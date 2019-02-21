@@ -294,23 +294,24 @@
     position: relative;
     padding-right: 100rpx;
     width: 100%;
-    font-size: 32rpx;
+    font-size: 34rpx;
     display: block;
 }
 .choose-content-checkbox{
     position: absolute;
-    width: 40rpx;
-    height: 40rpx;
+    width: 46rpx;
+    height: 46rpx;
     border-radius: 50%;
     border: 1px solid #dcdcdc;
     display: block;
-    top: 20rpx;
+    top: 18rpx;
     right: 0;
     z-index: 2;
 }
 .choose-content-checkbox-active{
     background: #0099ff;
 }
+
 
 .common-publish-item-pass{
     padding-right: 80rpx;
