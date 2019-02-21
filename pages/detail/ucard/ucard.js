@@ -105,7 +105,7 @@ Page({
                 success(res) {
                     if (res.confirm) {
                         wx.navigateTo({
-                            url: '/pages/userinfo/phone/phone?type=info',
+                          url: '/pages/userinfo/edit/edit',
                         })
                     } else if (res.cancel) {
                         wx.navigateBack({ delta: 1 })

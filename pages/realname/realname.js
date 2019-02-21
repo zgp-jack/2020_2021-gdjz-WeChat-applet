@@ -355,7 +355,7 @@ Page({
             url:"user/do-auth/",
             way:"POST",
             params:formData,
-            title:"正在提交实名信息",
+            title:"提交中",
             failTitle:"网络错误，提交失败！",
             success:function(res){
                 let mydata = res.data;
