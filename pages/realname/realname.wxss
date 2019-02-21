@@ -1,0 +1,48 @@
+@import '../publish/recruit/recruit.wxss';
+
+.yupao-realname-container{
+    position: relative;
+    width: 100%;
+    background: white;
+}
+.nopadding{
+    padding: 0;
+}
+.realname-tips{
+    margin-top: 15rpx;
+}
+.realname-tips-box{
+    position: relative;
+    font-size: 28rpx;
+    padding: 0 27rpx;
+    line-height: 50rpx;
+}
+.realname-tips-box text{
+    height: 45rpx;
+    line-height: 45rpx;
+    display: inline-block;
+    padding: 0 20rpx;
+    font-size: 24rpx;
+    border-radius: 2px;
+    background: #f52626;
+    color: white;
+    margin-right: 10rpx;
+}
+.realname-item{
+    position: relative;
+    width: 50%;
+    float: left;
+    padding: 10rpx 20rpx;
+}
+.realname-item image{
+    display: block;
+    width: 100%;
+    height: 200rpx;
+}
+.realname-item text{
+    display: block;
+    width: 100%;
+    font-size: 26rpx;
+    text-align: center;
+    line-height: 80rpx;
+}

@@ -1,0 +1,30 @@
+<import src="/pages/footer/footer.wxml"/>
+
+<view class="yupao-common-container">
+    <view class='invite-content'>
+        <view class='invite-item  common-shaded-box clearfix'>
+            <image class='invite-shareimg' src='http://yupao.oss-cn-beijing.aliyuncs.com/newyupao/images/share-hand.png'></image>
+        </view>
+        <view class='invite-item common-shaded-box'>
+                <view class='invite-padding-left '>
+                    <image src='http://yupao.oss-cn-beijing.aliyuncs.com/newyupao/images/share-way1.png'></image>
+                    <view>点击右上角（手指指向的）三个点，分享<text>鱼泡招工</text>到微信建筑群、焊工群、微信好友朋友圈，工友点击你分享的链接来到鱼泡平台。</view>
+                </view>
+        </view>
+        <view class='invite-item  common-shaded-box'>
+                <view class='invite-padding-left '>
+                    <image src='http://yupao.oss-cn-beijing.aliyuncs.com/newyupao/images/share-way2.png'></image>
+                    <view>复制下方（你的专享邀请链接），发到QQ群论坛贴吧，工友通过你的专享邀请链接来到鱼泡平台。</view>
+                </view>
+                <view class='user-share-box'>
+                    <input value='{{ shareUrl }}'></input>
+                </view>
+        </view>
+
+        <text class='common-sure-btn' bindtap='copyUserShareUrl'>复制专属邀请链接</text>
+    </view>
+
+</view>
+
+<!-- 引入footer -->
+<template is="footer" data="{{ footerImgs,publishActive,showPublishBox,footerActive }}" />

@@ -1,0 +1,15 @@
+@import "../../publish/recruit/recruit.wxss";
+
+.user-changepass-box .user-changepass-tips{
+    position: relative;
+    display: block;
+    padding: 0 27rpx;
+    line-height: 80rpx;
+    font-size: 30rpx;
+}
+.user-changepass-box .common-publish-item{
+    background: white;
+}
+.user-changepass-box .common-publish-item:nth-last-child(1) .common-publish-item-content{
+    border-bottom: 0;
+}

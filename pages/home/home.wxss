@@ -1,0 +1,398 @@
+.index-yupao-header{
+    position: relative;
+    width: 100%;
+    height: 100rpx;
+    box-sizing: border-box;
+    padding: 20rpx 27rpx;
+}
+.index-yupao-logo{
+    position: relative;
+    float: left;
+    width: 135rpx;
+    height: 60rpx;
+}
+.index-yupao-area{
+    position: relative;
+    float: left;
+    padding: 0 20rpx;
+}
+.index-area-start{
+    position: relative;
+    width: 22rpx;
+    height:25rpx;
+}
+.index-area-text{
+    position: relative;
+    line-height: 60rpx;
+    font-size:30rpx;
+    margin-left: 10rpx;
+    color: #333;
+}
+.index-area-more{
+    position: relative;
+    width: 20rpx;
+    height:20rpx;
+    margin-left: 10rpx;
+}
+.index-download-app{
+    position: relative;
+    float: right;
+    width: 220rpx;
+    height: 60rpx;
+}
+.index-download-app image{
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+.index-swiperbox{
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 220rpx;
+
+}
+.index-swiper-img{
+    position: relative;
+    display:block;
+    width: 100%;
+    height: 220rpx;
+}
+.index-margin-swiper{
+    padding-top: 210rpx;
+    width: 100%;
+    overflow-x: hidden;
+}
+.index-yupao-industry{
+    position: relative;
+    width: 100%;
+    padding: 10rpx;
+    padding-bottom: 20rpx;
+    background: white;
+    border-radius: 16rpx;
+    box-sizing: border-box;
+    zoom: 1;
+}
+.index-industry-item{
+    position: relative;
+    width: 20%;
+    float: left;
+    height: 150rpx;
+    padding: 10rpx;
+}
+.index-industry-item image{
+    position: relative;
+    display: block;
+    width: 80rpx;
+    height: 80rpx;
+    margin: 10rpx auto;
+}
+.index-industry-item text{
+    font-size:26rpx;
+    margin: 10rpx 0;
+    display: block;
+    text-align: center;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.index-yupao-function{
+    position: relative;
+    background: white;
+    width: 100%;
+    margin-top: 15rpx;
+}
+.index-fun-item{
+    position: relative;
+    float: left;
+    width: 33.3333%;
+    height: 110rpx;
+    border-right: 1px solid #dcdcdc;
+    border-bottom: 1px solid #dcdcdc;
+}
+.index-yupao-function navigator:nth-child(3n) .index-fun-item{
+    border-right: 0;
+}
+.index-fun-item:nth-child(4),.index-fun-item:nth-child(5),.index-fun-item:nth-child(6){
+    border-bottom: 0;
+}
+.index-fun-item image{
+    position: relative;
+    display: block;
+    width: 40rpx;
+    height: 40rpx;
+    margin-right: 10rpx;
+}
+.index-fun-item text{
+    display: block;
+    font-size: 28rpx;
+}
+.index-yupao-notice{
+    position: relative;
+    width: 100%;
+    padding: 20rpx 27rpx;
+    background: white;
+    margin-top: 15rpx;
+}
+.index-yupao-notice image{
+    position: relative;
+    display: block;
+    width:150rpx;
+    height:40rpx;
+}
+.index-notice-swiper{
+    position: absolute;
+    width: 100%;
+    top: 0;
+    height: 80rpx;
+    padding-left: 170rpx;
+    padding-right: 27rpx;
+    overflow: hidden;
+    box-sizing: border-box;
+}
+.index-notice-swiper swiper{
+    height: 80rpx;
+}
+.index-notice-text{
+    position: relative;
+    display: block;
+    width: 100%;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    font-size: 28rpx;
+    line-height: 80rpx;
+}
+.index-infolists{
+    position: relative;
+    width: 100%;
+}
+.index-lists-item{
+    position: relative;
+    width: 100%;
+}
+.index-lists-header{
+    position: relative;
+    width: 100%;
+    background: white;
+    height: 100rpx;
+    line-height: 100rpx;
+    color: #050505;
+    padding-left: 50rpx;
+    padding-right: 27rpx;
+    font-size: 34rpx;
+    margin: 15rpx 0;
+    box-sizing: border-box;
+}
+.index-lists-header text{
+    float: right;
+    font-size: 30rpx;
+    padding-left: 10rpx;
+}
+.index-lists-header::before{
+    position: absolute;
+    content: '';
+    width:8rpx;
+    height: 45rpx;
+    background: #0099ff;
+    left: 27rpx;
+    top: 30rpx;
+}
+.index-list-item{
+    position: relative;
+    width: 100%;
+    background: white;
+    padding: 10rpx 27rpx 0;
+    border-bottom: 1px solid #eee;
+}
+.index-item-header{
+    position: relative;
+    width: 100%;
+    height: 80rpx;
+    padding-right: 240rpx;
+    border-bottom: 1rpx dashed #dcdcdc;
+}
+.index-item-header text{
+    line-height: 80rpx;
+    font-size: 32rpx;
+}
+.index-item-header .index-item-title{
+    display: block;
+    width: 100%;
+}
+.index-item-header .index-item-time{
+    position: absolute;
+    line-height: 80rpx;
+    top: 0;
+    right: 0;
+    font-size: 26rpx;
+    color: #828586;
+}
+.index-item-body{
+    position: relative;
+    padding:30rpx 0;
+}
+.index-item-userimg{
+    position: absolute;
+    width: 140rpx;
+    height: 140rpx;
+    left: 0;
+    top: 30rpx;
+}
+.index-item-userimg image{
+    display: block;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+}
+.index-item-words{
+    position: relative;
+    width: 100%;
+    height: 140rpx;
+    padding-left: 160rpx;
+    box-sizing: border-box;
+}
+.index-item-words{
+    position: relative;
+    width: 100%;
+}
+.index-words-item{
+    display: block;
+    line-height:20rpx;
+    margin-bottom: 16rpx;
+}
+.index-item-words .index-words-item:nth-last-child(1){
+    margin-bottom: 0;
+}
+.index-words-item image{
+    width: 36rpx;
+    height: 36rpx;
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 10rpx;
+}
+.index-words-item>text{
+    font-size: 28rpx;
+}
+.index-words-item>text text{
+    color: #f23c3c;
+}
+
+.index-pullareabox{
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    right:-100%;
+    top: 0;
+    background: #f7f6f9;
+    z-index: 10;
+    transition: 0.5s;
+    padding-bottom: 10rpx;
+}
+.index-pullareabox-active{
+    right:0;
+}
+.index-area-header{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100rpx;
+    line-height: 100rpx;
+    background: #0099ff;
+    color: white;
+    font-size: 38rpx;
+    text-align: center;
+    letter-spacing: 4rpx;
+    z-index: 10;
+}
+.index-area-tips{
+    position: absolute;
+    top: 100rpx;
+    left: 0;
+    width: 100%;
+    height: 100rpx;
+    background: white;
+    padding: 0 27rpx;
+    font-size: 28rpx;
+    color: #333;
+    line-height: 100rpx;
+    letter-spacing: 2rpx;
+    font-weight: 800;
+    z-index: 10;
+    box-shadow: 0 1px 3px #e7e6e4;
+}
+.index-area-body{
+    position: relative;
+    width: 100%;
+    height: 100%;
+    padding-top: 200rpx;
+    overflow-y: scroll;
+}
+.index-area-item{
+    position: relative;
+    width: 100%;
+    padding: 0 27rpx;
+}
+.area-header-words{
+    position: relative;
+    width: 100%;
+    height: 80rpx;
+    line-height:80rpx;
+    font-size: 28rpx;
+}
+.area-body-content{
+    position: relative;
+    width: 100%;
+}
+.area-body-content view{
+    position: relative;
+    width: 33.33333%;
+    float: left;
+    padding: 10rpx;
+    margin-bottom: 10rpx;
+}
+.area-body-content view text{
+    display: block;
+    width: 100%;
+    background: white;
+    color: #333;
+    text-align: center;
+    padding: 0 10rpx;
+    border-radius: 5rpx;
+    line-height: 80rpx;
+    font-size: 28rpx;
+}
+.index-close-area{
+    position: absolute;
+    width: 50rpx;
+    height: 50rpx;
+    left: 27rpx;
+    top: 25rpx;
+    background:url("http://yupao.oss-cn-beijing.aliyuncs.com/miniprogram/images/index-close.png") no-repeat;
+    background-size:100% 100%;
+}
+
+
+/* 用户授权 */
+.userauthbox{
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.55);
+    left: 0;
+    top: 0;
+    z-index: 9999;
+}
+.userauthbox button{
+    position: relative;
+    display: block;
+    width: 70%;
+    border: 0;
+    border-radius: 0;
+}
+.userauthbox button::after,.userauthbox button::before{
+    border: 0;
+}

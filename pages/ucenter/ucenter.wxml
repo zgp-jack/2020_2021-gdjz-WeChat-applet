@@ -1,0 +1,98 @@
+<import src="/pages/footer/footer.wxml"/>
+
+<view class="ucener-header">
+    <text class='ucenter-title'>会员中心</text>
+    <view class='ucener-userinfo-wrap'>
+        <view class='ucenter-userinfo'>
+            <view class='ucenter-userinfo-box'>
+                <image src='{{ member.headimgurl }}' class='ucenter-userimg'></image>
+                <view class='ucenter-userinfo-words'>
+                    <navigator class='user-update-info' url='/pages/userinfo/index/index?img={{ member.headimgurl }}&auth={{ member.is_check }}&tel={{ member.tel }}&name={{ member.username || member.nickname }}&pass={{ member.pwd_status }}' open-type="navigate" wx:if="{{ member.tel }}">修改资料</navigator>
+                    <navigator class='user-update-info' url='/pages/userinfo/edit/edit' open-type="navigate" wx:else="{{ member.tel }}">完善资料</navigator>
+                    <view class='ucenter-username overwords'>{{ member.username || member.nickname }}</view>
+                    <view class='ucenter-usernum overwords'>会员编号：<text>{{ member.id }}</text> </view>
+                </view>
+            </view>
+            <view class='ucenter-integralbox flex-row'>
+                <navigator class='ucenter-integral-item flex-column' url='/pages/integral/return/return' open-type="navigate" wx:if="{{ showReturnIntegral }}">
+                    <text>{{ member.return_integral }}</text>
+                    <text>返回积分</text>
+                </navigator>
+                <navigator class='ucenter-integral-item flex-column' url='/pages/integral/official/official' open-type="navigate">
+                    <text class='overwords'>{{ member.integral }}</text>
+                    <text>积分</text>
+                </navigator>
+                <navigator class='ucenter-integral-item flex-column' url='/pages/integral/temp/temp' open-type="navigate">
+                    <text>{{ member.temporary_integral }}</text>
+                    <text>签到积分</text>
+                </navigator>
+            </view>
+        </view>
+    </view>
+</view>
+
+<view class='yupao-common-container'>
+    <view class='ucenter-menus-box'>
+        <view class='ucenter-menus clearfix'>
+            <view class='ucenter-menu-item'>
+                <navigator url='../published/published?type=0' open-type="navigate" >
+                    <image src='{{ ucenterimgs.published }}'></image>
+                    <text>已发布信息</text>
+                </navigator>
+            </view>
+            <view class='ucenter-menu-item'>
+                <navigator url='{{ (member.has_resume == "1") ? "/pages/mycard/mycard" : "/pages/publish/card/card" }}' open-type="navigate" >
+                    <image src='{{ ucenterimgs.card }}'></image>
+                    <text>{{ (member.has_resume == "1") ? "我的找活名片" : "发布找活名片" }}</text>
+                </navigator>
+            </view>
+            <view class='ucenter-menu-item'>
+                <navigator url='../published/published?type=1' open-type="navigate" >
+                    <image src='{{ ucenterimgs.used }}'></image>
+                    <text>已发布交易</text>
+                </navigator>
+            </view>
+            <view class='ucenter-menu-item'>
+                <navigator url='../getintegral/getintegral' open-type="navigate" >
+                    <image src='{{ ucenterimgs.recharge }}'></image>
+                    <text>获取积分</text>
+                </navigator>
+            </view>
+            <view class='ucenter-menu-item'>
+                <navigator url='../integral/expend/expend' open-type="navigate" >
+                    <image src='{{ ucenterimgs.expend }}'></image>
+                    <text>积分消耗记录</text>
+                </navigator>
+            </view>
+            <view class='ucenter-menu-item'>
+                <navigator url='../integral/source/source' open-type="navigate" >
+                    <image src='{{ ucenterimgs.original }}'></image>
+                    <text>积分来源</text>
+                </navigator>
+            </view>
+            <view class='ucenter-menu-item'>
+                <navigator url='../static/invite' open-type="navigate" >
+                    <image src='{{ ucenterimgs.invite }}'></image>
+                    <text>邀请工友</text>
+                </navigator>
+            </view>
+            <view class='ucenter-menu-item'>
+                <navigator url='../feedback/feedback' open-type="navigate" >
+                    <image src='{{ ucenterimgs.feedback }}'></image>
+                    <text>意见反馈</text>
+                </navigator>
+            </view>
+            <view class='ucenter-menu-item'>
+                <navigator url='../download/download-app' open-type="navigate" >
+                    <image src='{{ ucenterimgs.downapp }}'></image>
+                    <text>下载APP</text>
+                </navigator>
+            </view>
+        </view>
+    </view>
+</view>
+
+
+
+<!-- 引入footer -->
+<template is="footer" data="{{ footerImgs,publishActive,showPublishBox,footerActive }}" />

@@ -1,0 +1,30 @@
+<view class="yupao-common-container">
+    <view class='user-changepass-box'>
+        <text class='user-changepass-tips'>旧密码</text>
+        <view class='common-publish-item'>
+            <view class='common-publish-item-content common-publish-item-pass'>
+                <text class='common-publish-words'>原密码</text>
+                <input class='common-publish-input' password='{{ oldicon }}' value='{{ oldPass }}' placeholder='请输入旧密码' bindinput='enterOldPass'></input>
+                <text class='pass-eyes-icon {{ oldicon ? "" : "pass-eyes-icon-active" }}' bindtap='changeInputType' data-type="old"></text>
+            </view>
+        </view>
+    </view>
+    <view class='user-changepass-box'>
+        <text class='user-changepass-tips'>新密码</text>
+        <view class='common-publish-item'>
+            <view class='common-publish-item-content common-publish-item-pass'>
+                <text class='common-publish-words'>新密码</text>
+                <input class='common-publish-input' password='{{ newicon }}' value='{{ newPass }}' placeholder='请输入新密码' bindinput='enterNewPass'></input>
+                <text class='pass-eyes-icon {{ newicon ? "" : "pass-eyes-icon-active" }}' bindtap='changeInputType' data-type="new"></text>
+            </view>
+        </view>
+        <view class='common-publish-item'>
+            <view class='common-publish-item-content common-publish-item-pass'>
+                <text class='common-publish-words'>确认密码</text>
+                <input class='common-publish-input' password='{{ sureicon }}' value='{{ rePass }}' placeholder='请确认新密码' bindinput='enterRePass'></input>
+                <text class='pass-eyes-icon {{ sureicon ? "" : "pass-eyes-icon-active" }}' bindtap='changeInputType'  data-type="sure"></text>
+            </view>
+        </view>
+    </view>
+    <text class='common-sure-btn' bindtap='userUpdataPass'>确认修改</text>
+</view>

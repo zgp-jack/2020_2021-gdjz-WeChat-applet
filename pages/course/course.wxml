@@ -1,0 +1,17 @@
+<view class="yupao-common-container yupao-common-nofooter">
+    <view class='common-choose-header'>
+        <view class='choose-headerbox common-shaded-box flex-row'>
+            <view class='choose-header-item' wx:for="{{ courseData }}" wx:key="{{ index }}"  bindtap='showThisCourse' data-index="{{ index }}">
+                <view class='{{ (index == courseIndex) ? "text-active" : "" }}'><image src='{{ (index == courseIndex) ? item.activeImg : item.normalImg }}'></image>{{ item.title }}</view>
+            </view>
+        </view>
+    </view>
+    <view class='course-body'>
+        <view class='course-contentbox common-shaded-box'>
+            <view class='course-content-item' wx:for="{{ courseData[courseIndex].lists }}" wx:key="{{ index }}">
+                <text  data-id="{{ item.id }}" bindtap='showThisCourseInfo'>{{ item.title }}</text>
+                <video src="{{ item.video_url }}" controls wx:if="{{ item.id == playId }}"></video>
+            </view>
+        </view>
+    </view>
+</view>

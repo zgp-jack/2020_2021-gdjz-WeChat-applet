@@ -1,0 +1,15 @@
+<view class='page-downloadapp' >
+    <view bindtap='copyAppUrl' class='downloadapp-copyview'> </view>
+    <view class='downloadapp-content'>
+        <view class='downloadapp-item'>
+            <video src="http://yupao.oss-cn-beijing.aliyuncs.com/miniprogram/videos/download-app.mp4"></video>
+            <text>使用教程</text>
+        </view>
+        <view class='downloadapp-words'>方法一：浏览器内下载</view>
+        <view class='downloadapp-item'>
+            <video src="http://yupao.oss-cn-beijing.aliyuncs.com/yupaoweb/miniWechat/video/downloadAppVideo.mp4"></video>
+            <text>使用教程</text>
+        </view>
+        <view class='downloadapp-words'>方法二：关注公众号下载</view>
+    </view>
+</view>

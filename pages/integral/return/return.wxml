@@ -1,0 +1,24 @@
+<view class="yupao-common-container yupao-common-nofooter">
+    <view class='integral-header'>返回积分记录</view>
+    <view class='integral-content'>
+        <view class='integral-list-item' wx:for="{{ lists }}" wx:key="{{ index }}">
+            <view class='integral-list-time'>
+                <text>{{ item.year_month }}</text>
+                <text>{{ item.day }}</text>
+            </view>
+            <view class='integral-list-words'>
+                <view class='integral-list-title overwords'>退还积分</view>
+                <view class='integral-list-info overwords'>{{ item.ext }}</view>
+                <view class='integral-list-lasttime overwords'>时间：{{ item.His }} <text>返回积分：{{ item.integral }}</text></view>
+            </view>
+        </view>
+
+    </view>
+
+    <view class='nodata-texttips' wx:if="{{ nothavemore }}">没有更多数据了</view>
+    <view class='common-nodatabox flex-column lists-nodata'  wx:if="{{ isNone }}">
+        <image src='{{ nodata }}'></image>
+        <text>暂无返回积分记录</text>
+    </view>
+
+</view>

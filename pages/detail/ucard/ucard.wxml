@@ -1,0 +1,90 @@
+<view style='height:100%;{{ showComplain ? "overflow:hidden;" : "" }}'>
+
+<view class="yupao-common-container">
+    <view class='yupao-ucard-container'>
+        <view class='yupao-ucard-header'>
+            <view class='yupao-ucard-title overwords'>找活名片<text wx:if="{{ isMine }}">修改/刷新</text></view>
+            <view class='ucard-headimgbox'>
+                <image src='{{ ucardInfo.image }}' class='ucard-headimg'></image>
+            </view>
+        </view>
+
+        <view class='yupao-ucard-body'>
+            <view class='yupao-ucard-words common-shaded-box'>{{ ucardInfo.title }}</view>
+            <view class='yupao-common-list yupao-list-ucard'>
+                <view class='yupao-common-lists-item clearfix'>
+                    <view class='yupao-common-list-left'><image src='http://yupao.oss-cn-beijing.aliyuncs.com/miniprogram/images/ucard-user.png'></image>联系人</view>
+                    <view class='yupao-common-list-right'>{{ ucardInfo.user_name }}</view>
+                </view>
+                <view class='yupao-common-lists-item clearfix'>
+                    <view class='yupao-common-list-left'><image src='http://yupao.oss-cn-beijing.aliyuncs.com/miniprogram/images/ucard-time.png'></image>注册时间</view>
+                    <view class='yupao-common-list-right'>{{ ucardInfo.time }}</view>
+                </view>
+                <view class='yupao-common-lists-item clearfix'>
+                    <view class='yupao-common-list-left'><image src='http://yupao.oss-cn-beijing.aliyuncs.com/miniprogram/images/ucard-mode.png'></image>规模</view>
+                    <view class='yupao-common-list-right'>{{ ucardInfo.team_composition_words }}</view>
+                </view>
+                <view class='yupao-common-lists-item clearfix'>
+                    <view class='yupao-common-list-left'><image src='http://yupao.oss-cn-beijing.aliyuncs.com/miniprogram/images/ucard-type.png'></image>工种</view>
+                    <view class='yupao-common-list-right'><text class='user-need-group' wx:for="{{ ucardInfo.classifyName }}" wx:key="{{ index }}">【{{ item }}】</text></view>
+                </view>
+                <view class='yupao-common-lists-item clearfix'>
+                    <view class='yupao-common-list-left'><image src='http://yupao.oss-cn-beijing.aliyuncs.com/miniprogram/images/ucard-posi.png'></image>可去的省份</view>
+                    <view class='yupao-common-list-right'><text class='user-need-group' wx:for="{{ ucardInfo.showProvinceList }}" wx:key="{{ index }}">【{{ item }}】</text></view>
+                </view>
+                <view class='yupao-common-lists-item clearfix'>
+                    <view class='yupao-common-list-left'><image src='http://yupao.oss-cn-beijing.aliyuncs.com/miniprogram/images/ucard-status.png'></image>找活状态</view>
+                    <view class='yupao-common-list-right'>{{ ucardInfo.is_end_word }}</view>
+                </view>
+            </view>
+
+            <view class='yupao-common-list'>
+                <view class='yupao-common-lists-item clearfix'>
+                    <view class='yupao-common-list-left yupao-common-list-phone'><image class='ucar-phone-list' src='http://yupao.oss-cn-beijing.aliyuncs.com/miniprogram/images/ucard-tel.png'></image>电话号码：<view>{{ ucardInfo.tel_str }}<block wx:if="{{ ucardInfo.is_end == '2' }}">({{ ucardInfo.is_end_word }})</block></view></view>
+                    <view class='yupao-common-list-right common-list-phone-edit'><text class='list-show-allphone' wx:if="{{ ucardInfo.show_ajax_btn }}" bindtap='getInfoTel'>查看完整号码</text><text class='list-call-phone' wx:if="{{ !ucardInfo.show_ajax_btn && (ucardInfo.is_end == '1') }}"  bindtap='callThisPhone'  data-phone="{{ ucardInfo.tel_str }}">拨打</text><text class='list-complain-phone' wx:if="{{ !ucardInfo.show_ajax_btn && (ucardInfo.is_end == '1') }}" bindtap='userTapComplain'>投诉</text></view>
+                </view>
+                <view class='yupao-common-lists-item clearfix'>
+                    <view class='yupao-lists-detail-tips'><image src='http://yupao.oss-cn-beijing.aliyuncs.com/miniprogram/images/ucard-info.png'></image>找活详情</view>
+                    <view class='yupao-lists-detail'>{{ ucardInfo.detail }}</view>
+                </view>
+            </view>
+
+            <view class='ucard-imgsbox clearfix' wx:if="{{ ucardInfo.view_images.length }}">
+                <view class='ucard-imgs-item' wx:for="{{ ucardInfo.view_images }}" wx:key="{{ index }}">
+                    <image src='{{ item }}' bindtap='previewImage' data-src="{{ item }}"></image>
+                </view>
+            </view>
+ 
+
+        </view>
+    </view>
+</view>
+
+
+<view class='info-needusershare flex-row' wx:if="{{ isShare }}">
+    <view class='usershare-box'>
+        <view class='usershare-header'>温馨提示</view>
+        <view class='usershare-body'>{{ shareMsg }}</view>
+        <view class='usershare-footer'>
+            <button open-type="share">立即分享</button>
+        </view>
+    </view>
+</view>
+
+<view class='yupao-common-enterbox flex-row' wx:if="{{ showComplain }}">
+    <view class='yupao-common-enter'>
+        <text class='yupao-enter-title'>投诉信息</text>
+        <text class='yupao-enter-tips'>请输入投诉内容</text>
+        <view class='yupao-enter-body'>
+            <textarea class='yupao-enter-wrap yupao-enter-textarea'  placeholder='请输入投诉内容' bindinput='userEnterComplain' maxlength='200' value='{{ complainInfo }}'></textarea>
+        </view>
+        <view class='yupao-enter-footer clearfix'>
+            <text bindtap='userCancleComplain'>取消</text>
+            <text bindtap='userComplaintAction'>确定</text>
+        </view>
+    </view>
+</view>
+
+
+
+</view>

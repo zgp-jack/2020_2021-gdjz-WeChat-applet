@@ -1,0 +1,4 @@
+<import src="../../wxParse/wxParse.wxml"/>
+<view class='noticebox'>
+    <template is="wxParse" data="{{ wxParseData:content.nodes }}"/>
+</view>

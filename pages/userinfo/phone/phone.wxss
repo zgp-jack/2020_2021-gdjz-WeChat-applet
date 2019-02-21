@@ -1,0 +1,4 @@
+@import "../../publish/recruit/recruit.wxss";
+.user-changephone .common-publish-item{
+    background: white;
+}

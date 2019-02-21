@@ -1,0 +1,129 @@
+.yupao-feedback{
+	position: relative;
+	width: 100%;
+}
+.feedback-header{
+	position: relative;
+	width: 100%;
+	background: #dbecfd;
+	padding: 30rpx;
+}
+.feedback-header view{
+	line-height: 50rpx;
+	font-size: 28rpx;
+	text-align: center;
+	color: #545454;
+}
+.feedback-header text{
+	color: #0099ff;
+}
+.feedback-body{
+	position: relative;
+	padding: 20rpx;
+}
+.feedback-container{
+	position: relative;
+	width: 100%;
+	padding: 10rpx;
+	background: white;
+	border-radius: 2px;
+	box-shadow: #e7e6e4 0 0 10rpx;
+}
+.feedback-container textarea{
+	height: 150px;
+    width: 100%;
+	outline: 0;
+	border: 0;
+	font-size: 32rpx;
+	line-height: 50rpx;
+	padding: 10rpx;
+    display: block;
+    letter-spacing: 2rpx;
+}
+.feedback-imgs{
+	position: relative;
+	margin-top: 10rpx;
+	width: 100%;
+	padding: 0 20rpx;
+}
+.feedback-img-item{
+	position: relative;
+	float: left;
+	width:33.333%;
+	height: 200rpx;
+	border-radius: 5px;
+	overflow: hidden;
+    padding: 10rpx;
+}
+.feedback-imgbox{
+    position: relative;
+    height: 100%;
+}
+
+.feedback-img-item image{
+	display: block;
+	width: 100%;
+	height: 100%;
+}
+.feedback-msg-tips{
+	position: relative;
+	line-height: 100rpx;
+	padding: 0 15rpx;
+    font-size: 28rpx;
+}
+.feedback-uploadtips::before{
+	position: absolute;
+	content: '';
+	width:50px;
+	height: 4px;
+	background: #dcdcdc;
+	left: 50%;
+	top: 50%;
+    margin-left: -25px;
+    margin-top: -2px;
+	z-index: 1;
+	border-radius: 2px;
+}
+.feedback-uploadtips::after{
+	position: absolute;
+	content: '';
+	width:4px;
+	height:50px;
+	background: #dcdcdc;
+	top: 50%;
+	left:50%;
+    margin-left: -2px;
+    margin-top: -25px;
+	z-index: 1;
+	border-radius: 2px;
+}
+.feedback-submit-btn{
+	position: relative;
+	width: 80%;
+	height:100rpx;
+	line-height: 100rpx;
+	background: #0099ff;
+	text-align: center;
+	display: block;
+	color: white;
+    font-size: 32rpx;
+    letter-spacing: 2rpx;
+	margin: 15rpx auto 0;
+	border-radius:5px;
+}
+
+.feedback-del-thisimg{
+	position: absolute;
+	background: rgba(0,0,0,0.5);
+	width: 100%;
+	height: 40px;
+	left: 0;
+	bottom: 0;
+	z-index: 3;
+}
+.feedback-del-thisimg image{
+    position: relative;
+    display: block;
+    width: 20px;
+    height: 25px;
+}

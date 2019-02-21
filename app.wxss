@@ -1,0 +1,542 @@
+/* init-ypao-wxss */
+view,text,input,button,label,textarea,form{
+    box-sizing: border-box;
+}
+page{
+    background: #f7f6f9;
+}
+
+.nopadding{
+    padding: 0 !important;
+}
+.text-active{
+    color: #0099ff !important;
+}
+.color-red{
+    color: #ff0000;
+}
+/* flex-row */
+.flex-row{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+/* flex-column */
+.flex-column{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+/* flex-flex */
+.flex-flex{
+    flex: 1;
+}
+
+/* 清除浮动 */
+.clearfix::after{
+    display: block;
+    content: "";
+    height: 0;
+    clear: both;
+    overflow: hidden;
+    visibility: hidden;
+}
+
+/* 文字隐藏 */
+.overwords{
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+/* 共用container */
+.yupao-common-container{
+    position: relative;
+    width: 100%;
+    padding-bottom: 150rpx;
+}
+.yupao-common-nofooter{
+    padding-bottom: 0;
+}
+
+/* 无数据 */
+.common-nodatabox{
+    position: relative;
+    width: 100%;
+    padding: 50rpx 0;
+    background: transparent;
+}
+.common-nodatabox image{
+    position: relative;
+    display: block;
+    width: 200rpx;
+    height: 200rpx;
+}
+.common-nodatabox text{
+    display: block;
+    font-size: 28rpx;
+    line-height: 100rpx;
+}
+.common-nobg{
+    background: none;
+}
+
+/* 共用底部 */
+.common-yupao-footer{
+    position: fixed;
+    width: 100%;
+    height: 100rpx;
+    background: white;
+    left: 0;
+    bottom: 0;
+    box-shadow: #e8e6e3 0 0 5px
+}
+.yupao-footer-item{
+    position: relative;
+    width: 20%;
+    height: 100%;
+    float: left;
+}
+.yupao-footer-item image{
+    position: absolute;
+    display: block;
+    width: 40rpx;
+    height: 40rpx;
+    left: 50%;
+    margin-left: -20rpx;
+    top: 12rpx;
+}
+.yupao-footer-item text{
+    position: absolute;
+    display: block;
+    width: 100%;
+    text-align: center;
+    left: 0;
+    bottom: 12rpx;
+    font-size: 28rpx;
+}
+.yupao-footer-item .footer-text-active{
+    color: #0099ff;
+}
+.yupao-footer-publish .footer-publish-btn{
+    position: absolute;
+    display: block;
+    width: 90rpx;
+    height: 90rpx;
+    left: 50%;
+    margin-left: -45rpx;
+    top: -35rpx;
+    border-radius: 50%;
+    background: white;
+}
+
+/* 发布页面 */
+.common-publish-box{
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    background: rgba(255, 255, 255, 0.9);
+    opacity: 0;
+    transition: 0.5s;
+    -moz-transition: 0.5s;
+    -webkit-transition: 0.5s;
+    -o-transition: 0.5s;
+    z-index: 3;
+}
+.common-publish-box-active{
+    opacity: 1;
+}
+.common-publish-img{
+    position: absolute;
+    width: 40rpx;
+    height: 40rpx;
+    background: white;
+    left: 50%;
+    margin-left: -20rpx;
+    bottom: 70rpx;
+}
+.common-publish-img image{
+    position: relative;
+    display: block;
+    width:100% ;
+    height: 100%;
+    transition: 0.5s;
+    -moz-transition: 0.5s;
+    -webkit-transition: 0.5s;
+    -o-transition: 0.5s;
+}
+.publish-rotate-active image{
+    transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+    -moz-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    -o-transform: rotate(45deg);
+}
+.common-publish-container{
+    position: absolute;
+    width: 100%;
+    left: 0;
+    bottom: -1000rpx;
+    transition: 0.5s;
+    -moz-transition: 0.5s;
+    -webkit-transition: 0.5s;
+    -o-transition: 0.5s;
+}
+.common-publish-container-active{
+    bottom: 180rpx;
+}
+.commo-publish-item{
+    position: relative;
+    flex: 1;
+    padding: 20rpx 0;
+}
+.commo-publish-item image{
+    display: block;
+    width: 100rpx;
+    height: 100rpx;
+    margin-top: 20rpx;
+}
+.commo-publish-item text{
+    display: block;
+    font-size: 28rpx;
+    line-height: 60rpx;
+}
+
+/* 伪类不占位线条 */
+.myleftborder::after{
+    position: absolute;
+    content: '';
+    left: 0;
+    top: 0;
+    width: 1px;
+    height: 100%;
+    background: #dcdcdc;
+    transform: scaleX(0.5);
+}
+.myrightborder::after{
+    position: absolute;
+    content: '';
+    right: 0;
+    top: 0;
+    width: 1px;
+    height: 100%;
+    background: #dcdcdc;
+    transform: scaleX(0.5);
+}
+.mytopborder::after{
+    position: absolute;
+    content: '';
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 1px;
+    background: #dcdcdc;
+    transform: scaleY(0.5);
+}
+.mybottomborder::after{
+    position: absolute;
+    content: '';
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 1px;
+    background: #dcdcdc;
+    transform: scaleY(0.5);
+}
+.filtrate-item-info{
+    position: relative;
+    padding: 0 27rpx;
+}
+
+/* 公共信息列表 */
+.yupao-common-list{
+    position: relative;
+    width: 100%;
+    background: white;
+    margin-top: 15rpx;
+    box-shadow: #e7e6e4 0 0 10rpx;
+    border-top: 1px solid #e7e6e4;
+    border-bottom: 1px solid #e7e6e4;
+}
+.yupao-common-lists-item{
+    position: relative;
+    width: 100%;
+    min-height: 100rpx;
+    padding: 20rpx 27rpx;
+    border-bottom: 1px solid #e7e6e4;
+}
+.yupao-common-lists-item .yupao-common-lists-item:nth-last-child(1){
+    border-bottom: 0;
+}
+.yupao-common-list-left{
+    position: relative;
+    float: left;
+    width: 200rpx;
+    color: #333;
+    line-height: 60rpx;
+    font-size: 30rpx;
+}
+.yupao-common-list-right{
+    position: relative;
+    float: right;
+    color: #0099ff;
+    font-size: 30rpx;
+    line-height: 60rpx;
+}
+.yupao-common-lists-text{
+    position: relative;
+    font-size: 30rpx;
+    line-height: 60rpx;
+}
+
+/* 底部数据加载 */
+.common-loading-footer{
+    position: relative;
+    width: 100%;
+    height: 200rpx;
+}
+.common-loading-footer image{
+    position: relative;
+    display: block;
+    width: 100rpx;
+    height: 100rpx;
+    margin: 50rpx auto 0;
+}
+.common-loading-footer text{
+    display: block;
+    line-height: 80rpx;
+    text-align: center;
+    font-size: 30rpx;
+}
+/* 通用阴影盒子 */
+.common-shaded-box{
+    position: relative;
+    width: 100%;
+    padding: 10rpx 20rpx;
+    box-shadow: #e7e6e4 0 0 10rpx;
+    border-radius: 2px;
+}
+
+/*共用点击按钮  */
+.common-sure-btn{
+    position: relative;
+    width: 80%;
+    height: 80rpx;
+    line-height: 80rpx;
+    background: #0099ff;
+    color: #fff;
+    display: block;
+    text-align: center;
+    border-radius: 2px;
+    font-size: 32rpx;
+    letter-spacing: 1px;
+    margin: 30rpx auto 0;
+}
+
+/* 鱼泡输入弹窗 */
+.yupao-common-enterbox{
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,.4);
+    left: 0;
+    top: 0;
+    z-index: 5;
+}
+.yupao-common-enter{
+    position: relative;
+    width: 80%;
+    background: white;
+    border-radius: 10px;
+    box-shadow: #e7e6e4 0 0 10rpx;
+}
+.yupao-enter-title{
+    position: relative;
+    display: block;
+    line-height:60rpx;
+    font-size: 30rpx;
+    text-align: center;
+    padding-top: 20rpx;
+}
+.yupao-enter-tips{
+    position: relative;
+    display: block;
+    text-align: center;
+    font-size: 28rpx;
+    padding: 10rpx 0 0;
+    line-height: 40rpx;
+    color: #666;
+}
+.yupao-enter-body{
+    position: relative;
+    padding:20rpx;
+    border-bottom: 1px solid #f2f2f2;
+}
+.yupao-enter-wrap{
+    position: relative;
+    display: block;
+    width: 100%;
+    font-size: 28rpx;
+    border: 1px solid #dcdcdc;
+    padding:0 20rpx;
+    border-radius: 5px;
+}
+.yupao-enter-input{
+    height:80rpx;
+}
+.yupao-enter-textarea{
+    height: 200rpx;
+    padding: 20rpx;
+}
+.yupao-enter-footer{
+    position: relative;
+    height: 100rpx;
+    line-height: 100rpx;
+}
+.yupao-enter-footer text{
+    position: relative;
+    display: block;
+    width: 50%;
+    float: left;
+    border-right: 1px solid #f2f2f2;
+    line-height: 100rpx;
+    font-size: 30rpx;
+    text-align: center;
+}
+.yupao-enter-footer text:nth-last-child(1){
+    border-right: 0;
+}
+
+
+/* 共用数据加载 */
+.common-loading-shade{
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    background: rgba(255,255,255,.9);
+    z-index: 9999;
+}
+.common-loading-shade image{
+    position: relative;
+    display: block;
+    width: 100rpx;
+    height: 100rpx;
+}
+.common-loading-shade text{
+    position: relative;
+    display: block;
+    text-align: center;
+    line-height: 100rpx;
+    font-size: 30rpx;
+    letter-spacing: 2rpx;
+}
+
+/* 列表页 无时间 */
+.infolist-header-notime{
+    padding-right: 0 !important;
+}
+
+
+/* 没有更多数据 */
+.nodata-texttips{
+    position: relative;
+    display: block;
+    line-height: 100rpx;
+    font-size: 28rpx;
+    text-align: center;
+    letter-spacing: 2rpx;
+}
+
+/* 信息需要用户分享 */
+.info-needusershare{
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background: rgba(0,0,0,.6);
+    z-index: 5;
+}
+.usershare-box{
+    position: relative;
+    display: block;
+    width: 90%;
+    background: white;
+    border-radius: 2px;
+    box-shadow: #e7e6e4 0 0 10rpx;
+    padding: 20rpx 0;
+}
+.usershare-header{
+    font-size: 30rpx;
+    text-align: center;
+    display: block;
+    line-height: 100rpx;
+    font-weight: 800;
+    background: #fff;
+}
+.usershare-body{
+    position: relative;
+    display: block;
+    padding: 20rpx;
+    font-size: 28rpx;
+    text-align: center;
+    line-height: 60rpx;
+}
+.usershare-footer{
+    position: relative;
+    display: block;
+}
+.usershare-footer button{
+    position: relative;
+    display: block;
+    width: 100%;
+    height: 120rpx;
+    line-height: 120rpx;
+    background: #fff;
+    border: 0;
+    font-size: 30rpx;
+    text-align: center;
+    letter-spacing: 5rpx;
+    color: #0099ff;
+}
+.usershare-footer button::after,.usershare-footer button::before{
+    border: 0;
+}
+
+
+.lists-ad{
+    border-radius:2px;
+    box-shadow:#e7e6e4 0 0 10rpx;
+    margin-bottom:15rpx;
+    width: 100%;
+    height: 200rpx;
+    overflow: hidden;
+}
+.lists-ad image{
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+.fixed-ad{
+    position: fixed;
+    width: 200rpx;
+    height: 200rpx;
+    right: 0;
+    bottom: 150rpx;
+    z-index: 2;
+}
+.fixed-ad navigator,.fixed-ad image{
+    position: relative;
+    display: block;
+    width: 100%;
+    height: 100%;
+}

@@ -1,0 +1,168 @@
+.ucener-header{
+    position: relative;
+    width: 100%;
+    height: 380rpx;
+    background:url("http://yupao.oss-cn-beijing.aliyuncs.com/miniprogram/images/new-ucenter.png") no-repeat;
+    background-size:100% 100%;
+}
+.ucenter-title{
+    position: relative;
+    width: 100%;
+    text-align: center;
+    display: block;
+    line-height: 110rpx;
+    font-size: 34rpx;
+    color: white;
+}
+.ucener-userinfo-wrap{
+    width: 100%;
+    position: absolute;
+    height: 315rpx;
+    left: 0;
+    top: 110rpx;
+    padding: 0 27rpx;
+}
+.ucenter-userinfo{
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: block;
+    background: white;
+    border-radius: 5px;
+    box-shadow: #e7e6e4 0 0 10rpx;
+}
+.ucenter-userinfo-box{
+    position: relative;
+    width: 100%;
+    padding: 0 27rpx;
+    height: 175rpx;
+}
+.ucenter-userimg{
+    position: absolute;
+    width: 120rpx;
+    height: 120rpx;
+    border-radius: 50%;
+    top: 25rpx;
+    left: 27rpx;
+}
+.ucenter-userinfo-words{
+    position: relative;
+    width: 100%;
+    height: 175rpx;
+    font-size: 30rpx;
+    color: #1c1c1c;
+    line-height: 50rpx;
+    font-weight: bold;
+    padding: 40rpx 0 10rpx 140rpx;
+    border-bottom: 1px dashed #dcdcdc;
+}
+.ucenter-username{
+    padding-right: 220rpx;
+}
+.user-update-info{
+    position: absolute;
+    right: 0;
+    top: 40rpx;
+    font-size: 24rpx;
+    border: 1px solid #dcdcdc;
+    border-radius:5px;
+    padding: 0 20rpx;
+    font-weight: normal;
+    height: 45rpx;
+    line-height: 45rpx;
+}
+.ucenter-usernum text{
+    color: #0099ff;
+}
+.ucenter-integralbox{
+    position: relative;
+    width: 100%;
+    height: 140rpx;
+}
+.ucenter-integral-item{
+    position: relative;
+    font-weight: bold;
+    line-height: 50rpx;
+    height: 100%;
+    flex: 1;
+}
+.ucenter-integral-item text:nth-child(1){
+    color: #069bfe;
+    font-size: 32rpx;
+    display: block;
+}
+.ucenter-integral-item text:nth-child(2){
+    color: #666564;
+    font-size: 30rpx;
+    display: block;
+}
+.ucenter-menus-box{
+    position: relative;
+    width: 100%;
+    margin-top: 60rpx;
+    padding: 0 27rpx;
+}
+.ucenter-menus{
+    position: relative;
+    width: 100%;
+    background: white;
+    box-shadow: #e7e6e4 0 0 10rpx;
+    border-radius: 5px;
+}
+.ucenter-menus .ucenter-menu-item{
+    position: relative;
+    width: 33.3333%;
+    float: left;
+    height: 190rpx;
+    border-right: 1px dashed #dcdcdc;
+    border-bottom: 1px dashed #dcdcdc;
+}
+.ucenter-menus .ucenter-menu-item navigator{
+    padding: 20rpx 0;
+}
+.ucenter-menu-item:nth-child(3n){
+    border-right: 0;
+}
+.ucenter-menus .ucenter-menu-item:nth-last-child(1),.ucenter-menus .ucenter-menu-item:nth-last-child(2),.ucenter-menus .ucenter-menu-item:nth-last-child(3){
+    border-bottom: 0;
+}
+
+.ucenter-menu-item:nth-child(1)::after,.ucenter-menu-item:nth-child(4)::after{
+	position: absolute;
+	content: '';
+	width: 50rpx;
+	height: 50rpx;
+	left: -25rpx;
+	bottom: -25rpx;
+	background: #f7f6f9;
+	border-radius: 50%;
+	z-index: 10;
+	border-color: #f7f6f9;
+}
+.ucenter-menu-item:nth-child(3)::after,.ucenter-menu-item:nth-child(6)::after{
+	position: absolute;
+	content: '';
+	width: 50rpx;
+	height: 50rpx;
+	right: -25rpx;
+	bottom: -25rpx;
+	background: #f7f6f9;
+	border-radius: 50%;
+	z-index: 10;
+	border-color: #f7f6f9;
+}
+
+
+.ucenter-menu-item image{
+    display: block;
+    width: 100rpx;
+    height: 100rpx;
+    margin: 0 auto;
+}
+.ucenter-menu-item text{
+    font-size: 28rpx;
+    text-align: center;
+    display: block;
+    line-height: 40rpx;
+    margin-top: 10rpx;
+}

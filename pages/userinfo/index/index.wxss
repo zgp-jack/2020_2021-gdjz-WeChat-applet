@@ -1,0 +1,56 @@
+.user-editinfo-lists{
+    position: relative;
+    background: white;
+    width: 100%;
+    box-shadow: #e7e6e4 0 0 10rpx;
+}
+.user-editinfo-item{
+    position: relative;
+    padding: 20rpx;
+    padding-right: 50rpx;
+    border-bottom: 1px solid #dcdcdc;
+}
+.user-editinfo-item:nth-last-child(1){
+    border-bottom: 0;
+}
+.user-editinfo-left{
+    position: relative;
+    float: left;
+    font-size: 28rpx;
+    color: #333;
+    line-height: 60rpx;
+}
+.user-editinfo-item::before{
+    position: absolute;
+    content: '';
+    width: 6px;
+    height: 6px;
+    right: 27rpx;
+    top: 50%;
+    margin-top: -4px;
+    border-top: 1px solid #ccc;
+    border-right: 1px solid #ccc;
+    transform: rotate(45deg);
+    -moz-transform: rotate(45deg);
+    -o-transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+}
+.user-editinfo-right{
+    position: relative;
+    float: right;
+    right: 0;
+    font-size: 28rpx;
+    line-height: 60rpx;
+}
+.user-editinfo-right-dis{
+    color: #666;
+}
+.user-editinfo-username{
+    line-height: 80rpx;
+}
+.user-editinfo-userimg{
+    width: 80rpx;
+    height: 80rpx;
+    border-radius: 50%;
+}

@@ -1,0 +1,9 @@
+/* pages/notice/notice.wxss */
+@import "/wxParse/wxParse.wxss";
+.noticebox{
+    position: relative;
+    padding: 20rpx;
+    box-sizing: border-box;
+    max-width: 100%;
+    overflow: hidden;
+}

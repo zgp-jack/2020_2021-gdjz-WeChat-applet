@@ -1,0 +1,46 @@
+<template name="footer">
+
+<view class="common-yupao-footer">
+    <view class='yupao-footer-item' bindtap='jumpThisLink' data-url="/pages/home/home" data-type="1">
+        <image src='{{ footerActive == "home" ? footerImgs.homeActive : footerImgs.homeNormal }}'></image>
+        <text class='{{ footerActive == "home" ? "footer-text-active" : "" }}'>首页</text>
+    </view>
+    <view class='yupao-footer-item' bindtap='jumpThisLink' data-url="/pages/index/index" data-type='1'>
+        <image src='{{ footerActive == "recruit" ? footerImgs.zgActive : footerImgs.zgNormal }}'></image>
+        <text class='{{ footerActive == "recruit" ? "footer-text-active" : "" }}'>招工</text>
+    </view>
+    <view class='yupao-footer-item yupao-footer-publish' bindtap='doPublishAction'>
+        <image src='{{ footerImgs.publish }}' class='footer-publish-btn'></image>
+        <text>发布</text>
+    </view>
+    <view class='yupao-footer-item' bindtap='jumpThisLink' data-url="/pages/findwork/findwork" data-type='1'>
+        <image src='{{ footerActive == "findwork" ? footerImgs.zhActive : footerImgs.zhNormal }}'></image>
+        <text class='{{ footerActive == "findwork" ? "footer-text-active" : "" }}'>找活</text>
+    </view>
+    <view class='yupao-footer-item' bindtap='jumpThisLink' data-url="/pages/ucenter/ucenter" data-type='1'>
+        <image src='{{ footerActive == "member" ? footerImgs.memberActive : footerImgs.memberNormal }}'></image>
+        <text class='{{ footerActive == "member" ? "footer-text-active" : "" }}'>会员</text>
+    </view>
+</view>
+
+<view class='common-publish-box {{ publishActive ? "common-publish-box-active":"" }}' bindtap='closePublishAction' wx:if="{{ showPublishBox }}">
+    <view class='common-publish-container flex-row {{ publishActive ? "common-publish-container-active":"" }}'>
+        <view class='commo-publish-item flex-column'  bindtap='jumpThisLink' data-url="/pages/publish/recruit/recruit"  data-type='0'>
+            <image src='http://yupao.oss-cn-beijing.aliyuncs.com/miniprogram/images/publish-recruit.png'></image>
+            <text>发布招工信息</text>
+        </view>
+        <view class='commo-publish-item flex-column'  bindtap='valiUserCard' >
+            <image src='http://yupao.oss-cn-beijing.aliyuncs.com/miniprogram/images/publish-card.png'></image>
+            <text>发布找活信息</text>
+        </view>
+        <view class='commo-publish-item flex-column'  bindtap='jumpThisLink' data-url="/pages/publish/used/used"  data-type='0'>
+            <image src='http://yupao.oss-cn-beijing.aliyuncs.com/miniprogram/images/publish-used.png'></image>
+            <text>发布二手交易</text>
+        </view>
+    </view>
+    <view class='common-publish-img {{ publishActive ? "publish-rotate-active":"" }}'>
+        <image src='http://yupao.oss-cn-beijing.aliyuncs.com/miniprogram/images/publish.png'></image>
+    </view>
+</view>
+
+</template>

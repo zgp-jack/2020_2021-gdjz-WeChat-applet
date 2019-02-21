@@ -1,0 +1,260 @@
+@import "../home/home.wxss";
+page{
+    height: 100%;
+}
+.lists-header{
+    position: fixed;
+    width: 100%;
+    background: #0099ff;
+    height: 100rpx;
+    left: 0;
+    top: 0;
+    padding-left: 27rpx;
+    padding-right:110rpx;
+    z-index: 10;
+}
+.lists-header input{
+    height: 70rpx;
+    line-height:70rpx;
+    background: white;
+    display: block;
+    width: 100%;
+    margin-top: 15rpx;
+    border-radius: 100rpx;
+    padding-right:30rpx;
+    padding-left: 30rpx;
+    font-size: 28rpx;
+}
+.lists-header text{
+    position: absolute;
+    display: block;
+    width: 80rpx;
+    right:27rpx;
+    top: 15rpx;
+    line-height: 70rpx;
+    text-align: right;
+    color: white;
+    font-size: 28rpx;
+}
+.lists-header image{
+    position: absolute;
+    display: block;
+    width: 30rpx;
+    height: 30rpx;
+    left: 40rpx;
+    top: 35rpx;
+}
+
+.lists-condition-menu{
+    position: fixed;
+    width: 100%;
+    height: 80rpx;
+    left: 0;
+    top: 100rpx;
+    background: white;
+    z-index: 10;
+}
+.lists-condition-item{
+    position: relative;
+    flex: 1;
+    text-align:center;
+    padding: 0 20rpx;
+    height: 100%;
+    overflow: hidden;
+}
+.lists-condition-item view{
+    position: relative;
+    display: inline-block;
+    width: auto;
+    max-width: 100%;
+    text-align: center;
+    font-size: 30rpx;
+    height: 100%;
+    line-height: 80rpx;
+    color: #000;
+    letter-spacing: 2rpx;
+    padding-right: 30rpx;
+    margin: 0 auto;
+}
+.lists-condition-item view image{
+    position: absolute;
+    width: 20rpx;
+    height: 20rpx;
+    right: 0;
+    top: 30rpx;
+    z-index: 1;
+    transition: 0.5s;
+}
+.lists-condition-item.lists-condition-active view{
+    color: #0099ff;
+}
+.lists-condition-item.lists-condition-active view image{
+    transform: rotate(-180deg);
+}
+.user-choose-shade{
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    background: rgba(0, 0, 0, 0.3);
+    z-index: 5;
+    opacity: 0;
+    display: none;
+    transition:opactiy 0.5s;
+}
+.user-choose-shade-active{
+    opacity: 1;
+    display: block;
+}
+.user-choose-item{
+    position: absolute;
+    width: 100%;
+    height: 60%;
+    background: white;
+    left: 0;
+    top: -70%;
+    overflow-y: scroll;
+    box-shadow: 0 1px 1px #e7e6e4;
+    transition:top 0.5s;
+}
+.user-choose-item-active{
+    top: 180rpx;
+}
+.filtrate-list-item{
+    position: relative;
+    width: 100%;
+    height: 100rpx;
+    padding: 0 27rpx;
+    font-size: 30rpx;
+    line-height: 100rpx;
+}
+.filtrate-list-active::before{
+    position: absolute;
+    content: '';
+    width: 3px;
+    height: 100%;
+    background: #0099ff;
+    left: 0;
+    top: 0;
+}
+.filtrate-item-lists{
+    position: fixed;
+    right: -50%;
+    width: 50%;
+    height: 60%;
+    top: 180rpx;
+    background: #f7f7f7;
+    z-index: 1;
+    transition: 0.5s;
+    overflow-y: scroll;
+}
+.filtrate-item-lists-active{
+    right: 0;
+}
+.filtrate-item-info{
+    color: #333;
+}
+.filtrate-item-info-active{
+    background: #0099ff;
+    color: #fff;
+}
+.yupao-lists-container{
+    position: relative;
+    width: 100%;
+    padding-top: 180rpx;
+    padding-left: 27rpx;
+    padding-right: 27rpx;
+}
+
+.yupao-lists-notice{
+    position: relative;
+    width: 100%;
+    padding:20rpx 0;
+    margin-top: 15rpx;
+    background: white;
+    border-radius: 2px;
+    box-shadow: #e7e6e4 0 0 10rpx;
+}
+.yupao-lists-wxinfo{
+    position: relative;
+    width: 100%;
+    padding: 0 27rpx;
+}
+.yupao-common-tips{
+    display: inline-block;
+    width: initial;
+    height: 40rpx;
+    padding: 0 10rpx;
+    background: #f86e09;
+    border-radius: 2px;
+    color: white;
+    line-height: 40rpx;
+    font-size: 22rpx;
+}
+.yupao-lists-wxtips{
+    position: relative;
+    font-size: 28rpx;
+    line-height: 50rpx;
+    color: #7f7e7e;
+    border-bottom: 1px solid #dcdcdc;
+    padding-bottom: 10rpx;
+}
+.yupao-lists-wxtips text{
+    color: #0099ff;
+}
+.yupao-lists-wxtips .yupao-lists-tips{
+    position: relative;
+    background: none;
+    color: #f86e09;
+    margin-right:10rpx;
+}
+.yupao-lists-noticetips{
+    position: relative;
+    width: 100%;
+    height: 65rpx;
+}
+.yupao-lists-newtips{
+    position: absolute;
+    left: 27rpx;
+    top: 25rpx;
+    background: none;
+    color: #f86e09;
+    font-size: 28rpx;
+    padding: 0;
+    line-height: 40rpx;
+}
+.lists-notice-swiper{
+    position: absolute;
+    width: 100%;
+    height: 50rpx;
+    top:20rpx;
+    padding-left: 155rpx;
+}
+.lists-notice-swiper swiper{
+    height: 50rpx;
+}
+.lists-notice-text{
+    position: relative;
+    font-size: 28rpx;
+    height: 50rpx;
+    line-height: 50rpx;
+    color: #0099ff;
+    width:100%;
+    display:block;
+    padding-right: 27rpx;
+}
+
+.listsbox{
+    position: relative;
+    width: 100%;
+    margin-top: 15rpx;
+}
+.listsbox .index-list-item{
+    margin-bottom: 15rpx;
+    box-shadow: #e7e6e4 0 0 10rpx;
+    border-radius: 2px;
+}
+.lists-nodata{
+    background: transparent;
+}

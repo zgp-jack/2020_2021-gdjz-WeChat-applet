@@ -1,0 +1,63 @@
+<view class="yupao-common-container">
+
+    <view class='info-yupao-tips'> 
+        <view class='yupao-lists-notice'>
+        <view class='yupao-lists-wxinfo'>
+            <view class='yupao-lists-wxtips'><text class='yupao-lists-tips'>公告</text>加客服微信号:<text  data-wechat="{{ wechat }}" bindtap='clipboardWechat'>{{ wechat }}</text> 拉你进工人微信群。客服电话:<text bindtap='callThisPhone' data-phone="{{ phone }}">{{ phone }}</text></view>
+        </view>
+        <view class='yupao-lists-noticetips'>
+            <text class='yupao-common-tips yupao-lists-newtips'>新手必看</text>
+            <view class='lists-notice-swiper'>
+                <swiper indicator-dots="{{ notice.indicatorDots }}" autoplay="{{ notice.autoplay}} " interval="{{ notice.interval }}" duration="{{ notice.duration }}" circular="{{ notice.circular }}"  vertical="{{ notice.vertical }}">
+                    <block wx:for="{{ notice.lists }}" wx:key="{{ index }}">
+                        <swiper-item>
+                            <text class='lists-notice-text overwords' data-id="{{ item.id }}" bindtap='showThisNotice'>{{ item.title }}</text>
+                        </swiper-item>
+                    </block>
+                </swiper>
+            </view>
+        </view>
+        </view>
+    </view>
+
+
+
+    <view class='yupao-common-list'>
+        <view class='yupao-common-lists-item clearfix'>
+            <view class='yupao-common-list-left'>项目名称</view>
+            <view class='yupao-common-list-right'>{{ usedInfo.title }}</view>
+        </view>
+        <view class='yupao-common-lists-item clearfix'>
+            <view class='yupao-common-list-left'>发布时间</view>
+            <view class='yupao-common-list-right'>{{ usedInfo.time }}</view>
+        </view>
+        <view class='yupao-common-lists-item clearfix'>
+            <view class='yupao-common-list-left'>联系人</view>
+            <view class='yupao-common-list-right'>{{ usedInfo.user_name }}</view>
+        </view>
+        <view class='yupao-common-lists-item clearfix'>
+            <view class='yupao-common-list-left'>电话号码</view>
+            <view class='yupao-common-list-right' bindtap='callThisPhone' data-phone="{{ usedInfo.user_mobile }}" data-end='{{ usedInfo.is_end }}'>{{ usedInfo.user_mobile }}</view>
+        </view>
+        <view class='yupao-common-lists-item clearfix'>
+            <view class='yupao-common-list-left'>地区</view>
+            <view class='yupao-common-list-right'>{{ usedInfo.showAddress }}</view>
+        </view>
+        <view class='yupao-common-lists-item clearfix'>
+            <view class='yupao-common-list-left'>分类</view>
+            <view class='yupao-common-list-right'>{{ usedInfo.showCateAttr }}</view>
+        </view>
+        <view class='yupao-common-lists-item clearfix'>
+            <view class='yupao-common-list-left'>交易状态</view>
+            <view class='yupao-common-list-right'>{{ usedInfo.is_end_word }}</view>
+        </view>
+    </view>
+    <view class='yupao-common-list'>
+        <view class='yupao-common-lists-item clearfix'>
+            <view class='yupao-common-lists-text'>要求 / 备注</view>
+        </view>
+        <view class='yupao-common-lists-item clearfix' style='border-bottom:0;'>
+            <view class='yupao-common-lists-text'>{{ usedInfo.detail }}</view>
+        </view>
+    </view>
+</view>

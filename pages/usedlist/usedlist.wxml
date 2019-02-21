@@ -1,0 +1,107 @@
+<!-- 搜索头部 -->
+<view class="lists-header">
+    <input placeholder="跳蚤市场"  bindconfirm="userTapSearch" confirm-type="search"   bindinput='bindKeyInput'/>
+    <text bindtap='userTapSearch'>搜索</text>
+</view>
+
+<!-- 筛选条件 -->
+<view class='lists-condition-menu flex-row mybottomborder'>
+    <view class='lists-condition-item {{ (showListsInfo == "1") ? "lists-condition-active" : ""}}' bindtap='showListsType' data-type="1">
+        <view class='overwords'>{{ areaText }}<image src='{{ selectimg }}'></image></view>
+    </view>
+    <view class='lists-condition-item {{ (showListsInfo == "2") ? "lists-condition-active" : ""}}' bindtap='showListsType' data-type="2">
+        <view class='overwords'>{{ typeText }}<image src='{{ selectimg }}'></image></view>
+    </view>
+</view>
+
+<!-- 筛选条件列表 -->
+<view class='user-choose-shade {{ (showListsInfo != "0") ? "user-choose-shade-active":"" }}' bindtap='closeAllSelect'>
+    <view class='user-choose-item {{ (showListsInfo == "1") ? "user-choose-item-active" : "" }}'  wx:if="{{ showListsInfo == '1' }}">
+        <view class='filtrate-list-item mybottomborder overwords {{ (province == index) ? "filtrate-list-active" : "" }}'  wx:for="{{ fillterArea }}" wx:key="{{ index }}" catchtap='userChooseProvince' data-index="{{ index }}" bindtouchstart="touchStart" bindtouchend="touchEnd" data-id='{{ item.id }}' data-haschild="{{ item.has_children }}"  data-area="{{ item.name }}">
+            <text>{{ item.name }}</text>
+            <view class='filtrate-item-lists {{ (province == index) ? "filtrate-item-lists-active" : "" }}' wx:if="{{ item.has_children }}">
+                <view class='filtrate-item-info mybottomborder overwords {{ (userCity == item.id) ? "filtrate-item-info-active" : "" }}' wx:for="{{ item.children }}" wx:key="{{ index }}" catchtap='userChooseCity' data-id="{{ item.id }}"   data-area="{{ item.name }}">{{ item.name }}</view>
+            </view>
+        </view>
+    </view>
+    <view class='user-choose-item {{ (showListsInfo == "2") ? "user-choose-item-active" : "" }}' wx:if="{{ showListsInfo == '2' }}"  catchtap='stopThisAction'>
+        <view class='filtrate-list-item mybottomborder overwords {{ (worktype == pindex) ? "filtrate-list-active" : "" }}' wx:for="{{ fillterType }}" wx:key="{{ index }}" wx:for-index="pindex" catchtap='userChooseWorktype' data-index="{{ pindex }}"  bindtouchstart="touchStart" bindtouchend="touchEnd"   data-id='{{ item.id }}' data-haschild="{{ item.has_attribute }}" data-type="{{ item.name }}">
+            <text>{{ item.name }}</text>
+            <view class='filtrate-item-lists {{ (worktype == pindex) ? "filtrate-item-lists-active" : "" }}' wx:if="{{ item.has_attribute  }}" >
+                <view class='filtrate-item-info mybottomborder overwords {{ (workinfo == item.id) ? "filtrate-item-info-active" : "" }}' wx:for="{{ item.attributes }}" wx:key="index" wx:for-index="cindex" catchtap='userChooseWorkinfo' data-id="{{ item.id }}" data-type="{{ item.name }}" data-key="{{ pindex }}">{{ item.name }}</view>
+            </view>
+        </view>
+    </view>
+</view>
+
+
+<view class='yupao-lists-container yupao-common-container yupao-common-nofooter'>
+
+    <!-- 公告 -->
+    <view class='yupao-lists-notice'>
+        <view class='yupao-lists-wxinfo'>
+            <view class='yupao-lists-wxtips'><text class='yupao-lists-tips'>公告</text>加客服微信号:<text  data-wechat="{{ wechat }}" bindtap='clipboardWechat'>{{ wechat }}</text> 拉你进工人微信群。客服电话:<text bindtap='callThisPhone' data-phone="{{ phone }}">{{ phone }}</text></view>
+        </view>
+        <view class='yupao-lists-noticetips'>
+            <text class='yupao-common-tips yupao-lists-newtips'>新手必看</text>
+            <view class='lists-notice-swiper'>
+                <swiper indicator-dots="{{ notice.indicatorDots }}" autoplay="{{ notice.autoplay}} " interval="{{ notice.interval }}" duration="{{ notice.duration }}" circular="{{ notice.circular }}"  vertical="{{ notice.vertical }}">
+                    <block wx:for="{{ notice.lists }}" wx:key="{{ index }}">
+                        <swiper-item>
+                            <text class='lists-notice-text overwords' data-id="{{ item.id }}" bindtap='showThisNotice'>{{ item.title }}</text>
+                        </swiper-item>
+                    </block>
+                </swiper>
+            </view>
+        </view>
+    </view>
+
+    <view class='listsbox '>
+
+    <block  wx:for="{{ lists }}" wx:key="{{ index }}" wx:if="{{ lists.length }}">
+        <navigator url='../detail/usedinfo/usedinfo?id={{ item.id }}'>
+            <view class='index-list-item' >
+                <view class='index-item-header'>
+                    <text class='index-item-title overwords'>{{ item.title }}</text>
+                    <text class='index-item-time'>{{ item.time }}</text>
+                </view>
+                <view class='index-item-body'>
+                    <view class='index-item-userimg'><image src='{{ item.image }}'></image></view>
+                    <view class='index-item-words'>
+                        <view class='index-words-item overwords'>
+                            <image src='{{ listsImg.infoman }}'></image>
+                            <text>联系人：{{ item.user_name }}</text>
+                        </view>
+                        <view class='index-words-item overwords'>
+                            <image src='{{ listsImg.posi }}'></image>
+                            <text>{{ item.show_address }}</text>
+                        </view>
+                        <view class='index-words-item overwords'>
+                            <image src='{{ listsImg.status }}'></image>
+                            <text>交易状态： <text>{{ (item.top == "1") ? "置顶中" : item.state_arr.state }}</text></text>
+                        </view>
+                    </view>
+                </view>
+            </view>
+        </navigator>
+        <ad class="lists-ad"  unit-id="adunit-ae7e7f8a9ffcb0ab" wx:if="{{index % 5 == 0 && index > 5}}"></ad>
+        <navigator url='/pages/download/download-app' wx:if="{{index == 5}}" class='lists-ad'>
+            <image  src="http://yupao.oss-cn-beijing.aliyuncs.com/yupaoweb/miniWechat/image/download.png"></image>
+        </navigator>
+    </block>
+
+        <view class='nodata-texttips' wx:if="{{ nothavemore }}">没有更多数据了</view>
+
+        <view class='common-nodatabox flex-column lists-nodata'  wx:if="{{ showNothinkData }}">
+            <image src='{{ listsImg.nodata }}'></image>
+            <text>没有找到相关数据</text>
+        </view>
+    </view>
+
+</view>
+
+<view class='fixed-ad'>
+    <navigator url='/pages/download/download-app'>
+        <image src='http://yupao.oss-cn-beijing.aliyuncs.com/miniprogram/images/fixed-downloadapp.png'></image>
+    </navigator>
+</view>

@@ -1,0 +1,244 @@
+<import src="/pages/footer/footer.wxml"/>
+
+<!-- 首页头部 -->
+<view class="index-yupao-header">
+    <image class='index-yupao-logo' src='{{ indexImgs.logo }}'></image>
+    <view class='flex-row index-yupao-area' bindtap='showArea'>
+        <image src='{{ indexImgs.area }}' class='index-area-start'></image>
+        <text class='index-area-text'>{{ areaText }}</text>
+        <image src='{{ indexImgs.areamore }}' class='index-area-more'></image>
+    </view>
+    <navigator url='/pages/download/download-app'  open-type="navigate">
+        <view class='index-download-app'>
+                <image src='{{ indexImgs.loadapp }}'></image>
+        </view>
+    </navigator>
+</view>
+
+<!-- container -->
+<view class='yupao-common-container index-margin-swiper'>
+    
+    <!-- 轮播图 -->
+    <view class='index-swiperbox'>
+        <swiper indicator-dots="{{ swiper.indicatorDots }}" autoplay="{{ swiper.autoplay}} " interval="{{ swiper.interval }}" duration="{{ swiper.duration }}" circular="{{ swiper.circular }}" >
+        <block wx:for="{{ swiper.imgUrls }}" wx:key="{{ index }}">
+            <swiper-item>
+            <navigator url='{{ item.small_url }}' open-type="navigate">
+                <image src="{{ item.banner }}" class="index-swiper-img" />
+            </navigator>
+            </swiper-item>
+        </block>
+        </swiper>
+    </view>
+
+    <!-- 鱼泡产业 -->
+    <view class='index-yupao-industry clearfix'>
+        <navigator url='/pages/index/index' class='index-footer-nav' open-type="navigate">
+            <view class='index-industry-item'>
+                <image src='{{ industry.jzzg }}'></image>
+                <text>建筑招工</text>
+            </view>
+        </navigator>
+        <navigator class='index-footer-nav' target="miniProgram" open-type="navigate" app-id="wxca0eab5cd5fe6a7c" path="" extra-data="" version="release" >
+            <view class='index-industry-item'>
+                <image src='{{ industry.zxzg }}'></image>
+                <text>装修招工</text>
+            </view>
+        </navigator>
+        <navigator class='index-footer-nav' target="miniProgram" open-type="navigate" app-id="wxd348efa56021e8d0" path="" extra-data="" version="release" >
+            <view class='index-industry-item'>
+                <image src='{{ industry.hgzp }}'></image>
+                <text>焊工招聘</text>
+            </view>
+        </navigator>
+        <navigator class='index-footer-nav' target="miniProgram" open-type="navigate" app-id="wx33194c327f50b99d" path="" extra-data="" version="release" >
+            <view class='index-industry-item'>
+                <image src='{{ industry.gczg }}'></image>
+                <text>工厂招工</text>
+            </view>
+        </navigator>
+        <navigator class='index-footer-nav' target="miniProgram" open-type="navigate" app-id="wx3c00097df345ae74" path="" extra-data="" version="release" >
+            <view class='index-industry-item'>
+                <image src='{{ industry.gwzg }}'></image>
+                <text>国外招工</text>
+            </view>
+        </navigator>
+        <!-- <navigator class='index-footer-nav' target="miniProgram" open-type="navigate" app-id="wx0ae31bf0edad4390" path="" extra-data="" version="release" > -->
+            <view class='index-industry-item' bindtap='toastDevelop'>
+                <image src='{{ industry.jxzl }}'></image>
+                <text>机械租赁</text>
+            </view>
+        <!-- </navigator> -->
+        <navigator class='index-footer-nav' target="miniProgram" open-type="navigate" app-id="wxbac40ffffdee0573" path="" extra-data="" version="release" >
+            <view class='index-industry-item'>
+                <image src='{{ industry.zbcg }}'></image>
+                <text>招标采购</text>
+            </view>
+        </navigator>
+        <navigator class='index-footer-nav' target="miniProgram" open-type="navigate" app-id="wx7cea45b9ebdf87ac" path="" extra-data="" version="release" >
+            <view class='index-industry-item'>
+                <image src='{{ industry.zjxm }}'></image>
+                <text>在建项目</text>
+            </view>
+        </navigator>
+        <view class='index-industry-item' bindtap='jumpThisLink'  data-url="/pages/usedlist/usedlist">
+            <image src='{{ industry.esjy }}'></image>
+            <text>二手交易</text>
+        </view>
+        <navigator class='index-footer-nav' target="miniProgram" open-type="navigate" app-id="wx3faf62a5edbb1513" path="" extra-data="" version="release" >
+            <view class='index-industry-item'>
+                <image src='{{ industry.gjsc }}'></image>
+                <text>工具商城</text>
+            </view>
+        </navigator>
+    </view>
+
+    <!-- 快捷功能 -->
+    <view class='index-yupao-function clearfix'>
+        <navigator url='{{ item.url }}'  wx:for="{{ fun }}" wx:key="{{ index }}" open-type="navigate" >
+            <view class='index-fun-item flex-row'>
+                <image src='{{ item.img }}'></image>
+                <text>{{ item.title }}</text>
+            </view>
+        </navigator>
+    </view>
+
+    <!-- 鱼泡公告 -->
+    <view class='index-yupao-notice'>
+        <image src='{{ indexImgs.notice }}'></image>
+        <view class='index-notice-swiper'>
+            <swiper indicator-dots="{{ notice.indicatorDots }}" autoplay="{{ notice.autoplay}} " interval="{{ notice.interval }}" duration="{{ notice.duration }}" circular="{{ notice.circular }}"  vertical="{{ notice.vertical }}">
+                <block wx:for="{{ notice.lists }}" wx:key="{{ index }}">
+                    <swiper-item>
+                        <navigator url='/pages/static/notice?id={{ item.id }}' open-type="navigate" >
+                            <text class='index-notice-text' data-id="{{ item.id }}">{{ item.title }}</text>
+                        </navigator>
+                    </swiper-item>
+                </block>
+            </swiper>
+        </view>
+    </view>
+    
+    <!-- 信息列表 -->
+    <view class='index-infolists'>
+        <view class='index-lists-item' >
+            <navigator url='/pages/index/index' class='index-lists-header'  open-type="navigate">最新招工信息<text>更多</text> </navigator>
+            <view class='index-lists-body'>
+                <view class='index-list-item'  wx:for="{{ infolists.job.lists }}" wx:key="{{ index }}" data-id="{{ item.id }}" data-type="job" bindtap='showMsgInfo'>
+                    <view class='index-item-header infolist-header-notime'>
+                        <text class='index-item-title overwords'>{{ item.title }}</text>
+                    </view>
+                    <view class='index-item-body'>
+                        <view class='index-item-userimg'><image src='{{ item.image }}'></image></view>
+                        <view class='index-item-words'>
+                            <view class='index-words-item overwords'>
+                                <image src='{{ indexImgs.infoman }}'></image>
+                                <text>联系人：{{ item.user_name }}</text>
+                            </view>
+                            <view class='index-words-item overwords'>
+                                <image src='{{ indexImgs.rilitime }}'></image>
+                                <text>{{ item.time }}</text>
+                            </view>
+                            <view class='index-words-item overwords'>
+                                <image src='{{ indexImgs.status }}'></image>
+                                <text>{{ item.state_arr.label }}： <text>{{ item.state_arr.state }}</text></text>
+                            </view>
+                        </view>
+                    </view>
+                </view>
+                <view class='common-nodatabox flex-column'  wx:if="{{ infolists.information.lists.length == 0 }}">
+                    <image src='{{ indexImgs.nodata }}'></image>
+                    <text>该地区暂无相关数据</text>
+                </view>
+            </view>
+        </view>
+        <view class='index-lists-item' >
+            <navigator url='/pages/findwork/findwork' class='index-lists-header'  open-type="navigate">最新找活信息<text>更多</text> </navigator>
+            <view class='index-lists-body'>
+                <view class='index-list-item'  wx:for="{{ infolists.resume.lists }}" wx:key="{{ index }}" data-id="{{ item.id }}" data-type="resume" bindtap='showMsgInfo'>
+                    <view class='index-item-header'>
+                        <text class='index-item-title overwords'>{{ item.title }}</text>
+                        <text class='index-item-time'>{{ item.time }}</text>
+                    </view>
+                    <view class='index-item-body'>
+                        <view class='index-item-userimg'><image src='{{ item.image }}'></image></view>
+                        <view class='index-item-words'>
+                            <view class='index-words-item overwords'>
+                                <image src='{{ indexImgs.infoman }}'></image>
+                                <text>联系人：{{ item.user_name }}</text>
+                            </view>
+                            <view class='index-words-item overwords'>
+                                <image src='{{ indexImgs.posi }}'></image>
+                                <text>{{ item.show_address }}</text>
+                            </view>
+                            <view class='index-words-item overwords'>
+                                <image src='{{ indexImgs.status }}'></image>
+                                <text>{{ item.state_arr.label }}： <text>{{ item.state_arr.state }}</text></text>
+                            </view>
+                        </view>
+                    </view>
+                </view>
+                <view class='common-nodatabox flex-column'  wx:if="{{ infolists.resume.lists.length == 0 }}">
+                    <image src='{{ indexImgs.nodata }}'></image>
+                    <text>该地区暂无相关数据</text>
+                </view>
+            </view>
+        </view>
+        <view class='index-lists-item' >
+            <navigator url='/pages/usedlist/usedlist' class='index-lists-header'  open-type="navigate">最新二手交易信息<text>更多</text> </navigator>
+            <view class='index-lists-body'>
+                <view class='index-list-item'  wx:for="{{ infolists.fleamarket.lists }}" wx:key="{{ index }}" data-id="{{ item.id }}" data-type="fleamarket" bindtap='showMsgInfo'>
+                    <view class='index-item-header'>
+                        <text class='index-item-title overwords'>{{ item.title }}</text>
+                        <text class='index-item-time'>{{ item.time }}</text>
+                    </view>
+                    <view class='index-item-body'>
+                        <view class='index-item-userimg'><image src='{{ item.image }}'></image></view>
+                        <view class='index-item-words'>
+                            <view class='index-words-item overwords'>
+                                <image src='{{ indexImgs.infoman }}'></image>
+                                <text>联系人：{{ item.user_name }}</text>
+                            </view>
+                            <view class='index-words-item overwords'>
+                                <image src='{{ indexImgs.posi }}'></image>
+                                <text>{{ item.show_address }}</text>
+                            </view>
+                            <view class='index-words-item overwords'>
+                                <image src='{{ indexImgs.status }}'></image>
+                                <text>{{ item.state_arr.label }}： <text>{{ item.state_arr.state }}</text></text>
+                            </view>
+                        </view>
+                    </view>
+                </view>
+                <view class='common-nodatabox flex-column'  wx:if="{{ infolists.fleamarket.lists.length == 0 }}">
+                    <image src='{{ indexImgs.nodata }}'></image>
+                    <text>该地区暂无相关数据</text>
+                </view>
+            </view>
+        </view>
+    </view>
+</view>
+
+
+<!-- 地区选择 -->
+<view class='index-pullareabox {{ showArea ? "index-pullareabox-active":"" }}'>
+    <view class='index-area-header'>地区选择 <text class='index-close-area'   bindtap='closeArea'></text></view>
+    <view class='index-area-tips overwords'>当前选择城市：<text>{{ areaText }}</text></view>
+    <view class='index-area-body'>
+        <view class='index-area-item' wx:for="{{ areadata }}" wx:key="{{ index }}">
+            <text class='area-header-words'>{{ item[0].city }}</text>
+            <view class='area-body-content clearfix'>
+                <view wx:for="{{ item }}" wx:key="{{ index }}"><text class='overwords' data-id="{{ item.id }}" data-area="{{ item.city }}"  bindtap='chooseThisCtiy'>{{ item.city }}</text></view>
+            </view>
+        </view>
+    </view>
+</view>
+
+<view class='fixed-ad'>
+    <navigator url='/pages/publish/recruit/recruit'>
+        <image src='http://yupao.oss-cn-beijing.aliyuncs.com/miniprogram/images/fixed-publishrecruit.png'></image>
+    </navigator>
+</view>
+
+<!-- 引入footer -->
+<template is="footer" data="{{ footerImgs,publishActive,showPublishBox,footerActive }}" />

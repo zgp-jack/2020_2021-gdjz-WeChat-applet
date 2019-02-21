@@ -1,0 +1,66 @@
+.invite-content{
+    position: relative;
+    width: 100%;
+    padding: 20rpx 27rpx;
+}
+.invite-item{
+    position: relative;
+    padding:20rpx;
+    background: white;
+    margin-bottom: 30rpx;
+}
+.invite-shareimg{
+    position: relative;
+    float: right;
+    width: 60rpx;
+    height: 69rpx;
+}
+.invite-item view{
+    font-size: 28rpx;
+    line-height: 50rpx;
+}
+.invite-padding-left{
+    padding-left: 150rpx;
+}
+.invite-padding-left::before{
+    position: absolute;
+    content: '';
+    width: 10rpx;
+    height: 50rpx;
+    background: linear-gradient(0deg, #0c7afa, #2ab3ff);
+    left: 70rpx;
+    top: -40rpx;
+    border-radius: 5px;
+}
+.invite-padding-left::after{
+    position: absolute;
+    content: '';
+    width: 10rpx;
+    height: 50rpx;
+    background: linear-gradient(0deg, #0c7afa, #2ab3ff);
+    right: 70rpx;
+    top: -40rpx;
+    border-radius: 5px;
+}
+.invite-padding-left image{
+    position: absolute;
+    display: block;
+    width: 110rpx;
+    height: 110rpx;
+    left: 20rpx;
+    top: 30rpx;
+}
+.user-share-box{
+    position: relative;
+    width: 100%;
+    padding: 15rpx;
+}
+.user-share-box input{
+    border: 1px solid #dcdcdc;
+    height: 70rpx;
+    line-height: 70rpx;
+    border-radius: 2px;
+    display: block;
+    padding: 0 10rpx;
+    box-sizing: border-box;
+}

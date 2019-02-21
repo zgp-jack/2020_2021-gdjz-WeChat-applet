@@ -1,0 +1,309 @@
+page{
+    position: relative;
+    width: 100%;
+    background:#e9463d  url("http://yupao.oss-cn-beijing.aliyuncs.com/miniprogram/images/truntable-main.png") no-repeat;
+    background-size: 100% 100%;
+}
+.xydzpimg{
+    position: relative;
+    display: block;
+    margin: 20rpx auto 0;
+}
+.turntable-container{
+    position: relative;
+    width: 100%;
+    padding-top:20rpx;
+}
+.turntable-content{
+    position: relative;
+    margin: 0 auto;
+    display: block;
+    background: url("http://yupao.oss-cn-beijing.aliyuncs.com/miniprogram/images/truntable-bg.png") no-repeat;
+    background-size: 100% 100%;
+}
+.turntable-btnbox{
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    display: block;
+    background: url("http://yupao.oss-cn-beijing.aliyuncs.com/miniprogram/images/truntable-btn.png") no-repeat;
+    background-size: 100% 100%;
+    z-index:5;
+    transform-origin: center;
+}
+.turntable-footer{
+    position: relative;
+    padding-top: 50rpx;
+}
+.turntable-footer-item{
+    position: relative;
+    background: #ec6861;
+    width: 80%;
+    border: 1px dashed #f4ef20;
+    display: block;
+    margin: 0 auto 40rpx;
+    border-radius: 5px;
+}
+.turntable-footer-item:nth-last-child(1){
+    margin-bottom: 0;
+}
+.turntable-times-tips{
+    position: relative;
+    display: block;
+    width: 100%;
+    text-align: center;
+    color: #f1eb3c;
+    line-height: 100rpx;
+    font-size: 28rpx;
+    letter-spacing: 2rpx;
+}
+.turntable-times-tips::after,.turntable-times-tips::before{
+    position: absolute;
+    content: '';
+    width:4rpx;
+    height:80rpx;
+    background:  #efea3c;
+    bottom:-60rpx;
+    z-index: 5;
+    border-radius: 5rpx;
+}
+.turntable-footer-item::before,.turntable-footer-item::after{
+    position: absolute;
+    content: '';
+    width:16rpx;
+    height: 16rpx;
+    background: #e9463d;
+    border-radius: 50%;
+    overflow: hidden;
+    z-index: 2;
+}
+.turntable-footer-item::before{
+    bottom:12rpx;
+    left: 44rpx;
+}
+.turntable-footer-item::after{
+    bottom:12rpx;
+    right: 44rpx;
+}
+.turntable-footer-item:nth-last-child(1)::before{
+    top: 12rpx;
+    left: 44rpx;
+}
+.turntable-footer-item:nth-last-child(1)::after{
+    top: 12rpx;
+    right: 44rpx;
+}
+
+.turntable-times-tips::before{
+    left: 50rpx;
+}
+.turntable-times-tips::after{
+    right: 50rpx;
+}
+.turntable-names-scroll{
+    position: relative;
+    width: 100%;
+}
+.turntable-names-tips{
+    position: relative;
+    display: block;
+    width: 100%;
+    font-size: 40rpx;
+    text-align: center;
+    line-height: 80rpx;
+    padding: 10rpx 0;
+    color: #f1eb3c;
+    background: #e3524a;
+}
+.scorllname-swiper{
+    position: relative;
+    width: 100%;
+    height: 300rpx;
+    padding: 20rpx 0;
+}
+.scrollname-item{
+    position: relative;
+    padding: 0 20rpx;
+}
+.scrollname-item view{
+    position: relative;
+    display: block;
+    line-height: 75rpx;
+    color: #fff;
+    font-size: 30rpx;
+    text-align: center;
+}
+
+.truntable-footer-arrows{
+    position: relative;
+    display: block;
+    width: 30rpx;
+    height: 30rpx;
+    border-right: 1px solid #efea3c;
+    border-bottom: 1px solid #efea3c;
+    transform: rotate(45deg);
+    margin: 0 auto 40rpx;
+}
+.turntable-shade{
+    position: absolute;
+    background: url("http://yupao.oss-cn-beijing.aliyuncs.com/miniprogram/images/truntable-shade.png") no-repeat;
+    background-size: 100% 100%;
+    bottom: 10rpx;
+    left: 50%;
+    z-index: -1;
+}
+
+
+.turntable-wined-fixed{
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: 10;
+}
+.turntable-wined-box{
+    position: relative;
+    display: block;
+    width: 90%;
+    height: 600rpx;
+    background: url("http://yupao.oss-cn-beijing.aliyuncs.com/miniprogram/images/win-mainbg.png") no-repeat;
+    background-size: 100% 100%;
+    z-index: 100;
+}
+
+.turntable-wined-header{
+    position: relative;
+    width: 100%;
+}
+.turntable-wined-header view{
+    text-align: center;
+    color: white;
+}
+.turntable-wined-header-title{
+    font-size: 42rpx;
+}
+.turntable-wined-header-tips{
+    font-size: 32rpx;
+}
+.turntable-wined-content{
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+.turntable-wined-content-title{
+    color: #fff;
+    font-size:30rpx;
+}
+.turntable-wined-content-time{
+    color: #fff;
+    font-size: 22rpx;
+}
+.turntable-wined-content-tips{
+    position: relative;
+    color: #e51f20;
+    font-size: 28rpx;
+}
+.turntable-wined-content-num{
+    position: absolute;
+    right: 20rpx;
+    top:20rpx;
+    font-size: 44rpx;
+    color: #fff;
+    letter-spacing: 2rpx;
+}
+.turntable-wined-footer-tips{
+    position: relative;
+    display: block;
+    width: 100%;
+    color: #6f6f6f;
+    text-align: center;
+    font-size: 34rpx;
+    font-weight: bold;
+}
+.turntable-wined-footer{
+    position: relative;
+}
+.turntable-wined-footer-item{
+    position: relative;
+    display: block;
+    width: 50%;
+    text-align: center;
+    padding: 0 20rpx;
+}
+.turntable-wined-footer-item text{
+    font-size: 34rpx;
+    color: #ff0000;
+    display: block;
+    border: 1px solid #ff0000;
+    border-radius: 6px;
+    letter-spacing: 2rpx;
+}
+.turntable-wined-footer-item:nth-last-child(1) text{
+    background: #ff0000;
+    color: #fff;
+}
+.turntable-wined-close{
+    position: absolute;
+    left: 50%;
+    bottom: -100rpx;
+    display: block;
+    width:60rpx;
+    height: 60rpx;
+    margin-left: -30rpx;
+    background: url("http://yupao.oss-cn-beijing.aliyuncs.com/miniprogram/images/wined-close.png") no-repeat;
+    background-size: 100% 100%;
+}
+.turntable-wined-close::before{
+    position: absolute;
+    content: '';
+    left: 50%;
+    height: 45rpx;
+    width: 1px;
+    background: #fff;
+    top:-40rpx;
+    z-index: -1;
+}
+
+.index-swiper-opacity{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: block;
+    z-index: 5;
+    background: transparent;
+}
+
+.user-notimesbox{
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: 10;
+}
+.user-notimes-view{
+    position: relative;
+    display: block;
+    background: url("http://yupao.oss-cn-beijing.aliyuncs.com/miniprogram/images/notimes.png") no-repeat;
+    background-size: 100% 100%;
+}
+.user-colse-times{
+    position: absolute;
+    left: 50%;
+    top: 0;
+    display: block;
+    background: url("http://yupao.oss-cn-beijing.aliyuncs.com/miniprogram/images/close-notimes.png") no-repeat;
+    background-size: 100% 100%;
+    z-index: 15;
+}
+.user-notimes-chooseapp{
+    position: absolute;
+    top: 62%;
+    width: 62%;
+    left: 19%;
+    z-index: 10;
+    opacity: 0;
+}

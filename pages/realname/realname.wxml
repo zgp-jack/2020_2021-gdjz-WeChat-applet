@@ -1,0 +1,104 @@
+<view class="yupao-common-container">
+    <view class='yupao-realname-container'>
+        <view class='common-publish-content common-shaded-box nopadding'>
+            <view class='common-publish-item'>
+                <view class='common-publish-item-content'>
+                    <text class='common-publish-words'>姓名</text>
+                    <input class='common-publish-input' value='{{ member.username }}' placeholder='请输入姓名' bindinput='userEnterName'></input>
+                </view>
+            </view>
+            <view class='common-publish-item'>
+                <view class='common-publish-item-content'>
+                    <text class='common-publish-words'>年龄</text>
+                    <input class='common-publish-input' type='number' value='{{ member.age }}' placeholder='请输入年龄' bindinput='userEnterAge'></input>
+                </view>
+            </view>
+            <view class='common-publish-item'>
+                <view class='common-publish-item-content'>
+                    <text class='common-publish-words'>民族</text>
+                    <input class='common-publish-input' value='{{ member.nationality }}' placeholder='请输入民族' bindinput='userEnterNationality'></input>
+                </view>
+            </view>
+            <view class='common-publish-item'>
+                <view class='common-publish-item-content'>
+                    <text class='common-publish-words'>身份证号</text>
+                    <input class='common-publish-input' type='number' value='{{ member.id_card }}' placeholder='请输入身份证号' bindinput='userEnterIdcard'></input>
+                </view>
+            </view>
+            <view class='common-publish-item' wx:if="{{ !member.tel }}">
+                <view class='common-publish-item-content'>
+                    <text class='common-publish-words'>手机号</text>
+                    <input class='common-publish-input' type='number' value='{{ member.tel }}' placeholder='请输入手机号' bindinput='userEnterTel'></input>
+                </view>
+            </view>
+            <view class='common-publish-item' wx:if="{{ !member.tel }}">
+                <view class='common-publish-item-content common-publish-item-code '>
+                    <text class='common-publish-words'>验证码</text>
+                    <input class='common-publish-input' type='number' value='{{ member.code }}' placeholder='请输入验证码' bindinput='userEnterCode' maxlength='4'></input>
+                    <text class='publish-getcode-btn'  bindtap='userGetCode'>{{ codeTips }}</text>
+                </view>
+            </view>
+            <view class='common-publish-item' wx:if="{{ !member.tel }}">
+                <view class='common-publish-item-content'>
+                    <text class='common-publish-words'>密码</text>
+                    <input class='common-publish-input' password value='{{ member.pass }}' placeholder='请输入密码' bindinput='userEnterPass'></input>
+                </view>
+            </view>
+        </view>
+
+        <view class='common-publish-content common-shaded-box realname-tips'>
+            <view class='realname-tips-box'> <text>重要</text>上传前，先按示范拍好两张照片，一张单独的身份证正面照(可遮掉身份证号后4位)，一张真人头像同身份证的合影照片。
+             </view>
+        </view>
+
+        <view class='common-publish-content common-shaded-box realname-tips'>
+            <view class='realname-idcardbox clearfix' style='border-bottom:1px solid #dcdcdc;'>
+                <view class='realname-item' bindtap='userUploadIdcard' data-type="zm">
+                    <image src='{{ member.id_card_img_path || idcardz }}'></image>
+                    <text>请上传身份证正面</text>
+                </view>
+                <view class='realname-item' bindtap='userUploadIdcard' data-type="sc">
+                    <image src='{{ member.hand_img_path || idcardf }}'></image>
+                    <text>请上传手持身份证</text>
+                </view>
+            </view>
+            <view class='common-publish-item  common-publish-item-realname' wx:if="{{ member.show_resume =='1' }}">
+                <view class='common-publish-item-content'>
+                    <text class='common-publish-words'>所属工种</text>
+                    <view class='common-publish-allwords' wx:if="{{ member.worktypeIds.length  }}" bindtap="userChangeWorktype"><block wx:for="{{ classifyTree }}" wx:key="{{ index }}" wx:if="{{ item.has_children == 1 }}"><block wx:for="{{ item.children }}" wx:key="index" wx:if="{{ item.is_check }}"><text class='user-items-text'>{{ item.name }}</text></block></block></view>
+                    <input class='common-publish-input' disabled placeholder='请选择所属工种'  wx:else="{{ member.worktypeIds.length }}" bindtap="userChangeWorktype"></input>
+                </view>
+            </view>
+            <view class='common-publish-item common-publish-item-realname' wx:if="{{ member.show_resume =='1' }}">
+                <view class='common-publish-item-content '>
+                    <text class='common-publish-words'>地区</text>
+                        <picker   range='{{ member.cities }}' value='{{ myIndex }}' range-key="name" bindchange='provincePickerChange'>
+                            <view class='common-publish-allwords' wx:if="{{ hasChecked  }}">{{ member.cities[myIndex].name }}</view>
+                            <input class='common-publish-input' disabled placeholder='请选择地区'  wx:if="{{ !hasChecked  }}" ></input>
+                        </picker>
+                </view>
+            </view>
+        </view>
+    </view>
+    <text class='common-sure-btn'  bindtap='userSubmitIdcard'>确认提交</text>
+</view>
+
+
+
+<view class='publish-choose-wordtype' wx:if="{{ showWorkType }}">
+    <view class='publish-choose-contentbox common-shaded-box'>
+        <view class='publish-choose-header'>选择工种</view>
+        <view class='publish-choose-body'>
+            <view class='publish-choose-content-item' wx:for="{{ classifyTree }}" wx:key="{{ index }}" wx:for-index="pindex"   wx:if="{{ item.has_children == '1' }}">
+                <view class='publish-choose-content-header'>{{ item.name }}</view>
+                <view class='publish-choose-content-list' wx:for="{{ item.children }}"  wx:key="{{ index }}" wx:for-index="cindex" bindtap='userClickItem' data-type='workType'  data-id="{{ item.id }}" data-check="{{ item.is_check || false }}" data-index='{{ pindex }}' data-key="{{ cindex }}">
+                    <text class='choose-content-lish-left'>{{ item.name }}</text>
+                    <text class='choose-content-checkbox {{ item.is_check ? "choose-content-checkbox-active":"" }}' ></text>
+                </view>
+            </view>
+        </view>
+        <view class='publish-choose-footer flex-row'>
+            <view bindtap='userSureWorktype'>确定</view>
+        </view>
+    </view>
+</view>

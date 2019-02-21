@@ -1,0 +1,76 @@
+/* pages/expend/expend.wxss */
+.integral-header{
+    position: relative;
+    width: 100%;
+    height: 100rpx;
+    background: white;
+    text-align: center;
+    line-height: 100rpx;
+    font-size: 30rpx;
+    letter-spacing: 2rpx;
+    color: #333;
+}
+.integral-content{
+    position: relative;
+    width: 100%;
+    padding: 0 27rpx 0 87rpx;
+}
+.integral-list-item{
+    position: relative;
+    width: 100%;
+    height: 200rpx;
+    background: white;
+    border-radius: 5rpx;
+    margin-top: 15rpx;
+    box-shadow: #e7e6e4 0 0 10rpx;
+}
+.integral-list-time{
+    position: absolute;
+    width: 120rpx;
+    height: 120rpx;
+    background: #0099ff;
+    left: -60rpx;
+    top: 40rpx;
+    border-radius: 2px;
+    padding: 10rpx 0;
+}
+.integral-list-time text{
+    position: relative;
+    display: block;
+    text-align: center;
+    line-height: 50rpx;
+}
+.integral-list-time text:nth-child(1){
+    color: white;
+    font-size: 26rpx;
+}
+.integral-list-time text:nth-child(2){
+    color: white;
+    font-size: 34rpx;
+}
+.integral-list-words{
+    position: relative;
+    padding:10rpx 27rpx 10rpx 80rpx;
+    width: 100%;
+    height: 200rpx;
+}
+.integral-list-words view{
+    position: relative;
+    display: block;
+    line-height:60rpx;
+    color: #333;
+}
+.integral-list-words .integral-list-title{
+    font-size: 32rpx;
+}
+.integral-list-words .integral-list-info{
+    font-size: 30rpx;
+}
+.integral-list-lasttime{
+    font-size: 30rpx;
+}
+.integral-list-lasttime text{
+    float: right;
+    font-size: 30rpx;
+    color: #fd4040;
+}

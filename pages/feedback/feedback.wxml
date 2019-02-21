@@ -1,0 +1,29 @@
+<view class="yupao-common-container"> 
+    <view class="yupao-feedback">
+			<view class="feedback-header">
+				<view>为提高沟通效率，建议您添加客服微信或拨打客服电话</view>
+				<view>加客服微信号: <text bindtap='clipboardWechat' data-wc="{{ wechat }}">{{ wechat }}</text>,客服电话:<text data-phone="{{ phone }}" bindtap='callThisPhone'>{{ phone }}</text></view>
+			</view>
+			<view class="feedback-body">
+				<view class="feedback-container">
+					<textarea name="" rows="" cols="" placeholder="请留下您的意见或建议..." bindinput="userEnterContent" value='{{ content }}' maxlength="500"></textarea>
+					<view class="feedback-imgs clearfix">
+						<view class="feedback-img-item"  data-type="0" data-index='{{ index }}' bindtap='userUploadsImg' wx:for="{{ imglists }}" wx:key="{{ index }}">
+							<view class='feedback-imgbox'>
+                                <image src='{{ item }}'></image>
+                                <view class="feedback-del-thisimg flex-row" catchtap="delThisImg" data-index="{{ index }}">
+                                    <image src='{{ delImg }}'></image>
+                                </view>
+                            </view>
+						</view>
+						<view class="feedback-img-item feedback-uploadtips" data-type="1" bindtap='userUploadsImg' wx:if="{{ imgs.length < maxLen }}">
+							<image src='{{ normalImg }}'></image>
+						</view>
+					</view>
+					<p class="feedback-msg-tips">(提供问题截图，最多{{ maxLen }}张，可以不添加)</p>
+				</view>
+			</view>
+		
+		<text class="feedback-submit-btn" bindtap='userSubmitFeedback'>提交</text>
+	</view>
+</view>

@@ -1,0 +1,135 @@
+page{
+    position: relative;
+    height: 100%;
+}
+.yupao-ucard-container{
+    position: relative;
+    width: 100%;
+}
+.yupao-ucard-header{
+    position: relative;
+    width: 100%;
+    height: 335rpx;
+    background: url("http://yupao.oss-cn-beijing.aliyuncs.com/miniprogram/images/ucard.png") no-repeat;
+    background-size: 100% 100%;
+}
+.yupao-ucard-title{
+    position: relative;
+    height: 100rpx;
+    line-height: 100rpx;
+    text-align: center;
+    color: #fff;
+    font-size: 34rpx;
+    padding: 0 160rpx;
+}
+.yupao-ucard-title text{
+    position: absolute;
+    display: block;
+    right: 27rpx;
+    top: 0;
+    font-size: 28rpx;
+    line-height: 100rpx;
+}
+.ucard-headimgbox{
+     position: relative;
+    display: block;
+    width: 150rpx;
+    height: 150rpx;
+    margin: 0 auto;
+    border-radius: 50%;
+    overflow: hidden;
+    border:8rpx solid rgba(255,255,255,0.5);
+}
+.ucard-headimg{
+    position: relative;
+    display: block;
+    width: 100%;
+    height:100%;
+    border-radius: 50%;
+}
+.yupao-ucard-body{
+    position: relative;
+    display: block;
+}
+.yupao-ucard-words{
+    position: relative;
+    width: 90%;
+    padding: 20rpx;
+    font-size: 30rpx;
+    text-align: center;
+    background: white;
+    color: #000;
+    margin-left: 5%;
+    margin-top: -40rpx;
+    border-radius: 20rpx;
+    line-height: 50rpx;
+}
+.yupao-ucard-words::before{
+    position: absolute;
+    content: '';
+    height: 0;
+    left: 50%;
+    top:  -25rpx;
+    margin-left: -25rpx;
+    border-width: 0 30rpx 30rpx;
+    border-style: solid;
+    border-color: transparent transparent #fff;
+}
+.yupao-common-list-phone{
+    width: auto;
+}
+.yupao-common-list-phone view{
+    display: inline-block;
+}
+.common-list-phone-edit text{
+    display: inline-block;
+    background: #0099ff;
+    color: #fff;
+    padding: 0 20rpx;
+    font-size: 26rpx;
+    border-radius:5rpx;
+}
+.common-list-phone-edit .list-call-phone{
+    background: #67C23A;
+    margin-right: 10rpx;
+}
+.common-list-phone-edit .list-complain-phone{
+    background: #F56C6C;
+}
+.yupao-lists-detail-tips{
+    font-size: 30rpx;
+}
+.yupao-lists-detail{
+    font-size: 30rpx;
+    padding: 20rpx 0;
+}
+.text-red{
+    color: #ff0000;
+}
+.ucard-imgsbox{
+    position: relative;
+    width: 100%;
+    margin-top:15rpx;
+    background: white;
+    padding: 20rpx 10rpx;
+}
+.ucard-imgs-item{
+    position: relative;
+    width: 33.3333%;
+    height: 150rpx;
+    padding: 10rpx;
+    float: left;
+}
+.ucard-imgs-item image{
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+.yupao-list-ucard .yupao-common-list-left image,.yupao-lists-detail-tips image,.ucar-phone-list{
+    position: relative;
+    display: inline-block;
+    width: 36rpx;
+    height: 36rpx;
+    vertical-align: text-top;
+    margin-right: 10rpx;
+}

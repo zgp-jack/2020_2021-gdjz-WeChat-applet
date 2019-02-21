@@ -1,0 +1,81 @@
+<view class="yupao-common-container">
+    
+    <view class='turntable-container'>
+        <image src='{{ xydzp }}' class='xydzpimg' style='width:{{ wordsWidth }}px;height:{{ wordsHeight }}px;'></image>
+        <view class='turntable-content' style='width:{{ bgHeight }}px;height:{{ bgHeight }}px;'>
+            <view bindtap='startTurntable' class='turntable-btnbox' style='transition:  transform {{ transTime }}s ease-in-out 0s;width:{{ btnWidth }}px;height:{{ btnWidth }}px;margin-left:-{{ btnWidth/2 }}px;margin-top:-{{ btnWidth/2 }}px;transform:rotate({{ rotateDeg }}deg);'></view>
+            <view class='turntable-shade' style='width:{{ shadeWidth }}px;height:{{ shadeWidth/10 }}px;margin-left:-{{ shadeWidth/2 }}px;'></view>
+        </view>
+
+        <view class='turntable-footer'>
+            <view class='truntable-footer-arrows'></view>
+            <view class='turntable-footer-item'>
+                <view class='turntable-times-tips'>您还有{{ userTimes }}次抽奖机会</view>
+            </view>
+            <view class='turntable-footer-item'>
+                <view class='turntable-names-scroll'>
+                    <view class='index-swiperbox'>
+                        <view class='index-swiper-opacity'></view>
+                        <view class='turntable-names-tips'>中奖名单</view>
+                        <swiper class='scorllname-swiper' indicator-dots="{{ scrollname.indicatorDots }}" autoplay="{{ scrollname.autoplay}} " interval="{{ scrollname.interval }}" duration="{{ scrollname.duration }}" circular="{{ scrollname.circular }}"  vertical="{{ scrollname.vertical }}" >
+                            <block wx:for="{{ scrollname.nameArr }}" wx:key="{{ index }}">
+                                <swiper-item>
+                                    <view class='scrollname-item'>
+                                        <view wx:for="{{ item }}" wx:key="{{ index }}">恭喜 {{ item.name }} 获得了 {{ item.integral }} 积分</view>
+                                    </view>
+                                </swiper-item>
+                            </block>
+                        </swiper>
+                    </view>
+                </view>
+            </view>
+        </view>
+
+    </view>
+
+</view>
+
+<view class='turntable-wined-fixed flex-row' wx:if="{{ winData.isShow }}" >
+    <view class='turntable-wined-box' style='width:{{ winWidth }}px;height:{{ winHeight }}px;padding-top:{{ winHeight * 0.0694 }}px;'>
+        <view class='turntable-wined-header' style='height:{{ winHeight * 0.27785 }}px;padding:20px 0;'>
+            <view class='turntable-wined-header-title' style='line-height:{{ ((winHeight  * 0.27785)- 40 ) / 2  }}px;'>中奖啦</view>
+            <view class='turntable-wined-header-tips' style='line-height:{{ ((winHeight  * 0.27785)- 40 ) / 2  }}px;'>恭喜您获得了{{ winData.integral }}个临时积分</view>
+        </view>
+        <view class='turntable-wined-body' style='padding:{{ winHeight * 0.08 }}px {{  winWidth * 0.14}}px 0;height:{{ winHeight * 0.3357 }}px;'>
+            <view class='turntable-wined-content'>
+                    <view class='turntable-wined-content-num'>{{ winData.integral }}积分</view>
+                    <view class='turntable-wined-content-title' style='height:{{ winHeight * 0.11 }}px;padding:{{ winHeight * 0.0405 }}px 0;'>鱼泡网临时积分</view>
+                    <view class='turntable-wined-content-tips' style='height:{{ winHeight * 0.0289 }}px;'>有效期</view>
+                    <view class='turntable-wined-content-time' style='height:{{ winHeight * 0.094 }}px;padding:{{ winHeight * 0.0405 }}px 0;'>{{ winData.stime }} 至 {{ winData.etime }}</view>
+            </view>
+        </view>
+        <view class='turntable-wined-footer-tips' style='height:{{ winHeight * 0.1447 }}px;line-height:{{ winHeight * 0.1447 }}px;'>鱼泡网APP每日签到获得更多积分</view>
+        <view class='turntable-wined-footer flex-row' style='padding:0 {{  winWidth * 0.03 }}px;'>
+            <view class='turntable-wined-footer-item'>
+                <text style='height:{{ winHeight * 0.119 }}px;line-height:{{ winHeight * 0.119 }}px;' bindtap='userChooseUcenter'  data-type='1'>进会员中心</text>
+            </view>
+            <view class='turntable-wined-footer-item'>
+                <text style='height:{{ winHeight * 0.119 }}px;line-height:{{ winHeight * 0.119 }}px;' bindtap='userChooseApp'>下载APP</text>
+            </view>
+        </view>
+        <view class='turntable-wined-close' bindtap='closeWinbox' data-pay="{{ topay }}"></view>
+    </view>
+</view>
+
+<view class='user-notimesbox flex-row' wx:if="{{ showTimesTips }}">
+    <view class='user-notimes-view' style='width:{{ notimesW }}px;height:{{ notimesW / 0.974 }}px;' >
+        <view class='user-notimes-chooseapp' style='height:{{ (notimesW / 0.974) * 0.091 }}px;' catchtap='userChooseApp'></view>
+        <view class='user-colse-times'  style='width:{{ notimesW * 0.11333 }}px;height:{{ notimesW * 0.11333 }}px;margin-left:-{{ (notimesW * 0.11333)/2 }}px;' catchtap="userCloseTips"></view>
+    </view>
+</view>
+
+
+<view class='info-needusershare flex-row' wx:if="{{ isShare }}">
+    <view class='usershare-box'>
+        <view class='usershare-header'>温馨提示</view>
+        <view class='usershare-body'>每日分享到建筑或焊工微信群，即可参与抽奖</view>
+        <view class='usershare-footer'>
+            <button open-type="share">立即分享</button>
+        </view>
+    </view>
+</view>

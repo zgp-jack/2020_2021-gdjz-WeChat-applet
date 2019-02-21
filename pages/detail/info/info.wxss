@@ -1,0 +1,118 @@
+@import "../../index/index.wxss";
+.info-yupao-tips{
+    position: relative;
+    width: 100%;
+}
+.info-yupao-tips .yupao-lists-notice{
+    margin-top: 0;
+    border-radius: 0;
+}
+.yupao-common-list-right .user-need-group{
+    display: inline-block;
+    margin-right: 10rpx;
+}
+.yupao-common-list-right .user-need-group:nth-last-child(1){
+    margin-right: 0;
+}
+.info-concern-img{
+    position: relative;
+    margin-top: 15rpx;
+    background: white;
+}
+.info-concern-img image{
+    display: block;
+    width: 100%;
+}
+.info-mark{
+    color: #ff0000;
+    font-size: 26rpx;
+}
+.yupao-common-list-padding{
+    padding: 0 27rpx;
+}
+.yupao-common-list-padding .yupao-common-lists-item{
+    padding:20rpx 0;
+}
+.yupao-common-list-padding .yupao-common-lists-item:nth-last-child(1){
+    border-bottom: 0;
+}
+.info-wenxintips{
+    padding: 20rpx 27rpx;
+    background: white;
+    margin-top: 15rpx;
+}
+.info-wenxintips text{
+    font-size: 28rpx;
+    font-weight: bold;
+    color: #7f7e7e;
+}
+.info-wenxintips  .wenxintips-words{
+    color: red;
+    font-size: 28rpx;
+    line-height: 50rpx;
+}
+.wenxintips-info{
+    position: relative;
+    display: inline;
+    font-size:28rpx;
+    color: #4c4b4b;
+}
+.wenxintips-info navigator{
+    display: inline;
+}
+.wenxintips-info text{
+    font-weight: normal;
+}
+
+.showallphone-btn{
+    position: relative;
+    display: inline-block;
+    height:50rpx;
+    line-height: 50rpx;
+    padding: 0 20rpx;
+    background: #0099ff;
+    color: white;
+    font-size: 26rpx;
+    margin-left: 20rpx;
+    border-radius: 10rpx;
+}
+
+
+.list-call-phone{
+    display: inline-block;
+    color: #fff;
+    padding: 0 20rpx;
+    font-size: 26rpx;
+    border-radius:5rpx;
+    background: #67C23A;
+    margin:0 5rpx;
+}
+.list-complain-phone{
+    display: inline-block;
+    color: #fff;
+    padding: 0 20rpx;
+    font-size: 26rpx;
+    border-radius:5rpx;
+    background: #F56C6C;
+}
+
+
+.ucard-imgsbox{
+    position: relative;
+    width: 100%;
+    margin-top:15rpx;
+    background: white;
+    padding: 20rpx 10rpx;
+}
+.ucard-imgs-item{
+    position: relative;
+    width: 33.3333%;
+    height: 150rpx;
+    padding: 10rpx;
+    float: left;
+}
+.ucard-imgs-item image{
+    display: block;
+    width: 100%;
+    height: 100%;
+}

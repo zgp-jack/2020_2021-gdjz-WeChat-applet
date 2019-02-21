@@ -1,0 +1,67 @@
+<import src="/pages/footer/footer.wxml"/>
+
+<view class="yupao-common-container">
+    <view class='common-choose-header'>
+        <view class='choose-headerbox common-shaded-box flex-row'>
+            <view class='choose-header-item' wx:for="{{ publishedData }}" wx:key="{{ index }}"  bindtap='showThisList' data-index="{{ index }}">
+                <view class='{{ (index == publishIndex) ? "text-active" : "" }}'><image src='{{ (index == publishIndex) ? item.activeImg : item.normalImg }}'></image>{{ item.title }}</view>
+            </view>
+        </view>
+        <view class='published-title common-shaded-box'>{{ publishedTitle[publishIndex] }}</view>
+    </view>
+
+    <view class='published-content clearfix'>
+        <view class='published-list-item common-shaded-box' wx:for="{{ lists }}" wx:key="{{ index }}">
+            <view class='published-list-header overwords'>{{ item.title }} <text>{{ item.end_word }}</text> </view>
+            <view class='published-list-body'>
+                <view class='published-list-edit'>
+                    <navigator  url='{{ (publishIndex == 0) ? ("../publish/recruit/recruit?id="+item.id) : ("../publish/used/used?id="+item.id) }}' open-type="navigate" ><image src='{{ publishedImg.edit }}'></image>修改</navigator>
+                </view>
+                <view class='published-list-detail' bindtap='setInfoStatus'  data-id="{{ item.id }}" data-index="{{ index }}"><image src='{{ publishedImg.wzz }}'></image>{{ item.update_word }}</view>
+                <view class='published-list-settop' bindtap='setThisTop' data-id="{{ item.id }}"  data-index="{{ index }}" data-status='{{ item.top.is_top }}'><image src='{{ publishedImg.top }}'></image>{{ item.top && (item.top.is_top == "1") ? "取消置顶" : "置顶" }}</view>
+            </view>
+            <view class='published-list-footer' wx:if="{{ item.top && (item.top.is_top == '1') }}">
+                <view> <image src='{{ publishedImg.time }}'></image>到期时间：{{ item.top.time_str }}</view>
+            </view>
+        </view>
+    </view>
+
+    <view class='nodata-texttips' wx:if="{{ nothavamore }}">没有更多数据了</view>
+
+    <view class='common-nodatabox flex-column lists-nodata'  wx:if="{{ showNoData }}">
+        <image src='{{ nodataImg }}'></image>
+        <text>没有找到相关数据</text>
+    </view>
+
+</view>
+
+<view class='cost-integral-settopbox flex-row' wx:if="{{ showSetTop }}">
+    <view class='cost-integral-settop'>
+        <view class='cost-integral-settop-header'>置顶提示</view>
+        <view class='cost-integral-settop-body'>
+            <view class='cost-integral-settop-item'>
+                <text class='cost-integral-settop-tips'>置顶天数</text>
+                <input type='number' class='cost-integral-settop-right' value='{{ inputValue }}'  bindinput="userEnterTopDay" placeholder="请输入置顶天数"></input>
+            </view>
+            <view class='cost-integral-settop-item'>
+                <text class='cost-integral-settop-tips'>置顶地域</text>
+                <picker bindchange="bindAreaChange" value="{{ areaIndex }}" range="{{ areaLists }}">
+                    <view class="picker">
+                    <text class='cost-integral-settop-right'>{{ areaLists[areaIndex] }}</text>
+                    </view> 
+                </picker>
+            </view>
+            <view class='cost-integral-settop-num overwords'>--消耗积分<text>{{ costIntegral }}</text>积分--</view>
+            <view class='cost-integral-settop-footer clearfix'>
+                <view><text bindtap='cancleSetTop'>取消</text></view>
+                <view><text bindtap='sureSetTop'>确定</text></view>
+            </view>
+        </view>
+    </view>
+</view>
+
+
+
+
+<!-- 引入footer -->
+<template is="footer" data="{{ footerImgs,publishActive,showPublishBox,footerActive }}" />

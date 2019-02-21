@@ -1,0 +1,10 @@
+<view class="yupao-common-container">
+    <view class='report-container'>
+        <view class='report-words-box'>
+            <view class='report-words-item'>为促进鱼泡网健康发展，便利鱼泡网新老工友，鱼泡网开通绿色举报通道。</view>
+            <view class='report-words-item'>严厉打击各类违法犯纪行为，保障新老工友合法权益，鱼泡网致力推荐新老工友对鱼泡网中存在的一些少数不法分子进行举报。</view>
+            <view class='report-words-item'>鱼泡网将对其信息进行封锁入库，从而绿化建筑行业，鱼泡网举报热线：<text bindtap='callReportPhone' data-phone="400-833-1578">400-833-1578</text></view>
+            <view class='report-words-item'>(请事先准备好聊天记录截图、对方电话号、身份证号等)</view>
+        </view>
+    </view>
+</view>
