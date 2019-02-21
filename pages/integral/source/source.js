@@ -15,12 +15,16 @@ Page({
         lists: [],
         day:30,
         pageSize: 15,
-        page: 1
+        page: 1, 
+        system: ""
     },
     getIntegralHeader: function () {
         let _this = this;
         let userInfo = wx.getStorageSync("userInfo");
         this.setData({ userInfo: userInfo })
+        app.initSystemInfo(function (res) {
+          if (res) _this.setData({ system: res.platform })
+        })
         wx.showLoading({ title: '数据加载中' })
         app.doRequestAction({
             url: "integral/header-words/",
@@ -29,7 +33,8 @@ Page({
                 userId: userInfo.userId,
                 token: userInfo.token,
                 tokenTime: userInfo.tokenTime,
-                type: "source"
+                type: "source",
+              systemType:_this.data.system
             },
             success: function (res) {
                 wx.hideLoading();
@@ -67,7 +72,8 @@ Page({
                 token: userInfo.token,
                 tokenTime: userInfo.tokenTime,
                 type: "source",
-                page: _this.data.page
+                page: _this.data.page,
+                systemType:_this.data.system
             },
             success: function (res) {
                 wx.hideLoading();

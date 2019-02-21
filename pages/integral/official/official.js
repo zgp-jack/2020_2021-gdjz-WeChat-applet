@@ -32,7 +32,8 @@ Page({
                 userId: userInfo.userId,
                 token: userInfo.token,
                 tokenTime: userInfo.tokenTime,
-                type: "pay"
+                type: "pay",
+              systemType:_this.data.system
             },
             success: function (res) {
                 wx.hideLoading();
@@ -69,7 +70,8 @@ Page({
                 token: userInfo.token,
                 tokenTime: userInfo.tokenTime,
                 type: "pay",
-                page: _this.data.page
+                page: _this.data.page,
+                systemType: _this.data.system
             },
             success: function (res) {
                 wx.hideLoading();

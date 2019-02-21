@@ -1,7 +1,7 @@
 <view class="yupao-common-container yupao-common-nofooter">
     <view class='integral-header'>正式积分来源</view>
     <view class='integral-content'>
-        <view class='integral-list-item' wx:for="{{ lists }}" wx:key="{{ index }}" wx:if="{{ (system != 'ios') && (item.source_type == '3') }}">
+        <view class='integral-list-item' wx:for="{{ lists }}" wx:key="{{ index }}">
             <view class='integral-list-time'>
                 <text>{{ item.year_month }}</text>
                 <text>{{ item.day }}</text>

@@ -6,6 +6,7 @@ App({
     userInfo: null,
     refId:"",
     apiRequestUrl: "https://newyupaomini.54xiaoshuo.com/",
+    // apiRequestUrl: "http://miniapi.qsyupao.com/",
     apiUploadImg:"https://newyupaomini.54xiaoshuo.com/index/upload/",
     apiImgUrl:"http://yupao.oss-cn-beijing.aliyuncs.com/miniprogram/images/"
   },
