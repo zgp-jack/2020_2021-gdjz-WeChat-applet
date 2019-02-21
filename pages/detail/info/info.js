@@ -252,7 +252,7 @@ Page({
         this.setData({ complainInfo: e.detail.value })
     },
     userTapComplain: function () {
-        if (this.data.info.show_ajax_btn){
+        if (this.data.info.show_ajax_btn || this.data.info.is_end == '2'){
             app.showMyTips("请查看完整的手机号码后再操作！");
             return false; 
         }
