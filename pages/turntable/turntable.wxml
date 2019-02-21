@@ -73,7 +73,7 @@
 <view class='info-needusershare flex-row' wx:if="{{ isShare }}">
     <view class='usershare-box'>
         <view class='usershare-header'>温馨提示</view>
-        <view class='usershare-body'>每日分享到建筑或焊工微信群，即可参与抽奖</view>
+        <view class='usershare-body'>分享到建筑或焊工微信群，即可参与抽奖</view>
         <view class='usershare-footer'>
             <button open-type="share">立即分享</button>
         </view>
