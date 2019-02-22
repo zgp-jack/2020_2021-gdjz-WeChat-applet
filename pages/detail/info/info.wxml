@@ -5,10 +5,10 @@
     <view class='info-yupao-tips'> 
         <view class='yupao-lists-notice'>
         <view class='yupao-lists-wxinfo'>
-            <view class='yupao-lists-wxtips'><text class='yupao-lists-tips'>公告</text>加客服微信号:<text  data-wechat="{{ wechat }}" bindtap='clipboardWechat'>{{ wechat }}</text> 拉你进工人微信群。客服电话:<text bindtap='callThisPhone' data-phone="{{ phone }}">{{ phone }}</text></view>
+            <view class='yupao-lists-wxtips'><text class='yupao-lists-tips'>加群：</text>加客服微信号:<text  data-wechat="{{ wechat }}" bindtap='clipboardWechat'>{{ wechat }}</text> 拉你进工人微信群。客服电话:<text bindtap='callThisPhone' data-phone="{{ phone }}">{{ phone }}</text></view>
         </view>
         <view class='yupao-lists-noticetips'>
-            <text class='yupao-common-tips yupao-lists-newtips'>新手必看</text>
+            <text class='yupao-common-tips yupao-lists-newtips'>鱼泡公告：</text>
             <view class='lists-notice-swiper'>
                 <swiper indicator-dots="{{ notice.indicatorDots }}" autoplay="{{ notice.autoplay}} " interval="{{ notice.interval }}" duration="{{ notice.duration }}" circular="{{ notice.circular }}"  vertical="{{ notice.vertical }}">
                     <block wx:for="{{ notice.lists }}" wx:key="{{ index }}">
@@ -40,7 +40,7 @@
             <view class='yupao-common-list-right'>{{ info.tel_str }}<block wx:if="{{ info.is_end == '2' }}">({{ info.is_end_word }})</block><text class='showallphone-btn'  wx:if="{{ info.show_ajax_btn }}" bindtap='getInfoTel'>查看完整号码</text><text class='list-call-phone' wx:if="{{ !info.show_ajax_btn && (info.is_end == '1') }}"  bindtap='callThisPhone'  data-phone="{{ info.tel_str }}">拨打</text><text class='list-complain-phone' wx:if="{{ !info.show_ajax_btn && (info.is_end == '1') }}" bindtap='userTapComplain'>投诉</text></view>
         </view>
         <view class='yupao-common-lists-item clearfix'>
-            <view class='yupao-common-lists-text color-red'>联系我时，说明是在“鱼泡网”上看到的</view>
+            <view class='yupao-common-lists-text color-red'>联系我时，请说明是在“鱼泡网”上看到的。</view>
         </view>
     </view>
 
@@ -53,20 +53,22 @@
 
 
     <view class='yupao-common-list'>
-        <view class='yupao-common-lists-item clearfix' style='border-bottom:0;'>
+        <view class='yupao-common-lists-item  yupao-common-list-detail  clearfix'>
+            <view class='yupao-info-detailtitle'>招工详情</view>
             <view class='yupao-common-lists-text'>{{ info.detail }}</view>
         </view>
-    </view>
-
-    <view class='info-wenxintips clearfix'>
-        <view class='wenxintips-words'>温馨提示：<view class='wenxintips-info'>此信息由鱼泡网的用户提供，但联系时仍需要注意识别信息真假， <navigator url='/pages/anti-fraud/anti-fraud'  open-type="navigate" class='text-active'>防骗指南</navigator>。</view></view>
-        <view class='wenxintips-info'>如果发现此信息不真实，请 <text class='text-active' bindtap='userTapComplain'>立即举报</text>。</view>
     </view>
 
     <view class='ucard-imgsbox clearfix' wx:if="{{ info.view_images.length }}">
         <view class='ucard-imgs-item' wx:for="{{ info.view_images }}" wx:key="{{ index }}">
             <image src='{{ item }}' bindtap='previewImage' data-src="{{ item }}"></image>
         </view>
+    </view>
+
+    
+    <view class='info-wenxintips clearfix'>
+        <view class='wenxintips-words'>温馨提示：<view class='wenxintips-info'>此信息由鱼泡网的用户提供，但联系时仍需要注意识别信息真假， <navigator url='/pages/anti-fraud/anti-fraud'  open-type="navigate" class='text-active'>防骗指南</navigator>。</view></view>
+        <view class='wenxintips-info'>如果发现此信息不真实，请 <text class='text-active' bindtap='userTapComplain'>立即举报</text>。</view>
     </view>
 
     <view class='info-concern-img'>
