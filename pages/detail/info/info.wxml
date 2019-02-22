@@ -71,7 +71,7 @@
 
     <view class='info-concern-img'>
         <navigator url='/pages/download/download-app' open-type="navigate">
-            <image mode='widthFix' src='{{ info.download_app }}'></image>
+            <image mode='widthFix' src='{{ appLinkImg }}'></image>
         </navigator>
     </view>
 

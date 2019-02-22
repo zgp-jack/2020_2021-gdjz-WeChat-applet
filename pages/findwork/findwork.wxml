@@ -95,7 +95,7 @@
         <!-- <ad class="lists-ad"  unit-id="adunit-ae7e7f8a9ffcb0ab" wx:if="{{index % 5 == 0 && index > 5}}"></ad> -->
 
         <navigator url='/pages/download/download-app' wx:if="{{index == 8}}" class='lists-ad'>
-            <image  src="http://yupao.oss-cn-beijing.aliyuncs.com/yupaoweb/miniWechat/image/download.png"></image>
+            <image  src="{{ appLinkImg }}"></image>
         </navigator>
 
         </block>
@@ -112,7 +112,7 @@
 
 <view class='fixed-ad'>
     <navigator url='/pages/download/download-app'>
-        <image src='http://yupao.oss-cn-beijing.aliyuncs.com/miniprogram/images/fixed-downloadapp.png'></image>
+        <image src='{{ fixedAdImg }}'></image>
     </navigator>
 </view>
 

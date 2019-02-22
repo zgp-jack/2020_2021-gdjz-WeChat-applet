@@ -5,6 +5,10 @@ App({
   globalData: {
     userInfo: null,
     refId:"",
+    fixedDownApp:"https://newyupaomini.54xiaoshuo.com/statics/images/fixed-downloadapp.png",
+    fixedPublishImg:"https://newyupaomini.54xiaoshuo.com/statics/images/fixed-publishrecruit.png",
+    commonShareImg: "https://newyupaomini.54xiaoshuo.com/statics/images/minishare.png",
+    commonDownloadApp: "https://newyupaomini.54xiaoshuo.com/statics/images/download.png",
     apiRequestUrl: "https://newyupaomini.54xiaoshuo.com/",
     // apiRequestUrl: "http://miniapi.qsyupao.com/",
     apiUploadImg:"https://newyupaomini.54xiaoshuo.com/index/upload/",

@@ -56,7 +56,9 @@ Page({
         typeText:"选择工种",
         showNothinkData:false,
         nothavemore:false,
-        showMyLoading:false
+        showMyLoading:false,
+        appLinkImg: app.globalData.commonDownloadApp,
+        fixedAdImg:app.globalData.fixedDownApp
     },
     touchStart: function (e) {
         this.touchStartTime = e.timeStamp
@@ -504,7 +506,7 @@ Page({
         return {
             title: '全国建筑工地招工平台',
             path: _path,
-            imageUrl: "http://yupao.oss-cn-beijing.aliyuncs.com/miniprogram/images/minishare.png"
+            imageUrl: app.globalData.commonShareImg
         }
     }
 })

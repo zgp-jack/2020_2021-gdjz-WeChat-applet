@@ -59,6 +59,7 @@ Page({
     showArea : false,
     isScroll:true,
     areadata:[],
+    fixedAdImg:app.globalData.fixedPublishImg
   },
     toastDevelop:function(){
         app.showMyTips("该功能正在完善阶段");
@@ -270,7 +271,7 @@ Page({
         return {
             title: '全国建筑工地招工平台',
             path: _path,
-            imageUrl: "http://yupao.oss-cn-beijing.aliyuncs.com/miniprogram/images/minishare.png"
+            imageUrl: app.globalData.commonShareImg
         }
     }
     

@@ -28,7 +28,7 @@
         <view class='filtrate-list-item mybottomborder overwords {{ (worktype == pindex) ? "filtrate-list-active" : "" }}' wx:for="{{ fillterType }}" wx:key="{{ index }}" wx:for-index="pindex" catchtap='userChooseWorktype' data-index="{{ pindex }}"  bindtouchstart="touchStart" bindtouchend="touchEnd"   data-id='{{ item.id }}' data-haschild="{{ item.has_attribute }}" data-type="{{ item.name }}">
             <text>{{ item.name }}</text>
             <view class='filtrate-item-lists {{ (worktype == pindex) ? "filtrate-item-lists-active" : "" }}' wx:if="{{ item.has_attribute  }}" >
-                <view class='filtrate-item-info mybottomborder overwords {{ (workinfo == item.id) ? "filtrate-item-info-active" : "" }}' wx:for="{{ item.attributes }}" wx:key="index" wx:for-index="cindex" catchtap='userChooseWorkinfo' data-id="{{ item.id }}" data-type="{{ item.name }}" data-key="{{ pindex }}">{{ item.name }}</view>
+                <view class='filtrate-item-info mybottomborder overwords {{ (workinfo == item.id) ? "filtrate-item-info-active" : "" }}' wx:for="{{ item.attributes }}" wx:key="index" wx:for-index="cindex" catchtap='userChooseWorkinfo' data-id="{{ item.id }}" data-type="{{ fillterType[pindex].name+'-'+item.name }}" data-key="{{ pindex }}">{{ item.name }}</view>
             </view>
         </view>
     </view>
@@ -86,7 +86,7 @@
         </navigator>
         <!-- <ad class="lists-ad"  unit-id="adunit-ae7e7f8a9ffcb0ab" wx:if="{{index % 5 == 0 && index > 5}}"></ad> -->
         <navigator url='/pages/download/download-app' wx:if="{{index == 7}}" class='lists-ad'>
-            <image  src="http://yupao.oss-cn-beijing.aliyuncs.com/yupaoweb/miniWechat/image/download.png"></image>
+            <image  src="{{ appLinkImg }}"></image>
         </navigator>
     </block>
 
@@ -102,6 +102,6 @@
 
 <view class='fixed-ad'>
     <navigator url='/pages/download/download-app'>
-        <image src='http://yupao.oss-cn-beijing.aliyuncs.com/miniprogram/images/fixed-downloadapp.png'></image>
+        <image src='{{ fixedAdImg }}'></image>
     </navigator>
 </view>

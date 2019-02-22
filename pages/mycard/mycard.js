@@ -161,7 +161,7 @@ Page({
         return {
             title: '全国建筑工地招工平台',
             path: _path,
-            imageUrl: "http://yupao.oss-cn-beijing.aliyuncs.com/miniprogram/images/minishare.png"
+            imageUrl: app.globalData.commonShareImg
         }
     }
 })

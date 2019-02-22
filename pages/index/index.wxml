@@ -88,7 +88,7 @@
         
 
         <navigator url='/pages/download/download-app' wx:if="{{index == 8 }}" class='lists-ad'>
-            <image  src="http://yupao.oss-cn-beijing.aliyuncs.com/yupaoweb/miniWechat/image/download.png"></image>
+            <image  src="{{ appLinkImg }}"></image>
         </navigator>
 
         </block>
@@ -111,7 +111,7 @@
 
 <view class='fixed-ad'>
     <navigator url='/pages/download/download-app'>
-        <image src='http://yupao.oss-cn-beijing.aliyuncs.com/miniprogram/images/fixed-downloadapp.png'></image>
+        <image src='{{ fixedAdImg }}'></image>
     </navigator>
 </view>
 

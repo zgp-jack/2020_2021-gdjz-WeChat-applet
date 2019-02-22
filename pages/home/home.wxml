@@ -236,7 +236,7 @@
 
 <view class='fixed-ad'>
     <navigator url='/pages/publish/recruit/recruit'>
-        <image src='http://yupao.oss-cn-beijing.aliyuncs.com/miniprogram/images/fixed-publishrecruit.png'></image>
+        <image src='{{ fixedAdImg }}'></image>
     </navigator>
 </view>
 
