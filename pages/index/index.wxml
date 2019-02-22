@@ -85,7 +85,7 @@
             </view>
         </navigator>
 
-        <navigator url='/pages/download/download-app' wx:if="{{ (index >= 7) && (index % 7) == 0 }}" class='lists-ad'>
+        <navigator url='/pages/download/download-app' wx:if="{{ (index >= 8) && (index % 8) == 0 }}" class='lists-ad'>
             <image  src="{{ appLinkImg }}"></image>
         </navigator>
 

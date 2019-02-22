@@ -5,7 +5,7 @@ App({
   globalData: {
     userInfo: null,
     refId:"",
-    fixedGetIntegral: "http://yupao.oss-cn-beijing.aliyuncs.com/miniprogram/images/fixed-getintegral.png",
+      fixedGetIntegral: "https://newyupaomini.54xiaoshuo.com/statics/images/fixed-getintegral.png",
     fixedDownApp:"https://newyupaomini.54xiaoshuo.com/statics/images/fixed-downloadapp.png",
     fixedPublishImg:"https://newyupaomini.54xiaoshuo.com/statics/images/fixed-publishrecruit.png",
     commonShareImg: "https://newyupaomini.54xiaoshuo.com/statics/images/minishare.png",
