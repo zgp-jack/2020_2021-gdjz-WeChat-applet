@@ -53,7 +53,8 @@ Page({
         nothavemore: false,
         showMyLoading: false,
         appLinkImg: app.globalData.commonDownloadApp,
-        fixedAdImg:app.globalData.fixedDownApp
+        fixedAdImg:app.globalData.fixedDownApp,
+        fixedGetIntegral: app.globalData.fixedGetIntegral,
     },
     stopThisAction: function () {
         return false;
@@ -194,7 +195,6 @@ Page({
         let _key = parseInt(e.currentTarget.dataset.key);
         let pid = this.data.fillterType[_key].id;
         
-        if (parseInt(this.data.searchDate.classify_id) == id) return false;
         this.setData({
             workinfo: id,
             typeText: typeText,

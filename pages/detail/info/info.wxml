@@ -102,5 +102,10 @@
     </view>
 </view>
 
+</view>
 
+<view class='fixed-get-integral fixed-get-integral-bottom'>
+    <navigator url='/pages/turntable/turntable'>
+        <image src='{{ fixedGetIntegral }}'></image>
+    </navigator>
 </view>

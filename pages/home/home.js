@@ -59,7 +59,8 @@ Page({
     showArea : false,
     isScroll:true,
     areadata:[],
-    fixedAdImg:app.globalData.fixedPublishImg
+    fixedAdImg:app.globalData.fixedPublishImg,
+    
   },
     toastDevelop:function(){
         app.showMyTips("该功能正在完善阶段");

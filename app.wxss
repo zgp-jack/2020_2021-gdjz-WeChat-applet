@@ -528,15 +528,28 @@ page{
 
 .fixed-ad{
     position: fixed;
-    width: 200rpx;
-    height: 200rpx;
+    width: 180rpx;
+    height: 180rpx;
     right: 0;
     bottom: 150rpx;
     z-index: 2;
 }
-.fixed-ad navigator,.fixed-ad image{
+.fixed-get-integral{
+    position: fixed;
+    width: 120rpx;
+    height: 120rpx;
+    right: 15rpx;
+    top: 300rpx;
+    z-index: 2;
+}
+.fixed-get-integral-bottom{
+    top: auto;
+    bottom: 150rpx;
+}
+.fixed-ad navigator,.fixed-ad image,.fixed-get-integral navigator,.fixed-get-integral image{
     position: relative;
     display: block;
     width: 100%;
     height: 100%;
 }
+

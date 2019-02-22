@@ -85,9 +85,7 @@
             </view>
         </navigator>
 
-        
-
-        <navigator url='/pages/download/download-app' wx:if="{{index == 8 }}" class='lists-ad'>
+        <navigator url='/pages/download/download-app' wx:if="{{ (index >= 7) && (index % 7) == 0 }}" class='lists-ad'>
             <image  src="{{ appLinkImg }}"></image>
         </navigator>
 
@@ -112,6 +110,12 @@
 <view class='fixed-ad'>
     <navigator url='/pages/download/download-app'>
         <image src='{{ fixedAdImg }}'></image>
+    </navigator>
+</view>
+
+<view class='fixed-get-integral'>
+    <navigator url='/pages/turntable/turntable'>
+        <image src='{{ fixedGetIntegral }}'></image>
     </navigator>
 </view>
 

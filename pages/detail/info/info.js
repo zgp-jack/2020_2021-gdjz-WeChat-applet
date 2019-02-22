@@ -25,6 +25,7 @@ Page({
         showComplain: false,
         complainInfo: "",
         appLinkImg: app.globalData.commonDownloadApp,
+        fixedGetIntegral: app.globalData.fixedGetIntegral,
     },
     previewImage: function (e) {
         let src = e.currentTarget.dataset.src;

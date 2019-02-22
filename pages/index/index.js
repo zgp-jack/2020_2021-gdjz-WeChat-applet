@@ -58,7 +58,8 @@ Page({
         nothavemore:false,
         showMyLoading:false,
         appLinkImg: app.globalData.commonDownloadApp,
-        fixedAdImg:app.globalData.fixedDownApp
+        fixedAdImg:app.globalData.fixedDownApp,
+        fixedGetIntegral: app.globalData.fixedGetIntegral,
     },
     touchStart: function (e) {
         this.touchStartTime = e.timeStamp

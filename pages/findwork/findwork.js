@@ -59,7 +59,8 @@ Page({
         nothavemore: false,
         showMyLoading: false,
         appLinkImg: app.globalData.commonDownloadApp,
-        fixedAdImg:app.globalData.fixedDownApp
+        fixedAdImg:app.globalData.fixedDownApp,
+        fixedGetIntegral: app.globalData.fixedGetIntegral,
     },
     stopThisAction:function(){
         return false;

@@ -85,7 +85,7 @@
             </view>
         </navigator>
         <!-- <ad class="lists-ad"  unit-id="adunit-ae7e7f8a9ffcb0ab" wx:if="{{index % 5 == 0 && index > 5}}"></ad> -->
-        <navigator url='/pages/download/download-app' wx:if="{{index == 7}}" class='lists-ad'>
+        <navigator url='/pages/download/download-app' wx:if="{{ (index >= 7) && (index % 7) == 0 }}" class='lists-ad'>
             <image  src="{{ appLinkImg }}"></image>
         </navigator>
     </block>
@@ -103,5 +103,11 @@
 <view class='fixed-ad'>
     <navigator url='/pages/download/download-app'>
         <image src='{{ fixedAdImg }}'></image>
+    </navigator>
+</view>
+
+<view class='fixed-get-integral'>
+    <navigator url='/pages/turntable/turntable'>
+        <image src='{{ fixedGetIntegral }}'></image>
     </navigator>
 </view>
