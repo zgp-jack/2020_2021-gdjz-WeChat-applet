@@ -5,13 +5,12 @@ App({
   globalData: {
     userInfo: null,
     refId:"",
-      fixedGetIntegral: "https://newyupaomini.54xiaoshuo.com/statics/images/fixed-getintegral.png",
-    fixedDownApp:"https://newyupaomini.54xiaoshuo.com/statics/images/fixed-downloadapp.png",
-    fixedPublishImg:"https://newyupaomini.54xiaoshuo.com/statics/images/fixed-publishrecruit.png",
-    commonShareImg: "https://newyupaomini.54xiaoshuo.com/statics/images/minishare.png",
-    commonDownloadApp: "https://newyupaomini.54xiaoshuo.com/statics/images/download.png",
+    fixedGetIntegral: "http://yupao.oss-cn-beijing.aliyuncs.com/miniprogram/images/fixed-getintegral.png?t=" + new Date().getTime(),
+    fixedDownApp: "http://yupao.oss-cn-beijing.aliyuncs.com/miniprogram/images/fixed-downloadapp.png?t=" + new Date().getTime(),
+    fixedPublishImg: "http://yupao.oss-cn-beijing.aliyuncs.com/miniprogram/images/fixed-publishrecruit.png?t=" + new Date().getTime(),
+    commonShareImg: "http://yupao.oss-cn-beijing.aliyuncs.com/miniprogram/images/minishare.png?t=" + new Date().getTime(),
+    commonDownloadApp: "http://yupao.oss-cn-beijing.aliyuncs.com/miniprogram/images/download.png?t=" + new Date().getTime(),
     apiRequestUrl: "https://newyupaomini.54xiaoshuo.com/",
-    // apiRequestUrl: "http://miniapi.qsyupao.com/",
     apiUploadImg:"https://newyupaomini.54xiaoshuo.com/index/upload/",
     apiImgUrl:"http://yupao.oss-cn-beijing.aliyuncs.com/miniprogram/images/"
   },

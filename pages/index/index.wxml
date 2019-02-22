@@ -104,7 +104,7 @@
 
 <!-- 用户授权 -->
 <view class='userauthbox flex-row'  wx:if="{{ !userInfo }}">
-    <button  open-type="getUserInfo"  bindgetuserinfo='bindGetUserInfo' style='height:{{ userAuthBtn }}px;background:url({{ userAuthGif }}) no-repeat;background-size:100% 100%;'></button>
+    <button  open-type="getUserInfo"  bindgetuserinfo='bindGetUserInfo' style='height:{{ userAuthBtn }}px;background:url({{ userAuthImg }}) no-repeat;background-size:100% 100%;'></button>
 </view>
 
 <view class='fixed-ad'>

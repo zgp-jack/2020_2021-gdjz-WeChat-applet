@@ -60,6 +60,7 @@ Page({
         appLinkImg: app.globalData.commonDownloadApp,
         fixedAdImg:app.globalData.fixedDownApp,
         fixedGetIntegral: app.globalData.fixedGetIntegral,
+        userAuthImg: "http://yupao.oss-cn-beijing.aliyuncs.com/miniprogram/images/gdjz-userauth.gif?t=" + new Date().getTime(),
     },
     touchStart: function (e) {
         this.touchStartTime = e.timeStamp
