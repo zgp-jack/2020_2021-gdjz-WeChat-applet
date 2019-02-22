@@ -506,7 +506,7 @@ Page({
         let userInfo = this.data.userInfo;
         let _path = userInfo ? '/pages/index/index?refid=' + userInfo.userId : "/pages/index/index";
         return {
-            title: '全国建筑工地招工平台',
+            title: app.globalData.commonShareTips,
             path: _path,
             imageUrl: app.globalData.commonShareImg
         }

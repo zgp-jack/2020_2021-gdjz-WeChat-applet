@@ -305,7 +305,7 @@ Page({
             _this.setData({ isShare: false,shared:true })
         }, 500);
         return {
-            title: '全国建筑工地招工平台',
+            title: app.globalData.commonShareTips,
             path: '/pages/index/index?refid=' + userId,
             imageUrl: app.globalData.commonShareImg
         }

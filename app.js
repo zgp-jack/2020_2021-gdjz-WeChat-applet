@@ -12,7 +12,8 @@ App({
     commonDownloadApp: "http://yupao.oss-cn-beijing.aliyuncs.com/miniprogram/images/download.png?t=" + new Date().getTime(),
     apiRequestUrl: "https://newyupaomini.54xiaoshuo.com/",
     apiUploadImg:"https://newyupaomini.54xiaoshuo.com/index/upload/",
-    apiImgUrl:"http://yupao.oss-cn-beijing.aliyuncs.com/miniprogram/images/"
+    apiImgUrl:"http://yupao.oss-cn-beijing.aliyuncs.com/miniprogram/images/",
+    commonShareTips:"全国建筑工地招工平台"
   },
     stopThisAction:function(){
         return false;

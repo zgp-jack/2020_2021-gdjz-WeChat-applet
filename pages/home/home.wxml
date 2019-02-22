@@ -234,10 +234,8 @@
     </view>
 </view>
 
-<view class='fixed-ad'>
-    <navigator url='/pages/publish/recruit/recruit'>
-        <image src='{{ fixedAdImg }}'></image>
-    </navigator>
+<view class='fixed-ad'  bindtap='jumpThisLink'  data-url="/pages/publish/recruit/recruit"  data-type='0'>
+    <image src='{{ fixedAdImg }}'></image>
 </view>
 
 <!-- 引入footer -->
