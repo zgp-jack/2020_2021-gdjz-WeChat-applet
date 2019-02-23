@@ -1,9 +1,6 @@
 .page-downloadapp{
     position: relative;
     display: block;
-    background: white url("http://yupao.oss-cn-beijing.aliyuncs.com/miniprogram/images/downloadapp-topbg.png") no-repeat;
-    background-position: top center; 
-    background-size: 100%;
 }
 .download-app{
     position: relative;

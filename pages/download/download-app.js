@@ -7,7 +7,8 @@ Page({
      */
     data: {
         appUrl: "https://android.myapp.com/myapp/detail.htm?apkName=io.dcloud.H576E6CC7&amp;ADTAG=mobile",
-        appImg: app.globalData.apiImgUrl + "downloadappimg.png"
+        appImg: app.globalData.apiImgUrl + "downloadappimg.png",
+        downappbg: app.globalData.apiImgUrl + "downloadapp-topbg.png?t=" + new Date().getTime()
     },
     copyAppUrl: function () {
         wx.setClipboardData({

@@ -447,13 +447,42 @@ Page({
         let userInfo = this.data.userInfo;
         footerjs.valiUserCard(this,app, userInfo);
     },
+    initUserLocation: function () {
+        let _this = this;
+        let areaId = wx.getStorageSync("areaId");
+        let areaText = wx.getStorageSync("areaText");
+        app.appRequestAction({
+            url: "index/only-get-area-id/",
+            success: function (res) {
+                let mydata = res.data;
+                if (mydata.errcode == "ok") {
+                    areaText ? "" : wx.setStorageSync("areaText", mydata.areaText);
+                    areaId ? "" : wx.setStorageSync("areaId", mydata.areaId);
+                } else {
+                    if (!areaText || !areaId) {
+                        wx.setStorageSync("areaText", "全国");
+                        wx.setStorageSync("areaId", "1");
+                    }
+                }
+            },
+            fail: function () {
+                if (!areaText || !areaId) {
+                    wx.setStorageSync("areaText", "全国");
+                    wx.setStorageSync("areaId", "1");
+                }
+            },
+            complete: function () {
+                _this.initAreaInfo();
+            }
+        });
+    },
     /**
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
+        this.initUserLocation();
         this.initUserinfo();
         this.initFooterData();
-        this.initAreaInfo();
         this.checkIsInvite(options);
     },
     /**

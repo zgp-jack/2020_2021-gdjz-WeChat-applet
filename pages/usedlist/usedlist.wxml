@@ -40,7 +40,7 @@
     <!-- 公告 -->
     <view class='yupao-lists-notice'>
         <view class='yupao-lists-wxinfo'>
-            <view class='yupao-lists-wxtips'><text class='yupao-lists-tips'>加群：</text>加客服微信号:<text  data-wechat="{{ wechat }}" bindtap='clipboardWechat'>{{ wechat }}</text> 拉你进工人微信群。客服电话:<text bindtap='callThisPhone' data-phone="{{ phone }}">{{ phone }}</text></view>
+            <view class='yupao-lists-wxtips'><text class='yupao-lists-tips'>加群：</text>加工友微信号:<text  data-wechat="{{ wechat }}" bindtap='clipboardWechat'>{{ wechat }}</text> 拉你进工人微信群。客服电话:<text bindtap='callThisPhone' data-phone="{{ phone }}">{{ phone }}</text></view>
         </view>
         <view class='yupao-lists-noticetips'>
             <text class='yupao-common-tips yupao-lists-newtips'>鱼泡公告：</text>
@@ -84,8 +84,8 @@
                 </view>
             </view>
         </navigator>
-        <!-- <ad class="lists-ad"  unit-id="adunit-ae7e7f8a9ffcb0ab" wx:if="{{index % 5 == 0 && index > 5}}"></ad> -->
-        <navigator url='/pages/download/download-app' wx:if="{{ (index >= 8) && (index % 8) == 0 }}" class='lists-ad'>
+        <ad  class="lists-ad" unit-id="adunit-80f40e8b4f60c3f6"  wx:if="{{index % 5 == 0 && index > 5}}"></ad>
+        <navigator url='/pages/download/download-app' wx:if="{{ (index == 5) && ( index >= 5) }}" class='lists-ad'>
             <image  src="{{ appLinkImg }}"></image>
         </navigator>
     </block>

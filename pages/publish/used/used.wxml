@@ -51,7 +51,7 @@
             </view>
             <view class='common-publish-item'>
                 <text class='common-publihs-contenttips'>详情</text>
-                <textarea placeholder='请你输入二手交易详情,越详细越好,这样有助于你更快的完成二手交易哟~' wx:if="{{ showTextarea }}" value='{{ cardInfo.content }}' focus='{{ textareaActive }}' bindinput='userEnterContent' bindtap='getTextareaFocus'></textarea>
+                <textarea placeholder='{{ textareaTips }}' wx:if="{{ showTextarea }}" value='{{ cardInfo.content }}' focus='{{ textareaActive }}' bindinput='userEnterContent' bindtap='getTextareaFocus'></textarea>
             </view>
         </view>
     </view>

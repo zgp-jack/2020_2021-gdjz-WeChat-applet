@@ -34,7 +34,8 @@ Page({
         showUploads: false,
         codeTips:"获取验证码",
         status:1,
-        textareaActive:false
+        textareaActive:false,
+        textareaTips: ""
     },
     bindPickerChange:function(e){
         this.setData({
@@ -162,7 +163,8 @@ Page({
                         "cardInfo.content": mydata.model.detail,
                         "cardInfo.imgs": mydata.view_image,
                         "cardInfo.imgnum": parseInt(mydata.typeTextArr.maxImageCount),
-                        showUploads: (mydata.view_image.length > 0) ? true : false
+                        showUploads: (mydata.view_image.length > 0) ? true : false,
+                        textareaTips: mydata.placeholder
                     })
                 }else{
                     app.returnPrevPage(mydata.errmsg);

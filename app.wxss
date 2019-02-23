@@ -555,3 +555,49 @@ page{
 .fixed-get-integral image{
     border-radius: 50%;
 }
+
+
+.publish-uploads-tips{
+    position: relative;
+    text-align: center;
+    font-size: 28rpx;
+    padding: 0 27rpx;
+}
+.publish-uploads-tips text{
+    position: relative;
+    display: block;
+    width: 100%;
+    padding:20rpx 0;
+    border-top: 1px dashed #dcdcdc;
+    color: #999;
+}
+.publish-uploads-item::before{
+    position: absolute;
+    content: '';
+    width: 50rpx;
+    height:2px;
+    left: 50%;
+    top: 50%;
+    margin-left: -25rpx;
+    margin-top: -1px;
+    z-index:1;
+    background:  #dcdcdc;
+}
+.publish-uploads-item::after{
+    position: absolute;
+    content: '';
+    width: 2px;
+    height:50rpx;
+    left: 50%;
+    top: 50%;
+    margin-left: -1px;
+    margin-top: -25rpx;
+    z-index:1;
+    background: #dcdcdc;
+}
+.publish-uploads-item-actice::before,.publish-uploads-item-actice::after{
+    content: none;
+}
+.publish-uploads-content-bottom{
+    padding-bottom:20rpx !important;
+}

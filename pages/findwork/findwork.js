@@ -285,8 +285,7 @@ Page({
         let areaId = wx.getStorageSync("areaId");
         let areaText = wx.getStorageSync("areaText");
         this.setData({
-            "searchDate.area_id": areaId ? areaId : 1,
-            areaText: areaText ? areaText : "全国"
+            "searchDate.area_id": areaId ? areaId : 1
         })
         this.doRequestAction(false);
     },
@@ -333,7 +332,24 @@ Page({
             })
         }
     },
-
+    valiFilterProvince: function () {
+        let _this = this;
+        let areaId = wx.getStorageSync("areaId");
+        if (areaId == "1") {
+            _this.setData({ areaText: "全国" })
+            _this.initAreaInfo();
+            return false;
+        }
+        app.appRequestAction({
+            url: "resume/get-resume-province/",
+            params: { area_id: areaId },
+            success: function (res) {
+                let mydata = res.data;
+                _this.setData({ areaText: mydata.provinceName })
+                _this.initAreaInfo();
+            }
+        });
+    },
     // 共用footer
     jumpThisLink: function (e) {
         app.jumpThisLink(e);
@@ -359,9 +375,9 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
+        this.valiFilterProvince();
         this.initFooterData();
         this.initNeedData();
-        this.initAreaInfo();
     },
 
     /**

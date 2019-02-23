@@ -84,8 +84,8 @@
                 </view>
             </view>
         </navigator>
-
-        <navigator url='/pages/download/download-app' wx:if="{{ (index >= 8) && (index % 8) == 0 }}" class='lists-ad'>
+        <ad  class="lists-ad" unit-id="adunit-80f40e8b4f60c3f6"  wx:if="{{index % 5 == 0 && index > 5}}"></ad>
+        <navigator url='/pages/download/download-app' wx:if="{{ (index == 5) && ( index >= 5) }}" class='lists-ad'>
             <image  src="{{ appLinkImg }}"></image>
         </navigator>
 

@@ -90,6 +90,10 @@ App({
                         duration:2000
                     })
                 }
+            },
+            complete: function () {
+                wx.hideLoading();
+                _options.hasOwnProperty("complete") ? _options.complete() : "";
             }
         })
     },

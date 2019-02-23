@@ -1,4 +1,4 @@
-<view class='page-downloadapp' >
+<view class='page-downloadapp'  style='background: white url("{{ downappbg }}") no-repeat;background-position: top center;background-size: 100%;'>
     <view bindtap='copyAppUrl' class='downloadapp-copyview'> </view>
     <view class='downloadapp-content'>
         <view class='downloadapp-item'>

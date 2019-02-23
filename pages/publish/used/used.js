@@ -33,7 +33,8 @@ Page({
         showTextarea: true,
         codeTips: "获取验证码",
         status: 1,
-        textareaActive: false
+        textareaActive: false,
+        textareaTips: ""
     },
 
     userClickItem: function (e) {
@@ -93,7 +94,8 @@ Page({
                         "cardInfo.cityId": mydata.model.city_id ? mydata.model.city_id : "",
                         "cardInfo.memberTel": mydata.memberInfo.tel,
                         "cardInfo.cardTel": mydata.model.user_mobile,
-                        "cardInfo.content": mydata.model.detail ? mydata.model.detail : ""
+                        "cardInfo.content": mydata.model.detail ? mydata.model.detail : "",
+                        textareaTips: mydata.placeholder
                     })
                     setTimeout(function () {
                         _this.initAreaPicker();

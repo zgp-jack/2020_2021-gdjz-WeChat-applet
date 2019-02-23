@@ -10,7 +10,8 @@
         <view class='turntable-footer'>
             <view class='truntable-footer-arrows'></view>
             <view class='turntable-footer-item'>
-                <view class='turntable-times-tips'>您还有{{ userTimes }}次抽奖机会</view>
+                <view class='turntable-times-tips' wx:if="{{ userTimes == 0 }}">您今日抽奖次数已用完</view>
+                <view class='turntable-times-tips'  wx:else="{{ userTimes == 0 }}">您还有{{ userTimes }}次抽奖机会</view>
             </view>
             <view class='turntable-footer-item'>
                 <view class='turntable-names-scroll'>

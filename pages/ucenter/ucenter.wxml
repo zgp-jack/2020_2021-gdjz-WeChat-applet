@@ -79,7 +79,7 @@
             <view class='ucenter-menu-item'>
                 <navigator url='../feedback/feedback' open-type="navigate" >
                     <image src='{{ ucenterimgs.feedback }}'></image>
-                    <text>意见反馈</text>
+                    <text>给我们建议</text>
                 </navigator>
             </view>
             <view class='ucenter-menu-item'>

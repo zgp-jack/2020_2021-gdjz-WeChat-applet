@@ -56,14 +56,17 @@
                 </view>
             </view>
             <view class='common-publish-item'>
-                <text class='common-publihs-contenttips'>详情</text>
-                <textarea placeholder='请你输入招工详情,越详细越好,这样有助于你更快的招到好工人哟~' wx:if="{{ showTextarea }}" value='{{ cardInfo.content }}' focus='{{ textareaActive }}' bindinput='userEnterContent' bindtap='getTextareaFocus'></textarea>
+                <text class='common-publihs-contenttips'>找活详情</text>
+                <textarea placeholder='{{ textareaTips }}' wx:if="{{ showTextarea }}" value='{{ cardInfo.content }}' focus='{{ textareaActive }}' bindinput='userEnterContent' bindtap='getTextareaFocus'></textarea>
             </view>
         </view>
         <view class='common-publish-content common-shaded-box publish-uploads-img'>
-            <view class='publish-uploads-title' bindtap='userDoUploads'>上传图片<view class='allow-not-uploads'><view class='common-uploads-bgbox'><text class='common-trans {{ showUploads ? "user-uploads-active" : "" }}'></text></view>(可以不上传)</view></view>
-            <view class='publish-uploads-content clearfix' wx:if="{{ showUploads }}">
-                <view class='publish-uploads-item' wx:for="{{ cardInfo.imgs }}" wx:key="index" wx:for-index="index">
+            <view  bindtap='userDoUploads' bindtap='userDoUploads' >
+                <view class='publish-uploads-title'>上传图片<view class='allow-not-uploads'><view class='common-uploads-bgbox'><text class='common-trans {{ showUploads ? "user-uploads-active" : "" }}'></text></view>(可以不上传)</view></view>
+                <view class='publish-uploads-tips'><text>可上传做过的工程照片、完工现场照片等</text></view>
+            </view>
+            <view class='publish-uploads-content  publish-uploads-content-bottom clearfix' wx:if="{{ showUploads }}">
+                <view class='publish-uploads-item  {{ item.httpurl ? "publish-uploads-item-actice" : "" }}' wx:for="{{ cardInfo.imgs }}" wx:key="index" wx:for-index="index">
                     <view class='uploads-item-content' bindtap='userUploadCardImg' data-index="{{ index }}"  data-type="1">
                         <image src='{{ item.httpurl }}'></image>
                         <view class='del-upload-item-img' catchtap="delCardImg" data-index="{{ index }}">

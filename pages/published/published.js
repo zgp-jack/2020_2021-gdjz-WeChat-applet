@@ -136,6 +136,7 @@ Page({
     },
     showThisList:function(e){
         let index = e.currentTarget.dataset.index;
+        wx.setNavigationBarTitle({ title: (index == "1") ? "鱼泡网-我发布的二手交易" : "鱼泡网-我发布的招工" })
         if (this.data.publishIndex == index) return false;
         this.setData({
             publishIndex: index,
@@ -148,7 +149,10 @@ Page({
         this.getPublishedData();
     },
     initPublishedData: function (options){
-        if (options && options.hasOwnProperty("type")) this.setData({ publishIndex: parseInt(options.type) })
+        if (options && options.hasOwnProperty("type")){
+            this.setData({ publishIndex: parseInt(options.type) })
+            wx.setNavigationBarTitle({ title: (options.type == "1") ? "鱼泡网-我发布的二手交易" : "鱼泡网-我发布的招工" })
+        }
         let userInfo = wx.getStorageSync("userInfo");
         this.setData({ userInfo: userInfo })
         this.getPublishedData();
