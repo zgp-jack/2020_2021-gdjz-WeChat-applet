@@ -51,7 +51,7 @@
             </view>
             <view class='common-publish-item'>
                 <text class='common-publihs-contenttips'>详情</text>
-                <textarea placeholder='{{ textareaTips }}' wx:if="{{ showTextarea }}" value='{{ cardInfo.content }}' focus='{{ textareaActive }}' bindinput='userEnterContent' bindtap='getTextareaFocus'></textarea>
+                <textarea placeholder='{{ textareaTips }}' wx:if="{{ showTextarea }}" value='{{ cardInfo.content }}' focus='{{ textareaActive }}' bindinput='userEnterContent' bindtap='getTextareaFocus'  maxlength="-1"></textarea>
             </view>
         </view>
     </view>

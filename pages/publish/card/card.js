@@ -327,7 +327,8 @@ Page({
         app.appRequestAction({
             title:"找活名片提交中",
             url:"publish/publish-msg/",
-            way:"POST",
+            way: "POST",
+            mask: true,
             failTitle:"网络出错，发布失败！",
             params:dataJson,
             success:function(res){

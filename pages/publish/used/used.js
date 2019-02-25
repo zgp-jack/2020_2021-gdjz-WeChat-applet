@@ -322,6 +322,7 @@ Page({
             title: "正在发布交易信息",
             url: "publish/publish-msg/",
             way: "POST",
+            mask: true,
             failTitle: "网络出错，发布失败！",
             params: dataJson,
             success: function (res) {

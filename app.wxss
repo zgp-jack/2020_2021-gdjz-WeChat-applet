@@ -517,10 +517,12 @@ page{
     box-shadow:#e7e6e4 0 0 10rpx;
     margin-bottom:15rpx;
     width: 100%;
-    height: 200rpx;
     overflow: hidden;
 }
-.lists-ad image{
+.lists-ad-image{
+    height: 200rpx;
+}
+.lists-ad-image image{
     display: block;
     width: 100%;
     height: 100%;
@@ -600,4 +602,13 @@ page{
 }
 .publish-uploads-content-bottom{
     padding-bottom:20rpx !important;
+}
+
+
+.dashed-bottom{
+    border-bottom: 1px dashed #dcdcdc !important;
+}
+.yupao-info-tips{
+    min-height: auto;
+    padding: 15rpx 27rpx;
 }

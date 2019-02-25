@@ -198,13 +198,15 @@ App({
         })
     },
     showMyTips:function(_msg){
+        setTimeout(function(){
+            wx.showToast({
+                title: _msg,
+                icon: 'none',
+                duration: 2000,
+                success: function () { }
+            })
+        },1)
         
-        wx.showToast({
-            title: _msg,
-            icon: 'none',
-            duration: 2000,
-            success:function(){}
-        })
     },
     userUploadImg:function(callback){
         let _this = this;

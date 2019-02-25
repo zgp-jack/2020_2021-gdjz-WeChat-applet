@@ -6,7 +6,7 @@
 			</view>
 			<view class="feedback-body">
 				<view class="feedback-container">
-					<textarea name="" rows="" cols="" placeholder="请留下您的意见或建议..." bindinput="userEnterContent" value='{{ content }}' maxlength="500"></textarea>
+					<textarea name="" rows="" cols="" placeholder="请留下您的意见或建议..." bindinput="userEnterContent" value='{{ content }}' maxlength="-1"></textarea>
 					<view class="feedback-imgs clearfix">
 						<view class="feedback-img-item"  data-type="0" data-index='{{ index }}' bindtap='userUploadsImg' wx:for="{{ imglists }}" wx:key="{{ index }}">
 							<view class='feedback-imgbox'>

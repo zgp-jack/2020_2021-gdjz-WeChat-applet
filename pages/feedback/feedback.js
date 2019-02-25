@@ -69,43 +69,37 @@ Page({
             })
             return false;
         }
-        wx.showLoading({ title: '正在留言' })
-        app.doRequestAction({
-            url:"index/leaving-message/",
-            way:"POST",
-            params:{
-                userId:userInfo.userId,
-                token:userInfo.token,
-                tokenTime:userInfo.tokenTime,
-                images:imgs,
+        app.appRequestAction({
+            url: "index/leaving-message/",
+            way: "POST",
+            mask: true,
+            title: "正在提交留言",
+            params: {
+                userId: userInfo.userId,
+                token: userInfo.token,
+                tokenTime: userInfo.tokenTime,
+                images: imgs,
                 content: content
             },
-            success:function(res){
+            success: function (res) {
                 wx.hideLoading();
                 let mydata = res.data;
-                wx.showToast({
-                    title: mydata.errmsg,
-                    icon: "none",
-                    duration: 2000
-                })
-                if(mydata.errcode == "ok"){
+
+                if (mydata.errcode == "ok") {
                     wx.showModal({
                         title: '系统提示',
                         content: mydata.errmsg,
-                        showCancel:false,
-                        success:function(res){
-                            wx.navigateBack({ delta:1  })
+                        showCancel: false,
+                        success: function (res) {
+                            wx.navigateBack({ delta: 1 })
                         }
                     })
+                } else {
+                    app.showMyTips(mydata.errmsg);
                 }
             },
-            fail:function(){
-                wx.hideLoading();
-                wx.showToast({
-                    title: "网络错误，留言失败！",
-                    icon: "none",
-                    duration: 2000
-                })
+            fail: function () {
+                app.showMyTips("网络错误，留言失败！");
             }
         })
     },

@@ -388,6 +388,8 @@ Page({
                         app.globalData.userInfo = userInfo;
                         wx.setStorageSync('userInfo', userInfo)
                         that.initNeedData();
+                    } else {
+                        app.showMyTips(uinfo.errmsg);
                     }
                 });
             });
@@ -418,6 +420,7 @@ Page({
                     app.globalData.userInfo = _this.data.userInfo;
                     wx.setStorageSync('userInfo', _this.data.userInfo)
                 } else if (mydata.errcode == "fail") {
+                    app.showMyTips(mydata.errmsg);
                     _this.setData({
                         userInfo: false
                     })
@@ -451,30 +454,36 @@ Page({
         let _this = this;
         let areaId = wx.getStorageSync("areaId");
         let areaText = wx.getStorageSync("areaText");
-        app.appRequestAction({
-            url: "index/only-get-area-id/",
-            success: function (res) {
-                let mydata = res.data;
-                if (mydata.errcode == "ok") {
-                    areaText ? "" : wx.setStorageSync("areaText", mydata.areaText);
-                    areaId ? "" : wx.setStorageSync("areaId", mydata.areaId);
-                } else {
+
+        if (!areaId || !areaText) {
+            app.appRequestAction({
+                url: "index/only-get-area-id/",
+                success: function (res) {
+                    let mydata = res.data;
+                    if (mydata.errcode == "ok") {
+                        wx.setStorageSync("areaText", mydata.areaText);
+                        wx.setStorageSync("areaId", mydata.areaId);
+                    } else {
+                        if (!areaText || !areaId) {
+                            wx.setStorageSync("areaText", "全国");
+                            wx.setStorageSync("areaId", "1");
+                        }
+                    }
+                },
+                fail: function () {
                     if (!areaText || !areaId) {
                         wx.setStorageSync("areaText", "全国");
                         wx.setStorageSync("areaId", "1");
                     }
+                },
+                complete: function () {
+                    _this.initAreaInfo();
                 }
-            },
-            fail: function () {
-                if (!areaText || !areaId) {
-                    wx.setStorageSync("areaText", "全国");
-                    wx.setStorageSync("areaId", "1");
-                }
-            },
-            complete: function () {
-                _this.initAreaInfo();
-            }
-        });
+            });
+        } else {
+            _this.initAreaInfo();
+        }
+
     },
     /**
      * 生命周期函数--监听页面加载

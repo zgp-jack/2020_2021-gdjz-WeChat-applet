@@ -24,7 +24,7 @@
                 </navigator>
                 <navigator class='ucenter-integral-item flex-column' url='/pages/integral/temp/temp' open-type="navigate">
                     <text>{{ member.temporary_integral }}</text>
-                    <text>签到积分</text>
+                    <text>临时积分</text>
                 </navigator>
             </view>
         </view>

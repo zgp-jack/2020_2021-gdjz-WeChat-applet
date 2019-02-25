@@ -17,7 +17,7 @@
                     <view class='yupao-common-list-right'>{{ ucardInfo.user_name }}</view>
                 </view>
                 <view class='yupao-common-lists-item clearfix'>
-                    <view class='yupao-common-list-left'><image src='http://yupao.oss-cn-beijing.aliyuncs.com/miniprogram/images/ucard-time.png'></image>注册时间</view>
+                    <view class='yupao-common-list-left'><image src='http://yupao.oss-cn-beijing.aliyuncs.com/miniprogram/images/ucard-time.png'></image>更新时间</view>
                     <view class='yupao-common-list-right'>{{ ucardInfo.time }}</view>
                 </view>
                 <view class='yupao-common-lists-item clearfix'>
