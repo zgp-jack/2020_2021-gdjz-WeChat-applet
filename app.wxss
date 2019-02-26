@@ -293,6 +293,7 @@ page{
     position: relative;
     font-size: 30rpx;
     line-height: 60rpx;
+    word-wrap: break-word;
 }
 
 /* 底部数据加载 */

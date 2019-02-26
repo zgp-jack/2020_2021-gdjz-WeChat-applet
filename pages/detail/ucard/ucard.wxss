@@ -102,6 +102,7 @@ page{
 .yupao-lists-detail{
     font-size: 30rpx;
     padding: 20rpx 0;
+    word-wrap: break-word;
 }
 .text-red{
     color: #ff0000;

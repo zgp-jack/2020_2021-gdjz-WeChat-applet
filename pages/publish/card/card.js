@@ -157,7 +157,7 @@ Page({
                         "cardInfo.cityIds": mydata.resume_province,
                         "cardInfo.citynum": parseInt(mydata.typeTextArr.maxProvinceCount),
                         "cardInfo.team": mydata.staffList,
-                        "cardInfo.teamId": mydata.model.team_size ? mydata.model.team_size : 1,
+                        "cardInfo.teamId": mydata.model.team_composition ? parseInt(mydata.model.team_composition) : 1,
                         "cardInfo.memberTel": mydata.memberInfo.tel,
                         "cardInfo.cardTel": mydata.model.user_mobile,
                         "cardInfo.content": mydata.model.detail,
