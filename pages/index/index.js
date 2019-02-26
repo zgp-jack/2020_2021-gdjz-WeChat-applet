@@ -458,6 +458,7 @@ Page({
         if (!areaId || !areaText) {
             app.appRequestAction({
                 url: "index/only-get-area-id/",
+                hideLoading:true,
                 success: function (res) {
                     let mydata = res.data;
                     if (mydata.errcode == "ok") {

@@ -342,6 +342,7 @@ Page({
         }
         app.appRequestAction({
             url: "resume/get-resume-province/",
+            hideLoading: true,
             params: { area_id: areaId },
             success: function (res) {
                 let mydata = res.data;

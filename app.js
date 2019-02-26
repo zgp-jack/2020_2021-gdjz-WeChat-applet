@@ -55,15 +55,19 @@ App({
   },
 
     appRequestAction: function (_options) {
-        wx.showLoading({
-            title: _options.hasOwnProperty("title") ? _options.title : '数据加载中',
-            mask: _options.hasOwnProperty("mask") ? _options.mask : false
-        })
+
+        if ((_options.hasOwnProperty("hideLoading") && !_options.hideLoading) || (!_options.hasOwnProperty("hideLoading"))) {
+            wx.showLoading({
+                title: _options.hasOwnProperty("title") ? _options.title : '数据加载中',
+                mask: _options.hasOwnProperty("mask") ? _options.mask : false
+            })
+        }
+
         if (_options.hasOwnProperty("params")) {
-            _options.params.wechat_token = "jizhao";
+            _options.params.wechat_token = "yupao";
         } else {
             _options.params = {
-                wechat_token: "jizhao"
+                wechat_token: "yupao"
             }
         }
 
@@ -76,23 +80,26 @@ App({
                 'content-type': 'application/x-www-form-urlencoded'
             },
             success(res) {
-                wx.hideLoading();
+                if ((_options.hasOwnProperty("hideLoading") && !_options.hideLoading) || (!_options.hasOwnProperty("hideLoading"))) {
+                    wx.hideLoading();
+                }
                 _options.hasOwnProperty("success") ? _options.success(res) : "";
             },
             fail(err) {
-                wx.hideLoading();
-                if (_options.hasOwnProperty("fail")){
+                if ((_options.hasOwnProperty("hideLoading") && !_options.hideLoading) || (!_options.hasOwnProperty("hideLoading"))) {
+                    wx.hideLoading();
+                }
+                if (_options.hasOwnProperty("fail")) {
                     _options.fail(err)
-                }else{
-                    wx.showToast({
-                        title: _options.hasOwnProperty("failTitle") ? _options.failTitle : '网络错误，数据加载失败！',
-                        icon:"none",
-                        duration:2000
-                    })
+                } else {
+                    let _title = _options.hasOwnProperty("failTitle") ? _options.failTitle : '网络错误，数据加载失败！';
+                    _this.showMyTips(_title);
                 }
             },
             complete: function () {
-                wx.hideLoading();
+                if ((_options.hasOwnProperty("hideLoading") && !_options.hideLoading) || (!_options.hasOwnProperty("hideLoading"))) {
+                    wx.hideLoading();
+                }
                 _options.hasOwnProperty("complete") ? _options.complete() : "";
             }
         })
