@@ -64,3 +64,18 @@
     padding: 0 10rpx;
     box-sizing: border-box;
 }
+
+
+
+.invite-item-noline::before,.invite-item-noline::after{
+    content: none;
+}
+.btn-margin-bottom{
+    margin-bottom: 30rpx;
+    border-radius: 2px;
+    outline: 0;
+    border: 0;
+}
+.btn-margin-bottom::before,.btn-margin-bottom::after{
+    border: 0;
+}

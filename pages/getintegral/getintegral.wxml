@@ -19,11 +19,11 @@
                 <text class='getintegral-list-info'>充值付钱购买积分。（我们不鼓励付钱购买，我们希望大家多帮忙宣传）</text>
                 <text class='getintegral-list-btn' bindtap='goThisPage' data-url="/pages/recharge/recharge">去充值</text>
             </view>
-            <view class='getintegral-list-item'>
+            <!-- <view class='getintegral-list-item'>
                 <view class='getintegral-list-title'>大转盘</view>
                 <text class='getintegral-list-info'>每天玩大转盘可获得1-100个积分。</text>
                 <text class='getintegral-list-btn' bindtap='goThisPage' data-url="/pages/turntable/turntable">大转盘</text>
-            </view>
+            </view> -->
         </view>
 
         <view class='getintegral-footer common-shaded-box '>

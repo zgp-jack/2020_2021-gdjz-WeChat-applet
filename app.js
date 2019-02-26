@@ -3,6 +3,7 @@ App({
 
   },
   globalData: {
+    requestToken:"jizhao",
     userInfo: null,
     refId:"",
     fixedGetIntegral: "http://yupao.oss-cn-beijing.aliyuncs.com/miniprogram/images/fixed-getintegral.png?t=" + new Date().getTime(),
@@ -13,7 +14,8 @@ App({
     apiRequestUrl: "https://newyupaomini.54xiaoshuo.com/",
     apiUploadImg:"https://newyupaomini.54xiaoshuo.com/index/upload/",
     apiImgUrl:"http://yupao.oss-cn-beijing.aliyuncs.com/miniprogram/images/",
-    commonShareTips:"全国建筑工地招工平台"
+    commonShareTips:"全国建筑工地招工平台",
+    isFirstLoading: true
   },
     stopThisAction:function(){
         return false;
@@ -30,10 +32,10 @@ App({
   },
   doRequestAction:function(_options){
       if (_options.hasOwnProperty("params")){
-          _options.params.wechat_token = "jizhao";
+          _options.params.wechat_token = this.globalData.requestToken;
       }else{
           _options.params = {
-              wechat_token: "jizhao"
+              wechat_token: this.globalData.requestToken
           }
       }
       
@@ -64,10 +66,10 @@ App({
         }
 
         if (_options.hasOwnProperty("params")) {
-            _options.params.wechat_token = "yupao";
+            _options.params.wechat_token = this.globalData.requestToken;
         } else {
             _options.params = {
-                wechat_token: "yupao"
+                wechat_token: this.globalData.requestToken
             }
         }
 

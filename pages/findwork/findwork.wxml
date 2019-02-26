@@ -113,9 +113,9 @@
     <image src='{{ fixedAdImg }}'></image>
 </view>
 
-<view class='fixed-get-integral'  bindtap='jumpThisLink'  data-url="/pages/turntable/turntable"  data-type='0'>
+<!-- <view class='fixed-get-integral'  bindtap='jumpThisLink'  data-url="/pages/turntable/turntable"  data-type='0'>
         <image src='{{ fixedGetIntegral }}'></image>
-</view>
+</view> -->
 
 <!-- 引入footer -->
 <template is="footer" data="{{ footerImgs,publishActive,showPublishBox,footerActive }}" />

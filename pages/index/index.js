@@ -226,7 +226,7 @@ Page({
             url:"index/info-list/",
             params: _this.data.searchDate,
             success:function(res){
-                wx.hideLoading();
+                app.globalData.isFirstLoading ? "" : wx.hideLoading();
                 let mydata = res.data;
                 let _page = parseInt(_this.data.searchDate.page)
                 _this.setData({ isFirstRequest:false });
@@ -486,10 +486,19 @@ Page({
         }
 
     },
+    timerLoading: function () {
+        let _this = this;
+        wx.showLoading({ title: '数据加载中' })
+        setTimeout(function () {
+            wx.hideLoading();
+            app.globalData.isFirstLoading = false
+        }, 3000)
+    },
     /**
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
+        this.timerLoading();
         this.initUserLocation();
         this.initUserinfo();
         this.initFooterData();
