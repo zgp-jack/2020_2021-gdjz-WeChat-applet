@@ -428,12 +428,6 @@ Page({
      * 用户点击右上角分享
      */
     onShareAppMessage: function () {
-        let userInfo = this.data.userInfo;
-        let _path = userInfo ? '/pages/index/index?refid=' + userInfo.userId : "/pages/index/index";
-        return {
-            title: app.globalData.commonShareTips,
-            path: _path,
-            imageUrl: app.globalData.commonShareImg
-        }
+        return app.getUserShareJson();
     }
 })

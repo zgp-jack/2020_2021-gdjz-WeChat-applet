@@ -285,10 +285,6 @@ Page({
         setTimeout(function(){
             _this.setData({ isShare:false })
         },500);
-        return {
-            title: app.globalData.commonShareTips,
-            path: '/pages/index/index?refid=' + userId,
-            imageUrl: app.globalData.commonShareImg
-        }
+        return app.getUserShareJson();
     }
 })

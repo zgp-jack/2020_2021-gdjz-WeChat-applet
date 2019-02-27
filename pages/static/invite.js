@@ -143,11 +143,6 @@ Page({
      */
     onShareAppMessage: function () {
         this.inviteUserShare();
-        let userId = this.data.userInfo.userId
-        return {
-            title: app.globalData.commonShareTips,
-            path: '/pages/index/index?refid='+userId,
-            imageUrl: app.globalData.commonShareImg
-        }
+        return app.getUserShareJson();
     }
 })

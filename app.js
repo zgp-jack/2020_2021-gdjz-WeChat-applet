@@ -15,8 +15,19 @@ App({
     apiUploadImg:"https://newyupaomini.54xiaoshuo.com/index/upload/",
     apiImgUrl:"http://yupao.oss-cn-beijing.aliyuncs.com/miniprogram/images/",
     commonShareTips:"全国建筑工地招工平台",
-    isFirstLoading: true
+    isFirstLoading: true,
+    inviteSource: "712790d9629c6dcea00e3f5bff60132b",
   },
+    getUserShareJson: function () {
+        let userInfo = wx.getStorageSync("userInfo");
+        let _path = userInfo ? '/pages/index/index?refid=' + userInfo.userId + "&source=" + this.globalData.inviteSource : '/pages/index/index';
+        let _json = {
+            title: this.globalData.commonShareTips,
+            path: _path,
+            imageUrl: this.globalData.commonShareImg,
+        }
+        return _json;
+    },
     stopThisAction:function(){
         return false;
     },
@@ -178,10 +189,12 @@ App({
                 let encryptedData = res.encryptedData
                 let iv = res.iv
                 var params = new Object()
+                let _source = wx.getStorageSync("_source");
                 params.session_key = session_key
                 params.encryptedData = encryptedData
                 params.iv = iv
                 params.refid = this.globalData.refId
+                params.source = _source ? _source : "";
                 params.wechat_token = "jizhao"
                 //发起请求  
                 wx.request({
