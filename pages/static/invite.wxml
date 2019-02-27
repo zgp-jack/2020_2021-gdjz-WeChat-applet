@@ -14,7 +14,7 @@
         <button class='common-sure-btn btn-margin-bottom' open-type="share">点击分享</button>
         <view class='invite-item  common-shaded-box'>
                 <view class='invite-padding-left  invite-item-noline'>
-                    <image src='http://yupao.oss-cn-beijing.aliyuncs.com/miniprogram/images/invite-way1.png'></image>
+                    <image src='http://yupao.oss-cn-beijing.aliyuncs.com/miniprogram/images/invite-way2.png'></image>
                     <view>点击下方（复制专属邀请链接），发到QQ群、论坛、贴吧，工友通过你的专享邀请链接来到鱼泡网。</view>
                 </view>
                 <view class='user-share-box'>

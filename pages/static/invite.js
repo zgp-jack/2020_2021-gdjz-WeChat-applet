@@ -14,6 +14,14 @@ Page({
     /**
      * 生命周期函数--监听页面加载
      */
+    inviteUserShare: function () {
+        let userInfo = wx.getStorageSync("userInfo");
+        app.doRequestAction({
+            way: "POST",
+            url: "user/invite-share/",
+            params: userInfo
+        })
+    },
     initFooterData: function () {
         this.setData({
             footerImgs: footerjs.footerImgs,
@@ -134,6 +142,7 @@ Page({
      * 用户点击右上角分享
      */
     onShareAppMessage: function () {
+        this.inviteUserShare();
         let userId = this.data.userInfo.userId
         return {
             title: app.globalData.commonShareTips,
