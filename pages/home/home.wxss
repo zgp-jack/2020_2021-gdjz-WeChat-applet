@@ -270,7 +270,7 @@
     width: 36rpx;
     height: 36rpx;
     display: inline-block;
-    vertical-align: middle;
+    vertical-align: sub;
     margin-right: 10rpx;
 }
 .index-words-item>text{
