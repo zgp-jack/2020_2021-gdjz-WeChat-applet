@@ -74,3 +74,69 @@
     font-size: 30rpx;
     color: #fd4040;
 }
+
+
+
+
+.expend-showthis-record{
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background: rgba(0, 0, 0, 0.3);
+    z-index: 5;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+.expend-show-recruit{
+    position: relative;
+    width: 90%;
+    height:70%;
+    background: white;
+    border-radius: 10px 10px 5px 5px;
+    padding-top: 50rpx;
+    box-shadow: #e7e6e4 0 0 10rpx;
+}
+.expend-close-record{
+    position: absolute;
+    width: 100rpx;
+    height: 100rpx;
+    left: 50%;
+    top: -50rpx;
+    margin-left: -50rpx;
+    background: url("http://yupao.oss-cn-beijing.aliyuncs.com/miniprogram/images/expend-close.png") no-repeat;
+    background-size: 100% 100%;
+}
+.expend-show-recruit .yupao-common-list-left{
+    width: auto;
+}
+.expend-show-recruit .yupao-common-list{
+    box-shadow: none;
+    border: 0;
+    margin-top: 0;
+    height: calc(100% - 50rpx);
+    overflow-y: scroll;
+}
+.expend-show-recruit .yupao-common-list-left text{
+    margin-right: 20rpx;
+    color: #0099ff;
+}
+.expend-show-recruit .yupao-common-list-left text:nth-last-child(1){
+    margin-right: 0;
+}
+.expend-show-recruit  .yupao-common-lists-text{
+    padding: 20rpx 27rpx;
+    line-height:50rpx;
+}
+.list-call-phone{
+    display: inline-block;
+    color: #fff;
+    padding: 0 20rpx;
+    font-size: 26rpx;
+    border-radius:8rpx;
+    background: #67C23A;
+    margin:0 5rpx;
+}

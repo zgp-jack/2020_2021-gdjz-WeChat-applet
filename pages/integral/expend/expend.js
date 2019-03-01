@@ -15,7 +15,9 @@ Page({
         lists:[],
         day:7,
         pageSize:15,
-        page :1
+        page :1,
+        showRecord: false,
+        info: {}
     },
     getIntegralHeader: function () {
         let _this = this;
@@ -98,6 +100,43 @@ Page({
                 })
             }
         })
+    },
+    showThisRecord: function (e) {
+        let _this = this;
+        let id = e.currentTarget.dataset.id;
+        let userInfo = this.data.userInfo;
+        userInfo.logId = id;
+        app.appRequestAction({
+            title: "信息获取中",
+            url: "integral/look-used-info/",
+            way: "POST",
+            params: userInfo,
+            success: function (res) {
+                let mydata = res.data;
+                if (mydata.errcode == "ok") {
+                    _this.setData({ info: mydata.info, showRecord: true })
+                } else {
+                    wx.showModal({
+                        title: '温馨提示',
+                        content: mydata.errmsg,
+                        showCancel: false,
+                    })
+                }
+            },
+            fail: function () {
+                wx.showModal({
+                    title: '温馨提示',
+                    content: '网络错误，数据加载失败！',
+                    showCancel: false,
+                })
+            }
+        })
+    },
+    closeThisRerocd: function () {
+        this.setData({ showRecord: false })
+    },
+    callThisPhone: function (e) {
+        app.callThisPhone(e);
     },
     /**
      * 生命周期函数--监听页面加载

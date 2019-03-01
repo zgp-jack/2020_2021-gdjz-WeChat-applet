@@ -1,7 +1,7 @@
 <view class="yupao-common-container yupao-common-nofooter">
-    <view class='integral-header'>显示最近{{ day }}天的积分消耗记录</view>
+    <view class='integral-header' wx:if="{{ false }}">显示最近{{ day }}天的积分消耗记录</view>
     <view class='integral-content'>
-        <view class='integral-list-item' wx:for="{{ lists }}" wx:key="{{ index }}">
+        <view class='integral-list-item' wx:for="{{ lists }}" wx:key="{{ index }}" data-id='{{ item.id }}' bindtap='showThisRecord'>
             <view class='integral-list-time'>
                 <text>{{ item.year_month }}</text>
                 <text>{{ item.day }}</text>
@@ -21,4 +21,34 @@
         <text>暂无积分消耗记录</text>
     </view>
 
+</view>
+
+
+
+<view class='expend-showthis-record' wx:if="{{ showRecord }}">
+    <view class='expend-show-recruit'>
+        <view class='expend-close-record' bindtap='closeThisRerocd'></view>
+        <view class='yupao-common-list'>
+            <view class='yupao-common-lists-item clearfix'>
+                <view class='yupao-common-list-left'>项目名称</view>
+                <view class='yupao-common-list-right'>{{ info.title }}</view>
+            </view>
+            <view class='yupao-common-lists-item clearfix'>
+                <view class='yupao-common-list-left'>电话</view>
+                <view class='yupao-common-list-right'>{{ info.user_mobile }} <block wx:if="{{ info.is_end == '2' }}">({{ info.end_word }})</block><block wx:else="{{ info.is_end == '2' }}">({{ info.user_name }})<text class='list-call-phone'   bindtap='callThisPhone'  data-phone="{{ info.user_mobile }}">拨打</text></block></view>
+            </view>
+            <view class='yupao-common-lists-item clearfix' wx:if="{{ info.type =='resume' }}">
+                <view class='yupao-common-list-left'>规模</view>
+                <view class='yupao-common-list-right'>{{ info.team_composition_words }}</view>
+            </view>
+            <view class='yupao-common-lists-item clearfix' wx:if="{{ info.type =='resume' }}">
+                <view class='yupao-common-list-left'>接活省份</view>
+                <view class='yupao-common-list-right'><block wx:for="{{ info.showProvinceList }}" wx:key="index">{{ item }}</block>  </view>
+            </view>
+            <view class='yupao-common-lists-item clearfix'>
+                <view class='yupao-common-list-left'><text wx:for="{{ info.classifyName }}"  wx:key="index">[{{ item }}]</text></view>
+            </view>
+            <view class='yupao-common-lists-text'>{{ info.detail }}</view>
+        </view>
+    </view>
 </view>
