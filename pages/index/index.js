@@ -1,5 +1,6 @@
 // pages/lists/lists.
 let footerjs = require("../../utils/footer.js");
+let areas = require("../../utils/area.js");
 const app = getApp();
 Page({
 
@@ -61,6 +62,11 @@ Page({
         fixedAdImg:app.globalData.fixedDownApp,
         fixedGetIntegral: app.globalData.fixedGetIntegral,
         userAuthImg: "http://yupao.oss-cn-beijing.aliyuncs.com/miniprogram/images/gdjz-userauth.gif?t=" + new Date().getTime(),
+        userShareData:{
+            showApp:false,
+            showWin:false
+        },
+        userShareTime:{}
     },
     touchStart: function (e) {
         this.touchStartTime = e.timeStamp
@@ -273,7 +279,7 @@ Page({
             if (parseInt(_wx.expirTime) > _time) _mark = false;
         }
         app.doRequestAction({
-            url:"index/search-data/",
+            url:"index/less-search-data/",
             params: { 
                 type:"job",
                 userId: _mark ? (userInfo.userId ? userInfo.userId : "" ) : "",
@@ -281,8 +287,6 @@ Page({
             success:function(res){
                 let mydata = res.data;
                 _this.setData({
-                    fillterArea: mydata.areaTree,
-                    fillterType: mydata.classifyTree,
                     "notice.lists": mydata.notice,
                     phone: mydata.phone,
                     wechat: _mark ? mydata.wechat.number : (_wx.wechat ? _wx.wechat : mydata.wechat.number)
@@ -497,10 +501,40 @@ Page({
             app.globalData.isFirstLoading = false
         }, 3000)
     },
+    getFilterData: function () {
+        let _this = this;
+        this.setData({
+            fillterArea: areas.getAreaArr
+        })
+        app.globalData.allTypes ? this.setData({ fillterType: app.globalData.allTypes.classTree }) : app.getListsAllType(function (_data) {
+            _this.setData({ fillterType: _data.classTree })
+        });
+    },
+    initUserShareTimes:function(){
+        app.pageInitSystemInfo(this);
+        app.initUserShareTimes()
+    },
+    userShareAction:function(){
+        let _this = this;
+        app.userShareAction(function(_str){
+            if(_str == "share"){
+                _this.setData({
+                    "userShareData.showApp":true
+                })
+            }else{
+                _this.setData({
+                    "userShareData.shoWin": true,
+                    userShareTime: app.globalData.userShareData
+                })
+            }
+        })
+    },
     /**
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
+        this.initUserShareTimes();
+        this.getFilterData();
         this.timerLoading();
         this.initUserLocation();
         this.initUserinfo();
@@ -554,6 +588,7 @@ Page({
      * 用户点击右上角分享
      */
     onShareAppMessage: function () {
+        this.userShareAction();
         return app.getUserShareJson();
     }
 })

@@ -36,7 +36,9 @@
         "pages/query/query",
         "pages/report/report",
         "pages/anti-fraud/anti-fraud",
-        "pages/footer/footer"
+        "pages/footer/footer",
+        "pages/tpl/win/win",
+        "pages/tpl/app/app"
     ],
     "window": {
         "backgroundTextStyle": "light",

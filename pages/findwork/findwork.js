@@ -1,6 +1,8 @@
 // pages/lists/lists.js
 const app = getApp();
 let footerjs = require("../../utils/footer.js");
+let areas = require("../../utils/area.js");
+
 Page({
 
     /**
@@ -252,7 +254,7 @@ Page({
             if (parseInt(_wx.expirTime) > _time) _mark = false;
         }
         app.doRequestAction({
-            url: "index/search-data/",
+            url: "index/less-search-data/",
             params: {
                 type: "resume",
                 userId: _mark ? userInfo.userId : "",
@@ -260,9 +262,6 @@ Page({
             success: function (res) {
                 let mydata = res.data;
                 _this.setData({
-                    fillterArea: mydata.areaTree,
-                    fillterType: mydata.classifyTree,
-                    fillterTeam: mydata.staffTree,
                     "notice.lists": mydata.notice,
                     phone: mydata.phone,
                     wechat: _mark ? mydata.wechat.number : _wx.wechat
@@ -372,10 +371,22 @@ Page({
         let userInfo = this.data.userInfo;
         footerjs.valiUserCard(this, app, userInfo);
     },
+    getFilterData: function () {
+        let _this = this;
+        this.setData({ fillterArea: areas.getProviceList() })
+        app.globalData.allTypes ? this.setData({ fillterType: app.globalData.allTypes.classTree, fillterTeam: app.globalData.allTypes.staffTree }) : app.getListsAllType(function (_data) {
+            _this.setData({
+                fillterType: _data.classTree,
+                fillterTeam: _data.staffTree
+            })
+        })
+
+    },
     /**
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
+        this.getFilterData();
         this.valiFilterProvince();
         this.initFooterData();
         this.initNeedData();

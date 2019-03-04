@@ -1,4 +1,5 @@
 /* init-ypao-wxss */
+@import "./pages/tpl/app/app.wxss";
 view,text,input,button,label,textarea,form{
     box-sizing: border-box;
 }

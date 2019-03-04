@@ -17,6 +17,12 @@ App({
     commonShareTips:"全国建筑工地招工平台",
     isFirstLoading: true,
     inviteSource: "712790d9629c6dcea00e3f5bff60132b",
+    allTypes: false,
+    userTimes:1,
+    userShareData:{
+        today:"",
+        tomorrow:""
+    }
   },
     getUserShareJson: function () {
         let userInfo = wx.getStorageSync("userInfo");
@@ -300,5 +306,114 @@ App({
 
         let _type = e.currentTarget.dataset.type;
         (_type == "1") ? wx.reLaunch({ url:_url }) : wx.navigateTo({ url: _url });
-    }
+    },
+    getListsAllType: function (_callback) {
+        let _this = this;
+        this.appRequestAction({
+            url: "index/top-search-tree/",
+            way: "POST",
+            hideLoading: true,
+            failTitle: "数据加载失败，请重新进入小程序",
+            success: function (res) {
+                let mydata = res.data;
+                if (mydata.errcode == "ok") {
+                    _this.globalData.allTypes = mydata.data;
+                    _callback(mydata.data);
+                } else {
+                    _this.showMyTips(mydata.errmsg);
+                }
+            }
+        })
+    },
+    valiDateIsToday:function(){
+        let myDate = new Date();
+        let _y = myDate.getFullYear();
+        let _m = parseInt((myDate.getMonth() + 1)) < 10 ? "0" + myDate.getMonth() : myDate.getMonth()  ;
+        let _d = parseInt(myDate.getDate()) < 10 ? "0" + myDate.getDate() : myDate.getDate();
+        let _ymd = _y + "-" + _m + "-" + _d;
+        return _ymd;
+    },
+    initUserShareTimes: function () {
+        let _this = this;
+        let userinfo = wx.getStorageSync("userInfo");
+        this.appRequestAction({
+            url: "integral/init-round/",
+            way: "POST",
+            title: "正在初始化数据",
+            showLoading:false,
+            params: userinfo,
+            success: function (res) {
+                let mydata = res.data;
+                if (mydata.errcode == "ok") {
+                    _this.globalData.userTimes = parseInt(mydata.lessNumber);
+                }
+            }
+        })
+    },
+    userShareAction:function(callback){
+        let _this = this;
+        if(this.globalData.userTimes == 0){
+            let _td = this.valiDateIsToday(); //today
+            let _t = wx.getStorageSync("_st"); //shareTime
+            if(_t  != _td){
+                wx.setStorageSync("_st", _td);
+                callback('share');
+            }
+            return false;
+        }
+        this.appRequestAction({
+            url: "integral/roundabout/",
+            way: "POST",
+            params: userInfo,
+            showLoading:false,
+            success: function (res) {
+                let mydata = res.data;
+                console.log(mydata);
+                if (mydata.errcode == "ok") {
+                    _this.globalData.userTimes = parseInt(_this.globalData.userTimes) - 1;
+                    let timestamp = Date.parse(new Date());
+                    let date = new Date(timestamp);
+                    let year = date.getFullYear();
+                    let month = (date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1);
+                    let day = date.getDate() < 10 ? '0' + date.getDate() : date.getDate();
+                    let hours = (date.getHours()) < 10 ? "0" + (date.getHours()) : (date.getHours());
+                    let min = ((date.getMinutes()) < 10 ? "0" + (date.getMinutes()) : (date.getMinutes()));
+                    let _data = new Date();
+                    _data.setTime(_data.getTime() + 24 * 60 * 60 * 1000);
+                    let tomorrow = _data.getFullYear() + "-" + ((_data.getMonth() + 1 < 10 ? '0' + (_data.getMonth() + 1) : _datagetMonth() + 1)) + "-" + ((_data.getDate()) < 10 ? "0" + (_data.getDate()) : _data.getDate()) + " 00:00";
+                    let today = year + "-" + month + "-" + day + " " + hours + ":" + min;
+                    _this.globalData.userShareData.today = today;
+                    _this.globalData.userShareData.tomorrow = tomorrow;
+                    callback(mydata);
+                }
+            }
+        })
+    },
+    pageInitSystemInfo: function (_this) {
+        
+        this.initSystemInfo(function (res) {
+            if (res) {
+                let _ww = res.screenWidth;
+                let _wh = res.screenHeight;
+                let _bg = _ww * 0.9;
+                let _btnh = _bg / 4.695;
+                let wordsw = _ww * 0.5;
+                let _wordsh = wordsw / 4.21;
+                let _shadew = _ww * 0.8;
+                let _winw = _ww * 0.9;
+                let _winh = _winw / 0.9247;
+                let _tipsw = _ww * 0.96;
+                _this.setData({
+                    bgHeight: _bg,
+                    btnWidth: _btnh,
+                    wordsHeight: _wordsh,
+                    wordsWidth: wordsw,
+                    shadeWidth: _shadew,
+                    winWidth: _winw,
+                    winHeight: _winh,
+                    notimesW: _tipsw
+                })
+            }
+        })
+    },
 })

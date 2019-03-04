@@ -1,0 +1,35 @@
+<template name="app">
+    <view class='user-notimesbox flex-row'  wx:if="{{ userShareData.showApp }}">
+        <view class='user-notimes-view' style='width:{{ notimesW }}px;height:{{ notimesW / 0.974 }}px;' >
+            <view class='user-notimes-chooseapp' style='height:{{ (notimesW / 0.974) * 0.091 }}px;' catchtap='userChooseApp'></view>
+            <view class='user-colse-times'  style='width:{{ notimesW * 0.11333 }}px;height:{{ notimesW * 0.11333 }}px;margin-left:-{{ (notimesW * 0.11333)/2 }}px;' catchtap="userCloseTips"></view>
+        </view>
+    </view>
+
+
+    <view class='turntable-wined-fixed flex-row' wx:if="{{ userShareData.showWin }}">
+        <view class='turntable-wined-box' style='width:{{ winWidth }}px;height:{{ winHeight }}px;padding-top:{{ winHeight * 0.0694 }}px;'>
+            <view class='turntable-wined-header' style='height:{{ winHeight * 0.27785 }}px;padding:20px 0;'>
+                <view class='turntable-wined-header-title' style='line-height:{{ ((winHeight  * 0.27785)- 40 ) / 2  }}px;'>中奖啦</view>
+                <view class='turntable-wined-header-tips' style='line-height:{{ ((winHeight  * 0.27785)- 40 ) / 2  }}px;'>恭喜您获得了{{ winData.integral }}个临时积分</view>
+            </view>
+            <view class='turntable-wined-body' style='padding:{{ winHeight * 0.08 }}px {{  winWidth * 0.14}}px 0;height:{{ winHeight * 0.3357 }}px;'>
+                <view class='turntable-wined-content'>
+                        <view class='turntable-wined-content-num'>{{ winData.integral }}积分</view>
+                        <view class='turntable-wined-content-title' style='height:{{ winHeight * 0.11 }}px;padding:{{ winHeight * 0.0405 }}px 0;'>鱼泡网临时积分</view>
+                        <view class='turntable-wined-content-tips' style='height:{{ winHeight * 0.0289 }}px;'>有效期</view>
+                        <view class='turntable-wined-content-time' style='height:{{ winHeight * 0.094 }}px;padding:{{ winHeight * 0.0405 }}px 0;'>{{ userShareTime.today }} 至 {{ userShareTime.tomorrow }}</view>
+                </view>
+            </view>
+            <view class='turntable-wined-footer-tips' style='height:{{ winHeight * 0.1447 }}px;line-height:{{ winHeight * 0.1447 }}px;'>鱼泡网APP每日签到获得更多积分</view>
+            <view class='turntable-wined-footer flex-row' style='padding:0 {{  winWidth * 0.03 }}px;'>
+                <view class='turntable-wined-footer-item'>
+                    <text style='height:{{ winHeight * 0.119 }}px;line-height:{{ winHeight * 0.119 }}px;' bindtap='closeWinbox' >领取积分</text>
+                </view>
+                <view class='turntable-wined-footer-item'>
+                    <text style='height:{{ winHeight * 0.119 }}px;line-height:{{ winHeight * 0.119 }}px;' bindtap='userChooseApp'>下载APP</text>
+                </view>
+            </view>
+        </view>
+    </view>
+</template>

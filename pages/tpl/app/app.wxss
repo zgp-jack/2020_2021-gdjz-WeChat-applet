@@ -1,0 +1,153 @@
+.turntable-wined-fixed{
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: 10;
+}
+.turntable-wined-box{
+    position: relative;
+    display: block;
+    width: 90%;
+    height: 600rpx;
+    background: url("http://yupao.oss-cn-beijing.aliyuncs.com/miniprogram/images/win-mainbg.png") no-repeat;
+    background-size: 100% 100%;
+    z-index: 100;
+}
+
+.turntable-wined-header{
+    position: relative;
+    width: 100%;
+}
+.turntable-wined-header view{
+    text-align: center;
+    color: white;
+}
+.turntable-wined-header-title{
+    font-size: 42rpx;
+}
+.turntable-wined-header-tips{
+    font-size: 32rpx;
+}
+.turntable-wined-content{
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+.turntable-wined-content-title{
+    color: #fff;
+    font-size:30rpx;
+}
+.turntable-wined-content-time{
+    color: #fff;
+    font-size: 22rpx;
+}
+.turntable-wined-content-tips{
+    position: relative;
+    color: #e51f20;
+    font-size: 28rpx;
+}
+.turntable-wined-content-num{
+    position: absolute;
+    right: 20rpx;
+    top:20rpx;
+    font-size: 44rpx;
+    color: #fff;
+    letter-spacing: 2rpx;
+}
+.turntable-wined-footer-tips{
+    position: relative;
+    display: block;
+    width: 100%;
+    color: #6f6f6f;
+    text-align: center;
+    font-size: 34rpx;
+    font-weight: bold;
+}
+.turntable-wined-footer{
+    position: relative;
+}
+.turntable-wined-footer-item{
+    position: relative;
+    display: block;
+    width: 50%;
+    text-align: center;
+    padding: 0 20rpx;
+}
+.turntable-wined-footer-item text{
+    font-size: 34rpx;
+    color: #ff0000;
+    display: block;
+    border: 1px solid #ff0000;
+    border-radius: 6px;
+    letter-spacing: 2rpx;
+}
+.turntable-wined-footer-item:nth-last-child(1) text{
+    background: #ff0000;
+    color: #fff;
+}
+.turntable-wined-close{
+    position: absolute;
+    left: 50%;
+    bottom: -100rpx;
+    display: block;
+    width:60rpx;
+    height: 60rpx;
+    margin-left: -30rpx;
+    background: url("http://yupao.oss-cn-beijing.aliyuncs.com/miniprogram/images/wined-close.png") no-repeat;
+    background-size: 100% 100%;
+}
+.turntable-wined-close::before{
+    position: absolute;
+    content: '';
+    left: 50%;
+    height: 45rpx;
+    width: 1px;
+    background: #fff;
+    top:-40rpx;
+    z-index: -1;
+}
+
+.index-swiper-opacity{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: block;
+    z-index: 5;
+    background: transparent;
+}
+
+.user-notimesbox{
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: 10;
+}
+.user-notimes-view{
+    position: relative;
+    display: block;
+    background: url("http://yupao.oss-cn-beijing.aliyuncs.com/miniprogram/images/notimes.png") no-repeat;
+    background-size: 100% 100%;
+}
+.user-colse-times{
+    position: absolute;
+    left: 50%;
+    top: 0;
+    display: block;
+    background: url("http://yupao.oss-cn-beijing.aliyuncs.com/miniprogram/images/close-notimes.png") no-repeat;
+    background-size: 100% 100%;
+    z-index: 15;
+}
+.user-notimes-chooseapp{
+    position: absolute;
+    top: 62%;
+    width: 62%;
+    left: 19%;
+    z-index: 10;
+    opacity: 0;
+}

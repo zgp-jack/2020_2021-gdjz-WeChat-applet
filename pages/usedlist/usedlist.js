@@ -1,5 +1,6 @@
 // pages/lists/lists.js
 const app = getApp();
+let areas = require("../../utils/area.js");
 Page({
 
     /**
@@ -271,7 +272,7 @@ Page({
             if (parseInt(_wx.expirTime) > _time) _mark = false;
         }
         app.doRequestAction({
-            url: "index/search-data/",
+            url: "index/less-search-data/",
             params: {
                 type: "fleamarket",
                 userId: _mark ? userInfo.userId : "",
@@ -279,8 +280,6 @@ Page({
             success: function (res) {
                 let mydata = res.data;
                 _this.setData({
-                    fillterArea: mydata.areaTree,
-                    fillterType: mydata.classifyTree,
                     "notice.lists": mydata.notice,
                     phone: mydata.phone,
                     wechat: _mark ? mydata.wechat.number : _wx.wechat
@@ -354,10 +353,20 @@ Page({
     jumpThisLink: function (e) {
         app.jumpThisLink(e);
     },
+    getFilterData: function () {
+        let _this = this;
+        this.setData({ fillterArea: areas.getAreaArr })
+        app.globalData.allTypes ? this.setData({ fillterType: app.globalData.allTypes.fleamarketTree }) : app.getListsAllType(function (_data) {
+            _this.setData({
+                fillterType: _data.fleamarketTree
+            })
+        })
+    },
     /**
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
+        this.getFilterData();
         this.initNeedData();
         this.initAreaInfo();
     },
