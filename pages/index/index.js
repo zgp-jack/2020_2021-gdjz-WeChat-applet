@@ -64,7 +64,8 @@ Page({
         userAuthImg: "http://yupao.oss-cn-beijing.aliyuncs.com/miniprogram/images/gdjz-userauth.gif?t=" + new Date().getTime(),
         userShareData:{
             showApp:false,
-            showWin:false
+            showWin:false,
+            integral:"1"
         },
         userShareTime:{}
     },
@@ -392,6 +393,7 @@ Page({
                         app.globalData.userInfo = userInfo;
                         wx.setStorageSync('userInfo', userInfo)
                         that.initNeedData();
+                        that.initUserShareTimes();
                     } else {
                         app.showMyTips(uinfo.errmsg);
                     }
@@ -511,8 +513,9 @@ Page({
         });
     },
     initUserShareTimes:function(){
+        let userInfo = wx.getStorageSync("userInfo");
         app.pageInitSystemInfo(this);
-        app.initUserShareTimes()
+        if(userInfo) app.initUserShareTimes();
     },
     userShareAction:function(){
         let _this = this;
@@ -523,11 +526,27 @@ Page({
                 })
             }else{
                 _this.setData({
-                    "userShareData.shoWin": true,
-                    userShareTime: app.globalData.userShareData
+                    "userShareData.showWin": true,
+                    userShareTime: app.globalData.userShareData,
+                    "userShareData.integral": _str.integral
                 })
             }
         })
+    },
+    userTapLink:function(e){
+        this.setData({ "userShareData.showApp": false, "userShareData.showWin": false })
+        let url = e.currentTarget.dataset.url;
+        wx.navigateTo({
+            url: url
+        })
+    },
+    closeWinbox:function(e){
+        let type = e.currentTarget.dataset.type;
+        if(type == "app"){
+            this.setData({ "userShareData.showApp":false })
+        }else{
+            this.setData({ "userShareData.showWin": false })
+        }
     },
     /**
      * 生命周期函数--监听页面加载

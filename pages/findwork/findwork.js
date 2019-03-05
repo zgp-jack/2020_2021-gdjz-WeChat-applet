@@ -63,6 +63,12 @@ Page({
         appLinkImg: app.globalData.commonDownloadApp,
         fixedAdImg:app.globalData.fixedDownApp,
         fixedGetIntegral: app.globalData.fixedGetIntegral,
+        userShareData: {
+            showApp: false,
+            showWin: false,
+            integral: "1"
+        },
+        userShareTime: {}
     },
     stopThisAction:function(){
         return false;
@@ -382,10 +388,45 @@ Page({
         })
 
     },
+    initUserShareTimes: function () {
+        app.pageInitSystemInfo(this);
+    },
+    userShareAction: function () {
+        let _this = this;
+        app.userShareAction(function (_str) {
+            if (_str == "share") {
+                _this.setData({
+                    "userShareData.showApp": true
+                })
+            } else {
+                _this.setData({
+                    "userShareData.showWin": true,
+                    userShareTime: app.globalData.userShareData,
+                    "userShareData.integral": _str.integral
+                })
+            }
+        })
+    },
+    userTapLink: function (e) {
+        this.setData({ "userShareData.showApp": false, "userShareData.showWin": false })
+        let url = e.currentTarget.dataset.url;
+        wx.navigateTo({
+            url: url
+        })
+    },
+    closeWinbox: function (e) {
+        let type = e.currentTarget.dataset.type;
+        if (type == "app") {
+            this.setData({ "userShareData.showApp": false })
+        } else {
+            this.setData({ "userShareData.showWin": false })
+        }
+    },
     /**
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
+        this.initUserShareTimes();
         this.getFilterData();
         this.valiFilterProvince();
         this.initFooterData();
@@ -439,6 +480,7 @@ Page({
      * 用户点击右上角分享
      */
     onShareAppMessage: function () {
+        this.userShareAction();
         return app.getUserShareJson();
     }
 })

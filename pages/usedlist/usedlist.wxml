@@ -1,3 +1,5 @@
+<import src="/pages/tpl/app/app.wxml"/>
+
 <!-- 搜索头部 -->
 <view class="lists-header">
     <input placeholder="跳蚤市场"  bindconfirm="userTapSearch" confirm-type="search"   bindinput='bindKeyInput'/>
@@ -107,3 +109,9 @@
 <!-- <view class='fixed-get-integral'  bindtap='jumpThisLink'  data-url="/pages/turntable/turntable"  data-type='0'>
         <image src='{{ fixedGetIntegral }}'></image>
 </view> -->
+
+<button class='fixed-get-integral-btn'  open-type="share">
+        <image src='http://yupao.oss-cn-beijing.aliyuncs.com/miniprogram/images/list-share-btn.png?t=111'></image>
+</button>
+
+<template is="app"  data="{{ bgHeight,btnWidth,wordsHeight,wordsWidth,shadeWidth,winWidth,winHeight,notimesW,userShareData,userShareTime }}" />

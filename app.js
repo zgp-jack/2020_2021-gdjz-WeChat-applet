@@ -12,6 +12,7 @@ App({
     commonShareImg: "http://yupao.oss-cn-beijing.aliyuncs.com/miniprogram/images/minishare.png?t=" + new Date().getTime(),
     commonDownloadApp: "http://yupao.oss-cn-beijing.aliyuncs.com/miniprogram/images/download.png?t=" + new Date().getTime(),
     apiRequestUrl: "https://newyupaomini.54xiaoshuo.com/",
+    //apiRequestUrl: "http://miniapi.qsyupao.com/",
     apiUploadImg:"https://newyupaomini.54xiaoshuo.com/index/upload/",
     apiImgUrl:"http://yupao.oss-cn-beijing.aliyuncs.com/miniprogram/images/",
     commonShareTips:"全国建筑工地招工平台",
@@ -328,7 +329,7 @@ App({
     valiDateIsToday:function(){
         let myDate = new Date();
         let _y = myDate.getFullYear();
-        let _m = parseInt((myDate.getMonth() + 1)) < 10 ? "0" + myDate.getMonth() : myDate.getMonth()  ;
+        let _m = parseInt((myDate.getMonth() + 1)) < 10 ? "0" + parseInt((myDate.getMonth() + 1)) : parseInt((myDate.getMonth() + 1))  ;
         let _d = parseInt(myDate.getDate()) < 10 ? "0" + myDate.getDate() : myDate.getDate();
         let _ymd = _y + "-" + _m + "-" + _d;
         return _ymd;
@@ -337,7 +338,7 @@ App({
         let _this = this;
         let userinfo = wx.getStorageSync("userInfo");
         this.appRequestAction({
-            url: "integral/init-round/",
+            url: "integral/init-share/",
             way: "POST",
             title: "正在初始化数据",
             showLoading:false,
@@ -352,23 +353,27 @@ App({
     },
     userShareAction:function(callback){
         let _this = this;
+        let _time = 1000;
         if(this.globalData.userTimes == 0){
             let _td = this.valiDateIsToday(); //today
             let _t = wx.getStorageSync("_st"); //shareTime
             if(_t  != _td){
                 wx.setStorageSync("_st", _td);
-                callback('share');
+                setTimeout(function(){
+                    callback('share');
+                }, _time)
             }
             return false;
         }
+        let userInfo = wx.getStorageSync("userInfo");
+        if(!userInfo) return false;
         this.appRequestAction({
-            url: "integral/roundabout/",
+            url: "integral/share-integral/",
             way: "POST",
             params: userInfo,
             showLoading:false,
             success: function (res) {
                 let mydata = res.data;
-                console.log(mydata);
                 if (mydata.errcode == "ok") {
                     _this.globalData.userTimes = parseInt(_this.globalData.userTimes) - 1;
                     let timestamp = Date.parse(new Date());
@@ -384,7 +389,9 @@ App({
                     let today = year + "-" + month + "-" + day + " " + hours + ":" + min;
                     _this.globalData.userShareData.today = today;
                     _this.globalData.userShareData.tomorrow = tomorrow;
-                    callback(mydata);
+                    setTimeout(function(){
+                        callback(mydata);
+                    }, _time)
                 }
             }
         })

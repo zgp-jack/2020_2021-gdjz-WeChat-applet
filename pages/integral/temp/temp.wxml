@@ -7,7 +7,7 @@
                 <text>{{ item.day }}</text>
             </view>
             <view class='integral-list-words'>
-                <view class='integral-list-title overwords'>大转盘</view>
+                <view class='integral-list-title overwords'>{{ item.source_title }}</view>
                 <view class='integral-list-info overwords'>{{ item.ext }}</view>
                 <view class='integral-list-lasttime overwords'>时间：{{ item.His }} <text>获得积分：{{ item.integral }}</text></view>
             </view>

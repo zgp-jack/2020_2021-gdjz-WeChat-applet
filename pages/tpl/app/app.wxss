@@ -131,7 +131,7 @@
 .user-notimes-view{
     position: relative;
     display: block;
-    background: url("http://yupao.oss-cn-beijing.aliyuncs.com/miniprogram/images/notimes.png") no-repeat;
+    background: url("http://yupao.oss-cn-beijing.aliyuncs.com/miniprogram/images/share-apptips.png") no-repeat;
     background-size: 100% 100%;
 }
 .user-colse-times{

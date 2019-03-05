@@ -1,3 +1,6 @@
+<import src="/pages/tpl/app/app.wxml"/>
+
+
 <view style='height:100%;{{ showComplain ? "overflow:hidden;" : "" }}'>
 
 <view class="yupao-common-container" style='padding-bottom:30rpx;'>
@@ -109,3 +112,10 @@
 <!-- <view class='fixed-get-integral fixed-get-integral-bottom'     bindtap='jumpThisLink'  data-url="/pages/turntable/turntable"  data-type='0'>
     <image src='{{ fixedGetIntegral }}'></image>
 </view> -->
+
+<button class='fixed-get-integral-btn fixed-get-integral-btn-info'  open-type="share" >
+        <image src='http://yupao.oss-cn-beijing.aliyuncs.com/miniprogram/images/list-share-btn.png?t=111'></image>
+</button>
+
+
+<template is="app"  data="{{ bgHeight,btnWidth,wordsHeight,wordsWidth,shadeWidth,winWidth,winHeight,notimesW,userShareData,userShareTime }}" />
