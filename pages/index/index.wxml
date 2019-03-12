@@ -116,9 +116,9 @@
         <image src='{{ fixedGetIntegral }}'></image>
 </view> -->
 
-<button class='fixed-get-integral-btn'  open-type="share">
+<!-- <button class='fixed-get-integral-btn'  open-type="share">
         <image src='http://yupao.oss-cn-beijing.aliyuncs.com/miniprogram/images/list-share-btn.png?t=111'></image>
-</button>
+</button> -->
  
 <template is="app"  data="{{ bgHeight,btnWidth,wordsHeight,wordsWidth,shadeWidth,winWidth,winHeight,notimesW,userShareData,userShareTime }}" />
 

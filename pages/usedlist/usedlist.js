@@ -459,7 +459,7 @@ Page({
      * 用户点击右上角分享
      */
     onShareAppMessage: function () {
-        this.userShareAction();
+        //this.userShareAction();
         return app.getUserShareJson();
     }
 })

@@ -68,12 +68,6 @@ Page({
         if(_end != "1") return false;
         app.callThisPhone(e);
     },
-    callThisPhone: function (e) {
-        let phone = e.currentTarget.dataset.phone;
-        wx.makePhoneCall({
-            phoneNumber: phone
-        })
-    },
     clipboardWechat: function (e) {
         let wechat = e.currentTarget.dataset.wechat;
         wx.setClipboardData({

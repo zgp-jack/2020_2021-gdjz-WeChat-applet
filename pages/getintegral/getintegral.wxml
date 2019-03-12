@@ -3,9 +3,8 @@
     <view class='getintegral-content'>
 
         <view class='getintegral-header common-shaded-box'>
-            <view><text class='getintegral-notice'>公告</text>如果有任何疑问，请拨打客服电话：<text class='getintegral-phone' data-phone="400-833-1578" bindtap='callThisPhone'>400-833-1578</text> 鱼泡网每天投放大量精力为大家搜集、审核信息，免费提供给大家，请大家帮 忙邀请点工友注册，感谢您对鱼泡网的支持。</view>
-            <view class='getintegral-three-way'>以下几种是获取积分的方式，直接点击进入查看具体操作：</view>
-        </view>
+            <view><text class='getintegral-notice'>公告：</text>如果有任何疑问，请拨打客服电话：<text class='getintegral-phone' data-phone="400-833-1578" bindtap='callThisPhone'>400-833-1578</text> 鱼泡网投入大量的人力物力开发平台、审核信息，免费服务千万工友。因此请大家帮忙多邀请工友注册，感谢您对鱼泡网的支持！</view>
+            </view>
 
         <view class='getintegral-body common-shaded-box '>
             <text class='getintegral-how'>如何获取积分</text>
@@ -26,9 +25,7 @@
             </view> -->
         </view>
 
-        <view class='getintegral-footer common-shaded-box '>
-            <view>如有任何疑问，请拨打客服电话：<text bindtap='callThisPhone' data-phone="400-833-1578">400-833-1578</text>(鱼泡网每天投入数千元为大家搜集，审核信息，免费提供给大家，请大家帮忙邀请工友注册，感谢您对鱼泡招工的支持。)</view>
-        </view>
+        
 
     </view>
 

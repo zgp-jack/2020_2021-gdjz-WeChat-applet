@@ -402,7 +402,7 @@ Page({
      * 用户点击右上角分享
      */
     onShareAppMessage: function () {
-        this.userShareAction();
+        //this.userShareAction();
         if (this.data.shareFlag) this.userShareAddIntegral();
         let userId = this.data.userInfo.userId
         let _this = this;

@@ -341,7 +341,7 @@ App({
             url: "integral/init-share/",
             way: "POST",
             title: "正在初始化数据",
-            showLoading:false,
+            hideLoading:true,
             params: userinfo,
             success: function (res) {
                 let mydata = res.data;
@@ -352,6 +352,9 @@ App({
         })
     },
     userShareAction:function(callback){
+        let userInfo = wx.getStorageSync("userInfo");
+        if (!userInfo) return false;
+        this.userShareTotal();
         let _this = this;
         let _time = 1000;
         if(this.globalData.userTimes == 0){
@@ -365,13 +368,12 @@ App({
             }
             return false;
         }
-        let userInfo = wx.getStorageSync("userInfo");
         if(!userInfo) return false;
         this.appRequestAction({
             url: "integral/share-integral/",
             way: "POST",
             params: userInfo,
-            showLoading:false,
+            hideLoading:true,
             success: function (res) {
                 let mydata = res.data;
                 if (mydata.errcode == "ok") {
@@ -421,6 +423,14 @@ App({
                     notimesW: _tipsw
                 })
             }
+        })
+    },
+    userShareTotal: function () {
+        let userInfo = wx.getStorageSync("userInfo");
+        this.doRequestAction({
+            url: "user/list-share/",
+            way: "POST",
+            params: userInfo
         })
     },
 })
