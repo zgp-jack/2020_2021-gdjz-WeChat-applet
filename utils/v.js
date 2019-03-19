@@ -52,7 +52,7 @@ let vali = {
 
         //验证手机号
         vali.isMobile = function (inputString) {
-            var partten = /^1[3,4,5,7,8,9]\d{9}$/;
+            var partten = /^1[3,4,5,6,7,8,9]\d{9}$/;
             var fl = false;
             if (partten.test(inputString)) {
                 return true;

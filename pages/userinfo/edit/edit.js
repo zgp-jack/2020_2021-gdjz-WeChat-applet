@@ -149,7 +149,9 @@ Page({
                         content: mydata.errmsg,
                         showCancel: false,
                         success: function () {
-                          wx.navigateBack({ delta: 1 })
+                          wx.reLaunch({
+                              url: '/pages/ucenter/ucenter',
+                          })
                         }
                     })
                 }else{

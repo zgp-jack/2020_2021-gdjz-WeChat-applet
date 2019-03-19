@@ -43,7 +43,7 @@
         </view>
         <view class='yupao-about-footer common-shaded-box'>
             <text>鱼泡网值得每一位建筑人的期待，定不负你所望！</text>
-            <text>鱼泡客服热线：400-833-1578</text>
+            <text>鱼泡客服热线：{{ phone }}</text>
             <text>鱼泡网：yupao.com</text>
         </view>
     </view>

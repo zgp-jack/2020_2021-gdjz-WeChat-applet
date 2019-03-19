@@ -292,6 +292,7 @@ Page({
                     phone: mydata.phone,
                     wechat: _mark ? mydata.wechat.number : (_wx.wechat ? _wx.wechat : mydata.wechat.number)
                 })
+                app.globalData.serverPhone = mydata.phone;
                 if(_mark){
                     let extime = _time + (mydata.wechat.outTime * 1000);
                     wx.setStorageSync("_wx", { wechat: mydata.wechat.number, expirTime: extime});

@@ -65,7 +65,7 @@ Page({
     },
     callThisPhone:function(e){
         let _end = e.currentTarget.dataset.end;
-        if(_end != "1") return false;
+        if(_end == "2") return false;
         app.callThisPhone(e);
     },
     clipboardWechat: function (e) {

@@ -4,6 +4,7 @@ App({
   },
   globalData: {
     requestToken:"jizhao",
+    serverPhone:"400-833-1578",
     userInfo: null,
     refId:"",
     fixedGetIntegral: "http://yupao.oss-cn-beijing.aliyuncs.com/miniprogram/images/fixed-getintegral.png?t=" + new Date().getTime(),

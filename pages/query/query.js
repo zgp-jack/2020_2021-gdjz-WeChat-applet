@@ -15,7 +15,8 @@ Page({
         workType:[],
         registerCtiy:"",
         recentlyCity:"",
-        tel:""
+        tel:"",
+        
     },
     callThisPhone:function(e){
         let phone = e.currentTarget.dataset.phone;
@@ -147,6 +148,7 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
+        this.setData({ serverPhone: app.globalData.serverPhone })
         //this.initUserAuth();
     },
 

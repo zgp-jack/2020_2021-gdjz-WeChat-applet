@@ -7,6 +7,7 @@ Page({
      */
     data: {
         showRecharge:false,
+        phone: ""
     },
     callThisPhone:function(e){
         let phone = e.currentTarget.dataset.phone;
@@ -21,7 +22,6 @@ Page({
     initGetIntegralList:function(){
         let _this = this;
         app.initSystemInfo(function(res){
-            console.log(res.platform);
             if (res && res.platform != "ios"){
                 _this.setData({
                     showRecharge: true
@@ -33,6 +33,7 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
+        this.setData({ phone:app.globalData.serverPhone })
         this.initGetIntegralList();
     },
 

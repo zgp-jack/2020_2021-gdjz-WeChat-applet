@@ -37,7 +37,7 @@
         </view>
         <view class='yupao-common-lists-item clearfix'>
             <view class='yupao-common-list-left'>电话号码</view>
-            <view class='yupao-common-list-right' bindtap='callThisPhone' data-phone="{{ usedInfo.user_mobile }}" data-end='{{ usedInfo.is_end }}'>{{ usedInfo.user_mobile }}</view>
+            <view class='yupao-common-list-right' bindtap='callThisPhone' data-phone="{{ usedInfo.user_mobile }}" data-end='{{ usedInfo.is_end }}'>{{ usedInfo.user_mobile }}<block wx:if="{{ usedInfo.is_end == '2' }}">({{ usedInfo.is_end_word }})</block></view>
         </view>
         <view class='yupao-common-lists-item clearfix'>
             <view class='yupao-common-list-left'>地区</view>

@@ -42,7 +42,7 @@
             <view>2.要求他同你微信视频聊天，视频里约定好条款，录下来，作为证据。</view>
             <view>3.多问问对方建筑的专业问题，看看他专业与否，一上来就问工地地址，不问清楚工资 图纸等，就说能马上过来的，百分百是骗子。</view>
             <view>4.一定不要轻易的告诉对方，工地的详细地址。</view>
-            <view>5.如果你发现同你联系的人，有任何问题，都可联系我们客服投诉（电话： <text bindtap='callThisPhone' data-phone='400-833-1578'>400-833-1578</text>），确定后，我们将他加入骗子数据库，防止他接着骗人。</view>
+            <view>5.如果你发现同你联系的人，有任何问题，都可联系我们客服投诉（电话： <text bindtap='callThisPhone' data-phone='{{ serverPhone }}'>{{ serverPhone }}</text>），确定后，我们将他加入骗子数据库，防止他接着骗人。</view>
         </view>
     </view>
     </view>
