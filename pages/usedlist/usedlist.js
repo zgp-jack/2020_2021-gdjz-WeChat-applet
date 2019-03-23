@@ -1,6 +1,7 @@
 // pages/lists/lists.js
 const app = getApp();
 let areas = require("../../utils/area.js");
+let md5 = require("../../utils/md5.js");
 Page({
 
     /**
@@ -87,7 +88,7 @@ Page({
         let areaText = e.currentTarget.dataset.area;
         let _sid = this.data.searchDate.area_id;
         this.setData({ province: index })
-        if (_id == _sid) return false;
+        //if (_id == _sid) return false;
         if (_this.touchEndTime - _this.touchStartTime < 350) {
             var currentTime = e.timeStamp
             var lastTapTime = _this.lastTapTime
@@ -131,7 +132,7 @@ Page({
     userChooseCity: function (e) {
         let areaText = e.currentTarget.dataset.area;
         let id = parseInt(e.currentTarget.dataset.id);
-        if (parseInt(this.data.searchDate.area_id) == id) return false;
+       // if (parseInt(this.data.searchDate.area_id) == id) return false;
         this.setData({
             userCity: id,
             isFirstRequest: true,
@@ -268,6 +269,65 @@ Page({
             }
         })
     },
+    doSearchRequestAction: function (_append) {
+        let _this = this;
+        this.setData({
+            nothavemore: false,
+            showNothinkData: false
+        })
+        let _data = _this.data.searchDate;
+        _data.system_time = (parseInt(new Date().getTime() / 1000) + app.globalData.userGapTime);
+        let _str = md5.hexMD5(_data.system_time.toString());
+        _data.system_token = md5.hexMD5(_str.substring(0, 16));
+        wx.showLoading({ title: '数据加载中' })
+        app.doRequestAction({
+            url: "index/info-list-new/",
+            params: _data,
+            success: function (res) {
+                app.globalData.isFirstLoading ? "" : wx.hideLoading();
+                let mydata = res.data;
+
+                if (mydata.errcode == "token_fail") {
+                    _this.initAdminTime(function () {
+                        _this.doSearchRequestAction();
+                    })
+                    return false;
+                }
+
+                let _page = parseInt(_this.data.searchDate.page)
+                _this.setData({ isFirstRequest: false });
+                if (mydata && mydata.length) {
+                    let _data = _this.data.lists;
+                    for (let i = 0; i < mydata.length; i++) {
+                        _data.push(mydata[i]);
+                    }
+                    _this.setData({
+                        "searchDate.page": (parseInt(_page) + 1),
+                        lists: _append ? _data : mydata
+                    })
+                } else {
+                    if (_page == 1) {
+                        _this.setData({
+                            showNothinkData: true,
+                            lists: []
+                        })
+                    } else {
+                        _this.setData({
+                            nothavemore: true
+                        })
+                    }
+                }
+
+            },
+            fail: function (err) {
+                wx.hideLoading();
+                wx.showToast({
+                    title: '网络出错，数据加载失败！',
+                    icon: "none"
+                })
+            }
+        })
+    },
     initNeedData: function () {
         let _this = this;
         let _mark = true;
@@ -337,12 +397,12 @@ Page({
         })
     },
     userTapSearch: function () {
-        if (this.data.searchDate.keywords == "") return false;
+        //if (this.data.searchDate.keywords == "") return false;
         this.returnTop();
         this.setData({
             "searchDate.page": 1
         })
-        this.doRequestAction(false);
+        this.doSearchRequestAction(false);
     },
     returnTop: function () {
         if (wx.pageScrollTo) {

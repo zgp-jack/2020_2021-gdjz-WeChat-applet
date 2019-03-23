@@ -24,7 +24,9 @@ App({
     userShareData:{
         today:"",
         tomorrow:""
-    }
+    },
+    appNetTime: parseInt(new Date().getTime() / 1000),
+    userGapTime:0
   },
     getUserShareJson: function () {
         let userInfo = wx.getStorageSync("userInfo");
@@ -432,6 +434,19 @@ App({
             url: "user/list-share/",
             way: "POST",
             params: userInfo
+        })
+    },
+    initAdminTime: function (callback) {
+        let _this = this;
+        this.appRequestAction({
+            url: "index/get-init-time/",
+            hideLoading: true,
+            success: function (res) {
+                _this.globalData.appNetTime = res.data.time;
+                _this.globalData.userGapTime = _this.globalData.appNetTime - parseInt(new Date().getTime() / 1000);
+                callback ? callback() : ""
+            },
+            fail: function () { }
         })
     },
 })

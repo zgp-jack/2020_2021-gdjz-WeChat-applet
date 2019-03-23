@@ -1,6 +1,7 @@
 // pages/lists/lists.
 let footerjs = require("../../utils/footer.js");
 let areas = require("../../utils/area.js");
+let md5 = require("../../utils/md5.js");
 const app = getApp();
 Page({
 
@@ -65,7 +66,7 @@ Page({
         userShareData:{
             showApp:false,
             showWin:false,
-            integral:"1"
+            integral:"1",
         },
         userShareTime:{}
     },
@@ -81,7 +82,12 @@ Page({
             showListsInfo: (this.data.showListsInfo == type ) ? 0 : type
         })
     },
-    userChooseProvince:function(e){
+    closeAllSelect: function () {
+        this.setData({
+            showListsInfo: 0
+        }) 
+    },
+    userChooseProvince: function (e) {
         var _this = this;
         let index = parseInt(e.currentTarget.dataset.index);
         let directCtiy = parseInt(e.currentTarget.dataset.haschild);
@@ -89,7 +95,7 @@ Page({
         let areaText = e.currentTarget.dataset.area;
         let _sid = this.data.searchDate.area_id;
         this.setData({ province: index })
-        if(_id == _sid) return false;
+        //if(_id == _sid) return false;
         if (_this.touchEndTime - _this.touchStartTime < 350) {
             var currentTime = e.timeStamp
             var lastTapTime = _this.lastTapTime
@@ -101,7 +107,7 @@ Page({
                 _this.returnTop();
                 _this.setData({
                     isFirstRequest: true,
-                    "searchDate.page":1,
+                    "searchDate.page": 1,
                     "searchDate.area_id": _id,
                     areaText: areaText
                 })
@@ -109,11 +115,11 @@ Page({
                 wx.setStorageSync("areaText", areaText)
                 _this.doRequestAction(false);
                 _this.closeAllSelect();
-                
+
             } else {
                 _this.lastTapTimeoutFunc = setTimeout(function () {
                     //console.log("tap");
-                    if (directCtiy == 0){
+                    if (directCtiy == 0) {
                         _this.returnTop();
                         _this.setData({
                             isFirstRequest: true,
@@ -130,15 +136,10 @@ Page({
             }
         }
     },
-    closeAllSelect: function () {
-        this.setData({
-            showListsInfo: 0
-        }) 
-    },
     userChooseCity:function(e){
         let areaText = e.currentTarget.dataset.area;
         let id = parseInt(e.currentTarget.dataset.id);
-        if(parseInt(this.data.searchDate.area_id) == id) return false;
+        //if(parseInt(this.data.searchDate.area_id) == id) return false;
         this.setData({
             userCity: id,
             isFirstRequest: true,
@@ -160,7 +161,7 @@ Page({
         let _typeid = parseInt(e.currentTarget.dataset.id);
         let typeText = e.currentTarget.dataset.type;
         this.setData({worktype: index })
-        if (_type == _typeid) return false;
+        //if (_type == _typeid) return false;
         
         if (_this.touchEndTime - _this.touchStartTime < 350) {
             var currentTime = e.timeStamp
@@ -203,7 +204,7 @@ Page({
     userChooseWorkinfo: function (e) {
         let typeText = e.currentTarget.dataset.type;
         let id = parseInt(e.currentTarget.dataset.id);
-        if (parseInt(this.data.searchDate.classify_id) == id) return false;
+        //if (parseInt(this.data.searchDate.classify_id) == id) return false;
         this.setData({
             workinfo: id,
             typeText: typeText,
@@ -265,6 +266,65 @@ Page({
                 wx.showToast({
                     title: '网络出错，数据加载失败！',
                     icon:"none"
+                })
+            }
+        })
+    },
+    doSearchRequestAction: function (_append) {
+        let _this = this;
+        this.setData({
+            nothavemore: false,
+            showNothinkData: false
+        })
+        let _data = _this.data.searchDate;
+        _data.system_time = (parseInt(new Date().getTime() / 1000) + app.globalData.userGapTime) ;
+        let _str = md5.hexMD5(_data.system_time.toString());
+        _data.system_token =md5.hexMD5(_str.substring(0, 16)) ;
+        wx.showLoading({ title: '数据加载中' })
+        app.doRequestAction({
+            url: "index/info-list-new/",
+            params: _data ,
+            success: function (res) {
+                app.globalData.isFirstLoading ? "" : wx.hideLoading();
+                let mydata = res.data;
+
+                if (mydata.errcode == "token_fail"){
+                    app.initAdminTime(function (){
+                        _this.doSearchRequestAction();
+                    })
+                    return false;
+                }
+
+                let _page = parseInt(_this.data.searchDate.page)
+                _this.setData({ isFirstRequest: false });
+                if (mydata && mydata.length) {
+                    let _data = _this.data.lists;
+                    for (let i = 0; i < mydata.length; i++) {
+                        _data.push(mydata[i]);
+                    }
+                    _this.setData({
+                        "searchDate.page": (parseInt(_page) + 1),
+                        lists: _append ? _data : mydata
+                    })
+                } else {
+                    if (_page == 1) {
+                        _this.setData({
+                            showNothinkData: true,
+                            lists: []
+                        })
+                    } else {
+                        _this.setData({
+                            nothavemore: true
+                        })
+                    }
+                }
+
+            },
+            fail: function (err) {
+                wx.hideLoading();
+                wx.showToast({
+                    title: '网络出错，数据加载失败！',
+                    icon: "none"
                 })
             }
         })
@@ -340,12 +400,12 @@ Page({
         })
     },
     userTapSearch:function(){
-        if(this.data.searchDate.keywords == "") return false;
+        //if(this.data.searchDate.keywords == "") return false;
         this.returnTop();
         this.setData({
             "searchDate.page": 1
         })
-        this.doRequestAction(false);
+        this.doSearchRequestAction(false);
     },
     returnTop:function(){
         if (wx.pageScrollTo) {
@@ -549,10 +609,14 @@ Page({
             this.setData({ "userShareData.showWin": false })
         }
     },
+    initAdminTime:function(callback){
+        app.initAdminTime();
+    },
     /**
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
+        this.initAdminTime();
         this.initUserShareTimes();
         this.getFilterData();
         this.timerLoading();
