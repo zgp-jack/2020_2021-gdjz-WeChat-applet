@@ -10,7 +10,7 @@
             <text class='getintegral-how'>如何获取积分</text>
             <view class='getintegral-list-item'>
                 <view class='getintegral-list-title'>邀请工友获取积分</view>
-                <text class='getintegral-list-info'>每成功邀请一位工友注册，最高可获得80积分。（推荐）</text>
+                <text class='getintegral-list-info'>每成功邀请一位工友注册，最高可获得2-18积分。（推荐）</text>
                 <text class='getintegral-list-btn' bindtap='goThisPage' data-url="/pages/static/invite">去邀请</text>
             </view>
             <view class='getintegral-list-item' wx:if="{{ showRecharge }}">

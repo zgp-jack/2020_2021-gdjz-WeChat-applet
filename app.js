@@ -15,7 +15,7 @@ App({
     apiRequestUrl: "https://newyupaomini.54xiaoshuo.com/",
     //apiRequestUrl: "http://miniapi.qsyupao.com/",
     apiUploadImg:"https://newyupaomini.54xiaoshuo.com/index/upload/",
-    apiImgUrl:"http://yupao.oss-cn-beijing.aliyuncs.com/miniprogram/images/",
+    apiImgUrl:"http://cdn.yupao.com/miniprogram/images/",
     commonShareTips:"全国建筑工地招工平台",
     isFirstLoading: true,
     inviteSource: "712790d9629c6dcea00e3f5bff60132b",
