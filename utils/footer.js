@@ -1,4 +1,4 @@
-const _url = "http://yupao.oss-cn-beijing.aliyuncs.com/miniprogram";
+const _url = "http://cdn.yupao.com/miniprogram";
 const footerImgs = {
     homeNormal: "/images/footer-home.png",
     homeActive:"/images/footer-home-active.png",

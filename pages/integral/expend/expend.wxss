@@ -107,7 +107,7 @@
     left: 50%;
     top: -50rpx;
     margin-left: -50rpx;
-    background: url("http://yupao.oss-cn-beijing.aliyuncs.com/miniprogram/images/expend-close.png") no-repeat;
+    background: url("http://cdn.yupao.com/miniprogram/images/expend-close.png") no-repeat;
     background-size: 100% 100%;
 }
 .expend-show-recruit .yupao-common-list-left{

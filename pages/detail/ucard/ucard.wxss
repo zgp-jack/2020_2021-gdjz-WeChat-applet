@@ -10,7 +10,7 @@ page{
     position: relative;
     width: 100%;
     height: 335rpx;
-    background: url("http://yupao.oss-cn-beijing.aliyuncs.com/miniprogram/images/ucard.png") no-repeat;
+    background: url("http://cdn.yupao.com/miniprogram/images/ucard.png") no-repeat;
     background-size: 100% 100%;
 }
 .yupao-ucard-title{

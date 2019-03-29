@@ -1,7 +1,7 @@
 page{
     position: relative;
     width: 100%;
-    background:#e9463d  url("http://yupao.oss-cn-beijing.aliyuncs.com/miniprogram/images/truntable-main.png") no-repeat;
+    background:#e9463d  url("http://cdn.yupao.com/miniprogram/images/truntable-main.png") no-repeat;
     background-size: 100% 100%;
 }
 .xydzpimg{
@@ -18,7 +18,7 @@ page{
     position: relative;
     margin: 0 auto;
     display: block;
-    background: url("http://yupao.oss-cn-beijing.aliyuncs.com/miniprogram/images/truntable-bg.png") no-repeat;
+    background: url("http://cdn.yupao.com/miniprogram/images/truntable-bg.png") no-repeat;
     background-size: 100% 100%;
 }
 .turntable-btnbox{
@@ -26,7 +26,7 @@ page{
     left: 50%;
     top: 50%;
     display: block;
-    background: url("http://yupao.oss-cn-beijing.aliyuncs.com/miniprogram/images/truntable-btn.png") no-repeat;
+    background: url("http://cdn.yupao.com/miniprogram/images/truntable-btn.png") no-repeat;
     background-size: 100% 100%;
     z-index:5;
     transform-origin: center;
@@ -146,7 +146,7 @@ page{
 }
 .turntable-shade{
     position: absolute;
-    background: url("http://yupao.oss-cn-beijing.aliyuncs.com/miniprogram/images/truntable-shade.png") no-repeat;
+    background: url("http://cdn.yupao.com/miniprogram/images/truntable-shade.png") no-repeat;
     background-size: 100% 100%;
     bottom: 10rpx;
     left: 50%;
@@ -168,7 +168,7 @@ page{
     display: block;
     width: 90%;
     height: 600rpx;
-    background: url("http://yupao.oss-cn-beijing.aliyuncs.com/miniprogram/images/win-mainbg.png") no-repeat;
+    background: url("http://cdn.yupao.com/miniprogram/images/win-mainbg.png") no-repeat;
     background-size: 100% 100%;
     z-index: 100;
 }
@@ -252,7 +252,7 @@ page{
     width:60rpx;
     height: 60rpx;
     margin-left: -30rpx;
-    background: url("http://yupao.oss-cn-beijing.aliyuncs.com/miniprogram/images/wined-close.png") no-repeat;
+    background: url("http://cdn.yupao.com/miniprogram/images/wined-close.png") no-repeat;
     background-size: 100% 100%;
 }
 .turntable-wined-close::before{
@@ -287,7 +287,7 @@ page{
 .user-notimes-view{
     position: relative;
     display: block;
-    background: url("http://yupao.oss-cn-beijing.aliyuncs.com/miniprogram/images/notimes.png") no-repeat;
+    background: url("http://cdn.yupao.com/miniprogram/images/notimes.png") no-repeat;
     background-size: 100% 100%;
 }
 .user-colse-times{
@@ -295,7 +295,7 @@ page{
     left: 50%;
     top: 0;
     display: block;
-    background: url("http://yupao.oss-cn-beijing.aliyuncs.com/miniprogram/images/close-notimes.png") no-repeat;
+    background: url("http://cdn.yupao.com/miniprogram/images/close-notimes.png") no-repeat;
     background-size: 100% 100%;
     z-index: 15;
 }

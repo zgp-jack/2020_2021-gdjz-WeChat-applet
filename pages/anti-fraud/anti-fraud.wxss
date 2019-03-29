@@ -29,7 +29,7 @@
     display: block;
     width: 36rpx;
     height: 36rpx;
-    background: url("http://yupao.oss-cn-beijing.aliyuncs.com/miniprogram/images/laba.png") no-repeat;
+    background: url("http://cdn.yupao.com/miniprogram/images/laba.png") no-repeat;
     background-size: 100% 100%;
     left: 0;
     top: 50%;

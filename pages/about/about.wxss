@@ -18,7 +18,7 @@
     display: block;
     width: 410rpx;
     height: 70rpx;
-    background: url("http://yupao.oss-cn-beijing.aliyuncs.com/miniprogram/images/biaoti.png") no-repeat;
+    background: url("http://cdn.yupao.com/miniprogram/images/biaoti.png") no-repeat;
     background-size: 100% 100%;
     text-align: center;
     font-size: 32rpx;
@@ -39,7 +39,7 @@
 
 .about-yupao-industry{
     position: relative;
-    background: url("http://yupao.oss-cn-beijing.aliyuncs.com/miniprogram/images/bj1.png") no-repeat;
+    background: url("http://cdn.yupao.com/miniprogram/images/bj1.png") no-repeat;
     background-size: 100% 100%;
     padding: 20rpx 0;
 }
@@ -73,7 +73,7 @@
     display: block;
     width: 16rpx;
     height: 80rpx;
-    background: url("http://yupao.oss-cn-beijing.aliyuncs.com/miniprogram/images/roand.png") no-repeat;
+    background: url("http://cdn.yupao.com/miniprogram/images/roand.png") no-repeat;
     background-size: 100% 100%;
     bottom: -30rpx;
     left: 20rpx;
@@ -109,7 +109,7 @@
 .yupao-about-footer{
     position: relative;
     width: 100%;
-    background: url("http://yupao.oss-cn-beijing.aliyuncs.com/miniprogram/images/bj2.png") no-repeat;
+    background: url("http://cdn.yupao.com/miniprogram/images/bj2.png") no-repeat;
     background-size: 100% 100%;
     padding:30rpx 10rpx;
 }

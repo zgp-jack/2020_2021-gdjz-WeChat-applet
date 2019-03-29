@@ -44,16 +44,16 @@
     content: '';
     width: 30rpx;
     height: 30rpx;
-    background: url("http://yupao.oss-cn-beijing.aliyuncs.com/newyupao/images/card-edit.png") no-repeat;
+    background: url("http://cdn.yupao.com/newyupao/images/card-edit.png") no-repeat;
     background-size: 100% 100%;
     left: 0;
     top: 28rpx;
 }
 .setmycard-item-status::before{
-    background: url("http://yupao.oss-cn-beijing.aliyuncs.com/newyupao/images/my-card-status.png") no-repeat;
+    background: url("http://cdn.yupao.com/newyupao/images/my-card-status.png") no-repeat;
     background-size: 100% 100%;
 }
 .setmycard-item-top::before{
-    background: url("http://yupao.oss-cn-beijing.aliyuncs.com/newyupao/images/card-top.png") no-repeat;
+    background: url("http://cdn.yupao.com/newyupao/images/card-top.png") no-repeat;
     background-size: 100% 100%;
 }

@@ -371,7 +371,7 @@
     height: 50rpx;
     left: 27rpx;
     top: 25rpx;
-    background:url("http://yupao.oss-cn-beijing.aliyuncs.com/miniprogram/images/index-close.png") no-repeat;
+    background:url("http://cdn.yupao.com/miniprogram/images/index-close.png") no-repeat;
     background-size:100% 100%;
 }
 

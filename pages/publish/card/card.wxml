@@ -70,7 +70,7 @@
                     <view class='uploads-item-content' bindtap='userUploadCardImg' data-index="{{ index }}"  data-type="1">
                         <image src='{{ item.httpurl }}'></image>
                         <view class='del-upload-item-img' catchtap="delCardImg" data-index="{{ index }}">
-                            <image src='http://yupao.oss-cn-beijing.aliyuncs.com/miniprogram/images/imgs-del.png'></image>
+                            <image src='http://cdn.yupao.com/miniprogram/images/imgs-del.png'></image>
                         </view>
                     </view>
                 </view>
