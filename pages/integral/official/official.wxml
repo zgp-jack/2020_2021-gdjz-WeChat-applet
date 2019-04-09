@@ -1,5 +1,5 @@
 <view class="yupao-common-container yupao-common-nofooter">
-    <view class='integral-header'>正式积分来源</view>
+    <view class='integral-header'>积分来源记录</view>
     <view class='integral-content'>
         <view class='integral-list-item' wx:for="{{ lists }}" wx:key="{{ index }}">
             <view class='integral-list-time'>
@@ -18,7 +18,7 @@
     <view class='nodata-texttips' wx:if="{{ nothavemore }}">没有更多数据了</view>
     <view class='common-nodatabox flex-column lists-nodata'  wx:if="{{ isNone }}">
         <image src='{{ nodata }}'></image>
-        <text>暂无积分充值记录</text>
+        <text>暂无积分来源记录</text>
     </view>
 
 </view>

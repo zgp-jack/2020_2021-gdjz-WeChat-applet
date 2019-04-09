@@ -1,1 +1,2 @@
 @import '../expend/expend.wxss';
+.return-integral-header{position: relative;padding: 20rpx 30rpx;line-height: 40rpx;font-size: 26rpx;height: initial;}

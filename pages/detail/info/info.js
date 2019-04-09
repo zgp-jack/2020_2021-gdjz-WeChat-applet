@@ -224,7 +224,7 @@ Page({
         }
     },
     getInfoTel: function () {
-        let _this = this;
+        let _this = this; 
         let userInfo = this.data.userInfo;
         let infoId = this.data.infoId;
         userInfo.infoId = infoId;
@@ -238,6 +238,10 @@ Page({
                 console.log(mydata.errcode);
                 _this.doDetailAction(mydata, {
                     success: function () {
+                        if (mydata.errcode == "end"){
+                            app.showMyTips(mydata.errmsg);
+                            return false;
+                        }
                         _this.setData({
                             "info.tel_str": mydata.tel,
                             "info.show_ajax_btn": false

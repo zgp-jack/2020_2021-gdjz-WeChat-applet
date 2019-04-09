@@ -160,6 +160,10 @@ Page({
                 let mydata = res.data;
                 _this.doDetailAction(mydata, {
                     success: function () {
+                        if (mydata.errcode == "end") {
+                            app.showMyTips(mydata.errmsg);
+                            return false;
+                        }
                         _this.setData({ 
                             "ucardInfo.tel_str": mydata.tel,
                             "ucardInfo.show_ajax_btn":false

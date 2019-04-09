@@ -16,7 +16,7 @@
             <view class='ucenter-integralbox flex-row'>
                 <navigator class='ucenter-integral-item flex-column' url='/pages/integral/return/return' open-type="navigate" wx:if="{{ showReturnIntegral }}">
                     <text>{{ member.return_integral }}</text>
-                    <text>返回积分</text>
+                    <text>积分返回记录</text>
                 </navigator>
                 <navigator class='ucenter-integral-item flex-column' url='/pages/integral/official/official' open-type="navigate">
                     <text class='overwords'>{{ member.integral }}</text>

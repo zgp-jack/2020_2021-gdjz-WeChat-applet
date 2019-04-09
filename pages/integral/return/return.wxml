@@ -1,5 +1,5 @@
 <view class="yupao-common-container yupao-common-nofooter">
-    <view class='integral-header'>返回积分记录</view>
+    <view class='integral-header return-integral-header'>注：所有返回积分已加入积分总和，这里只做记录显示。</view>
     <view class='integral-content'>
         <view class='integral-list-item' wx:for="{{ lists }}" wx:key="{{ index }}">
             <view class='integral-list-time'>
