@@ -1,0 +1,26 @@
+page{
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background: url("http://cdn.yupao.com/miniprogram/images/fast-index-bg.png") no-repeat;
+    background-position: left bottom;
+    background-size: cover;
+    box-sizing: border-box;
+}
+.fast-index-header{position: relative;display: block;width: 100%;}
+.fast-issue-indexbox{position: relative;width: 100%;padding: 20rpx;}
+.fast-issue-indexbox textarea{position: relative;width: 100%;padding: 20rpx;background: white;height: 300rpx;font-size: 30rpx;box-shadow: #e7e6e4 0 0 10rpx;border-radius: 3px;}
+.fast-userphonebox{position: relative;margin-top: 30rpx;}
+.fast-index-teltips{position: relative;font-size: 28rpx;color: #000;text-align: center;line-height: 45rpx;}
+.fast-userphonebox input{position: relative;display: block;background: white;height: 90rpx;line-height: 90rpx;padding: 0 30rpx;font-size: 28rpx;color: #000;border-radius: 3px;box-shadow: #e7e6e4 0 0 10rpx;margin-top: 30rpx;text-align: center;}
+.fast-index-surebtn{position: relative;display: block;width: 100%;background: #0099ff;height: 90rpx;line-height:90rpx;margin-top: 30rpx;border-radius: 20px;box-shadow: #e7e6e4 0 0 10rpx;text-align: center;letter-spacing: 2px;font-size: 28rpx;font-weight: bold;color: #fff;}
+.fast-index-btns{position: relative;width: 100%;margin: 30rpx 0;}
+.fast-index-btns view{position: relative;width: 45%;font-size: 28rpx;height: 90rpx;line-height: 90rpx;text-align: center;background: white;color: #0099ff;box-shadow: #e7e6e4 0 0 10px;border-radius: 20px;}
+.fast-index-btns view:nth-last-child(1){margin-left:5%;}
+
+
+
+
+
+
+

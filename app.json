@@ -1,7 +1,9 @@
 {
     "pages": [
-        "pages/index/index",
+        "pages/fast-issue/index/index",
+        "pages/fast-issue/code/code",
         "pages/home/home",
+        "pages/index/index",
         "pages/recharge/recharge",
         "pages/turntable/turntable",
         "pages/getintegral/getintegral",
@@ -38,7 +40,9 @@
         "pages/anti-fraud/anti-fraud",
         "pages/footer/footer",
         "pages/tpl/win/win",
-        "pages/tpl/app/app"
+        "pages/tpl/app/app",
+        "pages/fast-issue/tips/tips",
+        "pages/fast-issue/lists/lists"
     ],
     "window": {
         "backgroundTextStyle": "light",

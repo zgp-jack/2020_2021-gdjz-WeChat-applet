@@ -1,0 +1,14 @@
+<image src='{{ headerbg }}' class='fast-index-header' mode='widthFix'></image>
+<view class="fast-issue-indexbox">
+    
+    <textarea placeholder='请粘贴或输入您的招工信息'  value='{{ content }}' focus='{{ textareaActive }}' bindinput='userEnterContent' bindtap='getTextareaFocus'  maxlength="-1"></textarea>
+    <view class='fast-userphonebox' wx:if="{{ showTel }}">
+        <view class='fast-index-teltips'>{{ isphone ? '以下是鱼泡网自动为您匹配出来的手机号码，如若有误，请自行修改：' : '鱼泡网并未在信息中检测出您的手机号码，请您准确的填写与您联系时的手机号码：' }}</view>
+        <input placeholder='请输入您的手机号码' type="number" bindinput="getUserPhone" value='{{ phone }}'></input>
+    </view>
+    <view class='fast-index-surebtn' bindtap='userSubmitAction'>发布招工</view>
+    <view class='fast-index-btns flex-row'>
+        <view>去鱼泡招工列表</view>
+        <view>管理已发布信息</view>
+    </view>
+</view>

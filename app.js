@@ -12,8 +12,8 @@ App({
     fixedPublishImg: "http://cdn.yupao.com/miniprogram/images/fixed-publishrecruit.png?t=" + new Date().getTime(),
     commonShareImg: "http://cdn.yupao.com/miniprogram/images/minishare.png?t=" + new Date().getTime(),
     commonDownloadApp: "http://cdn.yupao.com/miniprogram/images/download.png?t=" + new Date().getTime(),
-    apiRequestUrl: "https://newyupaomini.54xiaoshuo.com/",
-    //apiRequestUrl: "http://miniapi.qsyupao.com/",
+    //apiRequestUrl: "https://newyupaomini.54xiaoshuo.com/",
+    apiRequestUrl: "http://miniapi.qsyupao.com/",
     apiUploadImg:"https://newyupaomini.54xiaoshuo.com/index/upload/",
     apiImgUrl:"http://cdn.yupao.com/miniprogram/images/",
     commonShareTips:"全国建筑工地招工平台",
@@ -145,7 +145,7 @@ App({
                     if (res.code) {
                         //发起网络请求
                         wx.request({
-                            url: that.globalData.apiRequestUrl + '/user/user-info/',
+                            url: that.globalData.apiRequestUrl + 'user/user-info/',
                             data: {
                                 code: res.code,
                                 wechat_token: "jizhao"
@@ -208,7 +208,7 @@ App({
                 params.wechat_token = "jizhao"
                 //发起请求  
                 wx.request({
-                    url: that.globalData.apiRequestUrl + '/user/make-user/',
+                    url: that.globalData.apiRequestUrl + 'user/make-user/',
                     data: params,
                     header: {
                         'content-type': 'application/json' // 默认值
