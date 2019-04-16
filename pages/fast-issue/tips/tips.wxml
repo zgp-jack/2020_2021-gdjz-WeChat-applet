@@ -1,2 +1,10 @@
-<!--pages/fast-issue/tips/tips.wxml-->
-<text>pages/fast-issue/tips/tips.wxml</text>
+<view class="fast-codebox">
+    <view class='fast-code fast-tips'>
+        <view class='fast-tips-header'></view>
+        <view class='fast-code-body fast-tips-body'>恭喜您，您的招工信息已经发布成功，我们将为您把该条招工信息同步至上千个微信群中，预祝您能早日招到满意的工人，当然为了您能更好的管理该条招工信息，可以点击下方的链接去管理</view>
+    </view>
+    <view class='fast-index-btns flex-row'>
+        <view class='userfastbtn' bindtap='reLaunchIndex' data-url="/pages/index/index">去鱼泡招工列表</view>
+        <button class='userfastbtn'  open-type="getUserInfo"  bindgetuserinfo='usreFastAuth' >管理已发布信息</button>
+    </view>
+</view>

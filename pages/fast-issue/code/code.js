@@ -7,11 +7,12 @@ Page({
      */
     data: {
         code : "",
-        time:10,
+        ctime:60,
         phone:"",
         userInfo:{},
         fastId:0,
         hasUser:false,
+        timer:null
     },
     getPhoneCode:function(e){
         this.setData({ code: e.detail.value })
@@ -21,17 +22,17 @@ Page({
         let fastId = wx.getStorageSync("fastId");
         let phone = wx.getStorageSync("fastTel");
         if (userInfo) this.setData({ userInfo: userInfo, hasUser:true });
-        this.setData({ fastId: fastId, phone: fastId })
+        this.setData({ fastId: fastId, phone: phone })
         this.initCodeTime();
     },
     initCodeTime: function () {
         let _this = this;
-        let codeTime = this.data.time;
-        let timer = setInterval(function () {
+        let codeTime = this.data.ctime;
+        _this.data.timer = setInterval(function () {
             codeTime--;
-            _this.setData({ time: codeTime })
+            _this.setData({ ctime: codeTime })
             if (codeTime == 0) {
-                clearInterval(timer);
+                clearInterval(_this.data.timer);
                 return false;
             }
         }, 1000)
@@ -52,16 +53,17 @@ Page({
             success: function (res) {
                 let mydata = res.data;
                 app.showMyTips(mydata.errmsg);
-                console.log(mydata);
+                //console.log(mydata);
                 if (mydata.errcode == "ok") {
                     let _time = parseInt(mydata.refresh);
-                    _this.setData({ time: _time });
+                    _this.setData({ ctime: _time });
                     _this.initCodeTime();
                 }
             }
         })
     },
     userSubmitAction:function(){
+        let _this = this;
         let code = this.data.code;
         if(!code){
             app.showMyTips("请输入正确的验证码!");
@@ -82,13 +84,24 @@ Page({
             params: userinfo,
             success: function (res) {
                 let mydata = res.data;
-                app.showMyTips(mydata.errmsg);
-                //console.log(mydata);
                 if (mydata.errcode == "ok") {
                     let hasUser = _this.data.hasUser;
-                    wx.navigateTo({
-                        url: hasUser ? '/pages/fast-issue/lists/lists' : '/pages/fast-issue/tips/tips',
+                    wx.showModal({
+                        title: '恭喜您',
+                        content: mydata.errmsg,
+                        showCancel: false,
+                        success(res) {
+                            if (res.confirm) {
+                                clearInterval(_this.data.timer);
+                                wx.reLaunch({
+                                    url: hasUser? '/pages/fast-issue/lists/lists' : '/pages/fast-issue/tips/tips',
+                                })
+                            }
+                        }
                     })
+                    
+                }else{
+                    app.showMyTips(mydata.errmsg);
                 }
             }
         })
@@ -142,10 +155,4 @@ Page({
 
     },
 
-    /**
-     * 用户点击右上角分享
-     */
-    onShareAppMessage: function () {
-
-    }
 })

@@ -15,8 +15,10 @@ page{
 .fast-userphonebox input{position: relative;display: block;background: white;height: 90rpx;line-height: 90rpx;padding: 0 30rpx;font-size: 28rpx;color: #000;border-radius: 3px;box-shadow: #e7e6e4 0 0 10rpx;margin-top: 30rpx;text-align: center;}
 .fast-index-surebtn{position: relative;display: block;width: 100%;background: #0099ff;height: 90rpx;line-height:90rpx;margin-top: 30rpx;border-radius: 20px;box-shadow: #e7e6e4 0 0 10rpx;text-align: center;letter-spacing: 2px;font-size: 28rpx;font-weight: bold;color: #fff;}
 .fast-index-btns{position: relative;width: 100%;margin: 30rpx 0;}
-.fast-index-btns view{position: relative;width: 45%;font-size: 28rpx;height: 90rpx;line-height: 90rpx;text-align: center;background: white;color: #0099ff;box-shadow: #e7e6e4 0 0 10px;border-radius: 20px;}
-.fast-index-btns view:nth-last-child(1){margin-left:5%;}
+.fast-index-btns .userfastbtn{position: relative;width: 45%;font-size: 28rpx;height: 90rpx;line-height: 90rpx;text-align: center;background: white;color: #0099ff;box-shadow: #e7e6e4 0 0 10px;border-radius: 20px;border: 0;}
+.fast-index-btns .userfastbtn::before,.fast-index-btns .userfastbtn::after{border: 0;}
+.fast-index-btns .userfastbtn:nth-last-child(1){margin-left:5%;}
+.fast-index-btns .userfastbtn:nth-child(1){margin-left:0;}
 
 
 

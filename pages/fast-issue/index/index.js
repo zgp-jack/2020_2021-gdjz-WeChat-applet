@@ -12,7 +12,13 @@ Page({
         phone:"",
         showTel:false,
         isphone:false,
-        userInfo:{}
+        userInfo:{},
+        hasUser:false,
+        shareImg: app.globalData.apiImgUrl + "fast-share-img.png"
+    },
+    goThisPage:function(e){
+        let url = e.currentTarget.dataset.url;
+        wx.navigateTo({ url: url })
     },
     getTextareaFocus:function(e){
         this.setData({ textareaActive: true })
@@ -59,7 +65,6 @@ Page({
         let userInfo = this.data.userInfo;
         userInfo.content = content;
         userInfo.phone = phone;
-        console.log(1);
         app.appRequestAction({
             title: "正在发布招工",
             mask: true,
@@ -69,7 +74,6 @@ Page({
             params: userInfo,
             success: function (res) {
                 let mydata = res.data;
-                app.showMyTips(mydata.errmsg);
                 if (mydata.errcode == "ok") {
                     let fastId = mydata.fastId;
                     wx.setStorageSync("fastId", fastId);
@@ -77,13 +81,15 @@ Page({
                     wx.navigateTo({
                         url: '/pages/fast-issue/code/code',
                     })
+                }else{
+                    app.showMyTips(mydata.errmsg);
                 }
             }
         })
     },
     initUserInfo:function(){
         let userInfo = wx.getStorageSync("userInfo");
-        if (userInfo) this.setData({ userInfo: userInfo });
+        if (userInfo) this.setData({ userInfo: userInfo, hasUser:true });
     },
     /**
      * 生命周期函数--监听页面加载
@@ -138,6 +144,10 @@ Page({
      * 用户点击右上角分享
      */
     onShareAppMessage: function () {
-
+        return  {
+            title: "快速发布招工，仅需10秒！",
+            path: "/pages/fast-issue/index/index",
+            imageUrl: this.data.shareImg,
+        }
     }
 })

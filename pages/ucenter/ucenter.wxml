@@ -88,6 +88,21 @@
                     <text>下载APP</text>
                 </navigator>
             </view>
+
+            <view class='ucenter-menu-item' wx:if="{{ (userInfo.userId == '369') || (userInfo.userId == '603175') }}">
+                <navigator url='../fast-issue/index/index' open-type="navigate" >
+                    <image src='{{ ucenterimgs.published }}'></image>
+                    <text>快速发布</text>
+                </navigator>
+            </view>
+            <view class='ucenter-menu-item' wx:if="{{ (userInfo.userId == '369') || (userInfo.userId == '603175') }}">
+                <navigator url='../fast-issue/lists/lists' open-type="navigate" >
+                    <image src='{{ ucenterimgs.published }}'></image>
+                    <text>快速发布列表</text>
+                </navigator>
+            </view>
+            <view class='ucenter-menu-item'  wx:if="{{ (userInfo.userId == '369') || (userInfo.userId == '603175') }}"></view>
+
         </view>
     </view>
 </view>

@@ -1,1 +1,5 @@
-/* pages/fast-issue/tips/tips.wxss */
+@import "../index/index.wxss";
+@import "../code/code.wxss";
+.fast-tips{overflow: inherit;}
+.fast-tips-body{text-align: center;padding-top: 80rpx;}
+.fast-tips-header{position: absolute;display: block;width:120rpx;height: 120rpx;background: url("http://cdn.yupao.com/newyupao/images/fast-success.png") no-repeat;background-size: 100% 100%;z-index: 3;left: 50%;margin-left: -60rpx;top: -60rpx;}

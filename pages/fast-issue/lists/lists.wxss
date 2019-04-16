@@ -1,1 +1,21 @@
-/* pages/fast-issue/lists/lists.wxss */
+page{background: #f8f8f8;}
+.fast-listsbox{position: relative;width: 100%;padding-bottom: 120rpx;}
+.fast-list-item{position: relative;width: 100%;background: white;padding: 10rpx 30rpx;margin-bottom: 20rpx;box-shadow: #e7e6e4 0 0 10rpx;}
+.fast-list-header{position: relative;width: 100%;padding-right: 80rpx;line-height: 80rpx; border-bottom: 1px solid #dcdcdc;font-size: 28rpx;}
+.fast-list-header view{position: absolute;right: 0;top: 0;line-height: 80rpx;color: #0099ff;}
+.fast-list-body{position: relative;width: 100%;}
+.fast-list-status{position: relative;float: left;color: #333;font-size: 28rpx;line-height: 80rpx;padding-left:50rpx;}
+.fast-list-status::before{position: absolute;content: '';display: block;width: 40rpx;height: 40rpx;background: url("http://cdn.yupao.com/newyupao/images/published-djs.png") no-repeat;background-size: 100% 100%;left: 0;top:20rpx;}
+.fast-list-status view{ display: inline-block;}
+.fast-list-status .list-status-wait{color: #E6A23C;}
+.fast-list-status .list-status-error{color: #F56C6C;}
+.fast-list-status .list-status-success{color: #67C23A;}
+.fast-list-time{font-size: 28rpx;color: #999;position: relative;float: right;line-height: 80rpx;}
+.fast-list-nomore{position: relative;width: 100%;text-align: center;line-height: 50rpx;margin-top: 30rpx;font-size: 28rpx;color: #666;}
+
+
+.fast-list-footer{position: fixed;width: 100%;height: 100rpx;background: #0099ff;z-index: 10;left: 0;bottom: 0;}
+.fast-list-footer view{position: relative;width: 50%;height: 100rpx;line-height: 100rpx;border-right: 1px solid #dcdcdc; display: block;color: white;text-align: center;font-size:30rpx;font-weight: bold;}
+.fast-list-footer view:nth-last-child(1){border-right: 0;}
+
+

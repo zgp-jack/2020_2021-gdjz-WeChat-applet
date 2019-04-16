@@ -8,7 +8,7 @@
     </view>
     <view class='fast-index-surebtn' bindtap='userSubmitAction'>发布招工</view>
     <view class='fast-index-btns flex-row'>
-        <view>去鱼泡招工列表</view>
-        <view>管理已发布信息</view>
+        <view class='userfastbtn' bindtap='goThisPage' data-url="/pages/index/index">去鱼泡招工列表</view>
+        <view class='userfastbtn' wx:if="{{ hasUser }}" bindtap='goThisPage' data-url="/pages/fast-issue/lists/lists">管理已发布信息</view>
     </view>
 </view>

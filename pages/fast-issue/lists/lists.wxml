@@ -1,2 +1,16 @@
-<!--pages/fast-issue/lists/lists.wxml-->
-<text>pages/fast-issue/lists/lists.wxml</text>
+<view class="fast-listsbox">
+    <view class='fast-list-item' wx:for="{{ lists }}" wx:key="index" data-status="{{ item.is_join }}" data-type="{{ item.join_type }}" data-id="{{ (item.join_type == 'job') ? item.gczdw_id : item.sgdw_id }}" bindtap='toThisPage'>
+        <view class='fast-list-header overwords'>{{ item.content }}<view>{{ (item.join_type == 'resume') ? '找活':'招工' }}</view></view>
+        <view class='fast-list-body clearfix'>
+            <view class='fast-list-status'>审核状态：<view class='{{ (item.is_join == "0") ? "list-status-wait" : ((item.is_join == "1") ? "list-status-success" : "list-status-error") }}'>{{ item.is_join_word }}</view></view>
+            <view class='fast-list-time'>{{ item.time }}</view>
+        </view>
+    </view>
+    <view class='fast-list-nomore' wx:if="{{ isEnd }}">没有更多数据了</view>
+</view>
+
+
+<view class='fast-list-footer flex-row'>
+    <view bindtap='goThisPage'  data-url="/pages/index/index">去鱼泡招工列表</view>
+    <view bindtap='goThisPage' data-url="/pages/published/published">管理已发布信息</view>
+</view>
