@@ -251,7 +251,7 @@ App({
         wx.showLoading({ title: '正在上传图片' });
         wx.chooseImage({
             count: 1,
-            sizeType: ['original', 'compressed'],
+            sizeType: ['compressed'],
             sourceType: ['album', 'camera'],
             success: res => {
                 let imgRes = res;
