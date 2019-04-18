@@ -68,7 +68,10 @@ Page({
             showWin:false,
             integral:"1",
         },
-        userShareTime:{}
+        userShareTime:{},
+        firstJoin: false,
+        fastIssueImg: app.globalData.apiImgUrl + "index-fast-issue.png",
+        showFastIssue: app.globalData.showFastIssue
     },
     touchStart: function (e) {
         this.touchStartTime = e.timeStamp
@@ -434,6 +437,7 @@ Page({
         }
         this.setData({ userInfo: userInfo });
         this.initNeedData();
+        if (!app.globalData.showFastIssue.request) app.isShowFastIssue(this);
     },
     //用户授权
     bindGetUserInfo: function (e) {
@@ -454,7 +458,8 @@ Page({
                         app.globalData.userInfo = userInfo;
                         wx.setStorageSync('userInfo', userInfo)
                         that.initNeedData();
-                        that.initUserShareTimes();
+                        //that.initUserShareTimes();
+                        if (!app.globalData.showFastIssue.request) app.isShowFastIssue(that);
                     } else {
                         app.showMyTips(uinfo.errmsg);
                     }
@@ -573,6 +578,7 @@ Page({
             _this.setData({ fillterType: _data.classTree })
         });
     },
+    
     initUserShareTimes:function(){
         let userInfo = wx.getStorageSync("userInfo");
         app.pageInitSystemInfo(this);
@@ -612,12 +618,18 @@ Page({
     initAdminTime:function(callback){
         app.initAdminTime();
     },
+    initFirstTips:function(){
+        app.initFirstTips(this);
+    },
+    
     /**
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
+        //this.isShowFastIssue();
+        this.initFirstTips();
         this.initAdminTime();
-        this.initUserShareTimes();
+        //this.initUserShareTimes();
         this.getFilterData();
         this.timerLoading();
         this.initUserLocation();

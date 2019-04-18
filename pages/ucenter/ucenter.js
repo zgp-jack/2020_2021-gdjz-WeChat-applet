@@ -17,12 +17,16 @@ Page({
             downapp: app.globalData.apiImgUrl + "uc-downapp.png",
             feedback: app.globalData.apiImgUrl + "ucenter-feedback.png",
             invite: app.globalData.apiImgUrl + "ucnter-yaoqing.png",
+            fastissue: app.globalData.apiImgUrl + "ucenter-fast.png",
+            fastlist: app.globalData.apiImgUrl + "ucenter-fastlist.png",
         },
         userInfo:{},
         member:{},
-        showReturnIntegral:false
+        showReturnIntegral:false,
+        showFastIssue: app.globalData.showFastIssue
     },
     initUserInfo:function(){
+        if (!app.globalData.showFastIssue.request) app.isShowFastIssue(this);
         let userInfo = wx.getStorageSync("userInfo");
         this.setData({ userInfo:userInfo })
         let _this = this;

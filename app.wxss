@@ -639,3 +639,14 @@ page{
     top: auto;
     bottom: 250rpx;
 }
+
+
+/* 首页提示关注 */
+.common-index-gztips{position: fixed;right:20rpx;top:20rpx;line-height:30px;padding: 0 30rpx;border-radius: 5px; z-index: 15;background: rgba(0,0,0,.65);color: #fff;font-size: 26rpx; animation:gzScale 2s linear infinite;}
+.common-index-gztips::after{position: fixed;content: ''; right: 22%;top:-16px;width: 0; height: 0;border-width: 8px;border-style: solid;transform: rotate(90deg);border-color: transparent rgba(0,0,0,.65) transparent transparent;}
+
+@keyframes gzScale{
+    0%{transform: scale(1);}
+    50%{transform: scale(0.9);}
+    100%{transform: scale(1);}
+}

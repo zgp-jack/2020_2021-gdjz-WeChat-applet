@@ -1,6 +1,9 @@
 <import src="/pages/footer/footer.wxml"/>
 <import src="/pages/tpl/app/app.wxml"/>
 
+<view class='common-index-gztips' wx:if="{{ firstJoin }}">添加到我的小程序，招工找活更方便</view>
+
+
 <!-- 搜索头部 -->
 <view class="lists-header">
     <input placeholder="找活、找工作" bindconfirm="userTapSearch"  confirm-type="search"   bindinput='bindKeyInput'/>
@@ -111,6 +114,13 @@
 <view class='fixed-ad'   bindtap='jumpThisLink'  data-url="/pages/download/download-app"  data-type='0'>
     <image src='{{ fixedAdImg }}'></image>
 </view>
+
+<!-- 快速发布 -->
+<view wx:if="{{ showFastIssue.show > 0 }}"  class='fixed-get-integral' bindtap='jumpThisLink'  data-url="/pages/fast-issue/index/index"  data-type='0' >
+    <image src='{{ fastIssueImg }}'></image>
+</view>
+
+
 
 <!-- <view class='fixed-get-integral'  bindtap='jumpThisLink'  data-url="/pages/turntable/turntable"  data-type='0'>
         <image src='{{ fixedGetIntegral }}'></image>

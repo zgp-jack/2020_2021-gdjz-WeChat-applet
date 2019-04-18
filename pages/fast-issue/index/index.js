@@ -6,7 +6,7 @@ Page({
      * 页面的初始数据
      */
     data: {
-        headerbg: app.globalData.apiImgUrl + "fast-index-header.png",
+        headerbg: app.globalData.apiImgUrl + "fast-index-header.png?t="+new Date().getTime(),
         textareaActive:false,
         content:"",
         phone:"",
@@ -91,10 +91,15 @@ Page({
         let userInfo = wx.getStorageSync("userInfo");
         if (userInfo) this.setData({ userInfo: userInfo, hasUser:true });
     },
+    initFirstTips: function () {
+        app.initFirstTips(this);
+    },
+
     /**
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
+        this.initFirstTips();
         this.initUserInfo();
     },
 

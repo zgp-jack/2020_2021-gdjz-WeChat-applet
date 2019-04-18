@@ -26,7 +26,12 @@ App({
         tomorrow:""
     },
     appNetTime: parseInt(new Date().getTime() / 1000),
-    userGapTime:0
+    userGapTime:0,
+    firstJoin:true,
+    showFastIssue:{
+        show:0,
+        request:false
+    }
   },
     getUserShareJson: function () {
         let userInfo = wx.getStorageSync("userInfo");
@@ -455,4 +460,43 @@ App({
             fail: function () { }
         })
     },
+    initFirstTips: function (_this) {
+        let that = this; //app
+        let m = this.globalData.firstJoin;
+        if (m) {
+            _this.setData({ firstJoin: m });
+            let t = 5;
+            let timer = setInterval(function () {
+                t--;
+                if (t == 0) {
+                    _this.setData({ firstJoin: false });
+                    that.globalData.firstJoin = false;
+                    clearInterval(timer);
+                    return false;
+                }
+            }, 1000)
+        }
+    },
+    isShowFastIssue:function(_this){
+        let that = this;
+        let userInfo = wx.getStorageSync("userInfo");
+        this.appRequestAction({
+            way:"POST",
+            url: "fast-issue/fast-log/",
+            hideLoading: true,
+            params: userInfo,
+            success: function (res) {
+               let mydata = res.data;
+               if(mydata.errcode =="ok"){
+                   let _log = parseInt(mydata.hasLog);
+                   that.globalData.showFastIssue.show = _log;
+                   that.globalData.showFastIssue.request = true;
+
+                   _this.setData({ showFastIssue: that.globalData.showFastIssue });
+               }
+            },
+            fail: function () { }
+        })
+    },
+
 })

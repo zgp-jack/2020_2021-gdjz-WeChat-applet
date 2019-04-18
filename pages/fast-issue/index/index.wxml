@@ -12,3 +12,5 @@
         <view class='userfastbtn' wx:if="{{ hasUser }}" bindtap='goThisPage' data-url="/pages/fast-issue/lists/lists">管理已发布信息</view>
     </view>
 </view>
+
+<view class='common-index-gztips' wx:if="{{ firstJoin }}">添加到我的小程序，招工找活更方便</view>

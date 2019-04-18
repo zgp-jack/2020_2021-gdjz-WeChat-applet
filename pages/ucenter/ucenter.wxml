@@ -76,6 +76,20 @@
                     <text>邀请工友</text>
                 </navigator>
             </view>
+
+            <view class='ucenter-menu-item' wx:if="{{ showFastIssue.show > 0 }}">
+                <navigator url='../fast-issue/index/index' open-type="navigate" >
+                    <image src='{{ ucenterimgs.fastissue }}'></image>
+                    <text>快速发布</text>
+                </navigator>
+            </view>
+            <view class='ucenter-menu-item'  wx:if="{{ showFastIssue.show > 0 }}">
+                <navigator url='../fast-issue/lists/lists' open-type="navigate" >
+                    <image src='{{ ucenterimgs.fastlist }}'></image>
+                    <text>快速发布列表</text>
+                </navigator>
+            </view>
+
             <view class='ucenter-menu-item'>
                 <navigator url='../feedback/feedback' open-type="navigate" >
                     <image src='{{ ucenterimgs.feedback }}'></image>
@@ -89,19 +103,8 @@
                 </navigator>
             </view>
 
-            <view class='ucenter-menu-item' wx:if="{{ (userInfo.userId == '369') || (userInfo.userId == '603175') }}">
-                <navigator url='../fast-issue/index/index' open-type="navigate" >
-                    <image src='{{ ucenterimgs.published }}'></image>
-                    <text>快速发布</text>
-                </navigator>
-            </view>
-            <view class='ucenter-menu-item' wx:if="{{ (userInfo.userId == '369') || (userInfo.userId == '603175') }}">
-                <navigator url='../fast-issue/lists/lists' open-type="navigate" >
-                    <image src='{{ ucenterimgs.published }}'></image>
-                    <text>快速发布列表</text>
-                </navigator>
-            </view>
-            <view class='ucenter-menu-item'  wx:if="{{ (userInfo.userId == '369') || (userInfo.userId == '603175') }}"></view>
+            
+            <view class='ucenter-menu-item'  wx:if="{{ showFastIssue.show > 0 }}"></view>
 
         </view>
     </view>
