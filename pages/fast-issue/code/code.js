@@ -85,21 +85,29 @@ Page({
             success: function (res) {
                 let mydata = res.data;
                 if (mydata.errcode == "ok") {
+                    clearInterval(_this.data.timer);
                     let hasUser = _this.data.hasUser;
-                    wx.showModal({
-                        title: '恭喜您',
-                        content: mydata.errmsg,
-                        showCancel: false,
-                        success(res) {
-                            if (res.confirm) {
-                                clearInterval(_this.data.timer);
-                                wx.reLaunch({
-                                    url: hasUser? '/pages/fast-issue/lists/lists' : '/pages/fast-issue/tips/tips',
-                                })
+                    let oldId = parseInt(mydata.oldJobId);
+                    if(!oldId){
+                        wx.showModal({
+                            title: '恭喜您',
+                            content: mydata.errmsg,
+                            showCancel: false,
+                            success(res) {
+                                if (res.confirm) {
+                                    clearInterval(_this.data.timer);
+                                    wx.reLaunch({
+                                        url: hasUser ? '/pages/fast-issue/lists/lists' : '/pages/fast-issue/tips/tips',
+                                    })
+                                }
                             }
-                        }
-                    })
-                    
+                        })
+                    }else{
+                        let _token = mydata.token;
+                        wx.navigateTo({
+                            url: '/pages/publish/fast/fast?id=' + oldId + "&token=" + _token,
+                        })
+                    }
                 }else{
                     app.showMyTips(mydata.errmsg);
                 }

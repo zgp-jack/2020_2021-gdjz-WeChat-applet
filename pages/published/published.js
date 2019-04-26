@@ -1,5 +1,6 @@
 // pages/published/published.js
 let footerjs = require("../../utils/footer.js");
+let pd = require("../../utils/p.js");
 const app = getApp();
 Page({
 
@@ -48,7 +49,8 @@ Page({
             top: app.globalData.apiImgUrl + "detail-top.png",
             wzd: app.globalData.apiImgUrl + "detail-wzd.png",
             time: app.globalData.apiImgUrl + "published-djs.png",
-        }
+        },
+        pd: pd.pd
     },
     bindAreaChange:function(e){
         this.setData({ areaIndex: e.detail.value })

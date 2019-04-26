@@ -12,8 +12,8 @@ App({
     fixedPublishImg: "http://cdn.yupao.com/miniprogram/images/fixed-publishrecruit.png?t=" + new Date().getTime(),
     commonShareImg: "http://cdn.yupao.com/miniprogram/images/minishare.png?t=" + new Date().getTime(),
     commonDownloadApp: "http://cdn.yupao.com/miniprogram/images/download.png?t=" + new Date().getTime(),
-    apiRequestUrl: "https://newyupaomini.54xiaoshuo.com/",
-    //apiRequestUrl: "http://miniapi.qsyupao.com/",
+    //apiRequestUrl: "https://newyupaomini.54xiaoshuo.com/",
+    apiRequestUrl: "http://miniapi.qsyupao.com/",
     apiUploadImg:"https://newyupaomini.54xiaoshuo.com/index/upload/",
     apiImgUrl:"http://cdn.yupao.com/miniprogram/images/",
     commonShareTips:"全国建筑工地招工平台",
@@ -207,10 +207,12 @@ App({
                 let _source = wx.getStorageSync("_source");
                 let fastId = wx.getStorageSync("fastId");
                 let fastTel = wx.getStorageSync("fastTel");
+                let fastJobId = wx.getStorageSync("fastJobId") ? wx.getStorageSync("fastJobId") : "";
                 if(fastId && fastTel){
                     params.fastId = fastId;
                     params.phone = fastTel;
                 }
+                params.fast_job_id = fastJobId;
                 params.session_key = session_key
                 params.encryptedData = encryptedData
                 params.iv = iv

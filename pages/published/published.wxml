@@ -61,6 +61,20 @@
 </view>
 
 
+<view class='user-province-settop  flex-row'>
+    <view class='cost-integral-settop'>
+        <view class='cost-integral-settop-header'>置顶提示</view>
+        <view class='psettop-body'>
+            <checkbox-group bindchange="checkboxChange">
+                <label class="settop-checkbox" wx:for="{{ pd }}"wx:key="index">
+                    <checkbox value="{{item.id}}" checked="{{item.checked}}" />
+                    {{item.name}}
+                </label>
+            </checkbox-group>
+        </view>
+    </view>
+</view>
+
 
 
 <!-- 引入footer -->
