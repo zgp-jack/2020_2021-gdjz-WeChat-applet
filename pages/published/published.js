@@ -50,7 +50,9 @@ Page({
             wzd: app.globalData.apiImgUrl + "detail-wzd.png",
             time: app.globalData.apiImgUrl + "published-djs.png",
         },
-        pd: pd.pd
+        pd: pd.pd,
+        ids:[2,6,7,11,16],
+        newTopShow:false
     },
     bindAreaChange:function(e){
         this.setData({ areaIndex: e.detail.value })
@@ -347,7 +349,40 @@ Page({
         })
     },
 
-
+    //选择多省份
+    setThisTop1:function(e){
+        this.setData({ newTopShow:true })
+        let id = e.currentTarget.dataset.id;
+        let ids = e.currentTarget.dataset.ids;
+        this.initJobPd(ids);
+    },
+    checkboxChange:function(e){
+        let ids = e.detail.value;
+        this.initJobPd(ids);
+    },
+    initJobPd:function(ids){
+        let p = app.arrDeepCopy(this.data.pd);
+        let _pd = p.map(item => {
+            for (let i = 0; i < ids.length; i++) {
+                let itemId = parseInt(ids[i]);
+                let id = parseInt(item.id);
+                item.checked = false;
+                if(itemId == id){
+                    item.checked = true;
+                    break;
+                }
+            }
+            return item;
+        })
+        //console.log(_pd);
+        this.setData({ pd: _pd });
+    },
+    closeNewTop:function(){
+        this.setData({ newTopShow:false });
+    },
+    sureNewTop:function(){
+        
+    },
     // 共用footer
     jumpThisLink: function (e) {
         app.jumpThisLink(e);

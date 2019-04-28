@@ -1,7 +1,7 @@
 {
     "pages": [
-        "pages/published/published",
         "pages/index/index",
+        "pages/published/published",
         "pages/fast-issue/index/index",
         "pages/publish/fast/fast",
         "pages/fast-issue/lists/lists",
