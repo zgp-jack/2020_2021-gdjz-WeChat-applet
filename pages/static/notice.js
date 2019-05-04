@@ -9,7 +9,7 @@ Page({
     data: {
         noticeId:0,
         content:"",
-        title:""
+        title:"",
     },
     getNoticeInfo:function(options){
         let _this = this;

@@ -4,6 +4,7 @@ App({
   },
   globalData: {
     requestToken:"jizhao",
+    unitid:"adunit-80f40e8b4f60c3f6",
     serverPhone:"400-833-1578",
     userInfo: null,
     refId:"",
@@ -12,8 +13,8 @@ App({
     fixedPublishImg: "http://cdn.yupao.com/miniprogram/images/fixed-publishrecruit.png?t=" + new Date().getTime(),
     commonShareImg: "http://cdn.yupao.com/miniprogram/images/minishare.png?t=" + new Date().getTime(),
     commonDownloadApp: "http://cdn.yupao.com/miniprogram/images/download.png?t=" + new Date().getTime(),
-    //apiRequestUrl: "https://newyupaomini.54xiaoshuo.com/",
-    apiRequestUrl: "http://miniapi.qsyupao.com/",
+    apiRequestUrl: "https://newyupaomini.54xiaoshuo.com/",
+    //apiRequestUrl: "http://miniapi.qsyupao.com/",
     apiUploadImg:"https://newyupaomini.54xiaoshuo.com/index/upload/",
     apiImgUrl:"http://cdn.yupao.com/miniprogram/images/",
     commonShareTips:"全国建筑工地招工平台",
@@ -25,8 +26,10 @@ App({
         today:"",
         tomorrow:""
     },
+    //验证用户
     appNetTime: parseInt(new Date().getTime() / 1000),
     userGapTime:0,
+    //第一次进入 引导添加到我的小程序
     firstJoin:true,
     showFastIssue:{
         show:0,
@@ -153,7 +156,7 @@ App({
                             url: that.globalData.apiRequestUrl + 'user/user-info/',
                             data: {
                                 code: res.code,
-                                wechat_token: "jizhao"
+                                wechat_token: that.globalData.requestToken
                             },
                             success: function (resdata) {
                                 //获取到session_key 解密 
@@ -218,7 +221,7 @@ App({
                 params.iv = iv
                 params.refid = this.globalData.refId
                 params.source = _source ? _source : "";
-                params.wechat_token = "jizhao"
+                params.wechat_token = that.globalData.requestToken
                 //发起请求  
                 wx.request({
                     url: that.globalData.apiRequestUrl + 'user/make-user/',
