@@ -1,6 +1,12 @@
 App({
-  onLaunch: function () {
-
+  onLaunch: function (e) {
+      console.log(e.path);
+      console.log("--------onLaunch----------");
+      this.initUserInfo(e);
+  },
+  onShow(e){
+      console.log(e.path);
+      console.log("--------onShow----------");
   },
   globalData: {
     requestToken:"jizhao",
@@ -13,8 +19,8 @@ App({
     fixedPublishImg: "http://cdn.yupao.com/miniprogram/images/fixed-publishrecruit.png?t=" + new Date().getTime(),
     commonShareImg: "http://cdn.yupao.com/miniprogram/images/minishare.png?t=" + new Date().getTime(),
     commonDownloadApp: "http://cdn.yupao.com/miniprogram/images/download.png?t=" + new Date().getTime(),
-    //apiRequestUrl: "https://newyupaomini.54xiaoshuo.com/",
-    apiRequestUrl: "http://miniapi.qsyupao.com/",
+    apiRequestUrl: "https://newyupaomini.54xiaoshuo.com/",
+    //apiRequestUrl: "http://miniapi.qsyupao.com/",
     apiUploadImg:"https://newyupaomini.54xiaoshuo.com/index/upload/",
     apiImgUrl:"http://cdn.yupao.com/miniprogram/images/",
     commonShareTips:"全国建筑工地招工平台",
@@ -36,6 +42,33 @@ App({
         request:false
     }
   },
+    initUserInfo: function (e) {
+        let tpage = e.path;
+        console.log(tpage);
+        //不需要校验的路由名单
+        let pages = ["pages/index/index", "pages/fast-issue/index/index"];
+        let rs = pages.join("|");
+        let re = new RegExp("^(" + rs + ")(.*?)");
+        let isIndex = (tpage.match(re) != null);
+        let userInfo = wx.getStorageSync("userInfo");
+        console.log(tpage.match(re));
+        console.log(isIndex);
+        console.log(userInfo);
+        if (!userInfo) {
+            if (!isIndex) {
+                wx.showModal({
+                    title: '温馨提示',
+                    content: '系统检测到您并未登录，您需要登录后才能继续操作',
+                    showCancel: false,
+                    success: function (e) {
+                        wx.reLaunch({
+                            url: '/pages/index/index',
+                        })
+                    }
+                })
+            }
+        }
+    },
     getUserShareJson: function () {
         let userInfo = wx.getStorageSync("userInfo");
         let _path = userInfo ? '/pages/index/index?refid=' + userInfo.userId + "&source=" + this.globalData.inviteSource : '/pages/index/index';

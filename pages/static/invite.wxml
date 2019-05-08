@@ -2,9 +2,9 @@
 
 <view class="yupao-common-container">
     <view class='invite-content'>
-        <view class='invite-item  common-shaded-box clearfix'>
+        <!-- <view class='invite-item  common-shaded-box clearfix'>
             <image class='invite-shareimg' src='http://cdn.yupao.com/miniprogram/images/invite-hand.png'></image>
-        </view>
+        </view> -->
         <view class='invite-item common-shaded-box'>
                 <view class='invite-padding-left '>
                     <image src='http://cdn.yupao.com/miniprogram/images/invite-way1.png'></image>

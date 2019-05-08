@@ -18,7 +18,7 @@
         <view class='anti-fraud-info'>1、与对方联系时，开启通话录音，保存聊天依据。</view>
         <view class='anti-fraud-info'>2、认真核对对方招工详情信息，了解薪酬、福利待遇等详细情况，约定好薪酬、工作内容等事项，保留聊天记录。</view>
         <view class='anti-fraud-info'>3、认真询问招工要求、工地现场照片及建设单位等工地信息，以供参考及了解项目的实际情况。</view>
-        <view class='anti-fraud-info'>4、在查看招工信息确实无误后，为有效保障您的合法权益，建议您与昭公放签订用工协议，明确薪酬、用工时间、工作内容及工地制度等约定条款，并签字盖章。</view>
+        <view class='anti-fraud-info'>4、在查看招工信息确实无误后，为有效保障您的合法权益，建议您与招工方签订用工协议，明确薪酬、用工时间、工作内容及工地制度等约定条款，并签字盖章。</view>
         <view class='anti-fraud-info'>5、如遇恶意拖欠工人工资情况，请及时报请劳动监察大队处理，利用法律有效保护自身合法权益。</view>
         <view class='anti-fraud-other'>祝广大鱼泡工友顺利找到自己理想的工作和合适的工人。</view>
         <view class='anti-fraud-other'>如有疑问，敬请拨打鱼泡客服咨询热线： <text data-phone="400-833-1578" bindtap='callThisPhone'>400-833-1578</text></view>

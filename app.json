@@ -1,13 +1,13 @@
 {
     "pages": [
         "pages/index/index",
+        "pages/home/home",
         "pages/published/published",
         "pages/fast-issue/index/index",
         "pages/publish/fast/fast",
         "pages/fast-issue/lists/lists",
         "pages/fast-issue/tips/tips",
         "pages/fast-issue/code/code",
-        "pages/home/home",
         "pages/recharge/recharge",
         "pages/turntable/turntable",
         "pages/getintegral/getintegral",
