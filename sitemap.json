@@ -1,7 +1,92 @@
 {
     "desc": "关于本文件的更多信息，请参考文档 https://developers.weixin.qq.com/miniprogram/dev/framework/sitemap.html",
-    "rules": [{
-    "action": "allow",
-    "page": "*"
-    }]
+    "rules": [
+        {
+            "action": "allow",
+            "page": "pages/index/index",
+            "matching": "exclusive"
+        },
+        {
+            "action": "allow",
+            "page": "pages/home/home",
+            "matching": "exclusive"
+        },
+        {
+            "action": "allow",
+            "page": "pages/findwork/findwork",
+            "matching": "exclusive"
+        },
+        {
+            "action": "allow",
+            "page": "pages/usedlist/usedlist",
+            "matching": "exclusive"
+        },
+        {
+            "action": "allow",
+            "page": "pages/ucenter/ucenter",
+            "matching": "exclusive"
+        },
+        {
+            "action": "allow",
+            "page": "pages/static/invite",
+            "matching": "exclusive"
+        },
+        {
+            "action": "allow",
+            "page": "pages/download/download",
+            "matching": "exclusive"
+        },
+        {
+            "action": "allow",
+            "page": "pages/detail/info/info",
+            "params": ["id"],
+            "matching" : "partial"
+        },
+        {
+            "action": "allow",
+            "page": "pages/detail/ucard/ucard",
+            "params": [ "id" ],
+            "matching": "partial"
+        },
+        {
+            "action": "allow",
+            "page": "pages/detail/usedinfo/usedinfo",
+            "params": [ "id" ],
+            "matching": "partial"
+        },
+        {
+            "action": "allow",
+            "page": "pages/detail/static/notice",
+            "params": [ "id" ],
+            "matching": "partial"
+        },
+        {
+            "action": "disallow",
+            "page": "pages/publish/recruit/recruit"
+        },
+        {
+            "action": "disallow",
+            "page": "pages/publish/fast/fast"
+        },
+        {
+            "action": "disallow",
+            "page": "pages/publish/card/card"
+        },
+        {
+            "action": "disallow",
+            "page": "pages/publish/used/used"
+        },
+        {
+            "action": "disallow",
+            "page": "pages/fast-issue/code/code"
+        },
+        {
+            "action": "disallow",
+            "page": "pages/fast-issue/tips/tips"
+        },
+        {
+            "action": "allow",
+            "page": "*"
+        }
+    ]
 }

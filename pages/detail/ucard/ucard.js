@@ -40,6 +40,10 @@ Page({
             success:function(res){
                 let mydata = res.data;
                 _this.setData({ ucardInfo: mydata.result })
+                if (mydata.errcode != "fail") {
+                    let t = mydata.result.title;
+                    wx.setNavigationBarTitle({ title: t })
+                }
                 _this.doDetailAction(mydata,{
                     success:function(){},
                     share:function(){

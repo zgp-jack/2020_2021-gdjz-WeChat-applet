@@ -36,6 +36,8 @@ Page({
                     _this.setData({
                         usedInfo: mydata.data
                     })
+                    let t = mydata.data.title;
+                    wx.setNavigationBarTitle({ title: t })
                 } else {
                     wx.showModal({
                         title: '温馨提示',

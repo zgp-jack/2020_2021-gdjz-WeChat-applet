@@ -1,12 +1,6 @@
 App({
   onLaunch: function (e) {
-      console.log(e.path);
-      console.log("--------onLaunch----------");
       this.initUserInfo(e);
-  },
-  onShow(e){
-      console.log(e.path);
-      console.log("--------onShow----------");
   },
   globalData: {
     requestToken:"jizhao",
@@ -44,16 +38,13 @@ App({
   },
     initUserInfo: function (e) {
         let tpage = e.path;
-        console.log(tpage);
         //不需要校验的路由名单
         let pages = ["pages/index/index", "pages/fast-issue/index/index"];
         let rs = pages.join("|");
         let re = new RegExp("^(" + rs + ")(.*?)");
         let isIndex = (tpage.match(re) != null);
         let userInfo = wx.getStorageSync("userInfo");
-        console.log(tpage.match(re));
-        console.log(isIndex);
-        console.log(userInfo);
+        
         if (!userInfo) {
             if (!isIndex) {
                 wx.showModal({
