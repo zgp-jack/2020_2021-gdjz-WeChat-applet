@@ -94,13 +94,26 @@ Page({
     initFirstTips: function () {
         app.initFirstTips(this);
     },
-
+    initClipboardData:function(){
+        let _this = this;
+        try{
+            wx.getClipboardData({
+                success(res) {
+                    _this.setData({ content: res.data,textareaActive: true })
+                }
+            })
+        }
+        catch(err){
+            console.log(err);
+        }
+    },
     /**
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
         this.initFirstTips();
         this.initUserInfo();
+        this.initClipboardData();
     },
 
     /**

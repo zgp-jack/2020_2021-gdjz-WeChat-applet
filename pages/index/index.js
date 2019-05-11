@@ -73,6 +73,48 @@ Page({
         fastIssueImg: app.globalData.apiImgUrl + "index-fast-issue.png",
         showFastIssue: app.globalData.showFastIssue
     },
+    showDetailInfo: function (e) {
+        let _this = this;
+        let formId = e.detail.formId;
+        let id = e.currentTarget.dataset.id;
+        wx.navigateTo({ url: '/pages/detail/info/info?id=' + id })
+        let day = app.valiDateIsToday();
+        let tempInfo = wx.getStorageSync("tempInfo");
+        if (tempInfo) {
+            try {
+                let tday = tempInfo.day;
+                let times = parseInt(tempInfo.times);
+                if (tday == day) {
+                    if (times < 3) {
+                        times += 1;
+                        let tempData = { day: tday, times: times }
+                        wx.setStorageSync("tempInfo", tempData)
+                        _this.setTemplateInfo(formId);
+                    }
+                    return false;
+                }else{
+                    let tempDate = { day: day, times: 1 }
+                    wx.setStorageSync("tempInfo", tempDate)
+                    _this.setTemplateInfo(formId);
+                }
+            }
+            catch (err) { }
+        } else {
+            let tempDate = { day: day, times: 1 }
+            wx.setStorageSync("tempInfo", tempDate)
+            _this.setTemplateInfo(formId);
+        }
+    },
+    setTemplateInfo: function (formId) {
+        let data = app.arrDeepCopy(this.data.userInfo)
+        data.formId = formId
+        app.appRequestAction({
+            hideLoading: true,
+            params: data,
+            url: "/wechat/push-msg/",
+            way: "POST"
+        })
+    },
     touchStart: function (e) {
         this.touchStartTime = e.timeStamp
     },

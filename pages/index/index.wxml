@@ -64,8 +64,10 @@
     <view class='listsbox '>
         <block  wx:for="{{ lists }}" wx:key="{{ index }}" wx:if="{{ lists.length }}">
 
-        <navigator url='../detail/info/info?id={{ item.id }}' >
-            <view class='index-list-item' >
+        <!-- <navigator url='../detail/info/info?id={{ item.id }}' > -->
+        <view class='index-list-item' >
+            <form report-submit="true"  report-submit-timeout="1000"	bindsubmit="showDetailInfo" data-id="{{ item.id }}">
+                <button class='lists-template-btn' form-type='submit'></button>
                 <view class='index-item-header infolist-header-notime'>
                     <text class='index-item-title overwords'>{{ item.title }}</text>
                 </view>
@@ -86,8 +88,12 @@
                         </view>
                     </view>
                 </view>
+                </form>
             </view>
-        </navigator>
+        
+        <!-- </navigator> -->
+
+
         <ad  class="lists-ad" unit-id="adunit-80f40e8b4f60c3f6"  wx:if="{{index % 5 == 0 && index > 5}}"></ad>
         <navigator url='/pages/download/download-app' wx:if="{{ (index == 5) && ( index >= 5) }}" class='lists-ad lists-ad-image '>
             <image  src="{{ appLinkImg }}"></image>
