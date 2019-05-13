@@ -66,7 +66,7 @@
 
         <!-- <navigator url='../detail/info/info?id={{ item.id }}' > -->
         <view class='index-list-item' >
-            <form report-submit="true"  report-submit-timeout="1000"	bindsubmit="showDetailInfo" data-id="{{ item.id }}">
+            <form report-submit="true"  bindsubmit="showDetailInfo" data-id="{{ item.id }}" data-type="job">
                 <button class='lists-template-btn' form-type='submit'></button>
                 <view class='index-item-header infolist-header-notime'>
                     <text class='index-item-title overwords'>{{ item.title }}</text>

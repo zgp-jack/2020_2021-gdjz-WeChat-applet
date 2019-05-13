@@ -68,8 +68,11 @@
 
         <block  wx:for="{{ lists }}" wx:key="{{ index }}" wx:if="{{ lists.length }}">
 
-        <navigator url='../detail/ucard/ucard?id={{ item.id }}'>
-            <view class='index-list-item' >
+        <!-- <navigator url='../detail/ucard/ucard?id={{ item.id }}'> -->
+        
+        <view class='index-list-item' >
+            <form report-submit="true" bindsubmit="showDetailInfo" data-id="{{ item.id }}" data-type="resume">
+                <button class='lists-template-btn' form-type='submit'></button>
                 <view class='index-item-header'>
                     <text class='index-item-title overwords'>{{ item.title }}</text>
                     <text class='index-item-time'>{{ item.time }}</text>
@@ -91,8 +94,9 @@
                         </view>
                     </view>
                 </view>
-            </view>
-        </navigator>
+            </form>
+        </view>
+        <!-- </navigator> -->
         <ad  class="lists-ad" unit-id="adunit-80f40e8b4f60c3f6"  wx:if="{{index % 5 == 0 && index > 5}}"></ad>
         <navigator url='/pages/download/download-app' wx:if="{{ (index == 5) && ( index >= 5) }}" class='lists-ad lists-ad-image'>
             <image  src="{{ appLinkImg }}"></image>

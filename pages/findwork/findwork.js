@@ -71,6 +71,9 @@ Page({
         },
         userShareTime: {}
     },
+    showDetailInfo:function(e){
+        app.showDetailInfo(e);
+    },
     stopThisAction:function(){
         return false;
     },

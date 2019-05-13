@@ -527,5 +527,49 @@ App({
             fail: function () { }
         })
     },
-
+    showDetailInfo: function (e) {
+        let _this = this;
+        let formId = e.detail.formId;
+        let id = e.currentTarget.dataset.id;
+        let type = e.currentTarget.dataset.type;
+        let url = (type == "job") ? '/pages/detail/info/info?id=' : '/pages/detail/ucard/ucard?id='
+        wx.navigateTo({ url: url+ id })
+        if (formId == "requestFormId:fail timeout") return false;
+        let day = this.valiDateIsToday();
+        let tempInfo = wx.getStorageSync("tempInfo");
+        if (tempInfo) {
+            try {
+                let tday = tempInfo.day;
+                let times = parseInt(tempInfo.times);
+                if (tday == day) {
+                    if (times < 1) {
+                        times += 1;
+                        let tempData = { day: tday, times: times }
+                        wx.setStorageSync("tempInfo", tempData)
+                        _this.setTemplateInfo(formId);
+                    }
+                    return false;
+                } else {
+                    let tempDate = { day: day, times: 1 }
+                    wx.setStorageSync("tempInfo", tempDate)
+                    _this.setTemplateInfo(formId);
+                }
+            }
+            catch (err) { }
+        } else {
+            let tempDate = { day: day, times: 1 }
+            wx.setStorageSync("tempInfo", tempDate)
+            _this.setTemplateInfo(formId);
+        }
+    },
+    setTemplateInfo: function (formId) {
+        let data = wx.getStorageSync("userInfo")
+        data.formId = formId
+        this.appRequestAction({
+            hideLoading: true,
+            params: data,
+            url: "wechat/save-form/",
+            way: "POST"
+        })
+    },
 })
