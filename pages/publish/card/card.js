@@ -125,6 +125,7 @@ Page({
     initUserCardinfo: function (options){
         let _this = this;
         let userInfo = wx.getStorageSync("userInfo");
+        userInfo = userInfo ? userInfo : {};
         let infoId = (options.hasOwnProperty("id")) ? options.id : "";
         if(infoId){
             wx.setNavigationBarTitle({
@@ -148,8 +149,8 @@ Page({
                     _this.setData({
                         infoId: infoId,
                         userPhone: mydata.model.user_mobile || mydata.memberInfo.tel,
-                        "cardInfo.username": mydata.model.user_name,
-                        "cardInfo.title": mydata.model.title,
+                        "cardInfo.username": mydata.model.user_name || "",
+                        "cardInfo.title": mydata.model.title || "",
                         "cardInfo.workType": mydata.classifyTree,
                         "cardInfo.workTypeIds": mydata.selectedClassifies,
                         "cardInfo.workTypenum": parseInt(mydata.typeTextArr.maxClassifyCount),
@@ -160,7 +161,7 @@ Page({
                         "cardInfo.teamId": mydata.model.team_composition ? parseInt(mydata.model.team_composition) : 1,
                         "cardInfo.memberTel": mydata.memberInfo.tel,
                         "cardInfo.cardTel": mydata.model.user_mobile,
-                        "cardInfo.content": mydata.model.detail,
+                        "cardInfo.content": mydata.model.detail || "",
                         "cardInfo.imgs": mydata.view_image,
                         "cardInfo.imgnum": parseInt(mydata.typeTextArr.maxImageCount),
                         showUploads: (mydata.view_image.length > 0) ? true : false,

@@ -8,6 +8,7 @@ Page({
      * 页面的初始数据
      */
     data: {
+        unitid: app.globalData.unitid,
         touchStartTime: 0,
         touchEndTime: 0,
         lastTapTime: 0,

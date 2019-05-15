@@ -177,8 +177,10 @@ let vali = {
 
         // 字符串去空
         vali.regStrNone = function(_str){
-            let str = _str.replace(/^\s+|\s+$/g, '');
-            return (str == "") ? false : true
+          var _re = Object.prototype.toString.call(_str).slice(8, -1).toLowerCase();
+          if(_re != 'string') return false
+          let str = _str.replace(/^\s+|\s+$/g, '');
+          return (str == "") ? false : true
         }
 
         //数组去重

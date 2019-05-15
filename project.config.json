@@ -12,7 +12,7 @@
 		"autoAudits": false
 	},
 	"compileType": "miniprogram",
-	"libVersion": "2.3.0",
+	"libVersion": "1.6.3",
 	"appid": "wx456feacb0e86162f",
 	"projectname": "gdjz",
 	"debugOptions": {

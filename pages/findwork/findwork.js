@@ -10,6 +10,7 @@ Page({
      * 页面的初始数据
      */
     data: {
+        unitid: app.globalData.unitid,
         footerActive: "findwork",
         touchStartTime: 0,
         touchEndTime: 0,

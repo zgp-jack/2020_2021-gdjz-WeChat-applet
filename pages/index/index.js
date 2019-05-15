@@ -9,6 +9,7 @@ Page({
      * 页面的初始数据
      */
     data: {
+        unitid: app.globalData.unitid,
         footerActive: "recruit",
         userInfo:true,
         touchStartTime:0,
@@ -72,7 +73,7 @@ Page({
         firstJoin: false,
         fastIssueImg: app.globalData.apiImgUrl + "index-fast-issue.png",
         showFastIssue: app.globalData.showFastIssue
-    },               
+    },             
     showDetailInfo:function(e){
         app.showDetailInfo(e);
     },
@@ -235,7 +236,11 @@ Page({
             nothavemore:false,
             showNothinkData:false
         })
-        wx.showLoading({ title: '数据加载中' })
+        try{
+          wx.showLoading({ title: '数据加载中' })
+        }catch(err){
+          console.log(err);
+        }
         app.doRequestAction({
             url:"index/info-list/",
             params: _this.data.searchDate,
@@ -519,9 +524,11 @@ Page({
         })
     },
     doPublishAction: function () {
+        console.log("发布被点击了");
         footerjs.doPublishAction(this);
     },
     closePublishAction: function () {
+        console.log("关闭被点击了");
         footerjs.closePublishAction(this);
     },
     valiUserCard:function(){
