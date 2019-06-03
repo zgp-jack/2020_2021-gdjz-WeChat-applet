@@ -14,8 +14,9 @@ Page({
         isphone:false,
         userInfo:{},
         hasUser:false,
-        shareImg: app.globalData.apiImgUrl + "fast-share-img.png"
+        shareImg: app.globalData.apiImgUrl + "fast-share-img.png?t=" + new Date().getTime()
     },
+
     goThisPage:function(e){
         let url = e.currentTarget.dataset.url;
         wx.navigateTo({ url: url })
@@ -27,13 +28,19 @@ Page({
         let val = e.detail.value;
         this.setData({ content: val });
         let content = val.replace(/\s+/g, "");
-        let _partten = /1[3,4,5,6,7,8,9]\d{9}/g;
+        let _partten = /1[3-9]\d{9}/g;
         let phone = content.match(_partten);
         if(this.checkType(phone,'array')){
             let tel = phone[0];
             this.setData({ showTel: true, phone: tel, isphone:true });
         }
     },
+    userEnterEnd:function(e){
+      this.userEnterContent(e)
+    },
+  loseBlur:function(e){
+    this.userEnterContent(e)
+  },
     checkType: function(obj, _type){
         var _re = Object.prototype.toString.call(obj).slice(8, -1).toLowerCase();
         if(_type == undefined) return _re;
@@ -87,6 +94,7 @@ Page({
             }
         })
     },
+
     initUserInfo:function(){
         let userInfo = wx.getStorageSync("userInfo");
         if (userInfo) this.setData({ userInfo: userInfo, hasUser:true });

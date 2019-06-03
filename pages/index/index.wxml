@@ -61,6 +61,8 @@
         </view>
     </view>
 
+    
+
     <view class='listsbox '>
         <block  wx:for="{{ lists }}" wx:key="{{ index }}" wx:if="{{ lists.length }}">
 
