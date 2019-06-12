@@ -584,9 +584,15 @@ Page({
         this.setData({
             fillterArea: areas.getAreaArr
         })
-        app.globalData.allTypes ? this.setData({ fillterType: app.globalData.allTypes.classTree }) : app.getListsAllType(function (_data) {
-            _this.setData({ fillterType: _data.classTree })
+      if (app.globalData.allTypes) {
+        _this.setData({ fillterType: app.globalData.allTypes.classTree });
+        if (_this.data.fillterType.length == 1) _this.setData({ typeText: _this.data.fillterType[0].name })
+      } else {
+        app.getListsAllType(function (_data) {
+          _this.setData({ fillterType: _data.classTree })
+          if (_this.data.fillterType.length == 1) _this.setData({ typeText: _this.data.fillterType[0].name })
         });
+      }   
     },
     
     initUserShareTimes:function(){

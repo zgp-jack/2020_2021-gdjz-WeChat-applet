@@ -51,7 +51,7 @@
                 <text>焊工招聘</text>
             </view>
         </navigator>
-        <navigator class='index-footer-nav' target="miniProgram" open-type="navigate" app-id="wx33194c327f50b99d" path="" extra-data="" version="release" >
+        <navigator class='index-footer-nav' target="miniProgram" open-type="navigate" app-id="wxebf234cb9fa3bee9" path="" extra-data="" version="release" >
             <view class='index-industry-item'>
                 <image src='{{ industry.gczg }}'></image>
                 <text>工厂招工</text>
@@ -63,12 +63,12 @@
                 <text>国外招工</text>
             </view>
         </navigator>
-        <!-- <navigator class='index-footer-nav' target="miniProgram" open-type="navigate" app-id="wx0ae31bf0edad4390" path="" extra-data="" version="release" > -->
-            <view class='index-industry-item' bindtap='toastDevelop'>
+        <navigator class='index-footer-nav' target="miniProgram" open-type="navigate" app-id="wx0ae31bf0edad4390" path="" extra-data="" version="release" >
+            <view class='index-industry-item'>
                 <image src='{{ industry.jxzl }}'></image>
                 <text>机械租赁</text>
             </view>
-        <!-- </navigator> -->
+        </navigator>
         <navigator class='index-footer-nav' target="miniProgram" open-type="navigate" app-id="wxbac40ffffdee0573" path="" extra-data="" version="release" >
             <view class='index-industry-item'>
                 <image src='{{ industry.zbcg }}'></image>
