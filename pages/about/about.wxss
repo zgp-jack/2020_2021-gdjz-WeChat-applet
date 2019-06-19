@@ -119,3 +119,8 @@
     font-size: 28rpx;
     line-height: 50rpx;
 }
+
+
+.yupao-about-groupb .about-group-img:nth-last-child(1)::before,.yupao-about-groupb .about-group-img:nth-last-child(1)::after{
+  content: none;
+}

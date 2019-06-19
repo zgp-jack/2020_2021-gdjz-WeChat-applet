@@ -127,7 +127,7 @@
     border-bottom: 0;
 }
 
-.ucenter-menu-item:nth-child(1)::after,.ucenter-menu-item:nth-child(4)::after{
+.ucenter-menu-item:nth-child(1)::after,.ucenter-menu-item:nth-child(4)::after,.ucenter-menu-item:nth-child(7)::after{
 	position: absolute;
 	content: '';
 	width: 50rpx;
@@ -139,7 +139,7 @@
 	z-index: 10;
 	border-color: #f7f6f9;
 }
-.ucenter-menu-item:nth-child(3)::after,.ucenter-menu-item:nth-child(6)::after{
+.ucenter-menu-item:nth-child(3)::after,.ucenter-menu-item:nth-child(6)::after,.ucenter-menu-item:nth-child(9)::after{
 	position: absolute;
 	content: '';
 	width: 50rpx;

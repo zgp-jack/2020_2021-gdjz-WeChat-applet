@@ -13,32 +13,50 @@
                     <view  class='about-industry-item-body'>解决老板招工难，工人找活途径单一。</view>
                 </view>
                 <view class='about-industry-item'>
+                    <view  class='about-industry-item-title'>鱼泡工具商城：</view>
+                    <view  class='about-industry-item-body'>帮工人买到好用且价格实在的施工工具、施工耗材。</view>
+                </view>
+                
+                <view class='about-industry-item'>
+                    <view  class='about-industry-item-title'>鱼泡机械：</view>
+                    <view  class='about-industry-item-body'>解决工地找机械难，多余机械出租难的问题。</view>
+                </view>
+            </view>
+            <view class='about-industry-content'>
+                <view class='about-industry-item'>
                     <view  class='about-industry-item-title'>鱼泡招标：</view>
                     <view  class='about-industry-item-body'>免费提供全国工程招标采购信息。</view>
+                </view>
+                <view class='about-industry-item'>
+                    <view  class='about-industry-item-title'>鱼泡建筑通：</view>
+                    <view  class='about-industry-item-body'>免费提供全国建筑企业资质、中标、在建项目等信息。</view>
                 </view>
                 <view class='about-industry-item'>
                     <view  class='about-industry-item-title'>鱼泡出国劳务平台：</view>
                     <view  class='about-industry-item-body'>帮想出国的工人找到靠谱的代办中介。</view>
                 </view>
             </view>
-            <view class='about-industry-content'>
-                <view class='about-industry-item'>
-                    <view  class='about-industry-item-title'>鱼泡工具商城：</view>
-                    <view  class='about-industry-item-body'>帮工人买到好用且价格实在的施工工具、施工耗材。</view>
-                </view>
-                <view class='about-industry-item'>
-                    <view  class='about-industry-item-title'>鱼泡建筑通：</view>
-                    <view  class='about-industry-item-body'>免费提供全国建筑企业资质、中标、在建项目等信息。</view>
-                </view>
-            </view>
         </view>
-        <view class='yupao-about-group'>
+        <view class='yupao-about-group yupao-about-groupb'>
             <view class='about-header-title'>团队风采</view>
             <view class='about-group-img'>
                 <image src='http://cdn.yupao.com/miniprogram/images/group.png' mode="widthFix"></image>
             </view>
             <view class='about-group-img'>
+                <image src='http://cdn.yupao.com/miniprogram/images/yupao-group-contnet.png' mode="widthFix"></image>
+            </view>
+            <view class='about-group-img'>
+                <image src='http://cdn.yupao.com/miniprogram/images/ypao-group-telg.png' mode="widthFix"></image>
+            </view>
+            <view class='about-group-img'>
                 <image src='http://cdn.yupao.com/miniprogram/images/kefu.png' mode="widthFix"></image>
+            </view>
+        </view>
+
+        <view class='yupao-about-group'>
+            <view class='about-header-title'>资质证书</view>
+            <view class='about-group-img'>
+                <image src='http://cdn.yupao.com/miniprogram/images/yupao-about-zizhizs.png' mode="widthFix"></image>
             </view>
         </view>
         <view class='yupao-about-footer common-shaded-box'>

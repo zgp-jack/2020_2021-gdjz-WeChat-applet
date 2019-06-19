@@ -19,6 +19,7 @@ Page({
             invite: app.globalData.apiImgUrl + "ucnter-yaoqing.png",
             fastissue: app.globalData.apiImgUrl + "ucenter-fast.png",
             fastlist: app.globalData.apiImgUrl + "ucenter-fastlist.png",
+            realname: app.globalData.apiImgUrl + "ucenter-userrealname.png",
         },
         userInfo:{},
         member:{},

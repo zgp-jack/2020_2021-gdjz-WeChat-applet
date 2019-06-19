@@ -97,8 +97,11 @@
 
 
         <ad  class="lists-ad" unit-id="{{ unitid }}"  wx:if="{{index % 5 == 0 && index > 5}}"></ad>
-        <navigator url='/pages/download/download-app' wx:if="{{ (index == 5) && ( index >= 5) }}" class='lists-ad lists-ad-image '>
+        <navigator url='/pages/download/download-app' wx:if="{{ (index == 5) && (fillterType[worktype].id != '55')}}" class='lists-ad lists-ad-image'>
             <image  src="{{ appLinkImg }}"></image>
+        </navigator>
+        <navigator class='lists-ad lists-ad-image' target="miniProgram"  wx:if="{{ (index == 5) && (fillterType[worktype].id == '55')}}" open-type="navigate" app-id="wx0ae31bf0edad4390" path="" extra-data="" version="release" >
+            <image  src="{{ jixieLinkImg }}"></image>
         </navigator>
 
         </block>

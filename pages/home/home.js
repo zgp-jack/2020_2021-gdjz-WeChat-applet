@@ -45,22 +45,27 @@ Page({
         zbcg: app.globalData.apiImgUrl + "zbcg.png",
         zjxm: app.globalData.apiImgUrl + "zjxm.png", 
         esjy: app.globalData.apiImgUrl + "es.png",
-        gjsc: app.globalData.apiImgUrl + "ypsc.png"
+        gjsc: app.globalData.apiImgUrl + "ypsc.png",
+        driver: app.globalData.apiImgUrl + "driver.png",
+        jixiezr: app.globalData.apiImgUrl + "jixiezr.png",
     }, 
-    fun: [ 
-        { img: app.globalData.apiImgUrl + "yqhy.png", title: "邀请好友" ,url:"../static/invite"},
-        { img: app.globalData.apiImgUrl + "smrz.png", title: "实名认证", url: "../realname/realname" },
-        { img: app.globalData.apiImgUrl + "smcx.png", title: "实名查询", url: "../query/query"},
-        { img: app.globalData.apiImgUrl + "syjc.png", title: "使用教程", url: "../course/course"},
-        { img: app.globalData.apiImgUrl + "jbpz.png", title: "举报骗子", url: "../report/report" },
-        { img: app.globalData.apiImgUrl + "gywm.png", title: "关于我们", url: "../about/about"}
-      ],
+    fun: {
+      yqhy: app.globalData.apiImgUrl + "yqhy.png",
+      smrz: app.globalData.apiImgUrl + "smcx.png",
+      zjxm: app.globalData.apiImgUrl + "index-newzjxm.png",
+
+    },
     infolists:[],
     showArea : false,
     isScroll:true,
     areadata:[],
+    jixieLinkImg: app.globalData.commonJixieAd,
     fixedAdImg:app.globalData.fixedPublishImg,
+    phone: app.globalData.serverPhone,
     
+  },
+  callThisPhone: function (e) {
+    app.callThisPhone(e);
   },
     toastDevelop:function(){
         app.showMyTips("该功能正在完善阶段");

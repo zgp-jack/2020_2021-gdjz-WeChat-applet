@@ -60,6 +60,7 @@ Page({
         showNothinkData:false,
         nothavemore:false,
         showMyLoading:false,
+        jixieLinkImg: app.globalData.commonJixieAd,
         appLinkImg: app.globalData.commonDownloadApp,
         fixedAdImg:app.globalData.fixedDownApp,
         fixedGetIntegral: app.globalData.fixedGetIntegral,

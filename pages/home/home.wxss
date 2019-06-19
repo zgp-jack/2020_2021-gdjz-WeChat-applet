@@ -110,7 +110,6 @@
     width: 33.3333%;
     height: 110rpx;
     border-right: 1px solid #dcdcdc;
-    border-bottom: 1px solid #dcdcdc;
 }
 .index-yupao-function navigator:nth-child(3n) .index-fun-item{
     border-right: 0;
@@ -396,3 +395,10 @@
 .userauthbox button::after,.userauthbox button::before{
     border: 0;
 }
+
+
+.home-footer-about{position: relative;padding: 30rpx 0 0;text-align: center;}
+.home-footer-about navigator,.home-footer-about text{position: relative; display: inline-block;font-size: 28rpx;margin: 0 15rpx;}
+.home-footer-about navigator::after{position: absolute;content: ''; right: -15rpx;height: 20rpx;width: 1rpx;background:#828586;top:12rpx;}
+.home-footer-copyright{position: relative;font-size: 28rpx;text-align: center;margin-top: 15rpx;}
+

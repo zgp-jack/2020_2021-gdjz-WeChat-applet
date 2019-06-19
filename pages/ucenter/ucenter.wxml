@@ -89,7 +89,12 @@
                     <text>快速发布列表</text>
                 </navigator>
             </view>
-
+            <view class='ucenter-menu-item'>
+                <navigator url='../realname/realname' open-type="navigate" >
+                    <image src='{{ ucenterimgs.realname }}'></image>
+                    <text>实名认证</text>
+                </navigator>
+            </view>
             <view class='ucenter-menu-item'>
                 <navigator url='../feedback/feedback' open-type="navigate" >
                     <image src='{{ ucenterimgs.feedback }}'></image>
@@ -104,7 +109,9 @@
             </view>
 
             
-            <view class='ucenter-menu-item'  wx:if="{{ showFastIssue.show > 0 }}"></view>
+            <view class='ucenter-menu-item'  wx:if="{{ !showFastIssue.show }}"></view>
+
+            <view class='ucenter-menu-item'  wx:if="{{ !showFastIssue.show }}"></view>
 
         </view>
     </view>

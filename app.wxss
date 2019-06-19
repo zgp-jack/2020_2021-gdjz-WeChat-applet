@@ -537,7 +537,7 @@ page{
     width: 180rpx;
     height: 180rpx;
     right: 0;
-    bottom: 150rpx;
+    bottom: 230rpx;
     z-index: 2;
 }
 .fixed-get-integral{
