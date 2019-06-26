@@ -1,5 +1,6 @@
 <template name="footer">
 
+
 <view class="common-yupao-footer">
     <view class='yupao-footer-item' bindtap='jumpThisLink' data-url="/pages/home/home" data-type="1">
         <image src='{{ footerActive == "home" ? footerImgs.homeActive : footerImgs.homeNormal }}'></image>
@@ -9,10 +10,19 @@
         <image src='{{ footerActive == "recruit" ? footerImgs.zgActive : footerImgs.zgNormal }}'></image>
         <text class='{{ footerActive == "recruit" ? "footer-text-active" : "" }}'>招工信息</text>
     </view>
-    <view class='yupao-footer-item yupao-footer-publish' bindtap='doPublishAction'>
-        <image src='{{ footerImgs.publish }}' class='footer-publish-btn'></image>
+
+    <view class='yupao-footer-item yupao-footer-item-newpub' bindtap='doPublishAction' >
+        <image src='{{ footerImgs.pubicon }}'></image>
         <text>发布</text>
     </view>
+
+
+    <!-- <view class='yupao-footer-item yupao-footer-publish' bindtap='doPublishAction'>
+        <image src='{{ footerImgs.publish }}' class='footer-publish-btn'></image>
+        <text>发布</text>
+    </view> -->
+
+
     <view class='yupao-footer-item' bindtap='jumpThisLink' data-url="/pages/findwork/findwork" data-type='1'>
         <image src='{{ footerActive == "findwork" ? footerImgs.zhActive : footerImgs.zhNormal }}'></image>
         <text class='{{ footerActive == "findwork" ? "footer-text-active" : "" }}'>工人找活</text>
@@ -22,6 +32,8 @@
         <text class='{{ footerActive == "member" ? "footer-text-active" : "" }}'>会员</text>
     </view>
 </view>
+
+
 
 <view class='common-publish-box {{ publishActive ? "common-publish-box-active":"" }}' bindtap='closePublishAction' wx:if="{{ showPublishBox }}">
     <view class='common-publish-container flex-row {{ publishActive ? "common-publish-container-active":"" }}'>
@@ -38,9 +50,9 @@
             <text>发布二手交易</text>
         </view>
     </view>
-    <view class='common-publish-img {{ publishActive ? "publish-rotate-active":"" }}'>
+    <!-- <view class='common-publish-img {{ publishActive ? "publish-rotate-active":"" }}'>
         <image src='http://cdn.yupao.com/miniprogram/images/publish.png'></image>
-    </view>
+    </view> -->
 </view>
 
 </template>

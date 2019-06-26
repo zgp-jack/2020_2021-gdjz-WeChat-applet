@@ -107,7 +107,12 @@ Page({
         try{
             wx.getClipboardData({
                 success(res) {
-                    _this.setData({ content: res.data,textareaActive: true })
+                  let d = res.data;
+                  let p = /1[3-9]\d{9}/g;
+                  let phone = d.match(p);
+                  if (_this.checkType(phone, 'array')) {
+                    _this.setData({ content: res.data, textareaActive: true })
+                  }
                 }
             })
         }

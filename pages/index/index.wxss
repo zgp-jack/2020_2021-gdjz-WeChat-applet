@@ -281,3 +281,5 @@ page{
 .lists-template-btn::after,.lists-template-btn::before{border: 0;}
 
 
+/* 一键发布 */
+.bottompublishbtn{position: fixed;width: 300rpx;line-height: 80rpx;background: #0099ff;color: white;text-align: center;border-radius: 20px;bottom: 115rpx;left: 50%;margin-left: -150rpx;font-size: 28rpx;letter-spacing: 5rpx;box-shadow: #0099ff 0 0 10rpx;z-index: 10;}

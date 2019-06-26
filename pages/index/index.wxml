@@ -131,6 +131,7 @@
     <image src='{{ fastIssueImg }}'></image>
 </view>
 
+<view class='bottompublishbtn'  bindtap='jumpThisLink' data-url="/pages/publish/recruit/recruit"   data-type='0'>发布招工</view>
 
 
 <!-- <view class='fixed-get-integral'  bindtap='jumpThisLink'  data-url="/pages/turntable/turntable"  data-type='0'>

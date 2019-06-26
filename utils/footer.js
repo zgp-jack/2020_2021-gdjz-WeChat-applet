@@ -9,6 +9,7 @@ const footerImgs = {
     zhActive: "/images/footer-zh-active.png",
     memberNormal: "/images/footer-member.png",
     memberActive: "/images/footer-member-active.png",
+  pubicon: "/images/yupao-footer-publish-btnimg.png"
 }
 
 function doPublishAction (_this) {

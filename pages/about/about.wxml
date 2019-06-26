@@ -52,7 +52,6 @@
                 <image src='http://cdn.yupao.com/miniprogram/images/kefu.png' mode="widthFix"></image>
             </view>
         </view>
-
         <view class='yupao-about-group'>
             <view class='about-header-title'>资质证书</view>
             <view class='about-group-img'>

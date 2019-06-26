@@ -137,6 +137,9 @@ page{
     background: white;
 }
 
+
+
+
 /* 发布页面 */
 .common-publish-box{
     position: fixed;
@@ -652,3 +655,7 @@ page{
     50%{transform: scale(0.9);}
     100%{transform: scale(1);}
 }
+
+
+.yupao-footer-item-newpub image{width: 46rpx;height: 46rpx;top: 7rpx;margin-left: -23rpx;}
+

@@ -10,13 +10,23 @@ Page({
         rechargeData:[],
         activeIndex:1,
         integral:0,
+      price: ""
     },
     chooseThisMoney:function(e){
         let _index = e.currentTarget.dataset.index;
         this.setData({
             activeIndex: parseInt(_index)
         })
+      this.initJfPrice()
     },
+  initJfPrice: function () {
+    let p = this.data.rechargeData[this.data.activeIndex].price
+    let n = this.data.rechargeData[this.data.activeIndex].integral
+    let op = Math.floor((p / n) * 100) / 100;
+    this.setData({
+      price: op
+    })
+  },
     initUserInfo:function(){
         let _this = this;
         let userInfo = wx.getStorageSync("userInfo");
@@ -38,6 +48,7 @@ Page({
                         rechargeData:mydata.list,
                         integral:mydata.user.integral
                     })
+                  _this.initJfPrice();
                 }else{
                     app.returnPrevPage(mydata.errmsg);
                 }
