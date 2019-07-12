@@ -149,6 +149,28 @@ page{
     transition: 0.5s;
     overflow-y: scroll;
 }
+.filtrate-item-three2-lists{
+    position: fixed;
+    right: -66.66%;
+    width: 66.66%;
+    height: 60%;
+    top: 180rpx;
+    background: #f7f7f7;
+    z-index: 1;
+    transition: 0.5s;
+    overflow-y: scroll;
+}
+.filtrate-item-three3-lists{
+    position: fixed;
+    right: -33.33%;
+    width: 33.33%;
+    height: 60%;
+    top: 180rpx;
+    background: #fff;
+    z-index: 1;
+    transition: 0.5s;
+    overflow-y: scroll;
+}
 .filtrate-item-lists-active{
     right: 0;
 }
@@ -282,4 +304,4 @@ page{
 
 
 /* 一键发布 */
-.bottompublishbtn{position: fixed;width: 300rpx;line-height: 80rpx;background: #0099ff;color: white;text-align: center;border-radius: 20px;bottom: 115rpx;left: 50%;margin-left: -150rpx;font-size: 28rpx;letter-spacing: 5rpx;box-shadow: #0099ff 0 0 10rpx;z-index: 10;}
+.bottompublishbtn{position: fixed;width: 300rpx;line-height: 80rpx;background: #0099ff;color: white;text-align: center;border-radius: 20px;bottom: 115rpx;left: 50%;margin-left: -150rpx;font-size: 28rpx;letter-spacing: 5rpx;box-shadow: #0099ff 0 0 10rpx;z-index: 3;}

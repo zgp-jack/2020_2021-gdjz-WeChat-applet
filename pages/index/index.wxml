@@ -21,15 +21,21 @@
 </view>
 
 <!-- 筛选条件列表 -->
+
 <view class='user-choose-shade {{ (showListsInfo != "0") ? "user-choose-shade-active":"" }}' bindtap='closeAllSelect'>
+
     <view class='user-choose-item {{ (showListsInfo == "1") ? "user-choose-item-active" : "" }}'  wx:if="{{ showListsInfo == '1' }}">
         <view class='filtrate-list-item mybottomborder overwords {{ (province == index) ? "filtrate-list-active" : "" }}'  wx:for="{{ fillterArea }}" wx:key="{{ index }}" catchtap='userChooseProvince' data-index="{{ index }}" bindtouchstart="touchStart" bindtouchend="touchEnd" data-id='{{ item.id }}' data-haschild="{{ item.has_children }}"  data-area="{{ item.name }}">
             <text>{{ item.name }}</text>
             <view class='filtrate-item-lists {{ (province == index) ? "filtrate-item-lists-active" : "" }}' wx:if="{{ item.has_children }}">
                 <view class='filtrate-item-info mybottomborder overwords {{ (userCity == item.id) ? "filtrate-item-info-active" : "" }}' wx:for="{{ item.children }}" wx:key="{{ index }}" catchtap='userChooseCity' data-id="{{ item.id }}"   data-area="{{ item.name }}">{{ item.name }}</view>
+
             </view>
+
         </view>
     </view>
+
+
     <view class='user-choose-item {{ (showListsInfo == "2") ? "user-choose-item-active" : "" }}' wx:if="{{ showListsInfo == '2' }}">
         <view class='filtrate-list-item mybottomborder overwords {{ (worktype == index) ? "filtrate-list-active" : "" }}' wx:for="{{ fillterType }}" wx:key="{{ index }}" catchtap='userChooseWorktype' data-index="{{ index }}"  bindtouchstart="touchStart" bindtouchend="touchEnd"   data-id='{{ item.id }}' data-haschild="{{ item.has_children }}" data-type="{{ item.name }}">
             <text>{{ item.name }}</text>
@@ -38,6 +44,7 @@
             </view>
         </view>
     </view>
+
 </view>
 
 <view class='yupao-lists-container yupao-common-container'>
