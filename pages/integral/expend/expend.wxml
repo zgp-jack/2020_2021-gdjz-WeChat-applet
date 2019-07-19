@@ -35,7 +35,7 @@
             </view>
             <view class='yupao-common-lists-item clearfix'>
                 <view class='yupao-common-list-left'>电话</view>
-                <view class='yupao-common-list-right'>{{ info.user_mobile }} <block wx:if="{{ info.is_end == '2' }}">({{ info.end_word }})</block><block wx:else="{{ info.is_end == '2' }}">({{ info.user_name }})<text class='list-call-phone'   bindtap='callThisPhone'  data-phone="{{ info.user_mobile }}">拨打</text></block></view>
+                <view class='yupao-common-list-right'>{{ info.user_mobile }} <block wx:if="{{ info.is_end == '2' }}">({{ info.end_word }})</block><block wx:else="{{ info.is_end == '2' }}">({{ info.user_name }})<text class='list-call-phone'   bindtap='callThisPhone'  data-phone="{{ info.user_mobile }}">拨打</text></block><block wx:if="{{ info.show_complain }}"><text class='list-call-phone list-complain-phone' data-id="{{ info.id }}"  data-type="{{ info.type }}" bindtap='complainInfo'>投诉</text></block></view>
             </view>
             <view class='yupao-common-lists-item clearfix' wx:if="{{ info.type =='resume' }}">
                 <view class='yupao-common-list-left'>规模</view>
@@ -49,6 +49,21 @@
                 <view class='yupao-common-list-left'><text wx:for="{{ info.classifyName }}"  wx:key="index">[{{ item }}]</text></view>
             </view>
             <view class='yupao-common-lists-text'>{{ info.detail }}</view>
+        </view>
+    </view>
+</view>
+
+
+<view class='yupao-common-enterbox flex-row' wx:if="{{ showComplain }}">
+    <view class='yupao-common-enter'>
+        <text class='yupao-enter-title'>投诉信息</text>
+        <text class='yupao-enter-tips'>请输入投诉内容</text>
+        <view class='yupao-enter-body'>
+            <textarea class='yupao-enter-wrap yupao-enter-textarea'  placeholder='请输入投诉内容' bindinput='userEnterComplain' maxlength='200' value='{{ complainInfo }}'></textarea>
+        </view>
+        <view class='yupao-enter-footer clearfix'>
+            <text bindtap='userCancleComplain'>取消</text>
+            <text bindtap='userComplaintAction'>确定</text>
         </view>
     </view>
 </view>

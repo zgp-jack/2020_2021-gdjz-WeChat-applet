@@ -73,7 +73,14 @@ Page({
         userShareTime:{},
         firstJoin: false,
         fastIssueImg: app.globalData.apiImgUrl + "index-fast-issue.png",
-        showFastIssue: app.globalData.showFastIssue
+        showFastIssue: app.globalData.showFastIssue,
+      joblistjz: app.globalData.apiImgUrl + "joblist_jz.png",
+        joblistwyjz:app.globalData.apiImgUrl+"joblist_wyjz.png"
+    },
+    wantFastIssue:function(){
+      wx.navigateTo({
+        url: '/pages/published/published?type=0&jz=1',
+      })
     },             
     showDetailInfo:function(e){
         app.showDetailInfo(e);

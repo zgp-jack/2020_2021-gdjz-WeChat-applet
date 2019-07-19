@@ -17,8 +17,58 @@ Page({
         pageSize:15,
         page :1,
         showRecord: false,
-        info: {}
+        info: {},
+        showComplain:false,
+        complainInfo:"",
+        infoId:"",
+        type:""
     },
+  userCancleComplain:function(){
+    this.setData({ showComplain: false })
+  },
+  complainInfo:function(e){
+    let infoId = e.currentTarget.dataset.id;
+    let type = e.currentTarget.dataset.type;
+    this.setData({ showComplain: true,infoId:infoId,type:type })
+  },
+  userEnterComplain:function(e){
+    this.setData({ complainInfo: e.detail.value })
+  },
+  bindconfirm:function(e){
+    this.setData({ complainInfo: e.detail.value })
+  },
+  userComplaintAction:function(e){
+    let _this = this;
+    let userInfo = this.data.userInfo;
+    let infoId = this.data.infoId;
+    let type = this.data.type;
+    let info = this.data.complainInfo; 
+    info = info.replace(/^\s+|\s+$/g, '');
+    if (!info) {
+      app.showMyTips("请输入您的投诉内容");
+      return false;
+    }
+    app.appRequestAction({
+      url: "publish/complain/",
+      way: "POST",
+      params: {
+        userId: userInfo.userId,
+        token: userInfo.token,
+        tokenTime: userInfo.tokenTime,
+        infoId: infoId,
+        type: type,
+        content: info
+      },
+      title: "正在提交投诉",
+      failTitle: "网络错误，投诉失败！",
+      success: function (res) {
+        let mydata = res.data;
+        app.showMyTips(mydata.errmsg);
+        console.log();
+        if (mydata.errcode == "ok") _this.setData({ showComplain: false })
+      }
+    })
+  },
     getIntegralHeader: function () {
         let _this = this;
         let userInfo = wx.getStorageSync("userInfo");

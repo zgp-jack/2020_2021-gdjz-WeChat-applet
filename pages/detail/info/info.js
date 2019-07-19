@@ -31,7 +31,37 @@ Page({
             showWin: false,
             integral: "1"
         },
-        userShareTime: {}
+        userShareTime: {},
+        collectFalse: app.globalData.apiImgUrl + "collect-false.png",
+        collectTrue: app.globalData.apiImgUrl + "collect-true.png",
+        collectMark:false
+    },
+    userCollectAction:function(){
+      let _this = this;
+      let userInfo = wx.getStorageSync("userInfo");
+      let id = this.data.infoId;
+      let data = {
+        userId:userInfo.userId,
+        token:userInfo.token,
+        tokenTime:userInfo.tokenTime,
+        id:id
+      };
+
+      app.appRequestAction({
+        url: "job/collect/",
+        way: "POST",
+        params: data,
+        title: "操作中",
+        failTitle: "网络错误，操作失败！",
+        success: function (res) {
+          let mydata = res.data;
+          app.showMyTips(mydata.errmsg);
+          if (mydata.errcode == "ok"){
+            _this.setData({ collectMark: (mydata.action == "add") ? true : false })
+          }
+        }
+      })
+
     },
     previewImage: function (e) {
         let src = e.currentTarget.dataset.src;
@@ -116,7 +146,7 @@ Page({
             params: userInfo,
             success: function (res) { 
                 let mydata = res.data;
-                _this.setData({ info: mydata.result })
+              _this.setData({ info: mydata.result, collectMark: mydata.result.is_collect ? true : false })
                 if (mydata.errcode != "fail") {
                     let t = mydata.result.title;
                     wx.setNavigationBarTitle({ title: t })
@@ -278,7 +308,7 @@ Page({
         this.setData({ showComplain: false })
     },
     userComplaintAction: function () {
-        let _this = this;
+        let _this = this; 
         let userInfo = this.data.userInfo;
         let infoId = this.data.infoId;
         let info = this.data.complainInfo; 

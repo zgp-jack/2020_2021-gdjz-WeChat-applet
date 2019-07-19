@@ -27,12 +27,12 @@
     height: 80rpx;
     line-height: 80rpx;
     font-size: 28rpx;
-    padding-right: 150rpx;
+    padding-right: 200rpx;
     border-bottom: 1px dashed #0099ff;
 }
 .published-list-header text{
     position: absolute;
-    color: red;
+    color: #0099ff;
     display: block;
     line-height: 80rpx;
     right:27rpx;
@@ -208,6 +208,12 @@
 .collect-tips-words{position: relative;display: inline-block;font-size: 30rpx;color: white;text-align: center;line-height:50rpx;width: 100%;}
 .collect-tips-hand{position: relative;display: block; margin: 80rpx auto;width:600rpx;height: 200rpx;}
 .knowtips{position: absolute;bottom:-45rpx;width: 350rpx;line-height: 90rpx;background: #0099ff;color: white;text-align: center;font-size: 30rpx;left: 50%;margin-left: -175rpx;border-radius: 20px;}
+
+
+.published-list-body text{font-size: 30rpx;line-height: 80rpx;color: #444;}
+.collect-status{float: left;}
+.collect-time{position: absolute;width: 100%;z-index: 1;text-align: center;left: 0;top: 0;padding-left: 80rpx;}
+.published-list-body .collect-action{position: relative; float: right;color: #0099ff;z-index: 2;}
 
 
 

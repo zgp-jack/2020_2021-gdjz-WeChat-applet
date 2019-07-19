@@ -305,3 +305,7 @@ page{
 
 /* 一键发布 */
 .bottompublishbtn{position: fixed;width: 300rpx;line-height: 80rpx;background: #0099ff;color: white;text-align: center;border-radius: 20px;bottom: 115rpx;left: 50%;margin-left: -150rpx;font-size: 28rpx;letter-spacing: 5rpx;box-shadow: #0099ff 0 0 10rpx;z-index: 3;}
+
+.joblist-jz{position: absolute;left: 0;top: 0;width: 80rpx;height: 80rpx;z-index: 3;border-radius: 2px 0 0 0;}
+.joblist-wyjz{position: absolute;bottom: 0;right: 0;width: 80rpx;height: 80rpx;z-index: 1;border-radius: 0 0 2px 0;}
+

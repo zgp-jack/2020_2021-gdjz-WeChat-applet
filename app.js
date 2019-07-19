@@ -23,7 +23,7 @@ App({
     apiRequestUrl: "https://newyupaomini.54xiaoshuo.com/",
     //apiRequestUrl: "http://miniapi.qsyupao.com/",
     //apiRequestUrl:"http://mini.zhaogongdi.com/",
-    apiUploadImg:"https://newyupaomini.54xiaoshuo.com/index/upload/",
+    //apiUploadImg:"https://newyupaomini.54xiaoshuo.com/index/upload/",
     apiImgUrl:"http://cdn.yupao.com/miniprogram/images/",
     commonShareTips:"全国建筑工地招工平台",
     isFirstLoading: true,

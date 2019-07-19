@@ -77,6 +77,12 @@
         <view class='index-list-item' >
             <form report-submit="true"  bindsubmit="showDetailInfo" data-id="{{ item.id }}" data-type="job">
                 <button class='lists-template-btn' form-type='submit'></button>
+
+
+                <!-- <image wx:if="{{ (item.top == '1') }}" class='joblist-jz' src='{{ joblistjz }}'></image>
+                <image wx:if="{{ (item.top == '1') }}" class='joblist-wyjz' src='{{ joblistwyjz }}' bindtap='wantFastIssue'></image> -->
+
+
                 <view class='index-item-header infolist-header-notime'>
                     <text class='index-item-title overwords'>{{ item.title }}</text>
                 </view>

@@ -116,3 +116,12 @@
     width: 100%;
     height: 100%;
 }
+
+
+.collectbox{position: absolute;right: 0;top: 0;display: flex;justify-content: center;align-items: center;}
+.collectbox image{width: 40rpx;height: 40rpx;margin-right: 5rpx;}
+.collect-false text{color: #777;}
+.collect-true text{color: #ff0000;}
+
+
+

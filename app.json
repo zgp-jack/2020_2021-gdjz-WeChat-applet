@@ -44,6 +44,7 @@
     "pages/footer/footer",
     "pages/tpl/win/win",
     "pages/tpl/app/app",
+    "pages/collect/collect",
     "pages/map/detail",
     "pages/map/map",
     "pages/rm/rm"

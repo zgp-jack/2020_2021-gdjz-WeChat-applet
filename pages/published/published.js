@@ -52,7 +52,10 @@ Page({
         },
         pd: pd.pd,
         ids:[2,6,7,11,16],
-        newTopShow:false
+        newTopShow:false,
+      collecticon: app.globalData.apiImgUrl + "collect-tipicon.png",
+      collecthand: app.globalData.apiImgUrl + "collect-tiphand.png",
+      showCollectTips:false
     },
     bindAreaChange:function(e){
         this.setData({ areaIndex: e.detail.value })
@@ -403,13 +406,20 @@ Page({
     valiUserCard: function () {
         let userInfo = this.data.userInfo;
         footerjs.valiUserCard(this, app, userInfo);
-    },
+  }, 
+  initCollectTips: function(options){
+    if (options.hasOwnProperty("jz")) this.setData({ showCollectTips:true })
+  },
+  closeCollect:function(){
+    this.setData({ showCollectTips: false })
+  },
     /**
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
         this.initFooterData();
         this.initPublishedData(options);
+        this.initCollectTips(options);
     },
 
     /**

@@ -448,6 +448,7 @@ page{
 
 /* 列表页 无时间 */
 .infolist-header-notime{
+  padding-left: 15rpx;
     padding-right: 0 !important;
 }
 
