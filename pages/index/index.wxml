@@ -79,8 +79,8 @@
                 <button class='lists-template-btn' form-type='submit'></button>
 
 
-                <!-- <image wx:if="{{ (item.top == '1') }}" class='joblist-jz' src='{{ joblistjz }}'></image>
-                <image wx:if="{{ (item.top == '1') }}" class='joblist-wyjz' src='{{ joblistwyjz }}' bindtap='wantFastIssue'></image> -->
+                <image wx:if="{{ (item.top == '1') }}" class='joblist-jz' src='{{ joblistjz }}'></image>
+                <image wx:if="{{ (item.top == '1') }}" class='joblist-wyjz' src='{{ joblistwyjz }}' bindtap='wantFastIssue'></image>
 
 
                 <view class='index-item-header infolist-header-notime'>

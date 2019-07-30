@@ -1,12 +1,15 @@
 // pages/publish/card/card.js
 let vali = require("../../../utils/v.js");
+let areas = require("../../../utils/tas.js");
+const Amap = require("../../../utils/amap-wx.js");
+const amapFun = new Amap.AMapWX({ key: '20f12aae660c04de86f993d3eff590a0' });
 const app = getApp();
 Page({
 
     /**
      * 页面的初始数据
      */
-    data: {
+    data: { 
         userInfo: {},
         cardInfo: {
             username: "",
@@ -37,8 +40,216 @@ Page({
         codeTips: "获取验证码",
         status: 1,
         textareaActive: false,
-        textareaTips: ""
+        textareaTips: "",
+        addressActive:false,
+        addressList:[],
+        addressConut:0,
+        addressText:'',
+        addressData:{
+          title:"",
+          adcode:"",
+          location:"",
+        },
+      addressTips:"请先输入您的详细地址",
+      pindex: 0,
+      cindex: 0,
+      tindex: 0,
+      objectAreaData: [],
+      adcode: "", county_id:""
     },
+
+  getMapInfo: function () {
+    let that = this;
+    amapFun.getRegeo({
+      success: function (data) {
+        console.log(data)
+        let pois = data[0].regeocodeData.pois;
+        let adcode = data[0].regeocodeData.addressComponent.adcode
+        that.setData({
+          addressList: pois,
+          adcode: adcode
+        })
+      },
+      fail: function (info) {
+        //失败回调
+        that.openSetting({ setting: 0 })
+      }
+    })
+    
+  },
+  /**打开设置面板 */
+  openSetting: function (e) {
+    let that = this;
+    wx.getSetting({
+      success: (res) => {
+        console.log(res.authSetting['scope.userLocation']);
+        if (res.authSetting['scope.userLocation'] != undefined && res.authSetting['scope.userLocation'] != true) {//非初始化进入该页面,且未授权   
+          wx.showModal({
+            title: '是否授权当前位置',
+            content: '需要获取您的地理位置，请确认授权，否则将不能为你自动推荐位置',
+            success: function (res) {
+              if (res.cancel) {
+              } else if (res.confirm) {
+                //village_LBS(that);
+                wx.openSetting({
+                  success: function (data) {
+                    console.log(data);
+                    if (data.authSetting["scope.userLocation"] == true) {
+                      wx.showToast({
+                        title: '授权成功',
+                        icon: 'success',
+                        duration: 2000
+                      })
+                      //再次授权，调用getLocationt的API
+                      that.getMapInfo()
+                    } else {
+                      wx.showToast({
+                        title: '授权失败',
+                        icon: 'success',
+                        duration: 2000
+                      })
+                    }
+                  }
+                })
+              }
+            }
+          })
+          return false;
+        }
+      },
+    })
+  },
+  getKeywordsInputs:function(){
+    let _this = this;
+    let keywords = this.data.addressText;
+    amapFun.getInputtips({
+      keywords: keywords,
+      location: '',
+      success: function (data) {
+
+        console.log(data)
+        if (data) {
+          _this.setData({ addressList: data.tips, addressTips: data.tips.length ? '' : '暂未搜索到相关位置' })
+        } else {
+          _this.setData({ addressTips: '暂未搜索到相关位置' })
+        }
+      }
+    })
+  },
+  userTapAddress:function(){
+    this.openSetting();
+    this.setData({ addressActive: true, showTextarea:false })
+  },
+  closeAddressAction:function(){
+    this.setData({ addressActive: false, showTextarea: true })
+  },
+  userEnterAddress:function(e){
+    this.setData({ addressText:e.detail.value })
+    this.getKeywordsInputs();
+  },
+  setAddressData:function(e){
+    let t = e.currentTarget.dataset.title
+    let a = e.currentTarget.dataset.adcode
+    let l = e.currentTarget.dataset.location
+    this.setData({ 
+      "addressData.title": t,
+      "addressData.adcode": a,
+      "addressData.location":l,
+    })
+    this.closeAddressAction();
+  },
+  getAddressList:function(){
+    let _this = this;
+
+    app.appRequestAction({
+      way:'POST',
+      url:'/publish/get-tips/',
+      hideLoading:true,
+      params:{
+        keywords: _this.data.addressText
+      },
+      success: function (res) {
+        let mydata = res.data;
+        if (mydata.status) {
+          _this.setData({ addressList: mydata.tips, addressTips: mydata.tips.length ? '' : '暂未搜索到相关位置' })
+        } else {
+          _this.setData({ addressTips: mydata.info })
+        }
+      },
+      fail: function () {
+        this.setData({ addressTips: '接口出错，请联系客服电话400-833-1578' })
+      }
+    })
+
+
+  },
+
+  initPickerData: function () {
+    let pickerData = [];
+    let p = this.initAllProvice();
+    let c = this.getCityList();
+    let t = this.getTownList();
+    pickerData.push(p, c, t);
+    this.setData({ objectAreaData: pickerData })
+  },
+  initAllProvice: function () { //获取所有省份
+    let arr = app.arrDeepCopy(areas.getAreaArr);
+    let provice = [];
+    let len = arr.length;
+    for (let i = 0; i < len; i++) {
+      let data = { id: arr[i].id, pid: arr[i].pid, name: arr[i].name }
+      provice.push(data)
+    }
+    return provice;
+  },
+  getCityList: function () {
+    let i = this.data.pindex;
+    let arr = app.arrDeepCopy(areas.getAreaArr);
+    let cdata = arr[i].children;
+    let len = cdata.length;
+    let city = [];
+    for (let j = 0; j < len; j++) {
+      let data = { id: cdata[j].id, pid: cdata[j].pid, name: cdata[j].name }
+      city.push(data)
+    }
+    return city;
+  },
+  getTownList: function () {
+    let arr = app.arrDeepCopy(areas.getAreaArr);
+    let i = this.data.pindex;
+    let j = this.data.cindex;
+    let _data = arr[i].children[j];
+    console.log(_data);
+    return _data.has_children ? _data.children : [{ id: _data.id, pid: _data.pid, name: _data.name }];
+  },
+  bindPickerColumnChange: function (e) {
+    let column = e.detail.column;
+    let value = e.detail.value;
+    if (column == 0) {
+      this.setData({ pindex: value })
+    } else if (column == 1) {
+      this.setData({ cindex: value })
+    } else {
+      this.setData({ tindex: value })
+    }
+
+    this.initPickerData();
+  },
+  bindMultiPickerChange: function (e) {
+    let arrdata = app.arrDeepCopy(areas.getAreaArr);
+    let arr = e.detail.value;
+    let data = arrdata[arr[0]].children[arr[1]];
+    let mydata = (data.has_children) ? data.children[arr[2]] : data
+    console.log(mydata)
+  },
+
+
+
+
+
+
+
+
     bindPickerChange: function (e) {
         this.setData({
             "cardInfo.teamId": parseInt(e.detail.value) + 1
@@ -110,7 +321,8 @@ Page({
         }
         this.setData({ userInfo: userInfo });
         app.appRequestAction({
-            url: "publish/view-message/",
+            //url: "publish/view-message/",
+            url:"publish/new-job/",
             way: "POST",
             params: {
                 userId: userInfo.userId,
@@ -130,7 +342,7 @@ Page({
                         "cardInfo.workType": mydata.classifyTree,
                         "cardInfo.workTypeIds": mydata.selectedClassifies ? mydata.selectedClassifies : [],
                         "cardInfo.workTypenum": parseInt(mydata.typeTextArr.maxClassifyCount),
-                        "cardInfo.cities": mydata.areaTree,
+                        //"cardInfo.cities": mydata.areaTree,
                         "cardInfo.provinceId": mydata.model.province_id ? mydata.model.province_id : "",
                         "cardInfo.cityId": mydata.model.city_id ? mydata.model.city_id : "",
                         "cardInfo.memberTel": mydata.memberInfo.tel,
@@ -139,11 +351,14 @@ Page({
                         "cardInfo.imgs": mydata.view_image,
                         "cardInfo.imgnum": parseInt(mydata.typeTextArr.maxImageCount),
                         showUploads: (mydata.view_image.length > 0) ? true : false,
-                        textareaTips: mydata.placeholder
+                        textareaTips: mydata.placeholder,
+                        "addressData.title": mydata.model.address,
+                        "addressData.location": mydata.model.location,
+                        county_id: mydata.model.county_id
                     })
-                    setTimeout(function(){
-                        _this.initAreaPicker();
-                    },0)
+                    // setTimeout(function(){
+                    //     _this.initAreaPicker();
+                    // },0)
                 } else {
                     app.showMyTips(mydata.errmsg);
                 }
@@ -331,10 +546,15 @@ Page({
             app.showMyTips("请选择您的所需工种！");
             return false;
         }
-        if (cardInfo.provinceId == "") {
-            app.showMyTips("请选择您的地区！");
+        // if (cardInfo.provinceId == "") {
+        //     app.showMyTips("请选择您的地区！");
+        //     return false;
+        // }
+
+      if (_this.data.addressData.adcode == "" && cardInfo.provinceId == "") {
+            app.showMyTips("请输入您的地区！");
             return false;
-        }
+         }
         if (!v.regStrNone(cardInfo.username)) {
             app.showMyTips("请输入正确的联系人姓名！");
             return false;
@@ -366,16 +586,21 @@ Page({
             user_name: cardInfo.username,
             classifies: cardInfo.workTypeIds,
             detail: cardInfo.content,
-            provinces: cardInfo.cityIds,
+            //provinces: cardInfo.cityIds ? cardInfo.cityIds : [],
             code: cardInfo.code,
             images: cardImgs,
             province_id: cardInfo.provinceId,
-            city_id: (cardInfo.provinceId == cardInfo.cityId) ? "" :cardInfo.cityId
+            city_id: (cardInfo.provinceId == cardInfo.cityId) ? "" :cardInfo.cityId,
+            address: _this.data.addressData.title,
+            location: _this.data.addressData.location ? _this.data.addressData.location : "",
+            adcode: _this.data.addressData.adcode,
+            county_id: _this.data.county_id
         };
 
         app.appRequestAction({
             title: "正在发布招工信息",
-            url: "publish/publish-msg/",
+            // url: "publish/publish-msg/",
+            url:"publish/save-job/",
             way: "POST",
             mask: true,
             failTitle: "网络出错，发布失败！",
@@ -481,6 +706,8 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
+      this.getMapInfo()
+      //this.initPickerData();
         this.initUserCardinfo(options);
     },
 

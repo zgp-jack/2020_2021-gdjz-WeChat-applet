@@ -1,6 +1,10 @@
 {
   "pages": [
     "pages/index/index",
+    "pages/publish/recruit/recruit",
+    "pages/map/map",
+    "pages/publish/test/test",
+    "pages/collect/collect",
     "pages/home/home",
     "pages/published/published",
     "pages/fast-issue/index/index",
@@ -16,7 +20,6 @@
     "pages/detail/usedinfo/usedinfo",
     "pages/detail/info/info",
     "pages/detail/ucard/ucard",
-    "pages/publish/recruit/recruit",
     "pages/publish/card/card",
     "pages/publish/used/used",
     "pages/realname/realname",
@@ -44,10 +47,9 @@
     "pages/footer/footer",
     "pages/tpl/win/win",
     "pages/tpl/app/app",
-    "pages/collect/collect",
     "pages/map/detail",
-    "pages/map/map",
-    "pages/rm/rm"
+    "pages/rm/rm",
+    "pages/userauth/userauth"
   ],
   "window": {
     "backgroundTextStyle": "light",

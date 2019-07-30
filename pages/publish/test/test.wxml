@@ -1,0 +1,5 @@
+<picker mode="multiSelector" bindchange="bindMultiPickerChange" bindcolumnchange="bindPickerColumnChange" value="{{[pindex,cindex,tindex]}}" range-key="name" range="{{objectAreaData}}">
+    <view class="picker">
+      当前选择：
+    </view>
+  </picker>
