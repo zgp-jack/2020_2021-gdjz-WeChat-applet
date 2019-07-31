@@ -38,6 +38,16 @@ Page({
         let index = e.currentTarget.dataset.index;
         wx.setNavigationBarTitle({ title: (index == "1") ? "鱼泡网-我收藏的找活信息" : "鱼泡网-我收藏的招工信息" })
         if (this.data.publishIndex == index) return false;
+        console.log(this.data.publishIndex)
+      if (this.data.publishIndex == 0){
+        this.setData({ 
+          publishIndex : 1,
+          lists: [],
+          nothavamore: false,
+          showNoData: true,
+        })
+        return false;
+      }
         this.setData({
             publishIndex: index,
             page:1,

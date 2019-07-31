@@ -31,6 +31,10 @@
             <view class='yupao-common-list-right'>{{ info.title }}</view>
         </view>
         <view class='yupao-common-lists-item clearfix'>
+            <view class='yupao-common-list-left'>项目地址</view>
+            <view class='yupao-common-list-right'>{{ info.show_full_address }} <image src='{{ locationicon }}' bindtap='showThisMap' class='locationicon'></image></view>
+        </view>
+        <view class='yupao-common-lists-item clearfix'>
             <view class='yupao-common-list-left'>发布时间</view>
             <view class='yupao-common-list-right'>{{ info.time }}</view>
         </view>

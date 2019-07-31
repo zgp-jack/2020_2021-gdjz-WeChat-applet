@@ -34,8 +34,19 @@ Page({
         userShareTime: {},
         collectFalse: app.globalData.apiImgUrl + "collect-false.png",
         collectTrue: app.globalData.apiImgUrl + "collect-true.png",
-        collectMark:false
+        collectMark:false,
+       locationicon: app.globalData.apiImgUrl +"detail-info-map.png",
     },
+  showThisMap:function(){
+    let _this = this;
+    let location = this.data.info.location
+    let arr = location.split(",")
+    wx.openLocation({//​使用微信内置地图查看位置。
+      latitude: parseFloat(arr[1]),//要去的纬度-地址
+      longitude: parseFloat(arr[0]),//要去的经度-地址
+      name: _this.data.info.show_full_address
+    })
+  },
     userCollectAction:function(){
       let _this = this;
       let userInfo = wx.getStorageSync("userInfo");

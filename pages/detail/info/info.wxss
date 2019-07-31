@@ -123,5 +123,5 @@
 .collect-false text{color: #777;}
 .collect-true text{color: #ff0000;}
 
-
+.locationicon{width: 50rpx;height: 50rpx;display: inline-block;vertical-align: middle;}
 

@@ -352,9 +352,9 @@ Page({
                         "cardInfo.imgnum": parseInt(mydata.typeTextArr.maxImageCount),
                         showUploads: (mydata.view_image.length > 0) ? true : false,
                         textareaTips: mydata.placeholder,
-                        "addressData.title": mydata.model.address,
-                        "addressData.location": mydata.model.location,
-                        county_id: mydata.model.county_id
+                      "addressData.title": mydata.model.address ? mydata.model.address : "",
+                      "addressData.location": mydata.model.location ? mydata.model.location : "",
+                      county_id: mydata.model.county_id ? mydata.model.county_id : ""
                     })
                     // setTimeout(function(){
                     //     _this.initAreaPicker();

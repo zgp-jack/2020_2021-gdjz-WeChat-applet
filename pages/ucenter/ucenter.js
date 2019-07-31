@@ -20,6 +20,7 @@ Page({
             fastissue: app.globalData.apiImgUrl + "ucenter-fast.png",
             fastlist: app.globalData.apiImgUrl + "ucenter-fastlist.png",
             realname: app.globalData.apiImgUrl + "ucenter-userrealname.png",
+          collect: app.globalData.apiImgUrl + "ucenter_person_collect.jpg"
         },
         userInfo:{},
         member:{},
