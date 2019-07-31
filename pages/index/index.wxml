@@ -99,7 +99,7 @@
                         </view>
                         <view class='index-words-item overwords'>
                             <image src='{{ listsImg.status }}'></image>
-                            <text>招工状态： <text>{{ (item.top == "1") ? "置顶中" : item.state_arr.state }}</text></text>
+                            <text>招工状态： <text>{{ (item.top == "1") ? "急招中" : item.state_arr.state }}</text></text>
                         </view>
                     </view>
                 </view>

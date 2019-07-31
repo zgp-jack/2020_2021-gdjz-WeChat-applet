@@ -249,9 +249,17 @@ Page({
         }catch(err){
           console.log(err);
         }
+
+      let _params = _this.data.searchDate;
+      let uinfo = wx.getStorageSync("userInfo");
+      if (uinfo){
+        _params.userId = uinfo.userId;
+        _params.token = uinfo.token;
+        _params.tokenTime = uinfo.tokenTime;
+      }
         app.doRequestAction({
             url:"index/info-list/",
-            params: _this.data.searchDate,
+          params: _params,
             success:function(res){
                 app.globalData.isFirstLoading ? "" : wx.hideLoading();
                 let mydata = res.data;

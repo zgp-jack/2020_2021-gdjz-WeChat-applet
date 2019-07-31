@@ -55,9 +55,38 @@ Page({
       cindex: 0,
       tindex: 0,
       objectAreaData: [],
-      adcode: "", county_id:""
+      adcode: "", 
+      county_id:""
     },
 
+  checkAdcode:function(adcode,callback){
+    let _this = this;
+    app.appRequestAction({
+      way: 'POST',
+      url: 'publish/checking-adcode/',
+      params: {
+        adcode: adcode
+      },
+      success: function (res) {
+        if (res.data.errcode == "fail"){
+          wx.showModal({
+            title: '温馨提示',
+            content: res.data.errmsg,
+            showCancel:false,
+            complete:function(){
+              _this.userTapAddress();
+            }
+          })
+        }else{
+          callback()
+        }
+      },
+      fail: function () {
+        callback()
+      }
+    })
+
+  },
   getMapInfo: function () {
     let that = this;
     amapFun.getRegeo({
@@ -82,7 +111,7 @@ Page({
     let that = this;
     wx.getSetting({
       success: (res) => {
-        console.log(res.authSetting['scope.userLocation']);
+        //console.log(res.authSetting['scope.userLocation']);
         if (res.authSetting['scope.userLocation'] != undefined && res.authSetting['scope.userLocation'] != true) {//非初始化进入该页面,且未授权   
           wx.showModal({
             title: '是否授权当前位置',
@@ -127,7 +156,7 @@ Page({
       location: '',
       success: function (data) {
 
-        console.log(data)
+        //console.log(data)
         if (data) {
           _this.setData({ addressList: data.tips, addressTips: data.tips.length ? '' : '暂未搜索到相关位置' })
         } else {
@@ -148,15 +177,19 @@ Page({
     this.getKeywordsInputs();
   },
   setAddressData:function(e){
+    let _this = this;
     let t = e.currentTarget.dataset.title
     let a = e.currentTarget.dataset.adcode
     let l = e.currentTarget.dataset.location
-    this.setData({ 
-      "addressData.title": t,
-      "addressData.adcode": a,
-      "addressData.location":l,
+    this.checkAdcode(a,function(){
+      _this.setData({
+        "addressData.title": t,
+        "addressData.adcode": a,
+        "addressData.location": l,
+      })
+      _this.closeAddressAction();
     })
-    this.closeAddressAction();
+    
   },
   getAddressList:function(){
     let _this = this;
@@ -180,7 +213,6 @@ Page({
         this.setData({ addressTips: '接口出错，请联系客服电话400-833-1578' })
       }
     })
-
 
   },
 

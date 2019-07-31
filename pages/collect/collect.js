@@ -84,7 +84,6 @@ Page({
             success: function (res) {
                 wx.hideLoading()
                 let mydata = res.data;
-                console.log(mydata);
                 if (mydata.errcode == "ok") {
                     if (mydata.list.length > 0) {
                         let newData = _this.data.lists;
