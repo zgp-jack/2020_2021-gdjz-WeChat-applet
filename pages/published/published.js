@@ -86,7 +86,7 @@ Page({
         let areaIndex = this.data.areaIndex;
         let infoIndex = parseInt(this.data.infoIndex);
         let _this = this;
-        wx.showLoading({ title: '正在置顶该信息' })
+        wx.showLoading({ title: '加载中' })
         app.doRequestAction({
             url:"job/set-job-top/",
             way:"POST",
@@ -104,7 +104,7 @@ Page({
                 let mydata = res.data;
                 if(mydata.errcode == "integralBad"){
                     wx.showModal({
-                        title: '置顶失败',
+                        title: '设置急招失败',
                         content: mydata.errmsg,
                         success: function (res) {
                             if (res.confirm) {
@@ -134,7 +134,7 @@ Page({
             fail:function(res){
                 wx.hideLoading();
                 wx.showToast({
-                    title: "网络错误，置顶失败！",
+                    title: "网络错误，设置急招失败！",
                     icon: "none",
                     duration: 2000
                 })

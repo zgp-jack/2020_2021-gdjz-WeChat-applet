@@ -40,6 +40,7 @@ Page({
   showThisMap:function(){
     let _this = this;
     let location = this.data.info.location
+    if(!location) return false;
     let arr = location.split(",")
     wx.openLocation({//​使用微信内置地图查看位置。
       latitude: parseFloat(arr[1]),//要去的纬度-地址
@@ -155,12 +156,13 @@ Page({
             url: "job/job-info/",
             way: "POST",
             params: userInfo,
-            success: function (res) { 
+            success: function (res) {  
                 let mydata = res.data;
-              _this.setData({ info: mydata.result, collectMark: mydata.result.is_collect ? true : false })
+              _this.setData({ info: mydata.result })
                 if (mydata.errcode != "fail") {
                     let t = mydata.result.title;
                     wx.setNavigationBarTitle({ title: t })
+                  _this.setData({ collectMark: mydata.result.is_collect ? true : false})
                 }
                 _this.doDetailAction(mydata, {
                     success:function(){},

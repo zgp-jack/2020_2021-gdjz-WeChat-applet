@@ -91,11 +91,10 @@ Page({
     let that = this;
     amapFun.getRegeo({
       success: function (data) {
-        console.log(data)
         let pois = data[0].regeocodeData.pois;
         let adcode = data[0].regeocodeData.addressComponent.adcode
+        that.filtterNullData(pois);
         that.setData({
-          addressList: pois,
           adcode: adcode
         })
       },
@@ -105,6 +104,18 @@ Page({
       }
     })
     
+  },
+  filtterNullData:function (result){
+    let len = result.length;
+    let res = [];
+    let v = vali.v.new();
+    for (let i = 0; i<len ;i++){
+      let adcode = v.ObjType(result[i].adcode, "array")
+      let district = v.ObjType(result[i].district, "array")
+      let location = v.ObjType(result[i].location, "array")
+      if (!adcode && !district && !location) res.push(result[i])
+    }
+    this.setData({ addressList: res })
   },
   /**打开设置面板 */
   openSetting: function (e) {
@@ -158,7 +169,8 @@ Page({
 
         //console.log(data)
         if (data) {
-          _this.setData({ addressList: data.tips, addressTips: data.tips.length ? '' : '暂未搜索到相关位置' })
+          _this.setData({ addressTips: data.tips.length ? '' : '暂未搜索到相关位置' })
+          _this.filtterNullData(data.tips)
         } else {
           _this.setData({ addressTips: '暂未搜索到相关位置' })
         }
@@ -624,11 +636,10 @@ Page({
             province_id: cardInfo.provinceId,
             city_id: (cardInfo.provinceId == cardInfo.cityId) ? "" :cardInfo.cityId,
             address: _this.data.addressData.title,
-            location: _this.data.addressData.location ? _this.data.addressData.location : "",
+            location: _this.data.addressData.location,
             adcode: _this.data.addressData.adcode,
             county_id: _this.data.county_id
         };
-
         app.appRequestAction({
             title: "正在发布招工信息",
             // url: "publish/publish-msg/",
