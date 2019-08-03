@@ -139,6 +139,7 @@ Page({
       app.appRequestAction({
         url: "job/collect/",
         way: "POST",
+        mask: true,
         params: data,
         title: "操作中",
         failTitle: "网络错误，操作失败！",
@@ -206,7 +207,7 @@ Page({
      * 生命周期函数--监听页面显示
      */
   onShow: function (options) {
-    this.setData({ isFirstRequest:true })
+    this.setData({ isFirstRequest: true, lists: [], page: 1 })
       this.initPublishedData(options);
     },
 

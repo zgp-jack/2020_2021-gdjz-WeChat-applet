@@ -54,7 +54,7 @@
         <view class='cost-integral-settop-body'>
             <view class='cost-integral-settop-item'>
                 <text class='cost-integral-settop-tips'>急招天数</text>
-                <input type='number' class='cost-integral-settop-right' value='{{ inputValue }}'  bindinput="userEnterTopDay" placeholder="请输入置顶天数"></input>
+                <input type='number' class='cost-integral-settop-right' value='{{ inputValue }}'  bindinput="userEnterTopDay" placeholder="请输入急招天数"></input>
             </view>
             <view class='cost-integral-settop-item'>
                 <text class='cost-integral-settop-tips'>急招地区</text>
@@ -76,7 +76,7 @@
 
 <view class='user-province-settop  flex-row' wx:if="{{ newTopShow }}">
     <view class='cost-integral-settop'>
-        <view class='cost-integral-settop-header'>置顶提示</view>
+        <view class='cost-integral-settop-header'>急招提示</view>
         <view class='psettop-body'>
             <checkbox-group bindchange="checkboxChange">
                 <label class="settop-checkbox" wx:for="{{ pd }}"wx:key="index">
@@ -86,8 +86,8 @@
             </checkbox-group>
         </view>
         <view class='new-settop-footer'>
-            <input placeholder='点击此处输入置顶天数' placeholder-style="new-settop-input" maxlength="3" type="number" value='{{ 1 }}'></input>
-            <view class='new-settop-tips'>您将<view>{{ 5 }}</view>个省市置顶<view>{{ 2 }}</view>天，需要<view>{{ 50 }}</view>积分。<view class='desc-newsettop'>置顶说明</view></view>
+            <input placeholder='点击此处输入急招天数' placeholder-style="new-settop-input" maxlength="3" type="number" value='{{ 1 }}'></input>
+            <view class='new-settop-tips'>您将<view>{{ 5 }}</view>个省市急招<view>{{ 2 }}</view>天，需要<view>{{ 50 }}</view>积分。<view class='desc-newsettop'>急招说明</view></view>
             <view class='new-settop-btns flex-row'>
                 <view bindtap='closeNewTop'>取消</view>
                 <view bindtap='sureNewTop'>确定</view>
