@@ -1,18 +1,43 @@
 // pages/userauth/userauth.js
+let app = getApp();
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-
+    icon: app.globalData.apiImgUrl + "userauth-topicon.png"
   },
-
+  returnPrevPage:function(){
+    wx.navigateBack({ delta: 1 })
+  },
+  bindGetUserInfo :function(e){
+    let that = this;
+    app.bindGetUserInfo(e, function (res) {
+      app.mini_user(res, function (res) {
+        app.api_user(res, function (res) {
+          let uinfo = res.data;
+          if (uinfo.errcode == "ok") {
+            let userInfo = {
+              userId: uinfo.data.id,
+              token: uinfo.data.sign.token,
+              tokenTime: uinfo.data.sign.time,
+            }
+            app.globalData.userInfo = userInfo;
+            wx.setStorageSync('userInfo', userInfo)
+            let r = "/" + getCurrentPages()[0].route;
+            wx.reLaunch({ url: r })
+          } else {
+            app.showMyTips(uinfo.errmsg);
+          }
+        });
+      });
+    });
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
   },
 
   /**

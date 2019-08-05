@@ -131,9 +131,9 @@
 
 
 <!-- 用户授权 -->
-<view class='userauthbox flex-row'  wx:if="{{ !userInfo }}">
+<!-- <view class='userauthbox flex-row'  wx:if="{{ !userInfo }}">
     <button  open-type="getUserInfo"  bindgetuserinfo='bindGetUserInfo' style='height:{{ userAuthBtn }}px;background:url({{ userAuthImg }}) no-repeat;background-size:100% 100%;'></button>
-</view>
+</view> -->
 
 <view class='fixed-ad'   bindtap='jumpThisLink'  data-url="/pages/download/download-app"  data-type='0'>
     <image src='{{ fixedAdImg }}'></image>
@@ -144,7 +144,7 @@
     <image src='{{ fastIssueImg }}'></image>
 </view>
 
-<view class='bottompublishbtn'  bindtap='jumpThisLink' data-url="/pages/publish/recruit/recruit"   data-type='0'>发布招工</view>
+<view class='bottompublishbtn'  bindtap='valiUserUrl' data-url="/pages/publish/recruit/recruit"   >发布招工</view>
 
 
 <!-- <view class='fixed-get-integral'  bindtap='jumpThisLink'  data-url="/pages/turntable/turntable"  data-type='0'>

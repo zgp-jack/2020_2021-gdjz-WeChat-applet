@@ -10,6 +10,7 @@ Page({
      * 页面的初始数据
      */
     data: {
+        userInfo:"",
         unitid: app.globalData.unitid,
         footerActive: "findwork",
         touchStartTime: 0,
@@ -319,7 +320,8 @@ Page({
         let _mark = true;
         let _wx = wx.getStorageSync("resume_wx");
         let userInfo = wx.getStorageSync("userInfo");
-        this.setData({ userInfo:userInfo })
+        this.setData({ userInfo:userInfo ? userInfo : false })
+        userInfo = userInfo ? userInfo : { userId: 0 }
         let _time = Date.parse(new Date());
         if (_wx && _wx.expirTime) {
             if (parseInt(_wx.expirTime) > _time) _mark = false;
@@ -385,6 +387,10 @@ Page({
 
     //用户点击搜索
     userTapSearch: function () {
+      if (!this.data.userInfo) {
+        app.gotoUserauth();
+        return false;
+      }
         //if (this.data.searchDate.keywords == "") return false;
         this.returnTop();
         this.setData({
@@ -503,6 +509,10 @@ Page({
     },
     valiUserCard: function () {
         let userInfo = this.data.userInfo;
+        if(!userInfo){
+          app.gotoUserauth();
+          return false;
+        }
         footerjs.valiUserCard(this, app, userInfo);
     },
     getFilterData: function () {

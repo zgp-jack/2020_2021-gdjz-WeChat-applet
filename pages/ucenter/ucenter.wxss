@@ -114,11 +114,9 @@
     width: 33.3333%;
     float: left;
     height: 190rpx;
+    padding: 20rpx 0;
     border-right: 1px dashed #dcdcdc;
     border-bottom: 1px dashed #dcdcdc;
-}
-.ucenter-menus .ucenter-menu-item navigator{
-    padding: 20rpx 0;
 }
 .ucenter-menu-item:nth-child(3n){
     border-right: 0;
@@ -166,3 +164,10 @@
     line-height: 40rpx;
     margin-top: 10rpx;
 }
+
+
+.ucenter-nouserinfo{padding-left: 160rpx;}
+.ucenter-nouserinfo image{position: absolute;width: 100rpx;height: 100rpx;left: 30rpx;top: 40rpx;}
+.ucenter-nouserinfo text{position: relative;display: block;line-height: 175rpx;letter-spacing: 2px;font-size: 30rpx;font-weight: bold;}
+.ucenter-nouserinfo-tips{border-top: 1px dashed #dcdcdc;padding: 20rpx;font-size: 26rpx;line-height: 50rpx;color: #666;}
+

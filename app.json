@@ -1,6 +1,8 @@
 {
   "pages": [
     "pages/index/index",
+    "pages/ucenter/ucenter",
+    "pages/userauth/userauth",
     "pages/publish/recruit/recruit",
     "pages/map/map",
     "pages/publish/test/test",
@@ -23,7 +25,6 @@
     "pages/publish/card/card",
     "pages/publish/used/used",
     "pages/realname/realname",
-    "pages/ucenter/ucenter",
     "pages/mycard/mycard",
     "pages/userinfo/setpass/setpass",
     "pages/userinfo/pass/pass",
@@ -48,8 +49,7 @@
     "pages/tpl/win/win",
     "pages/tpl/app/app",
     "pages/map/detail",
-    "pages/rm/rm",
-    "pages/userauth/userauth"
+    "pages/rm/rm"
   ],
   "window": {
     "backgroundTextStyle": "light",

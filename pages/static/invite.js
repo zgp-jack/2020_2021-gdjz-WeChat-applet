@@ -7,8 +7,8 @@ Page({
      * 页面的初始数据
      */
     data: {
-        shareUrl:"",
-        userInfo:""
+        shareUrl:'',
+        userInfo:false
     },
 
     /**
@@ -37,7 +37,6 @@ Page({
     },
     onLoad: function (options) {
         this.initFooterData();
-        this.getUserInviteLink();
     },
     copyUserShareUrl:function(){
         let _this = this;
@@ -68,6 +67,20 @@ Page({
     getUserInviteLink:function(){
         let _this = this;
         let userInfo = wx.getStorageSync("userInfo");
+        if (!userInfo){
+          wx.showModal({
+            title: '温馨提示',
+            content: '您当前未登录，前往登录后可获得专属邀请链接，成功邀请好友还可获得鱼泡积分',
+            success:function(res){
+              if(res.confirm){
+                app.gotoUserauth();
+              }else{
+                wx.reLaunch({ url: '/pages/home/home' })
+              }
+            }
+          })
+          return false;
+        }
         this.setData({
             userInfo: userInfo
         })
@@ -107,7 +120,7 @@ Page({
      * 生命周期函数--监听页面显示
      */
     onShow: function () {
-
+      if (!this.data.shareUrl) this.getUserInviteLink();
     },
 
     /**

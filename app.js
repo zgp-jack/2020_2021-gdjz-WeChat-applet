@@ -1,11 +1,11 @@
 App({
   onLaunch: function (e) {
-    try{
-      if (e.path) this.initUserInfo(e);
-    }
-    catch(err){
-      console.log(err);
-    }
+    // try{
+    //   if (e.path) this.initUserInfo(e);
+    // }
+    // catch(err){
+    //   console.log(err);
+    // }
   },
   globalData: {
     unitid:"adunit-80f40e8b4f60c3f6",
@@ -537,13 +537,15 @@ App({
             fail: function () { }
         })
     },
-    showDetailInfo: function (e) {
+      showDetailInfo: function (e, uinfo) {
         let _this = this;
         let formId = e.detail.formId;
         let id = e.currentTarget.dataset.id;
         let type = e.currentTarget.dataset.type;
         let url = (type == "job") ? '/pages/detail/info/info?id=' : '/pages/detail/ucard/ucard?id='
         wx.navigateTo({ url: url+ id })
+        if(!uinfo) return false;
+
         if (formId == "requestFormId:fail timeout") return false;
         let day = this.valiDateIsToday();
         let tempInfo = wx.getStorageSync("tempInfo");
@@ -582,4 +584,11 @@ App({
             way: "POST"
         })
     },
+  valiUserUrl:function(e,user){
+    let url = e.currentTarget.dataset.url;
+    wx.navigateTo({ url: user ? url : '/pages/userauth/userauth' })
+  },
+  gotoUserauth:function(){
+    wx.navigateTo({ url: '/pages/userauth/userauth' })
+  }
 })

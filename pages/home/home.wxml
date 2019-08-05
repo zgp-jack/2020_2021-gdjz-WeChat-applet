@@ -107,12 +107,12 @@
                 <text>邀请好友</text>
             </view>
         </navigator>
-        <navigator url='/pages/query/query'  open-type="navigate" >
-            <view class='index-fun-item flex-row'>
-                <image src='{{ fun.smrz }}'></image>
-                <text>实名查询</text>
-            </view>
-        </navigator>
+
+        <view class='index-fun-item flex-row' data-url='/pages/query/query' bindtap='valiUserUrl'>
+            <image src='{{ fun.smrz }}'></image>
+            <text>实名查询</text>
+        </view>
+
         <navigator class='index-footer-nav' target="miniProgram" open-type="navigate" app-id="wx7cea45b9ebdf87ac" path="" extra-data="" version="release" >
             <view class='index-fun-item flex-row'>
                 <image src='{{ fun.zjxm }}'></image>
@@ -263,7 +263,7 @@
     </view>
 </view>
 
-<view class='fixed-ad'  bindtap='jumpThisLink'  data-url="/pages/publish/recruit/recruit"  data-type='0'>
+<view class='fixed-ad'  bindtap='valiUserUrl'  data-url="/pages/publish/recruit/recruit"  >
     <image src='{{ fixedAdImg }}'></image>
 </view>
 

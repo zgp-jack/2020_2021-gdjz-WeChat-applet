@@ -7,6 +7,7 @@ Page({
      */
     data: {
         infoId:"",
+        userInfo:false,
         notice: {
             autoplay: true,
             indicatorDots: false,
@@ -112,6 +113,7 @@ Page({
         let _mark = true;
         let _wx = wx.getStorageSync("_wx");
         let userInfo = wx.getStorageSync("userInfo");
+        userInfo = userInfo ? userInfo : {userId : 0}
         let _time = Date.parse(new Date());
         if (_wx && _wx.expirTime) {
             if (parseInt(_wx.expirTime) > _time) _mark = false;
@@ -149,7 +151,8 @@ Page({
         let _this = this;
         let userInfo = wx.getStorageSync("userInfo");
         let infoId = options.id;
-        this.setData({ userInfo:userInfo,infoId:infoId });
+        this.setData({ userInfo:userInfo ? userInfo : false,infoId:infoId });
+        userInfo = userInfo ? userInfo : {userId:0}
         userInfo.infoId = infoId;
         userInfo.type = "job";
         app.appRequestAction({

@@ -5,7 +5,7 @@ Page({
     footerActive: "home",
     areaId: 1,
     areaText:"全国",
-    userInfo:"",
+    userInfo:false,
     indexImgs:{
         logo: app.globalData.apiImgUrl + "logo.png?t=" + new Date().getTime(), 
         area: app.globalData.apiImgUrl + "area.png",
@@ -224,6 +224,9 @@ Page({
       this.initIndexData();
       this.initFooterData();
       this.getAreaData();
+  },
+  valiUserUrl: function (e) {
+    app.valiUserUrl(e, this.data.userInfo)
   },
 
     /**

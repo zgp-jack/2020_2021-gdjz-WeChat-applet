@@ -7,6 +7,7 @@ Page({
      */
     data: {
         footerActive: "member",
+        nouser: app.globalData.apiImgUrl + "userauth-userinfo-null.png",
         ucenterimgs:{
             published: app.globalData.apiImgUrl + "uc-publish.png",
             used: app.globalData.apiImgUrl + "ucenter-used.png",
@@ -22,14 +23,19 @@ Page({
             realname: app.globalData.apiImgUrl + "ucenter-userrealname.png",
           collect: app.globalData.apiImgUrl + "ucenter_person_collect.jpg"
         },
-        userInfo:{},
+        userInfo:false,
         member:{},
         showReturnIntegral:false,
         showFastIssue: app.globalData.showFastIssue
     },
     initUserInfo:function(){
+      let userInfo = wx.getStorageSync("userInfo");
+      if(!userInfo){
+        this.setData({ showFastIssue:false })
+        return false
+      };
         if (!app.globalData.showFastIssue.request) app.isShowFastIssue(this);
-        let userInfo = wx.getStorageSync("userInfo");
+        
         this.setData({ userInfo:userInfo })
         let _this = this;
         wx.showLoading({ title: '正在初始化用户数据', })
@@ -63,6 +69,16 @@ Page({
             }
         })
     },
+  valiUserUrl:function(e){
+    app.valiUserUrl(e,this.data.userInfo)
+  },
+  gotoUserauth:function(){
+    app.gotoUserauth();
+  },
+  downappfun:function(e){
+    let url = e.currentTarget.dataset.url;
+    wx.navigateTo({ url: url })
+  },
     // 共用footer
     jumpThisLink: function (e) {
         app.jumpThisLink(e);

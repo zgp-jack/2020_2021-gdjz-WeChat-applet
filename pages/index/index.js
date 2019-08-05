@@ -83,7 +83,8 @@ Page({
       })
     },             
     showDetailInfo:function(e){
-        app.showDetailInfo(e);
+      let uinfo = this.data.userInfo;
+      app.showDetailInfo(e, uinfo);
     },
     touchStart: function (e) {
         this.touchStartTime = e.timeStamp
@@ -361,6 +362,7 @@ Page({
         let _mark = true;
         let _wx = wx.getStorageSync("_wx");
         let userInfo = this.data.userInfo;
+        userInfo = userInfo ? userInfo : {userId:0}
         let _time = Date.parse(new Date());
         this.validateLogin();
         if (_wx && _wx.expirTime){
@@ -427,6 +429,10 @@ Page({
         })
     },
     userTapSearch:function(){
+      if(!this.data.userInfo){
+        app.gotoUserauth();
+        return false;
+      }
         //if(this.data.searchDate.keywords == "") return false;
         this.returnTop();
         this.setData({
@@ -448,21 +454,28 @@ Page({
     },
     initUserinfo:function(){
         let _this = this;
-        app.initSystemInfo(function (res) {
-            if (res) {
-                let _h = (res.windowWidth * 0.7) / 0.6216;
-                _this.setData({ userAuthBtn: _h })
-            }
-        })
-        let userInfo = wx.getStorageSync("userInfo");
-        if(!userInfo){
-            this.setData({ userInfo:false })
-            return false;
-        }
-        this.setData({ userInfo: userInfo });
+      let userInfo = wx.getStorageSync("userInfo");
+        // app.initSystemInfo(function (res) {
+        //     if (res) {
+        //         let _h = (res.windowWidth * 0.7) / 0.6216;
+        //         _this.setData({ userAuthBtn: _h })
+        //     }
+        // })
+        
+        // if(!userInfo){
+        //     this.setData({ userInfo:false })
+        //     return false;
+        // }
+        this.setData({ userInfo: userInfo ? userInfo : false });
         this.initNeedData();
-        if (!app.globalData.showFastIssue.request) app.isShowFastIssue(this);
+
+        if (userInfo) if (!app.globalData.showFastIssue.request) app.isShowFastIssue(this);
+        
     },
+  valiUserUrl:function(e){
+    let userInfo = this.data.userInfo;
+    app.valiUserUrl(e,userInfo);
+  },
     //用户授权
     bindGetUserInfo: function (e) {
         let that = this;
