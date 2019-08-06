@@ -467,8 +467,8 @@ Page({
         //     return false;
         // }
         this.setData({ userInfo: userInfo ? userInfo : false });
+        
         this.initNeedData();
-
         if (userInfo) if (!app.globalData.showFastIssue.request) app.isShowFastIssue(this);
         
     },
@@ -693,7 +693,6 @@ Page({
      * 生命周期函数--监听页面显示
      */
     onShow: function () {
-
     },
 
     /**

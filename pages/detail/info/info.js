@@ -51,7 +51,11 @@ Page({
   },
     userCollectAction:function(){
       let _this = this;
-      let userInfo = wx.getStorageSync("userInfo");
+      let userInfo = this.data.userInfo;
+      if (!userInfo) {
+        app.gotoUserauth();
+        return false;
+      }
       let id = this.data.infoId;
       let data = {
         userId:userInfo.userId,
@@ -147,16 +151,17 @@ Page({
             }
         })
     },
-    initJobInfo: function (options){
+    initJobInfo: function (id){
         let _this = this;
         let userInfo = wx.getStorageSync("userInfo");
-        let infoId = options.id;
+        let url = userInfo ? "job/job-info/" : "/job/no-user-info/";
+        let infoId = id;
         this.setData({ userInfo:userInfo ? userInfo : false,infoId:infoId });
         userInfo = userInfo ? userInfo : {userId:0}
         userInfo.infoId = infoId;
         userInfo.type = "job";
         app.appRequestAction({
-            url: "job/job-info/",
+            url: url,
             way: "POST",
             params: userInfo,
             success: function (res) {  
@@ -276,6 +281,10 @@ Page({
     getInfoTel: function () {
         let _this = this; 
         let userInfo = this.data.userInfo;
+        if(!userInfo){
+          app.gotoUserauth();
+          return false;
+        }
         let infoId = this.data.infoId;
         userInfo.infoId = infoId;
         userInfo.type = "job";
@@ -407,7 +416,7 @@ Page({
     onLoad: function (options) {
         this.initUserShareTimes();
         this.initNeedData();
-        this.initJobInfo(options);
+        this.initJobInfo(options.id);
     },
 
     /**

@@ -25,8 +25,11 @@ Page({
             }
             app.globalData.userInfo = userInfo;
             wx.setStorageSync('userInfo', userInfo)
-            let r = "/" + getCurrentPages()[0].route;
-            wx.reLaunch({ url: r })
+            let pages = getCurrentPages();
+            let r = "/" + pages[0].route;
+            let prevPage = pages[pages.length - 2];
+            prevPage.setData({ userInfo:userInfo });
+            wx.navigateBack({ delta: 1 })
           } else {
             app.showMyTips(uinfo.errmsg);
           }

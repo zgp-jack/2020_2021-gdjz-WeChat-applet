@@ -201,17 +201,17 @@ Page({
         }
     },
     initIndexData:function(){
+      let _this = this;
+      this.initUserInfo(function(){
         let areaId = wx.getStorageSync("areaId");
         let areaText = wx.getStorageSync("areaText");
-        let userInfo = wx.getStorageSync("userInfo");
-        if(userInfo) app.globalData.userInfo = userInfo; //app存入userinfo
-        this.setData({
-            areaId: areaId, 
-            areaText: areaText,
-            userInfo: userInfo ? userInfo :false
+        _this.setData({
+          areaId: areaId,
+          areaText: areaText,
         })
-        this.getIndexListData();
-        this.getSwipersData();
+        _this.getIndexListData();
+        _this.getSwipersData();
+      })
     },
     jumpThisLink:function(e){
         app.jumpThisLink(e);
@@ -219,6 +219,14 @@ Page({
     valiUserCard: function () {
         let userInfo = this.data.userInfo;
         footerjs.valiUserCard(this, app, userInfo);
+    },
+    initUserInfo:function(callback){
+      let userInfo = wx.getStorageSync("userInfo");
+      if (userInfo) app.globalData.userInfo = userInfo; //app存入userinfo
+      this.setData({
+        userInfo: userInfo ? userInfo : false
+      })
+      callback ? callback() : ""
     },
     onLoad: function (options) {
       this.initIndexData();
@@ -240,7 +248,7 @@ Page({
      * 生命周期函数--监听页面显示
      */
     onShow: function () {
-
+      this.initUserInfo();
     },
 
     /**

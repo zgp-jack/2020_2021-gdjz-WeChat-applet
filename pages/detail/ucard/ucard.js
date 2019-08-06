@@ -26,15 +26,16 @@ Page({
     callThisPhone:function(e){
         app.callThisPhone(e);
     },
-    initUcardInfo: function (options){
+    initUcardInfo: function (id){
         let _this = this;
-        let id = options.id;
+        let url = userInfo ? "resume/resume-info/" : "resume/no-user-info/";
         let userInfo = wx.getStorageSync("userInfo");
-        this.setData({ userInfo:userInfo,infoId:id });
+        this.setData({ userInfo:userInfo ? userInfo : false,infoId:id });
+        userInfo = userInfo ? userInfo : {}
         userInfo.infoId = id;
-        userInfo.type = "resume";
+      userInfo.type = "resume";
         app.appRequestAction({
-            url:"resume/resume-info/",
+          url: url,
             way:"POST",
             params:userInfo,
             success:function(res){
@@ -153,6 +154,10 @@ Page({
     getInfoTel:function(){
         let _this = this;
         let userInfo = this.data.userInfo;
+        if (!userInfo) {
+          app.gotoUserauth();
+          return false;
+        }
         let infoId = this.data.infoId;
         userInfo.infoId = infoId;
         userInfo.type = "resume";
@@ -238,7 +243,7 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
-        this.initUcardInfo(options);
+        this.initUcardInfo(options.id);
     },
 
     /**

@@ -13,6 +13,13 @@ const footerImgs = {
 }
 
 function doPublishAction (_this) {
+    let userInfo = _this.data.userInfo;
+    if(!userInfo){
+      wx.navigateTo({
+        url: '/pages/userauth/userauth',
+      })
+      return false;
+    }
     _this.setData({
         showPublishBox: true
     })
