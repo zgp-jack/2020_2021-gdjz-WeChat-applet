@@ -6,7 +6,7 @@ Page({
      * 页面的初始数据
      */
     data: {
-        userInfo: {},
+        userInfo: false,
         usedInfo: {},
         notice: {
             autoplay: true,
@@ -24,7 +24,8 @@ Page({
         let _this = this;
         let _id = options.id;
         let userInfo = wx.getStorageSync("userInfo");
-        this.setData({ userInfo: userInfo });
+        this.setData({ userInfo: userInfo ? userInfo : false });
+        userInfo = userInfo ? userInfo : {}
         userInfo.infoId = _id;
         app.appRequestAction({
             url: "fleamarket/fleamarket-info/",
@@ -103,8 +104,8 @@ Page({
         app.doRequestAction({
             url: "index/search-data/",
             params: {
-                type: "job",
-                userId: _mark ? userInfo.userId : "",
+              type: "job",
+              userId: _mark ? (userInfo ? userInfo.userId : "") : "",
             },
             success: function (res) {
                 let mydata = res.data;

@@ -321,7 +321,6 @@ Page({
         let _wx = wx.getStorageSync("resume_wx");
         let userInfo = wx.getStorageSync("userInfo");
         this.setData({ userInfo:userInfo ? userInfo : false })
-        userInfo = userInfo ? userInfo : { userId: 0 }
         let _time = Date.parse(new Date());
         if (_wx && _wx.expirTime) {
             if (parseInt(_wx.expirTime) > _time) _mark = false;
@@ -330,7 +329,7 @@ Page({
             url: "index/less-search-data/",
             params: {
                 type: "resume",
-                userId: _mark ? userInfo.userId : "",
+              userId: _mark ? (userInfo ? userInfo.userId : "") : "",
             },
             success: function (res) {
                 let mydata = res.data;

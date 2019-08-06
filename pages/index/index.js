@@ -362,7 +362,6 @@ Page({
         let _mark = true;
         let _wx = wx.getStorageSync("_wx");
         let userInfo = this.data.userInfo;
-        userInfo = userInfo ? userInfo : {userId:0}
         let _time = Date.parse(new Date());
         this.validateLogin();
         if (_wx && _wx.expirTime){

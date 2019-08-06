@@ -8,6 +8,7 @@ Page({
      * 页面的初始数据
      */
     data: {
+      userInfo:false,
         unitid: app.globalData.unitid,
         touchStartTime: 0,
         touchEndTime: 0,
@@ -271,6 +272,7 @@ Page({
         })
     },
     doSearchRequestAction: function (_append) {
+      
         let _this = this;
         this.setData({
             nothavemore: false,
@@ -342,7 +344,7 @@ Page({
             url: "index/less-search-data/",
             params: {
                 type: "fleamarket",
-                userId: _mark ? userInfo.userId : "",
+              userId: _mark ? (userInfo ? userInfo.userId : "") : "",
             },
             success: function (res) {
                 let mydata = res.data;
@@ -398,6 +400,11 @@ Page({
         })
     },
     userTapSearch: function () {
+      if (!this.data.userInfo) {
+        app.gotoUserauth();
+        return false;
+      }
+      //let userInfo = 
         //if (this.data.searchDate.keywords == "") return false;
         this.returnTop();
         this.setData({
