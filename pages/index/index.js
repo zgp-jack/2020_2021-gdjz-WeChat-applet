@@ -78,6 +78,10 @@ Page({
         joblistwyjz:app.globalData.apiImgUrl+"joblist_wyjz.png"
     },
     wantFastIssue:function(){
+      if (!this.data.userInfo) {
+        app.gotoUserauth();
+        return false;
+      }
       wx.navigateTo({
         url: '/pages/published/published?type=0&jz=1',
       })
@@ -371,7 +375,7 @@ Page({
             url:"index/less-search-data/",
             params: { 
                 type:"job",
-                userId: _mark ? (userInfo.userId ? userInfo.userId : "" ) : "",
+                userId: _mark ? (userInfo ? userInfo.userId : "" ) : "",
             },
             success:function(res){
                 let mydata = res.data;
@@ -466,7 +470,6 @@ Page({
         //     return false;
         // }
         this.setData({ userInfo: userInfo ? userInfo : false });
-        
         this.initNeedData();
         if (userInfo) if (!app.globalData.showFastIssue.request) app.isShowFastIssue(this);
         

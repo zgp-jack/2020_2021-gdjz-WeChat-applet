@@ -1,7 +1,7 @@
 <view class="common-userauth">
 <image src='{{ icon }}' class='userauth-topicon'></image>
 <view class='userauth-title'>鱼泡网申请获得以下权限</view>
-<view class='userauth-words'>获得您的公开信息(昵称、头像、地区性别)</view>
-<button class='userauth-btn userauth-sure-btn'  open-type="getUserInfo"  bindgetuserinfo='bindGetUserInfo' >微信登陆</button>
+<view class='userauth-words'>获得您的公开信息(昵称、头像、地区与性别)</view>
+<button class='userauth-btn userauth-sure-btn'  open-type="getUserInfo"  bindgetuserinfo='bindGetUserInfo' >微信登录</button>
 <button class='userauth-btn  userauth-back-btn' bindtap='returnPrevPage'>取消</button>
 </view>

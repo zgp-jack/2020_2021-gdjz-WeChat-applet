@@ -75,7 +75,8 @@ Page({
         userShareTime: {}
     },
     showDetailInfo:function(e){
-        app.showDetailInfo(e);
+      let uinfo = this.data.userInfo;
+      app.showDetailInfo(e, uinfo);
     },
     stopThisAction:function(){
         return false;

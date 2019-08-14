@@ -2,11 +2,11 @@
 
 <view class="yupao-common-container">
     <view class='common-choose-header'>
-        <view class='choose-headerbox common-shaded-box flex-row'>
+        <!-- <view class='choose-headerbox common-shaded-box flex-row'>
             <view class='choose-header-item' wx:for="{{ publishedData }}" wx:key="{{ index }}"  bindtap='showThisList' data-index="{{ index }}">
                 <view class='{{ (index == publishIndex) ? "text-active" : "" }}'><image src='{{ (index == publishIndex) ? item.activeImg : item.normalImg }}'></image>{{ item.title }}</view>
             </view>
-        </view>
+        </view> -->
         <view class='published-title common-shaded-box'>{{ publishedTitle[publishIndex] }}</view>
     </view>
 

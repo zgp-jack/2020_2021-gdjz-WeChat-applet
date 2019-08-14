@@ -36,10 +36,10 @@
       <view class='ucenter-userinfo'>
           <view class='ucenter-userinfo-box ucenter-nouserinfo' bindtap='gotoUserauth'>
             <image src='{{ nouser }}'></image>
-            <text>登陆/注册</text>
+            <text>登录/注册</text>
           </view>
           <view class='ucenter-integralbox ucenter-nouserinfo-tips'>
-            点击上方登陆/注册按钮可以前往登录页面，登录成功后可解锁小程序全部功能，方便您能更便捷的招工找活。
+            点击上方登录/注册按钮可以前往登录页面，登录成功后可解锁小程序全部功能，方便您能更便捷的招工找活。
           </view>
       </view>
     </view>
@@ -105,14 +105,12 @@
                 <text>下载APP</text>
             </view>
 
+            <view class='ucenter-menu-item' wx:if="{{ !showFastIssue.show }}"></view>
             
-            <view class='ucenter-menu-item'  wx:if="{{ !showFastIssue.show && userInfo }}"></view>
+            <view class='ucenter-menu-item' wx:if="{{ showFastIssue.show }}"></view>
 
-            <view class='ucenter-menu-item'  wx:if="{{ !showFastIssue.show && userInfo }}"></view>
-
-            <view class='ucenter-menu-item' wx:if="{{ userInfo }}"></view>
-
-            <view class='ucenter-menu-item' ></view>
+            <view class='ucenter-menu-item' wx:if="{{ showFastIssue.show }}" ></view>
+            
 
         </view>
     </view>

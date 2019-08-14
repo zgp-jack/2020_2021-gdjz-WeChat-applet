@@ -414,7 +414,7 @@ Page({
      */
     
     onLoad: function (options) {
-        this.initUserShareTimes();
+        //this.initUserShareTimes();
         this.initNeedData();
         this.initJobInfo(options.id);
     },
