@@ -1,10 +1,10 @@
 /* pages/userauth/userauth.wxss */
 page{background: white;}
 .userauth-topicon{position: relative;display: block;width: 300rpx;height: 300rpx;margin: 80rpx auto 10rpx;}
-.userauth-title{position: relative;text-align: center;font-size: 32rpx;font-weight: bold;color: #111;line-height:60rpx;letter-spacing: 2rpx;}
+.userauth-title{position: relative;text-align: center;font-size: 32rpx;font-weight: bold;color: #555;line-height:60rpx;letter-spacing: 2rpx;}
 .userauth-words{position: relative;text-align: center;font-size: 32rpx;color: gray;line-height: 60rpx;letter-spacing: 2rpx;}
 .userauth-btn{position: relative;width: 95%;line-height: 90rpx;text-align: center;border-radius: 5rpx;font-size:30rpx;letter-spacing: 5rpx;margin-top: 30rpx;}
-.userauth-sure-btn{background: #0099ff;color: white;}
+.userauth-sure-btn{background: #67C23A;color: white;}
 .userauth-back-btn{background: white;color: #555;border: 1px solid #f1f1f1;}
 
 

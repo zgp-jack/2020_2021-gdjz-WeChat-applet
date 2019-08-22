@@ -414,9 +414,11 @@ Page({
      */
     
     onLoad: function (options) {
-        //this.initUserShareTimes();
-        this.initNeedData();
-        this.initJobInfo(options.id);
+      //this.initUserShareTimes();
+      let infoId = options.id;
+      this.setData({ infoId: infoId })
+      this.initNeedData();
+        //this.initJobInfo(infoId);
     },
 
     /**
@@ -430,7 +432,12 @@ Page({
      * 生命周期函数--监听页面显示
      */
     onShow: function () {
-
+      let userInfo = wx.getStorageSync("userInfo");
+      let infoId = this.data.infoId;
+      if (userInfo) {
+        this.setData({ userInfo: userInfo })
+      }
+      this.initJobInfo(infoId);
     },
 
     /**

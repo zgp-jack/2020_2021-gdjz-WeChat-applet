@@ -7,7 +7,9 @@ Page({
      * 页面的初始数据
      */
     data: {
-        userInfo:{},
+        userInfo:false,
+      icon: app.globalData.apiImgUrl + "userauth-topicon.png",
+      options: {},
         cardInfo:{
             username:"",
             title:"",
@@ -132,7 +134,6 @@ Page({
                 title: '修改找活名片'
             })
         }
-        this.setData({ userInfo : userInfo });
         app.appRequestAction({
             url: "publish/view-message/",
             way: "POST",
@@ -147,6 +148,7 @@ Page({
                 let mydata = res.data;
                 if (mydata.errcode == "ok") {
                     _this.setData({
+                      userInfo: userInfo,
                         infoId: infoId,
                         userPhone: mydata.model.user_mobile || mydata.memberInfo.tel,
                         "cardInfo.username": mydata.model.user_name || "",
@@ -167,6 +169,10 @@ Page({
                         showUploads: (mydata.view_image.length > 0) ? true : false,
                         textareaTips: mydata.placeholder
                     })
+                }else if (mydata.errcode == "has") {
+                  wx.redirectTo({
+                    url: '/pages/mycard/mycard',
+                  })
                 }else{
                     app.returnPrevPage(mydata.errmsg);
                 }
@@ -409,11 +415,46 @@ Page({
         }
         return _arr;
     },
+  bindGetUserInfo: function (e) {
+    let that = this;
+    app.bindGetUserInfo(e, function (res) {
+      app.mini_user(res, function (res) {
+        app.api_user(res, function (res) {
+          let uinfo = res.data;
+          if (uinfo.errcode == "ok") {
+            let userInfo = {
+              userId: uinfo.data.id,
+              token: uinfo.data.sign.token,
+              tokenTime: uinfo.data.sign.time,
+            }
+            app.globalData.userInfo = userInfo;
+            wx.setStorageSync('userInfo', userInfo)
+            //that.setData({ userInfo: userInfo });
+            let options = that.data.options;
+            that.initUserCardinfo(options);
+          } else {
+            app.showMyTips(uinfo.errmsg);
+          }
+        });
+      });
+    });
+  },
+  returnPrevPage: function () {
+    wx.navigateBack({ delta: 1 })
+  },
     /**
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
+      let userInfo = wx.getStorageSync("userInfo");
+      if (userInfo) {
+        this.setData({
+          userInfo: userInfo
+        })
         this.initUserCardinfo(options);
+      } else {
+        this.setData({ options: options })
+      }
     },
 
     /**

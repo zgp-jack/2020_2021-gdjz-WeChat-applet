@@ -387,10 +387,10 @@ Page({
 
     //用户点击搜索
     userTapSearch: function () {
-      if (!this.data.userInfo) {
-        app.gotoUserauth();
-        return false;
-      }
+      // if (!this.data.userInfo) {
+      //   app.gotoUserauth();
+      //   return false;
+      // }
         //if (this.data.searchDate.keywords == "") return false;
         this.returnTop();
         this.setData({
@@ -509,10 +509,10 @@ Page({
     },
     valiUserCard: function () {
         let userInfo = this.data.userInfo;
-        if(!userInfo){
-          app.gotoUserauth();
-          return false;
-        }
+        // if(!userInfo){
+        //   app.gotoUserauth();
+        //   return false;
+        // }
         footerjs.valiUserCard(this, app, userInfo);
     },
     getFilterData: function () {
@@ -582,7 +582,12 @@ Page({
      * 生命周期函数--监听页面显示
      */
     onShow: function () {
-
+      let userInfo = wx.getStorageSync("userInfo");
+      if (userInfo) {
+        this.setData({
+          userInfo: userInfo
+        })
+      }
     },
 
     /**

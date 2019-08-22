@@ -1,1 +1,2 @@
-@import '../recruit/recruit.wxss'
+@import '../recruit/recruit.wxss';
+@import '../../userauth/userauth.wxss';

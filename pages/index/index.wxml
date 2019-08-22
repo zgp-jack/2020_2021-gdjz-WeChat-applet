@@ -1,5 +1,5 @@
 <import src="/pages/footer/footer.wxml"/>
-<import src="/pages/tpl/app/app.wxml"/>
+<!-- <import src="/pages/tpl/app/app.wxml"/> -->
 
 <view class='common-index-gztips' wx:if="{{ firstJoin }}">添加到我的小程序，招工找活更方便</view>
 
@@ -144,7 +144,7 @@
     <image src='{{ fastIssueImg }}'></image>
 </view>
 
-<view class='bottompublishbtn'  bindtap='valiUserUrl' data-url="/pages/publish/recruit/recruit"   >发布招工</view>
+<view class='bottompublishbtn'  bindtap='jumpThisLink' data-url="/pages/publish/recruit/recruit"    data-type='0' >发布招工</view>
 
 
 <!-- <view class='fixed-get-integral'  bindtap='jumpThisLink'  data-url="/pages/turntable/turntable"  data-type='0'>
@@ -155,7 +155,7 @@
         <image src='http://cdn.yupao.com/miniprogram/images/list-share-btn.png?t=111'></image>
 </button> -->
  
-<template is="app"  data="{{ bgHeight,btnWidth,wordsHeight,wordsWidth,shadeWidth,winWidth,winHeight,notimesW,userShareData,userShareTime }}" />
+<!-- <template is="app"  data="{{ bgHeight,btnWidth,wordsHeight,wordsWidth,shadeWidth,winWidth,winHeight,notimesW,userShareData,userShareTime }}" /> -->
 
 <!-- 引入footer -->
 <template is="footer" data="{{ footerImgs,publishActive,showPublishBox,footerActive }}" />

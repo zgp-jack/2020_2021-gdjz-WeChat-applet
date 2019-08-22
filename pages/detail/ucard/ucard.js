@@ -28,8 +28,8 @@ Page({
     },
     initUcardInfo: function (id){
         let _this = this;
+      let userInfo = wx.getStorageSync("userInfo");
         let url = userInfo ? "resume/resume-info/" : "resume/no-user-info/";
-        let userInfo = wx.getStorageSync("userInfo");
         this.setData({ userInfo:userInfo ? userInfo : false,infoId:id });
         userInfo = userInfo ? userInfo : {}
         userInfo.infoId = id;
@@ -243,7 +243,8 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
-        this.initUcardInfo(options.id);
+      let infoId = options.id;
+      this.setData({ infoId: infoId })
     },
 
     /**
@@ -257,7 +258,12 @@ Page({
      * 生命周期函数--监听页面显示
      */
     onShow: function () {
-
+      let userInfo = wx.getStorageSync("userInfo");
+      let infoId = this.data.infoId;
+      if (userInfo) {
+        this.setData({ userInfo: userInfo })
+      }
+      this.initUcardInfo(infoId);
     },
 
     /**

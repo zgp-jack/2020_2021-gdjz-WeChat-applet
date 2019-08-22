@@ -400,10 +400,10 @@ Page({
         })
     },
     userTapSearch: function () {
-      if (!this.data.userInfo) {
-        app.gotoUserauth();
-        return false;
-      }
+      // if (!this.data.userInfo) {
+      //   app.gotoUserauth();
+      //   return false;
+      // }
       //let userInfo = 
         //if (this.data.searchDate.keywords == "") return false;
         this.returnTop();

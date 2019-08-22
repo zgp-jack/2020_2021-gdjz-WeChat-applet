@@ -432,10 +432,10 @@ Page({
         })
     },
     userTapSearch:function(){
-      if(!this.data.userInfo){
-        app.gotoUserauth();
-        return false;
-      }
+      // if(!this.data.userInfo){
+      //   app.gotoUserauth();
+      //   return false;
+      // }
         //if(this.data.searchDate.keywords == "") return false;
         this.returnTop();
         this.setData({
@@ -695,6 +695,12 @@ Page({
      * 生命周期函数--监听页面显示
      */
     onShow: function () {
+      let userInfo = wx.getStorageSync("userInfo");
+      if (userInfo) {
+        this.setData({
+          userInfo: userInfo
+        })
+      }
     },
 
     /**

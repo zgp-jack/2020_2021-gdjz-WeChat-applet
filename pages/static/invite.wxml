@@ -8,7 +8,7 @@
         <view class='invite-item common-shaded-box'>
                 <view class='invite-padding-left '>
                     <image src='http://cdn.yupao.com/miniprogram/images/invite-way1.png'></image>
-                    <view>点击右上角（手指指向的）三个点，或点击下方(点击分享)按钮，分享<text>鱼泡网</text>到微信建筑群、焊工群、微信好友，工友点击你分享的链接来到鱼泡网。</view>
+                    <view>点击右上角三个点，或点击下方(点击分享)按钮，分享<text>鱼泡网</text>到微信建筑群、焊工群、微信好友，工友点击你分享的链接来到鱼泡网。</view>
                 </view>
         </view>
         <button class='common-sure-btn btn-margin-bottom' open-type="share">点击分享</button>

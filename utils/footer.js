@@ -13,13 +13,13 @@ const footerImgs = {
 }
 
 function doPublishAction (_this) {
-    let userInfo = _this.data.userInfo;
-    if(!userInfo){
-      wx.navigateTo({
-        url: '/pages/userauth/userauth',
-      })
-      return false;
-    }
+    // let userInfo = _this.data.userInfo;
+    // if(!userInfo){
+    //   wx.navigateTo({
+    //     url: '/pages/userauth/userauth',
+    //   })
+    //   return false;
+    // }
     _this.setData({
         showPublishBox: true
     })
@@ -40,6 +40,11 @@ function closePublishAction(_this) {
     }, 500)
 }
 function valiUserCard(_this,app,userInfo){
+  if (!userInfo) {
+    wx.navigateTo({
+      url: '/pages/publish/card/card?u=0',
+    })
+  } else {
     app.appRequestAction({
         title:"正在加载名片",
         url:"resume/judge-resume/",
@@ -59,6 +64,7 @@ function valiUserCard(_this,app,userInfo){
         },
 
     })
+  }
 }
 
 module.exports = {

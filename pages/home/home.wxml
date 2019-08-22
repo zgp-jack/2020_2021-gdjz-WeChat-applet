@@ -263,7 +263,7 @@
     </view>
 </view>
 
-<view class='fixed-ad'  bindtap='valiUserUrl'  data-url="/pages/publish/recruit/recruit"  >
+<view class='fixed-ad'  bindtap='jumpThisLink'  data-url="/pages/publish/recruit/recruit" data-type='0' >
     <image src='{{ fixedAdImg }}'></image>
 </view>
 

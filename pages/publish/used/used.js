@@ -7,7 +7,9 @@ Page({
      * 页面的初始数据
      */
     data: {
-        userInfo: {},
+      userInfo: false,
+      icon: app.globalData.apiImgUrl + "userauth-topicon.png",
+      options: {},
         cardInfo: {
             username: "",
             title: "",
@@ -378,11 +380,46 @@ Page({
             this.initCityPicker(val);
         }
     },
+  bindGetUserInfo: function (e) {
+    let that = this;
+    app.bindGetUserInfo(e, function (res) {
+      app.mini_user(res, function (res) {
+        app.api_user(res, function (res) {
+          let uinfo = res.data;
+          if (uinfo.errcode == "ok") {
+            let userInfo = {
+              userId: uinfo.data.id,
+              token: uinfo.data.sign.token,
+              tokenTime: uinfo.data.sign.time,
+            }
+            app.globalData.userInfo = userInfo;
+            wx.setStorageSync('userInfo', userInfo)
+            that.setData({ userInfo: userInfo });
+            let options = that.data.options;
+            that.initUserCardinfo(options);
+          } else {
+            app.showMyTips(uinfo.errmsg);
+          }
+        });
+      });
+    });
+  },
+  returnPrevPage: function () {
+    wx.navigateBack({ delta: 1 })
+  },
     /**
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
+      let userInfo = wx.getStorageSync("userInfo");
+      if (userInfo) {
+        this.setData({
+          userInfo: userInfo
+        })
         this.initUserCardinfo(options);
+      } else {
+        this.setData({ options: options })
+      }
     },
 
     /**
