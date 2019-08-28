@@ -64,7 +64,9 @@ Page({
             showWin: false,
             integral: "1"
         },
-        userShareTime: {}
+        userShareTime: {},
+      isload: false,
+      scrollTop: 0
     },
     stopThisAction: function () {
         return false;
@@ -226,7 +228,9 @@ Page({
     },
     doRequestAction: function (_append) {
         let _this = this;
+      if (_this.data.isload) return false;
         this.setData({
+          isload: true,
             nothavemore: false,
             showNothinkData: false
         })
@@ -235,6 +239,7 @@ Page({
             url: "index/info-list/",
             params: _this.data.searchDate,
             success: function (res) {
+              _this.setData({ isload: false })
                 wx.hideLoading();
                 let mydata = res.data;
                 let _page = parseInt(_this.data.searchDate.page)
@@ -263,6 +268,7 @@ Page({
 
             },
             fail: function (err) {
+              _this.setData({ isload: false })
                 wx.hideLoading();
                 wx.showToast({
                     title: '网络出错，数据加载失败！',
@@ -413,16 +419,17 @@ Page({
         this.doSearchRequestAction(false);
     },
     returnTop: function () {
-        if (wx.pageScrollTo) {
-            wx.pageScrollTo({
-                scrollTop: 0
-            })
-        } else {
-            wx.showToast({
-                title: '当前微信版本过低，无法自动回到顶部，请升级到最新微信版本后重试。',
-                icon: 'none'
-            })
-        }
+      this.setData({ scrollTop: 0 })
+        // if (wx.pageScrollTo) {
+        //     wx.pageScrollTo({
+        //         scrollTop: 0
+        //     })
+        // } else {
+        //     wx.showToast({
+        //         title: '当前微信版本过低，无法自动回到顶部，请升级到最新微信版本后重试。',
+        //         icon: 'none'
+        //     })
+        // }
     },
     jumpThisLink: function (e) {
         app.jumpThisLink(e);

@@ -327,10 +327,19 @@ Page({
             app.showMyTips("请查看完整的手机号码后再操作！");
             return false; 
         }
+      if(!this.data.info.show_complaint.show_complaint){
+        wx.showModal({
+          title: '提示',
+          content: this.data.info.show_complaint.tips_message,
+          showCancel:false,
+          confirmText:'知道了'
+        })
+        return false;
+      }
         this.setData({ showComplain: true })
     },
     userCancleComplain: function () {
-        this.setData({ showComplain: false })
+      this.setData({ showComplain: false, complainInfo:"" })
     },
     userComplaintAction: function () {
         let _this = this; 
@@ -357,8 +366,16 @@ Page({
             failTitle: "网络错误，投诉失败！",
             success: function (res) {
                 let mydata = res.data;
-                app.showMyTips(mydata.errmsg);
-                if (mydata.errcode == "ok") _this.setData({ showComplain: false })
+              if (mydata.errcode == "ok"){
+                _this.setData({ showComplain: false, complainInfo: "", "info.show_complaint.show_complaint": 0 });
+              }
+                
+                wx.showModal({
+                  title: '提示',
+                  content: mydata.errmsg,
+                  showCancel:false,
+                  confirmText: mydata.errcode == 'pass_complaint' ? '知道了' : '确定'
+                })
             }
         })
     },
@@ -414,10 +431,10 @@ Page({
      */
     
     onLoad: function (options) {
-      //this.initUserShareTimes();
-      let infoId = options.id;
-      this.setData({ infoId: infoId })
-      this.initNeedData();
+        //this.initUserShareTimes();
+        let infoId = options.id;
+        this.setData({ infoId:infoId })
+        this.initNeedData();
         //this.initJobInfo(infoId);
     },
 
@@ -438,6 +455,7 @@ Page({
         this.setData({ userInfo: userInfo })
       }
       this.initJobInfo(infoId);
+      
     },
 
     /**

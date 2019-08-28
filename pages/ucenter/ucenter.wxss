@@ -171,3 +171,6 @@
 .ucenter-nouserinfo text{position: relative;display: block;line-height: 175rpx;letter-spacing: 2px;font-size: 30rpx;font-weight: bold;}
 .ucenter-nouserinfo-tips{border-top: 1px dashed #dcdcdc;padding: 20rpx;font-size: 26rpx;line-height: 50rpx;color: #666;}
 
+
+
+.click-red-point::after{position: absolute;content: '详情';font-size: 20rpx;right: 30rpx;top:5rpx;color: #ff0000;}

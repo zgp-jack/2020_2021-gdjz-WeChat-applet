@@ -1,1 +1,2 @@
 @import '../expend/expend.wxss';
+.integral-header{color: #0099ff;font-weight: bold;}

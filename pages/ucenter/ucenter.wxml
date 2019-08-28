@@ -23,7 +23,7 @@
                     <text class='overwords'>{{ member.integral }}</text>
                     <text>积分</text>
                 </navigator>
-                <navigator class='ucenter-integral-item flex-column' url='/pages/integral/temp/temp' open-type="navigate">
+                <navigator class='ucenter-integral-item flex-column {{ member.temporary_integral != "0" ? "click-red-point" : "" }}' url='/pages/integral/temp/temp' open-type="navigate">
                     <text>{{ member.temporary_integral }}</text>
                     <text>临时积分</text>
                 </navigator>

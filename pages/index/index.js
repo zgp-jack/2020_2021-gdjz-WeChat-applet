@@ -74,8 +74,10 @@ Page({
         firstJoin: false,
         fastIssueImg: app.globalData.apiImgUrl + "index-fast-issue.png",
         showFastIssue: app.globalData.showFastIssue,
-        joblistjz: app.globalData.apiImgUrl + "joblist_jz.png",
-        joblistwyjz:app.globalData.apiImgUrl+"joblist_wyjz.png"
+        joblistjz: app.globalData.apiImgUrl + "joblist_zd.png",
+        joblistwyjz:app.globalData.apiImgUrl+"joblist_wyzd.png",
+      isload: false,
+      scrollTop: 0
     },
     wantFastIssue:function(){
       if (!this.data.userInfo) {
@@ -245,7 +247,9 @@ Page({
     },
     doRequestAction:function(_append){
         let _this = this;
+      if (_this.data.isload) return false;
         this.setData({
+          isload: true,
             nothavemore:false,
             showNothinkData:false
         })
@@ -266,6 +270,7 @@ Page({
             url:"index/info-list/",
           params: _params,
             success:function(res){
+              _this.setData({ isload: false })
                 app.globalData.isFirstLoading ? "" : wx.hideLoading();
                 let mydata = res.data;
                 let _page = parseInt(_this.data.searchDate.page)
@@ -294,6 +299,7 @@ Page({
                 
             },
             fail:function(err){
+              _this.setData({ isload: false })
                 wx.hideLoading();
                 wx.showToast({
                     title: '网络出错，数据加载失败！',
@@ -444,16 +450,17 @@ Page({
         this.doSearchRequestAction(false);
     },
     returnTop:function(){
-        if (wx.pageScrollTo) {
-            wx.pageScrollTo({
-                scrollTop: 0
-            })
-        }else{
-            wx.showToast({
-                title: '当前微信版本过低，无法自动回到顶部，请升级到最新微信版本后重试。',
-                icon: 'none'
-            })
-        }
+      this.setData({ scrollTop: 0 })
+        // if (wx.pageScrollTo) {
+        //     wx.pageScrollTo({
+        //         scrollTop: 0
+        //     })
+        // }else{
+        //     wx.showToast({
+        //         title: '当前微信版本过低，无法自动回到顶部，请升级到最新微信版本后重试。',
+        //         icon: 'none'
+        //     })
+        // }
     },
     initUserinfo:function(){
         let _this = this;

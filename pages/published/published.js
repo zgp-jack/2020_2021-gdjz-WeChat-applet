@@ -1,6 +1,5 @@
 // pages/published/published.js
 let footerjs = require("../../utils/footer.js");
-let pd = require("../../utils/p.js");
 const app = getApp();
 Page({
 
@@ -50,12 +49,10 @@ Page({
             wzd: app.globalData.apiImgUrl + "detail-wzd.png",
             time: app.globalData.apiImgUrl + "published-djs.png",
         },
-        pd: pd.pd,
-        ids:[2,6,7,11,16],
-        newTopShow:false,
+      newTopShow: false,
       collecticon: app.globalData.apiImgUrl + "collect-tipicon.png",
-      collecthand: app.globalData.apiImgUrl + "collect-tiphand.png",
-      showCollectTips:false
+      collecthand: app.globalData.apiImgUrl + "new-published-zd.png",
+      showCollectTips: false
     },
     bindAreaChange:function(e){
         this.setData({ areaIndex: e.detail.value })
@@ -86,7 +83,7 @@ Page({
         let areaIndex = this.data.areaIndex;
         let infoIndex = parseInt(this.data.infoIndex);
         let _this = this;
-        wx.showLoading({ title: '加载中' })
+        wx.showLoading({ title: '正在置顶该信息' })
         app.doRequestAction({
             url:"job/set-job-top/",
             way:"POST",
@@ -104,7 +101,7 @@ Page({
                 let mydata = res.data;
                 if(mydata.errcode == "integralBad"){
                     wx.showModal({
-                        title: '设置急招失败',
+                        title: '设置置顶失败',
                         content: mydata.errmsg,
                         success: function (res) {
                             if (res.confirm) {
@@ -159,7 +156,7 @@ Page({
         if (options && options.hasOwnProperty("type")){
             this.setData({ publishIndex: parseInt(options.type) })
             wx.setNavigationBarTitle({ title: (options.type == "1") ? "鱼泡网-我发布的二手交易" : "鱼泡网-我发布的招工" })
-        }
+        } 
         let userInfo = wx.getStorageSync("userInfo");
         this.setData({ userInfo: userInfo })
         this.getPublishedData();
@@ -226,7 +223,17 @@ Page({
         let _index = this.data.publishIndex;
         let infoIndex = e.currentTarget.dataset.index;
         let status = e.currentTarget.dataset.status;
+        let s = e.currentTarget.dataset.s;
         let userInfo = this.data.userInfo;
+
+        if(s == "2"){
+          wx.showModal({
+            title: '提示',
+            content: '已招到状态不能进行置顶操作，请修改招工状态',
+            showCancel:false
+          })
+          return false;
+        }
         let _this = this;
         this.setData({ infoId: _id, infoIndex: infoIndex })
         if(_index == 1){
@@ -352,40 +359,7 @@ Page({
         })
     },
 
-    //选择多省份
-    setThisTop1:function(e){
-        this.setData({ newTopShow:true })
-        let id = e.currentTarget.dataset.id;
-        let ids = e.currentTarget.dataset.ids;
-        this.initJobPd(ids);
-    },
-    checkboxChange:function(e){
-        let ids = e.detail.value;
-        this.initJobPd(ids);
-    },
-    initJobPd:function(ids){
-        let p = app.arrDeepCopy(this.data.pd);
-        let _pd = p.map(item => {
-            for (let i = 0; i < ids.length; i++) {
-                let itemId = parseInt(ids[i]);
-                let id = parseInt(item.id);
-                item.checked = false;
-                if(itemId == id){
-                    item.checked = true;
-                    break;
-                }
-            }
-            return item;
-        })
-        //console.log(_pd);
-        this.setData({ pd: _pd });
-    },
-    closeNewTop:function(){
-        this.setData({ newTopShow:false });
-    },
-    sureNewTop:function(){
-        
-    },
+
     // 共用footer
     jumpThisLink: function (e) {
         app.jumpThisLink(e);
@@ -406,20 +380,20 @@ Page({
     valiUserCard: function () {
         let userInfo = this.data.userInfo;
         footerjs.valiUserCard(this, app, userInfo);
-  }, 
-  initCollectTips: function(options){
-    if (options.hasOwnProperty("jz")) this.setData({ showCollectTips:true })
-  },
-  closeCollect:function(){
-    this.setData({ showCollectTips: false })
-  },
+    },
+    initCollectTips: function (options) {
+      if (options.hasOwnProperty("jz")) this.setData({ showCollectTips: true })
+    },
+    closeCollect: function () {
+      this.setData({ showCollectTips: false })
+    },
     /**
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
-        this.initFooterData();
-        this.initPublishedData(options);
-        this.initCollectTips(options);
+      this.initFooterData();
+      this.initPublishedData(options);
+      this.initCollectTips(options);
     },
 
     /**

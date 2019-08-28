@@ -27,12 +27,12 @@ Page({
         app.callThisPhone(e);
     },
     initUcardInfo: function (id){
-        let _this = this;
+      let _this = this;
       let userInfo = wx.getStorageSync("userInfo");
-        let url = userInfo ? "resume/resume-info/" : "resume/no-user-info/";
-        this.setData({ userInfo:userInfo ? userInfo : false,infoId:id });
-        userInfo = userInfo ? userInfo : {}
-        userInfo.infoId = id;
+      let url = userInfo ? "resume/resume-info/" : "resume/no-user-info/";
+      this.setData({ userInfo:userInfo ? userInfo : false,infoId:id });
+      userInfo = userInfo ? userInfo : {}
+      userInfo.infoId = id;
       userInfo.type = "resume";
         app.appRequestAction({
           url: url,
@@ -43,6 +43,7 @@ Page({
                 _this.setData({ ucardInfo: mydata.result })
                 if (mydata.errcode != "fail") {
                     let t = mydata.result.title;
+                    console.log(t)
                     wx.setNavigationBarTitle({ title: t })
                 }
                 _this.doDetailAction(mydata,{
@@ -195,10 +196,19 @@ Page({
         this.setData({ complainInfo : e.detail.value })
     },
     userTapComplain:function(){
+      if (!this.data.ucardInfo.show_complaint.show_complaint) {
+        wx.showModal({
+          title: '提示',
+          content: this.data.ucardInfo.show_complaint.tips_message,
+          showCancel: false,
+          confirmText: '知道了'
+        })
+        return false;
+      }
         this.setData({ showComplain : true })
     },
     userCancleComplain:function(){
-        this.setData({ showComplain: false })
+      this.setData({ showComplain: false, complainInfo: "" })
     },
     userComplaintAction: function () {
         let _this = this;
@@ -224,8 +234,13 @@ Page({
             failTitle:"网络错误，投诉失败！",
             success:function(res){
                 let mydata = res.data;
-                app.showMyTips(mydata.errmsg);
-                if (mydata.errcode == "ok") _this.setData({ showComplain: false })
+              if (mydata.errcode == "ok") _this.setData({ showComplain: false, complainInfo: "", "ucardInfo.show_complaint.show_complaint": 0 })
+                wx.showModal({
+                  title: '提示',
+                  content: mydata.errmsg,
+                  showCancel:false,
+                  confirmText: mydata.errcode == 'pass_complaint' ? '知道了' : '确定'
+                })
             }
         })
     },
@@ -243,8 +258,8 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
-      let infoId = options.id;
-      this.setData({ infoId: infoId })
+        let infoId = options.id;
+        this.setData({ infoId:infoId })
     },
 
     /**
@@ -260,8 +275,8 @@ Page({
     onShow: function () {
       let userInfo = wx.getStorageSync("userInfo");
       let infoId = this.data.infoId;
-      if (userInfo) {
-        this.setData({ userInfo: userInfo })
+      if(userInfo){
+        this.setData({userInfo:userInfo})
       }
       this.initUcardInfo(infoId);
     },

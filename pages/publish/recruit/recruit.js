@@ -652,20 +652,15 @@ Page({
             params: dataJson,
             success: function (res) {
                 let mydata = res.data;
-                if (mydata.errcode == "ok") {
-                    wx.showModal({
-                        title: '恭喜您',
-                        content: mydata.errmsg,
-                        showCancel: false,
-                        success: function (res) {
-                            wx.reLaunch({
-                                url: '/pages/published/published',
-                            })
-                        }
-                    })
-                } else {
-                    app.showMyTips(mydata.errmsg);
+              wx.showModal({
+                title: (mydata.errcode == "ok") ? '恭喜您' : '提示',
+                content: mydata.errmsg,
+                showCancel: false,
+                confirmText: (mydata.errcode == "ok") ? '确定' : '知道了',
+                success: function (res) {
+                  if (mydata.errcode == "ok") wx.reLaunch({ url: '/pages/published/published' })
                 }
+              })
             }
         })
     },

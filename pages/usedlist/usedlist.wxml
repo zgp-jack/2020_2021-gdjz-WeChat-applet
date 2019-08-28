@@ -2,7 +2,7 @@
 
 <!-- 搜索头部 -->
 <view class="lists-header">
-    <input placeholder="跳蚤市场"  bindconfirm="userTapSearch" confirm-type="search"   bindinput='bindKeyInput'/>
+    <input placeholder="跳蚤市场"  bindconfirm="userTapSearch" confirm-type="search"   bindinput='bindKeyInput'  bindtap="closeAllSelect"/>
     <text bindtap='userTapSearch'>搜索</text>
 </view>
 
@@ -37,7 +37,7 @@
 </view>
 
 
-<view class='yupao-lists-container yupao-common-container yupao-common-nofooter'>
+<scroll-view class='yupao-lists-container yupao-common-container yupao-common-nofooter yupao-usedlist-container' scroll-y="true" scrolltolower="100" bindscrolltolower="onReachBottom" scroll-top="{{ scrollTop }}">
 
     <!-- 公告 -->
     <view class='yupao-lists-notice'>
@@ -100,7 +100,7 @@
         </view>
     </view>
 
-</view>
+</scroll-view>
 
 <view class='fixed-ad'   bindtap='jumpThisLink'  data-url="/pages/download/download-app"  data-type='0'>
     <image src='{{ fixedAdImg }}'></image>

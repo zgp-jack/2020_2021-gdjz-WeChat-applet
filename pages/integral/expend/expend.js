@@ -11,38 +11,39 @@ Page({
         nothavemore:false,
         isNone:false,
         isFirst:true,
-        userInfo:"",
+        userInfo:{},
         lists:[],
         day:7,
         pageSize:15,
         page :1,
-        showRecord: false,
-        info: {},
-        showComplain:false,
-        complainInfo:"",
-        infoId:"",
-        type:""
+        showRecord:false,
+        info:{},
+        showComplain: false,
+        complainInfo: "",
+        infoId: "",
+        type: "",
+        cindex:""
     },
-  userCancleComplain:function(){
-    this.setData({ showComplain: false })
+  userCancleComplain: function () {
+    this.setData({ showComplain: false, complainInfo:"" })
   },
-  complainInfo:function(e){
+  complainInfo: function (e) {
     let infoId = e.currentTarget.dataset.id;
     let type = e.currentTarget.dataset.type;
-    this.setData({ showComplain: true,infoId:infoId,type:type })
+    this.setData({ showComplain: true, infoId: infoId, type: type })
   },
-  userEnterComplain:function(e){
+  userEnterComplain: function (e) {
     this.setData({ complainInfo: e.detail.value })
   },
-  bindconfirm:function(e){
+  bindconfirm: function (e) {
     this.setData({ complainInfo: e.detail.value })
   },
-  userComplaintAction:function(e){
+  userComplaintAction: function (e) {
     let _this = this;
     let userInfo = this.data.userInfo;
     let infoId = this.data.infoId;
     let type = this.data.type;
-    let info = this.data.complainInfo; 
+    let info = this.data.complainInfo;
     info = info.replace(/^\s+|\s+$/g, '');
     if (!info) {
       app.showMyTips("请输入您的投诉内容");
@@ -63,9 +64,14 @@ Page({
       failTitle: "网络错误，投诉失败！",
       success: function (res) {
         let mydata = res.data;
-        app.showMyTips(mydata.errmsg);
-        console.log();
-        if (mydata.errcode == "ok") _this.setData({ showComplain: false })
+        if (mydata.errcode == "ok"){
+            _this.setData({ showComplain: false, complainInfo: "", "info.show_complain":0 })
+        }
+        wx.showModal({
+          title: '提示',
+          content: mydata.errmsg,
+          showCancel:false
+        })
       }
     })
   },
@@ -151,21 +157,21 @@ Page({
             }
         })
     },
-    showThisRecord: function (e) {
+    showThisRecord:function(e){
         let _this = this;
         let id = e.currentTarget.dataset.id;
         let userInfo = this.data.userInfo;
         userInfo.logId = id;
         app.appRequestAction({
-            title: "信息获取中",
-            url: "integral/look-used-info/",
-            way: "POST",
-            params: userInfo,
-            success: function (res) {
+            title:"信息获取中",
+            url:"integral/look-used-info/",
+            way:"POST",
+            params:userInfo,
+            success:function(res){
                 let mydata = res.data;
-                if (mydata.errcode == "ok") {
-                    _this.setData({ info: mydata.info, showRecord: true })
-                } else {
+                if(mydata.errcode == "ok"){
+                    _this.setData({ info: mydata.info, showRecord:true })
+                }else{
                     wx.showModal({
                         title: '温馨提示',
                         content: mydata.errmsg,
@@ -173,19 +179,19 @@ Page({
                     })
                 }
             },
-            fail: function () {
+            fail:function(){
                 wx.showModal({
                     title: '温馨提示',
                     content: '网络错误，数据加载失败！',
-                    showCancel: false,
+                    showCancel:false,
                 })
             }
         })
     },
-    closeThisRerocd: function () {
-        this.setData({ showRecord: false })
+    closeThisRerocd:function(){
+        this.setData({ showRecord:false })
     },
-    callThisPhone: function (e) {
+    callThisPhone:function(e){
         app.callThisPhone(e);
     },
     /**

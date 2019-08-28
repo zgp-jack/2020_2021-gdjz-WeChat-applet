@@ -182,11 +182,13 @@ page{
     color: #fff;
 }
 .yupao-lists-container{
-    position: relative;
+    /* position: relative;
+    padding-top: 180rpx;*/
     width: 100%;
-    padding-top: 180rpx;
     padding-left: 27rpx;
-    padding-right: 27rpx;
+    padding-right: 27rpx; 
+
+    position: fixed;height:calc(100% - 280rpx);top: 180rpx;left: 0;padding-bottom: 0;overflow-y: scroll;box-sizing: border-box; 
 }
 
 .yupao-lists-notice{
