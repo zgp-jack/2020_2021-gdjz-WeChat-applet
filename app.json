@@ -4,7 +4,6 @@
     "pages/ucenter/ucenter",
     "pages/userauth/userauth",
     "pages/publish/recruit/recruit",
-    "pages/map/map",
     "pages/publish/test/test",
     "pages/collect/collect",
     "pages/home/home",
@@ -48,6 +47,7 @@
     "pages/footer/footer",
     "pages/tpl/win/win",
     "pages/tpl/app/app",
+    "pages/map/map",
     "pages/map/detail",
     "pages/rm/rm"
   ],

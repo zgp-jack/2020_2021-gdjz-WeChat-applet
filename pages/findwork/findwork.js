@@ -119,10 +119,12 @@ Page({
         let index = parseInt(e.currentTarget.dataset.index);
         let _id = e.currentTarget.dataset.id;
         let areaText = e.currentTarget.dataset.area;
+      let directCtiy = parseInt(e.currentTarget.dataset.haschild);
         let _sid = this.data.searchDate.area_id;
         this.setData({ province: index })
         //if (_id == _sid) return false;
-
+      let mydata = { "name": areaText, "id": _id };
+      if (!directCtiy) app.setStorageAction(_id, mydata)
         _this.returnTop();
         _this.setData({
             isFirstRequest: true,

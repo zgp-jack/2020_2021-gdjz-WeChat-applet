@@ -43,7 +43,8 @@ App({
     showFastIssue:{
         show:0,
         request:false
-    }
+    },
+    gdApiKey:"20f12aae660c04de86f993d3eff590a0"
   },
     initUserInfo: function (e) {
         let tpage = e.path;
@@ -590,5 +591,89 @@ App({
   },
   gotoUserauth:function(){
     wx.navigateTo({ url: '/pages/userauth/userauth' })
-  }
+  },
+  /**打开设置面板 */
+  openSetting: function (callback) {
+    let that = this;
+    wx.getSetting({
+      success: (res) => {
+        //console.log(res.authSetting['scope.userLocation']);
+        if (res.authSetting['scope.userLocation'] != undefined && res.authSetting['scope.userLocation'] != true) {//非初始化进入该页面,且未授权   
+          wx.showModal({
+            title: '是否授权当前位置',
+            content: '需要获取您的地理位置，请确认授权，否则将不能为你自动推荐位置',
+            success: function (res) {
+              if (res.cancel) {
+              } else if (res.confirm) {
+                wx.openSetting({
+                  success: function (data) {
+                    console.log(data);
+                    if (data.authSetting["scope.userLocation"] == true) {
+                      wx.showToast({
+                        title: '授权成功',
+                        icon: 'success',
+                        duration: 2000
+                      })
+                      callback? callback() : ""
+                    } else {
+                      wx.showToast({
+                        title: '授权失败',
+                        icon: 'success',
+                        duration: 2000
+                      })
+                    }
+                  }
+                })
+              }
+            }
+          })
+          return false;
+        }
+      },
+    })
+  },
+  setStorageAction: function (id, mydata,flag) { //flag='省'
+    if(id == 1) return false;
+    let locationHistory = wx.getStorageSync("locationHistory");
+    let gpsPorvince = wx.getStorageSync("gpsPorvince");
+    let gpsOrientation = wx.getStorageSync("gpsOrientation");
+    let isArr = locationHistory instanceof Array;
+    let lid = flag ? (gpsPorvince ? parseInt(gpsPorvince.id) : "") : (gpsOrientation ? parseInt
+      (gpsOrientation.id) : "");
+    if (lid == id) return false;
+    if (!isArr) {
+      wx.setStorageSync("locationHistory", [mydata])
+    } else {
+      let len = locationHistory.length;
+      for (let i = 0; i < len; i++) {
+        let fid = parseInt(locationHistory[i].id);
+        if (fid == id) {
+          locationHistory.splice(i, 1);
+          break;
+        }
+      }
+      locationHistory.unshift(mydata);
+      locationHistory.splice(2)
+      wx.setStorageSync("locationHistory", locationHistory)
+    }
+  },
+  getAreaData: function (_this) {
+    let areadata = wx.getStorageSync("areadata");
+    if (areadata) {
+      _this.setData({
+        areadata: areadata
+      })
+      return false;
+    }
+    this.doRequestAction({
+      url: "index/index-area/",
+      success: function (res) {
+        _this.setData({
+          areadata: res.data
+        })
+        wx.setStorageSync('areadata', res.data)
+      }
+    });
+
+  },
 })

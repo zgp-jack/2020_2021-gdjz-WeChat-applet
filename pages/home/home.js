@@ -1,4 +1,5 @@
-let footerjs = require("../../utils/footer.js"); 
+let footerjs = require("../../utils/footer.js");
+let areas = require("../../utils/area.js");
 const app = getApp();
 Page({
     data: {
@@ -62,7 +63,41 @@ Page({
     jixieLinkImg: app.globalData.commonJixieAd,
     fixedAdImg:app.globalData.fixedPublishImg,
     phone: app.globalData.serverPhone,
-    
+      locationHistory:false,
+      gpsOrientation:false,
+      gpsposi:"../../images/gps-posi.png",
+      clearinput: "../../images/clear-input.png",
+      allAreaLists:[],
+      nAreaLists:[],
+      isAllAreas:true,
+      showInputList:false,
+      searchInputVal:""
+  },
+  chooseInputCtiy:function(e){
+    this.chooseThisCtiy(e);
+    this.setData({ isAllAreas:true,searchInputVal:"",showArea:false })
+  },
+  clearInputAction:function(){
+    this.setData({ isAllAreas: true, showInputList:false,searchInputVal:"" })
+  },
+  searchInput:function(e){
+    let val = e.detail.value
+    this.setData({ searchInputVal: val  })
+    if (!val) this.setData({ showInputList: false, isAllAreas:true })
+    else{
+      this.setData({ showInputList: true })
+      this.filterInputList(val);
+    }
+  },
+  filterInputList:function(val){
+    let list = app.arrDeepCopy(this.data.allAreaLists);
+    let nlist = list.filter(function(item){
+      return (item.name.indexOf(val) != -1);
+    })
+    this.setData({ nAreaLists: nlist,isAllAreas:false })
+  },
+  showInputList:function(){
+    this.setData({ showInputList:true })
   },
   callThisPhone: function (e) {
     app.callThisPhone(e);
@@ -77,7 +112,8 @@ Page({
     },
     closeArea: function () {
         this.setData({
-            showArea: false
+            showArea: false,
+          showInputList:false
         })
     },
     initFooterData:function(){
@@ -115,29 +151,13 @@ Page({
             }
         });
     },
-    getAreaData: function () {
-        let _this = this;
-        let areadata = wx.getStorageSync("areadata");
-        if (areadata){
-            _this.setData({
-                areadata: areadata
-            })
-            return false;
-        }
-        app.doRequestAction({
-            url: "index/index-area/",
-            success: function (res) {
-                _this.setData({
-                    areadata: res.data
-                })
-                wx.setStorageSync('areadata', res.data)
-            }
-        });
-
+    getAreaData: function () { 
+      app.getAreaData(this);
     },
     chooseThisCtiy:function(e){
         let id = e.currentTarget.dataset.id;
         let area = e.currentTarget.dataset.area;
+      let mydata = { "name": area, "id": id };
         this.setData({
             areaId: parseInt(id),
             areaText: area,
@@ -146,7 +166,8 @@ Page({
         this.getIndexListData();
         wx.setStorageSync("areaId", id);
         wx.setStorageSync("areaText", area);
-
+        app.setStorageAction(id, mydata)
+      this.initHistoryLoc();
     },
     getSwipersData:function(){
         let _this = this;
@@ -228,10 +249,22 @@ Page({
       })
       callback ? callback() : ""
     },
+  initHistoryLoc:function(){
+    let h = wx.getStorageSync("locationHistory");
+    let p = wx.getStorageSync("gpsOrientation");
+    if (h) this.setData({ locationHistory: h })
+    if (p) this.setData({ gpsOrientation:p })
+  },
+  initInputList:function(){
+    let list = areas.getInputList();
+    this.setData({ allAreaLists: list })
+  },
     onLoad: function (options) {
+      this.initInputList();
       this.initIndexData();
       this.initFooterData();
       this.getAreaData();
+      this.initHistoryLoc();
   },
   valiUserUrl: function (e) {
     app.valiUserUrl(e, this.data.userInfo)

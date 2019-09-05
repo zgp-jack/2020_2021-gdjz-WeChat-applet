@@ -1,8 +1,10 @@
 // pages/lists/lists.
+const app = getApp();
 let footerjs = require("../../utils/footer.js");
 let areas = require("../../utils/area.js");
 let md5 = require("../../utils/md5.js");
-const app = getApp();
+const Amap = require("../../utils/amap-wx.js");
+const amapFun = new Amap.AMapWX({ key: app.globalData.gdApiKey });
 Page({
 
     /**
@@ -79,6 +81,28 @@ Page({
       isload: false,
       scrollTop: 0
     },
+  getMapInfo: function (callback) {
+    let that = this;
+    amapFun.getRegeo({
+      success: function (data) {
+        let gpsLocation = {
+          province : data[0].regeocodeData.addressComponent.province,
+          city : data[0].regeocodeData.addressComponent.city,
+          adcode : data[0].regeocodeData.addressComponent.adcode,
+          citycode : data[0].regeocodeData.addressComponent.citycode
+        }
+        let province = areas.getProviceItem(gpsLocation.province, gpsLocation.city)
+        wx.setStorageSync("areaText", province.name)
+        wx.setStorageSync("areaId", province.id)
+        
+        callback(province)
+      },
+      fail: function (info) {
+        wx.setStorageSync("areaText", "全国")
+        wx.setStorageSync("areaId", "1")
+      }
+    })
+  },
     wantFastIssue:function(){
       if (!this.data.userInfo) {
         app.gotoUserauth();
@@ -117,14 +141,16 @@ Page({
         let areaText = e.currentTarget.dataset.area;
         let _sid = this.data.searchDate.area_id;
         this.setData({ province: index })
+        let mydata = { "name": areaText, "id": _id};
         //if(_id == _sid) return false;
         if (_this.touchEndTime - _this.touchStartTime < 350) {
             var currentTime = e.timeStamp
             var lastTapTime = _this.lastTapTime
             _this.lastTapTime = currentTime
-
+          if (!directCtiy) app.setStorageAction(_id, mydata)
             if (currentTime - lastTapTime < 300) {
                 //console.log("double tap");
+                
                 clearTimeout(_this.lastTapTimeoutFunc);
                 _this.returnTop();
                 _this.setData({
@@ -160,7 +186,8 @@ Page({
     },
     userChooseCity:function(e){
         let areaText = e.currentTarget.dataset.area;
-        let id = parseInt(e.currentTarget.dataset.id);
+        let id = parseInt(e.currentTarget.dataset.id); 
+        let pid = parseInt(e.currentTarget.dataset.pid); 
         //if(parseInt(this.data.searchDate.area_id) == id) return false;
         this.setData({
             userCity: id,
@@ -169,12 +196,18 @@ Page({
             "searchDate.page":1,
             "searchDate.area_id": id
         })
+      let mydata = { "name": areaText, "id": id };
+      if (id != pid) {
+        app.setStorageAction(id,mydata)
+      }
+      
         this.returnTop();
         this.doRequestAction(false);
         this.closeAllSelect();
         wx.setStorageSync("areaId", id)
         wx.setStorageSync("areaText", areaText)
     },
+    
     userChooseWorktype:function(e){
         var _this = this;
         let index = parseInt(e.currentTarget.dataset.index);
@@ -245,7 +278,7 @@ Page({
             url: '/pages/static/notice?id=' + _id,
         })
     },
-    doRequestAction:function(_append){
+    doRequestAction:function(_append,callback){
         let _this = this;
       if (_this.data.isload) return false;
         this.setData({
@@ -577,36 +610,29 @@ Page({
         let _this = this;
         let areaId = wx.getStorageSync("areaId");
         let areaText = wx.getStorageSync("areaText");
+        let gpsOrientation = wx.getStorageSync("gpsOrientation");
+      
+        if (areaId && areaText) {
+          _this.initAreaInfo()
+        } else if(gpsOrientation) {
+          wx.setStorageSync("areaText", gpsOrientation.name)
+          wx.setStorageSync("areaId", gpsOrientation.id)
+          _this.initAreaInfo();
+        }else{
+          _this.setData({
+            "searchDate.area_id": 1,
+            areaText: "全国"
+          })
+          _this.doRequestAction(false);
 
-        if (!areaId || !areaText) {
-            app.appRequestAction({
-                url: "index/only-get-area-id/",
-                hideLoading:true,
-                success: function (res) {
-                    let mydata = res.data;
-                    if (mydata.errcode == "ok") {
-                        wx.setStorageSync("areaText", mydata.areaText);
-                        wx.setStorageSync("areaId", mydata.areaId);
-                    } else {
-                        if (!areaText || !areaId) {
-                            wx.setStorageSync("areaText", "全国");
-                            wx.setStorageSync("areaId", "1");
-                        }
-                    }
-                },
-                fail: function () {
-                    if (!areaText || !areaId) {
-                        wx.setStorageSync("areaText", "全国");
-                        wx.setStorageSync("areaId", "1");
-                    }
-                },
-                complete: function () {
-                    _this.initAreaInfo();
-                }
-            });
-        } else {
+          _this.getMapInfo(function(res){
+            _this.setData({
+              "searchDate.page":1,
+            })
             _this.initAreaInfo();
-        }
+          })
+
+        }          
 
     },
     timerLoading: function () {
@@ -690,6 +716,7 @@ Page({
         this.initUserinfo();
         this.initFooterData();
         this.checkIsInvite(options);
+
     },
     /**
      * 生命周期函数--监听页面初次渲染完成

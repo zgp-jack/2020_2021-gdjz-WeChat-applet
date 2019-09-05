@@ -251,9 +251,27 @@
 
 <!-- 地区选择 -->
 <view class='index-pullareabox {{ showArea ? "index-pullareabox-active":"" }}'>
-    <view class='index-area-header'>地区选择 <text class='index-close-area'   bindtap='closeArea'></text></view>
+    <view class='index-area-header'>
+      <view class="searchinputbox">
+        <input class="area-input" placeholder="请输入城市" bindinput="searchInput" bindtap="showInputList" value="{{ searchInputVal }}"></input>
+        <image src="{{ clearinput }}" bindtap="clearInputAction"></image>
+      </view>
+      <text class='index-close-area' bindtap='closeArea'>取消</text>
+    </view>
+
+    <view class="searchcitybox" wx:if="{{ showInputList }}">
+      <view class="search-list-item" wx:for="{{ isAllAreas ? allAreaLists : nAreaLists }}" wx:key="{{ index }}"  bindtap='chooseInputCtiy'  data-id="{{ item.id }}" data-area="{{ item.name }}" >{{ item.cname }} </view>
+    </view>
+
     <view class='index-area-tips overwords'>当前选择城市：<text>{{ areaText }}</text></view>
     <view class='index-area-body'>
+        <view class='index-area-item' wx:if="{{ gpsOrientation || locationHistory }}">
+            <text class='area-header-words'>当前定位城市/最近访问</text>
+            <view class='area-body-content clearfix'>
+              <view class="gpsposi"><view class='overwords' data-id="{{ gpsOrientation.id }}" data-area="{{ gpsOrientation.name }}"  bindtap='chooseThisCtiy'><image src="{{ gpsposi }}"></image>{{ gpsOrientation.name }}</view></view>
+                <view wx:for="{{ locationHistory }}" wx:key="{{ index }}"><text class='overwords' data-id="{{ item.id }}" data-area="{{ item.name }}"  bindtap='chooseThisCtiy'>{{ item.name }}</text></view>
+            </view>
+        </view>
         <view class='index-area-item' wx:for="{{ areadata }}" wx:key="{{ index }}">
             <text class='area-header-words'>{{ item[0].city }}</text>
             <view class='area-body-content clearfix'>

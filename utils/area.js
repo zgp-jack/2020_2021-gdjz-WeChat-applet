@@ -1731,12 +1731,83 @@ function getProviceList(){
     var _lists = arrDeepCopy(areas);
     var _p = [];
     for(let i = 0;i < _lists.length;i++){
-        _p.push({ id:_lists[i].id,name:_lists[i].name })
+        _p.push({ id:_lists[i].id,name:_lists[i].name,has_children:_lists[i].has_children })
     }
     return _p;
 }
 
+function getPublishArea(){
+  let _lists = arrDeepCopy(areas);
+  _lists = _lists.slice(1);
+  _lists.forEach((item,index)=>{
+    if (item.has_children) { _lists[index].children =  item.children.slice(1) }
+  })
+  return _lists;
+}
+
+function getProviceItem(p,c) {
+  let _lists = arrDeepCopy(areas);
+  _lists = _lists.slice(1);
+  let len = _lists.length;
+  for (let i = 0; i < len;i++){
+    if (p.indexOf(_lists[i].name) != -1){
+      let pdata = _lists[i];
+      if(pdata.has_children){
+        let plist = pdata.children
+        let clen = plist.length
+        for (let j = 0; j < clen;j++){
+          if (c.indexOf(plist[j].name) != -1) {
+            let myp = { "pid": _lists[i].id, "name": plist[j].name, "id": plist[j].id}
+            wx.setStorageSync("gpsPorvince", myp);
+            wx.setStorageSync("gpsOrientation", plist[j] );
+            break;
+          }
+        }
+      }else{
+        delete pdata.has_children
+        wx.setStorageSync("gpsOrientation", pdata);
+      }
+      let item = {
+        name: pdata.name,
+        id:pdata.id,
+        pid:pdata.pid
+      };
+      return item;
+      break;
+    }
+  }
+  return areas[0];
+}
+
+function getInputList(){
+  let _lists = arrDeepCopy(areas);
+  _lists.splice(0,1);
+  let len = _lists.length;
+  let res = [];
+  for (let i = 0; i < len;i++){
+    let _clists = _lists[i];
+    if (_clists.has_children){
+      let name = _clists.name;
+      let nlist = _clists.children;
+      let nlen = nlist.length;
+      for(let j = 1;j<nlen;j++){
+        let data = nlist[j];
+        data.cname = name + "-" + data.name
+        res.push(data)
+      }
+    }else{
+      _clists.cname = _clists.name;
+      res.push(_clists)
+    }
+  }
+  return res;
+}
+
+
 module.exports = {
     getAreaArr: areas,
-    getProviceList: getProviceList
+    getProviceList: getProviceList,
+  getPublishArea: getPublishArea,
+  getProviceItem: getProviceItem,
+  getInputList: getInputList
 }

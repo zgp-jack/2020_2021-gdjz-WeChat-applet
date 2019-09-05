@@ -92,13 +92,15 @@ Page({
         let areaText = e.currentTarget.dataset.area;
         let _sid = this.data.searchDate.area_id;
         this.setData({ province: index })
+      let mydata = { "name": areaText, "id": _id };
         //if (_id == _sid) return false;
         if (_this.touchEndTime - _this.touchStartTime < 350) {
             var currentTime = e.timeStamp
             var lastTapTime = _this.lastTapTime
             _this.lastTapTime = currentTime
-
+          if (!directCtiy) app.setStorageAction(_id, mydata)
             if (currentTime - lastTapTime < 300) {
+              
                 //console.log("double tap");
                 clearTimeout(_this.lastTapTimeoutFunc);
                 _this.returnTop();
@@ -136,6 +138,7 @@ Page({
     userChooseCity: function (e) {
         let areaText = e.currentTarget.dataset.area;
         let id = parseInt(e.currentTarget.dataset.id);
+      let pid = parseInt(e.currentTarget.dataset.pid); 
        // if (parseInt(this.data.searchDate.area_id) == id) return false;
         this.setData({
             userCity: id,
@@ -144,6 +147,10 @@ Page({
             "searchDate.page": 1,
             "searchDate.area_id": id
         })
+      let mydata = { "name": areaText, "id": id };
+      if (id != pid) {
+        app.setStorageAction(id, mydata)
+      }
         this.returnTop();
         this.doRequestAction(false);
         this.closeAllSelect();

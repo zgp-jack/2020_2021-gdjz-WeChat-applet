@@ -1,16 +1,16 @@
 // pages/publish/card/card.js
-let vali = require("../../../utils/v.js");
-let areas = require("../../../utils/tas.js");
-const Amap = require("../../../utils/amap-wx.js");
-const amapFun = new Amap.AMapWX({ key: '20f12aae660c04de86f993d3eff590a0' });
 const app = getApp();
+let vali = require("../../../utils/v.js");
+let areas = require("../../../utils/area.js");
+const Amap = require("../../../utils/amap-wx.js");
+const amapFun = new Amap.AMapWX({ key: app.globalData.gdApiKey });
 Page({
 
     /**
      * 页面的初始数据
      */
     data: { 
-        userInfo:false,
+        userInfo:true,
       icon: app.globalData.apiImgUrl + "userauth-topicon.png",
       options: {},
         cardInfo: {
@@ -58,9 +58,143 @@ Page({
       tindex: 0,
       objectAreaData: [],
       adcode: "", 
-      county_id:""
+      county_id:"",
+      mapInfo:{
+        longitude:"116.3974700000",
+        latitude:"39.9088230000"
+      },
+      showArea:false,
+      areadata:[],
+      locationHistory: false,
+      gpsOrientation: false, 
+      gpsposi: "../../../images/gps-posi.png",
+      clearinput: "../../../images/clear-input.png",
+      areaText:"北京",
+      areaId:2,
+      keyAutoVal:"北京市",
+      showMaplist:true,
+      historyCityLists:[],
+      isKeyvalActive:false,
+      allAreaLists: [],
+      nAreaLists: [],
+      isAllAreas: true,
+      showInputList: false,
+      searchInputVal: ""
     },
-
+  chooseInputCtiy: function (e) {
+    this.chooseThisCtiy(e);
+    this.setData({ isAllAreas: true, searchInputVal: "", showArea: false, showInputList:false })
+  },
+  clearInputAction: function () {
+    this.setData({ isAllAreas: true, showInputList: false, searchInputVal: "" })
+  },
+  searchInput: function (e) {
+    let val = e.detail.value
+    this.setData({ searchInputVal: val })
+    if (!val) this.setData({ showInputList: false, isAllAreas: true })
+    else {
+      this.setData({ showInputList: true })
+      this.filterInputList(val);
+    }
+  },
+  filterInputList: function (val) {
+    let list = app.arrDeepCopy(this.data.allAreaLists);
+    let nlist = list.filter(function (item) {
+      return (item.name.indexOf(val) != -1);
+    })
+    this.setData({ nAreaLists: nlist, isAllAreas: false })
+  },
+  showInputList: function () {
+    this.setData({ showInputList: true })
+  },
+  clearInputVal:function(){
+    this.setData({ showMaplist: true, addressText:"" })
+  },
+  mapInputFocus:function(e){
+    if (!e.detail.value) this.setData({ showMaplist: false, isKeyvalActive:false })
+  },
+  initHistoryLoc: function () {
+    let h = wx.getStorageSync("locationHistory");
+    let p = wx.getStorageSync("gpsPorvince");
+    if (h) this.setData({ locationHistory: h })
+    if (p) this.setData({ gpsOrientation: p })
+    if (!h) this.setData({ isKeyvalActive:true })
+  },
+  detailHistoryCities:function(item){
+    let hc = wx.getStorageSync("historyCityLists");
+    if(hc){
+      let len = hc.length;
+      for(let i = 0;i < len; i++){
+        if (hc[i].address == item.address){
+          if (hc[i].adcode == item.adcode){
+            if (hc[i].location == item.location){
+              if (hc[i].district == item.district){
+                hc.splice(i,1);
+                break;
+              }
+            }
+          }
+        }
+      }
+      hc.unshift(item)
+      if (hc.length > 10) hc.splice(10)
+      wx.setStorageSync("historyCityLists", hc)
+    }else{
+      wx.setStorageSync("historyCityLists", [item])
+    }
+  },
+  initHistoryCityList:function(){
+    let hc = wx.getStorageSync("historyCityLists");
+    if (hc) this.setData({ historyCityLists:hc })
+  },
+  getAreaData: function () {
+    app.getAreaData(this);
+  },
+  showCity:function(){
+    this.setData({ showArea: true, addressActive:false })
+  },
+  closeArea: function () {
+    this.setData({ showArea: false, addressActive: true, showInputList: false, searchInputVal:"" })
+  },
+  chooseThisCtiy: function (e) {
+    let id = e.currentTarget.dataset.id;
+    let area = e.currentTarget.dataset.area;
+    let pid = parseInt(e.currentTarget.dataset.pid);
+    let pname = e.currentTarget.dataset.pname;
+    let mydata = { "name": area, "id": id };
+    this.setData({ areaId: parseInt(id), areaText: area })
+    this.closeArea();
+    app.setStorageAction(id, mydata,true)
+    this.initHistoryLoc();
+    if (pid){
+      let val = (pid == 1) ? area + "市" : pname + "省" + area + "市";
+      this.setData({ keyAutoVal: val })
+    }else{
+      this.setData({ keyAutoVal: area + "市" })
+    }
+  },
+  userRegMap:function(e){
+    if (e.type == 'end' && (e.causedBy == 'scale' || e.causedBy == 'drag')) {
+      var that = this;
+      this.mapCtx = wx.createMapContext("mymap");
+      this.mapCtx.getCenterLocation({
+        type: 'gcj02',
+        success: function (res) {
+          let longitude = res.longitude;
+          let latitude = res.latitude;
+          let loc = res.longitude + "," + res.latitude;
+          that.setData({
+            "mapInfo.longitude": longitude,
+            "mapInfo.latitude": latitude
+          })
+          that.getPoiList(loc,function(data){
+            let city = data[0].regeocodeData.addressComponent.city
+            that.setData({ areaText: city })
+          });
+        }
+      })
+    }
+  },
   checkAdcode:function(adcode,callback){
     let _this = this;
     app.appRequestAction({
@@ -91,23 +225,40 @@ Page({
   },
   getMapInfo: function () {
     let that = this;
+    wx.getLocation({
+      type: 'wgs84',
+      success(res) {
+        let loc = res.longitude + "," +  res.latitude;
+        that.setData({ "mapInfo.longitude": res.longitude, "mapInfo.latitude": res.latitude })
+        that.getPoiList(loc,function(data){
+          let p = data[0].regeocodeData.addressComponent.province
+          let c = data[0].regeocodeData.addressComponent.city
+          let mydata = areas.getProviceItem(p, c)
+          wx.setStorageSync("gpsOrientation", mydata)
+          that.initAreaText();
+        });
+      }
+    })
+  },
+  getPoiList:function(loc,callback){
+    let that = this;
     amapFun.getRegeo({
+      location: loc,
       success: function (data) {
         let pois = data[0].regeocodeData.pois;
         let adcode = data[0].regeocodeData.addressComponent.adcode
+        callback ? callback(data) : ""
         that.filtterNullData(pois);
-        that.setData({
-          adcode: adcode
-        })
+        that.setData({ adcode: adcode })
       },
       fail: function (info) {
         //失败回调
         that.openSetting({ setting: 0 })
       }
     })
-    
   },
-  filtterNullData:function (result){
+  
+  filtterNullData:function (result,callback){
     let len = result.length;
     let res = [];
     let v = vali.v.new();
@@ -116,8 +267,9 @@ Page({
       let district = v.ObjType(result[i].district, "array")
       let location = v.ObjType(result[i].location, "array")
       if (!adcode && !district && !location) res.push(result[i])
+      if(res.length == 10) break;
     }
-    this.setData({ addressList: res })
+    callback ? callback(res) : this.setData({ addressList: res })
   },
   /**打开设置面板 */
   openSetting: function (e) {
@@ -163,16 +315,16 @@ Page({
   },
   getKeywordsInputs:function(){
     let _this = this;
-    let keywords = this.data.addressText;
+    let keywords = this.data.keyAutoVal + this.data.addressText;
     amapFun.getInputtips({
       keywords: keywords,
       location: '',
       success: function (data) {
-
-        //console.log(data)
         if (data) {
-          _this.setData({ addressTips: data.tips.length ? '' : '暂未搜索到相关位置' })
-          _this.filtterNullData(data.tips)
+          //_this.setData({ addressTips: data.tips.length ? '' : '暂未搜索到相关位置' })
+          _this.filtterNullData(data.tips,function(data){
+            _this.setData({ historyCityLists:data })
+          })
         } else {
           _this.setData({ addressTips: '暂未搜索到相关位置' })
         }
@@ -183,25 +335,38 @@ Page({
     this.openSetting();
     this.setData({ addressActive: true, showTextarea:false })
   },
-  closeAddressAction:function(){
-    this.setData({ addressActive: false, showTextarea: true })
+  closeAddressAction:function(bool){
+    this.setData({ addressActive: false, showTextarea: true, addressText: "",showMaplist:true })
   },
   userEnterAddress:function(e){
-    this.setData({ addressText:e.detail.value })
-    this.getKeywordsInputs();
+    this.setData({ addressText: e.detail.value, showMaplist: false, isKeyvalActive:true })
+    if (e.detail.value) this.getKeywordsInputs();
+    else{
+      this.initHistoryCityList()
+      this.setData({ showMaplist: true, isKeyvalActive:false })
+    }
   },
   setAddressData:function(e){
     let _this = this;
     let t = e.currentTarget.dataset.title
     let a = e.currentTarget.dataset.adcode
     let l = e.currentTarget.dataset.location
+    let d = e.currentTarget.dataset.district
+    let hl = {
+      name: t,
+      adcode: a,
+      location: l,
+      district:d
+    }
     this.checkAdcode(a,function(){
       _this.setData({
         "addressData.title": t,
         "addressData.adcode": a,
         "addressData.location": l,
       })
+      _this.detailHistoryCities(hl);
       _this.closeAddressAction();
+      _this.initHistoryCityList();
     })
     
   },
@@ -229,7 +394,6 @@ Page({
     })
 
   },
-
   initPickerData: function () {
     let pickerData = [];
     let p = this.initAllProvice();
@@ -288,13 +452,6 @@ Page({
     let mydata = (data.has_children) ? data.children[arr[2]] : data
     console.log(mydata)
   },
-
-
-
-
-
-
-
 
     bindPickerChange: function (e) {
         this.setData({
@@ -583,6 +740,7 @@ Page({
         let cardInfo = this.data.cardInfo;
         let phone = this.data.userPhone;
         let infoId = this.data.infoId;
+        let lastPublishCity = this.data.areaText;
         let v = vali.v.new();
         if (!v.regStrNone(cardInfo.title)) {
             app.showMyTips("请输入招工标题！");
@@ -651,7 +809,8 @@ Page({
             failTitle: "网络出错，发布失败！",
             params: dataJson,
             success: function (res) {
-                let mydata = res.data;
+              let mydata = res.data;
+              if (mydata.errcode == "ok") wx.setStorageSync("lastPublishCity", lastPublishCity)
               wx.showModal({
                 title: (mydata.errcode == "ok") ? '恭喜您' : '提示',
                 content: mydata.errmsg,
@@ -770,11 +929,30 @@ Page({
   returnPrevPage: function () {
     wx.navigateBack({ delta: 1 })
   },
+  initAreaText:function(){
+    let lastCtiy = wx.getStorageSync("lastPublishCity");
+    let gpsloc = wx.getStorageSync("gpsPorvince");
+    if(lastCtiy){
+      this.setData({ areaText: lastCtiy, keyAutoVal: lastCtiy })
+    } else if(gpsloc){
+      this.setData({ areaText: gpsloc.name , keyAutoVal: gpsloc.name + "市" })
+    }
+  },
+  initInputList: function () {
+    let list = areas.getInputList();
+    this.setData({ allAreaLists: list })
+  },
     /**
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
+      this.initInputList();
+      areas.getInputList();
       //this.initPickerData();
+      this.getAreaData();
+      this.initHistoryLoc();
+      this.initAreaText();
+      this.initHistoryCityList();
       let userInfo = wx.getStorageSync("userInfo");
       if (userInfo) {
         this.setData({
@@ -783,7 +961,7 @@ Page({
         this.getMapInfo()
         this.initUserCardinfo(options);
       } else {
-        this.setData({ options: options })
+        this.setData({ userInfo:false,options: options })
       }
     },
 

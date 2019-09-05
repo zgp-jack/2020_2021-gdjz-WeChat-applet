@@ -252,21 +252,41 @@ Page({
     let that = this;
     wx.getLocation({
       type: 'gcj02', 
+      altitude:true,
       success(res) {
         let latitude = res.latitude
         let longitude = res.longitude
+        console.log(res)
+        that.loadCity(longitude,latitude)
         that.setData({ 
           latitude: latitude, 
           longitude: longitude,
         })
-        that.getDrivingRoute();
+        //that.getDrivingRoute();
         //that.getWalkingRoute();
         //that.getRidingRoute();
         //that.getBusRoute();
-        
       }
     })
     
+  },
+  loadCity: function (longitude, latitude) {
+    var page = this
+    wx.request({
+      url: 'https://api.map.baidu.com/geocoder/v2/?ak=您的ak&location=' + latitude + ',' + longitude + '&output=json',
+      data: {},
+      header: {
+        'Content-Type': 'application/json'
+      },
+      success: function (res) {
+        // success  
+        console.log(res);
+      },
+      fail: function () {
+        console.log("获取定位失败")
+      },
+
+    })
   },
   userCmap:function(){
     wx.chooseLocation({
