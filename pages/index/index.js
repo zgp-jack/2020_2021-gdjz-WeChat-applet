@@ -139,9 +139,10 @@ Page({
         let directCtiy = parseInt(e.currentTarget.dataset.haschild);
         let _id = e.currentTarget.dataset.id;
         let areaText = e.currentTarget.dataset.area;
+      let panme = e.currentTarget.dataset.pname;
         let _sid = this.data.searchDate.area_id;
         this.setData({ province: index })
-        let mydata = { "name": areaText, "id": _id};
+      let mydata = { "name": areaText, "id": _id, "ad_name": panme};
         //if(_id == _sid) return false;
         if (_this.touchEndTime - _this.touchStartTime < 350) {
             var currentTime = e.timeStamp
@@ -185,6 +186,7 @@ Page({
         }
     },
     userChooseCity:function(e){
+      let pname = e.currentTarget.dataset.pname;
         let areaText = e.currentTarget.dataset.area;
         let id = parseInt(e.currentTarget.dataset.id); 
         let pid = parseInt(e.currentTarget.dataset.pid); 
@@ -196,7 +198,7 @@ Page({
             "searchDate.page":1,
             "searchDate.area_id": id
         })
-      let mydata = { "name": areaText, "id": id };
+      let mydata = { "name": areaText, "id": id, ad_name: pname};
       if (id != pid) {
         app.setStorageAction(id,mydata)
       }

@@ -92,7 +92,7 @@ Page({
   filterInputList:function(val){
     let list = app.arrDeepCopy(this.data.allAreaLists);
     let nlist = list.filter(function(item){
-      return (item.name.indexOf(val) != -1);
+      return (item.cname.indexOf(val) != -1);
     })
     this.setData({ nAreaLists: nlist,isAllAreas:false })
   },
@@ -157,7 +157,8 @@ Page({
     chooseThisCtiy:function(e){
         let id = e.currentTarget.dataset.id;
         let area = e.currentTarget.dataset.area;
-      let mydata = { "name": area, "id": id };
+      let pname = e.currentTarget.dataset.pname;
+      let mydata = { "name": area, "id": id, ad_name:pname};
         this.setData({
             areaId: parseInt(id),
             areaText: area,

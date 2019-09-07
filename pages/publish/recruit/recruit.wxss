@@ -42,6 +42,7 @@
     width: 100%;
     padding: 75rpx 27rpx 0;
 }
+.recruit-publish-body{padding-top: 20rpx;}
 .common-publish-content{
     position: relative;
     width: 100%;
@@ -370,7 +371,7 @@
 .address-header input{border:1px solid #dcdcdc;font-size: 28rpx;height: 100%;border-radius: 5rpx;padding: 0 15rpx;background: #f8f8f8;color: #333;min-height: 0;padding-right: 80rpx;}
 .address-header text{position: absolute;right: 20rpx;top: 0;line-height: 120rpx;font-size: 32rpx;color: #969494;letter-spacing: 2rpx;}
 .address-body{position: absolute;left:0;top:0;width: 100%;height: 100%;padding: 130rpx 20rpx 20rpx;}
-.address-container{position: relative;width: 100%;height:calc(100% - 400rpx);overflow-y: scroll;background: white;box-shadow: 0 0 5rpx #dcdcdc;border-radius: 5rpx;}
+.address-container{position: relative;width: 100%;height:100%;overflow-y: scroll;background: white;box-shadow: 0 0 5rpx #dcdcdc;border-radius: 5rpx;}
 .address-item{position: relative;width: 100%;padding: 20rpx 20rpx 0;}
 .address-item-title{font-size: 30rpx;color: #333;line-height: 50rpx;}
 .address-item-text{font-size: 28rpx;color: #666;line-height:40rpx;border-bottom: 1px solid #dcdcdc;padding-bottom: 20rpx;}

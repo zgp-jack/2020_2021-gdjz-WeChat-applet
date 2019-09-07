@@ -100,18 +100,26 @@ Page({
   filterInputList: function (val) {
     let list = app.arrDeepCopy(this.data.allAreaLists);
     let nlist = list.filter(function (item) {
-      return (item.name.indexOf(val) != -1);
+      return (item.cname.indexOf(val) !== -1);
     })
     this.setData({ nAreaLists: nlist, isAllAreas: false })
   },
-  showInputList: function () {
+  showInputList: function (e) {
     this.setData({ showInputList: true })
   },
   clearInputVal:function(){
     this.setData({ showMaplist: true, addressText:"" })
   },
   mapInputFocus:function(e){
-    if (!e.detail.value) this.setData({ showMaplist: false, isKeyvalActive:false })
+
+    let val = e.detail.value;
+    if (val == ""){
+      this.initHistoryCityList()
+      this.setData({ showMaplist: false, isKeyvalActive: false })
+    }else{
+      this.setData({ showMaplist: false, isKeyvalActive: false })
+    }
+    
   },
   initHistoryLoc: function () {
     let h = wx.getStorageSync("locationHistory");
@@ -145,7 +153,7 @@ Page({
   },
   initHistoryCityList:function(){
     let hc = wx.getStorageSync("historyCityLists");
-    if (hc) this.setData({ historyCityLists:hc })
+    this.setData({ historyCityLists: hc ? hc :[] })
   },
   getAreaData: function () {
     app.getAreaData(this);
@@ -161,17 +169,14 @@ Page({
     let area = e.currentTarget.dataset.area;
     let pid = parseInt(e.currentTarget.dataset.pid);
     let pname = e.currentTarget.dataset.pname;
-    let mydata = { "name": area, "id": id };
+    let mydata = { "name": area, "id": id,"ad_name":pname };
     this.setData({ areaId: parseInt(id), areaText: area })
     this.closeArea();
     app.setStorageAction(id, mydata,true)
     this.initHistoryLoc();
-    if (pid){
-      let val = (pid == 1) ? area + "市" : pname + "省" + area + "市";
-      this.setData({ keyAutoVal: val })
-    }else{
-      this.setData({ keyAutoVal: area + "市" })
-    }
+    this.setData({ keyAutoVal: pname, addressText:"" })
+    this.getKeywordsInputs(pname)
+    this.setData({ showMaplist: false, isKeyvalActive:true })
   },
   userRegMap:function(e){
     if (e.type == 'end' && (e.causedBy == 'scale' || e.causedBy == 'drag')) {
@@ -294,6 +299,7 @@ Page({
                         icon: 'success',
                         duration: 2000
                       })
+                      
                       //再次授权，调用getLocationt的API
                       that.getMapInfo()
                     } else {
@@ -313,11 +319,11 @@ Page({
       },
     })
   },
-  getKeywordsInputs:function(){
+  getKeywordsInputs:function(val){
     let _this = this;
     let keywords = this.data.keyAutoVal + this.data.addressText;
     amapFun.getInputtips({
-      keywords: keywords,
+      keywords: val ? val : keywords,
       location: '',
       success: function (data) {
         if (data) {
@@ -339,11 +345,14 @@ Page({
     this.setData({ addressActive: false, showTextarea: true, addressText: "",showMaplist:true })
   },
   userEnterAddress:function(e){
-    this.setData({ addressText: e.detail.value, showMaplist: false, isKeyvalActive:true })
-    if (e.detail.value) this.getKeywordsInputs();
-    else{
+    let val = e.detail.value;
+    this.setData({ addressText: val, showMaplist: false })
+    if (val){
+      this.getKeywordsInputs();
+      this.setData({ isKeyvalActive: true })
+    }else{
       this.initHistoryCityList()
-      this.setData({ showMaplist: true, isKeyvalActive:false })
+      this.setData({ showMaplist: true,isKeyvalActive:true })
     }
   },
   setAddressData:function(e){
@@ -519,7 +528,7 @@ Page({
         let infoId = (options.hasOwnProperty("id")) ? options.id : "";
         if (infoId) {
             wx.setNavigationBarTitle({
-                title: '修改招工信息'
+                title: '修改招工'
             })
         }
         this.setData({ userInfo: userInfo });
@@ -740,7 +749,7 @@ Page({
         let cardInfo = this.data.cardInfo;
         let phone = this.data.userPhone;
         let infoId = this.data.infoId;
-        let lastPublishCity = this.data.areaText;
+      let lastPublishCity = { name:this.data.areaText,ad_name:this.data.keyAutoVal};
         let v = vali.v.new();
         if (!v.regStrNone(cardInfo.title)) {
             app.showMyTips("请输入招工标题！");
@@ -931,9 +940,11 @@ Page({
   },
   initAreaText:function(){
     let lastCtiy = wx.getStorageSync("lastPublishCity");
+    let gpsPorvince = wx.getStorageSync("gpsPorvince");
     let gpsloc = wx.getStorageSync("gpsPorvince");
+    this.setData({ gpsOrientation: gpsPorvince })
     if(lastCtiy){
-      this.setData({ areaText: lastCtiy, keyAutoVal: lastCtiy })
+      this.setData({ areaText: lastCtiy.name, keyAutoVal: lastCtiy.ad_name })
     } else if(gpsloc){
       this.setData({ areaText: gpsloc.name , keyAutoVal: gpsloc.name + "市" })
     }

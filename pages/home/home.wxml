@@ -166,7 +166,7 @@
                 </view>
                 <view class='common-nodatabox flex-column'  wx:if="{{ infolists.information.lists.length == 0 }}">
                     <image src='{{ indexImgs.nodata }}'></image>
-                    <text>该地区暂无相关数据</text>
+                    <text>该地区暂无相关内容</text>
                 </view>
             </view>
         </view>
@@ -198,7 +198,7 @@
                 </view>
                 <view class='common-nodatabox flex-column'  wx:if="{{ infolists.resume.lists.length == 0 }}">
                     <image src='{{ indexImgs.nodata }}'></image>
-                    <text>该地区暂无相关数据</text>
+                    <text>该地区暂无相关内容</text>
                 </view>
             </view>
         </view>
@@ -230,7 +230,7 @@
                 </view>
                 <view class='common-nodatabox flex-column'  wx:if="{{ infolists.fleamarket.lists.length == 0 }}">
                     <image src='{{ indexImgs.nodata }}'></image>
-                    <text>该地区暂无相关数据</text>
+                    <text>该地区暂无相关内容</text>
                 </view>
             </view>
         </view>
@@ -260,7 +260,8 @@
     </view>
 
     <view class="searchcitybox" wx:if="{{ showInputList }}">
-      <view class="search-list-item" wx:for="{{ isAllAreas ? allAreaLists : nAreaLists }}" wx:key="{{ index }}"  bindtap='chooseInputCtiy'  data-id="{{ item.id }}" data-area="{{ item.name }}" >{{ item.cname }} </view>
+      <view class="search-list-item" wx:if="{{ !isAllAreas && !nAreaLists.length }}">暂未找到相关城市</view>
+      <view class="search-list-item" wx:for="{{ isAllAreas ? allAreaLists : nAreaLists }}" wx:key="{{ index }}"  bindtap='chooseInputCtiy' data-pname="{{ item.ad_name }}"  data-id="{{ item.id }}" data-area="{{ item.name }}" >{{ item.cname }} </view>
     </view>
 
     <view class='index-area-tips overwords'>当前选择城市：<text>{{ areaText }}</text></view>
@@ -268,14 +269,14 @@
         <view class='index-area-item' wx:if="{{ gpsOrientation || locationHistory }}">
             <text class='area-header-words'>当前定位城市/最近访问</text>
             <view class='area-body-content clearfix'>
-              <view class="gpsposi"><view class='overwords' data-id="{{ gpsOrientation.id }}" data-area="{{ gpsOrientation.name }}"  bindtap='chooseThisCtiy'><image src="{{ gpsposi }}"></image>{{ gpsOrientation.name }}</view></view>
-                <view wx:for="{{ locationHistory }}" wx:key="{{ index }}"><text class='overwords' data-id="{{ item.id }}" data-area="{{ item.name }}"  bindtap='chooseThisCtiy'>{{ item.name }}</text></view>
+              <view class="gpsposi" wx:if="{{ gpsOrientation }}"><view class='overwords' data-id="{{ gpsOrientation.id }}" data-area="{{ gpsOrientation.name }}" data-pname="{{ gpsOrientation.ad_name }}"  bindtap='chooseThisCtiy'><image src="{{ gpsposi }}" ></image>{{ gpsOrientation.name }}</view></view>
+                <view wx:for="{{ locationHistory }}" wx:key="{{ index }}" wx:if="{{ gpsOrientation ? index < 2 : true }}"><text class='overwords' data-id="{{ item.id }}" data-area="{{ item.name }}" data-pname="{{ item.ad_name }}"  bindtap='chooseThisCtiy'>{{ item.name }}</text></view>
             </view>
         </view>
         <view class='index-area-item' wx:for="{{ areadata }}" wx:key="{{ index }}">
             <text class='area-header-words'>{{ item[0].city }}</text>
             <view class='area-body-content clearfix'>
-                <view wx:for="{{ item }}" wx:key="{{ index }}"><text class='overwords' data-id="{{ item.id }}" data-area="{{ item.city }}"  bindtap='chooseThisCtiy'>{{ item.city }}</text></view>
+                <view wx:for="{{ item }}" wx:key="{{ index }}"><text class='overwords' data-id="{{ item.id }}" data-area="{{ item.city }}" data-pname="{{ item.ad_name }}"  bindtap='chooseThisCtiy'>{{ item.city }}</text></view>
             </view>
         </view>
     </view>

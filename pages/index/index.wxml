@@ -25,10 +25,10 @@
 <view class='user-choose-shade {{ (showListsInfo != "0") ? "user-choose-shade-active":"" }}' bindtap='closeAllSelect'>
 
     <view class='user-choose-item {{ (showListsInfo == "1") ? "user-choose-item-active" : "" }}'  wx:if="{{ showListsInfo == '1' }}">
-        <view class='filtrate-list-item mybottomborder overwords {{ (province == index) ? "filtrate-list-active" : "" }}'  wx:for="{{ fillterArea }}" wx:key="{{ index }}" catchtap='userChooseProvince' data-index="{{ index }}" bindtouchstart="touchStart" bindtouchend="touchEnd" data-id='{{ itemProvice.id }}' data-haschild="{{ itemProvice.has_children }}"  data-area="{{ itemProvice.name }}" wx:for-item="itemProvice">
+        <view class='filtrate-list-item mybottomborder overwords {{ (province == index) ? "filtrate-list-active" : "" }}'  wx:for="{{ fillterArea }}" wx:key="{{ index }}" catchtap='userChooseProvince' data-index="{{ index }}" bindtouchstart="touchStart" bindtouchend="touchEnd" data-id='{{ itemProvice.id }}' data-pname="{{ itemProvice.ad_name }}" data-haschild="{{ itemProvice.has_children }}"  data-area="{{ itemProvice.name }}" wx:for-item="itemProvice">
             <text>{{ itemProvice.name }}</text>
             <view class='filtrate-item-lists {{ (province == index) ? "filtrate-item-lists-active" : "" }}' wx:if="{{ itemProvice.has_children }}">
-                <view class='filtrate-item-info mybottomborder overwords {{ (userCity == item.id) ? "filtrate-item-info-active" : "" }}' wx:for="{{ itemProvice.children }}" wx:key="{{ index }}" catchtap='userChooseCity' data-id="{{ item.id }}"  data-pid="{{ itemProvice.id }}"  data-area="{{ item.name }}" wx:for-item="item" >{{ item.name }}</view>
+                <view class='filtrate-item-info mybottomborder overwords {{ (userCity == item.id) ? "filtrate-item-info-active" : "" }}' wx:for="{{ itemProvice.children }}" data-pname="{{ item.ad_name }}" wx:key="{{ index }}" catchtap='userChooseCity' data-id="{{ item.id }}"  data-pid="{{ itemProvice.id }}"  data-area="{{ item.name }}" wx:for-item="item" >{{ item.name }}</view>
 
             </view>
 
@@ -119,11 +119,11 @@
 
         </block>
 
-        <view class='nodata-texttips' wx:if="{{ nothavemore }}">没有更多数据了</view>
+        <view class='nodata-texttips' wx:if="{{ nothavemore }}">没有更多内容了</view>
 
         <view class='common-nodatabox flex-column lists-nodata'  wx:if="{{ showNothinkData }}">
             <image src='{{ listsImg.nodata }}'></image>
-            <text>没有找到相关数据</text>
+            <text>暂无相关内容</text>
         </view>
     </view>
 

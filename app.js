@@ -633,6 +633,7 @@ App({
     })
   },
   setStorageAction: function (id, mydata,flag) { //flag='省'
+    let maxNum = 3;
     if(id == 1) return false;
     let locationHistory = wx.getStorageSync("locationHistory");
     let gpsPorvince = wx.getStorageSync("gpsPorvince");
@@ -653,25 +654,29 @@ App({
         }
       }
       locationHistory.unshift(mydata);
-      locationHistory.splice(2)
+      locationHistory.splice(maxNum)
       wx.setStorageSync("locationHistory", locationHistory)
     }
   },
   getAreaData: function (_this) {
+    let num = 1;
     let areadata = wx.getStorageSync("areadata");
     if (areadata) {
-      _this.setData({
-        areadata: areadata
-      })
-      return false;
+      if (areadata.hasOwnProperty("num") && (areadata.num == num)){
+        _this.setData({
+          areadata: areadata.data
+        })
+        return false;
+      }
     }
     this.doRequestAction({
       url: "index/index-area/",
       success: function (res) {
+        let mydata = { data: res.data, num: num}
         _this.setData({
           areadata: res.data
         })
-        wx.setStorageSync('areadata', res.data)
+        wx.setStorageSync('areadata', mydata)
       }
     });
 
