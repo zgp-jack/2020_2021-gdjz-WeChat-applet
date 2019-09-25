@@ -1,5 +1,5 @@
 <view class="yupao-common-container yupao-common-nofooter">
-    <view class='integral-header'>临时积分仅限当天使用，第二天自动清空</view>
+    <view class='integral-header'>正式积分不为0时，可使用临时积分；临时积分仅限当天使用，第二天自动清空</view>
     <view class='integral-content'>
         <view class='integral-list-item' wx:for="{{ lists }}" wx:key="{{ index }}">
             <view class='integral-list-time'>

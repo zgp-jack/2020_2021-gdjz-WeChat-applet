@@ -3,9 +3,10 @@ const areas = [
     "id": "1",
     "pid": "0",
     "name": "全国",
-    "ad_name": "中华人民共和国",
+    "ad_name": "中国",
     "has_children": 0,
     "children": [
+
     ]
   },
   {
@@ -15,6 +16,7 @@ const areas = [
     "ad_name": "北京市",
     "has_children": 0,
     "children": [
+
     ]
   },
   {
@@ -24,6 +26,12 @@ const areas = [
     "ad_name": "安徽省",
     "has_children": 1,
     "children": [
+      {
+        "id": "3",
+        "pid": "1",
+        "name": "安徽",
+        "ad_name": "安徽省"
+      },
       {
         "id": "36",
         "pid": "3",
@@ -35,12 +43,6 @@ const areas = [
         "pid": "3",
         "name": "蚌埠",
         "ad_name": "蚌埠市"
-      },
-      {
-        "id": "38",
-        "pid": "3",
-        "name": "巢湖",
-        "ad_name": "巢湖"
       },
       {
         "id": "39",
@@ -136,6 +138,12 @@ const areas = [
     "has_children": 1,
     "children": [
       {
+        "id": "4",
+        "pid": "1",
+        "name": "福建",
+        "ad_name": "福建省"
+      },
+      {
         "id": "53",
         "pid": "4",
         "name": "福州",
@@ -198,6 +206,12 @@ const areas = [
     "ad_name": "甘肃省",
     "has_children": 1,
     "children": [
+      {
+        "id": "5",
+        "pid": "1",
+        "name": "甘肃",
+        "ad_name": "甘肃省"
+      },
       {
         "id": "62",
         "pid": "5",
@@ -291,6 +305,12 @@ const areas = [
     "ad_name": "广东省",
     "has_children": 1,
     "children": [
+      {
+        "id": "6",
+        "pid": "1",
+        "name": "广东",
+        "ad_name": "广东省"
+      },
       {
         "id": "76",
         "pid": "6",
@@ -427,6 +447,12 @@ const areas = [
     "has_children": 1,
     "children": [
       {
+        "id": "7",
+        "pid": "1",
+        "name": "广西",
+        "ad_name": "广西壮族自治区"
+      },
+      {
         "id": "97",
         "pid": "7",
         "name": "南宁",
@@ -520,6 +546,12 @@ const areas = [
     "has_children": 1,
     "children": [
       {
+        "id": "8",
+        "pid": "1",
+        "name": "贵州",
+        "ad_name": "贵州省"
+      },
+      {
         "id": "111",
         "pid": "8",
         "name": "贵阳",
@@ -582,6 +614,12 @@ const areas = [
     "ad_name": "海南省",
     "has_children": 1,
     "children": [
+      {
+        "id": "9",
+        "pid": "1",
+        "name": "海南",
+        "ad_name": "海南省"
+      },
       {
         "id": "120",
         "pid": "9",
@@ -700,6 +738,12 @@ const areas = [
     "has_children": 1,
     "children": [
       {
+        "id": "10",
+        "pid": "1",
+        "name": "河北",
+        "ad_name": "河北省"
+      },
+      {
         "id": "138",
         "pid": "10",
         "name": "石家庄",
@@ -774,6 +818,12 @@ const areas = [
     "ad_name": "河南省",
     "has_children": 1,
     "children": [
+      {
+        "id": "11",
+        "pid": "1",
+        "name": "河南",
+        "ad_name": "河南省"
+      },
       {
         "id": "149",
         "pid": "11",
@@ -892,6 +942,12 @@ const areas = [
     "has_children": 1,
     "children": [
       {
+        "id": "12",
+        "pid": "1",
+        "name": "黑龙江",
+        "ad_name": "黑龙江省"
+      },
+      {
         "id": "167",
         "pid": "12",
         "name": "哈尔滨",
@@ -979,6 +1035,12 @@ const areas = [
     "has_children": 1,
     "children": [
       {
+        "id": "13",
+        "pid": "1",
+        "name": "湖北",
+        "ad_name": "湖北省"
+      },
+      {
         "id": "180",
         "pid": "13",
         "name": "武汉",
@@ -1059,7 +1121,7 @@ const areas = [
       {
         "id": "193",
         "pid": "13",
-        "name": "襄樊",
+        "name": "襄阳",
         "ad_name": "襄阳市"
       },
       {
@@ -1089,6 +1151,12 @@ const areas = [
     "ad_name": "湖南省",
     "has_children": 1,
     "children": [
+      {
+        "id": "14",
+        "pid": "1",
+        "name": "湖南",
+        "ad_name": "湖南省"
+      },
       {
         "id": "197",
         "pid": "14",
@@ -1183,6 +1251,12 @@ const areas = [
     "has_children": 1,
     "children": [
       {
+        "id": "15",
+        "pid": "1",
+        "name": "吉林",
+        "ad_name": "吉林省"
+      },
+      {
         "id": "211",
         "pid": "15",
         "name": "长春",
@@ -1245,6 +1319,12 @@ const areas = [
     "ad_name": "江苏省",
     "has_children": 1,
     "children": [
+      {
+        "id": "16",
+        "pid": "1",
+        "name": "江苏",
+        "ad_name": "江苏省"
+      },
       {
         "id": "220",
         "pid": "16",
@@ -1333,6 +1413,12 @@ const areas = [
     "has_children": 1,
     "children": [
       {
+        "id": "17",
+        "pid": "1",
+        "name": "江西",
+        "ad_name": "江西省"
+      },
+      {
         "id": "233",
         "pid": "17",
         "name": "南昌",
@@ -1407,6 +1493,12 @@ const areas = [
     "ad_name": "辽宁省",
     "has_children": 1,
     "children": [
+      {
+        "id": "18",
+        "pid": "1",
+        "name": "辽宁",
+        "ad_name": "辽宁省"
+      },
       {
         "id": "244",
         "pid": "18",
@@ -1501,6 +1593,12 @@ const areas = [
     "has_children": 1,
     "children": [
       {
+        "id": "19",
+        "pid": "1",
+        "name": "内蒙古",
+        "ad_name": "内蒙古自治区"
+      },
+      {
         "id": "258",
         "pid": "19",
         "name": "呼和浩特",
@@ -1582,6 +1680,12 @@ const areas = [
     "has_children": 1,
     "children": [
       {
+        "id": "20",
+        "pid": "1",
+        "name": "宁夏",
+        "ad_name": "宁夏回族自治区"
+      },
+      {
         "id": "270",
         "pid": "20",
         "name": "银川",
@@ -1620,6 +1724,12 @@ const areas = [
     "ad_name": "青海省",
     "has_children": 1,
     "children": [
+      {
+        "id": "21",
+        "pid": "1",
+        "name": "青海",
+        "ad_name": "青海省"
+      },
       {
         "id": "275",
         "pid": "21",
@@ -1678,6 +1788,12 @@ const areas = [
     "has_children": 1,
     "children": [
       {
+        "id": "22",
+        "pid": "1",
+        "name": "山东",
+        "ad_name": "山东省"
+      },
+      {
         "id": "283",
         "pid": "22",
         "name": "济南",
@@ -1718,12 +1834,6 @@ const areas = [
         "pid": "22",
         "name": "济宁",
         "ad_name": "济宁市"
-      },
-      {
-        "id": "290",
-        "pid": "22",
-        "name": "莱芜",
-        "ad_name": "莱芜区"
       },
       {
         "id": "291",
@@ -1788,6 +1898,12 @@ const areas = [
     "ad_name": "山西省",
     "has_children": 1,
     "children": [
+      {
+        "id": "23",
+        "pid": "1",
+        "name": "山西",
+        "ad_name": "山西省"
+      },
       {
         "id": "300",
         "pid": "23",
@@ -1864,6 +1980,12 @@ const areas = [
     "has_children": 1,
     "children": [
       {
+        "id": "24",
+        "pid": "1",
+        "name": "陕西",
+        "ad_name": "陕西省"
+      },
+      {
         "id": "311",
         "pid": "24",
         "name": "西安",
@@ -1932,6 +2054,7 @@ const areas = [
     "ad_name": "上海市",
     "has_children": 0,
     "children": [
+
     ]
   },
   {
@@ -1941,6 +2064,12 @@ const areas = [
     "ad_name": "四川省",
     "has_children": 1,
     "children": [
+      {
+        "id": "26",
+        "pid": "1",
+        "name": "四川",
+        "ad_name": "四川省"
+      },
       {
         "id": "322",
         "pid": "26",
@@ -2076,6 +2205,7 @@ const areas = [
     "ad_name": "天津市",
     "has_children": 0,
     "children": [
+
     ]
   },
   {
@@ -2085,6 +2215,12 @@ const areas = [
     "ad_name": "西藏自治区",
     "has_children": 1,
     "children": [
+      {
+        "id": "28",
+        "pid": "1",
+        "name": "西藏",
+        "ad_name": "西藏自治区"
+      },
       {
         "id": "344",
         "pid": "28",
@@ -2136,6 +2272,12 @@ const areas = [
     "ad_name": "新疆维吾尔自治区",
     "has_children": 1,
     "children": [
+      {
+        "id": "29",
+        "pid": "1",
+        "name": "新疆",
+        "ad_name": "新疆维吾尔自治区"
+      },
       {
         "id": "351",
         "pid": "29",
@@ -2254,6 +2396,12 @@ const areas = [
     "has_children": 1,
     "children": [
       {
+        "id": "30",
+        "pid": "1",
+        "name": "云南",
+        "ad_name": "云南省"
+      },
+      {
         "id": "367",
         "pid": "30",
         "name": "昆明",
@@ -2359,6 +2507,12 @@ const areas = [
     "has_children": 1,
     "children": [
       {
+        "id": "31",
+        "pid": "1",
+        "name": "浙江",
+        "ad_name": "浙江省"
+      },
+      {
         "id": "383",
         "pid": "31",
         "name": "杭州",
@@ -2433,6 +2587,7 @@ const areas = [
     "ad_name": "重庆市",
     "has_children": 0,
     "children": [
+
     ]
   }
 ]
@@ -2498,7 +2653,7 @@ function getProviceItem(p,c) {
   return areas[0];
 }
 
-function getInputList(){
+function getInputList(bool){
   let _lists = arrDeepCopy(areas);
   _lists.splice(0,1);
   let len = _lists.length;
@@ -2509,7 +2664,8 @@ function getInputList(){
       let name = _clists.name;
       let nlist = _clists.children;
       let nlen = nlist.length;
-      for(let j = 0;j<nlen;j++){
+      let start = bool ? 1 : 0;
+      for (let j = start;j<nlen;j++){
         let data = nlist[j];
         data.cname = name + "-" + data.name
         res.push(data)

@@ -96,7 +96,7 @@
                 <image src='{{ ucenterimgs.realname }}'></image>
                 <text>实名认证</text>
             </view>
-            <view class='ucenter-menu-item' data-url='../feedback/feedback'  bindtap='valiUserUrl' >
+            <view class='ucenter-menu-item'  data-url='/pages/others/message/lists/lists?tel={{ (member.tel == null) ? "" : member.tel }}&name={{ member.username || member.nickname }}'   bindtap='valiUserUrl' >
                 <image src='{{ ucenterimgs.feedback }}'></image>
                 <text>给我们建议</text>
             </view>

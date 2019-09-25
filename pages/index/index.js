@@ -31,6 +31,7 @@ Page({
         loadingGif: app.globalData.apiImgUrl + "loading.gif",
         nodata: app.globalData.apiImgUrl + "nodata.png",
         selectimg: app.globalData.apiImgUrl + 'select.png',
+        returnTopImg: app.globalData.apiImgUrl + 'returntop.png',
         showListsInfo:0,
         province:-1,
         userCity:-1,
@@ -79,7 +80,8 @@ Page({
         joblistjz: app.globalData.apiImgUrl + "joblist_zd.png",
         joblistwyjz:app.globalData.apiImgUrl+"joblist_wyzd.png",
       isload: false,
-      scrollTop: 0
+      scrollTop: 0,
+      showReturnTopImg:false
     },
   getMapInfo: function (callback) {
     let that = this;
@@ -139,10 +141,11 @@ Page({
         let directCtiy = parseInt(e.currentTarget.dataset.haschild);
         let _id = e.currentTarget.dataset.id;
         let areaText = e.currentTarget.dataset.area;
-      let panme = e.currentTarget.dataset.pname;
         let _sid = this.data.searchDate.area_id;
+      let panme = e.currentTarget.dataset.pname;
+      let mydata = { "name": areaText, "id": _id, "ad_name": panme };
         this.setData({ province: index })
-      let mydata = { "name": areaText, "id": _id, "ad_name": panme};
+      
         //if(_id == _sid) return false;
         if (_this.touchEndTime - _this.touchStartTime < 350) {
             var currentTime = e.timeStamp
@@ -187,9 +190,10 @@ Page({
     },
     userChooseCity:function(e){
       let pname = e.currentTarget.dataset.pname;
+      let pid = parseInt(e.currentTarget.dataset.pid); 
         let areaText = e.currentTarget.dataset.area;
         let id = parseInt(e.currentTarget.dataset.id); 
-        let pid = parseInt(e.currentTarget.dataset.pid); 
+        
         //if(parseInt(this.data.searchDate.area_id) == id) return false;
         this.setData({
             userCity: id,
@@ -738,6 +742,10 @@ Page({
         })
       }
     },
+  viewScroll:function(e){
+    let top = e.detail.scrollTop;
+    this.setData({ showReturnTopImg: (top > 960) ? true : false })
+  },
 
     /**
      * 生命周期函数--监听页面隐藏

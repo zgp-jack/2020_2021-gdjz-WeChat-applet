@@ -25,13 +25,11 @@
 <view class='user-choose-shade {{ (showListsInfo != "0") ? "user-choose-shade-active":"" }}' bindtap='closeAllSelect'>
 
     <view class='user-choose-item {{ (showListsInfo == "1") ? "user-choose-item-active" : "" }}'  wx:if="{{ showListsInfo == '1' }}">
-        <view class='filtrate-list-item mybottomborder overwords {{ (province == index) ? "filtrate-list-active" : "" }}'  wx:for="{{ fillterArea }}" wx:key="{{ index }}" catchtap='userChooseProvince' data-index="{{ index }}" bindtouchstart="touchStart" bindtouchend="touchEnd" data-id='{{ itemProvice.id }}' data-pname="{{ itemProvice.ad_name }}" data-haschild="{{ itemProvice.has_children }}"  data-area="{{ itemProvice.name }}" wx:for-item="itemProvice">
-            <text>{{ itemProvice.name }}</text>
-            <view class='filtrate-item-lists {{ (province == index) ? "filtrate-item-lists-active" : "" }}' wx:if="{{ itemProvice.has_children }}">
-                <view class='filtrate-item-info mybottomborder overwords {{ (userCity == item.id) ? "filtrate-item-info-active" : "" }}' wx:for="{{ itemProvice.children }}" data-pname="{{ item.ad_name }}" wx:key="{{ index }}" catchtap='userChooseCity' data-id="{{ item.id }}"  data-pid="{{ itemProvice.id }}"  data-area="{{ item.name }}" wx:for-item="item" >{{ item.name }}</view>
-
+        <view class='filtrate-list-item mybottomborder overwords {{ (province == index) ? "filtrate-list-active" : "" }}'  wx:for="{{ fillterArea }}" wx:key="{{ index }}" catchtap='userChooseProvince' data-index="{{ index }}" bindtouchstart="touchStart" bindtouchend="touchEnd" data-id='{{ item.id }}' data-haschild="{{ item.has_children }}"  data-area="{{ item.name }}">
+            <text>{{ item.name }}</text>
+            <view class='filtrate-item-lists {{ (province == index) ? "filtrate-item-lists-active" : "" }}' wx:if="{{ item.has_children }}">
+                <view class='filtrate-item-info mybottomborder overwords {{ (userCity == item.id) ? "filtrate-item-info-active" : "" }}' wx:for="{{ item.children }}" wx:key="{{ index }}" catchtap='userChooseCity' data-id="{{ item.id }}"   data-area="{{ item.name }}">{{ item.name }}</view>
             </view>
-
         </view>
     </view>
 
@@ -47,7 +45,7 @@
 
 </view>
 
-<scroll-view class='yupao-lists-container yupao-common-container'  scroll-y="true" scrolltolower="100" bindscrolltolower="onReachBottom" scroll-top="{{ scrollTop }}">
+<scroll-view class='yupao-lists-container yupao-common-container'  scroll-y="true" scrolltolower="100" bindscrolltolower="onReachBottom" scroll-top="{{ scrollTop }}" bindscroll="viewScroll" scroll-with-animation="true">
 
     <!-- 公告 -->
     <view class='yupao-lists-notice'>
@@ -145,6 +143,8 @@
 </view>
 
 <view class='bottompublishbtn'  bindtap='jumpThisLink' data-url="/pages/publish/recruit/recruit"    data-type='0' >发布招工</view>
+
+<image class="returntop {{ showReturnTopImg ? 'returntop-active' : '' }}" src="{{ returnTopImg }}" bindtap="returnTop" ></image>
 
 
 <!-- <view class='fixed-get-integral'  bindtap='jumpThisLink'  data-url="/pages/turntable/turntable"  data-type='0'>

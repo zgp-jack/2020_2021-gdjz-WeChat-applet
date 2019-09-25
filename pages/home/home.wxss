@@ -287,7 +287,6 @@
     top: 0;
     background: #f7f6f9;
     z-index: 100;
-    transition: 0.5s;
     padding-bottom: 10rpx;
 }
 .index-pullareabox-active{

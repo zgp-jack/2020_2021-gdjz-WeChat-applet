@@ -1,0 +1,59 @@
+<!-- 意见反馈列表 -->
+<view class="feedback-header" id="comment">
+  <view class="feedback-header-texr">提示 :</view>
+  <view class="feedback-boxes">
+    为提高沟通效率，建议您添加客服微信或拨打客服电话,
+    <text>加客服微信号</text>
+    <text bindtap='clipboardWechat' data-wc="{{ wechat }}" class='gehu'>{{ wechat }}</text> 客服电话:
+    <text class='gehu' data-phone="{{ phone }}" bindtap='callThisPhone'>{{ phone }}</text>
+  </view>
+</view>
+
+
+<view class="feedback-body">
+  <view class="feedback-box-se">
+
+    <!-- 列表 -->
+    <block wx:for="{{restaurants}}" wx:key="{{index}}">
+      <view class="feedback-body-1">
+        <view class="superior">
+          <view class="superior-1">
+            <text>问</text>
+          </view>
+          <view class="superior-2">
+            {{item.content}}
+          </view>
+        </view>
+
+        <view class="species">
+          <view class="species-1" wx:for-item="imagesItem" wx:for="{{item.images}}" wx:key="{{index}}">
+            <image style="width:100%;height:200rpx" data-item="{{item}}" data-index="{{index}}" bindtap="restimg" src="{{imagesItem}}" mode="aspectFill"></image>
+          </view>
+
+        </view>
+
+        <view class="species-text">{{item.ask_time}}</view>
+        <view class="superior-1s" wx:if="{{item.is_answer}}">
+          <view class="superior-1-s">答</view>
+          <view class="superior-2">
+            <text wx:if="{{item.send_msg}}">{{item.send_msg}}</text>
+          </view>
+        </view>
+      </view>
+    </block>
+
+  </view>
+
+
+
+</view>
+
+<view class="footr">
+  <view class="footr-1" bindtap='valiUserUrl'>我要提意见</view>
+</view>
+
+
+<view class='common-nodatabox flex-column' wx:if="{{ !restaurants.length }}">
+  <image src='{{nodata}}'></image>
+  <text>暂无相关意见反馈</text>
+</view>

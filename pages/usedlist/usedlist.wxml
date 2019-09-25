@@ -1,4 +1,4 @@
-<import src="/pages/tpl/app/app.wxml"/>
+<!-- <import src="/pages/tpl/app/app.wxml"/> -->
 
 <!-- 搜索头部 -->
 <view class="lists-header">
@@ -37,7 +37,7 @@
 </view>
 
 
-<scroll-view class='yupao-lists-container yupao-common-container yupao-common-nofooter yupao-usedlist-container' scroll-y="true" scrolltolower="100" bindscrolltolower="onReachBottom" scroll-top="{{ scrollTop }}">
+<scroll-view class='yupao-lists-container yupao-common-container yupao-common-nofooter yupao-usedlist-container' scroll-y="true" scrolltolower="100" bindscrolltolower="onReachBottom" scroll-top="{{ scrollTop }}" bindscroll="viewScroll" scroll-with-animation="true">
 
     <!-- 公告 -->
     <view class='yupao-lists-notice'>
@@ -114,4 +114,7 @@
         <image src='http://cdn.yupao.com/miniprogram/images/list-share-btn.png?t=111'></image>
 </button> -->
 
-<template is="app"  data="{{ bgHeight,btnWidth,wordsHeight,wordsWidth,shadeWidth,winWidth,winHeight,notimesW,userShareData,userShareTime }}" />
+
+<image class="returntop {{ showReturnTopImg ? 'returntop-active' : '' }}" src="{{ returnTopImg }}" bindtap="returnTop" ></image>
+
+<!-- <template is="app"  data="{{ bgHeight,btnWidth,wordsHeight,wordsWidth,shadeWidth,winWidth,winHeight,notimesW,userShareData,userShareTime }}" /> -->

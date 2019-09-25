@@ -8,14 +8,14 @@ Page({
     areaText:"全国",
     userInfo:false,
     indexImgs:{
-        logo: app.globalData.apiImgUrl + "logo.png?t=" + new Date().getTime(), 
+        logo: app.globalData.apiImgUrl + "logo.png", 
         area: app.globalData.apiImgUrl + "area.png",
         areamore: app.globalData.apiImgUrl + "areamore.png",
         loadapp: app.globalData.apiImgUrl + "loadapp.png",
         infoman: app.globalData.apiImgUrl + "infoman.png", 
         posi: app.globalData.apiImgUrl + "posi.png", 
         status: app.globalData.apiImgUrl + "status.png", 
-        notice: app.globalData.apiImgUrl + "notice.png", 
+        notice: app.globalData.apiImgUrl + "notice.png?t=1", 
         nodata: app.globalData.apiImgUrl + "nodata.png",
         rilitime: app.globalData.apiImgUrl + "rilitime.png",
     },
@@ -71,7 +71,8 @@ Page({
       nAreaLists:[],
       isAllAreas:true,
       showInputList:false,
-      searchInputVal:""
+      searchInputVal:"",
+      areaInputFocus:false
   },
   chooseInputCtiy:function(e){
     this.chooseThisCtiy(e);
@@ -97,7 +98,7 @@ Page({
     this.setData({ nAreaLists: nlist,isAllAreas:false })
   },
   showInputList:function(){
-    this.setData({ showInputList:true })
+    this.setData({ showInputList: true })
   },
   callThisPhone: function (e) {
     app.callThisPhone(e);
@@ -111,10 +112,15 @@ Page({
         })
     },
     closeArea: function () {
+      this.setData({ areaInputFocus: false })
+      setTimeout(()=>{
         this.setData({
-            showArea: false,
-          showInputList:false
+          showArea: false,
+          showInputList: false,
+          isAllAreas: true,
+          searchInputVal: "",
         })
+      },10)
     },
     initFooterData:function(){
         this.setData({
@@ -262,10 +268,8 @@ Page({
   },
     onLoad: function (options) {
       this.initInputList();
-      this.initIndexData();
       this.initFooterData();
       this.getAreaData();
-      this.initHistoryLoc();
   },
   valiUserUrl: function (e) {
     app.valiUserUrl(e, this.data.userInfo)
@@ -282,7 +286,9 @@ Page({
      * 生命周期函数--监听页面显示
      */
     onShow: function () {
+      this.initIndexData();
       this.initUserInfo();
+      this.initHistoryLoc();
     },
 
     /**

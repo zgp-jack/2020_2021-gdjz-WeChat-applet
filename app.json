@@ -5,6 +5,7 @@
     "pages/userauth/userauth",
     "pages/publish/recruit/recruit",
     "pages/publish/test/test",
+    "pages/publish/pmap/pmap",
     "pages/collect/collect",
     "pages/home/home",
     "pages/published/published",
@@ -49,7 +50,8 @@
     "pages/tpl/app/app",
     "pages/map/map",
     "pages/map/detail",
-    "pages/rm/rm"
+    "pages/others/message/lists/lists",
+    "pages/others/message/publish/publish"
   ],
   "window": {
     "backgroundTextStyle": "light",

@@ -1,0 +1,242 @@
+.yupao-feedback {
+  position: relative;
+  width: 100%;
+}
+
+.feedback-header {
+  position: relative;
+  width: 100%;
+  background: #fff;
+  padding: 30rpx;
+  display: flex;
+  font-size: 28rpx;
+  color: #545454;
+}
+
+.feedback-boxes {
+  flex: 1;
+  margin-left: 20rpx;
+  font-size: 28rpx;
+  line-height: 50rpx;
+  margin-top: -5rpx;
+}
+
+.feedback-boxes-txew {
+  color: #b1b0b0;
+}
+
+.feedback-header-texr {
+  color: #f86e09;
+}
+
+.gehu {
+  color: #3d7cff;
+}
+
+.feedback-body {
+  position: relative;
+  padding: 20rpx;
+}
+
+.feedback-container {
+  position: relative;
+  width: 100%;
+  background: white;
+  border-radius: 2px;
+  box-shadow: #e7e6e4 0 0 10rpx;
+  padding: 35rpx 20rpx;
+}
+
+.feedback-container textarea {
+  height: 150px;
+  width: 100%;
+  outline: 0;
+  border: 0;
+  font-size: 32rpx;
+  line-height: 50rpx;
+  padding: 10rpx;
+  display: block;
+  letter-spacing: 2rpx;
+}
+
+.box-feelback {
+  background: rgba(246, 246, 246, 1);
+  border-radius: 8rpx;
+}
+
+.feedback-imgs {
+  position: relative;
+  margin-top: 10rpx;
+  width: 100%;
+  padding: 0 20rpx;
+}
+
+.feedback-img-item {
+  position: relative;
+  float: left;
+  width: 30.333%;
+  height: 200rpx;
+  overflow: hidden;
+  box-shadow: 0px 2px 8px 0px rgba(0, 0, 0, 0.08);
+  border-radius: 6px;
+  margin-bottom: 20rpx;
+  margin-right: 15rpx;
+}
+
+.feedback-imgbox {
+  position: relative;
+  height: 100%;
+}
+
+.feedback-img-item image {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+/* .feedback-uploadtips::before {
+  position: absolute;
+  content: '';
+  width: 50px;
+  height: 4px;
+  background: #dcdcdc;
+  left: 50%;
+  top: 50%;
+  margin-left: -25px;
+  margin-top: -2px;
+  z-index: 1;
+  border-radius: 2px;
+} */
+
+/* .feedback-uploadtips::after {
+  position: absolute;
+  content: '';
+  width: 4px;
+  height: 50px;
+  background: #dcdcdc;
+  top: 50%;
+  left: 50%;
+  margin-left: -2px;
+  margin-top: -25px;
+  z-index: 1;
+  border-radius: 2px;
+} */
+
+.feedback-submit-btn {
+  position: relative;
+  width: 80%;
+  height: 100rpx;
+  line-height: 100rpx;
+  background: #09f;
+  text-align: center;
+  display: block;
+  color: white;
+  font-size: 30rpx;
+  letter-spacing: 2rpx;
+  margin: 15rpx auto 0;
+  border-radius: 5px;
+}
+
+.feedback-del-thisimg {
+  position: absolute;
+  background: rgba(0, 0, 0, 0.5);
+  width: 100%;
+  height: 40px;
+  left: 0;
+  bottom: 0;
+  z-index: 3;
+}
+
+.feedback-del-thisimg image {
+  position: relative;
+  display: block;
+  width: 20px;
+  height: 25px;
+}
+
+.common-publish-item {
+  position: relative;
+  padding: 0 20rpx;
+  min-height: 100rpx;
+}
+
+.common-publish-content {
+  position: relative;
+  width: 100%;
+  padding: 20rpx 0 0;
+  background: white;
+}
+
+.common-publish-item-content {
+  padding: 20rpx 0;
+  padding-left: 180rpx;
+  border-bottom: 1px solid #dcdcdc;
+  overflow: hidden;
+  display: flex;
+}
+
+.common-publishbore {
+  border-bottom: none;
+}
+
+.common-publish-item-contents {
+  padding: 20rpx 0;
+  padding-left: 180rpx;
+  overflow: hidden;
+  display: flex;
+}
+
+.common-publish-words {
+  position: absolute;
+  left: 20rpx;
+  top: 20rpx;
+  line-height: 60rpx;
+  font-size: 28rpx;
+  font-weight: 400;
+  color: rgba(42, 42, 42, 1);
+  width: 150rpx;
+  text-align: justify;
+}
+
+.common-publish-words::after {
+  content: '.';
+  width: 100%;
+  display: inline-block;
+  overflow: hidden;
+  height: 0;
+}
+
+.common-publish-input {
+  position: relative;
+  flex: 1;
+  display: block;
+  height: 60rpx;
+  font-size: 28rpx;
+  line-height: 20rpx;
+  border: 0;
+}
+
+.short {
+  text-align: center;
+  width: 150rpx;
+  font-size: 24rpx;
+  background: #f7f6f9;
+  padding: 5rpx;
+}
+
+.common-publish-inputE {
+  position: relative;
+  flex: 1;
+  height: 60rpx;
+  font-size: 30rpx;
+  line-height: 20rpx;
+  border: 0;
+  display: flex;
+  align-items: center;
+}
+
+#texra {
+  padding: 30rpx 20rpx;
+  font-size: 28rpx;
+  word-wrap: break-word;
+}

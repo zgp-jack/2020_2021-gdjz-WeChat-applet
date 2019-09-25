@@ -253,14 +253,19 @@
 <view class='index-pullareabox {{ showArea ? "index-pullareabox-active":"" }}'>
     <view class='index-area-header'>
       <view class="searchinputbox">
-        <input class="area-input" placeholder="请输入城市" bindinput="searchInput" bindtap="showInputList" value="{{ searchInputVal }}"></input>
+        <input class="area-input" placeholder="请输入城市名" bindinput="searchInput" bindtap="showInputList" value="{{ searchInputVal }}" focus="{{ areaInputFocus }}"></input>
         <image src="{{ clearinput }}" bindtap="clearInputAction"></image>
       </view>
       <text class='index-close-area' bindtap='closeArea'>取消</text>
     </view>
 
     <view class="searchcitybox" wx:if="{{ showInputList }}">
-      <view class="search-list-item" wx:if="{{ !isAllAreas && !nAreaLists.length }}">暂未找到相关城市</view>
+      <view class="search-list-item" wx:if="{{ !isAllAreas && !nAreaLists.length }}">
+        <view class='common-nodatabox flex-column'>
+            <image src='{{ indexImgs.nodata }}'></image>
+            <text>暂未找到相关城市</text>
+        </view>
+        </view>
       <view class="search-list-item" wx:for="{{ isAllAreas ? allAreaLists : nAreaLists }}" wx:key="{{ index }}"  bindtap='chooseInputCtiy' data-pname="{{ item.ad_name }}"  data-id="{{ item.id }}" data-area="{{ item.name }}" >{{ item.cname }} </view>
     </view>
 

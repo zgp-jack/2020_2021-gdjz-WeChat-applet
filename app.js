@@ -681,4 +681,9 @@ App({
     });
 
   },
+  getPrevPage:function(){
+    let pages = getCurrentPages();
+    let prevPage = pages[pages.length - 2];
+    return prevPage;
+  }
 })

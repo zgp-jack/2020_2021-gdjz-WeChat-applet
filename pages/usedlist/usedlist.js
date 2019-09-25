@@ -25,6 +25,7 @@ Page({
         loadingGif: app.globalData.apiImgUrl + "loading.gif",
         nodata: app.globalData.apiImgUrl + "nodata.png",
         selectimg: app.globalData.apiImgUrl + 'select.png',
+      returnTopImg: app.globalData.apiImgUrl + 'returntop.png',
         showListsInfo: 0,
         province: -1,
         worktype: -1,
@@ -486,6 +487,10 @@ Page({
             this.setData({ "userShareData.showWin": false })
         }
     },
+  viewScroll: function (e) {
+    let top = e.detail.scrollTop;
+    this.setData({ showReturnTopImg: (top > 960) ? true : false })
+  },
     /**
      * 生命周期函数--监听页面加载
      */
