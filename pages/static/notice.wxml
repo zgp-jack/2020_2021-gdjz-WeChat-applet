@@ -1,4 +1,12 @@
 <import src="../../wxParse/wxParse.wxml"/>
+<import src="/pages/footer/footer.wxml"/>
 <view class='noticebox'>
+    <view class="infotitle">{{ title }}</view>
+    <view class="info-time">作者：{{ author }} <text>{{ time }}</text> </view>
     <template is="wxParse" data="{{ wxParseData:content.nodes }}"/>
 </view>
+
+
+<button class="info-shareimg" open-type="share">分享</button>
+<!-- 引入footer -->
+<template is="footer" data="{{ footerImgs,publishActive,showPublishBox,footerActive }}" />

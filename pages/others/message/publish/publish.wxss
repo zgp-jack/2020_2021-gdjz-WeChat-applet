@@ -17,8 +17,8 @@
   flex: 1;
   margin-left: 20rpx;
   font-size: 28rpx;
-  line-height: 50rpx;
-  margin-top: -5rpx;
+  line-height: 30rpx;
+  margin-top: 6rpx;
 }
 
 .feedback-boxes-txew {
@@ -27,6 +27,7 @@
 
 .feedback-header-texr {
   color: #f86e09;
+  font-size: 28rpx;
 }
 
 .gehu {
@@ -69,6 +70,7 @@
   margin-top: 10rpx;
   width: 100%;
   padding: 0 20rpx;
+  margin-left: 14rpx;
 }
 
 .feedback-img-item {
@@ -77,10 +79,26 @@
   width: 30.333%;
   height: 200rpx;
   overflow: hidden;
-  box-shadow: 0px 2px 8px 0px rgba(0, 0, 0, 0.08);
+  /* box-shadow: 0px 2px 8px 0px rgba(0, 0, 0, 0.08); */
   border-radius: 6px;
   margin-bottom: 20rpx;
   margin-right: 15rpx;
+  background: white;
+  /* border: 4rpx dashed #dcdcdc; */
+}
+
+.feedback-img-itema {
+  position: relative;
+  float: left;
+  width: 30.333%;
+  height: 200rpx;
+  overflow: hidden;
+  /* box-shadow: 0px 2px 8px 0px rgba(0, 0, 0, 0.08); */
+  border-radius: 6px;
+  margin-bottom: 20rpx;
+  margin-right: 15rpx;
+  background: white;
+  border: 4rpx dashed #dcdcdc;
 }
 
 .feedback-imgbox {
@@ -94,7 +112,7 @@
   height: 100%;
 }
 
-/* .feedback-uploadtips::before {
+.feedback-uploadtips::before {
   position: absolute;
   content: '';
   width: 50px;
@@ -106,9 +124,9 @@
   margin-top: -2px;
   z-index: 1;
   border-radius: 2px;
-} */
+}
 
-/* .feedback-uploadtips::after {
+.feedback-uploadtips::after {
   position: absolute;
   content: '';
   width: 4px;
@@ -120,11 +138,11 @@
   margin-top: -25px;
   z-index: 1;
   border-radius: 2px;
-} */
+}
 
 .feedback-submit-btn {
   position: relative;
-  width: 80%;
+  width: 95%;
   height: 100rpx;
   line-height: 100rpx;
   background: #09f;
@@ -220,8 +238,9 @@
   text-align: center;
   width: 150rpx;
   font-size: 24rpx;
-  background: #f7f6f9;
+  background:#09f;
   padding: 5rpx;
+  color: white;
 }
 
 .common-publish-inputE {
@@ -239,4 +258,11 @@
   padding: 30rpx 20rpx;
   font-size: 28rpx;
   word-wrap: break-word;
+}
+
+.texralengh {
+  font-size: 30rpx;
+  color: #ccc;
+  padding: 0 20rpx;
+  text-align: right;
 }

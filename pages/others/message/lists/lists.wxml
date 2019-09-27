@@ -1,9 +1,7 @@
 <!-- 意见反馈列表 -->
 <view class="feedback-header" id="comment">
-  <view class="feedback-header-texr">提示 :</view>
-  <view class="feedback-boxes">
-    为提高沟通效率，建议您添加客服微信或拨打客服电话,
-    <text>加客服微信号</text>
+  <view>
+    <text class="feedback-header-texr">提示 : </text> 为提高沟通效率,建议您添加客服微信或拨打客服电话,客服微信号:
     <text bindtap='clipboardWechat' data-wc="{{ wechat }}" class='gehu'>{{ wechat }}</text> 客服电话:
     <text class='gehu' data-phone="{{ phone }}" bindtap='callThisPhone'>{{ phone }}</text>
   </view>
@@ -11,17 +9,18 @@
 
 
 <view class="feedback-body">
-  <view class="feedback-box-se">
+
 
     <!-- 列表 -->
     <block wx:for="{{restaurants}}" wx:key="{{index}}">
       <view class="feedback-body-1">
+
         <view class="superior">
           <view class="superior-1">
             <text>问</text>
           </view>
           <view class="superior-2">
-            {{item.content}}
+            <text>{{item.content}}</text>
           </view>
         </view>
 
@@ -34,15 +33,15 @@
 
         <view class="species-text">{{item.ask_time}}</view>
         <view class="superior-1s" wx:if="{{item.is_answer}}">
-          <view class="superior-1-s">答</view>
-          <view class="superior-2">
+          <view class="superiordati">答</view>
+          <view class="superioredase">
             <text wx:if="{{item.send_msg}}">{{item.send_msg}}</text>
           </view>
         </view>
       </view>
     </block>
 
-  </view>
+
 
 
 
@@ -53,7 +52,7 @@
 </view>
 
 
-<view class='common-nodatabox flex-column' wx:if="{{ !restaurants.length }}">
+<view class='common-nodatabox flex-column' wx:if="{{restaurants.length==0}}">
   <image src='{{nodata}}'></image>
   <text>暂无相关意见反馈</text>
 </view>

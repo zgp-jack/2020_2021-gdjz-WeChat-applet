@@ -312,6 +312,6 @@ page{
 .joblist-wyjz{position: absolute;bottom: 0;right: 0;width: 80rpx;height: 80rpx;z-index: 1;border-radius: 0 0 2px 0;}
 
 
-.returntop{position: fixed;width: 80rpx;height: 80rpx;right: 27rpx;bottom: -100rpx;border-radius: 50%;box-shadow:0  0 5rpx #e7e6e4;transition: 0.5s;}
+.returntop{position: fixed;width: 80rpx;height: 80rpx;display: block;right: 50rpx;bottom: -120rpx;border-radius: 50%;box-shadow:0  0 5rpx #0099ff;transition: 0.5s;}
 
-.returntop-active{bottom: 120rpx;}
+.returntop-active{bottom: 115rpx;}

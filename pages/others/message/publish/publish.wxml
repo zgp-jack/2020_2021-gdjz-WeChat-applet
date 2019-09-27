@@ -3,10 +3,8 @@
 
 
     <view class="feedback-header">
-      <view class="feedback-header-texr">提示 :</view>
-      <view class="feedback-boxes">
-        为提高沟通效率，建议您添加客服微信或拨打客服电话,
-        <text>客服微信号</text>
+      <view>
+        <text class="feedback-header-texr">提示 : </text> 为提高沟通效率,建议您添加客服微信或拨打客服电话,客服微信号:
         <text bindtap='clipboardWechat' data-wc="{{ wechat }}" class='gehu'>{{ wechat }}</text> 客服电话:
         <text class='gehu' data-phone="{{ phone }}" bindtap='callThisPhone'>{{ phone }}</text>
       </view>
@@ -18,7 +16,8 @@
       <view class="feedback-container">
 
         <view class="box-feelback">
-          <textarea id="texra"  maxlength="500" placeholder="请填写您对鱼泡的建议或者意见" bindinput="userEnterContent" value='{{ content }}'></textarea>
+          <textarea id="texra" maxlength="500" placeholder="请填写您对鱼泡的建议或意见" bindinput="userEnterContent" value='{{ content }}'></textarea>
+          <view class="texralengh">{{texralengh}}/500</view>
 
           <view class="feedback-imgs clearfix">
             <view class="feedback-img-item" data-type="0" data-index='{{ index }}' bindtap='userUploadsImg' wx:for="{{ imglists }}" wx:key="{{ index }}">
@@ -29,10 +28,11 @@
                 </view>
               </view>
             </view>
-            <view class="feedback-img-item feedback-uploadtips" data-type="1" bindtap='userUploadsImg' wx:if="{{ imgs.length < maxLen }}">
-              <image src='{{ hintImg }}'></image>
+            <view class="feedback-img-itema feedback-uploadtips" data-type="1" bindtap='userUploadsImg' wx:if="{{ imgs.length < maxLen }}">
+              <!-- <image src='/images/yangs.png' mode="widthFix"></image> -->
             </view>
           </view>
+
         </view>
 
 
@@ -53,7 +53,7 @@
         <view class='common-publish-item'>
           <view class='common-publish-item-content {{!tel || (member.phone != tel)?"":"common-publishbore"}}'>
             <text class='common-publish-words'>联系电话:</text>
-            <input maxlength="11" class='common-publish-input' value='{{ member.phone }}' placeholder='请输入手机号方便客户联系你' bindinput="addinput" type="number"></input>
+            <input maxlength="11" class='common-publish-input' value='{{ member.phone }}' placeholder='请输入手机号' bindinput="addinput" type="number"></input>
           </view>
         </view>
 
@@ -71,6 +71,6 @@
       </view>
     </view>
 
-    <text class="feedback-submit-btn" bindtap='userSubmitFeedback'>提交</text>
+    <text class="feedback-submit-btn" bindtap='userSubmitFeedback'>提交保存</text>
   </view>
 </view>

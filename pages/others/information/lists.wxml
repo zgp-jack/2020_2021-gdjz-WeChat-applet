@@ -1,0 +1,50 @@
+<!-- 新闻列表 -->
+<import src="/pages/footer/footer.wxml" />
+<!-- 滚动选项卡 -->
+<scroll-view scroll-x="true" class="tab-h" scroll-left="{{scrollLeft}}">
+  <blick wx:for="{{tabBars}}" wx:key="index">
+
+    <view class="tab-item {{currentType==item.index?'active':''}}" data-typeIndex="{{ item.index }}" data-index="{{index}}" data-item='{{item}}' bindtap="swichNav">{{item.name}}</view>
+  
+  </blick>
+</scroll-view>
+
+<view class="bagboxs"></view>
+
+<swiper class="tab-content" data-ty peIndex="{{ item.index }}" current="{{currentTab}}" bindchange="switchTab" style="height:{{swiperheight}}rpx">
+
+  <block wx:for="{{tabBars}}" wx:key="index">
+
+    <swiper-item>
+      <scroll-view scroll-y="true" data-item="{{item}}" class="scoll-h" bindscrolltolower="loadmore">
+        <block wx:for="{{newslist}}" wx:key="i">
+          <view class="contentlist" catchtap="category" data-item="{{item}}">
+            <view class="contentlistimg">
+              <image src="{{item.cover_img}}"></image>
+            </view>
+            <view class="contentlisyupao">
+              <view class="contentyupaotext">{{item.title}}</view>
+              <view class="contentyupaocone">{{item.desc}}</view>
+              <view class="yupaowriter">
+                <view>{{item.author}}</view>
+                <view>{{item.time}}</view>
+              </view>
+            </view>
+          </view>
+        </block>
+      </scroll-view>
+    </swiper-item>
+  </block>
+</swiper>
+
+<view class='addeas common-nodatabox flex-column' wx:if="{{newslist.length==0}}">
+  <image src='{{nodata}}'></image>
+  <text>{{typename}}</text>
+</view>
+
+
+
+
+
+<!-- 引入footer -->
+<template is="footer" data="{{ footerImgs,publishActive,showPublishBox,footerActive }}" />

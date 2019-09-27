@@ -24,10 +24,11 @@ Page({
       verification: "", //验证码
     },
     tel: "",
-    verify: "发验证码",
+    verify: "获取验证码",
     disabled: false, //验证按钮
+    texralengh:0,
   },
-  initUserInfo: function (options) {
+  initUserInfo: function(options) {
     let td = this.data
     let tel = options.tel;
     let name = options.name;
@@ -40,15 +41,15 @@ Page({
     })
 
   },
-  onLoad: function (options) {
+  onLoad: function(options) {
     this.initUserInfo(options);
     //this.initUploadImgsApi();
   },
-  userUploadsImg: function (e) {
+  userUploadsImg: function(e) {
     let _type = parseInt(e.currentTarget.dataset.type);
     let _index = parseInt(e.currentTarget.dataset.index);
     let _this = this;
-    app.userUploadImg(function (imgRes, mydata) {
+    app.userUploadImg(function(imgRes, mydata) {
       wx.hideLoading();
       wx.showToast({
         title: mydata.errmsg,
@@ -70,13 +71,15 @@ Page({
       })
     })
   },
-  userEnterContent: function (e) {
+  userEnterContent: function(e) {
     let val = e.detail.value
+    let cursor = e.detail.cursor
     this.setData({
+      texralengh: cursor,
       content: val
     })
   },
-  delThisImg: function (e) {
+  delThisImg: function(e) {
     let index = parseInt(e.currentTarget.dataset.index);
     let imgs = this.data.imgs;
     let imglists = this.data.imglists;
@@ -87,7 +90,7 @@ Page({
       imglists: imglists
     })
   },
-  userSubmitFeedback: function () {
+  userSubmitFeedback: function() {
     let _this = this;
     let td = this.data
     let userInfo = wx.getStorageSync("userInfo");
@@ -102,7 +105,7 @@ Page({
     }
 
     if (username.length < 2 || !words.test(username)) {
-      app.showMyTips("请输入正确的用户名！");
+      app.showMyTips("请正确输入联系人且必须包含汉字！");
       return false;
     }
 
@@ -134,14 +137,14 @@ Page({
         tel: td.member.phone,
         code: td.member.verification
       },
-      success: function (res) {
+      success: function(res) {
         let mydata = res.data;
         if (mydata.errcode == "ok") {
           wx.showModal({
             title: '系统提示',
             content: mydata.errmsg,
             showCancel: false,
-            success: function (res) {
+            success: function(res) {
               wx.navigateBack({
                 delta: 1
               })
@@ -159,10 +162,10 @@ Page({
 
   },
 
-  callThisPhone: function (e) {
+  callThisPhone: function(e) {
     app.callThisPhone(e);
   },
-  clipboardWechat: function (e) {
+  clipboardWechat: function(e) {
     let wechat = e.currentTarget.dataset.wc;
     wx.setClipboardData({
       data: wechat,
@@ -172,7 +175,7 @@ Page({
           title: '恭喜您',
           content: '微信号：' + wechat + "已复制到粘贴板,去微信-添加朋友-搜索框粘贴",
           showCancel: false,
-          success: function () { }
+          success: function() {}
         })
       }
     })
@@ -180,7 +183,7 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  initUploadImgsApi: function () {
+  initUploadImgsApi: function() {
     let userInfo = wx.getStorageSync("userInfo");
     this.setData({
       userInfo: userInfo
@@ -189,46 +192,53 @@ Page({
   },
 
   //手机号
-  addinput: function (e) {
+  addinput: function(e) {
     let val = e.detail.value
     this.setData({
       'member.phone': val
     })
   },
   //名字
-  userEnterName: function (e) {
+  userEnterName: function(e) {
     let username = e.detail.value
     this.setData({
       'member.username': username
     })
   },
   //验证
-  verifi: function (e) {
+  verifi: function(e) {
     let verification = e.detail.value
     this.setData({
       'member.verification': verification
     })
   },
   //短信请求
-  getVerifyCode: function () {
+  getVerifyCode: function() {
     let td = this.data
+    let userInfo = wx.getStorageSync("userInfo");
     let _this = this
     if (vali.isMobile(td.member.phone)) {
-      this.validateBtn();
+      this.setData({
+        disabled: true
+      })
       // 发送网络请求
       app.appRequestAction({
         url: "index/get-code/",
         way: "POST",
+        mask: true,
         failTitle: "网络错误，获取失败！",
         params: {
-          userId: td.userInfo.userId,
-          token: td.userInfo.token,
-          tokenTime: td.userInfo.tokenTime,
+          userId: userInfo.userId,
+          token: userInfo.token,
+          tokenTime: userInfo.tokenTime,
           tel: td.member.phone,
           sendType: "have"
         },
-        success: function (res) {
+        success: function(res) {
           let mydata = res.data;
+          if (mydata.errcode == "ok") {
+            _this.validateBtn(mydata.refresh);
+          }
           app.showMyTips(mydata.errmsg);
         },
 
@@ -236,8 +246,8 @@ Page({
     } else app.showMyTips("手机号有误")
   },
 
-  validateBtn: function () {
-    let time = 60;
+  validateBtn: function(refresh) {
+    let time = refresh ? parseInt(refresh) : 60;
     let timer = setInterval(() => {
       if (time == 0) {
         clearInterval(timer);
@@ -249,24 +259,9 @@ Page({
         // 倒计时
         this.setData({
           verify: time + "秒后重试",
-          disabled: true
         })
         time--;
       }
     }, 1000);
   },
-  validatePhone() {
-    let td = this.data;
-    // 验证手机号码
-    if (!vali.isMobile(td.member.phone)) {
-      wx.showToast({
-        title: '请填写正确的手机号码',
-        icon: 'none',
-        duration: 2000
-      })
-      return false;
-    } else {
-      return true;
-    }
-  }
 })

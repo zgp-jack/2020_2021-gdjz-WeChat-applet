@@ -13,7 +13,7 @@ Page({
     nodata: app.globalData.apiImgUrl + "nodata.png",
     isViewImgs: false,
   },
-  initUserData: function (options) {
+  initUserData: function(options) {
     let userInfo = wx.getStorageSync("userInfo");
     let td = this.data
     let tel = options.tel;
@@ -30,12 +30,12 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
+  onLoad: function(options) {
     let that = this
     this.initUserData(options)
 
   },
-  onShow: function () {
+  onShow: function() {
     if (this.data.isViewImgs) {
       this.setData({
         isViewImgs: false
@@ -53,20 +53,17 @@ Page({
     })
   },
 
-  onHide: function () {
+  onHide: function() {
     wx.hideToast()
 
   },
   //下拉加载方法
-  getFeedbackList: function (bool) {
+  getFeedbackList: function(bool) {
     let _this = this;
     let td = this.data
     let page = td.page;
     let userInfo = wx.getStorageSync("userInfo");
     // 发送网络请求
-    wx.showLoading({
-      title: '加载中',
-    })
     app.appRequestAction({
       url: "leaving-message/list/",
       way: "POST",
@@ -76,7 +73,7 @@ Page({
         tokenTime: userInfo.tokenTime,
         page: td.page,
       },
-      success: function (res) {
+      success: function(res) {
         let mydata = res.data.data;
         let len = mydata.length;
         if (len) {
@@ -99,24 +96,24 @@ Page({
           page: page
         })
       },
-
-
+    
+      
     })
   },
 
 
   ////下拉加载生命周期
-  onReachBottom: function () {
+  onReachBottom: function() {
     if ((this.data.page != 1) && this.data.hasmore) this.getFeedbackList()
   },
 
-  valiUserUrl: function () {
+  valiUserUrl: function() {
     let td = this.data
     wx.navigateTo({
       url: '/pages/others/message/publish/publish?tel=' + td.member.phone + "&name=" + td.member.username + "&wechat=" + td.wechat + "&phone=" + td.phone
     })
   },
-  clipboardWechat: function (e) {
+  clipboardWechat: function(e) {
     let wechat = e.currentTarget.dataset.wc;
     wx.setClipboardData({
       data: wechat,
@@ -126,15 +123,15 @@ Page({
           title: '恭喜您',
           content: '微信号：' + wechat + "已复制到粘贴板,去微信-添加朋友-搜索框粘贴",
           showCancel: false,
-          success: function () { }
+          success: function() {}
         })
       }
     })
   },
-  callThisPhone: function (e) {
+  callThisPhone: function(e) {
     app.callThisPhone(e);
   },
-  initNeedData: function () {
+  initNeedData: function() {
     let _this = this;
     let _mark = true;
     let _wx = wx.getStorageSync("_wx");
@@ -149,7 +146,7 @@ Page({
         type: "job",
         userId: _mark ? (userInfo.userId ? userInfo.userId : "") : "",
       },
-      success: function (res) {
+      success: function(res) {
         let mydata = res.data;
         _this.setData({
           phone: mydata.phone,
@@ -163,7 +160,7 @@ Page({
           });
         }
       },
-      fail: function (err) {
+      fail: function(err) {
         wx.showToast({
           title: '数据加载失败！',
           icon: "none",

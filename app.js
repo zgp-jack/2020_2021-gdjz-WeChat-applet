@@ -484,7 +484,7 @@ App({
         this.doRequestAction({
             url: "user/list-share/",
             way: "POST",
-            params: userInfo
+            params: userInfo ? userInfo : {}
         })
     },
     initAdminTime: function (callback) {
@@ -685,5 +685,13 @@ App({
     let pages = getCurrentPages();
     let prevPage = pages[pages.length - 2];
     return prevPage;
-  }
+  },
+  commonUserShare: function () {
+    let userInfo = wx.getStorageSync("userInfo");
+    this.appRequestAction({
+      url: "user/user-share/",
+      way: "POST",
+      params: userInfo ? userInfo : {}
+    })
+  },
 })

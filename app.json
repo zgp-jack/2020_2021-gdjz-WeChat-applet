@@ -51,7 +51,8 @@
     "pages/map/map",
     "pages/map/detail",
     "pages/others/message/lists/lists",
-    "pages/others/message/publish/publish"
+    "pages/others/message/publish/publish",
+    "pages/others/information/lists"
   ],
   "window": {
     "backgroundTextStyle": "light",

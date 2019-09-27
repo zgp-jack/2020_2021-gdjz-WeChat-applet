@@ -15,7 +15,7 @@ Page({
         infoman: app.globalData.apiImgUrl + "infoman.png", 
         posi: app.globalData.apiImgUrl + "posi.png", 
         status: app.globalData.apiImgUrl + "status.png", 
-        notice: app.globalData.apiImgUrl + "notice.png?t=1", 
+        notice: app.globalData.apiImgUrl + "notice.png?t=2", 
         nodata: app.globalData.apiImgUrl + "nodata.png",
         rilitime: app.globalData.apiImgUrl + "rilitime.png",
     },
@@ -49,6 +49,7 @@ Page({
         gjsc: app.globalData.apiImgUrl + "ypsc.png",
         driver: app.globalData.apiImgUrl + "driver.png",
         jixiezr: app.globalData.apiImgUrl + "jixiezr.png",
+      newzjxm: app.globalData.apiImgUrl + "newindex-zjxmicon.png"
     }, 
     fun: {
       yqhy: app.globalData.apiImgUrl + "yqhy.png",

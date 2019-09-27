@@ -6,4 +6,11 @@
     box-sizing: border-box;
     max-width: 100%;
     overflow: hidden;
+    padding-bottom: 100rpx;
 }
+.infotitle{font-size: 34rpx;line-height:50rpx;padding: 10rpx 0;}
+.info-time{position: relative;width: 100%;border-bottom: 1px solid #dcdcdc;font-size: 26rpx;color:#586069;line-height: 40px;margin-bottom: 20rpx;}
+.info-time text{float: right;}
+
+.info-shareimg{position: fixed;width: 100rpx;height: 100rpx;line-height: 100rpx;text-align: center;font-size:30rpx;color: #0099ff;border-radius: 50%;box-shadow: 0 0 5px #0099ff;right: 27rpx;top: 400rpx;z-index: 10;background: white;overflow: hidden;font-weight: bold;letter-spacing: 1px;border:none;padding: 0;}
+.info-shareimg::after{border:0;}

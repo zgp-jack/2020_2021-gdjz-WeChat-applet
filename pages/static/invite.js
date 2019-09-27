@@ -19,7 +19,7 @@ Page({
         app.doRequestAction({
             way: "POST",
             url: "user/invite-share/",
-            params: userInfo
+            params: userInfo ? userInfo : {}
         })
     },
     initFooterData: function () {

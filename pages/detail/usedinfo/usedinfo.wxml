@@ -6,7 +6,7 @@
             <view class='yupao-lists-wxtips'><text class='yupao-lists-tips'>加群：</text>加工友微信号:<text  data-wechat="{{ wechat }}" bindtap='clipboardWechat'>{{ wechat }}</text> 拉你进工人微信群。客服电话:<text bindtap='callThisPhone' data-phone="{{ phone }}">{{ phone }}</text></view>
         </view>
         <view class='yupao-lists-noticetips'>
-            <text class='yupao-common-tips yupao-lists-newtips'>鱼泡公告：</text>
+            <text class='yupao-common-tips yupao-lists-newtips'>鱼泡资讯：</text>
             <view class='lists-notice-swiper'>
                 <swiper indicator-dots="{{ notice.indicatorDots }}" autoplay="{{ notice.autoplay}} " interval="{{ notice.interval }}" duration="{{ notice.duration }}" circular="{{ notice.circular }}"  vertical="{{ notice.vertical }}">
                     <block wx:for="{{ notice.lists }}" wx:key="{{ index }}">
