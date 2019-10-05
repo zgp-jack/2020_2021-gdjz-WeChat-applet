@@ -22,7 +22,7 @@ page{position: relative;width: 100%;height: 100%;}
 
 .feedback-body {
   position: relative;
-  margin-bottom: 150rpx;
+  padding-bottom: 180rpx;
   margin-top: 20rpx;
 }
 
@@ -151,9 +151,6 @@ page{position: relative;width: 100%;height: 100%;}
   background: rgba(255, 255, 255, 1);
   width: 100%;
   padding: 25rpx 20rpx;
-  /* display: flex;
-  align-items: center;
-  justify-content: center; */
 }
 
 .footr-1 {

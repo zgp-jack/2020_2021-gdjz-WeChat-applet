@@ -67,7 +67,8 @@ Page({
         },
         userShareTime: {},
       isload: false,
-      scrollTop: 0
+      scrollTop: 0,
+      showReturnTopImg:false
     },
     stopThisAction: function () {
         return false;
