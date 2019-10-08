@@ -46,6 +46,8 @@ Page({
         },
         fillterArea: [],
         fillterType:[],
+        fillterListType: [],
+        joblisttype:"",
         notice: {
             autoplay: true,
             indicatorDots: false,
@@ -60,6 +62,7 @@ Page({
         lists:[],
         areaText:"选择城市",
         typeText:"选择工种",
+        listText:"最新",
         showNothinkData:false,
         nothavemore:false,
         showMyLoading:false,
@@ -81,7 +84,13 @@ Page({
         joblistwyjz:app.globalData.apiImgUrl+"joblist_wyzd.png",
       isload: false,
       scrollTop: 0,
-      showReturnTopImg:false
+      showReturnTopImg:false,
+      bring: app.globalData.apiImgUrl + 'newlist-jobzd.png', //顶置图片
+      autimg: app.globalData.apiImgUrl + 'newlist-jobrealname.png', //实名图片
+      hirimg: app.globalData.apiImgUrl + 'newlist-jobfinding.png', //招人图片
+      doneimg: app.globalData.apiImgUrl + 'newlist-jobfindend.png', //已找到
+      iondzs: app.globalData.apiImgUrl + 'newlist-jobposi.png',//定位
+      iImgUrl: app.globalData.apiImgUrl, //图片地址
     },
   getMapInfo: function (callback) {
     let that = this;
@@ -262,6 +271,17 @@ Page({
         }
 
     },
+    userChooseListType:function(e){
+      let type = e.currentTarget.dataset.type;
+      let name = e.currentTarget.dataset.name;
+      this.setData({
+        "searchDate.joblisttype":type,
+        listText:name
+      })
+      this.returnTop();
+      this.doRequestAction(false);
+      this.closeAllSelect();
+    },
     userChooseWorkinfo: function (e) {
         let typeText = e.currentTarget.dataset.type;
         let id = parseInt(e.currentTarget.dataset.id);
@@ -306,7 +326,7 @@ Page({
         _params.tokenTime = uinfo.tokenTime;
       }
         app.doRequestAction({
-            url:"index/info-list/",
+          url:"job/list-new/",
           params: _params,
             success:function(res){
               _this.setData({ isload: false })
@@ -655,11 +675,11 @@ Page({
             fillterArea: areas.getAreaArr
         })
       if (app.globalData.allTypes) {
-        _this.setData({ fillterType: app.globalData.allTypes.classTree });
+        _this.setData({ fillterType: app.globalData.allTypes.classTree, fillterListType: app.globalData.allTypes.jobListType, "searchDate.joblisttype": app.globalData.allTypes.jobListType[0].type, listText: app.globalData.allTypes.jobListType[0].name });
         if (_this.data.fillterType.length == 1) _this.setData({ typeText: _this.data.fillterType[0].name })
       } else {
         app.getListsAllType(function (_data) {
-          _this.setData({ fillterType: _data.classTree })
+          _this.setData({ fillterType: _data.classTree, fillterListType: _data.jobListType, "searchDate.joblisttype": _data.jobListType[0].type, listText: _data.jobListType[0].name })
           if (_this.data.fillterType.length == 1) _this.setData({ typeText: _this.data.fillterType[0].name })
         });
       }   
@@ -670,6 +690,9 @@ Page({
         app.pageInitSystemInfo(this);
         if(userInfo) app.initUserShareTimes();
     },
+  stopThisAction: function () {
+    return false;
+  },
     userShareAction:function(){
         let _this = this;
         app.userShareAction(function(_str){

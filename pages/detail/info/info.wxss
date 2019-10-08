@@ -125,3 +125,519 @@
 
 .locationicon{width: 50rpx;height: 50rpx;display: inline-block;vertical-align: middle;}
 
+/* codes by hmx */
+
+.matter {
+  position: relative;
+  margin-bottom: 150rpx;
+}
+
+.cephalosomea {
+  width: 100%;
+  margin: 30rpx 0;
+  background: white;
+  padding-left: 20rpx;
+  padding-right: 20rpx;
+  padding-bottom: 30rpx;
+}
+
+.linkmanbox {
+  height: 100rpx;
+  border: 1rpx solid;
+}
+
+.linkmana {
+  font-size: 30rpx;
+  font-family: Source Han Sans CN;
+  font-weight: 400;
+  color: rgba(42, 42, 42, 1);
+  padding: 20rpx 0;
+}
+
+.linkmanb {
+  font-size: 26rpx;
+  font-family: Source Han Sans CN;
+  font-weight: 400;
+  color: rgba(127, 126, 126, 1);
+  padding-bottom: 20rpx;
+}
+
+.nlianc {
+  width: 696rpx;
+  padding: 30rpx;
+  background: rgba(255, 255, 255, 1);
+  box-shadow: darkgrey 0px 0px 8rpx;
+  box-sizing: border-box;
+  border-radius: 4rpx;
+}
+
+.linkmanlianc {
+  position: relative;
+  padding: 5rpx 0;
+  box-sizing: border-box;
+}
+
+.linkmanlianc::before {
+  position: absolute;
+  content: '';
+  width: 2rpx;
+  height: 100%;
+  background: #dcdcdc;
+}
+
+.newjobinfopactive::before {
+  position: absolute;
+  content: '';
+  width: 30rpx;
+  height: 30rpx;
+  background: url(http://cdn.yupao.com/newyupao/images/newjobinfo-steps.png) no-repeat;
+  background-size: 100% 100%;
+  left: -11rpx;
+  top: 20rpx;
+}
+
+.pactive {
+  margin-left: 45rpx;
+  padding-top: 18rpx;
+}
+
+.pactiveciome {
+  display: flex;
+}
+
+.newjobinfopactive {
+  position: relative;
+  font-size: 28rpx;
+  color: #2a2a2a;
+}
+
+.newjobin {
+  position: relative;
+  font-size: 28rpx;
+  color: #2a2a2a;
+}
+
+.xian {
+  width: 1rpx;
+  height: 170rpx;
+  border: 1rpx solid rgba(238, 238, 238, 1);
+  position: absolute;
+  left: 40rpx;
+  top: 25rpx;
+}
+
+.comeit {
+  font-size: 28rpx;
+  font-family: Source Han Sans CN;
+  font-weight: 400;
+  color: rgba(42, 42, 42, 1);
+}
+
+.tu {
+  width: 25rpx;
+  height: 25rpx;
+  position: absolute;
+  left: 30rpx;
+  top: 50rpx;
+  z-index: 1;
+}
+
+.tus {
+  width: 25rpx;
+  height: 25rpx;
+  position: absolute;
+  left: 30rpx;
+  top: 106rpx;
+  z-index: 1;
+}
+
+.comeite {
+  font-size: 28rpx;
+  font-family: Source Han Sans CN;
+  font-weight: 400;
+  color: rgba(42, 42, 42, 1);
+  display: flex;
+  align-items: center;
+}
+
+.comeitex {
+  font-size: 28rpx;
+  font-family: Source Han Sans CN;
+  font-weight: 400;
+  color: rgba(247, 17, 17, 1);
+}
+
+.substance {
+  width: 180rpx;
+  height: 40rpx;
+  background: rgba(0, 153, 255, 1);
+  border-radius: 6rpx;
+  font-size: 26rpx;
+  font-family: Source Han Sans CN;
+  font-weight: 400;
+  color: rgb(255, 255, 255);
+  text-align: center;
+  line-height: 40rpx;
+  margin-left: 50rpx;
+}
+
+.substan {
+  display: flex;
+  margin-left: 30rpx;
+}
+
+.substanphone {
+  width: 120rpx;
+  height: 40rpx;
+  background: rgba(52, 176, 49, 1);
+  font-size: 26rpx;
+  font-family: Source Han Sans CN;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 1);
+  text-align: center;
+  line-height: 40rpx;
+  border-radius: 6rpx;
+}
+
+.complain {
+  width: 70rpx;
+  height: 40rpx;
+  background: rgba(247, 17, 17, 1);
+  font-size: 26rpx;
+  font-family: Source Han Sans CN;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 1);
+  text-align: center;
+  line-height: 40rpx;
+  margin-left: 30rpx;
+  border-radius: 6rpx;
+}
+
+.seek {
+  padding: 10rpx;
+  background: rgba(0, 153, 255, 1);
+  background: rgba(246, 243, 243, 1);
+  border: 1rpx solid rgba(212, 211, 211, 1);
+  border-radius: 6rpx;
+  font-size: 26rpx;
+  font-family: Source Han Sans CN;
+  font-weight: 400;
+  color: rgba(127, 126, 126, 1);
+  text-align: center;
+  margin-left: 50rpx;
+}
+
+.ephalos {
+  padding-top: 15rpx;
+}
+
+.register {
+  display: flex;
+  justify-content: space-between;
+}
+
+.gister {
+  display: flex;
+  align-items: center;
+}
+
+.locationgo {
+  display: flex;
+  align-items: center;
+}
+
+.maps {
+  width: 37rpx;
+  height: 37rpx;
+}
+
+.locatext {
+  font-size: 28rpx;
+  font-family: Source Han Sans CN;
+  font-weight: 400;
+  color: rgb(127, 126, 126);
+}
+
+.maptexr {
+  font-size: 28rpx;
+  font-family: Source Han Sans CN;
+  font-weight: 400;
+  color: rgba(127, 126, 126, 1);
+}
+
+.locdez {
+  font-size: 28rpx;
+  font-family: Source Han Sans CN;
+  font-weight: 400;
+  color: rgb(42, 42, 42);
+  margin-top: 10rpx;
+}
+
+.craft {
+  font-size: 28rpx;
+  font-family: Source Han Sans CN;
+  font-weight: 400;
+  color: rgba(127, 126, 126, 1);
+  padding: 20rpx 0;
+}
+
+.jiaznu {
+  padding: 10rpx;
+  background: rgba(238, 237, 239, 1);
+  font-size: 26rpx;
+  font-family: Source Han Sans CN;
+  font-weight: 400;
+  color: rgba(42, 42, 42, 1);
+  text-align: center;
+  margin-right: 20rpx;
+  border-radius: 6rpx;
+  margin-bottom: 10rpx;
+}
+
+.cephalosomebox {
+  width: 100%;
+  margin: 20rpx 0;
+  background: white;
+  padding-left: 25rpx;
+  padding-right: 25rpx;
+  padding-bottom: 25rpx;
+}
+
+.genre {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.craftas {
+  font-size: 28rpx;
+  font-family: Source Han Sans CN;
+  font-weight: 400;
+  color: rgba(42, 42, 42, 1);
+  line-height: 40rpx;
+  padding-bottom: 20rpx;
+}
+
+.craftbox {
+  border-top: 1rpx solid rgba(220, 220, 220, 1);
+  padding-top: 30rpx;
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.imgbox {
+  width: 32.3333%;
+  border: 1rpx solid;
+  height: 200rpx;
+  margin-right: 1%;
+  margin-bottom: 15rpx;
+}
+
+.imgbox:nth-child(3n) {
+  margin-right: 0;
+}
+
+.info-yupao-tips {
+  position: relative;
+  width: 100%;
+}
+
+.info-yupao-tips .yupao-lists-notice {
+  margin-top: 0;
+  border-radius: 0;
+}
+
+.yupao-common-list-right .user-need-group {
+  display: inline-block;
+  margin-right: 10rpx;
+}
+
+.yupao-common-list-right .user-need-group:nth-last-child(1) {
+  margin-right: 0;
+}
+
+.info-concern-img {
+  position: relative;
+  margin-top: 15rpx;
+  background: white;
+}
+
+.info-concern-img image {
+  display: block;
+  width: 100%;
+}
+
+.info-mark {
+  color: #f00;
+  font-size: 26rpx;
+}
+
+.yupao-common-list-padding {
+  padding: 0 27rpx;
+}
+
+.yupao-common-list-padding .yupao-common-lists-item {
+  padding: 20rpx 0;
+}
+
+.yupao-common-list-padding .yupao-common-lists-item:nth-last-child(1) {
+  border-bottom: 0;
+}
+
+.info-wenxintips {
+  padding: 20rpx 27rpx;
+  background: white;
+  margin-top: 15rpx;
+}
+
+.info-wenxintips text {
+  font-size: 28rpx;
+  font-weight: bold;
+  color: #7f7e7e;
+}
+
+.info-wenxintips  .wenxintips-words {
+  color: red;
+  font-size: 28rpx;
+  line-height: 40rpx;
+}
+
+.wenxintips-info {
+  position: relative;
+  display: inline;
+  font-size: 28rpx;
+  color: #4c4b4b;
+}
+
+.wenxintips-info navigator {
+  display: inline;
+}
+
+.wenxintips-info text {
+  font-weight: normal;
+}
+
+.showallphone-btn {
+  position: relative;
+  display: inline-block;
+  height: 50rpx;
+  line-height: 50rpx;
+  padding: 0 20rpx;
+  background: #09f;
+  color: white;
+  font-size: 26rpx;
+  margin-left: 20rpx;
+  border-radius: 10rpx;
+}
+
+.list-call-phone {
+  display: inline-block;
+  color: #fff;
+  padding: 0 20rpx;
+  font-size: 26rpx;
+  border-radius: 5rpx;
+  background: #67c23a;
+  margin: 0 5rpx;
+}
+
+.list-complain-phone {
+  display: inline-block;
+  color: #fff;
+  padding: 0 20rpx;
+  font-size: 26rpx;
+  border-radius: 5rpx;
+  background: #f56c6c;
+}
+
+.ucard-imgsbox {
+  position: relative;
+  width: 100%;
+  margin-top: 15rpx;
+  background: white;
+  padding: 20rpx 10rpx;
+}
+
+.ucard-imgs-item {
+  position: relative;
+  width: 33.3333%;
+  height: 150rpx;
+  padding: 10rpx;
+  float: left;
+}
+
+.ucard-imgs-item image {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.collectbox {
+  position: absolute;
+  right: 0;
+  top: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.collectbox image {
+  width: 40rpx;
+  height: 40rpx;
+  margin-right: 5rpx;
+}
+
+.collect-false text {
+  color: #777;
+}
+
+.collect-true text {
+  color: #f00;
+}
+
+.locationicon {
+  width: 50rpx;
+  height: 50rpx;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+/* rewrite footer */
+.newdetail-info-footer{
+  position: fixed;
+  width: 100%;
+  height: 100rpx;
+  background: white;
+  left: 0;
+  bottom:0;  
+  border-top: 1px solid #e8e6e3;
+  box-shadow: #e8e6e3 0 0 5px;
+  z-index: 5;
+}
+.newdetail-info-itembox{position: relative;height: 100%;}
+.newdetail-info-item{
+  position: relative;
+  float:left;
+  width: 19%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: transparent;
+  padding:2rpx 0 0;
+  border-radius: 0;
+  line-height: initial;
+}
+
+.newdetail-info-item::after{border: 0;}
+.newdetail-info-item image{
+  width: 40rpx;
+  height: 40rpx;
+}
+.newdetail-info-item text{
+  margin-top:5rpx;
+  font-size: 26rpx;
+}
+
+.callthisphone-btn{position: absolute;line-height: 70rpx;top:15rpx;right: 30rpx;padding:0 50rpx;background-image: linear-gradient(to right , #1e9dff, #1c51f9);font-size: 26rpx;color: white;border-radius: 30px;}

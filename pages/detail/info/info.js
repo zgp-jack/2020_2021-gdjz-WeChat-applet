@@ -37,7 +37,27 @@ Page({
         collectTrue: app.globalData.apiImgUrl + "collect-true.png",
         collectMark:false,
        locationicon: app.globalData.apiImgUrl +"detail-info-map.png",
+
+      mapimg: app.globalData.apiImgUrl + "newdetail-info-map.png",
+      collectImg: app.globalData.apiImgUrl + "job-collect-normal.png",
+      collectedImg: app.globalData.apiImgUrl + "job-collect-active.png",
+      complainImg: app.globalData.apiImgUrl + "newjobinfo-complain.png",
+      sharebtnImg: app.globalData.apiImgUrl + "newjobinfo-share.png",
     },
+  showThisMapInfo:function(){
+    let loc = this.data.info.location;
+    let locArr = loc.split(",");
+    wx.openLocation({
+      latitude: parseFloat(locArr[1]),
+      longitude: parseFloat(locArr[0]),       
+      scale: 18
+    })
+  },
+  userTapConcern:function(){
+    wx.navigateTo({
+      url: '/pages/static/notice?id=32',
+    })
+  },
   showThisMap:function(){
     let _this = this;
     let location = this.data.info.location
@@ -491,12 +511,18 @@ Page({
      */
     onShareAppMessage: function () {
         //this.userShareAction();
+      let tel = this.data.info.tel_str;
+      tel = tel.substring(0, tel.length - 3) + "****"
+      this.setData({ "info.tel_str": tel })
         if (this.data.shareFlag) this.userShareAddIntegral();
         let userId = this.data.userInfo.userId
         let _this = this;
         setTimeout(function () {
             _this.setData({ isShare: false })
         }, 500);
-        return app.getUserShareJson();
+      return {
+        title: this.data.info.title,
+        path: "/pages/detail/info/info?id=" + this.data.infoId
+      };
     }
 })
