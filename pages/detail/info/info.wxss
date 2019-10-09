@@ -129,7 +129,6 @@
 
 .matter {
   position: relative;
-  margin-bottom: 150rpx;
 }
 
 .cephalosomea {
@@ -163,7 +162,6 @@
 }
 
 .nlianc {
-  width: 696rpx;
   padding: 30rpx;
   background: rgba(255, 255, 255, 1);
   box-shadow: darkgrey 0px 0px 8rpx;
@@ -171,7 +169,19 @@
   border-radius: 4rpx;
 }
 
-.linkmanlianc {
+.nlileftsidebar {
+  position: relative;
+}
+
+.nlileftsidebar::before {
+  position: absolute;
+  content: '';
+  width: 2rpx;
+  height: 100%;
+  background: #dcdcdc;
+}
+
+/* .linkmanlianc {
   position: relative;
   padding: 5rpx 0;
   box-sizing: border-box;
@@ -183,14 +193,14 @@
   width: 2rpx;
   height: 100%;
   background: #dcdcdc;
-}
+} */
 
 .newjobinfopactive::before {
   position: absolute;
   content: '';
   width: 30rpx;
   height: 30rpx;
-  background: url(http://cdn.yupao.com/newyupao/images/newjobinfo-steps.png) no-repeat;
+  background: url(http://cdn.yupao.com/newyupao/images/newjobinfo-steps.png?t=1) no-repeat;
   background-size: 100% 100%;
   left: -11rpx;
   top: 20rpx;
@@ -606,7 +616,7 @@
 .newdetail-info-footer{
   position: fixed;
   width: 100%;
-  height: 100rpx;
+  height: 120rpx;
   background: white;
   left: 0;
   bottom:0;  
@@ -640,4 +650,4 @@
   font-size: 26rpx;
 }
 
-.callthisphone-btn{position: absolute;line-height: 70rpx;top:15rpx;right: 30rpx;padding:0 50rpx;background-image: linear-gradient(to right , #1e9dff, #1c51f9);font-size: 26rpx;color: white;border-radius: 30px;}
+.callthisphone-btn{position: absolute;line-height: 70rpx;top:25rpx;right: 30rpx;padding:0 50rpx;background-image: linear-gradient(to right , #1e9dff, #1c51f9);font-size: 26rpx;color: white;border-radius: 30px;}

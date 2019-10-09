@@ -1,6 +1,6 @@
 <view style='height:100%;{{ showComplain ? "overflow:hidden;" : "" }}'>
 
-  <view class="yupao-common-container" style='padding-bottom:30rpx;'>
+  <view class="yupao-common-container" style="{{ userInfo.userId == info.user_id ? 'padding-bottom:20rpx':'padding-bottom:130rpx' }}">
 
     <view class='info-yupao-tips'>
       <view class='yupao-lists-notice'>
@@ -26,7 +26,7 @@
       </view>
     </view>
 
-    <view class="matter">
+    <view class="matter" >
 
       <view class="cephalosomea">
 
@@ -35,8 +35,7 @@
           <view class="linkmanb">发布时间：{{ info.time }}</view>
 
           <view class="nlianc">
-
-            <view class="linkmanlianc">
+            <view class="nlileftsidebar">
               <view class="newjobinfopactive">
                 <view class="pactive">
                   <view class="pactiveciome">
@@ -44,19 +43,17 @@
                   </view>
                 </view>
               </view>
-            </view>
 
-            <view class="linkmanlianc">
               <view class="newjobinfopactive">
                 <view class="pactive">
                   <view class="pactiveciome">
                     <view class="comeite">
                       <view>电话号码：{{ info.tel_str }}</view>
-                      <view class="comeitstatuse"  wx:if="{{ userInfo.userId != info.user_id }}">
+                      <view class="comeitstatuse" wx:if="{{ userInfo.userId != info.user_id }}">
                         <view class="substance" wx:if="{{ info.show_ajax_btn }}" bindtap='getInfoTel'>查看完整电话</view>
-                        <view class="seek" wx:if="{{ info.is_end == '2' }}">已招到</view> 
-                        <view class="substan" wx:if="{{ !info.show_ajax_btn && (info.is_end == '1') }}" >
-                          <view class="substanphone" bindtap='callThisPhone'  data-phone="{{ info.tel_str }}">拨打电话</view>
+                        <view class="seek" wx:if="{{ info.is_end == '2' }}">已招到</view>
+                        <view class="substan" wx:if="{{ !info.show_ajax_btn && (info.is_end == '1') }}">
+                          <view class="substanphone" bindtap='callThisPhone' data-phone="{{ info.tel_str }}">拨打电话</view>
                           <view class="complain" bindtap='userTapComplain'>投诉</view>
                         </view>
                       </view>
@@ -64,10 +61,6 @@
                   </view>
                 </view>
               </view>
-            </view>
-
-
-            <view class="linkmanlianc">
               <view class="newjobin">
                 <view class="pactive">
                   <view class="pactiveciome">
@@ -84,20 +77,20 @@
       <view class="cephalosomebox">
         <view class="ephalos">
 
-            <view class="locatext" wx:if="{{ !info.location }}">项目地址：
-              <text class="locdez">{{ info.show_full_address }}</text>
-            </view>
+          <view class="locatext" wx:if="{{ !info.location }}">项目地址：
+            <text class="locdez">{{ info.show_full_address }}</text>
+          </view>
 
-            <view class="locatext" wx:if="{{ info.location }}">
-              <view class="register">
-                <text>项目地址：</text>
-                <view class="gister" bindtap="showThisMapInfo">
-                  <image class="maps" src="{{ mapimg }}"></image>
-                  <text class="maptexr">查看地图</text>
-                </view>
+          <view class="locatext" wx:if="{{ info.location }}">
+            <view class="register">
+              <text>项目地址：</text>
+              <view class="gister" bindtap="showThisMapInfo">
+                <image class="maps" src="{{ mapimg }}"></image>
+                <text class="maptexr">查看地图</text>
               </view>
-              <view class="locdez">{{ info.show_full_address }}</view>
             </view>
+            <view class="locdez">{{ info.show_full_address }}</view>
+          </view>
 
         </view>
 
@@ -177,7 +170,7 @@
       <text wx:if="{{ !collectMark }}">收藏</text>
       <text style="color:#0099ff;" wx:if="{{ collectMark}}">已收藏</text>
     </view>
-    <view class="newdetail-info-item" bindtap="userTapComplain" >
+    <view class="newdetail-info-item" bindtap="userTapComplain">
       <image src="{{ complainImg }}"></image>
       <text>投诉</text>
     </view>
@@ -187,7 +180,7 @@
     </button>
   </view>
   <view class="callthisphone-btn" wx:if="{{ info.show_ajax_btn }}" bindtap='getInfoTel'>查看完整电话</view>
-  <view class="callthisphone-btn" wx:if="{{ !info.show_ajax_btn && (info.is_end == '1') }}"  bindtap='callThisPhone'  data-phone="{{ info.tel_str }}">拨打电话</view>
+  <view class="callthisphone-btn" wx:if="{{ !info.show_ajax_btn && (info.is_end == '1') }}" bindtap='callThisPhone' data-phone="{{ info.tel_str }}">拨打电话</view>
   <view class="callthisphone-btn" wx:if="{{ info.is_end == '2' }}">{{ info.is_end_word }}</view>
 </view>
 

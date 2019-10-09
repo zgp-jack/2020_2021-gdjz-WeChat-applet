@@ -327,6 +327,7 @@ Page({
       }
         app.doRequestAction({
           url:"job/list-new/",
+          way:"POST",
           params: _params,
             success:function(res){
               _this.setData({ isload: false })

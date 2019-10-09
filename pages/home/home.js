@@ -73,7 +73,13 @@ Page({
       isAllAreas:true,
       showInputList:false,
       searchInputVal:"",
-      areaInputFocus:false
+      areaInputFocus:false,
+      bring: app.globalData.apiImgUrl + 'newlist-jobzd.png', //顶置图片
+      autimg: app.globalData.apiImgUrl + 'newlist-jobrealname.png', //实名图片
+      hirimg: app.globalData.apiImgUrl + 'newlist-jobfinding.png', //招人图片
+      doneimg: app.globalData.apiImgUrl + 'newlist-jobfindend.png', //已找到
+      iondzs: app.globalData.apiImgUrl + 'newlist-jobposi.png',//定位
+      iImgUrl: app.globalData.apiImgUrl, //图片地址
   },
   chooseInputCtiy:function(e){
     this.chooseThisCtiy(e);
@@ -143,7 +149,7 @@ Page({
             title: '数据加载中',
         })
         app.doRequestAction({
-            url: "index/index-msg-list/",
+          url: "index/new-msg-list/",
             params:{area:this.data.areaId},
             success: function (res) {
                 _this.setData({
