@@ -276,7 +276,9 @@ Page({
       let name = e.currentTarget.dataset.name;
       this.setData({
         "searchDate.joblisttype":type,
-        listText:name
+        listText:name,
+        isFirstRequest: true,
+        "searchDate.page": 1,
       })
       this.returnTop();
       this.doRequestAction(false);
@@ -301,7 +303,7 @@ Page({
     showThisNotice:function(e){
         let _id =  e.currentTarget.dataset.id;
         wx.navigateTo({
-            url: '/pages/static/notice?id=' + _id,
+          url: '/pages/static/notice?type=1&id=' + _id,
         })
     },
     doRequestAction:function(_append,callback){
@@ -380,7 +382,8 @@ Page({
         _data.system_token =md5.hexMD5(_str.substring(0, 16)) ;
         wx.showLoading({ title: '数据加载中' })
         app.doRequestAction({
-            url: "index/info-list-new/",
+          url: "job/list-new/",
+          way:"POST",
             params: _data ,
             success: function (res) {
                 app.globalData.isFirstLoading ? "" : wx.hideLoading();
@@ -507,7 +510,7 @@ Page({
         this.setData({
             "searchDate.page": 1
         })
-        this.doSearchRequestAction(false);
+      this.doRequestAction(false);
     },
     returnTop:function(){
       this.setData({ scrollTop: 0 })

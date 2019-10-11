@@ -71,6 +71,6 @@
       </view>
     </view>
 
-    <text class="feedback-submit-btn" bindtap='userSubmitFeedback'>提交保存</text>
+    <text class="feedback-submit-btn" bindtap='userSubmitFeedback'>反馈意见</text>
   </view>
 </view>

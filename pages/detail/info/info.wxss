@@ -133,11 +133,11 @@
 
 .cephalosomea {
   width: 100%;
-  margin: 30rpx 0;
+  margin: 15rpx 0 0;
   background: white;
   padding-left: 20rpx;
   padding-right: 20rpx;
-  padding-bottom: 30rpx;
+  padding-bottom: 25rpx;
 }
 
 .linkmanbox {
@@ -200,7 +200,7 @@
   content: '';
   width: 30rpx;
   height: 30rpx;
-  background: url(http://cdn.yupao.com/newyupao/images/newjobinfo-steps.png?t=1) no-repeat;
+  background: url(http://cdn.yupao.com/miniprogram/images/newjobinfo-steps.png?t=11) no-repeat;
   background-size: 100% 100%;
   left: -11rpx;
   top: 20rpx;
@@ -338,7 +338,7 @@
 }
 
 .ephalos {
-  padding-top: 15rpx;
+  padding-top: 20rpx;
 }
 
 .register {
@@ -406,11 +406,11 @@
 
 .cephalosomebox {
   width: 100%;
-  margin: 20rpx 0;
+  margin: 15rpx 0 0;
   background: white;
   padding-left: 25rpx;
   padding-right: 25rpx;
-  padding-bottom: 25rpx;
+  padding-bottom: 15rpx;
 }
 
 .genre {
@@ -425,7 +425,7 @@
   font-weight: 400;
   color: rgba(42, 42, 42, 1);
   line-height: 40rpx;
-  padding-bottom: 20rpx;
+  padding-bottom: 10rpx;
 }
 
 .craftbox {
@@ -469,7 +469,6 @@
 
 .info-concern-img {
   position: relative;
-  margin-top: 15rpx;
   background: white;
 }
 
@@ -650,4 +649,4 @@
   font-size: 26rpx;
 }
 
-.callthisphone-btn{position: absolute;line-height: 70rpx;top:25rpx;right: 30rpx;padding:0 50rpx;background-image: linear-gradient(to right , #1e9dff, #1c51f9);font-size: 26rpx;color: white;border-radius: 30px;}
+.callthisphone-btn{position: absolute;line-height: 70rpx;top:25rpx;right: 30rpx;width: 32%;background-image: linear-gradient(to right , #1e9dff, #1c51f9);font-size: 26rpx;color: white;border-radius: 30px;text-align: center;}

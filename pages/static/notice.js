@@ -31,9 +31,6 @@ Page({
                   author: msg.author,
                   time:msg.time
                 })
-                wx.setNavigationBarTitle({
-                    title: msg.title
-                })
                 WxParse.wxParse('content', 'html', msg.content,_this,5);
             }
         });
@@ -65,6 +62,12 @@ Page({
     onLoad: function (options) {
         this.getNoticeInfo(options);
       this.initFooterData();
+      if (options.hasOwnProperty("type") && options.type == '1'){
+        wx.setNavigationBarTitle({
+          title: "鱼泡资讯"
+        })
+      }
+      
     },
 
     /**

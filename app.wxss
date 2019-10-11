@@ -546,15 +546,15 @@ page{
 }
 .fixed-get-integral{
     position: fixed;
-    width: 120rpx;
-    height: 120rpx;
+    width: 90rpx;
+    height: 90rpx;
     right: 15rpx;
     top: 420rpx;
     z-index: 2;
 }
 .fixed-get-integral-bottom{
     top: auto;
-    bottom: 150rpx;
+    bottom: 250rpx;
 }
 .fixed-ad navigator,.fixed-ad image,.fixed-get-integral navigator,.fixed-get-integral image{
     position: relative;

@@ -11,7 +11,7 @@
 .published-content{
     position: relative;
     width: 100%;
-    padding: 20rpx 27rpx;
+    padding:0 27rpx 20rpx;
 }
 
 .published-list-item{

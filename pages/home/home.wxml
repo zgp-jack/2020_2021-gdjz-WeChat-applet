@@ -128,7 +128,7 @@
             <swiper indicator-dots="{{ notice.indicatorDots }}" autoplay="{{ notice.autoplay}} " interval="{{ notice.interval }}" duration="{{ notice.duration }}" circular="{{ notice.circular }}"  vertical="{{ notice.vertical }}">
                 <block wx:for="{{ notice.lists }}" wx:key="{{ index }}">
                     <swiper-item>
-                        <navigator url='/pages/static/notice?id={{ item.id }}' open-type="navigate" >
+                        <navigator url='/pages/static/notice?id={{ item.id }}&type=1' open-type="navigate" >
                             <text class='index-notice-text' data-id="{{ item.id }}">{{ item.title }}</text>
                         </navigator>
                     </swiper-item>

@@ -423,14 +423,14 @@
 .gainebox {
   position: relative;
   width: 100%;
-  margin-top: 25rpx;
+  margin-top: 15rpx;
   margin-bottom: 20rpx;
 }
 
 .indxlistitem {
   position: relative;
   background: white;
-  margin-bottom: 25rpx;
+  margin-bottom: 15rpx;
 }
 
 .ingsasea {
@@ -515,15 +515,15 @@
 }
 
 .yupao-liststou {
-  width: 120rpx;
-  height: 120rpx;
+  width: 135rpx;
+  height: 135rpx;
   border-radius: 50%;
   text-align: center;
 }
 
 .yupao-lists-img {
-  width: 120rpx;
-  height: 120rpx;
+  width: 135rpx;
+  height: 135rpx;
   border-radius: 50%;
 }
 
@@ -544,10 +544,10 @@
 }
 
 .yupaolistswxyu {
-  margin-top: 15rpx;
-  font-size: 26rpx;
+  margin-top: 10rpx;
+  font-size: 28rpx;
   color: rgba(127, 126, 126, 1);
-  line-height: 35rpx;
+  line-height: 40rpx;
   letter-spacing: 1rpx;
   text-overflow: -o-ellipsis-lastline;
   overflow: hidden;

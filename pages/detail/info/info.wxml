@@ -184,9 +184,9 @@
   <view class="callthisphone-btn" wx:if="{{ info.is_end == '2' }}">{{ info.is_end_word }}</view>
 </view>
 
-<!-- <view class='fixed-get-integral fixed-get-integral-bottom'     bindtap='jumpThisLink'  data-url="/pages/turntable/turntable"  data-type='0'>
-    <image src='{{ fixedGetIntegral }}'></image>
-</view> -->
+<view class='fixed-get-integral fixed-get-integral-bottom' bindtap='detailToHome' wx:if="{{ showHomeImg }}">
+    <image src='{{ homebtnImg }}'></image>
+</view>
 
 <!-- <button class='fixed-get-integral-btn fixed-get-integral-btn-info'  open-type="share" >
         <image src='http://cdn.yupao.com/miniprogram/images/list-share-btn.png?t=111'></image>

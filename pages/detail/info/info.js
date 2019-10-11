@@ -43,13 +43,22 @@ Page({
       collectedImg: app.globalData.apiImgUrl + "job-collect-active.png",
       complainImg: app.globalData.apiImgUrl + "newjobinfo-complain.png",
       sharebtnImg: app.globalData.apiImgUrl + "newjobinfo-share.png",
+      homebtnImg: app.globalData.apiImgUrl + "newdetailinfo-home.png",
+      showHomeImg:false
     },
+  detailToHome:function(){
+    wx.redirectTo({
+      url: '/pages/index/index',
+    })
+  },
   showThisMapInfo:function(){
     let loc = this.data.info.location;
     let locArr = loc.split(",");
     wx.openLocation({
       latitude: parseFloat(locArr[1]),
-      longitude: parseFloat(locArr[0]),       
+      longitude: parseFloat(locArr[0]),
+      name: this.data.info.map_address_name,
+      address: this.data.info.map_street_name, 
       scale: 18
     })
   },
@@ -129,7 +138,7 @@ Page({
     showThisNotice: function (e) {
         let _id = e.currentTarget.dataset.id;
         wx.navigateTo({
-            url: '/pages/static/notice?id=' + _id,
+            url: '/pages/static/notice?type=1&id=' + _id,
         })
     },
     initNeedData: function () {
@@ -314,7 +323,6 @@ Page({
             params: userInfo,
             success: function (res) {
                 let mydata = res.data;
-                console.log(mydata.errcode);
                 _this.doDetailAction(mydata, {
                     success: function () {
                         if (mydata.errcode == "end"){
@@ -446,11 +454,15 @@ Page({
             this.setData({ "userShareData.showWin": false })
         }
     },
+  isShowHomeBtn: function (options) {
+    if (options.hasOwnProperty("home") && options.home == "1") this.setData({ showHomeImg:true })
+  },
     /**
      * 生命周期函数--监听页面加载
      */
     
     onLoad: function (options) {
+      this.isShowHomeBtn(options);
         //this.initUserShareTimes();
         let infoId = options.id;
         this.setData({ infoId:infoId })
@@ -512,7 +524,7 @@ Page({
     onShareAppMessage: function () {
         //this.userShareAction();
       let tel = this.data.info.tel_str;
-      tel = tel.substring(0, tel.length - 3) + "****"
+      tel = tel.substring(0, tel.length - 4) + "****"
       this.setData({ "info.tel_str": tel })
         if (this.data.shareFlag) this.userShareAddIntegral();
         let userId = this.data.userInfo.userId
@@ -522,7 +534,7 @@ Page({
         }, 500);
       return {
         title: this.data.info.title,
-        path: "/pages/detail/info/info?id=" + this.data.infoId
+        path: "/pages/detail/info/info?home=1&id=" + this.data.infoId
       };
     }
 })

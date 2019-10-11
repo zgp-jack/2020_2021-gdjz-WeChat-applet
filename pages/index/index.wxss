@@ -281,8 +281,6 @@ page{
 .lists-nodata{
     background: transparent;
 }
-
-
 .yupao-info-detailtitle{
     position: relative;
     font-size: 34rpx;

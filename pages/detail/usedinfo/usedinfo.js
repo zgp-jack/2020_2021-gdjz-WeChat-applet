@@ -89,7 +89,7 @@ Page({
     showThisNotice: function (e) {
         let _id = e.currentTarget.dataset.id;
         wx.navigateTo({
-            url: '/pages/static/notice?id=' + _id,
+            url: '/pages/static/notice?type=1&id=' + _id,
         })
     },
     initNeedData: function () {
