@@ -6,8 +6,20 @@
 
 <!-- 搜索头部 -->
 <view class="lists-header">
-    <input placeholder="找活、找工作" bindconfirm="userTapSearch"  confirm-type="search"   bindinput='bindKeyInput' bindtap="closeAllSelect"/>
+    <input placeholder="找活、找工作" bindconfirm="userTapSearch"  confirm-type="search" bindfocus='bindInputFocus' bindinput='bindKeyInput' bindtap="closeAllSelect" value='{{ searchDate.keywords }}'/>
     <text bindtap='userTapSearch'>搜索</text>
+</view>
+
+<view class='usersearchhistorybox' wx:if="{{ showHistoryList && historyList.length }}" bindtap='closeHistory'>
+  <view class='usersearchhistory'>
+    <view class='usersearchhistory-item usersearchhistory-item-title'>搜素历史</view>
+    <view class='usersearchhistory-box'>
+      <view class='usersearchhistory-item' wx:for="{{ historyList }}" wx:key="{{ index }}" catchtap='searchThisWords' data-text='{{ item }}'>{{ item }}</view>
+    </view>
+    <view class='usersearchhistory-footer'>
+      <view bindtap='clearHistory'><image src='{{ historydel }}'></image>清空历史记录</view>
+    </view>
+  </view>
 </view>
 
 <!-- 筛选条件 -->
@@ -72,6 +84,11 @@
                 </swiper>
             </view>
         </view>
+    </view>
+
+    <view class='feedbackmsg'>
+      <image class='feedbackmsg-img' src='{{ feedbackimg }}'></image>
+      <view><text>[新消息]</text>你的意见反馈，有最新回复，请注意查看！</view>
     </view>
 
     <view class='gainebox'>

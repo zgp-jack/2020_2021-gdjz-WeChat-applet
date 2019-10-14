@@ -90,7 +90,11 @@ Page({
       hirimg: app.globalData.apiImgUrl + 'newlist-jobfinding.png', //招人图片
       doneimg: app.globalData.apiImgUrl + 'newlist-jobfindend.png', //已找到
       iondzs: app.globalData.apiImgUrl + 'newlist-jobposi.png',//定位
+      feedbackimg: app.globalData.apiImgUrl + "feedbackmsg-img.png",
+      historydel: app.globalData.apiImgUrl + "historylist-del.png",
       iImgUrl: app.globalData.apiImgUrl, //图片地址
+      showHistoryList:false,
+      historyList:[]
     },
   getMapInfo: function (callback) {
     let that = this;
@@ -494,11 +498,51 @@ Page({
                 })
             }
         })
-    },
+  },
+  bindInputFocus:function(){
+    this.setData({
+      showHistoryList: true
+    })
+  },
+  
+  searchThisWords:function(e){
+    let text = e.currentTarget.dataset.text;
+    this.setData({
+      "searchDate.keywords": text,
+      showHistoryList: false
+    })
+    this.userTapSearch();
+  },
+  closeHistory:function(){
+    this.setData({
+      showHistoryList: false
+    })
+  },
+  clearHistory:function(){
+    this.setData({
+      showHistoryList: false
+    })
+    let his = wx.getStorageSync("searchHistory")
+    if(his.hasOwnProperty("job")){
+      his.job = [];
+      wx.setStorageSync("searchHistory", his)
+    }
+    this.initSearchHistory();
+  },
     bindKeyInput:function(e){
         this.setData({
-            "searchDate.keywords": e.detail.value
+            "searchDate.keywords": e.detail.value,
         })
+    },
+    initSearchHistory:function(){
+      let his = wx.getStorageSync("searchHistory")
+      if (his) {
+        let job = his.hasOwnProperty("job");
+        if(job){
+          let jobs = his.job
+          this.setData({ historyList: jobs})
+        }
+      }
     },
     userTapSearch:function(){
       // if(!this.data.userInfo){
@@ -506,11 +550,38 @@ Page({
       //   return false;
       // }
         //if(this.data.searchDate.keywords == "") return false;
+      let text = this.data.searchDate.keywords;
+      if(text){
+        let his = wx.getStorageSync("searchHistory")
+        if(his){
+          let job = his.hasOwnProperty("job");
+          if (job){
+            let jobs = his.job;
+            let index =  jobs.indexOf(text);
+            if (index != -1){
+              jobs.splice(index, 1);
+            }
+            jobs.unshift(text);
+            
+          }else{
+            his.job = [];
+            his.job.push(text)
+          }
+          wx.setStorageSync("searchHistory", his)
+        }else{
+          let myhis = {
+            job:[text]
+          }
+          wx.setStorageSync("searchHistory", myhis)
+        }
+      }
         this.returnTop();
         this.setData({
-            "searchDate.page": 1
+          "searchDate.page": 1,
+          showHistoryList: false
         })
       this.doRequestAction(false);
+      this.initSearchHistory();
     },
     returnTop:function(){
       this.setData({ scrollTop: 0 })
@@ -739,6 +810,7 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
+      this.initSearchHistory();
         //this.isShowFastIssue();
         this.initFirstTips();
         this.initAdminTime();

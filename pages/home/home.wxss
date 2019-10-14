@@ -163,6 +163,7 @@
     overflow: hidden;
     font-size: 28rpx;
     line-height: 80rpx;
+    color:#0099ff;
 }
 .index-infolists{
     position: relative;
@@ -434,8 +435,8 @@
 }
 
 .ingsasea {
-  width: 76rpx;
-  height: 76rpx;
+  width: 70rpx;
+  height: 70rpx;
   position: absolute;
   left: 0;
   top: 0rpx;
@@ -474,10 +475,10 @@
 }
 
 .yupaotile {
-  padding-left: 15rpx;
+  padding-left: 5rpx;
   padding-right: 200rpx;
-  color: rgba(53, 54, 54, 1);
-  font-size: 30rpx;
+  color: #000;
+  font-size: 32rpx;
   -webkit-line-clamp: 1;
   -webkit-box-orient: vertical;
   text-overflow: ellipsis;
@@ -545,7 +546,7 @@
 
 .yupaolistswxyu {
   margin-top: 10rpx;
-  font-size: 28rpx;
+  font-size: 30rpx;
   color: rgba(127, 126, 126, 1);
   line-height: 40rpx;
   letter-spacing: 1rpx;
@@ -576,10 +577,12 @@
   display: flex;
   align-items: center;
   flex: 1;
+  padding-left: 5rpx;
+  box-sizing: border-box;
 }
 
 .cometstexre {
-  font-size: 24rpx;
+  font-size: 28rpx;
   font-family: Adobe Heiti Std;
   font-weight: 400;
   color: rgba(127, 126, 126, 1);
@@ -593,7 +596,7 @@
 }
 
 .cometime {
-  font-size: 22rpx;
+  font-size: 28rpx;
   font-family: Adobe Heiti Std;
   font-weight: 400;
   color: rgba(127, 126, 126, 1);

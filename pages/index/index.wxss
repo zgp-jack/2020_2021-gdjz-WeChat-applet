@@ -11,7 +11,7 @@ page{
     top: 0;
     padding-left: 27rpx;
     padding-right:110rpx;
-    z-index: 10;
+    z-index: 15;
 }
 .lists-header input{
     height: 70rpx;
@@ -52,7 +52,7 @@ page{
     left: 0;
     top: 100rpx;
     background: white;
-    z-index: 10;
+    z-index:9;
 }
 .lists-condition-item{
     position: relative;
@@ -315,3 +315,15 @@ page{
 .returntop-active{bottom: 115rpx;}
 
 
+/* 反馈信息 */
+.feedbackmsg{position: relative;width: 100%;padding:30rpx 20rpx;box-sizing: border-box;background: white;margin-top: 15rpx;padding-left: 60rpx;}
+.feedbackmsg-img{position: absolute;width: 30rpx;height: 30rpx;left:20rpx;top:30rpx;}
+.feedbackmsg view{font-size: 28rpx;color: #222121;line-height: 30rpx;}
+.feedbackmsg text{color: #ff0000;margin-right: 10rpx;}
+.usersearchhistorybox{position: fixed;width: 100%;height: 100%;left: 0;top: 0;background: rgba(0, 0, 0, 0.3);z-index: 10;}
+.usersearchhistory{position: absolute;width: 100%;top: 100rpx;left: 0;background: white;z-index: 15;}
+.usersearchhistory-item{position: relative;width: 100%;padding: 20rpx;font-size:30rpx;font-weight: bold;color:#BEBDBD;border-bottom: 1px solid #F0F2F5;line-height: 80rpx;letter-spacing: 1rpx;}
+.usersearchhistory-item-title{color:#000000; }
+.usersearchhistory-footer{position: relative;padding: 50rpx 0;display: flex;flex-direction: row;justify-content: center;align-items: center;}
+.usersearchhistory-footer view{position: relative;display: inline-block;line-height: 80rpx;padding: 0 50rpx;border: 1px solid #dcdcdc;border-radius: 5rpx;color: #666666;margin: 0 auto;font-size: 30rpx;}
+.usersearchhistory-footer image{position: relative;display: inline-block;width: 32rpx;height: 32rpx;vertical-align: middle;margin-right: 10rpx;}
