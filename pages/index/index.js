@@ -94,7 +94,8 @@ Page({
       historydel: app.globalData.apiImgUrl + "historylist-del.png",
       iImgUrl: app.globalData.apiImgUrl, //图片地址
       showHistoryList:false,
-      historyList:[]
+      historyList:[],
+      member_notice:{}
     },
   getMapInfo: function (callback) {
     let that = this;
@@ -448,12 +449,14 @@ Page({
             url:"index/less-search-data/",
             params: { 
                 type:"job",
+                way:"POST",
                 userId: _mark ? (userInfo ? userInfo.userId : "" ) : "",
             },
             success:function(res){
                 let mydata = res.data;
                 _this.setData({
                     "notice.lists": mydata.notice,
+                  member_notice: mydata.member_notice,
                     phone: mydata.phone,
                     wechat: _mark ? mydata.wechat.number : (_wx.wechat ? _wx.wechat : mydata.wechat.number)
                 })
@@ -499,6 +502,7 @@ Page({
             }
         })
   },
+  
   bindInputFocus:function(){
     this.setData({
       showHistoryList: true
