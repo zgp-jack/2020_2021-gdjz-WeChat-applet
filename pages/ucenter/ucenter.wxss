@@ -180,3 +180,4 @@
 /* 信息提示 */
 .ucenter-hasnoticeinfo{margin-bottom: 15rpx;border-radius: 5px;box-shadow: #e7e6e4 0 0 10rpx;overflow: hidden;}
 .ucenter-hasnoticeinfo .feedbackmsg{margin-top: 0;}
+.ucenter-menu-item .ucenter-badge{position: absolute;color: white;background: #ff0000;top: 10rpx;right: 20rpx;font-size: 24rpx;line-height: 36rpx;padding: 0 6rpx;border-radius: 5rpx;transform: scale(0.92);}

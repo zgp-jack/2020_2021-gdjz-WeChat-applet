@@ -11,7 +11,7 @@
   <view class='usersearchhistory'>
     <view class='usersearchhistory-item usersearchhistory-item-title'>历史记录</view>
     <view class='usersearchhistory-box'>
-      <view class='usersearchhistory-item' wx:for="{{ historyList }}" wx:key="{{ index }}" catchtap='searchThisWords' data-text='{{ item }}'>{{ item }}</view>
+      <view class='usersearchhistory-item overwords' wx:for="{{ historyList }}" wx:key="{{ index }}" catchtap='searchThisWords' data-text='{{ item }}'>{{ item }}</view>
     </view>
     <view class='usersearchhistory-footer'>
       <view bindtap='clearHistory'>清空历史记录</view>

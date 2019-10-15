@@ -825,7 +825,6 @@ Page({
         this.getFilterData();
         this.timerLoading();
         this.initUserLocation();
-        this.initUserinfo();
         this.initFooterData();
         this.checkIsInvite(options);
 
@@ -841,12 +840,8 @@ Page({
      * 生命周期函数--监听页面显示
      */
     onShow: function () {
-      let userInfo = wx.getStorageSync("userInfo");
-      if (userInfo) {
-        this.setData({
-          userInfo: userInfo
-        })
-      }
+
+      this.initUserinfo();
     },
   viewScroll:function(e){
     let top = e.detail.scrollTop;

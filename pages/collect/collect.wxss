@@ -25,7 +25,7 @@
 .published-list-header{
     height: 80rpx;
     line-height: 80rpx;
-    font-size: 28rpx;
+    font-size: 30rpx;
     padding-right: 200rpx;
     border-bottom: 1px dashed #0099ff;
 }

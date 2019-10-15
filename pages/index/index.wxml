@@ -15,7 +15,7 @@
   <view class='usersearchhistory'>
     <view class='usersearchhistory-item usersearchhistory-item-title'>历史记录</view>
     <view class='usersearchhistory-box'>
-      <view class='usersearchhistory-item' wx:for="{{ historyList }}" wx:key="{{ index }}" catchtap='searchThisWords' data-text='{{ item }}'>{{ item }}</view>
+      <view class='usersearchhistory-item overwords' wx:for="{{ historyList }}" wx:key="{{ index }}" catchtap='searchThisWords' data-text='{{ item }}'>{{ item }}</view>
     </view>
     <view class='usersearchhistory-footer'>
       <view bindtap='clearHistory'>清空历史记录</view>
@@ -91,7 +91,7 @@
     <view class='feedbackmsg' wx:if="{{ member_notice.hasNoticeMsg }}"  bindtap='jumpThisLink'  data-url='../others/message/lists/lists?tel={{ (member_less_info.info.tel == null) ? "" : member_less_info.info.tel }}&name={{ member_less_info.info.username }}'  data-type='0'>
       <image class='feedbackmsg-img' src='{{ feedbackimg }}'></image>
       <view class="overwords"><text>[{{ member_notice.infoTypeWord }}]</text>{{ member_notice.tipsMsg }} </view>
-      <image class="feedback-rightarrow" src="{{ rightarrow }}"></image>
+      <text class="feedback-btn">点击查看</text>
     </view>
 
     <view class='gainebox'>

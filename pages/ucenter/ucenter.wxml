@@ -56,7 +56,7 @@
           <view class='feedbackmsg'>
             <image class='feedbackmsg-img' src='{{ feedbackimg }}'></image>
             <view class="overwords"><text>[{{ member.has_notice_msg.infoTypeWord }}]</text>{{ member.has_notice_msg.tipsMsg }}</view>
-            <image class="feedback-rightarrow" src="{{ rightarrow }}"></image>
+            <text class="feedback-btn">点击查看</text>
           </view>
         </view>
 
@@ -111,6 +111,7 @@
             <view class='ucenter-menu-item'  data-url='/pages/others/message/lists/lists?tel={{ (member.tel == null) ? "" : member.tel }}&name={{ member.username || member.nickname }}'   bindtap='valiUserUrl' >
                 <image src='{{ ucenterimgs.feedback }}'></image>
                 <text>给我们建议</text>
+                <text class="ucenter-badge" wx:if="{{ member.has_notice_msg.hasNoticeMsg }}">新消息</text>
             </view>
             <view class='ucenter-menu-item' data-url='../download/download-app'   bindtap='downappfun' >
                 <image src='{{ ucenterimgs.downapp }}'></image>
