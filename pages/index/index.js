@@ -96,7 +96,8 @@ Page({
       iImgUrl: app.globalData.apiImgUrl, //图片地址
       showHistoryList:false,
       historyList:[],
-      member_notice:{}
+      member_notice:{},
+      member_less_info:{}
     },
   getMapInfo: function (callback) {
     let that = this;
@@ -450,12 +451,14 @@ Page({
         else userInfo = {type:"job"}
         app.doRequestAction({
           url: "index/less-search-data/",
+          way:"POST",
           params: userInfo,
             success:function(res){
                 let mydata = res.data;
                 _this.setData({
                     "notice.lists": mydata.notice,
                   member_notice: mydata.member_notice,
+                  member_less_info: mydata.member_less_info,
                     phone: mydata.phone,
                     wechat: _mark ? mydata.wechat.number : (_wx.wechat ? _wx.wechat : mydata.wechat.number)
                 })
@@ -570,6 +573,7 @@ Page({
             his.job = [];
             his.job.push(text)
           }
+          his.job.splice(4)
           wx.setStorageSync("searchHistory", his)
         }else{
           let myhis = {

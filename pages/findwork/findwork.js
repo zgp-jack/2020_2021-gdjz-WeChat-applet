@@ -76,7 +76,9 @@ Page({
         userShareTime: {},
       isload: false,
       scrollTop: 0,
-      showReturnTopImg: false
+      showReturnTopImg: false,
+      showHistoryList: false,
+      historyList: [],
     },
     showDetailInfo:function(e){
       let uinfo = this.data.userInfo;
@@ -390,11 +392,52 @@ Page({
             }
         })
     },
-    bindKeyInput: function (e) {
-        this.setData({
-            "searchDate.keywords": e.detail.value
-        })
-    },
+
+  bindInputFocus: function () {
+    this.setData({
+      showHistoryList: true
+    })
+  },
+
+  searchThisWords: function (e) {
+    let text = e.currentTarget.dataset.text;
+    this.setData({
+      "searchDate.keywords": text,
+      showHistoryList: false
+    })
+    this.userTapSearch();
+  },
+  closeHistory: function () {
+    this.setData({
+      showHistoryList: false
+    })
+  },
+  clearHistory: function () {
+    this.setData({
+      showHistoryList: false
+    })
+    let his = wx.getStorageSync("searchHistory")
+    if (his.hasOwnProperty("resume")) {
+      his.resume = [];
+      wx.setStorageSync("searchHistory", his)
+    }
+    this.initSearchHistory();
+  },
+  bindKeyInput: function (e) {
+    this.setData({
+      "searchDate.keywords": e.detail.value,
+    })
+  },
+  initSearchHistory: function () {
+    let his = wx.getStorageSync("searchHistory")
+    if (his) {
+      let job = his.hasOwnProperty("resume");
+      if (job) {
+        let jobs = his.resume
+        this.setData({ historyList: jobs })
+      }
+    }
+  },
 
     //用户点击搜索
     userTapSearch: function () {
@@ -403,11 +446,39 @@ Page({
       //   return false;
       // }
         //if (this.data.searchDate.keywords == "") return false;
+      let text = this.data.searchDate.keywords;
+      if (text) {
+        let his = wx.getStorageSync("searchHistory")
+        if (his) {
+          let job = his.hasOwnProperty("resume");
+          if (job) {
+            let jobs = his.resume;
+            let index = jobs.indexOf(text);
+            if (index != -1) {
+              jobs.splice(index, 1);
+            }
+            jobs.unshift(text);
+
+          } else {
+            his.resume = [];
+            his.resume.push(text)
+          }
+          his.resume.splice(4)
+          wx.setStorageSync("searchHistory", his)
+        } else {
+          let myhis = {
+            resume: [text]
+          }
+          wx.setStorageSync("searchHistory", myhis)
+        }
+      }
         this.returnTop();
         this.setData({
-            "searchDate.page": 1
+            "searchDate.page": 1,
+            showHistoryList:false
         })
-        this.doSearchRequestAction(false);
+      this.doRequestAction(false);
+      this.initSearchHistory();
     },
     returnTop: function () {
       this.setData({ scrollTop: 0 })
@@ -580,6 +651,7 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
+      this.initSearchHistory();
         this.initUserShareTimes();
         this.getFilterData();
         this.valiFilterProvince();

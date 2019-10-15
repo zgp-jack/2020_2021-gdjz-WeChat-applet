@@ -411,11 +411,51 @@ Page({
             }
         })
     },
-    bindKeyInput: function (e) {
-        this.setData({
-            "searchDate.keywords": e.detail.value
-        })
-    },
+  bindInputFocus: function () {
+    this.setData({
+      showHistoryList: true
+    })
+  },
+
+  searchThisWords: function (e) {
+    let text = e.currentTarget.dataset.text;
+    this.setData({
+      "searchDate.keywords": text,
+      showHistoryList: false
+    })
+    this.userTapSearch();
+  },
+  closeHistory: function () {
+    this.setData({
+      showHistoryList: false
+    })
+  },
+  clearHistory: function () {
+    this.setData({
+      showHistoryList: false
+    })
+    let his = wx.getStorageSync("searchHistory")
+    if (his.hasOwnProperty("used")) {
+      his.used = [];
+      wx.setStorageSync("searchHistory", his)
+    }
+    this.initSearchHistory();
+  },
+  bindKeyInput: function (e) {
+    this.setData({
+      "searchDate.keywords": e.detail.value,
+    })
+  },
+  initSearchHistory: function () {
+    let his = wx.getStorageSync("searchHistory")
+    if (his) {
+      let job = his.hasOwnProperty("used");
+      if (job) {
+        let jobs = his.used
+        this.setData({ historyList: jobs })
+      }
+    }
+  },
     userTapSearch: function () {
       // if (!this.data.userInfo) {
       //   app.gotoUserauth();
@@ -423,11 +463,41 @@ Page({
       // }
       //let userInfo = 
         //if (this.data.searchDate.keywords == "") return false;
+
+      let text = this.data.searchDate.keywords;
+      if (text) {
+        let his = wx.getStorageSync("searchHistory")
+        if (his) {
+          let job = his.hasOwnProperty("used");
+          if (job) {
+            let jobs = his.used;
+            let index = jobs.indexOf(text);
+            if (index != -1) {
+              jobs.splice(index, 1);
+            }
+            jobs.unshift(text);
+
+          } else {
+            his.used = [];
+            his.used.push(text)
+          }
+          his.used.splice(4)
+          wx.setStorageSync("searchHistory", his)
+        } else {
+          let myhis = {
+            used: [text]
+          }
+          wx.setStorageSync("searchHistory", myhis)
+        }
+      }
+
         this.returnTop();
         this.setData({
-            "searchDate.page": 1
+          "searchDate.page": 1,
+          showHistoryList: false
         })
-        this.doSearchRequestAction(false);
+      this.doRequestAction(false);
+      this.initSearchHistory();
     },
     returnTop: function () {
       this.setData({ scrollTop: 0 })
@@ -495,7 +565,8 @@ Page({
     /**
      * 生命周期函数--监听页面加载
      */
-    onLoad: function (options) {
+  onLoad: function (options) {
+      this.initSearchHistory();
         this.initUserShareTimes();
         this.getFilterData();
         this.initNeedData();

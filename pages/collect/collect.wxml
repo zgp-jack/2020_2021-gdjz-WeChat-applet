@@ -14,7 +14,7 @@
         <view class='published-list-item common-shaded-box' wx:for="{{ lists }}" wx:key="{{ index }}">
             <view class='published-list-header overwords'>{{ item.title }} <text data-id="{{ item.id }}" bindtap='showCollectInfo'>查看详情>></text> </view>
             <view class='published-list-body'>
-                <text class='collect-status'>状态：正在招</text>
+                <text class='collect-status'>状态：{{ item.state }}</text>
                 <text class='collect-time'>{{ item.time }}</text>
                 <text class='collect-action' data-id="{{ item.id }}" data-index="{{ index }}" bindtap='cancleCollect'>取消</text>
             </view>

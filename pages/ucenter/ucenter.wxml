@@ -52,7 +52,7 @@
 
     <view class='ucenter-menus-box'>
         <!-- 新信息提示     -->
-      <view class="ucenter-hasnoticeinfo" wx:if="{{ member.has_notice_msg.hasNoticeMsg }}" data-url='../others/message/lists/lists'   bindtap='downappfun' >
+      <view class="ucenter-hasnoticeinfo" wx:if="{{ member.has_notice_msg.hasNoticeMsg }}" data-url='../others/message/lists/lists?tel={{ (member.tel == null) ? "" : member.tel }}&name={{ member.username || member.nickname }}'   bindtap='downappfun' >
           <view class='feedbackmsg'>
             <image class='feedbackmsg-img' src='{{ feedbackimg }}'></image>
             <view class="overwords"><text>[{{ member.has_notice_msg.infoTypeWord }}]</text>{{ member.has_notice_msg.tipsMsg }}</view>

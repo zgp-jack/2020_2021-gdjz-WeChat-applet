@@ -2,8 +2,21 @@
 
 <!-- 搜索头部 -->
 <view class="lists-header">
-    <input placeholder="跳蚤市场"  bindconfirm="userTapSearch" confirm-type="search"   bindinput='bindKeyInput'  bindtap="closeAllSelect"/>
+    <input placeholder="跳蚤市场"  bindconfirm="userTapSearch" confirm-type="search"   bindinput='bindKeyInput'  bindtap="closeAllSelect" bindfocus='bindInputFocus' value='{{ searchDate.keywords }}' />
     <text bindtap='userTapSearch'>搜索</text>
+</view>
+
+<!-- 历史记录 -->
+<view class='usersearchhistorybox' wx:if="{{ showHistoryList && historyList.length }}" bindtap='closeHistory'>
+  <view class='usersearchhistory'>
+    <view class='usersearchhistory-item usersearchhistory-item-title'>历史记录</view>
+    <view class='usersearchhistory-box'>
+      <view class='usersearchhistory-item' wx:for="{{ historyList }}" wx:key="{{ index }}" catchtap='searchThisWords' data-text='{{ item }}'>{{ item }}</view>
+    </view>
+    <view class='usersearchhistory-footer'>
+      <view bindtap='clearHistory'>清空历史记录</view>
+    </view>
+  </view>
 </view>
 
 <!-- 筛选条件 -->

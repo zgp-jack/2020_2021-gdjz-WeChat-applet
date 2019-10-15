@@ -10,14 +10,15 @@
     <text bindtap='userTapSearch'>搜索</text>
 </view>
 
+<!-- 历史记录 -->
 <view class='usersearchhistorybox' wx:if="{{ showHistoryList && historyList.length }}" bindtap='closeHistory'>
   <view class='usersearchhistory'>
-    <view class='usersearchhistory-item usersearchhistory-item-title'>搜素历史</view>
+    <view class='usersearchhistory-item usersearchhistory-item-title'>历史记录</view>
     <view class='usersearchhistory-box'>
       <view class='usersearchhistory-item' wx:for="{{ historyList }}" wx:key="{{ index }}" catchtap='searchThisWords' data-text='{{ item }}'>{{ item }}</view>
     </view>
     <view class='usersearchhistory-footer'>
-      <view bindtap='clearHistory'><image src='{{ historydel }}'></image>清空历史记录</view>
+      <view bindtap='clearHistory'>清空历史记录</view>
     </view>
   </view>
 </view>
@@ -87,7 +88,7 @@
     </view>
 
     <!-- 留言通知  -->
-    <view class='feedbackmsg' wx:if="{{ member_notice.hasNoticeMsg }}"  bindtap='jumpThisLink'  data-url="../others/message/lists/lists"  data-type='0'>
+    <view class='feedbackmsg' wx:if="{{ member_notice.hasNoticeMsg }}"  bindtap='jumpThisLink'  data-url='../others/message/lists/lists?tel={{ (member_less_info.info.tel == null) ? "" : member_less_info.info.tel }}&name={{ member_less_info.info.username }}'  data-type='0'>
       <image class='feedbackmsg-img' src='{{ feedbackimg }}'></image>
       <view class="overwords"><text>[{{ member_notice.infoTypeWord }}]</text>{{ member_notice.tipsMsg }} </view>
       <image class="feedback-rightarrow" src="{{ rightarrow }}"></image>
