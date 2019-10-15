@@ -31,6 +31,7 @@
         </view>
     </view>
 
+    
 
     <view class='ucener-userinfo-wrap' wx:if="{{ !userInfo }}">
       <view class='ucenter-userinfo'>
@@ -48,7 +49,18 @@
 </view>
 
 <view class='yupao-common-container'>
+
     <view class='ucenter-menus-box'>
+        <!-- 新信息提示     -->
+      <view class="ucenter-hasnoticeinfo" wx:if="{{ member.has_notice_msg.hasNoticeMsg }}" data-url='../others/message/lists/lists'   bindtap='downappfun' >
+          <view class='feedbackmsg'>
+            <image class='feedbackmsg-img' src='{{ feedbackimg }}'></image>
+            <view class="overwords"><text>[{{ member.has_notice_msg.infoTypeWord }}]</text>{{ member.has_notice_msg.tipsMsg }}</view>
+            <image class="feedback-rightarrow" src="{{ rightarrow }}"></image>
+          </view>
+        </view>
+
+
         <view class='ucenter-menus clearfix'>
             <view class='ucenter-menu-item' data-url='../published/published?type=0' bindtap='valiUserUrl'>
                 <image src='{{ ucenterimgs.published }}'></image>

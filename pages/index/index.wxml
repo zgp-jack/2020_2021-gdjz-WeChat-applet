@@ -86,9 +86,11 @@
         </view>
     </view>
 
-    <view class='feedbackmsg'>
+    <!-- 留言通知  -->
+    <view class='feedbackmsg' wx:if="{{ member_notice.hasNoticeMsg }}"  bindtap='jumpThisLink'  data-url="../others/message/lists/lists"  data-type='0'>
       <image class='feedbackmsg-img' src='{{ feedbackimg }}'></image>
-      <view><text>[新消息]</text>你的意见反馈，有最新回复，请注意查看！</view>
+      <view class="overwords"><text>[{{ member_notice.infoTypeWord }}]</text>{{ member_notice.tipsMsg }} </view>
+      <image class="feedback-rightarrow" src="{{ rightarrow }}"></image>
     </view>
 
     <view class='gainebox'>

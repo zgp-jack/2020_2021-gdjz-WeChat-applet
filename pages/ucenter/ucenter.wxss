@@ -1,3 +1,5 @@
+@import '../index/index.wxss';
+
 .ucener-header{
     position: relative;
     width: 100%;
@@ -174,3 +176,7 @@
 
 
 .click-red-point::after{position: absolute;content: '详情';font-size: 20rpx;right: 30rpx;top:5rpx;color: #ff0000;}
+
+/* 信息提示 */
+.ucenter-hasnoticeinfo{margin-bottom: 15rpx;border-radius: 5px;box-shadow: #e7e6e4 0 0 10rpx;overflow: hidden;}
+.ucenter-hasnoticeinfo .feedbackmsg{margin-top: 0;}

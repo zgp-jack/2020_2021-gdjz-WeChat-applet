@@ -26,7 +26,9 @@ Page({
         userInfo:false,
         member:{},
         showReturnIntegral:false,
-        showFastIssue: app.globalData.showFastIssue
+        showFastIssue: app.globalData.showFastIssue,
+      feedbackimg: app.globalData.apiImgUrl + "feedbackmsg-img.png",
+      rightarrow: app.globalData.apiImgUrl + "feedback-rightarrow.png",
     },
     initUserInfo:function(){
       let userInfo = wx.getStorageSync("userInfo");

@@ -90,8 +90,9 @@ Page({
       hirimg: app.globalData.apiImgUrl + 'newlist-jobfinding.png', //招人图片
       doneimg: app.globalData.apiImgUrl + 'newlist-jobfindend.png', //已找到
       iondzs: app.globalData.apiImgUrl + 'newlist-jobposi.png',//定位
-      feedbackimg: app.globalData.apiImgUrl + "feedbackmsg-img.png",
       historydel: app.globalData.apiImgUrl + "historylist-del.png",
+      feedbackimg: app.globalData.apiImgUrl + "feedbackmsg-img.png",
+      rightarrow: app.globalData.apiImgUrl + "feedback-rightarrow.png",
       iImgUrl: app.globalData.apiImgUrl, //图片地址
       showHistoryList:false,
       historyList:[],
@@ -445,13 +446,11 @@ Page({
         if (_wx && _wx.expirTime){
             if (parseInt(_wx.expirTime) > _time) _mark = false;
         }
+        if(userInfo) userInfo.type = "job"
+        else userInfo = {type:"job"}
         app.doRequestAction({
-            url:"index/less-search-data/",
-            params: { 
-                type:"job",
-                way:"POST",
-                userId: _mark ? (userInfo ? userInfo.userId : "" ) : "",
-            },
+          url: "index/less-search-data/",
+          params: userInfo,
             success:function(res){
                 let mydata = res.data;
                 _this.setData({
