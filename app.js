@@ -1,5 +1,5 @@
 App({
-  onLaunch: function (e) {
+  onLaunch: function(e) {
     // try{
     //   if (e.path) this.initUserInfo(e);
     // }
@@ -46,7 +46,7 @@ App({
     },
     gdApiKey: "20f12aae660c04de86f993d3eff590a0"
   },
-  initUserInfo: function (e) {
+  initUserInfo: function(e) {
     let tpage = e.path;
 
     //不需要校验的路由名单
@@ -62,7 +62,7 @@ App({
           title: '温馨提示',
           content: '系统检测到您并未登录，您需要登录后才能继续操作',
           showCancel: false,
-          success: function (e) {
+          success: function(e) {
             wx.reLaunch({
               url: '/pages/index/index',
             })
@@ -71,7 +71,7 @@ App({
       }
     }
   },
-  getUserShareJson: function () {
+  getUserShareJson: function() {
     let userInfo = wx.getStorageSync("userInfo");
     let _path = userInfo ? '/pages/index/index?refid=' + userInfo.userId + "&source=" + this.globalData.inviteSource : '/pages/index/index';
     let _json = {
@@ -81,20 +81,20 @@ App({
     }
     return _json;
   },
-  stopThisAction: function () {
+  stopThisAction: function() {
     return false;
   },
-  initSystemInfo: function (callback) {
+  initSystemInfo: function(callback) {
     wx.getSystemInfo({
-      success: function (res) {
+      success: function(res) {
         callback(res);
       },
-      fail: function (res) {
+      fail: function(res) {
         callback(false);
       }
     })
   },
-  doRequestAction: function (_options) {
+  doRequestAction: function(_options) {
     if (_options.hasOwnProperty("params")) {
       _options.params.wechat_token = this.globalData.requestToken;
     } else {
@@ -120,7 +120,7 @@ App({
     })
   },
 
-  appRequestAction: function (_options) {
+  appRequestAction: function(_options) {
 
     if ((_options.hasOwnProperty("hideLoading") && !_options.hideLoading) || (!_options.hasOwnProperty("hideLoading"))) {
       wx.showLoading({
@@ -162,7 +162,7 @@ App({
           _this.showMyTips(_title);
         }
       },
-      complete: function () {
+      complete: function() {
         if ((_options.hasOwnProperty("hideLoading") && !_options.hideLoading) || (!_options.hasOwnProperty("hideLoading"))) {
           wx.hideLoading();
         }
@@ -171,7 +171,7 @@ App({
     })
   },
 
-  bindGetUserInfo: function (e, callback) {
+  bindGetUserInfo: function(e, callback) {
     //如果选择授权 则含有用户信息 
     var that = this
     if (e.detail.userInfo) {
@@ -183,7 +183,7 @@ App({
       that.globalData.userInfo = e.detail.userInfo; //设置用户信息 
       // 登录 获取在我们这里user_id
       wx.login({
-        success: function (res) {
+        success: function(res) {
           // 发送 res.code 到后台换取 openId, sessionKey, unionId
           if (res.code) {
             //发起网络请求
@@ -193,13 +193,13 @@ App({
                 code: res.code,
                 wechat_token: that.globalData.requestToken
               },
-              success: function (resdata) {
+              success: function(resdata) {
                 //获取到session_key 解密 
                 var session_key = resdata.data.session_key
                 callback(session_key)
                 //that.mini_user(session_key)
               },
-              fail: function (error) {
+              fail: function(error) {
                 console.log(error);
               }
             })
@@ -212,7 +212,7 @@ App({
       console.log('拒绝授权')
     }
   },
-  mini_user: function (session_key, callback) {
+  mini_user: function(session_key, callback) {
     var that = this
     wx.getSetting({
       success: (res) => {
@@ -274,26 +274,28 @@ App({
       }
     })
   },
-  callThisPhone: function (e) {
+  callThisPhone: function(e) {
     let phone = e.currentTarget.dataset.phone;
     wx.makePhoneCall({
       phoneNumber: phone
     })
   },
-  showMyTips: function (_msg) {
-    setTimeout(function () {
+  showMyTips: function(_msg) {
+    setTimeout(function() {
       wx.showToast({
         title: _msg,
         icon: 'none',
         duration: 2000,
-        success: function () { }
+        success: function() {}
       })
     }, 1)
 
   },
-  userUploadImg: function (callback) {
+  userUploadImg: function(callback) {
     let _this = this;
-    wx.showLoading({ title: '正在上传图片' });
+    wx.showLoading({
+      title: '正在上传图片'
+    });
     wx.chooseImage({
       count: 1,
       sizeType: ['compressed'],
@@ -319,7 +321,7 @@ App({
               })
             }
           },
-          fail: function () {
+          fail: function() {
             wx.hideLoading();
             wx.showToast({
               title: "网络错误，上传失败！",
@@ -330,29 +332,31 @@ App({
         })
 
       },
-      fail: function () {
+      fail: function() {
         wx.hideLoading();
       }
     })
   },
-  arrDeepCopy: function (source) {
+  arrDeepCopy: function(source) {
     var sourceCopy = source instanceof Array ? [] : {};
     for (var item in source) {
       sourceCopy[item] = typeof source[item] === 'object' ? this.arrDeepCopy(source[item]) : source[item];
     }
     return sourceCopy;
   },
-  returnPrevPage: function (_msg) {
+  returnPrevPage: function(_msg) {
     wx.showModal({
       title: '温馨提示',
       content: _msg,
       showCancel: false,
-      success: function () {
-        wx.navigateBack({ delta: 1 })
+      success: function() {
+        wx.navigateBack({
+          delta: 1
+        })
       }
     })
   },
-  jumpThisLink: function (e) {
+  jumpThisLink: function(e) {
     let pages = getCurrentPages()
     let currentPage = pages[pages.length - 1]
     let _page = "/" + currentPage.route
@@ -360,16 +364,20 @@ App({
     if (_url == _page) return false;
 
     let _type = e.currentTarget.dataset.type;
-    (_type == "1") ? wx.reLaunch({ url: _url }) : wx.navigateTo({ url: _url });
+    (_type == "1") ? wx.reLaunch({
+      url: _url
+    }): wx.navigateTo({
+      url: _url
+    });
   },
-  getListsAllType: function (_callback) {
+  getListsAllType: function(_callback) {
     let _this = this;
     this.appRequestAction({
       url: "index/top-search-tree/",
       way: "POST",
       hideLoading: true,
       failTitle: "数据加载失败，请重新进入小程序",
-      success: function (res) {
+      success: function(res) {
         let mydata = res.data;
         if (mydata.errcode == "ok") {
           _this.globalData.allTypes = mydata.data;
@@ -380,7 +388,7 @@ App({
       }
     })
   },
-  valiDateIsToday: function () {
+  valiDateIsToday: function() {
     let myDate = new Date();
     let _y = myDate.getFullYear();
     let _m = parseInt((myDate.getMonth() + 1)) < 10 ? "0" + parseInt((myDate.getMonth() + 1)) : parseInt((myDate.getMonth() + 1));
@@ -388,7 +396,7 @@ App({
     let _ymd = _y + "-" + _m + "-" + _d;
     return _ymd;
   },
-  initUserShareTimes: function () {
+  initUserShareTimes: function() {
     let _this = this;
     let userinfo = wx.getStorageSync("userInfo");
     this.appRequestAction({
@@ -397,7 +405,7 @@ App({
       title: "正在初始化数据",
       hideLoading: true,
       params: userinfo,
-      success: function (res) {
+      success: function(res) {
         let mydata = res.data;
         if (mydata.errcode == "ok") {
           _this.globalData.userTimes = parseInt(mydata.lessNumber);
@@ -405,7 +413,7 @@ App({
       }
     })
   },
-  userShareAction: function (callback) {
+  userShareAction: function(callback) {
     let userInfo = wx.getStorageSync("userInfo");
     if (!userInfo) return false;
     this.userShareTotal();
@@ -416,7 +424,7 @@ App({
       let _t = wx.getStorageSync("_st"); //shareTime
       if (_t != _td) {
         wx.setStorageSync("_st", _td);
-        setTimeout(function () {
+        setTimeout(function() {
           callback('share');
         }, _time)
       }
@@ -428,7 +436,7 @@ App({
       way: "POST",
       params: userInfo,
       hideLoading: true,
-      success: function (res) {
+      success: function(res) {
         let mydata = res.data;
         if (mydata.errcode == "ok") {
           _this.globalData.userTimes = parseInt(_this.globalData.userTimes) - 1;
@@ -445,16 +453,16 @@ App({
           let today = year + "-" + month + "-" + day + " " + hours + ":" + min;
           _this.globalData.userShareData.today = today;
           _this.globalData.userShareData.tomorrow = tomorrow;
-          setTimeout(function () {
+          setTimeout(function() {
             callback(mydata);
           }, _time)
         }
       }
     })
   },
-  pageInitSystemInfo: function (_this) {
+  pageInitSystemInfo: function(_this) {
 
-    this.initSystemInfo(function (res) {
+    this.initSystemInfo(function(res) {
       if (res) {
         let _ww = res.screenWidth;
         let _wh = res.screenHeight;
@@ -479,7 +487,7 @@ App({
       }
     })
   },
-  userShareTotal: function () {
+  userShareTotal: function() {
     let userInfo = wx.getStorageSync("userInfo");
     this.doRequestAction({
       url: "user/list-share/",
@@ -487,29 +495,33 @@ App({
       params: userInfo ? userInfo : {}
     })
   },
-  initAdminTime: function (callback) {
+  initAdminTime: function(callback) {
     let _this = this;
     this.appRequestAction({
       url: "index/get-init-time/",
       hideLoading: true,
-      success: function (res) {
+      success: function(res) {
         _this.globalData.appNetTime = res.data.time;
         _this.globalData.userGapTime = _this.globalData.appNetTime - parseInt(new Date().getTime() / 1000);
         callback ? callback() : ""
       },
-      fail: function () { }
+      fail: function() {}
     })
   },
-  initFirstTips: function (_this) {
+  initFirstTips: function(_this) {
     let that = this; //app
     let m = this.globalData.firstJoin;
     if (m) {
-      _this.setData({ firstJoin: m });
+      _this.setData({
+        firstJoin: m
+      });
       let t = 5;
-      let timer = setInterval(function () {
+      let timer = setInterval(function() {
         t--;
         if (t == 0) {
-          _this.setData({ firstJoin: false });
+          _this.setData({
+            firstJoin: false
+          });
           that.globalData.firstJoin = false;
           clearInterval(timer);
           return false;
@@ -517,7 +529,7 @@ App({
       }, 1000)
     }
   },
-  isShowFastIssue: function (_this) {
+  isShowFastIssue: function(_this) {
     let that = this;
     let userInfo = wx.getStorageSync("userInfo");
     this.appRequestAction({
@@ -525,26 +537,30 @@ App({
       url: "fast-issue/fast-log/",
       hideLoading: true,
       params: userInfo,
-      success: function (res) {
+      success: function(res) {
         let mydata = res.data;
         if (mydata.errcode == "ok") {
           let _log = parseInt(mydata.hasLog);
           that.globalData.showFastIssue.show = _log;
           that.globalData.showFastIssue.request = true;
 
-          _this.setData({ showFastIssue: that.globalData.showFastIssue });
+          _this.setData({
+            showFastIssue: that.globalData.showFastIssue
+          });
         }
       },
-      fail: function () { }
+      fail: function() {}
     })
   },
-  showDetailInfo: function (e, uinfo) {
+  showDetailInfo: function(e, uinfo) {
     let _this = this;
     let formId = e.detail.formId;
     let id = e.currentTarget.dataset.id;
     let type = e.currentTarget.dataset.type;
     let url = (type == "job") ? '/pages/detail/info/info?id=' : '/pages/detail/ucard/ucard?id='
-    wx.navigateTo({ url: url + id })
+    wx.navigateTo({
+      url: url + id
+    })
     if (!uinfo) return false;
 
     if (formId == "requestFormId:fail timeout") return false;
@@ -557,25 +573,33 @@ App({
         if (tday == day) {
           if (times < 1) {
             times += 1;
-            let tempData = { day: tday, times: times }
+            let tempData = {
+              day: tday,
+              times: times
+            }
             wx.setStorageSync("tempInfo", tempData)
             _this.setTemplateInfo(formId);
           }
           return false;
         } else {
-          let tempDate = { day: day, times: 1 }
+          let tempDate = {
+            day: day,
+            times: 1
+          }
           wx.setStorageSync("tempInfo", tempDate)
           _this.setTemplateInfo(formId);
         }
-      }
-      catch (err) { }
+      } catch (err) {}
     } else {
-      let tempDate = { day: day, times: 1 }
+      let tempDate = {
+        day: day,
+        times: 1
+      }
       wx.setStorageSync("tempInfo", tempDate)
       _this.setTemplateInfo(formId);
     }
   },
-  setTemplateInfo: function (formId) {
+  setTemplateInfo: function(formId) {
     let data = wx.getStorageSync("userInfo") || {};
     data.formId = formId
     this.appRequestAction({
@@ -585,28 +609,31 @@ App({
       way: "POST"
     })
   },
-  valiUserUrl: function (e, user) {
+  valiUserUrl: function(e, user) {
     let url = e.currentTarget.dataset.url;
-    wx.navigateTo({ url: user ? url : '/pages/userauth/userauth' })
+    wx.navigateTo({
+      url: user ? url : '/pages/userauth/userauth'
+    })
   },
-  gotoUserauth: function () {
-    wx.navigateTo({ url: '/pages/userauth/userauth' })
+  gotoUserauth: function() {
+    wx.navigateTo({
+      url: '/pages/userauth/userauth'
+    })
   },
   /**打开设置面板 */
-  openSetting: function (callback) {
+  openSetting: function(callback) {
     let that = this;
     wx.getSetting({
       success: (res) => {
         //console.log(res.authSetting['scope.userLocation']);
-        if (res.authSetting['scope.userLocation'] != undefined && res.authSetting['scope.userLocation'] != true) {//非初始化进入该页面,且未授权   
+        if (res.authSetting['scope.userLocation'] != undefined && res.authSetting['scope.userLocation'] != true) { //非初始化进入该页面,且未授权   
           wx.showModal({
             title: '是否授权当前位置',
             content: '需要获取您的地理位置，请确认授权，否则将不能为你自动推荐位置',
-            success: function (res) {
-              if (res.cancel) {
-              } else if (res.confirm) {
+            success: function(res) {
+              if (res.cancel) {} else if (res.confirm) {
                 wx.openSetting({
-                  success: function (data) {
+                  success: function(data) {
                     console.log(data);
                     if (data.authSetting["scope.userLocation"] == true) {
                       wx.showToast({
@@ -632,15 +659,14 @@ App({
       },
     })
   },
-  setStorageAction: function (id, mydata, flag) { //flag='省'
+  setStorageAction: function(id, mydata, flag) { //flag='省'
     let maxNum = 3;
     if (id == 1) return false;
     let locationHistory = wx.getStorageSync("locationHistory");
     let gpsPorvince = wx.getStorageSync("gpsPorvince");
     let gpsOrientation = wx.getStorageSync("gpsOrientation");
     let isArr = locationHistory instanceof Array;
-    let lid = flag ? (gpsPorvince ? parseInt(gpsPorvince.id) : "") : (gpsOrientation ? parseInt
-      (gpsOrientation.id) : "");
+    let lid = flag ? (gpsPorvince ? parseInt(gpsPorvince.id) : "") : (gpsOrientation ? parseInt(gpsOrientation.id) : "");
     if (lid == id) return false;
     if (!isArr) {
       wx.setStorageSync("locationHistory", [mydata])
@@ -658,7 +684,7 @@ App({
       wx.setStorageSync("locationHistory", locationHistory)
     }
   },
-  getAreaData: function (_this) {
+  getAreaData: function(_this) {
     let num = 1;
     let areadata = wx.getStorageSync("areadata");
     if (areadata) {
@@ -671,8 +697,11 @@ App({
     }
     this.doRequestAction({
       url: "index/index-area/",
-      success: function (res) {
-        let mydata = { data: res.data, num: num }
+      success: function(res) {
+        let mydata = {
+          data: res.data,
+          num: num
+        }
         _this.setData({
           areadata: res.data
         })
@@ -681,12 +710,12 @@ App({
     });
 
   },
-  getPrevPage: function () {
+  getPrevPage: function() {
     let pages = getCurrentPages();
     let prevPage = pages[pages.length - 2];
     return prevPage;
   },
-  commonUserShare: function () {
+  commonUserShare: function() {
     let userInfo = wx.getStorageSync("userInfo");
     this.appRequestAction({
       url: "user/user-share/",

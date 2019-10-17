@@ -35,6 +35,10 @@ Page({
           _this.setData({
             cardInfo: _data
           })
+
+          if (_data.show_tips == "1"){
+            app.returnPrevPage(_data.check_tips_string);
+          }
         } else {
           wx.showModal({
             title: '很抱歉',

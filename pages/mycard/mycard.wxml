@@ -1,66 +1,78 @@
 <view class="yupao-common-container">
-    <view class='yupao-ucard-container'>
-        <view class='yupao-ucard-header'>
-            <view class='yupao-ucard-title overwords'>找活名片<text bindtap='setMycard'>修改/刷新</text></view>
-            <view class='ucard-headimgbox'>
-                <image src='{{ cardInfo.image }}' class='ucard-headimg'></image>
-            </view>
-        </view>
-
-        <view class='yupao-ucard-body'>
-            <view class='yupao-ucard-words common-shaded-box'>{{ cardInfo.title }}</view>
-            <view class='yupao-common-list yupao-list-ucard'>
-                <view class='yupao-common-lists-item clearfix'>
-                    <view class='yupao-common-list-left'><image src='http://cdn.yupao.com/miniprogram/images/ucard-user.png'></image>联系人</view>
-                    <view class='yupao-common-list-right'>{{ cardInfo.user_name }}</view>
-                </view>
-                <view class='yupao-common-lists-item clearfix'>
-                    <view class='yupao-common-list-left'><image src='http://cdn.yupao.com/miniprogram/images/ucard-time.png'></image>更新时间</view>
-                    <view class='yupao-common-list-right'>{{ cardInfo.time }}</view>
-                </view>
-                <view class='yupao-common-lists-item clearfix'>
-                    <view class='yupao-common-list-left'><image src='http://cdn.yupao.com/miniprogram/images/ucard-mode.png'></image>规模</view>
-                    <view class='yupao-common-list-right'>{{ cardInfo.team_word.name }}</view>
-                </view>
-                <view class='yupao-common-lists-item clearfix'>
-                    <view class='yupao-common-list-left'><image src='http://cdn.yupao.com/miniprogram/images/ucard-type.png'></image>工种</view>
-                    <view class='yupao-common-list-right'><text class='user-need-group' wx:for="{{ cardInfo.classify }}" wx:key="{{ index }}">【{{ item.name }}】</text></view>
-                </view>
-                <view class='yupao-common-lists-item clearfix'>
-                    <view class='yupao-common-list-left'><image src='http://cdn.yupao.com/miniprogram/images/ucard-posi.png'></image>可去的省份</view>
-                    <view class='yupao-common-list-right'>{{ cardInfo.area_str }}</view>
-                </view>
-                <view class='yupao-common-lists-item clearfix'>
-                    <view class='yupao-common-list-left'><image src='http://cdn.yupao.com/miniprogram/images/ucard-status.png'></image>找活状态</view>
-                    <view class='yupao-common-list-right text-red'>{{ cardInfo.is_end == "1" ? "正在找" : "已找到" }}</view>
-                </view>
-                <view class='yupao-common-lists-item clearfix'>
-                    <view class='yupao-common-list-left'><image src='http://cdn.yupao.com/miniprogram/images/ucard-tel.png'></image>电话号码</view>
-                    <view class='yupao-common-list-right'>{{ cardInfo.user_mobile }}</view>
-                </view>
-            </view>
-            <view class='yupao-common-list'>
-                <view class='yupao-common-lists-item clearfix'>
-                    <view class='yupao-lists-detail-tips'><image src='http://cdn.yupao.com/miniprogram/images/ucard-info.png'></image>找活详情</view>
-                    <view class='yupao-lists-detail'>{{ cardInfo.detail }}</view>
-                </view>
-            </view>
-
-            <view class='ucard-imgsbox clearfix' wx:if="{{ cardInfo.view_images.length }}">
-                <view class='ucard-imgs-item' wx:for="{{ cardInfo.view_images }}" wx:key="{{ index }}">
-                    <image src='{{ item }}' bindtap='previewImage' data-src="{{ item }}"></image>
-                </view>
-            </view>
-
-        </view>
+  <view class='yupao-ucard-container'>
+    <view class='yupao-ucard-header'>
+      <view class='yupao-ucard-title overwords'>找活名片
+        <text bindtap='setMycard'>修改/刷新</text>
+      </view>
+      <view class='ucard-headimgbox'>
+        <image src='{{ cardInfo.image }}' class='ucard-headimg'></image>
+      </view>
     </view>
+
+    <view class='yupao-ucard-body'>
+      <view class='yupao-ucard-words common-shaded-box'>{{ cardInfo.title }}</view>
+      <view class='yupao-common-list yupao-list-ucard'>
+        <view class='yupao-common-lists-item clearfix'>
+          <view class='yupao-common-list-left'>
+            <image src='http://cdn.yupao.com/miniprogram/images/ucard-user.png'></image>联系人</view>
+          <view class='yupao-common-list-right'>{{ cardInfo.user_name }}</view>
+        </view>
+        <view class='yupao-common-lists-item clearfix'>
+          <view class='yupao-common-list-left'>
+            <image src='http://cdn.yupao.com/miniprogram/images/ucard-time.png'></image>更新时间</view>
+          <view class='yupao-common-list-right'>{{ cardInfo.time }}</view>
+        </view>
+        <view class='yupao-common-lists-item clearfix'>
+          <view class='yupao-common-list-left'>
+            <image src='http://cdn.yupao.com/miniprogram/images/ucard-mode.png'></image>规模</view>
+          <view class='yupao-common-list-right'>{{ cardInfo.team_word.name }}</view>
+        </view>
+        <view class='yupao-common-lists-item clearfix'>
+          <view class='yupao-common-list-left'>
+            <image src='http://cdn.yupao.com/miniprogram/images/ucard-type.png'></image>工种</view>
+          <view class='yupao-common-list-right'>
+            <text class='user-need-group' wx:for="{{ cardInfo.classify }}" wx:key="{{ index }}">【{{ item.name }}】</text>
+          </view>
+        </view>
+        <view class='yupao-common-lists-item clearfix'>
+          <view class='yupao-common-list-left'>
+            <image src='http://cdn.yupao.com/miniprogram/images/ucard-posi.png'></image>可去的省份</view>
+          <view class='yupao-common-list-right'>{{ cardInfo.area_str }}</view>
+        </view>
+        <view class='yupao-common-lists-item clearfix'>
+          <view class='yupao-common-list-left'>
+            <image src='http://cdn.yupao.com/miniprogram/images/ucard-status.png'></image>找活状态</view>
+          <view class='yupao-common-list-right text-red'>{{ cardInfo.is_end == "1" ? "正在找" : "已找到" }}</view>
+        </view>
+        <view class='yupao-common-lists-item clearfix'>
+          <view class='yupao-common-list-left'>
+            <image src='http://cdn.yupao.com/miniprogram/images/ucard-tel.png'></image>电话号码</view>
+          <view class='yupao-common-list-right'>{{ cardInfo.user_mobile }}</view>
+        </view>
+      </view>
+      <view class='yupao-common-list'>
+        <view class='yupao-common-lists-item clearfix'>
+          <view class='yupao-lists-detail-tips'>
+            <image src='http://cdn.yupao.com/miniprogram/images/ucard-info.png'></image>找活详情</view>
+          <view class='yupao-lists-detail'>{{ cardInfo.detail }}</view>
+        </view>
+      </view>
+
+      <view class='ucard-imgsbox clearfix' wx:if="{{ cardInfo.view_images.length }}">
+        <view class='ucard-imgs-item' wx:for="{{ cardInfo.view_images }}" wx:key="{{ index }}">
+          <image src='{{ item }}' bindtap='previewImage' data-src="{{ item }}"></image>
+        </view>
+      </view>
+
+    </view>
+  </view>
 </view>
 
 
 <view class='my-card-editbox' wx:if="{{ showCardSet }}" bindtap='hideCradSet'>
-    <view class='setmycard'>
-        <navigator class='setmycard-item' url='/pages/publish/card/card?id={{ cardInfo.id }}' open-type="navigate">修改名片</navigator>
-        <view class='setmycard-item setmycard-item-status' bindtap='setMycardStatus'>改为{{ cardInfo.is_end == "1" ? "已找到" : "正在找" }}</view>
-        <view class='setmycard-item setmycard-item-top' bindtap='settopMycard'>置顶名片</view>
-    </view>
+  <view class='setmycard'>
+    <navigator class='setmycard-item' url='/pages/publish/card/card?id={{ cardInfo.id }}' open-type="navigate">修改名片</navigator>
+    <view class='setmycard-item setmycard-item-status' bindtap='setMycardStatus'>改为{{ cardInfo.is_end == "1" ? "已找到" : "正在找" }}</view>
+    <view class='setmycard-item setmycard-item-top' bindtap='settopMycard'>置顶名片</view>
+  </view>
 </view>
