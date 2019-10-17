@@ -85,6 +85,7 @@ Page({
           _this.setData({
             "cardInfo.is_end": mydata.end_status
           })
+          wx.navigateBack({ delta: 1 })
         }
 
       }
