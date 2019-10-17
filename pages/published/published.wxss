@@ -1,197 +1,323 @@
 @import "../course/course.wxss";
-.published-title{
-    position: relative;
-    width: 100%;
-    padding: 20rpx 27rpx;
-    background: white;
-    margin-top: 15rpx;
-    font-size: 28rpx;
-    color: #000;
-}
-.published-content{
-    position: relative;
-    width: 100%;
-    padding:0 27rpx 20rpx;
+
+.published-title {
+  position: relative;
+  width: 100%;
+  padding: 20rpx 27rpx;
+  background: white;
+  margin-top: 15rpx;
+  font-size: 28rpx;
+  color: #000;
 }
 
-.published-list-item{
-    position: relative;
-}
-.published-list-item{
-    position: relative;
-    width: 100%;
-    background: white;
-    margin-bottom: 15rpx;
-}
-.published-list-header{
-    height: 80rpx;
-    line-height: 80rpx;
-    font-size: 30rpx;
-    padding-right: 150rpx;
-    border-bottom: 1px dashed #0099ff;
-}
-.published-list-header text{
-    position: absolute;
-    color: red;
-    display: block;
-    line-height: 80rpx;
-    right:27rpx;
-    top: 10rpx;
-}
-.published-list-body{
-    position: relative;
-    height: 80rpx;
-}
-.published-list-body view{
-    font-size: 28rpx;
-    position: relative;
-    width: 33.333%;
-    float: left;
-    text-align: left;
-    line-height: 80rpx;
-}
-.published-list-body view image{
-    position: relative;
-    display: inline-block;
-    width: 36rpx;
-    height: 36rpx;
-    margin-right: 10rpx;
-    vertical-align: text-bottom;
-}
-.published-list-edit{
-    position: relative;
-
-}
-.published-list-detail{
-    position: absolute;
-    left: 0;
-    top: 0;
-    text-align: center !important;
-}
-.published-list-settop{
-    position: relative;
-    float: right;
-    text-align: right !important;
-}
-.published-list-footer{
-    position: relative;
-    border-top: 1px solid #dcdcdc;
-    padding: 20rpx 0;
-}
-.published-list-footer image{
-    position: relative;
-    display: inline-block;
-    width: 36rpx;
-    height:36rpx;
-    margin-right: 10rpx;
-    vertical-align: text-bottom;
-}
-.published-list-footer view{
-    font-size: 26rpx;
-}
-.cost-integral-settopbox{
-    position: fixed;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.6);
-    left: 0;
-    top: 0;
-    z-index: 10;
-}
-.cost-integral-settop{
-    position: relative;
-    width: 80%;
-}
-.cost-integral-settop-header{
-    width: 100%;
-    background: #f3f3f3;
-    text-align: center;
-    font-size: 34rpx;
-    line-height:120rpx;
-}
-.cost-integral-settop-body{
-    position: relative;
-    width: 100%;
-    height: 500rpx;
-    background: white;
-    padding: 40rpx 30rpx;
-}
-.cost-integral-settop-item{
-    position: relative;
-    width: 100%;
-    height: 100rpx;
-    margin-bottom: 20rpx;
-    border: 1px solid #0099ff;
-    padding-left: 160rpx;
-}
-.cost-integral-settop-tips{
-    position: absolute;
-    left: 20rpx;
-    top: 0;
-    line-height: 100rpx;
-    font-weight: bold;
-    font-size: 28rpx;
-}
-.cost-integral-settop-right{
-    position: relative;
-    width: 100%;
-    height: 100rpx;
-    line-height: 100rpx;
-    font-size: 30rpx;
-}
-.cost-integral-settop-footer{
-    position: relative;
-    width: 100%;
-    height: 100rpx;
-}
-.cost-integral-settop-footer view{
-    position: relative;
-    display: block;
-    width: 50%;
-    height: 100rpx;
-    float: left;
-    padding: 0 20rpx;
-}
-.cost-integral-settop-footer view text{
-    display: block;
-    width: 100%;
-    height: 80%;
-    background: rgba(0,0,0,.1);
-    color: #353535;
-    text-align: center;
-    line-height: 80rpx;
-    font-size: 28rpx;
-}
-.cost-integral-settop-footer view:nth-last-child(1) text{
-    background: #0099ff;
-    color: #fff;
-}
-.cost-integral-settop-num{
-    position: relative;
-    line-height: 80rpx;
-    font-size: 34rpx;
-    display: block;
-    text-align: center;
-    margin-bottom: 20rpx;
-    color: #0099ff;
-}
-.cost-integral-settop-num text{
-    color: #ff0000;
-    margin: 0 5rpx;
+.published-content {
+  position: relative;
+  width: 100%;
+  padding: 0 27rpx 20rpx;
 }
 
+.published-list-item {
+  position: relative;
+}
 
+.published-list-item {
+  position: relative;
+  width: 100%;
+  background: white;
+  margin-bottom: 15rpx;
+}
 
-.collect-warp{position: fixed;width: 100%;height: 100%;z-index: 10;background: rgba(0, 0, 0, 0.2);}
-.collectbox-tips{position: fixed;width: 90%;top: 50%;margin-top: -380rpx; left: 5%;background: white;border-radius: 12px;}
-.collect-tips-icon{position: absolute;width: 100rpx;height: 100rpx; left: 50%;margin-left: -50rpx;top:-50rpx;z-index: 10;}
-.collect-bg{position: relative;width: 100%;height: 300rpx;background: url("http://cdn.yupao.com/miniprogram/images/collect-tipbg.png") no-repeat;background-size: 100% 100%;padding: 60rpx 20rpx 0;}
-.collect-tips-title{position: relative;text-align: center;display:inline-block;font-size: 36rpx;line-height: 60rpx;color: white;width: 100%;margin-bottom: 10rpx;}
-.collect-tips-words{position: relative;display: inline-block;font-size: 30rpx;color: white;text-align: center;line-height:50rpx;width: 100%;}
-.collect-tips-hand{position: relative;display: block; margin: 80rpx auto;width:600rpx;height: 200rpx;}
-.knowtips{position: absolute;bottom:-45rpx;width: 350rpx;line-height: 90rpx;background: #0099ff;color: white;text-align: center;font-size: 30rpx;left: 50%;margin-left: -175rpx;border-radius: 20px;}
+.published-list-header {
+  height: 80rpx;
+  line-height: 80rpx;
+  font-size: 30rpx;
+  padding-right: 200rpx;
+  border-bottom: 1px dashed #09f;
+}
 
+.published-list-header text {
+  position: absolute;
+  color: red;
+  display: block;
+  line-height: 80rpx;
+  right: 27rpx;
+  top: 10rpx;
+}
 
-.settop-triangle-sign::before{position: absolute;content: '';right: 30rpx;top:45rpx;width: 0; height: 0;border-width: 5px;border-style: solid;border-color:#000 transparent transparent transparent;}
+.published-list-body {
+  position: relative;
+  height: 80rpx;
+}
 
+.published-list-body view {
+  font-size: 28rpx;
+  position: relative;
+  width: 33.333%;
+  float: left;
+  text-align: left;
+  line-height: 80rpx;
+}
 
+.published-list-body view image {
+  position: relative;
+  display: inline-block;
+  width: 36rpx;
+  height: 36rpx;
+  margin-right: 10rpx;
+  vertical-align: text-bottom;
+}
+
+.published-list-edit {
+  position: relative;
+}
+
+.published-list-detail {
+  position: absolute;
+  left: 0;
+  top: 0;
+  text-align: center !important;
+}
+
+.published-list-settop {
+  position: relative;
+  float: right;
+  text-align: right !important;
+}
+
+.published-list-footer {
+  position: relative;
+  border-top: 1px solid #dcdcdc;
+  padding: 20rpx 0;
+}
+
+.published-list-footer image {
+  position: relative;
+  display: inline-block;
+  width: 36rpx;
+  height: 36rpx;
+  margin-right: 10rpx;
+  vertical-align: text-bottom;
+}
+
+.published-list-footer view {
+  font-size: 26rpx;
+}
+
+.cost-integral-settopbox {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  left: 0;
+  top: 0;
+  z-index: 10;
+}
+
+.cost-integral-settop {
+  position: relative;
+  width: 80%;
+}
+
+.cost-integral-settop-header {
+  width: 100%;
+  background: #f3f3f3;
+  text-align: center;
+  font-size: 34rpx;
+  line-height: 120rpx;
+}
+
+.cost-integral-settop-body {
+  position: relative;
+  width: 100%;
+  height: 500rpx;
+  background: white;
+  padding: 40rpx 30rpx;
+}
+
+.cost-integral-settop-item {
+  position: relative;
+  width: 100%;
+  height: 100rpx;
+  margin-bottom: 20rpx;
+  border: 1px solid #09f;
+  padding-left: 160rpx;
+}
+
+.cost-integral-settop-tips {
+  position: absolute;
+  left: 20rpx;
+  top: 0;
+  line-height: 100rpx;
+  font-weight: bold;
+  font-size: 28rpx;
+}
+
+.cost-integral-settop-right {
+  position: relative;
+  width: 100%;
+  height: 100rpx;
+  line-height: 100rpx;
+  font-size: 30rpx;
+}
+
+.cost-integral-settop-footer {
+  position: relative;
+  width: 100%;
+  height: 100rpx;
+}
+
+.cost-integral-settop-footer view {
+  position: relative;
+  display: block;
+  width: 50%;
+  height: 100rpx;
+  float: left;
+  padding: 0 20rpx;
+}
+
+.cost-integral-settop-footer view text {
+  display: block;
+  width: 100%;
+  height: 80%;
+  background: rgba(0, 0, 0, 0.1);
+  color: #353535;
+  text-align: center;
+  line-height: 80rpx;
+  font-size: 28rpx;
+}
+
+.cost-integral-settop-footer view:nth-last-child(1) text {
+  background: #09f;
+  color: #fff;
+}
+
+.cost-integral-settop-num {
+  position: relative;
+  line-height: 80rpx;
+  font-size: 34rpx;
+  display: block;
+  text-align: center;
+  margin-bottom: 20rpx;
+  color: #09f;
+}
+
+.cost-integral-settop-num text {
+  color: #f00;
+  margin: 0 5rpx;
+}
+
+.collect-warp {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  z-index: 10;
+  background: rgba(0, 0, 0, 0.2);
+}
+
+.collectbox-tips {
+  position: fixed;
+  width: 90%;
+  top: 50%;
+  margin-top: -380rpx;
+  left: 5%;
+  background: white;
+  border-radius: 12px;
+}
+
+.collect-tips-icon {
+  position: absolute;
+  width: 100rpx;
+  height: 100rpx;
+  left: 50%;
+  margin-left: -50rpx;
+  top: -50rpx;
+  z-index: 10;
+}
+
+.collect-bg {
+  position: relative;
+  width: 100%;
+  height: 300rpx;
+  background: url("http://cdn.yupao.com/miniprogram/images/collect-tipbg.png") no-repeat;
+  background-size: 100% 100%;
+  padding: 60rpx 20rpx 0;
+}
+
+.collect-tips-title {
+  position: relative;
+  text-align: center;
+  display: inline-block;
+  font-size: 36rpx;
+  line-height: 60rpx;
+  color: white;
+  width: 100%;
+  margin-bottom: 10rpx;
+}
+
+.collect-tips-words {
+  position: relative;
+  display: inline-block;
+  font-size: 30rpx;
+  color: white;
+  text-align: center;
+  line-height: 50rpx;
+  width: 100%;
+}
+
+.collect-tips-hand {
+  position: relative;
+  display: block;
+  margin: 80rpx auto;
+  width: 600rpx;
+  height: 200rpx;
+}
+
+.knowtips {
+  position: absolute;
+  bottom: -45rpx;
+  width: 350rpx;
+  line-height: 90rpx;
+  background: #09f;
+  color: white;
+  text-align: center;
+  font-size: 30rpx;
+  left: 50%;
+  margin-left: -175rpx;
+  border-radius: 20px;
+}
+
+.settop-triangle-sign::before {
+  position: absolute;
+  content: '';
+  right: 30rpx;
+  top: 45rpx;
+  width: 0;
+  height: 0;
+  border-width: 5px;
+  border-style: solid;
+  border-color: #000 transparent transparent transparent;
+}
+
+.published-list-body .published-list-info {
+  width: 100%;
+}
+
+.published-list-info {
+  position: relative;
+  color: #f00;
+}
+
+.published-list-info text {
+  position: relative;
+  width: initial;
+  color: #f00;
+}
+
+.published-list-info image {
+  position: relative;
+  display: inline-block;
+  width: 30rpx;
+  height: 30rpx;
+  vertical-align: middle;
+  margin-right: 10rpx;
+}
