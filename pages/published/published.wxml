@@ -29,7 +29,7 @@
     <view class='published-list-item common-shaded-box' wx:for="{{ lists }}" wx:key="{{ index }}">
       <view class='published-list-header overwords'>{{ item.title }}
         <text>{{ item.end_word }}</text> </view>
-      <view class='published-list-body' wx:if="{{ item.is_check !='1' }}">
+      <view class='published-list-body' wx:if="{{ item.is_check =='2' }}">
         <view class='published-list-edit'>
           <navigator url='{{ (publishIndex == 0) ? ("../publish/recruit/recruit?id="+item.id) : ("../publish/used/used?id="+item.id) }}' open-type="navigate">
             <image src='{{ publishedImg.edit }}'></image>修改</navigator>
@@ -39,7 +39,7 @@
         <view class='published-list-settop' bindtap='setThisTop' data-id="{{ item.id }}" data-index="{{ index }}" data-s="{{ item.is_end }}" data-status='{{ item.top.is_top }}' wx:if="{{ (item.is_end == 1) }}">
           <image src='{{ publishedImg.top }}'></image>{{ item.top && (item.top.is_top == "1") ? "取消置顶" : "置顶" }}</view>
       </view>
-      <view class="published-list-body" wx:if="{{ item.is_check =='1' }}">
+      <view class="published-list-body" wx:if="{{ item.is_check !='2' }}">
         <view class="published-list-info">
           <image src="{{ publishedImg.info }}"></image>
           <text>人工审核中，该信息仅自己可见</text>
