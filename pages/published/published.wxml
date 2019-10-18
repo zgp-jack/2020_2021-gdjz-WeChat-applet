@@ -34,10 +34,14 @@
           <navigator url='{{ (publishIndex == 0) ? ("../publish/recruit/recruit?id="+item.id) : ("../publish/used/used?id="+item.id) }}' open-type="navigate">
             <image src='{{ publishedImg.edit }}'></image>修改</navigator>
         </view>
+
+        <block wx:if="{{ item.is_check == '2'  }}">
         <view class='published-list-detail' bindtap='setInfoStatus' data-id="{{ item.id }}" data-index="{{ index }}">
           <image src='{{ publishedImg.wzz }}'></image>{{ item.update_word }}</view>
         <view class='published-list-settop' bindtap='setThisTop' data-id="{{ item.id }}" data-index="{{ index }}" data-s="{{ item.is_end }}" data-status='{{ item.top.is_top }}' wx:if="{{ (item.is_end == 1) }}">
           <image src='{{ publishedImg.top }}'></image>{{ item.top && (item.top.is_top == "1") ? "取消置顶" : "置顶" }}</view>
+        </block>
+
       </view>
       <view class="published-list-body" wx:if="{{ item.is_check == '1' }}">
         <view class="published-list-info">

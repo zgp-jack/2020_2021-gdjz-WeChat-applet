@@ -37,7 +37,19 @@ Page({
           })
 
           if (_data.show_tips == "1"){
-            app.returnPrevPage(_data.check_tips_string);
+            if (_data.is_check == "0"){
+              wx.showModal({
+                title: '温馨提示',
+                content: _data.check_tips_string,
+                showCancel:false,
+                success: function (res) {
+                  wx.redirectTo({
+                    url: '/pages/publish/card/card?id=' + _data.id,
+                  })
+                }
+              })
+            }
+            else app.returnPrevPage(_data.check_tips_string);
           }
         } else {
           wx.showModal({
