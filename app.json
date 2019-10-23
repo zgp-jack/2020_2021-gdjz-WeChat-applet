@@ -1,5 +1,6 @@
 {
   "pages": [
+    "pages/livecardone/livecardone",
     "pages/index/index",
     "pages/ucenter/ucenter",
     "pages/userauth/userauth",
@@ -52,7 +53,8 @@
     "pages/map/detail",
     "pages/others/message/lists/lists",
     "pages/others/message/publish/publish",
-    "pages/others/information/lists"
+    "pages/others/information/lists",
+    "pages/live-card"
   ],
   "window": {
     "backgroundTextStyle": "light",
