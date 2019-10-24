@@ -93,7 +93,7 @@
     <view class="cardotext">
       <view class="oworkone">
         <image src="../../images/newjobinfo-steps.png"></image>
-        <text class="workotext">找活类型：</text>
+        <text class="workotext">人员构成：</text>
       </view>
       <view class="owork">
         <text class="workotextone">工人，班组突击队</text>
@@ -130,7 +130,7 @@
     <view class="cardotextbottom"></view>
   </view>
   <view class="cardthree">
-    <view>
+    <view class="cardthreemobile">
       <image src="../../images/newresume-description.png"></image>
       自我介绍
     </view>
@@ -148,7 +148,7 @@
     </view>
   </view>
   <view class="cardfive">
-    <view>
+    <view class="cardfivemobile">
       <image src="../../images/newresume-experience.png"></image>
       项目经验
     </view>
@@ -189,7 +189,7 @@
     </view>
   </view>
   <view class="cardseven">
-    <view>
+    <view class="cardsevenmobile">
       <image src="../../images/newresume-skill.png"></image>
       职业技能
     </view>

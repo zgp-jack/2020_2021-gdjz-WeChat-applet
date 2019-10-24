@@ -1,5 +1,6 @@
 {
   "pages": [
+    "pages/new-project-experience/projectexperience",
     "pages/livecardone/livecardone",
     "pages/index/index",
     "pages/ucenter/ucenter",
