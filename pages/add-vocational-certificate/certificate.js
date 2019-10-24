@@ -1,23 +1,23 @@
-const app = getApp();
+
 Page({
   data: {
     date: "",
-    region:"",
-    imgArrs:[],
+    region: "",
+    imgArrs: [],
     idArrs: []
   },
-  bindDateChange(e){
+  bindDateChange(e) {
     this.setData({
       date: e.detail.value
     })
   },
-  changeRegin(e){
+  changeRegin(e) {
     console.log(e.detail.value)
     this.setData({
       region: e.detail.value[0] + e.detail.value[1] + e.detail.value[2]
     })
   },
-  previewImage(e){
+  previewImage(e) {
     console.log(e)
     let that = this
     wx.previewImage({
@@ -33,7 +33,7 @@ Page({
       success(res) {
         // tempFilePath可以作为img标签的src属性显示图片
         const path = res.tempFilePaths[0]
-        if (that.data.imgArrs.length >= 6) {
+        if (that.data.imgArrs.length >= 5) {
           return
         }
         that.data.imgArrs.push(path)
@@ -42,7 +42,7 @@ Page({
           imgArrs: that.data.imgArrs,
           // idArrs: that.data.idArrs
         })
-  
+
         wx.uploadFile({
           url: '要上传的地址',
           filePath: path,

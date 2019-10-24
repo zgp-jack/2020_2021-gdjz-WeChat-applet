@@ -1,0 +1,21 @@
+<view bindtap="obtn">
+  <view class="introduce">
+    <textarea class="introduceone" bindinput="TextAreaBlur" maxlength="500" placeholder="请简要介绍您所从事的行业以及工作经验..." />
+    <text>{{digital}}/500</text>
+  </view>
+  <view class="mask" catchtouchmove="preventTouchMove" wx:if="{{showModal}}"></view>
+  <view class="modalDlg" wx:if="{{showModal}}">
+    <view class="modalDlgone">
+      <text class="sty">示例1</text>
+      <text>示例2</text>
+    </view>
+    <text class="text" >我叫张三，来自陕西西安，从事电工工作已经15年了，有国家颁发的特种行业操作资格证书，主要从事建筑工地的用电安装和管理，能快速的处理施工中突发的各种电路事故，能独自的操作各种配电的安装和管理       </text>
+  </view>
+  <view class="introducetwo">
+    <text></text>
+
+    <text catchtap="btn" class="btn">我该怎么写?</text>
+
+  </view>
+  <button class="introducethree">提交保存</button>
+</view>

@@ -1,0 +1,80 @@
+.certificateheader{
+  width: 93%;
+  margin: 0 auto;
+  margin-top: 19rpx;
+  height: 110rpx;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  background-color: white;
+}
+.certificateheader .certificateheaderone{
+  width: 38%;
+  font-size: 30rpx;
+  line-height: 110rpx;
+  color: #2A2A2A;
+  margin-left: 19rpx;
+}
+.certificateheader .certificateheadertwo{
+  width: 80%;
+  height: 110rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.certificateheader .certificateheadertwo input{
+  font-size: 30rpx;
+  height: 30rpx;
+}
+
+.certificatebottom{
+    margin-top: 100rpx;
+    position: fixed;
+    bottom: 0;
+    background-color: white;
+    height: 100rpx;
+    width: 100%;
+}
+.certificatebottom .certificatebottomone{
+  width: 325rpx;
+  height: 64rpx;
+  background:  white;
+  border: 1px solid #0099FF;
+  position: absolute;
+  left: 27rpx;
+  top: 18rpx;
+  color:#0099FF;
+  line-height:  64rpx;
+  text-align: center;
+  font-size: 29rpx;
+}
+
+.certificatebottom .certificatebottomotwo{
+  width: 325rpx;
+  height: 64rpx;
+  background:#0099FF;
+  position: absolute;
+  right: 27rpx;
+  top: 18rpx;
+  color: white;
+  line-height:  64rpx;
+  text-align: center;
+  font-size: 29rpx;
+}
+
+.certificateone{
+  width: 93%;
+  margin: 0 auto;
+  margin-top: 19rpx;
+  margin-bottom: 110rpx;
+}
+.certificateone .certificateoneone{
+  width: 181rpx;
+  height: 181rpx;
+  margin-top: 50rpx;
+  margin-right: 50rpx;
+}
+.img_item{
+   display: inline-block;
+
+}

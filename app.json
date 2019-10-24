@@ -1,5 +1,8 @@
 {
   "pages": [
+    "pages/introduce-myself/ introduce",
+    "pages/finding-name-card/findingnamecard",
+    "pages/add-vocational-certificate/certificate",
     "pages/new-project-experience/projectexperience",
     "pages/livecardone/livecardone",
     "pages/index/index",

@@ -1,0 +1,53 @@
+<view>
+  <view class="findingnamecard">
+    请完善一下信息
+  </view>
+  <view class="findingnamecardone">
+    <view class="findingnamecardoneson">
+      <view class="findingnamecardonesonone">
+        <text>名片完善度：</text>
+        <view>资料越完善找活越容易</view>
+      </view>
+      <view class="findingnamecardonesontwo">
+        <text>0</text>
+        <view>浏览次数</view>
+      </view>
+    </view>
+  </view>
+  <view class="findingnamecardtwo">
+    <image class="findingnamecardtwoone"></image>
+    <text class="findingnamecardtwotwo">李小六</text>
+    <text class="findingnamecardtwothree">你还没有完善基本信息</text>
+    <view class="findingnamecardtwofour">去完善</view>
+  </view>
+  <view class="findingnamecardthree">
+    <view class="findingnamecardthreemobile">
+      <image src="../../images/newresume-description.png"></image>
+      自我介绍
+    </view>
+  </view>
+  <view class="findingnamecardfour">
+    <text class="findingnamecardfourone">你还没有完善基本信息</text>
+    <view class="findingnamecardfourtwo">去完善</view>
+  </view>
+  <view class="findingnamecardfive">
+    <view class="findingnamecardfivemobile">
+      <image src="../../images/newresume-experience.png"></image>
+      项目经验
+    </view>
+  </view>
+  <view class="findingnamecardsix">
+    <text class="findingnamecardsixone">添加项目经验可提升老板对你的信任程度</text>
+    <view class="findingnamecardsixtwo">添加项目经验</view>
+  </view>
+  <view class="findingnamecardseven">
+    <view class="findingnamecardsevenmobile">
+      <image src="../../images/newresume-skill.png"></image>
+      职业技能
+    </view>
+  </view>
+  <view class="findingnamecardeight">
+    <text class="findingnamecardeightone">添加职业技能，用实力证明你的能力</text>
+    <view class="findingnamecardeighttwo">添加职业技能</view>
+  </view>
+</view>
