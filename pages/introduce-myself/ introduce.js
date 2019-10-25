@@ -6,7 +6,24 @@ Page({
    */
   data: {
     digital:0,
-    showModal: false
+    showModal: false,
+    num:1,
+    numone:true,
+    numtwo:false
+  },
+  changenumone(){
+    this.setData({
+      num: 1,
+      numone: true,
+      numtwo: false
+    })
+  },
+  changenumtwo() {
+    this.setData({
+      num: 2,
+      numtwo: true,
+      numone: false
+    })
   },
   TextAreaBlur(e){
     this.setData({

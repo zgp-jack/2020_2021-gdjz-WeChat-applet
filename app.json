@@ -1,5 +1,6 @@
 {
   "pages": [
+    "pages/basic-information/information",
     "pages/introduce-myself/ introduce",
     "pages/finding-name-card/findingnamecard",
     "pages/add-vocational-certificate/certificate",
