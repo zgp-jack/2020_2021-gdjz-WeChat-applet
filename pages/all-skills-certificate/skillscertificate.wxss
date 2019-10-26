@@ -117,7 +117,7 @@
   height: 47rpx;
   margin: 0 auto;
   margin-top: 43rpx;
-  background: #124DEA;
+  background: #0099FF;
   text-align: center;
   line-height: 47rpx;
   font-size: 24rpx;

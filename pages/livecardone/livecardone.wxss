@@ -229,7 +229,6 @@
 }
 
 .cardthree .cardthreemobile {
-  width: 140rpx;
   position: absolute;
   left: 50%;
   margin-left: -70rpx;
@@ -292,7 +291,6 @@
 .cardfive .cardfivemobile {
   position: absolute;
   left: 50%;
-  width: 140rpx;
   margin-left: -70rpx;
   font-size: 26rpx;
   font-weight: bold;
@@ -406,7 +404,6 @@
 .cardseven .cardsevenmobile {
   position: absolute;
   left: 50%;
-  width: 140rpx;
   margin-left: -70rpx;
   font-size: 26rpx;
   font-weight: bold;
@@ -475,30 +472,6 @@
   margin-top: 10rpx;
 }
 
-.cardsixthreeborder {
-  position: relative;
-  left: -30rpx;
-}
-
-.cardsixthreeline {
-  position: relative;
-  left: 20rpx;
-  border-left: 1px solid #d3d3d1;
-  padding-left: 6rpx;
-}
-
-.cardeightzong .cardeightfive {
-  position: relative;
-  left: -31rpx;
-  top: 8rpx;
-}
-
-.cardeightzong .cardeightfiveline {
-  position: relative;
-  left: 20rpx;
-  border-left: 1px solid #d3d3d1;
-  padding-left: 8rpx;
-}
 
 .cardeightzong .cardeightfive image {
   width: 185rpx;
@@ -563,10 +536,10 @@
 .line {
   border-left: 1px solid #dcdcdc;
   position: relative;
-  left: 20rpx;
+  left: 4%;
 }
 
 .cardotext {
   position: relative;
-  left: -28.5rpx;
+  left: -4%;
 }

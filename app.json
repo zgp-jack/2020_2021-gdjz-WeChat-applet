@@ -1,16 +1,17 @@
 {
-  "pages": [
-    "pages/all-skills-certificate/skillscertificate",
-    "pages/livecardone/livecardone",
+   "pages": [
     "pages/preview-name-card/previewcard",
-    "pages/modify-project-experience/modifyexper",
+    "pages/livecardone/livecardone",
+    "pages/all-skills-certificate/skillscertificate",
     "pages/basic-information/information",
     "pages/modifycertificate/modifycertificate",
-    "pages/addcertificate/addcertificate",
-    "pages/introduce-myself/ introduce",
-    "pages/finding-name-card/findingnamecard",
-    "pages/add-vocational-certificate/certificate",
+    "pages/modify-project-experience/modifyexper",
     "pages/new-project-experience/projectexperience",
+    "pages/finding-name-card/findingnamecard",
+    "pages/all-project-experience/allexperience",
+    "pages/addcertificate/addcertificate",
+    "pages/introduce-myself/introduce",
+    "pages/add-vocational-certificate/certificate",
     "pages/index/index",
     "pages/ucenter/ucenter",
     "pages/userauth/userauth",
@@ -63,8 +64,8 @@
     "pages/map/detail",
     "pages/others/message/lists/lists",
     "pages/others/message/publish/publish",
-    "pages/others/information/lists",
-    "pages/live-card"
+    "pages/others/information/lists"
+ 
   ],
   "window": {
     "backgroundTextStyle": "light",

@@ -26,67 +26,6 @@
   font-size: 30rpx;
   height: 30rpx;
 }
-.experienceone{
-    width: 93%;
-  margin: 0 auto;
-  margin-top: 19rpx;
-  height: 110rpx;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  background-color: white;
-}
-.experienceone .experienceoneone{
-  width: 38%;
-  font-size: 30rpx;
-  line-height: 110rpx;
-  color: #2A2A2A;
-  margin-left: 19rpx;
-}
-.experienceone .experienceonetwo{
-  width: 80%;
-  height: 110rpx;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-
-.experienceone .experienceonetwo input{
-  font-size: 30rpx;
-  height: 30rpx;
-}
-
-.experiencetwo{
-  width: 93%;
-  margin: 0 auto;
-  margin-top: 19rpx;
-  height: 110rpx;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  background-color: white;
-}
-
-.experiencetwo .experiencetwoone{
-  width: 38%;
-  font-size: 30rpx;
-  line-height: 110rpx;
-  color: #2A2A2A;
-  margin-left: 19rpx;
-}
-
-.experiencetwo .experiencetwotwo{
-  width: 80%;
-  height: 110rpx;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-
-.experiencetwo .experiencetwotwo input{
-  font-size: 30rpx;
-  height: 30rpx;
-}
 
 
 .experiencethree{
@@ -100,13 +39,12 @@
 .experiencethree .experiencethreeone{
   width: 38%;
   font-size: 30rpx;
-  line-height: 110rpx;
+  line-height: 60rpx;
   color: #2A2A2A;
   margin-left: 19rpx;
 }
 
 .experiencethree .experiencethreetwo{
-  height: 235rpx;
   font-size: 30rpx;
 }
 
@@ -115,7 +53,6 @@
   font-size: 30rpx;
   padding-left: 20rpx;
   padding-right: 20rpx;
-  margin-top:-18rpx;
   background: white;
 }
 
@@ -128,7 +65,6 @@
 .experiencefour .experiencefourone{
   width: 181rpx;
   height: 181rpx;
-  margin-top: 50rpx;
   margin-right: 50rpx;
 }
 .img_item{

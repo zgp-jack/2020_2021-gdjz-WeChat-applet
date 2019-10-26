@@ -188,6 +188,7 @@
       </view>
     </view>
   </view>
-
+  <view class="precardebottom">
+  </view>
 
 </view>

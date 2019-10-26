@@ -1,16 +1,16 @@
 <view>
   <view class="modifycertificatede">
-    <text class="modifycertificatedeone">职业技能：</text>
+    <view class="modifycertificatedeone"> <view>职</view><view>业</view><view>技</view><view>能：</view></view>
     <view class="modifycertificatedetwo">
       <input type="text" placeholder="请输入您的职业技能名称"></input>
     </view>
   </view>
   <view class="modifycertificatetime">
-    <text class="modifycertificatetimeone">领取证书时间：</text>
+    <text class="modifycertificatetimeone">领取证书时间:</text>
     <view class="modifycertificatetimetwo">
       <input type="text" placeholder="请选择您领取证书的时间"></input>
     </view>
-  </view>
+  </view> 
 
   <view class="modifycertificateimage">
     <view wx:for="{{imgArrs}}" class='img_item' wx:key="{{item}}">

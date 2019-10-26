@@ -363,23 +363,23 @@
 
 .precardsixthreeborder{
   position: relative;
-  left: -30rpx;
+  left: -6%;
 }
 .precardsixthreeline{
   position: relative;
-  left: 20rpx;
+  left: 4.5%;
   border-left: 1px solid #d3d3d1;
   padding-left: 6rpx;
 }
 
 .precardeightzong .precardeightfive{
   position: relative;
-  left: -31rpx;
+  left: -6%;
   top: 8rpx;
 }
 .precardeightzong .precardeightfiveline{
   position: relative;
-  left: 20rpx;
+  left: 4%;
   border-left: 1px solid #d3d3d1;
   padding-left: 8rpx;
 }
@@ -439,9 +439,13 @@
 .line{
   border-left: 1px solid #DCDCDC;
   position: relative;
-  left: 29rpx;
+  left: 4%;
 }
 .precardotext{
   position: relative;
-  left: -28.5rpx;
+  left: -4%;
+}
+
+.precardebottom{
+  height: 120rpx;
 }

@@ -581,17 +581,17 @@
   color: #666666;
   font-size: 24rpx;
   text-align:center;
-  line-height: 50rpx;
+  line-height: 50rpx; 
   border-radius: 24rpx;
 }
 .informationsave{
-  width: 421rpx;
-  height: 114rpx;
+  width: 521rpx;
+  height: 97rpx;
   background: #108EEF;
   color: white;
-  font-size: 36rpx;
+  font-size: 38rpx;
   text-align: center;
-  line-height: 114rpx;
+  line-height:  97rpx;
   margin-bottom: 42rpx;
   margin-top: 20rpx;
 }

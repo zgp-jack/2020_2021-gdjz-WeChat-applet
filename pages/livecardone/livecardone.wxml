@@ -164,7 +164,6 @@
           <text>广东台山碧桂园项目</text>
         </view>
         <view class="cardsixthreeborder">
-          <view class="cardsixthreeline">
             <view class="cardsixthree">
               <text>2019-01-2020-12</text>
               <text>广东省台州市</text>
@@ -181,7 +180,6 @@
               <image></image>
               <image></image>
             </view>
-          </view>
         </view>
         <view class="cardsixsixall">
           <button class="cardsixsix">更多项目经验 </button>
@@ -211,11 +209,10 @@
           <text>2019-01</text>
         </view>
         <view class="cardeightfive">
-          <view class="cardeightfiveline">
+
             <image></image>
             <image></image>
             <image></image>
-          </view>
         </view>
         <view class="cardeightsixall">
           <button class="cardeightsix">更多技能证书 </button>

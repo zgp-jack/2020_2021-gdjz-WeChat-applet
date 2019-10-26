@@ -37,7 +37,7 @@
 .modifyexperimage{
   width: 93%;
   margin: 0 auto;
-  margin-top: 20rpx;
+  margin-top: 19rpx;
   margin-bottom: 110rpx;
 }
 .modifyexperimage .modifyexperimageone{
@@ -52,74 +52,6 @@
 
 
 
-
-.modifyexpertime{
-  width: 93%;
-  margin: 0 auto;
-  margin-top: 19rpx;
-  height: 90rpx;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  background-color: white;
-   border-bottom: 1px solid #F1F1F1;
-}
-.modifyexpertime .modifyexpertimeone{
-  width: 28%;
-  font-size: 28rpx;
-  line-height: 90rpx;
-  color: #2A2A2A;
-  margin-left: 19rpx;
-}
-.modifyexpertime .modifyexpertimetwo{
-  width: 80%;
-  height: 90rpx;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-.modifyexpertime .modifyexpertimetwo input{
-  font-size: 28rpx;
-  height: 30rpx;
-}
-
-
-.modifyexperregion{
-  width: 93%;
-  margin: 0 auto;
-  margin-top: 19rpx;
-  height: 90rpx;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  background-color: white;
-}
-
-.modifyexperregion .modifyexperregionone{
-  width: 28%;
-  font-size: 28rpx;
-  line-height: 90rpx;
-  color: #2A2A2A;
-  margin-left: 19rpx;
-}
-.modifyexperregion .modifyexperregionone text{
-    padding-left: 58rpx;
-}
-.modifyexperregion .modifyexperregiontwo{
-  width: 80%;
-  height: 90rpx;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-}
-
-.modifyexperregion .modifyexperregiontwo input{
-  margin-top: 20rpx;
-  font-size: 28rpx;
-  height: 30rpx;
-}
-
-
 .modifyexper{
   width: 93%;
   margin: 0 auto;
@@ -132,7 +64,7 @@
   font-size: 28rpx;
   width: 94%;
   margin: 0 auto;
-  margin-top: 35rpx;
+  line-height: 50rpx;
 }
 
 .modifyexpertwo{

@@ -10,14 +10,13 @@
   border-bottom: 1px solid #F1F1F1;
 }
 .modifycertificatede .modifycertificatedeone{
-  width: 22%;
+  width: 32%;
   font-size: 28rpx;
   line-height: 90rpx;
   color: #2A2A2A;
   margin-left: 19rpx;
-}
-.modifycertificatede .modifycertificatedeone text{
-    padding-left: 58rpx;
+  display: flex;
+  justify-content: space-between;
 }
 .modifycertificatede .modifycertificatedetwo{
   width: 80%;
@@ -36,7 +35,7 @@
 .modifycertificatetime{
   width: 93%;
   margin: 0 auto;
-  margin-top: 8rpx;
+  margin-top: 19rpx;
   height: 90rpx;
   display: flex;
   flex-direction: row;
@@ -45,12 +44,11 @@
   border-bottom: 1px solid #F1F1F1;
 }
 .modifycertificatetime .modifycertificatetimeone{
-  width: 22%;
-  font-size: 21rpx;
+  width: 32%;
+  font-size: 28rpx;
   line-height: 90rpx;
   color: #2A2A2A;
   margin-left: 19rpx;
-  font-weight: bold;
 }
 .modifycertificatetime .modifycertificatetimeone text{
     padding-left: 58rpx;
@@ -63,7 +61,7 @@
   justify-content: center;
 }
 .modifycertificatetime .modifycertificatetimetwo input{ 
-  font-size: 21rpx;
+  font-size: 28rpx;
   height: 30rpx;
 }
 
@@ -72,7 +70,7 @@
 .modifycertificateimage{
   width: 93%;
   margin: 0 auto;
-  margin-top: 20rpx;
+  margin-top: 19rpx;
   margin-bottom: 110rpx;
 }
 .modifycertificateimage .modifycertificateimageone{
