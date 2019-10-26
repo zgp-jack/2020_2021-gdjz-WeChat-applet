@@ -1,33 +1,10 @@
 <view class="headerlivecard">
-  <view class="card">
-    <view class="cardson">
-      <view class="cardsonone">
-        <text>名片完善度：</text>
-        <view>资料越完善找活越容易</view>
-      </view>
-      <view class="cardsontwo">
-        <text>0</text>
-        <view>浏览次数</view>
-      </view>
-    </view>
+  <view class="precardtwoheader">
+    注:分享名片 让你的名片更靠前
   </view>
-  <view class="cardone">
-    <view class="cardoneson">
-      <view class="cardonesonone">
-        <image src="../../images/workdetail.png"></image>
-        <text>我的工作状态：</text>
-      </view>
-      <view class="cardonesontwo">
-        <text>未开始找工作</text>
-        <image src="../../images/bottomimg.png"></image>
-      </view>
-    </view>
-  </view>
-  <image class="link" src="../../images/newresume-linktag.png"></image>
-  <image class="linkone" src="../../images/newresume-linktag.png"></image>
-  <view class="cardtwo">
-    <view class="cardtwosonone">
-      <view class="cardtwosononeimg">
+  <view class="precardtwo">
+    <view class="precardtwosonone">
+      <view class="precardtwosononeimg">
         <view class="oimg">
           <image></image>
         </view>
@@ -40,21 +17,21 @@
           </view>
         </view>
       </view>
-      <view class=" cardtwosontwo ">
+      <view class="precardtwosontwo ">
         <text>编辑</text>
       </view>
     </view>
     <view class="line">
-      <view class="cardotext">
+      <view class="precardotext">
         <view class="oworkone">
           <image src="../../images/newjobinfo-steps.png"></image>
           <text class="workotext">工 <text class="telephone">种：</text></text>
         </view>
         <view class="owork">
-          <text class="workotextone">反对广泛大概豆腐干豆腐干豆腐干大豆腐干豆腐干感到翻跟斗翻跟斗翻跟斗范甘迪士大夫大</text>
+          <text class="workotextone">反对广泛大概豆腐干豆腐干豆腐干大豆腐干豆腐干感到翻跟斗翻跟斗翻跟斗范甘迪士大夫大士大夫水水水水水水水水水水水水水水水水</text>
         </view>
       </view>
-      <view class="cardotext">
+      <view class="precardotext">
         <view class="oworkone">
           <image src="../../images/newjobinfo-steps.png"></image>
           <text class="workotext">工 <text class="telephone">龄：</text></text>
@@ -63,7 +40,7 @@
           <text class="workotextone">10年</text>
         </view>
       </view>
-      <view class="cardotext">
+      <view class="precardotext">
         <view class="oworkone">
           <image src="../../images/newjobinfo-steps.png"></image>
           <text class="workotext">手 <text class="telephone">机：</text></text>
@@ -72,7 +49,7 @@
           <text class="workotextone">13525467856</text>
         </view>
       </view>
-      <view class="cardotext">
+      <view class="precardotext">
         <view class="oworkone">
           <image src="../../images/newjobinfo-steps.png"></image>
           <text class="workotext">熟<text class="states">练</text>度：</text>
@@ -81,7 +58,7 @@
           <text class="workotextone">非常熟悉</text>
         </view>
       </view>
-      <view class="cardotext">
+      <view class="precardotext">
         <view class="oworkone">
           <image src="../../images/newjobinfo-steps.png"></image>
           <text class="workotext">找活人数：</text>
@@ -90,7 +67,7 @@
           <text class="workotextone">100人</text>
         </view>
       </view>
-      <view class="cardotext">
+      <view class="precardotext">
         <view class="oworkone">
           <image src="../../images/newjobinfo-steps.png"></image>
           <text class="workotext">人员构成：</text>
@@ -99,7 +76,7 @@
           <text class="workotextone">工人，班组突击队</text>
         </view>
       </view>
-      <view class="cardotext">
+      <view class="precardotext">
         <view class="oworkone">
           <image src="../../images/newjobinfo-steps.png"></image>
           <text class="workotext">我的家乡：</text>
@@ -108,7 +85,7 @@
           <text class="workotextone">四川省成都市</text>
         </view>
       </view>
-      <view class="cardotext">
+      <view class="precardotext">
         <view class="oworkone">
           <image src="../../images/newjobinfo-steps.png"></image>
           <text class="workotext">所在地区：</text>
@@ -117,7 +94,7 @@
           <text class="workotextone">四川省泸州市泸县尖叫村</text>
         </view>
       </view>
-      <view class="cardotext">
+      <view class="precardotext">
         <view class="oworkone">
           <image src="../../images/newjobinfo-steps.png"></image>
           <text class="workotext">标 <text class="telephone">签：</text></text>
@@ -127,53 +104,42 @@
         </view>
       </view>
     </view>
-    <view class="cardotextbottom"></view>
+    <view class="precardotextbottom"></view>
   </view>
-  <view class="cardthree">
-    <view class="cardthreemobile">
+  <view class="precardthree">
+    <view class="precardthreemobile">
       <image src="../../images/newresume-description.png"></image>
       自我介绍
     </view>
-    <view class="cardthreeone">
-      编辑
-    </view>
   </view>
-  <view class="cardfour">
+  <view class="precardfour">
     <text> 士大夫士大夫士大夫士大夫士大夫胜多负少手动阀手动阀手动阀手动阀手动阀撒旦士大夫士大夫随风倒十分士大夫撒旦士大夫十分士大夫是非得失</text>
-    <view class="cardfourbottom"></view>
-    <view class="result">
-      <text class="resultone">个人资料审核失败原因：</text>
-      <text>就不告诉你，就不告诉你，就不告诉你就不告诉你，就不告诉你,就不告诉你，就不告诉你,就不告诉你，就不告诉你</text>
-      <view></view>
-    </view>
+    <view class="precardfourbottom"></view>
   </view>
-  <view class="cardfive">
-    <view class="cardfivemobile">
+  <view class="precardfive">
+    <view class="precardfivemobile">
       <image src="../../images/newresume-experience.png"></image>
       项目经验
     </view>
-    <view class="cardthreeone">
-      添加
-    </view>
   </view>
-  <view class="cardsix">
-    <view class="cardsixzong">
-      <image src="../../images/newresume-experience-item.png" class="cardsixone"></image>
-      <view class="cardsixall">
-        <view class="cardsixtwo">
+  <view class="precardsix">
+    <view class="precardsixzong">
+      <image src="../../images/newresume-experience-item.png" class="precardsixone"></image>
+      <view class="precardsixall">
+        <view class="precardsixtwo">
           <text>广东台山碧桂园项目</text>
         </view>
-        <view class="cardsixthreeborder">
-          <view class="cardsixthreeline">
-            <view class="cardsixthree">
+        <view class="precardsixthreeborder">
+          <view class="precardsixthreeline">
+            <view class="precardsixthree">
               <text>2019-01-2020-12</text>
               <text>广东省台州市</text>
             </view>
-            <view class="cardsixfour">
+            <view class="precardsixfour">
               <text>主要包工所有虽有水电安装
         </text>
             </view>
-            <view class="cardsixfive">
+            <view class="precardsixfive">
               <image></image>
               <image></image>
               <image></image>
@@ -183,54 +149,45 @@
             </view>
           </view>
         </view>
-        <view class="cardsixsixall">
-          <button class="cardsixsix">更多项目经验 </button>
+        <view class="precardsixsixall">
+          <button class="precardsixsix">更多项目经验 </button>
           <image src="../../images/downward.png" class="down"></image>
         </view>
-        <view class="cardsixsixallvoto">
+        <view class="precardsixsixallvoto">
         </view>
       </view>
     </view>
   </view>
-  <view class="cardseven">
-    <view class="cardsevenmobile">
+  <view class="precardseven">
+    <view class="precardsevenmobile">
       <image src="../../images/newresume-skill.png"></image>
       职业技能
     </view>
-    <view class="cardthreeone">
-      添加
-    </view>
-
   </view>
-  <view class="cardeight">
-    <view class="cardeightzong">
-      <image src="../../images/newresume-experience-item.png" class="cardeightone"></image>
-      <view class="cardeightall">
-        <view class="cardeighttwo">
+  <view class="precardeight">
+    <view class="precardeightzong">
+      <image src="../../images/newresume-experience-item.png" class="precardeightone"></image>
+      <view class="precardeightall">
+        <view class="precardeighttwo">
           <text>水电工技术证书</text>
           <text>2019-01</text>
         </view>
-        <view class="cardeightfive">
-          <view class="cardeightfiveline">
+        <view class="precardeightfive">
+          <view class="precardeightfiveline">
             <image></image>
             <image></image>
             <image></image>
           </view>
         </view>
-        <view class="cardeightsixall">
-          <button class="cardeightsix">更多技能证书 </button>
+        <view class="precardeightsixall">
+          <button class="precardeightsix">更多技能证书 </button>
           <image src="../../images/downward.png" class="down"></image>
         </view>
-        <view class="cardsixsixallvoto">
+        <view class="precardsixsixallvoto">
         </view>
       </view>
     </view>
   </view>
-  <view class="cardnine">
-    <view class="cardnineone">
-      <image src="../../images/bottom-one.png"></image> 预览</view>
-    <view class="cardnineone">
-      <image src="../../images/bottom-two.png"></image>分享</view>
-  </view>
+
 
 </view>

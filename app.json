@@ -1,11 +1,16 @@
 {
   "pages": [
+    "pages/all-skills-certificate/skillscertificate",
+    "pages/livecardone/livecardone",
+    "pages/preview-name-card/previewcard",
+    "pages/modify-project-experience/modifyexper",
     "pages/basic-information/information",
+    "pages/modifycertificate/modifycertificate",
+    "pages/addcertificate/addcertificate",
     "pages/introduce-myself/ introduce",
     "pages/finding-name-card/findingnamecard",
     "pages/add-vocational-certificate/certificate",
     "pages/new-project-experience/projectexperience",
-    "pages/livecardone/livecardone",
     "pages/index/index",
     "pages/ucenter/ucenter",
     "pages/userauth/userauth",

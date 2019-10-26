@@ -1,115 +1,16 @@
-.headerlivecard {
-  width: 100%;
-}
-
-.card {
-  width: 100%;
-  margin-top: 20rpx;
-  padding-left: 27rpx;
-  padding-right: 27rpx;
-}
-
-.cardson {
-  width: 100%;
+.precardtwoheader{
+  width: 93%;
+  margin: 0 auto;
   background-color: white;
-  height: 114rpx;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-}
-
-.cardson .cardsonone text {
-  margin-top: 14rpx;
-  display: block;
-  font-size: 30rpx;
-  margin-left: 13rpx;
-}
-
-.cardson .cardsonone view {
-  margin-top: 6rpx;
-  margin-bottom: 14rpx;
+  overflow: hidden;
+  height: 66rpx;
+  color: #F87A14;
   font-size: 26rpx;
-  color: #f87a14;
-  margin-left: 13rpx;
+  text-align: center;
+  line-height: 66rpx;
 }
 
-.cardson .cardsontwo text {
-  margin-left: 40rpx;
-  color: #09f;
-  font-size: 26rpx;
-  font-weight: bold;
-}
-
-.cardson .cardsontwo view {
-  margin-top: 6rpx;
-  color: #626160;
-  font-size: 26rpx;
-  margin-right: 13rpx;
-}
-
-.cardone {
-  width: 100%;
-  margin-top: 20rpx;
-  padding-left: 27rpx;
-  padding-right: 27rpx;
-}
-
-.cardone .cardoneson {
-  width: 100%;
-  background-color: white;
-  height: 80rpx;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-}
-
-.cardone .cardoneson .cardonesonone {
-  font-size: 26rpx;
-  color: #343434;
-  margin-top: 25rpx;
-}
-
-.cardone .cardoneson .cardonesonone image {
-  margin-left: 14rpx;
-  width: 28rpx;
-  height: 28rpx;
-}
-
-.cardone .cardoneson .cardonesonone text {
-  margin-left: 14rpx;
-  width: 28rpx;
-  height: 28rpx;
-}
-
-.cardone .cardoneson .cardonesontwo {
-  color: #ff1800;
-  font-size: 24rpx;
-  margin-top: 27rpx;
-}
-
-.cardone .cardoneson .cardonesontwo image {
-  width: 26rpx;
-  height: 16rpx;
-  margin: 0 8rpx;
-}
-
-.link {
-  width: 6px;
-  height: 38rpx;
-  position: absolute;
-  left: 50rpx;
-  top: 227rpx;
-}
-
-.linkone {
-  width: 6px;
-  height: 38rpx;
-  position: absolute;
-  right: 50rpx;
-  top: 227rpx;
-}
-
-.cardtwo {
+.precardtwo {
   width: 93%;
   margin: 0 auto;
   margin-top: 20rpx;
@@ -117,7 +18,7 @@
   overflow: hidden;
 }
 
-.cardtwo .cardtwosonone {
+.precardtwo .precardtwosonone {
   width: 100%;
   height: 88rpx;
   margin-top: 22rpx;
@@ -126,14 +27,14 @@
   justify-content: space-between;
 }
 
-.cardtwosonone .cardtwosononeimg {
+.precardtwosonone .precardtwosononeimg {
   width: 400rpx;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
 }
 
-.cardtwosonone .cardtwosononeimg .oimg {
+.precardtwosonone .precardtwosononeimg .oimg {
   height: 88rpx;
   width: 88rpx;
   background: #fc0;
@@ -141,30 +42,30 @@
   margin-left: 14rpx;
 }
 
-.cardtwosonone .cardtwosononeimg .oimg image {
+.precardtwosonone .precardtwosononeimg .oimg image {
   height: 88rpx;
   width: 88rpx;
 }
 
-.cardtwosonone .cardtwosononeimg  .oimgone {
+.precardtwosonone .precardtwosononeimg  .oimgone {
   width: 280rpx;
 }
 
-.cardtwosonone .cardtwosononeimg  .oimgone .otext {
+.precardtwosonone .precardtwosononeimg  .oimgone .otext {
   color: #343434;
   font-size: 27rpx;
 }
 
-.cardtwosonone .cardtwosononeimg .oimgone .otextone {
+.precardtwosonone .precardtwosononeimg .oimgone .otextone {
   font-size: 25rpx;
   color: #6c6b6b;
 }
 
-.cardtwosonone .cardtwosononeimg .oimgone .otextone .ochange {
+.precardtwosonone .precardtwosononeimg .oimgone .otextone .ochange {
   margin-left: 6rpx;
 }
 
-.cardtwo .cardtwosontwo {
+.precardtwo .precardtwosontwo {
   font-size: 28rpx;
   color: #09f;
   line-height: 88rpx;
@@ -172,54 +73,54 @@
   right: 12rpx;
 }
 
-.cardotext {
+.precardotext {
   width: 100%;
   display: flex;
 }
 
-.cardotext .oworkone {
+.precardotext .oworkone {
   display: flex;
 }
 
-.cardotext .owork {
+.precardotext .owork {
   margin: 0;
   padding: 0;
   display: inline-block;
   width: 80%;
 }
 
-.cardotext  image {
+.precardotext  image {
   width: 16rpx;
   height: 16rpx;
   margin: 0 20rpx;
   margin-top: 24rpx;
 }
 
-.cardotext .workotext {
+.precardotext .workotext {
   color: grey;
   font-size: 24rpx;
   width: 140rpx;
   margin-top: 14rpx;
 }
 
-.cardotext .workotext .telephone {
+.precardotext .workotext .telephone {
   margin-left: 40rpx;
 }
 
-.cardotext .workotext .states {
+.precardotext .workotext .states {
   margin: 0 12rpx;
 }
 
-.cardotext .workotextone {
+.precardotext .workotextone {
   color: black;
   font-size: 24rpx;
 }
 
-.cardotextbottom {
+.precardotextbottom {
   margin-top: 16rpx;
 }
 
-.cardthree {
+.precardthree {
   width: 93%;
   margin: 12rpx auto;
   margin-bottom: 16rpx;
@@ -227,8 +128,7 @@
   font-size: 24rpx;
   position: relative;
 }
-
-.cardthree .cardthreemobile {
+.precardthree .precardthreemobile{
   width: 140rpx;
   position: absolute;
   left: 50%;
@@ -236,21 +136,20 @@
   font-size: 26rpx;
   font-weight: bold;
 }
-
-.cardthree image {
+.precardthree image {
   margin-left: 6rpx;
   width: 22rpx;
   height: 24rpx;
 }
 
-.cardthree .cardthreeone {
+.precardthree .precardthreeone {
   font-size: 24rpx;
   color: #09f;
   position: absolute;
   right: 8rpx;
 }
 
-.cardfour {
+.precardfour {
   width: 93%;
   margin: 0 auto;
   color: #343434;
@@ -258,29 +157,29 @@
   background-color: white;
 }
 
-.cardfour  text {
+.precardfour  text {
   padding-top: 4rpx;
   font-size: 24rpx;
 }
 
-.cardfour .cardfourbottom {
+.precardfour .precardfourbottom {
   height: 10rpx;
 }
 
-.cardfour .result {
+.precardfour .result {
   background: #fffbf7;
 }
 
-.cardfour .result .resultone {
+.precardfour .result .resultone {
   color: #fa0819;
   font-size: 24rpx;
 }
 
-.cardfour .result view {
+.precardfour .result view {
   height: 20rpx;
 }
 
-.cardfive {
+.precardfive {
   width: 93%;
   margin: 12rpx auto;
   margin-bottom: 16rpx;
@@ -288,8 +187,7 @@
   font-size: 24rpx;
   position: relative;
 }
-
-.cardfive .cardfivemobile {
+.precardfive .precardfivemobile{
   position: absolute;
   left: 50%;
   width: 140rpx;
@@ -297,96 +195,88 @@
   font-size: 26rpx;
   font-weight: bold;
 }
-
-.cardfive image {
+.precardfive image {
   margin-left: 6rpx;
   width: 22rpx;
   height: 24rpx;
 }
 
-.cardfive .cardthreeone {
+.precardfive .precardthreeone {
   font-size: 24rpx;
   color: #09f;
   position: absolute;
   right: 8rpx;
 }
 
-.cardsix {
+.precardsix {
   width: 93%;
   margin: 0 auto;
   background-color: white;
 }
 
-.cardsixzong {
+.precardsixzong {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
 }
 
-.cardsix .cardsixone {
+.precardsix .precardsixone {
   width: 32rpx;
   height: 20rpx;
   margin-left: 20rpx;
   margin-top: 20rpx;
 }
 
-.cardsixzong .cardsixtwo {
+.precardsixzong .precardsixtwo {
   color: #343434;
   font-size: 26rpx;
   margin-left: 14rpx;
   margin-top: 10rpx;
 }
 
-.cardsixzong .cardsixthree {
+.precardsixzong .precardsixthree {
+  color: #8b8b8a;
+  font-size: 22rpx;
+  margin-left: 14rpx;
+  margin-top: 4rpx;
+}
+.precardsixzong .precardsixthree  text:last-child{
+   margin-left: 26rpx;
+}
+.precardsixzong .precardsixfour {
   color: #8b8b8a;
   font-size: 22rpx;
   margin-left: 14rpx;
   margin-top: 10rpx;
 }
-
-.cardsixzong .cardsixthree  text:last-child {
-  margin-left: 26rpx;
-}
-
-.cardsixzong .cardsixfour {
-  color: #8b8b8a;
-  font-size: 22rpx;
-  margin-left: 14rpx;
-  margin-top: 10rpx;
-}
-
-.cardsixzong .cardsixfive image {
+.precardsixzong .precardsixfive image{
   width: 185rpx;
   height: 185rpx;
   background-color: orange;
   margin-left: 16rpx;
   margin-top: 16rpx;
 }
-
-.cardsixzong .cardsixsix {
+.precardsixzong .precardsixsix{
   margin: 0;
   padding: 0;
   width: 246rpx;
   height: 45rpx;
-  background-color: #09f;
+  background-color: #0099FF;
   margin: 20rpx auto;
   margin-left: 186rpx;
   font-size: 26rpx;
   color: white;
   line-height: 45rpx;
 }
-
-.cardsixzong  .cardsixsixall {
+.precardsixzong  .precardsixsixall{
   position: relative;
   width: 246rpx;
   height: 45rpx;
 }
-
-.cardsixsixallvoto {
+.precardsixsixallvoto{
   height: 24rpx;
 }
-
-.cardsixzong .down {
+.precardsixzong .down{
   position: absolute;
   top: 14rpx;
   left: 394rpx;
@@ -394,7 +284,7 @@
   height: 15rpx;
 }
 
-.cardseven {
+.precardseven {
   width: 93%;
   margin: 12rpx auto;
   margin-bottom: 16rpx;
@@ -402,171 +292,156 @@
   font-size: 24rpx;
   position: relative;
 }
-
-.cardseven .cardsevenmobile {
-  position: absolute;
-  left: 50%;
-  width: 140rpx;
-  margin-left: -70rpx;
-  font-size: 26rpx;
-  font-weight: bold;
+.precardseven .precardsevenmobile{
+   position: absolute;
+   left: 50%;
+   width: 140rpx;
+   margin-left: -70rpx;
+   font-size: 26rpx;
+   font-weight: bold;
 }
-
-.cardseven image {
+.precardseven image {
   margin-left: 6rpx;
   width: 22rpx;
   height: 24rpx;
 }
 
-.cardseven .cardthreeone {
+.precardseven .precardthreeone {
   font-size: 24rpx;
   color: #09f;
   position: absolute;
   right: 8rpx;
 }
 
-.cardeight {
+.precardeight {
   width: 93%;
   margin: 0 auto;
   background-color: white;
 }
 
-.cardeightzong {
+.precardeightzong {
   display: flex;
   flex-direction: row;
 }
 
-.cardeight .cardeightone {
+.precardeight .precardeightone {
   width: 20rpx;
   height: 20rpx;
   margin-left: 20rpx;
   margin-top: 20rpx;
 }
 
-.cardeightzong .cardeighttwo {
+.precardeightzong .precardeighttwo {
   color: #343434;
   font-size: 26rpx;
   margin-left: 14rpx;
   margin-top: 10rpx;
 }
-
-.cardeightzong .cardeighttwo text:last-child {
+.precardeightzong .precardeighttwo text:last-child{
   font-size: 20rpx;
   line-height: 26rpx;
-  color: #8b8b8a;
+  color: #8B8B8A;
   margin-left: 14rpx;
 }
-
-.cardeightzong .cardeightthree {
+.precardeightzong .precardeightthree {
+  color: #8b8b8a;
+  font-size: 22rpx;
+  margin-left: 14rpx;
+  margin-top: 10rpx;
+}
+.precardeightzong .precardeightthree  text:last-child{
+   margin-left: 26rpx;
+}
+.precardeightzong .precardeightfour {
   color: #8b8b8a;
   font-size: 22rpx;
   margin-left: 14rpx;
   margin-top: 10rpx;
 }
 
-.cardeightzong .cardeightthree  text:last-child {
-  margin-left: 26rpx;
-}
 
-.cardeightzong .cardeightfour {
-  color: #8b8b8a;
-  font-size: 22rpx;
-  margin-left: 14rpx;
-  margin-top: 10rpx;
-}
 
-.cardsixthreeborder {
+.precardsixthreeborder{
   position: relative;
   left: -30rpx;
 }
-
-.cardsixthreeline {
+.precardsixthreeline{
   position: relative;
   left: 20rpx;
   border-left: 1px solid #d3d3d1;
   padding-left: 6rpx;
 }
 
-.cardeightzong .cardeightfive {
+.precardeightzong .precardeightfive{
   position: relative;
   left: -31rpx;
   top: 8rpx;
 }
-
-.cardeightzong .cardeightfiveline {
+.precardeightzong .precardeightfiveline{
   position: relative;
   left: 20rpx;
   border-left: 1px solid #d3d3d1;
   padding-left: 8rpx;
 }
-
-.cardeightzong .cardeightfive image {
+.precardeightzong .precardeightfive image{
   width: 185rpx;
   height: 185rpx;
   background-color: orange;
   margin-left: 16rpx;
   margin-top: 16rpx;
 }
-
-.cardeightzong .cardeightsix {
+.precardeightzong .precardeightsix{
   margin: 0;
   padding: 0;
   width: 246rpx;
   height: 45rpx;
-  background-color: #09f;
+  background-color: #0099FF;
   margin: 20rpx auto;
   margin-left: 186rpx;
   font-size: 26rpx;
   color: white;
   line-height: 45rpx;
 }
-
-.cardeightzong  .cardeightsixall {
+.precardeightzong  .precardeightsixall{
   position: relative;
   width: 246rpx;
   height: 45rpx;
 }
-
-.cardeightzong .down {
+.precardeightzong .down{
   position: absolute;
   top: 14rpx;
   left: 394rpx;
   width: 20rpx;
   height: 15rpx;
 }
-
-.cardnine {
+.precardnine{
   margin: 18rpx auto;
   height: 91rpx;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
 }
-
-.cardnine .cardnineone {
+.precardnine .precardnineone{
   height: 91rpx;
   width: 369rpx;
   background-color: white;
-  color: #7d7d7d;
+  color: #7D7D7D;
   font-size: 36rpx;
-  text-align: center;
+  text-align:center;
   line-height: 91rpx;
 }
-
-.cardnine .cardnineone image {
-  width: 35rpx;
+.precardnine .precardnineone image{
+  width:35rpx;
   height: 35rpx;
   position: relative;
   top: 4rpx;
 }
-
-.line {
-  border-left: 1px solid #dcdcdc;
+.line{
+  border-left: 1px solid #DCDCDC;
   position: relative;
-  left: 20rpx;
+  left: 29rpx;
 }
-
-.cardotext {
+.precardotext{
   position: relative;
   left: -28.5rpx;
 }

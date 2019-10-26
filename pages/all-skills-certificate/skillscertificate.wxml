@@ -1,0 +1,30 @@
+<view>
+ <view class="skilleight">
+   <image class="audit" src="../../images/notthrough.png"></image>
+   <!-- <image class="audit" src="../../images/review.png"></image> -->
+   <view class="editor">编辑</view>
+    <view class="skilleightzong">
+      <image src="../../images/newresume-experience-item.png" class="skilleightone"></image>
+      <view></view>
+      <view class="skilleightall">
+        <view class="skilleighttwo">
+          <text>水电工技术证书</text>
+          <text>2019-01</text>
+        </view>
+        <view class="skilleightfive">
+          <view class="skilleightfiveline">
+            <image></image>
+            <image></image>
+            <image></image>
+          </view>
+        </view>
+        <view class="skilleightsixall">
+          没有更多了...
+        </view>
+        <view class="skillsixsixallvoto">
+        </view>
+      </view>
+    </view>
+  </view>
+  <button class="obtn">添加技能证书</button>
+</view>

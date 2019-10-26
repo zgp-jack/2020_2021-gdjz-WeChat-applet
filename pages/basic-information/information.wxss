@@ -253,6 +253,7 @@
    padding-left: 20rpx;
    margin-left: 20rpx;
 }
+
 .informationpeople{
    width: 93%;
    height: 522rpx;
@@ -527,7 +528,7 @@
 .informationevaluation{
   width: 93%;
   margin: 0 auto;
-  height: 211rpx;
+  height: 225rpx;
   background: white;
   margin-top: 20rpx;
   overflow: hidden;

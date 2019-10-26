@@ -10,8 +10,9 @@
       <text  class="choose {{num==2?'sty':''}}" catchtap="changenumtwo">示例2</text>
     </view>
     <view class="text">
-    <text wx:if="{{numone}}">我叫张三，来自陕西西安，从事电工工作已经15年了，有国家颁发的特种行业操作资格证书，主要从事建筑工地的用电安装和管理，能快速的处理施工中突发的各种电路事故，能独自的操作各种配电的安装和管理。</text>
-    <text wx:if="{{numtwo}}">我叫李晓明，来自四川成都，从事焊工工作已经五年了，有国家颁发的特种行业操作资格证书一级证书，主要从事无缝焊接，曾获得参与过2018年IPC中国手工焊接竞赛，获得第三名。</text>
+       <view>
+         123
+       </view>
     </view>
   </view>
   <view class="introducetwo">

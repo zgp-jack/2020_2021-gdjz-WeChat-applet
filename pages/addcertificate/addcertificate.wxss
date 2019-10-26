@@ -1,0 +1,123 @@
+.addcertificatede{
+  width: 93%;
+  margin: 0 auto;
+  margin-top: 19rpx;
+  height: 90rpx;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  background-color: white;
+  border-bottom: 1px solid #F1F1F1;
+}
+.addcertificatede .addcertificatedeone{
+  width: 22%;
+  font-size: 28rpx;
+  line-height: 90rpx;
+  color: #2A2A2A;
+  margin-left: 19rpx;
+}
+.addcertificatede .addcertificatedeone text{
+    padding-left: 58rpx;
+}
+.addcertificatede .addcertificatedetwo{
+  width: 80%;
+  height: 90rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.addcertificatede .addcertificatedetwo input{
+  margin-top: 2rpx;
+  font-size: 28rpx;
+  height: 30rpx;
+}
+
+
+.addcertificatetime{
+  width: 93%;
+  margin: 0 auto;
+  margin-top: 8rpx;
+  height: 90rpx;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  background-color: white;
+  border-bottom: 1px solid #F1F1F1;
+}
+.addcertificatetime .addcertificatetimeone{
+  width: 22%;
+  font-size: 21rpx;
+  line-height: 90rpx;
+  color: #2A2A2A;
+  margin-left: 19rpx;
+  font-weight: bold;
+}
+.addcertificatetime .addcertificatetimeone text{
+    padding-left: 58rpx;
+}
+.addcertificatetime .addcertificatetimetwo{
+  width: 80%;
+  height: 90rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.addcertificatetime .addcertificatetimetwo input{ 
+  font-size: 21rpx;
+  height: 30rpx;
+}
+
+
+
+.addcertificateimage{
+  width: 93%;
+  margin: 0 auto;
+  margin-top: 20rpx;
+  margin-bottom: 110rpx;
+}
+.addcertificateimage .addcertificateimageone{
+  width: 181rpx;
+  height: 181rpx;
+  margin-right: 50rpx;
+}
+.img_item{
+   display: inline-block;
+
+}
+
+
+
+.addcertificatebottom{
+    margin-top: 100rpx;
+    position: fixed;
+    bottom: 0;
+    background-color: white;
+    height: 100rpx;
+    width: 100%;
+}
+.addcertificatebottom .addcertificatebottomone{
+  width: 325rpx;
+  height: 64rpx;
+  background:  white;
+  border: 1px solid #0099FF;
+  position: absolute;
+  left: 27rpx;
+  top: 18rpx;
+  color:#0099FF;
+  line-height:  64rpx;
+  text-align: center;
+  font-size: 29rpx;
+}
+
+.addcertificatebottom .addcertificatebottomotwo{
+  width: 325rpx;
+  height: 64rpx;
+  background:#0099FF;
+  position: absolute;
+  right: 27rpx;
+  top: 18rpx;
+  color: white;
+  line-height:  64rpx;
+  text-align: center;
+  font-size: 29rpx;
+}
