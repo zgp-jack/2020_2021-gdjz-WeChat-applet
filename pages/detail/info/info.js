@@ -54,6 +54,7 @@ Page({
   showThisMapInfo:function(){
     let loc = this.data.info.location;
     let locArr = loc.split(",");
+    console.log(this.data.info.map_address_name)
     wx.openLocation({
       latitude: parseFloat(locArr[1]),
       longitude: parseFloat(locArr[0]),

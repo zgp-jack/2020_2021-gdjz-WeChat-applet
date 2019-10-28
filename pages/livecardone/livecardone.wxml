@@ -164,30 +164,35 @@
           <text>广东台山碧桂园项目</text>
         </view>
         <view class="cardsixthreeborder">
-            <view class="cardsixthree">
-              <text>2019-01-2020-12</text>
-              <text>广东省台州市</text>
-            </view>
-            <view class="cardsixfour">
-              <text>主要包工所有虽有水电安装
+          <view class="cardsixthree">
+            <text>2019-01-2020-12</text>
+            <text>广东省台州市</text>
+          </view>
+          <view class="cardsixfour">
+            <text>主要包工所有虽有水电安装
         </text>
-            </view>
-            <view class="cardsixfive">
-              <image></image>
-              <image></image>
-              <image></image>
-              <image></image>
-              <image></image>
-              <image></image>
-            </view>
+          </view>
+          <view class="cardsixfive">
+            <image></image>
+            <image></image>
+            <image></image>
+            <image></image>
+            <image></image>
+            <image></image>
+          </view>
         </view>
-        <view class="cardsixsixall">
-          <button class="cardsixsix">更多项目经验 </button>
+
+      </view>
+    </view>
+    <view class="cardsixsixall">
+      <button class="cardsixsix">
+        <view>
+          更多项目经验
           <image src="../../images/downward.png" class="down"></image>
         </view>
-        <view class="cardsixsixallvoto">
-        </view>
-      </view>
+      </button>
+    </view>
+    <view class="cardsixsixallvoto">
     </view>
   </view>
   <view class="cardseven">
@@ -210,17 +215,22 @@
         </view>
         <view class="cardeightfive">
 
-            <image></image>
-            <image></image>
-            <image></image>
+          <image></image>
+          <image></image>
+          <image></image>
         </view>
-        <view class="cardeightsixall">
-          <button class="cardeightsix">更多技能证书 </button>
+
+      </view>
+    </view>
+    <view class="cardeightsixall">
+      <button class="cardeightsix">
+        <view>
+          更多技能证书
           <image src="../../images/downward.png" class="down"></image>
         </view>
-        <view class="cardsixsixallvoto">
-        </view>
-      </view>
+      </button>
+    </view>
+    <view class="cardsixsixallvoto">
     </view>
   </view>
   <view class="cardnine">

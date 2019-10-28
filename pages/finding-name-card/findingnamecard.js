@@ -1,18 +1,47 @@
 // pages/Finding a name card.js
+const app = getApp();
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-
+    username:'',
+    userimg:''
   },
-
+  toperfect(){
+    wx.navigateTo({
+      url: '/pages/basic-information/information',
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    let _this = this;
+    let userId = '';
+    let token = '';
+    let tokenTime = '';
+    let message = wx.getStorageSync("userInfo")
+    console.log(message)
 
+    let usermessage = { 
+      userId: message.userId, 
+      token: message.token, 
+      tokenTime: message.tokenTime}
+
+    app.doRequestAction({
+      url: 'resumes/resume-list/',
+      way: 'POST',
+      params: usermessage,
+      success(res) {
+        console.log(res)
+        _this.setData({
+          username: res.data.info.username,
+          userimg: res.data.info.headerimg
+        })
+      }
+    })
   },
 
   /**
@@ -25,8 +54,8 @@ Page({
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function () {
-
+  onShow(){
+     
   },
 
   /**

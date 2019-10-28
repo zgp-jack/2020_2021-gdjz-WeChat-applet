@@ -8,13 +8,13 @@ Page({
    */
   data: {
     region: "",
-    evaluation:[],
-    detailevaluation: [ "努力上进", "一直加班", "吃苦耐劳1", "吃苦耐劳2"],
-    detailevaluationo: ["吃苦耐劳", "刻苦勤奋", "努力劳动", "发奋条哈",],
+    evaluation: [],
+    detailevaluation: ["努力上进", "一直加班", "吃苦耐劳1", "吃苦耐劳2"],
+    detailevaluationo: ["吃苦耐劳", "刻苦勤奋", "努力劳动", "发奋条哈", ],
     regionone: "",
     oimg: "../../images/touxiang.png",
     array: ["男", "女"],
-    typeworkarray: ["小工","中工","大工"],
+    typeworkarray: ["小工", "中工", "大工"],
     proficiencyarray: ["熟悉", "很牛", "特牛"],
     compositionarray: ["木工", "水工", "电工"],
     date: "",
@@ -23,7 +23,7 @@ Page({
   GPSsubmit: function() {
     this.getLocation();
   },
-  clock(e){
+  clock(e) {
     let off = true;
     for (let i = 0; i < this.data.evaluation.length; i++) {
       if (this.data.evaluation[i] == e.currentTarget.dataset.id) {
@@ -34,23 +34,29 @@ Page({
     if (this.data.evaluation.length >= 3) {
       return
     }
-    if (off){
-     this.data.evaluation.push(e.currentTarget.dataset.id)
+    if (off) {
+      this.data.evaluation.push(e.currentTarget.dataset.id)
     }
     console.log(this.data.evaluation.length)
   },
-  bindcompositionone(e){
+  userTapAddress: function () {
+    console.log(123)
+    wx.navigateTo({
+      url: '/pages/selectmap/smap',
+    })
+  },
+  bindcompositionone(e) {
     this.setData({
       indexcomposition: e.detail.value
     })
   },
-  bindproficiencyone(e){
+  bindproficiencyone(e) {
     console.log(e)
     this.setData({
       indexproficiency: e.detail.value
     })
   },
-  bindTypeworkone(e){
+  bindTypeworkone(e) {
     this.setData({
       index: e.detail.value
     })
@@ -65,7 +71,7 @@ Page({
         console.log(data);
         let oname = data[0].name + ' ' + data[0].desc;
         if (oname.length >= 10) {
-          let onamesplit = oname.slice(0,10) + '...';
+          let onamesplit = oname.slice(0, 10) + '...';
           _this.setData({
             regionone: onamesplit
           });

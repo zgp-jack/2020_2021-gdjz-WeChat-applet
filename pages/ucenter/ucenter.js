@@ -119,10 +119,14 @@ Page({
     /**
      * 生命周期函数--监听页面显示
      */
-    onShow: function () {
-      this.initUserInfo();
+    async onShow() {
+      await this.initUserInfo();
     },
-
+    releaselive(){
+      wx.navigateTo({
+        url: '/pages/finding-name-card/findingnamecard',
+      })
+    },
     /**
      * 生命周期函数--监听页面隐藏
      */

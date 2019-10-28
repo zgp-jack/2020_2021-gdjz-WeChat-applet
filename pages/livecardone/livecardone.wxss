@@ -361,21 +361,22 @@
   margin-top: 16rpx;
 }
 
-.cardsixzong .cardsixsix {
-  margin: 0;
+ .cardsixsix {
   padding: 0;
   width: 246rpx;
   height: 45rpx;
-  background-color: #09f;
-  margin: 20rpx auto;
-  margin-left: 186rpx;
+  background-color: #0099FF;
   font-size: 26rpx;
   color: white;
   line-height: 45rpx;
+  border-radius: 20rpx;
+  display: flex;
+  justify-content: center;
+  margin-top: 14rpx;
 }
 
-.cardsixzong  .cardsixsixall {
-  position: relative;
+  .cardsixsixall {
+  margin: 0 auto;
   width: 246rpx;
   height: 45rpx;
 }
@@ -384,10 +385,7 @@
   height: 24rpx;
 }
 
-.cardsixzong .down {
-  position: absolute;
-  top: 14rpx;
-  left: 394rpx;
+ .down {
   width: 20rpx;
   height: 15rpx;
 }
@@ -481,29 +479,27 @@
   margin-top: 16rpx;
 }
 
-.cardeightzong .cardeightsix {
-  margin: 0;
-  padding: 0;
+ .cardeightsix {
+   padding: 0;
   width: 246rpx;
   height: 45rpx;
-  background-color: #09f;
-  margin: 20rpx auto;
-  margin-left: 186rpx;
+  background-color: #0099FF;
   font-size: 26rpx;
   color: white;
   line-height: 45rpx;
+  border-radius: 20rpx;
+  display: flex;
+  justify-content: center;
+  margin-top: 14rpx;
 }
 
 .cardeightzong  .cardeightsixall {
-  position: relative;
+  margin: 0 auto;
   width: 246rpx;
   height: 45rpx;
 }
 
-.cardeightzong .down {
-  position: absolute;
-  top: 14rpx;
-  left: 394rpx;
+ .down {
   width: 20rpx;
   height: 15rpx;
 }

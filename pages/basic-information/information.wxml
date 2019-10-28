@@ -44,9 +44,9 @@
     <view class="informationseven">
       <text class="informationsevenone">所在地区：</text>
       <view class="informationseventwo">
-        <picker bindchange="changeReginone" mode="region" value="{{regionone}}">
-          <input name="addregionone" value="{{regionone}}" placeholder="请选择你所在地址"></input>
-        </picker>
+          <input name="addregionone"  bindtap='userTapAddress' value='{{ addressData.title }}'>
+
+          </input>
         <text class="positioning" bindtap="GPSsubmit">获取定位</text>
       </view>
     </view>

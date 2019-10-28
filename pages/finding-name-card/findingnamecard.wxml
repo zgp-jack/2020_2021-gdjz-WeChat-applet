@@ -15,10 +15,10 @@
     </view>
   </view>
   <view class="findingnamecardtwo">
-    <image class="findingnamecardtwoone"></image>
-    <text class="findingnamecardtwotwo">李小六</text>
+    <image class="findingnamecardtwoone" src="{{userimg}}"></image>
+    <text class="findingnamecardtwotwo">{{username}}</text>
     <text class="findingnamecardtwothree">你还没有完善基本信息</text>
-    <view class="findingnamecardtwofour">去完善</view>
+    <view class="findingnamecardtwofour" bindtap="toperfect">去完善</view>
   </view>
   <view class="findingnamecardthree">
     <view class="findingnamecardthreemobile">

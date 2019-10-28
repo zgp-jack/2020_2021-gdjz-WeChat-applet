@@ -1,10 +1,10 @@
-.precardtwoheader{
+.precardtwoheader {
   width: 93%;
   margin: 0 auto;
   background-color: white;
   overflow: hidden;
   height: 66rpx;
-  color: #F87A14;
+  color: #f87a14;
   font-size: 26rpx;
   text-align: center;
   line-height: 66rpx;
@@ -123,12 +123,13 @@
 .precardthree {
   width: 93%;
   margin: 12rpx auto;
-  margin-bottom: 16rpx;
+  margin-bottom: 20rpx;
   height: 24rpx;
   font-size: 24rpx;
   position: relative;
 }
-.precardthree .precardthreemobile{
+
+.precardthree .precardthreemobile {
   width: 140rpx;
   position: absolute;
   left: 50%;
@@ -136,6 +137,7 @@
   font-size: 26rpx;
   font-weight: bold;
 }
+
 .precardthree image {
   margin-left: 6rpx;
   width: 22rpx;
@@ -182,12 +184,13 @@
 .precardfive {
   width: 93%;
   margin: 12rpx auto;
-  margin-bottom: 16rpx;
+  margin-bottom: 20rpx;
   height: 24rpx;
   font-size: 24rpx;
   position: relative;
 }
-.precardfive .precardfivemobile{
+
+.precardfive .precardfivemobile {
   position: absolute;
   left: 50%;
   width: 140rpx;
@@ -195,6 +198,7 @@
   font-size: 26rpx;
   font-weight: bold;
 }
+
 .precardfive image {
   margin-left: 6rpx;
   width: 22rpx;
@@ -214,72 +218,78 @@
   background-color: white;
 }
 
-.precardsixzong {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-}
 
 .precardsix .precardsixone {
-  width: 32rpx;
+  width: 20rpx;
   height: 20rpx;
-  margin-left: 20rpx;
+  margin-left: 3.5%;
   margin-top: 20rpx;
 }
 
 .precardsixzong .precardsixtwo {
   color: #343434;
   font-size: 26rpx;
-  margin-left: 14rpx;
   margin-top: 10rpx;
 }
-
+.precardsixtwo text{
+  padding-left: 10rpx;
+}
 .precardsixzong .precardsixthree {
   color: #8b8b8a;
   font-size: 22rpx;
   margin-left: 14rpx;
   margin-top: 4rpx;
 }
-.precardsixzong .precardsixthree  text:last-child{
-   margin-left: 26rpx;
+
+.precardsixzong .precardsixthree  text:last-child {
+  margin-left: 26rpx;
 }
+
 .precardsixzong .precardsixfour {
   color: #8b8b8a;
   font-size: 22rpx;
   margin-left: 14rpx;
   margin-top: 10rpx;
 }
-.precardsixzong .precardsixfive image{
-  width: 185rpx;
+.precardsixzong .precardsixfive{
+  margin: 0 auto;
+}
+.precardsixzong .precardsixfive image {
+  width: 29%;
   height: 185rpx;
   background-color: orange;
-  margin-left: 16rpx;
+  margin-left: 3%;
   margin-top: 16rpx;
 }
-.precardsixzong .precardsixsix{
-  margin: 0;
+
+.precardsixsix {
   padding: 0;
   width: 246rpx;
   height: 45rpx;
-  background-color: #0099FF;
-  margin: 20rpx auto;
-  margin-left: 186rpx;
+  background-color: #09f;
   font-size: 26rpx;
   color: white;
   line-height: 45rpx;
+  border-radius: 20rpx;
+  display: flex;
+  justify-content: center;
+  margin-top: 8rpx;
 }
-.precardsixzong  .precardsixsixall{
-  position: relative;
+
+.precardsixzong .precardsixsix view {
+  width: 80%;
+}
+
+.precardsixzong  .precardsixsixall {
   width: 246rpx;
   height: 45rpx;
 }
-.precardsixsixallvoto{
+
+.precardsixsixallvoto {
   height: 24rpx;
 }
-.precardsixzong .down{
-  position: absolute;
-  top: 14rpx;
-  left: 394rpx;
+
+.down {
   width: 20rpx;
   height: 15rpx;
 }
@@ -287,19 +297,21 @@
 .precardseven {
   width: 93%;
   margin: 12rpx auto;
-  margin-bottom: 16rpx;
+  margin-bottom: 20rpx;
   height: 24rpx;
   font-size: 24rpx;
   position: relative;
 }
-.precardseven .precardsevenmobile{
-   position: absolute;
-   left: 50%;
-   width: 140rpx;
-   margin-left: -70rpx;
-   font-size: 26rpx;
-   font-weight: bold;
+
+.precardseven .precardsevenmobile {
+  position: absolute;
+  left: 50%;
+  width: 140rpx;
+  margin-left: -70rpx;
+  font-size: 26rpx;
+  font-weight: bold;
 }
+
 .precardseven image {
   margin-left: 6rpx;
   width: 22rpx;
@@ -319,39 +331,38 @@
   background-color: white;
 }
 
-.precardeightzong {
-  display: flex;
-  flex-direction: row;
-}
-
-.precardeight .precardeightone {
+ .precardeightone {
   width: 20rpx;
   height: 20rpx;
-  margin-left: 20rpx;
-  margin-top: 20rpx;
+  margin-left: 3.7%;
 }
 
 .precardeightzong .precardeighttwo {
   color: #343434;
   font-size: 26rpx;
-  margin-left: 14rpx;
-  margin-top: 10rpx;
+  padding-top: 17rpx;
 }
-.precardeightzong .precardeighttwo text:last-child{
+.precardeighttwo .waterbook{
+  margin-left: 10rpx;
+}
+.precardeightzong .precardeighttwo text:last-child {
   font-size: 20rpx;
   line-height: 26rpx;
-  color: #8B8B8A;
+  color: #8b8b8a;
   margin-left: 14rpx;
 }
+
 .precardeightzong .precardeightthree {
   color: #8b8b8a;
   font-size: 22rpx;
   margin-left: 14rpx;
   margin-top: 10rpx;
 }
-.precardeightzong .precardeightthree  text:last-child{
-   margin-left: 26rpx;
+
+.precardeightzong .precardeightthree  text:last-child {
+  margin-left: 26rpx;
 }
+
 .precardeightzong .precardeightfour {
   color: #8b8b8a;
   font-size: 22rpx;
@@ -359,93 +370,93 @@
   margin-top: 10rpx;
 }
 
-
-
-.precardsixthreeborder{
-  position: relative;
-  left: -6%;
+.precardsixthreeborder {
+  width: 100%;
 }
-.precardsixthreeline{
-  position: relative;
-  left: 4.5%;
+
+.precardsixthreeline {
   border-left: 1px solid #d3d3d1;
-  padding-left: 6rpx;
+  width: 90%;
+  margin: 0 auto;
 }
 
-.precardeightzong .precardeightfive{
-  position: relative;
-  left: -6%;
-  top: 8rpx;
+.precardeightzong .precardeightfive {
+   width: 100%;
 }
-.precardeightzong .precardeightfiveline{
-  position: relative;
-  left: 4%;
+
+.precardeightzong .precardeightfiveline {
+  width: 90%;
+  margin: 0 auto;
   border-left: 1px solid #d3d3d1;
-  padding-left: 8rpx;
 }
-.precardeightzong .precardeightfive image{
-  width: 185rpx;
+
+.precardeightzong .precardeightfive image {
+  width: 29%;
   height: 185rpx;
   background-color: orange;
-  margin-left: 16rpx;
+  margin-left: 3%;
   margin-top: 16rpx;
 }
-.precardeightzong .precardeightsix{
-  margin: 0;
-  padding: 0;
+
+.precardeightzong  .precardeightsixall {
+  margin: 0 auto;
   width: 246rpx;
   height: 45rpx;
-  background-color: #0099FF;
-  margin: 20rpx auto;
-  margin-left: 186rpx;
-  font-size: 26rpx;
-  color: white;
-  line-height: 45rpx;
+  margin-top: -30rpx;
 }
-.precardeightzong  .precardeightsixall{
-  position: relative;
-  width: 246rpx;
-  height: 45rpx;
-}
-.precardeightzong .down{
-  position: absolute;
-  top: 14rpx;
-  left: 394rpx;
-  width: 20rpx;
-  height: 15rpx;
-}
-.precardnine{
+
+.precardnine {
   margin: 18rpx auto;
   height: 91rpx;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
 }
-.precardnine .precardnineone{
+
+.precardnine .precardnineone {
   height: 91rpx;
   width: 369rpx;
   background-color: white;
-  color: #7D7D7D;
+  color: #7d7d7d;
   font-size: 36rpx;
-  text-align:center;
+  text-align: center;
   line-height: 91rpx;
 }
-.precardnine .precardnineone image{
-  width:35rpx;
+
+.precardnine .precardnineone image {
+  width: 35rpx;
   height: 35rpx;
   position: relative;
   top: 4rpx;
 }
-.line{
-  border-left: 1px solid #DCDCDC;
+
+.line {
+  border-left: 1px solid #dcdcdc;
   position: relative;
   left: 4%;
 }
-.precardotext{
+
+.precardotext {
   position: relative;
   left: -4%;
 }
 
-.precardebottom{
+.precardebottom {
   height: 120rpx;
+}
+
+.none{
+  margin-left: 3.7%;
+}
+
+.none text{
+  font-size: 24rpx;
+  color: rgb(170, 169, 169);
+  margin-left: 16rpx;
+}
+
+.none image {
+  width: 20rpx;
+  height: 20rpx;
+
 }

@@ -124,10 +124,11 @@
   </view>
   <view class="precardsix">
     <view class="precardsixzong">
-      <image src="../../images/newresume-experience-item.png" class="precardsixone"></image>
+  
       <view class="precardsixall">
         <view class="precardsixtwo">
-          <text>广东台山碧桂园项目</text>
+            <image src="../../images/newresume-experience-item.png" class="precardsixone"></image>
+            <text>广东台山碧桂园项目</text>
         </view>
         <view class="precardsixthreeborder">
           <view class="precardsixthreeline">
@@ -136,8 +137,7 @@
               <text>广东省台州市</text>
             </view>
             <view class="precardsixfour">
-              <text>主要包工所有虽有水电安装
-        </text>
+              <text>主要包工所有虽有水电安装</text>
             </view>
             <view class="precardsixfive">
               <image></image>
@@ -147,15 +147,20 @@
               <image></image>
               <image></image>
             </view>
+
           </view>
         </view>
-        <view class="precardsixsixall">
-          <button class="precardsixsix">更多项目经验 </button>
+      </view>
+    </view>
+    <view class="precardsixsixall">
+      <button class="precardsixsix">
+        <view>
+          更多项目经验
           <image src="../../images/downward.png" class="down"></image>
         </view>
-        <view class="precardsixsixallvoto">
-        </view>
-      </view>
+      </button>
+    </view>
+    <view class="precardsixsixallvoto">
     </view>
   </view>
   <view class="precardseven">
@@ -166,10 +171,10 @@
   </view>
   <view class="precardeight">
     <view class="precardeightzong">
-      <image src="../../images/newresume-experience-item.png" class="precardeightone"></image>
       <view class="precardeightall">
         <view class="precardeighttwo">
-          <text>水电工技术证书</text>
+          <image src="../../images/newresume-experience-item.png" class="precardeightone"></image>
+          <text  class="waterbook">水电工技术证书</text>
           <text>2019-01</text>
         </view>
         <view class="precardeightfive">
@@ -179,13 +184,14 @@
             <image></image>
           </view>
         </view>
-        <view class="precardeightsixall">
-          <button class="precardeightsix">更多技能证书 </button>
-          <image src="../../images/downward.png" class="down"></image>
-        </view>
-        <view class="precardsixsixallvoto">
-        </view>
+
       </view>
+    </view>
+    <view class="none">
+      <image src="../../images/none.png"></image>
+      <text>没有更多了...</text>
+    </view>
+    <view class="precardsixsixallvoto">
     </view>
   </view>
   <view class="precardebottom">
