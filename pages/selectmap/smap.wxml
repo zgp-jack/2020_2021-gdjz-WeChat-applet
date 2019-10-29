@@ -34,10 +34,20 @@
 
   </view>
 
-  <map id="myMap" class="img_box"
-  longitude="{{longitude}}"
-  latitude="{{latitude}}"
-   markers="{{markers}}" ></map>
+  <map id="myMap" class="img_box" longitude="{{longitude}}" latitude="{{latitude}}" markers="{{markers}}"></map>
+ <scroll-view scroll-y="true" style="height: 470rpx; position:absolute;bottom:0;" >
+  <view >
+    <!-- <view class='address-item-title {{ (addressData.location == item.location && addressData.title == (showHisTitle ? item.title : item.name)) ? "address-title-active" : "" }}'>
+      <text class="map-locdistance"></text>
+    </view> -->
+
+    <view class='address-item-text'  bindtap='setAddressmap' wx:for="{{ mapaddressList }}" wx:key="{{ index }}" 
+     data-title='{{ showHisTitle ? item.title : item.name }}' data-adcode='{{ item.adcode }}' data-district='{{ (item.district ? item.district : "") + (item.address ? item.address : "") }}' data-location='{{ item.location }}'
+    >
+       <view style="padding-left:20rpx;padding-right:30rpx; display:flex; justify-content: space-between;"><text>{{ item.name}}</text>  <text>{{item.distance}}</text> </view>
+    <view style="padding-left:20rpx;" > {{ (item.cityname + item.adname + item.address) }}</view></view>
+   </view>
+  </scroll-view>
 </view>
 
 

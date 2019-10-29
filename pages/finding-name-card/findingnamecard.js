@@ -14,10 +14,7 @@ Page({
       url: '/pages/basic-information/information',
     })
   },
-  /**
-   * 生命周期函数--监听页面加载
-   */
-  onLoad: function (options) {
+  namerequest() {
     let _this = this;
     let userId = '';
     let token = '';
@@ -25,10 +22,11 @@ Page({
     let message = wx.getStorageSync("userInfo")
     console.log(message)
 
-    let usermessage = { 
-      userId: message.userId, 
-      token: message.token, 
-      tokenTime: message.tokenTime}
+    let usermessage = {
+      userId: message.userId,
+      token: message.token,
+      tokenTime: message.tokenTime
+    }
 
     app.doRequestAction({
       url: 'resumes/resume-list/',
@@ -42,6 +40,13 @@ Page({
         })
       }
     })
+    
+    },
+  /**
+   * 生命周期函数--监听页面加载
+   */
+  onLoad: function (options) {
+    this.namerequest();
   },
 
   /**

@@ -1,5 +1,6 @@
 // pages/basic-information/information.js
 var amapFile = require('../../utils/amap-wx.js');
+let areas = require("../../utils/area.js");
 const app = getApp();
 Page({
 
@@ -7,23 +8,30 @@ Page({
    * 页面的初始数据
    */
   data: {
+    multiArray: [[], []],
+    objectMultiArray: [
+      [], []
+    ],
     region: "",
     evaluation: [],
-    detailevaluation: ["努力上进", "一直加班", "吃苦耐劳1", "吃苦耐劳2"],
-    detailevaluationo: ["吃苦耐劳", "刻苦勤奋", "努力劳动", "发奋条哈", ],
+    detailevaluation: [],
     regionone: "",
     oimg: "../../images/touxiang.png",
-    array: ["男", "女"],
-    typeworkarray: ["小工", "中工", "大工"],
-    proficiencyarray: ["熟悉", "很牛", "特牛"],
-    compositionarray: ["木工", "水工", "电工"],
+    array: [],
+    typeworkarray: [],
+    proficiencyarray: [],
+    compositionarray: [],
     date: "",
-    nationalarray: ["汉族", "壮族", "藏族", "彝族", "裕固族", "瑶族", "锡伯族", "乌孜别克族", "维吾尔族", "佤族", "土家族", "土族", "塔塔尔族", "塔吉克族", "水族", "畲族", "撒拉族", "羌族", "普米族", "怒族", "纳西族", "仫佬族", "苗族", "蒙古族", "门巴族", "毛南族", "满族", "珞巴族", "僳僳族", "黎族", "拉祜族", "柯尔克孜族", "景颇族", "京族", "基诺族", "回族", "赫哲族", "哈萨克族", "哈尼族", "仡佬族", "高山族", "鄂温克族", "俄罗斯族", "鄂伦春族", "独龙族", "东乡族", "侗族", "德昂族", "傣族", "达斡尔族", "朝鲜族", "布依族", "保安族", "布朗族", "白族", "阿昌族", "汉族"]
+    nationalarray: [],
+    person: "",
+    judge: false
   },
-  GPSsubmit: function() {
+  GPSsubmit: function () {
     this.getLocation();
   },
+
   clock(e) {
+    let that = this;
     let off = true;
     for (let i = 0; i < this.data.evaluation.length; i++) {
       if (this.data.evaluation[i] == e.currentTarget.dataset.id) {
@@ -37,21 +45,35 @@ Page({
     if (off) {
       this.data.evaluation.push(e.currentTarget.dataset.id)
     }
-    console.log(this.data.evaluation.length)
+
+    let odetailevaluation = this.data.detailevaluation
+    if (odetailevaluation[e.currentTarget.dataset.index - 1].classname != "oinformationnosave"){
+      odetailevaluation[e.currentTarget.dataset.index - 1].classname = "oinformationnosave"
+      that.setData({
+         detailevaluation: odetailevaluation
+      })
+    }else{
+      odetailevaluation[e.currentTarget.dataset.index - 1].classname = "informationnosave"
+      that.setData({
+        detailevaluation: odetailevaluation
+      })
+    }
+
   },
+
   userTapAddress: function () {
-    console.log(123)
     wx.navigateTo({
       url: '/pages/selectmap/smap',
     })
   },
-  bindcompositionone(e) {
+  personnelpositionone(e) {
     this.setData({
-      indexcomposition: e.detail.value
+      indexperson: e.detail.value,
+      judge: true
     })
   },
   bindproficiencyone(e) {
-    console.log(e)
+
     this.setData({
       indexproficiency: e.detail.value
     })
@@ -61,13 +83,13 @@ Page({
       index: e.detail.value
     })
   },
-  getLocation: function() {
+  getLocation: function () {
     var _this = this;
     var myAmapFun = new amapFile.AMapWX({
       key: app.globalData.gdApiKey
     }); //key注册高德地图开发者
     myAmapFun.getRegeo({
-      success: function(data) {
+      success: function (data) {
         console.log(data);
         let oname = data[0].name + ' ' + data[0].desc;
         if (oname.length >= 10) {
@@ -81,7 +103,7 @@ Page({
           });
         }
       },
-      fail: function(info) {
+      fail: function (info) {
         console.log("getLocation fail");
         wx.showModal({
           title: info.errMsg
@@ -93,13 +115,13 @@ Page({
     });
   },
   changeRegin(e) {
-    console.log(e.detail.value)
+
     this.setData({
       region: e.detail.value[0] + e.detail.value[1] + e.detail.value[2]
     })
   },
   changeReginone(e) {
-    console.log(e.detail.value)
+
     this.setData({
       regionone: e.detail.value[0] + e.detail.value[1] + e.detail.value[2]
     })
@@ -114,7 +136,7 @@ Page({
       date: e.detail.value
     })
   },
-  bindPickerChange: function(e) {
+  bindPickerChange: function (e) {
     this.setData({
       index: e.detail.value
     })
@@ -157,59 +179,202 @@ Page({
       }
     })
   },
+
+
+  getlocationdetails() {
+    let historyregionone = wx.getStorageSync("historyregionone");
+    if (historyregionone) {
+      this.setData({
+        regionone: historyregionone
+      })
+      wx.removeStorageSync('historyregionone')
+    }
+  },
+  accessprovince() {
+    let that = this;
+    app.doRequestAction({
+      url: 'resumes/get-data/',
+      way: 'GET',
+      success(res) {
+        let nationalarray = [];
+        let alllabel = [];
+        let typeworkarray = [];
+        let proficiencyarray = [];
+        let compositionarray = [];
+        let array = []
+        for (let i = 0; i < res.data.nation.length; i++) {
+          nationalarray.push(res.data.nation[i].mz_name)
+        }
+        for (let i = 0; i < res.data.label.length; i++) {
+          res.data.label[i].classname = "informationnosave"
+        }
+        for (let i = 0; i < res.data.occupation.length; i++) {
+          typeworkarray.push(res.data.occupation[i].name)
+        }
+        for (let i = 0; i < res.data.prof_degree.length; i++) {
+          proficiencyarray.push(res.data.prof_degree[i].name)
+        }
+        for (let i = 0; i < res.data.type.length; i++) {
+          compositionarray.push(res.data.type[i].name)
+        }
+        for (let i = 0; i < res.data.gender.length; i++) {
+          array.push(res.data.gender[i].name)
+        }
+
+        that.setData({
+          nationalarray: nationalarray,
+          detailevaluation: res.data.label,
+          typeworkarray: typeworkarray,
+          proficiencyarray: proficiencyarray,
+          compositionarray: compositionarray,
+          array: array
+        })
+
+      }
+    })
+  },
+
+
+
+
+
+
+
+initAllProvice: function () { //获取所有省份
+    let arr = app.arrDeepCopy(areas.getPublishArea());
+    console.log(arr)
+    let provice = [];
+    let provicemore = [];
+    let provicechild = [];
+    let provicechildmore = [];
+    let len = arr.length;
+    for (let i = 0; i < len; i++) {
+      let data = { id: arr[i].id, pid: arr[i].pid, name: arr[i].name }
+      let dataone = arr[i].name 
+      provice.push(data)
+      provicemore.push(dataone)
+      for (let j = 0; j < arr[i].children.length; j++) {
+        if (arr[i].children[j].id){
+        let datachild = { id: arr[i].children[j].id, pid: arr[i].children[j].pid, name: arr[i].children[j].name }
+          let datachildone = arr[i].children[j].name
+          provicechild.push(datachild)
+          provicechildmore.push(datachildone)
+        }else{
+          let datachildone = arr[i].name
+          provicechildmore.push(datachildone)
+        }
+     
+
+      }
+    }
+  console.log(provicechild)
+  console.log(provicechildmore)
+  console.log(provice)
+  console.log(provicechild)
+    this.setData({
+      multiArray: [provicemore, provicechildmore],
+      objectMultiArray: [provice, provicechild]
+    })
+    console.log(provice)
+    // return provice;
+  },
+  bindMultiPickerChange: function (e) {
+    console.log(e)
+    console.log('picker发送选择改变，携带值为', e.detail.value)
+    this.setData({
+      multiIndex: e.detail.value
+    })
+  },
+  bindMultiPickerColumnChange: function (e) {
+    console.log(e)
+    console.log('修改的列为', e.detail.column, '，值为', e.detail.value);
+    var data = {
+      multiArray: this.data.multiArray,
+      multiIndex: this.data.multiIndex
+    };
+    data.multiIndex[e.detail.column] = e.detail.value;
+    switch (e.detail.column) {
+      case 0:
+        switch (data.multiIndex[0]) {
+          case 0:
+
+            break;
+          case 1:
+
+            break;
+        }
+        data.multiIndex[1] = 0;
+        data.multiIndex[2] = 0;
+        break;
+      case 1:
+        switch (data.multiIndex[0]) {
+          case 0:
+           
+            break;
+          case 1:
+
+            break;
+        }
+        data.multiIndex[2] = 0;
+        break;
+    }
+    console.log(data.multiIndex);
+    this.setData(data);
+  },
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function(options) {
-
+  onLoad: function (options) {
+    this.accessprovince();
+    this.initAllProvice()
   },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function() {
+  onReady: function () {
 
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function() {
-
+  onShow: function () {
+    this.getlocationdetails()
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
-  onHide: function() {
+  onHide: function () {
 
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
-  onUnload: function() {
+  onUnload: function () {
 
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
-  onPullDownRefresh: function() {
+  onPullDownRefresh: function () {
 
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
-  onReachBottom: function() {
+  onReachBottom: function () {
 
   },
 
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function() {
+  onShareAppMessage: function () {
 
   }
 })

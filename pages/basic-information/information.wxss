@@ -256,7 +256,6 @@
 
 .informationpeople{
    width: 93%;
-   height: 522rpx;
    margin: 0 auto;
    margin-top: 19rpx;
    background-color: white;
@@ -571,10 +570,11 @@
   margin: 0 auto;
   margin-top: 24rpx;
   height: 50rpx;
-  display: flex;
-  justify-content: space-between;
 }
-.informationlabeltwo view{
+.informationnosave{
+  margin-top: 12rpx;
+  margin-left: 2%;
+  display: inline-block;
   width: 150rpx;
   height: 50rpx;
   border: 1px solid #BFBFBF;
@@ -584,9 +584,24 @@
   line-height: 50rpx; 
   border-radius: 24rpx;
 }
+
+.oinformationnosave{
+  margin-top: 12rpx;
+  margin-left: 2%;
+  display: inline-block;
+  width: 150rpx;
+  height: 50rpx;
+  font-size: 24rpx;
+  text-align:center;
+  line-height: 50rpx; 
+  border-radius: 24rpx;
+  border: 1px solid #108EEF;
+  background: #108EEF;
+  color: white;
+}
+
 .informationsave{
   width: 521rpx;
-  height: 97rpx;
   background: #108EEF;
   color: white;
   font-size: 38rpx;

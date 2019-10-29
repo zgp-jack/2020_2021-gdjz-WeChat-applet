@@ -32,7 +32,6 @@
                 </view>
             </view> -->
 
-
             <view class='common-publish-item'>
                 <view class='common-publish-item-content'>
                     <text class='common-publish-words'>详细地址</text>

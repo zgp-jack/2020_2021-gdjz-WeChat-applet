@@ -13,12 +13,14 @@ Page({
    * 页面的初始数据
    */
   data: {
-    show:false,
-    longitude: 116.404008,
-    latitude: 39.914209,
-    markers: [116.404008, 39.914209],
+    regionone: "",
+    show: false,
+    longitude:"",
+    latitude: "",
+    markers: [],
     nodataImg: app.globalData.apiImgUrl + "nodata.png",
     addressList: [],
+    mapaddressList:[],
     addressText: '',
     addressData: {
       "title": "",
@@ -42,10 +44,10 @@ Page({
     isAllAreas: true,
     showInputList: false,
     searchInputVal: "",
-    showHisTitle:false,
-    areaInputFocus:false
+    showHisTitle: false,
+    areaInputFocus: false
   },
-  chooseInputCtiy: function (e) { 
+  chooseInputCtiy: function (e) {
     this.chooseThisCtiy(e);
     this.setData({ isAllAreas: true, searchInputVal: "", showArea: false, showInputList: false })
   },
@@ -76,18 +78,18 @@ Page({
     this.setData({ showInputList: true })
   },
   clearInputVal: function () {
-    this.setData({ showMaplist: true, addressText: "",showHisTitle:false })
+    this.setData({ showMaplist: true, addressText: "", showHisTitle: false })
     this.getMapInfo();
   },
   mapInputFocus: function (e) {
     this.setData({
-      show:true
+      show: true
     })
     let val = e.detail.value;
-    if(val) return false;
+    if (val) return false;
     this.initHistoryCityList()
-    this.setData({ showHisTitle:true })
-    
+    this.setData({ showHisTitle: true })
+
   },
   initHistoryLoc: function () {
     let h = wx.getStorageSync("locationHistory");
@@ -96,6 +98,7 @@ Page({
     if (p) this.setData({ gpsOrientation: p })
   },
   detailHistoryCities: function (item) {
+    console.log(item)
     let hc = wx.getStorageSync("historyCityLists");
     if (hc) {
       let len = hc.length;
@@ -130,7 +133,7 @@ Page({
       }
     } else {
       hc = []
-      this.setData({ addressTips:"暂无历史记录" })
+      this.setData({ addressTips: "暂无历史记录" })
     }
     this.setData({ addressList: hc })
   },
@@ -147,7 +150,7 @@ Page({
       this.setData({ showArea: false, addressActive: true, showInputList: false, searchInputVal: "", isAllAreas: true })
     }, 10)
 
-    
+
   },
   chooseThisCtiy: function (e) {
     let _this = this;
@@ -240,7 +243,7 @@ Page({
       },
       fail: function (info) {
         //失败回调
-        that.openSetting(function(){
+        that.openSetting(function () {
           that.initHistoryCityList();
         })
       }
@@ -343,8 +346,9 @@ Page({
       }
     })
   },
-  closeAddressAction:function(){
-    wx.navigateBack({ delta:1 })
+  closeAddressAction: function () {
+
+    wx.navigateBack({ delta: 1 })
   },
   userEnterAddress: function (e) {
     let _this = this;
@@ -353,8 +357,8 @@ Page({
 
     let keywords = this.data.keyAutoVal + this.data.addressText;
     this.getKeywordsInputs(keywords, function (data) {
-      _this.setData({ addressList: data,showHisTitle:false })
-      if (!data.length) _this.setData({ addressTips:"暂无数据" })
+      _this.setData({ addressList: data, showHisTitle: false })
+      if (!data.length) _this.setData({ addressTips: "暂无数据" })
     });
     // if (val){
     //   let keywords = this.data.keyAutoVal + this.data.addressText;
@@ -367,12 +371,13 @@ Page({
     //   //this.setData({ showMaplist: true,isKeyvalActive:true })
     // }
   },
-  saveInfo:function(info){
+  saveInfo: function (info) {
     let _this = this;
     wx.setStorageSync("userLastPubArea", info);
-    
+
   },
   setAddressData: function (e) {
+    console.log(e)
     let _this = this;
     let area = this.data.areaText;
     let pname = this.data.keyAutoVal;
@@ -394,7 +399,7 @@ Page({
       wx.setStorageSync("lastPublishCity", lastPublishCity);
 
       prevPage.setData({
-        "addressData.title": t,
+        regionone: t,
         "addressData.adcode": a,
         "addressData.location": l,
         "addressData.district": d,
@@ -405,24 +410,10 @@ Page({
 
       _this.detailHistoryCities(hl);
       _this.initHistoryCityList();
-      
-      console.log(hl)
-      let data = hl.location.split(",")
-      console.log(data)
-      var marker = {
-        id: 1,
-        latitude: ~~data[0],
-        longitude: ~~data[1]
-      }
-      var markers = new Array();
-      markers.push(marker);
-      console.log(markers)
-      _this.setData({
-        show:false,
-        markers: markers,
-        latitude: ~~data[0],
-        longitude: ~~data[1]
-      });
+
+      wx.navigateBack({ delta: 1 })
+
+   
     })
 
   },
@@ -465,6 +456,62 @@ Page({
     let list = areas.getInputList(true);
     this.setData({ allAreaLists: list })
   },
+
+  addmap(){
+    var that = this;
+    var myAmapFun = new Amap.AMapWX({ key: app.globalData.gdApiKey });
+    myAmapFun.getRegeo({
+      success: function (data) {
+        that.setData({
+          longitude: data[0].longitude,
+          latitude: data[0].latitude,
+          markers: [{
+            id: "1",
+            latitude: data[0].latitude,
+            longitude: data[0].longitude,
+            width: 20,
+            height: 20,
+            iconPath: "../../images/gps-posi.png"
+          }]
+        })
+      }, fail: function (info) {
+       
+        console.log(info)
+      }
+    })
+
+  },
+
+
+
+  aroundmap() {
+    var that = this;
+    var myAmapFun = new Amap.AMapWX({ key: app.globalData.gdApiKey });
+    myAmapFun.getPoiAround({
+      success: function (data) {
+        let alltude = that.data.longitude + ',' + that.data.latitude;
+        for (let i = 0; i < data.poisData.length ; i++){
+          let distan = that.getGreatCircleDistance(alltude,data.poisData[i].location)
+          data.poisData[i].distance = distan
+        }
+        that.setData({
+          mapaddressList: data.poisData
+        })
+      }, fail: function (info) {
+
+        console.log(info)
+      }
+    })
+
+  },
+  setAddressmap(e){
+    var that = this;
+    that.setData({
+      regionone: e.currentTarget.dataset.title
+    })
+    wx.setStorageSync("historyregionone", e.currentTarget.dataset.title)
+    wx.navigateBack({ delta: 1 })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
@@ -477,31 +524,8 @@ Page({
     this.initHistoryCityList();
     this.getMapInfo();
     this.openSetting();
-
-    var that = this;
-    var myAmapFun = new Amap.AMapWX({ key: app.globalData.gdApiKey });
-    wx.getSystemInfo({
-      success: function (data) {
-        var height = data.windowHeight;
-        var width = data.windowWidth;
-        var size = width + "*" + height;
-        myAmapFun.getStaticmap({
-          zoom: 8,
-          size: size,
-          scale: 2,
-          markers: "mid,0xFF0000,A:116.37359,39.92437;116.47359,39.92437",
-          success: function (data) {
-            that.setData({
-              src: data.url
-            })
-          },
-          fail: function (info) {
-            wx.showModal({ title: info.errMsg })
-          }
-        })
-
-      }
-    })
+    this.addmap();
+    this.aroundmap();
   },
 
   /**
