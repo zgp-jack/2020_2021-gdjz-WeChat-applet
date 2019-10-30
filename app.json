@@ -1,12 +1,12 @@
 {
    "pages": [
+    "pages/basic-information/information",
     "pages/index/index",
     "pages/detail/info/info",
     "pages/all-project-experience/allexperience",
     "pages/preview-name-card/previewcard",
     "pages/livecardone/livecardone",
     "pages/all-skills-certificate/skillscertificate",
-    "pages/basic-information/information",
     "pages/modifycertificate/modifycertificate",
     "pages/modify-project-experience/modifyexper",
     "pages/new-project-experience/projectexperience",

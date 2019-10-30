@@ -10,26 +10,26 @@
     <view class="informationtwi">
       <text class="informationtwione">姓<text>名：</text></text>
       <view class="informationtwitwo">
-        <input type="text" placeholder="请输入你的名字"></input>
+        <input type="text" placeholder="请输入你的名字" bindinput="name"></input>
       </view>
     </view>
     <view class="informationthree">
-      <text class="informationthreeone">性<text>别：</text></text>
-      <picker bindchange="bindPickerChange" range="{{array}}">
+      <text class="informationthreeone" >性<text>别：</text></text>
+      <picker bindchange="sex" range="{{array}}" >
         <input class="informationthreetwo" name="addregion" value="{{array[index]}}" placeholder="请选择性别"></input>
       </picker>
     </view>
     <view class="informationfour">
       <text class="informationfourone">出生日期：</text>
       <view class="informationfourtwo">
-        <picker mode="date" value="{{date}}" start="09:01" end="21:01" bindchange="bindDateChange">
-          <input name="addtime" value="{{date}}" placeholder="请选择出生日期"></input>
+        <picker mode="date" value="{{date}}" start="09:01" end="21:01" bindchange="birthday">
+          <input name="addtime" value="{{birthday}}" placeholder="请选择出生日期"></input>
         </picker>
       </view>
     </view>
     <view class="informationfive">
       <text class="informationfiveone">民<text>族：</text></text>
-      <picker bindchange="bindPickernational" range="{{nationalarray}}">
+      <picker bindchange="nation" range="{{nationalarray}}" >
         <input class="informationfivetwo" name="addnational" value="{{nationalarray[nationalindex]}}" placeholder="请选择民族"></input>
       </picker>
     </view>
@@ -38,7 +38,7 @@
       <!-- bindchange="initAllProvice" -->
       <view class="informationsixtwo">
         <picker bindchange="bindMultiPickerChange" bindcolumnchange="bindMultiPickerColumnChange"  mode="multiSelector" value="{{multiIndex}}" range="{{multiArray}}">
-          <input name="addregion" value="{{region}}" placeholder="请选择家乡地址"></input>
+          <input name="addregion" value="{{multiIndexvalue}}" placeholder="请选择家乡地址"></input>
         </picker>
       </view>
     </view>
@@ -55,8 +55,8 @@
   <view class="informationpeople">
     <view class="informationTypework">
       <text class="informationTypeworkone">所属工种：</text>
-      <picker bindchange="bindTypeworkone" range="{{typeworkarray}}">
-        <input class="informationTypeworktwo" name="addworkarray" value="{{typeworkarray[index]}}" placeholder="请选择工种"></input>
+      <picker  bindchange="typeworkone"    bindcolumnchange="multypeworkone" mode="multiSelector" value="{{multiworkIndex}}"  range="{{typeworkarray}}" >
+        <input class="informationTypeworktwo" name="addworkarray" value="{{workIndexvalue}}" placeholder="请选择工种"></input>
       </picker>
     </view>
 
@@ -93,7 +93,7 @@
     <view class="informationtheinput">
       <text class="informationtheinputone">手机号码：</text>
       <view class="informationtheinputtwo">
-        <input type="text" placeholder="请输入手机号"></input>
+        <input type="text" placeholder="请输入手机号" bindinput="telephone"></input>
       </view>
     </view>
 
@@ -124,7 +124,7 @@
     </view>
   </view>
 
-  <button class="informationsave">
+  <button class="informationsave" bindtap="submitinformation">
     保存资料
   </button>
 </view>

@@ -3,11 +3,12 @@
   margin: 0 auto;
   height: 80rpx;
   background: white;
-  font-size: 28rpx;
+  font-size: 27rpx;
   color: #343434;
   line-height: 80rpx;
   text-align: center;
   letter-spacing: 6rpx;
+  font-weight: bold;
 }
 
 
@@ -30,8 +31,9 @@
 .findingnamecardoneson .findingnamecardonesonone text {
   margin-top: 14rpx;
   display: block;
-  font-size: 30rpx;
+  font-size: 28rpx;
   margin-left: 13rpx;
+  font-weight: bold;
 }
 
 .findingnamecardoneson .findingnamecardonesonone view {

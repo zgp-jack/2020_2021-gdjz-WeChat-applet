@@ -3,29 +3,26 @@
     <view class="choose-address-text" bindtap="showCity">{{ areaText }}
       <view class="map-cityarrow"></view>
     </view>
+    <!-- address-container -->
     <view class="inputandimg">
-      <input placeholder='请输入你的详细地址' bindinput='userEnterAddress' value='{{ addressText }}' bindfocus="mapInputFocus"></input>
+      <input placeholder='请输入你的详细地址' bindinput='userEnterAddress' value='{{ addressText }}' bindtap="mapInputFocus"></input>
       <image src="{{ clearinput }}" bindtap="clearInputVal"></image>
     </view>
     <text bindtap='closeAddressAction'>取消</text>
   </view>
-
-  <view class='address-body' wx:if="{{show}}">
-    <view class="mapandpois">
+    <view class='address-body' wx:if="{{show}}">
+      <view class="mapandpois">
       <view class='address-container' wx:if="{{show}}">
-        <view class="history-title" wx:if="{{ showHisTitle && addressList.length }}">历史记录</view>
-        <view>
+      <view class="history-title" wx:if="{{ showHisTitle && addressList.length }}">历史记录</view>
+        <view >
           <view class='address-tips' wx:if="{{ !addressList.length }}">
             <view class='common-nodatabox flex-column'>
-              <image src='{{ nodataImg }}'></image>
-              <text>{{ addressTips }}</text>
+                <image src='{{ nodataImg }}'></image>
+                <text>{{ addressTips }}</text>
             </view>
           </view>
-          <view class='address-item' bindtap='setAddressData' data-title='{{ showHisTitle ? item.title : item.name }}' data-adcode='{{ item.adcode }}' data-district='{{ (item.district ? item.district : "") + (item.address ? item.address : "") }}' data-location='{{ item.location }}'
-            wx:for="{{ addressList }}" wx:key="{{ index }}">
-            <view class='address-item-title {{ (addressData.location == item.location && addressData.title == (showHisTitle ? item.title : item.name)) ? "address-title-active" : "" }}'>
-              <text class="map-locdistance">{{ item.distance }}</text>
-            </view>
+          <view class='address-item' bindtap='setAddressData' data-title='{{ showHisTitle ? item.title : item.name }}' data-adcode='{{ item.adcode }}' data-district='{{ (item.district ? item.district : "") + (item.address ? item.address : "") }}' data-location='{{ item.location }}' wx:for="{{ addressList }}" wx:key="{{ index }}">
+            <view class='address-item-title {{ (addressData.location == item.location && addressData.title == (showHisTitle ? item.title : item.name)) ? "address-title-active" : "" }}'>{{ showHisTitle ? item.title : item.name }}<text class="map-locdistance">{{ item.distance }}</text></view>
             <view class='address-item-text'>{{ (item.district ? item.district : "") + (item.address ? item.address : "") }}</view>
           </view>
         </view>
@@ -35,7 +32,7 @@
   </view>
 
   <map id="myMap" class="img_box" longitude="{{longitude}}" latitude="{{latitude}}" markers="{{markers}}"></map>
- <scroll-view scroll-y="true" style="height: 470rpx; position:absolute;bottom:0;" >
+ <scroll-view scroll-y="true" style="height: 600rpx; position:absolute;bottom:0;" >
   <view >
     <!-- <view class='address-item-title {{ (addressData.location == item.location && addressData.title == (showHisTitle ? item.title : item.name)) ? "address-title-active" : "" }}'>
       <text class="map-locdistance"></text>
@@ -45,7 +42,7 @@
      data-title='{{ showHisTitle ? item.title : item.name }}' data-adcode='{{ item.adcode }}' data-district='{{ (item.district ? item.district : "") + (item.address ? item.address : "") }}' data-location='{{ item.location }}'
     >
        <view style="padding-left:20rpx;padding-right:30rpx; display:flex; justify-content: space-between;"><text>{{ item.name}}</text>  <text>{{item.distance}}</text> </view>
-    <view style="padding-left:20rpx;" > {{ (item.cityname + item.adname + item.address) }}</view></view>
+    <view style="padding-left:20rpx;" > {{ (item.district + item.address) }}</view></view>
    </view>
   </scroll-view>
 </view>

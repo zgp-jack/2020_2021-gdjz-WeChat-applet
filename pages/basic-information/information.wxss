@@ -246,7 +246,7 @@
    width:140rpx; 
    height: 30rpx;
    line-height: 30rpx;
-   font-size: 22rpx;
+   font-size: 28rpx;
    color: #797979;
    margin-top: 30rpx;
    border-left:1px solid  rgb(143, 143, 143);

@@ -2,16 +2,21 @@
 var amapFile = require('../../utils/amap-wx.js');
 let areas = require("../../utils/area.js");
 const app = getApp();
+// bindPickerChange
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    multiArray: [[], []],
+    multiArrayone: [],
+    multiArray: [],
     objectMultiArray: [
-      [], []
     ],
+    multiIndexvalue:"",
+    multiIndex: [0, 0],
+    multiworkIndex: [0, 0],
+    allprovinces:[],
     region: "",
     evaluation: [],
     detailevaluation: [],
@@ -19,9 +24,18 @@ Page({
     oimg: "../../images/touxiang.png",
     array: [],
     typeworkarray: [],
+    typeworkarrayone: [],
+    objecttypeArray: [
+    ],
     proficiencyarray: [],
     compositionarray: [],
     date: "",
+    name:"",
+    telephone:0,
+    sex:"",
+    nation:"",
+    index:"",
+    birthday:"",
     nationalarray: [],
     person: "",
     judge: false
@@ -29,8 +43,38 @@ Page({
   GPSsubmit: function () {
     this.getLocation();
   },
-
-  clock(e) {
+  name(e){
+    this.setData({
+      name: e.detail.value
+    })
+  },
+  telephone(e){
+    this.setData({
+      telephone: e.detail.value
+    })
+  },
+  sex: function (e) {
+    this.setData({
+      sex: e.detail.value
+    })
+  },
+  nation(e) {
+    this.setData({
+      nation: e.detail.value
+    })
+  },
+  typeworkone(e) {
+    console.log(e)
+    this.setData({
+      index: e.detail.value
+    })
+  },
+  birthday(e){
+    this.setData({
+      birthday: e.detail.value
+    })
+  },
+  clock(e) {   //标签选择的处理
     let that = this;
     let off = true;
     for (let i = 0; i < this.data.evaluation.length; i++) {
@@ -47,12 +91,12 @@ Page({
     }
 
     let odetailevaluation = this.data.detailevaluation
-    if (odetailevaluation[e.currentTarget.dataset.index - 1].classname != "oinformationnosave"){
+    if (odetailevaluation[e.currentTarget.dataset.index - 1].classname != "oinformationnosave") {
       odetailevaluation[e.currentTarget.dataset.index - 1].classname = "oinformationnosave"
       that.setData({
-         detailevaluation: odetailevaluation
+        detailevaluation: odetailevaluation
       })
-    }else{
+    } else {
       odetailevaluation[e.currentTarget.dataset.index - 1].classname = "informationnosave"
       that.setData({
         detailevaluation: odetailevaluation
@@ -78,12 +122,8 @@ Page({
       indexproficiency: e.detail.value
     })
   },
-  bindTypeworkone(e) {
-    this.setData({
-      index: e.detail.value
-    })
-  },
-  getLocation: function () {
+
+  getLocation: function () {   //定位获取
     var _this = this;
     var myAmapFun = new amapFile.AMapWX({
       key: app.globalData.gdApiKey
@@ -121,27 +161,18 @@ Page({
     })
   },
   changeReginone(e) {
-
     this.setData({
       regionone: e.detail.value[0] + e.detail.value[1] + e.detail.value[2]
     })
   },
-  bindPickernational(e) {
-    this.setData({
-      nationalindex: e.detail.value
-    })
-  },
+
   bindDateChange(e) {
     this.setData({
       date: e.detail.value
     })
   },
-  bindPickerChange: function (e) {
-    this.setData({
-      index: e.detail.value
-    })
-  },
-  chooseImage() {
+
+  chooseImage() {     //图片的上传
     let that = this
     wx.chooseImage({
       count: 1,
@@ -181,21 +212,23 @@ Page({
   },
 
 
-  getlocationdetails() {
+  getlocationdetails() {   //所在地区的位置
     let historyregionone = wx.getStorageSync("historyregionone");
+    console.log(historyregionone)
     if (historyregionone) {
       this.setData({
-        regionone: historyregionone
+        regionone: historyregionone.title
       })
       wx.removeStorageSync('historyregionone')
     }
   },
-  accessprovince() {
+  accessprovince() {  //大部分piker需要的数据
     let that = this;
     app.doRequestAction({
       url: 'resumes/get-data/',
       way: 'GET',
       success(res) {
+        console.log(res)
         let nationalarray = [];
         let alllabel = [];
         let typeworkarray = [];
@@ -208,9 +241,6 @@ Page({
         for (let i = 0; i < res.data.label.length; i++) {
           res.data.label[i].classname = "informationnosave"
         }
-        for (let i = 0; i < res.data.occupation.length; i++) {
-          typeworkarray.push(res.data.occupation[i].name)
-        }
         for (let i = 0; i < res.data.prof_degree.length; i++) {
           proficiencyarray.push(res.data.prof_degree[i].name)
         }
@@ -221,10 +251,58 @@ Page({
           array.push(res.data.gender[i].name)
         }
 
+
+          let typework = [];
+          let typeworkmore = [];
+          let typeworkchild = [];
+          let typeworkchildmore = [];
+          let typearray = [];
+          let typearrayname = [];
+         let arr = res.data.occupation
+        for (let i = 0; i < arr.length; i++) {
+            let data = { id: arr[i].id, pid: arr[i].pid, name: arr[i].name }
+            let dataone = arr[i].name
+
+            typework.push(data)
+            typeworkmore.push(dataone)
+            typearray[i] = [];
+            typearrayname[i] = []
+            if (arr[i].children.length == 0) {
+              typearray[i].push(arr[i])
+              typearrayname[i].push(arr[i].name)
+            }
+            for (let j = 0; j < arr[i].children.length; j++) {
+              if (arr[i].children[j].id) {
+                let datachild = { id: arr[i].children[j].id, pid: arr[i].children[j].pid, name: arr[i].children[j].name }
+
+    
+                  typearray[i].push(arr[i].children[j])
+                  typearrayname[i].push(arr[i].children[j].name)
+              } else {
+                let datachildone = arr[i].name
+                typeworkchildmore.push(datachildone)
+              }
+            }
+            typeworkchild.push(typearray[i])
+            typeworkchildmore.push(typearrayname[i])
+          }
+        console.log(typework)
+        console.log(typeworkmore)
+        console.log(typeworkchild)
+        console.log(typeworkchildmore)
+          that.setData({
+            typeworkarrayone: [typeworkmore, typeworkchildmore],
+            objecttypeArray: [typework, typeworkchild]
+          })
+          console.log(typework)
+          that.setData({
+            typeworkarray: [typeworkmore, that.data.typeworkarrayone[1][0]],
+          })
+        console.log(that.data.objecttypeArray)
+
         that.setData({
           nationalarray: nationalarray,
           detailevaluation: res.data.label,
-          typeworkarray: typeworkarray,
           proficiencyarray: proficiencyarray,
           compositionarray: compositionarray,
           array: array
@@ -234,60 +312,82 @@ Page({
     })
   },
 
-
-
-
-
-
-
-initAllProvice: function () { //获取所有省份
+  initAllProvice: function () { //获取所有省份
+    let that = this;
     let arr = app.arrDeepCopy(areas.getPublishArea());
     console.log(arr)
+    this.setData({
+      allprovinces: arr
+    })
     let provice = [];
     let provicemore = [];
     let provicechild = [];
     let provicechildmore = [];
+    let array = [];
+    let arrayname = [];
     let len = arr.length;
     for (let i = 0; i < len; i++) {
       let data = { id: arr[i].id, pid: arr[i].pid, name: arr[i].name }
-      let dataone = arr[i].name 
+      let dataone = arr[i].name
+
       provice.push(data)
       provicemore.push(dataone)
+      array[i] = [];
+      arrayname[i] = []
+      if (arr[i].children.length == 0) {
+        array[i].push(arr[i])
+        arrayname[i].push(arr[i].name)
+      }
       for (let j = 0; j < arr[i].children.length; j++) {
-        if (arr[i].children[j].id){
-        let datachild = { id: arr[i].children[j].id, pid: arr[i].children[j].pid, name: arr[i].children[j].name }
-          let datachildone = arr[i].children[j].name
-          provicechild.push(datachild)
-          provicechildmore.push(datachildone)
-        }else{
+        if (arr[i].children[j].id) {
+          let datachild = { id: arr[i].children[j].id, pid: arr[i].children[j].pid, name: arr[i].children[j].name }
+
+          if (arr[i].children[j].pid - 2 == i) {
+            array[i].push(arr[i].children[j])
+            arrayname[i].push(arr[i].children[j].name)
+          }
+        } else {
           let datachildone = arr[i].name
           provicechildmore.push(datachildone)
         }
-     
-
       }
+      provicechild.push(array[i])
+      provicechildmore.push(arrayname[i])
     }
-  console.log(provicechild)
-  console.log(provicechildmore)
-  console.log(provice)
-  console.log(provicechild)
     this.setData({
-      multiArray: [provicemore, provicechildmore],
+      multiArrayone: [provicemore, provicechildmore],
+      // multiArray: [provicemore, that.data.multiArrayone[1][0]],
       objectMultiArray: [provice, provicechild]
     })
     console.log(provice)
-    // return provice;
+    this.setData({
+      multiArray: [provicemore, that.data.multiArrayone[1][0]],
+      objectMultiArray: [provice, provicechild]
+    })
   },
-  bindMultiPickerChange: function (e) {
-    console.log(e)
-    console.log('picker发送选择改变，携带值为', e.detail.value)
+  bindMultiPickerChange: function (e) {    //最终家乡的选择
+    let that = this; 
     this.setData({
       multiIndex: e.detail.value
     })
+    let allpro = '';
+    if (this.data.allprovinces[this.data.multiIndex[0]].children.length != 0){
+ 
+    allpro = this.data.allprovinces[this.data.multiIndex[0]].id +","+ this.data.allprovinces[this.data.multiIndex[0]].children[this.data.multiIndex[1]].id
+      this.setData({
+        multiIndexvalue: that.data.allprovinces[that.data.multiIndex[0]].name + that.data.allprovinces[that.data.multiIndex[0]].children[that.data.multiIndex[1]].name
+    })
+    } else {
+      allpro = this.data.allprovinces[this.data.multiIndex[0]].id
+      this.setData({
+        multiIndexvalue: that.data.allprovinces[that.data.multiIndex[0]].name + that.data.allprovinces[that.data.multiIndex[0]].name
+      })
+    } 
   },
-  bindMultiPickerColumnChange: function (e) {
-    console.log(e)
-    console.log('修改的列为', e.detail.column, '，值为', e.detail.value);
+
+  bindMultiPickerColumnChange: function (e) {   //下滑家乡列表所产生的函数
+    let that = this;
+    let namearry = this.data.multiArrayone;
     var data = {
       multiArray: this.data.multiArray,
       multiIndex: this.data.multiIndex
@@ -296,30 +396,80 @@ initAllProvice: function () { //获取所有省份
     switch (e.detail.column) {
       case 0:
         switch (data.multiIndex[0]) {
-          case 0:
-
-            break;
-          case 1:
-
+          case data.multiIndex[0]:
+            data.multiArray[1] = namearry[1][data.multiIndex[0]];
             break;
         }
         data.multiIndex[1] = 0;
-        data.multiIndex[2] = 0;
         break;
-      case 1:
-        switch (data.multiIndex[0]) {
-          case 0:
-           
-            break;
-          case 1:
 
+    }
+    this.setData(data);
+    console.log(data)
+  },
+
+  typeworkone(e) {
+    console.log(e)
+    // this.setData({
+    //   index: e.detail.value
+    // })
+  },
+  multypeworkone: function (e) {   //下滑工种列表所产生的函数
+    console.log(e.detail.column + ",,," + e.detail.value)
+  
+     let that = this;
+    let namearry = this.data.typeworkarrayone;
+    var data = {
+      typeworkarray: this.data.typeworkarray,
+      multiworkIndex: this.data.multiworkIndex
+    };
+    data.multiworkIndex[e.detail.column] = e.detail.value;
+    switch (e.detail.column) {
+      case 0:
+        switch (data.multiworkIndex[0]) {
+          case data.multiworkIndex[0]:
+            data.typeworkarray[1] = namearry[1][data.multiworkIndex[0]];
             break;
         }
-        data.multiIndex[2] = 0;
+        data.multiworkIndex[1] = 0;
         break;
+
     }
-    console.log(data.multiIndex);
     this.setData(data);
+    console.log(data)
+  },
+
+
+  submitinformation() {
+    let information = {}
+    let userInfo = wx.getStorageSync("userInfo");
+    let obirthday = this.data.birthday.split("-")[0] + "年" + this.data.birthday.split("-")[1] + "月" + this.data.birthday.split("-")[2]+"日"
+
+    Object.assign(information,{
+      userId: userInfo.userId,
+      token: userInfo.token,
+      tokenTime: userInfo.tokenTime,
+      // code:
+      username: this.data.name,
+      // headerimg:
+      tel: this.data.telephone,
+      gender: this.data.sex,
+      nation: this.data.nation,
+      birthday: obirthday,
+      // occupations
+    })
+    console.log(information)
+    // app.doRequestAction({
+    //   url: "resumes/add-resume/",
+    //   way: "POST",
+    //   params: information,
+    //   success: function (res) {
+
+    //   },
+    //   fail: function (err) {
+    //     console.log(err)
+    //   }
+    // })
   },
   /**
    * 生命周期函数--监听页面加载

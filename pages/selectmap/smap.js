@@ -4,8 +4,12 @@ let vali = require("../../utils/v.js");
 const PI = Math.PI;
 let EARTH_RADIUS = 6378137.0;
 const Amap = require("../../utils/amap-wx.js");
-
-
+// addressList
+// historyCityLists
+// historyregionone
+// mapaddressList
+//setAddressData
+//closeAddressAction
 const amapFun = new Amap.AMapWX({ key: app.globalData.gdApiKey });
 Page({
 
@@ -98,7 +102,6 @@ Page({
     if (p) this.setData({ gpsOrientation: p })
   },
   detailHistoryCities: function (item) {
-    console.log(item)
     let hc = wx.getStorageSync("historyCityLists");
     if (hc) {
       let len = hc.length;
@@ -167,7 +170,9 @@ Page({
       areaId: parseInt(id), areaText: area, showHisTitle: false, keyAutoVal: pname, addressText: ""
     })
     this.initHistoryLoc();
+    console.log(pname)
     this.getKeywordsInputs(pname, function (data) {
+      console.log(data)
       _this.setData({ addressList: data })
     })
 
@@ -207,6 +212,7 @@ Page({
     let that = this;
     this.getKeywordsInputs(this.data.keyAutoVal, function (data) {
       that.setData({ addressList: data })
+      that.setData({ mapaddressList: data })
     });
     return false;
   },
@@ -347,7 +353,7 @@ Page({
     })
   },
   closeAddressAction: function () {
-
+    console.log(123)
     wx.navigateBack({ delta: 1 })
   },
   userEnterAddress: function (e) {
@@ -392,6 +398,7 @@ Page({
       location: l,
       district: d
     }
+    wx.setStorageSync("historyregionone", hl)
     this.checkAdcode(a, function () {
       let prevPage = app.getPrevPage();
 
@@ -462,6 +469,7 @@ Page({
     var myAmapFun = new Amap.AMapWX({ key: app.globalData.gdApiKey });
     myAmapFun.getRegeo({
       success: function (data) {
+        console.log(data)
         that.setData({
           longitude: data[0].longitude,
           latitude: data[0].latitude,
@@ -489,14 +497,15 @@ Page({
     var myAmapFun = new Amap.AMapWX({ key: app.globalData.gdApiKey });
     myAmapFun.getPoiAround({
       success: function (data) {
-        let alltude = that.data.longitude + ',' + that.data.latitude;
-        for (let i = 0; i < data.poisData.length ; i++){
-          let distan = that.getGreatCircleDistance(alltude,data.poisData[i].location)
-          data.poisData[i].distance = distan
-        }
-        that.setData({
-          mapaddressList: data.poisData
-        })
+        console.log(data)
+        // let alltude = that.data.longitude + ',' + that.data.latitude;
+        // for (let i = 0; i < data.poisData.length ; i++){
+        //   let distan = that.getGreatCircleDistance(alltude,data.poisData[i].location)
+        //   data.poisData[i].distance = distan
+        // }
+        // that.setData({
+        //   mapaddressList: data.poisData
+        // })
       }, fail: function (info) {
 
         console.log(info)
@@ -509,7 +518,7 @@ Page({
     that.setData({
       regionone: e.currentTarget.dataset.title
     })
-    wx.setStorageSync("historyregionone", e.currentTarget.dataset.title)
+    wx.setStorageSync("historyregionone", e.currentTarget.dataset)
     wx.navigateBack({ delta: 1 })
   },
   /**
@@ -525,7 +534,6 @@ Page({
     this.getMapInfo();
     this.openSetting();
     this.addmap();
-    this.aroundmap();
   },
 
   /**
@@ -533,6 +541,7 @@ Page({
    */
   onReady: function () {
     this.mapCtx = wx.createMapContext('myMap')
+    this.aroundmap()
   },
 
   /**
