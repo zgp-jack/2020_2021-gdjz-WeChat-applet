@@ -827,7 +827,6 @@ Page({
         this.initUserLocation();
         this.initFooterData();
         this.checkIsInvite(options);
-
     },
     /**
      * 生命周期函数--监听页面初次渲染完成
@@ -866,7 +865,11 @@ Page({
      * 页面相关事件处理函数--监听用户下拉动作
      */
     onPullDownRefresh: function () {
-
+      wx.showLoading({title: '下拉刷新'})
+      wx.startPullDownRefresh();
+      setTimeout(function(){
+        wx.stopPullDownRefresh()
+      },1500)
     },
 
     /**
@@ -876,7 +879,7 @@ Page({
         if ((this.data.isFirstRequest) || (this.data.showNothinkData) || (this.data.nothavemore)) return false;
         this.doRequestAction(true);
     },
-
+  
     /**
      * 用户点击右上角分享
      */
