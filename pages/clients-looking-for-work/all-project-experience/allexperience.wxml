@@ -1,0 +1,36 @@
+<view>
+ <view class="skilleight">
+   <image class="audit" src="../../../images/notthrough.png"></image>
+   <!-- <image class="audit" src="../../images/review.png"></image> -->
+   <view class="editor">编辑</view>
+    <view class="skilleightzong">
+      <image src="../../../images/newresume-experience-item.png" class="skilleightone"></image>
+      <view></view>
+      <view class="skilleightall">
+        <view class="project">
+          广东中山碧桂园项目
+        </view>
+        <view class="skilleighttwo">
+          <text>2019-01-2020-12</text>
+          <text>广东省台州市</text>
+        </view>
+        <view class="description">
+           主要包工所有水电安装以及埋管
+        </view>
+        <view class="skilleightfive">
+          <view class="skilleightfiveline">
+            <image></image>
+            <image></image>
+            <image></image>
+          </view>
+        </view>
+        <view class="skilleightsixall">
+          没有更多了...
+        </view>
+        <view class="skillsixsixallvoto">
+        </view>
+      </view>
+    </view>
+  </view>
+  <button class="obtn">添加项目经验</button>
+</view>

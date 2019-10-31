@@ -124,7 +124,7 @@ Page({
     },
     releaselive(){
       wx.navigateTo({
-        url: '/pages/finding-name-card/findingnamecard',
+        url: '/pages/clients-looking-for-work/finding-name-card/findingnamecard',
       })
     },
     /**

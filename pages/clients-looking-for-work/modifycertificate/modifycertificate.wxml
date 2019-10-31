@@ -1,0 +1,28 @@
+<view>
+  <view class="modifycertificatede">
+    <view class="modifycertificatedeone"> <view>职</view><view>业</view><view>技</view><view>能：</view></view>
+    <view class="modifycertificatedetwo">
+      <input type="text" placeholder="请输入您的职业技能名称"></input>
+    </view>
+  </view>
+  <view class="modifycertificatetime">
+    <text class="modifycertificatetimeone">领取证书时间:</text>
+    <view class="modifycertificatetimetwo">
+      <input type="text" placeholder="请选择您领取证书的时间"></input>
+    </view>
+  </view> 
+
+  <view class="modifycertificateimage">
+    <view wx:for="{{imgArrs}}" class='img_item' wx:key="{{item}}">
+      <image class="modifycertificateimageone" src='{{item}}' mode='widthFix' bindtap='previewImage' data-item="{{item}}" />
+    </view>
+    <view class='img_item' bindtap='chooseImage'>
+      <image class='modifycertificateimageone' src="../../../images/addimage.png" mode='widthFix' />
+    </view>
+  </view>
+
+  <view class="modifycertificatebottom">
+    <button class="modifycertificatebottomone">删除</button>
+    <button class="modifycertificatebottomotwo">确认保存</button>
+  </view>
+</view>

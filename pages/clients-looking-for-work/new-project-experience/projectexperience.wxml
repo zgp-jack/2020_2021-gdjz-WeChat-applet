@@ -1,0 +1,42 @@
+<view>
+  <view class="experienceheader">
+    <text class="experienceheaderone">项目名称：</text>
+    <view class="experienceheadertwo">
+      <input type="text" placeholder="请输入项目名称"></input>
+    </view>
+  </view>
+  <view class="experienceheader">
+    <text class="experienceheaderone">完工时间：</text>
+    <view class="experienceheadertwo">
+      <picker mode="date" value="{{date}}" start="09:01" end="21:01" bindchange="bindDateChange">
+        <input name="addtime" value="{{date}}" placeholder="请选择完工时间"></input>
+      </picker>
+    </view>
+  </view>
+  <view class="experienceheader">
+    <text class="experienceheaderone">所在地区：</text>
+    <view class="experienceheadertwo">
+      <picker bindchange="changeRegin" mode="region" value="{{region}}">
+        <input name="addregion" value="{{region}}" placeholder="请选择所在地区"></input>
+      </picker>
+    </view>
+  </view>
+  <view class="experiencethree">
+    <view class="experiencethreeone">项目详情：</view>
+    <view class="experiencethreetwo">
+      <textarea bindblur="bindTextAreaBlur" maxlength="500" placeholder="主要描述工作中的项目情况..." />
+    </view>
+  </view>
+  <view class="experiencefour">
+    <view wx:for="{{imgArrs}}" class='img_item' wx:key="{{item}}">
+      <image class="experiencefourone" src='{{item}}' mode='widthFix' bindtap='previewImage' data-item="{{item}}" />
+    </view>
+    <view class='img_item' bindtap='chooseImage'>
+      <image class='experiencefourone' src="../../../images/addimage.png" mode='widthFix' />
+    </view>
+  </view>
+  <view class="experiencebottom">
+    <button class="experiencebottomone">保存 继续添加</button>
+    <button class="experiencebottomotwo">确认保存</button>
+  </view>
+</view>

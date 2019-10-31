@@ -1,0 +1,200 @@
+<view class="headerlivecard">
+  <view class="precardtwoheader">
+    注:分享名片 让你的名片更靠前
+  </view>
+  <view class="precardtwo">
+    <view class="precardtwosonone">
+      <view class="precardtwosononeimg">
+        <view class="oimg">
+          <image></image>
+        </view>
+        <view class="oimgone">
+          <text class="otext">李小六哈哈</text>
+          <view class="otextone">
+            <text>男</text>
+            <text class="ochange">55岁</text>
+            <text class="ochange">维吾尔族</text>
+          </view>
+        </view>
+      </view>
+      <view class="precardtwosontwo ">
+        <text>编辑</text>
+      </view>
+    </view>
+    <view class="line">
+      <view class="precardotext">
+        <view class="oworkone">
+          <image src="../../../images/newjobinfo-steps.png"></image>
+          <text class="workotext">工 <text class="telephone">种：</text></text>
+        </view>
+        <view class="owork">
+          <text class="workotextone">反对广泛大概豆腐干豆腐干豆腐干大豆腐干豆腐干感到翻跟斗翻跟斗翻跟斗范甘迪士大夫大士大夫水水水水水水水水水水水水水水水水</text>
+        </view>
+      </view>
+      <view class="precardotext">
+        <view class="oworkone">
+          <image src="../../../images/newjobinfo-steps.png"></image>
+          <text class="workotext">工 <text class="telephone">龄：</text></text>
+        </view>
+        <view class="owork">
+          <text class="workotextone">10年</text>
+        </view>
+      </view>
+      <view class="precardotext">
+        <view class="oworkone">
+          <image src="../../../images/newjobinfo-steps.png"></image>
+          <text class="workotext">手 <text class="telephone">机：</text></text>
+        </view>
+        <view class="owork">
+          <text class="workotextone">13525467856</text>
+        </view>
+      </view>
+      <view class="precardotext">
+        <view class="oworkone">
+          <image src="../../../images/newjobinfo-steps.png"></image>
+          <text class="workotext">熟<text class="states">练</text>度：</text>
+        </view>
+        <view class="owork">
+          <text class="workotextone">非常熟悉</text>
+        </view>
+      </view>
+      <view class="precardotext">
+        <view class="oworkone">
+          <image src="../../../images/newjobinfo-steps.png"></image>
+          <text class="workotext">找活人数：</text>
+        </view>
+        <view class="owork">
+          <text class="workotextone">100人</text>
+        </view>
+      </view>
+      <view class="precardotext">
+        <view class="oworkone">
+          <image src="../../../images/newjobinfo-steps.png"></image>
+          <text class="workotext">人员构成：</text>
+        </view>
+        <view class="owork">
+          <text class="workotextone">工人，班组突击队</text>
+        </view>
+      </view>
+      <view class="precardotext">
+        <view class="oworkone">
+          <image src="../../../images/newjobinfo-steps.png"></image>
+          <text class="workotext">我的家乡：</text>
+        </view>
+        <view class="owork">
+          <text class="workotextone">四川省成都市</text>
+        </view>
+      </view>
+      <view class="precardotext">
+        <view class="oworkone">
+          <image src="../../../images/newjobinfo-steps.png"></image>
+          <text class="workotext">所在地区：</text>
+        </view>
+        <view class="owork">
+          <text class="workotextone">四川省泸州市泸县尖叫村</text>
+        </view>
+      </view>
+      <view class="precardotext">
+        <view class="oworkone">
+          <image src="../../../images/newjobinfo-steps.png"></image>
+          <text class="workotext">标 <text class="telephone">签：</text></text>
+        </view>
+        <view class="owork">
+          <text class="workotextone">急速突击，</text>
+        </view>
+      </view>
+    </view>
+    <view class="precardotextbottom"></view>
+  </view>
+  <view class="precardthree">
+    <view class="precardthreemobile">
+      <image src="../../../images/newresume-description.png"></image>
+      自我介绍
+    </view>
+  </view>
+  <view class="precardfour">
+    <text> 士大夫士大夫士大夫士大夫士大夫胜多负少手动阀手动阀手动阀手动阀手动阀撒旦士大夫士大夫随风倒十分士大夫撒旦士大夫十分士大夫是非得失</text>
+    <view class="precardfourbottom"></view>
+  </view>
+  <view class="precardfive">
+    <view class="precardfivemobile">
+      <image src="../../../images/newresume-experience.png"></image>
+      项目经验
+    </view>
+  </view>
+  <view class="precardsix">
+    <view class="precardsixzong">
+  
+      <view class="precardsixall">
+        <view class="precardsixtwo">
+            <image src="../../../images/newresume-experience-item.png" class="precardsixone"></image>
+            <text>广东台山碧桂园项目</text>
+        </view>
+        <view class="precardsixthreeborder">
+          <view class="precardsixthreeline">
+            <view class="precardsixthree">
+              <text>2019-01-2020-12</text>
+              <text>广东省台州市</text>
+            </view>
+            <view class="precardsixfour">
+              <text>主要包工所有虽有水电安装</text>
+            </view>
+            <view class="precardsixfive">
+              <image></image>
+              <image></image>
+              <image></image>
+              <image></image>
+              <image></image>
+              <image></image>
+            </view>
+
+          </view>
+        </view>
+      </view>
+    </view>
+    <view class="precardsixsixall">
+      <button class="precardsixsix">
+        <view>
+          更多项目经验
+          <image src="../../../images/downward.png" class="down"></image>
+        </view>
+      </button>
+    </view>
+    <view class="precardsixsixallvoto">
+    </view>
+  </view>
+  <view class="precardseven">
+    <view class="precardsevenmobile">
+      <image src="../../../images/newresume-skill.png"></image>
+      职业技能
+    </view>
+  </view>
+  <view class="precardeight">
+    <view class="precardeightzong">
+      <view class="precardeightall">
+        <view class="precardeighttwo">
+          <image src="../../../images/newresume-experience-item.png" class="precardeightone"></image>
+          <text  class="waterbook">水电工技术证书</text>
+          <text>2019-01</text>
+        </view>
+        <view class="precardeightfive">
+          <view class="precardeightfiveline">
+            <image></image>
+            <image></image>
+            <image></image>
+          </view>
+        </view>
+
+      </view>
+    </view>
+    <view class="none">
+      <image src="../../../images/none.png"></image>
+      <text>没有更多了...</text>
+    </view>
+    <view class="precardsixsixallvoto">
+    </view>
+  </view>
+  <view class="precardebottom">
+  </view>
+
+</view>

@@ -25,7 +25,7 @@
             <!-- <view class='common-publish-item'>
                 <view class='common-publish-item-content'>
                     <text class='common-publish-words'>地区</text>
-                        <picker mode="multiSelector" bindchange="bindMultiPickerChange" bindcolumnchange="bindPickerColumnChange" value="{{[pindex,cindex,tindex]}}" range-key="name" range="{{objectAreaData}}" >
+                        <picker mode="multiSelector" bindchange="bindMultiPickerChange" bindcolumnchange="bindPickerColumnChange" value="{{[pindex,cindex,]}}" range-key="name" range="{{objectAreaData}}" >
                             <view class='common-publish-allwords' wx:if="{{ cardInfo.provinceId != ''  }}">{{ areaText  }}</view>
                             <input class='common-publish-input' disabled placeholder='请选择地区'  wx:if="{{ cardInfo.provinceId == '' }}" ></input>
                         </picker>

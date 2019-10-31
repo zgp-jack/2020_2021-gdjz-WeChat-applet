@@ -2,6 +2,7 @@
 const app = getApp();
 let vali = require("../../../utils/v.js");
 let areas = require("../../../utils/area.js");
+
 Page({
 
   /**
@@ -247,6 +248,7 @@ Page({
       success: function (res) {
         let mydata = res.data;
         if (mydata.errcode == "ok") {
+          console.log(mydata)
           _this.setData({
             infoId: infoId,
             userPhone: mydata.model.user_mobile || mydata.memberInfo.tel,
