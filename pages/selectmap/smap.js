@@ -212,7 +212,6 @@ Page({
     let that = this;
     this.getKeywordsInputs(this.data.keyAutoVal, function (data) {
       that.setData({ addressList: data })
-      that.setData({ mapaddressList: data })
     });
     return false;
   },
@@ -398,7 +397,6 @@ Page({
       location: l,
       district: d
     }
-    wx.setStorageSync("historyregionone", hl)
     this.checkAdcode(a, function () {
       let prevPage = app.getPrevPage();
 
@@ -479,7 +477,7 @@ Page({
             longitude: data[0].longitude,
             width: 20,
             height: 20,
-            iconPath: "../../images/gps-posi.png"
+            iconPath: "../../images/gps.png"
           }]
         })
       }, fail: function (info) {
@@ -498,14 +496,14 @@ Page({
     myAmapFun.getPoiAround({
       success: function (data) {
         console.log(data)
-        // let alltude = that.data.longitude + ',' + that.data.latitude;
-        // for (let i = 0; i < data.poisData.length ; i++){
-        //   let distan = that.getGreatCircleDistance(alltude,data.poisData[i].location)
-        //   data.poisData[i].distance = distan
-        // }
-        // that.setData({
-        //   mapaddressList: data.poisData
-        // })
+        let alltude = that.data.longitude + ',' + that.data.latitude;
+        for (let i = 0; i < data.poisData.length ; i++){
+          let distan = that.getGreatCircleDistance(alltude,data.poisData[i].location)
+          data.poisData[i].distance = distan
+        }
+        that.setData({
+          mapaddressList: data.poisData
+        })
       }, fail: function (info) {
 
         console.log(info)
@@ -520,6 +518,40 @@ Page({
     })
     wx.setStorageSync("historyregionone", e.currentTarget.dataset)
     wx.navigateBack({ delta: 1 })
+  },
+
+  regionchange(e) {
+  
+    // 地图发生变化的时候，获取中间点，也就是用户选择的位置toFixed
+    if (e.type == 'end' && (e.causedBy == 'scale' || e.causedBy == 'drag')) {
+
+      var that = this;
+      that.mapCtx = wx.createMapContext("map4select");
+      that.mapCtx.getCenterLocation({
+        type: 'gcj02',
+        success: function (res) {
+          console.log(res)
+          that.setData({
+            latitude: res.latitude,
+            longitude: res.longitude,
+            circles: [{
+              latitude: res.latitude,
+              longitude: res.longitude,
+              color: '#FF0000DD',
+              fillColor: '#d1edff88',
+              radius: 3000,//定位点半径
+              strokeWidth: 1
+            }]
+          })
+        }
+      })
+    }
+  },
+  //定位到自己的位置事件
+  my_location: function (e) {
+    console.log(e)
+    var that = this;
+    that.onLoad();
   },
   /**
    * 生命周期函数--监听页面加载

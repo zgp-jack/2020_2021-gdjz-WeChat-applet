@@ -50,4 +50,8 @@
   height: 0;
   color: transparent;
 }
-/* inputandimg */
+
+.cover-image_confirm{
+    width: 40rpx;
+  height: 40rpx;
+}
