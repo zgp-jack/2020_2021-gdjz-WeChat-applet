@@ -1,0 +1,250 @@
+
+.informationtwo{
+  width: 93%;
+  margin: 0 auto;
+  background: white;
+  margin-top: 20rpx;
+} 
+
+.informationworkage{
+  width: 93%;
+  margin: 0 auto;
+  height: 110rpx;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  background-color: white;
+  border-bottom: 1px solid #F1F1F1;
+}
+.informationworkage .informationworkageone{
+  width: 28%;
+  font-size: 28rpx;
+  line-height: 110rpx;
+  color: #2A2A2A;
+  margin-left: 19rpx;
+  font-weight: bold;
+}
+.informationworkage .informationworkageone text{
+    padding-left: 58rpx;
+}
+.informationworkage .informationworkagetwo{
+  width: 80%;
+  height: 110rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.informationworkage .informationworkagetwo input{
+  font-size: 28rpx;
+  height: 110rpx;
+}
+
+
+.informationsix{
+  width: 93%;
+  margin: 0 auto;
+  height: 110rpx;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  background-color: white;
+  border-bottom: 1px solid #F1F1F1;
+}
+
+.informationsix .informationsixone{
+  width: 28%;
+  font-size: 28rpx;
+  line-height: 110rpx;
+  color: #2A2A2A;
+  margin-left: 19rpx;
+  font-weight: bold;
+}
+.informationsix .informationsixone text{
+    padding-left: 58rpx;
+}
+.informationsix .informationsixtwo{
+  width: 80%;
+  height: 110rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.informationsix .informationsixtwo input{
+  font-size: 28rpx;
+  height: 110rpx;
+}
+
+
+
+.informationproficiency{
+  width: 93%;
+  margin: 0 auto;
+  height: 110rpx;
+  display: flex;
+  flex-direction: row;
+  background-color: white;
+  border-bottom: 1px solid #F1F1F1;
+}
+.informationproficiency .informationproficiencyone{
+  width: 28%;
+  font-size: 28rpx;
+  line-height: 110rpx;
+  color: #2A2A2A;
+  margin-left: 19rpx;
+  font-weight: bold;
+}
+
+.informationproficiency .informationproficiencyone .proficiency{
+    margin-left: 14rpx;
+    margin-right: 14rpx;
+}
+
+.informationproficiency .informationproficiencytwo{
+  width: 80%;
+  height: 110rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.informationproficiency  input{
+  font-size: 28rpx;
+  height: 110rpx;
+}
+
+
+.informationcomposition{
+  width: 93%;
+  margin: 0 auto;
+  height: 110rpx;
+  display: flex;
+  flex-direction: row;
+  background-color: white;
+
+}
+.informationcomposition .informationcompositionone{
+  width: 28%;
+  font-size: 28rpx;
+  line-height: 110rpx;
+  color: #2A2A2A;
+  margin-left: 19rpx;
+  font-weight: bold;
+}
+
+.informationcomposition .informationcompositionone .proficiency{
+    margin-left: 14rpx;
+    margin-right: 14rpx;
+}
+
+.informationcomposition .informationcompositiontwo{
+  width: 80%;
+  height: 110rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.informationcomposition  input{
+  font-size: 28rpx;
+  height: 110rpx;
+}
+
+
+.informationteamsnumber{
+  width: 93%;
+  margin: 0 auto;
+  margin-top: 19rpx;
+  height: 90rpx;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  background-color: white;
+  border-bottom: 1px solid #F1F1F1;
+}
+.informationteamsnumber .informationteamsnumberone{
+  width: 28%;
+  font-size: 28rpx;
+  line-height: 90rpx;
+  color: #2A2A2A;
+  margin-left: 19rpx;
+  font-weight: bold;
+}
+.informationteamsnumber .informationteamsnumberone text{
+    padding-left: 58rpx;
+}
+.informationteamsnumber .informationteamsnumbertwo{
+  width: 80%;
+  height: 90rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.informationteamsnumber .informationteamsnumbertwo input{
+  font-size: 28rpx;
+  height: 110rpx;
+
+}
+
+
+.informationlabel{
+  width: 93%; 
+  margin: 0 auto;
+  height: 228rpx;
+  background: white;
+  margin-top: 20rpx;
+  overflow: hidden;
+}
+.informationlabelone{
+  font-size: 30rpx;
+  margin-left: 19rpx;
+  margin-top: 24rpx;
+  color: #2A2A2A;
+  font-weight: bold;
+}
+.informationlabeltwo{
+  width: 94%;
+  margin: 0 auto;
+  margin-top: 24rpx;
+  height: 50rpx;
+}
+
+.informationsave{
+  width: 521rpx;
+  background: #108EEF;
+  color: white;
+  font-size: 38rpx;
+  text-align: center;
+  line-height:  97rpx;
+  position: fixed;
+  bottom: 42rpx;
+  left: 50%;
+  margin-left: -260.5rpx;
+}
+
+.informationnosave{
+  margin-top: 12rpx;
+  margin-left: 2%;
+  display: inline-block;
+  width: 150rpx;
+  height: 50rpx;
+  border: 1px solid #BFBFBF;
+  color: #666666;
+  font-size: 24rpx;
+  text-align:center;
+  line-height: 50rpx; 
+  border-radius: 24rpx;
+}
+
+.oinformationnosave{
+  margin-top: 12rpx;
+  margin-left: 2%;
+  display: inline-block;
+  width: 150rpx;
+  height: 50rpx;
+  font-size: 24rpx;
+  text-align:center;
+  line-height: 50rpx; 
+  border-radius: 24rpx;
+  border: 1px solid #108EEF;
+  background: #108EEF;
+  color: white;
+}

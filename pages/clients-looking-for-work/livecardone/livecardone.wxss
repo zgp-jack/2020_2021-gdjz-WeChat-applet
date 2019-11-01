@@ -23,19 +23,21 @@
   display: block;
   font-size: 30rpx;
   margin-left: 13rpx;
+  letter-spacing: 4rpx;
+  font-weight: bold;
 }
 
 .cardson .cardsonone view {
   margin-top: 6rpx;
   margin-bottom: 14rpx;
   font-size: 26rpx;
-  color: #f87a14;
+  color: #0099FF;
   margin-left: 13rpx;
 }
 
 .cardson .cardsontwo text {
   margin-left: 40rpx;
-  color: #09f;
+  color: #0099FF;
   font-size: 26rpx;
   font-weight: bold;
 }
@@ -67,18 +69,23 @@
   font-size: 26rpx;
   color: #343434;
   margin-top: 25rpx;
+    height: 28rpx;
 }
-
+.cardone .cardoneson .cardonesonone view{
+  display: inline;
+}
 .cardone .cardoneson .cardonesonone image {
-  margin-left: 14rpx;
-  width: 28rpx;
-  height: 28rpx;
+  margin-left: 47rpx;
+  width: 25rpx;
+  height: 24rpx;
+  line-height: 28rpx;
 }
 
 .cardone .cardoneson .cardonesonone text {
-  margin-left: 14rpx;
-  width: 28rpx;
-  height: 28rpx;
+  margin-left: 18rpx;
+    width: 24%;
+   height: 28rpx;
+   line-height:28rpx;
 }
 
 .cardone .cardoneson .cardonesontwo {
@@ -200,6 +207,7 @@
   font-size: 24rpx;
   width: 140rpx;
   margin-top: 14rpx;
+  margin-bottom: 6rpx;
 }
 
 .cardotext .workotext .telephone {
@@ -214,30 +222,39 @@
   color: black;
   font-size: 24rpx;
 }
-
+.cardotext .workotextonetu {
+  color: black;
+  font-size: 24rpx;
+  background: #E7E7E7;
+  display: inline-block;
+  width: 146rpx;
+  height: 37rpx;
+  line-height: 37rpx;
+  text-align: center;
+}
 .cardotextbottom {
   margin-top: 16rpx;
 }
 
 .cardthree {
   width: 93%;
-  margin: 12rpx auto;
-  margin-bottom: 16rpx;
+  margin: 0 auto;
+  margin-top: 12rpx;
+  margin-bottom: 18rpx;
   height: 24rpx;
   font-size: 24rpx;
-  position: relative;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }
 
 .cardthree .cardthreemobile {
-  position: absolute;
-  left: 50%;
-  margin-left: -70rpx;
   font-size: 26rpx;
   font-weight: bold;
+    margin-left: 28rpx;
 }
 
 .cardthree image {
-  margin-left: 6rpx;
   width: 22rpx;
   height: 24rpx;
 }
@@ -245,8 +262,7 @@
 .cardthree .cardthreeone {
   font-size: 24rpx;
   color: #09f;
-  position: absolute;
-  right: 8rpx;
+  margin-right: 26rpx;
 }
 
 .cardfour {
@@ -281,32 +297,31 @@
 
 .cardfive {
   width: 93%;
-  margin: 12rpx auto;
-  margin-bottom: 16rpx;
+  margin: 0 auto;
+  margin-top: 12rpx;
+  margin-bottom: 18rpx;
   height: 24rpx;
   font-size: 24rpx;
-  position: relative;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }
 
 .cardfive .cardfivemobile {
-  position: absolute;
-  left: 50%;
-  margin-left: -70rpx;
-  font-size: 26rpx;
+ font-size: 26rpx;
   font-weight: bold;
+    margin-left: 28rpx;
 }
 
 .cardfive image {
-  margin-left: 6rpx;
   width: 22rpx;
   height: 24rpx;
 }
 
 .cardfive .cardthreeone {
-  font-size: 24rpx;
+ font-size: 24rpx;
   color: #09f;
-  position: absolute;
-  right: 8rpx;
+  margin-right: 26rpx;
 }
 
 .cardsix {
@@ -392,23 +407,23 @@
 
 .cardseven {
   width: 93%;
-  margin: 12rpx auto;
-  margin-bottom: 16rpx;
+  margin: 0 auto;
+  margin-top: 12rpx;
+  margin-bottom: 18rpx;
   height: 24rpx;
   font-size: 24rpx;
-  position: relative;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }
 
 .cardseven .cardsevenmobile {
-  position: absolute;
-  left: 50%;
-  margin-left: -70rpx;
   font-size: 26rpx;
   font-weight: bold;
+    margin-left: 28rpx;
 }
 
 .cardseven image {
-  margin-left: 6rpx;
   width: 22rpx;
   height: 24rpx;
 }
@@ -416,8 +431,7 @@
 .cardseven .cardthreeone {
   font-size: 24rpx;
   color: #09f;
-  position: absolute;
-  right: 8rpx;
+  margin-right: 26rpx;
 }
 
 .cardeight {
@@ -539,3 +553,14 @@
   position: relative;
   left: -4%;
 }
+
+
+.content{
+  font-size: 24rpx;
+  color: #797979;
+  margin-left: 8.5%;
+  margin-bottom: 8rpx;
+  padding-right: 2%;
+}
+
+/* workotext cardthree cardfive workotextone */

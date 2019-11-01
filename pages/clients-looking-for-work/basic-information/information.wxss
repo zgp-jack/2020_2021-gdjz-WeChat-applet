@@ -33,7 +33,6 @@
   margin-top: 30rpx;
 }
 .informationtwo{
-  height: 635rpx;
   width: 93%;
   margin: 0 auto;
   background: white;
@@ -174,8 +173,7 @@
 .informationsix{
   width: 93%;
   margin: 0 auto;
-  margin-top: 19rpx;
-  height: 90rpx;
+  height: 110rpx;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -186,16 +184,17 @@
 .informationsix .informationsixone{
   width: 28%;
   font-size: 28rpx;
-  line-height: 90rpx;
+  line-height: 110rpx;
   color: #2A2A2A;
   margin-left: 19rpx;
+  font-weight: bold;
 }
 .informationsix .informationsixone text{
     padding-left: 58rpx;
 }
 .informationsix .informationsixtwo{
   width: 80%;
-  height: 90rpx;
+  height: 110rpx;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -311,8 +310,7 @@
 .informationworkage{
   width: 93%;
   margin: 0 auto;
-  margin-top: 19rpx;
-  height: 90rpx;
+  height: 110rpx;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -322,16 +320,17 @@
 .informationworkage .informationworkageone{
   width: 28%;
   font-size: 28rpx;
-  line-height: 90rpx;
+  line-height: 110rpx;
   color: #2A2A2A;
   margin-left: 19rpx;
+  font-weight: bold;
 }
 .informationworkage .informationworkageone text{
     padding-left: 58rpx;
 }
 .informationworkage .informationworkagetwo{
   width: 80%;
-  height: 90rpx;
+  height: 110rpx;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -345,8 +344,7 @@
 .informationproficiency{
   width: 93%;
   margin: 0 auto;
-  margin-top: 19rpx;
-  height: 90rpx;
+  height: 110rpx;
   display: flex;
   flex-direction: row;
   background-color: white;
@@ -355,9 +353,10 @@
 .informationproficiency .informationproficiencyone{
   width: 25%;
   font-size: 28rpx;
-  line-height: 90rpx;
+  line-height: 110rpx;
   color: #2A2A2A;
   margin-left: 19rpx;
+  font-weight: bold;
 }
 
 .informationproficiency .informationproficiencyone .proficiency{
@@ -367,7 +366,7 @@
 
 .informationproficiency .informationproficiencytwo{
   width: 80%;
-  height: 90rpx;
+  height: 110rpx;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -382,19 +381,19 @@
 .informationcomposition{
   width: 93%;
   margin: 0 auto;
-  margin-top: 19rpx;
-  height: 90rpx;
+  height: 110rpx;
   display: flex;
   flex-direction: row;
   background-color: white;
-  border-bottom: 1px solid #F1F1F1;
+
 }
 .informationcomposition .informationcompositionone{
   width: 25%;
   font-size: 28rpx;
-  line-height: 90rpx;
+  line-height: 110rpx;
   color: #2A2A2A;
   margin-left: 19rpx;
+  font-weight: bold;
 }
 
 .informationcomposition .informationcompositionone .proficiency{
@@ -404,7 +403,7 @@
 
 .informationcomposition .informationcompositiontwo{
   width: 80%;
-  height: 90rpx;
+  height: 110rpx;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -576,6 +575,7 @@
   margin-left: 19rpx;
   margin-top: 24rpx;
   color: #2A2A2A;
+  font-weight: bold;
 }
 .informationlabeltwo{
   width: 94%;
@@ -619,8 +619,10 @@
   font-size: 38rpx;
   text-align: center;
   line-height:  97rpx;
-  margin-bottom: 42rpx;
-  margin-top: 20rpx;
+  position: fixed;
+  bottom: 42rpx;
+  left: 50%;
+  margin-left: -260.5rpx;
 }
 
 
@@ -730,3 +732,9 @@
 .choose-content-checkbox-active{
     background: #0099ff;
 }
+
+
+/* informationtwo informationtwi informationseven
+  informationpeople  informationtelephone informationevaluation
+  informationsave
+*/ 

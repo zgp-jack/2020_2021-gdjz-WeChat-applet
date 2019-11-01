@@ -1,0 +1,95 @@
+<view>
+  <view class="informationtwo">
+    <view class="informationtwi">
+      <text class="informationtwione">姓<text>名：</text></text>
+      <view class="informationtwitwo">
+        <input type="text" placeholder="请输入你的名字" bindinput="name"></input>
+      </view>
+    </view>
+    <view class="informationthree">
+      <text class="informationthreeone">性<text>别：</text></text>
+      <picker bindchange="sex" range="{{array}}" class="informationthreetwo">
+        <input disabled  name="addregion" value="{{array[sex]}}" placeholder="请选择性别"></input>
+      </picker>
+    </view>
+    <view class="informationfour">
+      <text class="informationfourone">出生日期：</text>
+      <view class="informationfourtwo">
+        <picker mode="date" value="{{date}}" start="09:01" end="21:01" bindchange="birthday">
+          <input disabled name="addtime" value="{{birthday}}" placeholder="请选择出生日期"></input>
+        </picker>
+      </view>
+    </view>
+    <view class="informationfive">
+      <text class="informationfiveone">民<text>族：</text></text>
+      <picker bindchange="nation" range="{{nationalarray}}" class="informationfivetwo">
+        <input disabled  name="addnational" value="{{nationalarray[nation]}}" placeholder="请选择民族"></input>
+      </picker>
+    </view>
+
+    <view class="informationpeople">
+
+      <view class="informationTypework">
+        <text class="informationTypeworkone">所属工种：</text>
+        <text bindtap="typeworktwo" class=' {{ workIndexvalue.length==5 ? "informationTypeworktwo":"informationTypeworktwoo" }}'>{{workIndexvalue}}</text>
+
+      </view>
+      <view class='publish-choose-wordtype' wx:if="{{ showWorkType }}">
+        <view class='publish-choose-contentbox common-shaded-box'>
+          <view class='publish-choose-header'>选择工种</view>
+          <view class='publish-choose-body'>
+            <view class='publish-choose-content-item' wx:for="{{ typeworkarray }}" wx:key="{{ index }}" wx:for-index="pindex" wx:if="{{ item.has_children }}">
+              <view class='publish-choose-content-header'>{{ item.name }}</view>
+              <view class='publish-choose-content-list' wx:for="{{item.children }}" wx:key="{{ index }}" wx:for-index="cindex" bindtap='userClickItem' data-type='workType' data-id="{{ item.id }}" data-check="{{ item.is_check }}" data-index='{{ pindex }}' data-name="{{item.name}}">
+                <text class='choose-content-lish-left'>{{ item.name }}</text>
+                <text class='choose-content-checkbox {{ item.is_check ? "choose-content-checkbox-active":"" }}'></text>
+              </view>
+            </view>
+          </view>
+          <view class='publish-choose-footer flex-row'>
+            <view bindtap='userSureWorktype'>确定</view>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <view class="informationseven">
+      <text class="informationsevenone">所在地区：</text>
+      <view class="informationseventwo">
+        <input name="addregionone" placeholder="请选择你所在地址" bindtap='userTapAddress' value='{{regionone}}'>
+
+        </input>
+        <text class="positioning" bindtap="GPSsubmit">获取定位</text>
+      </view>
+    </view>
+
+  </view>
+  <view class="informationtelephone">
+    <view class="informationtheinput">
+      <text class="informationtheinputone">手机号码：</text>
+      <view class="informationtheinputtwo">
+        <input type="text" placeholder="请输入手机号" bindinput="telephone"></input>
+      </view>
+    </view>
+
+    <view class="informationverificationcode">
+      <text class="informationverificationcodeone">验<text class="verificationcode">证</text>码：</text>
+      <view class="informationverificationcodetwo">
+        <input type="text" placeholder="请输入验证码" bindinput="verify"></input>
+        <text>获取验证码</text>
+      </view>
+    </view>
+  </view>
+
+  <view class="informationevaluation">
+    <view class="informationevaluationone">
+      自我介绍：
+    </view>
+    <textarea class="informationevaluationtwo" bindinput="textareavalue" maxlength="-1" placeholder="请简要介绍你所从事的行业以及工作经验...">
+    </textarea>
+  </view>
+
+  <button class="informationsave" bindtap="submitinformation">
+    保存资料
+  </button>
+</view>

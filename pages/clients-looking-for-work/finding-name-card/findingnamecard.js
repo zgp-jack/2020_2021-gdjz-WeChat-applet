@@ -11,7 +11,7 @@ Page({
   },
   toperfect(){
     wx.navigateTo({
-      url: '/pages/clients-looking-for-work/basic-information/information',
+      url: '/pages/clients-looking-for-work/essential-information/esinformation',
     })
   },
   namerequest() {

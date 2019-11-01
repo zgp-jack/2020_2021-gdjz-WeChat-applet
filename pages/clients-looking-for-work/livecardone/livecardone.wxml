@@ -3,7 +3,7 @@
     <view class="cardson">
       <view class="cardsonone">
         <text>名片完善度：</text>
-        <view>资料越完善找活越容易</view>
+        <view>资料越完善找活越容易，马上去完善>></view>
       </view>
       <view class="cardsontwo">
         <text>0</text>
@@ -14,7 +14,9 @@
   <view class="cardone">
     <view class="cardoneson">
       <view class="cardonesonone">
-        <image src="../../../images/workdetail.png"></image>
+        <view>
+          <image src="../../../images/workdetail.png"></image>
+        </view>
         <text>我的工作状态：</text>
       </view>
       <view class="cardonesontwo">
@@ -51,10 +53,10 @@
           <text class="workotext">工 <text class="telephone">种：</text></text>
         </view>
         <view class="owork">
-          <text class="workotextone">反对广泛大概豆腐干豆腐干豆腐干大豆腐干豆腐干感到翻跟斗翻跟斗翻跟斗范甘迪士大夫大</text>
+          <text class="workotextonetu">建筑木工</text>
         </view>
       </view>
-      <view class="cardotext">
+      <!-- <view class="cardotext">
         <view class="oworkone">
           <image src="../../../images/newjobinfo-steps.png"></image>
           <text class="workotext">工 <text class="telephone">龄：</text></text>
@@ -62,7 +64,7 @@
         <view class="owork">
           <text class="workotextone">10年</text>
         </view>
-      </view>
+      </view> -->
       <view class="cardotext">
         <view class="oworkone">
           <image src="../../../images/newjobinfo-steps.png"></image>
@@ -72,7 +74,7 @@
           <text class="workotextone">13525467856</text>
         </view>
       </view>
-      <view class="cardotext">
+      <!-- <view class="cardotext">
         <view class="oworkone">
           <image src="../../../images/newjobinfo-steps.png"></image>
           <text class="workotext">熟<text class="states">练</text>度：</text>
@@ -80,8 +82,8 @@
         <view class="owork">
           <text class="workotextone">非常熟悉</text>
         </view>
-      </view>
-      <view class="cardotext">
+      </view> -->
+      <!-- <view class="cardotext">
         <view class="oworkone">
           <image src="../../../images/newjobinfo-steps.png"></image>
           <text class="workotext">找活人数：</text>
@@ -89,8 +91,8 @@
         <view class="owork">
           <text class="workotextone">100人</text>
         </view>
-      </view>
-      <view class="cardotext">
+      </view> -->
+      <!-- <view class="cardotext">
         <view class="oworkone">
           <image src="../../../images/newjobinfo-steps.png"></image>
           <text class="workotext">人员构成：</text>
@@ -98,8 +100,8 @@
         <view class="owork">
           <text class="workotextone">工人，班组突击队</text>
         </view>
-      </view>
-      <view class="cardotext">
+      </view> -->
+      <!-- <view class="cardotext">
         <view class="oworkone">
           <image src="../../../images/newjobinfo-steps.png"></image>
           <text class="workotext">我的家乡：</text>
@@ -107,7 +109,7 @@
         <view class="owork">
           <text class="workotextone">四川省成都市</text>
         </view>
-      </view>
+      </view> -->
       <view class="cardotext">
         <view class="oworkone">
           <image src="../../../images/newjobinfo-steps.png"></image>
@@ -120,13 +122,20 @@
       <view class="cardotext">
         <view class="oworkone">
           <image src="../../../images/newjobinfo-steps.png"></image>
+          <text class="workotext">自我介绍：</text>
+        </view>
+      </view>
+      <!-- <view class="cardotext">
+        <view class="oworkone">
+          <image src="../../../images/newjobinfo-steps.png"></image>
           <text class="workotext">标 <text class="telephone">签：</text></text>
         </view>
         <view class="owork">
           <text class="workotextone">急速突击，</text>
         </view>
-      </view>
+      </view> -->
     </view>
+    <view class="content">请简要介绍您所从事的行业以及工作经验...</view>
     <view class="cardotextbottom"></view>
   </view>
   <view class="cardthree">
@@ -138,7 +147,69 @@
       编辑
     </view>
   </view>
-  <view class="cardfour">
+    <view class="cardtwo">
+    <view class="line">
+
+      <view class="cardotext">
+        <view class="oworkone">
+          <image src="../../../images/newjobinfo-steps.png"></image>
+          <text class="workotext">工 <text class="telephone">龄：</text></text>
+        </view>
+        <view class="owork">
+          <text class="workotextone">10年</text>
+        </view>
+      </view>
+       <view class="cardotext">
+        <view class="oworkone">
+          <image src="../../../images/newjobinfo-steps.png"></image>
+          <text class="workotext">人员构成：</text>
+        </view>
+        <view class="owork">
+          <text class="workotextone">工人，班组突击队</text>
+        </view>
+      </view>
+
+      <view class="cardotext">
+        <view class="oworkone">
+          <image src="../../../images/newjobinfo-steps.png"></image>
+          <text class="workotext">我的家乡：</text>
+        </view>
+        <view class="owork">
+          <text class="workotextone">四川省成都市</text>
+        </view>
+      </view>
+     <view class="cardotext">
+        <view class="oworkone">
+          <image src="../../../images/newjobinfo-steps.png"></image>
+          <text class="workotext">熟<text class="states">练</text>度：</text>
+        </view>
+        <view class="owork">
+          <text class="workotextone">非常熟悉</text>
+        </view>
+      </view>
+      <view class="cardotext">
+        <view class="oworkone">
+          <image src="../../../images/newjobinfo-steps.png"></image>
+          <text class="workotext">队伍人数：</text>
+        </view>
+        <view class="owork">
+          <text class="workotextone">100人</text>
+        </view>
+      </view>
+        <view class="cardotext">
+          <view class="oworkone">
+            <image src="../../../images/newjobinfo-steps.png"></image>
+            <text class="workotext">标 <text class="telephone">签：</text></text>
+          </view>
+          <view class="owork">
+            <text class="workotextonetu">急速突击</text>
+          </view>
+        </view>
+    </view>
+
+    <view class="cardotextbottom"></view>
+  </view>
+  <!-- <view class="cardfour">
     <text> 士大夫士大夫士大夫士大夫士大夫胜多负少手动阀手动阀手动阀手动阀手动阀撒旦士大夫士大夫随风倒十分士大夫撒旦士大夫十分士大夫是非得失</text>
     <view class="cardfourbottom"></view>
     <view class="result">
@@ -146,7 +217,7 @@
       <text>就不告诉你，就不告诉你，就不告诉你就不告诉你，就不告诉你,就不告诉你，就不告诉你,就不告诉你，就不告诉你</text>
       <view></view>
     </view>
-  </view>
+  </view> -->
   <view class="cardfive">
     <view class="cardfivemobile">
       <image src="../../../images/newresume-experience.png"></image>

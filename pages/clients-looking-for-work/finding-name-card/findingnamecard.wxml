@@ -6,7 +6,7 @@
     <view class="findingnamecardoneson">
       <view class="findingnamecardonesonone">
         <text>名片完善度：</text>
-        <view>资料越完善找活越容易</view>
+        <view>名片越完善找活越容易,马上去完善>></view>
       </view>
       <view class="findingnamecardonesontwo">
         <text>0</text>
@@ -15,19 +15,19 @@
     </view>
   </view>
   <view class="findingnamecardtwo">
-    <image class="findingnamecardtwoone" src="{{userimg}}"></image>
-    <text class="findingnamecardtwotwo">{{username}}</text>
+    <!-- <image class="findingnamecardtwoone" src="{{userimg}}"></image>
+    <text class="findingnamecardtwotwo">{{username}}</text> -->
     <text class="findingnamecardtwothree">你还没有完善基本信息</text>
     <view class="findingnamecardtwofour" bindtap="toperfect">去完善</view>
   </view>
   <view class="findingnamecardthree">
     <view class="findingnamecardthreemobile">
       <image src="../../../images/newresume-description.png"></image>
-      自我介绍
+      工作介绍
     </view>
   </view>
   <view class="findingnamecardfour">
-    <text class="findingnamecardfourone">你还没有完善基本信息</text>
+    <text class="findingnamecardfourone">完善工作介绍能让老板充分了解你或你的队伍</text>
     <view class="findingnamecardfourtwo">去完善</view>
   </view>
   <view class="findingnamecardfive">

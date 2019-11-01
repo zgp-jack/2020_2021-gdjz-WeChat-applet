@@ -5,6 +5,8 @@ const app = getApp();
 // bindPickerChange
 //is_check
 //workIndexvalue
+// userTapAddress
+//clock evaluation
 Page({
 
   /**
@@ -564,3 +566,4 @@ Page({
 
   }
 })
+

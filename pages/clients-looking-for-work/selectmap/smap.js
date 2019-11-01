@@ -4,7 +4,7 @@ let vali = require("../../../utils/v.js");
 const PI = Math.PI;
 let EARTH_RADIUS = 6378137.0;
 const Amap = require("../../../utils/amap-wx.js");
-
+//historyregionone
 const amapFun = new Amap.AMapWX({ key: app.globalData.gdApiKey });
 Page({
 
@@ -377,6 +377,7 @@ Page({
   },
   setAddressData: function (e) {
     console.log(e)
+    wx.setStorageSync("historyregionone", e.currentTarget.dataset)
     let _this = this;
     let area = this.data.areaText;
     let pname = this.data.keyAutoVal;
@@ -537,10 +538,12 @@ Page({
 
   },
   setAddressmap(e){
+    console.log(e)
     var that = this;
     that.setData({
       regionone: e.currentTarget.dataset.title
     })
+
     wx.setStorageSync("historyregionone", e.currentTarget.dataset)
     wx.navigateBack({ delta: 1 })
   },

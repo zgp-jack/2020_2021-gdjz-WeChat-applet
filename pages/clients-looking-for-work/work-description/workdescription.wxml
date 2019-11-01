@@ -1,0 +1,49 @@
+<view>
+  <view class="informationtwo">
+    <view class="informationworkage">
+      <text class="informationworkageone">工<text>龄：</text></text>
+      <view class="informationworkagetwo">
+        <input type="text" placeholder="请输入工龄" bindinput="peopleage" ></input>
+      </view>
+    </view>
+    <view class="informationsix">
+      <text class="informationsixone">家<text>乡：</text></text>
+      <!-- bindchange="initAllProvice" -->
+      <view class="informationsixtwo">
+        <picker bindchange="bindMultiPickerChange" bindcolumnchange="bindMultiPickerColumnChange" mode="multiSelector" value="{{multiIndex}}" range="{{multiArray}}">
+          <input disabled name="addregion" value="{{multiIndexvalue}}" placeholder="请选择家乡地址"></input>
+        </picker>
+      </view>
+    </view>
+    <view class="informationproficiency">
+      <text class="informationproficiencyone">熟<text class="proficiency">练</text>度：</text>
+      <picker bindchange="proficiency" class="informationproficiencytwo" range="{{proficiencyarray}}">
+        <input disabled  name="addproficiencyarray" value="{{proficiencyarray[indexproficiency]}}" bindinput="proficiency"  placeholder="请选择熟练度"></input>
+      </picker>
+    </view>
+    <view class="informationcomposition">
+      <text class="informationcompositionone">人员构成：</text>
+      <picker bindchange="constitute" class="informationcompositiontwo" range="{{compositionarray}}">
+        <input disabled  name="addcompositionarray" value="{{compositionarray[indexperson]}}" placeholder="请选择人员构成"></input>
+      </picker>
+    </view>
+    <view class="informationteamsnumber" wx:if="{{judge}}">
+      <text class="informationteamsnumberone">队伍人数：</text>
+      <view class="informationteamsnumbertwo">
+        <input type="text" placeholder="请输入人数" bindinput="teamsnum"></input>
+      </view>
+    </view>
+  </view>
+  <view class="informationlabel">
+    <view class="informationlabelone">
+      为自己贴个标签，让老板更懂你（可选3个）：
+    </view>
+    <view class="informationlabeltwo">
+      <text bindtap="clock" class="{{item.classname}}" wx:for="{{detailevaluation}}" wx:key="{{item}}" data-id="{{item.label_name}}" data-index="{{item.id}}">{{item.label_name}}</text>
+    </view>
+  </view>
+
+  <button class="informationsave" bindtap="submitmaterial">
+    保存资料
+  </button>
+</view>

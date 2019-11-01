@@ -3,11 +3,11 @@
   margin: 0 auto;
   height: 80rpx;
   background: white;
-  font-size: 27rpx;
+  font-size: 28rpx;
   color: #343434;
   line-height: 80rpx;
   text-align: center;
-  letter-spacing: 6rpx;
+  letter-spacing: 4rpx;
   font-weight: bold;
 }
 
@@ -34,13 +34,14 @@
   font-size: 28rpx;
   margin-left: 13rpx;
   font-weight: bold;
+  letter-spacing: 4rpx;
 }
 
 .findingnamecardoneson .findingnamecardonesonone view {
   margin-top: 6rpx;
   margin-bottom: 14rpx;
   font-size: 26rpx;
-  color: #f87a14;
+  color: #0099FF;
   margin-left: 13rpx;
 }
 
@@ -65,7 +66,7 @@
   overflow: hidden;
   padding-bottom: 40rpx;
 }
-.findingnamecardtwoone{
+/* .findingnamecardtwoone{
   display: block;
   width: 143rpx;
   height: 143rpx;
@@ -81,14 +82,15 @@
   text-align: center;
   font-size: 32rpx;
   margin-top: 16rpx;
-}
+} */
 .findingnamecardtwothree{
   width: 100%;
   display: block;
   color: #828181;
   text-align: center;
   font-size: 22rpx;
-  margin-top: 16rpx;
+  margin-top: 45rpx;
+  font-weight: bold;
 }
 .findingnamecardtwofour{
   width: 138rpx;
@@ -99,27 +101,27 @@
   line-height: 46rpx;
   font-size: 26rpx;
   margin: 0 auto;
-  margin-top: 22rpx;
+  margin-top: 28rpx;
   border-radius: 22rpx;
 }
 
 .findingnamecardthree {
   width: 93%;
-  margin: 12rpx auto;
-  margin-bottom: 16rpx;
+  margin-top: 12rpx;
+  margin-bottom: 18rpx;
   height: 24rpx;
   font-size: 24rpx;
-  position: relative;
+  margin-left: 24rpx;
+
 }
 .findingnamecardthree .findingnamecardthreemobile{
-  position: absolute;
-  left: 50%;
-  margin-left: -70rpx;
+
+
   font-size: 26rpx;
   font-weight: bold;
 }
 .findingnamecardthree image {
-  margin-left: 6rpx;
+
   width: 22rpx;
   height: 24rpx;
 }
@@ -144,6 +146,7 @@
   text-align: center;
   font-size: 22rpx;
   margin-top: 45rpx;
+  font-weight: bold;
 }
 
 .findingnamecardfourtwo{
@@ -161,21 +164,19 @@
 
 .findingnamecardfive {
   width: 93%;
-  margin: 12rpx auto;
-  margin-bottom: 16rpx;
+  margin-top: 12rpx;
+  margin-bottom: 18rpx;
   height: 24rpx;
   font-size: 24rpx;
-  position: relative;
+  margin-left: 24rpx;
 }
 .findingnamecardfive .findingnamecardfivemobile{
-  position: absolute;
-  left: 50%;
-  margin-left: -70rpx;
+
   font-size: 26rpx;
   font-weight: bold;
 }
 .findingnamecardfive image {
-  margin-left: 6rpx;
+
   width: 22rpx;
   height: 24rpx;
 }
@@ -195,6 +196,7 @@
   text-align: center;
   font-size: 22rpx;
   margin-top: 45rpx;
+  font-weight: bold;
 }
 
 .findingnamecardsixtwo{
@@ -213,21 +215,17 @@
 
 .findingnamecardseven {
   width: 93%;
-  margin: 12rpx auto;
-  margin-bottom: 16rpx;
+  margin-top: 12rpx;
+  margin-bottom: 18rpx;
   height: 24rpx;
   font-size: 24rpx;
-  position: relative;
+  margin-left: 24rpx;
 }
 .findingnamecardseven .findingnamecardsevenmobile{
-  position: absolute;
-  left: 50%;
-  margin-left: -70rpx;
   font-size: 26rpx;
   font-weight: bold;
 }
 .findingnamecardseven image {
-  margin-left: 6rpx;
   width: 22rpx;
   height: 24rpx;
 }
@@ -250,6 +248,7 @@
   text-align: center;
   font-size: 22rpx;
   margin-top: 45rpx;
+  font-weight: 600;
 }
 
 .findingnamecardeighttwo{
