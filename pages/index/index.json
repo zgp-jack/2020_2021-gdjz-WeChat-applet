@@ -1,3 +1,5 @@
 {
-  "navigationBarTitleText": "工地急招|工地招工|工地建筑招聘"
+  "navigationBarTitleText": "工地急招|工地招工|工地建筑招聘",
+  "enablePullDownRefresh": true,
+  "backgroundTextStyle": "dark"
 }

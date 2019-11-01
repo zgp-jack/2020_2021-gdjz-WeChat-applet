@@ -1,3 +1,5 @@
 {
-  "navigationBarTitleText": "工地招工|找施工队|工人找活的工程信息网"
+  "navigationBarTitleText": "工地招工|找施工队|工人找活的工程信息网",
+  "enablePullDownRefresh": true,
+  "backgroundTextStyle":"dark"
 }

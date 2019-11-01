@@ -182,13 +182,13 @@ page{
     color: #fff;
 }
 .yupao-lists-container{
-    /* position: relative;
-    padding-top: 180rpx;*/
+    position: relative;
+    padding-top: 180rpx;
     width: 100%;
     /* padding-left: 27rpx;
     padding-right: 27rpx;  */
 
-    position: fixed;height:calc(100% - 280rpx);top: 180rpx;left: 0;padding-bottom: 0;overflow-y: scroll;box-sizing: border-box; 
+    /* position: fixed;height:calc(100% - 280rpx);top: 180rpx;left: 0;padding-bottom: 0;overflow-y: scroll;box-sizing: border-box;  */
 }
 
 .yupao-lists-notice{
@@ -310,7 +310,7 @@ page{
 .joblist-wyjz{position: absolute;bottom: 0;right: 0;width: 80rpx;height: 80rpx;z-index: 1;border-radius: 0 0 2px 0;}
 
 
-.returntop{position: fixed;width: 80rpx;height: 80rpx;display: block;right: 50rpx;bottom: -120rpx;border-radius: 50%;box-shadow:0  0 5rpx #0099ff;transition: 0.5s;}
+.returntop{position: fixed;width: 80rpx;height: 80rpx;display: block;right: 50rpx;bottom: -120rpx;border-radius: 50%;box-shadow:0  0 5rpx #0099ff;transition: 0.5s;z-index: 10;}
 
 .returntop-active{bottom: 115rpx;}
 

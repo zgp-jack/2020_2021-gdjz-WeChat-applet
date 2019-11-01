@@ -219,7 +219,7 @@ Page({
             url: '/pages/static/notice?type=1&id=' + _id,
         })
     },
-    doRequestAction: function (_append) {
+    doRequestAction: function (_append,callback) {
         let _this = this;
       if (_this.data.isload) return false;
         this.setData({
@@ -231,7 +231,8 @@ Page({
         app.doRequestAction({
             url: "index/info-list/",
             params: _this.data.searchDate,
-            success: function (res) {
+          success: function (res) {
+            callback ? callback() : ""
               _this.setData({ isload: false })
                 wx.hideLoading();
                 let mydata = res.data;
@@ -261,6 +262,7 @@ Page({
 
             },
             fail: function (err) {
+              callback ? callback():""
               _this.setData({ isload: false })
                 wx.hideLoading();
                 wx.showToast({
@@ -481,17 +483,17 @@ Page({
       this.initSearchHistory();
     },
     returnTop: function () {
-      this.setData({ scrollTop: 0 })
-        // if (wx.pageScrollTo) {
-        //     wx.pageScrollTo({
-        //         scrollTop: 0
-        //     })
-        // } else {
-        //     wx.showToast({
-        //         title: '当前微信版本过低，无法自动回到顶部，请升级到最新微信版本后重试。',
-        //         icon: 'none'
-        //     })
-        // }
+      //this.setData({ scrollTop: 0 })
+        if (wx.pageScrollTo) {
+            wx.pageScrollTo({
+                scrollTop: 0
+            })
+        } else {
+            wx.showToast({
+                title: '当前微信版本过低，无法自动回到顶部，请升级到最新微信版本后重试。',
+                icon: 'none'
+            })
+        }
     },
     valiFilterProvince: function () {
         let _this = this;
@@ -643,8 +645,8 @@ Page({
             this.setData({ "userShareData.showWin": false })
         }
     },
-  viewScroll: function (e) {
-    let top = e.detail.scrollTop;
+  onPageScroll: function (e) {
+    let top = e.scrollTop;
     this.setData({ showReturnTopImg: (top > 960) ? true : false })
   },
     /**
@@ -696,7 +698,17 @@ Page({
      * 页面相关事件处理函数--监听用户下拉动作
      */
     onPullDownRefresh: function () {
-
+      wx.showNavigationBarLoading()
+      wx.startPullDownRefresh()
+      this.returnTop();
+      this.setData({
+        "searchDate.page": 1,
+        showHistoryList: false
+      })
+      this.doRequestAction(false, function () {
+        wx.hideNavigationBarLoading()
+        wx.stopPullDownRefresh();
+      })
     },
 
     /**

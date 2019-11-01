@@ -1,13 +1,13 @@
 {
   "pages": [
     "pages/index/index",
+    "pages/home/home",
     "pages/ucenter/ucenter",
     "pages/userauth/userauth",
     "pages/publish/recruit/recruit",
     "pages/publish/test/test",
     "pages/publish/pmap/pmap",
     "pages/collect/collect",
-    "pages/home/home",
     "pages/published/published",
     "pages/fast-issue/index/index",
     "pages/publish/fast/fast",
@@ -58,8 +58,7 @@
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#0099ff",
     "navigationBarTitleText": "鱼泡网-工地急招",
-    "navigationBarTextStyle": "white",
-    "enablePullDownRefresh": true
+    "navigationBarTextStyle": "white"
   },
   "permission": {
     "scope.userLocation": {

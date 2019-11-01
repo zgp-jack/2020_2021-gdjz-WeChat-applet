@@ -542,7 +542,7 @@ page{
     height: 180rpx;
     right: 0;
     bottom: 330rpx;
-    z-index: 2;
+    z-index: 10;
 }
 .fixed-get-integral{
     position: fixed;
@@ -550,7 +550,7 @@ page{
     height: 90rpx;
     right: 15rpx;
     top: 420rpx;
-    z-index: 2;
+    z-index: 10;
 }
 .fixed-get-integral-bottom{
     top: auto;

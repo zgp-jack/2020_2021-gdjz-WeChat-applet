@@ -1,3 +1,5 @@
 {
-  "navigationBarTitleText": "工地二手交易_工程机械二手买卖_工程设备废料回收_建筑资质租用转让"
+  "navigationBarTitleText": "工地二手交易_工程机械二手买卖_工程设备废料回收_建筑资质租用转让",
+  "enablePullDownRefresh": true,
+  "backgroundTextStyle": "dark"
 }

@@ -74,7 +74,8 @@ Page({
     nAreaLists: [],
     isAllAreas: true,
     showInputList: false,
-    searchInputVal: ""
+    searchInputVal: "",
+    strlen:0
   },
  
   userRegMap: function (e) {
@@ -261,6 +262,7 @@ Page({
             "cardInfo.memberTel": mydata.memberInfo.tel,
             "cardInfo.cardTel": mydata.model.user_mobile,
             "cardInfo.content": mydata.model.detail ? mydata.model.detail : "",
+            strlen: mydata.model.detail ? mydata.model.detail.length : 0,
             "cardInfo.imgs": mydata.view_image,
             "cardInfo.imgnum": parseInt(mydata.typeTextArr.maxImageCount),
             showUploads: (mydata.view_image.length > 0) ? true : false,
@@ -456,8 +458,8 @@ Page({
     let infoId = this.data.infoId;
     let lastPublishCity = { name: this.data.areaText, ad_name: this.data.keyAutoVal };
     let v = vali.v.new();
-    if (!v.regStrNone(cardInfo.title)) {
-      app.showMyTips("请输入招工标题！");
+    if (!v.isRequire(cardInfo.title,3)) {
+      app.showMyTips("标题最少三个字！");
       return false;
     }
     if (!cardInfo.workTypeIds.length) {
@@ -515,7 +517,7 @@ Page({
       county_id: _this.data.county_id
     };
     app.appRequestAction({
-      title: "正在发布招工信息",
+      title: "信息发布中",
       // url: "publish/publish-msg/",
       url: "publish/save-job/",
       way: "POST",
@@ -549,7 +551,8 @@ Page({
   },
   userEnterContent: function (e) {
     this.setData({
-      "cardInfo.content": e.detail.value
+      "cardInfo.content": e.detail.value,
+      strlen:e.detail.value.length
     })
   },
   delCardImg: function (e) {

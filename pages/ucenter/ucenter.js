@@ -30,7 +30,7 @@ Page({
       feedbackimg: app.globalData.apiImgUrl + "feedbackmsg-img.png",
       rightarrow: app.globalData.apiImgUrl + "feedback-rightarrow.png",
     },
-    initUserInfo:function(){
+    initUserInfo:function(callback){
       let userInfo = wx.getStorageSync("userInfo");
       if(!userInfo){
         this.setData({ showFastIssue:false })
@@ -46,6 +46,7 @@ Page({
             way:"POST",
             params: userInfo,
             success:function(res){
+              callback ? callback() : ""
                 wx.hideLoading();
                 let mydata = res.data;
                 if(mydata.errcode == "ok"){
@@ -61,7 +62,8 @@ Page({
                     })
                 }
             },
-            fail:function(err){
+          fail: function (err) {
+            callback ? callback() : ""
                 wx.hideLoading();
                 wx.showToast({
                     title: '网络出错，数据加载失败！',
@@ -141,7 +143,12 @@ Page({
      * 页面相关事件处理函数--监听用户下拉动作
      */
     onPullDownRefresh: function () {
-
+      wx.showNavigationBarLoading()
+      wx.startPullDownRefresh()
+      this.initUserInfo(function () {
+        wx.hideNavigationBarLoading()
+        wx.stopPullDownRefresh();
+      })
     },
 
     /**

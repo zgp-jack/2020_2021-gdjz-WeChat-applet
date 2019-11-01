@@ -36,7 +36,8 @@ Page({
         codeTips: "获取验证码",
         status: 1,
         textareaActive: false,
-        textareaTips: ""
+        textareaTips: "",
+        strlen:0
     },
 
     userClickItem: function (e) {
@@ -96,7 +97,8 @@ Page({
                         "cardInfo.cityId": mydata.model.city_id ? mydata.model.city_id : "",
                         "cardInfo.memberTel": mydata.memberInfo.tel,
                         "cardInfo.cardTel": mydata.model.user_mobile,
-                        "cardInfo.content": mydata.model.detail ? mydata.model.detail : "",
+                      "cardInfo.content": mydata.model.detail ? mydata.model.detail : "",
+                        strlen: mydata.model.detail ? mydata.model.detail.length : 0,
                         textareaTips: mydata.placeholder
                     })
                     setTimeout(function () {
@@ -272,8 +274,8 @@ Page({
         let phone = this.data.userPhone;
         let infoId = this.data.infoId;
         let v = vali.v.new();
-        if (!v.regStrNone(cardInfo.title)) {
-            app.showMyTips("请输入交易标题！");
+      if (!v.isRequire(cardInfo.title,3)) {
+            app.showMyTips("标题最少三个字！");
             return false;
         }
         if (cardInfo.category_id == "") {
@@ -321,7 +323,7 @@ Page({
         };
 
         app.appRequestAction({
-            title: "正在发布交易信息",
+            title: "信息发布中",
             url: "publish/publish-msg/",
             way: "POST",
             mask: true,
@@ -357,7 +359,8 @@ Page({
     },
     userEnterContent: function (e) {
         this.setData({
-            "cardInfo.content": e.detail.value
+            "cardInfo.content": e.detail.value,
+            strlen : e.detail.value.length
         })
     },
     provincePickerChange: function (e) {

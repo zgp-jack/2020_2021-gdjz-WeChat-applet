@@ -6,11 +6,11 @@
 .inputandimg image{position: absolute;width: 40rpx;height: 40rpx;right: 10rpx;top: 20rpx;}
 .address-header input{border:1px solid #dcdcdc;font-size: 28rpx;height: 100%;border-radius: 5rpx;padding: 0 15rpx;background: #f8f8f8;color: #333;min-height: 0;padding-right: 80rpx;}
 .address-header text{position: absolute;right: 20rpx;top: 0;line-height: 120rpx;font-size: 32rpx;color: #969494;letter-spacing: 2rpx;}
-.address-body{position: absolute;left:0;top:0;width: 100%;height: 100%;padding: 130rpx 20rpx 20rpx;}
+.address-body{position: absolute;left:0;top:0;width: 100%;height: 100%;padding: 130rpx 0 20rpx;}
 .address-container{position: relative;width: 100%;height:100%;overflow-y: scroll;background: white;box-shadow: 0 0 5rpx #dcdcdc;border-radius: 5rpx;}
-.address-item{position: relative;width: 100%;padding: 20rpx 20rpx 0;}
+.address-item{position: relative;width: 100%;padding: 20rpx 20rpx 0;border-bottom: 1px solid #dcdcdc;}
 .address-item-title{font-size: 30rpx;color: #333;line-height: 50rpx;padding-right: 100rpx;}
-.address-item-text{font-size: 28rpx;color: #666;line-height:40rpx;border-bottom: 1px solid #dcdcdc;padding-bottom: 20rpx;}
+.address-item-text{font-size: 28rpx;color: #666;line-height:40rpx;padding-bottom: 20rpx;}
 .address-item:nth-last-child(1) .address-item-text{border-bottom: 0;}
 .address-tips{display: block;text-align: center;font-size: 30rpx;padding-top: 50rpx;color: #555;}
 
@@ -25,6 +25,6 @@
 .mapandpois{position: relative;height: 100%;}
 .historyandkeys{height: 100%;}
 .historyandkeys-body{height:100%;}
-.history-title{position: relative;line-height: 66rpx;font-size: 26rpx;color: #777;padding: 0 20rpx;border-bottom: 1px solid #dcdcdc;}
+.history-title{position: relative;line-height: 66rpx;font-size: 26rpx;color: #777;padding: 0 20rpx;}
 
 .map-locdistance{position: absolute;right: 20rpx;font-size: 26rpx;color: #555;top: 20rpx;display: inline-block;line-height: 50rpx;}

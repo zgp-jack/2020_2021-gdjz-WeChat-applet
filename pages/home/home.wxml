@@ -151,7 +151,7 @@
             <view class='toplist'>
               <view class="yupao-boxs">
                 <view class="yupaoboxsfot">
-                  <view class="yupaotile" style="padding-right:20rpx;">{{ item.title }}</view>
+                  <view class="yupaotile">{{ item.title }}</view>
                 </view>
               </view>
               <view class='yupao-lists-wxtipse'>

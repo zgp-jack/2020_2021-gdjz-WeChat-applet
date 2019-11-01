@@ -142,7 +142,7 @@ Page({
     closePublishAction: function () {
         footerjs.closePublishAction(this);
     },
-    getIndexListData:function(){
+    getIndexListData:function(callback){
         let _this = this;
         let id = _this.data.areaId;
         wx.showLoading({
@@ -158,9 +158,11 @@ Page({
                 wx.hideLoading();
                 wx.setStorageSync("areaId", _this.data.areaId);
                 wx.setStorageSync("areaText", _this.data.areaText);
+              callback ? callback () : ""
             },
             fail:function(err){
                 wx.hideLoading();
+              callback ? callback() : ""
             }
         });
     },
@@ -316,7 +318,12 @@ Page({
      * 页面相关事件处理函数--监听用户下拉动作
      */
     onPullDownRefresh: function () {
-
+      wx.showNavigationBarLoading()
+      wx.startPullDownRefresh()
+      this.getIndexListData(function(){
+        wx.hideNavigationBarLoading()
+        wx.stopPullDownRefresh();
+      })
     },
 
     /**

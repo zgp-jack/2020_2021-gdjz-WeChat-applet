@@ -11,7 +11,7 @@
             <view class='common-publish-item'>
                 <view class='common-publish-item-content'>
                     <text class='common-publish-words'>标题</text>
-                    <input class='common-publish-input' value='{{ cardInfo.title }}' placeholder='请输入标题' bindinput='userEnterTitle'></input>
+                    <input class='common-publish-input' value='{{ cardInfo.title }}' placeholder='请输入标题(3-30个字)' bindinput='userEnterTitle'></input>
                 </view>
             </view>
             <view class='common-publish-item'>
@@ -51,7 +51,8 @@
             </view>
             <view class='common-publish-item'>
                 <text class='common-publihs-contenttips'>详情</text>
-                <textarea placeholder='{{ textareaTips }}' wx:if="{{ showTextarea }}" value='{{ cardInfo.content }}' focus='{{ textareaActive }}' bindblur='userEnterContent' bindtap='getTextareaFocus'  maxlength="-1"></textarea>
+                <textarea placeholder='{{ textareaTips }}' wx:if="{{ showTextarea }}" value='{{ cardInfo.content }}' focus='{{ textareaActive }}' bindinput='userEnterContent' bindtap='getTextareaFocus'  maxlength="-1"></textarea>
+                <view class="count-contentlen">{{ strlen }}/500</view>
             </view>
         </view>
     </view>

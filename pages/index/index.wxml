@@ -3,6 +3,8 @@
 
 <view class='common-index-gztips' wx:if="{{ firstJoin }}">添加到我的小程序，招工找活更方便</view>
 
+<view class='yupao-lists-container yupao-common-container' >
+
 
 <!-- 搜索头部 -->
 <view class="lists-header">
@@ -66,7 +68,6 @@
 
 </view>
 
-<scroll-view class='yupao-lists-container yupao-common-container'  scroll-y="true" scrolltolower="100" bindscrolltolower="onReachBottom" scroll-top="{{ scrollTop }}" bindscroll="viewScroll" scroll-with-animation="true">
 
     <!-- 公告 -->
     <view class='yupao-lists-notice'>
@@ -157,7 +158,7 @@
         </view>
     </view>
 
-</scroll-view>
+</view>
 
 
 <!-- 用户授权 -->

@@ -37,7 +37,8 @@ Page({
         codeTips:"获取验证码",
         status:1,
         textareaActive:false,
-        textareaTips: ""
+        textareaTips: "",
+        strlen:0
     },
     bindPickerChange:function(e){
         this.setData({
@@ -163,7 +164,8 @@ Page({
                         "cardInfo.teamId": mydata.model.team_composition ? parseInt(mydata.model.team_composition) : 1,
                         "cardInfo.memberTel": mydata.memberInfo.tel,
                         "cardInfo.cardTel": mydata.model.user_mobile,
-                        "cardInfo.content": mydata.model.detail || "",
+                      "cardInfo.content": mydata.model.detail || "",
+                        strlen: mydata.model.detail ? mydata.model.detail.length : 0,
                         "cardInfo.imgs": mydata.view_image,
                         "cardInfo.imgnum": parseInt(mydata.typeTextArr.maxImageCount),
                         showUploads: (mydata.view_image.length > 0) ? true : false,
@@ -332,7 +334,7 @@ Page({
             images: cardImgs
         };
         app.appRequestAction({
-            title:"找活名片提交中",
+            title:"信息发布中",
             url:"publish/publish-msg/",
             way: "POST",
             mask: true,
@@ -369,7 +371,8 @@ Page({
     },
     userEnterContent:function(e){
         this.setData({
-            "cardInfo.content":e.detail.value
+            "cardInfo.content":e.detail.value,
+            strlen:e.detail.value.length
         })
     },
     delCardImg:function(e){
