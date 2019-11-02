@@ -134,6 +134,9 @@
         <text>下载APP</text>
       </view>
 
+      <view class='ucenter-menu-item' wx:if="{{ !userInfo }}"></view>
+
+
       <view class='ucenter-menu-item' wx:if="{{ !showFastIssue.show }}"></view>
 
       <view class='ucenter-menu-item' wx:if="{{ showFastIssue.show }}"></view>

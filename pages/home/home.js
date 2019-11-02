@@ -148,9 +148,10 @@ Page({
         wx.showLoading({
             title: '数据加载中',
         })
-        app.doRequestAction({
+      app.appRequestAction({
           url: "index/new-msg-list/",
             params:{area:this.data.areaId},
+           hideLoading : true,
             success: function (res) {
                 _this.setData({
                     infolists: res.data
@@ -319,7 +320,7 @@ Page({
      */
     onPullDownRefresh: function () {
       wx.showNavigationBarLoading()
-      wx.startPullDownRefresh()
+      //wx.startPullDownRefresh()
       this.getIndexListData(function(){
         wx.hideNavigationBarLoading()
         wx.stopPullDownRefresh();

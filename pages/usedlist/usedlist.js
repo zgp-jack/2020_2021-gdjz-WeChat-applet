@@ -608,7 +608,7 @@ Page({
      */
     onPullDownRefresh: function () {
       wx.showNavigationBarLoading()
-      wx.startPullDownRefresh()
+      //wx.startPullDownRefresh()
       this.returnTop();
       this.setData({
         "searchDate.page": 1,

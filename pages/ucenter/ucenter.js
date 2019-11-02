@@ -144,7 +144,7 @@ Page({
      */
     onPullDownRefresh: function () {
       wx.showNavigationBarLoading()
-      wx.startPullDownRefresh()
+      //wx.startPullDownRefresh()
       this.initUserInfo(function () {
         wx.hideNavigationBarLoading()
         wx.stopPullDownRefresh();
