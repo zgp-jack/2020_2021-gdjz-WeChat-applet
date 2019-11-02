@@ -2,7 +2,15 @@
   <view class="experienceheader">
     <text class="experienceheaderone">项目名称：</text>
     <view class="experienceheadertwo">
-      <input type="text" placeholder="请输入项目名称"></input>
+      <input type="text" placeholder="请输入项目名称" bindinput="projectname"></input>
+    </view>
+  </view>
+  <view class="experienceheader">
+    <text class="experienceheaderone">开始时间：</text>
+    <view class="experienceheadertwo">
+      <picker mode="date" value="{{date}}" start="09:01" end="21:01" bindchange="bindstartDate">
+        <input name="addtime" value="{{date}}" placeholder="请选择开始时间"></input>
+      </picker>
     </view>
   </view>
   <view class="experienceheader">
@@ -13,18 +21,28 @@
       </picker>
     </view>
   </view>
-  <view class="experienceheader">
+
+  <!-- <view class="experienceheader">
     <text class="experienceheaderone">所在地区：</text>
     <view class="experienceheadertwo">
       <picker bindchange="changeRegin" mode="region" value="{{region}}">
         <input name="addregion" value="{{region}}" placeholder="请选择所在地区"></input>
       </picker>
     </view>
+  </view> -->
+  <view class="experienceheader">
+    <text class="experienceheaderone">所在地区：</text>
+    <!-- bindchange="initAllProvice" -->
+    <view class="experienceheadertwo">
+      <picker bindchange="bindMultiPickerChange" bindcolumnchange="bindMultiPickerColumnChange" mode="multiSelector" value="{{multiIndex}}" range="{{multiArray}}">
+        <input disabled name="addregion" value="{{multiIndexvalue}}" placeholder="请选择家乡地址"></input>
+      </picker>
+    </view>
   </view>
   <view class="experiencethree">
     <view class="experiencethreeone">项目详情：</view>
     <view class="experiencethreetwo">
-      <textarea bindblur="bindTextAreaBlur" maxlength="500" placeholder="主要描述工作中的项目情况..." />
+      <textarea bindinput="bindTextAreaBlur" maxlength="500" placeholder="主要描述工作中的项目情况..." />
     </view>
   </view>
   <view class="experiencefour">
@@ -37,6 +55,6 @@
   </view>
   <view class="experiencebottom">
     <button class="experiencebottomone">保存 继续添加</button>
-    <button class="experiencebottomotwo">确认保存</button>
+    <button class="experiencebottomotwo" bindtap="preserve">确认保存</button>
   </view>
 </view>

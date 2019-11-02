@@ -25,9 +25,10 @@
       </view>
     </view>
   </view>
-  <image class="link" src="../../../images/newresume-linktag.png"></image>
-  <image class="linkone" src="../../../images/newresume-linktag.png"></image>
+
   <view class="cardtwo">
+    <image class="link" src="../../../images/newresume-linktag.png"></image>
+    <image class="linkone" src="../../../images/newresume-linktag.png"></image>
     <view class="cardtwosonone">
       <view class="cardtwosononeimg">
         <view class="oimg">
@@ -147,7 +148,7 @@
       编辑
     </view>
   </view>
-    <view class="cardtwo">
+  <view class="cardtwo">
     <view class="line">
 
       <view class="cardotext">
@@ -159,7 +160,7 @@
           <text class="workotextone">10年</text>
         </view>
       </view>
-       <view class="cardotext">
+      <view class="cardotext">
         <view class="oworkone">
           <image src="../../../images/newjobinfo-steps.png"></image>
           <text class="workotext">人员构成：</text>
@@ -178,7 +179,7 @@
           <text class="workotextone">四川省成都市</text>
         </view>
       </view>
-     <view class="cardotext">
+      <view class="cardotext">
         <view class="oworkone">
           <image src="../../../images/newjobinfo-steps.png"></image>
           <text class="workotext">熟<text class="states">练</text>度：</text>
@@ -196,17 +197,16 @@
           <text class="workotextone">100人</text>
         </view>
       </view>
-        <view class="cardotext">
-          <view class="oworkone">
-            <image src="../../../images/newjobinfo-steps.png"></image>
-            <text class="workotext">标 <text class="telephone">签：</text></text>
-          </view>
-          <view class="owork">
-            <text class="workotextonetu">急速突击</text>
-          </view>
+      <view class="cardotext">
+        <view class="oworkone">
+          <image src="../../../images/newjobinfo-steps.png"></image>
+          <text class="workotext">标 <text class="telephone">签：</text></text>
         </view>
+        <view class="owork">
+          <text class="workotextonetu">急速突击</text>
+        </view>
+      </view>
     </view>
-
     <view class="cardotextbottom"></view>
   </view>
   <!-- <view class="cardfour">

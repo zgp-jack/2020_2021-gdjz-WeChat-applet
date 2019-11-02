@@ -30,7 +30,8 @@ Page({
     wardenryid:"",
     sex:"",
     nation:"",
-    verify:""
+    verify:"",
+    name:""
   },
   verify(e){
     this.setData({
@@ -44,11 +45,15 @@ Page({
   },
   sex: function (e) {
     this.setData({
-      sex: this.data.arrayone[e.detail.value].id
+      indexsex: ~~e.detail.value
+    })
+    this.setData({
+      sex: this.data.arrayone[~~e.detail.value].id
     })
   },
   nation(e) {
     this.setData({
+      nationindex: e.detail.value,
       nation: this.data.nationalarrayone[e.detail.value].mz_id
     })
   },
@@ -303,20 +308,117 @@ Page({
       wardenryid: wardenryid
     })
   },
+
+  vertifynum(){
+    let userInfo = wx.getStorageSync("userInfo");
+    let tele = {}
+    Object.assign(tele, {
+      userId: userInfo.userId,
+      token: userInfo.token,
+      tokenTime: userInfo.tokenTime,
+      tel: this.data.telephone - 0,
+    })
+    console.log(tele)
+    app.doRequestAction({
+      url: "index/get-code/",
+      way: "POST",
+      params: tele,
+      success: function (res) {
+        console.log(res)
+      },
+      fail: function (err) {
+        console.log(err)
+      }
+    })
+  },
   submitinformation() {
     let information = {}
     let userInfo = wx.getStorageSync("userInfo");
     let worktype = "";
     console.log(this.data.complexworkid)
     for (let i = 0; i < this.data.complexworkid.length ; i++){
-      worktype += this.data.complexworkid[i]+","
+      if (i == this.data.complexworkid.length-1){
+        worktype += this.data.complexworkid[i]
+      }else{
+        worktype += this.data.complexworkid[i] + ","
+      }
     }
 
     let vertifyNum = v.v.new()
     if (!vertifyNum.isMobile(this.data.telephone)){
-         console.log(123)
+      wx.showModal({
+        title: '温馨提示',
+        content: '您输入的手机号码不正确,请重新输入',
+        showCancel: false,
+        success(res) { }
+      })
+      return
     }
-
+    if (vertifyNum.isNull(this.data.name)) {
+      console.log('姓名')
+      wx.showModal({
+        title: '温馨提示',
+        content: '您输入的姓名为空,请重新输入',
+        showCancel: false,
+        success(res) { }
+      })
+      return
+    }
+    if (vertifyNum.isNull(this.data.sex)) {
+      
+      wx.showModal({
+        title: '温馨提示',
+        content: '您输入的性别为空,请重新输入',
+        showCancel: false,
+        success(res) { }
+      })
+      return
+    }
+    if (vertifyNum.isNull(this.data.nation)) {
+      wx.showModal({
+        title: '温馨提示',
+        content: '您输入的民族为空,请重新输入',
+        showCancel: false,
+        success(res) { }
+      })
+      return
+    }
+    if (vertifyNum.isNull(this.data.birthday)) {
+      wx.showModal({
+        title: '温馨提示',
+        content: '您输入的出生日期为空,请重新输入',
+        showCancel: false,
+        success(res) { }
+      })
+      return
+    }
+    if (vertifyNum.isNull(worktype)) {
+      wx.showModal({
+        title: '温馨提示',
+        content: '您输入的工种为空,请重新输入',
+        showCancel: false,
+        success(res) { }
+      })
+      return
+    }
+    if (vertifyNum.isNull(this.data.provinceid)) {
+      wx.showModal({
+        title: '温馨提示',
+        content: '您输入的所在地区为空,请重新输入',
+        showCancel: false,
+        success(res) { }
+      })
+      return
+    }
+    if (vertifyNum.isNull(this.data.otextareavalue)) {
+      wx.showModal({
+        title: '温馨提示',
+        content: '您输入的自我介绍为空,请重新输入',
+        showCancel: false,
+        success(res) { }
+      })
+      return
+    }
     Object.assign(information, {
       userId: userInfo.userId,
       token: userInfo.token,
@@ -331,25 +433,26 @@ Page({
       province: this.data.provinceid,
       city: this.data.wardenryid,
       introduce: this.data.otextareavalue,
-      lat: this.data.longitude,
-      lng: this.data.latitude,
+      lat:  this.data.latitude,
+      lng: this.data.longitude,
       address: this.data.regionone,
       adcode: this.data.oadcode,
     })
     console.log(information)
-    // app.doRequestAction({
-    //   url: "resumes/add-resume/",
-    //   way: "POST",
-    //   params: information,
-    //   success: function (res) {
-    //     console.log(res)
-    //   },
-    //   fail: function (err) {
-    //     console.log(err)
-    //   }
-    // })
+    app.doRequestAction({
+      url: "resumes/add-resume/",
+      way: "POST",
+      params: information,
+      success: function (res) {
+        wx.navigateTo({
+          url: '/pages/clients-looking-for-work/finding-name-card/findingnamecard',
+        })
+      },
+      fail: function (err) {
+        console.log(err)
+      }
+    })
   },
-
   /**
    * 生命周期函数--监听页面加载
    */

@@ -307,7 +307,7 @@ App({
           filePath: res.tempFilePaths[0],
           name: 'file',
           success(res) {
-
+            console.log(res)
             let mydata = JSON.parse(res.data);
 
             if (mydata.errcode == "ok") {

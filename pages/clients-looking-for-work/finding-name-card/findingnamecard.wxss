@@ -65,6 +65,7 @@
   background: white;
   overflow: hidden;
   padding-bottom: 40rpx;
+  position: relative;
 }
 /* .findingnamecardtwoone{
   display: block;
@@ -262,4 +263,703 @@
   margin: 0 auto;
   margin-top: 22rpx;
   border-radius: 22rpx;
+}
+
+
+
+
+
+
+
+
+
+
+.headerlivecard {
+  width: 100%;
+}
+
+.card {
+  width: 100%;
+  margin-top: 20rpx;
+  padding-left: 27rpx;
+  padding-right: 27rpx;
+}
+
+.cardson {
+  width: 100%;
+  background-color: white;
+  height: 114rpx;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.cardson .cardsonone text {
+  margin-top: 14rpx;
+  display: block;
+  font-size: 30rpx;
+  margin-left: 13rpx;
+  letter-spacing: 4rpx;
+  font-weight: bold;
+}
+
+.cardson .cardsonone view {
+  margin-top: 6rpx;
+  margin-bottom: 14rpx;
+  font-size: 26rpx;
+  color: #0099FF;
+  margin-left: 13rpx;
+}
+
+.cardson .cardsontwo text {
+  margin-left: 40rpx;
+  color: #0099FF;
+  font-size: 26rpx;
+  font-weight: bold;
+}
+
+.cardson .cardsontwo view {
+  margin-top: 6rpx;
+  color: #626160;
+  font-size: 26rpx;
+  margin-right: 13rpx;
+}
+
+.cardone {
+  width: 100%;
+  margin-top: 20rpx;
+  padding-left: 27rpx;
+  padding-right: 27rpx;
+}
+
+.cardone .cardoneson {
+  width: 100%;
+  background-color: white;
+  height: 80rpx;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.cardone .cardoneson .cardonesonone {
+  font-size: 26rpx;
+  color: #343434;
+  margin-top: 25rpx;
+    height: 28rpx;
+}
+.cardone .cardoneson .cardonesonone view{
+  display: inline;
+}
+.cardone .cardoneson .cardonesonone image {
+  margin-left: 47rpx;
+  width: 25rpx;
+  height: 24rpx;
+  line-height: 28rpx;
+}
+
+.cardone .cardoneson .cardonesonone text {
+  margin-left: 18rpx;
+    width: 24%;
+   height: 28rpx;
+   line-height:28rpx;
+}
+
+.cardone .cardoneson .cardonesontwo {
+  color: #ff1800;
+  font-size: 24rpx;
+  margin-top: 27rpx;
+}
+
+.cardone .cardoneson .cardonesontwo image {
+  width: 26rpx;
+  height: 16rpx;
+  margin: 0 8rpx;
+}
+
+
+.cardtwo {
+  width: 93%;
+  margin: 0 auto;
+  margin-top: 20rpx;
+  background-color: white;
+  overflow: hidden;
+}
+
+.cardtwo .cardtwosonone {
+  width: 100%;
+  height: 88rpx;
+  margin-top: 22rpx;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.cardtwosonone .cardtwosononeimg {
+  width: 400rpx;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.cardtwosonone .cardtwosononeimg .oimg {
+  height: 88rpx;
+  width: 88rpx;
+  border-radius: 50%;
+  margin-left: 14rpx;
+}
+
+.cardtwosonone .cardtwosononeimg .oimg image {
+  height: 88rpx;
+  width: 88rpx;
+}
+
+.cardtwosonone .cardtwosononeimg  .oimgone {
+  width: 280rpx;
+}
+
+.cardtwosonone .cardtwosononeimg  .oimgone .otext {
+  color: #343434;
+  font-size: 27rpx;
+}
+
+.cardtwosonone .cardtwosononeimg .oimgone .otextone {
+  font-size: 25rpx;
+  color: #6c6b6b;
+}
+
+.cardtwosonone .cardtwosononeimg .oimgone .otextone .ochange {
+  margin-left: 6rpx;
+}
+
+.cardtwo .cardtwosontwo {
+  font-size: 28rpx;
+  color: #09f;
+  line-height: 88rpx;
+  position: relative;
+  right: 12rpx;
+}
+
+.cardotext {
+  width: 100%;
+  display: flex;
+}
+
+.cardotext .oworkone {
+  display: flex;
+}
+
+.cardotext .owork {
+  margin: 0;
+  padding: 0;
+  display: inline-block;
+  width: 80%;
+}
+
+.cardotext  image {
+  width: 18rpx;
+  height: 18rpx;
+  margin: 0 20rpx;
+  margin-top: 24rpx;
+}
+
+.cardotext .workotext {
+  color: grey;
+  font-size: 24rpx;
+  width: 140rpx;
+  margin-top: 14rpx;
+  margin-bottom: 6rpx;
+}
+
+.cardotext .workotext .telephone {
+  margin-left: 40rpx;
+}
+
+.cardotext .workotext .states {
+  margin: 0 12rpx;
+}
+
+.cardotext .workotextone {
+  color: black;
+  font-size: 24rpx;
+}
+.cardotext .workotextonetu {
+  color: black;
+  font-size: 24rpx;
+  background: #E7E7E7;
+  display: inline-block;
+  height: 37rpx;
+  line-height: 37rpx;
+  padding-left: 4rpx;
+  padding-right: 4rpx;
+  text-align: center;
+  margin-top: 12rpx;
+  margin-left: 10rpx;
+
+}
+/* .cardotext:nth-child(2){
+  color: black;
+  font-size: 24rpx;
+  background: #E7E7E7;
+  display: inline-block;
+  height: 37rpx;
+  line-height: 37rpx;
+  padding-left: 4rpx;
+  padding-right: 4rpx;
+  text-align: center;
+  margin-top: 12rpx;
+  line
+} */
+.cardotextbottom {
+  margin-top: 16rpx;
+}
+
+.cardthree {
+  width: 93%;
+  margin: 0 auto;
+  margin-top: 12rpx;
+  margin-bottom: 18rpx;
+  height: 24rpx;
+  font-size: 24rpx;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.cardthree .cardthreemobile {
+  font-size: 26rpx;
+  font-weight: bold;
+    margin-left: 28rpx;
+}
+
+.cardthree image {
+  width: 22rpx;
+  height: 24rpx;
+}
+
+.cardthree .cardthreeone {
+  font-size: 24rpx;
+  color: #09f;
+  margin-right: 26rpx;
+}
+
+.cardfour {
+  width: 93%;
+  margin: 0 auto;
+  color: #343434;
+  padding-left: 10rpx;
+  background-color: white;
+}
+
+.cardfour  text {
+  padding-top: 4rpx;
+  font-size: 24rpx;
+}
+
+.cardfour .cardfourbottom {
+  height: 10rpx;
+}
+
+.cardfour .result {
+  background: #fffbf7;
+}
+
+.cardfour .result .resultone {
+  color: #fa0819;
+  font-size: 24rpx;
+}
+
+.cardfour .result view {
+  height: 20rpx;
+}
+
+.cardfive {
+  width: 93%;
+  margin: 0 auto;
+  margin-top: 12rpx;
+  margin-bottom: 18rpx;
+  height: 24rpx;
+  font-size: 24rpx;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.cardfive .cardfivemobile {
+ font-size: 26rpx;
+  font-weight: bold;
+    margin-left: 28rpx;
+}
+
+.cardfive image {
+  width: 22rpx;
+  height: 24rpx;
+}
+
+.cardfive .cardthreeone {
+ font-size: 24rpx;
+  color: #09f;
+  margin-right: 26rpx;
+}
+
+.cardsix {
+  width: 93%;
+  margin: 0 auto;
+  background-color: white;
+}
+
+.cardsixzong {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.cardsix .cardsixone {
+  width: 32rpx;
+  height: 20rpx;
+  margin-left: 20rpx;
+  margin-top: 20rpx;
+}
+
+.cardsixzong .cardsixtwo {
+  color: #343434;
+  font-size: 26rpx;
+  margin-left: 14rpx;
+  margin-top: 10rpx;
+}
+
+.cardsixzong .cardsixthree {
+  color: #8b8b8a;
+  font-size: 22rpx;
+  margin-left: 14rpx;
+  margin-top: 10rpx;
+}
+
+.cardsixzong .cardsixthree  text:last-child {
+  margin-left: 26rpx;
+}
+
+.cardsixzong .cardsixfour {
+  color: #8b8b8a;
+  font-size: 22rpx;
+  margin-left: 14rpx;
+  margin-top: 10rpx;
+}
+
+.cardsixzong .cardsixfive image {
+  width: 185rpx;
+  height: 185rpx;
+  background-color: orange;
+  margin-left: 16rpx;
+  margin-top: 16rpx;
+}
+
+ .cardsixsix {
+  padding: 0;
+  width: 246rpx;
+  height: 45rpx;
+  background-color: #0099FF;
+  font-size: 26rpx;
+  color: white;
+  line-height: 45rpx;
+  border-radius: 20rpx;
+  display: flex;
+  justify-content: center;
+  margin-top: 14rpx;
+}
+
+  .cardsixsixall {
+  margin: 0 auto;
+  width: 246rpx;
+  height: 45rpx;
+}
+
+.cardsixsixallvoto {
+  height: 24rpx;
+}
+
+ .down {
+  width: 20rpx;
+  height: 15rpx;
+}
+
+.cardseven {
+  width: 93%;
+  margin: 0 auto;
+  margin-top: 12rpx;
+  margin-bottom: 18rpx;
+  height: 24rpx;
+  font-size: 24rpx;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.cardseven .cardsevenmobile {
+  font-size: 26rpx;
+  font-weight: bold;
+    margin-left: 28rpx;
+}
+
+.cardseven image {
+  width: 22rpx;
+  height: 24rpx;
+}
+
+.cardseven .cardthreeone {
+  font-size: 24rpx;
+  color: #09f;
+  margin-right: 26rpx;
+}
+
+.cardeight {
+  width: 93%;
+  margin: 0 auto;
+  background-color: white;
+}
+
+.cardeightzong {
+  display: flex;
+  flex-direction: row;
+}
+
+.cardeight .cardeightone {
+  width: 20rpx;
+  height: 20rpx;
+  margin-left: 20rpx;
+  margin-top: 20rpx;
+}
+
+.cardeightzong .cardeighttwo {
+  color: #343434;
+  font-size: 26rpx;
+  margin-left: 14rpx;
+  margin-top: 10rpx;
+}
+
+.cardeightzong .cardeighttwo text:last-child {
+  font-size: 20rpx;
+  line-height: 26rpx;
+  color: #8b8b8a;
+  margin-left: 14rpx;
+}
+
+.cardeightzong .cardeightthree {
+  color: #8b8b8a;
+  font-size: 22rpx;
+  margin-left: 14rpx;
+  margin-top: 10rpx;
+}
+
+.cardeightzong .cardeightthree  text:last-child {
+  margin-left: 26rpx;
+}
+
+.cardeightzong .cardeightfour {
+  color: #8b8b8a;
+  font-size: 22rpx;
+  margin-left: 14rpx;
+  margin-top: 10rpx;
+}
+
+
+.cardeightzong .cardeightfive image {
+  width: 185rpx;
+  height: 185rpx;
+  background-color: orange;
+  margin-left: 16rpx;
+  margin-top: 16rpx;
+}
+
+ .cardeightsix {
+   padding: 0;
+  width: 246rpx;
+  height: 45rpx;
+  background-color: #0099FF;
+  font-size: 26rpx;
+  color: white;
+  line-height: 45rpx;
+  border-radius: 20rpx;
+  display: flex;
+  justify-content: center;
+  margin-top: 14rpx;
+}
+
+.cardeightzong  .cardeightsixall {
+  margin: 0 auto;
+  width: 246rpx;
+  height: 45rpx;
+}
+
+ .down {
+  width: 20rpx;
+  height: 15rpx;
+}
+
+.cardnine {
+  margin: 18rpx auto;
+  height: 91rpx;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.cardnine .cardnineone {
+  height: 91rpx;
+  width: 369rpx;
+  background-color: white;
+  color: #7d7d7d;
+  font-size: 36rpx;
+  text-align: center;
+  line-height: 91rpx;
+}
+
+.cardnine .cardnineone image {
+  width: 35rpx;
+  height: 35rpx;
+  position: relative;
+  top: 4rpx;
+}
+
+.line {
+  border-left: 1px solid #dcdcdc;
+  position: relative;
+  left: 4.2%;
+}
+
+.cardotext {
+  position: relative;
+  left: -4.2%;
+}
+
+
+.content{
+  font-size: 24rpx;
+  color: #797979;
+  margin-left: 8.5%;
+  margin-bottom: 8rpx;
+  padding-right: 2%;
+}
+.contentone{
+  font-size: 24rpx;
+  color: #202020;
+  margin-left: 8.5%;
+  margin-bottom: 8rpx;
+  padding-right: 2%;
+}
+/* link cardtwo  workotextonetu content oimg*/
+.ocardotext {
+  width: 100%;
+  display: flex;
+  position: relative;
+  left: -4.2%;
+
+}
+
+.cardotext .oworkone {
+  display: flex;
+  width: 28%;
+}
+
+.ocardotext  image {
+  width: 18rpx;
+  height: 18rpx;
+  margin: 0 20rpx;
+  margin-top: 24rpx;
+}
+
+.ocardotext .oworkotext {
+  color: grey;
+  font-size: 24rpx;
+  width: 140rpx;
+  margin-top: 14rpx;
+  margin-bottom: 6rpx;
+}
+.ocardotext .oworkotextonetu {
+  color: black;
+  font-size: 24rpx;
+  background: #E7E7E7;
+  display: inline-block;
+  height: 37rpx;
+  line-height: 37rpx;
+  padding-left: 4rpx;
+  padding-right: 4rpx;
+  text-align: center;
+  margin-top: 12rpx;
+  margin-left: 17rpx;
+
+}
+.ocardotext .all{
+  width: 72%;
+}
+.ocardotext .oworkotext .otelephone {
+  margin-left: 40rpx;
+}
+.ocardotext .oworkotext .otelephoneb {
+  margin-left: 35rpx;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+.select_box{
+  width:30%;
+  height:70%;
+  border-radius: 14rpx;
+  position: relative;
+  margin-top: 28rpx;
+  margin-right: 3%;
+  font-size: 22rpx;
+}
+
+.select_box .select{
+  display: flex;
+  justify-content: space-around;
+}
+.select_box .select .select_text{
+  font-size: 24rpx;
+  color: #FF1800;
+  line-height: 28rpx;
+  text-align: right;
+  flex: 1;
+}
+.select_box .select .select_img{
+  width: 28rpx;
+  height: 18rpx;
+  display: block;
+  margin-top: 8rpx;
+  transition:transform 0.3s;
+}
+.select_box .select .select_img_rotate{
+  transform:rotate(180deg); 
+}
+.select_box .option_box{
+  position: absolute;
+  top: calc(100% - 1px);
+  width: 100%;
+  box-sizing: border-box;
+  height: 0;
+  overflow-y: auto;
+  background: #fff;
+  transition: height 0.3s;
+  /* border-left:1px solid #efefef;
+  border-right:1px solid #efefef; */
+}
+.select_box .option_box .option{
+  display: block;
+  line-height: 30rpx; 
+  font-size: 24rpx;
+  border-top: 1px solid #efefef;
+  border-bottom: 1px solid #efefef;
+  border-left:1px solid #efefef;
+  border-right:1px solid #efefef;
+  text-align: center;
+  /* padding: 10rpx; */
 }

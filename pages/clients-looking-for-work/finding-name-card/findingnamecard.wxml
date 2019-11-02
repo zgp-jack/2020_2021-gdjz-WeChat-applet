@@ -1,7 +1,8 @@
 <view>
-  <view class="findingnamecard">
+  <view class="findingnamecard" wx:if="{{showtop}}">
     请完善一下信息
   </view>
+
   <view class="findingnamecardone">
     <view class="findingnamecardoneson">
       <view class="findingnamecardonesonone">
@@ -9,27 +10,188 @@
         <view>名片越完善找活越容易,马上去完善>></view>
       </view>
       <view class="findingnamecardonesontwo">
-        <text>0</text>
+        <text>{{view_num}}</text>
         <view>浏览次数</view>
       </view>
     </view>
   </view>
-  <view class="findingnamecardtwo">
-    <!-- <image class="findingnamecardtwoone" src="{{userimg}}"></image>
+  <view class="cardone" wx:if="{{showtopone}}">
+    <view class="cardoneson">
+      <view class="cardonesonone">
+        <view>
+          <image src="../../../images/workdetail.png"></image>
+        </view>
+        <text>我的工作状态：</text>
+      </view>
+      <!-- <view class="cardonesontwo">
+        <text>未开始找工作</text>
+        <image src="../../../images/bottomimg.png"></image>
+      </view> -->
+          <view class='select_box'>
+      <view class='select' catchtap='selectTap'>
+        <text class='select_text'>{{selectData[index]}}</text>
+        <image class='select_img {{selectShow&&"select_img_rotate"}}' src='../../../images/bottomimg.png' background-size="contain" wx:if="{{checkstatus}}"></image>
+      </view>
+      <view class='option_box' style='height:{{selectShow?(selectData.length>5?325:selectData.length*50):0}}rpx;'>
+        <text class='option' wx:for='{{selectData}}' wx:key='this' data-index='{{index}}' catchtap='optionTap'>{{item}}</text>
+      </view>
+    </view>
+    </view>
+
+  </view>
+
+
+  <view class="findingnamecardtwo" wx:if="{{showtop}}">
+    <!-- <image intro class="findingnamecardtwoone" src="{{userimg}}"></image>
     <text class="findingnamecardtwotwo">{{username}}</text> -->
     <text class="findingnamecardtwothree">你还没有完善基本信息</text>
     <view class="findingnamecardtwofour" bindtap="toperfect">去完善</view>
   </view>
-  <view class="findingnamecardthree">
+  <view class="cardtwo" wx:if="{{showtopone}}">
+    <view class="cardtwosonone">
+      <view class="cardtwosononeimg">
+        <view class="oimg">
+          <image src="../../../images/hearding.png"></image>
+        </view>
+        <view class="oimgone">
+          <text class="otext">{{name}}</text>
+          <view class="otextone">
+            <text>{{sex}}</text>
+            <text class="ochange">{{age}}岁</text>
+            <text class="ochange">{{nation}}</text>
+          </view>
+        </view>
+      </view>
+      <view class=" cardtwosontwo ">
+        <text bindtap="edit">编辑</text>
+      </view>
+    </view>
+    <view class="line">
+      <view class="ocardotext">
+        <view class="oworkone">
+          <image src="../../../images/newjobinfo-steps.png"></image>
+          <text class="oworkotext">工 <text class="otelephone">种：</text></text>
+        </view>
+        <view class="all">
+          <view class="oworkotextonetu" wx:for="{{occupations}}" wx:key="{{index}}">
+            {{item}}
+          </view>
+        </view>
+      </view>
+      <view class="cardotext">
+        <view class="oworkone">
+          <image src="../../../images/newjobinfo-steps.png"></image>
+          <text class="workotext">手 <text class="telephone">机：</text></text>
+        </view>
+        <view class="owork">
+          <text class="workotextone">{{telephone}}</text>
+        </view>
+      </view>
+      <view class="cardotext">
+        <view class="oworkone">
+          <image src="../../../images/newjobinfo-steps.png"></image>
+          <text class="workotext">所在地区：</text>
+        </view>
+        <view class="owork">
+          <text class="workotextone">{{city}}</text>
+        </view>
+      </view>
+      <view class="cardotext">
+        <view class="oworkone">
+          <image src="../../../images/newjobinfo-steps.png"></image>
+          <text class="workotext">自我介绍：</text>
+        </view>
+      </view>
+    </view>
+    <view class="content" wx:if="{{intro}}">{{introduce}}</view>
+    <view class="contentone" wx:if="{{introne}}">{{introduce}}</view>
+    <view class="cardotextbottom"></view>
+  </view>
+
+
+  <view class="findingnamecardthree" wx:if="{{selfintro}}">
     <view class="findingnamecardthreemobile">
       <image src="../../../images/newresume-description.png"></image>
-      工作介绍
+      自我介绍
     </view>
   </view>
-  <view class="findingnamecardfour">
+  <view class="findingnamecardfour" wx:if="{{selfintro}}">
     <text class="findingnamecardfourone">完善工作介绍能让老板充分了解你或你的队伍</text>
-    <view class="findingnamecardfourtwo">去完善</view>
+    <view class="findingnamecardfourtwo" bindtap="improvementwork">去完善</view>
   </view>
+
+  <view class="cardthree" wx:if="{{selfintrone}}">
+    <view class="cardthreemobile">
+      <image src="../../../images/newresume-description.png"></image>
+      自我介绍
+    </view>
+    <view class="cardthreeone" bindtap="improvementwork">
+      编辑
+    </view>
+  </view>
+  <view class="cardtwo" wx:if="{{selfintrone}}">
+    <view class="line">
+      <view class="cardotext">
+        <view class="oworkone">
+          <image src="../../../images/newjobinfo-steps.png"></image>
+          <text class="workotext">工 <text class="telephone">龄：</text></text>
+        </view>
+        <view class="owork">
+          <text class="workotextone">{{workingyears}}年</text>
+        </view>
+      </view>
+      <view class="cardotext">
+        <view class="oworkone">
+          <image src="../../../images/newjobinfo-steps.png"></image>
+          <text class="workotext">人员构成：</text>
+        </view>
+        <view class="owork">
+          <text class="workotextone">{{staffcomposition}}</text>
+        </view>
+      </view>
+
+      <view class="cardotext">
+        <view class="oworkone">
+          <image src="../../../images/newjobinfo-steps.png"></image>
+          <text class="workotext">我的家乡：</text>
+        </view>
+        <view class="owork">
+          <text class="workotextone">{{cityself}}</text>
+        </view>
+      </view>
+      <view class="cardotext">
+        <view class="oworkone">
+          <image src="../../../images/newjobinfo-steps.png"></image>
+          <text class="workotext">熟<text class="states">练</text>度：</text>
+        </view>
+        <view class="owork">
+          <text class="workotextone">{{procity}}</text>
+        </view>
+      </view>
+      <view class="cardotext">
+        <view class="oworkone">
+          <image src="../../../images/newjobinfo-steps.png"></image>
+          <text class="workotext">队伍人数：</text>
+        </view>
+        <view class="owork">
+          <text class="workotextone">{{personnum}}人</text>
+        </view>
+      </view>
+      <view class="ocardotext">
+        <view class="oworkone">
+          <image src="../../../images/newjobinfo-steps.png"></image>
+          <text class="oworkotext">标  <text class="otelephoneb">签 ：</text></text>
+        </view>
+        <view class="all">
+          <view class="oworkotextonetu" wx:for="{{tags}}" wx:key="{{index}}">
+            {{item}}
+          </view>
+        </view>
+      </view>
+    </view>
+    <view class="cardotextbottom"></view>
+  </view>
+
   <view class="findingnamecardfive">
     <view class="findingnamecardfivemobile">
       <image src="../../../images/newresume-experience.png"></image>
@@ -38,7 +200,7 @@
   </view>
   <view class="findingnamecardsix">
     <text class="findingnamecardsixone">添加项目经验可提升老板对你的信任程度</text>
-    <view class="findingnamecardsixtwo">添加项目经验</view>
+    <view class="findingnamecardsixtwo" bindtap="addproject">添加项目经验</view>
   </view>
   <view class="findingnamecardseven">
     <view class="findingnamecardsevenmobile">

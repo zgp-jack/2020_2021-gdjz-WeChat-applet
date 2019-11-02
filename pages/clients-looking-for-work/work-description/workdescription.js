@@ -1,11 +1,12 @@
 // pages/clients-looking-for-work/work-description/workdescription.js
 let areas = require("../../../utils/area.js");
 const app = getApp();
+let v = require("../../../utils/v.js");
 Page({
 
   /**
-   * 页面的初始数据
-   */
+   * 页面的初始数据  allprovinces
+   */ 
   data: {
     workage:"",
     multiArray:[],
@@ -223,7 +224,62 @@ Page({
   submitmaterial() {     //发数据给后台
     let information = {}
     let userInfo = wx.getStorageSync("userInfo");
+    let vertifyNum = v.v.new()
+    if (vertifyNum.isNull(this.data.workage)) {
+      wx.showModal({
+        title: '温馨提示',
+        content: '您输入的工龄为空,请重新输入',
+        showCancel: false,
+        success(res) { }
+      })
+      return
+    }
+    if (vertifyNum.isNull(this.data.provincecity)) {
+      wx.showModal({
+        title: '温馨提示',
+        content: '您选择的家乡为空,请重新输入',
+        showCancel: false,
+        success(res) { }
+      })
+      return
+    }
+    if (vertifyNum.isNull(this.data.degreeone)) {
+      wx.showModal({
+        title: '温馨提示',
+        content: '您选择的熟练度为空,请重新输入',
+        showCancel: false,
+        success(res) { }
+      })
+      return
+    }
+    if (vertifyNum.isNull(this.data.constituttion)) {
+      wx.showModal({
+        title: '温馨提示',
+        content: '您选择的人员构成为空,请重新输入',
+        showCancel: false,
+        success(res) { }
+      })
+      return
+    }
 
+    if (vertifyNum.isNull(this.data.teamsnumber) && this.data.constituttion != 1) {
+      wx.showModal({
+        title: '温馨提示',
+        content: '您输入的队伍人数为空或者为零,请重新输入',
+        showCancel: false,
+        success(res) { }
+      })
+      return
+    }
+    if (this.data.labelnum.length == 0) {
+      wx.showModal({
+        title: '温馨提示',
+        content: '您选择的标签为空,请重新输入',
+        showCancel: false,
+        success(res) { }
+      })
+      return
+    }
     Object.assign(information, {
       userId: userInfo.userId,
       token: userInfo.token,
@@ -235,23 +291,27 @@ Page({
       number_people: this.data.teamsnumber,
       tags: this.data.labelnum
     })
-    app.doRequestAction({
-      url: "resumes/introduce/",
-      way: "POST",
-      params: information,
-      success: function (res) {
-        console.log(res)
-      },
-      fail: function (err) {
-        console.log(err)
-      }
-    })
+    console.log(information)
+    // app.doRequestAction({
+    //   url: "resumes/introduce/",
+    //   way: "POST",
+    //   params: information,
+    //   success: function (res) {
+    //     console.log(res)
+    //     wx.navigateTo({
+    //       url: '/pages/clients-looking-for-work/finding-name-card/findingnamecard',
+    //     })
+    //   },
+    //   fail: function (err) {
+    //     console.log(err)
+    //   }
+    // })
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    app.userUploadImg()
   },
 
   /**
