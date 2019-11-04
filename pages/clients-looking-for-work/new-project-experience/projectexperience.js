@@ -8,6 +8,7 @@ Page({
     allprovinces:"",
     region:"",
     imgArrs:[],
+    importimg:[],
     idArrs: [],
     multiArray: [],
     multiArrayone: [],
@@ -49,7 +50,24 @@ Page({
     })
   },
   chooseImage() {
-    app.userUploadImg()
+    let that = this;
+    if (that.data.imgArrs.length>=6){
+      wx.showModal({
+        title: '温馨提示',
+        content: '您最多只能选择六张图片',
+        showCancel: false,
+        success(res) { }
+      })
+      return
+    }
+    app.userUploadImg(function(img,url){
+      wx.hideLoading()
+      that.data.imgArrs.push(url.httpurl)
+      that.data.importimg.push(url.url)
+      that.setData({
+        imgArrs: that.data.imgArrs
+      })
+    })
   },
   initAllProvice: function () { //获取所有省份
     let that = this;
