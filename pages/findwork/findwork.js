@@ -654,7 +654,7 @@ Page({
      */
     onLoad: function (options) {
       this.initSearchHistory();
-        this.initUserShareTimes();
+        //this.initUserShareTimes();
         this.getFilterData();
         this.valiFilterProvince();
         this.initFooterData();
