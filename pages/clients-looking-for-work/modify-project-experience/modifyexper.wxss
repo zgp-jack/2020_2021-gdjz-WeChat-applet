@@ -1,3 +1,31 @@
+.experienceheader{
+  width: 93%;
+  margin: 0 auto;
+  margin-top: 19rpx;
+  height: 110rpx;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  background-color: white;
+}
+.experienceheader .experienceheaderone{
+  width: 28%;
+  font-size: 30rpx;
+  line-height: 110rpx;
+  color: #2A2A2A;
+  margin-left: 19rpx;
+}
+.experienceheader .experienceheadertwo{
+  width: 80%;
+  height: 110rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.experienceheader .experienceheadertwo input{
+  font-size: 30rpx;
+  height: 30rpx;
+}
 .modifyexpername{
   width: 93%;
   margin: 0 auto;
@@ -44,6 +72,7 @@
   width: 181rpx;
   height: 181rpx;
   margin-right: 50rpx;
+  position: relative;
 }
 .img_item{
    display: inline-block;
@@ -200,3 +229,18 @@
 .buttontext  view:last-child{
    color: white;
 }
+
+.delete{
+   width: 30rpx;
+   height: 30rpx;
+   background: rgb(139, 137, 137);
+   position: absolute;
+   border-radius: 50%;
+   right: 0;
+   top: 0;
+   text-align: center;
+   line-height:  30rpx;
+   color: white;
+   font-size: 20rpx;
+}
+/* modifyexperimageone  modalDlg*/

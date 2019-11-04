@@ -1,15 +1,29 @@
-// pages/modify-project-experience/modifyexper.js
+const app = getApp();
+let v = require("../../../utils/v.js");
+let areas = require("../../../utils/area.js");
 Page({
 
   /**
-   * 页面的初始数据
+   * 页面的初始数据 bindstartDate delete deleteexper obtn vertify
    */
   data: {
+    project:"",
+    resume_uuid:"",
+    uuid:"",
+    multiArray: [],
+    multiArrayone: [],
+    objectMultiArray: [],
+    multiIndex: [0, 0],
+    multiIndexvalue: "",
+    provincecity:"",
     imgArrs: [],
     idArrs: [],
-    date:"",
     regionone: "",
     showModal: false,
+    name:"",
+    date: "",
+    startdate:"",
+    content:""
   },
   changeReginone(e) {
     console.log(e.detail.value)
@@ -26,6 +40,11 @@ Page({
       date: e.detail.value
     })
   },
+  bindstartDate(e) {
+    this.setData({
+      startdate: e.detail.value
+    })
+  },
   previewImage(e) {
     console.log(e)
     let that = this
@@ -35,9 +54,39 @@ Page({
     })
   },
   vertify(){
-    console.log(123)
+    let userInfo = wx.getStorageSync("userInfo");
+    let project = {}
+    Object.assign(project, {
+      userId: userInfo.userId,
+      token: userInfo.token,
+      tokenTime: userInfo.tokenTime,
+      project_uuid: this.data.uuid
+    })
+    console.log(project)
+    let that = this;
+    app.doRequestAction({
+      url: 'resumes/del-project/',
+      way: 'POST',
+      params: project,
+      success(res) {
+        wx.navigateBack({
+          delta: 1
+        })
+      }
+    })
     this.setData({
       showModal: false
+    })
+  },
+  delete(e){
+    console.log(e)
+    this.data.imgArrs.splice(e.currentTarget.dataset.index,1)
+    this.data.idArrs.splice(e.currentTarget.dataset.index, 1)
+    this.setData({
+      imgArrs: this.data.imgArrs
+    })
+    this.setData({
+      idArrs: this.data.idArrs
     })
   },
   obtn() {
@@ -51,53 +100,189 @@ Page({
     })
   },
   chooseImage() {
-    let that = this
-    wx.chooseImage({
-      count: 1,
-      sourceType: ['album', 'camera'],
-      success(res) {
-        // tempFilePath可以作为img标签的src属性显示图片
-        const path = res.tempFilePaths[0]
-        if (that.data.imgArrs.length >= 5) {
-          return
+    let that = this;
+    if (that.data.imgArrs.length >= 6) {
+      wx.showModal({
+        title: '温馨提示',
+        content: '您最多只能选择六张图片',
+        showCancel: false,
+        success(res) { }
+      })
+      return
+    }
+    app.userUploadImg(function (img, url) {
+      wx.hideLoading()
+      that.data.imgArrs.push(url.httpurl)
+      that.data.idArrs.push(url.url)
+      that.setData({
+        imgArrs: that.data.imgArrs
+      })
+    })
+    console.log(that.data.imgArrs)
+  },
+  initAllProvice: function () { //获取所有省份
+    let that = this;
+    let arr = app.arrDeepCopy(areas.getPublishArea());
+    this.setData({
+      allprovinces: arr
+    })
+    let provice = [];
+    let provicemore = [];
+    let provicechild = [];
+    let provicechildmore = [];
+    let array = [];
+    let arrayname = [];
+    let len = arr.length;
+    for (let i = 0; i < len; i++) {
+      let data = { id: arr[i].id, pid: arr[i].pid, name: arr[i].name }
+      let dataone = arr[i].name
+
+      provice.push(data)
+      provicemore.push(dataone)
+      array[i] = [];
+      arrayname[i] = []
+      if (arr[i].children.length == 0) {
+        array[i].push(arr[i])
+        arrayname[i].push(arr[i].name)
+      }
+      for (let j = 0; j < arr[i].children.length; j++) {
+        if (arr[i].children[j].id) {
+          let datachild = { id: arr[i].children[j].id, pid: arr[i].children[j].pid, name: arr[i].children[j].name }
+
+          if (arr[i].children[j].pid - 2 == i) {
+            array[i].push(arr[i].children[j])
+            arrayname[i].push(arr[i].children[j].name)
+          }
+        } else {
+          let datachildone = arr[i].name
+          provicechildmore.push(datachildone)
         }
-        that.data.imgArrs.push(path)
-        // that.data.idArrs.push(id)
-        that.setData({
-          imgArrs: that.data.imgArrs,
-          // idArrs: that.data.idArrs
-        })
+      }
+      provicechild.push(array[i])
+      provicechildmore.push(arrayname[i])
+    }
+    this.setData({
+      multiArrayone: [provicemore, provicechildmore],
+      objectMultiArray: [provice, provicechild]
+    })
 
-        wx.uploadFile({
-          url: '要上传的地址',
-          filePath: path,
-          name: 'image',
-          success: (res) => {
-            console.log(res)
-            // 根据查看结果是否需要json化
-            let { url, id } = JSON.parse(res.data).data
-            console.log(url)
-            console.log(id)
-            that.data.imgArrs.push(url)
-            that.data.idArrs.push(id)
-            that.setData({
-              imgArrs: that.data.imgArrs,
-              idArrs: that.data.idArrs
+    this.setData({
+      multiArray: [provicemore, that.data.multiArrayone[1][0]],
+      objectMultiArray: [provice, provicechild]
+    })
+    console.log(this.data.multiArrayone)
+  },
+
+  bindMultiPickerChange: function (e) {    //最终家乡的选择
+    let that = this;
+    this.setData({
+      multiIndex: e.detail.value
+    })
+    let allpro = '';
+    if (this.data.allprovinces[this.data.multiIndex[0]].children.length != 0) {
+
+      allpro = this.data.allprovinces[this.data.multiIndex[0]].id + "," + this.data.allprovinces[this.data.multiIndex[0]].children[this.data.multiIndex[1]].id
+      this.setData({
+        multiIndexvalue: that.data.allprovinces[that.data.multiIndex[0]].name + that.data.allprovinces[that.data.multiIndex[0]].children[that.data.multiIndex[1]].name
+      })
+    } else {
+      allpro = this.data.allprovinces[this.data.multiIndex[0]].id + "," + this.data.allprovinces[this.data.multiIndex[0]].id
+      this.setData({
+        multiIndexvalue: that.data.allprovinces[that.data.multiIndex[0]].name + that.data.allprovinces[that.data.multiIndex[0]].name
+      })
+    }
+    this.setData({
+      provincecity: allpro
+    })
+  },
+
+  bindMultiPickerColumnChange: function (e) {   //下滑家乡列表所产生的函数
+    let that = this;
+    let namearry = this.data.multiArrayone;
+    var data = {
+      multiArray: this.data.multiArray,
+      multiIndex: this.data.multiIndex
+    };
+    data.multiIndex[e.detail.column] = e.detail.value;
+    switch (e.detail.column) {
+      case 0:
+        switch (data.multiIndex[0]) {
+          case data.multiIndex[0]:
+            data.multiArray[1] = namearry[1][data.multiIndex[0]];
+            break;
+        }
+        data.multiIndex[1] = 0;
+        break;
+
+    }
+    this.setData(data);
+    console.log(data)
+  },
+
+
+  preserve() {
+    let userInfo = wx.getStorageSync("userInfo");
+    let project = {}
+
+    let oimg = ""
+    for (let i = 0; i < this.data.idArrs.length; i++) {
+      if (i == this.data.idArrs.length - 1) {
+        oimg += this.data.idArrs[i]
+      } else {
+        oimg += this.data.idArrs[i] + ","
+      }
+
+    }
+    Object.assign(project, {
+      userId: userInfo.userId,
+      token: userInfo.token,
+      tokenTime: userInfo.tokenTime,
+      resume_uuid: this.data.resume_uuid,
+      completion_time: this.data.date,
+      start_time: this.data.startdate,
+      project_name: this.data.name,
+      detail: this.data.content,
+      province: this.data.provincecity.split(",")[0],
+      city: this.data.provincecity.split(",")[1],
+      image: oimg,
+      project_uuid: this.data.uuid
+    })
+    console.log(project)
+    let that = this;
+    app.doRequestAction({
+      url: 'resumes/project/',
+      way: 'POST',
+      params: project,
+      success(res) {
+        wx.showModal({
+          title: '温馨提示',
+          content: '保存成功',
+          showCancel: false,
+          success(res) {
+            wx.navigateBack({
+              delta: 1
             })
-            console.log(that.data.imgArrs)
-            console.log(that.data.idArrs)
-
           }
         })
       }
     })
   },
-
+  ovalue(e){
+    this.setData({
+      name: e.detail.value
+    })
+  },
+  ocontent(e){
+    this.setData({
+      content: e.detail.value
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    this.getproject()
+    this.initAllProvice()
   },
 
   /**
@@ -113,7 +298,46 @@ Page({
   onShow: function () {
 
   },
+  getproject(){
+    let project = wx.getStorageSync("projectdetail");
+    this.setData({
+      project: project.uid
+    })
+    console.log(this.data.project)
 
+    this.setData({
+      name: this.data.project.project_name
+    })
+
+    this.setData({
+      date: this.data.project.completion_time
+    })
+
+    this.setData({
+      multiIndexvalue: this.data.project.province_name + this.data.project.city_name
+    })
+    this.setData({
+      startdate: this.data.project.start_time
+    })
+    this.setData({
+      content: this.data.project.detail
+    })
+    this.setData({
+      imgArrs: this.data.project.image
+    })
+    this.setData({
+      idArrs: this.data.project.images.split(",")
+    })
+    this.setData({
+      resume_uuid: this.data.project.resume_uuid
+    })
+    this.setData({
+      uuid: this.data.project.uuid
+    })
+    this.setData({
+      provincecity: this.data.project.province + "," + this.data.project.city
+    })
+  },
   /**
    * 生命周期函数--监听页面隐藏
    */

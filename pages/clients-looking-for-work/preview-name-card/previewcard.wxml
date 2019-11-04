@@ -1,200 +1,216 @@
-<view class="headerlivecard">
-  <view class="precardtwoheader">
-    注:分享名片 让你的名片更靠前
+<view wx:if="{{allde}}">
+
+  <view class="header">
+    注:分享名片 让你的名片排名更靠前
   </view>
-  <view class="precardtwo">
-    <view class="precardtwosonone">
-      <view class="precardtwosononeimg">
+  <view class="cardtwo" wx:if="{{showtopone}}">
+    <view class="cardtwosonone">
+      <view class="cardtwosononeimg">
         <view class="oimg">
-          <image></image>
+          <image src="{{headerimg}}" bindtap='chooseImage'></image>
         </view>
         <view class="oimgone">
-          <text class="otext">李小六哈哈</text>
+          <text class="otext">{{name}}</text>
           <view class="otextone">
-            <text>男</text>
-            <text class="ochange">55岁</text>
-            <text class="ochange">维吾尔族</text>
+            <text>{{sex}}</text>
+            <text class="ochange">{{age}}岁</text>
+            <text class="ochange">{{nation}}</text>
           </view>
         </view>
       </view>
-      <view class="precardtwosontwo ">
-        <text>编辑</text>
+      <view class=" cardtwosontwo ">
+        <text bindtap="edit">编辑</text>
       </view>
     </view>
-    <view class="line">
-      <view class="precardotext">
+    <view class="lineone">
+    <view class="linezo">
+      <view class="cardotext">
         <view class="oworkone">
-          <image src="../../../images/newjobinfo-steps.png"></image>
-          <text class="workotext">工 <text class="telephone">种：</text></text>
+          <text class="oworkotext">工 <text class="otelephone">种：</text></text>
         </view>
-        <view class="owork">
-          <text class="workotextone">反对广泛大概豆腐干豆腐干豆腐干大豆腐干豆腐干感到翻跟斗翻跟斗翻跟斗范甘迪士大夫大士大夫水水水水水水水水水水水水水水水水</text>
+        <view class="all">
+          <view class="oworkotextonetu" wx:for="{{occupations}}" wx:key="{{index}}">
+            {{item}}
+          </view>
         </view>
       </view>
-      <view class="precardotext">
+      <view class="cardotext">
         <view class="oworkone">
-          <image src="../../../images/newjobinfo-steps.png"></image>
-          <text class="workotext">工 <text class="telephone">龄：</text></text>
-        </view>
-        <view class="owork">
-          <text class="workotextone">10年</text>
-        </view>
-      </view>
-      <view class="precardotext">
-        <view class="oworkone">
-          <image src="../../../images/newjobinfo-steps.png"></image>
           <text class="workotext">手 <text class="telephone">机：</text></text>
         </view>
         <view class="owork">
-          <text class="workotextone">13525467856</text>
+          <text class="workotextone">{{telephone}}</text>
         </view>
       </view>
-      <view class="precardotext">
+      <view class="cardotext">
         <view class="oworkone">
-          <image src="../../../images/newjobinfo-steps.png"></image>
-          <text class="workotext">熟<text class="states">练</text>度：</text>
-        </view>
-        <view class="owork">
-          <text class="workotextone">非常熟悉</text>
-        </view>
-      </view>
-      <view class="precardotext">
-        <view class="oworkone">
-          <image src="../../../images/newjobinfo-steps.png"></image>
-          <text class="workotext">找活人数：</text>
-        </view>
-        <view class="owork">
-          <text class="workotextone">100人</text>
-        </view>
-      </view>
-      <view class="precardotext">
-        <view class="oworkone">
-          <image src="../../../images/newjobinfo-steps.png"></image>
-          <text class="workotext">人员构成：</text>
-        </view>
-        <view class="owork">
-          <text class="workotextone">工人，班组突击队</text>
-        </view>
-      </view>
-      <view class="precardotext">
-        <view class="oworkone">
-          <image src="../../../images/newjobinfo-steps.png"></image>
-          <text class="workotext">我的家乡：</text>
-        </view>
-        <view class="owork">
-          <text class="workotextone">四川省成都市</text>
-        </view>
-      </view>
-      <view class="precardotext">
-        <view class="oworkone">
-          <image src="../../../images/newjobinfo-steps.png"></image>
           <text class="workotext">所在地区：</text>
         </view>
         <view class="owork">
-          <text class="workotextone">四川省泸州市泸县尖叫村</text>
+          <text class="workotextone">{{city}}</text>
         </view>
       </view>
-      <view class="precardotext">
+      <view class="cardotext">
         <view class="oworkone">
-          <image src="../../../images/newjobinfo-steps.png"></image>
-          <text class="workotext">标 <text class="telephone">签：</text></text>
-        </view>
-        <view class="owork">
-          <text class="workotextone">急速突击，</text>
+          <text class="workotext">自我介绍：</text>
         </view>
       </view>
     </view>
-    <view class="precardotextbottom"></view>
+    </view>
+    <view class="content" wx:if="{{intro}}">{{introduce}}</view>
+    <view class="contentone" wx:if="{{introne}}">{{introduce}}</view>
+    <view class="cardotextbottom"></view>
   </view>
-  <view class="precardthree">
-    <view class="precardthreemobile">
+
+
+
+  <view class="cardthree" wx:if="{{selfintrone}}">
+    <view class="cardthreemobile">
       <image src="../../../images/newresume-description.png"></image>
       自我介绍
     </view>
-  </view>
-  <view class="precardfour">
-    <text> 士大夫士大夫士大夫士大夫士大夫胜多负少手动阀手动阀手动阀手动阀手动阀撒旦士大夫士大夫随风倒十分士大夫撒旦士大夫十分士大夫是非得失</text>
-    <view class="precardfourbottom"></view>
-  </view>
-  <view class="precardfive">
-    <view class="precardfivemobile">
-      <image src="../../../images/newresume-experience.png"></image>
-      项目经验
-    </view>
-  </view>
-  <view class="precardsix">
-    <view class="precardsixzong">
-  
-      <view class="precardsixall">
-        <view class="precardsixtwo">
-            <image src="../../../images/newresume-experience-item.png" class="precardsixone"></image>
-            <text>广东台山碧桂园项目</text>
-        </view>
-        <view class="precardsixthreeborder">
-          <view class="precardsixthreeline">
-            <view class="precardsixthree">
-              <text>2019-01-2020-12</text>
-              <text>广东省台州市</text>
-            </view>
-            <view class="precardsixfour">
-              <text>主要包工所有虽有水电安装</text>
-            </view>
-            <view class="precardsixfive">
-              <image></image>
-              <image></image>
-              <image></image>
-              <image></image>
-              <image></image>
-              <image></image>
-            </view>
 
+  </view>
+  <view class="cardtwo" wx:if="{{selfintrone}}">
+    <view class="lineone">
+    <view class="linezo">
+      <view class="cardotext">
+        <view class="oworkone">
+          <text class="workotext">工 <text class="telephone">龄：</text></text>
+        </view>
+        <view class="owork">
+          <text class="workotextone">{{workingyears}}年</text>
+        </view>
+      </view>
+      <view class="cardotext">
+        <view class="oworkone">
+          <text class="workotext">人员构成：</text>
+        </view>
+        <view class="owork">
+          <text class="workotextone">{{staffcomposition}}</text>
+        </view>
+      </view>
+
+      <view class="cardotext">
+        <view class="oworkone">
+          <text class="workotext">我的家乡：</text>
+        </view>
+        <view class="owork">
+          <text class="workotextone">{{cityself}}</text>
+        </view>
+      </view>
+      <view class="cardotext">
+        <view class="oworkone">
+          <text class="workotext">熟<text class="states">练</text>度：</text>
+        </view>
+        <view class="owork">
+          <text class="workotextone">{{procity}}</text>
+        </view>
+      </view>
+      <view class="cardotext">
+        <view class="oworkone">
+          <text class="workotext">队伍人数：</text>
+        </view>
+        <view class="owork">
+          <text class="workotextone">{{personnum}}人</text>
+        </view>
+      </view>
+      <view class="cardotext">
+        <view class="oworkone">
+          <text class="oworkotext">标  <text class="otelephoneb">签 ：</text></text>
+        </view>
+        <view class="all">
+          <view class="tworkotextonetu" wx:for="{{tags}}" wx:key="{{index}}">
+            {{item}}
           </view>
         </view>
       </view>
     </view>
-    <view class="precardsixsixall">
-      <button class="precardsixsix">
+    </view>
+    
+    <view class="cardotextbottom"></view>
+  </view>
+
+
+  <view class="cardfive" wx:if="{{projectlength != 0}}">
+    <view class="cardfivemobile">
+      <image src="../../../images/newresume-experience.png"></image>
+      项目经验
+    </view>
+
+  </view>
+   <view class="cardsix" wx:if="{{projectlength != 0}}">
+    <view class="cardsixzong" wx:for="{{projectone}}" wx:key="{{index}}">
+      <view>
+      <image src="../../../images/newresume-experience-item.png" class="cardsixone"></image>
+      </view>
+      <view class="cardsixall">
+        <view class="cardsixtwo">
+          <text>{{item.project_name}}</text>
+        </view>
+        <view class="cardsixthreeborder">
+          <view class="cardsixthree">
+            <text>{{item.start_time}}--{{item.completion_time}}</text>
+            <text>{{item.province_name}}省{{item.city_name}}市</text>
+          </view>
+          <view class="cardsixfour">
+            <text>{{item.detail}}
+        </text>
+          </view>
+          <view class="cardsixfive">
+            <image wx:for="{{item.image}}" wx:key="{{index}}" src="{{item}}"></image>
+     
+          </view>
+        </view>
+
+      </view>
+    </view>
+    <view class="cardsixsixall" wx:if="{{projectlength > 1 }}">
+      <button class="cardsixsix" bindtap="moreproject">
         <view>
           更多项目经验
           <image src="../../../images/downward.png" class="down"></image>
         </view>
       </button>
     </view>
-    <view class="precardsixsixallvoto">
+    <view class="cardsixsixallvoto">
     </view>
   </view>
-  <view class="precardseven">
-    <view class="precardsevenmobile">
+
+
+  <view class="cardseven">
+    <view class="cardsevenmobile">
       <image src="../../../images/newresume-skill.png"></image>
       职业技能
     </view>
+
   </view>
-  <view class="precardeight">
-    <view class="precardeightzong">
-      <view class="precardeightall">
-        <view class="precardeighttwo">
-          <image src="../../../images/newresume-experience-item.png" class="precardeightone"></image>
-          <text  class="waterbook">水电工技术证书</text>
-          <text>2019-01</text>
+  <view class="cardeight">
+    <view class="cardeightzong" wx:for="{{skillbooksone}}" wx:key="{{index}}">
+     <view>
+      <image src="../../../images/newresume-experience-item.png" class="cardeightone"></image>
+      </view>
+      <view class="cardeightall">
+        <view class="cardeighttwo">
+          <text>{{item.name}}</text>
+          <text>{{item.certificate_time}}</text>
         </view>
-        <view class="precardeightfive">
-          <view class="precardeightfiveline">
-            <image></image>
-            <image></image>
-            <image></image>
-          </view>
+        <view class="cardeightfive">
+          <image wx:for="{{item.image}}" wx:key="{{index}}" src="{{item}}"></image>
+
         </view>
 
       </view>
     </view>
-    <view class="none">
-      <image src="../../../images/none.png"></image>
-      <text>没有更多了...</text>
+    <view class="cardeightsixall" wx:if="{{skilllength > 1 }}">
+      <button class="cardeightsix" bindtap="moreskill">
+        <view>
+          更多技能证书
+          <image src="../../../images/downward.png" class="down" ></image>
+        </view>
+      </button>
     </view>
-    <view class="precardsixsixallvoto">
+    <view class="cardsixsixallvoto">
     </view>
   </view>
-  <view class="precardebottom">
-  </view>
-
 </view>

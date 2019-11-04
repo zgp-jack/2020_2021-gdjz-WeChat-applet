@@ -1,22 +1,19 @@
 {
   "pages": [
-    "pages/clients-looking-for-work/finding-name-card/findingnamecard",
-    "pages/clients-looking-for-work/new-project-experience/projectexperience",
     "pages/index/index",
+    "pages/clients-looking-for-work/finding-name-card/findingnamecard",
+    "pages/clients-looking-for-work/modify-project-experience/modifyexper",
+    "pages/clients-looking-for-work/all-project-experience/allexperience",
+    "pages/clients-looking-for-work/new-project-experience/projectexperience",
     "pages/clients-looking-for-work/livecardone/livecardone",
     "pages/clients-looking-for-work/essential-information/esinformation",
-
     "pages/clients-looking-for-work/work-description/workdescription",
-
     "pages/clients-looking-for-work/add-vocational-certificate/certificate",
     "pages/clients-looking-for-work/introduce-myself/introduce",
     "pages/clients-looking-for-work/addcertificate/addcertificate",
-
-    "pages/clients-looking-for-work/modify-project-experience/modifyexper",
     "pages/clients-looking-for-work/modifycertificate/modifycertificate",
     "pages/clients-looking-for-work/all-skills-certificate/skillscertificate",
     "pages/clients-looking-for-work/preview-name-card/previewcard",
-    "pages/clients-looking-for-work/all-project-experience/allexperience",
     "pages/clients-looking-for-work/selectmap/smap",
     "pages/clients-looking-for-work/basic-information/information",
     "pages/detail/info/info",
@@ -70,7 +67,9 @@
     "pages/map/detail",
     "pages/others/message/lists/lists",
     "pages/others/message/publish/publish",
-    "pages/others/information/lists"
+    "pages/others/information/lists",
+    "pages/clients-looking-for-work/preall-project-experience/preall-project-experience",
+    "pages/clients-looking-for-work/preall-skills-certificate/preall-skills-certificate"
   ],
   "window": {
     "backgroundTextStyle": "light",

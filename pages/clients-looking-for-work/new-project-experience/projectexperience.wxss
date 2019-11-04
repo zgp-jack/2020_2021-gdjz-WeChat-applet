@@ -66,6 +66,7 @@
   width: 181rpx;
   height: 181rpx;
   margin-right: 50rpx;
+  position: relative;
 }
 .img_item{
    display: inline-block;
@@ -106,3 +107,17 @@
   text-align: center;
   font-size: 29rpx;
 }
+.delete{
+   width: 30rpx;
+   height: 30rpx;
+   background: rgb(139, 137, 137);
+   position: absolute;
+   border-radius: 50%;
+   right: 0;
+   top: 0;
+   text-align: center;
+   line-height:  30rpx;
+   color: white;
+   font-size: 20rpx;
+}
+/* experiencefourone */

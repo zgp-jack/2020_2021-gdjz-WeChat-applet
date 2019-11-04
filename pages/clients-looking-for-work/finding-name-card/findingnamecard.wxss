@@ -28,14 +28,7 @@
   justify-content: space-between;
 }
 
-.findingnamecardoneson .findingnamecardonesonone text {
-  margin-top: 14rpx;
-  display: block;
-  font-size: 28rpx;
-  margin-left: 13rpx;
-  font-weight: bold;
-  letter-spacing: 4rpx;
-}
+
 
 .findingnamecardoneson .findingnamecardonesonone view {
   margin-top: 6rpx;
@@ -44,7 +37,33 @@
   color: #0099FF;
   margin-left: 13rpx;
 }
+.findingnamecardoneson .findingnamecardonesonone .otext {
+  margin-top: 14rpx;
+  font-size: 28rpx;
+  margin-left: 13rpx;
+  font-weight: bold;
+  letter-spacing: 4rpx;
+  color: #000;
+  display: flex;
+  /* justify-content: space-between;  olang*/
+}
 
+.findingnamecardoneson .findingnamecardonesonone .lang {
+  margin-top: 14rpx;
+ width: 143rpx;
+ background: #DEDDDD;
+ height: 14rpx;
+ border-radius: 8rpx;
+ position: relative;
+}
+.findingnamecardoneson .findingnamecardonesonone .olang {
+ background: #0099FF;
+ height: 14rpx;
+ border-radius: 8rpx;
+ position: absolute;
+ padding: 0;
+ margin: 0;
+}
 .findingnamecardoneson .findingnamecardonesontwo text {
   margin-left: 40rpx;
   color: #09f;
@@ -440,14 +459,25 @@
 }
 
 .cardotext {
+  position: relative;
   width: 100%;
   display: flex;
 }
 
 .cardotext .oworkone {
   display: flex;
+  margin-left: 54rpx;
 }
-
+.cardotext::before {
+  position: absolute;
+  content: '';
+  width: 9px;
+  height: 9px;
+  background: url(http://cdn.yupao.com/miniprogram/images/newjobinfo-steps.png?t=11) no-repeat;
+  background-size: 100% 100%;
+    left: 10.5px;
+  top: 10px;
+}
 .cardotext .owork {
   margin: 0;
   padding: 0;
@@ -528,7 +558,6 @@
 .cardthree .cardthreemobile {
   font-size: 26rpx;
   font-weight: bold;
-    margin-left: 28rpx;
 }
 
 .cardthree image {
@@ -539,7 +568,6 @@
 .cardthree .cardthreeone {
   font-size: 24rpx;
   color: #09f;
-  margin-right: 26rpx;
 }
 
 .cardfour {
@@ -587,7 +615,6 @@
 .cardfive .cardfivemobile {
  font-size: 26rpx;
   font-weight: bold;
-    margin-left: 28rpx;
 }
 
 .cardfive image {
@@ -598,7 +625,6 @@
 .cardfive .cardthreeone {
  font-size: 24rpx;
   color: #09f;
-  margin-right: 26rpx;
 }
 
 .cardsix {
@@ -610,11 +636,10 @@
 .cardsixzong {
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
 }
 
 .cardsix .cardsixone {
-  width: 32rpx;
+  width: 20rpx;
   height: 20rpx;
   margin-left: 20rpx;
   margin-top: 20rpx;
@@ -648,7 +673,6 @@
 .cardsixzong .cardsixfive image {
   width: 185rpx;
   height: 185rpx;
-  background-color: orange;
   margin-left: 16rpx;
   margin-top: 16rpx;
 }
@@ -697,7 +721,6 @@
 .cardseven .cardsevenmobile {
   font-size: 26rpx;
   font-weight: bold;
-    margin-left: 28rpx;
 }
 
 .cardseven image {
@@ -708,7 +731,6 @@
 .cardseven .cardthreeone {
   font-size: 24rpx;
   color: #09f;
-  margin-right: 26rpx;
 }
 
 .cardeight {
@@ -765,7 +787,6 @@
 .cardeightzong .cardeightfive image {
   width: 185rpx;
   height: 185rpx;
-  background-color: orange;
   margin-left: 16rpx;
   margin-top: 16rpx;
 }
@@ -804,6 +825,8 @@
 }
 
 .cardnine .cardnineone {
+  margin: 0;
+  padding: 0;
   height: 91rpx;
   width: 369rpx;
   background-color: white;
@@ -811,6 +834,8 @@
   font-size: 36rpx;
   text-align: center;
   line-height: 91rpx;
+  border: none;
+
 }
 
 .cardnine .cardnineone image {
@@ -819,17 +844,23 @@
   position: relative;
   top: 4rpx;
 }
-
-.line {
-  border-left: 1px solid #dcdcdc;
+.lineone{
   position: relative;
-  left: 4.2%;
+}
+.linezo::before {
+  position: absolute;
+  content: '';
+  left: 15px;
+  top: 0;
+  width: 1px;
+  height: 100%;
+  background: #dcdcdc;
 }
 
-.cardotext {
+/* .cardotext {
   position: relative;
-  left: -4.2%;
-}
+  left: -15px;
+} */
 
 
 .content{
@@ -847,34 +878,45 @@
   padding-right: 2%;
 }
 /* link cardtwo  workotextonetu content oimg*/
-.ocardotext {
-  width: 100%;
+.cardotext {  width: 100%;
   display: flex;
-  position: relative;
-  left: -4.2%;
+  /* position: relative;
+  left: -15px; */
 
 }
 
 .cardotext .oworkone {
   display: flex;
-  width: 28%;
 }
 
-.ocardotext  image {
+.cardotext  image {
   width: 18rpx;
   height: 18rpx;
   margin: 0 20rpx;
   margin-top: 24rpx;
 }
 
-.ocardotext .oworkotext {
+.cardotext .oworkotext {
   color: grey;
   font-size: 24rpx;
   width: 140rpx;
   margin-top: 14rpx;
   margin-bottom: 6rpx;
 }
-.ocardotext .oworkotextonetu {
+.cardotext .oworkotextonetu {
+  color: black;
+  font-size: 24rpx;
+  background: #E7E7E7;
+  display: inline-block;
+  height: 37rpx;
+  line-height: 37rpx;
+  padding-left: 4rpx;
+  padding-right: 4rpx;
+  text-align: center;
+  margin-top: 12rpx;
+  /* margin-left: 17rpx; */
+}
+.cardotext .tworkotextonetu {
   color: black;
   font-size: 24rpx;
   background: #E7E7E7;
@@ -886,15 +928,25 @@
   text-align: center;
   margin-top: 12rpx;
   margin-left: 17rpx;
+}
+.cardotext .tworkotextonetu:first-child{
+  color: black;
+  font-size: 24rpx;
+  background: #E7E7E7;
+  display: inline-block;
+  height: 37rpx;
+  line-height: 37rpx;
+  padding-left: 4rpx;
+  padding-right: 4rpx;
+  text-align: center;
+  margin-top: 12rpx;
+  margin-left:0rpx;
+}
 
-}
-.ocardotext .all{
-  width: 72%;
-}
-.ocardotext .oworkotext .otelephone {
+.cardotext .oworkotext .otelephone {
   margin-left: 40rpx;
 }
-.ocardotext .oworkotext .otelephoneb {
+.cardotext .oworkotext .otelephoneb {
   margin-left: 35rpx;
 }
 
@@ -949,8 +1001,6 @@
   overflow-y: auto;
   background: #fff;
   transition: height 0.3s;
-  /* border-left:1px solid #efefef;
-  border-right:1px solid #efefef; */
 }
 .select_box .option_box .option{
   display: block;
@@ -961,5 +1011,5 @@
   border-left:1px solid #efefef;
   border-right:1px solid #efefef;
   text-align: center;
-  /* padding: 10rpx; */
 }
+/*cardsevenmobile cardthreeone cardnineone*/

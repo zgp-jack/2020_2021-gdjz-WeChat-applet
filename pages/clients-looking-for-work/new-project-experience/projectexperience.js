@@ -1,6 +1,7 @@
 const app = getApp();
 let v = require("../../../utils/v.js");
 let areas = require("../../../utils/area.js");
+//bindstartDate delete
 Page({
   data: {
     date: "",
@@ -168,8 +169,16 @@ Page({
   preserve(){
     let userInfo = wx.getStorageSync("userInfo");
     let project = {}
-    console.log(this.data.provincecity)
-    console.log(this.data.provincecity)
+
+    let oimg = ""
+    for (let i = 0; i<this.data.importimg.length;i++){
+      if (i == this.data.importimg.length-1){
+        oimg += this.data.importimg[i]
+      }else{
+        oimg += this.data.importimg[i] + ","
+      }
+
+    }
     Object.assign(project, {
       userId: userInfo.userId,
       token: userInfo.token,
@@ -181,21 +190,87 @@ Page({
       detail: this.data.detail,
       province: this.data.provincecity.split(",")[0],
       city: this.data.provincecity.split(",")[1],
+      image: oimg
     })
+    console.log(project)
     let that = this;
-    // app.doRequestAction({
-    //   url: 'resumes/project/',
-    //   way: 'POST',
-    //   params: project,
-    //   success(res) {
-      
-    //   }
-    // })
+    app.doRequestAction({
+      url: 'resumes/project/',
+      way: 'POST',
+      params: project,
+      success(res) {
+        wx.showModal({
+          title: '温馨提示',
+          content: '保存成功',
+          showCancel: false,
+          success(res) { 
+            wx.navigateBack({
+              delta: 1
+            })
+          }
+        })
+      }
+    })
+  },
+  preservechixu(){
+    let userInfo = wx.getStorageSync("userInfo");
+    let project = {}
+
+    let oimg = ""
+    for (let i = 0; i < this.data.importimg.length; i++) {
+      if (i == this.data.importimg.length - 1) {
+        oimg += this.data.importimg[i]
+      } else {
+        oimg += this.data.importimg[i] + ","
+      }
+
+    }
+    Object.assign(project, {
+      userId: userInfo.userId,
+      token: userInfo.token,
+      tokenTime: userInfo.tokenTime,
+      resume_uuid: this.data.resume_uuid,
+      completion_time: this.data.date,
+      start_time: this.data.startdate,
+      project_name: this.data.projectname,
+      detail: this.data.detail,
+      province: this.data.provincecity.split(",")[0],
+      city: this.data.provincecity.split(",")[1],
+      image: oimg
+    })
+    console.log(project)
+    let that = this;
+    app.doRequestAction({
+      url: 'resumes/project/',
+      way: 'POST',
+      params: project,
+      success(res) {
+        wx.showModal({
+          title: '温馨提示',
+          content: '保存成功,继续添加',
+          showCancel: false,
+          success(res) {
+          }
+        })
+
+      }
+    })
   },
   getuuid(){
     let userInfo = wx.getStorageSync("uuid");
     this.setData({
       resume_uuid: userInfo
+    })
+  },
+  delete(e) {
+    console.log(e)
+    this.data.imgArrs.splice(e.currentTarget.dataset.index, 1)
+    this.data.idArrs.splice(e.currentTarget.dataset.index, 1)
+    this.setData({
+      imgArrs: this.data.imgArrs
+    })
+    this.setData({
+      importimg: this.data.importimg
     })
   },
   onShow: function () {

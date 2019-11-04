@@ -201,8 +201,13 @@ Page({
       this.data.evaluation.push(e.currentTarget.dataset.index)
       let labelnum = "";
       for (let i = 0; i < this.data.evaluation.length;i++){
+        if (this.data.evaluation.length - 1 == i){
+          labelnum += this.data.evaluation[i]
+        }else{
         labelnum += this.data.evaluation[i] + ","
+        }
       }
+
       that.setData({
         labelnum: labelnum
       })

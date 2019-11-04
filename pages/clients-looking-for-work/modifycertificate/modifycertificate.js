@@ -1,12 +1,74 @@
-// pages/modifycertificate/modifycertificate.js
+const app = getApp();
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
+    skill:[],
     imgArrs: [],
-    idArrs: []
+    idArrs: [],
+    name:"",
+    resume_uuid:"",
+    uuid:"",
+    time:"",
+    showModal: false
+  },
+  vertify() {
+    let userInfo = wx.getStorageSync("userInfo");
+    let project = {}
+    Object.assign(project, {
+      userId: userInfo.userId,
+      token: userInfo.token,
+      tokenTime: userInfo.tokenTime,
+      certificate_uuid: this.data.uuid
+    })
+    console.log(project)
+    let that = this;
+    app.doRequestAction({
+      url: 'resumes/del-certificate/',
+      way: 'POST',
+      params: project,
+      success(res) {
+        wx.navigateBack({
+          delta: 1
+        })
+      }
+    })
+    this.setData({
+      showModal: false
+    })
+  },
+  deleteexper() {
+    this.setData({
+      showModal: true
+    })
+  },
+  obtn() {
+    this.setData({
+      showModal: false
+    })
+  },
+  delete(e) {
+    console.log(e)
+    this.data.imgArrs.splice(e.currentTarget.dataset.index, 1)
+    this.data.idArrs.splice(e.currentTarget.dataset.index, 1)
+    this.setData({
+      imgArrs: this.data.imgArrs
+    })
+    this.setData({
+      idArrs: this.data.idArrs
+    })
+  },
+  bindstartDate(e) {
+    this.setData({
+      time: e.detail.value
+    })
+  },
+  ovalue(e) {
+    this.setData({
+      name: e.detail.value
+    })
   },
   previewImage(e) {
     console.log(e)
@@ -58,12 +120,81 @@ Page({
       }
     })
   },
+  getskill(){
+    let skilltail = wx.getStorageSync("skilltail");
+    console.log(skilltail)
+    this.setData({
+      skill: skilltail.uid
+    })
+    console.log(this.data.skill)
 
+    this.setData({
+      name: this.data.skill.name
+    })
+    this.setData({
+      imgArrs: this.data.skill.image
+    })
+    this.setData({
+      idArrs: this.data.skill.images.split(",")
+    })
+    this.setData({
+      resume_uuid: this.data.skill.resume_uuid
+    })
+    this.setData({
+      uuid: this.data.skill.uuid
+    })
+    this.setData({
+      time: this.data.skill.certificate_time
+    })
+  },
+  preserve() {
+    let userInfo = wx.getStorageSync("userInfo");
+    let project = {}
+
+    let oimg = ""
+    for (let i = 0; i < this.data.idArrs.length; i++) {
+      if (i == this.data.idArrs.length - 1) {
+        oimg += this.data.idArrs[i]
+      } else {
+        oimg += this.data.idArrs[i] + ","
+      }
+
+    }
+    Object.assign(project, {
+      userId: userInfo.userId,
+      token: userInfo.token,
+      tokenTime: userInfo.tokenTime,
+      resume_uuid: this.data.resume_uuid,
+      name: this.data.name,
+      image: oimg,
+      certificate_uuid: this.data.uuid,
+      certificate_time: this.data.time
+    })
+    console.log(project)
+    let that = this;
+    app.doRequestAction({
+      url: 'resumes/certificate/',
+      way: 'POST',
+      params: project,
+      success(res) {
+        wx.showModal({
+          title: '温馨提示',
+          content: '保存成功',
+          showCancel: false,
+          success(res) {
+            wx.navigateBack({
+              delta: 1
+            })
+          }
+        })
+      }
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    this.getskill()
   },
 
   /**

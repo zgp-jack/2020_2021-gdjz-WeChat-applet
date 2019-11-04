@@ -5,16 +5,9 @@ Page({
    * 页面的初始数据
    */
   data: {
-    allproject:[],
+    allproject: [],
     projectlength: 0,
-    allde:false,
-  },
-  editor(e){
-    console.log(e)
-    wx.setStorageSync("projectdetail", e.currentTarget.dataset)
-    wx.navigateTo({
-      url: "/pages/clients-looking-for-work/modify-project-experience/modifyexper",
-    })
+    allde: false,
   },
   /**
    * 生命周期函数--监听页面加载
@@ -29,10 +22,10 @@ Page({
   onReady: function () {
 
   },
-  addpro(){
-      wx.navigateTo({
-        url: "/pages/clients-looking-for-work/new-project-experience/projectexperience",
-      })
+  addpro() {
+    wx.navigateTo({
+      url: "/pages/clients-looking-for-work/new-project-experience/projectexperience",
+    })
   },
   /**
    * 生命周期函数--监听页面显示
@@ -63,7 +56,8 @@ Page({
         })
       }
 
-    })},
+    })
+  },
   onShow: function () {
     this.project()
   },

@@ -5,39 +5,10 @@ Page({
    * 页面的初始数据
    */
   data: {
-    allproject:[],
-    projectlength: 0,
-    allde:false,
-  },
-  editor(e){
-    console.log(e)
-    wx.setStorageSync("projectdetail", e.currentTarget.dataset)
-    wx.navigateTo({
-      url: "/pages/clients-looking-for-work/modify-project-experience/modifyexper",
-    })
-  },
-  /**
-   * 生命周期函数--监听页面加载
-   */
-  onLoad: function (options) {
+    allskill: []
 
   },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-
-  },
-  addpro(){
-      wx.navigateTo({
-        url: "/pages/clients-looking-for-work/new-project-experience/projectexperience",
-      })
-  },
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  project() {
+  allskill() {
     let userInfo = wx.getStorageSync("userInfo");
     let detail = {}
     Object.assign(detail, {
@@ -53,19 +24,35 @@ Page({
       success(res) {
         console.log(res)
         that.setData({
-          allproject: res.data.data.project
-        })
-        that.setData({
-          projectlength: res.data.data.project.length
+          allskill: res.data.data.certificates
         })
         that.setData({
           allde: true
         })
       }
 
-    })},
+    })
+  },
+
+  /**
+   * 生命周期函数--监听页面加载
+   */
+  onLoad: function (options) {
+
+  },
+
+  /**
+   * 生命周期函数--监听页面初次渲染完成
+   */
+  onReady: function () {
+
+  },
+
+  /**
+   * 生命周期函数--监听页面显示
+   */
   onShow: function () {
-    this.project()
+    this.allskill()
   },
 
   /**

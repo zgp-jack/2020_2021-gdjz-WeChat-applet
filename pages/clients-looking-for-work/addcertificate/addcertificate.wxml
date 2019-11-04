@@ -2,19 +2,21 @@
   <view class="addcertificatede">
     <text class="addcertificatedeone">职业技能：</text>
     <view class="addcertificatedetwo">
-      <input type="text" placeholder="请输入您的职业技能名称"></input>
+      <input type="text" placeholder="请输入您的职业技能名称" bindinput="name"></input>
     </view>
   </view>
   <view class="addcertificatetime">
     <text class="addcertificatetimeone">领取证书时间：</text>
     <view class="addcertificatetimetwo">
-      <input type="text" placeholder="请选择您领取证书的时间"></input>
+      <picker mode="date" value="{{date}}"bindchange="bindstartDate">
+        <input name="addtime" value="{{date}}" placeholder="请选择您领取证书的时间"></input>
+      </picker>
     </view>
   </view>
-
   <view class="addcertificateimage">
     <view wx:for="{{imgArrs}}" class='img_item' wx:key="{{item}}">
-      <image class="addcertificateimageone" src='{{item}}' mode='widthFix' bindtap='previewImage' data-item="{{item}}" />
+      <image class="addcertificateimageone" src='{{item}}' mode='widthFix' bindtap='previewImage' data-item="{{item}}"><view class="delete" catchtap="delete" data-index="{{index}}">X</view>
+      </image>
     </view>
     <view class='img_item' bindtap='chooseImage'>
       <image class='addcertificateimageone' src="../../../images/addimage.png" mode='widthFix' />
@@ -22,7 +24,7 @@
   </view>
 
   <view class="addcertificatebottom">
-    <button class="addcertificatebottomone">保存 继续添加</button>
-    <button class="addcertificatebottomotwo">确认保存</button>
+    <button class="addcertificatebottomone" bindtap="preservechixu">保存 继续添加</button>
+    <button class="addcertificatebottomotwo" bindtap="preserve">确认保存</button>
   </view>
 </view>

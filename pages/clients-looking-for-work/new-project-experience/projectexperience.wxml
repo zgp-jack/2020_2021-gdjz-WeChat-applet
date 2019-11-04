@@ -8,15 +8,15 @@
   <view class="experienceheader">
     <text class="experienceheaderone">开始时间：</text>
     <view class="experienceheadertwo">
-      <picker mode="date" value="{{date}}" start="09:01" end="21:01" bindchange="bindstartDate">
-        <input name="addtime" value="{{date}}" placeholder="请选择开始时间"></input>
+      <picker mode="date" value="{{startdate}}"bindchange="bindstartDate">
+        <input name="addtime" value="{{startdate}}" placeholder="请选择开始时间"></input>
       </picker>
     </view>
   </view>
   <view class="experienceheader">
     <text class="experienceheaderone">完工时间：</text>
     <view class="experienceheadertwo">
-      <picker mode="date" value="{{date}}" start="09:01" end="21:01" bindchange="bindDateChange">
+      <picker mode="date" value="{{date}}" bindchange="bindDateChange">
         <input name="addtime" value="{{date}}" placeholder="请选择完工时间"></input>
       </picker>
     </view>
@@ -47,14 +47,15 @@
   </view>
   <view class="experiencefour">
     <view wx:for="{{imgArrs}}" class='img_item' wx:key="{{item}}">
-      <image class="experiencefourone" src='{{item}}' mode='widthFix' bindtap='previewImage' data-item="{{item}}" />
+      <image class="experiencefourone" src='{{item}}' mode='widthFix' bindtap='previewImage' data-item="{{item}}"><view class="delete" catchtap="delete" data-index="{{index}}">X</view>
+      </image>
     </view>
     <view class='img_item' bindtap='chooseImage'>
       <image class='experiencefourone' src="../../../images/addimage.png" mode='widthFix' />
     </view>
   </view>
   <view class="experiencebottom">
-    <button class="experiencebottomone">保存 继续添加</button>
+    <button class="experiencebottomone"  bindtap="preservechixu">保存 继续添加</button>
     <button class="experiencebottomotwo" bindtap="preserve">确认保存</button>
   </view>
 </view>

@@ -2,7 +2,6 @@
  <view class="skilleight" wx:for="{{allskill}}" wx:key="{{index}}">
    <image class="audit" src="../../../images/notthrough.png"></image>
    <!-- <image class="audit" src="../../../images/review.png"></image> -->
-   <view class="editor" bindtap="editor" data-uid="{{item}}">编辑</view>
     <view class="skilleightzong">
       <image src="../../../images/newresume-experience-item.png" class="skilleightone"></image>
       <view></view>
@@ -24,5 +23,4 @@
       </view>
     </view>
   </view>
-  <button class="obtn" bindtap="addskill">添加技能证书</button>
 </view>

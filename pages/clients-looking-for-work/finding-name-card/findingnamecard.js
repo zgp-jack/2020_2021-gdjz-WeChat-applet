@@ -7,6 +7,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    allde:false,
     username:'',
     userimg:'',
     showtop:true,
@@ -28,6 +29,7 @@ Page({
     procity: "未填写",
     personnum: "未填写",
     tags: "未填写",
+    headerimg:"../../../images/hearding.png",
     selectk:[],
     selectkone:"",
     selectShow: false,//控制下拉列表的显示隐藏，false隐藏、true显示
@@ -37,7 +39,24 @@ Page({
     check:"",
     checkstatus:true,
     is_introduces:false,
-    view_num:""
+    view_num:"",
+    project:[],
+    projectone:[],
+    projectlength:0,
+    importimg:"",
+    imgArrs:"",
+    percent:0,
+    skilllength:0,
+    skillbooks:[],
+    skillbooksone: []
+  },
+  onShareAppMessage: function () {
+    console.log(123)
+    return {
+      title: '在这里输入标题',
+      desc: '在这里输入简介说明',
+      path: '../preview-name-card/previewcard'//这是一个路径
+    }
   },
   selectTap() {
     if (this.data.check=="1"){
@@ -99,6 +118,54 @@ Page({
   addproject(){
     wx.navigateTo({
       url: "/pages/clients-looking-for-work/new-project-experience/projectexperience",
+    })
+  },
+  moreproject(){
+    wx.navigateTo({
+      url: "/pages/clients-looking-for-work/all-project-experience/allexperience",
+    })
+  },
+  addskill(){
+    wx.navigateTo({
+      url: "/pages/clients-looking-for-work/addcertificate/addcertificate",
+    })
+  },
+  moreskill() {
+    wx.navigateTo({
+      url: "/pages/clients-looking-for-work/all-skills-certificate/skillscertificate",
+    })
+  },
+  preview() {
+    wx.navigateTo({
+      url: "/pages/clients-looking-for-work/preview-name-card/previewcard",
+    })
+  },
+  chooseImage() {
+    let that = this;
+    app.userUploadImg(function (img, url) {
+      console.log(url)
+      wx.hideLoading()
+      that.data.imgArrs=url.httpurl
+      that.data.importimg=url.url
+      that.setData({
+        headerimg: that.data.imgArrs
+      })
+      let userInfo = wx.getStorageSync("userInfo");
+      let imgdetail = {}
+      Object.assign(imgdetail, {
+        userId: userInfo.userId,
+        token: userInfo.token,
+        tokenTime: userInfo.tokenTime,
+        image: that.data.importimg
+      })
+      app.doRequestAction({
+        url: 'resumes/edit-img/',
+        way: 'POST',
+        params: imgdetail,
+        success(res) {
+          console.log(res)     
+        }
+      })
     })
   },
   getdetail() {
@@ -190,7 +257,10 @@ Page({
         that.setData({
           check: res.data.data.info.check
         })
-
+        
+        that.setData({
+          headerimg: res.data.data.info.headerimg
+        })
         if (res.data.data.is_introduces){
             that.setData({
               is_introduces: res.data.data.is_introduces,
@@ -202,7 +272,32 @@ Page({
         that.setData({
           view_num: res.data.data.info.view_num
         });
-
+        that.setData({
+          project: res.data.data.project
+        });
+        that.setData({
+          projectone: [res.data.data.project[0]]
+        });
+        that.setData({
+          projectlength: res.data.data.project.length
+        })
+        that.setData({
+          allde: true
+        })
+       
+        that.setData({
+          percent: res.data.data.info.progress-0
+        })
+        
+        that.setData({
+          skillbooks: res.data.data.certificates
+        })
+        that.setData({
+          skilllength: res.data.data.certificates.length
+        })
+        that.setData({
+          skillbooksone: [that.data.skillbooks[0]]
+        })
       }
     })
   },
@@ -212,6 +307,7 @@ Page({
       showtopone:true
     })
   },
+
   // namerequest() {
   //   let _this = this;
   //   let userId = '';
@@ -259,7 +355,7 @@ Page({
    */
    onShow(){
     this.getdetail();
-
+    
   },
 
   /**

@@ -1,5 +1,3 @@
-
-
 .skilleight {
   width: 93%;
   margin: 0 auto;
@@ -143,5 +141,3 @@
   top: 29rpx;
   right: 29rpx;
 }
-
-/* obtn */

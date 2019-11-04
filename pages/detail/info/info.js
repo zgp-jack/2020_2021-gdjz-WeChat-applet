@@ -1,4 +1,4 @@
-// pages/info/info.js
+// pages/info/info.js share share
 const app = getApp();
 Page({
 

@@ -1,15 +1,20 @@
-<view>
- <view class="skilleight" wx:for="{{allskill}}" wx:key="{{index}}">
+<view wx:if="{{allde}}">
+ <view class="skilleight"  wx:for="{{allproject}}" wx:key="{{index}}">
    <image class="audit" src="../../../images/notthrough.png"></image>
-   <!-- <image class="audit" src="../../../images/review.png"></image> -->
-   <view class="editor" bindtap="editor" data-uid="{{item}}">编辑</view>
+   <!-- <image class="audit" src="../../images/review.png"></image> -->
     <view class="skilleightzong">
       <image src="../../../images/newresume-experience-item.png" class="skilleightone"></image>
       <view></view>
       <view class="skilleightall">
+        <view class="project">
+         {{item.project_name}}
+        </view>
         <view class="skilleighttwo">
-          <text>{{item.name}}</text>
-          <text>{{item.certificate_time}}</text>
+          <text>{{item.start_time}}--{{item.completion_time}}</text>
+          <text>{{item.province_name}}省{{item.city_name}}市</text>
+        </view>
+        <view class="description">
+           {{item.detail}}
         </view>
         <view class="skilleightfive">
           <view class="skilleightfiveline">
@@ -24,5 +29,5 @@
       </view>
     </view>
   </view>
-  <button class="obtn" bindtap="addskill">添加技能证书</button>
 </view>
+

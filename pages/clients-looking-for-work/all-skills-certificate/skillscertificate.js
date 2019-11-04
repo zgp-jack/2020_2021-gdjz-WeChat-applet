@@ -1,11 +1,49 @@
-// pages/all-skills-Certificate/skillscertificate.js
+const app = getApp();
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
+    allskill:[]
 
+  },
+  allskill() {
+    let userInfo = wx.getStorageSync("userInfo");
+    let detail = {}
+    Object.assign(detail, {
+      userId: userInfo.userId,
+      token: userInfo.token,
+      tokenTime: userInfo.tokenTime,
+    })
+    let that = this;
+    app.doRequestAction({
+      url: 'resumes/resume-list/',
+      way: 'POST',
+      params: detail,
+      success(res) {
+        console.log(res)
+        that.setData({
+          allskill: res.data.data.certificates
+        })
+        that.setData({
+          allde: true
+        })
+      }
+
+    })
+  },
+  addskill() {
+    wx.navigateTo({
+      url: "/pages/clients-looking-for-work/addcertificate/addcertificate",
+    })
+  },
+  editor(e){
+    console.log(e)
+    wx.setStorageSync("skilltail", e.currentTarget.dataset)
+    wx.navigateTo({
+      url: "/pages/clients-looking-for-work/modifycertificate/modifycertificate",
+    })
   },
 
   /**
@@ -26,7 +64,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    this.allskill()
   },
 
   /**
