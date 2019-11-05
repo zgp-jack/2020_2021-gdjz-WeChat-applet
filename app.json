@@ -1,7 +1,8 @@
 {
   "pages": [
-    "pages/index/index",
+        "pages/index/index",
     "pages/clients-looking-for-work/finding-name-card/findingnamecard",
+
     "pages/clients-looking-for-work/modify-project-experience/modifyexper",
     "pages/clients-looking-for-work/all-project-experience/allexperience",
     "pages/clients-looking-for-work/new-project-experience/projectexperience",

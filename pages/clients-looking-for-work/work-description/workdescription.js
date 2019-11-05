@@ -5,56 +5,57 @@ let v = require("../../../utils/v.js");
 Page({
 
   /**
-   * 页面的初始数据  allprovinces
-   */ 
+   * 页面的初始数据  multiIndexvalue indexproficiency
+   */
   data: {
-    workage:"",
-    multiArray:[],
-    multiArrayone:[],
-    objectMultiArray:[],
-    multiIndex:[0,0],
-    provincecity:"",
-    proficiencyarray:[],
+    workage: "",
+    multiArray: [],
+    multiArrayone: [],
+    objectMultiArray: [],
+    multiIndex: [0, 0],
+    provincecity: "",
+    proficiencyarray: [],
     proficiencyarrayone: [],
-    degreeone:0,
-    compositionarray:[],
+    degreeone: 0,
+    compositionarray: [],
     compositionarrayone: [],
-    constituttion:"",
-    judge:false,
-    detailevaluation:[],
-    evaluation:[],
-    labelnum:"",
-    teamsnumber:""
+    constituttion: "",
+    judge: false,
+    detailevaluation: [],
+    evaluation: [],
+    labelnum: "",
+    teamsnumber: "",
+    multiIndexvalue: ""
   },
-  peopleage(e){   //工龄的选择
+  peopleage(e) { //工龄的选择
     this.setData({
       workage: ~~e.detail.value
     })
   },
-  teamsnum(e) {  //队伍人数的额选择
+  teamsnum(e) { //队伍人数的额选择
     this.setData({
       teamsnumber: ~~e.detail.value
     })
   },
-  proficiency(e) {   //熟练度的选择
+  proficiency(e) { //熟练度的选择
     console.log(this.data.proficiencyarrayone[e.detail.value].id)
     this.setData({
       indexproficiency: e.detail.value,
       degreeone: ~~this.data.proficiencyarrayone[e.detail.value].id
     })
   },
-  constitute(e){     //人员构成的选择
+  constitute(e) { //人员构成的选择
     this.setData({
       indexperson: e.detail.value,
       constituttion: ~~this.data.compositionarrayone[e.detail.value].id
     })
-    if (this.data.compositionarrayone[e.detail.value].id>1){
+    if (this.data.compositionarrayone[e.detail.value].id > 1) {
       this.setData({
         judge: true
       })
     }
   },
-  accessprovince() {  //大部分piker需要的数据
+  accessprovince() { //大部分piker需要的数据
     let that = this;
     app.doRequestAction({
       url: 'resumes/get-data/',
@@ -82,12 +83,13 @@ Page({
           compositionarray: compositionarray,
           compositionarrayone: res.data.type
         })
-
+        console.log(that.data.compositionarrayone)
+        that.getintrodetail()
       }
     })
   },
 
-  initAllProvice: function () { //获取所有省份
+  initAllProvice: function() { //获取所有省份
     let that = this;
     let arr = app.arrDeepCopy(areas.getPublishArea());
     this.setData({
@@ -101,7 +103,11 @@ Page({
     let arrayname = [];
     let len = arr.length;
     for (let i = 0; i < len; i++) {
-      let data = { id: arr[i].id, pid: arr[i].pid, name: arr[i].name }
+      let data = {
+        id: arr[i].id,
+        pid: arr[i].pid,
+        name: arr[i].name
+      }
       let dataone = arr[i].name
 
       provice.push(data)
@@ -114,7 +120,11 @@ Page({
       }
       for (let j = 0; j < arr[i].children.length; j++) {
         if (arr[i].children[j].id) {
-          let datachild = { id: arr[i].children[j].id, pid: arr[i].children[j].pid, name: arr[i].children[j].name }
+          let datachild = {
+            id: arr[i].children[j].id,
+            pid: arr[i].children[j].pid,
+            name: arr[i].children[j].name
+          }
 
           if (arr[i].children[j].pid - 2 == i) {
             array[i].push(arr[i].children[j])
@@ -138,7 +148,7 @@ Page({
       objectMultiArray: [provice, provicechild]
     })
   },
-  bindMultiPickerChange: function (e) {    //最终家乡的选择
+  bindMultiPickerChange: function(e) { //最终家乡的选择
     let that = this;
     this.setData({
       multiIndex: e.detail.value
@@ -148,12 +158,12 @@ Page({
 
       allpro = this.data.allprovinces[this.data.multiIndex[0]].id + "," + this.data.allprovinces[this.data.multiIndex[0]].children[this.data.multiIndex[1]].id
       this.setData({
-        multiIndexvalue: that.data.allprovinces[that.data.multiIndex[0]].name + that.data.allprovinces[that.data.multiIndex[0]].children[that.data.multiIndex[1]].name
+        multiIndexvalue: that.data.allprovinces[that.data.multiIndex[0]].name + "省" + " " + that.data.allprovinces[that.data.multiIndex[0]].children[that.data.multiIndex[1]].name + "市"
       })
     } else {
       allpro = this.data.allprovinces[this.data.multiIndex[0]].id
       this.setData({
-        multiIndexvalue: that.data.allprovinces[that.data.multiIndex[0]].name + that.data.allprovinces[that.data.multiIndex[0]].name
+        multiIndexvalue: that.data.allprovinces[that.data.multiIndex[0]].name + "省" + "" + that.data.allprovinces[that.data.multiIndex[0]].name + "市"
       })
     }
     this.setData({
@@ -161,7 +171,7 @@ Page({
     })
   },
 
-  bindMultiPickerColumnChange: function (e) {   //下滑家乡列表所产生的函数
+  bindMultiPickerColumnChange: function(e) { //下滑家乡列表所产生的函数
     let that = this;
     let namearry = this.data.multiArrayone;
     var data = {
@@ -184,7 +194,7 @@ Page({
     console.log(data)
   },
 
-  clock(e) {   //标签选择的处理
+  clock(e) { //标签选择的处理
     let that = this;
     let off = true;
     for (let i = 0; i < this.data.evaluation.length; i++) {
@@ -200,11 +210,11 @@ Page({
     if (off) {
       this.data.evaluation.push(e.currentTarget.dataset.index)
       let labelnum = "";
-      for (let i = 0; i < this.data.evaluation.length;i++){
-        if (this.data.evaluation.length - 1 == i){
+      for (let i = 0; i < this.data.evaluation.length; i++) {
+        if (this.data.evaluation.length - 1 == i) {
           labelnum += this.data.evaluation[i]
-        }else{
-        labelnum += this.data.evaluation[i] + ","
+        } else {
+          labelnum += this.data.evaluation[i] + ","
         }
       }
 
@@ -226,7 +236,7 @@ Page({
     }
 
   },
-  submitmaterial() {     //发数据给后台
+  submitmaterial() { //发数据给后台
     let information = {}
     let userInfo = wx.getStorageSync("userInfo");
     let vertifyNum = v.v.new()
@@ -235,7 +245,7 @@ Page({
         title: '温馨提示',
         content: '您输入的工龄为空,请重新输入',
         showCancel: false,
-        success(res) { }
+        success(res) {}
       })
       return
     }
@@ -244,7 +254,7 @@ Page({
         title: '温馨提示',
         content: '您选择的家乡为空,请重新输入',
         showCancel: false,
-        success(res) { }
+        success(res) {}
       })
       return
     }
@@ -253,7 +263,7 @@ Page({
         title: '温馨提示',
         content: '您选择的熟练度为空,请重新输入',
         showCancel: false,
-        success(res) { }
+        success(res) {}
       })
       return
     }
@@ -262,7 +272,7 @@ Page({
         title: '温馨提示',
         content: '您选择的人员构成为空,请重新输入',
         showCancel: false,
-        success(res) { }
+        success(res) {}
       })
       return
     }
@@ -272,7 +282,7 @@ Page({
         title: '温馨提示',
         content: '您输入的队伍人数为空或者为零,请重新输入',
         showCancel: false,
-        success(res) { }
+        success(res) {}
       })
       return
     }
@@ -281,7 +291,7 @@ Page({
         title: '温馨提示',
         content: '您选择的标签为空,请重新输入',
         showCancel: false,
-        success(res) { }
+        success(res) {}
       })
       return
     }
@@ -297,75 +307,146 @@ Page({
       tags: this.data.labelnum
     })
     console.log(information)
-    // app.doRequestAction({
-    //   url: "resumes/introduce/",
-    //   way: "POST",
-    //   params: information,
-    //   success: function (res) {
-    //     console.log(res)
-    //     wx.navigateTo({
-    //       url: '/pages/clients-looking-for-work/finding-name-card/findingnamecard',
-    //     })
-    //   },
-    //   fail: function (err) {
-    //     console.log(err)
-    //   }
-    // })
+    app.doRequestAction({
+      url: "resumes/introduce/",
+      way: "POST",
+      params: information,
+      success: function(res) {
+        wx.showModal({
+          title: '温馨提示',
+          content: '保存成功',
+          showCancel: false,
+          success(res) {
+            wx.navigateBack({
+              delta: 1
+            })
+          }
+        })
+      },
+      fail: function(err) {
+        console.log(err)
+      }
+    })
+  },
+
+  getintrodetail() {
+
+    let introdetail = wx.getStorageSync("introdetail");
+    console.log(introdetail)
+
+    this.setData({
+      workage: introdetail.experience
+    })
+    this.setData({
+      multiIndexvalue: introdetail.hometown
+    })
+    this.setData({
+      provincecity: introdetail.hometown_id
+    })
+    this.setData({
+      labelnum: introdetail.tag_id
+    })
+    console.log(this.data.detailevaluation)
+    let tagid = introdetail.tag_id.split(",")
+    for (let i = 0; i < this.data.detailevaluation.length; i++) {
+      for (let j = 0; j < tagid.length; j++) {
+        if (this.data.detailevaluation[i].id == tagid[j]) {
+          this.data.detailevaluation[i].classname = "oinformationnosave"
+        }
+      }
+    }
+    this.setData({
+      detailevaluation: this.data.detailevaluation
+    })
+    let evaluations = []
+    for (let i = 0; i < tagid.length; i++) {
+      evaluations.push(tagid[i] - 0)
+    }
+    this.setData({
+      evaluation: evaluations
+    })
+    if (introdetail.prof_degree) {
+      this.setData({
+        indexproficiency: introdetail.prof_degree - 1
+      })
+    }
+    
+    this.setData({
+      degreeone: introdetail.prof_degree
+    })
+
+    if (introdetail.type) {
+      this.setData({
+        indexperson: introdetail.type - 1
+      })
+    }
+
+    this.setData({
+      constituttion: introdetail.type 
+    })
+    if (introdetail.type -0 > 1) {
+      this.setData({
+        judge: true
+      })
+    }
+    
+    this.setData({
+      teamsnumber: introdetail.number_people
+    })
   },
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
-
+  onLoad: function(options) {
+    this.accessprovince();
   },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function () {
+  onReady: function() {
 
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function () {
-    this.accessprovince()
+  onShow: function() {
     this.initAllProvice()
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
-  onHide: function () {
+  onHide: function() {
 
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
-  onUnload: function () {
+  onUnload: function() {
 
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
-  onPullDownRefresh: function () {
+  onPullDownRefresh: function() {
 
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
-  onReachBottom: function () {
+  onReachBottom: function() {
 
   },
 
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function () {
+  onShareAppMessage: function() {
 
   }
 })

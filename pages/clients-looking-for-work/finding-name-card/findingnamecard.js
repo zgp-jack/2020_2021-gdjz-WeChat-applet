@@ -7,47 +7,47 @@ Page({
    * 页面的初始数据
    */
   data: {
-    allde:false,
-    username:'',
-    userimg:'',
-    showtop:true,
+    allde: false,
+    username: '',
+    userimg: '',
+    showtop: true,
     showtopone: false,
-    name:"未填写",
-    sex:"未填写",
-    nation:"未填写",
+    name: "未填写",
+    sex: "未填写",
+    nation: "未填写",
     occupations: "未填写",
     telephone: "未填写",
     introduce: "未填写",
     city: "未填写",
-    intro:true,
-    introne:false,
+    intro: true,
+    introne: false,
     selfintro: true,
     selfintrone: false,
     workingyears: "未填写",
-    staffcomposition:"未填写",
+    staffcomposition: "未填写",
     cityself: "未填写",
     procity: "未填写",
     personnum: "未填写",
     tags: "未填写",
-    headerimg:"../../../images/hearding.png",
-    selectk:[],
-    selectkone:"",
+    headerimg: "../../../images/hearding.png",
+    selectk: [],
+    selectkone: "",
     selectShow: false,//控制下拉列表的显示隐藏，false隐藏、true显示
     selectData: [],//下拉列表的数据
     index: 0,//选择的下拉列表下标
-    resume_uuid:"",
-    check:"",
-    checkstatus:true,
-    is_introduces:false,
-    view_num:"",
-    project:[],
-    projectone:[],
-    projectlength:0,
-    importimg:"",
-    imgArrs:"",
-    percent:0,
-    skilllength:0,
-    skillbooks:[],
+    resume_uuid: "",
+    check: "",
+    checkstatus: true,
+    is_introduces: false,
+    view_num: "",
+    project: [],
+    projectone: [],
+    projectlength: 0,
+    importimg: "",
+    imgArrs: "",
+    percent: 0,
+    skilllength: 0,
+    skillbooks: [],
     skillbooksone: []
   },
   onShareAppMessage: function () {
@@ -59,7 +59,7 @@ Page({
     }
   },
   selectTap() {
-    if (this.data.check=="1"){
+    if (this.data.check == "1") {
       wx.showModal({
         title: '温馨提示',
         content: '提示信息审核中，请稍后再试',
@@ -100,32 +100,33 @@ Page({
       }
     })
   },
-  toperfect(){
+  toperfect() {
     wx.navigateTo({
       url: '/pages/clients-looking-for-work/essential-information/esinformation',
     })
   },
-  improvementwork(){
+  improvementwork() {
     wx.navigateTo({
       url: '/pages/clients-looking-for-work/work-description/workdescription',
     })
   },
-  edit(){
+  edit(e) {
+
     wx.navigateTo({
       url: '/pages/clients-looking-for-work/essential-information/esinformation',
     })
   },
-  addproject(){
+  addproject() {
     wx.navigateTo({
       url: "/pages/clients-looking-for-work/new-project-experience/projectexperience",
     })
   },
-  moreproject(){
+  moreproject() {
     wx.navigateTo({
       url: "/pages/clients-looking-for-work/all-project-experience/allexperience",
     })
   },
-  addskill(){
+  addskill() {
     wx.navigateTo({
       url: "/pages/clients-looking-for-work/addcertificate/addcertificate",
     })
@@ -145,8 +146,8 @@ Page({
     app.userUploadImg(function (img, url) {
       console.log(url)
       wx.hideLoading()
-      that.data.imgArrs=url.httpurl
-      that.data.importimg=url.url
+      that.data.imgArrs = url.httpurl
+      that.data.importimg = url.url
       that.setData({
         headerimg: that.data.imgArrs
       })
@@ -163,7 +164,7 @@ Page({
         way: 'POST',
         params: imgdetail,
         success(res) {
-          console.log(res)     
+          console.log(res)
         }
       })
     })
@@ -185,8 +186,9 @@ Page({
         let date = new Date();
         let dateo = date.getTime()
         let dateone = new Date(dateo);
-        console.log(res)
-        if (res.data.data.info.uuid){
+        wx.setStorageSync("introdetail", res.data.data.introduces)
+        wx.setStorageSync("introinfo", res.data.data.info)
+        if (res.data.data.info.uuid) {
           that.showtop()
           that.setData({
             resume_uuid: res.data.data.info.uuid
@@ -197,12 +199,13 @@ Page({
           name: res.data.data.info.username
         })
         that.setData({
-          sex: res.data.data.info.gender=="1"?"男":"女"
+          sex: res.data.data.info.gender == "1" ? "男" : "女"
         })
-        that.setData({
-          age: dateone.getFullYear()-(res.data.data.info.birthday.split("-")[0]-0)
-        })
-        
+        if (res.data.data.info.birthday) {
+          that.setData({
+            age: dateone.getFullYear() - (res.data.data.info.birthday.split("-")[0] - 0)
+          })
+        }
         that.setData({
           nation: res.data.data.info.nation
         })
@@ -241,7 +244,7 @@ Page({
         })
         let selectD = Object.values(res.data.data.status)
         let selectk = Object.keys(res.data.data.status)
-        if (res.data.data.info.is_end == "2"){
+        if (res.data.data.info.is_end == "2") {
           selectD.reverse();
           selectk.reverse()
         }
@@ -249,62 +252,65 @@ Page({
           selectData: selectD,
           selectk: selectk
         })
-        if (res.data.data.info.check=="1"){
-        that.setData({
-          checkstatus: false
-        });
+        if (res.data.data.info.check == "1") {
+          that.setData({
+            checkstatus: false
+          });
         }
         that.setData({
           check: res.data.data.info.check
         })
-        
+
         that.setData({
           headerimg: res.data.data.info.headerimg
         })
-        if (res.data.data.is_introduces){
-            that.setData({
-              is_introduces: res.data.data.is_introduces,
-              selfintro: false,
-              selfintrone: true,
-            })
+        if (res.data.data.is_introduces) {
+          that.setData({
+            is_introduces: res.data.data.is_introduces,
+            selfintro: false,
+            selfintrone: true,
+          })
         }
-        
+
         that.setData({
           view_num: res.data.data.info.view_num
         });
-        that.setData({
-          project: res.data.data.project
-        });
-        that.setData({
-          projectone: [res.data.data.project[0]]
-        });
-        that.setData({
-          projectlength: res.data.data.project.length
-        })
+        if (res.data.data.project != []) {
+          that.setData({
+            project: res.data.data.project
+          });
+          that.setData({
+            projectone: [res.data.data.project[0]]
+          });
+          that.setData({
+            projectlength: res.data.data.project.length
+          })
+        }
         that.setData({
           allde: true
         })
-       
+
         that.setData({
-          percent: res.data.data.info.progress-0
+          percent: res.data.data.info.progress - 0
         })
-        
-        that.setData({
-          skillbooks: res.data.data.certificates
-        })
-        that.setData({
-          skilllength: res.data.data.certificates.length
-        })
-        that.setData({
-          skillbooksone: [that.data.skillbooks[0]]
-        })
+        if (res.data.data.certificates != []) {
+          that.setData({
+            skillbooks: res.data.data.certificates
+          })
+          that.setData({
+            skilllength: res.data.data.certificates.length
+          })
+          that.setData({
+            skillbooksone: [that.data.skillbooks[0]]
+          })
+        }
       }
     })
   },
-  showtop(){
+  showtop() {
     this.setData({
-      showtop:false,
-      showtopone:true
+      showtop: false,
+      showtopone: true
     })
   },
 
@@ -334,7 +340,7 @@ Page({
   //       })
   //     }
   //   })
-    
+
   //   },
   /**
    * 生命周期函数--监听页面加载
@@ -347,15 +353,15 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
- 
+
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
-   onShow(){
+  onShow() {
     this.getdetail();
-    
+
   },
 
   /**

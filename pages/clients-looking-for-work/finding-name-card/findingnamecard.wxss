@@ -135,6 +135,7 @@
 
 }
 .findingnamecardthree .findingnamecardthreemobile{
+  text-align: center;
   font-size: 26rpx;
   font-weight: bold;
 
@@ -190,7 +191,7 @@
   margin-left: 24rpx;
 }
 .findingnamecardfive .findingnamecardfivemobile{
-
+  text-align: center;
   font-size: 26rpx;
   font-weight: bold;
 }
@@ -243,6 +244,7 @@
 .findingnamecardseven .findingnamecardsevenmobile{
   font-size: 26rpx;
   font-weight: bold;
+  text-align: center;
 }
 .findingnamecardseven image {
   width: 22rpx;
@@ -923,7 +925,20 @@
   padding-right: 4rpx;
   text-align: center;
   margin-top: 12rpx;
-  /* margin-left: 17rpx; */
+  margin-right: 17rpx;
+}
+.cardotext .oworkotextonetu:last-child{
+  color: black;
+  font-size: 24rpx;
+  background: #E7E7E7;
+  display: inline-block;
+  height: 37rpx;
+  line-height: 37rpx;
+  padding-left: 4rpx;
+  padding-right: 4rpx;
+  text-align: center;
+  margin-top: 12rpx;
+  margin-right: 0rpx;
 }
 .cardotext .tworkotextonetu {
   color: black;
@@ -936,9 +951,9 @@
   padding-right: 4rpx;
   text-align: center;
   margin-top: 12rpx;
-  margin-left: 17rpx;
+  margin-right: 17rpx;
 }
-.cardotext .tworkotextonetu:first-child{
+.cardotext .tworkotextonetu:last-child{
   color: black;
   font-size: 24rpx;
   background: #E7E7E7;
@@ -949,7 +964,7 @@
   padding-right: 4rpx;
   text-align: center;
   margin-top: 12rpx;
-  margin-left:0rpx;
+  margin-right: 0rpx;
 }
 
 .cardotext .oworkotext .otelephone {
@@ -1024,4 +1039,4 @@
 /*cardsevenmobile cardthreeone cardthreeone cardsevenmobile  cardfivemobile cardthreemobile*/
   /* position: absolute;
   left: 50%;
-  margin-left: -10%; */
+  margin-left: -10%; findingnamecardsevenmobile findingnamecardfivemobile findingnamecardsevenmobile findingnamecardthreemobile oworkotextonetu*/

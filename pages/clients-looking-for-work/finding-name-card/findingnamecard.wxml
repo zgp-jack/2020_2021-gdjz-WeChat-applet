@@ -244,7 +244,8 @@
     <view class="cardsixsixallvoto">
     </view>
   </view>
-  <!-- <view class="findingnamecardseven" wx:if="{{skilllength == 0}}">
+  
+  <view class="findingnamecardseven" wx:if="{{skilllength == 0}}">
     <view class="findingnamecardsevenmobile">
       <image src="../../../images/newresume-skill.png"></image>
       职业技能
@@ -253,7 +254,7 @@
   <view class="findingnamecardeight" wx:if="{{skilllength == 0}}">
     <text class="findingnamecardeightone">添加职业技能，用实力证明你的能力</text>
     <view class="findingnamecardeighttwo" bindtap="addskill">添加职业技能</view>
-  </view> -->
+  </view>
   <view class="cardseven">
     <view class="cardsevenmobile">
       <image src="../../../images/newresume-skill.png"></image>

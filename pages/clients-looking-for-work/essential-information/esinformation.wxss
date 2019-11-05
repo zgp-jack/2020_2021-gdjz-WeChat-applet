@@ -340,7 +340,6 @@
 .informationtelephone{
   width: 93%;
   margin: 0 auto;
-  height: 211rpx;
   background: white;
   margin-top: 20rpx;
   overflow: hidden;
@@ -458,6 +457,4 @@
   margin-top: 20rpx;
   margin-bottom: 42rpx;
 }
-.informationtwitwos{
-  
-}
+/* informationtelephone */

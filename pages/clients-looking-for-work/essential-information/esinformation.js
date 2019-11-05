@@ -5,35 +5,37 @@ let v = require("../../../utils/v.js");
 const app = getApp();
 Page({
 
-  /**
-   * 页面的初始数据
+  /** 
+   * 页面的初始数据 textareavalue  typeworkarray
    */
   data: {
-    array:[],
-    arrayone:[],
-    nationalarray:[],
+    array: [],
+    arrayone: [],
+    nationalarray: [],
     nationalarrayone: [],
-    typeworkarray:[],
-    complexwork:[],
+    typeworkarray: [],
+    complexwork: [],
     complexworkid: [],
     workIndexvalue: '请选择工种',
     showWorkType: false,
     pindex: 0,
     cindex: 0,
-    otextareavalue:"",
-    oadcode:"",
-    provinceaddress:"",
-    cityaddress:"",
-    longitude:"",
-    latitude:"",
-    provinceid:"",
-    wardenryid:"",
-    sex:"",
-    nation:"",
-    verify:"",
-    name:""
+    otextareavalue: "",
+    oadcode: "",
+    provinceaddress: "",
+    cityaddress: "",
+    longitude: "",
+    latitude: "",
+    provinceid: "",
+    wardenryid: "",
+    sex: "",
+    nation: "",
+    verify: "",
+    name: "",
+    telephone:"",
+    tele:false
   },
-  verify(e){
+  verify(e) {
     this.setData({
       verify: e.detail.value
     })
@@ -155,6 +157,7 @@ Page({
       url: 'resumes/get-data/',
       way: 'GET',
       success(res) {
+
         console.log(res)
         let nationalarray = [];
         let alllabel = [];
@@ -199,7 +202,7 @@ Page({
           array: array,
           arrayone: res.data.gender
         })
-
+        that.getintrodetail()
       }
     })
   },
@@ -208,12 +211,11 @@ Page({
     this.setData({
       showWorkType: false
     })
-
     let all = ""
     for (let i = 0; i < this.data.complexwork.length; i++) {
       all += this.data.complexwork[i] + " "
     }
-    if (all == ""){
+    if (all == "") {
       all = '请选择工种';
     }
     this.setData({
@@ -275,13 +277,13 @@ Page({
       showWorkType: true
     })
   },
-  textareavalue(e){
+  textareavalue(e) {
     this.setData({
       otextareavalue: e.detail.value
     })
 
   },
-  
+
   getarea() {
     let provinceid = "";
     let wardenryid = ""
@@ -309,7 +311,7 @@ Page({
     })
   },
 
-  vertifynum(){
+  vertifynum() {
     let userInfo = wx.getStorageSync("userInfo");
     let tele = {}
     Object.assign(tele, {
@@ -336,16 +338,16 @@ Page({
     let userInfo = wx.getStorageSync("userInfo");
     let worktype = "";
     console.log(this.data.complexworkid)
-    for (let i = 0; i < this.data.complexworkid.length ; i++){
-      if (i == this.data.complexworkid.length-1){
+    for (let i = 0; i < this.data.complexworkid.length; i++) {
+      if (i == this.data.complexworkid.length - 1) {
         worktype += this.data.complexworkid[i]
-      }else{
+      } else {
         worktype += this.data.complexworkid[i] + ","
       }
     }
 
     let vertifyNum = v.v.new()
-    if (!vertifyNum.isMobile(this.data.telephone)){
+    if (!vertifyNum.isMobile(this.data.telephone)) {
       wx.showModal({
         title: '温馨提示',
         content: '您输入的手机号码不正确,请重新输入',
@@ -365,7 +367,7 @@ Page({
       return
     }
     if (vertifyNum.isNull(this.data.sex)) {
-      
+
       wx.showModal({
         title: '温馨提示',
         content: '您输入的性别为空,请重新输入',
@@ -433,7 +435,7 @@ Page({
       province: this.data.provinceid,
       city: this.data.wardenryid,
       introduce: this.data.otextareavalue,
-      lat:  this.data.latitude,
+      lat: this.data.latitude,
       lng: this.data.longitude,
       address: this.data.regionone,
       adcode: this.data.oadcode,
@@ -444,21 +446,108 @@ Page({
       way: "POST",
       params: information,
       success: function (res) {
-        wx.navigateTo({
-          url: '/pages/clients-looking-for-work/finding-name-card/findingnamecard',
+
+        wx.showModal({
+          title: '温馨提示',
+          content: '保存成功',
+          showCancel: false,
+          success(res) {
+            wx.navigateBack({
+              delta: 1
+            })
+          }
         })
+
       },
       fail: function (err) {
         console.log(err)
       }
     })
   },
+
+  getintrodetail() {
+    console.log(this.data.typeworkarray)
+    let introinfo = wx.getStorageSync("introinfo");
+    console.log(introinfo)
+    this.setData({
+      name: introinfo.username
+    })
+    if (introinfo.gender != "") {
+      this.setData({
+        indexsex: introinfo.gender - 1
+      })
+      this.setData({
+        sex: introinfo.gender
+      })
+    }
+    this.setData({
+      birthday: introinfo.birthday
+    })
+    if (introinfo.gender != "") {
+      this.setData({
+        nationindex: introinfo.nation_id - 1
+      })
+      this.setData({
+        nation: introinfo.nation_id
+      })
+    } 
+    this.setData({
+      complexwork: introinfo.occupations
+    })
+    this.setData({
+      complexworkid: introinfo.occupations_id.split(",")
+    })
+    if (introinfo.occupations != []) {
+      let workIndexvalue = ""
+      for (let i = 0; i < introinfo.occupations.length; i++) {
+        workIndexvalue += introinfo.occupations[i] + " "
+      }
+      this.setData({
+        workIndexvalue: workIndexvalue
+      })
+    }
+    this.setData({
+      regionone: introinfo.address
+    })
+    if (introinfo.location) {
+      this.setData({
+        latitude: introinfo.location.split(",")[0]
+      })
+
+      this.setData({
+        longitude: introinfo.location.split(",")[1]
+      })
+    } 
+    
+    this.setData({
+      telephone: introinfo.tel
+    })
+    this.setData({
+      tele: introinfo.tel
+    })
+    this.setData({
+      otextareavalue: introinfo.introduce
+    })
+     this.data.typeworkarray
+    for (let i = 0; i < this.data.typeworkarray.length; i++) {
+      for (let j = 0; j < this.data.typeworkarray[i].children.length; j++) {
+        for (let k = 0; k < introinfo.occupations.length; k++){
+          if (this.data.typeworkarray[i].children[j].name ===introinfo.occupations[k] ) {
+            this.data.typeworkarray[i].children[j].is_check = true
+          }
+        }
+      }
+    }
+    this.setData({
+      typeworkarray: this.data.typeworkarray
+    })
+
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
-
+    this.accessprovince()
   },
 
   /**
@@ -473,7 +562,6 @@ Page({
    */
   onShow: function () {
     this.getlocationdetails()
-    this.accessprovince()
     this.getadcode()
 
   },

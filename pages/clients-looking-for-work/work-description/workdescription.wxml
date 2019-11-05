@@ -3,7 +3,7 @@
     <view class="informationworkage">
       <text class="informationworkageone">工<text>龄：</text></text>
       <view class="informationworkagetwo">
-        <input type="text" placeholder="请输入工龄" bindinput="peopleage" ></input>
+        <input type="text" placeholder="请输入工龄" value="{{workage}}" bindinput="peopleage" ></input>
       </view>
     </view>
     <view class="informationsix">
@@ -30,7 +30,7 @@
     <view class="informationteamsnumber" wx:if="{{judge}}">
       <text class="informationteamsnumberone">队伍人数：</text>
       <view class="informationteamsnumbertwo">
-        <input type="text" placeholder="请输入人数" bindinput="teamsnum"></input>
+        <input type="text" placeholder="请输入人数" value="{{teamsnumber}}" bindinput="teamsnum"></input>
       </view>
     </view>
   </view>
