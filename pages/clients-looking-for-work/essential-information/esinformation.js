@@ -470,34 +470,34 @@ Page({
     let introinfo = wx.getStorageSync("introinfo");
     console.log(introinfo)
     this.setData({
-      name: introinfo.username
+      name: introinfo.hasOwnProperty("username") ? introinfo.username :""
     })
-    if (introinfo.gender != "") {
-      this.setData({
-        indexsex: introinfo.gender - 1
-      })
-      this.setData({
-        sex: introinfo.gender
-      })
-    }
+
     this.setData({
-      birthday: introinfo.birthday
+      indexsex: introinfo.hasOwnProperty("gender") ? introinfo.gender - 1 : ""
+      })
+    this.setData({
+      sex: introinfo.hasOwnProperty("gender") ?introinfo.gender:""
+    })
+
+    this.setData({
+      birthday: introinfo.hasOwnProperty("birthday") ? introinfo.birthday : ""
     })
     if (introinfo.gender != "") {
       this.setData({
-        nationindex: introinfo.nation_id - 1
+        nationindex: introinfo.hasOwnProperty("nation_id") ? introinfo.nation_id - 1 : ""
       })
       this.setData({
-        nation: introinfo.nation_id
+        nation: introinfo.hasOwnProperty("nation_id") ? introinfo.nation_id : ""
       })
     } 
     this.setData({
-      complexwork: introinfo.occupations
+      complexwork: introinfo.hasOwnProperty("occupations") ? introinfo.occupations :[]
     })
     this.setData({
-      complexworkid: introinfo.occupations_id.split(",")
+      complexworkid: introinfo.hasOwnProperty("occupations_id") ? introinfo.occupations_id.split(",") : []
     })
-    if (introinfo.occupations != []) {
+    if (introinfo.hasOwnProperty("occupations")) {
       let workIndexvalue = ""
       for (let i = 0; i < introinfo.occupations.length; i++) {
         workIndexvalue += introinfo.occupations[i] + " "
@@ -507,28 +507,28 @@ Page({
       })
     }
     this.setData({
-      regionone: introinfo.address
+      regionone: introinfo.hasOwnProperty("address") ? introinfo.address : ""
     })
     if (introinfo.location) {
       this.setData({
-        latitude: introinfo.location.split(",")[0]
+        latitude: introinfo.hasOwnProperty("location") ? introinfo.location.split(",")[0] : ""
       })
 
       this.setData({
-        longitude: introinfo.location.split(",")[1]
+        longitude: introinfo.hasOwnProperty("location") ? introinfo.location.split(",")[1] : ""
       })
     } 
     
     this.setData({
-      telephone: introinfo.tel
+      telephone: introinfo.hasOwnProperty("tel") ? introinfo.tel : ""
     })
     this.setData({
-      tele: introinfo.tel
+      tele: introinfo.hasOwnProperty("tel") ? introinfo.tel : ""
     })
     this.setData({
-      otextareavalue: introinfo.introduce
+      otextareavalue: introinfo.hasOwnProperty("introduce") ? introinfo.introduce : ""
     })
-     this.data.typeworkarray
+    if (introinfo.hasOwnProperty("occupations")) {
     for (let i = 0; i < this.data.typeworkarray.length; i++) {
       for (let j = 0; j < this.data.typeworkarray[i].children.length; j++) {
         for (let k = 0; k < introinfo.occupations.length; k++){
@@ -537,6 +537,7 @@ Page({
           }
         }
       }
+    }
     }
     this.setData({
       typeworkarray: this.data.typeworkarray

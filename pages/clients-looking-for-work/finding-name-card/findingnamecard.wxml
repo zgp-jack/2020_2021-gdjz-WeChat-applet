@@ -8,7 +8,7 @@
       <view class="findingnamecardonesonone">
         <view class="otext"><text>名片完善度：</text> <view class="lang"><view class="olang"   style="width:{{percent}}%;"></view></view>
 <text style="font-size:26rpx; color:#F87A14; padding:3rpx 0 0 14rpx;font-weight:500;">{{percent}}%</text></view>
-        <view>名片越完善找活越容易,马上去完善>></view>
+        <view bindtap="completeall">名片越完善找活越容易,马上去完善>></view>
       </view>
       <view class="findingnamecardonesontwo">
         <text>{{view_num}}</text>
@@ -25,16 +25,16 @@
         <text>我的工作状态：</text>
       </view>
       <!-- <view class="cardonesontwo">
-        <text>未开始找工作</text>
+        <text>未开始找工作</text> skillbooksone
         <image src="../../../images/bottomimg.png"></image>
       </view> -->
           <view class='select_box'>
       <view class='select' catchtap='selectTap'>
-        <text class='select_text'>{{selectData[index]}}</text>
+        <text class='select_text'>{{selectData[index].name}}</text>
         <image class='select_img {{selectShow&&"select_img_rotate"}}' src='../../../images/bottomimg.png' background-size="contain" wx:if="{{checkstatus}}"></image>
       </view>
-      <view class='option_box' style='height:{{selectShow?(selectData.length>5?325:selectData.length*50):0}}rpx;'>
-        <text class='option' wx:for='{{selectData}}' wx:key='this' data-index='{{index}}' catchtap='optionTap'>{{item}}</text>
+      <view class='option_box' style='height:{{selectShow?(selectData.length>5?325:selectData.length*36):0}}rpx;'>
+        <text class='option' wx:for='{{selectData}}' wx:key='this' data-index='{{index}}' catchtap='optionTap'>{{item.name}}</text>
       </view>
     </view>
     </view>
@@ -43,12 +43,11 @@
 
 
   <view class="findingnamecardtwo" wx:if="{{showtop}}">
-    <!-- <image intro class="findingnamecardtwoone" src="{{userimg}}"></image>
-    <text class="findingnamecardtwotwo">{{username}}</text> -->
     <text class="findingnamecardtwothree">你还没有完善基本信息</text>
     <view class="findingnamecardtwofour" bindtap="toperfect">去完善</view>
   </view>
   <view class="cardtwo" wx:if="{{showtopone}}">
+    <image class="checkone" src="../../../images/audit.png" wx:if="{{checkone}}"></image>
     <view class="cardtwosonone">
       <view class="cardtwosononeimg">
         <view class="oimg">
@@ -63,7 +62,7 @@
           </view>
         </view>
       </view>
-      <view class=" cardtwosontwo ">
+      <view class="cardtwosontwo"  wx:if="{{!checkone}}">
         <text bindtap="edit">编辑</text>
       </view>
     </view>
@@ -97,7 +96,7 @@
       </view>
       <view class="cardotext">
         <view class="oworkone">
-          <text class="workotext">自我介绍：</text>
+          <text class="workotext">工作介绍：</text>
         </view>
       </view>
     </view>
@@ -111,7 +110,7 @@
   <view class="findingnamecardthree" wx:if="{{selfintro}}">
     <view class="findingnamecardthreemobile">
       <image src="../../../images/newresume-description.png" ></image>
-      自我介绍
+      工作介绍
     </view>
   </view>
   <view class="findingnamecardfour" wx:if="{{selfintro}}">
@@ -122,13 +121,14 @@
   <view class="cardthree" wx:if="{{selfintrone}}">
     <view class="cardthreemobile">
       <image src="../../../images/newresume-description.png"></image>
-      自我介绍
+        工作介绍
     </view>
-    <view class="cardthreeone" bindtap="improvementwork">
+    <view class="cardthreeone" bindtap="improvementwork" wx:if="{{!checktwo}}">
       编辑
     </view>
   </view>
   <view class="cardtwo" wx:if="{{selfintrone}}">
+      <image class="checktwo" src="../../../images/audit.png" wx:if="{{checktwo}}"></image>
     <view class="lineone">
     <view class="linezo">
       <view class="cardotext">
@@ -178,7 +178,7 @@
         </view>
         <view class="all">
           <view class="tworkotextonetu" wx:for="{{tags}}" wx:key="{{index}}">
-            {{item}}
+            {{item.label_name}}
           </view>
         </view>
       </view>
@@ -203,11 +203,12 @@
       <image src="../../../images/newresume-experience.png"></image>
       项目经验
     </view>
-    <view class="cardthreeone"  bindtap="addproject" wx:if="{{projectlength < 5}}">
+    <view class="cardthreeone" wx:if="{{!checkthree}}"  bindtap="addproject" wx:if="{{projectlength < 5}}" wx:if="{{!checkthree}}">
       添加
     </view>
   </view>
    <view class="cardsix" wx:if="{{projectlength != 0}}">
+      <image class="checkthree" src="../../../images/audit.png" wx:if="{{checkthree}}"></image>
     <view class="cardsixzong" wx:for="{{projectone}}" wx:key="{{index}}">
       <view>
       <image src="../../../images/newresume-experience-item.png" class="cardsixone"></image>
@@ -233,11 +234,14 @@
 
       </view>
     </view>
-    <view class="cardsixsixall" wx:if="{{projectlength > 1 }}">
+    <view class="cardsixsixall">
       <button class="cardsixsix" bindtap="moreproject">
-        <view>
+        <view wx:if="{{checkthreef != 0}}">
           更多项目经验
           <image src="../../../images/downward.png" class="down"></image>
+        </view>
+        <view wx:if="{{checkthreef == 0}}">
+          待修改
         </view>
       </button>
     </view>
@@ -255,16 +259,17 @@
     <text class="findingnamecardeightone">添加职业技能，用实力证明你的能力</text>
     <view class="findingnamecardeighttwo" bindtap="addskill">添加职业技能</view>
   </view>
-  <view class="cardseven">
+  <view class="cardseven" wx:if="{{skilllength != 0}}">
     <view class="cardsevenmobile">
       <image src="../../../images/newresume-skill.png"></image>
       职业技能
     </view>
-    <view class="cardthreeone" bindtap="addskill" wx:if="{{skilllength < 3}}">
+<view class="cardthreeone" bindtap="addskill" wx:if="{{skilllength < 3}}" wx:if="{{!checkfour}}" >
       添加
     </view>
   </view>
-  <view class="cardeight">
+  <view class="cardeight" wx:if="{{skilllength != 0}}">
+     <image class="checkfour" src="../../../images/audit.png" wx:if="{{checkfour}}"></image>
     <view class="cardeightzong" wx:for="{{skillbooksone}}" wx:key="{{index}}">
      <view>
       <image src="../../../images/newresume-experience-item.png" class="cardeightone"></image>
@@ -281,18 +286,21 @@
 
       </view>
     </view>
-    <view class="cardeightsixall" wx:if="{{skilllength > 1 }}">
+    <view class="cardeightsixall">
       <button class="cardeightsix" bindtap="moreskill">
         <view>
           更多技能证书
           <image src="../../../images/downward.png" class="down" ></image>
+        </view>
+        <view wx:if="{{checkfourf == 0}}">
+          待修改
         </view>
       </button>
     </view>
     <view class="cardsixsixallvoto">
     </view>
   </view>
-  <view class="cardnine">
+  <view class="cardnine" wx:if="{{showbottom}}">
     <button class="cardnineone" bindtap="preview">
       <image src="../../../images/bottom-one.png" ></image> 预览</button>
     <button class="cardnineone"  open-type='share'>

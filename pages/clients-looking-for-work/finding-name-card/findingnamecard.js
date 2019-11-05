@@ -1,10 +1,10 @@
-// pages/Finding a name card.js
+// completeall selectData selectTap
 const app = getApp();
-//selfintro 
+
 Page({
 
   /**
-   * 页面的初始数据
+   * 页面的初始数据 nation view_num
    */
   data: {
     allde: false,
@@ -35,7 +35,6 @@ Page({
     selectShow: false,//控制下拉列表的显示隐藏，false隐藏、true显示
     selectData: [],//下拉列表的数据
     index: 0,//选择的下拉列表下标
-    resume_uuid: "",
     check: "",
     checkstatus: true,
     is_introduces: false,
@@ -48,7 +47,37 @@ Page({
     percent: 0,
     skilllength: 0,
     skillbooks: [],
-    skillbooksone: []
+    skillbooksone: [],
+    checkone:false,
+    checkonef: 4568,
+    checktwo:false,
+    checktwof: 4568,
+    checkthree:false,
+    checkthreef: 4568,
+    checkfour: false,
+    checkfourf: 4568,
+    showbottom: false,
+    resume_uuid: "",
+
+  },
+  completeall(){
+    if (!this.data.resume_uuid){
+      wx.navigateTo({
+        url: '/pages/clients-looking-for-work/essential-information/esinformation',
+      })
+    } else if (this.data.is_introduces == 0){
+      wx.navigateTo({
+        url: '/pages/clients-looking-for-work/work-description/workdescription',
+      })
+    } else if (this.data.project.length == 0) {
+      wx.navigateTo({
+        url: "/pages/clients-looking-for-work/new-project-experience/projectexperience",
+      })
+    }else{
+      wx.navigateTo({
+        url: "/pages/clients-looking-for-work/addcertificate/addcertificate",
+      })
+    }
   },
   onShareAppMessage: function () {
     console.log(123)
@@ -63,6 +92,15 @@ Page({
       wx.showModal({
         title: '温馨提示',
         content: '提示信息审核中，请稍后再试',
+        showCancel: false,
+        success(res) { }
+      })
+      return
+    }
+    if (this.data.check == "0") {
+      wx.showModal({
+        title: '温馨提示',
+        content: '信息审核已经失败，请先修改资料',
         showCancel: false,
         success(res) { }
       })
@@ -101,11 +139,25 @@ Page({
     })
   },
   toperfect() {
+
     wx.navigateTo({
       url: '/pages/clients-looking-for-work/essential-information/esinformation',
     })
   },
   improvementwork() {
+    if (this.data.resume_uuid == "") {
+      wx.showModal({
+        title: '温馨提示',
+        content: '您未完善基本信息填写,请先填写基本信息',
+        showCancel: false,
+        success(res) {
+          wx.navigateTo({
+            url: '/pages/clients-looking-for-work/essential-information/esinformation',
+          })
+        }
+      })
+      return
+    }
     wx.navigateTo({
       url: '/pages/clients-looking-for-work/work-description/workdescription',
     })
@@ -117,6 +169,19 @@ Page({
     })
   },
   addproject() {
+    if (this.data.resume_uuid == "") {
+      wx.showModal({
+        title: '温馨提示',
+        content: '您未完善基本信息填写,请先填写基本信息',
+        showCancel: false,
+        success(res) {
+          wx.navigateTo({
+            url: '/pages/clients-looking-for-work/essential-information/esinformation',
+          })
+        }
+      })
+      return
+    }
     wx.navigateTo({
       url: "/pages/clients-looking-for-work/new-project-experience/projectexperience",
     })
@@ -127,6 +192,19 @@ Page({
     })
   },
   addskill() {
+    if (this.data.resume_uuid == "") {
+      wx.showModal({
+        title: '温馨提示',
+        content: '您未完善基本信息填写,请先填写基本信息',
+        showCancel: false,
+        success(res) {
+          wx.navigateTo({
+            url: '/pages/clients-looking-for-work/essential-information/esinformation',
+          })
+        }
+      })
+      return
+    }
     wx.navigateTo({
       url: "/pages/clients-looking-for-work/addcertificate/addcertificate",
     })
@@ -178,73 +256,92 @@ Page({
       tokenTime: userInfo.tokenTime,
     })
     let that = this;
-    app.doRequestAction({
+    app.appRequestAction({
       url: 'resumes/resume-list/',
       way: 'POST',
       params: detail,
       success(res) {
+        let mydata = res.data.data;
+        console.log(mydata)
+
+ 
+        for (let i = 0; i < mydata.project.length;i++){
+          if (mydata.project[i].check != 1) {
+            that.setData({
+              checkthree: false,
+              checkthreef: mydata.project[i].check
+            })
+            break
+          }
+          if (mydata.project[i].check == 1) {
+            that.setData({
+              checkthree: true,
+              checkthreef: mydata.project[i].check
+            })
+          }
+        }
+
+        for (let i = 0; i < mydata.certificates.length; i++) {
+          if (mydata.certificates[i].check != 1) {
+            that.setData({
+              checkfour: false,
+              checkfourf: mydata.project[i].check
+            })
+            break
+          }
+          if (mydata.certificates[i].check == 1) {
+            that.setData({
+              checkfour: true,
+              checkfourf: mydata.project[i].check
+            })
+          }
+        }
         let date = new Date();
         let dateo = date.getTime()
         let dateone = new Date(dateo);
-        wx.setStorageSync("introdetail", res.data.data.introduces)
-        wx.setStorageSync("introinfo", res.data.data.info)
-        if (res.data.data.info.uuid) {
+        wx.setStorageSync("introdetail", mydata.introduces)
+        wx.setStorageSync("introinfo", mydata.info)
+        if (mydata.info.uuid) {
           that.showtop()
           that.setData({
-            resume_uuid: res.data.data.info.uuid
+            resume_uuid: mydata.info.uuid
           })
-          wx.setStorageSync("uuid", res.data.data.info.uuid)
+          wx.setStorageSync("uuid", mydata.info.uuid)
         }
         that.setData({
-          name: res.data.data.info.username
+          sex: mydata.info.gender == "1" ? "男" : "女"
         })
-        that.setData({
-          sex: res.data.data.info.gender == "1" ? "男" : "女"
-        })
-        if (res.data.data.info.birthday) {
+        if (mydata.info.birthday) {
           that.setData({
-            age: dateone.getFullYear() - (res.data.data.info.birthday.split("-")[0] - 0)
+            age: dateone.getFullYear() - (mydata.info.birthday.split("-")[0] - 0)
           })
         }
         that.setData({
-          nation: res.data.data.info.nation
+          name: mydata.info.hasOwnProperty("username") ? mydata.info.username:"",
+          nation: mydata.info.hasOwnProperty("nation") ? mydata.info.nation : "",
+          occupations: mydata.info.hasOwnProperty("occupations") ? mydata.info.occupations : "",
+          telephone: mydata.info.hasOwnProperty("tel") ? mydata.info.tel : "",
+          city: mydata.info.hasOwnProperty("address") ? mydata.info.address : "",
+          intro: false,
+          introne: true, 
+          introduce: mydata.info.hasOwnProperty("introduce") ? mydata.info.introduce:"",
+          workingyears: mydata.introduces.hasOwnProperty("experience")?mydata.introduces.experience : "",
+          staffcomposition: mydata.introduces.hasOwnProperty("type_str")?mydata.introduces.type_str : "",
+          cityself: mydata.introduces.hasOwnProperty("hometown")? mydata.introduces.hometown : "",
+          procity: mydata.introduces.hasOwnProperty("prof_degree_str") ? mydata.introduces.prof_degree_str : "",
+          personnum: mydata.introduces.hasOwnProperty("number_people") ? mydata.introduces.number_people : "",
+          tags: mydata.introduces.hasOwnProperty("tags")  ? mydata.introduces.tags : "",
+          checkone: mydata.info.check && mydata.info.check == 1 ? true : false,
+          checkonef: mydata.info.hasOwnProperty("check") ? mydata.info.check:"",
+          checktwo: mydata.introduces.check && mydata.introduces.check == 1 ? true : false,
+          checktwof: mydata.introduces.hasOwnProperty("check") ? mydata.introduces.check : "",
         })
 
-        that.setData({
-          occupations: res.data.data.info.occupations
-        })
-        that.setData({
-          telephone: res.data.data.info.tel
-        })
-        that.setData({
-          city: res.data.data.info.address
-        })
-        that.setData({
-          intro: false,
-          introne: true,
-          introduce: res.data.data.info.introduce
-        })
-        that.setData({
-          workingyears: res.data.data.introduces.experience
-        })
-        that.setData({
-          staffcomposition: res.data.data.introduces.type_str
-        })
-        that.setData({
-          cityself: res.data.data.introduces.hometown
-        })
-        that.setData({
-          procity: res.data.data.introduces.prof_degree_str
-        })
-        that.setData({
-          personnum: res.data.data.introduces.number_people
-        })
-        that.setData({
-          tags: res.data.data.introduces.tags
-        })
-        let selectD = Object.values(res.data.data.status)
-        let selectk = Object.keys(res.data.data.status)
-        if (res.data.data.info.is_end == "2") {
+        let selectD = Object.values(mydata.status)
+        let selectk = Object.keys(mydata.status)
+        console.log(selectD)
+        console.log(selectk)
+        if (mydata.info.is_end == "2") {
           selectD.reverse();
           selectk.reverse()
         }
@@ -252,56 +349,103 @@ Page({
           selectData: selectD,
           selectk: selectk
         })
-        if (res.data.data.info.check == "1") {
+        if (mydata.info.check == "1" || mydata.info.check == "0") {
           that.setData({
             checkstatus: false
           });
         }
         that.setData({
-          check: res.data.data.info.check
+          check: mydata.info.hasOwnProperty("check") ? mydata.info.check : ""
         })
 
         that.setData({
-          headerimg: res.data.data.info.headerimg
+          headerimg: mydata.info.headerimg
         })
-        if (res.data.data.is_introduces) {
+        if (mydata.is_introduces == 1) {
           that.setData({
-            is_introduces: res.data.data.is_introduces,
+            is_introduces: mydata.is_introduces,
             selfintro: false,
             selfintrone: true,
           })
+        } else if (mydata.is_introduces == 0){
+          that.setData({
+            is_introduces: mydata.is_introduces
+          })
         }
 
         that.setData({
-          view_num: res.data.data.info.view_num
+          view_num: mydata.info.hasOwnProperty("view_num") ? mydata.info.view_num : 0
         });
-        if (res.data.data.project != []) {
+        if (mydata.project != []) {
           that.setData({
-            project: res.data.data.project
+            project: mydata.project
           });
           that.setData({
-            projectone: [res.data.data.project[0]]
+            projectone: [mydata.project[0]]
           });
           that.setData({
-            projectlength: res.data.data.project.length
+            projectlength: mydata.project.length >=1 ? mydata.project.length : 0
           })
         }
         that.setData({
-          allde: true
+          allde: true,
+          percent: mydata.info.hasOwnProperty("progress") ? mydata.info.progress : 0
         })
 
-        that.setData({
-          percent: res.data.data.info.progress - 0
-        })
-        if (res.data.data.certificates != []) {
+        if (mydata.certificates != []) {
           that.setData({
-            skillbooks: res.data.data.certificates
+            skillbooks: mydata.certificates
           })
           that.setData({
-            skilllength: res.data.data.certificates.length
+            skilllength: res.data.data.certificates.length >= 1 ? res.data.data.certificates.length : 0
           })
           that.setData({
             skillbooksone: [that.data.skillbooks[0]]
+          })
+        }
+        if (that.data.checkonef == "0"){
+          wx.showModal({
+            title: '温馨提示',
+            content: '您的基本信息审核未通过请重新填写',
+            showCancel: false,
+            success(res) {
+              wx.navigateTo({
+                url: '/pages/clients-looking-for-work/essential-information/esinformation',
+              })
+            }
+          })
+        } else if (that.data.checktwof == "0"){
+          wx.showModal({
+            title: '温馨提示',
+            content: '您的工作介绍审核未通过请重新填写',
+            showCancel: false,
+            success(res) {
+              wx.navigateTo({
+                url: '/pages/clients-looking-for-work/work-description/workdescription',
+              })
+            }
+          })
+        } else if (that.data.checkthreef == "0") {
+          wx.showModal({
+            title: '温馨提示',
+            content: '您的项目经验审核未通过请重新填写',
+            showCancel: false,
+            success(res) {
+              wx.navigateTo({
+                url: "/pages/clients-looking-for-work/all-project-experience/allexperience",
+              })
+            }
+          })
+        } else if (that.data.checkfourf == "0") {
+          wx.showModal({
+            title: '温馨提示',
+            content: '您的技能证书审核未通过请重新填写',
+            showCancel: false,
+            success(res) {
+              wx.navigateTo({
+                url: "/pages/clients-looking-for-work/all-skills-certificate/skillscertificate",
+              })
+            }
           })
         }
       }
@@ -313,7 +457,13 @@ Page({
       showtopone: true
     })
   },
-
+  showbottom(){
+    if (!this.data.checkone && !this.data.checktwo && !this.data.checkthree && !this.data.checkfour){
+        this.setData({
+          showbottom:true
+      })
+    }
+  },
   // namerequest() {
   //   let _this = this;
   //   let userId = '';

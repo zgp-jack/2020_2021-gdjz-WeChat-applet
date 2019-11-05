@@ -403,6 +403,7 @@
   margin-top: 20rpx;
   background-color: white;
   overflow: hidden;
+  position: relative;
 }
 
 .cardtwo .cardtwosonone {
@@ -639,6 +640,7 @@
   width: 93%;
   margin: 0 auto;
   background-color: white;
+  position: relative;
 }
 
 .cardsixzong {
@@ -748,6 +750,8 @@
   width: 93%;
   margin: 0 auto;
   background-color: white;
+  position: relative;
+  margin-bottom: 18rpx;
 }
 
 .cardeightzong {
@@ -1025,6 +1029,7 @@
   overflow-y: auto;
   background: #fff;
   transition: height 0.3s;
+  z-index: 999
 }
 .select_box .option_box .option{
   display: block;
@@ -1036,7 +1041,38 @@
   border-right:1px solid #efefef;
   text-align: center;
 }
+
+.checkone{
+ width: 121rpx;
+  height: 121rpx;
+  position: absolute;
+  top: 10rpx;
+  right: 21rpx;
+  z-index: 99
+}
+.checktwo{
+  width: 121rpx;
+  height: 121rpx;
+  position: absolute;
+  top: 10rpx;
+  right: 21rpx;
+  z-index: 99
+}
+.checkthree{
+   width: 121rpx;
+  height: 121rpx;
+  position: absolute;
+  top: 10rpx;
+  right: 21rpx;
+  z-index: 99
+}
+.checkfour{
+  width: 121rpx;
+  height: 121rpx;
+  position: absolute;
+  top: 10rpx;
+  right: 21rpx;
+  z-index: 99
+}
 /*cardsevenmobile cardthreeone cardthreeone cardsevenmobile  cardfivemobile cardthreemobile*/
-  /* position: absolute;
-  left: 50%;
-  margin-left: -10%; findingnamecardsevenmobile findingnamecardfivemobile findingnamecardsevenmobile findingnamecardthreemobile oworkotextonetu*/
+  /* cardtwo cardsix cardeight option_box cardeight*/

@@ -28,7 +28,7 @@
     <!-- bindchange="initAllProvice" -->
     <view class="experienceheadertwo">
       <picker bindchange="bindMultiPickerChange" bindcolumnchange="bindMultiPickerColumnChange" mode="multiSelector" value="{{multiIndex}}" range="{{multiArray}}">
-        <input disabled name="addregion" value="{{multiIndexvalue}}" placeholder="请选择家乡地址"></input>
+        <input disabled name="addregion" value="{{multiIndexvalue}}" placeholder="请选择所在地区"></input>
       </picker>
     </view>
   </view>

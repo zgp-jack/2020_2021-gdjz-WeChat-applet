@@ -57,7 +57,7 @@ Page({
   },
   accessprovince() { //大部分piker需要的数据
     let that = this;
-    app.doRequestAction({
+    app.appRequestAction({
       url: 'resumes/get-data/',
       way: 'GET',
       success(res) {
@@ -89,7 +89,7 @@ Page({
     })
   },
 
-  initAllProvice: function() { //获取所有省份
+  initAllProvice: function () { //获取所有省份
     let that = this;
     let arr = app.arrDeepCopy(areas.getPublishArea());
     this.setData({
@@ -148,7 +148,7 @@ Page({
       objectMultiArray: [provice, provicechild]
     })
   },
-  bindMultiPickerChange: function(e) { //最终家乡的选择
+  bindMultiPickerChange: function (e) { //最终家乡的选择
     let that = this;
     this.setData({
       multiIndex: e.detail.value
@@ -171,7 +171,7 @@ Page({
     })
   },
 
-  bindMultiPickerColumnChange: function(e) { //下滑家乡列表所产生的函数
+  bindMultiPickerColumnChange: function (e) { //下滑家乡列表所产生的函数
     let that = this;
     let namearry = this.data.multiArrayone;
     var data = {
@@ -245,7 +245,7 @@ Page({
         title: '温馨提示',
         content: '您输入的工龄为空,请重新输入',
         showCancel: false,
-        success(res) {}
+        success(res) { }
       })
       return
     }
@@ -254,7 +254,7 @@ Page({
         title: '温馨提示',
         content: '您选择的家乡为空,请重新输入',
         showCancel: false,
-        success(res) {}
+        success(res) { }
       })
       return
     }
@@ -263,7 +263,7 @@ Page({
         title: '温馨提示',
         content: '您选择的熟练度为空,请重新输入',
         showCancel: false,
-        success(res) {}
+        success(res) { }
       })
       return
     }
@@ -272,7 +272,7 @@ Page({
         title: '温馨提示',
         content: '您选择的人员构成为空,请重新输入',
         showCancel: false,
-        success(res) {}
+        success(res) { }
       })
       return
     }
@@ -282,7 +282,7 @@ Page({
         title: '温馨提示',
         content: '您输入的队伍人数为空或者为零,请重新输入',
         showCancel: false,
-        success(res) {}
+        success(res) { }
       })
       return
     }
@@ -291,7 +291,7 @@ Page({
         title: '温馨提示',
         content: '您选择的标签为空,请重新输入',
         showCancel: false,
-        success(res) {}
+        success(res) { }
       })
       return
     }
@@ -311,7 +311,7 @@ Page({
       url: "resumes/introduce/",
       way: "POST",
       params: information,
-      success: function(res) {
+      success: function (res) {
         wx.showModal({
           title: '温馨提示',
           content: '保存成功',
@@ -323,7 +323,7 @@ Page({
           }
         })
       },
-      fail: function(err) {
+      fail: function (err) {
         console.log(err)
       }
     })
@@ -335,118 +335,111 @@ Page({
     console.log(introdetail)
 
     this.setData({
-      workage: introdetail.experience
+      workage: introdetail.hasOwnProperty("experience") ? introdetail.experience : "",
+      multiIndexvalue: introdetail.hasOwnProperty("hometown") ? introdetail.hometown : "",
+      provincecity: introdetail.hasOwnProperty("hometown_id") ? introdetail.hometown_id : "",
+      labelnum: introdetail.hasOwnProperty("tag_id") ? introdetail.tag_id : "",
+      degreeone: introdetail.hasOwnProperty("prof_degree") ? introdetail.prof_degree : "",
+      constituttion: introdetail.hasOwnProperty("type") ? introdetail.type : "",
+      teamsnumber: introdetail.hasOwnProperty("number_people") ? introdetail.number_people : ""
     })
-    this.setData({
-      multiIndexvalue: introdetail.hometown
-    })
-    this.setData({
-      provincecity: introdetail.hometown_id
-    })
-    this.setData({
-      labelnum: introdetail.tag_id
-    })
+
     console.log(this.data.detailevaluation)
-    let tagid = introdetail.tag_id.split(",")
-    for (let i = 0; i < this.data.detailevaluation.length; i++) {
-      for (let j = 0; j < tagid.length; j++) {
-        if (this.data.detailevaluation[i].id == tagid[j]) {
-          this.data.detailevaluation[i].classname = "oinformationnosave"
+    if (introdetail.hasOwnProperty("tag_id") && introdetail.tag_id != null) {
+      let tagid = introdetail.tag_id.split(",")
+      for (let i = 0; i < this.data.detailevaluation.length; i++) {
+        for (let j = 0; j < tagid.length; j++) {
+          if (this.data.detailevaluation[i].id == tagid[j]) {
+            this.data.detailevaluation[i].classname = "oinformationnosave"
+          }
         }
       }
+
+
+      this.setData({
+        detailevaluation: this.data.detailevaluation
+      })
+
+
+      let evaluations = []
+      for (let i = 0; i < tagid.length; i++) {
+        evaluations.push(tagid[i] - 0)
+      }
+      this.setData({
+        evaluation: evaluations
+      })
     }
-    this.setData({
-      detailevaluation: this.data.detailevaluation
-    })
-    let evaluations = []
-    for (let i = 0; i < tagid.length; i++) {
-      evaluations.push(tagid[i] - 0)
-    }
-    this.setData({
-      evaluation: evaluations
-    })
-    if (introdetail.prof_degree) {
+    if (introdetail.hasOwnProperty("prof_degree")) {
       this.setData({
         indexproficiency: introdetail.prof_degree - 1
       })
     }
-    
-    this.setData({
-      degreeone: introdetail.prof_degree
-    })
-
-    if (introdetail.type) {
+    if (introdetail.hasOwnProperty("type")) {
       this.setData({
         indexperson: introdetail.type - 1
       })
     }
-
-    this.setData({
-      constituttion: introdetail.type 
-    })
-    if (introdetail.type -0 > 1) {
-      this.setData({
-        judge: true
-      })
+    if (introdetail.hasOwnProperty("type")) {
+      if (introdetail.type - 0 > 1) {
+        this.setData({
+          judge: true
+        })
+      }
     }
-    
-    this.setData({
-      teamsnumber: introdetail.number_people
-    })
   },
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function(options) {
+  onLoad: function (options) {
     this.accessprovince();
   },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function() {
+  onReady: function () {
 
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function() {
+  onShow: function () {
     this.initAllProvice()
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
-  onHide: function() {
+  onHide: function () {
 
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
-  onUnload: function() {
+  onUnload: function () {
 
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
-  onPullDownRefresh: function() {
+  onPullDownRefresh: function () {
 
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
-  onReachBottom: function() {
+  onReachBottom: function () {
 
   },
 
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function() {
+  onShareAppMessage: function () {
 
   }
 })
