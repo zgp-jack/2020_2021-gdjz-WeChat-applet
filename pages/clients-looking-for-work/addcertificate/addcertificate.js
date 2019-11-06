@@ -79,22 +79,40 @@ Page({
   preserve() {
     let userInfo = wx.getStorageSync("userInfo");
     let project = {}
-
-    let oimg = ""
-    for (let i = 0; i < this.data.idArrs.length; i++) {
-      if (i == this.data.idArrs.length - 1) {
-        oimg += this.data.idArrs[i]
-      } else {
-        oimg += this.data.idArrs[i] + ","
-      }
-
+    let vertifyNum = v.v.new()
+    if (vertifyNum.isNull(this.data.name)) {
+      wx.showModal({
+        title: '温馨提示',
+        content: '您输入的职业技能为空请重新输入',
+        showCancel: false,
+        success(res) { }
+      })
+      return
+    }
+    if (vertifyNum.isNull(this.data.idArrs)) {
+      wx.showModal({
+        title: '温馨提示',
+        content: '您添加的图片为空请重新输入',
+        showCancel: false,
+        success(res) { }
+      })
+      return
+    }
+    if (vertifyNum.isNull(this.data.date)) {
+      wx.showModal({
+        title: '温馨提示',
+        content: '您输入的领取证书时间为空请重新输入',
+        showCancel: false,
+        success(res) { }
+      })
+      return
     }
     Object.assign(project, {
       userId: userInfo.userId,
       token: userInfo.token,
       tokenTime: userInfo.tokenTime,
       resume_uuid: this.data.resume_uuid,
-      image: oimg,
+      image: this.data.idArrs,
       name: this.data.name,
       certificate_time: this.data.date
     })
@@ -105,38 +123,69 @@ Page({
       way: 'POST',
       params: project,
       success(res) {
-        wx.showModal({
-          title: '温馨提示',
-          content: '保存成功',
-          showCancel: false,
-          success(res) {
-            wx.navigateBack({
-              delta: 1
-            })
-          }
-        })
+        console.log(res)
+        if (res.data.errcode == "fail") {
+          wx.showModal({
+            title: '温馨提示',
+            content: '输入错误请重新输入',
+            showCancel: false,
+            success(res) {
+            }
+          })
+        }
+        if (res.data.errcode == "ok") {
+          wx.showModal({
+            title: '温馨提示',
+            content: "保存成功",
+            showCancel: false,
+            success(res) {
+              wx.navigateBack({
+                delta: 1
+              })
+            }
+          })
+        }
       }
     })
   },
   preservechixu() {
     let userInfo = wx.getStorageSync("userInfo");
     let project = {}
-
-    let oimg = ""
-    for (let i = 0; i < this.data.idArrs.length; i++) {
-      if (i == this.data.idArrs.length - 1) {
-        oimg += this.data.idArrs[i]
-      } else {
-        oimg += this.data.idArrs[i] + ","
-      }
-
+    let vertifyNum = v.v.new()
+    if (vertifyNum.isNull(this.data.name)) {
+      wx.showModal({
+        title: '温馨提示',
+        content: '您输入的职业技能为空请重新输入',
+        showCancel: false,
+        success(res) { }
+      })
+      return
     }
+    if (vertifyNum.isNull(this.data.idArrs)) {
+      wx.showModal({
+        title: '温馨提示',
+        content: '您添加的图片为空请重新输入',
+        showCancel: false,
+        success(res) { }
+      })
+      return
+    }
+    if (vertifyNum.isNull(this.data.date)) {
+      wx.showModal({
+        title: '温馨提示',
+        content: '您输入的领取证书时间为空请重新输入',
+        showCancel: false,
+        success(res) { }
+      })
+      return
+    }
+
     Object.assign(project, {
       userId: userInfo.userId,
       token: userInfo.token,
       tokenTime: userInfo.tokenTime,
       resume_uuid: this.data.resume_uuid,
-      image: oimg,
+      image: this.data.idArrs,
       name: this.data.name,
       certificate_time: this.data.date
     })
@@ -147,13 +196,30 @@ Page({
       way: 'POST',
       params: project,
       success(res) {
-        wx.showModal({
-          title: '温馨提示',
-          content: '保存成功,继续添加',
-          showCancel: false,
-          success(res) {
-          }
-        })
+        if (res.data.errcode == "fail") {
+          wx.showModal({
+            title: '温馨提示',
+            content: '输入错误请重新输入',
+            showCancel: false,
+            success(res) {
+            }
+          })
+        }
+        if (res.data.errcode == "ok") {
+          wx.showModal({
+            title: '温馨提示',
+            content: "保存成功",
+            showCancel: false,
+            success(res) {
+              that.setData({
+                imgArrs: [],
+                idArrs: [],
+                date: "",
+                name: "",
+              })
+            }
+          })
+        }
 
       }
     })
@@ -210,7 +276,4 @@ Page({
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function () {
-
-  }
 })

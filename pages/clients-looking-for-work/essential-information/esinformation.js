@@ -1,4 +1,4 @@
-// pages/clients-looking-for-work/essential-information/esinformation.js
+// vertifynum verify
 var amapFile = require('../../../utils/amap-wx.js');
 let areas = require("../../../utils/area.js");
 let v = require("../../../utils/v.js");
@@ -32,8 +32,33 @@ Page({
     nation: "",
     verify: "",
     name: "",
-    telephone:"",
-    tele:false
+    telephone: "",
+    tele: false,
+    codeTips: "获取验证码",
+    status: 1,
+  },
+
+  initCountDown: function(_time) {
+    let _t = parseInt(_time);
+    let _this = this;
+    this.setData({
+      status: 0,
+      codeTips: _t + "秒后重试"
+    });
+    let timer = setInterval(function() {
+      _t--;
+      if (_t == 0) {
+        clearInterval(timer);
+        _this.setData({
+          status: 1,
+          codeTips: "获取验证码"
+        })
+        return false;
+      }
+      _this.setData({
+        codeTips: _t + "秒后重试"
+      })
+    }, 1000)
   },
   verify(e) {
     this.setData({
@@ -45,7 +70,7 @@ Page({
       name: e.detail.value
     })
   },
-  sex: function (e) {
+  sex: function(e) {
     this.setData({
       indexsex: ~~e.detail.value
     })
@@ -70,16 +95,16 @@ Page({
       telephone: e.detail.value
     })
   },
-  GPSsubmit: function () {
+  GPSsubmit: function() {
     this.getLocation();
   },
-  getLocation: function () {   //定位获取
+  getLocation: function() { //定位获取
     var _this = this;
     var myAmapFun = new amapFile.AMapWX({
       key: app.globalData.gdApiKey
     }); //key注册高德地图开发者
     myAmapFun.getRegeo({
-      success: function (data) {
+      success: function(data) {
         console.log(data);
         let oname = data[0].name + ' ' + data[0].desc;
         if (oname.length >= 10) {
@@ -93,7 +118,7 @@ Page({
           });
         }
       },
-      fail: function (info) {
+      fail: function(info) {
         console.log("getLocation fail");
         wx.showModal({
           title: info.errMsg
@@ -104,13 +129,13 @@ Page({
       }
     });
   },
-  getadcode: function () {   //定位获取
+  getadcode: function() { //定位获取
     var _this = this;
     var myAmapFun = new amapFile.AMapWX({
       key: app.globalData.gdApiKey
     }); //key注册高德地图开发者
     myAmapFun.getRegeo({
-      success: function (data) {
+      success: function(data) {
         console.log(data)
         _this.setData({
           oadcode: data[0].regeocodeData.addressComponent.adcode
@@ -123,7 +148,7 @@ Page({
         });
         _this.getarea()
       },
-      fail: function (info) {
+      fail: function(info) {
         console.log("getLocation fail");
         wx.showModal({
           title: info.errMsg
@@ -134,12 +159,12 @@ Page({
       }
     });
   },
-  userTapAddress: function () {
+  userTapAddress: function() {
     wx.navigateTo({
       url: '/pages/clients-looking-for-work/selectmap/smap',
     })
   },
-  getlocationdetails() {   //所在地区的位置
+  getlocationdetails() { //所在地区的位置
     let historyregionone = wx.getStorageSync("historyregionone");
     if (historyregionone) {
       this.setData({
@@ -151,7 +176,7 @@ Page({
     }
   },
 
-  accessprovince() {  //大部分piker需要的数据
+  accessprovince() { //大部分piker需要的数据
     let that = this;
     app.doRequestAction({
       url: 'resumes/get-data/',
@@ -223,7 +248,7 @@ Page({
     })
   },
 
-  userClickItem: function (e) {
+  userClickItem: function(e) {
     let that = this;
     let ce = false;
     console.log(e)
@@ -260,7 +285,7 @@ Page({
               title: '温馨提示',
               content: '所需工种最多选择' + that.data.complexwork.length + '个',
               showCancel: false,
-              success(res) { }
+              success(res) {}
             })
           }
         }
@@ -312,6 +337,9 @@ Page({
   },
 
   vertifynum() {
+    let that = this;
+    let status = this.data.status;
+    if (!status) return false;
     let userInfo = wx.getStorageSync("userInfo");
     let tele = {}
     Object.assign(tele, {
@@ -325,12 +353,14 @@ Page({
       url: "index/get-code/",
       way: "POST",
       params: tele,
-      success: function (res) {
-        console.log(res)
+      success: function(res) {
+        let mydata = res.data;
+        if (mydata.errcode == "ok") {
+          let _time = mydata.refresh;
+          that.initCountDown(_time);
+        }
       },
-      fail: function (err) {
-        console.log(err)
-      }
+      fail: function(err) {}
     })
   },
   submitinformation() {
@@ -352,7 +382,7 @@ Page({
         title: '温馨提示',
         content: '您输入的手机号码不正确,请重新输入',
         showCancel: false,
-        success(res) { }
+        success(res) {}
       })
       return
     }
@@ -362,7 +392,7 @@ Page({
         title: '温馨提示',
         content: '您输入的姓名为空,请重新输入',
         showCancel: false,
-        success(res) { }
+        success(res) {}
       })
       return
     }
@@ -372,7 +402,7 @@ Page({
         title: '温馨提示',
         content: '您输入的性别为空,请重新输入',
         showCancel: false,
-        success(res) { }
+        success(res) {}
       })
       return
     }
@@ -381,7 +411,7 @@ Page({
         title: '温馨提示',
         content: '您输入的民族为空,请重新输入',
         showCancel: false,
-        success(res) { }
+        success(res) {}
       })
       return
     }
@@ -390,7 +420,7 @@ Page({
         title: '温馨提示',
         content: '您输入的出生日期为空,请重新输入',
         showCancel: false,
-        success(res) { }
+        success(res) {}
       })
       return
     }
@@ -399,7 +429,7 @@ Page({
         title: '温馨提示',
         content: '您输入的工种为空,请重新输入',
         showCancel: false,
-        success(res) { }
+        success(res) {}
       })
       return
     }
@@ -408,7 +438,7 @@ Page({
         title: '温馨提示',
         content: '您输入的所在地区为空,请重新输入',
         showCancel: false,
-        success(res) { }
+        success(res) {}
       })
       return
     }
@@ -417,9 +447,21 @@ Page({
         title: '温馨提示',
         content: '您输入的自我介绍为空,请重新输入',
         showCancel: false,
-        success(res) { }
+        success(res) {}
       })
       return
+    }
+    // tele != telephone
+    if (this.data.telephone != this.data.tele) {
+      if (vertifyNum.isNull(this.data.verify)) {
+        wx.showModal({
+          title: '温馨提示',
+          content: '您输入的验证码为空,请重新输入',
+          showCancel: false,
+          success(res) {}
+        })
+        return
+      }
     }
     Object.assign(information, {
       userId: userInfo.userId,
@@ -445,7 +487,7 @@ Page({
       url: "resumes/add-resume/",
       way: "POST",
       params: information,
-      success: function (res) {
+      success: function(res) {
 
         wx.showModal({
           title: '温馨提示',
@@ -459,7 +501,7 @@ Page({
         })
 
       },
-      fail: function (err) {
+      fail: function(err) {
         console.log(err)
       }
     })
@@ -470,14 +512,14 @@ Page({
     let introinfo = wx.getStorageSync("introinfo");
     console.log(introinfo)
     this.setData({
-      name: introinfo.hasOwnProperty("username") ? introinfo.username :""
+      name: introinfo.hasOwnProperty("username") ? introinfo.username : ""
     })
 
     this.setData({
       indexsex: introinfo.hasOwnProperty("gender") ? introinfo.gender - 1 : ""
-      })
+    })
     this.setData({
-      sex: introinfo.hasOwnProperty("gender") ?introinfo.gender:""
+      sex: introinfo.hasOwnProperty("gender") ? introinfo.gender : ""
     })
 
     this.setData({
@@ -490,9 +532,9 @@ Page({
       this.setData({
         nation: introinfo.hasOwnProperty("nation_id") ? introinfo.nation_id : ""
       })
-    } 
+    }
     this.setData({
-      complexwork: introinfo.hasOwnProperty("occupations") ? introinfo.occupations :[]
+      complexwork: introinfo.hasOwnProperty("occupations") ? introinfo.occupations : []
     })
     this.setData({
       complexworkid: introinfo.hasOwnProperty("occupations_id") ? introinfo.occupations_id.split(",") : []
@@ -517,8 +559,8 @@ Page({
       this.setData({
         longitude: introinfo.hasOwnProperty("location") ? introinfo.location.split(",")[1] : ""
       })
-    } 
-    
+    }
+
     this.setData({
       telephone: introinfo.hasOwnProperty("tel") ? introinfo.tel : ""
     })
@@ -529,15 +571,15 @@ Page({
       otextareavalue: introinfo.hasOwnProperty("introduce") ? introinfo.introduce : ""
     })
     if (introinfo.hasOwnProperty("occupations")) {
-    for (let i = 0; i < this.data.typeworkarray.length; i++) {
-      for (let j = 0; j < this.data.typeworkarray[i].children.length; j++) {
-        for (let k = 0; k < introinfo.occupations.length; k++){
-          if (this.data.typeworkarray[i].children[j].name ===introinfo.occupations[k] ) {
-            this.data.typeworkarray[i].children[j].is_check = true
+      for (let i = 0; i < this.data.typeworkarray.length; i++) {
+        for (let j = 0; j < this.data.typeworkarray[i].children.length; j++) {
+          for (let k = 0; k < introinfo.occupations.length; k++) {
+            if (this.data.typeworkarray[i].children[j].name === introinfo.occupations[k]) {
+              this.data.typeworkarray[i].children[j].is_check = true
+            }
           }
         }
       }
-    }
     }
     this.setData({
       typeworkarray: this.data.typeworkarray
@@ -547,21 +589,21 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
+  onLoad: function(options) {
     this.accessprovince()
   },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function () {
+  onReady: function() {
 
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function () {
+  onShow: function() {
     this.getlocationdetails()
     this.getadcode()
 
@@ -570,35 +612,32 @@ Page({
   /**
    * 生命周期函数--监听页面隐藏
    */
-  onHide: function () {
+  onHide: function() {
 
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
-  onUnload: function () {
+  onUnload: function() {
 
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
-  onPullDownRefresh: function () {
+  onPullDownRefresh: function() {
 
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
-  onReachBottom: function () {
+  onReachBottom: function() {
 
   },
 
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function () {
-
-  }
 })

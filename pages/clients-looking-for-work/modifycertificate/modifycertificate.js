@@ -1,4 +1,5 @@
 const app = getApp();
+let v = require("../../../utils/v.js");
 Page({
 
   /**
@@ -129,36 +130,44 @@ Page({
     console.log(this.data.skill)
 
     this.setData({
-      name: this.data.skill.name
-    })
-    this.setData({
-      imgArrs: this.data.skill.image
-    })
-    this.setData({
-      idArrs: this.data.skill.images.split(",")
-    })
-    this.setData({
-      resume_uuid: this.data.skill.resume_uuid
-    })
-    this.setData({
-      uuid: this.data.skill.uuid
-    })
-    this.setData({
+      name: this.data.skill.name,
+      imgArrs: this.data.skill.image,
+      idArrs: this.data.skill.images,
+      resume_uuid: this.data.skill.resume_uuid,
+      uuid: this.data.skill.uuid,
       time: this.data.skill.certificate_time
     })
   },
   preserve() {
     let userInfo = wx.getStorageSync("userInfo");
     let project = {}
-
-    let oimg = ""
-    for (let i = 0; i < this.data.idArrs.length; i++) {
-      if (i == this.data.idArrs.length - 1) {
-        oimg += this.data.idArrs[i]
-      } else {
-        oimg += this.data.idArrs[i] + ","
-      }
-
+    let vertifyNum = v.v.new()
+    if (vertifyNum.isNull(this.data.name)) {
+      wx.showModal({
+        title: '温馨提示',
+        content: '您输入的职业技能为空请重新输入',
+        showCancel: false,
+        success(res) { }
+      })
+      return
+    }
+    if (vertifyNum.isNull(this.data.idArrs)) {
+      wx.showModal({
+        title: '温馨提示',
+        content: '您添加的图片为空请重新输入',
+        showCancel: false,
+        success(res) { }
+      })
+      return
+    }
+    if (vertifyNum.isNull(this.data.time)) {
+      wx.showModal({
+        title: '温馨提示',
+        content: '您输入的领取证书时间为空请重新输入',
+        showCancel: false,
+        success(res) { }
+      })
+      return
     }
     Object.assign(project, {
       userId: userInfo.userId,
@@ -166,7 +175,7 @@ Page({
       tokenTime: userInfo.tokenTime,
       resume_uuid: this.data.resume_uuid,
       name: this.data.name,
-      image: oimg,
+      image: this.data.idArrs,
       certificate_uuid: this.data.uuid,
       certificate_time: this.data.time
     })
@@ -242,7 +251,4 @@ Page({
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function () {
-
-  }
 })

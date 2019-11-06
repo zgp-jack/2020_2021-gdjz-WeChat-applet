@@ -1,4 +1,4 @@
-// pages/clients-looking-for-work/work-description/workdescription.js
+// .labelnum
 let areas = require("../../../utils/area.js");
 const app = getApp();
 let v = require("../../../utils/v.js");
@@ -20,34 +20,34 @@ Page({
     compositionarray: [],
     compositionarrayone: [],
     constituttion: "",
-    judge: false,
+    judge: false, 
     detailevaluation: [],
     evaluation: [],
-    labelnum: "",
+    labelnum: [],
     teamsnumber: "",
     multiIndexvalue: ""
   },
   peopleage(e) { //工龄的选择
     this.setData({
-      workage: ~~e.detail.value
+      workage: e.detail.value
     })
   },
   teamsnum(e) { //队伍人数的额选择
     this.setData({
-      teamsnumber: ~~e.detail.value
+      teamsnumber: e.detail.value
     })
   },
   proficiency(e) { //熟练度的选择
     console.log(this.data.proficiencyarrayone[e.detail.value].id)
     this.setData({
       indexproficiency: e.detail.value,
-      degreeone: ~~this.data.proficiencyarrayone[e.detail.value].id
+      degreeone: this.data.proficiencyarrayone[e.detail.value].id
     })
   },
   constitute(e) { //人员构成的选择
     this.setData({
       indexperson: e.detail.value,
-      constituttion: ~~this.data.compositionarrayone[e.detail.value].id
+      constituttion: this.data.compositionarrayone[e.detail.value].id
     })
     if (this.data.compositionarrayone[e.detail.value].id > 1) {
       this.setData({
@@ -286,6 +286,7 @@ Page({
       })
       return
     }
+    console.log(this.data.labelnum)
     if (this.data.labelnum.length == 0) {
       wx.showModal({
         title: '温馨提示',
@@ -332,7 +333,7 @@ Page({
   getintrodetail() {
 
     let introdetail = wx.getStorageSync("introdetail");
-    console.log(introdetail)
+
 
     this.setData({
       workage: introdetail.hasOwnProperty("experience") ? introdetail.experience : "",
@@ -344,7 +345,7 @@ Page({
       teamsnumber: introdetail.hasOwnProperty("number_people") ? introdetail.number_people : ""
     })
 
-    console.log(this.data.detailevaluation)
+
     if (introdetail.hasOwnProperty("tag_id") && introdetail.tag_id != null) {
       let tagid = introdetail.tag_id.split(",")
       for (let i = 0; i < this.data.detailevaluation.length; i++) {
@@ -439,7 +440,4 @@ Page({
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function () {
-
-  }
 })

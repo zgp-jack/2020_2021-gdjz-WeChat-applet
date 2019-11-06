@@ -1,4 +1,4 @@
-// pages/publish/card/card.js
+// pages/publish/card/card.js codeTips status
 const app = getApp();
 let vali = require("../../../utils/v.js");
 let areas = require("../../../utils/area.js");
@@ -77,7 +77,7 @@ Page({
     showInputList: false,
     searchInputVal: ""
   },
- 
+
   userRegMap: function (e) {
     if (e.type == 'end' && (e.causedBy == 'scale' || e.causedBy == 'drag')) {
       var that = this;

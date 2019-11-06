@@ -64,14 +64,32 @@ Page({
     })
     console.log(project)
     let that = this;
-    app.doRequestAction({
+    app.appRequestAction({
       url: 'resumes/del-project/',
       way: 'POST',
       params: project,
       success(res) {
-        wx.navigateBack({
-          delta: 1
-        })
+        if (res.data.errcode == "fail") {
+          wx.showModal({
+            title: '温馨提示',
+            content: '操作错误请重新操作',
+            showCancel: false,
+            success(res) {
+            }
+          })
+        }
+        if (res.data.errcode == "ok") {
+          wx.showModal({
+            title: '温馨提示',
+            content: '删除成功',
+            showCancel: false,
+            success(res) {
+              wx.navigateBack({
+                delta: 1
+              })
+            }
+          })
+        }
       }
     })
     this.setData({
@@ -119,6 +137,7 @@ Page({
       })
     })
     console.log(that.data.imgArrs)
+    console.log(that.data.idArrs)
   },
   initAllProvice: function () { //获取所有省份
     let that = this;
@@ -223,16 +242,64 @@ Page({
   preserve() {
     let userInfo = wx.getStorageSync("userInfo");
     let project = {}
+    let vertifyNum = v.v.new()
 
-    let oimg = ""
-    for (let i = 0; i < this.data.idArrs.length; i++) {
-      if (i == this.data.idArrs.length - 1) {
-        oimg += this.data.idArrs[i]
-      } else {
-        oimg += this.data.idArrs[i] + ","
-      }
-
+    if (vertifyNum.isNull(this.data.startdate)) {
+      wx.showModal({
+        title: '温馨提示',
+        content: '您输入的开始时间为空请重新输入',
+        showCancel: false,
+        success(res) { }
+      })
+      return
     }
+
+    if (vertifyNum.isNull(this.data.date)) {
+      wx.showModal({
+        title: '温馨提示',
+        content: '您输入的完工时间为空请重新输入',
+        showCancel: false,
+        success(res) { }
+      })
+      return
+    }
+    if (vertifyNum.isNull(this.data.name)) {
+      wx.showModal({
+        title: '温馨提示',
+        content: '您输入的项目名称为空请重新输入',
+        showCancel: false,
+        success(res) { }
+      })
+      return
+    }
+    if (vertifyNum.isNull(this.data.content)) {
+      wx.showModal({
+        title: '温馨提示',
+        content: '您输入的项目描述为空请重新输入',
+        showCancel: false,
+        success(res) { }
+      })
+      return
+    }
+    if (vertifyNum.isNull(this.data.provincecity)) {
+      wx.showModal({
+        title: '温馨提示',
+        content: '您输入的所在地区为空请重新输入',
+        showCancel: false,
+        success(res) { }
+      })
+      return
+    }
+    if (vertifyNum.isNull(this.data.idArrs)) {
+      wx.showModal({
+        title: '温馨提示',
+        content: '您添加的图片为空请重新输入',
+        showCancel: false,
+        success(res) { }
+      })
+      return
+    }
+    
     Object.assign(project, {
       userId: userInfo.userId,
       token: userInfo.token,
@@ -244,26 +311,38 @@ Page({
       detail: this.data.content,
       province: this.data.provincecity.split(",")[0],
       city: this.data.provincecity.split(",")[1],
-      image: oimg,
+      image: this.data.idArrs,
       project_uuid: this.data.uuid
     })
     console.log(project)
     let that = this;
-    app.doRequestAction({
+    app.appRequestAction({
       url: 'resumes/project/',
       way: 'POST',
       params: project,
       success(res) {
-        wx.showModal({
-          title: '温馨提示',
-          content: '保存成功',
-          showCancel: false,
-          success(res) {
-            wx.navigateBack({
-              delta: 1
-            })
-          }
-        })
+        console.log(res)
+        if (res.data.errcode == "fail") {
+          wx.showModal({
+            title: '温馨提示',
+            content: '输入错误请重新输入',
+            showCancel: false,
+            success(res) {
+            }
+          })
+        }
+        if (res.data.errcode == "ok") {
+          wx.showModal({
+            title: '温馨提示',
+            content: res.data.errmsg,
+            showCancel: false,
+            success(res) {
+              wx.navigateBack({
+                delta: 1
+              })
+            }
+          })
+        }
       }
     })
   },
@@ -301,42 +380,27 @@ Page({
   getproject(){
     let project = wx.getStorageSync("projectdetail");
     this.setData({
-      project: project.uid
+      project: project.uid,
     })
     console.log(this.data.project)
 
     this.setData({
-      name: this.data.project.project_name
-    })
-
-    this.setData({
-      date: this.data.project.completion_time
-    })
-
-    this.setData({
-      multiIndexvalue: this.data.project.province_name + this.data.project.city_name
-    })
-    this.setData({
-      startdate: this.data.project.start_time
-    })
-    this.setData({
-      content: this.data.project.detail
-    })
-    this.setData({
-      imgArrs: this.data.project.image
-    })
-    this.setData({
-      idArrs: this.data.project.images.split(",")
-    })
-    this.setData({
-      resume_uuid: this.data.project.resume_uuid
-    })
-    this.setData({
-      uuid: this.data.project.uuid
-    })
-    this.setData({
+      name: this.data.project.project_name,
+      date: this.data.project.completion_time,
+      multiIndexvalue: this.data.project.province_name + this.data.project.city_name,
+      startdate: this.data.project.start_time,
+      content: this.data.project.detail,
+      imgArrs: this.data.project.image,
+      resume_uuid: this.data.project.resume_uuid,
+      uuid: this.data.project.uuid,
       provincecity: this.data.project.province + "," + this.data.project.city
     })
+
+
+    this.setData({
+      idArrs: this.data.project.images
+    })
+    console.log(this.data.idArrs)
   },
   /**
    * 生命周期函数--监听页面隐藏
@@ -369,7 +433,4 @@ Page({
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function () {
-
-  }
 })

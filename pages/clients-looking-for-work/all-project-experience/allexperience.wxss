@@ -16,6 +16,8 @@
 }
 
 .skilleight .skilleightone {
+  margin: 0;
+  padding: 0;
   width: 20rpx;
   height: 20rpx;
   margin-left: 20rpx;
@@ -26,12 +28,14 @@
   color: #8b8b8a;
   font-size: 22rpx;
   margin-left: 14rpx;
-  margin-top: 10rpx;
+
 }
 
 .project{
  font-size: 26rpx;
  color: #343434;
+ margin-left: 14rpx;
+ margin-top: 10rpx;
 }
 
 .description{
@@ -144,4 +148,4 @@
   right: 29rpx;
 }
 
-/* obtn */
+/* obtn  skilleightzong skilleightone*/

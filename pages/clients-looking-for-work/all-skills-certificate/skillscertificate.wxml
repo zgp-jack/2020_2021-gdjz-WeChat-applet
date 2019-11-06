@@ -2,7 +2,7 @@
  <view class="skilleight" wx:for="{{allskill}}" wx:key="{{index}}">
    <image class="audit" wx:if="{{item.check == 1}}"  src="../../../images/review.png"></image>
    <image class="audit" wx:if="{{item.check == 0}}" src="../../../images/notthrough.png"></image>
-   <view class="editor" bindtap="editor" data-uid="{{item}}" wx:if="{{item.check == 0}}">编辑</view>
+   <view class="editor" bindtap="editor" data-uid="{{item}}" wx:if="{{item.check == 0||item.check == 2}}">编辑</view>
     <view class="skilleightzong">
       <image src="../../../images/newresume-experience-item.png" class="skilleightone"></image>
       <view></view>

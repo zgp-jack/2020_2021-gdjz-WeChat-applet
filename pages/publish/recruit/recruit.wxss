@@ -1,6 +1,6 @@
 @import "../../userauth/userauth.wxss";
 @import "../../home/home.wxss";
-/* publish-choose-wordtype */
+/* publish-choose-wordtype common-publish-words*/
 .common-publish-header{
     position: relative;
     width: 100%;

@@ -2,7 +2,7 @@
   <view class="experienceheader">
     <text class="experienceheaderone">项目名称：</text>
     <view class="experienceheadertwo">
-      <input type="text" placeholder="请输入项目名称" bindinput="projectname"></input>
+      <input type="text" placeholder="请输入项目名称" bindinput="projectname" value="{{projectname}}"></input>
     </view>
   </view>
   <view class="experienceheader">
@@ -42,7 +42,7 @@
   <view class="experiencethree">
     <view class="experiencethreeone">项目详情：</view>
     <view class="experiencethreetwo">
-      <textarea bindinput="bindTextAreaBlur" maxlength="500" placeholder="主要描述工作中的项目情况..." />
+      <textarea bindinput="bindTextAreaBlur" value="{{detail}}" maxlength="500" placeholder="主要描述工作中的项目情况..." />
     </view>
   </view>
   <view class="experiencefour">

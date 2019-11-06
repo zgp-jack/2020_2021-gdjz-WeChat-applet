@@ -1,4 +1,4 @@
-// completeall selectData selectTap
+// completeall selectData selectTap optionTap selectData index
 const app = getApp();
 
 Page({
@@ -48,11 +48,11 @@ Page({
     skilllength: 0,
     skillbooks: [],
     skillbooksone: [],
-    checkone:false,
+    checkone: false,
     checkonef: 4568,
-    checktwo:false,
+    checktwo: false,
     checktwof: 4568,
-    checkthree:false,
+    checkthree: false,
     checkthreef: 4568,
     checkfour: false,
     checkfourf: 4568,
@@ -60,12 +60,12 @@ Page({
     resume_uuid: "",
 
   },
-  completeall(){
-    if (!this.data.resume_uuid){
+  completeall() {
+    if (!this.data.resume_uuid) {
       wx.navigateTo({
         url: '/pages/clients-looking-for-work/essential-information/esinformation',
       })
-    } else if (this.data.is_introduces == 0){
+    } else if (this.data.is_introduces == 0) {
       wx.navigateTo({
         url: '/pages/clients-looking-for-work/work-description/workdescription',
       })
@@ -73,7 +73,7 @@ Page({
       wx.navigateTo({
         url: "/pages/clients-looking-for-work/new-project-experience/projectexperience",
       })
-    }else{
+    } else {
       wx.navigateTo({
         url: "/pages/clients-looking-for-work/addcertificate/addcertificate",
       })
@@ -88,6 +88,58 @@ Page({
     }
   },
   selectTap() {
+    let that = this;
+    if (this.data.check == "2") {
+      let selectdata = [];
+      let selectdataId = [];
+      for (let i = 0; i < this.data.selectData.length; i++) {
+        selectdata.push(this.data.selectData[i].name)
+      }
+      for (let i = 0; i < this.data.selectData.length; i++) {
+        selectdataId.push(this.data.selectData[i].id)
+      }
+      wx.showActionSheet({
+
+        itemList: selectdata,
+        success(res) {
+          if (that.data.index == res.tapIndex){
+            return
+          }
+          that.setData({
+            index: res.tapIndex
+          })
+          that.setData({
+            selectData: that.data.selectData,
+            selectk: that.data.selectk,
+          })
+          let userInfo = wx.getStorageSync("userInfo");
+          let detail = {}
+          let dataId = selectdataId[res.tapIndex] + ""
+          Object.assign(detail, {
+            userId: userInfo.userId,
+            token: userInfo.token,
+            tokenTime: userInfo.tokenTime,
+            resume_uuid: that.data.resume_uuid,
+            type: dataId
+          })
+          console.log(detail)
+          app.appRequestAction({
+            url: 'resumes/edit-end/',
+            way: 'POST',
+            params: detail,
+            success(res) {
+              console.log(res)
+              if (res.data.errcode == "ok"){
+                 that.getdetail()
+              }
+            }
+          })
+        },
+        fail(res) {
+          console.log(res.errMsg)
+        }
+      })
+    }
     if (this.data.check == "1") {
       wx.showModal({
         title: '温馨提示',
@@ -110,34 +162,7 @@ Page({
       selectShow: !this.data.selectShow
     });
   },
-  // 点击下拉列表
-  optionTap(e) {
-    console.log(22)
-    let Index = e.currentTarget.dataset.index;//获取点击的下拉列表的下标
-    this.setData({
-      index: Index,
-      selectkone: this.data.selectk[Index],
-      selectShow: !this.data.selectShow
-    });
-    let userInfo = wx.getStorageSync("userInfo");
-    let detail = {}
-    Object.assign(detail, {
-      userId: userInfo.userId,
-      token: userInfo.token,
-      tokenTime: userInfo.tokenTime,
-      resume_uuid: this.data.resume_uuid,
-      type: this.data.selectkone
-    })
-    let that = this;
-    app.doRequestAction({
-      url: 'resumes/edit-end/',
-      way: 'POST',
-      params: detail,
-      success(res) {
-        console.log(res)
-      }
-    })
-  },
+
   toperfect() {
 
     wx.navigateTo({
@@ -237,7 +262,7 @@ Page({
         tokenTime: userInfo.tokenTime,
         image: that.data.importimg
       })
-      app.doRequestAction({
+      app.appRequestAction({
         url: 'resumes/edit-img/',
         way: 'POST',
         params: imgdetail,
@@ -264,8 +289,8 @@ Page({
         let mydata = res.data.data;
         console.log(mydata)
 
- 
-        for (let i = 0; i < mydata.project.length;i++){
+
+        for (let i = 0; i < mydata.project.length; i++) {
           if (mydata.project[i].check != 1) {
             that.setData({
               checkthree: false,
@@ -285,14 +310,14 @@ Page({
           if (mydata.certificates[i].check != 1) {
             that.setData({
               checkfour: false,
-              checkfourf: mydata.project[i].check
+              checkfourf: mydata.certificates[i].check
             })
             break
           }
           if (mydata.certificates[i].check == 1) {
             that.setData({
               checkfour: true,
-              checkfourf: mydata.project[i].check
+              checkfourf: mydata.certificates[i].check
             })
           }
         }
@@ -317,43 +342,37 @@ Page({
           })
         }
         that.setData({
-          name: mydata.info.hasOwnProperty("username") ? mydata.info.username:"",
+          name: mydata.info.hasOwnProperty("username") ? mydata.info.username : "",
           nation: mydata.info.hasOwnProperty("nation") ? mydata.info.nation : "",
           occupations: mydata.info.hasOwnProperty("occupations") ? mydata.info.occupations : "",
           telephone: mydata.info.hasOwnProperty("tel") ? mydata.info.tel : "",
           city: mydata.info.hasOwnProperty("address") ? mydata.info.address : "",
           intro: false,
-          introne: true, 
-          introduce: mydata.info.hasOwnProperty("introduce") ? mydata.info.introduce:"",
-          workingyears: mydata.introduces.hasOwnProperty("experience")?mydata.introduces.experience : "",
-          staffcomposition: mydata.introduces.hasOwnProperty("type_str")?mydata.introduces.type_str : "",
-          cityself: mydata.introduces.hasOwnProperty("hometown")? mydata.introduces.hometown : "",
+          introne: true,
+          introduce: mydata.info.hasOwnProperty("introduce") ? mydata.info.introduce : "",
+          workingyears: mydata.introduces.hasOwnProperty("experience") ? mydata.introduces.experience : "",
+          staffcomposition: mydata.introduces.hasOwnProperty("type_str") ? mydata.introduces.type_str : "",
+          cityself: mydata.introduces.hasOwnProperty("hometown") ? mydata.introduces.hometown : "",
           procity: mydata.introduces.hasOwnProperty("prof_degree_str") ? mydata.introduces.prof_degree_str : "",
           personnum: mydata.introduces.hasOwnProperty("number_people") ? mydata.introduces.number_people : "",
-          tags: mydata.introduces.hasOwnProperty("tags")  ? mydata.introduces.tags : "",
+          tags: mydata.introduces.hasOwnProperty("tags") ? mydata.introduces.tags : "",
           checkone: mydata.info.check && mydata.info.check == 1 ? true : false,
-          checkonef: mydata.info.hasOwnProperty("check") ? mydata.info.check:"",
+          checkonef: mydata.info.hasOwnProperty("check") ? mydata.info.check : "",
           checktwo: mydata.introduces.check && mydata.introduces.check == 1 ? true : false,
           checktwof: mydata.introduces.hasOwnProperty("check") ? mydata.introduces.check : "",
         })
-
+        that.showbottom()
         let selectD = Object.values(mydata.status)
         let selectk = Object.keys(mydata.status)
-        console.log(selectD)
-        console.log(selectk)
         if (mydata.info.is_end == "2") {
-          selectD.reverse();
-          selectk.reverse()
+          that.setData({
+            index: 1,
+          })
         }
         that.setData({
           selectData: selectD,
           selectk: selectk
         })
-        if (mydata.info.check == "1" || mydata.info.check == "0") {
-          that.setData({
-            checkstatus: false
-          });
-        }
         that.setData({
           check: mydata.info.hasOwnProperty("check") ? mydata.info.check : ""
         })
@@ -367,7 +386,7 @@ Page({
             selfintro: false,
             selfintrone: true,
           })
-        } else if (mydata.is_introduces == 0){
+        } else if (mydata.is_introduces == 0) {
           that.setData({
             is_introduces: mydata.is_introduces
           })
@@ -384,7 +403,7 @@ Page({
             projectone: [mydata.project[0]]
           });
           that.setData({
-            projectlength: mydata.project.length >=1 ? mydata.project.length : 0
+            projectlength: mydata.project.length >= 1 ? mydata.project.length : 0
           })
         }
         that.setData({
@@ -403,7 +422,7 @@ Page({
             skillbooksone: [that.data.skillbooks[0]]
           })
         }
-        if (that.data.checkonef == "0"){
+        if (that.data.checkonef == "0") {
           wx.showModal({
             title: '温馨提示',
             content: '您的基本信息审核未通过请重新填写',
@@ -414,7 +433,7 @@ Page({
               })
             }
           })
-        } else if (that.data.checktwof == "0"){
+        } else if (that.data.checktwof == "0") {
           wx.showModal({
             title: '温馨提示',
             content: '您的工作介绍审核未通过请重新填写',
@@ -457,10 +476,10 @@ Page({
       showtopone: true
     })
   },
-  showbottom(){
-    if (!this.data.checkone && !this.data.checktwo && !this.data.checkthree && !this.data.checkfour){
-        this.setData({
-          showbottom:true
+  showbottom() {
+    if (this.data.checkonef == "2") {
+      this.setData({
+        showbottom: true
       })
     }
   },
@@ -545,7 +564,4 @@ Page({
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function () {
-
-  }
 })

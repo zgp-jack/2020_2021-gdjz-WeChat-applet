@@ -2,7 +2,7 @@
   <view class="findingnamecard" wx:if="{{showtop}}">
     请完善一下信息
   </view>
-
+<!-- {{selectShow&&"select_img_rotate"}} -->
   <view class="findingnamecardone">
     <view class="findingnamecardoneson">
       <view class="findingnamecardonesonone">
@@ -24,17 +24,10 @@
         </view>
         <text>我的工作状态：</text>
       </view>
-      <!-- <view class="cardonesontwo">
-        <text>未开始找工作</text> skillbooksone
-        <image src="../../../images/bottomimg.png"></image>
-      </view> -->
           <view class='select_box'>
       <view class='select' catchtap='selectTap'>
         <text class='select_text'>{{selectData[index].name}}</text>
-        <image class='select_img {{selectShow&&"select_img_rotate"}}' src='../../../images/bottomimg.png' background-size="contain" wx:if="{{checkstatus}}"></image>
-      </view>
-      <view class='option_box' style='height:{{selectShow?(selectData.length>5?325:selectData.length*36):0}}rpx;'>
-        <text class='option' wx:for='{{selectData}}' wx:key='this' data-index='{{index}}' catchtap='optionTap'>{{item.name}}</text>
+        <image class='select_img' src='../../../images/bottomimg.png' background-size="contain" wx:if="{{checkstatus}}"></image>
       </view>
     </view>
     </view>

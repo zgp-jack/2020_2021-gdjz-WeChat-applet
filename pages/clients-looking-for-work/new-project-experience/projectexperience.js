@@ -5,34 +5,34 @@ let areas = require("../../../utils/area.js");
 Page({
   data: {
     date: "",
-    startdate:"",
-    allprovinces:"",
-    region:"",
-    imgArrs:[],
-    importimg:[],
+    startdate: "",
+    allprovinces: "",
+    region: "",
+    imgArrs: [],
+    importimg: [],
     idArrs: [],
     multiArray: [],
     multiArrayone: [],
     objectMultiArray: [],
     multiIndex: [0, 0],
-    multiIndexvalue:"",
-    provincecity:"",
-    context:"",
-    resume_uuid:"",
-    projectname:"",
-    detail:""
+    multiIndexvalue: "",
+    provincecity: "",
+    context: "",
+    resume_uuid: "",
+    projectname: "",
+    detail: ""
   },
-  projectname(e){
+  projectname(e) {
     this.setData({
       projectname: e.detail.value
     })
   },
-  bindDateChange(e){
+  bindDateChange(e) {
     this.setData({
       date: e.detail.value
     })
   },
-  previewImage(e){
+  previewImage(e) {
     console.log(e)
     let that = this
     wx.previewImage({
@@ -40,19 +40,19 @@ Page({
       current: e.target.dataset.item,
     })
   },
-  bindTextAreaBlur(e){
+  bindTextAreaBlur(e) {
     this.setData({
       detail: e.detail.value
     })
   },
-  bindstartDate(e){
+  bindstartDate(e) {
     this.setData({
       startdate: e.detail.value
     })
   },
   chooseImage() {
     let that = this;
-    if (that.data.imgArrs.length>=6){
+    if (that.data.imgArrs.length >= 6) {
       wx.showModal({
         title: '温馨提示',
         content: '您最多只能选择六张图片',
@@ -61,7 +61,7 @@ Page({
       })
       return
     }
-    app.userUploadImg(function(img,url){
+    app.userUploadImg(function (img, url) {
       wx.hideLoading()
       that.data.imgArrs.push(url.httpurl)
       that.data.importimg.push(url.url)
@@ -115,7 +115,7 @@ Page({
       multiArrayone: [provicemore, provicechildmore],
       objectMultiArray: [provice, provicechild]
     })
-    
+
     this.setData({
       multiArray: [provicemore, that.data.multiArrayone[1][0]],
       objectMultiArray: [provice, provicechild]
@@ -166,18 +166,65 @@ Page({
     this.setData(data);
     console.log(data)
   },
-  preserve(){
+  preserve() {
     let userInfo = wx.getStorageSync("userInfo");
     let project = {}
+    let vertifyNum = v.v.new()
 
-    let oimg = ""
-    for (let i = 0; i<this.data.importimg.length;i++){
-      if (i == this.data.importimg.length-1){
-        oimg += this.data.importimg[i]
-      }else{
-        oimg += this.data.importimg[i] + ","
-      }
+    if (vertifyNum.isNull(this.data.startdate)) {
+      wx.showModal({
+        title: '温馨提示',
+        content: '您输入的开始时间为空请重新输入',
+        showCancel: false,
+        success(res) { }
+      })
+      return
+    }
 
+    if (vertifyNum.isNull(this.data.date)) {
+      wx.showModal({
+        title: '温馨提示',
+        content: '您输入的完工时间为空请重新输入',
+        showCancel: false,
+        success(res) { }
+      })
+      return
+    }
+    if (vertifyNum.isNull(this.data.projectname)) {
+      wx.showModal({
+        title: '温馨提示',
+        content: '您输入的项目名称为空请重新输入',
+        showCancel: false,
+        success(res) { }
+      })
+      return
+    }
+    if (vertifyNum.isNull(this.data.detail)) {
+      wx.showModal({
+        title: '温馨提示',
+        content: '您输入的项目描述为空请重新输入',
+        showCancel: false,
+        success(res) { }
+      })
+      return
+    }
+    if (vertifyNum.isNull(this.data.provincecity)) {
+      wx.showModal({
+        title: '温馨提示',
+        content: '您输入的所在地区为空请重新输入',
+        showCancel: false,
+        success(res) { }
+      })
+      return
+    }
+    if (vertifyNum.isNull(this.data.importimg)) {
+      wx.showModal({
+        title: '温馨提示',
+        content: '您添加的图片为空请重新输入',
+        showCancel: false,
+        success(res) { }
+      })
+      return
     }
     Object.assign(project, {
       userId: userInfo.userId,
@@ -190,41 +237,101 @@ Page({
       detail: this.data.detail,
       province: this.data.provincecity.split(",")[0],
       city: this.data.provincecity.split(",")[1],
-      image: oimg
+      image: this.data.importimg
     })
     console.log(project)
     let that = this;
-    app.doRequestAction({
+    app.appRequestAction({
       url: 'resumes/project/',
       way: 'POST',
       params: project,
       success(res) {
-        wx.showModal({
-          title: '温馨提示',
-          content: '保存成功',
-          showCancel: false,
-          success(res) { 
-            wx.navigateBack({
-              delta: 1
-            })
-          }
-        })
+        console.log(res)
+        if (res.data.errcode == "fail") {
+          wx.showModal({
+            title: '温馨提示',
+            content: '输入错误请重新输入',
+            showCancel: false,
+            success(res) {
+            }
+          })
+        }
+        if (res.data.errcode == "ok") {
+          wx.showModal({
+            title: '温馨提示',
+            content: '保存成功',
+            showCancel: false,
+            success(res) {
+              wx.navigateBack({
+                delta: 1
+              })
+            }
+          })
+        }
       }
     })
   },
-  preservechixu(){
+  preservechixu() {
     let userInfo = wx.getStorageSync("userInfo");
     let project = {}
+    let vertifyNum = v.v.new()
 
-    let oimg = ""
-    for (let i = 0; i < this.data.importimg.length; i++) {
-      if (i == this.data.importimg.length - 1) {
-        oimg += this.data.importimg[i]
-      } else {
-        oimg += this.data.importimg[i] + ","
-      }
-
+    if (vertifyNum.isNull(this.data.startdate)) {
+      wx.showModal({
+        title: '温馨提示',
+        content: '您输入的开始时间为空请重新输入',
+        showCancel: false,
+        success(res) { }
+      })
+      return
     }
+
+    if (vertifyNum.isNull(this.data.date)) {
+      wx.showModal({
+        title: '温馨提示',
+        content: '您输入的完工时间为空请重新输入',
+        showCancel: false,
+        success(res) { }
+      })
+      return
+    }
+    if (vertifyNum.isNull(this.data.projectname)) {
+      wx.showModal({
+        title: '温馨提示',
+        content: '您输入的项目时间为空请重新输入',
+        showCancel: false,
+        success(res) { }
+      })
+      return
+    }
+    if (vertifyNum.isNull(this.data.detail)) {
+      wx.showModal({
+        title: '温馨提示',
+        content: '您输入的项目描述为空请重新输入',
+        showCancel: false,
+        success(res) { }
+      })
+      return
+    }
+    if (vertifyNum.isNull(this.data.provincecity)) {
+      wx.showModal({
+        title: '温馨提示',
+        content: '您输入的所在地区为空请重新输入',
+        showCancel: false,
+        success(res) { }
+      })
+      return
+    }
+    if (vertifyNum.isNull(this.data.importimg)) {
+      wx.showModal({
+        title: '温馨提示',
+        content: '您添加的图片为空请重新输入',
+        showCancel: false,
+        success(res) { }
+      })
+      return
+    }
+
     Object.assign(project, {
       userId: userInfo.userId,
       token: userInfo.token,
@@ -236,27 +343,48 @@ Page({
       detail: this.data.detail,
       province: this.data.provincecity.split(",")[0],
       city: this.data.provincecity.split(",")[1],
-      image: oimg
+      image: this.data.importimg
     })
     console.log(project)
     let that = this;
-    app.doRequestAction({
+    app.appRequestAction({
       url: 'resumes/project/',
       way: 'POST',
       params: project,
       success(res) {
-        wx.showModal({
-          title: '温馨提示',
-          content: '保存成功,继续添加',
-          showCancel: false,
-          success(res) {
-          }
-        })
+        if (res.data.errcode == "fail") {
+          wx.showModal({
+            title: '温馨提示',
+            content: '输入错误请重新输入',
+            showCancel: false,
+            success(res) {
+            }
+          })
+        }
+        if (res.data.errcode == "ok") {
+          wx.showModal({
+            title: '温馨提示',
+            content: '保存成功',
+            showCancel: false,
+            success(res) {
+              that.setData({
+                projectname:"",
+                startdate: "",
+                date:"",
+                detail:"",
+                provincecity:"",
+                multiIndexvalue:"",
+                importimg:[],
+                imgArrs:[]
+              })
+            }
+          })
+        }
 
       }
     })
   },
-  getuuid(){
+  getuuid() {
     let userInfo = wx.getStorageSync("uuid");
     this.setData({
       resume_uuid: userInfo

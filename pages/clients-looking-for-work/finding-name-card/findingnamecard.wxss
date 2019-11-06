@@ -259,7 +259,7 @@
   margin: 0 auto;
   background: white;
   overflow: hidden;
-  margin-bottom: 120rpx;
+  margin-bottom: 60rpx;
   padding-bottom: 40rpx;
 }
 .findingnamecardeightone{
@@ -473,12 +473,13 @@
 .cardotext::before {
   position: absolute;
   content: '';
-  width: 9px;
-  height: 9px;
+  width: 11px;
+  height: 11px;
   background: url(http://cdn.yupao.com/miniprogram/images/newjobinfo-steps.png?t=11) no-repeat;
   background-size: 100% 100%;
-    left: 10.5px;
-  top: 10px;
+    left: 14px;
+    margin-left:  -5px;
+  top:18rpx;
 }
 .cardotext .owork {
   margin: 0;
@@ -865,7 +866,7 @@
 .linezo::before {
   position: absolute;
   content: '';
-  left: 15px;
+  left: 14px;
   top: 0;
   width: 1px;
   height: 100%;
@@ -1074,5 +1075,4 @@
   right: 21rpx;
   z-index: 99
 }
-/*cardsevenmobile cardthreeone cardthreeone cardsevenmobile  cardfivemobile cardthreemobile*/
-  /* cardtwo cardsix cardeight option_box cardeight*/
+/*linezo cardtwo cardotext cardotext findingnamecardeight*/
