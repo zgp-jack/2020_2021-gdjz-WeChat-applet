@@ -119,13 +119,6 @@ Page({
         }
       },
       fail: function(info) {
-        console.log("getLocation fail");
-        wx.showModal({
-          title: info.errMsg
-        });
-        _this.setData({
-          result: '获取位置失败！'
-        });
       }
     });
   },
@@ -149,13 +142,6 @@ Page({
         _this.getarea()
       },
       fail: function(info) {
-        console.log("getLocation fail");
-        wx.showModal({
-          title: info.errMsg
-        });
-        _this.setData({
-          result: '获取位置失败！'
-        });
       }
     });
   },
@@ -342,10 +328,7 @@ Page({
     if (!status) return false;
     let userInfo = wx.getStorageSync("userInfo");
     let tele = {}
-    Object.assign(tele, {
-      userId: userInfo.userId,
-      token: userInfo.token,
-      tokenTime: userInfo.tokenTime,
+    Object.assign(tele,userInfo, {
       tel: this.data.telephone - 0,
     })
     console.log(tele)
@@ -355,12 +338,16 @@ Page({
       params: tele,
       success: function(res) {
         let mydata = res.data;
+        app.showMyTips(mydata.errmsg);
         if (mydata.errcode == "ok") {
           let _time = mydata.refresh;
           that.initCountDown(_time);
         }
       },
-      fail: function(err) {}
+      fail: function(err) {
+
+       app.showMyTips("验证码发送失败");
+      }
     })
   },
   submitinformation() {
@@ -512,12 +499,11 @@ Page({
     let introinfo = wx.getStorageSync("introinfo");
     console.log(introinfo)
     this.setData({
-      name: introinfo.hasOwnProperty("username") ? introinfo.username : ""
+      name: introinfo.hasOwnProperty("username") ? introinfo.username : "",
+      indexsex: introinfo.hasOwnProperty("gender") ? introinfo.gender - 1 : "",
+
     })
 
-    this.setData({
-      indexsex: introinfo.hasOwnProperty("gender") ? introinfo.gender - 1 : ""
-    })
     this.setData({
       sex: introinfo.hasOwnProperty("gender") ? introinfo.gender : ""
     })

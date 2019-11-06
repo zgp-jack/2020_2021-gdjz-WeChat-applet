@@ -1,4 +1,4 @@
-// .labelnum
+// .labelnum judge
 let areas = require("../../../utils/area.js");
 const app = getApp();
 let v = require("../../../utils/v.js");
@@ -49,11 +49,18 @@ Page({
       indexperson: e.detail.value,
       constituttion: this.data.compositionarrayone[e.detail.value].id
     })
+    console.log(e.detail.value)
+    console.log(this.data.compositionarrayone)
     if (this.data.compositionarrayone[e.detail.value].id > 1) {
       this.setData({
         judge: true
       })
-    }
+    } 
+    if (this.data.compositionarrayone[e.detail.value].id <= 1) {
+      this.setData({
+        judge: false
+      })
+    } 
   },
   accessprovince() { //大部分piker需要的数据
     let that = this;

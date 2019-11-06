@@ -1,4 +1,4 @@
-/* informationtwione */
+/* informationfive informationevaluationtwo*/
 .informationtwo{
   width: 93%;
   margin: 0 auto;
@@ -16,20 +16,29 @@
   background-color: white;
   border-bottom: 1px solid #F1F1F1;
 }
-.informationtwi .informationtwione{
-  width: 18%;
+.informationtwione{
+  width: 17.5%;
   font-size: 28rpx;
   line-height: 110rpx;
   color: #2A2A2A;
   margin-left: 19rpx;
   text-align: justify;
+  position: relative;
 }
-.informationtwi .informationtwione::after{
+.informationtwione::after{
     content:'';
     width: 100%;
     display: inline-block;
     overflow: hidden;
     height: 0;
+}
+.informationtwione::before{
+    content:':';
+    /* overflow: hidden; */
+    height: 100%;
+    width: 6rpx;
+    position: absolute;
+    right: -4px;
 }
 .informationtwi .informationtwione text{
     padding-left: 58rpx;
@@ -53,21 +62,17 @@
   height: 110rpx;
   display: flex;
   flex-direction: row;
+  justify-content: space-between;
   background-color: white;
   border-bottom: 1px solid #F1F1F1;
 }
-.informationthree .informationthreeone{
-  width: 28%;
-  font-size: 28rpx;
-  line-height: 110rpx;
-  color: #2A2A2A;
-  margin-left: 19rpx;
-}
+
+
 .informationthree .informationthreeone text{
     padding-left: 58rpx;
 }
 .informationthree .informationthreetwo{
-  width: 80%;
+  width: 72%;
   height: 110rpx;
   display: flex;
   flex-direction: column;
@@ -116,21 +121,13 @@
   height: 110rpx;
   display: flex;
   flex-direction: row;
+  justify-content: space-between;
   background-color: white;
   border-bottom: 1px solid #F1F1F1;
 }
-.informationfive .informationfiveone{
-  width: 28%;
-  font-size: 28rpx;
-  line-height: 110rpx;
-  color: #2A2A2A;
-  margin-left: 19rpx;
-}
-.informationfive .informationfiveone text{
-    padding-left: 58rpx;
-}
+
 .informationfive .informationfivetwo{
-  width: 80%;
+  width: 72%;
   height: 110rpx;
   display: flex;
   flex-direction: column;
@@ -394,23 +391,42 @@
   height: 90rpx;
   display: flex;
   flex-direction: row;
+  justify-content: space-between;
   background-color: white;
 }
 .informationverificationcode .informationverificationcodeone{
-  width: 28%;
+  width: 17.5%;
   font-size: 28rpx;
   line-height: 90rpx;
   color: #2A2A2A;
   margin-left: 19rpx;
+  text-align: justify;
+  position: relative;
 }
 
+.informationverificationcode .informationverificationcodeone::after{
+    content:'';
+    width: 100%;
+    display: inline-block;
+    overflow: hidden;
+    height: 0;
+}
+
+.informationverificationcode .informationverificationcodeone::before{
+    content:':';
+    /* overflow: hidden; */
+    height: 100%;
+    width: 6rpx;
+    position: absolute;
+    right: -4px;
+}
 .informationverificationcode .informationverificationcodeone .verificationcode{
     margin-left: 14rpx;
     margin-right: 14rpx;
 }
 
 .informationverificationcode .informationverificationcodetwo{
-  width: 80%;
+  width: 72%;
   height: 90rpx;
   display: flex;
   flex-direction: row;
@@ -452,7 +468,7 @@
   margin: 0 auto;
   display: block;
   background: white; 
-  font-size: 30rpx;
+  font-size: 28rpx;
   height: 140rpx;
 }
 

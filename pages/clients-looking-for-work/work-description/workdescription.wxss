@@ -1,4 +1,4 @@
-
+/* informationworkageone informationteamsnumber*/
 .informationtwo{
   width: 93%;
   margin: 0 auto;
@@ -17,18 +17,35 @@
   border-bottom: 1px solid #F1F1F1;
 }
 .informationworkage .informationworkageone{
-  width: 28%;
+  width: 17.5%;
   font-size: 28rpx;
   line-height: 110rpx;
   color: #2A2A2A;
   margin-left: 19rpx;
   font-weight: bold;
+  text-align: justify;
+  position: relative;
+}
+.informationworkage .informationworkageone::after{
+    content:'';
+    width: 100%;
+    display: inline-block;
+    overflow: hidden;
+    height: 0;
+}
+.informationworkage .informationworkageone::before{
+    content:':';
+    /* overflow: hidden; */
+    height: 100%;
+    width: 6rpx;
+    position: absolute;
+    right: -4px;
 }
 .informationworkage .informationworkageone text{
     padding-left: 58rpx;
 }
 .informationworkage .informationworkagetwo{
-  width: 80%;
+  width: 72%;
   height: 110rpx;
   display: flex;
   flex-direction: column;
@@ -52,18 +69,34 @@
 }
 
 .informationsix .informationsixone{
-  width: 28%;
+  width: 17.5%;
   font-size: 28rpx;
   line-height: 110rpx;
   color: #2A2A2A;
   margin-left: 19rpx;
   font-weight: bold;
+  text-align: justify;
+  position: relative;
+}
+.informationsix .informationsixone::after{
+    content:'';
+    width: 100%;
+    display: inline-block;
+    overflow: hidden;
+    height: 0;
+}
+.informationsix .informationsixone::before{
+    content:':';
+    height: 100%;
+    width: 6rpx;
+    position: absolute;
+    right: -4px;
 }
 .informationsix .informationsixone text{
     padding-left: 58rpx;
 }
 .informationsix .informationsixtwo{
-  width: 80%;
+  width: 72%;
   height: 110rpx;
   display: flex;
   flex-direction: column;
@@ -83,25 +116,38 @@
   height: 110rpx;
   display: flex;
   flex-direction: row;
+  justify-content: space-between;
   background-color: white;
   border-bottom: 1px solid #F1F1F1;
 }
 .informationproficiency .informationproficiencyone{
-  width: 28%;
+  width: 17.5%;
   font-size: 28rpx;
   line-height: 110rpx;
   color: #2A2A2A;
   margin-left: 19rpx;
   font-weight: bold;
+  text-align: justify;
+  position: relative;
 }
-
-.informationproficiency .informationproficiencyone .proficiency{
-    margin-left: 14rpx;
-    margin-right: 14rpx;
+.informationproficiency .informationproficiencyone::after{
+    content:'';
+    width: 100%;
+    display: inline-block;
+    overflow: hidden;
+    height: 0;
+}
+.informationproficiency .informationproficiencyone::before{
+    content:':';
+    /* overflow: hidden; */
+    height: 100%;
+    width: 6rpx;
+    position: absolute;
+    right: -4px;
 }
 
 .informationproficiency .informationproficiencytwo{
-  width: 80%;
+  width: 72%;
   height: 110rpx;
   display: flex;
   flex-direction: column;
@@ -119,25 +165,38 @@
   height: 110rpx;
   display: flex;
   flex-direction: row;
+  justify-content: space-between;
   background-color: white;
-
+  border-bottom: 1px solid #F1F1F1;
 }
 .informationcomposition .informationcompositionone{
-  width: 28%;
+  width: 17.5%;
   font-size: 28rpx;
   line-height: 110rpx;
   color: #2A2A2A;
   margin-left: 19rpx;
   font-weight: bold;
+  text-align: justify;
+  position: relative;
 }
-
-.informationcomposition .informationcompositionone .proficiency{
-    margin-left: 14rpx;
-    margin-right: 14rpx;
+.informationcomposition .informationcompositionone::after{
+    content:'';
+    width: 100%;
+    display: inline-block;
+    overflow: hidden;
+    height: 0;
+}
+.informationcomposition .informationcompositionone::before{
+    content:':';
+    /* overflow: hidden; */
+    height: 100%;
+    width: 6rpx;
+    position: absolute;
+    right: -4px;
 }
 
 .informationcomposition .informationcompositiontwo{
-  width: 80%;
+  width: 72%;
   height: 110rpx;
   display: flex;
   flex-direction: column;
@@ -152,27 +211,42 @@
 .informationteamsnumber{
   width: 93%;
   margin: 0 auto;
-  margin-top: 19rpx;
   height: 90rpx;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   background-color: white;
-  border-bottom: 1px solid #F1F1F1;
 }
 .informationteamsnumber .informationteamsnumberone{
-  width: 28%;
+  width: 17.5%;
   font-size: 28rpx;
   line-height: 90rpx;
   color: #2A2A2A;
   margin-left: 19rpx;
   font-weight: bold;
+  text-align: justify;
+  position: relative;
+}
+.informationteamsnumber .informationteamsnumberone::after{
+    content:'';
+    width: 100%;
+    display: inline-block;
+    overflow: hidden;
+    height: 0;
+}
+.informationteamsnumber .informationteamsnumberone::before{
+    content:':';
+    /* overflow: hidden; */
+    height: 100%;
+    width: 6rpx;
+    position: absolute;
+    right: -4px;
 }
 .informationteamsnumber .informationteamsnumberone text{
     padding-left: 58rpx;
 }
 .informationteamsnumber .informationteamsnumbertwo{
-  width: 80%;
+  width: 72%;
   height: 90rpx;
   display: flex;
   flex-direction: column;

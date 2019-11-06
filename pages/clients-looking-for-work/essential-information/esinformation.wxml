@@ -1,13 +1,13 @@
 <view>
   <view class="informationtwo">
     <view class="informationtwi">
-      <text class="informationtwione">姓名:</text>
+      <text class="informationtwione">姓名</text>
       <view class="informationtwitwo">
         <input type="text" placeholder="请输入你的名字" value="{{name}}" bindinput="name"></input>
       </view>
     </view>
     <view class="informationthree">
-      <text class="informationthreeone">性别：</text>
+      <text class="informationtwione">性别</text>
       <picker bindchange="sex" range="{{array}}" class="informationthreetwo">
         <input disabled name="addregion" value="{{array[indexsex]}}" placeholder="请选择性别"></input>
       </picker>
@@ -21,7 +21,7 @@
       </view>
     </view>
     <view class="informationfive">
-      <text class="informationfiveone">民族：</text>
+      <text class="informationtwione">民族</text>
       <picker bindchange="nation" range="{{nationalarray}}" class="informationfivetwo">
         <input disabled name="addnational" value="{{nationalarray[nationindex]}}" placeholder="请选择民族"></input>
       </picker>
@@ -73,7 +73,7 @@
     </view>
 
     <view class="informationverificationcode"   wx:if="{{tele!=telephone}}">
-      <text class="informationverificationcodeone">验<text class="verificationcode">证</text>码：</text>
+      <text class="informationverificationcodeone">验证码</text>
       <view class="informationverificationcodetwo">
         <input type="text"  maxlength='4' placeholder="请输入验证码" bindinput="verify"></input>
         <text bindtap="vertifynum">{{codeTips}}</text>

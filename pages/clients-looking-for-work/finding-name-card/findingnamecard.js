@@ -1,4 +1,4 @@
-// completeall selectData selectTap optionTap selectData index
+// completeall selectData selectTap optionTap selectData index allde
 const app = getApp();
 
 Page({
@@ -7,7 +7,6 @@ Page({
    * 页面的初始数据 nation view_num
    */
   data: {
-    allde: false,
     username: '',
     userimg: '',
     showtop: true,
@@ -407,7 +406,6 @@ Page({
           })
         }
         that.setData({
-          allde: true,
           percent: mydata.info.hasOwnProperty("progress") ? mydata.info.progress : 0
         })
 

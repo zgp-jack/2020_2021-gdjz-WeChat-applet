@@ -1,3 +1,4 @@
+/* oworkotext view */
 .findingnamecard{
   width: 93%;
   margin: 0 auto;
@@ -45,7 +46,6 @@
   letter-spacing: 4rpx;
   color: #000;
   display: flex;
-  /* justify-content: space-between;  olang*/
 }
 
 .findingnamecardoneson .findingnamecardonesonone .lang {
@@ -86,23 +86,7 @@
   padding-bottom: 40rpx;
   position: relative;
 }
-/* .findingnamecardtwoone{
-  display: block;
-  width: 143rpx;
-  height: 143rpx;
-  margin: 0 auto;
-  margin-top: 21rpx;
-  border-radius: 50%;
-  background: orange;
-}
-.findingnamecardtwotwo{
-  width: 100%;
-  display: block;
-  color: #343434;
-  text-align: center;
-  font-size: 32rpx;
-  margin-top: 16rpx;
-} */
+
 .findingnamecardtwothree{
   width: 100%;
   display: block;
@@ -893,16 +877,18 @@
   margin-bottom: 8rpx;
   padding-right: 2%;
 }
-/* link cardtwo  workotextonetu content oimg*/
-.cardotext {  width: 100%;
+
+.cardotext {  
+  width: 100%;
   display: flex;
-  /* position: relative;
-  left: -15px; */
+  justify-content: space-between;
+
 
 }
 
 .cardotext .oworkone {
-  display: flex;
+
+  width: 14.5%
 }
 
 .cardotext  image {
@@ -913,11 +899,35 @@
 }
 
 .cardotext .oworkotext {
+  margin: 0;
+  padding: 0;
+  height: 30rpx;
+  display: inline-block;
   color: grey;
   font-size: 24rpx;
-  width: 140rpx;
+  width: 100%;
   margin-top: 14rpx;
   margin-bottom: 6rpx;
+  text-align: justify;
+  position: relative;
+}
+.cardotext .oworkotext::after{
+    content:'';
+    width: 100%;
+    display: inline-block;
+    overflow: hidden;
+    height: 0;
+}
+.cardotext .oworkotext::before{
+    content:':';
+    /* overflow: hidden; */
+    height: 100%;
+    width: 6rpx;
+    position: absolute;
+    right: -4px;
+}
+.all{
+  width:72%
 }
 .cardotext .oworkotextonetu {
   color: black;
@@ -1075,4 +1085,4 @@
   right: 21rpx;
   z-index: 99
 }
-/*linezo cardtwo cardotext cardotext findingnamecardeight*/
+/*oworkotext .all*/

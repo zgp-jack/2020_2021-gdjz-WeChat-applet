@@ -1,13 +1,13 @@
 <view>
   <view class="informationtwo">
     <view class="informationworkage">
-      <text class="informationworkageone">工<text>龄：</text></text>
+      <text class="informationworkageone">工龄</text>
       <view class="informationworkagetwo">
         <input type="text" placeholder="请输入工龄" value="{{workage}}" bindinput="peopleage" ></input>
       </view>
     </view>
     <view class="informationsix">
-      <text class="informationsixone">家<text>乡：</text></text>
+      <text class="informationsixone">家乡</text>
       <!-- bindchange="initAllProvice" -->
       <view class="informationsixtwo">
         <picker bindchange="bindMultiPickerChange" bindcolumnchange="bindMultiPickerColumnChange" mode="multiSelector" value="{{multiIndex}}" range="{{multiArray}}">
@@ -16,19 +16,19 @@
       </view>
     </view>
     <view class="informationproficiency">
-      <text class="informationproficiencyone">熟<text class="proficiency">练</text>度：</text>
+      <text class="informationproficiencyone">熟练度</text>
       <picker bindchange="proficiency" class="informationproficiencytwo" range="{{proficiencyarray}}">
         <input disabled  name="addproficiencyarray" value="{{proficiencyarray[indexproficiency]}}" bindinput="proficiency"  placeholder="请选择熟练度"></input>
       </picker>
     </view>
     <view class="informationcomposition">
-      <text class="informationcompositionone">人员构成：</text>
+      <text class="informationcompositionone">人员构成</text>
       <picker bindchange="constitute" class="informationcompositiontwo" range="{{compositionarray}}">
         <input disabled  name="addcompositionarray" value="{{compositionarray[indexperson]}}" placeholder="请选择人员构成"></input>
       </picker>
     </view>
     <view class="informationteamsnumber" wx:if="{{judge}}">
-      <text class="informationteamsnumberone">队伍人数：</text>
+      <text class="informationteamsnumberone">队伍人数</text>
       <view class="informationteamsnumbertwo">
         <input type="text" placeholder="请输入人数" value="{{teamsnumber}}" bindinput="teamsnum"></input>
       </view>

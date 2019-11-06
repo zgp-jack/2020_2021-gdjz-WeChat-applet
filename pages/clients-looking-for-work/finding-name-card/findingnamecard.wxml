@@ -1,4 +1,4 @@
-<view wx:if="{{allde}}">
+<view>
   <view class="findingnamecard" wx:if="{{showtop}}">
     请完善一下信息
   </view>
@@ -63,7 +63,7 @@
     <view class="linezo">
       <view class="cardotext">
         <view class="oworkone">
-          <text class="oworkotext">工 <text class="otelephone">种：</text></text>
+          <text class="oworkotext">工种</text>
         </view>
         <view class="all">
           <view class="oworkotextonetu" wx:for="{{occupations}}" wx:key="{{index}}">
@@ -73,23 +73,23 @@
       </view>
       <view class="cardotext">
         <view class="oworkone">
-          <text class="workotext">手 <text class="telephone">机：</text></text>
+          <text class="oworkotext">手机</text>
         </view>
-        <view class="owork">
+        <view class="all">
           <text class="workotextone">{{telephone}}</text>
         </view>
       </view>
       <view class="cardotext">
         <view class="oworkone">
-          <text class="workotext">所在地区：</text>
+          <text class="oworkotext">所在地区</text>
         </view>
-        <view class="owork">
+        <view class="all">
           <text class="workotextone">{{city}}</text>
         </view>
       </view>
       <view class="cardotext">
         <view class="oworkone">
-          <text class="workotext">工作介绍：</text>
+          <text class="oworkotext">工作介绍</text>
         </view>
       </view>
     </view>
@@ -126,48 +126,48 @@
     <view class="linezo">
       <view class="cardotext">
         <view class="oworkone">
-          <text class="workotext">工 <text class="telephone">龄：</text></text>
+          <text class="oworkotext">工龄</text>
         </view>
-        <view class="owork">
+        <view class="all">
           <text class="workotextone">{{workingyears}}年</text>
         </view>
       </view>
       <view class="cardotext">
         <view class="oworkone">
-          <text class="workotext">人员构成：</text>
+          <text class="oworkotext">人员构成</text>
         </view>
-        <view class="owork">
+        <view class="all">
           <text class="workotextone">{{staffcomposition}}</text>
         </view>
       </view>
 
       <view class="cardotext">
         <view class="oworkone">
-          <text class="workotext">我的家乡：</text>
+          <text class="oworkotext">我的家乡</text>
         </view>
-        <view class="owork">
+        <view class="all">
           <text class="workotextone">{{cityself}}</text>
         </view>
       </view>
       <view class="cardotext">
         <view class="oworkone">
-          <text class="workotext">熟<text class="states">练</text>度：</text>
+          <text class="oworkotext">熟练度</text>
         </view>
-        <view class="owork">
+        <view class="all">
           <text class="workotextone">{{procity}}</text>
         </view>
       </view>
       <view class="cardotext">
         <view class="oworkone">
-          <text class="workotext">队伍人数：</text>
+          <text class="oworkotext">队伍人数</text>
         </view>
-        <view class="owork">
+        <view class="all">
           <text class="workotextone">{{personnum}}人</text>
         </view>
       </view>
       <view class="cardotext">
         <view class="oworkone">
-          <text class="oworkotext">标  <text class="otelephoneb">签 ：</text></text>
+          <text class="oworkotext">标签</text>
         </view>
         <view class="all">
           <view class="tworkotextonetu" wx:for="{{tags}}" wx:key="{{index}}">
