@@ -71,3 +71,4 @@
     <button class="modifyexperbottomotwo" bindtap="preserve">确认保存</button>
   </view>
 </view>
+<!-- vertify  delete project-->

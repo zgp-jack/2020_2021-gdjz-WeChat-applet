@@ -1,4 +1,5 @@
-/* oworkotext view */
+/*cardotext  oworkotext .cardtwo lineone*/ 
+
 .findingnamecard{
   width: 93%;
   margin: 0 auto;
@@ -11,7 +12,21 @@
   letter-spacing: 4rpx;
   font-weight: bold;
 }
+.link {
+  width: 6px;
+  height: 38rpx;
+  position: absolute;
+  left: 48rpx;
+  top: -25rpx;
+}
 
+.linkone {
+  width: 6px;
+  height: 38rpx;
+  position: absolute;
+  right: 48rpx;
+    top: -25rpx;
+}
 
 .findingnamecardone {
   width: 100%;
@@ -386,8 +401,11 @@
   margin: 0 auto;
   margin-top: 20rpx;
   background-color: white;
-  overflow: hidden;
+padding-bottom: 6rpx;
   position: relative;
+}
+.cardonetwof{
+    overflow: hidden;
 }
 
 .cardtwo .cardtwosonone {
@@ -465,19 +483,19 @@
     margin-left:  -5px;
   top:18rpx;
 }
-.cardotext .owork {
+/* .cardotext .owork {
   margin: 0;
   padding: 0;
   display: inline-block;
   width: 80%;
-}
+} */
 
-.cardotext  image {
+/* .cardotext  image {
   width: 18rpx;
   height: 18rpx;
   margin: 0 20rpx;
   margin-top: 24rpx;
-}
+} */
 
 .cardotext .workotext {
   color: grey;
@@ -846,6 +864,7 @@
 }
 .lineone{
   position: relative;
+  margin-bottom: 8rpx;
 }
 .linezo::before {
   position: absolute;

@@ -6,8 +6,9 @@ const app = getApp();
 Page({
 
   /** 
-   * 页面的初始数据 textareavalue  typeworkarray
+   * 页面的初始数据 textareavalue  typeworkarray gender submitinformation
    */
+
   data: {
     array: [],
     arrayone: [],
@@ -36,8 +37,24 @@ Page({
     tele: false,
     codeTips: "获取验证码",
     status: 1,
+    nowDate:"",
   },
-
+  getbirth(){
+    var date = new Date();
+    var year = date.getFullYear();
+    var month = date.getMonth() + 1;
+    var day = date.getDate();
+    if (month < 10) {
+      month = "0" + month;
+    }
+    if (day < 10) {
+      day = "0" + day;
+    }
+    var nowDate = year + "-" + month + "-" + day;
+    this.setData({
+      nowDate: nowDate
+    });
+  },
   initCountDown: function(_time) {
     let _t = parseInt(_time);
     let _this = this;
@@ -158,6 +175,7 @@ Page({
         longitude: historyregionone.location.split(",")[0],
         latitude: historyregionone.location.split(",")[1]
       })
+      console.log(this.data.longitude)
       wx.removeStorageSync('historyregionone')
     }
   },
@@ -207,13 +225,11 @@ Page({
         that.setData({
           nationalarray: nationalarray,
           nationalarrayone: res.data.nation,
-          // detailevaluation: res.data.label,
-          // proficiencyarray: proficiencyarray,
-          // compositionarray: compositionarray,
           array: array,
           arrayone: res.data.gender
         })
         that.getintrodetail()
+        console.log(that.data.arrayone)
       }
     })
   },
@@ -470,28 +486,44 @@ Page({
       adcode: this.data.oadcode,
     })
     console.log(information)
-    app.doRequestAction({
-      url: "resumes/add-resume/",
-      way: "POST",
-      params: information,
-      success: function(res) {
 
-        wx.showModal({
-          title: '温馨提示',
-          content: '保存成功',
-          showCancel: false,
-          success(res) {
-            wx.navigateBack({
-              delta: 1
-            })
-          }
-        })
+    let date = new Date();
+    let dateo = date.getTime()
+    let dateone = new Date(dateo);
+    let pages = getCurrentPages();
+    let r = "/" + pages[0].route;
+    let prevPage = pages[pages.length - 2];
+    console.log(prevPage)
+    prevPage.setData({ 
+      name: this.data.name,
+      sex: this.data.sex == "1" ? "男" : "女",
+      age: dateone.getFullYear() - (this.data.birthday.split("-")[0] - 0),
+      nation: this.data.nation,
+    });
 
-      },
-      fail: function(err) {
-        console.log(err)
-      }
-    })
+    wx.navigateBack({ delta: 1 })
+    // app.doRequestAction({
+    //   url: "resumes/add-resume/",
+    //   way: "POST",
+    //   params: information,
+    //   success: function(res) {
+
+    //     wx.showModal({
+    //       title: '温馨提示',
+    //       content: '保存成功',
+    //       showCancel: false,
+    //       success(res) {
+    //         wx.navigateBack({
+    //           delta: 1
+    //         })
+    //       }
+    //     })
+
+    //   },
+    //   fail: function(err) {
+    //     console.log(err)
+    //   }
+    // })
   },
 
   getintrodetail() {
@@ -576,7 +608,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-    this.accessprovince()
+
   },
 
   /**
@@ -590,9 +622,11 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function() {
-    this.getlocationdetails()
-    this.getadcode()
 
+    this.getadcode()
+    this.getbirth()
+    this.accessprovince()
+    this.getlocationdetails()
   },
 
   /**

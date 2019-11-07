@@ -1,9 +1,11 @@
 const app = getApp();
 let v = require("../../../utils/v.js");
 let areas = require("../../../utils/area.js");
+let remain = require("../../../utils/remain.js");
 //bindstartDate delete
 Page({
   data: {
+    project: "",
     date: "",
     startdate: "",
     allprovinces: "",
@@ -13,6 +15,7 @@ Page({
     idArrs: [],
     multiArray: [],
     multiArrayone: [],
+    provicemore: [],
     objectMultiArray: [],
     multiIndex: [0, 0],
     multiIndexvalue: "",
@@ -20,7 +23,38 @@ Page({
     context: "",
     resume_uuid: "",
     projectname: "",
-    detail: ""
+    detail: "",
+    showModal: false,
+    uuid: "",
+    obtnbut: true,
+    nowDate: ""
+  },
+  getbirth() {
+    var date = new Date();
+    var year = date.getFullYear();
+    var month = date.getMonth() + 1;
+    var day = date.getDate();
+    if (month < 10) {
+      month = "0" + month;
+    }
+    if (day < 10) {
+      day = "0" + day;
+    }
+    var nowDate = year + "-" + month + "-" + day;
+    this.setData({
+      nowDate: nowDate
+    });
+
+  },
+  obtn() {
+    this.setData({
+      showModal: false
+    })
+  },
+  deleteexper() {
+    this.setData({
+      showModal: true
+    })
   },
   projectname(e) {
     this.setData({
@@ -28,9 +62,9 @@ Page({
     })
   },
   bindDateChange(e) {
-    this.setData({
-      date: e.detail.value
-    })
+      this.setData({
+        date: e.detail.value
+      }) 
   },
   previewImage(e) {
     console.log(e)
@@ -115,7 +149,9 @@ Page({
       multiArrayone: [provicemore, provicechildmore],
       objectMultiArray: [provice, provicechild]
     })
-
+    this.setData({
+      provicemore: provicemore
+    })
     this.setData({
       multiArray: [provicemore, that.data.multiArrayone[1][0]],
       objectMultiArray: [provice, provicechild]
@@ -190,6 +226,16 @@ Page({
       })
       return
     }
+
+    if (new Date(this.data.startdate).getTime() > new Date(this.data.date).getTime()){
+      wx.showModal({
+        title: '温馨提示',
+        content: '您输入的开始时间大于完工时间,请重新输入',
+        showCancel: false,
+        success(res) { }
+      })
+      return
+    }
     if (vertifyNum.isNull(this.data.projectname)) {
       wx.showModal({
         title: '温馨提示',
@@ -241,35 +287,24 @@ Page({
     })
     console.log(project)
     let that = this;
-    app.appRequestAction({
-      url: 'resumes/project/',
-      way: 'POST',
-      params: project,
-      success(res) {
-        console.log(res)
-        if (res.data.errcode == "fail") {
-          wx.showModal({
-            title: '温馨提示',
-            content: '输入错误请重新输入',
-            showCancel: false,
-            success(res) {
-            }
-          })
-        }
-        if (res.data.errcode == "ok") {
-          wx.showModal({
-            title: '温馨提示',
-            content: '保存成功',
-            showCancel: false,
-            success(res) {
-              wx.navigateBack({
-                delta: 1
-              })
-            }
-          })
-        }
-      }
-    })
+    // app.appRequestAction({
+    //   url: 'resumes/project/',
+    //   way: 'POST',
+    //   params: project,
+    //   failTitle: "操作失败，请稍后重试！",
+    //   success(res) {
+    //     console.log(res)
+    //     remain.remain({
+    //       tips: res.data.errmsg, callback: function () {
+    //         if (res.data.errcode == "ok") {
+    //           wx.navigateBack({
+    //             delta: 1
+    //           })
+    //         }
+    //       }
+    //     })
+    //   }
+    // })
   },
   preservechixu() {
     let userInfo = wx.getStorageSync("userInfo");
@@ -290,6 +325,15 @@ Page({
       wx.showModal({
         title: '温馨提示',
         content: '您输入的完工时间为空请重新输入',
+        showCancel: false,
+        success(res) { }
+      })
+      return
+    }
+    if (new Date(this.data.startdate).getTime() > new Date(this.data.date).getTime()) {
+      wx.showModal({
+        title: '温馨提示',
+        content: '您输入的开始时间大于完工时间,请重新输入',
         showCancel: false,
         success(res) { }
       })
@@ -351,35 +395,24 @@ Page({
       url: 'resumes/project/',
       way: 'POST',
       params: project,
+      failTitle: "操作失败，请稍后重试！",
       success(res) {
-        if (res.data.errcode == "fail") {
-          wx.showModal({
-            title: '温馨提示',
-            content: '输入错误请重新输入',
-            showCancel: false,
-            success(res) {
-            }
-          })
-        }
-        if (res.data.errcode == "ok") {
-          wx.showModal({
-            title: '温馨提示',
-            content: '保存成功',
-            showCancel: false,
-            success(res) {
+        remain.remain({
+          tips: res.data.errmsg, callback: function () {
+            if (res.data.errcode == "ok") {
               that.setData({
-                projectname:"",
+                projectname: "",
                 startdate: "",
-                date:"",
-                detail:"",
-                provincecity:"",
-                multiIndexvalue:"",
-                importimg:[],
-                imgArrs:[]
+                date: "",
+                detail: "",
+                provincecity: "",
+                multiIndexvalue: "",
+                importimg: [],
+                imgArrs: []
               })
             }
-          })
-        }
+          }
+        })
 
       }
     })
@@ -393,19 +426,230 @@ Page({
   delete(e) {
     console.log(e)
     this.data.imgArrs.splice(e.currentTarget.dataset.index, 1)
-    this.data.idArrs.splice(e.currentTarget.dataset.index, 1)
+    this.data.importimg.splice(e.currentTarget.dataset.index, 1)
     this.setData({
       imgArrs: this.data.imgArrs
     })
     this.setData({
       importimg: this.data.importimg
     })
+    console.log(this.data.importimg)
+  },
+  vertify() {
+    let userInfo = wx.getStorageSync("userInfo");
+    let project = {}
+    Object.assign(project, {
+      userId: userInfo.userId,
+      token: userInfo.token,
+      tokenTime: userInfo.tokenTime,
+      project_uuid: this.data.uuid
+    })
+    console.log(project)
+    let that = this;
+    app.appRequestAction({
+      url: 'resumes/del-project/',
+      way: 'POST',
+      params: project,
+      failTitle: "操作失败，请稍后重试！",
+      success(res) {
+        console.log(res)
+        remain.remain({
+          tips: res.data.errmsg, callback: function () {
+            if (res.data.errcode == "ok") {
+              that.delestore()
+            }
+          }
+        })
+      }
+    })
+    this.setData({
+      showModal: false
+    })
+  },
+
+  getproject() {
+    let that = this;
+    let project = wx.getStorageSync("projectdetail");
+    if (project) {
+      wx.setNavigationBarTitle({
+        title: '修改项目经验'
+      })
+      this.setData({
+        obtnbut: false
+      })
+      this.setData({
+        project: project.uid,
+      })
+      console.log(this.data.project)
+
+      this.setData({
+        projectname: this.data.project.project_name,
+        date: this.data.project.completion_time,
+        multiIndexvalue: this.data.project.province_name + this.data.project.city_name,
+        startdate: this.data.project.start_time,
+        detail: this.data.project.detail,
+        imgArrs: this.data.project.image,
+        resume_uuid: this.data.project.resume_uuid,
+        uuid: this.data.project.uuid,
+        provincecity: this.data.project.province + "," + this.data.project.city
+      })
+
+      var s = this.data.date;
+      var a = s.split(/[^0-9]/);
+      var d = new Date(a[0], a[1] - 1, a[2])
+      if (d.getTime() + 86400000 > new Date().getTime()) {
+        this.setData({
+          date: "至今"
+        })
+      }
+      console.log(this.data.objectMultiArray)
+      let one = "";
+      let two = "";
+      let osplit = this.data.provincecity.split(",");
+      for (let i = 0; i < this.data.objectMultiArray[0].length; i++) {
+        if (osplit[0] == this.data.objectMultiArray[0][i].id) {
+          this.data.multiIndex[0] = i
+          one = i
+        }
+      }
+      for (let i = 0; i < this.data.objectMultiArray[1].length; i++) {
+        for (let j = 0; j < this.data.objectMultiArray[1][i].length; j++) {
+          if (osplit[1] == this.data.objectMultiArray[1][i][j].id) {
+            this.data.multiIndex[1] = j
+            two = j
+          }
+        }
+      }
+      this.setData({
+        multiIndex: this.data.multiIndex
+      })
+
+      that.setData({
+        multiArray: [that.data.provicemore, that.data.multiArrayone[1][one]],
+      })
+
+
+      this.setData({
+        importimg: this.data.project.images
+      })
+    }
+  },
+  preserveone() {
+    let userInfo = wx.getStorageSync("userInfo");
+    let project = {}
+    let vertifyNum = v.v.new()
+
+    if (vertifyNum.isNull(this.data.startdate)) {
+      wx.showModal({
+        title: '温馨提示',
+        content: '您输入的开始时间为空请重新输入',
+        showCancel: false,
+        success(res) { }
+      })
+      return
+    }
+
+    if (vertifyNum.isNull(this.data.date)) {
+      wx.showModal({
+        title: '温馨提示',
+        content: '您输入的完工时间为空请重新输入',
+        showCancel: false,
+        success(res) { }
+      })
+      return
+    }
+    if (new Date(this.data.startdate).getTime() > new Date(this.data.date).getTime()) {
+      wx.showModal({
+        title: '温馨提示',
+        content: '您输入的开始时间大于完工时间,请重新输入',
+        showCancel: false,
+        success(res) { }
+      })
+      return
+    }
+    if (vertifyNum.isNull(this.data.projectname)) {
+      wx.showModal({
+        title: '温馨提示',
+        content: '您输入的项目名称为空请重新输入',
+        showCancel: false,
+        success(res) { }
+      })
+      return
+    }
+    if (vertifyNum.isNull(this.data.detail)) {
+      wx.showModal({
+        title: '温馨提示',
+        content: '您输入的项目描述为空请重新输入',
+        showCancel: false,
+        success(res) { }
+      })
+      return
+    }
+    if (vertifyNum.isNull(this.data.provincecity)) {
+      wx.showModal({
+        title: '温馨提示',
+        content: '您输入的所在地区为空请重新输入',
+        showCancel: false,
+        success(res) { }
+      })
+      return
+    }
+    if (vertifyNum.isNull(this.data.importimg)) {
+      wx.showModal({
+        title: '温馨提示',
+        content: '您添加的图片为空请重新输入',
+        showCancel: false,
+        success(res) { }
+      })
+      return
+    }
+
+    Object.assign(project, {
+      userId: userInfo.userId,
+      token: userInfo.token,
+      tokenTime: userInfo.tokenTime,
+      resume_uuid: this.data.resume_uuid,
+      completion_time: this.data.date,
+      start_time: this.data.startdate,
+      project_name: this.data.projectname,
+      detail: this.data.detail,
+      province: this.data.provincecity.split(",")[0],
+      city: this.data.provincecity.split(",")[1],
+      image: this.data.importimg,
+      project_uuid: this.data.uuid
+    })
+    console.log(project)
+    let that = this;
+    app.appRequestAction({
+      url: 'resumes/project/',
+      way: 'POST',
+      params: project,
+      failTitle: "操作失败，请稍后重试！",
+      success(res) {
+        console.log(res)
+        remain.remain({
+          tips: res.data.errmsg, callback: function () {
+            if (res.data.errcode == "ok") {
+              wx.navigateBack({
+                delta: 1
+              })
+            }
+          }
+        })
+      }
+    })
+  },
+  delestore() {
+    wx.removeStorageSync("projectdetail")
   },
   onShow: function () {
-    this.initAllProvice()
+    this.getbirth()
     this.getuuid()
+
   },
   onLoad: function (options) {
+    this.initAllProvice()
+    this.getproject()
 
   },
 

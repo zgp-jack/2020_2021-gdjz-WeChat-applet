@@ -2,7 +2,7 @@ const app = getApp();
 Page({
 
   /**
-   * 页面的初始数据
+   * 页面的初始数据 editor
    */
   data: {
     allproject:[],
@@ -13,8 +13,11 @@ Page({
     console.log(e)
     wx.setStorageSync("projectdetail", e.currentTarget.dataset)
     wx.navigateTo({
-      url: "/pages/clients-looking-for-work/modify-project-experience/modifyexper",
+      url: "/pages/clients-looking-for-work/new-project-experience/projectexperience",
     })
+  },
+  delestore() {
+    wx.removeStorageSync("projectdetail")
   },
   /**
    * 生命周期函数--监听页面加载
@@ -66,6 +69,7 @@ Page({
     })},
   onShow: function () {
     this.project()
+    this.delestore()
   },
 
   /**

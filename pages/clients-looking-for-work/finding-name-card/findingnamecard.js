@@ -1,4 +1,6 @@
-// completeall selectData selectTap optionTap selectData index allde
+// addskill  lat nation
+
+
 const app = getApp();
 
 Page({
@@ -426,44 +428,37 @@ Page({
             content: '您的基本信息审核未通过请重新填写',
             showCancel: false,
             success(res) {
-              wx.navigateTo({
-                url: '/pages/clients-looking-for-work/essential-information/esinformation',
-              })
             }
           })
+          return
         } else if (that.data.checktwof == "0") {
           wx.showModal({
             title: '温馨提示',
             content: '您的工作介绍审核未通过请重新填写',
             showCancel: false,
             success(res) {
-              wx.navigateTo({
-                url: '/pages/clients-looking-for-work/work-description/workdescription',
-              })
+
             }
           })
+          return
         } else if (that.data.checkthreef == "0") {
           wx.showModal({
             title: '温馨提示',
             content: '您的项目经验审核未通过请重新填写',
             showCancel: false,
             success(res) {
-              wx.navigateTo({
-                url: "/pages/clients-looking-for-work/all-project-experience/allexperience",
-              })
             }
           })
+          return
         } else if (that.data.checkfourf == "0") {
           wx.showModal({
             title: '温馨提示',
             content: '您的技能证书审核未通过请重新填写',
             showCancel: false,
             success(res) {
-              wx.navigateTo({
-                url: "/pages/clients-looking-for-work/all-skills-certificate/skillscertificate",
-              })
             }
           })
+          return
         }
       }
     })
@@ -481,39 +476,17 @@ Page({
       })
     }
   },
-  // namerequest() {
-  //   let _this = this;
-  //   let userId = '';
-  //   let token = '';
-  //   let tokenTime = '';
-  //   let message = wx.getStorageSync("userInfo")
-  //   console.log(message)
-
-  //   let usermessage = {
-  //     userId: message.userId,
-  //     token: message.token,
-  //     tokenTime: message.tokenTime
-  //   }
-
-  //   app.doRequestAction({
-  //     url: 'resumes/resume-list/',
-  //     way: 'POST',
-  //     params: usermessage,
-  //     success(res) {
-  //       console.log(res)
-  //       _this.setData({
-  //         username: res.data.info.username,
-  //         userimg: res.data.info.headerimg
-  //       })
-  //     }
-  //   })
-
-  //   },
+  delestore() {
+    wx.removeStorageSync("projectdetail")
+  }, 
+  deleskill() {
+    wx.removeStorageSync("skilltail")
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    this.getdetail();
   },
 
   /**
@@ -527,8 +500,9 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow() {
-    this.getdetail();
 
+    this.delestore();
+    this.deleskill()
   },
 
   /**

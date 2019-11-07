@@ -8,21 +8,21 @@
     </view>
     <view class="informationthree">
       <text class="informationtwione">性别</text>
-      <picker bindchange="sex" range="{{array}}" class="informationthreetwo">
+      <picker bindchange="sex" value="{{indexsex}}" range="{{array}}" class="informationthreetwo">
         <input disabled name="addregion" value="{{array[indexsex]}}" placeholder="请选择性别"></input>
       </picker>
     </view>
     <view class="informationfour">
       <text class="informationfourone">出生日期：</text>
       <view class="informationfourtwo">
-        <picker mode="date" value="{{date}}" start="09:01" end="21:01" bindchange="birthday">
+        <picker mode="date" value="{{birthday}}" start="1900-01-01" end="{{nowDate}}" bindchange="birthday">
           <input disabled name="addtime" value="{{birthday}}" placeholder="请选择出生日期"></input>
         </picker>
       </view>
     </view>
     <view class="informationfive">
       <text class="informationtwione">民族</text>
-      <picker bindchange="nation" range="{{nationalarray}}" class="informationfivetwo">
+      <picker bindchange="nation" range="{{nationalarray}}" class="informationfivetwo" value="{{nationindex}}">
         <input disabled name="addnational" value="{{nationalarray[nationindex]}}" placeholder="请选择民族"></input>
       </picker>
     </view>

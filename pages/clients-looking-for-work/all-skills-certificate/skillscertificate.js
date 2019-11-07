@@ -26,9 +26,6 @@ Page({
         that.setData({
           allskill: res.data.data.certificates
         })
-        that.setData({
-          allde: true
-        })
       }
 
     })
@@ -42,10 +39,12 @@ Page({
     console.log(e)
     wx.setStorageSync("skilltail", e.currentTarget.dataset)
     wx.navigateTo({
-      url: "/pages/clients-looking-for-work/modifycertificate/modifycertificate",
+      url: "/pages/clients-looking-for-work/addcertificate/addcertificate",
     })
   },
-
+  deleskill() {
+    wx.removeStorageSync("skilltail")
+  },
   /**
    * 生命周期函数--监听页面加载
    */
@@ -64,7 +63,8 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    this.allskill()
+    this.allskill();
+    this.deleskill()
   },
 
   /**

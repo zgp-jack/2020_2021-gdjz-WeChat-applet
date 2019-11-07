@@ -4,7 +4,7 @@ let areas = require("../../../utils/area.js");
 Page({
 
   /**
-   * 页面的初始数据 bindstartDate delete deleteexper obtn vertify
+   * 页面的初始数据 preserve
    */
   data: {
     project:"",

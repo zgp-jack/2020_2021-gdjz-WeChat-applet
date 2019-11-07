@@ -5,7 +5,7 @@ let v = require("../../../utils/v.js");
 Page({
 
   /**
-   * 页面的初始数据  multiIndexvalue indexproficiency
+   * 页面的初始数据  multiIndexvalue indexproficiency bindMultiPickerColumnChange
    */
   data: {
     workage: "",
@@ -20,12 +20,14 @@ Page({
     compositionarray: [],
     compositionarrayone: [],
     constituttion: "",
-    judge: false, 
+    judge: false,
     detailevaluation: [],
     evaluation: [],
     labelnum: [],
     teamsnumber: "",
-    multiIndexvalue: ""
+    multiIndexvalue: "",
+    multiIndexsuan: [],
+    provicemore: []
   },
   peopleage(e) { //工龄的选择
     this.setData({
@@ -55,12 +57,12 @@ Page({
       this.setData({
         judge: true
       })
-    } 
+    }
     if (this.data.compositionarrayone[e.detail.value].id <= 1) {
       this.setData({
         judge: false
       })
-    } 
+    }
   },
   accessprovince() { //大部分piker需要的数据
     let that = this;
@@ -149,13 +151,16 @@ Page({
       multiArrayone: [provicemore, provicechildmore],
       objectMultiArray: [provice, provicechild]
     })
-
+    this.setData({
+      provicemore: provicemore
+    })
     this.setData({
       multiArray: [provicemore, that.data.multiArrayone[1][0]],
       objectMultiArray: [provice, provicechild]
     })
   },
   bindMultiPickerChange: function (e) { //最终家乡的选择
+    console.log(e)
     let that = this;
     this.setData({
       multiIndex: e.detail.value
@@ -165,12 +170,12 @@ Page({
 
       allpro = this.data.allprovinces[this.data.multiIndex[0]].id + "," + this.data.allprovinces[this.data.multiIndex[0]].children[this.data.multiIndex[1]].id
       this.setData({
-        multiIndexvalue: that.data.allprovinces[that.data.multiIndex[0]].name + "省" + " " + that.data.allprovinces[that.data.multiIndex[0]].children[that.data.multiIndex[1]].name + "市"
+        multiIndexvalue: that.data.allprovinces[that.data.multiIndex[0]].name + " " + that.data.allprovinces[that.data.multiIndex[0]].children[that.data.multiIndex[1]].name 
       })
     } else {
       allpro = this.data.allprovinces[this.data.multiIndex[0]].id
       this.setData({
-        multiIndexvalue: that.data.allprovinces[that.data.multiIndex[0]].name + "省" + "" + that.data.allprovinces[that.data.multiIndex[0]].name + "市"
+        multiIndexvalue: that.data.allprovinces[that.data.multiIndex[0]].name  + "" + that.data.allprovinces[that.data.multiIndex[0]].name
       })
     }
     this.setData({
@@ -216,6 +221,7 @@ Page({
 
     if (off) {
       this.data.evaluation.push(e.currentTarget.dataset.index)
+      console.log(this.data.evaluation)
       let labelnum = "";
       for (let i = 0; i < this.data.evaluation.length; i++) {
         if (this.data.evaluation.length - 1 == i) {
@@ -338,7 +344,7 @@ Page({
   },
 
   getintrodetail() {
-
+    let that = this;
     let introdetail = wx.getStorageSync("introdetail");
 
 
@@ -349,10 +355,39 @@ Page({
       labelnum: introdetail.hasOwnProperty("tag_id") ? introdetail.tag_id : "",
       degreeone: introdetail.hasOwnProperty("prof_degree") ? introdetail.prof_degree : "",
       constituttion: introdetail.hasOwnProperty("type") ? introdetail.type : "",
-      teamsnumber: introdetail.hasOwnProperty("number_people") ? introdetail.number_people : ""
+      teamsnumber: introdetail.hasOwnProperty("number_people") ? introdetail.number_people : "",
+      multiIndexsuan: introdetail.hasOwnProperty("hometown_id") ? introdetail.hometown_id.split(",") : "",
     })
 
 
+    if (introdetail.hasOwnProperty("hometown_id")) {
+      let one = "";
+      let two = "";
+      for (let i = 0; i < this.data.objectMultiArray[0].length; i++) {
+        if (this.data.multiIndexsuan[0] == this.data.objectMultiArray[0][i].id) {
+          this.data.multiIndex[0] = i
+          one = i
+        }
+      }
+      for (let i = 0; i < this.data.objectMultiArray[1].length; i++) {
+        for (let j = 0; j < this.data.objectMultiArray[1][i].length; j++) {
+          if (this.data.multiIndexsuan[1] == this.data.objectMultiArray[1][i][j].id) {
+            this.data.multiIndex[1] = j
+            two = j
+          }
+        }
+      }
+      this.setData({
+        multiIndex: this.data.multiIndex
+      })
+
+      that.setData({
+        multiArray: [that.data.provicemore, that.data.multiArrayone[1][one]],
+      })
+
+    }
+    console.log(this.data.multiArrayone)
+    console.log(this.data.objectMultiArray)
     if (introdetail.hasOwnProperty("tag_id") && introdetail.tag_id != null) {
       let tagid = introdetail.tag_id.split(",")
       for (let i = 0; i < this.data.detailevaluation.length; i++) {
@@ -368,14 +403,15 @@ Page({
         detailevaluation: this.data.detailevaluation
       })
 
-
-      let evaluations = []
-      for (let i = 0; i < tagid.length; i++) {
-        evaluations.push(tagid[i] - 0)
+      if (introdetail.tag_id) {
+        let evaluations = []
+        for (let i = 0; i < tagid.length; i++) {
+          evaluations.push(tagid[i] - 0)
+        }
+        this.setData({
+          evaluation: evaluations
+        })
       }
-      this.setData({
-        evaluation: evaluations
-      })
     }
     if (introdetail.hasOwnProperty("prof_degree")) {
       this.setData({
