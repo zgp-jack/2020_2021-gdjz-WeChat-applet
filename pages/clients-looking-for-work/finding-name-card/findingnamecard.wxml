@@ -290,7 +290,7 @@
     </view>
     <view class="cardeightsixall">
       <button class="cardeightsix" bindtap="moreskill">
-        <view>
+        <view wx:if="{{checkfourf != 0}}">
           更多技能证书
           <image src="../../../images/downward.png" class="down"></image>
         </view>

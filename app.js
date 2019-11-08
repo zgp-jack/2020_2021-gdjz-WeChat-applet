@@ -8,6 +8,7 @@ App({
     // }
   },
   globalData: {
+    showdetail:true,
     unitid: "adunit-80f40e8b4f60c3f6",
     requestToken: "jizhao",
     unitid: "adunit-80f40e8b4f60c3f6",

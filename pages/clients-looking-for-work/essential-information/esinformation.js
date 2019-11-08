@@ -169,6 +169,8 @@ Page({
   },
   getlocationdetails() { //所在地区的位置
     let historyregionone = wx.getStorageSync("historyregionone");
+    console.log(historyregionone)
+
     if (historyregionone) {
       this.setData({
         regionone: historyregionone.title,
@@ -176,7 +178,7 @@ Page({
         latitude: historyregionone.location.split(",")[1]
       })
       console.log(this.data.longitude)
-      wx.removeStorageSync('historyregionone')
+      // wx.removeStorageSync('historyregionone')
     }
   },
 
@@ -486,44 +488,29 @@ Page({
       adcode: this.data.oadcode,
     })
     console.log(information)
+  
+    app.doRequestAction({
+      url: "resumes/add-resume/",
+      way: "POST",
+      params: information,
+      success: function(res) {
 
-    let date = new Date();
-    let dateo = date.getTime()
-    let dateone = new Date(dateo);
-    let pages = getCurrentPages();
-    let r = "/" + pages[0].route;
-    let prevPage = pages[pages.length - 2];
-    console.log(prevPage)
-    prevPage.setData({ 
-      name: this.data.name,
-      sex: this.data.sex == "1" ? "男" : "女",
-      age: dateone.getFullYear() - (this.data.birthday.split("-")[0] - 0),
-      nation: this.data.nation,
-    });
+        wx.showModal({
+          title: '温馨提示',
+          content: '保存成功',
+          showCancel: false,
+          success(res) {
+            wx.navigateBack({
+              delta: 1
+            })
+          }
+        })
 
-    wx.navigateBack({ delta: 1 })
-    // app.doRequestAction({
-    //   url: "resumes/add-resume/",
-    //   way: "POST",
-    //   params: information,
-    //   success: function(res) {
-
-    //     wx.showModal({
-    //       title: '温馨提示',
-    //       content: '保存成功',
-    //       showCancel: false,
-    //       success(res) {
-    //         wx.navigateBack({
-    //           delta: 1
-    //         })
-    //       }
-    //     })
-
-    //   },
-    //   fail: function(err) {
-    //     console.log(err)
-    //   }
-    // })
+      },
+      fail: function(err) {
+        console.log(err)
+      }
+    })
   },
 
   getintrodetail() {
@@ -533,16 +520,16 @@ Page({
     this.setData({
       name: introinfo.hasOwnProperty("username") ? introinfo.username : "",
       indexsex: introinfo.hasOwnProperty("gender") ? introinfo.gender - 1 : "",
-
+      sex: introinfo.hasOwnProperty("gender") ? introinfo.gender : "",
+      birthday: introinfo.hasOwnProperty("birthday") ? introinfo.birthday : "",
+      complexwork: introinfo.hasOwnProperty("occupations") ? introinfo.occupations : [],
+      complexworkid: introinfo.hasOwnProperty("occupations_id") ? introinfo.occupations_id.split(",") : [],
+      regionone: introinfo.hasOwnProperty("address") ? introinfo.address : "",
+      telephone: introinfo.hasOwnProperty("tel") ? introinfo.tel : "",
+      tele: introinfo.hasOwnProperty("tel") ? introinfo.tel : "",
+      otextareavalue: introinfo.hasOwnProperty("introduce") ? introinfo.introduce : "",
     })
 
-    this.setData({
-      sex: introinfo.hasOwnProperty("gender") ? introinfo.gender : ""
-    })
-
-    this.setData({
-      birthday: introinfo.hasOwnProperty("birthday") ? introinfo.birthday : ""
-    })
     if (introinfo.gender != "") {
       this.setData({
         nationindex: introinfo.hasOwnProperty("nation_id") ? introinfo.nation_id - 1 : ""
@@ -551,12 +538,6 @@ Page({
         nation: introinfo.hasOwnProperty("nation_id") ? introinfo.nation_id : ""
       })
     }
-    this.setData({
-      complexwork: introinfo.hasOwnProperty("occupations") ? introinfo.occupations : []
-    })
-    this.setData({
-      complexworkid: introinfo.hasOwnProperty("occupations_id") ? introinfo.occupations_id.split(",") : []
-    })
     if (introinfo.hasOwnProperty("occupations")) {
       let workIndexvalue = ""
       for (let i = 0; i < introinfo.occupations.length; i++) {
@@ -566,9 +547,6 @@ Page({
         workIndexvalue: workIndexvalue
       })
     }
-    this.setData({
-      regionone: introinfo.hasOwnProperty("address") ? introinfo.address : ""
-    })
     if (introinfo.location) {
       this.setData({
         latitude: introinfo.hasOwnProperty("location") ? introinfo.location.split(",")[0] : ""
@@ -579,15 +557,6 @@ Page({
       })
     }
 
-    this.setData({
-      telephone: introinfo.hasOwnProperty("tel") ? introinfo.tel : ""
-    })
-    this.setData({
-      tele: introinfo.hasOwnProperty("tel") ? introinfo.tel : ""
-    })
-    this.setData({
-      otextareavalue: introinfo.hasOwnProperty("introduce") ? introinfo.introduce : ""
-    })
     if (introinfo.hasOwnProperty("occupations")) {
       for (let i = 0; i < this.data.typeworkarray.length; i++) {
         for (let j = 0; j < this.data.typeworkarray[i].children.length; j++) {
@@ -608,7 +577,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-
+    this.accessprovince()
   },
 
   /**
@@ -625,7 +594,7 @@ Page({
 
     this.getadcode()
     this.getbirth()
-    this.accessprovince()
+
     this.getlocationdetails()
   },
 

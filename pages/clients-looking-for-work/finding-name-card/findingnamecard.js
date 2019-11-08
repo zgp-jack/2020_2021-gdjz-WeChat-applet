@@ -59,7 +59,7 @@ Page({
     checkfourf: 4568,
     showbottom: false,
     resume_uuid: "",
-
+    showtan: false
   },
   completeall() {
     if (!this.data.resume_uuid) {
@@ -103,7 +103,7 @@ Page({
 
         itemList: selectdata,
         success(res) {
-          if (that.data.index == res.tapIndex){
+          if (that.data.index == res.tapIndex) {
             return
           }
           that.setData({
@@ -130,8 +130,8 @@ Page({
             params: detail,
             success(res) {
               console.log(res)
-              if (res.data.errcode == "ok"){
-                 that.getdetail()
+              if (res.data.errcode == "ok") {
+                that.getdetail()
               }
             }
           })
@@ -422,43 +422,29 @@ Page({
             skillbooksone: [that.data.skillbooks[0]]
           })
         }
-        if (that.data.checkonef == "0") {
-          wx.showModal({
-            title: '温馨提示',
-            content: '您的基本信息审核未通过请重新填写',
-            showCancel: false,
-            success(res) {
-            }
-          })
-          return
-        } else if (that.data.checktwof == "0") {
-          wx.showModal({
-            title: '温馨提示',
-            content: '您的工作介绍审核未通过请重新填写',
-            showCancel: false,
-            success(res) {
 
+        let popup = "";
+        if (mydata.hasOwnProperty("popup_text")) {
+          for (let i = 0; i < mydata.popup_text.length; i++) {
+            if (mydata.popup_text.length - 1 == i) {
+              popup += mydata.popup_text[i]
+            } else {
+              popup += mydata.popup_text[i] + ""
             }
-          })
-          return
-        } else if (that.data.checkthreef == "0") {
-          wx.showModal({
-            title: '温馨提示',
-            content: '您的项目经验审核未通过请重新填写',
-            showCancel: false,
-            success(res) {
-            }
-          })
-          return
-        } else if (that.data.checkfourf == "0") {
-          wx.showModal({
-            title: '温馨提示',
-            content: '您的技能证书审核未通过请重新填写',
-            showCancel: false,
-            success(res) {
-            }
-          })
-          return
+          }
+        }
+
+        if (app.globalData.showdetail) {
+          if (that.data.checkonef == "0" || that.data.checktwof == "0" || that.data.checkthreef == "0" || that.data.checkfourf == "0") {
+            wx.showModal({
+              title: '温馨提示',
+              content: `您的${popup}未通过请重新修改`,
+              showCancel: false,
+              success(res) {
+              }
+            })
+            app.globalData.showdetail = false
+          }
         }
       }
     })
@@ -478,7 +464,7 @@ Page({
   },
   delestore() {
     wx.removeStorageSync("projectdetail")
-  }, 
+  },
   deleskill() {
     wx.removeStorageSync("skilltail")
   },
@@ -486,7 +472,8 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    this.getdetail();
+
+
   },
 
   /**
@@ -500,9 +487,10 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow() {
-
+    this.getdetail();
     this.delestore();
     this.deleskill()
+
   },
 
   /**

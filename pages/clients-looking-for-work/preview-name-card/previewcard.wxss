@@ -12,3 +12,19 @@
   text-align: center;
   line-height: 60rpx;
 }
+.cardnine{
+
+  margin: 0 auto;
+
+}
+.obtcardnineone{
+  background-color: #0099FF;
+  color: white;
+  width: 345rpx;
+  height: 70rpx;
+  outline: 0;
+  line-height: 70rpx;
+}
+.cardeight {
+margin-bottom: 18rpx;
+}
