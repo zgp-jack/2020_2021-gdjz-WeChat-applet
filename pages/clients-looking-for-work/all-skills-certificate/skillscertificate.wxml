@@ -1,8 +1,8 @@
 <view>
- <view class="skilleight" wx:for="{{allskill}}" wx:key="{{index}}">
-   <image class="audit" wx:if="{{item.check == 1}}"  src="../../../images/review.png"></image>
-   <image class="audit" wx:if="{{item.check == 0}}" src="../../../images/notthrough.png"></image>
-   <view class="editor" bindtap="editor" data-uid="{{item}}" wx:if="{{item.check == 0||item.check == 2}}">编辑</view>
+  <view class="skilleight" wx:for="{{allskill}}" wx:if="{{skillpass == 0}}" wx:key="{{index}}">
+    <image class="audit" wx:if="{{item.check == 1}}" src="../../../images/review.png"></image>
+    <image class="audit" wx:if="{{item.check == 0}}" src="../../../images/notthrough.png"></image>
+    <view class="editor" bindtap="editor" data-uid="{{item}}" wx:if="{{item.check == 0||item.check == 2}}">编辑</view>
     <view class="skilleightzong">
       <image src="../../../images/newresume-experience-item.png" class="skilleightone"></image>
       <view></view>
@@ -24,5 +24,30 @@
       </view>
     </view>
   </view>
-  <button class="obtn" bindtap="addskill">添加技能证书</button>
+  <button class="obtn" bindtap="addskill"  wx:if="{{skillpass == 0&&allskilength<5}}">添加技能证书</button>
+
+
+  <view class="skilleight" wx:for="{{allskilltwo}}" wx:key="{{index}}" wx:if="{{skillpass == 1}}">
+    <view class="skilleightzong">
+      <image src="../../../images/newresume-experience-item.png" class="skilleightone"></image>
+      <view></view>
+      <view class="skilleightall">
+        <view class="skilleighttwo">
+          <text>{{item.name}}</text>
+          <text>{{item.certificate_time}}</text>
+        </view>
+        <view class="skilleightfive">
+          <view class="skilleightfiveline">
+            <image wx:for="{{item.image}}" wx:key="{{index}}" src="{{item}}"></image>
+          </view>
+        </view>
+        <view class="skilleightsixall">
+          没有更多了...
+        </view>
+        <view class="skillsixsixallvoto">
+        </view>
+      </view>
+    </view>
+  </view>
+
 </view>

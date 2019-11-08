@@ -12,6 +12,17 @@
   letter-spacing: 4rpx;
   font-weight: bold;
 }
+.nopass{
+  width: 93%;
+  margin: 0 auto;
+  margin-top: 18rpx;
+  background: rgb(245, 235, 235);
+  height: 50rpx;
+  line-height: 50rpx;
+  color: red;
+  font-size: 26rpx;
+  padding-left: 6rpx;
+}
 .link {
   width: 6px;
   height: 38rpx;

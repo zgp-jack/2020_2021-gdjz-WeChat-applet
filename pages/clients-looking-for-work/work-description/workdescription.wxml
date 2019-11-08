@@ -11,14 +11,14 @@
       <!-- bindchange="initAllProvice" -->
       <view class="informationsixtwo">
         <picker bindchange="bindMultiPickerChange" bindcolumnchange="bindMultiPickerColumnChange" mode="multiSelector" value="{{multiIndex}}" range="{{multiArray}}">
-          <input disabled name="addregion" value="{{multiIndexvalue}}" placeholder="请选择家乡地址"></input>
+          <input disabled bindinput="" name="addregion" value="{{multiIndexvalue}}" placeholder="请选择家乡地址"></input>
         </picker>
       </view>
     </view>
     <view class="informationproficiency">
       <text class="informationproficiencyone">熟练度</text>
       <picker bindchange="proficiency" value="{{indexproficiency}}" class="informationproficiencytwo" range="{{proficiencyarray}}">
-        <input disabled  name="addproficiencyarray" value="{{proficiencyarray[indexproficiency]}}" bindinput="proficiency"  placeholder="请选择熟练度"></input>
+        <input disabled  name="addproficiencyarray" value="{{proficiencyarray[indexproficiency]}}"bindinput="proficiency"  placeholder="请选择熟练度"></input>
       </picker>
     </view>
     <view class="informationcomposition">

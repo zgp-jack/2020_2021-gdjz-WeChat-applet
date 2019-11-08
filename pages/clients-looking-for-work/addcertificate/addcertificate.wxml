@@ -16,7 +16,7 @@
   </view>
   <view class="addcertificateimage">
     <view wx:for="{{imgArrs}}" class='img_item' wx:key="{{item}}">
-      <image class="addcertificateimageone" src='{{item}}' mode='widthFix' bindtap='previewImage' data-item="{{item}}"><view class="delete" catchtap="delete" data-index="{{index}}">X</view>
+      <image class="addcertificateimageone" src='{{item}}' mode="scaleToFill" bindtap='previewImage' data-item="{{item}}"><view class="delete" catchtap="delete" data-index="{{index}}">X</view>
       </image>
     </view>
     <view class='img_item' bindtap='chooseImage'>

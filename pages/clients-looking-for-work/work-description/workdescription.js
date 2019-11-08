@@ -1,4 +1,4 @@
-// .labelnum judge
+// .labelnum judge  bindMultiPickerChange bindMultiPickerColumnChange
 let areas = require("../../../utils/area.js");
 const app = getApp();
 let v = require("../../../utils/v.js");
@@ -6,7 +6,7 @@ let remain = require("../../../utils/remain.js");
 Page({
 
   /**
-   * 页面的初始数据  multiIndexvalue indexproficiency bindMultiPickerColumnChange
+   * multiArray bindMultiPickerColumnChange
    */
   data: {
     workage: "",
@@ -189,6 +189,7 @@ Page({
   },
 
   bindMultiPickerColumnChange: function (e) { //下滑家乡列表所产生的函数
+    console.log(e)
     let that = this;
     let namearry = this.data.multiArrayone;
     var data = {
@@ -365,7 +366,7 @@ Page({
     })
 
 
-    if (introdetail.hasOwnProperty("hometown_id")) {
+    if (introdetail.hasOwnProperty("hometown_id") && introdetail.hometown_id != 0) {
       let one = "";
       let two = "";
       for (let i = 0; i < this.data.objectMultiArray[0].length; i++) {
@@ -391,6 +392,7 @@ Page({
       })
 
     }
+    console.log(that.data.multiArray)
     console.log(this.data.multiArrayone)
     console.log(this.data.objectMultiArray)
     if (introdetail.hasOwnProperty("tag_id") && introdetail.tag_id != null) {

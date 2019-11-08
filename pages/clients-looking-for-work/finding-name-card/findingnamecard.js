@@ -59,7 +59,9 @@ Page({
     checkfourf: 4568,
     showbottom: false,
     resume_uuid: "",
-    showtan: false
+    showtan: false,
+    resson:"",
+    ressonone:false
   },
   completeall() {
     if (!this.data.resume_uuid) {
@@ -74,7 +76,7 @@ Page({
       wx.navigateTo({
         url: "/pages/clients-looking-for-work/new-project-experience/projectexperience",
       })
-    } else {
+    } else if (this.data.skillbooks.length == 0) {
       wx.navigateTo({
         url: "/pages/clients-looking-for-work/addcertificate/addcertificate",
       })
@@ -447,6 +449,10 @@ Page({
                 showCancel: false,
                 success(res) {
                 }
+              })
+              that.setData({
+                resson: [that.data.skillbooks[0]],
+                ressonone:true
               })
               app.globalData.showdetail = false
             }

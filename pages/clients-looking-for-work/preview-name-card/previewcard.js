@@ -1,5 +1,4 @@
-// addskill  lat nation
-
+// moreproject
 
 const app = getApp();
 
@@ -75,11 +74,13 @@ Page({
     }
   },
   moreproject() {
+    wx.setStorageSync("pass",1)
     wx.navigateTo({
       url: "/pages/clients-looking-for-work/all-project-experience/allexperience",
     })
   },
   moreskill() {
+    wx.setStorageSync("skillpass", 1)
     wx.navigateTo({
       url: "/pages/clients-looking-for-work/all-skills-certificate/skillscertificate",
     })

@@ -111,7 +111,9 @@
     <view class="cardotextbottom"></view>
   </view>
 </view>
-
+ <view class="nopass" wx:if="{{ressonone}}">
+  审核未通过原因:
+ </view>
   <view class="findingnamecardthree" wx:if="{{selfintro}}">
     <view class="findingnamecardthreemobile">
       <image src="../../../images/newresume-description.png"></image>

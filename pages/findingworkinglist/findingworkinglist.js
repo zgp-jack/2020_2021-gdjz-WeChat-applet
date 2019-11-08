@@ -1,4 +1,4 @@
-// pages/lists/lists.js
+//userTapSearch
 const app = getApp();
 let footerjs = require("../../utils/footer.js");
 let areas = require("../../utils/area.js");
@@ -653,6 +653,20 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
+
+
+  getlistdata(){
+    let that = this;
+    app.appRequestAction({
+      url: 'resumes/index/',
+      way: 'GET',
+      failTitle: "操作失败，请稍后重试！",
+      success(res) {
+        console.log(res)
+      }
+    })
+  },
+
   onLoad: function (options) {
     this.initSearchHistory();
     this.initUserShareTimes();
@@ -660,6 +674,7 @@ Page({
     this.valiFilterProvince();
     this.initFooterData();
     this.initNeedData();
+    this.getlistdata()
   },
 
   /**

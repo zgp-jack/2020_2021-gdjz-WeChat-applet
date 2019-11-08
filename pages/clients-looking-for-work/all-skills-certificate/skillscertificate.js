@@ -6,8 +6,10 @@ Page({
    * 页面的初始数据
    */
   data: {
-    allskill: []
-
+    allskill: [],
+    allskilength:0,
+    skillpass:0,
+    allskilltwo: [],
   },
   allskill() {
     let userInfo = wx.getStorageSync("userInfo");
@@ -27,14 +29,26 @@ Page({
         console.log(res)
         if (res.errMsg == "request:ok") {
           that.setData({
-            allskill: res.data.data.certificates
+            allskill: res.data.data.certificates,
+            allskilength: res.data.data.certificates.length
           })
+          console.log(that.data.allskilength)
+          let allskilltwo = [];
+          for (let i = 0; i < that.data.allskill.length; i++) {
+            if (that.data.allskill[i].check == "2") {
+              allskilltwo.push(that.data.allskill[i])
+            }
+          }
+          // console.log(that.data.allskilltwo)
+          console.log(allskilltwo)
+          that.setData({
+            allskilltwo: allskilltwo
+          });
         }
       },
       fail: function (err) {
         app.showMyTips("获取失败");
       }
-
     })
   },
   addskill() {
@@ -52,6 +66,16 @@ Page({
   deleskill() {
     wx.removeStorageSync("skilltail")
   },
+  getskill() {
+    let skillpass = wx.getStorageSync("skillpass");
+    if (skillpass) {
+      this.setData({
+        skillpass: skillpass
+      })
+    }
+    wx.removeStorageSync("skillpass")
+  },
+
   /**
    * 生命周期函数--监听页面加载
    */
@@ -71,7 +95,8 @@ Page({
    */
   onShow: function () {
     this.allskill();
-    this.deleskill()
+    this.deleskill();
+    this.getskill();
   },
 
   /**

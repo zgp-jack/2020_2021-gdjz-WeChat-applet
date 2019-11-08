@@ -68,9 +68,7 @@
     "pages/map/detail",
     "pages/others/message/lists/lists",
     "pages/others/message/publish/publish",
-    "pages/others/information/lists",
-    "pages/clients-looking-for-work/preall-project-experience/preall-project-experience",
-    "pages/clients-looking-for-work/preall-skills-certificate/preall-skills-certificate"
+    "pages/others/information/lists"
   ],
   "window": {
     "backgroundTextStyle": "light",
