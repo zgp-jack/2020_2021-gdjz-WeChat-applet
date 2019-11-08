@@ -25,6 +25,36 @@
   outline: 0;
   line-height: 70rpx;
 }
+
+.obtcard{
+  margin-top:12rpx;
+}
+
+.obtcardone{
+  margin-top:30rpx;
+}
+
 .cardeight {
 margin-bottom: 18rpx;
+}
+.allone{
+  display: flex;
+  justify-content: space-between;
+  font-size: 26rpx;
+  color: white;
+  margin-top: 14.5rpx;
+}
+.cliok text:last-child{
+  background: #0099FF;
+  padding: 6rpx;
+  border-radius: 6rpx;
+  margin-right: 24rpx;
+}
+
+.jilu{
+  font-size: 26rpx;
+  color: #7D7D7D;
+  text-align: center;
+  margin-top: 19rpx;
+  padding-left: 18rpx;
 }

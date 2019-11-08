@@ -1,6 +1,8 @@
 {
   "pages": [
+    "pages/findingworkinglist/findingworkinglist",
     "pages/clients-looking-for-work/finding-name-card/findingnamecard",
+    "pages/clients-looking-for-work/preview-name-card/previewcard",
     "pages/index/index",
     "pages/clients-looking-for-work/modify-project-experience/modifyexper",
     "pages/clients-looking-for-work/all-project-experience/allexperience",
@@ -13,7 +15,6 @@
     "pages/clients-looking-for-work/addcertificate/addcertificate",
     "pages/clients-looking-for-work/modifycertificate/modifycertificate",
     "pages/clients-looking-for-work/all-skills-certificate/skillscertificate",
-    "pages/clients-looking-for-work/preview-name-card/previewcard",
     "pages/clients-looking-for-work/selectmap/smap",
     "pages/clients-looking-for-work/basic-information/information",
     "pages/detail/info/info",

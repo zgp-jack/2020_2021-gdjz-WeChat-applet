@@ -108,7 +108,7 @@ Page({
     })
     console.log(project)
     let that = this;
-    app.doRequestAction({
+    app.appRequestAction({
       url: 'resumes/del-certificate/',
       way: 'POST',
       params: project,
@@ -121,6 +121,9 @@ Page({
             })
           }
         })
+      },
+      fail: function (err) {
+        app.showMyTips("保存失败");
       }
     })
     this.setData({
@@ -179,7 +182,7 @@ Page({
     })
     console.log(project)
     let that = this;
-    app.doRequestAction({
+    app.appRequestAction({
       url: 'resumes/certificate/',
       way: 'POST',
       params: project,
@@ -193,6 +196,9 @@ Page({
             })
           }
         })
+      },
+      fail: function (err) {
+        app.showMyTips("保存失败");
       }
     })
   },
@@ -239,7 +245,7 @@ Page({
     })
     console.log(project)
     let that = this;
-    app.doRequestAction({
+    app.appRequestAction({
       url: 'resumes/certificate/',
       way: 'POST',
       failTitle: "操作失败，请稍后重试！",
@@ -247,9 +253,19 @@ Page({
       success(res) {
         remain.remain({
           tips: res.data.errmsg, callback: function () {
+            if (res.data.errcode == "ok") {
+              that.setData({
+                imgArrs: [],
+                idArrs: [],
+                date: "",
+                name: "",
+              })
+            }
           }
         })
-
+      },
+      fail: function (err) {
+        app.showMyTips("保存失败");
       }
     })
   },
@@ -322,7 +338,7 @@ Page({
     })
     console.log(project)
     let that = this;
-    app.doRequestAction({
+    app.appRequestAction({
       url: 'resumes/certificate/',
       way: 'POST',
       failTitle: "操作失败，请稍后重试！",
@@ -337,6 +353,9 @@ Page({
             }
           }
         })
+      },
+      fail: function (err) {
+        app.showMyTips("保存失败");
       }
     })
   },

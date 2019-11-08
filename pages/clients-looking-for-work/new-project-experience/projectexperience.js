@@ -2,7 +2,7 @@ const app = getApp();
 let v = require("../../../utils/v.js");
 let areas = require("../../../utils/area.js");
 let remain = require("../../../utils/remain.js");
-//bindstartDate delete
+//bindstartDate delete vertify
 Page({
   data: {
     project: "",
@@ -287,24 +287,27 @@ Page({
     })
     console.log(project)
     let that = this;
-    // app.appRequestAction({
-    //   url: 'resumes/project/',
-    //   way: 'POST',
-    //   params: project,
-    //   failTitle: "操作失败，请稍后重试！",
-    //   success(res) {
-    //     console.log(res)
-    //     remain.remain({
-    //       tips: res.data.errmsg, callback: function () {
-    //         if (res.data.errcode == "ok") {
-    //           wx.navigateBack({
-    //             delta: 1
-    //           })
-    //         }
-    //       }
-    //     })
-    //   }
-    // })
+    app.appRequestAction({
+      url: 'resumes/project/',
+      way: 'POST',
+      params: project,
+      failTitle: "操作失败，请稍后重试！",
+      success(res) {
+        console.log(res)
+        remain.remain({
+          tips: res.data.errmsg, callback: function () {
+            if (res.data.errcode == "ok") {
+              wx.navigateBack({
+                delta: 1
+              })
+            }
+          }
+        })
+      },
+      fail: function (err) {
+        app.showMyTips("保存失败");
+      }
+    })
   },
   preservechixu() {
     let userInfo = wx.getStorageSync("userInfo");
@@ -414,6 +417,9 @@ Page({
           }
         })
 
+      },
+      fail: function (err) {
+        app.showMyTips("保存失败");
       }
     })
   },
@@ -456,10 +462,16 @@ Page({
         remain.remain({
           tips: res.data.errmsg, callback: function () {
             if (res.data.errcode == "ok") {
-              that.delestore()
+              that.delestore();
+              wx.navigateBack({
+                delta: 1
+              })
             }
           }
         })
+      },
+      fail: function (err) {
+        app.showMyTips("保存失败");
       }
     })
     this.setData({
@@ -636,6 +648,9 @@ Page({
             }
           }
         })
+      },
+      fail: function (err) {
+        app.showMyTips("保存失败");
       }
     })
   },

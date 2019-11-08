@@ -1,13 +1,14 @@
-// pages/Finding a name card.js
+// addskill  lat nation
+
+
 const app = getApp();
-//selfintro 
+
 Page({
 
   /**
-   * 页面的初始数据
+   * 页面的初始数据 nation view_num
    */
   data: {
-    allde: false,
     username: '',
     userimg: '',
     showtop: true,
@@ -35,7 +36,6 @@ Page({
     selectShow: false,//控制下拉列表的显示隐藏，false隐藏、true显示
     selectData: [],//下拉列表的数据
     index: 0,//选择的下拉列表下标
-    resume_uuid: "",
     check: "",
     checkstatus: true,
     is_introduces: false,
@@ -48,37 +48,42 @@ Page({
     percent: 0,
     skilllength: 0,
     skillbooks: [],
-    skillbooksone: []
+    skillbooksone: [],
+    checkone: false,
+    checkonef: 4568,
+    checktwo: false,
+    checktwof: 4568,
+    checkthree: false,
+    checkthreef: 4568,
+    checkfour: false,
+    checkfourf: 4568,
+    showbottom: false,
+    resume_uuid: "",
+    showtan: false
   },
-
-  selectTap() {
-    if (this.data.check == "1") {
-      wx.showModal({
-        title: '温馨提示',
-        content: '提示信息审核中，请稍后再试',
-        showCancel: false,
-        success(res) { }
-      })
-      return
+  telephorf(e){
+    wx.makePhoneCall({
+      phoneNumber: e.currentTarget.dataset.telephone,
+    })
+  },
+  onShareAppMessage: function () {
+    console.log(123)
+    return {
+      title: '在这里输入标题',
+      desc: '在这里输入简介说明',
+      path: '../preview-name-card/previewcard'//这是一个路径
     }
-    this.setData({
-      selectShow: !this.data.selectShow
-    });
   },
-  // 点击下拉列表
   moreproject() {
     wx.navigateTo({
-      url: "/pages/clients-looking-for-work/preall-project-experience/preall-project-experience",
+      url: "/pages/clients-looking-for-work/all-project-experience/allexperience",
     })
   },
-  
   moreskill() {
     wx.navigateTo({
-      url: "/pages/clients-looking-for-work/preall-skills-certificate/preall-skills-certificate",
+      url: "/pages/clients-looking-for-work/all-skills-certificate/skillscertificate",
     })
   },
-
- 
   getdetail() {
     let userInfo = wx.getStorageSync("userInfo");
     let detail = {}
@@ -88,141 +93,150 @@ Page({
       tokenTime: userInfo.tokenTime,
     })
     let that = this;
-    app.doRequestAction({
+    app.appRequestAction({
       url: 'resumes/resume-list/',
       way: 'POST',
       params: detail,
+      failTitle: "操作失败，请稍后重试！",
       success(res) {
-        let date = new Date();
-        let dateo = date.getTime()
-        let dateone = new Date(dateo);
+        let mydata = res.data.data;
+        console.log(mydata)
         console.log(res)
-        if (res.data.data.info.uuid) {
-          that.showtop()
+        if (res.errMsg == "request:ok") {
+
+          let date = new Date();
+          let dateo = date.getTime()
+          let dateone = new Date(dateo);
+          wx.setStorageSync("introdetail", mydata.introduces)
+          wx.setStorageSync("introinfo", mydata.info)
+          if (mydata.info.uuid) {
+            that.setData({
+              resume_uuid: mydata.info.uuid
+            })
+            wx.setStorageSync("uuid", mydata.info.uuid)
+          }
           that.setData({
-            resume_uuid: res.data.data.info.uuid
+            sex: mydata.info.gender == "1" ? "男" : "女"
           })
-          wx.setStorageSync("uuid", res.data.data.info.uuid)
-        }
-        that.setData({
-          name: res.data.data.info.username
-        })
-        that.setData({
-          sex: res.data.data.info.gender == "1" ? "男" : "女"
-        })
-        that.setData({
-          age: dateone.getFullYear() - (res.data.data.info.birthday.split("-")[0] - 0)
-        })
-
-        that.setData({
-          nation: res.data.data.info.nation
-        })
-
-        that.setData({
-          occupations: res.data.data.info.occupations
-        })
-        that.setData({
-          telephone: res.data.data.info.tel
-        })
-        that.setData({
-          city: res.data.data.info.address
-        })
-        that.setData({
-          intro: false,
-          introne: true,
-          introduce: res.data.data.info.introduce
-        })
-        that.setData({
-          workingyears: res.data.data.introduces.experience
-        })
-        that.setData({
-          staffcomposition: res.data.data.introduces.type_str
-        })
-        that.setData({
-          cityself: res.data.data.introduces.hometown
-        })
-        that.setData({
-          procity: res.data.data.introduces.prof_degree_str
-        })
-        that.setData({
-          personnum: res.data.data.introduces.number_people
-        })
-        that.setData({
-          tags: res.data.data.introduces.tags
-        })
-        let selectD = Object.values(res.data.data.status)
-        let selectk = Object.keys(res.data.data.status)
-        if (res.data.data.info.is_end == "2") {
-          selectD.reverse();
-          selectk.reverse()
-        }
-        that.setData({
-          selectData: selectD,
-          selectk: selectk
-        })
-        if (res.data.data.info.check == "1") {
+          if (mydata.info.birthday) {
+            that.setData({
+              age: dateone.getFullYear() - (mydata.info.birthday.split("-")[0] - 0)
+            })
+          }
           that.setData({
-            checkstatus: false
+            name: mydata.info.hasOwnProperty("username") ? mydata.info.username : "",
+            nation: mydata.info.hasOwnProperty("nation") ? mydata.info.nation : "",
+            occupations: mydata.info.hasOwnProperty("occupations") ? mydata.info.occupations : "",
+            telephone: mydata.info.hasOwnProperty("tel") ? mydata.info.tel : "",
+            city: mydata.info.hasOwnProperty("address") ? mydata.info.address : "",
+            intro: false,
+            introne: true,
+            introduce: mydata.info.hasOwnProperty("introduce") ? mydata.info.introduce : "",
+            workingyears: mydata.introduces.hasOwnProperty("experience") ? mydata.introduces.experience : "",
+            staffcomposition: mydata.introduces.hasOwnProperty("type_str") ? mydata.introduces.type_str : "",
+            cityself: mydata.introduces.hasOwnProperty("hometown") ? mydata.introduces.hometown : "",
+            procity: mydata.introduces.hasOwnProperty("prof_degree_str") ? mydata.introduces.prof_degree_str : "",
+            personnum: mydata.introduces.hasOwnProperty("number_people") ? mydata.introduces.number_people : "",
+            tags: mydata.introduces.hasOwnProperty("tags") ? mydata.introduces.tags : "",
+          })
+
+          let selectD = Object.values(mydata.status)
+          let selectk = Object.keys(mydata.status)
+          if (mydata.info.is_end == "2") {
+            that.setData({
+              index: 1,
+            })
+          }
+          that.setData({
+            selectData: selectD,
+            selectk: selectk
+          })
+          that.setData({
+            check: mydata.info.hasOwnProperty("check") ? mydata.info.check : ""
+          })
+
+          that.setData({
+            headerimg: mydata.info.headerimg
+          })
+          if (mydata.is_introduces == 1) {
+            that.setData({
+              is_introduces: mydata.is_introduces,
+              selfintro: false,
+              selfintrone: true,
+            })
+          } else if (mydata.is_introduces == 0) {
+            that.setData({
+              is_introduces: mydata.is_introduces
+            })
+          }
+
+          that.setData({
+            view_num: mydata.info.hasOwnProperty("view_num") ? mydata.info.view_num : 0
           });
-        }
-        that.setData({
-          check: res.data.data.info.check
-        })
 
-        that.setData({
-          headerimg: res.data.data.info.headerimg
-        })
-        if (res.data.data.is_introduces) {
+          if (mydata.project != []) {
+            console.log(mydata.project)
+            let projectall = [];
+            for (let i = 0; i < mydata.project.length; i ++ ){
+              if (mydata.project[i].check == "2"){
+                 projectall.push(mydata.project[i])
+              }
+            }
+            that.setData({
+              project: projectall
+            });
+            that.setData({
+              projectone: [projectall[0]]
+            });
+            that.setData({
+              projectlength: projectall.length >= 1 ? projectall.length : 0
+            })
+          }
+
           that.setData({
-            is_introduces: res.data.data.is_introduces,
-            selfintro: false,
-            selfintrone: true,
+            percent: mydata.info.hasOwnProperty("progress") ? mydata.info.progress : 0
           })
+
+          if (mydata.certificates != []) {
+            console.log(mydata.certificates)
+            let certificatesall = [];
+            for (let i = 0; i < mydata.certificates.length; i++) {
+              if (mydata.certificates[i].check == "2") {
+                certificatesall.push(mydata.certificates[i])
+              }
+            }
+
+            that.setData({
+              skillbooks: certificatesall
+            })
+            that.setData({
+              skilllength: certificatesall.length >= 1 ? certificatesall.length : 0
+            })
+            that.setData({
+              skillbooksone: [certificatesall[0]]
+            })
+          }
+
         }
-
-        that.setData({
-          view_num: res.data.data.info.view_num
-        });
-        that.setData({
-          project: res.data.data.project
-        });
-        that.setData({
-          projectone: [res.data.data.project[0]]
-        });
-        that.setData({
-          projectlength: res.data.data.project.length
-        })
-        that.setData({
-          allde: true
-        })
-
-        that.setData({
-          percent: res.data.data.info.progress - 0
-        })
-
-        that.setData({
-          skillbooks: res.data.data.certificates
-        })
-        that.setData({
-          skilllength: res.data.data.certificates.length
-        })
-        that.setData({
-          skillbooksone: [that.data.skillbooks[0]]
-        })
+      },
+      fail: function (err) {
+        app.showMyTips("请求失败");
       }
     })
   },
-  showtop() {
-    this.setData({
-      showtop: false,
-      showtopone: true
-    })
-  },
 
+
+  delestore() {
+    wx.removeStorageSync("projectdetail")
+  },
+  deleskill() {
+    wx.removeStorageSync("skilltail")
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+
 
   },
 
@@ -238,6 +252,8 @@ Page({
    */
   onShow() {
     this.getdetail();
+    this.delestore();
+    this.deleskill()
 
   },
 
@@ -270,6 +286,6 @@ Page({
   },
 
   /**
-   * 用户点击右上角分享
+   * 用户点击右上角分享  projectone
    */
 })

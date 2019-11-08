@@ -1,4 +1,4 @@
-// addskill  lat nation
+// addskill  lat nation projectlength
 
 
 const app = getApp();
@@ -137,7 +137,7 @@ Page({
           })
         },
         fail(res) {
-          console.log(res.errMsg)
+          app.showMyTips("修改失败");
         }
       })
     }
@@ -266,9 +266,13 @@ Page({
       app.appRequestAction({
         url: 'resumes/edit-img/',
         way: 'POST',
+        failTitle: "操作失败，请稍后重试！",
         params: imgdetail,
         success(res) {
-          console.log(res)
+          app.showMyTips("保存成功");
+        },
+        fail: function (err) {
+          app.showMyTips("保存失败");
         }
       })
     })
@@ -286,166 +290,171 @@ Page({
       url: 'resumes/resume-list/',
       way: 'POST',
       params: detail,
+      failTitle: "操作失败，请稍后重试！",
       success(res) {
         let mydata = res.data.data;
         console.log(mydata)
-
-
-        for (let i = 0; i < mydata.project.length; i++) {
-          if (mydata.project[i].check != 1) {
-            that.setData({
-              checkthree: false,
-              checkthreef: mydata.project[i].check
-            })
-            break
+        console.log(res)
+        if (res.errMsg == "request:ok") {
+          for (let i = 0; i < mydata.project.length; i++) {
+            if (mydata.project[i].check != 1) {
+              that.setData({
+                checkthree: false,
+                checkthreef: mydata.project[i].check
+              })
+              break
+            }
+            if (mydata.project[i].check == 1) {
+              that.setData({
+                checkthree: true,
+                checkthreef: mydata.project[i].check
+              })
+            }
           }
-          if (mydata.project[i].check == 1) {
+
+          for (let i = 0; i < mydata.certificates.length; i++) {
+            if (mydata.certificates[i].check != 1) {
+              that.setData({
+                checkfour: false,
+                checkfourf: mydata.certificates[i].check
+              })
+              break
+            }
+            if (mydata.certificates[i].check == 1) {
+              that.setData({
+                checkfour: true,
+                checkfourf: mydata.certificates[i].check
+              })
+            }
+          }
+          let date = new Date();
+          let dateo = date.getTime()
+          let dateone = new Date(dateo);
+          wx.setStorageSync("introdetail", mydata.introduces)
+          wx.setStorageSync("introinfo", mydata.info)
+          if (mydata.info.uuid) {
+            that.showtop()
             that.setData({
-              checkthree: true,
-              checkthreef: mydata.project[i].check
+              resume_uuid: mydata.info.uuid
+            })
+            wx.setStorageSync("uuid", mydata.info.uuid)
+          }
+          that.setData({
+            sex: mydata.info.gender == "1" ? "男" : "女"
+          })
+          if (mydata.info.birthday) {
+            that.setData({
+              age: dateone.getFullYear() - (mydata.info.birthday.split("-")[0] - 0)
             })
           }
-        }
-
-        for (let i = 0; i < mydata.certificates.length; i++) {
-          if (mydata.certificates[i].check != 1) {
+          that.setData({
+            name: mydata.info.hasOwnProperty("username") ? mydata.info.username : "",
+            nation: mydata.info.hasOwnProperty("nation") ? mydata.info.nation : "",
+            occupations: mydata.info.hasOwnProperty("occupations") ? mydata.info.occupations : "",
+            telephone: mydata.info.hasOwnProperty("tel") ? mydata.info.tel : "",
+            city: mydata.info.hasOwnProperty("address") ? mydata.info.address : "",
+            intro: false,
+            introne: true,
+            introduce: mydata.info.hasOwnProperty("introduce") ? mydata.info.introduce : "",
+            workingyears: mydata.introduces.hasOwnProperty("experience") ? mydata.introduces.experience : "",
+            staffcomposition: mydata.introduces.hasOwnProperty("type_str") ? mydata.introduces.type_str : "",
+            cityself: mydata.introduces.hasOwnProperty("hometown") ? mydata.introduces.hometown : "",
+            procity: mydata.introduces.hasOwnProperty("prof_degree_str") ? mydata.introduces.prof_degree_str : "",
+            personnum: mydata.introduces.hasOwnProperty("number_people") ? mydata.introduces.number_people : "",
+            tags: mydata.introduces.hasOwnProperty("tags") ? mydata.introduces.tags : "",
+            checkone: mydata.info.check && mydata.info.check == 1 ? true : false,
+            checkonef: mydata.info.hasOwnProperty("check") ? mydata.info.check : "",
+            checktwo: mydata.introduces.check && mydata.introduces.check == 1 ? true : false,
+            checktwof: mydata.introduces.hasOwnProperty("check") ? mydata.introduces.check : "",
+          })
+          that.showbottom()
+          let selectD = Object.values(mydata.status)
+          let selectk = Object.keys(mydata.status)
+          if (mydata.info.is_end == "2") {
             that.setData({
-              checkfour: false,
-              checkfourf: mydata.certificates[i].check
+              index: 1,
             })
-            break
           }
-          if (mydata.certificates[i].check == 1) {
+          that.setData({
+            selectData: selectD,
+            selectk: selectk
+          })
+          that.setData({
+            check: mydata.info.hasOwnProperty("check") ? mydata.info.check : ""
+          })
+
+          that.setData({
+            headerimg: mydata.info.headerimg
+          })
+          if (mydata.is_introduces == 1) {
             that.setData({
-              checkfour: true,
-              checkfourf: mydata.certificates[i].check
+              is_introduces: mydata.is_introduces,
+              selfintro: false,
+              selfintrone: true,
+            })
+          } else if (mydata.is_introduces == 0) {
+            that.setData({
+              is_introduces: mydata.is_introduces
             })
           }
-        }
-        let date = new Date();
-        let dateo = date.getTime()
-        let dateone = new Date(dateo);
-        wx.setStorageSync("introdetail", mydata.introduces)
-        wx.setStorageSync("introinfo", mydata.info)
-        if (mydata.info.uuid) {
-          that.showtop()
-          that.setData({
-            resume_uuid: mydata.info.uuid
-          })
-          wx.setStorageSync("uuid", mydata.info.uuid)
-        }
-        that.setData({
-          sex: mydata.info.gender == "1" ? "男" : "女"
-        })
-        if (mydata.info.birthday) {
-          that.setData({
-            age: dateone.getFullYear() - (mydata.info.birthday.split("-")[0] - 0)
-          })
-        }
-        that.setData({
-          name: mydata.info.hasOwnProperty("username") ? mydata.info.username : "",
-          nation: mydata.info.hasOwnProperty("nation") ? mydata.info.nation : "",
-          occupations: mydata.info.hasOwnProperty("occupations") ? mydata.info.occupations : "",
-          telephone: mydata.info.hasOwnProperty("tel") ? mydata.info.tel : "",
-          city: mydata.info.hasOwnProperty("address") ? mydata.info.address : "",
-          intro: false,
-          introne: true,
-          introduce: mydata.info.hasOwnProperty("introduce") ? mydata.info.introduce : "",
-          workingyears: mydata.introduces.hasOwnProperty("experience") ? mydata.introduces.experience : "",
-          staffcomposition: mydata.introduces.hasOwnProperty("type_str") ? mydata.introduces.type_str : "",
-          cityself: mydata.introduces.hasOwnProperty("hometown") ? mydata.introduces.hometown : "",
-          procity: mydata.introduces.hasOwnProperty("prof_degree_str") ? mydata.introduces.prof_degree_str : "",
-          personnum: mydata.introduces.hasOwnProperty("number_people") ? mydata.introduces.number_people : "",
-          tags: mydata.introduces.hasOwnProperty("tags") ? mydata.introduces.tags : "",
-          checkone: mydata.info.check && mydata.info.check == 1 ? true : false,
-          checkonef: mydata.info.hasOwnProperty("check") ? mydata.info.check : "",
-          checktwo: mydata.introduces.check && mydata.introduces.check == 1 ? true : false,
-          checktwof: mydata.introduces.hasOwnProperty("check") ? mydata.introduces.check : "",
-        })
-        that.showbottom()
-        let selectD = Object.values(mydata.status)
-        let selectk = Object.keys(mydata.status)
-        if (mydata.info.is_end == "2") {
-          that.setData({
-            index: 1,
-          })
-        }
-        that.setData({
-          selectData: selectD,
-          selectk: selectk
-        })
-        that.setData({
-          check: mydata.info.hasOwnProperty("check") ? mydata.info.check : ""
-        })
 
-        that.setData({
-          headerimg: mydata.info.headerimg
-        })
-        if (mydata.is_introduces == 1) {
           that.setData({
-            is_introduces: mydata.is_introduces,
-            selfintro: false,
-            selfintrone: true,
-          })
-        } else if (mydata.is_introduces == 0) {
-          that.setData({
-            is_introduces: mydata.is_introduces
-          })
-        }
-
-        that.setData({
-          view_num: mydata.info.hasOwnProperty("view_num") ? mydata.info.view_num : 0
-        });
-        if (mydata.project != []) {
-          that.setData({
-            project: mydata.project
+            view_num: mydata.info.hasOwnProperty("view_num") ? mydata.info.view_num : 0
           });
+          if (mydata.project != []) {
+            that.setData({
+              project: mydata.project
+            });
+            that.setData({
+              projectone: [mydata.project[0]]
+            });
+            that.setData({
+              projectlength: mydata.project.length >= 1 ? mydata.project.length : 0
+            })
+          }
           that.setData({
-            projectone: [mydata.project[0]]
-          });
-          that.setData({
-            projectlength: mydata.project.length >= 1 ? mydata.project.length : 0
+            percent: mydata.info.hasOwnProperty("progress") ? mydata.info.progress : 0
           })
-        }
-        that.setData({
-          percent: mydata.info.hasOwnProperty("progress") ? mydata.info.progress : 0
-        })
 
-        if (mydata.certificates != []) {
-          that.setData({
-            skillbooks: mydata.certificates
-          })
-          that.setData({
-            skilllength: res.data.data.certificates.length >= 1 ? res.data.data.certificates.length : 0
-          })
-          that.setData({
-            skillbooksone: [that.data.skillbooks[0]]
-          })
-        }
+          if (mydata.certificates != []) {
+            that.setData({
+              skillbooks: mydata.certificates
+            })
+            that.setData({
+              skilllength: res.data.data.certificates.length >= 1 ? res.data.data.certificates.length : 0
+            })
+            that.setData({
+              skillbooksone: [that.data.skillbooks[0]]
+            })
+          }
 
-        let popup = "";
-        if (mydata.hasOwnProperty("popup_text")) {
-          for (let i = 0; i < mydata.popup_text.length; i++) {
-            if (mydata.popup_text.length - 1 == i) {
-              popup += mydata.popup_text[i]
-            } else {
-              popup += mydata.popup_text[i] + ""
+          let popup = "";
+          if (mydata.hasOwnProperty("popup_text")) {
+            for (let i = 0; i < mydata.popup_text.length; i++) {
+              if (mydata.popup_text.length - 1 == i) {
+                popup += mydata.popup_text[i]
+              } else {
+                popup += mydata.popup_text[i] + ""
+              }
+            }
+          }
+
+          if (app.globalData.showdetail) {
+            if (that.data.checkonef == "0" || that.data.checktwof == "0" || that.data.checkthreef == "0" || that.data.checkfourf == "0") {
+              wx.showModal({
+                title: '温馨提示',
+                content: `您的${popup}未通过请重新修改`,
+                showCancel: false,
+                success(res) {
+                }
+              })
+              app.globalData.showdetail = false
             }
           }
         }
-
-        if (app.globalData.showdetail) {
-          if (that.data.checkonef == "0" || that.data.checktwof == "0" || that.data.checkthreef == "0" || that.data.checkfourf == "0") {
-            wx.showModal({
-              title: '温馨提示',
-              content: `您的${popup}未通过请重新修改`,
-              showCancel: false,
-              success(res) {
-              }
-            })
-            app.globalData.showdetail = false
-          }
-        }
+      },
+      fail: function (err) {
+        app.showMyTips("请求失败");
       }
     })
   },

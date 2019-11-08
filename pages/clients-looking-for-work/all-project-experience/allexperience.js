@@ -49,12 +49,14 @@ Page({
       tokenTime: userInfo.tokenTime,
     })
     let that = this;
-    app.doRequestAction({
+    app.appRequestAction({
       url: 'resumes/resume-list/',
       way: 'POST',
       params: detail,
+      failTitle: "操作失败，请稍后重试！",
       success(res) {
         console.log(res)
+        if (res.errMsg == "request:ok"){
         that.setData({
           allproject: res.data.data.project
         })
@@ -64,6 +66,10 @@ Page({
         that.setData({
           allde: true
         })
+        }
+      },
+      fail: function (err) {
+        app.showMyTips("保存失败");
       }
 
     })},

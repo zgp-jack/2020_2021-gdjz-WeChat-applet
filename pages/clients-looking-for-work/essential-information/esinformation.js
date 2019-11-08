@@ -2,6 +2,7 @@
 var amapFile = require('../../../utils/amap-wx.js');
 let areas = require("../../../utils/area.js");
 let v = require("../../../utils/v.js");
+let remain = require("../../../utils/remain.js");
 const app = getApp();
 Page({
 
@@ -37,9 +38,9 @@ Page({
     tele: false,
     codeTips: "获取验证码",
     status: 1,
-    nowDate:"",
+    nowDate: "",
   },
-  getbirth(){
+  getbirth() {
     var date = new Date();
     var year = date.getFullYear();
     var month = date.getMonth() + 1;
@@ -55,14 +56,14 @@ Page({
       nowDate: nowDate
     });
   },
-  initCountDown: function(_time) {
+  initCountDown: function (_time) {
     let _t = parseInt(_time);
     let _this = this;
     this.setData({
       status: 0,
       codeTips: _t + "秒后重试"
     });
-    let timer = setInterval(function() {
+    let timer = setInterval(function () {
       _t--;
       if (_t == 0) {
         clearInterval(timer);
@@ -87,7 +88,7 @@ Page({
       name: e.detail.value
     })
   },
-  sex: function(e) {
+  sex: function (e) {
     this.setData({
       indexsex: ~~e.detail.value
     })
@@ -112,16 +113,16 @@ Page({
       telephone: e.detail.value
     })
   },
-  GPSsubmit: function() {
+  GPSsubmit: function () {
     this.getLocation();
   },
-  getLocation: function() { //定位获取
+  getLocation: function () { //定位获取
     var _this = this;
     var myAmapFun = new amapFile.AMapWX({
       key: app.globalData.gdApiKey
     }); //key注册高德地图开发者
     myAmapFun.getRegeo({
-      success: function(data) {
+      success: function (data) {
         console.log(data);
         let oname = data[0].name + ' ' + data[0].desc;
         if (oname.length >= 10) {
@@ -135,17 +136,17 @@ Page({
           });
         }
       },
-      fail: function(info) {
+      fail: function (info) {
       }
     });
   },
-  getadcode: function() { //定位获取
+  getadcode: function () { //定位获取
     var _this = this;
     var myAmapFun = new amapFile.AMapWX({
       key: app.globalData.gdApiKey
     }); //key注册高德地图开发者
     myAmapFun.getRegeo({
-      success: function(data) {
+      success: function (data) {
         console.log(data)
         _this.setData({
           oadcode: data[0].regeocodeData.addressComponent.adcode
@@ -158,11 +159,11 @@ Page({
         });
         _this.getarea()
       },
-      fail: function(info) {
+      fail: function (info) {
       }
     });
   },
-  userTapAddress: function() {
+  userTapAddress: function () {
     wx.navigateTo({
       url: '/pages/clients-looking-for-work/selectmap/smap',
     })
@@ -184,54 +185,60 @@ Page({
 
   accessprovince() { //大部分piker需要的数据
     let that = this;
-    app.doRequestAction({
+    app.appRequestAction({
       url: 'resumes/get-data/',
       way: 'GET',
+      failTitle: "操作失败，请稍后重试！",
       success(res) {
-
-        console.log(res)
-        let nationalarray = [];
-        let alllabel = [];
-        let typeworkarray = [];
-        let proficiencyarray = [];
-        let compositionarray = [];
-        let array = []
-        for (let i = 0; i < res.data.nation.length; i++) {
-          nationalarray.push(res.data.nation[i].mz_name)
-        }
-        for (let i = 0; i < res.data.label.length; i++) {
-          res.data.label[i].classname = "informationnosave"
-        }
-        for (let i = 0; i < res.data.prof_degree.length; i++) {
-          proficiencyarray.push(res.data.prof_degree[i].name)
-        }
-        for (let i = 0; i < res.data.type.length; i++) {
-          compositionarray.push(res.data.type[i].name)
-        }
-        for (let i = 0; i < res.data.gender.length; i++) {
-          array.push(res.data.gender[i].name)
-        }
-        that.setData({
-          typeworkarray: res.data.occupation
-        })
-        console.log(that.data.typeworkarray)
-
-        for (let i = 0; i < that.data.typeworkarray.length; i++) {
-          for (let j = 0; j < that.data.typeworkarray[i].children.length; j++) {
-            that.data.typeworkarray[i].children[j].is_check = false
+        if (res.errMsg == "request:ok") {
+          console.log(res)
+          let nationalarray = [];
+          let alllabel = [];
+          let typeworkarray = [];
+          let proficiencyarray = [];
+          let compositionarray = [];
+          let array = []
+          for (let i = 0; i < res.data.nation.length; i++) {
+            nationalarray.push(res.data.nation[i].mz_name)
           }
+          for (let i = 0; i < res.data.label.length; i++) {
+            res.data.label[i].classname = "informationnosave"
+          }
+          for (let i = 0; i < res.data.prof_degree.length; i++) {
+            proficiencyarray.push(res.data.prof_degree[i].name)
+          }
+          for (let i = 0; i < res.data.type.length; i++) {
+            compositionarray.push(res.data.type[i].name)
+          }
+          for (let i = 0; i < res.data.gender.length; i++) {
+            array.push(res.data.gender[i].name)
+          }
+          that.setData({
+            typeworkarray: res.data.occupation
+          })
+          console.log(that.data.typeworkarray)
+
+          for (let i = 0; i < that.data.typeworkarray.length; i++) {
+            for (let j = 0; j < that.data.typeworkarray[i].children.length; j++) {
+              that.data.typeworkarray[i].children[j].is_check = false
+            }
+          }
+          that.setData({
+            typeworkarray: that.data.typeworkarray
+          })
+          that.setData({
+            nationalarray: nationalarray,
+            nationalarrayone: res.data.nation,
+            array: array,
+            arrayone: res.data.gender
+          })
+          that.getintrodetail()
+          console.log(that.data.arrayone)
         }
-        that.setData({
-          typeworkarray: that.data.typeworkarray
-        })
-        that.setData({
-          nationalarray: nationalarray,
-          nationalarrayone: res.data.nation,
-          array: array,
-          arrayone: res.data.gender
-        })
-        that.getintrodetail()
-        console.log(that.data.arrayone)
+
+      },
+      fail: function (err) {
+        app.showMyTips("请求失败");
       }
     })
   },
@@ -252,7 +259,7 @@ Page({
     })
   },
 
-  userClickItem: function(e) {
+  userClickItem: function (e) {
     let that = this;
     let ce = false;
     console.log(e)
@@ -289,7 +296,7 @@ Page({
               title: '温馨提示',
               content: '所需工种最多选择' + that.data.complexwork.length + '个',
               showCancel: false,
-              success(res) {}
+              success(res) { }
             })
           }
         }
@@ -346,15 +353,15 @@ Page({
     if (!status) return false;
     let userInfo = wx.getStorageSync("userInfo");
     let tele = {}
-    Object.assign(tele,userInfo, {
+    Object.assign(tele, userInfo, {
       tel: this.data.telephone - 0,
     })
     console.log(tele)
-    app.doRequestAction({
+    app.appRequestAction({
       url: "index/get-code/",
       way: "POST",
       params: tele,
-      success: function(res) {
+      success: function (res) {
         let mydata = res.data;
         app.showMyTips(mydata.errmsg);
         if (mydata.errcode == "ok") {
@@ -362,9 +369,9 @@ Page({
           that.initCountDown(_time);
         }
       },
-      fail: function(err) {
+      fail: function (err) {
 
-       app.showMyTips("验证码发送失败");
+        app.showMyTips("验证码发送失败");
       }
     })
   },
@@ -387,7 +394,7 @@ Page({
         title: '温馨提示',
         content: '您输入的手机号码不正确,请重新输入',
         showCancel: false,
-        success(res) {}
+        success(res) { }
       })
       return
     }
@@ -397,7 +404,7 @@ Page({
         title: '温馨提示',
         content: '您输入的姓名为空,请重新输入',
         showCancel: false,
-        success(res) {}
+        success(res) { }
       })
       return
     }
@@ -407,7 +414,7 @@ Page({
         title: '温馨提示',
         content: '您输入的性别为空,请重新输入',
         showCancel: false,
-        success(res) {}
+        success(res) { }
       })
       return
     }
@@ -416,7 +423,7 @@ Page({
         title: '温馨提示',
         content: '您输入的民族为空,请重新输入',
         showCancel: false,
-        success(res) {}
+        success(res) { }
       })
       return
     }
@@ -425,7 +432,7 @@ Page({
         title: '温馨提示',
         content: '您输入的出生日期为空,请重新输入',
         showCancel: false,
-        success(res) {}
+        success(res) { }
       })
       return
     }
@@ -434,7 +441,7 @@ Page({
         title: '温馨提示',
         content: '您输入的工种为空,请重新输入',
         showCancel: false,
-        success(res) {}
+        success(res) { }
       })
       return
     }
@@ -443,7 +450,7 @@ Page({
         title: '温馨提示',
         content: '您输入的所在地区为空,请重新输入',
         showCancel: false,
-        success(res) {}
+        success(res) { }
       })
       return
     }
@@ -452,7 +459,7 @@ Page({
         title: '温馨提示',
         content: '您输入的自我介绍为空,请重新输入',
         showCancel: false,
-        success(res) {}
+        success(res) { }
       })
       return
     }
@@ -463,7 +470,7 @@ Page({
           title: '温馨提示',
           content: '您输入的验证码为空,请重新输入',
           showCancel: false,
-          success(res) {}
+          success(res) { }
         })
         return
       }
@@ -488,27 +495,26 @@ Page({
       adcode: this.data.oadcode,
     })
     console.log(information)
-  
-    app.doRequestAction({
+
+    app.appRequestAction({
       url: "resumes/add-resume/",
       way: "POST",
       params: information,
-      success: function(res) {
-
-        wx.showModal({
-          title: '温馨提示',
-          content: '保存成功',
-          showCancel: false,
-          success(res) {
-            wx.navigateBack({
-              delta: 1
-            })
+      failTitle: "操作失败，请稍后重试！",
+      success: function (res) {
+        console.log(res)
+        remain.remain({
+          tips: res.data.errmsg, callback: function () {
+            if (res.data.errmsg == "保存成功") {
+              wx.navigateBack({
+                delta: 1
+              })
+            }
           }
         })
-
       },
-      fail: function(err) {
-        console.log(err)
+      fail: function (err) {
+        app.showMyTips("保存失败");
       }
     })
   },
@@ -576,21 +582,21 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function(options) {
+  onLoad: function (options) {
     this.accessprovince()
   },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function() {
+  onReady: function () {
 
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function() {
+  onShow: function () {
 
     this.getadcode()
     this.getbirth()
@@ -601,28 +607,28 @@ Page({
   /**
    * 生命周期函数--监听页面隐藏
    */
-  onHide: function() {
+  onHide: function () {
 
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
-  onUnload: function() {
+  onUnload: function () {
 
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
-  onPullDownRefresh: function() {
+  onPullDownRefresh: function () {
 
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
-  onReachBottom: function() {
+  onReachBottom: function () {
 
   },
 

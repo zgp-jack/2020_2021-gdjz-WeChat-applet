@@ -2,6 +2,7 @@
 let areas = require("../../../utils/area.js");
 const app = getApp();
 let v = require("../../../utils/v.js");
+let remain = require("../../../utils/remain.js");
 Page({
 
   /**
@@ -69,6 +70,7 @@ Page({
     app.appRequestAction({
       url: 'resumes/get-data/',
       way: 'GET',
+      failTitle: "操作失败，请稍后重试！",
       success(res) {
         console.log(res)
         let alllabel = [];
@@ -94,6 +96,9 @@ Page({
         })
         console.log(that.data.compositionarrayone)
         that.getintrodetail()
+      },
+      fail: function (err) {
+        app.showMyTips("请求失败");
       }
     })
   },
@@ -325,20 +330,20 @@ Page({
       url: "resumes/introduce/",
       way: "POST",
       params: information,
+      failTitle: "操作失败，请稍后重试！",
       success: function (res) {
-        wx.showModal({
-          title: '温馨提示',
-          content: '保存成功',
-          showCancel: false,
-          success(res) {
-            wx.navigateBack({
-              delta: 1
-            })
+        remain.remain({
+          tips: res.data.errmsg, callback: function () {
+            if (res.data.errmsg == "保存成功") {
+              wx.navigateBack({
+                delta: 1
+              })
+            }
           }
         })
       },
       fail: function (err) {
-        console.log(err)
+        app.showMyTips("保存失败");
       }
     })
   },

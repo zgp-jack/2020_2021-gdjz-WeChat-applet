@@ -1,0 +1,138 @@
+@import "../index/index.wxss";
+/* listsboxshow */
+.listsboxdetail {
+  width: 100%;
+  height: 328rpx;
+  background: white;
+  overflow: hidden;
+}
+
+.oimg {
+  width: 92rpx;
+  height: 92rpx;
+  background: orange;
+  border-radius: 50%;
+}
+
+.listsboxdetailo {
+  width: 94%;
+  height: 92rpx;
+  margin: 0 auto;
+  margin-top: 30rpx;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.listsboxintro {
+  width: 80%;
+  height: 92rpx;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.listsboxage{
+  width: 84%;
+}
+.listsboxageone{
+  font-size: 26rpx;
+}
+
+.listsboxageone:nth-child(2){
+  font-size: 26rpx;
+  color: #FB8732;
+}
+.listsboxageone image{
+  width: 74rpx;
+  height: 24rpx;
+  background: #0099FF;
+}
+.listsboxageone text{
+  margin-left: 12rpx;
+}
+.listsboxageone .listsboxname{
+  font-size: 26rpx;
+  margin-left: 0rpx;
+}
+.listsboxageone image{
+    margin-left: 12rpx;
+}
+.listsboxshow{
+  font-size: 26rpx;
+  color: #353636;
+  margin-top: 34rpx;
+}
+.listsboxagetwo{
+  margin-top: 12rpx;
+  font-size: 24rpx;
+}
+.listsboxagetwo text{
+  font-size: 24rpx;
+  margin-left: 18rpx;
+}
+#listsboxnation{
+  margin-left: 0rpx;
+}
+.listsboxagetwo .listsboxnum{
+  margin-left: 0rpx;
+  color: red;
+}
+.listsboxlable{
+  width: 94%;
+  margin: 0 auto;
+  font-size: 26rpx;
+  color: #353636;
+  margin-top: 12rpx;
+  margin-bottom: 34rpx;
+}
+.listsboxlable view{
+  background: #F7F7F7;
+  padding: 3rpx;
+  font-size: 20rpx;
+  color: #9A9A9A;
+  display: inline-block;
+  margin-left: 22rpx;
+}
+.listsboxlable .listsboxlableone{
+    margin-left: 10rpx;
+}
+.listsboxself{
+   width: 91%;
+   margin: 0 auto;
+   font-size: 24rpx;
+   color: #828586;
+   border-bottom: 0.5px dashed #9A9A9A;
+   padding-bottom: 14rpx;
+}
+.listsboxlocal{
+   width: 91%;
+   margin: 0 auto;
+   margin-top: 17rpx;
+   display: flex;
+   justify-content: space-between;
+   height: 16rpx;
+}
+.listsboxlocal image{
+  width: 18rpx;
+  height: 26rpx;
+  background: red;
+  display: inline-block;
+}
+.listsboxlocal .listsboxlocalone{
+  font-size: 20rpx;
+  color: #969999;
+}
+.listsboxlocalone{
+  display: flex;
+  justify-content: space-around;
+}
+.listsboxlocaltwo{
+  color: #828586;
+  font-size: 22rpx;
+}
+.listsboxlocal .listsboxlocalone view{
+  margin-left: 10rpx;
+}
+.listsboxlocaltwo .listsboxtime{
+ margin-right: 10rpx;
+}

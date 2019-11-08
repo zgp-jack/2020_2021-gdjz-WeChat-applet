@@ -64,8 +64,11 @@
           </view>
         </view>
       </view>
-      <view class="cardtwosontwo" wx:if="{{!checkone}}">
+      <view class="cardtwosontwo" wx:if="{{!checkone && checkonef != '0'}}">
         <text bindtap="edit">编辑</text>
+      </view>
+      <view class="cardtwosontwo" wx:if="{{checkonef == '0'}}">
+        <text bindtap="edit">待修改</text>
       </view>
     </view>
     <view class="lineone">
@@ -236,7 +239,7 @@
 
       </view>
     </view>
-    <view class="cardsixsixall">
+    <view class="cardsixsixall" wx:if="{{projectlength > 1}}">
       <button class="cardsixsix" bindtap="moreproject">
         <view wx:if="{{checkthreef != 0}}">
           更多项目经验
@@ -288,7 +291,7 @@
 
       </view>
     </view>
-    <view class="cardeightsixall">
+    <view class="cardeightsixall" wx:if="{{skilllength > 1}}">
       <button class="cardeightsix" bindtap="moreskill">
         <view wx:if="{{checkfourf != 0}}">
           更多技能证书
@@ -310,4 +313,4 @@
   </view>
 </view>
 
-<!-- oworkotextonetu  cardsixone-->
+<!-- oworkotextonetu  cardsixone-- selectTap projectlength>
