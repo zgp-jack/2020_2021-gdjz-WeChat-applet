@@ -1,5 +1,5 @@
 <import src="/pages/footer/footer.wxml" />
-<!-- <import src="/pages/tpl/app/app.wxml"/> -->
+<!-- <import src="/pages/tpl/app/app.wxml"/> doSearchRequestAction -->
 
 <!-- 搜索头部 -->
 <view class="lists-header">
@@ -66,8 +66,8 @@
       <text>{{ item.name }}</text>
     </view>
   </view>
-  <view class='user-choose-item {{ (showListsInfo == "4") ? "user-choose-item-active" : "" }}' wx:if="{{ showListsInfo == '4' }}" catchtap=''>
-    <view class='filtrate-list-item mybottomborder overwords {{ ( teamindex == index) ? "filtrate-list-active" : "" }}' wx:for="{{ recommendteam }}" wx:key="{{ index }}" catchtap='' data-index="{{ index }}" data-id='{{ item.id }}' data-team="{{ item.name }}">
+  <view class='user-choose-item {{ (showListsInfo == "4") ? "user-choose-item-active" : "" }}' wx:if="{{ showListsInfo == '4' }}" catchtap='stopThisAction'>
+    <view class='filtrate-list-item mybottomborder overwords {{ ( teamindex == index) ? "filtrate-list-active" : "" }}' wx:for="{{ fillterNewest }}" wx:key="{{ index }}" catchtap='userChooseNewest' data-index="{{ index }}" data-id='{{ item.type }}' data-type="{{ item.name }}">
       <text>{{ item.name }}</text>
     </view>
   </view>
@@ -103,55 +103,52 @@
 
     <!-- <block  wx:for="{{ }}" wx:key="{{ }}" wx:if="{{}}"> -->
 
-    <view class="listsboxdetail" bindtap="persondetail">
+    <view class="listsboxdetail" bindtap="persondetail" data-all="{{item}}" wx:for="{{lists}}" wx:key="{{index}}">   <image src="../../images/finded.png" class="finded" wx:if="{{item.is_end == 2}}"></image>
       <view class="listsboxdetailo">
-        <image class="oimg"></image>
+        <image class="oimg" src="{{item.headerimg}}"></image>
         <view class="listsboxintro">
           <view class="listsboxage">
             <view class="listsboxageone">
-              <text class="listsboxname">李小六</text>
-              <text>38岁</text>
-              <image></image>
-              <image></image>
+              <text class="listsboxname">{{item.username}}</text>
+              <text>{{item.birthday}}岁</text>
+              <image wx:if="{{authentication == 2}}"  src="{{realNames}}"></image>
+              <image wx:if="{{certificate == 1}}" src="{{authentication}}"></image>
             </view>
-            <view class="listsboxagetwo">
-              <text id="listsboxnation">汉族</text>
-              <text>工龄<text class="listsboxnum">9</text>年</text>
-              <text>大公</text>
+            <view class="listsboxagetwo" wx:if="{{item.nation}}">
+              <text id="listsboxnation">{{item.nation}}</text>
+              <text>工龄<text class="listsboxnum">{{item.experience}}</text>年</text>
+              <text>{{item.prof_degree}}</text>
+            </view>
+             <view class="listsboxagetwot" wx:if="{{!item.nation}}">
+               <text wx:for="{{item.tags}}" wx:key="{{index}}">{{item.label_name}}</text>
             </view>
           </view>
           <view class="listsboxshow">
-            班组
+           {{item.type}}
           </view>
         </view>
       </view>
       <view class="listsboxlable">
-        <view class="listsboxlableone">
-          阿萨大
+        <view class="listsboxlableone" wx:for="{{item.occupations}}" wx:key="{{index}}">
+         {{item}}
         </view>
-        <view>
-          萨大是
-        </view>
-        <view>
-          阿萨大
-        </view>
+
       </view>
       <view class="listsboxself">
-        我叫李小六,今年26岁,从事土木材料员职业已经6年了职业已经...
+       {{item.introduce}}
       </view>
       <view class="listsboxlocal">
         <view class="listsboxlocalone">
-          <image></image>
+          <image src="../../images/biaoqian.png"></image>
           <view>
-            成都市双流区
+          {{item.show_address}}
           </view>
           <view>
-            4.5km
+         {{item.distance}}
           </view>
         </view>
         <view class="listsboxlocaltwo">
-          <text class="listsboxtime">2017-9-10</text>
-          <text>11:23</text>
+          <text class="listsboxtime">{{item.time}}</text>
         </view>
       </view>
     </view>

@@ -1,0 +1,60 @@
+@import "../clients-looking-for-work/finding-name-card/findingnamecard.wxss";
+.cardeight{
+  margin-bottom: 60rpx;
+}
+.header{
+  width: 93%;
+  margin: 0 auto;
+  height: 60rpx;
+  background: white;
+  font-size: 26rpx;
+  color: #F87A14;
+  text-align: center;
+  line-height: 60rpx;
+}
+.cardnine{
+
+  margin: 0 auto;
+
+}
+.obtcardnineone{
+  background-color: #0099FF;
+  color: white;
+  width: 345rpx;
+  height: 70rpx;
+  outline: 0;
+  line-height: 70rpx;
+}
+
+.obtcard{
+  margin-top:12rpx;
+}
+
+.obtcardone{
+  margin-top:30rpx;
+}
+
+.cardeight {
+margin-bottom: 18rpx;
+}
+.allone{
+  display: flex;
+  justify-content: space-between;
+  font-size: 26rpx;
+  color: white;
+  margin-top: 14.5rpx;
+}
+.cliok text:last-child{
+  background: #0099FF;
+  padding: 6rpx;
+  border-radius: 6rpx;
+  margin-right: 24rpx;
+}
+
+.jilu{
+  font-size: 26rpx;
+  color: #7D7D7D;
+  text-align: center;
+  margin-top: 19rpx;
+  padding-left: 18rpx;
+}

@@ -1,9 +1,9 @@
 {
   "pages": [
     "pages/findingworkinglist/findingworkinglist",
+    "pages/index/index",
     "pages/clients-looking-for-work/finding-name-card/findingnamecard",
     "pages/clients-looking-for-work/preview-name-card/previewcard",
-    "pages/index/index",
     "pages/clients-looking-for-work/modify-project-experience/modifyexper",
     "pages/clients-looking-for-work/all-project-experience/allexperience",
     "pages/clients-looking-for-work/new-project-experience/projectexperience",
@@ -68,7 +68,8 @@
     "pages/map/detail",
     "pages/others/message/lists/lists",
     "pages/others/message/publish/publish",
-    "pages/others/information/lists"
+    "pages/others/information/lists",
+    "pages/boss-look-card/lookcard"
   ],
   "window": {
     "backgroundTextStyle": "light",

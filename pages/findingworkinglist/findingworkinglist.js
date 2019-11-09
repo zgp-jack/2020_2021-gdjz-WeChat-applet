@@ -1,15 +1,18 @@
-//userTapSearch
+//userTapSearch persondetail
 const app = getApp();
 let footerjs = require("../../utils/footer.js");
 let areas = require("../../utils/area.js");
 let md5 = require("../../utils/md5.js");
-//teamText showListsType fillterTeam wechat phone
+var amapFile = require('../../utils/amap-wx.js');
+//userChooseProvince
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
+    information:"",
+    regionone:"",
     userInfo: "",
     unitid: app.globalData.unitid,
     footerActive: "findwork",
@@ -29,23 +32,35 @@ Page({
     nodata: app.globalData.apiImgUrl + "nodata.png",
     selectimg: app.globalData.apiImgUrl + 'select.png',
     returnTopImg: app.globalData.apiImgUrl + 'returntop.png',
+    realNames: app.globalData.apiImgUrl + 'newresume-infolist-ysm.png',
+    authentication: app.globalData.apiImgUrl + 'newresume-infolist-jnz.png',
     showListsInfo: 0,
     province: -1,
     userCity: -1,
     worktype: -1,
     workinfo: -1,
     teamindex: -1,
+    newindex:-1,
+    // searchDate: {
+    //   page: 1,
+    //   list_type: "resume",
+    //   area_id: 1,
+    //   classify_id: "",
+    //   keywords: "",
+    //   staff_id: "",
+    //   sort:"newest"
+    // },
     searchDate: {
       page: 1,
-      list_type: "resume",
-      area_id: 1,
-      classify_id: "",
+      occupations: "resume",
+      sort: "newest",
       keywords: "",
-      staff_id: ""
+      occupations: "",
     },
     fillterArea: [],
     fillterType: [],
     fillterTeam: [],
+    fillterNewest:[],
     recommendteam:[{name:"推荐"}],
     notice: {
       autoplay: true,
@@ -82,7 +97,7 @@ Page({
     showHistoryList: false,
     historyList: [],
   },
-  persondetail(){},
+
   showDetailInfo: function (e) {
     let uinfo = this.data.userInfo;
     app.showDetailInfo(e, uinfo);
@@ -102,7 +117,29 @@ Page({
       showListsInfo: (this.data.showListsInfo == type) ? 0 : type
     })
   },
+  userChooseNewest(e){
+    console.log(e)
+    let _this = this;
+    let index = parseInt(e.currentTarget.dataset.index);
+    let _id = e.currentTarget.dataset.id;
+    let text = e.currentTarget.dataset.type
+
+
+    this.setData({ newindex: index })
+
+    _this.returnTop();
+    _this.setData({
+      isFirstRequest: true,
+      "searchDate.page": 1,
+      "searchDate.sort": _id,
+      recommended: text
+    })
+    _this.doRequestAction(false);
+    _this.closeAllSelect();
+
+  },
   userChooseTeam: function (e) {
+
     let _this = this;
     let index = parseInt(e.currentTarget.dataset.index);
     let _id = e.currentTarget.dataset.id;
@@ -115,13 +152,14 @@ Page({
     _this.setData({
       isFirstRequest: true,
       "searchDate.page": 1,
-      "searchDate.staff_id": _id,
+      "searchDate.type": _id,
       teamText: teamText
     })
     _this.doRequestAction(false);
     _this.closeAllSelect();
   },
   userChooseProvince: function (e) {
+    console.log(e)
     let _this = this;
     let index = parseInt(e.currentTarget.dataset.index);
     let _id = e.currentTarget.dataset.id;
@@ -137,7 +175,7 @@ Page({
     _this.setData({
       isFirstRequest: true,
       "searchDate.page": 1,
-      "searchDate.area_id": _id,
+      "searchDate.province": _id,
       areaText: areaText
     })
     wx.setStorageSync("areaId", _id)
@@ -174,7 +212,7 @@ Page({
         _this.setData({
           isFirstRequest: true,
           "searchDate.page": 1,
-          "searchDate.classify_id": _typeid,
+          "searchDate.occupations": _typeid,
           typeText: typeText
         })
         _this.returnTop();
@@ -188,7 +226,7 @@ Page({
             _this.setData({
               isFirstRequest: true,
               "searchDate.page": 1,
-              "searchDate.classify_id": _typeid,
+              "searchDate.occupations": _typeid,
               typeText: typeText
             })
             _this.returnTop();
@@ -209,7 +247,7 @@ Page({
       typeText: typeText,
       isFirstRequest: true,
       "searchDate.page": 1,
-      "searchDate.classify_id": id
+      "searchDate.occupations": id
     })
     this.returnTop();
     this.doRequestAction(false);
@@ -225,6 +263,12 @@ Page({
   doRequestAction: function (_append) {
     let _this = this;
     if (_this.data.isload) return false;
+    let userLocation = wx.getStorageSync("userLocation");
+    userLocation
+    let locate = {}
+    Object.assign(locate, _this.data.searchDate, {
+      location: userLocation.split(",").reverse().join(","),
+    })
     this.setData({
       isload: true,
       nothavemore: false,
@@ -232,12 +276,12 @@ Page({
     })
     wx.showLoading({ title: '数据加载中' })
     app.doRequestAction({
-      url: "index/info-list/",
-      params: _this.data.searchDate,
+      url: "resumes/index/",
+      params: locate,
       success: function (res) {
         _this.setData({ isload: false })
         wx.hideLoading();
-        let mydata = res.data;
+        let mydata = res.data.errmsg;
         let _page = parseInt(_this.data.searchDate.page)
         _this.setData({ isFirstRequest: false });
         if (mydata && mydata.length) {
@@ -249,6 +293,9 @@ Page({
             "searchDate.page": (parseInt(_page) + 1),
             lists: _append ? _data : mydata
           })
+          // _this.setData({
+          //   information: _data
+          // })
         } else {
           if (_page == 1) {
             _this.setData({
@@ -288,6 +335,7 @@ Page({
       url: "index/info-list-new/",
       params: _data,
       success: function (res) {
+        console.log(res)
         app.globalData.isFirstLoading ? "" : wx.hideLoading();
         let mydata = res.data;
 
@@ -604,10 +652,11 @@ Page({
   getFilterData: function () {
     let _this = this;
     this.setData({ fillterArea: areas.getProviceList() })
-    app.globalData.allTypes ? this.setData({ fillterType: app.globalData.allTypes.classTree, fillterTeam: app.globalData.allTypes.staffTree }) : app.getListsAllType(function (_data) {
+    app.globalData.allTypes ? this.setData({ fillterType: app.globalData.allTypes.classTree, fillterTeam: app.globalData.allTypes.staffTree, fillterNewest:app.globalData.allTypes.jobListType }) : app.getListsAllType(function (_data) {
       _this.setData({
         fillterType: _data.classTree,
-        fillterTeam: _data.staffTree
+        fillterTeam: _data.staffTree,
+        fillterNewest: _data.jobListType
       })
     })
 
@@ -655,33 +704,36 @@ Page({
    */
 
 
-  getlistdata(){
-    let that = this;
-    app.appRequestAction({
-      url: 'resumes/index/',
-      way: 'GET',
-      failTitle: "操作失败，请稍后重试！",
-      success(res) {
-        console.log(res)
-      }
+
+
+
+
+
+  persondetail(e) {
+    wx.navigateTo({
+      url: "/pages/boss-look-card/lookcard",
     })
   },
 
-  onLoad: function (options) {
+
+
+
+
+
+ onLoad (options) {
     this.initSearchHistory();
     this.initUserShareTimes();
     this.getFilterData();
     this.valiFilterProvince();
     this.initFooterData();
     this.initNeedData();
-    this.getlistdata()
   },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-
+    
   },
 
   /**
@@ -694,6 +746,7 @@ Page({
         userInfo: userInfo
       })
     }
+
   },
 
   /**

@@ -1,16 +1,25 @@
 @import "../index/index.wxss";
-/* listsboxshow */
+/* listsboxshow listsboxdetail listsboxdetail*/
 .listsboxdetail {
   width: 100%;
-  height: 328rpx;
   background: white;
   overflow: hidden;
+  margin-top: 12rpx;
+  position: relative;
+}
+
+
+.finded{
+  width: 90rpx;
+  height: 40rpx;
+  position: absolute;
+  right: 0;
+  top: 0;
 }
 
 .oimg {
   width: 92rpx;
   height: 92rpx;
-  background: orange;
   border-radius: 50%;
 }
 
@@ -45,7 +54,6 @@
 .listsboxageone image{
   width: 74rpx;
   height: 24rpx;
-  background: #0099FF;
 }
 .listsboxageone text{
   margin-left: 12rpx;
@@ -110,12 +118,11 @@
    margin-top: 17rpx;
    display: flex;
    justify-content: space-between;
-   height: 16rpx;
+   margin-bottom: 25rpx;
 }
 .listsboxlocal image{
-  width: 18rpx;
+  width: 24rpx;
   height: 26rpx;
-  background: red;
   display: inline-block;
 }
 .listsboxlocal .listsboxlocalone{
@@ -135,4 +142,12 @@
 }
 .listsboxlocaltwo .listsboxtime{
  margin-right: 10rpx;
+}
+.listsboxagetwot text{
+  font-size: 26rpx;
+  color: #0099FF;
+  padding: 4rpx;
+  border: 1px solid #0099FF;
+  border-radius: 6rpx;
+  margin-right: 18rpx;
 }
