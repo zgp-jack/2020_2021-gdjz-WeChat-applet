@@ -44,8 +44,14 @@ margin-bottom: 18rpx;
   color: white;
   margin-top: 14.5rpx;
 }
-.cliok text:last-child{
+.cliok text:first-child{
   background: #0099FF;
+  padding: 6rpx;
+  border-radius: 6rpx;
+  margin-right: 15rpx;
+}
+.cliok text:last-child{
+  background: red;
   padding: 6rpx;
   border-radius: 6rpx;
   margin-right: 24rpx;
@@ -58,3 +64,40 @@ margin-bottom: 18rpx;
   margin-top: 19rpx;
   padding-left: 18rpx;
 }
+.introcardtwo{
+  width: 93%;
+  margin: 0 auto;
+  background: white;
+  overflow: hidden;
+  font-size: 26rpx;
+  color: #575757;
+}
+.introcontent{
+  margin-top: 21rpx;
+  margin-left: 50rpx;
+}
+
+.bossbottom{
+  width: 100%;
+  background: white;
+  height: 76rpx;
+  display: flex;
+  justify-content: space-around;
+    font-size: 26rpx;
+  color: #7D7D7D;
+  margin-top: 40rpx;
+}
+
+
+.bossbottom .bossbottomo{
+  margin-top: 20rpx;
+  display: flex;
+
+}
+.bossbottom .bossimg{
+  width: 25rpx;
+  height: 25rpx;
+  color: #7D7D7D;
+  padding-right: 8rpx;
+}
+/* content */

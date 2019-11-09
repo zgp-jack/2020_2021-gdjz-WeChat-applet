@@ -3,9 +3,14 @@ const app = getApp();
 Page({
 
   /**
-   * 页面的初始数据 nation view_num
+   * 页面的初始数据 nation view_num prof_degree userEnterComplain
    */
   data: {
+    complainInfo: "",
+    showComplain: false,
+    soucang: app.globalData.apiImgUrl + "newresume-footer-collect.png",
+    fenxiang: app.globalData.apiImgUrl + "newresume-footer-share.png",
+    zan: app.globalData.apiImgUrl + "newresume-footer-star.png",
     username: '',
     userimg: '',
     showtop: true,
@@ -58,6 +63,49 @@ Page({
     resume_uuid: "",
     showtan: false
   },
+  userComplaintAction: function () {
+    let _this = this;
+    let userInfo = this.data.userInfo;
+    let infoId = this.data.infoId;
+    let info = this.data.complainInfo;
+    if (info == "") {
+      app.showMyTips("请输入您的投诉内容");
+      return false;
+    }
+    app.appRequestAction({
+      url: "publish/complain/",
+      way: "POST",
+      params: {
+        userId: userInfo.userId,
+        token: userInfo.token,
+        tokenTime: userInfo.tokenTime,
+        infoId: infoId,
+        type: "resume",
+        content: info
+      },
+      title: "正在提交投诉",
+      failTitle: "网络错误，投诉失败！",
+      success: function (res) {
+        let mydata = res.data;
+        if (mydata.errcode == "ok") _this.setData({ showComplain: false, complainInfo: "", "ucardInfo.show_complaint.show_complaint": 0 })
+        wx.showModal({
+          title: '提示',
+          content: mydata.errmsg,
+          showCancel: false,
+          confirmText: mydata.errcode == 'pass_complaint' ? '知道了' : '确定'
+        })
+      }
+    })
+  }, 
+  userCancleComplain: function () {
+    this.setData({ showComplain: false, complainInfo: "" })
+  },
+  userTapComplain: function () {
+    this.setData({ showComplain: true })
+  },
+  userEnterComplain: function (e) {
+    this.setData({ complainInfo: e.detail.value })
+  },
   telephorf(e) {
     wx.makePhoneCall({
       phoneNumber: e.currentTarget.dataset.telephone,
@@ -85,22 +133,23 @@ Page({
   },
   getdetail() {
     let userInfo = wx.getStorageSync("userInfo");
+    let detailid = wx.getStorageSync("detailid");
     let detail = {}
     Object.assign(detail, {
       userId: userInfo.userId,
-      token: userInfo.token,
-      tokenTime: userInfo.tokenTime,
+      resume_uuid: detailid.resume_uuid,
+      location: detailid.location,
     })
     let that = this;
     app.appRequestAction({
-      url: 'resumes/resume-list/',
+      url: 'resumes/resume-detail/',
       way: 'POST',
       params: detail,
       failTitle: "操作失败，请稍后重试！",
       success(res) {
-        let mydata = res.data.data;
+        let mydata = res.data;
         console.log(mydata)
-        console.log(res)
+
         if (res.errMsg == "request:ok") {
 
           let date = new Date();
@@ -131,43 +180,19 @@ Page({
             intro: false,
             introne: true,
             introduce: mydata.info.hasOwnProperty("introduce") ? mydata.info.introduce : "",
-            workingyears: mydata.introduces.hasOwnProperty("experience") ? mydata.introduces.experience : "",
-            staffcomposition: mydata.introduces.hasOwnProperty("type_str") ? mydata.introduces.type_str : "",
-            cityself: mydata.introduces.hasOwnProperty("hometown") ? mydata.introduces.hometown : "",
-            procity: mydata.introduces.hasOwnProperty("prof_degree_str") ? mydata.introduces.prof_degree_str : "",
-            personnum: mydata.introduces.hasOwnProperty("number_people") ? mydata.introduces.number_people : "",
-            tags: mydata.introduces.hasOwnProperty("tags") ? mydata.introduces.tags : "",
+            workingyears: mydata.info.hasOwnProperty("experience") ? mydata.info.experience : "",
+            staffcomposition: mydata.info.hasOwnProperty("type_str") ? mydata.info.type_str : "",
+            cityself: mydata.info.hasOwnProperty("hometown") ? mydata.info.hometown : "",
+            procity: mydata.info.hasOwnProperty("prof_degree_str") ? mydata.info.prof_degree_str : "",
+            personnum: mydata.info.hasOwnProperty("number_people") ? mydata.info.number_people : "",
+            tags: mydata.info.hasOwnProperty("tags") ? mydata.info.tags : "",
           })
 
-          let selectD = Object.values(mydata.status)
-          let selectk = Object.keys(mydata.status)
-          if (mydata.info.is_end == "2") {
-            that.setData({
-              index: 1,
-            })
-          }
-          that.setData({
-            selectData: selectD,
-            selectk: selectk
-          })
-          that.setData({
-            check: mydata.info.hasOwnProperty("check") ? mydata.info.check : ""
-          })
+
 
           that.setData({
             headerimg: mydata.info.headerimg
           })
-          if (mydata.is_introduces == 1) {
-            that.setData({
-              is_introduces: mydata.is_introduces,
-              selfintro: false,
-              selfintrone: true,
-            })
-          } else if (mydata.is_introduces == 0) {
-            that.setData({
-              is_introduces: mydata.is_introduces
-            })
-          }
 
           that.setData({
             view_num: mydata.info.hasOwnProperty("view_num") ? mydata.info.view_num : 0

@@ -264,7 +264,7 @@ Page({
     let _this = this;
     if (_this.data.isload) return false;
     let userLocation = wx.getStorageSync("userLocation");
-    userLocation
+
     let locate = {}
     Object.assign(locate, _this.data.searchDate, {
       location: userLocation.split(",").reverse().join(","),
@@ -710,6 +710,13 @@ Page({
 
 
   persondetail(e) {
+    let userLocation = wx.getStorageSync("userLocation")
+    let all = {};
+    Object.assign(all, {
+      resume_uuid: e.currentTarget.dataset.all.uuid,
+      location: userLocation.split(",").reverse().join(","),
+    })
+    wx.setStorageSync("detailid", all)
     wx.navigateTo({
       url: "/pages/boss-look-card/lookcard",
     })
