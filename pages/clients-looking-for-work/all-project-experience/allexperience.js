@@ -2,7 +2,7 @@ const app = getApp();
 Page({
 
   /**
-   * 页面的初始数据 editor
+   * 页面的初始数据 editor allgetexpre
    */
   data: {
     allproject: [],

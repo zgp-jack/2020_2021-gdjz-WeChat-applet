@@ -1,16 +1,19 @@
 const app = getApp();
+let remain = require("../../utils/remain.js");
 
 Page({
 
-  /**
-   * 页面的初始数据 nation view_num prof_degree userEnterComplain
+  /** showComplain telephorft  age workingyears personnum workingyears
+   * 页面的初始数据 moreskill
    */
   data: {
     complainInfo: "",
     showComplain: false,
     soucang: app.globalData.apiImgUrl + "newresume-footer-collect.png",
+    soucangone: app.globalData.apiImgUrl + "newresume-footer-collect-active.png",
     fenxiang: app.globalData.apiImgUrl + "newresume-footer-share.png",
     zan: app.globalData.apiImgUrl + "newresume-footer-star.png",
+    zanone: app.globalData.apiImgUrl + "newresume-footer-star-active.png",
     username: '',
     userimg: '',
     showtop: true,
@@ -61,31 +64,80 @@ Page({
     checkfourf: 4568,
     showbottom: false,
     resume_uuid: "",
-    showtan: false
+    showtan: false,
+    onoff: false,
+    praise: 0,
+    status: 0,
+    collect: 0,
+    is_read: ""
+  },
+  telephorft() {
+    let that = this
+    let userInfo = wx.getStorageSync("userInfo");
+    let _this = this;
+    if (!userInfo) {
+      app.gotoUserauth();
+      return false;
+    }
+    let detailid = wx.getStorageSync("detailid");
+    let dert = {}
+    Object.assign(dert, {
+      resume_uuid: detailid.resume_uuid,
+      userId: userInfo.userId,
+      token: userInfo.token,
+      tokenTime: userInfo.tokenTime,
+    })
+    app.appRequestAction({
+      url: "resumes/get-tel/",
+      way: "POST",
+      failTitle: "网络错误！",
+      params: dert,
+      success: function (res) {
+        console.log(res)
+        if (res.data.errcode == 5000) {
+          console.log(123)
+          remain.remain({
+            tips: res.data.errmsg, callback: function () {
+            }
+          })
+        }
+        if (res.data.errcode == 200) {
+          that.setData({
+            telephone: res.data.tel,
+            onoff: true
+          })
+        }
+      },
+      fail: function (err) {
+
+        app.showMyTips("验证码发送失败");
+      }
+    })
   },
   userComplaintAction: function () {
     let _this = this;
-    let userInfo = this.data.userInfo;
-    let infoId = this.data.infoId;
+    let userInfo = wx.getStorageSync("userInfo");
     let info = this.data.complainInfo;
+    let detailid = wx.getStorageSync("detailid");
     if (info == "") {
       app.showMyTips("请输入您的投诉内容");
       return false;
     }
+    console.log(info)
     app.appRequestAction({
-      url: "publish/complain/",
+      url: "resumes/complain/",
       way: "POST",
       params: {
         userId: userInfo.userId,
         token: userInfo.token,
         tokenTime: userInfo.tokenTime,
-        infoId: infoId,
-        type: "resume",
+        resume_uuid: detailid.resume_uuid,
         content: info
       },
       title: "正在提交投诉",
       failTitle: "网络错误，投诉失败！",
       success: function (res) {
+        console.log(res)
         let mydata = res.data;
         if (mydata.errcode == "ok") _this.setData({ showComplain: false, complainInfo: "", "ucardInfo.show_complaint.show_complaint": 0 })
         wx.showModal({
@@ -96,7 +148,7 @@ Page({
         })
       }
     })
-  }, 
+  },
   userCancleComplain: function () {
     this.setData({ showComplain: false, complainInfo: "" })
   },
@@ -120,12 +172,24 @@ Page({
     }
   },
   moreproject() {
+    let userInfo = wx.getStorageSync("userInfo");
+    let _this = this;
+    if (!userInfo) {
+      app.gotoUserauth();
+      return false;
+    }
     wx.setStorageSync("pass", 1)
     wx.navigateTo({
       url: "/pages/clients-looking-for-work/all-project-experience/allexperience",
     })
   },
   moreskill() {
+    let userInfo = wx.getStorageSync("userInfo");
+    let _this = this;
+    if (!userInfo) {
+      app.gotoUserauth();
+      return false;
+    }
     wx.setStorageSync("skillpass", 1)
     wx.navigateTo({
       url: "/pages/clients-looking-for-work/all-skills-certificate/skillscertificate",
@@ -133,6 +197,10 @@ Page({
   },
   getdetail() {
     let userInfo = wx.getStorageSync("userInfo");
+    console.log(userInfo)
+    if (!userInfo) {
+      userInfo = { userId: null }
+    }
     let detailid = wx.getStorageSync("detailid");
     let detail = {}
     Object.assign(detail, {
@@ -148,7 +216,7 @@ Page({
       failTitle: "操作失败，请稍后重试！",
       success(res) {
         let mydata = res.data;
-        console.log(mydata)
+        console.log(res)
 
         if (res.errMsg == "request:ok") {
 
@@ -168,7 +236,7 @@ Page({
           })
           if (mydata.info.birthday) {
             that.setData({
-              age: dateone.getFullYear() - (mydata.info.birthday.split("-")[0] - 0)
+              age: dateone.getFullYear() - (mydata.info.birthday.split("-")[0] - 0)+"年"
             })
           }
           that.setData({
@@ -180,15 +248,20 @@ Page({
             intro: false,
             introne: true,
             introduce: mydata.info.hasOwnProperty("introduce") ? mydata.info.introduce : "",
-            workingyears: mydata.info.hasOwnProperty("experience") ? mydata.info.experience : "",
+            workingyears: mydata.info.hasOwnProperty("experience") ? mydata.info.experience  : "",
             staffcomposition: mydata.info.hasOwnProperty("type_str") ? mydata.info.type_str : "",
             cityself: mydata.info.hasOwnProperty("hometown") ? mydata.info.hometown : "",
             procity: mydata.info.hasOwnProperty("prof_degree_str") ? mydata.info.prof_degree_str : "",
-            personnum: mydata.info.hasOwnProperty("number_people") ? mydata.info.number_people : "",
+            personnum: mydata.info.hasOwnProperty("number_people") ? 
+  mydata.info.number_people+"人" : "",
             tags: mydata.info.hasOwnProperty("tags") ? mydata.info.tags : "",
+            praise: mydata.operation.hasOwnProperty("is_zan") ? mydata.operation.is_zan : "",
+            collect: mydata.operation.hasOwnProperty("is_collect") ? mydata.operation.is_collect : "",
+            status: mydata.operation.hasOwnProperty("status") ? mydata.operation.status : "",
+            is_read: mydata.info.hasOwnProperty("is_read") ? mydata.info.is_read : ""
           })
 
-
+          console.log(that.data.is_read)
 
           that.setData({
             headerimg: mydata.info.headerimg
@@ -256,12 +329,107 @@ Page({
   deleskill() {
     wx.removeStorageSync("skilltail")
   },
+  praise() {
+    let that = this
+    let userInfo = wx.getStorageSync("userInfo");
+    let detailid = wx.getStorageSync("detailid");
+    let _this = this;
+    if (!userInfo) {
+      app.gotoUserauth();
+      return false;
+    }
+    let praise = {}
+    Object.assign(praise, {
+      resume_uuid: detailid.resume_uuid,
+      userId: userInfo.userId,
+      token: userInfo.token,
+      tokenTime: userInfo.tokenTime,
+    })
+
+    app.appRequestAction({
+      url: "resumes/resume-support/",
+      way: "POST",
+      failTitle: "网络错误！",
+      params: praise,
+      success: function (res) {
+        console.log(res)
+        if (res.data.errcode == "ok") {
+          if (res.data.errmsg == "点赞成功") {
+            _this.setData({
+              praise: 1
+            })
+          }
+          if (res.data.errmsg == "取消点赞") {
+            _this.setData({
+              praise: 0
+            })
+          }
+        }
+      },
+      fail: function (err) {
+
+        app.showMyTips("验证码发送失败");
+      }
+    })
+  },
+
+  collect() {
+    let that = this
+    let userInfo = wx.getStorageSync("userInfo");
+    let detailid = wx.getStorageSync("detailid");
+    let _this = this;
+    if (!userInfo) {
+      app.gotoUserauth();
+      return false;
+    }
+    let collect = {}
+    Object.assign(collect, {
+      resume_uuid: detailid.resume_uuid,
+      userId: userInfo.userId,
+      token: userInfo.token,
+      tokenTime: userInfo.tokenTime,
+    })
+
+    app.appRequestAction({
+      url: "resumes/resume-collect/",
+      way: "POST",
+      failTitle: "网络错误！",
+      params: collect,
+      success: function (res) {
+        console.log(res)
+        if (res.data.errcode == "ok") {
+          if (res.data.errmsg == "收藏成功") {
+            _this.setData({
+              collect: 1
+            })
+          }
+          if (res.data.errmsg == "'取消收藏'") {
+            _this.setData({
+              collect: 0
+            })
+          }
+        }
+      },
+      fail: function (err) {
+
+        app.showMyTips("验证码发送失败");
+      }
+    })
+  },
+  onShareAppMessage: function () {
+    console.log(123)
+    return {
+      title: '在这里输入标题',
+      desc: '在这里输入简介说明',
+      path: '../boss-look-card/lookcard'//这是一个路径
+    }
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
 
-
+    this.getdetail();
   },
 
   /**
@@ -275,10 +443,9 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow() {
-    this.getdetail();
+
     this.delestore();
     this.deleskill()
-
   },
 
   /**

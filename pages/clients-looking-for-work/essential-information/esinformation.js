@@ -1,4 +1,4 @@
-// vertifynum verify
+// vertifynum verify textareavalue
 var amapFile = require('../../../utils/amap-wx.js');
 let areas = require("../../../utils/area.js");
 let v = require("../../../utils/v.js");
@@ -376,6 +376,9 @@ Page({
     })
   },
   submitinformation() {
+    if (app.globalData.showperfection){
+      app.globalData.perfection = true;
+    }
     let information = {}
     let userInfo = wx.getStorageSync("userInfo");
     let worktype = "";

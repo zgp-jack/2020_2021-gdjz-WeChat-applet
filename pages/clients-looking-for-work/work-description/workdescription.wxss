@@ -1,4 +1,4 @@
-/* informationworkageone informationteamsnumber*/
+/* informationworkageone informationteamsnumber informationnosave cardonesonone"*/
 .informationtwo{
   width: 93%;
   margin: 0 auto;
@@ -302,7 +302,7 @@
   height: 50rpx;
   border: 1px solid #BFBFBF;
   color: #666666;
-  font-size: 24rpx;
+  font-size: 26rpx;
   text-align:center;
   line-height: 50rpx; 
   border-radius: 24rpx;
@@ -314,7 +314,7 @@
   display: inline-block;
   width: 150rpx;
   height: 50rpx;
-  font-size: 24rpx;
+  font-size: 26rpx;
   text-align:center;
   line-height: 50rpx; 
   border-radius: 24rpx;

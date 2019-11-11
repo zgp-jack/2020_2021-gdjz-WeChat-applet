@@ -3,7 +3,7 @@ const app = getApp();
 Page({
 
     /**
-     * 页面的初始数据
+     * 页面的初始数据 getInfoTel
      */
     data: {
         infoId:"",
@@ -195,6 +195,7 @@ Page({
             way: "POST",
             params: userInfo,
             success: function (res) {  
+              console.log(res.data)
                 let mydata = res.data;
               _this.setData({ info: mydata.result })
                 if (mydata.errcode != "fail") {

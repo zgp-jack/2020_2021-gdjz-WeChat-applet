@@ -16,7 +16,7 @@
             <text class="otext">{{name}}</text>
             <view class="otextone">
               <text>{{sex}}</text>
-              <text class="ochange">{{age}}岁</text>
+              <text class="ochange">{{age}}</text>
               <text class="ochange">{{nation}}</text>
             </view>
           </view>
@@ -30,9 +30,12 @@
             </view>
             <view class="all allone">
               <text class="workotextone">{{telephone}}</text>
-              <view class="cliok">
+              <view class="cliok" wx:if="{{onoff || is_read ==0}}">
                 <text bindtap="telephorf" data-telephone="{{telephone}}">点击拨打</text>
                 <text bindtap="userTapComplain">举报</text>
+              </view>
+              <view class="cliok" wx:if="{{!onoff && is_read ==1}}">
+                <text bindtap="telephorft" data-telephone="{{telephone}}">查看完整电话</text>
               </view>
             </view>
           </view>
@@ -59,7 +62,7 @@
               <text class="oworkotext">工龄</text>
             </view>
             <view class="all">
-              <text class="workotextone">{{workingyears}}年</text>
+              <text class="workotextone">{{workingyears}}</text>
             </view>
           </view>
           <view class="cardotext">
@@ -83,7 +86,7 @@
               <text class="oworkotext">队伍人数</text>
             </view>
             <view class="all">
-              <text class="workotextone">{{personnum}}人</text>
+              <text class="workotextone">{{personnum}}</text>
             </view>
           </view>
           <view class="cardotext">
@@ -160,7 +163,7 @@
 
       </view>
     </view>
-    <view class="cardsixsixall">
+    <view class="cardsixsixall" wx:if="{{projectlength > 1}}">
       <button class="cardsixsix" bindtap="moreproject">
         <view>
           更多项目经验
@@ -198,7 +201,7 @@
 
       </view>
     </view>
-    <view class="cardeightsixall">
+    <view class="cardeightsixall" wx:if="{{skilllength > 1}}">
       <button class="cardeightsix" bindtap="moreskill">
         <view>
           更多技能证书
@@ -213,24 +216,25 @@
     暂无记录
   </view>
 
-  <view class="bossbottom">
-    <view class="bossbottomo">
+  <view class="bossbottom" wx:if="{{status == 0}}">
+    <view class="bossbottomo" bindtap="praise">
       <view>
-        <image class="bossimg" src="{{zan}}"></image>
+        <image class="bossimg" src="{{praise == 0?zan:zanone}}"></image>
       </view>
       赞
     </view>
-    <view class="bossbottomo">
+    
+    <button class="bossbottomb"  open-type='share'>
       <view>
         <image class="bossimg" src="{{fenxiang}}"></image>
       </view>
       <view class="bosstext">
         分享
       </view>
-    </view>
-    <view class="bossbottomo">
+    </button>
+    <view class="bossbottomo" bindtap="collect">
       <view>
-        <image class="bossimg" src="{{soucang}}"></image>
+        <image class="bossimg" src="{{collect ==0?soucang:soucangone}}"></image>
       </view>
       <view class="bosstext">
         收藏

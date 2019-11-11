@@ -61,7 +61,9 @@ Page({
     resume_uuid: "",
     showtan: false,
     resson:"",
-    ressonone:false
+    ressonone:false,
+    perfection: app.globalData.perfection,
+
   },
   completeall() {
     if (!this.data.resume_uuid) {
@@ -369,6 +371,10 @@ Page({
             checktwo: mydata.introduces.check && mydata.introduces.check == 1 ? true : false,
             checktwof: mydata.introduces.hasOwnProperty("check") ? mydata.introduces.check : "",
           })
+          if (that.data.showtop){
+            app.globalData.showperfection = true;
+          }
+
           that.showbottom()
           let selectD = Object.values(mydata.status)
           let selectk = Object.keys(mydata.status)
@@ -483,6 +489,19 @@ Page({
   deleskill() {
     wx.removeStorageSync("skilltail")
   },
+  completes(){
+    this.setData({
+      perfection: false
+    })
+  },
+  completemore(){
+    this.setData({
+      perfection: false
+    })
+    wx.navigateTo({
+      url: '/pages/clients-looking-for-work/work-description/workdescription',
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
@@ -502,6 +521,11 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow() {
+    if (app.globalData.perfection) {
+      this.setData({
+        perfection: app.globalData.perfection
+      })
+    }
     this.getdetail();
     this.delestore();
     this.deleskill()

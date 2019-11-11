@@ -46,3 +46,5 @@
     <button class="addcertificatebottomotwo" wx:if="{{!obtnbut}}" bindtap="preserveone">确认保存</button>
   </view>
 </view>
+
+<!-- vertify -->

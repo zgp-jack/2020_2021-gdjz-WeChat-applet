@@ -4,10 +4,12 @@ App({
     //   if (e.path) this.initUserInfo(e);
     // }
     // catch(err){
-    //   console.log(err);
+    //   console.log(err); gotoUserauth
     // }
   },
   globalData: {
+    showperfection: false,
+    perfection:false,
     showdetail:true,
     unitid: "adunit-80f40e8b4f60c3f6",
     requestToken: "jizhao",

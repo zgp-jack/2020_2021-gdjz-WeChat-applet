@@ -114,6 +114,7 @@ Page({
       params: project,
       failTitle: "操作失败，请稍后重试！",
       success(res) {
+        console.log(res)
         remain.remain({
           tips: res.data.errmsg, callback: function () {
             wx.navigateBack({
@@ -180,17 +181,20 @@ Page({
       name: this.data.name,
       certificate_time: this.data.date
     })
+
+    console.log(this.data.idArrs)
     console.log(project)
     let that = this;
     app.appRequestAction({
       url: 'resumes/certificate/',
       way: 'POST',
-      params: project,
+      params: {ig:["234234","dsfsdf"]},
       failTitle: "操作失败，请稍后重试！",
       success(res) {
-        console.log(res)
+        console.log(project)
         remain.remain({
           tips: res.data.errmsg, callback: function () {
+            // if (res.data.errcode)
             wx.navigateBack({
               delta: 1
             })
@@ -344,6 +348,7 @@ Page({
       failTitle: "操作失败，请稍后重试！",
       params: project,
       success(res) {
+        console.log(res)
         remain.remain({
           tips: res.data.errmsg, callback: function () {
             if (res.data.errcode == "ok") {

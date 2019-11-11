@@ -1,5 +1,5 @@
 @import "../index/index.wxss";
-/* listsboxshow listsboxdetail listsboxdetail*/
+/* listsboxagetwo listsboxlableone listsboxself listsboxlocalone*/
 .listsboxdetail {
   width: 100%;
   background: white;
@@ -59,7 +59,7 @@
   margin-left: 12rpx;
 }
 .listsboxageone .listsboxname{
-  font-size: 26rpx;
+  font-size: 28rpx;
   margin-left: 0rpx;
 }
 .listsboxageone image{
@@ -72,10 +72,10 @@
 }
 .listsboxagetwo{
   margin-top: 12rpx;
-  font-size: 24rpx;
+  font-size: 28rpx;
 }
 .listsboxagetwo text{
-  font-size: 24rpx;
+  font-size: 28rpx;
   margin-left: 18rpx;
 }
 #listsboxnation{
@@ -90,27 +90,29 @@
   margin: 0 auto;
   font-size: 26rpx;
   color: #353636;
-  margin-top: 12rpx;
-  margin-bottom: 34rpx;
+  margin-top: 4rpx;
+  margin-bottom: 17rpx;
 }
 .listsboxlable view{
-  background: #F7F7F7;
+  background: rgb(238, 238, 238);
   padding: 3rpx;
-  font-size: 20rpx;
+  font-size: 24rpx;
   color: #9A9A9A;
   display: inline-block;
   margin-left: 22rpx;
 }
 .listsboxlable .listsboxlableone{
     margin-left: 10rpx;
+    margin-top: 10rpx;
 }
 .listsboxself{
    width: 91%;
    margin: 0 auto;
-   font-size: 24rpx;
+   font-size: 28rpx;
    color: #828586;
    border-bottom: 0.5px dashed #9A9A9A;
    padding-bottom: 14rpx;
+   word-break:break-all;
 }
 .listsboxlocal{
    width: 91%;
@@ -121,12 +123,12 @@
    margin-bottom: 25rpx;
 }
 .listsboxlocal image{
-  width: 24rpx;
-  height: 26rpx;
+  width: 34rpx;
+  height: 36rpx;
   display: inline-block;
 }
 .listsboxlocal .listsboxlocalone{
-  font-size: 20rpx;
+  font-size: 28rpx;
   color: #969999;
 }
 .listsboxlocalone{
@@ -135,7 +137,7 @@
 }
 .listsboxlocaltwo{
   color: #828586;
-  font-size: 22rpx;
+  font-size: 28rpx;
 }
 .listsboxlocal .listsboxlocalone view{
   margin-left: 10rpx;

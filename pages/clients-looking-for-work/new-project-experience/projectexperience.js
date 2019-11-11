@@ -2,7 +2,7 @@ const app = getApp();
 let v = require("../../../utils/v.js");
 let areas = require("../../../utils/area.js");
 let remain = require("../../../utils/remain.js");
-//bindstartDate delete vertify
+//bindstartDate delete vertify vertify
 Page({
   data: {
     project: "",
@@ -29,23 +29,23 @@ Page({
     obtnbut: true,
     nowDate: ""
   },
-  getbirth() {
-    var date = new Date();
-    var year = date.getFullYear();
-    var month = date.getMonth() + 1;
-    var day = date.getDate();
-    if (month < 10) {
-      month = "0" + month;
-    }
-    if (day < 10) {
-      day = "0" + day;
-    }
-    var nowDate = year + "-" + month + "-" + day;
-    this.setData({
-      nowDate: nowDate
-    });
+  // getbirth() {
+  //   var date = new Date();
+  //   var year = date.getFullYear();
+  //   var month = date.getMonth() + 1;
+  //   var day = date.getDate();
+  //   if (month < 10) {
+  //     month = "0" + month;
+  //   }
+  //   if (day < 10) {
+  //     day = "0" + day;
+  //   }
+  //   var nowDate = year + "-" + month + "-" + day;
+  //   this.setData({
+  //     nowDate: nowDate
+  //   });
 
-  },
+  // },
   obtn() {
     this.setData({
       showModal: false
@@ -506,14 +506,14 @@ Page({
         provincecity: this.data.project.province + "," + this.data.project.city
       })
 
-      var s = this.data.date;
-      var a = s.split(/[^0-9]/);
-      var d = new Date(a[0], a[1] - 1, a[2])
-      if (d.getTime() + 86400000 > new Date().getTime()) {
-        this.setData({
-          date: "至今"
-        })
-      }
+      // var s = this.data.date;
+      // var a = s.split(/[^0-9]/);
+      // var d = new Date(a[0], a[1] - 1, a[2])
+      // if (d.getTime() + 86400000 > new Date().getTime()) {
+      //   this.setData({
+      //     date: "至今"
+      //   })
+      // }
       console.log(this.data.objectMultiArray)
       let one = "";
       let two = "";
@@ -658,7 +658,7 @@ Page({
     wx.removeStorageSync("projectdetail")
   },
   onShow: function () {
-    this.getbirth()
+    // this.getbirth()
     this.getuuid()
 
   },

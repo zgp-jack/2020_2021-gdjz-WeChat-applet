@@ -23,7 +23,7 @@
     </view> -->
 
 
-    <view class='yupao-footer-item' bindtap='jumpThisLink' data-url="/pages/findwork/findwork" data-type='1'>
+    <view class='yupao-footer-item' bindtap='jumpThisLink' data-url="/pages/findingworkinglist/findingworkinglist" data-type='1'>
         <image src='{{ footerActive == "findwork" ? footerImgs.zhActive : footerImgs.zhNormal }}'></image>
         <text class='{{ footerActive == "findwork" ? "footer-text-active" : "" }}'>工人找活</text>
     </view>

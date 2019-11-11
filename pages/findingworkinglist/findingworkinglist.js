@@ -1,4 +1,4 @@
-//userTapSearch persondetail
+//userTapSearch persondetail lists sort
 const app = getApp();
 let footerjs = require("../../utils/footer.js");
 let areas = require("../../utils/area.js");
@@ -11,8 +11,9 @@ Page({
    * 页面的初始数据
    */
   data: {
-    information:"",
-    regionone:"",
+    gender: "",
+    information: "",
+    regionone: "",
     userInfo: "",
     unitid: app.globalData.unitid,
     footerActive: "findwork",
@@ -40,7 +41,7 @@ Page({
     worktype: -1,
     workinfo: -1,
     teamindex: -1,
-    newindex:-1,
+    newindex: -1,
     // searchDate: {
     //   page: 1,
     //   list_type: "resume",
@@ -53,15 +54,15 @@ Page({
     searchDate: {
       page: 1,
       occupations: "resume",
-      sort: "newest",
+      sort: 0,
       keywords: "",
       occupations: "",
     },
     fillterArea: [],
     fillterType: [],
     fillterTeam: [],
-    fillterNewest:[],
-    recommendteam:[{name:"推荐"}],
+    fillterNewest: [],
+    recommendteam: [{ name: "推荐" }],
     notice: {
       autoplay: true,
       indicatorDots: false,
@@ -77,7 +78,7 @@ Page({
     areaText: "选择城市",
     typeText: "选择工种",
     teamText: "队伍",
-    recommended:"推荐",
+    recommended: "推荐",
     showNothinkData: false,
     nothavemore: false,
     showMyLoading: false,
@@ -117,7 +118,7 @@ Page({
       showListsInfo: (this.data.showListsInfo == type) ? 0 : type
     })
   },
-  userChooseNewest(e){
+  userChooseNewest(e) {
     console.log(e)
     let _this = this;
     let index = parseInt(e.currentTarget.dataset.index);
@@ -131,7 +132,7 @@ Page({
     _this.setData({
       isFirstRequest: true,
       "searchDate.page": 1,
-      "searchDate.sort": _id,
+      "searchDate.sort": index,
       recommended: text
     })
     _this.doRequestAction(false);
@@ -279,36 +280,38 @@ Page({
       url: "resumes/index/",
       params: locate,
       success: function (res) {
-        _this.setData({ isload: false })
-        wx.hideLoading();
-        let mydata = res.data.errmsg;
-        let _page = parseInt(_this.data.searchDate.page)
-        _this.setData({ isFirstRequest: false });
-        if (mydata && mydata.length) {
-          let _data = _this.data.lists;
-          for (let i = 0; i < mydata.length; i++) {
-            _data.push(mydata[i]);
-          }
-          _this.setData({
-            "searchDate.page": (parseInt(_page) + 1),
-            lists: _append ? _data : mydata
-          })
-          // _this.setData({
-          //   information: _data
-          // })
-        } else {
-          if (_page == 1) {
+        console.log(res)
+        if (res.data.errcode == "ok") {
+          _this.setData({ isload: false })
+          wx.hideLoading();
+          let mydata = res.data.errmsg;
+          let _page = parseInt(_this.data.searchDate.page)
+          _this.setData({ isFirstRequest: false });
+          if (mydata && mydata.length) {
+            let _data = _this.data.lists;
+            for (let i = 0; i < mydata.length; i++) {
+              _data.push(mydata[i]);
+            }
             _this.setData({
-              showNothinkData: true,
-              lists: []
+              "searchDate.page": (parseInt(_page) + 1),
+              lists: _append ? _data : mydata
             })
+            // _this.setData({
+            //   information: _data
+            // })
           } else {
-            _this.setData({
-              nothavemore: true
-            })
+            if (_page == 1) {
+              _this.setData({
+                showNothinkData: true,
+                lists: []
+              })
+            } else {
+              _this.setData({
+                nothavemore: true
+              })
+            }
           }
         }
-
       },
       fail: function (err) {
         _this.setData({ isload: false })
@@ -652,7 +655,7 @@ Page({
   getFilterData: function () {
     let _this = this;
     this.setData({ fillterArea: areas.getProviceList() })
-    app.globalData.allTypes ? this.setData({ fillterType: app.globalData.allTypes.classTree, fillterTeam: app.globalData.allTypes.staffTree, fillterNewest:app.globalData.allTypes.jobListType }) : app.getListsAllType(function (_data) {
+    app.globalData.allTypes ? this.setData({ fillterType: app.globalData.allTypes.classTree, fillterTeam: app.globalData.allTypes.staffTree, fillterNewest: app.globalData.allTypes.jobListType }) : app.getListsAllType(function (_data) {
       _this.setData({
         fillterType: _data.classTree,
         fillterTeam: _data.staffTree,
@@ -727,7 +730,7 @@ Page({
 
 
 
- onLoad (options) {
+  onLoad(options) {
     this.initSearchHistory();
     this.initUserShareTimes();
     this.getFilterData();
@@ -740,7 +743,7 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-    
+
   },
 
   /**
