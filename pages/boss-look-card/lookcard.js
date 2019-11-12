@@ -4,7 +4,7 @@ let remain = require("../../utils/remain.js");
 Page({
 
   /** showComplain telephorft  age workingyears personnum workingyears
-   * 页面的初始数据 moreskill projectone occupations introduce
+   * 页面的初始数据 moreskill projectone occupations introduce telephorft
    */
   data: {
     complainInfo: "",

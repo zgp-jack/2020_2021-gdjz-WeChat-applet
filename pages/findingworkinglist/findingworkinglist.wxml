@@ -117,7 +117,7 @@
             </view>
             <view class="listsboxagetwo" wx:if="{{item.nation}}">
               <text id="listsboxnation">{{item.nation}}</text>
-              <text>工龄<text class="listsboxnum">{{item.experience}}</text>年</text>
+              <text>工龄<text class="listsboxnum">{{item.experience}}</text></text>
               <text>{{item.prof_degree}}</text>
             </view>
              <view class="listsboxagetwot" wx:if="{{!item.nation}}">

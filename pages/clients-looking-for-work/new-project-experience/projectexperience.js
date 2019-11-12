@@ -275,15 +275,7 @@ Page({
       })
       return
     }
-    if (vertifyNum.isNull(this.data.importimg)) {
-      wx.showModal({
-        title: '温馨提示',
-        content: '您添加的图片为空请重新输入',
-        showCancel: false,
-        success(res) { }
-      })
-      return
-    }
+
     Object.assign(project, {
       userId: userInfo.userId,
       token: userInfo.token,
@@ -391,15 +383,7 @@ Page({
       })
       return
     }
-    if (vertifyNum.isNull(this.data.importimg)) {
-      wx.showModal({
-        title: '温馨提示',
-        content: '您添加的图片为空请重新输入',
-        showCancel: false,
-        success(res) { }
-      })
-      return
-    }
+
 
     Object.assign(project, {
       userId: userInfo.userId,
@@ -639,15 +623,7 @@ Page({
       })
       return
     }
-    if (vertifyNum.isNull(this.data.importimg)) {
-      wx.showModal({
-        title: '温馨提示',
-        content: '您添加的图片为空请重新输入',
-        showCancel: false,
-        success(res) { }
-      })
-      return
-    }
+
 
     Object.assign(project, {
       userId: userInfo.userId,

@@ -482,4 +482,62 @@
   margin-top: 20rpx;
   margin-bottom: 42rpx;
 }
+
+
+.yupao-common-enterbox{
+  z-index: 999
+}
+
+.yupao-common-enter{
+  border-radius: 0;
+}
+.yupao-enter-footer text{
+  border: 1px solid #0099FF;
+  color: white;
+  font-size: 32rpx;
+}
+.yupao-enter-footer text:first-child{
+  border: 1px solid #0099FF;
+  color: #0099FF;
+}
+.yupao-enter-footer text:last-child{
+  border: 1px solid #0099FF;
+  color: white;
+  background: #0099FF;
+}
+.yupao-enter-title{
+  font-size: 40rpx;
+  font-weight: bold;
+}
+.yupao-enter-tips{
+  margin-top: 30rpx;
+  font-weight: bold;
+  font-size: 30rpx;
+  color: #000;
+}
+.yupao-common-enter {
+  text-align: center;
+}
+.yupao-common-enter image{
+  width: 350rpx;
+  height: 220rpx;
+}
+.slang{
+  width: 265rpx;
+  height: 33rpx;
+  border: 1px solid #0099FF;
+  margin: 0 auto;
+  border-radius: 20rpx;
+  margin-top: 24rpx;
+  margin-bottom: 24rpx;
+}
+.solang{
+  background: #0099FF;
+  border-radius: 20rpx;
+  height: 33rpx;
+}
+.yupao-enter-perce{
+  display: inline-block;
+  margin-top: 24rpx;
+}
 /* informationtelephone */

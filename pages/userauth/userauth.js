@@ -1,4 +1,4 @@
-// pages/userauth/userauth.js
+// pages/userauth/userauth.js bindGetUserInfo
 let app = getApp();
 Page({
 

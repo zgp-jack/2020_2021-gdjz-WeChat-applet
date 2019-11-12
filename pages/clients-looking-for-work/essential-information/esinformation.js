@@ -3,6 +3,7 @@ var amapFile = require('../../../utils/amap-wx.js');
 let areas = require("../../../utils/area.js");
 let v = require("../../../utils/v.js");
 let remain = require("../../../utils/remain.js");
+let reminder = require("../../../utils/ reminder.js");
 const app = getApp();
 Page({
 
@@ -39,6 +40,7 @@ Page({
     codeTips: "获取验证码",
     status: 1,
     nowDate: "",
+    perfection: false
   },
   getbirth() {
     var date = new Date();
@@ -376,7 +378,7 @@ Page({
     })
   },
   submitinformation() {
-
+    let that = this;
     let information = {}
     let userInfo = wx.getStorageSync("userInfo");
     let worktype = "";
@@ -391,88 +393,41 @@ Page({
 
     let vertifyNum = v.v.new()
     if (!vertifyNum.isMobile(this.data.telephone)) {
-      wx.showModal({
-        title: '温馨提示',
-        content: '您输入的手机号码不正确,请重新输入',
-        showCancel: false,
-        success(res) { }
-      })
+      reminder.reminder({ tips: '手机号' })
       return
     }
     if (vertifyNum.isNull(this.data.name)) {
-      console.log('姓名')
-      wx.showModal({
-        title: '温馨提示',
-        content: '您输入的姓名为空,请重新输入',
-        showCancel: false,
-        success(res) { }
-      })
+      reminder.reminder({ tips: '姓名' })
       return
     }
     if (vertifyNum.isNull(this.data.sex)) {
-
-      wx.showModal({
-        title: '温馨提示',
-        content: '您输入的性别为空,请重新输入',
-        showCancel: false,
-        success(res) { }
-      })
+      reminder.reminder({ tips: '性别' })
       return
     }
     if (vertifyNum.isNull(this.data.nation)) {
-      wx.showModal({
-        title: '温馨提示',
-        content: '您输入的民族为空,请重新输入',
-        showCancel: false,
-        success(res) { }
-      })
+      reminder.reminder({ tips: '民族' })
       return
     }
     if (vertifyNum.isNull(this.data.birthday)) {
-      wx.showModal({
-        title: '温馨提示',
-        content: '您输入的出生日期为空,请重新输入',
-        showCancel: false,
-        success(res) { }
-      })
+      reminder.reminder({ tips: '出生日期' })
       return
     }
     if (vertifyNum.isNull(worktype)) {
-      wx.showModal({
-        title: '温馨提示',
-        content: '您输入的工种为空,请重新输入',
-        showCancel: false,
-        success(res) { }
-      })
+      reminder.reminder({ tips: '工种' })
       return
     }
     if (vertifyNum.isNull(this.data.provinceid)) {
-      wx.showModal({
-        title: '温馨提示',
-        content: '您输入的所在地区为空,请重新输入',
-        showCancel: false,
-        success(res) { }
-      })
+      reminder.reminder({ tips: '所在地区' })
       return
     }
     if (vertifyNum.isNull(this.data.otextareavalue)) {
-      wx.showModal({
-        title: '温馨提示',
-        content: '您输入的自我介绍为空,请重新输入',
-        showCancel: false,
-        success(res) { }
-      })
+      reminder.reminder({ tips: '自我介绍' })
       return
     }
     // tele != telephone
     if (this.data.telephone != this.data.tele) {
       if (vertifyNum.isNull(this.data.verify)) {
-        wx.showModal({
-          title: '温馨提示',
-          content: '您输入的验证码为空,请重新输入',
-          showCancel: false,
-          success(res) { }
-        })
+        reminder.reminder({ tips:"验证码"})
         return
       }
     }
@@ -508,11 +463,14 @@ Page({
           tips: res.data.errmsg, callback: function () {
             if (res.data.errmsg == "保存成功") {
               if (app.globalData.showperfection) {
-                app.globalData.perfection = true;
+                that.setData({
+                  perfection: true,
+                })
+              } else {
+                wx.navigateBack({
+                  delta: 1
+                })
               }
-              wx.navigateBack({
-                delta: 1
-              })
             }
           }
         })
@@ -582,6 +540,19 @@ Page({
       typeworkarray: this.data.typeworkarray
     })
 
+  },
+
+  completes() {
+    app.globalData.showperfection =false;
+    wx.navigateBack({
+      delta: 1
+    })
+  },
+  completemore() {
+    app.globalData.showperfection = false;
+    wx.navigateTo({
+      url: '/pages/clients-looking-for-work/work-description/workdescription',
+    })
   },
   /**
    * 生命周期函数--监听页面加载

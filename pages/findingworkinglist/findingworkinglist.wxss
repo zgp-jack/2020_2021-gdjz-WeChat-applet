@@ -1,5 +1,5 @@
 @import "../index/index.wxss";
-/* listsboxagetwo listsboxlableone listsboxself listsboxlocalone*/
+/* listsboxagetwo listsboxlableone listsboxself listsboxlocalone listsboxagetwo*/
 .listsboxdetail {
   width: 100%;
   background: white;
@@ -72,10 +72,10 @@
 }
 .listsboxagetwo{
   margin-top: 12rpx;
-  font-size: 28rpx;
+  font-size: 26rpx;
 }
 .listsboxagetwo text{
-  font-size: 28rpx;
+  font-size: 26rpx;
   margin-left: 18rpx;
 }
 #listsboxnation{

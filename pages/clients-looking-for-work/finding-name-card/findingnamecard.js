@@ -64,7 +64,6 @@ Page({
     showtan: false,
     resson: "",
     ressonone: false,
-    perfection: app.globalData.perfection,
     note:""
   },
   completeall() {
@@ -517,21 +516,7 @@ Page({
   deleskill() {
     wx.removeStorageSync("skilltail")
   },
-  completes() {
-    app.globalData.perfection = false
-    this.setData({
-      perfection: app.globalData.perfection
-    })
-  },
-  completemore() {
-    app.globalData.perfection = false
-    this.setData({
-      perfection: app.globalData.perfection
-    })
-    wx.navigateTo({
-      url: '/pages/clients-looking-for-work/work-description/workdescription',
-    })
-  },
+
   /**
    * 生命周期函数--监听页面加载
    */
@@ -551,11 +536,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow() {
-    if (app.globalData.showperfection) {
-      this.setData({
-        perfection: app.globalData.perfection
-      })
-    }
+
     this.getdetail();
     this.delestore();
     this.deleskill()

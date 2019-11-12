@@ -4,7 +4,7 @@ let vali = require("../../../utils/v.js");
 const PI = Math.PI;
 let EARTH_RADIUS = 6378137.0;
 const Amap = require("../../../utils/amap-wx.js");
-//historyregionone
+//historyregionone updated controltap markers address-body mapandpois userEnterAddress mapInputFocus
 const amapFun = new Amap.AMapWX({ key: app.globalData.gdApiKey });
 Page({
 
@@ -81,9 +81,6 @@ Page({
     this.getMapInfo();
   },
   mapInputFocus: function (e) {
-    this.setData({
-      show: true
-    })
     let val = e.detail.value;
     if (val) return false;
     this.initHistoryCityList()

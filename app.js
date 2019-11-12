@@ -4,14 +4,14 @@ App({
     //   if (e.path) this.initUserInfo(e); valiUserUrl
     // }
     // catch(err){
-    //   console.log(err); gotoUserauth
+    //   console.log(err); gotoUserauth bindGetUserInfo
     // }
   },
   globalData: {
     allexpress: true,
     allskill: true,
-    showperfection: false,
     perfection:false,
+    showperfection:false,
     showdetail:true,
     unitid: "adunit-80f40e8b4f60c3f6",
     requestToken: "jizhao",
@@ -189,6 +189,7 @@ App({
       // 登录 获取在我们这里user_id
       wx.login({
         success: function(res) {
+          console.log(res)
           // 发送 res.code 到后台换取 openId, sessionKey, unionId
           if (res.code) {
             //发起网络请求
@@ -199,6 +200,7 @@ App({
                 wechat_token: that.globalData.requestToken
               },
               success: function(resdata) {
+                console.log(resdata)
                 //获取到session_key 解密 
                 var session_key = resdata.data.session_key
                 callback(session_key)

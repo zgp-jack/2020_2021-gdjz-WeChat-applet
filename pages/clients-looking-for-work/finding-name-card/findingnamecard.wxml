@@ -312,21 +312,6 @@
     <button class="cardnineone" open-type='share'>
       <image src="../../../images/bottom-two.png"></image>分享</button>
   </view>
-  <view class='yupao-common-enterbox flex-row' wx:if="{{perfection}}">
-    <view class='yupao-common-enter'>
-      <image src="../../../images/sucess.png"></image>
-      <text class='yupao-enter-title'>发布成功</text>
-      <text class='yupao-enter-tips'>完善更多资料可获得积分</text>
-      <text class='yupao-enter-perce'>{{percent}}%</text>
-      <view class="slang">
-            <view class="solang" style="width:{{percent}}%;"></view>
-      </view>
-      <view class='yupao-enter-footer clearfix'>
-        <text bindtap='completes'>完成</text>
-        <text bindtap='completemore'>完善更多信息</text>
-      </view>
-    </view>
-  </view>
 </view>
 
 <!-- oworkotextonetu  cardsixone showtop -- selectTap projectlength>

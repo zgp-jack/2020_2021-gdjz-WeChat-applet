@@ -64,7 +64,7 @@
     </view>
 
   </view>
-  <view class="informationtelephone" >
+  <view class="informationtelephone">
     <view class="informationtheinput">
       <text class="informationtheinputone">手机号码：</text>
       <view class="informationtheinputtwo">
@@ -72,10 +72,10 @@
       </view>
     </view>
 
-    <view class="informationverificationcode"   wx:if="{{tele!=telephone}}">
+    <view class="informationverificationcode" wx:if="{{tele!=telephone}}">
       <text class="informationverificationcodeone">验证码</text>
       <view class="informationverificationcodetwo">
-        <input type="text"  maxlength='4' placeholder="请输入验证码" bindinput="verify"></input>
+        <input type="text" maxlength='4' placeholder="请输入验证码" bindinput="verify"></input>
         <text bindtap="vertifynum">{{codeTips}}</text>
       </view>
     </view>
@@ -92,4 +92,21 @@
   <button class="informationsave" bindtap="submitinformation">
     保存资料
   </button>
+
+  <view class='yupao-common-enterbox flex-row' wx:if="{{perfection}}">
+    <view class='yupao-common-enter'>
+      <image src="../../../images/sucess.png"></image>
+      <text class='yupao-enter-title'>发布成功</text>
+      <text class='yupao-enter-tips'>完善更多资料可获得积分</text>
+      <text class='yupao-enter-perce'>60%</text>
+      <view class="slang">
+        <view class="solang" style="width:60%;"></view>
+      </view>
+      <view class='yupao-enter-footer clearfix'>
+        <text bindtap='completes'>完成</text>
+        <text bindtap='completemore'>完善更多信息</text>
+      </view>
+    </view>
+  </view>
+  
 </view>
