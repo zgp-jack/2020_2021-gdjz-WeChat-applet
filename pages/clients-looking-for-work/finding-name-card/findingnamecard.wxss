@@ -1,4 +1,6 @@
-/*.cardfivemobile .cardseven .workotextone cardthreemobile .cardfivemobile .findingnamecardthreemobile .contentone findingnamecardfourone findingnamecardeightone findingnamecardsixone cardonesonone" findingnamecardonesontwo cardsixtwo .cardsixthree*/ 
+/*.cardfivemobile .cardseven .workotextone cardthreemobile .cardfivemobile .findingnamecardthreemobile .contentone findingnamecardfourone findingnamecardeightone findingnamecardsixone cardonesonone" findingnamecardonesontwo cardsixtwo .cardsixthree
+.cardtwosonone .cardtwosononeimg .oimg image yupao-common-enterbox 
+*/ 
 
 .findingnamecard{
   width: 93%;
@@ -15,13 +17,13 @@
 .nopass{
   width: 93%;
   margin: 0 auto;
-  margin-top: 18rpx;
-  background: rgb(245, 235, 235);
-  height: 50rpx;
-  line-height: 50rpx;
+  background: #FFFBF7;
   color: red;
   font-size: 28rpx;
-  padding-left: 6rpx;
+  padding-top: 10rpx;
+  padding-left: 42rpx;
+  padding-right: 42rpx;
+  padding-bottom: 10rpx;
 }
 .link {
   width: 6px;
@@ -447,6 +449,7 @@ padding-bottom: 6rpx;
 .cardtwosonone .cardtwosononeimg .oimg image {
   height: 88rpx;
   width: 88rpx;
+  border-radius: 50%;
 }
 
 .cardtwosonone .cardtwosononeimg  .oimgone {
@@ -1120,6 +1123,9 @@ padding-bottom: 6rpx;
   z-index: 99
 }
 
+.yupao-common-enterbox{
+  z-index: 999
+}
 
 .yupao-common-enter{
   border-radius: 0;
@@ -1173,4 +1179,4 @@ padding-bottom: 6rpx;
   display: inline-block;
   margin-top: 24rpx;
 }
-/*oworkotext .all*/
+/*oworkotext .all showtop nopass*/

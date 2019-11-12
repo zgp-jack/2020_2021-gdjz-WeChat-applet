@@ -3,7 +3,7 @@ let footerjs = require("../../utils/footer.js");
 Page({
 
     /**
-     * 页面的初始数据
+     * 页面的初始数据 valiUserUrl
      */
     data: {
         footerActive: "member",
@@ -72,6 +72,7 @@ Page({
         })
     },
   valiUserUrl:function(e){
+    console.log(this.data.userInfo)
     app.valiUserUrl(e,this.data.userInfo)
   },
   gotoUserauth:function(){

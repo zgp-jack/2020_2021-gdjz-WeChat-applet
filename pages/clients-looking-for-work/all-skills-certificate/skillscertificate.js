@@ -7,9 +7,11 @@ Page({
    */
   data: {
     allskill: [],
-    allskilength:0,
-    skillpass:0,
+    allskilength: 0,
+    skillpass: 0,
     allskilltwo: [],
+    allskillthree: [],
+    allskillonef:false
   },
   allskill() {
     let userInfo = wx.getStorageSync("userInfo");
@@ -27,7 +29,7 @@ Page({
       failTitle: "操作失败，请稍后重试！",
       success(res) {
         console.log(res)
-        if (res.errMsg == "request:ok") {
+        if (res.data.errcode == 200) {
           that.setData({
             allskill: res.data.data.certificates,
             allskilength: res.data.data.certificates.length
@@ -76,6 +78,31 @@ Page({
     wx.removeStorageSync("skillpass")
   },
 
+  allskilleng(){
+    let that = this;
+    if (!app.globalData.allskill) {
+      let allskill = wx.getStorageSync("allskill");
+      this.setData({
+        allskillonef: true
+      });
+      this.setData({
+        skillpass: 8
+      })
+      if (allskill != []) {
+        console.log(allskill)
+        let skill = [];
+        for (let i = 0; i < allskill.length; i++) {
+          if (allskill[i].check == "2") {
+            skill.push(allskill[i])
+          }
+        }
+        that.setData({
+          allskillthree: skill
+        });
+      }
+    }
+
+  },
   /**
    * 生命周期函数--监听页面加载
    */
@@ -94,7 +121,10 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    this.allskill();
+    if (app.globalData.allskill) {
+      this.allskill();
+    }
+    this.allskilleng()
     this.deleskill();
     this.getskill();
   },

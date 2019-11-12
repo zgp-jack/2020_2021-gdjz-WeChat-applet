@@ -1,13 +1,15 @@
 App({
   onLaunch: function(e) {
     // try{
-    //   if (e.path) this.initUserInfo(e);
+    //   if (e.path) this.initUserInfo(e); valiUserUrl
     // }
     // catch(err){
     //   console.log(err); gotoUserauth
     // }
   },
   globalData: {
+    allexpress: true,
+    allskill: true,
     showperfection: false,
     perfection:false,
     showdetail:true,
@@ -614,6 +616,8 @@ App({
   },
   valiUserUrl: function(e, user) {
     let url = e.currentTarget.dataset.url;
+    console.log(url)
+    console.log(user)
     wx.navigateTo({
       url: user ? url : '/pages/userauth/userauth'
     })

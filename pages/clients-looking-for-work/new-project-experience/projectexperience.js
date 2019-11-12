@@ -2,7 +2,7 @@ const app = getApp();
 let v = require("../../../utils/v.js");
 let areas = require("../../../utils/area.js");
 let remain = require("../../../utils/remain.js");
-//bindstartDate delete vertify vertify
+//bindstartDate delete vertify vertify preservechixu
 Page({
   data: {
     project: "",
@@ -27,7 +27,9 @@ Page({
     showModal: false,
     uuid: "",
     obtnbut: true,
-    nowDate: ""
+    nowDate: "",
+    project_cou:0,
+    project_count:0
   },
   // getbirth() {
   //   var date = new Date();
@@ -203,6 +205,16 @@ Page({
     console.log(data)
   },
   preserve() {
+    let that = this;
+    if (that.data.project_cou >= that.data.project_count) {
+      wx.showModal({
+        title: '温馨提示',
+        content: `最多只能添加${that.data.project_count}个项目`,
+        showCancel: false,
+        success(res) { }
+      })
+      return
+    }
     let userInfo = wx.getStorageSync("userInfo");
     let project = {}
     let vertifyNum = v.v.new()
@@ -286,7 +298,6 @@ Page({
       image: this.data.importimg
     })
     console.log(project)
-    let that = this;
     app.appRequestAction({
       url: 'resumes/project/',
       way: 'POST',
@@ -297,6 +308,7 @@ Page({
         remain.remain({
           tips: res.data.errmsg, callback: function () {
             if (res.data.errcode == "ok") {
+              app.globalData.allexpress = true;
               wx.navigateBack({
                 delta: 1
               })
@@ -310,6 +322,16 @@ Page({
     })
   },
   preservechixu() {
+    let that = this;
+    if (that.data.project_cou >= that.data.project_count){
+      wx.showModal({
+        title: '温馨提示',
+        content: `最多只能添加${that.data.project_count}个项目`,
+        showCancel: false,
+        success(res) { }
+      })
+      return
+    }
     let userInfo = wx.getStorageSync("userInfo");
     let project = {}
     let vertifyNum = v.v.new()
@@ -393,7 +415,6 @@ Page({
       image: this.data.importimg
     })
     console.log(project)
-    let that = this;
     app.appRequestAction({
       url: 'resumes/project/',
       way: 'POST',
@@ -403,6 +424,11 @@ Page({
         remain.remain({
           tips: res.data.errmsg, callback: function () {
             if (res.data.errcode == "ok") {
+              console.log(res)
+              that.setData({
+                project_cou: res.data.count
+              })
+              app.globalData.allexpress = true;
               that.setData({
                 projectname: "",
                 startdate: "",
@@ -463,6 +489,7 @@ Page({
           tips: res.data.errmsg, callback: function () {
             if (res.data.errcode == "ok") {
               that.delestore();
+              app.globalData.allexpress = true;
               wx.navigateBack({
                 delta: 1
               })
@@ -482,6 +509,12 @@ Page({
   getproject() {
     let that = this;
     let project = wx.getStorageSync("projectdetail");
+    let project_count = wx.getStorageSync("project_count");
+    if (project_count){
+      this.setData({
+        project_count: project_count
+      })
+    }
     if (project) {
       wx.setNavigationBarTitle({
         title: '修改项目经验'
@@ -642,6 +675,7 @@ Page({
         remain.remain({
           tips: res.data.errmsg, callback: function () {
             if (res.data.errcode == "ok") {
+              app.globalData.allexpress = true;
               wx.navigateBack({
                 delta: 1
               })

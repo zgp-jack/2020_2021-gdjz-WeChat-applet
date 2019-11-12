@@ -51,10 +51,13 @@
             <view class="oworkone">
               <text class="oworkotext">工种</text>
             </view>
-            <view class="all">
+            <view class="all" wx:if="{{occupations != '未填写'}}">
               <view class="oworkotextonetu" wx:for="{{occupations}}" wx:key="{{index}}">
                 {{item}}
               </view>
+            </view>
+            <view class="all" wx:if="{{occupations == '未填写'}}">
+               <text class="workotextone">{{occupations}}</text>
             </view>
           </view>
           <view class="cardotext">
@@ -102,10 +105,13 @@
             <view class="oworkone">
               <text class="oworkotext">标签</text>
             </view>
-            <view class="all">
+            <view class="all" wx:if="{{tags != '未填写'}}">
               <view class="tworkotextonetu" wx:for="{{tags}}" wx:key="{{index}}">
                 {{item.label_name}}
               </view>
+            </view>
+            <view class="all"  wx:if="{{tags == '未填写'}}">
+                <text class="workotextone">{{tags}}</text>
             </view>
           </view>
         </view>
@@ -212,7 +218,7 @@
     <view class="cardsixsixallvoto">
     </view>
   </view>
-  <view wx:if="{{skilllength == 0}}" class="jilu">
+  <view wx:if="{{skilllength == 0}}" class="jiluone">
     暂无记录
   </view>
 

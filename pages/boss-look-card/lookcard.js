@@ -4,7 +4,7 @@ let remain = require("../../utils/remain.js");
 Page({
 
   /** showComplain telephorft  age workingyears personnum workingyears
-   * 页面的初始数据 moreskill
+   * 页面的初始数据 moreskill projectone occupations introduce
    */
   data: {
     complainInfo: "",
@@ -178,7 +178,8 @@ Page({
       app.gotoUserauth();
       return false;
     }
-    wx.setStorageSync("pass", 1)
+    app.globalData.allexpress = false
+    wx.setStorageSync("allexpress", _this.data.project)
     wx.navigateTo({
       url: "/pages/clients-looking-for-work/all-project-experience/allexperience",
     })
@@ -190,7 +191,8 @@ Page({
       app.gotoUserauth();
       return false;
     }
-    wx.setStorageSync("skillpass", 1)
+    app.globalData.allskill = false
+    wx.setStorageSync("allskill", _this.data.skillbooks)
     wx.navigateTo({
       url: "/pages/clients-looking-for-work/all-skills-certificate/skillscertificate",
     })
@@ -218,7 +220,7 @@ Page({
         let mydata = res.data;
         console.log(res)
 
-        if (res.errMsg == "request:ok") {
+        if (res.data.errcode == "ok") {
 
           let date = new Date();
           let dateo = date.getTime()
@@ -236,7 +238,7 @@ Page({
           })
           if (mydata.info.birthday) {
             that.setData({
-              age: dateone.getFullYear() - (mydata.info.birthday.split("-")[0] - 0)+"年"
+              age: dateone.getFullYear() - (mydata.info.birthday.split("-")[0] - 0) + "年"
             })
           }
           that.setData({
@@ -247,13 +249,13 @@ Page({
             city: mydata.info.hasOwnProperty("address") ? mydata.info.address : "",
             intro: false,
             introne: true,
-            introduce: mydata.info.hasOwnProperty("introduce") ? mydata.info.introduce : "",
-            workingyears: mydata.info.hasOwnProperty("experience") ? mydata.info.experience  : "",
+            introduce: mydata.info.hasOwnProperty("introduce") ? mydata.info.introduce : "未填写",
+            workingyears: mydata.info.hasOwnProperty("experience") ? mydata.info.experience : "",
             staffcomposition: mydata.info.hasOwnProperty("type_str") ? mydata.info.type_str : "",
             cityself: mydata.info.hasOwnProperty("hometown") ? mydata.info.hometown : "",
             procity: mydata.info.hasOwnProperty("prof_degree_str") ? mydata.info.prof_degree_str : "",
-            personnum: mydata.info.hasOwnProperty("number_people") ? 
-  mydata.info.number_people+"人" : "",
+            personnum: mydata.info.hasOwnProperty("number_people") ?
+              mydata.info.number_people + "人" : "",
             tags: mydata.info.hasOwnProperty("tags") ? mydata.info.tags : "",
             praise: mydata.operation.hasOwnProperty("is_zan") ? mydata.operation.is_zan : "",
             collect: mydata.operation.hasOwnProperty("is_collect") ? mydata.operation.is_collect : "",
@@ -312,6 +314,7 @@ Page({
             that.setData({
               skillbooksone: [certificatesall[0]]
             })
+            console.log(that.data.skilllength)
           }
 
         }
@@ -354,12 +357,14 @@ Page({
       success: function (res) {
         console.log(res)
         if (res.data.errcode == "ok") {
-          if (res.data.errmsg == "点赞成功") {
+          if (res.data.show == 1) {
+            app.showMyTips("点赞成功");
             _this.setData({
               praise: 1
             })
           }
-          if (res.data.errmsg == "取消点赞") {
+          if (res.data.show == 0) {
+            app.showMyTips("取消点赞");
             _this.setData({
               praise: 0
             })
@@ -368,7 +373,7 @@ Page({
       },
       fail: function (err) {
 
-        app.showMyTips("验证码发送失败");
+        app.showMyTips("请求失败");
       }
     })
   },
@@ -398,12 +403,14 @@ Page({
       success: function (res) {
         console.log(res)
         if (res.data.errcode == "ok") {
-          if (res.data.errmsg == "收藏成功") {
+          if (res.data.show == 1) {
+            app.showMyTips("收藏成功");
             _this.setData({
               collect: 1
             })
           }
-          if (res.data.errmsg == "'取消收藏'") {
+          if (res.data.show == 0) {
+            app.showMyTips("取消收藏");
             _this.setData({
               collect: 0
             })
@@ -412,7 +419,7 @@ Page({
       },
       fail: function (err) {
 
-        app.showMyTips("验证码发送失败");
+        app.showMyTips("请求失败");
       }
     })
   },

@@ -99,7 +99,7 @@
   font-size: 26rpx;
   margin-top: 8rpx;
   margin-left: 16rpx;
-  margin-bottom: 92rpx;
+  margin-bottom: 42rpx;
 }
 
 .audit {
@@ -131,4 +131,15 @@
   top: 29rpx;
   right: 29rpx;
 }
-/* obtn */
+
+.resson {
+  font-size: 26rpx;
+  margin-top: 10rpx;
+  margin-left: 16rpx;
+  color: #FB2A08;
+  margin-bottom: 6rpx;
+}
+.skilleightfive{
+  margin-bottom: 20rpx;
+}
+/* obtn  skilleightsixall*/

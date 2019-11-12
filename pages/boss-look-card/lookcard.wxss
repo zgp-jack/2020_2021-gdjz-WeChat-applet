@@ -69,7 +69,14 @@
   margin-top: 19rpx;
   padding-left: 18rpx;
 }
-
+.jiluone {
+  font-size: 28rpx;
+  color: #7d7d7d;
+  text-align: center;
+  margin-top: 19rpx;
+  padding-left: 18rpx;
+  margin-bottom: 90rpx;
+}
 .introcardtwo {
   width: 93%;
   margin: 0 auto;
@@ -135,4 +142,4 @@
 }
 
 
-/* content  bossbottomo*/
+/* content  bossbottomo .jilu*/

@@ -333,9 +333,10 @@ Page({
       params: information,
       failTitle: "操作失败，请稍后重试！",
       success: function (res) {
+        console.log(res)
         remain.remain({
           tips: res.data.errmsg, callback: function () {
-            if (res.data.errmsg == "保存成功") {
+            if (res.data.errcode == 200) {
               wx.navigateBack({
                 delta: 1
               })

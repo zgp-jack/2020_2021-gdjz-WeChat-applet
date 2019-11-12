@@ -15,7 +15,8 @@ Page({
     showModal: false,
     obtnbut: true,
     uuid: "",
-    // nowDate: ""
+    certificate_count:0,
+    certificate_cou: 0,
   },
   // getbirth() {
   //   var date = new Date();
@@ -117,9 +118,12 @@ Page({
         console.log(res)
         remain.remain({
           tips: res.data.errmsg, callback: function () {
-            wx.navigateBack({
-              delta: 1
-            })
+            if (res.data.errcode == "ok") {
+              app.globalData.allskill = true;
+              wx.navigateBack({
+                delta: 1
+              })
+            }
           }
         })
       },
@@ -142,6 +146,16 @@ Page({
     })
   },
   preserve() {
+    let that = this;
+    if (that.data.certificate_cou >= that.data.certificate_count) {
+      wx.showModal({
+        title: '温馨提示',
+        content: `最多只能添加${that.data.certificate_count}个技能证书`,
+        showCancel: false,
+        success(res) { }
+      })
+      return
+    }
     let userInfo = wx.getStorageSync("userInfo");
     let project = {}
     let vertifyNum = v.v.new()
@@ -182,22 +196,21 @@ Page({
       certificate_time: this.data.date
     })
 
-    console.log(this.data.idArrs)
-    console.log(project)
-    let that = this;
     app.appRequestAction({
       url: 'resumes/certificate/',
       way: 'POST',
-      params: {ig:["234234","dsfsdf"]},
+      params: project,
       failTitle: "操作失败，请稍后重试！",
       success(res) {
-        console.log(project)
+        console.log(res)
         remain.remain({
           tips: res.data.errmsg, callback: function () {
-            // if (res.data.errcode)
-            wx.navigateBack({
-              delta: 1
-            })
+            if (res.data.errcode == "ok") {
+              app.globalData.allskill = true;
+              wx.navigateBack({
+                delta: 1
+              })
+            }
           }
         })
       },
@@ -207,6 +220,16 @@ Page({
     })
   },
   preservechixu() {
+    let that = this;
+    if (that.data.certificate_cou >= that.data.certificate_count) {
+      wx.showModal({
+        title: '温馨提示',
+        content: `最多只能添加${that.data.certificate_count}个技能证书`,
+        showCancel: false,
+        success(res) { }
+      })
+      return
+    }
     let userInfo = wx.getStorageSync("userInfo");
     let project = {}
     let vertifyNum = v.v.new()
@@ -248,7 +271,7 @@ Page({
       certificate_time: this.data.date
     })
     console.log(project)
-    let that = this;
+
     app.appRequestAction({
       url: 'resumes/certificate/',
       way: 'POST',
@@ -258,6 +281,10 @@ Page({
         remain.remain({
           tips: res.data.errmsg, callback: function () {
             if (res.data.errcode == "ok") {
+              that.setData({
+                certificate_cou: res.data.count
+              })
+              app.globalData.allskill = true;
               that.setData({
                 imgArrs: [],
                 idArrs: [],
@@ -276,6 +303,12 @@ Page({
 
   getskill() {
     let skilltail = wx.getStorageSync("skilltail");
+    let certificate_count = wx.getStorageSync("certificate_count");
+    if (certificate_count) {
+      this.setData({
+        certificate_count: certificate_count
+      })
+    }
     console.log(skilltail)
     if (skilltail) {
       wx.setNavigationBarTitle({
@@ -352,6 +385,7 @@ Page({
         remain.remain({
           tips: res.data.errmsg, callback: function () {
             if (res.data.errcode == "ok") {
+              app.globalData.allskill = true;
               wx.navigateBack({
                 delta: 1
               })

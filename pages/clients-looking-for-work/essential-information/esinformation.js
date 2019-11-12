@@ -1,4 +1,4 @@
-// vertifynum verify textareavalue
+// vertifynum verify textareavalue app.globalData.showperfection
 var amapFile = require('../../../utils/amap-wx.js');
 let areas = require("../../../utils/area.js");
 let v = require("../../../utils/v.js");
@@ -376,9 +376,7 @@ Page({
     })
   },
   submitinformation() {
-    if (app.globalData.showperfection){
-      app.globalData.perfection = true;
-    }
+
     let information = {}
     let userInfo = wx.getStorageSync("userInfo");
     let worktype = "";
@@ -509,6 +507,9 @@ Page({
         remain.remain({
           tips: res.data.errmsg, callback: function () {
             if (res.data.errmsg == "保存成功") {
+              if (app.globalData.showperfection) {
+                app.globalData.perfection = true;
+              }
               wx.navigateBack({
                 delta: 1
               })

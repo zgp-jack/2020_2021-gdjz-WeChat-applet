@@ -1,4 +1,4 @@
-// addskill  lat nation projectlength
+// addskill  lat nation projectlength         checkfourf ressonone
 
 
 const app = getApp();
@@ -6,9 +6,11 @@ const app = getApp();
 Page({
 
   /**
-   * 页面的初始数据 nation view_num
+   * 页面的初始数据 nation view_num perfection
    */
   data: {
+    certificate_count:0,
+    project_count: 0,
     username: '',
     userimg: '',
     showtop: true,
@@ -60,10 +62,10 @@ Page({
     showbottom: false,
     resume_uuid: "",
     showtan: false,
-    resson:"",
-    ressonone:false,
+    resson: "",
+    ressonone: false,
     perfection: app.globalData.perfection,
-
+    note:""
   },
   completeall() {
     if (!this.data.resume_uuid) {
@@ -217,6 +219,7 @@ Page({
     })
   },
   moreproject() {
+    app.globalData.allexpress = true;
     wx.navigateTo({
       url: "/pages/clients-looking-for-work/all-project-experience/allexperience",
     })
@@ -240,6 +243,7 @@ Page({
     })
   },
   moreskill() {
+    app.globalData.allskill = true;
     wx.navigateTo({
       url: "/pages/clients-looking-for-work/all-skills-certificate/skillscertificate",
     })
@@ -273,7 +277,10 @@ Page({
         failTitle: "操作失败，请稍后重试！",
         params: imgdetail,
         success(res) {
-          app.showMyTips("保存成功");
+          console.log(res)
+          if (res.data.errcode == 200) {
+            app.showMyTips("保存成功");
+          }
         },
         fail: function (err) {
           app.showMyTips("保存失败");
@@ -299,7 +306,7 @@ Page({
         let mydata = res.data.data;
         console.log(mydata)
         console.log(res)
-        if (res.errMsg == "request:ok") {
+        if (res.data.errcode == 200) {
           for (let i = 0; i < mydata.project.length; i++) {
             if (mydata.project[i].check != 1) {
               that.setData({
@@ -370,11 +377,15 @@ Page({
             checkonef: mydata.info.hasOwnProperty("check") ? mydata.info.check : "",
             checktwo: mydata.introduces.check && mydata.introduces.check == 1 ? true : false,
             checktwof: mydata.introduces.hasOwnProperty("check") ? mydata.introduces.check : "",
+            certificate_count: mydata.hasOwnProperty("certificate_count") ? mydata.certificate_count : "",
+            project_count: mydata.hasOwnProperty("project_count") ? mydata.project_count : "",
+            note: mydata.info.hasOwnProperty("note") ? mydata.info.note : "",
           })
-          if (that.data.showtop){
+          if (that.data.showtop) {
             app.globalData.showperfection = true;
           }
-
+          wx.setStorageSync("certificate_count", that.data.certificate_count)
+          wx.setStorageSync("project_count", that.data.project_count)
           that.showbottom()
           let selectD = Object.values(mydata.status)
           let selectk = Object.keys(mydata.status)
@@ -419,6 +430,8 @@ Page({
             that.setData({
               projectlength: mydata.project.length >= 1 ? mydata.project.length : 0
             })
+            console.log(that.data.projectlength)
+            console.log(that.data.project_count)
           }
           that.setData({
             percent: mydata.info.hasOwnProperty("progress") ? mydata.info.progress : 0
@@ -434,7 +447,7 @@ Page({
             that.setData({
               skillbooksone: [that.data.skillbooks[0]]
             })
-          }
+          } 
 
           let popup = "";
           if (mydata.hasOwnProperty("popup_text")) {
@@ -442,12 +455,27 @@ Page({
               if (mydata.popup_text.length - 1 == i) {
                 popup += mydata.popup_text[i]
               } else {
-                popup += mydata.popup_text[i] + ""
+                popup += mydata.popup_text[i] + "、"
               }
             }
           }
-
+          if (that.data.checkonef != "0" || that.data.checktwof != "0") {
+            that.setData({
+              ressonone: false
+            })
+          }
           if (app.globalData.showdetail) {
+            if (that.data.checkonef == "0" || that.data.checktwof == "0" ){
+              that.setData({
+                ressonone: true
+              })
+            }
+            if (that.data.checkthreef == "0") {
+              ressonthree: true
+            }
+            if (that.data.checkfourf == "0") {
+              ressonfour: true
+            }
             if (that.data.checkonef == "0" || that.data.checktwof == "0" || that.data.checkthreef == "0" || that.data.checkfourf == "0") {
               wx.showModal({
                 title: '温馨提示',
@@ -458,7 +486,7 @@ Page({
               })
               that.setData({
                 resson: [that.data.skillbooks[0]],
-                ressonone:true
+
               })
               app.globalData.showdetail = false
             }
@@ -489,14 +517,16 @@ Page({
   deleskill() {
     wx.removeStorageSync("skilltail")
   },
-  completes(){
+  completes() {
+    app.globalData.perfection = false
     this.setData({
-      perfection: false
+      perfection: app.globalData.perfection
     })
   },
-  completemore(){
+  completemore() {
+    app.globalData.perfection = false
     this.setData({
-      perfection: false
+      perfection: app.globalData.perfection
     })
     wx.navigateTo({
       url: '/pages/clients-looking-for-work/work-description/workdescription',
@@ -521,7 +551,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow() {
-    if (app.globalData.perfection) {
+    if (app.globalData.showperfection) {
       this.setData({
         perfection: app.globalData.perfection
       })

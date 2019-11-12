@@ -103,7 +103,7 @@ Page({
         let mydata = res.data.data;
         console.log(mydata)
         console.log(res)
-        if (res.errMsg == "request:ok") {
+        if (res.data.errcode == 200) {
 
           let date = new Date();
           let dateo = date.getTime()

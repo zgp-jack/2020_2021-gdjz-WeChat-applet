@@ -2,7 +2,44 @@
   <view class="skilleight" wx:for="{{allproject}}" wx:key="{{index}}" wx:if="{{allgetexpre ==0}}">
     <image class="audit" wx:if="{{item.check == 1}}" src="../../../images/review.png"></image>
     <image class="audit" wx:if="{{item.check == 0}}" src="../../../images/notthrough.png"></image>
-    <view class="editor" bindtap="editor" data-uid="{{item}}" wx:if="{{item.check == 0 || item.check == 2}}">编辑</view>
+    <view class="editor" bindtap="editor" data-uid="{{item}}" wx:if="{{ item.check == 2}}">编辑</view>
+        <view class="editor" bindtap="editor" data-uid="{{item}}" wx:if="{{item.check == 0}}">待修改</view>
+    <view class="skilleightzong">
+      <view>
+        <image src="../../../images/newresume-experience-item.png" class="skilleightone"></image>
+      </view>
+      <view class="skilleightall">
+        <view class="project">
+          {{item.project_name}}
+        </view>
+        <view class="skilleighttwo">
+          <text>{{item.start_time}}--{{item.completion_time}}</text>
+          <text>{{item.province_name}}省{{item.city_name}}市</text>
+        </view>
+        <view class="description">
+          {{item.detail}}
+        </view>
+        <view class="skilleightfive">
+          <view class="skilleightfiveline">
+            <image wx:for="{{item.image}}" wx:key="{{index}}" src="{{item}}"></image>
+          </view>
+        </view>
+        <view class="resson" wx:if="{{item.check == 0}}">
+          未通过原因：{{item.fail_case}}
+        </view>
+        <view class="skilleightsixall" wx:if="{{index == projectlength-1}}">
+          没有更多了...
+        </view>
+
+        <view class="skillsixsixallvoto">
+        </view>
+      </view>
+    </view>
+  </view>
+  <button class="obtn" bindtap="addpro" wx:if="{{allgetexpre ==0&&projectlength < 5}}">添加项目经验</button>
+
+
+  <view class="skilleight" wx:if="{{allgetexpre ==1}}" wx:for="{{projectwo}}" wx:key="{{index}}">
     <view class="skilleightzong">
       <view>
         <image src="../../../images/newresume-experience-item.png" class="skilleightone"></image>
@@ -31,10 +68,8 @@
       </view>
     </view>
   </view>
-  <button class="obtn" bindtap="addpro"  wx:if="{{allgetexpre ==0&&projectlength < 5}}">添加项目经验</button>
 
-
-  <view class="skilleight" wx:if="{{allgetexpre ==1}}" wx:for="{{projectwo}}" wx:key="{{index}}">
+  <view class="skilleight" wx:if="{{allgetexpreone}}" wx:for="{{projecthree}}" wx:key="{{index}}">
     <view class="skilleightzong">
       <view>
         <image src="../../../images/newresume-experience-item.png" class="skilleightone"></image>

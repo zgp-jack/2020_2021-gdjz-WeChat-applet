@@ -9,7 +9,9 @@ Page({
     projectlength: 0,
     allde: false,
     allgetexpre: 0,
-    projectwo:[]
+    projectwo: [],
+    projecthree: [],
+    allgetexpreone: false
   },
   editor(e) {
     console.log(e)
@@ -23,6 +25,7 @@ Page({
   },
   getexpre() {
     let pass = wx.getStorageSync("pass");
+    console.log(pass)
     if (pass) {
       this.setData({
         allgetexpre: pass
@@ -67,7 +70,7 @@ Page({
       failTitle: "操作失败，请稍后重试！",
       success(res) {
         console.log(res)
-        if (res.errMsg == "request:ok") {
+        if (res.data.errcode == 200) {
           that.setData({
             allproject: res.data.data.project
           })
@@ -75,15 +78,15 @@ Page({
             projectlength: res.data.data.project.length
           })
           console.log(that.data.allproject)
-            let projectall = [];
-            for (let i = 0; i < that.data.allproject.length; i++) {
-              if (that.data.allproject[i].check == "2") {
-                projectall.push(that.data.allproject[i])
-              }
+          let projectall = [];
+          for (let i = 0; i < that.data.allproject.length; i++) {
+            if (that.data.allproject[i].check == "2") {
+              projectall.push(that.data.allproject[i])
             }
-            that.setData({
-              projectwo: projectall
-            });
+          }
+          that.setData({
+            projectwo: projectall
+          });
 
         }
       },
@@ -93,10 +96,41 @@ Page({
 
     })
   },
+
+  projecttwo(){
+    let that = this;
+    if (!app.globalData.allexpress) {
+      let allexpress = wx.getStorageSync("allexpress");
+      this.setData({
+        allgetexpreone: true
+      });
+      this.setData({
+        allgetexpre: 8
+      })
+      if (allexpress != []) {
+        console.log(allexpress)
+        let projectall = [];
+        for (let i = 0; i < allexpress.length; i++) {
+          if (allexpress[i].check == "2") {
+            projectall.push(allexpress[i])
+          }
+        }
+        that.setData({
+          projecthree: projectall
+        });
+      }
+    }
+
+  },
+
   onShow: function () {
-    this.project()
-    this.delestore()
+    if (app.globalData.allexpress) {
+      this.project()
+    }
+    this.projecttwo()
     this.getexpre()
+    this.delestore()
+
   },
 
   /**

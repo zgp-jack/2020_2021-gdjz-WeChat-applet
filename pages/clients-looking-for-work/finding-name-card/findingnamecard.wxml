@@ -112,7 +112,7 @@
   </view>
 </view>
  <view class="nopass" wx:if="{{ressonone}}">
-  审核未通过原因:
+  审核未通过原因：{{note}}
  </view>
   <view class="findingnamecardthree" wx:if="{{selfintro}}">
     <view class="findingnamecardthreemobile">
@@ -210,7 +210,7 @@
       <image src="../../../images/newresume-experience.png"></image>
       项目经验
     </view>
-    <view class="cardthreeone" wx:if="{{!checkthree}}" bindtap="addproject" wx:if="{{projectlength < 5}}" wx:if="{{!checkthree}}">
+    <view class="cardthreeone" bindtap="addproject" wx:if="{{projectlength < project_count&&!checkthree}}">
       添加
     </view>
   </view>
@@ -241,7 +241,7 @@
 
       </view>
     </view>
-    <view class="cardsixsixall" wx:if="{{projectlength > 1}}">
+    <view class="cardsixsixall" wx:if="{{projectlength > 1||checkthreef == 0}}">
       <button class="cardsixsix" bindtap="moreproject">
         <view wx:if="{{checkthreef != 0}}">
           更多项目经验
@@ -271,7 +271,7 @@
       <image src="../../../images/newresume-skill.png"></image>
       职业技能
     </view>
-    <view class="cardthreeone" bindtap="addskill" wx:if="{{skilllength < 3}}" wx:if="{{!checkfour}}">
+    <view class="cardthreeone" bindtap="addskill" wx:if="{{skilllength < certificate_count&&!checkfour}}">
       添加
     </view>
   </view>
@@ -288,12 +288,11 @@
         </view>
         <view class="cardeightfive">
           <image wx:for="{{item.image}}" wx:key="{{index}}" src="{{item}}"></image>
-
         </view>
 
       </view>
     </view>
-    <view class="cardeightsixall" wx:if="{{skilllength > 1}}">
+    <view class="cardeightsixall" wx:if="{{skilllength > 1||checkfourf == 0}}">
       <button class="cardeightsix" bindtap="moreskill">
         <view wx:if="{{checkfourf != 0}}">
           更多技能证书
@@ -318,7 +317,7 @@
       <image src="../../../images/sucess.png"></image>
       <text class='yupao-enter-title'>发布成功</text>
       <text class='yupao-enter-tips'>完善更多资料可获得积分</text>
-      <text class='yupao-enter-perce'>100%</text>
+      <text class='yupao-enter-perce'>{{percent}}%</text>
       <view class="slang">
             <view class="solang" style="width:{{percent}}%;"></view>
       </view>
@@ -330,4 +329,4 @@
   </view>
 </view>
 
-<!-- oworkotextonetu  cardsixone-- selectTap projectlength>
+<!-- oworkotextonetu  cardsixone showtop -- selectTap projectlength>

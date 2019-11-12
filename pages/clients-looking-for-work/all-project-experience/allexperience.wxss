@@ -1,5 +1,3 @@
-
-
 .skilleight {
   width: 93%;
   margin: 0 auto;
@@ -28,22 +26,22 @@
   color: #8b8b8a;
   font-size: 22rpx;
   margin-left: 14rpx;
-
 }
 
-.project{
- font-size: 26rpx;
- color: #343434;
- margin-left: 14rpx;
- margin-top: 10rpx;
+.project {
+  font-size: 26rpx;
+  color: #343434;
+  margin-left: 14rpx;
+  margin-top: 10rpx;
 }
 
-.description{
+.description {
   margin-top: 16rpx;
   color: #8b8b8a;
   font-size: 22rpx;
   margin-left: 14rpx;
 }
+
 .skilleightzong .skilleighttwo text:last-child {
   font-size: 20rpx;
   line-height: 26rpx;
@@ -115,7 +113,7 @@
   font-size: 26rpx;
   margin-top: 8rpx;
   margin-left: 16rpx;
-  margin-bottom: 92rpx;
+  margin-bottom: 22rpx;
 }
 
 .audit {
@@ -127,12 +125,12 @@
   left: 0;
 }
 
-.obtn{
+.obtn {
   width: 418rpx;
   height: 47rpx;
   margin: 0 auto;
   margin-top: 43rpx;
-  background: #0099FF;
+  background: #09f;
   text-align: center;
   line-height: 47rpx;
   font-size: 24rpx;
@@ -140,12 +138,23 @@
   border-radius: 20rpx;
   margin-bottom: 43rpx;
 }
-.editor{
+
+.editor {
   font-size: 25rpx;
-  color: #0099FF;
+  color: #09f;
   position: absolute;
   top: 29rpx;
   right: 29rpx;
 }
 
-/* obtn  skilleightzong skilleightone*/
+.resson {
+  font-size: 26rpx;
+  margin-top: 10rpx;
+  margin-left: 16rpx;
+  color: #FB2A08;
+  margin-bottom: 6rpx;
+}
+.skilleightfive{
+  margin-bottom: 20rpx;
+}
+/* obtn  skilleightzong skilleightone resson .skilleightsixall*/
