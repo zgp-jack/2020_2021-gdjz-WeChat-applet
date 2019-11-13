@@ -1,6 +1,6 @@
 /*.cardfivemobile .cardseven .workotextone cardthreemobile .cardfivemobile .findingnamecardthreemobile .contentone findingnamecardfourone findingnamecardeightone findingnamecardsixone cardonesonone" findingnamecardonesontwo cardsixtwo .cardsixthree
-.cardtwosonone .cardtwosononeimg .oimg image yupao-common-enterbox 
-*/ 
+.cardtwosonone .cardtwosononeimg .oimg image yupao-common-enterbox findingnamecardonesonone
+.cardnine .cardnineone .cardsixsix .cardeightsix*/ 
 
 .findingnamecard{
   width: 93%;
@@ -59,13 +59,19 @@
 
 
 
+.findingnamecardoneson .findingnamecardonesonone  .sharelive  {
+  margin-bottom: 8rpx;
+  font-size: 28rpx;
+  color: red;
+  margin-left: 13rpx;
+}
 .findingnamecardoneson .findingnamecardonesonone view {
-  margin-top: 6rpx;
-  margin-bottom: 14rpx;
+  margin-bottom: 8rpx;
   font-size: 28rpx;
   color: #0099FF;
   margin-left: 13rpx;
 }
+
 .findingnamecardoneson .findingnamecardonesonone .otext {
   margin-top: 14rpx;
   font-size: 28rpx;
@@ -715,7 +721,6 @@ padding-bottom: 6rpx;
   font-size: 26rpx;
   color: white;
   line-height: 45rpx;
-  border-radius: 20rpx;
   display: flex;
   justify-content: center;
   margin-top: 14rpx;
@@ -834,7 +839,6 @@ padding-bottom: 6rpx;
   font-size: 26rpx;
   color: white;
   line-height: 45rpx;
-  border-radius: 20rpx;
   display: flex;
   justify-content: center;
   margin-top: 14rpx;
@@ -852,25 +856,32 @@ padding-bottom: 6rpx;
 }
 
 .cardnine {
-  margin: 18rpx auto;
+  margin: 0 auto;
   height: 91rpx;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  margin-top: 18rpx;
 }
 
 .cardnine .cardnineone {
   margin: 0;
   padding: 0;
   height: 91rpx;
-  width: 369rpx;
+  width: 50%;
   background-color: white;
   color: #7d7d7d;
   font-size: 36rpx;
   text-align: center;
   line-height: 91rpx;
+  border-radius:0;
+  border-top: 2px solid #ececec;
+}
+.cardnine .cardnineone::after {
   border: none;
-
+}
+.cardnine .cardnineone:first-child {
+   border-right: 2px solid #ececec;
 }
 
 .cardnine .cardnineone image {
@@ -1123,60 +1134,24 @@ padding-bottom: 6rpx;
   z-index: 99
 }
 
-.yupao-common-enterbox{
-  z-index: 999
-}
 
-.yupao-common-enter{
-  border-radius: 0;
-}
-.yupao-enter-footer text{
-  border: 1px solid #0099FF;
-  color: white;
-  font-size: 32rpx;
-}
-.yupao-enter-footer text:first-child{
-  border: 1px solid #0099FF;
-  color: #0099FF;
-}
-.yupao-enter-footer text:last-child{
-  border: 1px solid #0099FF;
-  color: white;
-  background: #0099FF;
-}
-.yupao-enter-title{
-  font-size: 40rpx;
-  font-weight: bold;
-}
-.yupao-enter-tips{
-  margin-top: 30rpx;
-  font-weight: bold;
-  font-size: 30rpx;
-  color: #000;
-}
-.yupao-common-enter {
-  text-align: center;
-}
-.yupao-common-enter image{
-  width: 350rpx;
-  height: 220rpx;
-}
-.slang{
-  width: 265rpx;
-  height: 33rpx;
-  border: 1px solid #0099FF;
-  margin: 0 auto;
-  border-radius: 20rpx;
-  margin-top: 24rpx;
-  margin-bottom: 24rpx;
-}
-.solang{
-  background: #0099FF;
-  border-radius: 20rpx;
-  height: 33rpx;
-}
-.yupao-enter-perce{
+
+
+
+
+.audit {
   display: inline-block;
-  margin-top: 24rpx;
+  width: 113rpx;
+  height: 113rpx;
+  position: absolute;
+  top: 0;
+  left: 0;
 }
-/*oworkotext .all showtop nopass*/
+.resson {
+  font-size: 26rpx;
+  margin-top: 10rpx;
+  margin-left: 16rpx;
+  color: #FB2A08;
+  margin-bottom: 6rpx;
+}
+/*oworkotext cardsix .all showtop nopass findingnamecardsixtwo*/

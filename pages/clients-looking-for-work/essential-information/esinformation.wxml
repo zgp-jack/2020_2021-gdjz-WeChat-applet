@@ -3,7 +3,7 @@
     <view class="informationtwi">
       <text class="informationtwione">姓名</text>
       <view class="informationtwitwo">
-        <input type="text" placeholder="请输入你的名字" value="{{name}}" bindinput="name"></input>
+        <input type="text" maxlength="6" placeholder="请输入你的名字" value="{{name}}" bindinput="name"></input>
       </view>
     </view>
     <view class="informationthree">
@@ -85,8 +85,9 @@
     <view class="informationevaluationone">
       自我介绍：
     </view>
-    <textarea class="informationevaluationtwo" bindinput="textareavalue" maxlength="-1" placeholder="请简要介绍你所从事的行业以及工作经验..." value="{{otextareavalue}}">
+    <textarea class="informationevaluationtwo" bindinput="textareavalue" maxlength="500" placeholder="请简要介绍你所从事的行业以及工作经验..." value="{{otextareavalue}}">
     </textarea>
+    <text class="informationenum">{{otextareavaluel}}/500</text>
   </view>
 
   <button class="informationsave" bindtap="submitinformation">

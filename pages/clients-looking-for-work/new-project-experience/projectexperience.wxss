@@ -34,6 +34,7 @@
   margin-top: 19rpx;
   background-color: white;
   padding-bottom:18rpx;
+  position: relative;
 }
 
 .experiencethree .experiencethreeone{
@@ -45,19 +46,21 @@
 }
 
 .experiencethree .experiencethreetwo{
+  margin-bottom: 22rpx;
+
   font-size: 30rpx;
 }
 
 .experiencethree .experiencethreetwo textarea{
   width: 100%; 
   font-size: 30rpx;
-  padding-left: 20rpx;
-  padding-right: 20rpx;
+  padding-left: 18rpx;
+  padding-right: 18rpx;
   background: white;
 }
 
 .experiencefour{
-  width: 93%;
+  width: 90%;
   margin: 0 auto;
   margin-top: 19rpx;
   margin-bottom: 110rpx;
@@ -159,7 +162,7 @@
 .text{
     width: 100%;
     margin:0 auto;
-    height: 280rpx;
+    height: 290rpx;
     font-size: 32rpx;
     position: relative;
 }
@@ -172,8 +175,10 @@
 }
 .text .textdetail{
   font-size: 32rpx;
-  width: 80%;
-  margin: 28rpx auto;
+  width: 83%;
+  margin: 0 auto;
+  margin-top: 28rpx;
+  margin-bottom: 40rpx;
 }
 .buttontext {
    width: 100%;
@@ -203,4 +208,11 @@
 .buttontext  view:last-child{
    color: white;
 }
-/* experiencefourone */
+.experiencethree .informationenum{
+  position: absolute;
+  right: 18rpx;
+  bottom: 10rpx;
+  font-size: 25rpx;
+  color: #5e5d5d;
+}
+/* experiencefourone experiencethree experiencethreetwo*/

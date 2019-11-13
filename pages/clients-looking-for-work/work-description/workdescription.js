@@ -176,12 +176,12 @@ Page({
 
       allpro = this.data.allprovinces[this.data.multiIndex[0]].id + "," + this.data.allprovinces[this.data.multiIndex[0]].children[this.data.multiIndex[1]].id
       this.setData({
-        multiIndexvalue: that.data.allprovinces[that.data.multiIndex[0]].name + " " + that.data.allprovinces[that.data.multiIndex[0]].children[that.data.multiIndex[1]].name 
+        multiIndexvalue: that.data.allprovinces[that.data.multiIndex[0]].name + " " + that.data.allprovinces[that.data.multiIndex[0]].children[that.data.multiIndex[1]].name
       })
     } else {
       allpro = this.data.allprovinces[this.data.multiIndex[0]].id
       this.setData({
-        multiIndexvalue: that.data.allprovinces[that.data.multiIndex[0]].name  + "" + that.data.allprovinces[that.data.multiIndex[0]].name
+        multiIndexvalue: that.data.allprovinces[that.data.multiIndex[0]].name + "" + that.data.allprovinces[that.data.multiIndex[0]].name
       })
     }
     this.setData({
@@ -320,9 +320,16 @@ Page({
         remain.remain({
           tips: res.data.errmsg, callback: function () {
             if (res.data.errcode == 200) {
-              wx.navigateBack({
-                delta: 1
-              })
+              if (app.globalData.skip) {
+                app.globalData.skip = false;
+                wx.navigateBack({
+                  delta: 2
+                })
+              }else{
+                wx.navigateBack({
+                  delta: 1
+                })
+              }
             }
           }
         })

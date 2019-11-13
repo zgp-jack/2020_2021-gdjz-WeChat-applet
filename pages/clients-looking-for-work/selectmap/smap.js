@@ -4,7 +4,7 @@ let vali = require("../../../utils/v.js");
 const PI = Math.PI;
 let EARTH_RADIUS = 6378137.0;
 const Amap = require("../../../utils/amap-wx.js");
-//historyregionone updated controltap markers address-body mapandpois userEnterAddress mapInputFocus
+//historyregionone updated controltap markers address-body mapandpois userEnterAddress mapInputFocus publish/checking-adcode/
 const amapFun = new Amap.AMapWX({ key: app.globalData.gdApiKey });
 Page({
 
@@ -175,12 +175,22 @@ Page({
   checkAdcode: function (adcode, callback) {
     let _this = this;
     app.appRequestAction({
-      way: 'POST',
-      url: 'publish/checking-adcode/',
+      way: 'GET',
+      url: 'resumes/check-adcode/',
       params: {
         adcode: adcode
       },
       success: function (res) {
+        console.log(res)
+        if (res.data.errcode == "ok") {
+          let provincelocal = {};
+          Object.assign(provincelocal,{
+            province: res.data.province,
+            city: res.data.city,
+            adcode: adcode
+          })
+          wx.setStorageSync("provincelocal", provincelocal)
+        }
         if (res.data.errcode == "fail") {
           wx.showModal({
             title: '温馨提示',

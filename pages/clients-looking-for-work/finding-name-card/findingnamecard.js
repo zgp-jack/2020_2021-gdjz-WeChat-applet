@@ -1,4 +1,4 @@
-// addskill  lat nation projectlength         checkfourf ressonone
+// addskill  lat nation projectlength showbottom  view_num
 
 
 const app = getApp();
@@ -9,7 +9,7 @@ Page({
    * 页面的初始数据 nation view_num perfection
    */
   data: {
-    certificate_count:0,
+    certificate_count: 0,
     project_count: 0,
     username: '',
     userimg: '',
@@ -41,7 +41,7 @@ Page({
     check: "",
     checkstatus: true,
     is_introduces: false,
-    view_num: "",
+    view_num: 0,
     project: [],
     projectone: [],
     projectlength: 0,
@@ -64,7 +64,10 @@ Page({
     showtan: false,
     resson: "",
     ressonone: false,
-    note:""
+    note: "",
+    passre: true,
+    nopassre: true,
+    showcomplete: true
   },
   completeall() {
     if (!this.data.resume_uuid) {
@@ -82,6 +85,17 @@ Page({
     } else if (this.data.skillbooks.length == 0) {
       wx.navigateTo({
         url: "/pages/clients-looking-for-work/addcertificate/addcertificate",
+      })
+    }
+  },
+  redorblue() {
+    if (this.data.resume_uuid && this.data.is_introduces != 0 && this.data.project.length != 0 && this.data.skillbooks.length != 0) {
+      this.setData({
+        showcomplete: false
+      })
+    }else{
+      this.setData({
+        showcomplete: true
       })
     }
   },
@@ -253,6 +267,16 @@ Page({
     })
   },
   chooseImage() {
+    if (this.data.checkone){
+      wx.showModal({
+        title: '温馨提示',
+        content: '信息审核中，请稍后再试',
+        showCancel: false,
+        success(res) {
+        }
+      })
+      return
+    }
     let that = this;
     app.userUploadImg(function (img, url) {
       console.log(url)
@@ -300,8 +324,7 @@ Page({
       url: 'resumes/resume-list/',
       way: 'POST',
       params: detail,
-      failTitle: "操作失败，请稍后重试！",
-      success(res) {
+      success:function(res) {
         let mydata = res.data.data;
         console.log(mydata)
         console.log(res)
@@ -394,6 +417,9 @@ Page({
             })
           }
           that.setData({
+            passre: true
+          })
+          that.setData({
             selectData: selectD,
             selectk: selectk
           })
@@ -419,22 +445,26 @@ Page({
           that.setData({
             view_num: mydata.info.hasOwnProperty("view_num") ? mydata.info.view_num : 0
           });
+
+
           if (mydata.project != []) {
             that.setData({
               project: mydata.project
             });
+
             that.setData({
               projectone: [mydata.project[0]]
             });
             that.setData({
               projectlength: mydata.project.length >= 1 ? mydata.project.length : 0
             })
-            console.log(that.data.projectlength)
-            console.log(that.data.project_count)
+
           }
           that.setData({
             percent: mydata.info.hasOwnProperty("progress") ? mydata.info.progress : 0
           })
+
+
 
           if (mydata.certificates != []) {
             that.setData({
@@ -446,7 +476,7 @@ Page({
             that.setData({
               skillbooksone: [that.data.skillbooks[0]]
             })
-          } 
+          }
 
           let popup = "";
           if (mydata.hasOwnProperty("popup_text")) {
@@ -462,9 +492,37 @@ Page({
             that.setData({
               ressonone: false
             })
+            that.setData({
+              passre: true
+            })
+            that.setData({
+              nopassre: true
+            })
+          }
+          if (that.data.checkonef == "0" || that.data.checktwof == "0") {
+            that.setData({
+              ressonone: true
+            })
+            that.setData({
+              nopassre: true
+            })
+            that.setData({
+              passre: false
+            })
+          }
+          if (that.data.checkonef == "1" || that.data.checktwof == "1") {
+            that.setData({
+              ressonone: false
+            })
+            that.setData({
+              passre: true
+            })
+            that.setData({
+              nopassre: false
+            })
           }
           if (app.globalData.showdetail) {
-            if (that.data.checkonef == "0" || that.data.checktwof == "0" ){
+            if (that.data.checkonef == "0" || that.data.checktwof == "0") {
               that.setData({
                 ressonone: true
               })
@@ -485,14 +543,15 @@ Page({
               })
               that.setData({
                 resson: [that.data.skillbooks[0]],
-
               })
               app.globalData.showdetail = false
             }
           }
+          that.redorblue()
         }
       },
       fail: function (err) {
+        console.log(err)
         app.showMyTips("请求失败");
       }
     })
@@ -507,6 +566,10 @@ Page({
     if (this.data.checkonef == "2") {
       this.setData({
         showbottom: true
+      })
+    } else {
+      this.setData({
+        showbottom: false
       })
     }
   },

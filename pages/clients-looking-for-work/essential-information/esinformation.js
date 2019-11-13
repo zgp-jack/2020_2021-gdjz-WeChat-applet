@@ -1,4 +1,4 @@
-// vertifynum verify textareavalue app.globalData.showperfection
+// vertifynum verify textareavalue app.globalData.showperfection textareavalue userTapAddress
 var amapFile = require('../../../utils/amap-wx.js');
 let areas = require("../../../utils/area.js");
 let v = require("../../../utils/v.js");
@@ -24,6 +24,7 @@ Page({
     pindex: 0,
     cindex: 0,
     otextareavalue: "",
+    otextareavaluel: 0,
     oadcode: "",
     provinceaddress: "",
     cityaddress: "",
@@ -116,7 +117,8 @@ Page({
     })
   },
   GPSsubmit: function () {
-    this.getLocation();
+    this.openSetting()
+
   },
   getLocation: function () { //定位获取
     var _this = this;
@@ -142,28 +144,49 @@ Page({
       }
     });
   },
-  getadcode: function () { //定位获取
-    var _this = this;
-    var myAmapFun = new amapFile.AMapWX({
-      key: app.globalData.gdApiKey
-    }); //key注册高德地图开发者
-    myAmapFun.getRegeo({
-      success: function (data) {
-        console.log(data)
-        _this.setData({
-          oadcode: data[0].regeocodeData.addressComponent.adcode
-        });
-        _this.setData({
-          provinceaddress: data[0].regeocodeData.addressComponent.province
-        });
-        _this.setData({
-          cityaddress: data[0].regeocodeData.addressComponent.city
-        });
-        _this.getarea()
+  openSetting: function (e) {
+    let that = this;
+    wx.getSetting({
+      success: (res) => {
+        //console.log(res.authSetting['scope.userLocation']);
+        if (res.authSetting['scope.userLocation'] != undefined && res.authSetting['scope.userLocation'] != true) {//非初始化进入该页面,且未授权   
+          wx.showModal({
+            title: '是否授权当前位置',
+            content: '需要获取您的地理位置，请确认授权，否则将不能为你自动推荐位置',
+            success: function (res) {
+              if (res.cancel) {
+              } else if (res.confirm) {
+                //village_LBS(that);
+                wx.openSetting({
+                  success: function (data) {
+                    console.log(data);
+                    if (data.authSetting["scope.userLocation"] == true) {
+                      wx.showToast({
+                        title: '授权成功',
+                        icon: 'success',
+                        duration: 2000
+                      })
+
+                      //再次授权，调用getLocationt的API
+                      that.getLocation();
+                    } else {
+                      wx.showToast({
+                        title: '授权失败',
+                        icon: 'success',
+                        duration: 2000
+                      })
+                    }
+                  }
+                })
+              }
+            }
+          })
+          return false;
+        } else {
+          that.getLocation();
+        }
       },
-      fail: function (info) {
-      }
-    });
+    })
   },
   userTapAddress: function () {
     wx.navigateTo({
@@ -172,8 +195,9 @@ Page({
   },
   getlocationdetails() { //所在地区的位置
     let historyregionone = wx.getStorageSync("historyregionone");
+    let provincelocal = wx.getStorageSync("provincelocal");
     console.log(historyregionone)
-
+    console.log(provincelocal)
     if (historyregionone) {
       this.setData({
         regionone: historyregionone.title,
@@ -182,6 +206,13 @@ Page({
       })
       console.log(this.data.longitude)
       // wx.removeStorageSync('historyregionone')
+    }
+    if (provincelocal) {
+      this.setData({
+        provinceid: provincelocal.province,
+        wardenryid: provincelocal.city,
+        oadcode: provincelocal.adcode
+      })
     }
   },
 
@@ -319,6 +350,9 @@ Page({
     this.setData({
       otextareavalue: e.detail.value
     })
+    this.setData({
+      otextareavaluel: e.detail.value.length
+    })
 
   },
 
@@ -396,8 +430,14 @@ Page({
       reminder.reminder({ tips: '手机号' })
       return
     }
-    if (vertifyNum.isNull(this.data.name)) {
-      reminder.reminder({ tips: '姓名' })
+
+    if (vertifyNum.isNull(this.data.name) || this.data.name.length < 2) {
+      wx.showModal({
+        title: '温馨提示',
+        content: '您输入的姓名为空,或者少于两个字',
+        showCancel: false,
+        success(res) { }
+      })
       return
     }
     if (vertifyNum.isNull(this.data.sex)) {
@@ -408,7 +448,10 @@ Page({
       reminder.reminder({ tips: '民族' })
       return
     }
+
+    that.getbirthall()
     if (vertifyNum.isNull(this.data.birthday)) {
+
       reminder.reminder({ tips: '出生日期' })
       return
     }
@@ -416,7 +459,8 @@ Page({
       reminder.reminder({ tips: '工种' })
       return
     }
-    if (vertifyNum.isNull(this.data.provinceid)) {
+
+    if (vertifyNum.isNull(this.data.regionone)) {
       reminder.reminder({ tips: '所在地区' })
       return
     }
@@ -427,7 +471,7 @@ Page({
     // tele != telephone
     if (this.data.telephone != this.data.tele) {
       if (vertifyNum.isNull(this.data.verify)) {
-        reminder.reminder({ tips:"验证码"})
+        reminder.reminder({ tips: "验证码" })
         return
       }
     }
@@ -493,9 +537,12 @@ Page({
       complexwork: introinfo.hasOwnProperty("occupations") ? introinfo.occupations : [],
       complexworkid: introinfo.hasOwnProperty("occupations_id") ? introinfo.occupations_id.split(",") : [],
       regionone: introinfo.hasOwnProperty("address") ? introinfo.address : "",
+      provinceid: introinfo.hasOwnProperty("province") ? introinfo.province : "",
+      wardenryid: introinfo.hasOwnProperty("city") ? introinfo.city : "",
       telephone: introinfo.hasOwnProperty("tel") ? introinfo.tel : "",
       tele: introinfo.hasOwnProperty("tel") ? introinfo.tel : "",
       otextareavalue: introinfo.hasOwnProperty("introduce") ? introinfo.introduce : "",
+      otextareavaluel: introinfo.hasOwnProperty("introduce") ? introinfo.introduce.length : 0,
     })
 
     if (introinfo.gender != "") {
@@ -543,16 +590,42 @@ Page({
   },
 
   completes() {
-    app.globalData.showperfection =false;
+    app.globalData.showperfection = false;
     wx.navigateBack({
       delta: 1
     })
   },
   completemore() {
     app.globalData.showperfection = false;
+    app.globalData.skip = true;
     wx.navigateTo({
       url: '/pages/clients-looking-for-work/work-description/workdescription',
     })
+  },
+  getbirthall() {
+    var date = new Date();
+    var year = date.getFullYear();
+    var month = date.getMonth() + 1;
+    var day = date.getDate();
+    if (month < 10) {
+      month = "0" + month;
+    }
+    if (day < 10) {
+      day = "0" + day;
+    }
+    let time = this.data.birthday.split("-");
+    let timeone = this.data.birthday.split("-")[0] - 0;
+    let timetwo = this.data.birthday.split("-")[1] - 0;
+    let timethree = this.data.birthday.split("-")[2] - 0;
+    if (year - timeone == 18 && month - timetwo <= 0 && day - timethree < 0 || year - timeone < 18) {
+      wx.showModal({
+        title: '温馨提示',
+        content: '输入的年龄不能小于18',
+        showCancel: false,
+        success(res) { }
+      })
+    }
+    return
   },
   /**
    * 生命周期函数--监听页面加载
@@ -572,11 +645,9 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
-    this.getadcode()
     this.getbirth()
-
     this.getlocationdetails()
+
   },
 
   /**

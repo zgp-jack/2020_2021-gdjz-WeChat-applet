@@ -3,7 +3,7 @@ let v = require("../../../utils/v.js");
 let areas = require("../../../utils/area.js");
 let remain = require("../../../utils/remain.js");
 let reminder = require("../../../utils/ reminder.js");
-//bindstartDate delete vertify vertify preservechixu
+//bindstartDate delete vertify vertify preservechixu bindTextAreaBlur
 Page({
   data: {
     project: "",
@@ -25,6 +25,7 @@ Page({
     resume_uuid: "",
     projectname: "",
     detail: "",
+    detailength:0,
     showModal: false,
     uuid: "",
     obtnbut: true,
@@ -32,23 +33,26 @@ Page({
     project_cou:0,
     project_count:0
   },
-  // getbirth() {
-  //   var date = new Date();
-  //   var year = date.getFullYear();
-  //   var month = date.getMonth() + 1;
-  //   var day = date.getDate();
-  //   if (month < 10) {
-  //     month = "0" + month;
-  //   }
-  //   if (day < 10) {
-  //     day = "0" + day;
-  //   }
-  //   var nowDate = year + "-" + month + "-" + day;
-  //   this.setData({
-  //     nowDate: nowDate
-  //   });
+  getbirthall() {
+    let starttime = this.data.startdate.split("-");
+    let starttimeone = this.data.startdate.split("-")[0] - 0;
+    let starttimetwo = this.data.startdate.split("-")[1] - 0;
+    let starttimethree = this.data.startdate.split("-")[2] - 0;
 
-  // },
+    let endtime = this.data.date.split("-");
+    let endtimeone = this.data.date.split("-")[0] - 0;
+    let endtimetwo = this.data.date.split("-")[1] - 0;
+    let endtimethree = this.data.date.split("-")[2] - 0;
+    if (endtimeone - starttimeone == 20 && endtimetwo - starttimetwo >= 0 && endtimethree - starttimethree > 0 || endtimeone - starttimeone > 20) {
+      wx.showModal({
+        title: '温馨提示',
+        content: '输入的开工时间和完工时间间隔不能大于20年',
+        showCancel: false,
+        success(res) { }
+      })
+    }
+    return
+  },
   obtn() {
     this.setData({
       showModal: false
@@ -80,6 +84,10 @@ Page({
   bindTextAreaBlur(e) {
     this.setData({
       detail: e.detail.value
+    })
+    
+    this.setData({
+      detailength: e.detail.value.length
     })
   },
   bindstartDate(e) {
@@ -251,7 +259,7 @@ Page({
       reminder.reminder({ tips: '所在地区' })
       return
     }
-
+    that.getbirthall()
     Object.assign(project, {
       userId: userInfo.userId,
       token: userInfo.token,

@@ -3,13 +3,14 @@ App({
     // try{
     //   if (e.path) this.initUserInfo(e); valiUserUrl
     // }
-    // catch(err){
+    // catch(err){bindGetUserInfo
     //   console.log(err); gotoUserauth bindGetUserInfo
     // }
   },
   globalData: {
     allexpress: true,
     allskill: true,
+    skip: false,
     perfection:false,
     showperfection:false,
     showdetail:true,
@@ -142,21 +143,27 @@ App({
       }
     }
 
+
     let _this = this;
+
+    let url = _options.hasOwnProperty("url") ? _this.globalData.apiRequestUrl + _options.url : _this.globalData.apiRequestUrl
+
+
+
     wx.request({
       method: _options.hasOwnProperty("way") ? _options.way : 'GET',
-      url: _options.hasOwnProperty("url") ? (_this.globalData.apiRequestUrl + _options.url) : _this.globalData.apiRequestUrl,
+      url: url,
       data: _options.hasOwnProperty("params") ? _options.params : {},
       header: {
         'content-type': 'application/x-www-form-urlencoded'
       },
-      success(res) {
+      success:function(res) {
         if ((_options.hasOwnProperty("hideLoading") && !_options.hideLoading) || (!_options.hasOwnProperty("hideLoading"))) {
           wx.hideLoading();
         }
         _options.hasOwnProperty("success") ? _options.success(res) : "";
       },
-      fail(err) {
+      fail:function(err) {
         if ((_options.hasOwnProperty("hideLoading") && !_options.hideLoading) || (!_options.hasOwnProperty("hideLoading"))) {
           wx.hideLoading();
         }
@@ -645,6 +652,7 @@ App({
                   success: function(data) {
                     console.log(data);
                     if (data.authSetting["scope.userLocation"] == true) {
+
                       wx.showToast({
                         title: '授权成功',
                         icon: 'success',

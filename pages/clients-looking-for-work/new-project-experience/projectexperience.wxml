@@ -46,6 +46,7 @@
     <view class="experiencethreetwo">
       <textarea bindinput="bindTextAreaBlur" value="{{detail}}" maxlength="500" placeholder="主要描述工作中的项目情况..." />
     </view>
+   <text class="informationenum">{{detailength}}/500</text>
   </view>
   <view class="experiencefour">
     <view wx:for="{{imgArrs}}"  class='img_item' wx:key="{{item}}">

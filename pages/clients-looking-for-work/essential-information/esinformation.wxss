@@ -1,4 +1,4 @@
-/* informationfive informationevaluationtwo*/
+/* informationfive informationevaluationtwo informationevaluationtwo informationenum*/
 .informationtwo{
   width: 93%;
   margin: 0 auto;
@@ -450,26 +450,36 @@
 .informationevaluation{
   width: 93%;
   margin: 0 auto;
-  height: 225rpx;
+  height: 255rpx;
   background: white;
   margin-top: 20rpx;
   overflow: hidden;
+    position: relative;
 }
 .informationevaluationone{
   font-size: 28rpx;
-  width: 88%;
+  width: 89%;
   margin: 0 auto;
   margin-top: 35rpx;
   
 }
 
 .informationevaluationtwo{
-  width: 88%;
+  width: 89%;
   margin: 0 auto;
   display: block;
   background: white; 
   font-size: 28rpx;
   height: 140rpx;
+
+}
+
+.informationevaluation .informationenum{
+  position: absolute;
+  right: 5.2%;
+  bottom: 8rpx;
+  font-size: 25rpx;
+  color: #5e5d5d;
 }
 
 .informationsave{
@@ -539,5 +549,12 @@
 .yupao-enter-perce{
   display: inline-block;
   margin-top: 24rpx;
+}
+.experiencethree .informationenum{
+  position: absolute;
+  right: 12rpx;
+  bottom: 4rpx;
+  font-size: 25rpx;
+  color: #5e5d5d;
 }
 /* informationtelephone */
