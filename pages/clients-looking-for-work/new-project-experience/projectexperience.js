@@ -2,6 +2,7 @@ const app = getApp();
 let v = require("../../../utils/v.js");
 let areas = require("../../../utils/area.js");
 let remain = require("../../../utils/remain.js");
+let reminder = require("../../../utils/ reminder.js");
 //bindstartDate delete vertify vertify preservechixu
 Page({
   data: {
@@ -220,22 +221,12 @@ Page({
     let vertifyNum = v.v.new()
 
     if (vertifyNum.isNull(this.data.startdate)) {
-      wx.showModal({
-        title: '温馨提示',
-        content: '您输入的开始时间为空请重新输入',
-        showCancel: false,
-        success(res) { }
-      })
+      reminder.reminder({ tips: '开始时间' })
       return
     }
 
     if (vertifyNum.isNull(this.data.date)) {
-      wx.showModal({
-        title: '温馨提示',
-        content: '您输入的完工时间为空请重新输入',
-        showCancel: false,
-        success(res) { }
-      })
+      reminder.reminder({ tips: '完工时间' })
       return
     }
 
@@ -249,30 +240,15 @@ Page({
       return
     }
     if (vertifyNum.isNull(this.data.projectname)) {
-      wx.showModal({
-        title: '温馨提示',
-        content: '您输入的项目名称为空请重新输入',
-        showCancel: false,
-        success(res) { }
-      })
+      reminder.reminder({ tips: '项目名称' })
       return
     }
     if (vertifyNum.isNull(this.data.detail)) {
-      wx.showModal({
-        title: '温馨提示',
-        content: '您输入的项目描述为空请重新输入',
-        showCancel: false,
-        success(res) { }
-      })
+      reminder.reminder({ tips: '项目描述' })
       return
     }
     if (vertifyNum.isNull(this.data.provincecity)) {
-      wx.showModal({
-        title: '温馨提示',
-        content: '您输入的所在地区为空请重新输入',
-        showCancel: false,
-        success(res) { }
-      })
+      reminder.reminder({ tips: '所在地区' })
       return
     }
 
@@ -329,22 +305,12 @@ Page({
     let vertifyNum = v.v.new()
 
     if (vertifyNum.isNull(this.data.startdate)) {
-      wx.showModal({
-        title: '温馨提示',
-        content: '您输入的开始时间为空请重新输入',
-        showCancel: false,
-        success(res) { }
-      })
+      reminder.reminder({ tips: '开始时间' })
       return
     }
 
     if (vertifyNum.isNull(this.data.date)) {
-      wx.showModal({
-        title: '温馨提示',
-        content: '您输入的完工时间为空请重新输入',
-        showCancel: false,
-        success(res) { }
-      })
+      reminder.reminder({ tips: '完工时间' })
       return
     }
     if (new Date(this.data.startdate).getTime() > new Date(this.data.date).getTime()) {
@@ -357,30 +323,15 @@ Page({
       return
     }
     if (vertifyNum.isNull(this.data.projectname)) {
-      wx.showModal({
-        title: '温馨提示',
-        content: '您输入的项目时间为空请重新输入',
-        showCancel: false,
-        success(res) { }
-      })
+      reminder.reminder({ tips: '项目时间' })
       return
     }
     if (vertifyNum.isNull(this.data.detail)) {
-      wx.showModal({
-        title: '温馨提示',
-        content: '您输入的项目描述为空请重新输入',
-        showCancel: false,
-        success(res) { }
-      })
+      reminder.reminder({ tips: '项目描述' })
       return
     }
     if (vertifyNum.isNull(this.data.provincecity)) {
-      wx.showModal({
-        title: '温馨提示',
-        content: '您输入的所在地区为空请重新输入',
-        showCancel: false,
-        success(res) { }
-      })
+      reminder.reminder({ tips: '所在地区' })
       return
     }
 
@@ -569,22 +520,12 @@ Page({
     let vertifyNum = v.v.new()
 
     if (vertifyNum.isNull(this.data.startdate)) {
-      wx.showModal({
-        title: '温馨提示',
-        content: '您输入的开始时间为空请重新输入',
-        showCancel: false,
-        success(res) { }
-      })
+      reminder.reminder({ tips: '开始时间' })
       return
     }
 
     if (vertifyNum.isNull(this.data.date)) {
-      wx.showModal({
-        title: '温馨提示',
-        content: '您输入的完工时间为空请重新输入',
-        showCancel: false,
-        success(res) { }
-      })
+      reminder.reminder({ tips: '完工时间' })
       return
     }
     if (new Date(this.data.startdate).getTime() > new Date(this.data.date).getTime()) {
@@ -597,30 +538,15 @@ Page({
       return
     }
     if (vertifyNum.isNull(this.data.projectname)) {
-      wx.showModal({
-        title: '温馨提示',
-        content: '您输入的项目名称为空请重新输入',
-        showCancel: false,
-        success(res) { }
-      })
+      reminder.reminder({ tips: '项目名称' })
       return
     }
     if (vertifyNum.isNull(this.data.detail)) {
-      wx.showModal({
-        title: '温馨提示',
-        content: '您输入的项目描述为空请重新输入',
-        showCancel: false,
-        success(res) { }
-      })
+      reminder.reminder({ tips: '项目描述' })
       return
     }
     if (vertifyNum.isNull(this.data.provincecity)) {
-      wx.showModal({
-        title: '温馨提示',
-        content: '您输入的所在地区为空请重新输入',
-        showCancel: false,
-        success(res) { }
-      })
+      reminder.reminder({ tips: '所在地区' })
       return
     }
 

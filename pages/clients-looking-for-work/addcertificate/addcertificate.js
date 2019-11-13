@@ -1,6 +1,7 @@
 const app = getApp();
 let v = require("../../../utils/v.js");
 let remain = require("../../../utils/remain.js");
+let reminder = require("../../../utils/ reminder.js");
 Page({
 
   /**
@@ -160,12 +161,7 @@ Page({
     let project = {}
     let vertifyNum = v.v.new()
     if (vertifyNum.isNull(this.data.name)) {
-      wx.showModal({
-        title: '温馨提示',
-        content: '您输入的职业技能为空请重新输入',
-        showCancel: false,
-        success(res) { }
-      })
+      reminder.reminder({ tips: '职业技能' })
       return
     }
     if (vertifyNum.isNull(this.data.idArrs)) {
@@ -178,12 +174,7 @@ Page({
       return
     }
     if (vertifyNum.isNull(this.data.date)) {
-      wx.showModal({
-        title: '温馨提示',
-        content: '您输入的领取证书时间为空请重新输入',
-        showCancel: false,
-        success(res) { }
-      })
+      reminder.reminder({ tips: '领取证书时间' })
       return
     }
     Object.assign(project, {
@@ -234,12 +225,7 @@ Page({
     let project = {}
     let vertifyNum = v.v.new()
     if (vertifyNum.isNull(this.data.name)) {
-      wx.showModal({
-        title: '温馨提示',
-        content: '您输入的职业技能为空请重新输入',
-        showCancel: false,
-        success(res) { }
-      })
+      reminder.reminder({ tips: '职业技能' })
       return
     }
     if (vertifyNum.isNull(this.data.idArrs)) {
@@ -252,12 +238,7 @@ Page({
       return
     }
     if (vertifyNum.isNull(this.data.date)) {
-      wx.showModal({
-        title: '温馨提示',
-        content: '您输入的领取证书时间为空请重新输入',
-        showCancel: false,
-        success(res) { }
-      })
+      reminder.reminder({ tips: '领取证书时间' })
       return
     }
 
@@ -337,15 +318,11 @@ Page({
     let project = {}
     let vertifyNum = v.v.new()
     if (vertifyNum.isNull(this.data.name)) {
-      wx.showModal({
-        title: '温馨提示',
-        content: '您输入的职业技能为空请重新输入',
-        showCancel: false,
-        success(res) { }
-      })
+      reminder.reminder({ tips: '职业技能' })
       return
     }
     if (vertifyNum.isNull(this.data.idArrs)) {
+
       wx.showModal({
         title: '温馨提示',
         content: '您添加的图片为空请重新输入',
@@ -355,12 +332,7 @@ Page({
       return
     }
     if (vertifyNum.isNull(this.data.date)) {
-      wx.showModal({
-        title: '温馨提示',
-        content: '您输入的领取证书时间为空请重新输入',
-        showCancel: false,
-        success(res) { }
-      })
+      reminder.reminder({ tips: '领取证书时间' })
       return
     }
     Object.assign(project, {

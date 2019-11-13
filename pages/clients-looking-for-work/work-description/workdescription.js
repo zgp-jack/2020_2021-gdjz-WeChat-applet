@@ -3,6 +3,7 @@ let areas = require("../../../utils/area.js");
 const app = getApp();
 let v = require("../../../utils/v.js");
 let remain = require("../../../utils/remain.js");
+let reminder = require("../../../utils/ reminder.js");
 Page({
 
   /**
@@ -259,47 +260,34 @@ Page({
     let information = {}
     let userInfo = wx.getStorageSync("userInfo");
     let vertifyNum = v.v.new()
-    if (vertifyNum.isNull(this.data.workage)) {
+    let str = /^\d{1,2}$/ig;
+    if (!str.test(this.data.workage)) {
       wx.showModal({
         title: '温馨提示',
-        content: '您输入的工龄为空,请重新输入',
+        content: '您输入的工龄不为数字,或者超过两位数请重新输入',
         showCancel: false,
         success(res) { }
       })
       return
     }
     if (vertifyNum.isNull(this.data.provincecity)) {
-      wx.showModal({
-        title: '温馨提示',
-        content: '您选择的家乡为空,请重新输入',
-        showCancel: false,
-        success(res) { }
-      })
+      reminder.reminder({ tips: '家乡' })
       return
     }
     if (vertifyNum.isNull(this.data.degreeone)) {
-      wx.showModal({
-        title: '温馨提示',
-        content: '您选择的熟练度为空,请重新输入',
-        showCancel: false,
-        success(res) { }
-      })
+      reminder.reminder({ tips: '熟练度' })
       return
     }
     if (vertifyNum.isNull(this.data.constituttion)) {
-      wx.showModal({
-        title: '温馨提示',
-        content: '您选择的人员构成为空,请重新输入',
-        showCancel: false,
-        success(res) { }
-      })
+      reminder.reminder({ tips: '人员构成' })
       return
     }
+    let strone = /^[1-9]{1,4}$/ig;
+    if (!strone.test(this.data.teamsnumber) && this.data.constituttion != 1) {
 
-    if (vertifyNum.isNull(this.data.teamsnumber) && this.data.constituttion != 1) {
       wx.showModal({
         title: '温馨提示',
-        content: '您输入的队伍人数为空或者为零,请重新输入',
+        content: '您输入的队伍人数不为数字,或者超过四位数,或者为零请重新输入',
         showCancel: false,
         success(res) { }
       })
@@ -307,12 +295,7 @@ Page({
     }
     console.log(this.data.labelnum)
     if (this.data.labelnum.length == 0) {
-      wx.showModal({
-        title: '温馨提示',
-        content: '您选择的标签为空,请重新输入',
-        showCancel: false,
-        success(res) { }
-      })
+      reminder.reminder({ tips: '标签' })
       return
     }
     Object.assign(information, {
