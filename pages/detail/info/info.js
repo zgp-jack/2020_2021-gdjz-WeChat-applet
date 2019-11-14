@@ -1,4 +1,4 @@
-// pages/info/info.js share share
+// pages/info/info.js share share showThisMapInfo showThisMapInfo
 const app = getApp();
 Page({
 

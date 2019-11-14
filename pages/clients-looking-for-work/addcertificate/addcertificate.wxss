@@ -1,3 +1,4 @@
+/* .img_item  .addcertificateimageone*/
 .addcertificatede{
   width: 93%;
   margin: 0 auto;
@@ -74,17 +75,32 @@
   margin: 0 auto;
   margin-top: 20rpx;
   margin-bottom: 110rpx;
+    height: 182rpx;
 }
 .addcertificateimage .addcertificateimageone{
-  width: 181rpx;
+  width: 85%;
   height: 181rpx;
-  margin-right: 50rpx;
   position: relative;
 }
-.img_item{
+.img_item:nth-child(1){
+   width: 33.34%; 
    display: inline-block;
-
+   text-align: left;
+     height: 181rpx;
 }
+.img_item:nth-child(2){
+   width: 33.33333%; 
+   display: inline-block;
+   text-align: center;
+     height: 181rpx;
+}
+.img_item:nth-child(3){
+   width: 33.33333%; 
+   display: inline-block;
+   text-align: right;
+     height: 181rpx;
+}
+
 
 
 

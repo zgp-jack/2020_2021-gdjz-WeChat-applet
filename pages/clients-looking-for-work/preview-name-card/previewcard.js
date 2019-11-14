@@ -1,4 +1,4 @@
-// moreproject
+// moreproject checkfour moreproject ressonone
 
 const app = getApp();
 
@@ -58,7 +58,9 @@ Page({
     checkfourf: 4568,
     showbottom: false,
     resume_uuid: "",
-    showtan: false
+    showtan: false,
+    ressonone: false,
+    note:""
   },
   telephorf(e){
     wx.makePhoneCall({
@@ -110,6 +112,36 @@ Page({
           let dateone = new Date(dateo);
           wx.setStorageSync("introdetail", mydata.introduces)
           wx.setStorageSync("introinfo", mydata.info)
+          for (let i = 0; i < mydata.project.length; i++) {
+            if (mydata.project[i].check != 1) {
+              that.setData({
+                checkthree: false,
+                checkthreef: mydata.project[i].check
+              })
+              break
+            }
+            if (mydata.project[i].check == 1) {
+              that.setData({
+                checkthree: true,
+                checkthreef: mydata.project[i].check
+              })
+            }
+          }
+          for (let i = 0; i < mydata.certificates.length; i++) {
+            if (mydata.certificates[i].check != 1) {
+              that.setData({
+                checkfour: false,
+                checkfourf: mydata.certificates[i].check
+              })
+              break
+            }
+            if (mydata.certificates[i].check == 1) {
+              that.setData({
+                checkfour: true,
+                checkfourf: mydata.certificates[i].check
+              })
+            }
+          }
           if (mydata.info.uuid) {
             that.setData({
               resume_uuid: mydata.info.uuid
@@ -139,6 +171,12 @@ Page({
             procity: mydata.introduces.hasOwnProperty("prof_degree_str") ? mydata.introduces.prof_degree_str : "",
             personnum: mydata.introduces.hasOwnProperty("number_people") ? mydata.introduces.number_people : "",
             tags: mydata.introduces.hasOwnProperty("tags") ? mydata.introduces.tags : "",
+            checkone: mydata.info.check && mydata.info.check == 1 ? true : false,
+            checkone: mydata.info.check && mydata.info.check == 1 ? true : false,
+            checkonef: mydata.info.hasOwnProperty("check") ? mydata.info.check : "",
+            checktwo: mydata.introduces.check && mydata.introduces.check == 1 ? true : false,
+            checktwof: mydata.introduces.hasOwnProperty("check") ? mydata.introduces.check : "",
+            note: mydata.info.hasOwnProperty("note") ? mydata.info.note : "",
           })
 
           let selectD = Object.values(mydata.status)
@@ -177,20 +215,20 @@ Page({
 
           if (mydata.project != []) {
             console.log(mydata.project)
-            let projectall = [];
-            for (let i = 0; i < mydata.project.length; i ++ ){
-              if (mydata.project[i].check == "2"){
-                 projectall.push(mydata.project[i])
-              }
-            }
+            // let projectall = [];
+            // for (let i = 0; i < mydata.project.length; i ++ ){
+            //   if (mydata.project[i].check == "2"){
+            //      projectall.push(mydata.project[i])
+            //   }
+            // }
             that.setData({
-              project: projectall
+              project: mydata.project
             });
             that.setData({
-              projectone: [projectall[0]]
+              projectone: [mydata.project[0]]
             });
             that.setData({
-              projectlength: projectall.length >= 1 ? projectall.length : 0
+              projectlength: mydata.project.length >= 1 ? mydata.project.length : 0
             })
           }
 
@@ -200,24 +238,56 @@ Page({
 
           if (mydata.certificates != []) {
             console.log(mydata.certificates)
-            let certificatesall = [];
-            for (let i = 0; i < mydata.certificates.length; i++) {
-              if (mydata.certificates[i].check == "2") {
-                certificatesall.push(mydata.certificates[i])
-              }
-            }
+            // let certificatesall = [];
+            // for (let i = 0; i < mydata.certificates.length; i++) {
+            //   if (mydata.certificates[i].check == "2") {
+            //     certificatesall.push(mydata.certificates[i])
+            //   }
+            // }
 
             that.setData({
-              skillbooks: certificatesall
+              skillbooks: mydata.certificates
             })
             that.setData({
-              skilllength: certificatesall.length >= 1 ? certificatesall.length : 0
+              skilllength: mydata.certificates.length >= 1 ? mydata.certificates.length : 0
             })
             that.setData({
-              skillbooksone: [certificatesall[0]]
+              skillbooksone: [mydata.certificates[0]]
             })
           }
-
+          if (that.data.checkonef != "0" || that.data.checktwof != "0") {
+            that.setData({
+              ressonone: false
+            })
+            that.setData({
+              passre: true
+            })
+            that.setData({
+              nopassre: true
+            })
+          }
+          if (that.data.checkonef == "0" || that.data.checktwof == "0") {
+            that.setData({
+              ressonone: true
+            })
+            that.setData({
+              nopassre: true
+            })
+            that.setData({
+              passre: false
+            })
+          }
+          if (that.data.checkonef == "1" || that.data.checktwof == "1") {
+            that.setData({
+              ressonone: false
+            })
+            that.setData({
+              passre: true
+            })
+            that.setData({
+              nopassre: false
+            })
+          }
         }
       },
       fail: function (err) {

@@ -1,10 +1,9 @@
 {
   "pages": [
-        "pages/clients-looking-for-work/finding-name-card/findingnamecard",
-        "pages/clients-looking-for-work/new-project-experience/projectexperience",
-    "pages/index/index",
-
     "pages/findingworkinglist/findingworkinglist",
+    "pages/index/index",
+    "pages/clients-looking-for-work/finding-name-card/findingnamecard",
+    "pages/clients-looking-for-work/new-project-experience/projectexperience",
     "pages/boss-look-card/lookcard",
     "pages/clients-looking-for-work/preview-name-card/previewcard",
     "pages/clients-looking-for-work/modify-project-experience/modifyexper",

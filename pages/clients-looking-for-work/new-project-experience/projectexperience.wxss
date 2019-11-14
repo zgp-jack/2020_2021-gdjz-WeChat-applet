@@ -1,3 +1,4 @@
+/* experiencefour */
 .experienceheader{
   width: 93%;
   margin: 0 auto;
@@ -60,7 +61,7 @@
 }
 
 .experiencefour{
-  width: 90%;
+  width: 93%;
   margin: 0 auto;
   margin-top: 19rpx;
   margin-bottom: 110rpx;
@@ -68,13 +69,40 @@
 .experiencefour .experiencefourone{
   width: 181rpx;
   height: 181rpx;
-  margin-right: 50rpx;
   position: relative;
 }
-.img_item{
+.img_item:nth-child(1){
+   width: 33.33%;  
    display: inline-block;
-
+   text-align: left;
 }
+.img_item:nth-child(2){
+   width: 33.33%; 
+   display: inline-block;
+   text-align: center;
+}
+.img_item:nth-child(3){
+   width: 33.33%; 
+   display: inline-block;
+   text-align: right;
+}
+.img_item:nth-child(4){
+   width: 33.33%; 
+   display: inline-block;
+   text-align: left;
+}
+.img_item:nth-child(5){
+   width: 33%; 
+   display: inline-block;
+   text-align: center;
+}
+.img_item:nth-child(6){
+   width: 33%; 
+   display: inline-block;
+   text-align: right;
+}
+
+
 
 .experiencebottom{
     margin-top: 100rpx;
@@ -215,4 +243,8 @@
   font-size: 25rpx;
   color: #5e5d5d;
 }
-/* experiencefourone experiencethree experiencethreetwo*/
+.experiencefourper{
+  width: 33%;
+  height: 181rpx;
+}
+/* experiencefourone experiencethree experiencethreetwo img_item*/

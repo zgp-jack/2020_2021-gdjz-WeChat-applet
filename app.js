@@ -4,7 +4,7 @@ App({
     //   if (e.path) this.initUserInfo(e); valiUserUrl
     // }
     // catch(err){bindGetUserInfo
-    //   console.log(err); gotoUserauth bindGetUserInfo
+    //   console.log(err); gotoUserauth bindGetUserInfo 
     // }
   },
   globalData: {

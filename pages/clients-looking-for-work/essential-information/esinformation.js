@@ -41,7 +41,8 @@ Page({
     codeTips: "获取验证码",
     status: 1,
     nowDate: "",
-    perfection: false
+    perfection: false,
+    regionreal:""
   },
   getbirth() {
     var date = new Date();
@@ -130,17 +131,23 @@ Page({
         console.log(data);
         let oname = data[0].name + ' ' + data[0].desc;
         if (oname.length >= 10) {
-          let onamesplit = oname.slice(0, 10) + '...';
+          // let onamesplit = oname.slice(0, 10) + '...';
+          let onamesplit = oname;
           _this.setData({
-            regionone: onamesplit
+            regionone: data[0].name,
           });
         } else {
           _this.setData({
             regionone: data[0].name + ' ' + data[0].desc
           });
         }
+        _this.setData({
+          oadcode: data[0].regeocodeData.addressComponent.adcode
+        });
+          
       },
       fail: function (info) {
+        app.showMyTips("定位失败,请重新定位");
       }
     });
   },
@@ -448,8 +455,16 @@ Page({
       reminder.reminder({ tips: '民族' })
       return
     }
-
-    that.getbirthall()
+   
+    if(!that.getbirthall()){
+      wx.showModal({
+        title: '温馨提示',
+        content: '输入的年龄不能小于18',
+        showCancel: false,
+        success(res) { }
+      })
+      return
+    }
     if (vertifyNum.isNull(this.data.birthday)) {
 
       reminder.reminder({ tips: '出生日期' })
@@ -617,15 +632,12 @@ Page({
     let timeone = this.data.birthday.split("-")[0] - 0;
     let timetwo = this.data.birthday.split("-")[1] - 0;
     let timethree = this.data.birthday.split("-")[2] - 0;
+    console.log(year)
+    console.log(timeone)
     if (year - timeone == 18 && month - timetwo <= 0 && day - timethree < 0 || year - timeone < 18) {
-      wx.showModal({
-        title: '温馨提示',
-        content: '输入的年龄不能小于18',
-        showCancel: false,
-        success(res) { }
-      })
+      return false
     }
-    return
+    return true
   },
   /**
    * 生命周期函数--监听页面加载

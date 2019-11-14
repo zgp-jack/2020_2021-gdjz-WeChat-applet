@@ -1,5 +1,5 @@
-// addskill  lat nation projectlength showbottom  view_num
-
+// addskill  lat nation projectlength showbot tom  view_num selectTap showbottom checkone projectone checkfour checkone ressonone note
+ 
 
 const app = getApp();
 
@@ -59,7 +59,7 @@ Page({
     checkthreef: 4568,
     checkfour: false,
     checkfourf: 4568,
-    showbottom: false,
+    // showbottom: false,
     resume_uuid: "",
     showtan: false,
     resson: "",
@@ -67,7 +67,17 @@ Page({
     note: "",
     passre: true,
     nopassre: true,
-    showcomplete: true
+    showcomplete: true,
+    checkcontent:"",
+    fail_certificate:"",
+    fail_project:""
+  },
+  editor(e) {
+    console.log(e)
+    wx.setStorageSync("projectdetail", e.currentTarget.dataset)
+    wx.navigateTo({
+      url: "/pages/clients-looking-for-work/new-project-experience/projectexperience",
+    })
   },
   completeall() {
     if (!this.data.resume_uuid) {
@@ -163,7 +173,7 @@ Page({
     if (this.data.check == "1") {
       wx.showModal({
         title: '温馨提示',
-        content: '提示信息审核中，请稍后再试',
+        content: that.data.checkcontent,
         showCancel: false,
         success(res) { }
       })
@@ -172,7 +182,7 @@ Page({
     if (this.data.check == "0") {
       wx.showModal({
         title: '温馨提示',
-        content: '信息审核已经失败，请先修改资料',
+        content: that.data.checkcontent,
         showCancel: false,
         success(res) { }
       })
@@ -402,6 +412,8 @@ Page({
             certificate_count: mydata.hasOwnProperty("certificate_count") ? mydata.certificate_count : "",
             project_count: mydata.hasOwnProperty("project_count") ? mydata.project_count : "",
             note: mydata.info.hasOwnProperty("note") ? mydata.info.note : "",
+            fail_certificate: mydata.hasOwnProperty("fail_certificate") ? mydata.fail_certificate : "",
+            fail_project: mydata.hasOwnProperty("fail_project") ? mydata.fail_project : "",
           })
           if (that.data.showtop) {
             app.globalData.showperfection = true;
@@ -424,7 +436,8 @@ Page({
             selectk: selectk
           })
           that.setData({
-            check: mydata.info.hasOwnProperty("check") ? mydata.info.check : ""
+            check: mydata.info.hasOwnProperty("check") ? mydata.info.check : "",
+            checkcontent: mydata.hasOwnProperty("content") ? mydata.content.check_tips_string : "",
           })
 
           that.setData({
@@ -551,11 +564,20 @@ Page({
         }
       },
       fail: function (err) {
-        console.log(err)
-        app.showMyTips("请求失败");
+        wx.showModal({
+          title: '温馨提示',
+          content: `您的网络请求失败`,
+          showCancel: false,
+          success(res) {
+            wx.navigateBack({
+              delta: 1
+            })
+          }
+        })
       }
     })
   },
+
   showtop() {
     this.setData({
       showtop: false,
@@ -599,7 +621,6 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow() {
-
     this.getdetail();
     this.delestore();
     this.deleskill()

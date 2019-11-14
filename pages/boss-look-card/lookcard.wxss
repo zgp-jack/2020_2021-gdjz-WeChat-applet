@@ -1,5 +1,7 @@
 @import "../clients-looking-for-work/finding-name-card/findingnamecard.wxss";
 
+/* workotextone */
+
 .cardeight {
   margin-bottom: 60rpx;
 }
@@ -31,6 +33,8 @@
 .obtcard {
   margin-top: 12rpx;
 }
+
+
 
 .obtcardone {
   margin-top: 30rpx;
@@ -69,6 +73,7 @@
   margin-top: 19rpx;
   padding-left: 18rpx;
 }
+
 .jiluone {
   font-size: 28rpx;
   color: #7d7d7d;
@@ -77,6 +82,7 @@
   padding-left: 18rpx;
   margin-bottom: 90rpx;
 }
+
 .introcardtwo {
   width: 93%;
   margin: 0 auto;
@@ -134,12 +140,35 @@
   color: #7d7d7d;
   padding-right: 8rpx;
 }
-.cardtwosonone .cardtwosononeimg .oimg image{
+
+.cardtwosonone .cardtwosononeimg .oimg image {
   height: 88rpx;
   width: 88rpx;
   border-radius: 50%;
-
+}
+.distancev {
+  display: flex;
 }
 
-
+.distancec{
+  width: 70%;
+  padding-top: 14rpx;
+}
+.distancet{
+    margin-top: 20rpx;
+  font-size: 26rpx;
+  color: #909090;
+      margin-left: 4rpx;
+}
+.distanceo{
+    display: flex;
+    margin-left: 6rpx;
+}
+#distance {
+  margin: 0;
+  margin-top: 18rpx;
+  width: 24rpx;
+  height: 36rpx;
+  display: inline-block;
+}
 /* content  bossbottomo .jilu*/

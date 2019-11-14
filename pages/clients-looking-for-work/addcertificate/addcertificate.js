@@ -18,24 +18,29 @@ Page({
     uuid: "",
     certificate_count:0,
     certificate_cou: 0,
+    imgArrslength:true
   },
-  // getbirth() {
-  //   var date = new Date();
-  //   var year = date.getFullYear();
-  //   var month = date.getMonth() + 1;
-  //   var day = date.getDate();
-  //   if (month < 10) {
-  //     month = "0" + month;
-  //   }
-  //   if (day < 10) {
-  //     day = "0" + day;
-  //   }
-  //   var nowDate = year + "-" + month + "-" + day;
-  //   this.setData({
-  //     nowDate: nowDate
-  //   });
-
-  // },
+  getbirthall() {
+    var date = new Date();
+    var year = date.getFullYear();
+    var month = date.getMonth() + 1;
+    var day = date.getDate();
+    if (month < 10) {
+      month = "0" + month;
+    }
+    if (day < 10) {
+      day = "0" + day;
+    }
+    let time = this.data.date.split("-");
+    let timeone = this.data.date.split("-")[0] - 0;
+    let timetwo = this.data.date.split("-")[1] - 0;
+    let timethree = this.data.date.split("-")[2] - 0;
+    console.log(time)
+    if (year - timeone == 20 && month - timetwo >= 0 && day - timethree > 0 || year - timeone > 20 || year - timeone < 0 || year - timeone == 0 && month - timetwo <= 0 && day - timethree < 0 ) {
+      return false
+    }
+    return true
+  },
   name(e) {
     this.setData({
       name: e.detail.value
@@ -56,15 +61,15 @@ Page({
   },
   chooseImage() {
     let that = this;
-    if (that.data.imgArrs.length >= 3) {
-      wx.showModal({
-        title: '温馨提示',
-        content: '您最多只能选择三张图片',
-        showCancel: false,
-        success(res) { }
-      })
-      return
-    }
+    // if (that.data.imgArrs.length >= 3) {
+    //   wx.showModal({
+    //     title: '温馨提示',
+    //     content: '您最多只能选择三张图片',
+    //     showCancel: false,
+    //     success(res) { }
+    //   })
+    //   return
+    // }
     app.userUploadImg(function (img, url) {
       wx.hideLoading()
       that.data.imgArrs.push(url.httpurl)
@@ -72,6 +77,11 @@ Page({
       that.setData({
         imgArrs: that.data.imgArrs
       })
+      if (that.data.imgArrs.length >= 3) {
+        that.setData({
+          imgArrslength: false
+        })
+      }
     })
   },
   previewImage(e) {
@@ -92,6 +102,11 @@ Page({
     this.setData({
       idArrs: this.data.idArrs
     })
+    if (this.data.imgArrs.length < 3) {
+      this.setData({
+        imgArrslength: true
+      })
+    }
   },
   getuuid() {
     let userInfo = wx.getStorageSync("uuid");
@@ -153,7 +168,11 @@ Page({
         title: '温馨提示',
         content: `最多只能添加${that.data.certificate_count}个技能证书`,
         showCancel: false,
-        success(res) { }
+        success(res) {
+          wx.navigateBack({
+            delta: 1
+          })
+         }
       })
       return
     }
@@ -162,6 +181,15 @@ Page({
     let vertifyNum = v.v.new()
     if (vertifyNum.isNull(this.data.name)) {
       reminder.reminder({ tips: '职业技能' })
+      return
+    }
+    if (!that.getbirthall()){
+      wx.showModal({
+        title: '温馨提示',
+        content: '领取证书的范围必须在前20年内',
+        showCancel: false,
+        success(res) { }
+      })
       return
     }
     if (vertifyNum.isNull(this.data.idArrs)) {
@@ -173,6 +201,7 @@ Page({
       })
       return
     }
+
     if (vertifyNum.isNull(this.data.date)) {
       reminder.reminder({ tips: '领取证书时间' })
       return
@@ -216,6 +245,20 @@ Page({
       wx.showModal({
         title: '温馨提示',
         content: `最多只能添加${that.data.certificate_count}个技能证书`,
+        showCancel: false,
+        success(res) { 
+          wx.navigateBack({
+            delta: 1
+          })
+
+        }
+      })
+      return
+    }
+    if (!that.getbirthall()) {
+      wx.showModal({
+        title: '温馨提示',
+        content: '领取证书的范围必须在前20年内',
         showCancel: false,
         success(res) { }
       })
@@ -321,6 +364,7 @@ Page({
       reminder.reminder({ tips: '职业技能' })
       return
     }
+    this.getbirthall()
     if (vertifyNum.isNull(this.data.idArrs)) {
 
       wx.showModal({
@@ -331,6 +375,7 @@ Page({
       })
       return
     }
+
     if (vertifyNum.isNull(this.data.date)) {
       reminder.reminder({ tips: '领取证书时间' })
       return

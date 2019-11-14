@@ -1,3 +1,4 @@
+<!-- locatext -->
 <view style='height:100%;{{ showComplain ? "overflow:hidden;" : "" }}'>
 
   <view class="yupao-common-container" style="{{ userInfo.userId == info.user_id ? 'padding-bottom:20rpx':'padding-bottom:130rpx' }}">

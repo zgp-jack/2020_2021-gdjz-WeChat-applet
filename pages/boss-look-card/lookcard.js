@@ -69,7 +69,20 @@ Page({
     praise: 0,
     status: 0,
     collect: 0,
-    is_read: ""
+    is_read: "",
+    distance:"0km",
+    location:""
+  },
+  showThisMapInfo: function () {
+    let loc = this.data.location;
+    let locArr = loc.split(",");
+
+    wx.openLocation({
+      latitude: parseFloat(locArr[1]),
+      longitude: parseFloat(locArr[0]),
+      address: this.data.city,
+      scale: 18
+    })
   },
   telephorft() {
     let that = this
@@ -260,7 +273,9 @@ Page({
             praise: mydata.operation.hasOwnProperty("is_zan") ? mydata.operation.is_zan : "",
             collect: mydata.operation.hasOwnProperty("is_collect") ? mydata.operation.is_collect : "",
             status: mydata.operation.hasOwnProperty("status") ? mydata.operation.status : "",
-            is_read: mydata.info.hasOwnProperty("is_read") ? mydata.info.is_read : ""
+            is_read: mydata.info.hasOwnProperty("is_read") ? mydata.info.is_read : "",
+            distance: mydata.info.hasOwnProperty("distance") ? mydata.info.distance : "0km",
+            location: mydata.info.hasOwnProperty("location") ? mydata.info.location : "0km",
           })
 
           console.log(that.data.is_read)

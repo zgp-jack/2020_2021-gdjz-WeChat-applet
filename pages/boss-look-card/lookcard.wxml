@@ -96,8 +96,12 @@
             <view class="oworkone">
               <text class="oworkotext">所在地区</text>
             </view>
-            <view class="all">
-              <text class="workotextone">{{city}}</text>
+            <view class="all distancev"  bindtap="showThisMapInfo">
+              <text class="workotextone distancec">{{city}}</text>
+              <view class="distanceo">
+                 <view> <image src="../../images/biaoqian.png" id="distance"></image></view>
+                  <view class="distancet">{{distance}}</view>
+              </view>
             </view>
           </view>
 

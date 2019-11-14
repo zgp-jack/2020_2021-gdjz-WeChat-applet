@@ -1,5 +1,5 @@
 @import "../finding-name-card/findingnamecard.wxss";
-
+/* introcardtwo */
 .cardeight {
   margin-bottom: 60rpx;
 }
@@ -84,6 +84,8 @@
   overflow: hidden;
   font-size: 28rpx;
   color: #575757;
+  position: relative;
+  min-height: 110rpx;
 }
 
 .introcontent {

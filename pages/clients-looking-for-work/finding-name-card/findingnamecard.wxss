@@ -1,6 +1,6 @@
 /*.cardfivemobile .cardseven .workotextone cardthreemobile .cardfivemobile .findingnamecardthreemobile .contentone findingnamecardfourone findingnamecardeightone findingnamecardsixone cardonesonone" findingnamecardonesontwo cardsixtwo .cardsixthree
 .cardtwosonone .cardtwosononeimg .oimg image yupao-common-enterbox findingnamecardonesonone
-.cardnine .cardnineone .cardsixsix .cardeightsix*/ 
+.cardnine .cardnineone .cardsixsix .cardeightsix cardsixsix cardeightsixall checkone*/ 
 
 .findingnamecard{
   width: 93%;
@@ -724,8 +724,23 @@ padding-bottom: 6rpx;
   display: flex;
   justify-content: center;
   margin-top: 14rpx;
+  position: relative;
+  border-radius: 8rpx;
 }
-
+.cardsixsixnum{
+  position: absolute;
+  width: 24rpx;
+  height: 24rpx;
+  color: white;
+  background: #DC0102;
+  border-radius: 50%;
+  right: -24rpx;
+  top: -20rpx;
+  text-align: center;
+  line-height: 24rpx;
+  font-size: 20rpx;
+  z-index: 9999;
+}
   .cardsixsixall {
   margin: 0 auto;
   width: 246rpx;
@@ -740,7 +755,13 @@ padding-bottom: 6rpx;
   width: 20rpx;
   height: 15rpx;
 }
-
+.editor {
+  font-size: 25rpx;
+  color: #09f;
+  position: absolute;
+  top: 29rpx;
+  right: 29rpx;
+}
 .cardseven {
   width: 93%;
   margin: 0 auto;
@@ -832,7 +853,7 @@ padding-bottom: 6rpx;
 }
 
  .cardeightsix {
-   padding: 0;
+  padding: 0;
   width: 246rpx;
   height: 45rpx;
   background-color: #0099FF;
@@ -842,9 +863,24 @@ padding-bottom: 6rpx;
   display: flex;
   justify-content: center;
   margin-top: 14rpx;
+  position: relative;
+  border-radius: 8rpx;
 }
-
-.cardeightzong  .cardeightsixall {
+.cardeightsixnum{
+  position: absolute;
+  width: 24rpx;
+  height: 24rpx;
+  color: white;
+  background: #DC0102;
+  border-radius: 50%;
+  right: -24rpx;
+  top: -20rpx;
+  text-align: center;
+  line-height: 24rpx;
+  font-size: 20rpx;
+  z-index: 9999;
+}
+ .cardeightsixall {
   margin: 0 auto;
   width: 246rpx;
   height: 45rpx;
@@ -1102,32 +1138,32 @@ padding-bottom: 6rpx;
 }
 
 .checkone{
- width: 121rpx;
-  height: 121rpx;
+ width: 100rpx;
+  height: 100rpx;
   position: absolute;
   top: 10rpx;
   right: 21rpx;
   z-index: 99
 }
 .checktwo{
-  width: 121rpx;
-  height: 121rpx;
+  width: 100rpx;
+  height: 100rpx;
   position: absolute;
   top: 10rpx;
   right: 21rpx;
   z-index: 99
 }
 .checkthree{
-   width: 121rpx;
-  height: 121rpx;
+   width: 100rpx;
+  height: 100rpx;
   position: absolute;
   top: 10rpx;
   right: 21rpx;
   z-index: 99
 }
 .checkfour{
-  width: 121rpx;
-  height: 121rpx;
+  width: 100rpx;
+  height: 100rpx;
   position: absolute;
   top: 10rpx;
   right: 21rpx;

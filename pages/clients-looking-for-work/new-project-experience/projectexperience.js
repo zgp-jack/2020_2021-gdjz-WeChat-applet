@@ -3,7 +3,8 @@ let v = require("../../../utils/v.js");
 let areas = require("../../../utils/area.js");
 let remain = require("../../../utils/remain.js");
 let reminder = require("../../../utils/ reminder.js");
-//bindstartDate delete vertify vertify preservechixu bindTextAreaBlur
+//bindstartDate delete vertify vertify preservechixu bindTextAreaBlur 大于今天 chooseImage delete
+
 Page({
   data: {
     project: "",
@@ -31,7 +32,8 @@ Page({
     obtnbut: true,
     nowDate: "",
     project_cou:0,
-    project_count:0
+    project_count:0,
+    imgArrslength:true
   },
   getbirthall() {
     let starttime = this.data.startdate.split("-");
@@ -44,14 +46,9 @@ Page({
     let endtimetwo = this.data.date.split("-")[1] - 0;
     let endtimethree = this.data.date.split("-")[2] - 0;
     if (endtimeone - starttimeone == 20 && endtimetwo - starttimetwo >= 0 && endtimethree - starttimethree > 0 || endtimeone - starttimeone > 20) {
-      wx.showModal({
-        title: '温馨提示',
-        content: '输入的开工时间和完工时间间隔不能大于20年',
-        showCancel: false,
-        success(res) { }
-      })
+      return false
     }
-    return
+    return true
   },
   obtn() {
     this.setData({
@@ -97,15 +94,15 @@ Page({
   },
   chooseImage() {
     let that = this;
-    if (that.data.imgArrs.length >= 6) {
-      wx.showModal({
-        title: '温馨提示',
-        content: '您最多只能选择六张图片',
-        showCancel: false,
-        success(res) { }
-      })
-      return
-    }
+    // if (that.data.imgArrs.length >= 6) {
+    //   wx.showModal({
+    //     title: '温馨提示',
+    //     content: '您最多只能选择六张图片',
+    //     showCancel: false,
+    //     success(res) { }
+    //   })
+    //   return
+    // }
     app.userUploadImg(function (img, url) {
       wx.hideLoading()
       that.data.imgArrs.push(url.httpurl)
@@ -113,6 +110,12 @@ Page({
       that.setData({
         imgArrs: that.data.imgArrs
       })
+
+      if (that.data.imgArrs.length >= 6) {
+        that.setData({
+          imgArrslength: false
+        })
+      }
     })
   },
   initAllProvice: function () { //获取所有省份
@@ -220,7 +223,11 @@ Page({
         title: '温馨提示',
         content: `最多只能添加${that.data.project_count}个项目`,
         showCancel: false,
-        success(res) { }
+        success(res) { 
+          wx.navigateBack({
+            delta: 1
+          })
+        }
       })
       return
     }
@@ -230,6 +237,16 @@ Page({
 
     if (vertifyNum.isNull(this.data.startdate)) {
       reminder.reminder({ tips: '开始时间' })
+      return
+    }
+
+    if (new Date(this.data.startdate).getTime() > new Date().getTime()) {
+      wx.showModal({
+        title: '温馨提示',
+        content: `您输入开始时间不能大于今天`,
+        showCancel: false,
+        success(res) { }
+      })
       return
     }
 
@@ -259,7 +276,15 @@ Page({
       reminder.reminder({ tips: '所在地区' })
       return
     }
-    that.getbirthall()
+    if(!that.getbirthall()){
+      wx.showModal({
+        title: '温馨提示',
+        content: '输入的开工时间和完工时间间隔不能大于20年',
+        showCancel: false,
+        success(res) { }
+      })
+      return
+    }
     Object.assign(project, {
       userId: userInfo.userId,
       token: userInfo.token,
@@ -304,7 +329,11 @@ Page({
         title: '温馨提示',
         content: `最多只能添加${that.data.project_count}个项目`,
         showCancel: false,
-        success(res) { }
+        success(res) { 
+          wx.navigateBack({
+            delta: 1
+          })
+        }
       })
       return
     }
@@ -319,6 +348,15 @@ Page({
 
     if (vertifyNum.isNull(this.data.date)) {
       reminder.reminder({ tips: '完工时间' })
+      return
+    }
+    if (new Date(this.data.startdate).getTime() > new Date().getTime()) {
+      wx.showModal({
+        title: '温馨提示',
+        content: `您输入开始时间不能大于今天`,
+        showCancel: false,
+        success(res) { }
+      })
       return
     }
     if (new Date(this.data.startdate).getTime() > new Date(this.data.date).getTime()) {
@@ -343,7 +381,15 @@ Page({
       return
     }
 
-
+    if (!that.getbirthall()) {
+      wx.showModal({
+        title: '温馨提示',
+        content: '输入的开工时间和完工时间间隔不能大于20年',
+        showCancel: false,
+        success(res) { }
+      })
+      return
+    }
     Object.assign(project, {
       userId: userInfo.userId,
       token: userInfo.token,
@@ -408,6 +454,12 @@ Page({
     this.setData({
       importimg: this.data.importimg
     })
+
+    if (this.data.imgArrs.length < 6) {
+      this.setData({
+        imgArrslength: true
+      })
+    }
     console.log(this.data.importimg)
   },
   vertify() {
@@ -476,6 +528,7 @@ Page({
         multiIndexvalue: this.data.project.province_name + this.data.project.city_name,
         startdate: this.data.project.start_time,
         detail: this.data.project.detail,
+        detailength: this.data.project.detail.length,
         imgArrs: this.data.project.image,
         resume_uuid: this.data.project.resume_uuid,
         uuid: this.data.project.uuid,
@@ -516,9 +569,8 @@ Page({
         multiArray: [that.data.provicemore, that.data.multiArrayone[1][one]],
       })
 
-
       this.setData({
-        importimg: this.data.project.images
+        importimg: this.data.project.images[0] == "" ? [] : this.data.project.images
       })
     }
   },
@@ -534,6 +586,15 @@ Page({
 
     if (vertifyNum.isNull(this.data.date)) {
       reminder.reminder({ tips: '完工时间' })
+      return
+    }
+    if (new Date(this.data.startdate).getTime() > new Date().getTime()) {
+      wx.showModal({
+        title: '温馨提示',
+        content: `您输入开始时间不能大于今天`,
+        showCancel: false,
+        success(res) { }
+      })
       return
     }
     if (new Date(this.data.startdate).getTime() > new Date(this.data.date).getTime()) {
@@ -558,7 +619,15 @@ Page({
       return
     }
 
-
+    if (!that.getbirthall()) {
+      wx.showModal({
+        title: '温馨提示',
+        content: '输入的开工时间和完工时间间隔不能大于20年',
+        showCancel: false,
+        success(res) { }
+      })
+      return
+    }
     Object.assign(project, {
       userId: userInfo.userId,
       token: userInfo.token,

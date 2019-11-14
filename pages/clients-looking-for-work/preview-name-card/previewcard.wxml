@@ -5,6 +5,7 @@
 
   <view class="cardtwo">
     <view class="cardonetwof">
+        <image class="checkone" src="../../../images/audit.png" wx:if="{{checkone}}"></image>
       <view class="cardtwosonone">
         <view class="cardtwosononeimg">
           <view class="oimg">
@@ -25,6 +26,9 @@
           <view class="cardotext">
             <view class="oworkone">
               <text class="oworkotext">手机</text>
+            </view>
+           <view class="all">
+              <text class="workotextone">{{telephone}}</text>
             </view>
           </view>
           <view class="cardotext">
@@ -108,7 +112,9 @@
       <view class="cardotextbottom"></view>
     </view>
   </view>
-
+  <view class="nopass" wx:if="{{ressonone}}">
+    审核未通过原因：{{note}}
+  </view>
 
   <view class="cardthree">
     <view class="cardthreemobile">
@@ -117,7 +123,7 @@
     </view>
   </view>
   <view class="introcardtwo">
-
+          <image class="checkone" src="../../../images/audit.png" wx:if="{{checkone}}"></image>
     <view class="introcontent">{{introduce}}</view>
 
 
@@ -126,13 +132,17 @@
 
 
   <view class="cardfive">
+
     <view class="cardfivemobile">
       <image src="../../../images/newresume-experience.png"></image>
       项目经验
     </view>
   </view>
-  <view class="cardsix" wx:if="{{projectlength!= 0}}">
+  <view class="cardsix" wx:if="{{projectlength != 0}}">
+    <image class="checkthree" src="../../../images/audit.png" wx:if="{{checkthree}}"></image>
     <view class="cardsixzong" wx:for="{{projectone}}" wx:key="{{index}}">
+        <image class="audit" wx:if="{{item.check == 0}}" src="../../../images/notthrough.png"></image>
+        <image class="audit" wx:if="{{item.check == 1&&!checkthree}}" src="../../../images/review.png"></image>
       <view>
         <image src="../../../images/newresume-experience-item.png" class="cardsixone"></image>
       </view>
@@ -151,19 +161,21 @@
           </view>
           <view class="cardsixfive">
             <image wx:for="{{item.image}}" wx:key="{{index}}" src="{{item}}"></image>
-
+          </view>
+          <view wx:if="{{item.check == 0}}" class="resson">
+              未通过原因：{{item.fail_case}}
           </view>
         </view>
 
       </view>
     </view>
-    <view class="cardsixsixall" wx:if="{{projectlength > 1}}">
-      <button class="cardsixsix" bindtap="moreproject">
+    <view class="cardsixsixall">
+      <view class="cardsixsix" bindtap="moreproject">
         <view>
           更多项目经验
           <image src="../../../images/downward.png" class="down"></image>
         </view>
-      </button>
+      </view>
     </view>
     <view class="cardsixsixallvoto">
     </view>
@@ -178,8 +190,11 @@
       职业技能
     </view>
   </view>
-  <view class="cardeight" wx:if="{{skilllength!= 0}}">
+   <view class="cardeight" wx:if="{{skilllength != 0}}">
+    <image class="checkfour" src="../../../images/audit.png" wx:if="{{checkfour}}"></image>
     <view class="cardeightzong" wx:for="{{skillbooksone}}" wx:key="{{index}}">
+            <image class="audit" wx:if="{{item.check == 0}}" src="../../../images/notthrough.png"></image>
+            <image class="audit" wx:if="{{item.check == 1&&!checkfour}}" src="../../../images/review.png"></image>
       <view>
         <image src="../../../images/newresume-experience-item.png" class="cardeightone"></image>
       </view>
@@ -190,18 +205,19 @@
         </view>
         <view class="cardeightfive">
           <image wx:for="{{item.image}}" wx:key="{{index}}" src="{{item}}"></image>
-
         </view>
-
+         <view wx:if="{{item.check == 0}}" class="resson">
+              未通过原因：{{item.fail_case}}
+          </view>
       </view>
     </view>
-    <view class="cardeightsixall" wx:if="{{skilllength > 1}}">
-      <button class="cardeightsix" bindtap="moreskill">
+    <view class="cardeightsixall">
+      <view class="cardeightsix" bindtap="moreskill">
         <view>
           更多技能证书
           <image src="../../../images/downward.png" class="down"></image>
         </view>
-      </button>
+      </view>
     </view>
     <view class="cardsixsixallvoto">
     </view>

@@ -19,8 +19,8 @@
       <image class="addcertificateimageone" src='{{item}}' mode="scaleToFill" bindtap='previewImage' data-item="{{item}}"><view class="delete" catchtap="delete" data-index="{{index}}">X</view>
       </image>
     </view>
-    <view class='img_item' bindtap='chooseImage'>
-      <image class='addcertificateimageone' src="../../../images/addimage.png" mode='widthFix' />
+    <view class='img_item' bindtap='chooseImage' wx:if="{{imgArrslength}}" >
+      <image class='addcertificateimageone' src="../../../images/addimage.png" mode='scaleToFill' />
     </view>
   </view>
   <view class="modalDlg" wx:if="{{showModal}}">

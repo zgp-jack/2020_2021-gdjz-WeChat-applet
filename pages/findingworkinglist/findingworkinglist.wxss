@@ -1,5 +1,6 @@
 @import "../index/index.wxss";
-/* listsboxagetwo listsboxlableone listsboxself listsboxlocalone listsboxagetwo*/
+/* listsboxagetwo listsboxlableone listsboxself listsboxlocalone listsboxagetwo oimg oimg
+.listsboxlocal image*/
 .listsboxdetail {
   width: 100%;
   background: white;
@@ -21,6 +22,8 @@
   width: 92rpx;
   height: 92rpx;
   border-radius: 50%;
+  margin-left: 10rpx;
+
 }
 
 .listsboxdetailo {
@@ -123,7 +126,7 @@
    margin-bottom: 25rpx;
 }
 .listsboxlocal image{
-  width: 34rpx;
+  width: 24rpx;
   height: 36rpx;
   display: inline-block;
 }

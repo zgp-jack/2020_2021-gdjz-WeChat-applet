@@ -1,4 +1,4 @@
-//userTapSearch persondetail lists sort
+//userTapSearch persondetail lists teamindex resumes/index/ errImg
 const app = getApp();
 let footerjs = require("../../utils/footer.js");
 let areas = require("../../utils/area.js");
@@ -11,6 +11,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    testImg:"http://cdn.yupao.com/miniprogram/images/user.png",
     gender: "",
     information: "",
     regionone: "",
@@ -420,6 +421,17 @@ Page({
       }
     })
   },
+  errImg: function (e) {
+    console.log(e)
+    let index = e.currentTarget.dataset.index;
+    console.log(index)
+    let obj = `lists[${index}].headerimg`;
+    this.setData({
+      [obj]: "http://cdn.yupao.com/miniprogram/images/user.png"
+    })
+  
+  },
+
   initAreaInfo: function () {
     let areaId = wx.getStorageSync("areaId");
     let areaText = wx.getStorageSync("areaText");

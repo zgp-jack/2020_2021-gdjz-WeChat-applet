@@ -39,7 +39,9 @@
   <button class="obtn" bindtap="addpro" wx:if="{{allgetexpre ==0&&projectlength < 5}}">添加项目经验</button>
 
 
-  <view class="skilleight" wx:if="{{allgetexpre ==1}}" wx:for="{{projectwo}}" wx:key="{{index}}">
+  <view class="skilleight" wx:if="{{allgetexpre ==1}}" wx:for="{{allproject}}" wx:key="{{index}}">
+    <image class="audit" wx:if="{{item.check == 1}}" src="../../../images/review.png"></image>
+    <image class="audit" wx:if="{{item.check == 0}}" src="../../../images/notthrough.png"></image>
     <view class="skilleightzong">
       <view>
         <image src="../../../images/newresume-experience-item.png" class="skilleightone"></image>
@@ -60,7 +62,10 @@
             <image wx:for="{{item.image}}" wx:key="{{index}}" src="{{item}}"></image>
           </view>
         </view>
-        <view class="skilleightsixall">
+           <view class="resson" wx:if="{{item.check == 0}}">
+          未通过原因：{{item.fail_case}}
+        </view>
+        <view class="skilleightsixall" wx:if="{{index == projectlength-1}}">
           没有更多了...
         </view>
         <view class="skillsixsixallvoto">

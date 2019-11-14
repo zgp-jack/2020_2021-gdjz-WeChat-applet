@@ -54,7 +54,7 @@
         <view class="delete" catchtap="delete" data-index="{{index}}">X</view>
       </image>
     </view>
-    <view class='img_item' bindtap='chooseImage'>
+    <view class='img_item' bindtap='chooseImage' wx:if="{{imgArrslength}}">
       <image  class='experiencefourone' src="../../../images/addimage.png" >
       </image>
     </view>
