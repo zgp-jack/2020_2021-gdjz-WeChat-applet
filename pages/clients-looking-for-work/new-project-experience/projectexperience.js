@@ -644,7 +644,7 @@ Page({
       project_uuid: this.data.uuid
     })
     console.log(project)
-    let that = this;
+
     app.appRequestAction({
       url: 'resumes/project/',
       way: 'POST',
