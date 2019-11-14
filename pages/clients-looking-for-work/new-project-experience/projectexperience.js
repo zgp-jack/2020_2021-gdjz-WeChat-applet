@@ -575,6 +575,7 @@ Page({
     }
   },
   preserveone() {
+    let that = this;
     let userInfo = wx.getStorageSync("userInfo");
     let project = {}
     let vertifyNum = v.v.new()
