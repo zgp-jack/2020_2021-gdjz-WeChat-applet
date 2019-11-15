@@ -65,7 +65,14 @@
   border-radius: 6rpx;
   margin-right: 15rpx;
 }
-
+.cliokine text:first-child {
+  background: rgb(135, 136, 136);
+  padding: 6rpx;
+  padding-left: 10rpx;
+  padding-right: 10rpx;
+  border-radius: 6rpx;
+  margin-right: 15rpx;
+}
 .jilu {
   font-size: 28rpx;
   color: #7d7d7d;

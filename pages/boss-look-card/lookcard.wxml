@@ -30,12 +30,15 @@
             </view>
             <view class="all allone">
               <text class="workotextone">{{telephone}}</text>
-              <view class="cliok" wx:if="{{onoff || is_read ==0}}">
+              <view class="cliok" wx:if="{{onoff || is_read ==0&&is_end !=2}}">
                 <text bindtap="telephorf" data-telephone="{{telephone}}">点击拨打</text>
                 <text bindtap="userTapComplain">举报</text>
               </view>
-              <view class="cliok" wx:if="{{!onoff && is_read ==1}}">
+              <view class="cliok" wx:if="{{!onoff && is_read ==1&&is_end !=2}}">
                 <text bindtap="telephorft" data-telephone="{{telephone}}">查看完整电话</text>
+              </view>
+              <view class="cliokine" wx:if="{{is_end ==2}}">
+                <text>已找到</text>
               </view>
             </view>
           </view>
@@ -57,7 +60,7 @@
               </view>
             </view>
             <view class="all" wx:if="{{occupations == '未填写'}}">
-               <text class="workotextone">{{occupations}}</text>
+              <text class="workotextone">{{occupations}}</text>
             </view>
           </view>
           <view class="cardotext">
@@ -96,11 +99,13 @@
             <view class="oworkone">
               <text class="oworkotext">所在地区</text>
             </view>
-            <view class="all distancev"  bindtap="showThisMapInfo">
+            <view class="all distancev" bindtap="showThisMapInfo">
               <text class="workotextone distancec">{{city}}</text>
               <view class="distanceo" wx:if="{{location}}">
-                 <view> <image src="../../images/biaoqian.png" id="distance"></image></view>
-                  <view class="distancet">{{distance}}</view>
+                <view>
+                  <image src="../../images/biaoqian.png" id="distance"></image>
+                </view>
+                <view class="distancet">{{distance}}</view>
               </view>
             </view>
           </view>
@@ -114,8 +119,8 @@
                 {{item.label_name}}
               </view>
             </view>
-            <view class="all"  wx:if="{{tags == '未填写'}}">
-                <text class="workotextone">{{tags}}</text>
+            <view class="all" wx:if="{{tags == '未填写'}}">
+              <text class="workotextone">{{tags}}</text>
             </view>
           </view>
         </view>
@@ -233,8 +238,8 @@
       </view>
       赞
     </view>
-    
-    <button class="bossbottomb"  open-type='share'>
+
+    <button class="bossbottomb" open-type='share'>
       <view>
         <image class="bossimg" src="{{fenxiang}}"></image>
       </view>

@@ -146,7 +146,7 @@
           <view class="listsboxadree">
           {{item.show_address}}
           </view>
-          <view>
+          <view class="listsboxadreeq">
          {{item.distance}}
           </view>
         </view>

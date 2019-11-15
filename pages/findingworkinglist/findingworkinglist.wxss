@@ -158,6 +158,9 @@
 .listsboxlocal .listsboxlocalone .listsboxadree{
   margin-left: 10rpx;
 }
+.listsboxlocal .listsboxlocalone .listsboxadreeq{
+  margin-left: 10rpx;
+}
 .listsboxlocaltwo .listsboxtime{
   margin-right: 10rpx;
 }

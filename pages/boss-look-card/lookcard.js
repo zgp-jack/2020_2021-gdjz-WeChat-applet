@@ -4,7 +4,7 @@ let remain = require("../../utils/remain.js");
 Page({
 
   /** showComplain telephorft  age workingyears personnum workingyears
-   * 页面的初始数据 moreskill projectone occupations introduce telephorft showThisMapInfo
+   * 页面的初始数据 moreskill projectone occupations introduce telephorft showThisMapInfo onoff
    */
   data: {
     complainInfo: "",
@@ -72,7 +72,8 @@ Page({
     is_read: "",
     distance: "0km",
     location: "",
-    showdistan: true
+    showdistan: true,
+    is_end:0
   },
   errImg: function (e) {
     // console.log(e)
@@ -276,7 +277,7 @@ Page({
             city: mydata.info.hasOwnProperty("address") ? mydata.info.address : "未填写",
             intro: false,
             introne: true,
-            introduce: mydata.info.hasOwnProperty("introduce") ? mydata.info.introduce : "未填写",
+            introduce: mydata.info.hasOwnProperty("introduce") ? mydata.info.introduce == "" ? "未填写" : mydata.info.introduce : "未填写",
             workingyears: mydata.info.hasOwnProperty("experience") ? mydata.info.experience : "未填写",
             staffcomposition: mydata.info.hasOwnProperty("type_str") ? mydata.info.type_str : "未填写",
             cityself: mydata.info.hasOwnProperty("hometown") ? mydata.info.hometown : "未填写",
@@ -290,6 +291,7 @@ Page({
             is_read: mydata.info.hasOwnProperty("is_read") ? mydata.info.is_read : "未填写",
             distance: mydata.info.hasOwnProperty("distance") ? mydata.info.distance == "" ? "0km" : mydata.info.distance: "0km",
             location: mydata.info.hasOwnProperty("location") ? mydata.info.location : "",
+            is_end: mydata.info.hasOwnProperty("is_end") ? mydata.info.is_end : "",
           })
 
           console.log(that.data.is_read)

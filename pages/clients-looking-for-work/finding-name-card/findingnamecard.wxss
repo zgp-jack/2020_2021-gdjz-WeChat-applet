@@ -1,6 +1,6 @@
 /*.cardfivemobile .cardseven .workotextone cardthreemobile .cardfivemobile .findingnamecardthreemobile .contentone findingnamecardfourone findingnamecardeightone findingnamecardsixone cardonesonone" findingnamecardonesontwo cardsixtwo .cardsixthree
 .cardtwosonone .cardtwosononeimg .oimg image yupao-common-enterbox findingnamecardonesonone
-.cardnine .cardnineone .cardsixsix .cardeightsix cardsixsix cardeightsixall checkone findingnamecardonesontwo */ 
+.cardnine .cardnineone .cardsixsix .cardeightsix cardsixsix cardeightsixall checkone findingnamecardonesontwo  .cardotext::before*/ 
 
 .findingnamecard{
   width: 93%;
@@ -505,7 +505,7 @@ padding-bottom: 6rpx;
   background-size: 100% 100%;
     left: 14px;
     margin-left:  -5px;
-  top:18rpx;
+  top:20rpx;
 }
 /* .cardotext .owork {
   margin: 0;
