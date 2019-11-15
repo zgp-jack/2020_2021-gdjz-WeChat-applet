@@ -1,6 +1,4 @@
-/*.cardfivemobile .cardseven .workotextone cardthreemobile .cardfivemobile .findingnamecardthreemobile .contentone findingnamecardfourone findingnamecardeightone findingnamecardsixone cardonesonone" findingnamecardonesontwo cardsixtwo .cardsixthree
-.cardtwosonone .cardtwosononeimg .oimg image yupao-common-enterbox findingnamecardonesonone
-.cardnine .cardnineone .cardsixsix .cardeightsix cardsixsix cardeightsixall checkone findingnamecardonesontwo  .cardotext::before*/ 
+/* modalDlg .contentone .cardsixzong .cardsixfour lang*/ 
 
 .findingnamecard{
   width: 93%;
@@ -84,7 +82,7 @@
 
 .findingnamecardoneson .findingnamecardonesonone .lang {
   margin-top: 14rpx;
- width: 143rpx;
+ width: 130rpx;
  background: #DEDDDD;
  height: 14rpx;
  border-radius: 8rpx;
@@ -97,6 +95,10 @@
  position: absolute;
  padding: 0;
  margin: 0;
+}
+
+.findingnamecardoneson .findingnamecardonesonone .olangw {
+font-size:26rpx; color:#F87A14; margin:3rpx 0 0 30rpx;font-weight:500;
 }
 .findingnamecardoneson .findingnamecardonesontwo{
   text-align: center;
@@ -706,6 +708,9 @@ padding-bottom: 6rpx;
   font-size: 26rpx;
   margin-left: 14rpx;
   margin-top: 10rpx;
+  padding-right: 5%;
+  word-wrap:break-word;
+  word-break:break-all;
 }
 
 .cardsixzong .cardsixfive image {
@@ -961,6 +966,8 @@ padding-bottom: 6rpx;
   margin-left: 8.5%;
   margin-bottom: 8rpx;
   padding-right: 2%;
+     word-wrap:break-word;
+  word-break:break-all;
 }
 
 .cardotext {  
@@ -1192,4 +1199,81 @@ padding-bottom: 6rpx;
   color: #FB2A08;
   margin-bottom: 6rpx;
 }
-/*oworkotext cardsix .all showtop nopass findingnamecardsixtwo*/
+
+
+
+/* 弹出层 */
+.modalDlg{
+    width: 70%;
+    position: fixed;
+    top: 340rpx;
+    left: 0;
+    right: 0;
+    z-index: 9999;
+    margin: 0 auto;
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 18rpx;
+}
+.modalDlg .modalDlgone{
+  width: 40%;
+  margin: 6rpx auto;
+  display: flex;
+  justify-content: space-between;
+  font-size: 32rpx;
+}
+
+.text{
+    width: 100%;
+    margin:0 auto;
+    /* height: 290rpx; */
+    font-size: 32rpx;
+    position: relative;
+}
+
+.text .otext{
+  width: 85rpx;
+  font-size: 42rpx;
+  font-weight: bold;
+  margin: 20rpx auto;
+}
+.text .textdetail{
+  font-size: 32rpx;
+  width: 83%;
+  margin: 0 auto;
+
+  margin-bottom: 40rpx;
+  margin-top: 48rpx;
+}
+
+.buttontext{
+    margin: 0 auto; 
+   width: 325rpx;
+   height: 74rpx;
+   background:#0099FF;
+   color: white;
+   font-size: 32rpx;
+   text-align: center;
+   line-height: 80rpx;
+  border-radius: 18rpx;
+  margin-bottom: 50rpx;
+}
+.bg {
+  position: absolute;
+  top: 0%;
+  left: 0%;
+  width: 100%;
+  height: 100%;
+  background-color: black;
+  z-index: 1001;
+  -moz-opacity: 0.7;
+  opacity: 0.70;
+  filter: alpha(opacity=70);
+}
+.popup{
+  color: red;
+}
+
+/*oworkotext cardsix .all  bg showtop nopass findingnamecardsixtwo*/

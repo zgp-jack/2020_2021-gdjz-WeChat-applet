@@ -2,7 +2,7 @@ const app = getApp();
 Page({
 
   /**
-   * 页面的初始数据 editor allgetexpre
+   * 页面的初始数据 editor allgetexpre addpro
    */
   data: {
     allproject: [],
@@ -47,6 +47,8 @@ Page({
 
   },
   addpro() {
+    let projectnum = this.data.allproject.length
+    wx.setStorageSync("projectnum", projectnum)
     wx.navigateTo({
       url: "/pages/clients-looking-for-work/new-project-experience/projectexperience",
     })

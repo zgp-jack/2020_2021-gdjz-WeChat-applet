@@ -3,7 +3,7 @@ let v = require("../../../utils/v.js");
 let areas = require("../../../utils/area.js");
 let remain = require("../../../utils/remain.js");
 let reminder = require("../../../utils/ reminder.js");
-//bindstartDate delete vertify vertify preservechixu bindTextAreaBlur 大于今天 chooseImage delete
+//bindstartDate delete vertify vertify preservechixu bindTextAreaBlur 大于今天 chooseImage delete preserve showModal vertify()
 
 Page({
   data: {
@@ -33,6 +33,7 @@ Page({
     nowDate: "",
     project_cou:0,
     project_count:0,
+    project_show: true,
     imgArrslength:true
   },
   getbirthall() {
@@ -418,6 +419,9 @@ Page({
                 project_cou: res.data.count
               })
               app.globalData.allexpress = true;
+
+              that.projectshow()
+
               that.setData({
                 projectname: "",
                 startdate: "",
@@ -507,9 +511,15 @@ Page({
     let that = this;
     let project = wx.getStorageSync("projectdetail");
     let project_count = wx.getStorageSync("project_count");
+    let projectnum = wx.getStorageSync("projectnum");
     if (project_count){
       this.setData({
         project_count: project_count
+      })
+    }
+    if (project_count) {
+      this.setData({
+        project_cou: projectnum
       })
     }
     if (project) {
@@ -681,7 +691,24 @@ Page({
   onShow: function () {
     // this.getbirth()
     this.getuuid()
+    this.projectshow()
 
+  },
+  preservechixutui(){
+    wx.navigateBack({
+      delta: 1
+    })
+  },
+  projectshow(){
+    let that = this;
+    if (that.data.project_cou >= that.data.project_count - 1) {
+
+      that.setData({
+        project_show: false
+      })
+    }
+    console.log(that.data.project_cou)
+    console.log(that.data.project_show)
   },
   onLoad: function (options) {
     this.initAllProvice()

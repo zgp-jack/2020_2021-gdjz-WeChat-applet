@@ -1,4 +1,4 @@
-<view>
+<view >
   <view class="findingnamecard" wx:if="{{showtop}}">
     请完善一下信息
   </view>
@@ -11,7 +11,7 @@
           <view class="lang">
             <view class="olang" style="width:{{percent}}%;"></view>
           </view>
-          <text style="font-size:26rpx; color:#F87A14; padding:3rpx 0 0 14rpx;font-weight:500;">{{percent}}%</text>
+          <text class="olangw">{{percent}}%</text>
         </view>
         <view bindtap="completeall" wx:if="{{showcomplete}}">名片越完善找活越容易,马上去完善>></view>
         <view class="sharelive" wx:if="{{!showcomplete}}">分享找活名片,可提升名片排名度</view>
@@ -178,11 +178,11 @@
             <text class="workotextone">{{procity}}</text>
           </view>
         </view>
-        <view class="cardotext">
+        <view class="cardotext" wx:if="{{personnum != 1}}">
           <view class="oworkone">
             <text class="oworkotext">队伍人数</text>
           </view>
-          <view class="all">
+          <view class="all" >
             <text class="workotextone">{{personnum}}人</text>
           </view>
         </view>
@@ -222,11 +222,11 @@
     </view>
   </view>
   <view class="cardsix" wx:if="{{projectlength != 0}}">
-    <image class="checkthree" src="../../../images/audit.png" wx:if="{{checkthree}}"></image>
+
     <view class="cardsixzong" wx:for="{{projectone}}" wx:key="{{index}}">
+        <image class="checkthree" src="../../../images/audit.png" wx:if="{{item.check == 1}}"></image>
      <view class="editor" bindtap="editor" data-uid="{{item}}" wx:if="{{item.check != 1}}">编辑</view>
         <image class="audit" wx:if="{{item.check == 0}}" src="../../../images/notthrough.png"></image>
-        <image class="audit" wx:if="{{item.check == 1&&!checkthree}}" src="../../../images/review.png"></image>
       <view>
         <image src="../../../images/newresume-experience-item.png" class="cardsixone"></image>
       </view>
@@ -292,11 +292,12 @@
     </view>
   </view>
   <view class="cardeight" wx:if="{{skilllength != 0}}">
-    <image class="checkfour" src="../../../images/audit.png" wx:if="{{checkfour}}"></image>
+
     <view class="cardeightzong" wx:for="{{skillbooksone}}" wx:key="{{index}}">
+    <image class="checkfour" src="../../../images/audit.png" wx:if="{{item.check == 1}}"></image>
          <view class="editor" bindtap="editorone" data-uid="{{item}}" wx:if="{{item.check != 1}}">编辑</view>
             <image class="audit" wx:if="{{item.check == 0}}" src="../../../images/notthrough.png"></image>
-            <image class="audit" wx:if="{{item.check == 1&&!checkfour}}" src="../../../images/review.png"></image>
+            <!-- <image class="audit" wx:if="{{item.check == 1&&!checkfour}}" src="../../../images/review.png"></image> -->
       <view>
         <image src="../../../images/newresume-experience-item.png" class="cardeightone"></image>
       </view>
@@ -331,6 +332,24 @@
     <view class="cardsixsixallvoto">
     </view>
   </view>
+  
+
+ <view class="modalDlg" wx:if="{{showModal}}">
+    <view class="modalDlgone">
+    </view>
+    <view class="text">
+      <view class="otext">
+        提示
+      </view>
+      <view class="textdetail">
+       您的<text class="popup">{{popup}}</text>未通过请重新修改
+      </view>
+      <view class="buttontext" catchtap="vertify">
+        确定
+      </view>
+    </view>
+  </view>
+  <view class="bg" bindtap="obtn" style='display:{{display}}'></view>
   <view class="cardnine" wx:if="{{showtopone}}">
     <button class="cardnineone" bindtap="preview">
       <image src="../../../images/bottom-one.png"></image> 预览</button>

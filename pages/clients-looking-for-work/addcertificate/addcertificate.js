@@ -18,7 +18,8 @@ Page({
     uuid: "",
     certificate_count:0,
     certificate_cou: 0,
-    imgArrslength:true
+    imgArrslength:true,
+    skill_show:true
   },
   getbirthall() {
     var date = new Date();
@@ -308,6 +309,8 @@ Page({
               that.setData({
                 certificate_cou: res.data.count
               })
+
+              that.skillshow()
               app.globalData.allskill = true;
               that.setData({
                 imgArrs: [],
@@ -325,10 +328,21 @@ Page({
       }
     })
   },
-
+  preservechixutui(){
+    wx.navigateBack({
+      delta: 1
+    })
+  },
   getskill() {
+
     let skilltail = wx.getStorageSync("skilltail");
     let certificate_count = wx.getStorageSync("certificate_count");
+    let certificate_cou = wx.getStorageSync("skillnum");
+    if (certificate_cou) {
+      this.setData({
+        certificate_cou: certificate_cou
+      })
+    }
     if (certificate_count) {
       this.setData({
         certificate_count: certificate_count
@@ -421,6 +435,18 @@ Page({
       }
     })
   },
+
+  skillshow() {
+    let that = this;
+    if (that.data.certificate_cou >= that.data.certificate_count - 1) {
+      that.setData({
+        skill_show: false
+      })
+    }
+
+    console.log(that.data.certificate_cou)
+    console.log(that.data.certificate_count)
+  },
   /**
    * 生命周期函数--监听页面加载
    */
@@ -439,6 +465,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
+    this.skillshow() 
     this.getuuid()
     // this.getbirth()
   },

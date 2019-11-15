@@ -1,6 +1,6 @@
 @import "../clients-looking-for-work/finding-name-card/findingnamecard.wxss";
 
-/* workotextone */
+/* workotextone  cliokine bossbottomo bossbottomo .jiluone  .cardsixzong .cardsixfour */
 
 .cardeight {
   margin-bottom: 60rpx;
@@ -65,6 +65,13 @@
   border-radius: 6rpx;
   margin-right: 15rpx;
 }
+
+.cliokine text:last-child {
+  background: red;
+  padding: 6rpx;
+  border-radius: 6rpx;
+  margin-right: 24rpx;
+}
 .cliokine text:first-child {
   background: rgb(135, 136, 136);
   padding: 6rpx;
@@ -87,7 +94,7 @@
   text-align: center;
   margin-top: 19rpx;
   padding-left: 18rpx;
-  margin-bottom: 90rpx;
+  margin-bottom: 108rpx;
 }
 
 .introcardtwo {
@@ -110,30 +117,35 @@
 .bossbottom {
   width: 100%;
   background: white;
-  height: 76rpx;
+  height: 100rpx;
   display: flex;
   justify-content: space-around;
-  font-size: 28rpx;
+  font-size: 30rpx;
   color: #7d7d7d;
   position: fixed;
   bottom: 0;
 }
 
 .bossbottom .bossbottomo {
-  margin-top: 20rpx;
-  display: flex;
-}
+  width: 33.33%;
+  margin-top: 30rpx;
 
+}
+.bossbottomc{
+  display: flex;
+  margin: 0 auto;
+}
 .bossbottom .bossbottomb {
+    width: 33.33%;
   padding-left: 0;
   padding-right: 0;
   margin: 0;
   line-height: inherit;
-  margin-top: 20rpx;
+  margin-top: 30rpx;
   display: flex;
   background-color: #fff;
   border-radius: 0;
-  font-size: 28rpx;
+  font-size: 30rpx;
   color: #7d7d7d;
 }
 
@@ -142,8 +154,8 @@
 }
 
 .bossbottom .bossimg {
-  width: 25rpx;
-  height: 25rpx;
+  width: 30rpx;
+  height: 30rpx;
   color: #7d7d7d;
   padding-right: 8rpx;
 }
@@ -162,7 +174,7 @@
   padding-top: 14rpx;
 }
 .distancet{
-    margin-top: 20rpx;
+    margin-top: 15rpx;
   font-size: 26rpx;
   color: #909090;
       margin-left: 4rpx;
@@ -173,9 +185,9 @@
 }
 #distance {
   margin: 0;
-  margin-top: 18rpx;
+  margin-top: 10rpx;
   width: 24rpx;
   height: 36rpx;
   display: inline-block;
 }
-/* content  bossbottomo .jilu*/
+/* content  bossbottomo  .bossbottom .jilu*/

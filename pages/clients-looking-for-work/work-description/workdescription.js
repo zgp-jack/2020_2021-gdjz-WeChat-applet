@@ -283,11 +283,11 @@ Page({
       return
     }
     let strone = /^[1-9]{1,4}$/ig;
-    if (!strone.test(this.data.teamsnumber) && this.data.constituttion != 1) {
+    if (!strone.test(this.data.teamsnumber) && this.data.constituttion != 1 || this.data.teamsnumber - 0 <= 1 && this.data.constituttion != 1) {
 
       wx.showModal({
         title: '温馨提示',
-        content: '您输入的队伍人数不为数字,或者超过四位数,或者为零请重新输入',
+        content: '您输入的队伍人数不为数字,或者超过四位数,或者小于或等于一请重新输入',
         showCancel: false,
         success(res) { }
       })
@@ -320,16 +320,9 @@ Page({
         remain.remain({
           tips: res.data.errmsg, callback: function () {
             if (res.data.errcode == 200) {
-              if (app.globalData.skip) {
-                app.globalData.skip = false;
-                wx.navigateBack({
-                  delta: 2
-                })
-              }else{
-                wx.navigateBack({
-                  delta: 1
-                })
-              }
+              wx.redirectTo({      
+                url: "../finding-name-card/findingnamecard",
+              });
             }
           }
         })

@@ -39,10 +39,11 @@
               </view>
               <view class="cliokine" wx:if="{{is_end ==2}}">
                 <text>已找到</text>
+                <text bindtap="userTapComplain" wx:if="{{is_read ==0&&is_end ==2}}">举报</text>
               </view>
             </view>
           </view>
-          <view class="cardotext">
+          <view class="cardotext" wx:if="{{cityself}}">
             <view class="oworkone">
               <text class="oworkotext">我的家乡</text>
             </view>
@@ -50,7 +51,7 @@
               <text class="workotextone">{{cityself}}</text>
             </view>
           </view>
-          <view class="cardotext">
+          <view class="cardotext" wx:if="{{occupations}}">
             <view class="oworkone">
               <text class="oworkotext">工种</text>
             </view>
@@ -63,7 +64,7 @@
               <text class="workotextone">{{occupations}}</text>
             </view>
           </view>
-          <view class="cardotext">
+          <view class="cardotext" wx:if="{{workingyears}}">
             <view class="oworkone">
               <text class="oworkotext">工龄</text>
             </view>
@@ -71,7 +72,7 @@
               <text class="workotextone">{{workingyears}}</text>
             </view>
           </view>
-          <view class="cardotext">
+          <view class="cardotext" wx:if="{{procity}}">
             <view class="oworkone">
               <text class="oworkotext">熟练度</text>
             </view>
@@ -79,7 +80,7 @@
               <text class="workotextone">{{procity}}</text>
             </view>
           </view>
-          <view class="cardotext">
+          <view class="cardotext" wx:if="{{staffcomposition}}">
             <view class="oworkone">
               <text class="oworkotext">人员构成</text>
             </view>
@@ -87,7 +88,7 @@
               <text class="workotextone">{{staffcomposition}}</text>
             </view>
           </view>
-          <view class="cardotext">
+          <view class="cardotext" wx:if="{{personnum && personnum !=1}}">
             <view class="oworkone">
               <text class="oworkotext">队伍人数</text>
             </view>
@@ -95,7 +96,7 @@
               <text class="workotextone">{{personnum}}</text>
             </view>
           </view>
-          <view class="cardotext">
+          <view class="cardotext" wx:if="{{city}}">
             <view class="oworkone">
               <text class="oworkotext">所在地区</text>
             </view>
@@ -110,7 +111,7 @@
             </view>
           </view>
 
-          <view class="cardotext">
+          <view class="cardotext" wx:if="{{tags}}">
             <view class="oworkone">
               <text class="oworkotext">标签</text>
             </view>
@@ -232,29 +233,37 @@
   </view>
 
   <view class="bossbottom" wx:if="{{status == 0}}">
-    <view class="bossbottomo" bindtap="praise">
-      <view>
-        <image class="bossimg" src="{{praise == 0?zan:zanone}}"></image>
-      </view>
-      赞
-    </view>
-
-    <button class="bossbottomb" open-type='share'>
-      <view>
-        <image class="bossimg" src="{{fenxiang}}"></image>
-      </view>
-      <view class="bosstext">
-        分享
+    <button class="bossbottomb" bindtap="praise">
+      <view class="bossbottomc">
+        <view>
+          <image class="bossimg" src="{{praise == 0?zan:zanone}}"></image>
+        </view>
+        <view>
+          赞
+        </view>
       </view>
     </button>
-    <view class="bossbottomo" bindtap="collect">
-      <view>
-        <image class="bossimg" src="{{collect ==0?soucang:soucangone}}"></image>
+
+    <button class="bossbottomb" open-type='share'>
+      <view class="bossbottomc">
+        <view>
+          <image class="bossimg" src="{{fenxiang}}"></image>
+        </view>
+        <view class="bosstext">
+          分享
+        </view>
       </view>
-      <view class="bosstext">
-        收藏
+    </button>
+    <button class="bossbottomb" bindtap="collect">
+      <view class="bossbottomc">
+        <view>
+          <image class="bossimg" src="{{collect ==0?soucang:soucangone}}"></image>
+        </view>
+        <view class="bosstext">
+          收藏
+        </view>
       </view>
-    </view>
+    </button>
   </view>
 
   <view class='yupao-common-enterbox flex-row' wx:if="{{ showComplain }}">

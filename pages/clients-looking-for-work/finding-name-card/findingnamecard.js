@@ -1,12 +1,12 @@
-// addskill  lat nation projectlength showbot tom  view_num selectTap showbottom checkone projectone checkfour checkone ressonone note showperfection editor
- 
+// addskill  lat nation projectlength showbot tom  view_num selectTap showbottom checkone projectone checkfour checkone ressonone note showperfection editor addproject
+
 
 const app = getApp();
 
 Page({
 
-  /**
-   * 页面的初始数据 nation view_num perfection
+  /** 
+   * 页面的初始数据 nation view_num perfection addskill
    */
   data: {
     certificate_count: 0,
@@ -15,6 +15,7 @@ Page({
     userimg: '',
     showtop: true,
     showtopone: false,
+    showModal: false,
     name: "未填写",
     sex: "未填写",
     nation: "未填写",
@@ -70,7 +71,21 @@ Page({
     showcomplete: true,
     checkcontent:"",
     fail_certificate:"",
-    fail_project:""
+    fail_project:"",
+    display:"none",
+    popup:""
+  },
+  vertify() {
+    this.setData({
+      showModal: false,
+      display: "none"
+    })
+  },
+  obtn() {
+    this.setData({
+      showModal: false,
+      display: "none"
+    })
   },
   editor(e) {
     console.log(e)
@@ -244,6 +259,9 @@ Page({
       })
       return
     }
+    
+    let projectnum = this.data.projectlength
+    wx.setStorageSync("projectnum", projectnum)
     wx.navigateTo({
       url: "/pages/clients-looking-for-work/new-project-experience/projectexperience",
     })
@@ -268,6 +286,8 @@ Page({
       })
       return
     }
+    let skillnum = this.data.skilllength
+    wx.setStorageSync("skillnum", skillnum)
     wx.navigateTo({
       url: "/pages/clients-looking-for-work/addcertificate/addcertificate",
     })
@@ -570,12 +590,17 @@ Page({
               ressonfour: true
             }
             if (that.data.checkonef == "0" || that.data.checktwof == "0" || that.data.checkthreef == "0" || that.data.checkfourf == "0") {
-              wx.showModal({
-                title: '温馨提示',
-                content: `您的${popup}未通过请重新修改`,
-                showCancel: false,
-                success(res) {
-                }
+              // wx.showModal({
+              //   title: '温馨提示',
+              //   content: `您的${popup}未通过请重新修改`,
+              //   showCancel: false,
+              //   success(res) {
+              //   }
+              // })
+              that.setData({
+                showModal: true,
+                display: "block",
+                popup: popup
               })
               that.setData({
                 resson: [that.data.skillbooks[0]],

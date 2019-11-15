@@ -1,5 +1,5 @@
 <import src="/pages/footer/footer.wxml" />
-<!-- <import src="/pages/tpl/app/app.wxml"/> doSearchRequestAction user-choose-item user-choose-item-active -->
+<!-- <import src="/pages/tpl/app/app.wxml"/> doSearchRequestAction user-choose-item user-choose-item-active  jumpThisLink overwords  stopThisAction -->
 
 <!-- 搜索头部 -->
 <view class="lists-header">
@@ -176,9 +176,9 @@
 
 </scroll-view>
 
-<view class='fixed-ad' bindtap='jumpThisLink' data-url="/pages/download/download-app" data-type='0'>
+<!-- <view class='fixed-ad' bindtap='jumpThisLink' data-url="/pages/download/download-app" data-type='0'>
   <image src='{{ fixedAdImg }}'></image>
-</view>
+</view> -->
 
 <view class='bottompublishbtn' bindtap='valiUserCard'>发布找活</view>
 

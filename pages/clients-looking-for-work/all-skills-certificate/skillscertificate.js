@@ -3,7 +3,7 @@ let remain = require("../../../utils/remain.js");
 Page({
 
   /**
-   * 页面的初始数据
+   * 页面的初始数据 addskill
    */
   data: {
     allskill: [],
@@ -54,6 +54,8 @@ Page({
     })
   },
   addskill() {
+    let skillnum = this.data.allskill.length
+    wx.setStorageSync("skillnum", skillnum)
     wx.navigateTo({
       url: "/pages/clients-looking-for-work/addcertificate/addcertificate",
     })

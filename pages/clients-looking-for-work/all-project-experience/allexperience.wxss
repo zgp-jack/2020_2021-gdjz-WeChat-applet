@@ -1,4 +1,4 @@
-/* audit  editor*/
+/* audit  editor description*/
 .skilleight {
   width: 93%;
   margin: 0 auto;
@@ -40,7 +40,9 @@
   margin-top: 16rpx;
   color: #8b8b8a;
   font-size: 22rpx;
-  margin-left: 14rpx;
+   width: 95%;
+   word-wrap:break-word;
+  word-break:break-all;
 }
 
 .skilleightzong .skilleighttwo text:last-child {
