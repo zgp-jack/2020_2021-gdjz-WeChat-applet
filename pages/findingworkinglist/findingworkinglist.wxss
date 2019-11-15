@@ -1,6 +1,6 @@
 @import "../index/index.wxss";
 /* listsboxagetwo listsboxlableone listsboxself listsboxlocalone listsboxagetwo oimg oimg
-.listsboxlocal image*/
+.listsboxlocal image listsboxlocalone listsboxself listsboxadree listsboxlocalone .listsboxlocal image*/
 .listsboxdetail {
   width: 100%;
   background: white;
@@ -115,7 +115,11 @@
    color: #828586;
    border-bottom: 0.5px dashed #9A9A9A;
    padding-bottom: 14rpx;
-   word-break:break-all;
+    display:block;           /*  内联对象需加  */
+    word-break:keep-all;    /* 不换行 */
+    white-space:nowrap;     /* 不换行 */
+    overflow:hidden;       /* 内容超出宽度时隐藏超出部分的内容 */
+    text-overflow:ellipsis;
 }
 .listsboxlocal{
    width: 91%;
@@ -126,6 +130,8 @@
    margin-bottom: 25rpx;
 }
 .listsboxlocal image{
+
+  padding: 0;
   width: 24rpx;
   height: 36rpx;
   display: inline-block;
@@ -136,17 +142,24 @@
 }
 .listsboxlocalone{
   display: flex;
-  justify-content: space-around;
+  width: 50%;
+
+}
+.listsboxlocalone  .listsboxadree{
+   display:block;           /*  内联对象需加  */    /* 不换行 */
+    white-space:nowrap;     /* 不换行 */
+    overflow:hidden;       /* 内容超出宽度时隐藏超出部分的内容 */
+    text-overflow:ellipsis;  
 }
 .listsboxlocaltwo{
   color: #828586;
   font-size: 28rpx;
 }
-.listsboxlocal .listsboxlocalone view{
+.listsboxlocal .listsboxlocalone .listsboxadree{
   margin-left: 10rpx;
 }
 .listsboxlocaltwo .listsboxtime{
- margin-right: 10rpx;
+  margin-right: 10rpx;
 }
 .listsboxagetwot text{
   font-size: 26rpx;

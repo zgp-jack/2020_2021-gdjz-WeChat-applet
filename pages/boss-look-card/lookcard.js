@@ -288,7 +288,7 @@ Page({
             collect: mydata.operation.hasOwnProperty("is_collect") ? mydata.operation.is_collect : "未填写",
             status: mydata.operation.hasOwnProperty("status") ? mydata.operation.status : "未填写",
             is_read: mydata.info.hasOwnProperty("is_read") ? mydata.info.is_read : "未填写",
-            distance: mydata.info.hasOwnProperty("distance") ? mydata.info.distance : "0km",
+            distance: mydata.info.hasOwnProperty("distance") ? mydata.info.distance == "" ? "0km" : mydata.info.distance: "0km",
             location: mydata.info.hasOwnProperty("location") ? mydata.info.location : "",
           })
 

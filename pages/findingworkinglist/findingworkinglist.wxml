@@ -142,8 +142,8 @@
       </view>
       <view class="listsboxlocal">
         <view class="listsboxlocalone">
-          <image src="../../images/biaoqian.png"></image>
-          <view>
+            <view><image src="../../images/biaoqian.png"></image>   </view>
+          <view class="listsboxadree">
           {{item.show_address}}
           </view>
           <view>
