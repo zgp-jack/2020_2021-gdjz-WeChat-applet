@@ -10,7 +10,7 @@
       <view class="cardtwosonone">
         <view class="cardtwosononeimg">
           <view class="oimg">
-            <image src="{{headerimg}}"></image>
+            <image src="{{headerimg}}" binderror="errImg"></image>
           </view>
           <view class="oimgone">
             <text class="otext">{{name}}</text>
@@ -98,7 +98,7 @@
             </view>
             <view class="all distancev"  bindtap="showThisMapInfo">
               <text class="workotextone distancec">{{city}}</text>
-              <view class="distanceo">
+              <view class="distanceo" wx:if="{{location}}">
                  <view> <image src="../../images/biaoqian.png" id="distance"></image></view>
                   <view class="distancet">{{distance}}</view>
               </view>

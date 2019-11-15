@@ -314,6 +314,7 @@ Page({
                 idArrs: [],
                 date: "",
                 name: "",
+                imgArrslength:true
               })
             }
           }
@@ -354,6 +355,11 @@ Page({
         uuid: this.data.skill.uuid,
         date: this.data.skill.certificate_time
       })
+      if (this.data.imgArrs.length >= 3) {
+        this.setData({
+          imgArrslength: false
+        })
+      }
     }
   },
   preserveone() {

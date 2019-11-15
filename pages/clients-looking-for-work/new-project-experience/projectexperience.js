@@ -426,7 +426,9 @@ Page({
                 provincecity: "",
                 multiIndexvalue: "",
                 importimg: [],
-                imgArrs: []
+                imgArrs: [],
+                detailength:0,
+                imgArrslength:true
               })
             }
           }
@@ -572,6 +574,11 @@ Page({
       this.setData({
         importimg: this.data.project.images[0] == "" ? [] : this.data.project.images
       })
+      if (that.data.imgArrs.length >= 6) {
+        that.setData({
+          imgArrslength: false
+        })
+      }
     }
   },
   preserveone() {

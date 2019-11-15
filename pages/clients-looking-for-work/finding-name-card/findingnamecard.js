@@ -1,4 +1,4 @@
-// addskill  lat nation projectlength showbot tom  view_num selectTap showbottom checkone projectone checkfour checkone ressonone note
+// addskill  lat nation projectlength showbot tom  view_num selectTap showbottom checkone projectone checkfour checkone ressonone note showperfection editor
  
 
 const app = getApp();
@@ -77,6 +77,13 @@ Page({
     wx.setStorageSync("projectdetail", e.currentTarget.dataset)
     wx.navigateTo({
       url: "/pages/clients-looking-for-work/new-project-experience/projectexperience",
+    })
+  },
+  editorone(e) {
+    console.log(e)
+    wx.setStorageSync("skilltail", e.currentTarget.dataset)
+    wx.navigateTo({
+      url: "/pages/clients-looking-for-work/addcertificate/addcertificate",
     })
   },
   completeall() {
@@ -340,23 +347,37 @@ Page({
         console.log(res)
         if (res.data.errcode == 200) {
           for (let i = 0; i < mydata.project.length; i++) {
-            if (mydata.project[i].check != 1) {
-              that.setData({
-                checkthree: false,
-                checkthreef: mydata.project[i].check
-              })
-              break
-            }
             if (mydata.project[i].check == 1) {
               that.setData({
                 checkthree: true,
                 checkthreef: mydata.project[i].check
               })
             }
+
+            if (mydata.project[i].check == 0) {
+              that.setData({
+                checkthree: false,
+                checkthreef: mydata.project[i].check
+              })
+              break
+            }
+
+            if (mydata.project[i].check == 2) {
+              that.setData({
+                checkthree: false,
+                checkthreef: mydata.project[i].check
+              })
+            }
           }
 
           for (let i = 0; i < mydata.certificates.length; i++) {
-            if (mydata.certificates[i].check != 1) {
+            if (mydata.certificates[i].check == 1) {
+              that.setData({
+                checkfour: false,
+                checkfourf: mydata.certificates[i].check
+              })
+            }
+            if (mydata.certificates[i].check == 0) {
               that.setData({
                 checkfour: false,
                 checkfourf: mydata.certificates[i].check
@@ -417,6 +438,8 @@ Page({
           })
           if (that.data.showtop) {
             app.globalData.showperfection = true;
+          }else{
+            app.globalData.showperfection = false;
           }
           wx.setStorageSync("certificate_count", that.data.certificate_count)
           wx.setStorageSync("project_count", that.data.project_count)

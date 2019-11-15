@@ -4,7 +4,7 @@ let remain = require("../../utils/remain.js");
 Page({
 
   /** showComplain telephorft  age workingyears personnum workingyears
-   * 页面的初始数据 moreskill projectone occupations introduce telephorft
+   * 页面的初始数据 moreskill projectone occupations introduce telephorft showThisMapInfo
    */
   data: {
     complainInfo: "",
@@ -70,19 +70,33 @@ Page({
     status: 0,
     collect: 0,
     is_read: "",
-    distance:"0km",
-    location:""
+    distance: "0km",
+    location: "",
+    showdistan: true
+  },
+  errImg: function (e) {
+    // console.log(e)
+    // let index = e.currentTarget.dataset.index;
+    // console.log(index)
+    // let obj = `lists[${index}].headerimg`;
+    this.setData({
+      headerimg: "http://cdn.yupao.com/miniprogram/images/user.png"
+    })
+
   },
   showThisMapInfo: function () {
-    let loc = this.data.location;
-    let locArr = loc.split(",");
 
-    wx.openLocation({
-      latitude: parseFloat(locArr[1]),
-      longitude: parseFloat(locArr[0]),
-      address: this.data.city,
-      scale: 18
-    })
+    if (this.data.location) {
+      let loc = this.data.location;
+      let locArr = loc.split(",");
+
+      wx.openLocation({
+        latitude: parseFloat(locArr[1]),
+        longitude: parseFloat(locArr[0]),
+        address: this.data.city,
+        scale: 18
+      })
+    }
   },
   telephorft() {
     let that = this
@@ -255,27 +269,27 @@ Page({
             })
           }
           that.setData({
-            name: mydata.info.hasOwnProperty("username") ? mydata.info.username : "",
-            nation: mydata.info.hasOwnProperty("nation") ? mydata.info.nation : "",
-            occupations: mydata.info.hasOwnProperty("occupations") ? mydata.info.occupations : "",
-            telephone: mydata.info.hasOwnProperty("tel") ? mydata.info.tel : "",
-            city: mydata.info.hasOwnProperty("address") ? mydata.info.address : "",
+            name: mydata.info.hasOwnProperty("username") ? mydata.info.username : "未填写",
+            nation: mydata.info.hasOwnProperty("nation") ? mydata.info.nation : "未填写",
+            occupations: mydata.info.hasOwnProperty("occupations") ? mydata.info.occupations : "未填写",
+            telephone: mydata.info.hasOwnProperty("tel") ? mydata.info.tel : "未填写",
+            city: mydata.info.hasOwnProperty("address") ? mydata.info.address : "未填写",
             intro: false,
             introne: true,
             introduce: mydata.info.hasOwnProperty("introduce") ? mydata.info.introduce : "未填写",
-            workingyears: mydata.info.hasOwnProperty("experience") ? mydata.info.experience : "",
-            staffcomposition: mydata.info.hasOwnProperty("type_str") ? mydata.info.type_str : "",
-            cityself: mydata.info.hasOwnProperty("hometown") ? mydata.info.hometown : "",
-            procity: mydata.info.hasOwnProperty("prof_degree_str") ? mydata.info.prof_degree_str : "",
+            workingyears: mydata.info.hasOwnProperty("experience") ? mydata.info.experience : "未填写",
+            staffcomposition: mydata.info.hasOwnProperty("type_str") ? mydata.info.type_str : "未填写",
+            cityself: mydata.info.hasOwnProperty("hometown") ? mydata.info.hometown : "未填写",
+            procity: mydata.info.hasOwnProperty("prof_degree_str") ? mydata.info.prof_degree_str : "未填写",
             personnum: mydata.info.hasOwnProperty("number_people") ?
-              mydata.info.number_people + "人" : "",
-            tags: mydata.info.hasOwnProperty("tags") ? mydata.info.tags : "",
-            praise: mydata.operation.hasOwnProperty("is_zan") ? mydata.operation.is_zan : "",
-            collect: mydata.operation.hasOwnProperty("is_collect") ? mydata.operation.is_collect : "",
-            status: mydata.operation.hasOwnProperty("status") ? mydata.operation.status : "",
-            is_read: mydata.info.hasOwnProperty("is_read") ? mydata.info.is_read : "",
+              mydata.info.number_people + "人" : "未填写",
+            tags: mydata.info.hasOwnProperty("tags") ? mydata.info.tags : "未填写",
+            praise: mydata.operation.hasOwnProperty("is_zan") ? mydata.operation.is_zan : "未填写",
+            collect: mydata.operation.hasOwnProperty("is_collect") ? mydata.operation.is_collect : "未填写",
+            status: mydata.operation.hasOwnProperty("status") ? mydata.operation.status : "未填写",
+            is_read: mydata.info.hasOwnProperty("is_read") ? mydata.info.is_read : "未填写",
             distance: mydata.info.hasOwnProperty("distance") ? mydata.info.distance : "0km",
-            location: mydata.info.hasOwnProperty("location") ? mydata.info.location : "0km",
+            location: mydata.info.hasOwnProperty("location") ? mydata.info.location : "",
           })
 
           console.log(that.data.is_read)

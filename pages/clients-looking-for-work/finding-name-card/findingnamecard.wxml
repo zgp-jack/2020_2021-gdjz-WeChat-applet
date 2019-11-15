@@ -294,6 +294,7 @@
   <view class="cardeight" wx:if="{{skilllength != 0}}">
     <image class="checkfour" src="../../../images/audit.png" wx:if="{{checkfour}}"></image>
     <view class="cardeightzong" wx:for="{{skillbooksone}}" wx:key="{{index}}">
+         <view class="editor" bindtap="editorone" data-uid="{{item}}" wx:if="{{item.check != 1}}">编辑</view>
             <image class="audit" wx:if="{{item.check == 0}}" src="../../../images/notthrough.png"></image>
             <image class="audit" wx:if="{{item.check == 1&&!checkfour}}" src="../../../images/review.png"></image>
       <view>
