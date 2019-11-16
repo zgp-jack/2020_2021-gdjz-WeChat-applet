@@ -18,7 +18,7 @@
 
 
     <view class="listsboxdetail" bindtap="showCollectInfo"  data-msg="{{ item.show_tips }}" data-tips="{{ item.check_tips_string }}" data-uuid="{{ item.resume.uuid }}" wx:for="{{lists}}" wx:key="{{index}}">
-      <image src="../../../images/finded.png" class="finded" wx:if="{{item.is_end == 2}}"></image>
+      <image src="../../../images/finded.png" class="finded" wx:if="{{item.resume.is_end == 2}}"></image>
       <view class="listsboxdetailo">
         <image class="oimg" src="{{item.resume.headerimg}}" data-index="{{index}}" binderror="errImg"></image>
         <view class="listsboxintro">

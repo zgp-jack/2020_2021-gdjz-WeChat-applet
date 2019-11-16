@@ -691,6 +691,7 @@ Page({
             app.globalData.userInfo = userInfo;
             wx.setStorageSync('userInfo', userInfo)
             that.setData({ userInfo: userInfo });
+            that.getdetail();
           } else {
             app.showMyTips(uinfo.errmsg);
           }
