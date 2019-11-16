@@ -69,21 +69,33 @@
         <text>已发布信息</text>
       </view>
 
-      <block wx:if="{{ (member.resume_status.has_resume == '0') }}">
+      <!-- <block wx:if="{{ (member.resume_status.has_resume == '0') }}">
         <view class='ucenter-menu-item' data-url="/pages/publish/card/card" bindtap='valiUserUrl'>
+          <image src='{{ ucenterimgs.card }}'></image>
+          <text>发布找活名片</text>
+          <text class="ucenter-badge">{{ member.resume_status.resume_tips_string }}</text>
+        </view>
+      </block> -->
+
+    <block wx:if="{{ (member.resume_status.has_resume == '0') }}">
+        <view class='ucenter-menu-item' data-url="/pages/publish/card/card" bindtap='releaselive'>
           <image src='{{ ucenterimgs.card }}'></image>
           <text>发布找活名片</text>
           <text class="ucenter-badge">{{ member.resume_status.resume_tips_string }}</text>
         </view>
       </block>
 
+
+
       <block wx:if="{{ (member.resume_status.has_resume == '1') }}">
-        <view class='ucenter-menu-item' data-url='{{ (member.resume_status.check_status == "0") ? "/pages/publish/card/card?id=" + member.resume_status.resume_id : "/pages/mycard/mycard" }}' bindtap='valiUserUrl'>
+        <!-- <view class='ucenter-menu-item' data-url='{{ (member.resume_status.check_status == "0") ? "/pages/publish/card/card?id=" + member.resume_status.resume_id : "/pages/mycard/mycard" }}' bindtap='valiUserUrl'> -->
+        <view class='ucenter-menu-item' data-url= "/pages/clients-looking-for-work/finding-name-card/findingnamecard" bindtap='valiUserUrl'>
           <image src='{{ ucenterimgs.card }}'></image>
           <text>我的找活名片</text>
           <text class="ucenter-badge" wx:if="{{ member.resume_status.check_status != '2' }}">{{ member.resume_status.resume_tips_string }}</text>
         </view>
       </block>
+
 
 
       <view class='ucenter-menu-item' data-url='../published/published?type=1' bindtap='valiUserUrl'>

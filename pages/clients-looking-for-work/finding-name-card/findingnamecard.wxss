@@ -1,0 +1,1279 @@
+/* modalDlg .contentone .cardsixzong .cardsixfour lang*/ 
+
+.findingnamecard{
+  width: 93%;
+  margin: 0 auto;
+  height: 80rpx;
+  background: white;
+  font-size: 28rpx;
+  color: #343434;
+  line-height: 80rpx;
+  text-align: center;
+  letter-spacing: 4rpx;
+  font-weight: bold;
+}
+.nopass{
+  width: 93%;
+  margin: 0 auto;
+  background: #FFFBF7;
+  color: red;
+  font-size: 28rpx;
+  padding-top: 10rpx;
+  padding-left: 42rpx;
+  padding-right: 42rpx;
+  padding-bottom: 10rpx;
+}
+.link {
+  width: 6px;
+  height: 38rpx;
+  position: absolute;
+  left: 48rpx;
+  top: -25rpx;
+}
+
+.linkone {
+  width: 6px;
+  height: 38rpx;
+  position: absolute;
+  right: 48rpx;
+    top: -25rpx;
+}
+
+.findingnamecardone {
+  width: 100%;
+  margin-top: 20rpx;
+  padding-left: 27rpx;
+  padding-right: 27rpx;
+}
+
+.findingnamecardoneson {
+  width: 100%;
+  background-color: white;
+  height: 114rpx;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+
+
+.findingnamecardoneson .findingnamecardonesonone  .sharelive  {
+  margin-bottom: 8rpx;
+  font-size: 28rpx;
+  color: red;
+  margin-left: 13rpx;
+}
+.findingnamecardoneson .findingnamecardonesonone view {
+  margin-bottom: 8rpx;
+  font-size: 28rpx;
+  color: #0099FF;
+  margin-left: 13rpx;
+}
+
+.findingnamecardoneson .findingnamecardonesonone .otext {
+  margin-top: 14rpx;
+  font-size: 28rpx;
+  margin-left: 13rpx;
+  font-weight: bold;
+  letter-spacing: 4rpx;
+  color: #000;
+  display: flex;
+}
+
+.findingnamecardoneson .findingnamecardonesonone .lang {
+  margin-top: 14rpx;
+ width: 130rpx;
+ background: #DEDDDD;
+ height: 14rpx;
+ border-radius: 8rpx;
+ position: relative;
+}
+.findingnamecardoneson .findingnamecardonesonone .olang {
+ background: #0099FF;
+ height: 14rpx;
+ border-radius: 8rpx;
+ position: absolute;
+ padding: 0;
+ margin: 0;
+}
+
+.findingnamecardoneson .findingnamecardonesonone .olangw {
+font-size:26rpx; color:#F87A14; margin:3rpx 0 0 30rpx;font-weight:500;
+}
+.findingnamecardoneson .findingnamecardonesontwo{
+  text-align: center;
+   margin-right: 13rpx;
+}
+.findingnamecardoneson .findingnamecardonesontwo text {
+  color: #09f;
+  font-size: 28rpx;
+  font-weight: bold;
+}
+
+.findingnamecardoneson .findingnamecardonesontwo view {
+  margin-top: 6rpx;
+  color: #626160;
+  font-size: 28rpx;
+  font-weight: bold;
+}
+.findingnamecardtwo{
+  width: 93%;
+  margin: 0 auto;
+  margin-top: 21rpx;
+  background: white;
+  overflow: hidden;
+  padding-bottom: 40rpx;
+  position: relative;
+}
+
+.findingnamecardtwothree{
+  width: 100%;
+  display: block;
+  color: #828181;
+  text-align: center;
+  font-size: 26rpx;
+  margin-top: 45rpx;
+  font-weight: bold;
+}
+.findingnamecardtwofour{
+  width: 138rpx;
+  height: 46rpx;
+  background: #0099FF;
+  color: white;
+  text-align: center;
+  line-height: 46rpx;
+  font-size: 26rpx;
+  margin: 0 auto;
+  margin-top: 28rpx;
+  border-radius: 22rpx;
+}
+
+.findingnamecardthree {
+  width: 93%;
+  margin-top: 12rpx;
+  margin-bottom: 18rpx;
+  height: 24rpx;
+  font-size: 24rpx;
+  margin-left: 24rpx;
+
+}
+.findingnamecardthree .findingnamecardthreemobile{
+  text-align: center;
+  font-size: 28rpx;
+  font-weight: bold;
+
+}
+.findingnamecardthree image {
+
+  width: 22rpx;
+  height: 24rpx;
+}
+
+.findingnamecardthree .findingnamecardthreeone {
+  font-size: 24rpx;
+  color: #09f;
+  position: absolute;
+  right: 8rpx;
+}
+.findingnamecardfour {
+  width: 93%;
+  margin: 0 auto;
+  padding-bottom: 40rpx;
+  background: white;
+  overflow: hidden;
+}
+.findingnamecardfourone{
+  width: 100%;
+  display: block;
+  color: #828181;
+  text-align: center;
+  font-size: 26rpx;
+  margin-top: 45rpx;
+  font-weight: bold;
+}
+
+.findingnamecardfourtwo{
+  width: 138rpx;
+  height: 46rpx;
+  background: #0099FF;
+  color: white;
+  text-align: center;
+  line-height: 46rpx;
+  font-size: 26rpx;
+  margin: 0 auto;
+  margin-top: 22rpx; 
+  border-radius: 22rpx;
+}
+
+.findingnamecardfive {
+  width: 93%;
+  margin-top: 12rpx;
+  margin-bottom: 18rpx;
+  height: 24rpx;
+  font-size: 24rpx;
+  margin-left: 24rpx;
+}
+.findingnamecardfive .findingnamecardfivemobile{
+  text-align: center;
+  font-size: 28rpx;
+  font-weight: bold;
+}
+.findingnamecardfive image {
+
+  width: 22rpx;
+  height: 24rpx;
+}
+
+
+.findingnamecardsix {
+  width: 93%;
+  margin: 0 auto;
+  background: white;
+  overflow: hidden;
+  padding-bottom: 40rpx;
+}
+.findingnamecardsixone{
+  width: 100%;
+  display: block;
+  color: #828181;
+  text-align: center;
+  font-size: 26rpx;
+  margin-top: 45rpx;
+  font-weight: bold;
+}
+
+.findingnamecardsixtwo{
+  width: 222rpx;
+  height: 46rpx;
+  background: #0099FF;
+  color: white;
+  text-align: center;
+  line-height: 46rpx;
+  font-size: 26rpx;
+  margin: 0 auto;
+  margin-top: 22rpx;
+  border-radius: 22rpx;
+}
+
+
+.findingnamecardseven {
+  width: 93%;
+  margin-top: 12rpx;
+  margin-bottom: 18rpx;
+  height: 24rpx;
+  font-size: 24rpx;
+  margin-left: 24rpx;
+}
+.findingnamecardseven .findingnamecardsevenmobile{
+  font-size: 26rpx;
+  font-weight: bold;
+  text-align: center;
+}
+.findingnamecardseven image {
+  width: 22rpx;
+  height: 24rpx;
+}
+
+
+
+
+.findingnamecardeight {
+  width: 93%;
+  margin: 0 auto;
+  background: white;
+  overflow: hidden;
+  margin-bottom: 60rpx;
+  padding-bottom: 40rpx;
+}
+.findingnamecardeightone{
+  width: 100%;
+  display: block;
+  color: #828181;
+  text-align: center;
+  font-size: 26rpx;
+  margin-top: 45rpx;
+  font-weight: 600;
+}
+
+.findingnamecardeighttwo{
+  width: 222rpx;
+  height: 46rpx;
+  background: #0099FF;
+  color: white;
+  text-align: center;
+  line-height: 46rpx;
+  font-size: 26rpx;
+  margin: 0 auto;
+  margin-top: 22rpx;
+  border-radius: 22rpx;
+}
+
+
+
+
+
+
+
+
+
+
+.headerlivecard {
+  width: 100%;
+}
+
+.card {
+  width: 100%;
+  margin-top: 20rpx;
+  padding-left: 27rpx;
+  padding-right: 27rpx;
+}
+
+.cardson {
+  width: 100%;
+  background-color: white;
+  height: 114rpx;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.cardson .cardsonone text {
+  margin-top: 14rpx;
+  display: block;
+  font-size: 30rpx;
+  margin-left: 13rpx;
+  letter-spacing: 4rpx;
+  font-weight: bold;
+}
+
+.cardson .cardsonone view {
+  margin-top: 6rpx;
+  margin-bottom: 14rpx;
+  font-size: 26rpx;
+  color: #0099FF;
+  margin-left: 13rpx;
+}
+
+.cardson .cardsontwo text {
+  margin-left: 40rpx;
+  color: #0099FF;
+  font-size: 26rpx;
+  font-weight: bold;
+}
+
+.cardson .cardsontwo view {
+  margin-top: 6rpx;
+  color: #626160;
+  font-size: 26rpx;
+  margin-right: 13rpx;
+}
+
+.cardone {
+  width: 100%;
+  margin-top: 20rpx;
+  padding-left: 27rpx;
+  padding-right: 27rpx;
+}
+
+.cardone .cardoneson {
+  width: 100%;
+  background-color: white;
+  height: 80rpx;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.cardone .cardoneson .cardonesonone {
+  font-size: 26rpx;
+  color: #343434;
+  margin-top: 25rpx;
+    height: 28rpx;
+    font-weight: bold;
+}
+.cardone .cardoneson .cardonesonone view{
+  display: inline;
+}
+.cardone .cardoneson .cardonesonone image {
+  margin-left: 47rpx;
+  width: 25rpx;
+  height: 24rpx;
+  line-height: 28rpx;
+}
+
+.cardone .cardoneson .cardonesonone text {
+  margin-left: 18rpx;
+    width: 24%;
+   height: 28rpx;
+   line-height:28rpx;
+}
+
+.cardone .cardoneson .cardonesontwo {
+  color: #ff1800;
+  font-size: 24rpx;
+  margin-top: 27rpx;
+}
+
+.cardone .cardoneson .cardonesontwo image {
+  width: 26rpx;
+  height: 16rpx;
+  margin: 0 8rpx;
+}
+
+
+.cardtwo {
+  width: 93%;
+  margin: 0 auto;
+  margin-top: 20rpx;
+  background-color: white;
+padding-bottom: 6rpx;
+  position: relative;
+}
+.cardonetwof{
+    overflow: hidden;
+}
+
+.cardtwo .cardtwosonone {
+  width: 100%;
+  height: 88rpx;
+  margin-top: 22rpx;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.cardtwosonone .cardtwosononeimg {
+  width: 400rpx;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.cardtwosonone .cardtwosononeimg .oimg {
+  height: 88rpx;
+  width: 88rpx;
+  border-radius: 50%;
+  margin-left: 14rpx;
+}
+
+.cardtwosonone .cardtwosononeimg .oimg image {
+  height: 88rpx;
+  width: 88rpx;
+  border-radius: 50%;
+}
+
+.cardtwosonone .cardtwosononeimg  .oimgone {
+  width: 280rpx;
+}
+
+.cardtwosonone .cardtwosononeimg  .oimgone .otext {
+  color: #343434;
+  font-size: 28rpx;
+}
+
+.cardtwosonone .cardtwosononeimg .oimgone .otextone {
+  font-size: 26rpx;
+  color: #6c6b6b;
+}
+
+.cardtwosonone .cardtwosononeimg .oimgone .otextone .ochange {
+  margin-left: 6rpx;
+}
+
+.cardtwo .cardtwosontwo {
+  font-size: 28rpx;
+  color: #09f;
+  line-height: 88rpx;
+  position: relative;
+  right: 12rpx;
+}
+
+.cardotext {
+  position: relative;
+  width: 100%;
+  display: flex;
+}
+
+.cardotext .oworkone {
+  display: flex;
+  margin-left: 54rpx;
+}
+.cardotext::before {
+  position: absolute;
+  content: '';
+  width: 11px;
+  height: 11px;
+  background: url(http://cdn.yupao.com/miniprogram/images/newjobinfo-steps.png?t=11) no-repeat;
+  background-size: 100% 100%;
+    left: 14px;
+    margin-left:  -5px;
+  top:20rpx;
+}
+/* .cardotext .owork {
+  margin: 0;
+  padding: 0;
+  display: inline-block;
+  width: 80%;
+} */
+
+/* .cardotext  image {
+  width: 18rpx;
+  height: 18rpx;
+  margin: 0 20rpx;
+  margin-top: 24rpx;
+} */
+
+.cardotext .workotext {
+  color: grey;
+  font-size: 24rpx;
+  width: 140rpx;
+  margin-top: 14rpx;
+  margin-bottom: 6rpx;
+}
+
+.cardotext .workotext .telephone {
+  margin-left: 40rpx;
+}
+
+.cardotext .workotext .states {
+  margin: 0 12rpx;
+}
+
+.cardotext .workotextone {
+  color: black;
+  font-size: 26rpx;
+}
+.cardotext .workotextonetu {
+  color: black;
+  font-size: 26rpx;
+  background: #E7E7E7;
+  display: inline-block;
+  height: 37rpx;
+  line-height: 37rpx;
+  padding-left: 4rpx;
+  padding-right: 4rpx;
+  text-align: center;
+  margin-top: 12rpx;
+  margin-left: 10rpx;
+
+}
+/* .cardotext:nth-child(2){
+  color: black;
+  font-size: 24rpx;
+  background: #E7E7E7;
+  display: inline-block;
+  height: 37rpx;
+  line-height: 37rpx;
+  padding-left: 4rpx;
+  padding-right: 4rpx;
+  text-align: center;
+  margin-top: 12rpx;
+  line
+} */
+.cardotextbottom {
+  margin-top: 16rpx;
+}
+
+.cardthree {
+  width: 93%;
+  margin: 0 auto;
+  margin-top: 12rpx;
+  margin-bottom: 18rpx;
+  height: 24rpx;
+  font-size: 24rpx;
+  position: relative;
+}
+
+.cardthree .cardthreemobile {
+  font-size: 28rpx;
+  font-weight: bold;
+  position: absolute;
+  left: 50%;
+  margin-left: -10%;
+}
+
+.cardthree image {
+  width: 22rpx;
+  height: 24rpx;
+}
+
+.cardthree .cardthreeone {
+  font-size: 24rpx;
+  color: #09f;
+  position: absolute;
+  right: 0;
+}
+
+.cardfour {
+  width: 93%;
+  margin: 0 auto;
+  color: #343434;
+  padding-left: 10rpx;
+  background-color: white;
+}
+
+.cardfour  text {
+  padding-top: 4rpx;
+  font-size: 24rpx;
+}
+
+.cardfour .cardfourbottom {
+  height: 10rpx;
+}
+
+.cardfour .result {
+  background: #fffbf7;
+}
+
+.cardfour .result .resultone {
+  color: #fa0819;
+  font-size: 24rpx;
+}
+
+.cardfour .result view {
+  height: 20rpx;
+}
+
+.cardfive {
+  width: 93%;
+  margin: 0 auto;
+  margin-top: 12rpx;
+  margin-bottom: 18rpx;
+  height: 24rpx;
+  font-size: 24rpx;
+  position: relative;
+}
+
+.cardfive .cardfivemobile {
+  font-size: 28rpx;
+  font-weight: bold;
+  position: absolute;
+  left: 50%;
+  margin-left: -10%;
+}
+
+.cardfive image {
+  width: 22rpx;
+  height: 24rpx;
+
+}
+
+.cardfive .cardthreeone {
+ font-size: 24rpx;
+  color: #09f;
+  position: absolute;
+  right: 0;
+}
+
+.cardsix {
+  width: 93%;
+  margin: 0 auto;
+  background-color: white;
+  position: relative;
+}
+
+.cardsixzong {
+  display: flex;
+  flex-direction: row;
+}
+
+.cardsix .cardsixone {
+  width: 20rpx;
+  height: 20rpx;
+  margin-left: 20rpx;
+  margin-top: 20rpx;
+}
+
+.cardsixzong .cardsixtwo {
+  color: #343434;
+  font-size: 28rpx;
+  font-weight: bold;
+  margin-left: 14rpx;
+  margin-top: 10rpx;
+}
+
+.cardsixzong .cardsixthree {
+  color: #8b8b8a;
+  font-size: 26rpx;
+  margin-left: 14rpx;
+  margin-top: 10rpx;
+}
+
+.cardsixzong .cardsixthree  text:last-child {
+  margin-left: 26rpx;
+}
+
+.cardsixzong .cardsixfour {
+  color: #8b8b8a;
+  font-size: 26rpx;
+  margin-left: 14rpx;
+  margin-top: 10rpx;
+  padding-right: 5%;
+  word-wrap:break-word;
+  word-break:break-all;
+}
+
+.cardsixzong .cardsixfive image {
+  width: 185rpx;
+  height: 185rpx;
+  margin-left: 16rpx;
+  margin-top: 16rpx;
+}
+
+ .cardsixsix {
+  padding: 0;
+  width: 246rpx;
+  height: 45rpx;
+  background-color: #0099FF;
+  font-size: 26rpx;
+  color: white;
+  line-height: 45rpx;
+  display: flex;
+  justify-content: center;
+  margin-top: 14rpx;
+  position: relative;
+  border-radius: 8rpx;
+}
+.cardsixsixnum{
+  position: absolute;
+  width: 24rpx;
+  height: 24rpx;
+  color: white;
+  background: #DC0102;
+  border-radius: 50%;
+  right: -24rpx;
+  top: -20rpx;
+  text-align: center;
+  line-height: 24rpx;
+  font-size: 20rpx;
+  z-index: 9999;
+}
+  .cardsixsixall {
+  margin: 0 auto;
+  width: 246rpx;
+  height: 45rpx;
+}
+
+.cardsixsixallvoto {
+  height: 24rpx;
+}
+
+ .down {
+  width: 20rpx;
+  height: 15rpx;
+}
+.editor {
+  font-size: 25rpx;
+  color: #09f;
+  position: absolute;
+  top: 29rpx;
+  right: 29rpx;
+}
+.cardseven {
+  width: 93%;
+  margin: 0 auto;
+  margin-top: 12rpx;
+  margin-bottom: 18rpx;
+  height: 24rpx;
+  font-size: 26rpx;
+  position: relative;
+}
+
+.cardseven .cardsevenmobile {
+  font-size: 28rpx;
+  font-weight: bold;
+  position: absolute;
+  left: 50%;
+  margin-left: -10%
+}
+
+.cardseven image {
+  width: 22rpx;
+  height: 24rpx;
+}
+
+.cardseven .cardthreeone {
+  font-size: 24rpx;
+  color: #09f;
+  position: absolute;
+  right: 0;
+}
+
+.cardeight {
+  width: 93%;
+  margin: 0 auto;
+  background-color: white;
+  position: relative;
+  margin-bottom: 18rpx;
+}
+
+.cardeightzong {
+  display: flex;
+  flex-direction: row;
+}
+
+.cardeight .cardeightone {
+  width: 20rpx;
+  height: 20rpx;
+  margin-left: 20rpx;
+  margin-top: 20rpx;
+}
+
+.cardeightzong .cardeighttwo {
+  color: #343434;
+  font-size: 26rpx;
+  margin-left: 14rpx;
+  margin-top: 10rpx;
+}
+
+.cardeightzong .cardeighttwo text:last-child {
+  font-size: 20rpx;
+  line-height: 26rpx;
+  color: #8b8b8a;
+  margin-left: 14rpx;
+}
+
+.cardeightzong .cardeightthree {
+  color: #8b8b8a;
+  font-size: 22rpx;
+  margin-left: 14rpx;
+  margin-top: 10rpx;
+}
+
+.cardeightzong .cardeightthree  text:last-child {
+  margin-left: 26rpx;
+}
+
+.cardeightzong .cardeightfour {
+  color: #8b8b8a;
+  font-size: 22rpx;
+  margin-left: 14rpx;
+  margin-top: 10rpx;
+}
+
+
+.cardeightzong .cardeightfive image {
+  width: 185rpx;
+  height: 185rpx;
+  margin-left: 16rpx;
+  margin-top: 16rpx;
+}
+
+ .cardeightsix {
+  padding: 0;
+  width: 246rpx;
+  height: 45rpx;
+  background-color: #0099FF;
+  font-size: 26rpx;
+  color: white;
+  line-height: 45rpx;
+  display: flex;
+  justify-content: center;
+  margin-top: 14rpx;
+  position: relative;
+  border-radius: 8rpx;
+}
+.cardeightsixnum{
+  position: absolute;
+  width: 24rpx;
+  height: 24rpx;
+  color: white;
+  background: #DC0102;
+  border-radius: 50%;
+  right: -24rpx;
+  top: -20rpx;
+  text-align: center;
+  line-height: 24rpx;
+  font-size: 20rpx;
+  z-index: 9999;
+}
+ .cardeightsixall {
+  margin: 0 auto;
+  width: 246rpx;
+  height: 45rpx;
+}
+
+ .down {
+  width: 20rpx;
+  height: 15rpx;
+}
+
+.cardnine {
+  margin: 0 auto;
+  height: 91rpx;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-top: 18rpx;
+}
+
+.cardnine .cardnineone {
+  margin: 0;
+  padding: 0;
+  height: 91rpx;
+  width: 50%;
+  background-color: white;
+  color: #7d7d7d;
+  font-size: 36rpx;
+  text-align: center;
+  line-height: 91rpx;
+  border-radius:0;
+  border-top: 2px solid #ececec;
+}
+.cardnine .cardnineone::after {
+  border: none;
+}
+.cardnine .cardnineone:first-child {
+   border-right: 2px solid #ececec;
+}
+
+.cardnine .cardnineone image {
+  width: 35rpx;
+  height: 35rpx;
+  position: relative;
+  top: 4rpx;
+}
+.lineone{
+  position: relative;
+  margin-bottom: 8rpx;
+}
+.linezo::before {
+  position: absolute;
+  content: '';
+  left: 14px;
+  top: 0;
+  width: 1px;
+  height: 100%;
+  background: #dcdcdc;
+}
+
+/* .cardotext {
+  position: relative;
+  left: -15px;
+} */
+
+
+.content{
+  font-size: 24rpx;
+  color: #797979;
+  margin-left: 8.5%;
+  margin-bottom: 8rpx;
+  padding-right: 2%;
+}
+.contentone{
+  font-size: 26rpx;
+  color: #202020;
+  margin-left: 8.5%;
+  margin-bottom: 8rpx;
+  padding-right: 2%;
+     word-wrap:break-word;
+  word-break:break-all;
+}
+
+.cardotext {  
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+
+
+}
+
+.cardotext .oworkone {
+
+  width: 16.5%
+}
+
+.cardotext  image {
+  width: 18rpx;
+  height: 18rpx;
+  margin: 0 20rpx;
+  margin-top: 24rpx;
+}
+
+.cardotext .oworkotext {
+  margin: 0;
+  padding: 0;
+  height: 30rpx;
+  display: inline-block;
+  color: grey;
+  font-size: 26rpx;
+  width: 100%;
+  margin-top: 14rpx;
+  margin-bottom: 6rpx;
+  text-align: justify;
+  position: relative;
+  font-weight: bold;
+}
+.cardotext .oworkotext::after{
+    content:'';
+    width: 100%;
+    display: inline-block;
+    overflow: hidden;
+    height: 0;
+}
+.cardotext .oworkotext::before{
+    content:':';
+    /* overflow: hidden; */
+    height: 100%;
+    width: 6rpx;
+    position: absolute;
+    right: -4px;
+}
+.all{
+  width:70%
+}
+.cardotext .oworkotextonetu {
+  color: black;
+  font-size: 26rpx;
+  background: #E7E7E7;
+  display: inline-block;
+  height: 37rpx;
+  line-height: 37rpx;
+  padding-left: 4rpx;
+  padding-right: 4rpx;
+  text-align: center;
+  margin-top: 12rpx;
+  margin-right: 17rpx;
+}
+.cardotext .oworkotextonetu:last-child{
+  color: black;
+  font-size: 26rpx;
+  background: #E7E7E7;
+  display: inline-block;
+  height: 37rpx;
+  line-height: 37rpx;
+  padding-left: 4rpx;
+  padding-right: 4rpx;
+  text-align: center;
+  margin-top: 12rpx;
+  margin-right: 0rpx;
+}
+.cardotext .tworkotextonetu {
+  color: black;
+  font-size: 24rpx;
+  background: #E7E7E7;
+  display: inline-block;
+  height: 37rpx;
+  line-height: 37rpx;
+  padding-left: 4rpx;
+  padding-right: 4rpx;
+  text-align: center;
+  margin-top: 12rpx;
+  margin-right: 17rpx;
+}
+.cardotext .tworkotextonetu:last-child{
+  color: black;
+  font-size: 24rpx;
+  background: #E7E7E7;
+  display: inline-block;
+  height: 37rpx;
+  line-height: 37rpx;
+  padding-left: 4rpx;
+  padding-right: 4rpx;
+  text-align: center;
+  margin-top: 12rpx;
+  margin-right: 0rpx;
+}
+
+.cardotext .oworkotext .otelephone {
+  margin-left: 40rpx;
+}
+.cardotext .oworkotext .otelephoneb {
+  margin-left: 35rpx;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+.select_box{
+  width:30%;
+  height:70%;
+  border-radius: 14rpx;
+  position: relative;
+  margin-top: 28rpx;
+  margin-right: 3%;
+  font-size: 22rpx;
+}
+
+.select_box .select{
+  display: flex;
+  justify-content: space-around;
+}
+.select_box .select .select_text{
+  font-size: 24rpx;
+  color: #FF1800;
+  line-height: 28rpx;
+  text-align: right;
+  flex: 1;
+}
+.select_box .select .select_img{
+  width: 28rpx;
+  height: 18rpx;
+  display: block;
+  margin-top: 8rpx;
+  transition:transform 0.3s;
+}
+.select_box .select .select_img_rotate{
+  transform:rotate(180deg); 
+}
+.select_box .option_box{
+  position: absolute;
+  top: calc(100% - 1px);
+  width: 100%;
+  box-sizing: border-box;
+  height: 0;
+  overflow-y: auto;
+  background: #fff;
+  transition: height 0.3s;
+  z-index: 999
+}
+.select_box .option_box .option{
+  display: block;
+  line-height: 30rpx; 
+  font-size: 24rpx;
+  border-top: 1px solid #efefef;
+  border-bottom: 1px solid #efefef;
+  border-left:1px solid #efefef;
+  border-right:1px solid #efefef;
+  text-align: center;
+}
+
+.checkone{
+ width: 100rpx;
+  height: 100rpx;
+  position: absolute;
+  top: 10rpx;
+  right: 21rpx;
+  z-index: 99
+}
+.checktwo{
+  width: 100rpx;
+  height: 100rpx;
+  position: absolute;
+  top: 10rpx;
+  right: 21rpx;
+  z-index: 99
+}
+.checkthree{
+   width: 100rpx;
+  height: 100rpx;
+  position: absolute;
+  top: 10rpx;
+  right: 21rpx;
+  z-index: 99
+}
+.checkfour{
+  width: 100rpx;
+  height: 100rpx;
+  position: absolute;
+  top: 10rpx;
+  right: 21rpx;
+  z-index: 99
+}
+
+
+
+
+
+
+.audit {
+  display: inline-block;
+  width: 113rpx;
+  height: 113rpx;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.resson {
+  font-size: 26rpx;
+  margin-top: 10rpx;
+  margin-left: 16rpx;
+  color: #FB2A08;
+  margin-bottom: 6rpx;
+}
+
+
+
+/* 弹出层 */
+.modalDlg{
+    width: 70%;
+    position: fixed;
+    top: 340rpx;
+    left: 0;
+    right: 0;
+    z-index: 9999;
+    margin: 0 auto;
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 18rpx;
+}
+.modalDlg .modalDlgone{
+  width: 40%;
+  margin: 6rpx auto;
+  display: flex;
+  justify-content: space-between;
+  font-size: 32rpx;
+}
+
+.text{
+    width: 100%;
+    margin:0 auto;
+    /* height: 290rpx; */
+    font-size: 32rpx;
+    position: relative;
+}
+
+.text .otext{
+  width: 85rpx;
+  font-size: 42rpx;
+  font-weight: bold;
+  margin: 20rpx auto;
+}
+.text .textdetail{
+  font-size: 32rpx;
+  width: 83%;
+  margin: 0 auto;
+
+  margin-bottom: 40rpx;
+  margin-top: 48rpx;
+}
+
+.buttontext{
+    margin: 0 auto; 
+   width: 325rpx;
+   height: 74rpx;
+   background:#0099FF;
+   color: white;
+   font-size: 32rpx;
+   text-align: center;
+   line-height: 80rpx;
+  border-radius: 18rpx;
+  margin-bottom: 50rpx;
+}
+.bg {
+  position: absolute;
+  top: 0%;
+  left: 0%;
+  width: 100%;
+  height: 100%;
+  background-color: black;
+  z-index: 1001;
+  -moz-opacity: 0.7;
+  opacity: 0.70;
+  filter: alpha(opacity=70);
+}
+.popup{
+  color: red;
+}
+
+/*oworkotext cardsix .all  bg showtop nopass findingnamecardsixtwo*/

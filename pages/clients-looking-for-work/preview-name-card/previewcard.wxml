@@ -1,0 +1,237 @@
+<view>
+  <view class="header">
+    注:分享名片 让你的名片排名更靠前
+  </view>
+
+  <view class="cardtwo">
+    <view class="cardonetwof">
+        <image class="checkone" src="../../../images/audit.png" wx:if="{{checkone}}"></image>
+      <view class="cardtwosonone">
+        <view class="cardtwosononeimg">
+          <view class="oimg">
+            <image src="{{headerimg}}"></image>
+          </view>
+          <view class="oimgone">
+            <text class="otext">{{name}}</text>
+            <view class="otextone">
+              <text>{{sex}}</text>
+              <text class="ochange">{{age}}</text>
+              <text class="ochange">{{nation}}</text>
+            </view>
+          </view>
+        </view>
+      </view>
+      <view class="lineone">
+        <view class="linezo">
+          <view class="cardotext">
+            <view class="oworkone">
+              <text class="oworkotext">手机</text>
+            </view>
+           <view class="all">
+              <text class="workotextone">{{telephone}}</text>
+            </view>
+          </view>
+          <view class="cardotext">
+            <view class="oworkone">
+              <text class="oworkotext">我的家乡</text>
+            </view>
+            <view class="all">
+              <text class="workotextone">{{cityself}}</text>
+            </view>
+          </view>
+          <view class="cardotext">
+            <view class="oworkone">
+              <text class="oworkotext">工种</text>
+            </view>
+            <view class="all" wx:if="{{occupations != '未填写'}}">
+              <view class="oworkotextonetu" wx:for="{{occupations}}" wx:key="{{index}}">
+                {{item}}
+              </view>
+            </view>
+            <view class="all" wx:if="{{occupations == '未填写'}}">
+               <text class="workotextone">{{occupations}}</text>
+            </view>
+          </view>
+          <view class="cardotext">
+            <view class="oworkone">
+              <text class="oworkotext">工龄</text>
+            </view>
+            <view class="all">
+              <text class="workotextone">{{workingyears}}</text>
+            </view>
+          </view>
+          <view class="cardotext">
+            <view class="oworkone">
+              <text class="oworkotext">熟练度</text>
+            </view>
+            <view class="all">
+              <text class="workotextone">{{procity}}</text>
+            </view>
+          </view>
+          <view class="cardotext">
+            <view class="oworkone">
+              <text class="oworkotext">人员构成</text>
+            </view>
+            <view class="all">
+              <text class="workotextone">{{staffcomposition}}</text>
+            </view>
+          </view>
+          <view class="cardotext" wx:if="{{personnum != 1}}">
+            <view class="oworkone">
+              <text class="oworkotext">队伍人数</text>
+            </view>
+            <view class="all">
+              <text class="workotextone">{{personnum}}</text>
+            </view>
+          </view>
+          <view class="cardotext">
+            <view class="oworkone">
+              <text class="oworkotext">所在地区</text>
+            </view>
+            <view class="all">
+              <text class="workotextone">{{city}}</text>
+            </view>
+          </view>
+
+          <view class="cardotext">
+            <view class="oworkone">
+              <text class="oworkotext">标签</text>
+            </view>
+            <view class="all" wx:if="{{tags != '未填写'}}">
+              <view class="tworkotextonetu" wx:for="{{tags}}" wx:key="{{index}}">
+                {{item.label_name}}
+              </view>
+            </view>
+            <view class="all"  wx:if="{{tags == '未填写'}}">
+                <text class="workotextone">{{tags}}</text>
+            </view>
+          </view>
+        </view>
+
+      </view>
+      <view class="cardotextbottom"></view>
+    </view>
+  </view>
+  <view class="nopass" wx:if="{{ressonone}}">
+    审核未通过原因：{{note}}
+  </view>
+
+  <view class="cardthree">
+    <view class="cardthreemobile">
+      <image src="../../../images/newresume-description.png"></image>
+      自我介绍
+    </view>
+  </view>
+  <view class="introcardtwo">
+          <image class="checkone" src="../../../images/audit.png" wx:if="{{checkone}}"></image>
+    <view class="introcontent">{{introduce}}</view>
+
+
+    <view class="cardotextbottom"></view>
+  </view>
+
+
+  <view class="cardfive">
+
+    <view class="cardfivemobile">
+      <image src="../../../images/newresume-experience.png"></image>
+      项目经验
+    </view>
+  </view>
+  <view class="cardsix" wx:if="{{projectlength != 0}}">
+
+    <view class="cardsixzong" wx:for="{{projectone}}" wx:key="{{index}}">
+            <image class="checkfour" src="../../../images/audit.png" wx:if="{{item.check==1}}"></image>
+        <image class="audit" wx:if="{{item.check == 0}}" src="../../../images/notthrough.png"></image>
+ 
+      <view>
+        <image src="../../../images/newresume-experience-item.png" class="cardsixone"></image>
+      </view>
+      <view class="cardsixall">
+        <view class="cardsixtwo">
+          <text>{{item.project_name}}</text>
+        </view>
+        <view class="cardsixthreeborder">
+          <view class="cardsixthree">
+            <text>{{item.start_time}}--{{item.completion_time}}</text>
+            <text>{{item.province_name}}省{{item.city_name}}市</text>
+          </view>
+          <view class="cardsixfour">
+            <text>{{item.detail}}
+        </text>
+          </view>
+          <view class="cardsixfive">
+            <image wx:for="{{item.image}}" wx:key="{{index}}" src="{{item}}"></image>
+          </view>
+          <view wx:if="{{item.check == 0}}" class="resson">
+              未通过原因：{{item.fail_case}}
+          </view>
+        </view>
+
+      </view>
+    </view>
+    <view class="cardsixsixall">
+      <view class="cardsixsix" bindtap="moreproject">
+        <view>
+          更多项目经验
+          <image src="../../../images/downward.png" class="down"></image>
+        </view>
+      </view>
+    </view>
+    <view class="cardsixsixallvoto">
+    </view>
+  </view>
+  <view wx:if="{{projectlength == 0}}" class="jilu">
+    暂无记录
+  </view>
+
+  <view class="cardseven">
+    <view class="cardsevenmobile">
+      <image src="../../../images/newresume-skill.png"></image>
+      职业技能
+    </view>
+  </view>
+   <view class="cardeight" wx:if="{{skilllength != 0}}">
+    <view class="cardeightzong" wx:for="{{skillbooksone}}" wx:key="{{index}}">
+        <image class="checkfour" src="../../../images/audit.png" wx:if="{{item.check==1}}"></image>
+            <image class="audit" wx:if="{{item.check == 0}}" src="../../../images/notthrough.png"></image>
+
+      <view>
+        <image src="../../../images/newresume-experience-item.png" class="cardeightone"></image>
+      </view>
+      <view class="cardeightall">
+        <view class="cardeighttwo">
+          <text>{{item.name}}</text>
+          <text>{{item.certificate_time}}</text>
+        </view>
+        <view class="cardeightfive">
+          <image wx:for="{{item.image}}" wx:key="{{index}}" src="{{item}}"></image>
+        </view>
+         <view wx:if="{{item.check == 0}}" class="resson">
+              未通过原因：{{item.fail_case}}
+          </view>
+      </view>
+    </view>
+    <view class="cardeightsixall">
+      <view class="cardeightsix" bindtap="moreskill">
+        <view>
+          更多技能证书
+          <image src="../../../images/downward.png" class="down"></image>
+        </view>
+      </view>
+    </view>
+    <view class="cardsixsixallvoto">
+    </view>
+  </view>
+  <view wx:if="{{skilllength == 0}}" class="jiluone">
+    暂无记录
+  </view>
+
+
+  <view class="cardnine {{projectlength == 0 || skilllength == 0?'obtcard':'' }} ">
+    <button class="obtcardnineone  {{projectlength == 0 && skilllength == 0?'obtcardone':'' }}" open-type='share'>
+      分享
+    </button>
+  </view>
+</view>
+<!-- oworkotextonetu  cardsixone-- selectTap projectone projectlength>

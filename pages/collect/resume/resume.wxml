@@ -1,0 +1,62 @@
+<import src="/pages/footer/footer.wxml"/>
+
+<view class="yupao-common-container">
+    <view class='common-choose-header'>
+        <view class='choose-headerbox common-shaded-box flex-row'>
+            <view class='choose-header-item'  bindtap='showThisList'>
+                <view ><image src='{{ collectIcon.infoIcon }}'></image>{{ collectIcon.infoTitle }}</view>
+            </view>
+            <view class='choose-header-item' >
+                <view class='text-active'><image src='{{ collectIcon.resumeIcon }}'></image>{{ collectIcon.resumeTitle }}</view>
+            </view>
+        </view>
+    </view>
+
+    <view class='published-content clearfix'>
+        <view class="indxlistitem"  wx:for="{{ lists }}" wx:key="{{ index }}" data-id="{{ item.id }}" data-type="job" bindtap='showCollectInfo' data-msg="{{ item.check_status.showTips }}" data-tips="{{ item.check_status.tipsMsg }}">
+          
+            <!-- 上 -->
+            <view class='toplist'>
+              <view class="yupao-boxs">
+                <view class="yupaoboxsfot">
+                  <view class="yupaotile" style="padding-right:20rpx">{{ item.title }}</view>
+                </view>
+              </view>
+              <view class='yupao-lists-wxtipse'>
+                <view class="yupao-liststou">
+                  <image class="yupao-lists-img" src="{{ item.header_img }}"></image>
+                </view>
+                <view class="yupao-listsname">
+                  <view class="yupao-listswxyus">
+                    <text style="color:black">{{ item.user_name }}</text>
+                    <image wx:if="{{ item.is_end == '1' }}" class="sjim" src="{{hirimg}}" ></image>
+                  </view>
+                  <view class="yupaolistswxyu">{{ item.detail }}</view>
+                </view>
+              </view>
+            </view>
+            <!-- 下 -->
+            <view class='bottomlist'>
+              <view class="bottomcomet">
+                <view class="boomcom">
+                  <text class="cometstexre">{{ item.time }}</text>
+                </view>
+                <view class="cometime"><text class="cancel-collect-item" data-id="{{ item.id }}" catchtap="cancleCollect" data-index="{{ index }}">取消收藏</text></view>
+              </view>
+            </view>
+
+        </view>
+    </view>
+
+    <view class='nodata-texttips' wx:if="{{ nothavamore && lists.length != 0 }}">没有更多数据了</view>
+
+    <view class='common-nodatabox flex-column lists-nodata'  wx:if="{{ showNoData || lists.length == 0 }}">
+        <image src='{{ nodataImg }}'></image>
+        <text>没有找到相关数据</text>
+    </view>
+
+</view>
+
+
+<!-- 引入footer -->
+<template is="footer" data="{{ footerImgs,publishActive,showPublishBox,footerActive }}" />

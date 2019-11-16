@@ -1,0 +1,193 @@
+@import "../clients-looking-for-work/finding-name-card/findingnamecard.wxss";
+
+/* workotextone  cliokine bossbottomo bossbottomo .jiluone  .cardsixzong .cardsixfour */
+
+.cardeight {
+  margin-bottom: 60rpx;
+}
+
+.header {
+  width: 93%;
+  margin: 0 auto;
+  height: 60rpx;
+  background: white;
+  font-size: 27rpx;
+  color: #f87a14;
+  text-align: center;
+  line-height: 60rpx;
+}
+
+.cardnine {
+  margin: 0 auto;
+}
+
+.obtcardnineone {
+  background-color: #09f;
+  color: white;
+  width: 345rpx;
+  height: 70rpx;
+  outline: 0;
+  line-height: 70rpx;
+}
+
+.obtcard {
+  margin-top: 12rpx;
+}
+
+
+
+.obtcardone {
+  margin-top: 30rpx;
+}
+
+.cardeight {
+  margin-bottom: 95rpx;
+}
+
+.allone {
+  display: flex;
+  justify-content: space-between;
+  font-size: 28rpx;
+  color: white;
+  margin-top: 14.5rpx;
+}
+
+.cliok text:last-child {
+  background: red;
+  padding: 6rpx;
+  border-radius: 6rpx;
+  margin-right: 24rpx;
+}
+
+.cliok text:first-child {
+  background: #09f;
+  padding: 6rpx;
+  border-radius: 6rpx;
+  margin-right: 15rpx;
+}
+
+.cliokine text:last-child {
+  background: red;
+  padding: 6rpx;
+  border-radius: 6rpx;
+  margin-right: 24rpx;
+}
+.cliokine text:first-child {
+  background: rgb(135, 136, 136);
+  padding: 6rpx;
+  padding-left: 10rpx;
+  padding-right: 10rpx;
+  border-radius: 6rpx;
+  margin-right: 15rpx;
+}
+.jilu {
+  font-size: 28rpx;
+  color: #7d7d7d;
+  text-align: center;
+  margin-top: 19rpx;
+  padding-left: 18rpx;
+}
+
+.jiluone {
+  font-size: 28rpx;
+  color: #7d7d7d;
+  text-align: center;
+  margin-top: 19rpx;
+  padding-left: 18rpx;
+  margin-bottom: 108rpx;
+}
+
+.introcardtwo {
+  width: 93%;
+  margin: 0 auto;
+  background: white;
+  overflow: hidden;
+  font-size: 28rpx;
+  color: #575757;
+}
+
+.introcontent {
+  margin-top: 21rpx;
+  margin-left: 50rpx;
+  margin-right: 50rpx;
+  word-break: break-all;
+  font-size: 26rpx;
+}
+
+.bossbottom {
+  width: 100%;
+  background: white;
+  height: 100rpx;
+  display: flex;
+  justify-content: space-around;
+  font-size: 30rpx;
+  color: #7d7d7d;
+  position: fixed;
+  bottom: 0;
+}
+
+.bossbottom .bossbottomo {
+  width: 33.33%;
+  margin-top: 30rpx;
+
+}
+.bossbottomc{
+  display: flex;
+  margin: 0 auto;
+}
+.bossbottom .bossbottomb {
+    width: 33.33%;
+  padding-left: 0;
+  padding-right: 0;
+  margin: 0;
+  line-height: inherit;
+  margin-top: 30rpx;
+  display: flex;
+  background-color: #fff;
+  border-radius: 0;
+  font-size: 30rpx;
+  color: #7d7d7d;
+}
+
+.bossbottom button:after {
+  border: none;
+}
+
+.bossbottom .bossimg {
+  width: 30rpx;
+  height: 30rpx;
+  color: #7d7d7d;
+  padding-right: 8rpx;
+}
+
+.cardtwosonone .cardtwosononeimg .oimg image {
+  height: 88rpx;
+  width: 88rpx;
+  border-radius: 50%;
+}
+.distancev {
+  display: flex;
+}
+
+.distancec{
+  width: 70%;
+  padding-top: 14rpx;
+}
+.distancet{
+    margin-top: 15rpx;
+  font-size: 26rpx;
+  color: #909090;
+      margin-left: 4rpx;
+}
+.distanceo{
+    display: flex;
+    margin-left: 6rpx;
+}
+#distance {
+  margin: 0;
+  margin-top: 10rpx;
+  width: 24rpx;
+  height: 36rpx;
+  display: inline-block;
+}
+/* content  bossbottomo  .bossbottom .jilu*/

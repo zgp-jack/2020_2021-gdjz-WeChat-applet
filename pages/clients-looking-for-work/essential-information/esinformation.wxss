@@ -1,0 +1,560 @@
+/* informationfive informationevaluationtwo informationevaluationtwo informationenum*/
+.informationtwo{
+  width: 93%;
+  margin: 0 auto;
+  background: white;
+  margin-top: 20rpx;
+}
+
+.informationtwi{
+  width: 93%;
+  margin: 0 auto;
+  height: 110rpx;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  background-color: white;
+  border-bottom: 1px solid #F1F1F1;
+}
+.informationtwione{
+  width: 17.5%;
+  font-size: 28rpx;
+  line-height: 110rpx;
+  color: #2A2A2A;
+  margin-left: 19rpx;
+  text-align: justify;
+  position: relative;
+}
+.informationtwione::after{
+    content:'';
+    width: 100%;
+    display: inline-block;
+    overflow: hidden;
+    height: 0;
+}
+.informationtwione::before{
+    content:':';
+    /* overflow: hidden; */
+    height: 100%;
+    width: 6rpx;
+    position: absolute;
+    right: -4px;
+}
+.informationtwi .informationtwione text{
+    padding-left: 58rpx;
+}
+.informationtwi .informationtwitwo{
+  width: 72%;
+  height: 110rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.informationtwi .informationtwitwo input{
+  font-size: 28rpx;
+  height: 30rpx;
+}
+
+
+.informationthree{
+  width: 93%;
+  margin: 0 auto;
+  height: 110rpx;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  background-color: white;
+  border-bottom: 1px solid #F1F1F1;
+}
+
+
+.informationthree .informationthreeone text{
+    padding-left: 58rpx;
+}
+.informationthree .informationthreetwo{
+  width: 72%;
+  height: 110rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.informationthree  input{
+  font-size: 28rpx;
+  height: 30rpx;
+}
+
+
+.informationfour{
+  width: 93%;
+  margin: 0 auto;
+  height: 110rpx;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  background-color: white;
+   border-bottom: 1px solid #F1F1F1;
+}
+.informationfour .informationfourone{
+  width: 28%;
+  font-size: 28rpx;
+  line-height: 110rpx;
+  color: #2A2A2A;
+  margin-left: 19rpx;
+}
+.informationfour .informationfourtwo{
+  width: 80%;
+  height: 110rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.informationfour .informationfourtwo input{
+  font-size: 28rpx;
+  height: 30rpx;
+}
+
+
+.informationfive{
+  width: 93%;
+  margin: 0 auto;
+  height: 110rpx;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  background-color: white;
+  border-bottom: 1px solid #F1F1F1;
+}
+
+.informationfive .informationfivetwo{
+  width: 72%;
+  height: 110rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.informationfive  input{
+  font-size: 28rpx;
+  height: 30rpx;
+}
+
+
+.informationpeople{
+   width: 93%;
+   margin: 0 auto;
+   background-color: white;
+}
+.informationTypework{
+  /* width: 93%; */
+  margin: 0 auto;
+  /* margin-top: 19rpx; */
+
+  display: flex;
+  flex-direction: row;
+  background-color: white;
+  border-bottom: 1px solid #F1F1F1;
+}
+.informationTypework .informationTypeworkone{
+  width: 26%;
+  font-size: 28rpx;
+  line-height: 110rpx;
+  color: #2A2A2A;
+  margin-left: 19rpx;
+}
+.informationTypework .informationTypeworkone text{
+    padding-left: 58rpx;
+}
+.informationTypework .informationTypeworktwo{
+  width: 75%;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  color: rgb(119, 119, 119);
+  font-size: 28rpx;
+}
+.informationTypework .informationTypeworktwoo{
+  width: 75%;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  color: black;
+  font-size: 28rpx;
+}
+.informationTypework  input{
+  color: rgb(179, 179, 179);
+  font-size: 28rpx;
+  height: 30rpx;
+}
+
+.publish-choose-wordtype{
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background: rgba(0, 0, 0, 0.6);
+    z-index:100;
+}
+.publish-choose-contentbox{
+    position: absolute;
+    width: 80%;
+    height: 80%;
+    background: white;
+    left: 10%;
+    top: 10%;
+    padding: 0;
+}
+.publish-choose-header{
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100rpx;
+    background: #f3f3f3;
+    text-align: center;
+    line-height: 100rpx;
+    font-size: 30rpx;
+    letter-spacing: 2rpx;
+    font-weight: 600;
+    z-index: 2;
+}
+.publish-choose-footer{
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+    height: 120rpx;
+    line-height: 120rpx;
+    border-top: 1px solid #dcdcdc;
+    z-index: 2;
+    background: white;
+}
+.publish-choose-footer view{
+    flex: 1;
+    text-align: center;
+    font-size: 30rpx;
+    height:inherit;
+    line-height: inherit;
+    letter-spacing: 2rpx;
+    border-right: 1px solid #dcdcdc;
+}
+.publish-choose-footer view:nth-last-child(1){
+    border-right: 0;
+}
+.publish-choose-content-item{
+    position: relative;
+    padding: 10rpx 20rpx;
+}
+.publish-choose-body{
+    position: relative;
+    width: 100%;
+    height: 100%;
+    padding-top: 100rpx;
+    padding-bottom: 120rpx;
+    z-index: 1;
+    overflow-y: scroll;
+    background: white;
+}
+
+.publish-choose-content-header{
+    position: relative;
+    width: 100%;
+    padding: 10rpx 0;
+    font-size: 34rpx;
+    line-height: 60rpx;
+    font-weight: bold;
+}
+
+.publish-choose-content-list{
+    position: relative;
+    width: 100%;
+    padding: 20rpx 0;
+    line-height: 40rpx;
+}
+.choose-content-lish-left{
+    position: relative;
+    padding-right: 100rpx;
+    width: 100%;
+    font-size: 34rpx;
+    display: block;
+}
+.choose-content-checkbox{
+    position: absolute;
+    width: 46rpx;
+    height: 46rpx;
+    border-radius: 50%;
+    border: 1px solid #dcdcdc;
+    display: block;
+    top: 18rpx;
+    right: 0;
+    z-index: 2;
+}
+.choose-content-checkbox-active{
+    background: #0099ff;
+}
+
+
+.informationseven{
+  width: 93%;
+  margin: 0 auto;
+  height: 110rpx;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  background-color: white;
+}
+
+.informationseven .informationsevenone{
+  width: 28%;
+  font-size: 28rpx;
+  line-height: 110rpx;
+  color: #2A2A2A;
+  margin-left: 19rpx;
+}
+.informationseven .informationsevenone text{
+    padding-left: 58rpx;
+}
+.informationseven .informationseventwo{
+  width: 80%;
+  height: 110rpx;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.informationseven .informationseventwo input{
+  /* margin-top: 20rpx; */
+  font-size: 28rpx;
+  height: 110rpx;
+}
+
+.positioning{
+   display:block;
+   width:140rpx; 
+   height: 30rpx;
+   line-height: 30rpx;
+   font-size: 28rpx;
+   color: #797979;
+   margin-top: 40rpx;
+   border-left:1px solid  rgb(143, 143, 143);
+   padding-left: 20rpx;
+   margin-left: 20rpx;
+}
+
+
+.informationtelephone{
+  width: 93%;
+  margin: 0 auto;
+  background: white;
+  margin-top: 20rpx;
+  overflow: hidden;
+}
+.informationtheinput{
+  width: 93%;
+  margin: 0 auto;
+  margin-top: 19rpx;
+  height: 90rpx;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  background-color: white;
+  border-bottom: 1px solid #F1F1F1;
+}
+.informationtheinput .informationtheinputone{
+  width: 28%;
+  font-size: 28rpx;
+  line-height: 90rpx;
+  color: #2A2A2A;
+  margin-left: 19rpx;
+}
+.informationtheinput .informationtheinputone text{
+    padding-left: 58rpx;
+}
+.informationtheinput .informationtheinputtwo{
+  width: 80%;
+  height: 90rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.informationtheinput .informationtheinputtwo input{
+  font-size: 28rpx;
+  height: 30rpx;
+}
+
+
+.informationverificationcode{
+  width: 93%;
+  margin: 0 auto;
+  margin-top: 10rpx;
+  height: 90rpx;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  background-color: white;
+}
+.informationverificationcode .informationverificationcodeone{
+  width: 17.5%;
+  font-size: 28rpx;
+  line-height: 90rpx;
+  color: #2A2A2A;
+  margin-left: 19rpx;
+  text-align: justify;
+  position: relative;
+}
+
+.informationverificationcode .informationverificationcodeone::after{
+    content:'';
+    width: 100%;
+    display: inline-block;
+    overflow: hidden;
+    height: 0;
+}
+
+.informationverificationcode .informationverificationcodeone::before{
+    content:':';
+    /* overflow: hidden; */
+    height: 100%;
+    width: 6rpx;
+    position: absolute;
+    right: -4px;
+}
+.informationverificationcode .informationverificationcodeone .verificationcode{
+    margin-left: 14rpx;
+    margin-right: 14rpx;
+}
+
+.informationverificationcode .informationverificationcodetwo{
+  width: 72%;
+  height: 90rpx;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.informationverificationcodetwo text{
+  width: 140rpx;
+  font-size: 24rpx;
+  text-align: center;
+  background: rgb(235, 234, 234);
+  height: 32rpx;
+  line-height:32rpx;
+  margin-top: 28rpx;
+}
+.informationverificationcode  input{
+  margin-top: 20rpx;
+  font-size: 28rpx;
+  height: 30rpx;
+}
+
+.informationevaluation{
+  width: 93%;
+  margin: 0 auto;
+  height: 255rpx;
+  background: white;
+  margin-top: 20rpx;
+  overflow: hidden;
+    position: relative;
+}
+.informationevaluationone{
+  font-size: 28rpx;
+  width: 89%;
+  margin: 0 auto;
+  margin-top: 35rpx;
+  
+}
+
+.informationevaluationtwo{
+  width: 89%;
+  margin: 0 auto;
+  display: block;
+  background: white; 
+  font-size: 28rpx;
+  height: 140rpx;
+
+}
+
+.informationevaluation .informationenum{
+  position: absolute;
+  right: 5.2%;
+  bottom: 8rpx;
+  font-size: 25rpx;
+  color: #5e5d5d;
+}
+
+.informationsave{
+  width: 521rpx;
+  background: #108EEF;
+  color: white;
+  font-size: 38rpx;
+  text-align: center;
+  line-height:  97rpx;
+  margin-top: 20rpx;
+  margin-bottom: 42rpx;
+}
+
+
+.yupao-common-enterbox{
+  z-index: 999
+}
+
+.yupao-common-enter{
+  border-radius: 0;
+}
+.yupao-enter-footer text{
+  border: 1px solid #0099FF;
+  color: white;
+  font-size: 32rpx;
+}
+.yupao-enter-footer text:first-child{
+  border: 1px solid #0099FF;
+  color: #0099FF;
+}
+.yupao-enter-footer text:last-child{
+  border: 1px solid #0099FF;
+  color: white;
+  background: #0099FF;
+}
+.yupao-enter-title{
+  font-size: 40rpx;
+  font-weight: bold;
+}
+.yupao-enter-tips{
+  margin-top: 30rpx;
+  font-weight: bold;
+  font-size: 30rpx;
+  color: #000;
+}
+.yupao-common-enter {
+  text-align: center;
+}
+.yupao-common-enter image{
+  width: 350rpx;
+  height: 220rpx;
+}
+.slang{
+  width: 265rpx;
+  height: 33rpx;
+  border: 1px solid #0099FF;
+  margin: 0 auto;
+  border-radius: 20rpx;
+  margin-top: 24rpx;
+  margin-bottom: 24rpx;
+}
+.solang{
+  background: #0099FF;
+  border-radius: 20rpx;
+  height: 33rpx;
+}
+.yupao-enter-perce{
+  display: inline-block;
+  margin-top: 24rpx;
+}
+.experiencethree .informationenum{
+  position: absolute;
+  right: 12rpx;
+  bottom: 4rpx;
+  font-size: 25rpx;
+  color: #5e5d5d;
+}
+/* informationtelephone */

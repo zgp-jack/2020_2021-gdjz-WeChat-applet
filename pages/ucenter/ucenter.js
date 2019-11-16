@@ -3,7 +3,7 @@ let footerjs = require("../../utils/footer.js");
 Page({
 
     /**
-     * 页面的初始数据
+     * 页面的初始数据 valiUserUrl
      */
     data: {
         footerActive: "member",
@@ -74,6 +74,7 @@ Page({
         })
     },
   valiUserUrl:function(e){
+    console.log(this.data.userInfo)
     app.valiUserUrl(e,this.data.userInfo)
   },
   gotoUserauth:function(){
@@ -121,10 +122,14 @@ Page({
     /**
      * 生命周期函数--监听页面显示
      */
-    onShow: function () {
-      this.initUserInfo();
+    async onShow() {
+      await this.initUserInfo();
     },
-
+    releaselive(){
+      wx.navigateTo({
+        url: '/pages/clients-looking-for-work/finding-name-card/findingnamecard',
+      })
+    },
     /**
      * 生命周期函数--监听页面隐藏
      */

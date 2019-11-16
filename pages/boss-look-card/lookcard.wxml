@@ -1,0 +1,284 @@
+<view>
+  <view class="header">
+    注:老板对找活者满意，可以直接与他联系以及点赞或转发
+  </view>
+
+
+
+  <view class="cardtwo">
+    <view class="cardonetwof">
+      <view class="cardtwosonone">
+        <view class="cardtwosononeimg">
+          <view class="oimg">
+            <image src="{{headerimg}}" binderror="errImg"></image>
+          </view>
+          <view class="oimgone">
+            <text class="otext">{{name}}</text>
+            <view class="otextone">
+              <text>{{sex}}</text>
+              <text class="ochange">{{age}}</text>
+              <text class="ochange">{{nation}}</text>
+            </view>
+          </view>
+        </view>
+      </view>
+      <view class="lineone">
+        <view class="linezo">
+          <view class="cardotext">
+            <view class="oworkone">
+              <text class="oworkotext">手机</text>
+            </view>
+            <view class="all allone">
+              <text class="workotextone">{{telephone}}</text>
+              <view class="cliok" wx:if="{{onoff || is_read ==0&&is_end !=2}}">
+                <text bindtap="telephorf" data-telephone="{{telephone}}">点击拨打</text>
+                <text bindtap="userTapComplain">举报</text>
+              </view>
+              <view class="cliok" wx:if="{{!onoff && is_read ==1&&is_end !=2}}">
+                <text bindtap="telephorft" data-telephone="{{telephone}}">查看完整电话</text>
+              </view>
+              <view class="cliokine" wx:if="{{is_end ==2}}">
+                <text>已找到</text>
+                <text bindtap="userTapComplain" wx:if="{{is_read ==0&&is_end ==2}}">举报</text>
+              </view>
+            </view>
+          </view>
+          <view class="cardotext" wx:if="{{cityself}}">
+            <view class="oworkone">
+              <text class="oworkotext">我的家乡</text>
+            </view>
+            <view class="all">
+              <text class="workotextone">{{cityself}}</text>
+            </view>
+          </view>
+          <view class="cardotext" wx:if="{{occupations}}">
+            <view class="oworkone">
+              <text class="oworkotext">工种</text>
+            </view>
+            <view class="all" wx:if="{{occupations != '未填写'}}">
+              <view class="oworkotextonetu" wx:for="{{occupations}}" wx:key="{{index}}">
+                {{item}}
+              </view>
+            </view>
+            <view class="all" wx:if="{{occupations == '未填写'}}">
+              <text class="workotextone">{{occupations}}</text>
+            </view>
+          </view>
+          <view class="cardotext" wx:if="{{workingyears}}">
+            <view class="oworkone">
+              <text class="oworkotext">工龄</text>
+            </view>
+            <view class="all">
+              <text class="workotextone">{{workingyears}}</text>
+            </view>
+          </view>
+          <view class="cardotext" wx:if="{{procity}}">
+            <view class="oworkone">
+              <text class="oworkotext">熟练度</text>
+            </view>
+            <view class="all">
+              <text class="workotextone">{{procity}}</text>
+            </view>
+          </view>
+          <view class="cardotext" wx:if="{{staffcomposition}}">
+            <view class="oworkone">
+              <text class="oworkotext">人员构成</text>
+            </view>
+            <view class="all">
+              <text class="workotextone">{{staffcomposition}}</text>
+            </view>
+          </view>
+          <view class="cardotext" wx:if="{{personnum && personnum !=1}}">
+            <view class="oworkone">
+              <text class="oworkotext">队伍人数</text>
+            </view>
+            <view class="all">
+              <text class="workotextone">{{personnum}}</text>
+            </view>
+          </view>
+          <view class="cardotext" wx:if="{{city}}">
+            <view class="oworkone">
+              <text class="oworkotext">所在地区</text>
+            </view>
+            <view class="all distancev" bindtap="showThisMapInfo">
+              <text class="workotextone distancec">{{city}}</text>
+              <view class="distanceo" wx:if="{{location}}">
+                <view>
+                  <image src="../../images/biaoqian.png" id="distance"></image>
+                </view>
+                <view class="distancet">{{distance}}</view>
+              </view>
+            </view>
+          </view>
+
+          <view class="cardotext" wx:if="{{tags}}">
+            <view class="oworkone">
+              <text class="oworkotext">标签</text>
+            </view>
+            <view class="all" wx:if="{{tags != '未填写'}}">
+              <view class="tworkotextonetu" wx:for="{{tags}}" wx:key="{{index}}">
+                {{item.label_name}}
+              </view>
+            </view>
+            <view class="all" wx:if="{{tags == '未填写'}}">
+              <text class="workotextone">{{tags}}</text>
+            </view>
+          </view>
+        </view>
+
+      </view>
+      <view class="cardotextbottom"></view>
+    </view>
+  </view>
+
+
+  <view class="cardthree">
+    <view class="cardthreemobile">
+      <image src="../../images/newresume-description.png"></image>
+      自我介绍
+    </view>
+  </view>
+  <view class="introcardtwo">
+
+    <view class="introcontent">{{introduce}}</view>
+
+
+    <view class="cardotextbottom"></view>
+  </view>
+
+
+  <view class="cardfive">
+    <view class="cardfivemobile">
+      <image src="../../images/newresume-experience.png"></image>
+      项目经验
+    </view>
+  </view>
+  <view class="cardsix" wx:if="{{projectlength!= 0}}">
+    <view class="cardsixzong" wx:for="{{projectone}}" wx:key="{{index}}">
+      <view>
+        <image src="../../images/newresume-experience-item.png" class="cardsixone"></image>
+      </view>
+      <view class="cardsixall">
+        <view class="cardsixtwo">
+          <text>{{item.project_name}}</text>
+        </view>
+        <view class="cardsixthreeborder">
+          <view class="cardsixthree">
+            <text>{{item.start_time}}--{{item.completion_time}}</text>
+            <text>{{item.province_name}}省{{item.city_name}}市</text>
+          </view>
+          <view class="cardsixfour">
+            <text>{{item.detail}}
+        </text>
+          </view>
+          <view class="cardsixfive">
+            <image wx:for="{{item.image}}" wx:key="{{index}}" src="{{item}}"></image>
+
+          </view>
+        </view>
+
+      </view>
+    </view>
+    <view class="cardsixsixall" wx:if="{{projectlength > 1}}">
+      <button class="cardsixsix" bindtap="moreproject">
+        <view>
+          更多项目经验
+          <image src="../../images/downward.png" class="down"></image>
+        </view>
+      </button>
+    </view>
+    <view class="cardsixsixallvoto">
+    </view>
+  </view>
+  <view wx:if="{{projectlength == 0}}" class="jilu">
+    暂无记录
+  </view>
+
+  <view class="cardseven">
+    <view class="cardsevenmobile">
+      <image src="../../images/newresume-skill.png"></image>
+      职业技能
+    </view>
+  </view>
+  <view class="cardeight" wx:if="{{skilllength!= 0}}">
+    <view class="cardeightzong" wx:for="{{skillbooksone}}" wx:key="{{index}}">
+      <view>
+        <image src="../../images/newresume-experience-item.png" class="cardeightone"></image>
+      </view>
+      <view class="cardeightall">
+        <view class="cardeighttwo">
+          <text>{{item.name}}</text>
+          <text>{{item.certificate_time}}</text>
+        </view>
+        <view class="cardeightfive">
+          <image wx:for="{{item.image}}" wx:key="{{index}}" src="{{item}}"></image>
+
+        </view>
+
+      </view>
+    </view>
+    <view class="cardeightsixall" wx:if="{{skilllength > 1}}">
+      <button class="cardeightsix" bindtap="moreskill">
+        <view>
+          更多技能证书
+          <image src="../../images/downward.png" class="down"></image>
+        </view>
+      </button>
+    </view>
+    <view class="cardsixsixallvoto">
+    </view>
+  </view>
+  <view wx:if="{{skilllength == 0}}" class="jiluone">
+    暂无记录
+  </view>
+
+  <view class="bossbottom" wx:if="{{status == 0}}">
+    <button class="bossbottomb" bindtap="praise">
+      <view class="bossbottomc">
+        <view>
+          <image class="bossimg" src="{{praise == 0?zan:zanone}}"></image>
+        </view>
+        <view>
+          赞
+        </view>
+      </view>
+    </button>
+
+    <button class="bossbottomb" open-type='share'>
+      <view class="bossbottomc">
+        <view>
+          <image class="bossimg" src="{{fenxiang}}"></image>
+        </view>
+        <view class="bosstext">
+          分享
+        </view>
+      </view>
+    </button>
+    <button class="bossbottomb" bindtap="collect">
+      <view class="bossbottomc">
+        <view>
+          <image class="bossimg" src="{{collect ==0?soucang:soucangone}}"></image>
+        </view>
+        <view class="bosstext">
+          收藏
+        </view>
+      </view>
+    </button>
+  </view>
+
+  <view class='yupao-common-enterbox flex-row' wx:if="{{ showComplain }}">
+    <view class='yupao-common-enter'>
+      <text class='yupao-enter-title'>投诉信息</text>
+      <text class='yupao-enter-tips'>请输入投诉内容</text>
+      <view class='yupao-enter-body'>
+        <textarea class='yupao-enter-wrap yupao-enter-textarea' placeholder='请输入投诉内容' bindinput='userEnterComplain' maxlength='200' value='{{ complainInfo }}'></textarea>
+      </view>
+      <view class='yupao-enter-footer clearfix'>
+        <text bindtap='userCancleComplain'>取消</text>
+        <text bindtap='userComplaintAction'>确定</text>
+      </view>
+    </view>
+  </view>
+
+</view>
+<!-- oworkotextonetu  cardsixone-- selectTap projectone projectlength>

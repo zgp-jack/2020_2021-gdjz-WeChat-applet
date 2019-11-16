@@ -1,0 +1,174 @@
+@import "../index/index.wxss";
+/* listsboxagetwo listsboxlableone listsboxself listsboxlocalone listsboxagetwo oimg oimg
+.listsboxlocal image listsboxlocalone listsboxself listsboxadree listsboxlocalone .listsboxlocal image   .listsboxlocalone*/
+.listsboxdetail {
+  width: 100%;
+  background: white;
+  overflow: hidden;
+  margin-top: 12rpx;
+  position: relative;
+}
+
+
+.finded{
+  width: 90rpx;
+  height: 40rpx;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+.oimg {
+  width: 92rpx;
+  height: 92rpx;
+  border-radius: 50%;
+  margin-left: 10rpx;
+
+}
+
+.listsboxdetailo {
+  width: 94%;
+  height: 92rpx;
+  margin: 0 auto;
+  margin-top: 30rpx;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.listsboxintro {
+  width: 80%;
+  height: 92rpx;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.listsboxage{
+  width: 84%;
+}
+.listsboxageone{
+  font-size: 26rpx;
+}
+
+.listsboxageone:nth-child(2){
+  font-size: 26rpx;
+  color: #FB8732;
+}
+.listsboxageone image{
+  width: 74rpx;
+  height: 24rpx;
+}
+.listsboxageone text{
+  margin-left: 12rpx;
+}
+.listsboxageone .listsboxname{
+  font-size: 28rpx;
+  margin-left: 0rpx;
+}
+.listsboxageone image{
+    margin-left: 12rpx;
+}
+.listsboxshow{
+  font-size: 26rpx;
+  color: #353636;
+  margin-top: 34rpx;
+}
+.listsboxagetwo{
+  margin-top: 12rpx;
+  font-size: 26rpx;
+}
+.listsboxagetwo text{
+  font-size: 26rpx;
+  margin-left: 18rpx;
+}
+#listsboxnation{
+  margin-left: 0rpx;
+}
+.listsboxagetwo .listsboxnum{
+  margin-left: 0rpx;
+  color: red;
+}
+.listsboxlable{
+  width: 94%;
+  margin: 0 auto;
+  font-size: 26rpx;
+  color: #353636;
+  margin-top: 4rpx;
+  margin-bottom: 17rpx;
+}
+.listsboxlable view{
+  background: rgb(238, 238, 238);
+  padding: 3rpx;
+  font-size: 24rpx;
+  color: #9A9A9A;
+  display: inline-block;
+  margin-left: 22rpx;
+}
+.listsboxlable .listsboxlableone{
+    margin-left: 10rpx;
+    margin-top: 10rpx;
+}
+.listsboxself{
+   width: 91%;
+   margin: 0 auto;
+   font-size: 28rpx;
+   color: #828586;
+   border-bottom: 0.5px dashed #9A9A9A;
+   padding-bottom: 14rpx;
+    display:block;           /*  内联对象需加  */
+    word-break:keep-all;    /* 不换行 */
+    white-space:nowrap;     /* 不换行 */
+    overflow:hidden;       /* 内容超出宽度时隐藏超出部分的内容 */
+    text-overflow:ellipsis;
+}
+.listsboxlocal{
+   width: 91%;
+   margin: 0 auto;
+   margin-top: 17rpx;
+   display: flex;
+   justify-content: space-between;
+   margin-bottom: 25rpx;
+}
+.listsboxlocal image{
+
+  padding: 0;
+  width: 24rpx;
+  height: 36rpx;
+  display: inline-block;
+}
+.listsboxlocal .listsboxlocalone{
+  font-size: 28rpx;
+  color: #969999;
+}
+.listsboxlocalone{
+  display: flex;
+  width: 50%;
+
+}
+.listsboxlocalone  .listsboxadree{
+   display:block;           /*  内联对象需加  */    /* 不换行 */
+    white-space:nowrap;     /* 不换行 */
+    overflow:hidden;       /* 内容超出宽度时隐藏超出部分的内容 */
+    text-overflow:ellipsis;  
+}
+.listsboxlocaltwo{
+  color: #828586;
+  font-size: 28rpx;
+}
+.listsboxlocal .listsboxlocalone .listsboxadree{
+  margin-left: 10rpx;
+}
+.listsboxlocal .listsboxlocalone .listsboxadreeq{
+  margin-left: 10rpx;
+}
+.listsboxlocaltwo .listsboxtime{
+  margin-right: 10rpx;
+}
+.listsboxagetwot text{
+  font-size: 26rpx;
+  color: #0099FF;
+  padding: 4rpx;
+  border: 1px solid #0099FF;
+  border-radius: 6rpx;
+  margin-right: 18rpx;
+}

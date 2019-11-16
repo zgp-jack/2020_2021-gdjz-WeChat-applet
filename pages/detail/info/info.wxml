@@ -1,3 +1,4 @@
+<!-- locatext -->
 <view style='height:100%;{{ showComplain ? "overflow:hidden;" : "" }}'>
 
   <view class="yupao-common-container" style="{{ userInfo.userId == info.user_id ? 'padding-bottom:20rpx':'padding-bottom:130rpx' }}">
@@ -190,4 +191,5 @@
 
 <!-- <button class='fixed-get-integral-btn fixed-get-integral-btn-info'  open-type="share" >
         <image src='http://cdn.yupao.com/miniprogram/images/list-share-btn.png?t=111'></image>
+        分享
 </button> -->

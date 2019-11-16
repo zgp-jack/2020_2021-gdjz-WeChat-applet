@@ -1,4 +1,4 @@
-// pages/ucard/ucard.js
+// pages/ucard/ucard.js show_complaint userCancleComplain userComplaintAction
 const app = getApp();
 Page({
 
@@ -220,15 +220,13 @@ Page({
             return  false;
         }
         app.appRequestAction({
-            url:"publish/complain/",
+            url:"resumes/complain/",
             way:"POST",
             params:{
                 userId:userInfo.userId,
                 token:userInfo.token,
                 tokenTime:userInfo.tokenTime,
-                infoId: infoId,
-                type:"resume",
-                content: info
+                content: _this.data.complainInfo
             },
             title:"正在提交投诉",
             failTitle:"网络错误，投诉失败！",

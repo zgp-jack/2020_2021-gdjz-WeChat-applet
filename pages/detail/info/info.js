@@ -1,9 +1,9 @@
-// pages/info/info.js
+// pages/info/info.js share share showThisMapInfo showThisMapInfo
 const app = getApp();
 Page({
 
     /**
-     * 页面的初始数据
+     * 页面的初始数据 getInfoTel
      */
     data: {
         infoId:"",
@@ -54,6 +54,7 @@ Page({
   showThisMapInfo:function(){
     let loc = this.data.info.location;
     let locArr = loc.split(",");
+    console.log(this.data.info.map_address_name)
     wx.openLocation({
       latitude: parseFloat(locArr[1]),
       longitude: parseFloat(locArr[0]),
@@ -194,6 +195,7 @@ Page({
             way: "POST",
             params: userInfo,
             success: function (res) {  
+              console.log(res.data)
                 let mydata = res.data;
               _this.setData({ info: mydata.result })
                 if (mydata.errcode != "fail") {

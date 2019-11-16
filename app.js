@@ -1,13 +1,19 @@
 App({
   onLaunch: function(e) {
     // try{
-    //   if (e.path) this.initUserInfo(e);
+    //   if (e.path) this.initUserInfo(e); valiUserUrl
     // }
-    // catch(err){
-    //   console.log(err);
+    // catch(err){bindGetUserInfo
+    //   console.log(err); gotoUserauth bindGetUserInfo 
     // }
   },
   globalData: {
+    allexpress: true,
+    allskill: true,
+    skip: false,
+    perfection:false,
+    showperfection:false,
+    showdetail:true,
     unitid: "adunit-80f40e8b4f60c3f6",
     requestToken: "jizhao",
     unitid: "adunit-80f40e8b4f60c3f6",
@@ -20,8 +26,8 @@ App({
     commonShareImg: "http://cdn.yupao.com/miniprogram/images/minishare.png?t=" + new Date().getTime(),
     commonDownloadApp: "http://cdn.yupao.com/miniprogram/images/download.png?t=" + new Date().getTime(),
     commonJixieAd: "http://cdn.yupao.com/miniprogram/images/list-ad-newjixie.png?t=" + new Date().getTime(),
-    //apiRequestUrl:"http://miniapi.zhaogong.vrtbbs.com/",
-    apiRequestUrl: "https://newyupaomini.54xiaoshuo.com/",
+    apiRequestUrl:"http://miniapi.zhaogong.vrtbbs.com/",
+    //apiRequestUrl: "https://newyupaomini.54xiaoshuo.com/",
     //apiRequestUrl: "http://miniapi.qsyupao.com/",
     //apiRequestUrl:"http://mini.zhaogongdi.com/",
     apiUploadImg: "https://newyupaomini.54xiaoshuo.com/index/upload/",
@@ -137,21 +143,27 @@ App({
       }
     }
 
+
     let _this = this;
+
+    let url = _options.hasOwnProperty("url") ? _this.globalData.apiRequestUrl + _options.url : _this.globalData.apiRequestUrl
+
+
+
     wx.request({
       method: _options.hasOwnProperty("way") ? _options.way : 'GET',
-      url: _options.hasOwnProperty("url") ? (_this.globalData.apiRequestUrl + _options.url) : _this.globalData.apiRequestUrl,
+      url: url,
       data: _options.hasOwnProperty("params") ? _options.params : {},
       header: {
         'content-type': 'application/x-www-form-urlencoded'
       },
-      success(res) {
+      success:function(res) {
         if ((_options.hasOwnProperty("hideLoading") && !_options.hideLoading) || (!_options.hasOwnProperty("hideLoading"))) {
           wx.hideLoading();
         }
         _options.hasOwnProperty("success") ? _options.success(res) : "";
       },
-      fail(err) {
+      fail:function(err) {
         if ((_options.hasOwnProperty("hideLoading") && !_options.hideLoading) || (!_options.hasOwnProperty("hideLoading"))) {
           wx.hideLoading();
         }
@@ -184,6 +196,7 @@ App({
       // 登录 获取在我们这里user_id
       wx.login({
         success: function(res) {
+          console.log(res)
           // 发送 res.code 到后台换取 openId, sessionKey, unionId
           if (res.code) {
             //发起网络请求
@@ -194,6 +207,7 @@ App({
                 wechat_token: that.globalData.requestToken
               },
               success: function(resdata) {
+                console.log(resdata)
                 //获取到session_key 解密 
                 var session_key = resdata.data.session_key
                 callback(session_key)
@@ -307,7 +321,7 @@ App({
           filePath: res.tempFilePaths[0],
           name: 'file',
           success(res) {
-
+            console.log(res)
             let mydata = JSON.parse(res.data);
 
             if (mydata.errcode == "ok") {
@@ -611,6 +625,8 @@ App({
   },
   valiUserUrl: function(e, user) {
     let url = e.currentTarget.dataset.url;
+    console.log(url)
+    console.log(user)
     wx.navigateTo({
       url: user ? url : '/pages/userauth/userauth'
     })
@@ -636,6 +652,7 @@ App({
                   success: function(data) {
                     console.log(data);
                     if (data.authSetting["scope.userLocation"] == true) {
+
                       wx.showToast({
                         title: '授权成功',
                         icon: 'success',

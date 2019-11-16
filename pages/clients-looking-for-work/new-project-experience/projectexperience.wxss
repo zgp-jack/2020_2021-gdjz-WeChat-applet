@@ -1,0 +1,251 @@
+/* experiencefour modalDlg*/
+.experienceheader{
+  width: 93%;
+  margin: 0 auto;
+  margin-top: 19rpx;
+  height: 110rpx;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  background-color: white;
+}
+.experienceheader .experienceheaderone{
+  width: 38%;
+  font-size: 30rpx;
+  line-height: 110rpx;
+  color: #2A2A2A;
+  margin-left: 19rpx;
+}
+.experienceheader .experienceheadertwo{
+  width: 80%;
+  height: 110rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.experienceheader .experienceheadertwo input{
+  font-size: 30rpx;
+  height: 30rpx;
+}
+
+
+.experiencethree{
+  width: 93%;
+  margin: 0 auto;
+  margin-top: 19rpx;
+  background-color: white;
+  padding-bottom:18rpx;
+  position: relative;
+}
+
+.experiencethree .experiencethreeone{
+  width: 38%;
+  font-size: 30rpx;
+  line-height: 60rpx;
+  color: #2A2A2A;
+  margin-left: 19rpx;
+}
+
+.experiencethree .experiencethreetwo{
+  margin-bottom: 22rpx;
+
+  font-size: 30rpx;
+}
+
+.experiencethree .experiencethreetwo textarea{
+  width: 100%; 
+  font-size: 30rpx;
+  padding-left: 18rpx;
+  padding-right: 18rpx;
+  background: white;
+}
+
+.experiencefour{
+  width: 93%;
+  margin: 0 auto;
+  margin-top: 19rpx;
+  margin-bottom: 110rpx;
+}
+.experiencefour .experiencefourone{
+  width: 181rpx;
+  height: 181rpx;
+  position: relative;
+}
+.img_item:nth-child(1){
+   width: 33.33%;  
+   display: inline-block;
+   text-align: left;
+}
+.img_item:nth-child(2){
+   width: 33.33%; 
+   display: inline-block;
+   text-align: center;
+}
+.img_item:nth-child(3){
+   width: 33.33%; 
+   display: inline-block;
+   text-align: right;
+}
+.img_item:nth-child(4){
+   width: 33.33%; 
+   display: inline-block;
+   text-align: left;
+}
+.img_item:nth-child(5){
+   width: 33%; 
+   display: inline-block;
+   text-align: center;
+}
+.img_item:nth-child(6){
+   width: 33%; 
+   display: inline-block;
+   text-align: right;
+}
+
+
+
+.experiencebottom{
+    margin-top: 100rpx;
+    position: fixed;
+    bottom: 0;
+    background-color: white;
+    height: 100rpx;
+    width: 100%;
+}
+.experiencebottom .experiencebottomone{
+  width: 325rpx;
+  height: 64rpx;
+  background:  white;
+  border: 1px solid #0099FF;
+  position: absolute;
+  left: 27rpx;
+  top: 18rpx;
+  color:#0099FF;
+  line-height:  64rpx;
+  text-align: center;
+  font-size: 29rpx;
+}
+
+.experiencebottom .experiencebottomotwo{
+  width: 325rpx;
+  height: 64rpx;
+  background:#0099FF;
+  position: absolute;
+  right: 27rpx;
+  top: 18rpx;
+  color: white;
+  line-height:  64rpx;
+  text-align: center;
+  font-size: 29rpx;
+}
+.delete{
+   width: 30rpx;
+   height: 30rpx;
+   background: rgb(139, 137, 137);
+   position: absolute;
+   border-radius: 50%;
+   right: 0;
+   top: 0;
+   text-align: center;
+   line-height:  30rpx;
+   color: white;
+   font-size: 20rpx;
+}
+
+.mask{
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background: #000;
+    z-index: 9000;
+    opacity: 0.5;
+}
+  
+/* 弹出层 */
+.modalDlg{
+    width: 70%;
+    position: fixed;
+    top: 340rpx;
+    left: 0;
+    right: 0;
+    z-index: 9999;
+    margin: 0 auto;
+    background-color: #fff;
+    border-radius:5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 1px solid rgb(143, 142, 142);
+}
+.modalDlg .modalDlgone{
+  width: 40%;
+  margin: 6rpx auto;
+  display: flex;
+  justify-content: space-between;
+  font-size: 32rpx;
+}
+
+.text{
+    width: 100%;
+    margin:0 auto;
+    height: 290rpx;
+    font-size: 32rpx;
+    position: relative;
+}
+
+.text .otext{
+  width: 85rpx;
+  font-size: 42rpx;
+  font-weight: bold;
+  margin: 0 auto;
+}
+.text .textdetail{
+  font-size: 32rpx;
+  width: 83%;
+  margin: 0 auto;
+  margin-top: 28rpx;
+  margin-bottom: 40rpx;
+}
+.buttontext {
+   width: 100%;
+   margin:0 auto;
+   display: flex;
+   justify-content: space-between;
+   position: absolute;
+   bottom: 0;
+}
+.buttontext  view{
+   width: 50%;
+   height: 80rpx;
+   background:#0099FF;
+   font-size: 32rpx;
+   text-align: center;
+   line-height: 80rpx;
+}
+
+.buttontext  view:first-child{
+   border: 1px solid rgb(143, 142, 142);
+   color: black;
+   background: white;
+   border-left: 0rpx;
+   border-bottom: 0rpx;
+}
+
+.buttontext  view:last-child{
+   color: white;
+}
+
+.experiencethree .informationenum{
+  position: absolute;
+  right: 18rpx;
+  bottom: 10rpx;
+  font-size: 25rpx;
+  color: #5e5d5d;
+}
+.experiencefourper{
+  width: 33%;
+  height: 181rpx;
+}
+/* experiencefourone experiencethree experiencethreetwo img_item*/

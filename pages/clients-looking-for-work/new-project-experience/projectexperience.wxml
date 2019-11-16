@@ -1,0 +1,85 @@
+<view bindtap="obtn">
+  <view class="experienceheader">
+    <text class="experienceheaderone">项目名称：</text>
+    <view class="experienceheadertwo">
+      <input type="text" placeholder="请输入项目名称" bindinput="projectname" value="{{projectname}}"></input>
+    </view>
+  </view>
+  <view class="experienceheader">
+    <text class="experienceheaderone">开始时间：</text>
+    <view class="experienceheadertwo">
+      <picker mode="date" value="{{startdate}}" bindchange="bindstartDate"  
+      start="1900-01-01" end="{{nowDate}}" >
+        <input name="addtime" value="{{startdate}}" disabled="true" placeholder="请选择开始时间"></input>
+      </picker>
+    </view>
+  </view>
+  <view class="experienceheader">
+    <text class="experienceheaderone">完工时间：</text>
+    <view class="experienceheadertwo">
+      <picker mode="date" value="{{date}}" bindchange="bindDateChange"
+      start="1900-01-01">
+        <input name="addtime" value="{{date}}" disabled="true" placeholder="请选择完工时间"></input>
+      </picker>
+    </view>
+  </view>
+
+  <!-- <view class="experienceheader">
+    <text class="experienceheaderone">所在地区：</text>
+    <view class="experienceheadertwo">
+      <picker bindchange="changeRegin" mode="region" value="{{region}}">
+        <input name="addregion" value="{{region}}" placeholder="请选择所在地区"></input>
+      </picker>
+    </view>
+  </view> -->
+  <view class="experienceheader">
+    <text class="experienceheaderone">所在地区：</text>
+    <!-- bindchange="initAllProvice" -->
+    <view class="experienceheadertwo">
+      <picker bindchange="bindMultiPickerChange" bindcolumnchange="bindMultiPickerColumnChange" mode="multiSelector" value="{{multiIndex}}" range="{{multiArray}}">
+        <input disabled name="addregion" value="{{multiIndexvalue}}" placeholder="请选择所在地区"></input>
+      </picker>
+    </view>
+  </view>
+  <view class="experiencethree">
+    <view class="experiencethreeone">项目详情：</view>
+    <view class="experiencethreetwo">
+      <textarea bindinput="bindTextAreaBlur" value="{{detail}}" maxlength="500" placeholder="主要描述工作中的项目情况..." />
+    </view>
+   <text class="informationenum">{{detailength}}/500</text>
+  </view>
+  <view class="experiencefour">
+    <view wx:for="{{imgArrs}}"  class='img_item' wx:key="{{item}}">
+      <image class="experiencefourone" src='{{item}}' mode="scaleToFill" bindtap='previewImage' data-item="{{item}}">
+        <view class="delete" catchtap="delete" data-index="{{index}}">X</view>
+      </image>
+    </view>
+    <view class='img_item' bindtap='chooseImage' wx:if="{{imgArrslength}}">
+      <image  class='experiencefourone' src="../../../images/addimage.png" >
+      </image>
+    </view>
+  </view>
+  <view class="modalDlg" wx:if="{{showModal}}">
+    <view class="modalDlgone">
+    </view>
+    <view class="text">
+      <view class="otext">
+        提示
+      </view>
+      <view class="textdetail">
+        项目经验删除后，将无法恢复
+      </view>
+      <view class="buttontext">
+        <view>取消</view>
+        <view catchtap="vertify">确定</view>
+      </view>
+    </view>
+  </view>
+  <view class="experiencebottom">
+    <button wx:if="{{!obtnbut}}" class="experiencebottomone" catchtap="deleteexper">删除项目经验</button>
+    <button wx:if="{{obtnbut&&project_show}}" class="experiencebottomone"  bindtap="preservechixu">保存 继续添加</button>
+    <button wx:if="{{obtnbut&&!project_show}}" class="experiencebottomone"  bindtap="preservechixutui">取消</button>
+    <button class="experiencebottomotwo" wx:if="{{obtnbut}}" bindtap="preserve">确认保存</button>
+    <button class="experiencebottomotwo" wx:if="{{!obtnbut}}" bindtap="preserveone">确认保存</button>
+  </view>
+</view>

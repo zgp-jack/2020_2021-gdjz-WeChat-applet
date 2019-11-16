@@ -1,7 +1,8 @@
-// pages/publish/card/card.js
+// 
 const app = getApp();
 let vali = require("../../../utils/v.js");
 let areas = require("../../../utils/area.js");
+
 Page({
 
   /**
@@ -77,7 +78,7 @@ Page({
     searchInputVal: "",
     strlen:0
   },
- 
+
   userRegMap: function (e) {
     if (e.type == 'end' && (e.causedBy == 'scale' || e.causedBy == 'drag')) {
       var that = this;
@@ -248,6 +249,7 @@ Page({
       success: function (res) {
         let mydata = res.data;
         if (mydata.errcode == "ok") {
+          console.log(mydata)
           _this.setData({
             infoId: infoId,
             userPhone: mydata.model.user_mobile || mydata.memberInfo.tel,

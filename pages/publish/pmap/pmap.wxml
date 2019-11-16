@@ -36,7 +36,9 @@
 <view class='index-pullareabox {{ showArea ? "index-pullareabox-active":"" }}'>
     <view class='index-area-header'>
       <view class="searchinputbox">
-        <input class="area-input" placeholder="请输入城市名" bindinput="searchInput" bindfocus="showInputList" value="{{ searchInputVal }}" focus="{{ areaInputFocus }}"></input>
+        <input class="area-input" placeholder="请输入城市名" bindinput="searchInput" bindfocus="showInputList" value="{{ searchInputVal }}" focus="{{ areaInputFocus }}"
+        tabindex="99999999999"
+        ></input>
         <image src="{{ clearinput }}" bindtap="clearInputAction"></image>
       </view>
       <text class='index-close-area' bindtap='closeArea'>取消</text>

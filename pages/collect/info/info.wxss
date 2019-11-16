@@ -1,0 +1,221 @@
+@import "../../course/course.wxss";
+@import "../../index/index.wxss";
+.published-title{
+    position: relative;
+    width: 100%;
+    padding:20rpx 27rpx;
+    background: white;
+    font-size: 28rpx;
+    color: #000;
+}
+.published-content{
+    position: relative;
+    width: 100%;
+    padding:0 0 20rpx ;
+}
+
+.published-list-item{
+    position: relative;
+}
+.published-list-item{
+    position: relative;
+    width: 100%;
+    background: white;
+    margin-bottom: 15rpx;
+}
+.published-list-header{
+    height: 80rpx;
+    line-height: 80rpx;
+    font-size: 30rpx;
+    padding-right: 200rpx;
+    border-bottom: 1px dashed #0099ff;
+}
+.published-list-header text{
+    position: absolute;
+    color: #0099ff;
+    display: block;
+    line-height: 80rpx;
+    right:27rpx;
+    top: 10rpx;
+}
+.published-list-body{
+    position: relative;
+    height: 80rpx;
+}
+.published-list-body view{
+    font-size: 28rpx;
+    position: relative;
+    width: 33.333%;
+    float: left;
+    text-align: left;
+    line-height: 80rpx;
+}
+.published-list-body view image{
+    position: relative;
+    display: inline-block;
+    width: 36rpx;
+    height: 36rpx;
+    margin-right: 10rpx;
+    vertical-align: text-bottom;
+}
+.published-list-edit{
+    position: relative;
+
+}
+.published-list-detail{
+    position: absolute;
+    left: 0;
+    top: 0;
+    text-align: center !important;
+}
+.published-list-settop{
+    position: relative;
+    float: right;
+    text-align: right !important;
+}
+.published-list-footer{
+    position: relative;
+    border-top: 1px solid #dcdcdc;
+    padding: 20rpx 0;
+}
+.published-list-footer image{
+    position: relative;
+    display: inline-block;
+    width: 36rpx;
+    height:36rpx;
+    margin-right: 10rpx;
+    vertical-align: text-bottom;
+}
+.published-list-footer view{
+    font-size: 26rpx;
+}
+.cost-integral-settopbox{
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    left: 0;
+    top: 0;
+    z-index: 10;
+}
+.cost-integral-settop{
+    position: relative;
+    width: 80%;
+}
+.cost-integral-settop-header{
+    width: 100%;
+    background: #f3f3f3;
+    text-align: center;
+    font-size: 34rpx;
+    line-height:120rpx;
+}
+.cost-integral-settop-body{
+    position: relative;
+    width: 100%;
+    height: 500rpx;
+    background: white;
+    padding: 40rpx 30rpx;
+}
+.cost-integral-settop-item{
+    position: relative;
+    width: 100%;
+    height: 100rpx;
+    margin-bottom: 20rpx;
+    border: 1px solid #0099ff;
+    padding-left: 160rpx;
+}
+.cost-integral-settop-tips{
+    position: absolute;
+    left: 20rpx;
+    top: 0;
+    line-height: 100rpx;
+    font-weight: bold;
+    font-size: 28rpx;
+}
+.cost-integral-settop-right{
+    position: relative;
+    width: 100%;
+    height: 100rpx;
+    line-height: 100rpx;
+    font-size: 30rpx;
+}
+.cost-integral-settop-footer{
+    position: relative;
+    width: 100%;
+    height: 100rpx;
+}
+.cost-integral-settop-footer view{
+    position: relative;
+    display: block;
+    width: 50%;
+    height: 100rpx;
+    float: left;
+    padding: 0 20rpx;
+}
+.cost-integral-settop-footer view text{
+    display: block;
+    width: 100%;
+    height: 80%;
+    background: rgba(0,0,0,.1);
+    color: #353535;
+    text-align: center;
+    line-height: 80rpx;
+    font-size: 28rpx;
+}
+.cost-integral-settop-footer view:nth-last-child(1) text{
+    background: #0099ff;
+    color: #fff;
+}
+.cost-integral-settop-num{
+    position: relative;
+    line-height: 80rpx;
+    font-size: 34rpx;
+    display: block;
+    text-align: center;
+    margin-bottom: 20rpx;
+    color: #0099ff;
+}
+.cost-integral-settop-num text{
+    color: #ff0000;
+    margin: 0 5rpx;
+}
+
+
+
+/* 新版本置顶 */
+/* .user-province-settop{position: fixed;width: 100%;height: 100%;left: 0;top: 0;z-index: 50;background: rgba(0, 0, 0, 0.3);}
+.cost-integral-settop{width: 90%;height: 75%;}
+.cost-integral-settop-header{line-height: 100rpx;position: absolute;left: 0;top: 0;z-index: 10;}
+.psettop-body{position: relative;width: 100%;padding: 120rpx 20rpx 330rpx;height: 100%;overflow-y: scroll; background: white;}
+.settop-checkbox{position: relative;display: inline-block;font-size: 28rpx;width: 33.333%;margin-bottom: 10rpx;}
+.settop-checkbox checkbox .wx-checkbox-input {width: 40rpx;height: 40rpx;}
+.new-settop-footer{position: absolute;left: 0;z-index: 10;bottom: 0;padding: 20rpx 20rpx;background: white;width: 100%;padding-bottom: 100rpx; box-shadow: #e7e6e4 0 0 10rpx;}
+.new-settop-footer input{display: block;width: 100%;height: 80rpx;border: 1px solid #f2f2f2;text-align: center;font-size: 30rpx;}
+.new-settop-tips{position: relative;text-align: center;font-size: 28rpx;padding: 20rpx 0;color: #666;}
+.new-settop-tips view{font-size: 32rpx;color: #ff0000;margin: 0 5rpx;display: inline-block;}
+.new-settop-tips view.desc-newsettop{font-size: 28rpx;color: #0099ff;}
+.new-settop-btns{position: absolute;width: 100%;height: 100rpx;line-height: 100rpx;border-top: 1px solid #dcdcdc;left: 0;bottom: 0;}
+.new-settop-btns view{position:relative;font-size: 30rpx;text-align: center;flex: 1;line-height: 100rpx;letter-spacing: 5rpx;border-right: 1px solid #dcdcdc;color: #666;font-weight: bold;}
+.new-settop-btns view:nth-last-child(1){border-right: 0;color: #0099ff;}
+.new-settop-input{color: #ff0000;font-size: 28rpx;letter-spacing: 2rpx;} */
+
+
+.collect-warp{position: fixed;width: 100%;height: 100%;z-index: 10;background: rgba(0, 0, 0, 0.2);}
+.collectbox-tips{position: fixed;width: 90%;top: 50%;margin-top: -380rpx; left: 5%;background: white;border-radius: 12px;}
+.collect-tips-icon{position: absolute;width: 100rpx;height: 100rpx; left: 50%;margin-left: -50rpx;top:-50rpx;z-index: 10;}
+.collect-bg{position: relative;width: 100%;height: 300rpx;background: url("http://cdn.yupao.com/miniprogram/images/collect-tipbg.png") no-repeat;background-size: 100% 100%;padding: 60rpx 20rpx 0;}
+.collect-tips-title{position: relative;text-align: center;display:inline-block;font-size: 36rpx;line-height: 60rpx;color: white;width: 100%;margin-bottom: 10rpx;}
+.collect-tips-words{position: relative;display: inline-block;font-size: 30rpx;color: white;text-align: center;line-height:50rpx;width: 100%;}
+.collect-tips-hand{position: relative;display: block; margin: 80rpx auto;width:600rpx;height: 200rpx;}
+.knowtips{position: absolute;bottom:-45rpx;width: 350rpx;line-height: 90rpx;background: #0099ff;color: white;text-align: center;font-size: 30rpx;left: 50%;margin-left: -175rpx;border-radius: 20px;}
+
+
+.published-list-body text{font-size: 30rpx;line-height: 80rpx;color: #444;}
+.collect-status{float: left;}
+.collect-time{position: absolute;width: 100%;z-index: 1;text-align: center;left: 0;top: 0;padding-left: 80rpx;}
+.published-list-body .collect-action{position: relative; float: right;color: #0099ff;z-index: 2;}
+
+
+.common-choose-header{position:relative;padding:15rpx 0;}
+.cancel-collect-item{position: relative;padding:2rpx 10rpx;background:#0099ff;color:white;border-radius: 2px;margin-right: 5rpx;}
+
