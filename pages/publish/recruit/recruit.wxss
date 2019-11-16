@@ -363,7 +363,6 @@
     margin: 10rpx auto;
 }
 
-<<<<<<< HEAD
 .count-contentlen{position: absolute;
 right: 20rpx;
 bottom: 0;
@@ -371,9 +370,7 @@ line-height: 60rpx;
 font-size: 28rpx;
 
 }
-=======
 /* publish-choose-content-item common-shaded-box publish-choose-body
 
 publish-choose-content-header publish-choose-content-list  choose-content-lish-left
 choose-content-checkbox*/
->>>>>>> lupanyu

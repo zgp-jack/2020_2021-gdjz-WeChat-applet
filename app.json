@@ -4,9 +4,7 @@
         "pages/clients-looking-for-work/ranking-list/rankinglist",
     "pages/clients-looking-for-work/finding-name-card/findingnamecard",
     "pages/index/index",
-<<<<<<< HEAD
     "pages/home/home",
-=======
     "pages/clients-looking-for-work/new-project-experience/projectexperience",
     "pages/boss-look-card/lookcard",
     "pages/clients-looking-for-work/preview-name-card/previewcard",
@@ -20,7 +18,6 @@
     "pages/clients-looking-for-work/all-skills-certificate/skillscertificate",
     "pages/clients-looking-for-work/selectmap/smap",
     "pages/detail/info/info",
->>>>>>> lupanyu
     "pages/ucenter/ucenter",
     "pages/userauth/userauth",
     "pages/publish/recruit/recruit",

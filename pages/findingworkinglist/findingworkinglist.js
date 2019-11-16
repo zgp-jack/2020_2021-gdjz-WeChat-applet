@@ -710,8 +710,8 @@ Page({
       this.setData({ "userShareData.showWin": false })
     }
   },
-  viewScroll: function (e) {
-    let top = e.detail.scrollTop;
+  onPageScroll: function (e) {
+    let top = e.scrollTop;
     this.setData({ showReturnTopImg: (top > 960) ? true : false })
   },
   /**
@@ -789,7 +789,17 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-
+    wx.showNavigationBarLoading()
+    //wx.startPullDownRefresh()
+    this.returnTop();
+    this.setData({
+      "searchDate.page": 1,
+      showHistoryList: false
+    })
+    this.doRequestAction(false, function () {
+      wx.hideNavigationBarLoading()
+      wx.stopPullDownRefresh();
+    })
   },
 
   /**
