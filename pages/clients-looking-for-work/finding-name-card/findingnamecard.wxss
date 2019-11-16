@@ -1,4 +1,7 @@
-/* modalDlg .contentone  bg.cardsixzong .cardsixfour lang cardnine  findingnamecardeight.cardeight*/ 
+
+@import "../../userauth/userauth.wxss";
+.common-userauth{position: fixed;left: 0;top: 0;z-index:999999;width:100%;height: 100%;background: white;}
+
 
 .findingnamecard{
   width: 93%;

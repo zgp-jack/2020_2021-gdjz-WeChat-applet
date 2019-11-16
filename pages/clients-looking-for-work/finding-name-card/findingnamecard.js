@@ -9,6 +9,8 @@ Page({
    * 页面的初始数据 nation view_num perfection addskill
    */
   data: {
+    icon: app.globalData.apiImgUrl + "userauth-topicon.png",
+    userInfo:true,
     certificate_count: 0,
     project_count: 0,
     username: '',
@@ -103,11 +105,7 @@ Page({
     })
   },
   completeall() {
-    let userInfo = wx.getStorageSync("userInfo");
-    if (!userInfo) {
-      app.gotoUserauth();
-      return false;
-    }
+
     if (!this.data.resume_uuid) {
       wx.navigateTo({
         url: '/pages/clients-looking-for-work/essential-information/esinformation',
@@ -222,21 +220,13 @@ Page({
   },
 
   toperfect() {
-    let userInfo = wx.getStorageSync("userInfo");
-    if (!userInfo) {
-      app.gotoUserauth();
-      return false;
-    }
+
     wx.navigateTo({
       url: '/pages/clients-looking-for-work/essential-information/esinformation',
     })
   },
   improvementwork() {
-    let userInfo = wx.getStorageSync("userInfo");
-    if (!userInfo) {
-      app.gotoUserauth();
-      return false;
-    }
+
     if (this.data.resume_uuid == "") {
       wx.showModal({
         title: '温馨提示',
@@ -261,11 +251,7 @@ Page({
     })
   },
   addproject() {
-    let userInfo = wx.getStorageSync("userInfo");
-    if (!userInfo) {
-      app.gotoUserauth();
-      return false;
-    }
+
     if (this.data.resume_uuid == "") {
       wx.showModal({
         title: '温馨提示',
@@ -293,11 +279,7 @@ Page({
     })
   },
   addskill() {
-    let userInfo = wx.getStorageSync("userInfo");
-    if (!userInfo) {
-      app.gotoUserauth();
-      return false;
-    }
+
     if (this.data.resume_uuid == "") {
       wx.showModal({
         title: '温馨提示',
@@ -675,11 +657,52 @@ Page({
     wx.removeStorageSync("skilltail")
   },
 
+  authrasution(){
+    let userInfo = wx.getStorageSync("userInfo");
+    if (!userInfo) {
+      this.setData({
+        userInfo:false
+      })
+      return false;
+    }else{
+      this.setData({
+        userInfo:userInfo
+      })
+      this.getdetail();
+    }
+  },
+  returnPrevPage(){
+    wx.navigateBack({
+      delta: 1
+    })
+  },
+  bindGetUserInfo: function (e) {
+    let that = this;
+    app.bindGetUserInfo(e, function (res) {
+      app.mini_user(res, function (res) {
+        app.api_user(res, function (res) {
+          let uinfo = res.data;
+          if (uinfo.errcode == "ok") {
+            let userInfo = {
+              userId: uinfo.data.id,
+              token: uinfo.data.sign.token,
+              tokenTime: uinfo.data.sign.time,
+            }
+            app.globalData.userInfo = userInfo;
+            wx.setStorageSync('userInfo', userInfo)
+            that.setData({ userInfo: userInfo });
+          } else {
+            app.showMyTips(uinfo.errmsg);
+          }
+        });
+      });
+    });
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    this.authrasution()
 
   },
 
@@ -694,14 +717,13 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow() {
+
     this.getdetail();
     this.delestore();
     this.deleskill()
 
   },
-  preventTouchMove: function () {
-    console.log(123)
-   },
+
   /**
    * 生命周期函数--监听页面隐藏
    */
