@@ -316,6 +316,7 @@ Page({
         }
       },
       fail: function (err) {
+        callback ? callback() : ""
         _this.setData({ isload: false })
         wx.hideLoading();
         wx.showToast({

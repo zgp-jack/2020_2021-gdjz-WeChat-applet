@@ -112,7 +112,7 @@ Page({
       success: function (res) {
         let mydata = res.data;
         app.showMyTips(mydata.errmsg);
-        if (mydata.errcode == "200") {
+        if (mydata.errcode == "ok") {
           let list = app.arrDeepCopy(_this.data.lists);
           list.splice(index, 1);
           _this.setData({ "lists": list })
@@ -126,6 +126,7 @@ Page({
     let type = e.currentTarget.dataset.type;
     let msg = e.currentTarget.dataset.msg;
     let tips = e.currentTarget.dataset.tips;
+    let uuid = e.currentTarget.dataset.uuid;
     if (msg == "1") {
       wx.showModal({
         title: '温馨提示',
@@ -134,7 +135,18 @@ Page({
       })
       return false;
     }
-    else wx.navigateTo({ url: '/pages/detail/info/info?id=' + id, })
+    else{
+      let userLocation = wx.getStorageSync("userLocation")
+      if (!userLocation) {
+        userLocation = ""
+      } else {
+        userLocation = userLocation.split(",").reverse().join(",")
+      }
+      let uuid = e.currentTarget.dataset.uuid
+      wx.navigateTo({
+        url: `/pages/boss-look-card/lookcard?uuid=${uuid}&location=${userLocation}`
+      })
+    }
   },
   // 共用footer
   jumpThisLink: function (e) {
@@ -157,7 +169,14 @@ Page({
     let userInfo = this.data.userInfo;
     footerjs.valiUserCard(this, app, userInfo);
   },
-
+  errImg:function(e){
+    let index = e.currentTarget.dataset.index;
+    console.log(index)
+    let obj = `lists[${index}].resume.headerimg`;
+    this.setData({
+      [obj]: "http://cdn.yupao.com/miniprogram/images/user.png"
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */

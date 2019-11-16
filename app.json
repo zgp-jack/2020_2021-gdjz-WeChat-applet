@@ -1,9 +1,11 @@
 {
   "pages": [
-        "pages/clients-looking-for-work/finding-name-card/findingnamecard",
+       
+    "pages/index/index",
+    "pages/collect/resume/resume",
         "pages/findingworkinglist/findingworkinglist",
         "pages/clients-looking-for-work/ranking-list/rankinglist",
-    "pages/index/index",
+    "pages/clients-looking-for-work/finding-name-card/findingnamecard",
     "pages/home/home",
     "pages/clients-looking-for-work/new-project-experience/projectexperience",
     "pages/boss-look-card/lookcard",
@@ -24,6 +26,7 @@
     "pages/publish/test/test",
     "pages/publish/pmap/pmap",
     "pages/collect/collect",
+    "pages/collect/info/info",
     "pages/published/published",
     "pages/fast-issue/index/index",
     "pages/publish/fast/fast",

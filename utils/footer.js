@@ -40,6 +40,12 @@ function closePublishAction(_this) {
     }, 500)
 }
 function valiUserCard(_this,app,userInfo){
+
+  wx.navigateTo({
+    url: '/pages/clients-looking-for-work/finding-name-card/findingnamecard',
+  })
+
+  return false;
   if (!userInfo) {
     wx.navigateTo({
       url: '/pages/publish/card/card?u=0',
