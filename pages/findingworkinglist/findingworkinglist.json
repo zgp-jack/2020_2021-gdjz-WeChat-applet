@@ -1,5 +1,5 @@
 {
   "navigationBarTitleText": "找活列表",
-  "enablePullDownRefresh": true,
-  "backgroundTextStyle": "dark"
+  "enablePullDownRefresh": true ,
+    "backgroundTextStyle": "dark"
 }

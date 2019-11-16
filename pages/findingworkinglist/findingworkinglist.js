@@ -262,7 +262,7 @@ Page({
       url: '/pages/static/notice?type=1&id=' + _id,
     })
   },
-  doRequestAction: function (_append) {
+  doRequestAction: function (_append,callback) {
     let _this = this;
     if (_this.data.isload) return false;
     let userLocation = wx.getStorageSync("userLocation");
@@ -281,6 +281,7 @@ Page({
       url: "resumes/index/",
       params: locate,
       success: function (res) {
+        callback ? callback() : ""
         console.log(res)
         if (res.data.errcode == "ok") {
           _this.setData({ isload: false })
@@ -710,8 +711,8 @@ Page({
       this.setData({ "userShareData.showWin": false })
     }
   },
-  onPageScroll: function (e) {
-    let top = e.scrollTop;
+  viewScroll: function (e) {
+    let top = e.detail.scrollTop;
     this.setData({ showReturnTopImg: (top > 960) ? true : false })
   },
   /**
@@ -786,7 +787,7 @@ Page({
   },
 
   /**
-   * 页面相关事件处理函数--监听用户下拉动作
+   * 页面相关事件处理函数--监听用户下拉动作 onReachBottom
    */
   onPullDownRefresh: function () {
     wx.showNavigationBarLoading()
@@ -797,6 +798,7 @@ Page({
       showHistoryList: false
     })
     this.doRequestAction(false, function () {
+      console.log(123)
       wx.hideNavigationBarLoading()
       wx.stopPullDownRefresh();
     })
@@ -806,6 +808,7 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
+    console.log(123)
     if ((this.data.isFirstRequest) || (this.data.showNothinkData) || (this.data.nothavemore)) return false;
     this.doRequestAction(true);
   },

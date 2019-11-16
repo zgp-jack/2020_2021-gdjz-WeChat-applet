@@ -73,7 +73,8 @@ Page({
     fail_certificate:"",
     fail_project:"",
     display:"none",
-    popup:""
+    popup:"",
+    move:true
   },
   vertify() {
     this.setData({
@@ -674,7 +675,9 @@ Page({
     this.deleskill()
 
   },
-
+  preventTouchMove: function () {
+    console.log(123)
+   },
   /**
    * 生命周期函数--监听页面隐藏
    */

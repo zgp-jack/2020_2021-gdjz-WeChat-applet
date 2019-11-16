@@ -349,7 +349,7 @@
       </view>
     </view>
   </view>
-  <view class="bg" bindtap="obtn" style='display:{{display}}'></view>
+  <view class="bg" bindtap="obtn" style='display:{{display}}' catchtouchmove="{{move}}"></view>
   <view class="cardnine" wx:if="{{showtopone}}">
     <button class="cardnineone" bindtap="preview">
       <image src="../../../images/bottom-one.png"></image> 预览</button>

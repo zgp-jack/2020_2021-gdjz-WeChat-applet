@@ -1,6 +1,6 @@
 @import "../index/index.wxss";
 /* listsboxagetwo listsboxlableone listsboxself listsboxlocalone listsboxagetwo oimg oimg
-.listsboxlocal image listsboxlocalone listsboxself listsboxadree listsboxlocalone .listsboxlocal image   .listsboxlocalone*/
+.listsboxlocal image listsboxlocalone listsboxself listsboxadree listsboxlocalone .listsboxlocal image   .listsboxlocalone  .listsboxlocaltwo .listsboxtime listsboxtime listsboxagetwo .listsboxlableone*/
 .listsboxdetail {
   width: 100%;
   background: white;
@@ -74,6 +74,7 @@
   margin-top: 34rpx;
 }
 .listsboxagetwo{
+  display: flex;
   margin-top: 12rpx;
   font-size: 26rpx;
 }
@@ -125,8 +126,9 @@
    width: 91%;
    margin: 0 auto;
    margin-top: 17rpx;
-   display: flex;
-   justify-content: space-between;
+   /* display: flex;
+   justify-content: space-between; */
+   position: relative;
    margin-bottom: 25rpx;
 }
 .listsboxlocal image{
@@ -142,8 +144,8 @@
 }
 .listsboxlocalone{
   display: flex;
-  width: 50%;
-
+  width: 100%;
+  padding-right: 270rpx;
 }
 .listsboxlocalone  .listsboxadree{
    display:block;           /*  内联对象需加  */    /* 不换行 */
@@ -152,8 +154,12 @@
     text-overflow:ellipsis;  
 }
 .listsboxlocaltwo{
+  width: 240rpx;
   color: #828586;
   font-size: 28rpx;
+  position: absolute;
+  right: 0;
+  top: 0;
 }
 .listsboxlocal .listsboxlocalone .listsboxadree{
   margin-left: 10rpx;
@@ -161,9 +167,10 @@
 .listsboxlocal .listsboxlocalone .listsboxadreeq{
   margin-left: 10rpx;
 }
-.listsboxlocaltwo .listsboxtime{
+/* .listsboxlocaltwo .listsboxtime{
+
   margin-right: 10rpx;
-}
+} */
 .listsboxagetwot text{
   font-size: 26rpx;
   color: #0099FF;

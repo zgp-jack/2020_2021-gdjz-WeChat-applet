@@ -1,9 +1,6 @@
+<!-- listsboxlocalone -->
 <import src="/pages/footer/footer.wxml" />
 <!-- <import src="/pages/tpl/app/app.wxml"/> doSearchRequestAction user-choose-item user-choose-item-active  jumpThisLink overwords  stopThisAction -->
-
-
-<view class='yupao-lists-container yupao-common-container'>
-
 
 <!-- 搜索头部 -->
 <view class="lists-header">
@@ -80,6 +77,8 @@
 </view>
 
 
+<view class='yupao-lists-container yupao-common-container'>
+
   <!-- 公告 -->
   <view class='yupao-lists-notice'>
     <view class='yupao-lists-wxinfo'>
@@ -143,13 +142,15 @@
        {{item.introduce}}
       </view>
       <view class="listsboxlocal">
-        <view class="listsboxlocalone">
+        <view >
+         <view class="listsboxlocalone">
             <view><image src="../../images/biaoqian.png"></image>   </view>
           <view class="listsboxadree">
           {{item.show_address}}
           </view>
           <view class="listsboxadreeq">
          {{item.distance}}
+          </view>
           </view>
         </view>
         <view class="listsboxlocaltwo">
