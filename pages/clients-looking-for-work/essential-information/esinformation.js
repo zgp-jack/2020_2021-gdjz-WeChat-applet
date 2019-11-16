@@ -8,7 +8,7 @@ const app = getApp();
 Page({
 
   /** 
-   * 页面的初始数据 textareavalue  typeworkarray gender submitinformation
+   * 页面的初始数据 textareavalue  typeworkarray gender submitinformation completemore
    */
 
   data: {
@@ -613,9 +613,10 @@ Page({
   completemore() {
     app.globalData.showperfection = false;
     app.globalData.skip = true;
-    wx.navigateTo({
+
+    wx.redirectTo({
       url: '/pages/clients-looking-for-work/work-description/workdescription',
-    })
+    });
   },
   getbirthall() {
     var date = new Date();

@@ -4,7 +4,7 @@ App({
     //   if (e.path) this.initUserInfo(e); valiUserUrl
     // }
     // catch(err){bindGetUserInfo
-    //   console.log(err); gotoUserauth bindGetUserInfo 
+    //   console.log(err); gotoUserauth bindGetUserInfo  mini_user api_user
     // }
   },
   globalData: {
@@ -26,7 +26,7 @@ App({
     commonShareImg: "http://cdn.yupao.com/miniprogram/images/minishare.png?t=" + new Date().getTime(),
     commonDownloadApp: "http://cdn.yupao.com/miniprogram/images/download.png?t=" + new Date().getTime(),
     commonJixieAd: "http://cdn.yupao.com/miniprogram/images/list-ad-newjixie.png?t=" + new Date().getTime(),
-    apiRequestUrl:"http://miniapi.zhaogong.vrtbbs.com/",
+    apiRequestUrl:"https://miniapi.zhaogong.vrtbbs.com/",
     //apiRequestUrl: "https://newyupaomini.54xiaoshuo.com/",
     //apiRequestUrl: "http://miniapi.qsyupao.com/",
     //apiRequestUrl:"http://mini.zhaogongdi.com/",
@@ -253,6 +253,7 @@ App({
     let that = this;
     wx.getUserInfo({
       success: (res) => {
+        console.log(res)
         let encryptedData = res.encryptedData
         let iv = res.iv
         var params = new Object()
@@ -279,6 +280,7 @@ App({
             'content-type': 'application/json' // 默认值
           },
           success(res) {
+            console.log(res)
             callback(res)
             // 授权用户执行操作
             wx.hideToast();

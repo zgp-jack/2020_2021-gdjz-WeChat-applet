@@ -1,4 +1,4 @@
-/* informationworkageone informationteamsnumber informationnosave cardonesonone"*/
+/* informationworkageone informationteamsnumber informationnosave cardonesonone informationteamsnumber"*/
 .informationtwo{
   width: 93%;
   margin: 0 auto;
@@ -211,7 +211,7 @@
 .informationteamsnumber{
   width: 93%;
   margin: 0 auto;
-  height: 90rpx;
+  height: 110rpx;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -220,7 +220,7 @@
 .informationteamsnumber .informationteamsnumberone{
   width: 17.5%;
   font-size: 28rpx;
-  line-height: 90rpx;
+  line-height: 110rpx;
   color: #2A2A2A;
   margin-left: 19rpx;
   font-weight: bold;
@@ -247,7 +247,7 @@
 }
 .informationteamsnumber .informationteamsnumbertwo{
   width: 72%;
-  height: 90rpx;
+  height: 110rpx;
   display: flex;
   flex-direction: column;
   justify-content: center;

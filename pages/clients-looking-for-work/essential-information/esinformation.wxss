@@ -1,4 +1,5 @@
-/* informationfive informationevaluationtwo informationevaluationtwo informationenum*/
+/* informationfive informationevaluationtwo informationevaluationtwo informationevaluationone informationevaluationtwo informationenum informationtheinput informationverificationcode
+informationteamsnumber publish-choose-contentbox informationseven*/
 .informationtwo{
   width: 93%;
   margin: 0 auto;
@@ -205,6 +206,7 @@
     left: 10%;
     top: 10%;
     padding: 0;
+    z-index: 9999;
 }
 .publish-choose-header{
     position: absolute;
@@ -353,18 +355,16 @@
 .informationtheinput{
   width: 93%;
   margin: 0 auto;
-  margin-top: 19rpx;
-  height: 90rpx;
+  height: 110rpx;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   background-color: white;
-  border-bottom: 1px solid #F1F1F1;
 }
 .informationtheinput .informationtheinputone{
   width: 28%;
   font-size: 28rpx;
-  line-height: 90rpx;
+  line-height: 110rpx;
   color: #2A2A2A;
   margin-left: 19rpx;
 }
@@ -373,7 +373,7 @@
 }
 .informationtheinput .informationtheinputtwo{
   width: 80%;
-  height: 90rpx;
+  height: 110rpx;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -381,23 +381,24 @@
 .informationtheinput .informationtheinputtwo input{
   font-size: 28rpx;
   height: 30rpx;
+  margin-top: 2rpx;
 }
 
 
 .informationverificationcode{
   width: 93%;
   margin: 0 auto;
-  margin-top: 10rpx;
-  height: 90rpx;
+  height: 110rpx;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   background-color: white;
+    border-top: 1px solid #F1F1F1;
 }
 .informationverificationcode .informationverificationcodeone{
   width: 17.5%;
   font-size: 28rpx;
-  line-height: 90rpx;
+  line-height: 110rpx;
   color: #2A2A2A;
   margin-left: 19rpx;
   text-align: justify;
@@ -427,7 +428,7 @@
 
 .informationverificationcode .informationverificationcodetwo{
   width: 72%;
-  height: 90rpx;
+  height: 110rpx;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -439,10 +440,10 @@
   background: rgb(235, 234, 234);
   height: 32rpx;
   line-height:32rpx;
-  margin-top: 28rpx;
+  margin-top: 38rpx;
 }
 .informationverificationcode  input{
-  margin-top: 20rpx;
+  margin-top: 30rpx;
   font-size: 28rpx;
   height: 30rpx;
 }

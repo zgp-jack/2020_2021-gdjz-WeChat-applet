@@ -320,9 +320,9 @@ Page({
         remain.remain({
           tips: res.data.errmsg, callback: function () {
             if (res.data.errcode == 200) {
-              wx.redirectTo({      
+              wx.navigateTo({
                 url: "../finding-name-card/findingnamecard",
-              });
+               })
             }
           }
         })
