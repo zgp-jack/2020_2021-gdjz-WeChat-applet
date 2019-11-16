@@ -73,7 +73,8 @@ Page({
     distance: "0km",
     location: "",
     showdistan: true,
-    is_end:0
+    is_end:0,
+    detailid: "",
   },
   errImg: function (e) {
     // console.log(e)
@@ -107,10 +108,10 @@ Page({
       app.gotoUserauth();
       return false;
     }
-    let detailid = wx.getStorageSync("detailid");
+    let detailid = that.data.detailid;
     let dert = {}
     Object.assign(dert, {
-      resume_uuid: detailid.resume_uuid,
+      resume_uuid: detailid,
       userId: userInfo.userId,
       token: userInfo.token,
       tokenTime: userInfo.tokenTime,
@@ -146,7 +147,7 @@ Page({
     let _this = this;
     let userInfo = wx.getStorageSync("userInfo");
     let info = this.data.complainInfo;
-    let detailid = wx.getStorageSync("detailid");
+    let detailid = _this.data.detailid;
     if (info == "") {
       app.showMyTips("请输入您的投诉内容");
       return false;
@@ -159,7 +160,7 @@ Page({
         userId: userInfo.userId,
         token: userInfo.token,
         tokenTime: userInfo.tokenTime,
-        resume_uuid: detailid.resume_uuid,
+        resume_uuid: detailid,
         content: info
       },
       title: "正在提交投诉",
@@ -237,6 +238,9 @@ Page({
       resume_uuid: option.uuid,
       location: option.location,
     }
+    this.setData({
+      detailid: option.uuid
+    })
     console.log(detail)
     let that = this;
     app.appRequestAction({
@@ -366,7 +370,7 @@ Page({
   praise() {
     let that = this
     let userInfo = wx.getStorageSync("userInfo");
-    let detailid = wx.getStorageSync("detailid");
+    let detailid = that.data.detailid;
     let _this = this;
     if (!userInfo) {
       app.gotoUserauth();
@@ -374,7 +378,7 @@ Page({
     }
     let praise = {}
     Object.assign(praise, {
-      resume_uuid: detailid.resume_uuid,
+      resume_uuid: detailid,
       userId: userInfo.userId,
       token: userInfo.token,
       tokenTime: userInfo.tokenTime,
@@ -412,7 +416,7 @@ Page({
   collect() {
     let that = this
     let userInfo = wx.getStorageSync("userInfo");
-    let detailid = wx.getStorageSync("detailid");
+    let detailid = that.data.detailid;
     let _this = this;
     if (!userInfo) {
       app.gotoUserauth();
@@ -420,7 +424,7 @@ Page({
     }
     let collect = {}
     Object.assign(collect, {
-      resume_uuid: detailid.resume_uuid,
+      resume_uuid: detailid,
       userId: userInfo.userId,
       token: userInfo.token,
       tokenTime: userInfo.tokenTime,
@@ -462,6 +466,7 @@ Page({
       path: '../boss-look-card/lookcard'//这是一个路径
     }
   },
+
   /**
    * 生命周期函数--监听页面加载
    */

@@ -1,6 +1,6 @@
 @import "../index/index.wxss";
 /* listsboxagetwo listsboxlableone listsboxself listsboxlocalone listsboxagetwo oimg oimg
-.listsboxlocal image listsboxlocalone listsboxself listsboxadree listsboxlocalone .listsboxlocal image   .listsboxlocalone  .listsboxlocaltwo .listsboxtime listsboxtime listsboxagetwo .listsboxlableone*/
+.listsboxlocal image listsboxlocalone listsboxself listsboxadree listsboxlocalone .listsboxlocal image   .listsboxlocalone  .listsboxlocaltwo .listsboxtime listsboxtime listsboxagetwo listsboxlocaltwo listsboxtime*/
 .listsboxdetail {
   width: 100%;
   background: white;
@@ -154,12 +154,12 @@
     text-overflow:ellipsis;  
 }
 .listsboxlocaltwo{
-  width: 240rpx;
   color: #828586;
   font-size: 28rpx;
   position: absolute;
   right: 0;
   top: 0;
+  padding-left: 10rpx;
 }
 .listsboxlocal .listsboxlocalone .listsboxadree{
   margin-left: 10rpx;
