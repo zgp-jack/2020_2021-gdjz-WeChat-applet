@@ -1,6 +1,7 @@
 {
   "pages": [
-    "pages/findingworkinglist/findingworkinglist",
+        "pages/findingworkinglist/findingworkinglist",
+        "pages/clients-looking-for-work/ranking-list/rankinglist",
     "pages/clients-looking-for-work/finding-name-card/findingnamecard",
     "pages/index/index",
     "pages/clients-looking-for-work/new-project-experience/projectexperience",
@@ -11,13 +12,10 @@
     "pages/clients-looking-for-work/livecardone/livecardone",
     "pages/clients-looking-for-work/essential-information/esinformation",
     "pages/clients-looking-for-work/work-description/workdescription",
-    "pages/clients-looking-for-work/add-vocational-certificate/certificate",
-    "pages/clients-looking-for-work/introduce-myself/introduce",
     "pages/clients-looking-for-work/addcertificate/addcertificate",
     "pages/clients-looking-for-work/modifycertificate/modifycertificate",
     "pages/clients-looking-for-work/all-skills-certificate/skillscertificate",
     "pages/clients-looking-for-work/selectmap/smap",
-    "pages/clients-looking-for-work/basic-information/information",
     "pages/detail/info/info",
     "pages/ucenter/ucenter",
     "pages/userauth/userauth",
@@ -70,7 +68,6 @@
     "pages/others/message/lists/lists",
     "pages/others/message/publish/publish",
     "pages/others/information/lists"
-
   ],
   "window": {
     "backgroundTextStyle": "light",

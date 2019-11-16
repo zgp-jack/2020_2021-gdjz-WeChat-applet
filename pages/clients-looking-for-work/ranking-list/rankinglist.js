@@ -1,46 +1,11 @@
-// pages/introduce-myself/ introduce.js
-Page({
+// pages/clients-looking-for-work/ranking-list/rankinglist.js
+Page({ 
 
   /**
    * 页面的初始数据
    */
   data: {
-    digital: 0,
-    showModal: false,
-    num: 1,
-    numone: true,
-    numtwo: false
-  },
-  changenumone() {
-    this.setData({
-      num: 1,
-      numone: true,
-      numtwo: false
-    })
-  },
-  changenumtwo() {
-    this.setData({
-      num: 2,
-      numtwo: true,
-      numone: false
-    })
-  },
-  TextAreaBlur(e) {
-    this.setData({
-      digital: e.detail.value.length
-    })
-  },
-  btn: function () {
-    this.setData({
-      showModal: true
-    })
-  },
-  obtn() {
-    this.setData({
-      showModal: false
-    })
-  },
-  preventTouchMove: function () {
+
   },
 
   /**
@@ -95,4 +60,7 @@ Page({
   /**
    * 用户点击右上角分享
    */
+  onShareAppMessage: function () {
+
+  }
 })

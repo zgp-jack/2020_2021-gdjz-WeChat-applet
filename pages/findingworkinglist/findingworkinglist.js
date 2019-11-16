@@ -79,7 +79,7 @@ Page({
     areaText: "选择城市",
     typeText: "选择工种",
     teamText: "个人",
-    recommended: "推荐",
+    recommended: "最新",
     showNothinkData: false,
     nothavemore: false,
     showMyLoading: false,
