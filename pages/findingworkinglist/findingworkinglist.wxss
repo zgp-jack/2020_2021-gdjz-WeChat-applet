@@ -1,6 +1,6 @@
 @import "../index/index.wxss";
 /* listsboxagetwo listsboxlableone listsboxself listsboxlocalone listsboxagetwo oimg oimg
-.listsboxlocal image listsboxlocalone listsboxself listsboxadree listsboxlocalone .listsboxlocal image*/
+.listsboxlocal image listsboxlocalone listsboxself listsboxadree listsboxlocalone .listsboxlocal image   .listsboxlocalone*/
 .listsboxdetail {
   width: 100%;
   background: white;
