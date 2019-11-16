@@ -1,5 +1,5 @@
 @import "../finding-name-card/findingnamecard.wxss";
-/* introcardtwo */
+/* introcardtwo  obtcard*/
 .cardeight {
   margin-bottom: 60rpx;
 }
@@ -140,5 +140,12 @@
   height: 88rpx;
   width: 88rpx;
   border-radius: 50%;
+
+}
+.cardnine{
+  position: static;
+}
+.cardeight{
+  margin-bottom: 65rpx;
 
 }

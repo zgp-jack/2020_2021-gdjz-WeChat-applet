@@ -225,19 +225,19 @@ Page({
       url: "/pages/clients-looking-for-work/all-skills-certificate/skillscertificate",
     })
   },
-  getdetail() {
+  getdetail(option) {
+    console.log(option)
     let userInfo = wx.getStorageSync("userInfo");
     console.log(userInfo)
     if (!userInfo) {
       userInfo = { userId: null }
     }
-    let detailid = wx.getStorageSync("detailid");
-    let detail = {}
-    Object.assign(detail, {
+    let detail = {
       userId: userInfo.userId,
-      resume_uuid: detailid.resume_uuid,
-      location: detailid.location,
-    })
+      resume_uuid: option.uuid,
+      location: option.location,
+    }
+    console.log(detail)
     let that = this;
     app.appRequestAction({
       url: 'resumes/resume-detail/',
@@ -466,8 +466,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
-    this.getdetail();
+    this.getdetail(options);
   },
 
   /**

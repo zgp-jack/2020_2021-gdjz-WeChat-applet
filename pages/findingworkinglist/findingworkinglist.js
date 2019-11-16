@@ -1,4 +1,4 @@
-//userTapSearch persondetail lists teamindex resumes/index/ errImg teamText fillterType
+//userTapSearch persondetail lists teamindex resumes/index/ errImg teamText fillterType persondetail
 const app = getApp();
 let footerjs = require("../../utils/footer.js");
 let areas = require("../../utils/area.js");
@@ -727,14 +727,15 @@ Page({
 
   persondetail(e) {
     let userLocation = wx.getStorageSync("userLocation")
-    let all = {};
-    Object.assign(all, {
-      resume_uuid: e.currentTarget.dataset.all.uuid,
-      location: userLocation.split(",").reverse().join(","),
-    })
-    wx.setStorageSync("detailid", all)
+    if (!userLocation){
+      userLocation=""
+    }else{
+      userLocation = userLocation.split(",").reverse().join(",")
+    }
+    let uuid = e.currentTarget.dataset.uuid
+    console.log(uuid)
     wx.navigateTo({
-      url: "/pages/boss-look-card/lookcard",
+      url: `/pages/boss-look-card/lookcard?uuid=${uuid}&location=${userLocation}`,
     })
   },
 
