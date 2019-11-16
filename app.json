@@ -1,8 +1,8 @@
 {
   "pages": [
+        "pages/clients-looking-for-work/finding-name-card/findingnamecard",
         "pages/findingworkinglist/findingworkinglist",
         "pages/clients-looking-for-work/ranking-list/rankinglist",
-    "pages/clients-looking-for-work/finding-name-card/findingnamecard",
     "pages/index/index",
     "pages/home/home",
     "pages/clients-looking-for-work/new-project-experience/projectexperience",

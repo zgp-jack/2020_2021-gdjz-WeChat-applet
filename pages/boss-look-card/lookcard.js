@@ -5,7 +5,7 @@ Page({
 
   /** showComplain telephorft  age workingyears personnum workingyears
    * 页面的初始数据 moreskill projectone occupations introduce telephorft showThisMapInfo onoff
-   */
+   telephorft*/
   data: {
     complainInfo: "",
     showComplain: false,

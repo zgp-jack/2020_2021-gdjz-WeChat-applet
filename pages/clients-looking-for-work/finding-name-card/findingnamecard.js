@@ -1,4 +1,4 @@
-// addskill  lat nation projectlength showbot tom  view_num selectTap showbottom checkone projectone checkfour checkone ressonone note showperfection editor addproject
+// addskill  lat nation projectlength showbot tom  view_num selectTap showbottom checkone projectone checkfour checkone ressonone note showperfection editor addproject toperfect improvementwork
 
 
 const app = getApp();
@@ -103,6 +103,11 @@ Page({
     })
   },
   completeall() {
+    let userInfo = wx.getStorageSync("userInfo");
+    if (!userInfo) {
+      app.gotoUserauth();
+      return false;
+    }
     if (!this.data.resume_uuid) {
       wx.navigateTo({
         url: '/pages/clients-looking-for-work/essential-information/esinformation',
@@ -217,12 +222,21 @@ Page({
   },
 
   toperfect() {
-
+    let userInfo = wx.getStorageSync("userInfo");
+    if (!userInfo) {
+      app.gotoUserauth();
+      return false;
+    }
     wx.navigateTo({
       url: '/pages/clients-looking-for-work/essential-information/esinformation',
     })
   },
   improvementwork() {
+    let userInfo = wx.getStorageSync("userInfo");
+    if (!userInfo) {
+      app.gotoUserauth();
+      return false;
+    }
     if (this.data.resume_uuid == "") {
       wx.showModal({
         title: '温馨提示',
@@ -247,6 +261,11 @@ Page({
     })
   },
   addproject() {
+    let userInfo = wx.getStorageSync("userInfo");
+    if (!userInfo) {
+      app.gotoUserauth();
+      return false;
+    }
     if (this.data.resume_uuid == "") {
       wx.showModal({
         title: '温馨提示',
@@ -274,6 +293,11 @@ Page({
     })
   },
   addskill() {
+    let userInfo = wx.getStorageSync("userInfo");
+    if (!userInfo) {
+      app.gotoUserauth();
+      return false;
+    }
     if (this.data.resume_uuid == "") {
       wx.showModal({
         title: '温馨提示',
