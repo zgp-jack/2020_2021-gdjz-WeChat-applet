@@ -557,7 +557,7 @@ Page({
       telephone: introinfo.hasOwnProperty("tel") ? introinfo.tel : "",
       tele: introinfo.hasOwnProperty("tel") ? introinfo.tel : "",
       otextareavalue: introinfo.hasOwnProperty("introduce") ? introinfo.introduce : "",
-      otextareavaluel: introinfo.hasOwnProperty("introduce") ? introinfo.introduce.length : 0,
+      otextareavaluel: introinfo.hasOwnProperty("introduce") ? introinfo.introduce ?introinfo.introduce.length:0 : 0,
     })
 
     if (introinfo.gender != "") {

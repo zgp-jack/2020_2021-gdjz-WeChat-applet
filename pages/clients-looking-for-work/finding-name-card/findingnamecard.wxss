@@ -1,4 +1,5 @@
-/* cardtwosonone .all .cardsixsixnum .cardthreemobile .cardtwo*/
+/* cardtwosonone .all .cardsixsixnum .cardotext .cardthreemobile .cardtwo .cardthree cardotext
+.cardotext*/
 @import "../../userauth/userauth.wxss";
 .common-userauth{position: fixed;left: 0;top: 0;z-index:999999;width:100%;height: 100%;background: white;}
 
@@ -499,6 +500,7 @@ padding-bottom: 6rpx;
   position: relative;
   width: 100%;
   display: flex;
+  margin-top: 12rpx;
 }
 
 .cardotext .oworkone {
@@ -514,7 +516,7 @@ padding-bottom: 6rpx;
   background-size: 100% 100%;
     left: 14px;
     margin-left:  -5px;
-  top:20rpx;
+  top:8rpx;
 }
 /* .cardotext .owork {
   margin: 0;
@@ -549,6 +551,7 @@ padding-bottom: 6rpx;
 .cardotext .workotextone {
   color: black;
   font-size: 26rpx;
+  padding-left: 28rpx;
 }
 .cardotext .workotextonetu {
   color: black;
@@ -603,7 +606,7 @@ padding-bottom: 6rpx;
   width: 27rpx;
   height: 30rpx;
   vertical-align: bottom;
-  padding-right: 6rpx;
+  padding-left: 2rpx;
 }
 
 .cardthree .cardthreeone {
@@ -665,7 +668,7 @@ padding-bottom: 6rpx;
   width: 26rpx;
   height: 28rpx;
   /* vertical-align: middle; */
-  padding-right: 6rpx;
+  padding-right: 2rpx;
 }
 
 .cardfive .cardthreeone {
@@ -801,7 +804,7 @@ padding-bottom: 6rpx;
   width: 27rpx;
   height: 30rpx;
   vertical-align: bottom;
-  padding-right: 6rpx;
+  padding-right: 2rpx;
 }
 
 .cardseven .cardthreeone {
@@ -989,14 +992,17 @@ padding-bottom: 6rpx;
 .cardotext {  
   width: 100%;
   display: flex;
-  justify-content: space-between;
-
-
+  vertical-align: baseline;
 }
 
 .cardotext .oworkone {
-
-  width: 16.5%
+  
+  width: 16.5%;
+  vertical-align: baseline;
+    /* height: 30rpx; */
+  /* display: flex;
+  flex-direction: column;
+  justify-content: center; */
 }
 
 .cardotext  image {
@@ -1007,18 +1013,20 @@ padding-bottom: 6rpx;
 }
 
 .cardotext .oworkotext {
+    width: 16.5%;
   margin: 0;
   padding: 0;
   height: 30rpx;
   display: inline-block;
   color: grey;
   font-size: 26rpx;
-  width: 100%;
-  margin-top: 14rpx;
-  margin-bottom: 6rpx;
+  /* width: 100%; */
+  /* margin-top: 14rpx;
+  margin-bottom: 6rpx; */
   text-align: justify;
   position: relative;
   font-weight: bold;
+  margin-left: 46rpx;
 }
 .cardotext .oworkotext::after{
     content:'';
@@ -1036,8 +1044,10 @@ padding-bottom: 6rpx;
     right: -4px;
 }
 .all{
-  width:70%;
-  margin-top: 4rpx;
+  /* width:70%; */
+  /* line-height: 30rpx; */
+  /* padding-top: 4.5rpx; */
+  display: inline-block;
 }
 .cardotext .oworkotextonetu {
   color: black;
@@ -1049,7 +1059,6 @@ padding-bottom: 6rpx;
   padding-left: 4rpx;
   padding-right: 4rpx;
   text-align: center;
-  margin-top: 12rpx;
   margin-right: 17rpx;
 }
 .cardotext .oworkotextonetu:last-child{
@@ -1062,8 +1071,25 @@ padding-bottom: 6rpx;
   padding-left: 4rpx;
   padding-right: 4rpx;
   text-align: center;
-  margin-top: 12rpx;
+  /* margin-top: 12rpx; */
   margin-right: 0rpx;
+}
+.labletu{
+   color: black;
+  font-size: 24rpx;
+  background: #E7E7E7;
+  display: inline-block;
+  height: 37rpx;
+  line-height: 37rpx;
+  padding-left: 4rpx;
+  padding-right: 4rpx;
+  text-align: center;
+  margin-right: 17rpx; 
+}
+
+.alllabletu{
+  display: flex;
+  padding-left: 28rpx;
 }
 .cardotext .tworkotextonetu {
   color: black;
@@ -1075,7 +1101,7 @@ padding-bottom: 6rpx;
   padding-left: 4rpx;
   padding-right: 4rpx;
   text-align: center;
-  margin-top: 12rpx;
+  /* margin-top: 12rpx; */
   margin-right: 17rpx;
 }
 .cardotext .tworkotextonetu:last-child{
@@ -1088,7 +1114,7 @@ padding-bottom: 6rpx;
   padding-left: 4rpx;
   padding-right: 4rpx;
   text-align: center;
-  margin-top: 12rpx;
+  /* margin-top: 12rpx; */
   margin-right: 0rpx;
 }
 
@@ -1295,4 +1321,145 @@ padding-bottom: 6rpx;
   color: red;
 }
 
-/*oworkotext cardsix .cardnine .all cardsixsixnum  cardeightsixnum bg showtop nopass findingnamecardsixtwo*/
+.cardtwoif {
+  width: 93%;
+  margin: 0 auto;
+  background-color: white;
+padding-bottom: 6rpx;
+  position: relative;
+  overflow: hidden;
+}
+.cardonetwof{
+    overflow: hidden;
+}
+
+.cardtwoif .cardtwoifsonone {
+  width: 100%;
+  height: 88rpx;
+  margin-top: 22rpx;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.cardtwoifsonone .cardtwoifsononeimg {
+  width: 400rpx;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.cardtwoifsonone .cardtwoifsononeimg .oimg {
+  height: 88rpx;
+  width: 88rpx;
+  border-radius: 50%;
+  margin-left: 14rpx;
+}
+
+.cardtwoifsonone .cardtwoifsononeimg .oimg image {
+  height: 88rpx;
+  width: 88rpx;
+  border-radius: 50%;
+}
+
+.cardtwoifsonone .cardtwoifsononeimg  .oimgone {
+  width: 280rpx;
+}
+
+.cardtwoifsonone .cardtwoifsononeimg  .oimgone .otext {
+  color: #343434;
+  font-size: 28rpx;
+}
+
+.cardtwoifsonone .cardtwoifsononeimg .oimgone .otextone {
+  font-size: 26rpx;
+  color: #6c6b6b;
+}
+
+.cardtwoifsonone .cardtwoifsononeimg .oimgone .otextone .ochange {
+  margin-left: 6rpx;
+}
+
+.cardtwoif .cardtwoifsontwo {
+  font-size: 28rpx;
+  color: #09f;
+  line-height: 88rpx;
+  position: relative;
+  right: 12rpx;
+}
+.workotype{
+  /* margin-top: -12rpx; */
+  width: 70.5%;
+  padding-left: 28rpx;
+}
+
+.cworkotype{
+
+  position: relative;
+  width: 100%;
+  margin-top: 12rpx;
+  padding-left:  190rpx;
+  min-height: 30rpx;
+
+}
+.cworkotype::before {
+  position: absolute;
+  content: '';
+  width: 11px;
+  height: 11px;
+  background: url(http://cdn.yupao.com/miniprogram/images/newjobinfo-steps.png?t=11) no-repeat;
+  background-size: 100% 100%;
+    left: 14px;
+    margin-left:  -5px;
+  top:8rpx;
+}
+.ocworkotype{
+   width: 16.5%;
+  left: 0;
+  top: 0;
+  height: 30rpx;
+  display: inline-block;
+  color: grey;
+  font-size: 26rpx;
+  text-align: justify;
+  position: absolute;
+  font-weight: bold;
+  margin-left: 46rpx;
+
+}
+.cworkotype .ocworkotype::after{
+    content:'';
+    width: 100%;
+    display: inline-block;
+    overflow: hidden;
+    height: 0;
+}
+.cworkotype .ocworkotype::before{
+    content:':';
+    /* overflow: hidden; */
+    height: 100%;
+    width: 6rpx;
+    position: absolute;
+    right: -4px;
+}
+.ocworkotyp{
+    position: relative;
+    font-size: 0;
+}
+.ocworkotyp .ocworkotyptu{
+color: black;
+font-size: 26rpx;
+background: #E7E7E7;
+display: inline-block;
+/* height: 37rpx; */
+line-height: 37rpx;
+padding-left: 4rpx;
+padding-right: 4rpx;
+text-align: center;
+margin-right: 17rpx;
+margin-bottom: 8rpx;
+}
+
+/*oworkotext cardsix  tworkotextonetu.cardnine .all cardsixsixnum  cardeightsixnum bg showtop nopass findingnamecardsixtwo .workotextone oworkotextonetu cardtwoif workotextone alllabletu
+
+workotype oworkotextonetu cardotext oworkotext cworkotype*/

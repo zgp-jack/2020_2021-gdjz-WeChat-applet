@@ -1,11 +1,11 @@
 {
   "pages": [
-       
-    "pages/index/index",
-    "pages/collect/resume/resume",
-        "pages/findingworkinglist/findingworkinglist",
-        "pages/clients-looking-for-work/ranking-list/rankinglist",
+        "pages/index/index",
     "pages/clients-looking-for-work/finding-name-card/findingnamecard",
+
+    "pages/collect/resume/resume",
+    "pages/findingworkinglist/findingworkinglist",
+    "pages/clients-looking-for-work/ranking-list/rankinglist",
     "pages/home/home",
     "pages/clients-looking-for-work/new-project-experience/projectexperience",
     "pages/boss-look-card/lookcard",

@@ -115,8 +115,8 @@
               <text class="listsboxname">{{item.username}}</text>
               <text>{{item.gender  == "1" ? "男" : item.gender == "0"?"女":""}}</text>
               <text>{{item.birthday}}岁</text>
-              <image wx:if="{{authentication == 2}}"  src="{{realNames}}"></image>
-              <image wx:if="{{certificate == 1}}" src="{{authentication}}"></image>
+              <image wx:if="{{item.authentication == 2}}"  src="{{realNames}}"></image>
+              <image wx:if="{{item.certificate == 1}}" src="{{authentication}}"></image>
             </view>
             <view class="listsboxagetwo" wx:if="{{item.nation}}">
               <text id="listsboxnation">{{item.nation}}</text>

@@ -282,9 +282,9 @@ Page({
       reminder.reminder({ tips: '人员构成' })
       return
     }
-    let strone = /^[1-9]{1,4}$/ig;
-    if (!strone.test(this.data.teamsnumber) && this.data.constituttion != 1 || this.data.teamsnumber - 0 <= 1 && this.data.constituttion != 1) {
-
+    let strone = /^[0-9]{1,4}$/ig;
+    if (!strone.test(this.data.teamsnumber) && this.data.constituttion != 1 || ~~this.data.teamsnumber - 0 <= 1 && this.data.constituttion != 1) {
+      console.log(this.data.teamsnumber)
       wx.showModal({
         title: '温馨提示',
         content: '您输入的队伍人数不为数字,或者超过四位数,或者小于或等于一请重新输入',

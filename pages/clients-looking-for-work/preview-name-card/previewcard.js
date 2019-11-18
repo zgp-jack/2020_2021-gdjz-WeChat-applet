@@ -5,7 +5,7 @@ const app = getApp();
 Page({
 
   /**
-   * 页面的初始数据 nation view_num
+   * 页面的初始数据 nation view_num occupations
    */
   data: {
     username: '',
@@ -15,7 +15,8 @@ Page({
     name: "未填写",
     sex: "未填写",
     nation: "未填写",
-    occupations: "未填写",
+    occupations:[],
+    occupationone: "未填写",
     telephone: "未填写",
     introduce: "未填写",
     city: "未填写",

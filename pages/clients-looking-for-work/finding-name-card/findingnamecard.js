@@ -1,4 +1,4 @@
-// addskill  lat nation projectlength showbot tom  view_num selectTap showbottom checkone projectone checkfour checkone ressonone note showperfection editor addproject toperfect improvementwork
+// addskill  lat nation projectlength showbot tom  view_num selectTap showbottom checkone projectone checkfour checkone ressonone note showperfection editor addproject toperfect improvementwork 修改失败 introinfo authentication
 
 
 const app = getApp();
@@ -192,7 +192,7 @@ Page({
           })
         },
         fail(res) {
-          app.showMyTips("修改失败");
+          // app.showMyTips("修改失败");
         }
       })
     }

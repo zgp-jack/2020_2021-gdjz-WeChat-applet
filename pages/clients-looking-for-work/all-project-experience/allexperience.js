@@ -113,9 +113,7 @@ Page({
         console.log(allexpress)
         let projectall = [];
         for (let i = 0; i < allexpress.length; i++) {
-          if (allexpress[i].check == "2") {
             projectall.push(allexpress[i])
-          }
         }
         that.setData({
           projecthree: projectall

@@ -149,3 +149,11 @@
   margin-bottom: 65rpx;
 
 }
+.tagsone{
+  color: black;
+font-size: 26rpx;
+
+}
+.workotextone{
+  font-size: 26rpx;
+}

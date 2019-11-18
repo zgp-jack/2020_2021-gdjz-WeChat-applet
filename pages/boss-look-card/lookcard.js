@@ -1,11 +1,11 @@
-const app = getApp();
+const app = getApp(); 
 let remain = require("../../utils/remain.js");
 
 Page({
 
   /** showComplain telephorft  age workingyears personnum workingyears
    * 页面的初始数据 moreskill projectone occupations introduce telephorft showThisMapInfo onoff
-   telephorft*/
+   telephorft occupations moreproject*/
   data: {
     complainInfo: "",
     showComplain: false,
@@ -21,7 +21,8 @@ Page({
     name: "未填写",
     sex: "未填写",
     nation: "未填写",
-    occupations: "未填写",
+    occupations:[],
+    occupationone: "未填写",
     telephone: "未填写",
     introduce: "未填写",
     city: "未填写",
@@ -75,6 +76,7 @@ Page({
     showdistan: true,
     is_end:0,
     detailid: "",
+    examine:true
   },
   errImg: function (e) {
     // console.log(e)
@@ -296,6 +298,7 @@ Page({
             distance: mydata.info.hasOwnProperty("distance") ? mydata.info.distance == "" ? "0km" : mydata.info.distance: "0km",
             location: mydata.info.hasOwnProperty("location") ? mydata.info.location : "",
             is_end: mydata.info.hasOwnProperty("is_end") ? mydata.info.is_end : "",
+            examine:false,
           })
 
           console.log(that.data.is_read)
@@ -312,9 +315,7 @@ Page({
             console.log(mydata.project)
             let projectall = [];
             for (let i = 0; i < mydata.project.length; i++) {
-              if (mydata.project[i].check == "2") {
                 projectall.push(mydata.project[i])
-              }
             }
             that.setData({
               project: projectall
@@ -335,9 +336,7 @@ Page({
             console.log(mydata.certificates)
             let certificatesall = [];
             for (let i = 0; i < mydata.certificates.length; i++) {
-              if (mydata.certificates[i].check == "2") {
                 certificatesall.push(mydata.certificates[i])
-              }
             }
 
             that.setData({

@@ -24,86 +24,84 @@
       <view class="lineone">
         <view class="linezo">
           <view class="cardotext">
-            <view class="oworkone">
               <text class="oworkotext">手机</text>
-            </view>
-           <view class="all">
+
+
               <text class="workotextone">{{telephone}}</text>
-            </view>
+
           </view>
           <view class="cardotext">
-            <view class="oworkone">
+
               <text class="oworkotext">我的家乡</text>
-            </view>
-            <view class="all">
+
+
               <text class="workotextone">{{cityself}}</text>
-            </view>
+
           </view>
-          <view class="cardotext">
-            <view class="oworkone">
-              <text class="oworkotext">工种</text>
-            </view>
-            <view class="all" wx:if="{{occupations != '未填写'}}">
-              <view class="oworkotextonetu" wx:for="{{occupations}}" wx:key="{{index}}">
+          <view class="cworkotype">
+
+                 <view class="ocworkotype">工种</view>
+
+            <view class="ocworkotyp" wx:if="{{occupations.length != 0}}">
+              <view class="ocworkotyptu" wx:for="{{occupations}}" wx:key="{{index}}">
                 {{item}}
-              </view>
+              </view> 
             </view>
-            <view class="all" wx:if="{{occupations == '未填写'}}">
-               <text class="workotextone">{{occupations}}</text>
+            <view class="ocworkotyp" wx:if="{{occupations.length == 0}}">
+               <text class="workotextone">{{occupationone}}</text>
             </view>
           </view>
           <view class="cardotext">
-            <view class="oworkone">
+
               <text class="oworkotext">工龄</text>
-            </view>
-            <view class="all">
+
+
               <text class="workotextone">{{workingyears}}</text>
-            </view>
+
           </view>
           <view class="cardotext">
-            <view class="oworkone">
+
               <text class="oworkotext">熟练度</text>
-            </view>
-            <view class="all">
+
+
               <text class="workotextone">{{procity}}</text>
-            </view>
+
           </view>
           <view class="cardotext">
-            <view class="oworkone">
+
               <text class="oworkotext">人员构成</text>
-            </view>
-            <view class="all">
+
+
               <text class="workotextone">{{staffcomposition}}</text>
-            </view>
+
           </view>
           <view class="cardotext" wx:if="{{personnum != 1}}">
-            <view class="oworkone">
+            
               <text class="oworkotext">队伍人数</text>
-            </view>
-            <view class="all">
+
+
               <text class="workotextone">{{personnum}}</text>
-            </view>
+
           </view>
           <view class="cardotext">
-            <view class="oworkone">
+          
               <text class="oworkotext">所在地区</text>
-            </view>
-            <view class="all">
+
+
               <text class="workotextone">{{city}}</text>
-            </view>
+
           </view>
 
           <view class="cardotext">
-            <view class="oworkone">
+
               <text class="oworkotext">标签</text>
-            </view>
-            <view class="all" wx:if="{{tags != '未填写'}}">
-              <view class="tworkotextonetu" wx:for="{{tags}}" wx:key="{{index}}">
+            <view class="alllabletu" wx:if="{{tags != '未填写'}}">
+              <view class="labletu" wx:for="{{tags}}" wx:key="{{index}}">
                 {{item.label_name}}
               </view>
             </view>
-            <view class="all"  wx:if="{{tags == '未填写'}}">
-                <text class="workotextone">{{tags}}</text>
+            <view class="alllabletu"  wx:if="{{tags == '未填写'}}">
+                <text class="tagsone">{{tags}}</text>
             </view>
           </view>
         </view>
@@ -119,7 +117,7 @@
   <view class="cardthree">
     <view class="cardthreemobile">
       <image src="../../../images/newresume-description.png"></image>
-      自我介绍
+      <text>自我介绍</text>
     </view>
   </view>
   <view class="introcardtwo">
@@ -135,7 +133,7 @@
 
     <view class="cardfivemobile">
       <image src="../../../images/newresume-experience.png"></image>
-      项目经验
+      <text>项目经验</text>
     </view>
   </view>
   <view class="cardsix" wx:if="{{projectlength != 0}}">
@@ -188,7 +186,7 @@
   <view class="cardseven">
     <view class="cardsevenmobile">
       <image src="../../../images/newresume-skill.png"></image>
-      职业技能
+      <text>职业技能</text>
     </view>
   </view>
    <view class="cardeight" wx:if="{{skilllength != 0}}">

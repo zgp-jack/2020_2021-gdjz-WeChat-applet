@@ -1,5 +1,5 @@
-//userTapSearch persondetail lists teamindex resumes/index/ errImg teamText fillterType persondetail
-const app = getApp();
+//userTapSearch persondetail lists teamindex resumes/index/ errImg teamText fillterType persondetail authentication
+const app = getApp(); 
 let footerjs = require("../../utils/footer.js");
 let areas = require("../../utils/area.js");
 let md5 = require("../../utils/md5.js");

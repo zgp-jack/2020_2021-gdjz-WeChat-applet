@@ -1,6 +1,6 @@
 @import "../clients-looking-for-work/finding-name-card/findingnamecard.wxss";
 
-/* workotextone cardeight  cliokine bossbottomo bossbottomo .jiluone  .cardsixzong .cardsixfour */
+/* workotextone cardeight  cliokine bossbottomo bossbottomo .jiluone .distancec .cardsixzong .cardsixfour */
 
 
 
@@ -42,13 +42,15 @@
 margin-bottom: 130rpx;
 
 }
-
+/* .cliok{
+  margin-left: 28rpx;
+} */
 .allone {
   display: flex;
   justify-content: space-between;
   font-size: 28rpx;
   color: white;
-  margin-top: 14.5rpx;
+  width: 75%;
 }
 
 .cliok text:last-child {
@@ -166,14 +168,15 @@ margin-bottom: 130rpx;
 }
 .distancev {
   display: flex;
+    font-size: 0;
+      width: 70%;
 }
 
 .distancec{
   width: 70%;
-  padding-top: 14rpx;
+
 }
 .distancet{
-    margin-top: 15rpx;
   font-size: 26rpx;
   color: #909090;
       margin-left: 4rpx;
@@ -184,9 +187,19 @@ margin-bottom: 130rpx;
 }
 #distance {
   margin: 0;
-  margin-top: 10rpx;
   width: 24rpx;
   height: 36rpx;
   display: inline-block;
+  position: relative;
+  top: -6rpx;
+  /* margin-bottom: 18rpx; */
 }
-/* content  bossbottomo  .bossbottom .jilu*/
+.tagsone{
+  color: black;
+font-size: 26rpx;
+
+}
+.workotextone{
+  font-size: 26rpx;
+}
+/* content  bossbottomo  .bossbottom .jilu allone*/

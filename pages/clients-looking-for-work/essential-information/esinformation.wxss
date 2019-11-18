@@ -1,7 +1,7 @@
 /* informationfive informationevaluationtwo informationevaluationtwo informationevaluationone informationevaluationtwo informationenum informationtheinput informationverificationcode
 informationteamsnumber publish-choose-contentbox informationseven informationevaluationtwo
 
-publish-choose-contentbox publish-choose-footer flex-row */
+publish-choose-contentbox publish-choose-footer flex-row informationevaluationtwo*/
 .informationtwo{
   width: 93%;
   margin: 0 auto;
@@ -457,23 +457,24 @@ publish-choose-contentbox publish-choose-footer flex-row */
   background: white;
   margin-top: 20rpx;
   overflow: hidden;
-    position: relative;
+  position: relative;
+  padding: 20rpx;
 }
 .informationevaluationone{
   font-size: 28rpx;
-  margin-left: 6%;
-  width: 89%;
-  margin-top: 35rpx;
-  
+  padding: 0 10rpx;
 }
 
 .informationevaluationtwo{
-  width: 89%;
+  position: relative;
   display: block;
   background: white; 
   font-size: 28rpx;
   height: 140rpx;
-  margin-left: 7%;
+  width:100%;
+  border: none;
+  outline: 0;
+  padding:10rpx;
 }
 
 .informationevaluation .informationenum{
@@ -560,3 +561,7 @@ publish-choose-contentbox publish-choose-footer flex-row */
   color: #5e5d5d;
 }
 /* informationtelephone */
+
+
+.common-uinfo-editbox{position: relative;width:100%;padding: 20rpx 27rpx;}
+.informationtwo,.informationtelephone,.informationevaluation{position: relative;width:100%;}

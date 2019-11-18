@@ -94,9 +94,7 @@ Page({
         console.log(allskill)
         let skill = [];
         for (let i = 0; i < allskill.length; i++) {
-          if (allskill[i].check == "2") {
             skill.push(allskill[i])
-          }
         }
         that.setData({
           allskillthree: skill
