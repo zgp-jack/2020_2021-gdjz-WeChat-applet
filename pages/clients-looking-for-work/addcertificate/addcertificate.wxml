@@ -10,7 +10,7 @@
     <view class="addcertificatetimetwo">
       <picker mode="date" value="{{date}}"bindchange="bindstartDate"
             start="1900-01-01">
-        <input name="addtime" value="{{date}}" placeholder="请选择您领取证书的时间"></input>
+        <input name="addtime" value="{{date}}" disabled="true" placeholder="请选择您领取证书的时间"></input>
       </picker>
     </view>
   </view>
