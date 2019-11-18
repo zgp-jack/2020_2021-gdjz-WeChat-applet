@@ -5,8 +5,9 @@ Page({
 
   /** showComplain telephorft  age workingyears personnum workingyears
    * 页面的初始数据 moreskill projectone occupations introduce telephorft showThisMapInfo onoff
-   telephorft occupations moreproject*/
+   telephorft occupations moreproject telephorft telephorft*/
   data: {
+    icon: app.globalData.apiImgUrl + "userauth-topicon.png",
     complainInfo: "",
     showComplain: false,
     soucang: app.globalData.apiImgUrl + "newresume-footer-collect.png",
@@ -141,7 +142,6 @@ Page({
       },
       fail: function (err) {
 
-        app.showMyTips("验证码发送失败");
       }
     })
   },
@@ -240,9 +240,12 @@ Page({
       resume_uuid: option.uuid,
       location: option.location,
     }
+    
+
     this.setData({
       detailid: option.uuid
     })
+
     console.log(detail)
     let that = this;
     app.appRequestAction({

@@ -46,7 +46,12 @@
 
   </view>
 
-
+  <view class="findingnamecardthree" wx:if="{{showtop}}">
+    <view class="findingnamecardthreemobile">
+      <image src="../../../images/newresume-description.png"></image>
+      基本信息
+    </view>
+  </view>
   <view class="findingnamecardtwo" wx:if="{{showtop}}">
     <text class="findingnamecardtwothree">您还没有完善基本信息</text>
     <view class="findingnamecardtwofour" bindtap="toperfect">去完善</view>

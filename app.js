@@ -3,7 +3,7 @@ App({
     // try{
     //   if (e.path) this.initUserInfo(e); valiUserUrl
     // }
-    // catch(err){bindGetUserInfo
+    // catch(err){bindGetUserInfo gotoUserauth
     //   console.log(err); gotoUserauth bindGetUserInfo  mini_user api_user
     // }
   },
