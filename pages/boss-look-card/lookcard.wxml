@@ -34,7 +34,7 @@
                 <text bindtap="userTapComplain">举报</text>
               </view>
               <view class="cliok" wx:if="{{examine||!onoff && is_read ==1&&is_end !=2&&status == 0}}">
-                <text bindtap="telephorft" data-telephone="{{telephone}}">查看完整电话</text>
+                <text bindtap="authrasution" data-telephone="{{telephone}}">查看完整电话</text>
               </view>
               <view class="cliokine" wx:if="{{is_end ==2&&status == 0}}">
                 <text>已找到</text>
@@ -77,7 +77,7 @@
           <view class="cardotext" wx:if="{{city}}">
             <text class="oworkotext">所在地区</text>
             <view class="distancev" bindtap="showThisMapInfo">
-              <text class="workotextone distancec">{{city}}</text>
+              <text class="workotextone">{{city}}</text>
               <view class="distanceo" wx:if="{{location}}">
                 <image src="../../images/biaoqian.png" id="distance"></image>
                 <text class="distancet">{{distance}}</text>
@@ -251,12 +251,12 @@
       </view>
     </view>
   </view>
-  <!-- <view class="common-userauth" wx:if="{{ !userInfo }}">
+  <view class="common-userauth" wx:if="{{ !userInfo }}">
     <image src='{{ icon }}' class='userauth-topicon'></image>
     <view class='userauth-title'>登录鱼泡网</view>
     <view class='userauth-words'>招工 找活抢先一步，用的安心 赚的开心。</view>
     <button class='userauth-btn userauth-sure-btn' open-type="getUserInfo" bindgetuserinfo='bindGetUserInfo'>微信授权登录</button>
     <button class='userauth-btn  userauth-back-btn' bindtap='returnPrevPage'>返回上一页</button>
-  </view> -->
+  </view>
 </view>
 <!-- oworkotextonetu  cardsixone-- selectTap projectone projectlength>

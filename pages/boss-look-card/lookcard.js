@@ -1,12 +1,13 @@
-const app = getApp(); 
+const app = getApp();
 let remain = require("../../utils/remain.js");
 
 Page({
 
   /** showComplain telephorft  age workingyears personnum workingyears
    * 页面的初始数据 moreskill projectone occupations introduce telephorft showThisMapInfo onoff
-   telephorft occupations moreproject telephorft telephorft*/
+   telephorft occupations moreproject telephorft telephorft authrasution resumes/get-tel/ location*/
   data: {
+    userInfo: true,
     icon: app.globalData.apiImgUrl + "userauth-topicon.png",
     complainInfo: "",
     showComplain: false,
@@ -22,7 +23,7 @@ Page({
     name: "未填写",
     sex: "未填写",
     nation: "未填写",
-    occupations:[],
+    occupations: [],
     occupationone: "未填写",
     telephone: "未填写",
     introduce: "未填写",
@@ -75,9 +76,13 @@ Page({
     distance: "0km",
     location: "",
     showdistan: true,
-    is_end:0,
+    is_end: 0,
     detailid: "",
-    examine:true
+    examine: true,
+    options: {
+        location:"",
+        uuid:""
+    }
   },
   errImg: function (e) {
     // console.log(e)
@@ -230,6 +235,7 @@ Page({
   },
   getdetail(option) {
     console.log(option)
+    let that = this;
     let userInfo = wx.getStorageSync("userInfo");
     console.log(userInfo)
     if (!userInfo) {
@@ -240,14 +246,21 @@ Page({
       resume_uuid: option.uuid,
       location: option.location,
     }
-    
-
-    this.setData({
-      detailid: option.uuid
-    })
-
+    console.log(that.data.options)
+    if (that.data.options.location != "" && that.data.options.uuid != "") {
+      this.setData({
+        detailid: option.uuid
+      })
+    } else {
+      this.setData({
+        detailid: option.uuid,
+        options: {
+          location: option.location,
+          uuid: option.uuid
+        }
+      })
+    }
     console.log(detail)
-    let that = this;
     app.appRequestAction({
       url: 'resumes/resume-detail/',
       way: 'POST',
@@ -292,16 +305,16 @@ Page({
             cityself: mydata.info.hasOwnProperty("hometown") ? mydata.info.hometown : "",
             procity: mydata.info.hasOwnProperty("prof_degree_str") ? mydata.info.prof_degree_str : "未填写",
             personnum: mydata.info.hasOwnProperty("number_people") ?
-              mydata.info.number_people: "未填写",
+              mydata.info.number_people : "未填写",
             tags: mydata.info.hasOwnProperty("tags") ? mydata.info.tags : "",
             praise: mydata.operation.hasOwnProperty("is_zan") ? mydata.operation.is_zan : "",
             collect: mydata.operation.hasOwnProperty("is_collect") ? mydata.operation.is_collect : "",
             status: mydata.operation.hasOwnProperty("status") ? mydata.operation.status : "",
             is_read: mydata.info.hasOwnProperty("is_read") ? mydata.info.is_read : "",
-            distance: mydata.info.hasOwnProperty("distance") ? mydata.info.distance == "" ? "0km" : mydata.info.distance: "0km",
+            distance: mydata.info.hasOwnProperty("distance") ? mydata.info.distance == "" ? "0km" : mydata.info.distance : "0km",
             location: mydata.info.hasOwnProperty("location") ? mydata.info.location : "",
             is_end: mydata.info.hasOwnProperty("is_end") ? mydata.info.is_end : "",
-            examine:false,
+            examine: false,
           })
 
           console.log(that.data.is_read)
@@ -318,7 +331,7 @@ Page({
             console.log(mydata.project)
             let projectall = [];
             for (let i = 0; i < mydata.project.length; i++) {
-                projectall.push(mydata.project[i])
+              projectall.push(mydata.project[i])
             }
             that.setData({
               project: projectall
@@ -339,7 +352,7 @@ Page({
             console.log(mydata.certificates)
             let certificatesall = [];
             for (let i = 0; i < mydata.certificates.length; i++) {
-                certificatesall.push(mydata.certificates[i])
+              certificatesall.push(mydata.certificates[i])
             }
 
             that.setData({
@@ -468,7 +481,51 @@ Page({
       path: '../boss-look-card/lookcard'//这是一个路径
     }
   },
+  authrasution() {
+    let userInfo = wx.getStorageSync("userInfo");
+    if (!userInfo) {
+      this.setData({
+        userInfo: false
+      })
+      return false;
+    } else {
+      this.setData({
+        userInfo: userInfo
+      })
+      this.telephorft()
+    }
+  },
+  returnPrevPage() {
+    wx.navigateBack({
+      delta: 1
+    })
+  },
+  bindGetUserInfo: function (e) {
+    let that = this;
+    app.bindGetUserInfo(e, function (res) {
+      app.mini_user(res, function (res) {
+        app.api_user(res, function (res) {
+          console.log(res)
+          let uinfo = res.data;
+          if (uinfo.errcode == "ok") {
+            let userInfo = {
+              userId: uinfo.data.id,
+              token: uinfo.data.sign.token,
+              tokenTime: uinfo.data.sign.time,
+            }
+            app.globalData.userInfo = userInfo;
+            wx.setStorageSync('userInfo', userInfo)
+            that.setData({ userInfo: userInfo });
+            console.log(that.data.options)
+            that.getdetail(that.data.options)
 
+          } else {
+            app.showMyTips(uinfo.errmsg);
+          }
+        });
+      });
+    });
+  },
   /**
    * 生命周期函数--监听页面加载
    */
