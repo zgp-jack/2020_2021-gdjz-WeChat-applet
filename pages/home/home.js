@@ -1,8 +1,10 @@
+// infolists
 let footerjs = require("../../utils/footer.js");
 let areas = require("../../utils/area.js");
 const app = getApp();
 Page({
     data: {
+    headerimg:"",
     footerActive: "home",
     areaId: 1,
     areaText:"全国",
@@ -153,6 +155,7 @@ Page({
             params:{area:this.data.areaId},
            hideLoading : true,
             success: function (res) {
+              console.log(res)
                 _this.setData({
                     infolists: res.data
                 })
@@ -284,7 +287,29 @@ Page({
   valiUserUrl: function (e) {
     app.valiUserUrl(e, this.data.userInfo)
   },
+  errImg: function (e) {
+    // console.log(e)
+    // let index = e.currentTarget.dataset.index;
+    // console.log(index)
+    // let obj = `lists[${index}].headerimg`;
+    this.setData({
+      headerimg: "http://cdn.yupao.com/miniprogram/images/user.png"
+    })
 
+  },
+  persondetail(e) {
+    let userLocation = wx.getStorageSync("userLocation")
+    if (!userLocation) {
+      userLocation = ""
+    } else {
+      userLocation = userLocation.split(",").reverse().join(",")
+    }
+    let uuid = e.currentTarget.dataset.uuid
+    console.log(uuid)
+    wx.navigateTo({
+      url: `/pages/boss-look-card/lookcard?uuid=${uuid}&location=${userLocation}`,
+    })
+  },
     /**
        * 生命周期函数--监听页面初次渲染完成
        */

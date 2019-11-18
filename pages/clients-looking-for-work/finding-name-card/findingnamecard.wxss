@@ -1,4 +1,4 @@
-/* cardtwosonone .all*/
+/* cardtwosonone .all .cardsixsixnum .cardthreemobile .cardtwo*/
 @import "../../userauth/userauth.wxss";
 .common-userauth{position: fixed;left: 0;top: 0;z-index:999999;width:100%;height: 100%;background: white;}
 
@@ -80,7 +80,7 @@ page{
 .findingnamecardoneson .findingnamecardonesonone .otext {
   margin-top: 14rpx;
   font-size: 28rpx;
-  margin-left: 13rpx;
+  /* margin-left: 13rpx; */
   font-weight: bold;
   letter-spacing: 4rpx;
   color: #000;
@@ -575,7 +575,7 @@ padding-bottom: 6rpx;
   padding-right: 4rpx;
   text-align: center;
   margin-top: 12rpx;
-  line
+  line cardtwo
 } */
 .cardotextbottom {
   margin-top: 16rpx;
@@ -583,29 +583,31 @@ padding-bottom: 6rpx;
 
 .cardthree {
   width: 93%;
-  margin: 0 auto;
-  margin-top: 12rpx;
-  margin-bottom: 18rpx;
-  height: 24rpx;
-  font-size: 24rpx;
+  margin: 10rpx auto;
+  height: 30rpx !important;
+  font-size: 28rpx;
   position: relative;
+  line-height: 30rpx;
 }
 
 .cardthree .cardthreemobile {
-  font-size: 28rpx;
   font-weight: bold;
   position: absolute;
+    height: 30rpx !important;
   left: 50%;
   margin-left: -10%;
+  line-height: 30rpx;
 }
 
 .cardthree image {
-  width: 22rpx;
-  height: 24rpx;
+  width: 27rpx;
+  height: 30rpx;
+  vertical-align: bottom;
+  padding-right: 6rpx;
 }
 
 .cardthree .cardthreeone {
-  font-size: 24rpx;
+  font-size: 28rpx;
   color: #09f;
   position: absolute;
   right: 0;
@@ -643,30 +645,31 @@ padding-bottom: 6rpx;
 
 .cardfive {
   width: 93%;
-  margin: 0 auto;
-  margin-top: 12rpx;
-  margin-bottom: 18rpx;
-  height: 24rpx;
-  font-size: 24rpx;
+  margin: 10rpx auto;
+  height: 30rpx !important;
+  font-size: 28rpx;
   position: relative;
+  line-height: 30rpx;
 }
 
 .cardfive .cardfivemobile {
-  font-size: 28rpx;
   font-weight: bold;
   position: absolute;
+    height: 30rpx !important;
   left: 50%;
   margin-left: -10%;
+  line-height: 30rpx;
 }
 
 .cardfive image {
-  width: 22rpx;
-  height: 24rpx;
-
+  width: 26rpx;
+  height: 28rpx;
+  /* vertical-align: middle; */
+  padding-right: 6rpx;
 }
 
 .cardfive .cardthreeone {
- font-size: 24rpx;
+ font-size: 28rpx;
   color: #09f;
   position: absolute;
   right: 0;
@@ -778,29 +781,31 @@ padding-bottom: 6rpx;
 }
 .cardseven {
   width: 93%;
-  margin: 0 auto;
-  margin-top: 12rpx;
-  margin-bottom: 18rpx;
-  height: 24rpx;
-  font-size: 26rpx;
+  margin: 10rpx auto;
+  height: 30rpx !important;
+  font-size: 28rpx;
   position: relative;
+  line-height: 30rpx;
 }
 
 .cardseven .cardsevenmobile {
-  font-size: 28rpx;
   font-weight: bold;
   position: absolute;
+    height: 30rpx !important;
   left: 50%;
-  margin-left: -10%
+  margin-left: -10%;
+  line-height: 30rpx;
 }
 
 .cardseven image {
-  width: 22rpx;
-  height: 24rpx;
+  width: 27rpx;
+  height: 30rpx;
+  vertical-align: bottom;
+  padding-right: 6rpx;
 }
 
 .cardseven .cardthreeone {
-  font-size: 24rpx;
+  font-size: 28rpx;
   color: #09f;
   position: absolute;
   right: 0;
@@ -1246,16 +1251,18 @@ padding-bottom: 6rpx;
 }
 
 .text .otext{
-  width: 85rpx;
+  width: 100%;
   font-size: 42rpx;
   font-weight: bold;
-  margin: 20rpx auto;
+  /* margin: 20rpx auto; */
+  text-align: center;
+  margin-top: 20rpx;
 }
 .text .textdetail{
   font-size: 32rpx;
-  width: 83%;
+  width: 88%;
   margin: 0 auto;
-
+  text-align: center;
   margin-bottom: 40rpx;
   margin-top: 48rpx;
 }
