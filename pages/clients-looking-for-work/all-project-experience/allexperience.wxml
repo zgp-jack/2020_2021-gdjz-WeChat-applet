@@ -1,5 +1,5 @@
 <view>
-  <view class="skilleight" wx:for="{{allproject}}" wx:key="{{index}}" wx:if="{{allgetexpre ==0}}">
+  <view class="skilleight" wx:for="{{allproject}}" wx:key="{{index}}" wx:if="{{allgetexpre ==0}}" wx:for-index="pindex">
     <image class="audit" wx:if="{{item.check == 1}}" src="../../../images/review.png"></image>
     <image class="audit" wx:if="{{item.check == 0}}" src="../../../images/notthrough.png"></image>
     <view class="editor" bindtap="editor" data-uid="{{item}}" wx:if="{{ item.check == 2}}">编辑</view>
@@ -21,7 +21,7 @@
         </view>
         <view class="skilleightfive">
           <view class="skilleightfiveline">
-            <image wx:for="{{item.image}}" wx:key="{{index}}" src="{{item}}"></image>
+            <image wx:for="{{item.image}}" wx:key="{{index}}" src="{{item}}" catchtap="previewImage" data-url="{{ item }}" data-index="{{ pindex }}"></image>
           </view>
         </view>
         <view class="resson" wx:if="{{item.check == 0}}">
@@ -39,7 +39,7 @@
   <button class="obtn" bindtap="addpro" wx:if="{{allgetexpre ==0&&projectlength < 5}}">添加项目经验</button>
 
 
-  <view class="skilleight" wx:if="{{allgetexpre ==1}}" wx:for="{{allproject}}" wx:key="{{index}}">
+  <view class="skilleight" wx:if="{{allgetexpre ==1}}" wx:for="{{allproject}}" wx:key="{{index}}" wx:for-index="pindex">
     <image class="audit" wx:if="{{item.check == 1}}" src="../../../images/review.png"></image>
     <image class="audit" wx:if="{{item.check == 0}}" src="../../../images/notthrough.png"></image>
     <view class="skilleightzong">
@@ -59,7 +59,7 @@
         </view>
         <view class="skilleightfive">
           <view class="skilleightfiveline">
-            <image wx:for="{{item.image}}" wx:key="{{index}}" src="{{item}}"></image>
+            <image wx:for="{{item.image}}" wx:key="{{index}}" src="{{item}}" catchtap="previewImage" data-url="{{ item }}" data-index="{{ pindex }}"></image>
           </view>
         </view>
            <view class="resson" wx:if="{{item.check == 0}}">
@@ -74,7 +74,7 @@
     </view>
   </view>
 
-  <view class="skilleight" wx:if="{{allgetexpreone}}" wx:for="{{projecthree}}" wx:key="{{index}}">
+  <view class="skilleight" wx:if="{{allgetexpreone}}" wx:for="{{projecthree}}" wx:key="{{index}}" wx:for-index="pindex">
     <view class="skilleightzong">
       <view>
         <image src="../../../images/newresume-experience-item.png" class="skilleightone"></image>
@@ -92,7 +92,7 @@
         </view>
         <view class="skilleightfive">
           <view class="skilleightfiveline">
-            <image wx:for="{{item.image}}" wx:key="{{index}}" src="{{item}}"></image>
+            <image wx:for="{{item.image}}" wx:key="{{index}}" src="{{item}}" catchtap="previewImage" data-url="{{ item }}" data-index="{{ pindex }}" data-type="1"></image>
           </view>
         </view>
         <view class="skilleightsixall">

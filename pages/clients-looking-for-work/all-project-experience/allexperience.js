@@ -132,7 +132,16 @@ Page({
     this.delestore()
 
   },
-
+  previewImage:function(e){
+    let url = e.currentTarget.dataset.url;
+    let i = e.currentTarget.dataset.index;
+    let type = e.currentTarget.dataset.type;
+    let urls = type == "1" ? this.data.projecthree[i].image : this.data.allproject[i].image
+    wx.previewImage({
+      current: url, 
+      urls: urls
+    })
+  },
   /**
    * 生命周期函数--监听页面隐藏
    */

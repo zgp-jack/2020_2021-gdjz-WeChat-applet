@@ -103,6 +103,17 @@ Page({
     }
 
   },
+  previewImage: function (e) {
+    let url = e.currentTarget.dataset.url;
+    let i = e.currentTarget.dataset.index;
+    console.log(i);
+    let type = e.currentTarget.dataset.type;
+    let urls = type == "1" ? this.data.allskillthree[i].image : this.data.allskill[i].image
+    wx.previewImage({
+      current: url,
+      urls: urls
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
