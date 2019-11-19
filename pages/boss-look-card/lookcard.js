@@ -130,19 +130,27 @@ Page({
       failTitle: "网络错误！",
       params: dert,
       success: function (res) {
-        console.log(res)
-        if (res.data.errcode == 5000) {
-          console.log(123)
-          remain.remain({
-            tips: res.data.errmsg, callback: function () {
-            }
-          })
-        }
         if (res.data.errcode == 200) {
           that.setData({
             telephone: res.data.tel,
             onoff: true
           })
+        } else if (res.data.errcode == "get_integral"){
+          wx.showModal({
+            title: '温馨提示',
+            content:res.data.errmsg,
+            success:function(res){
+              if (res.confirm) {
+                wx.navigateTo({
+                  url: '/pages/getintegral/getintegral',
+                })
+              } else if (res.cancel) {
+                wx.navigateBack()
+              }
+            }
+          })
+        }else{
+          app.showMyTips(res.data.errmsg)
         }
       },
       fail: function (err) {
