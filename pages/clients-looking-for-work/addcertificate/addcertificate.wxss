@@ -1,4 +1,4 @@
-/* .img_item  .addcertificateimageone*/
+/* .img_item  .addcertificateimageone addcertificatetimeone addcertificatetimeone addcertificatedeone*/
 .addcertificatede{
   width: 93%;
   margin: 0 auto;
@@ -11,17 +11,38 @@
   border-bottom: 1px solid #F1F1F1;
 }
 .addcertificatede .addcertificatedeone{
-  width: 22%;
+  width: 23.5%;
   font-size: 28rpx;
   line-height: 90rpx;
   color: #2A2A2A;
   margin-left: 19rpx;
+    display: inline-block;
+  text-align: justify;
+
+  /* letter-spacing: 10px; */
+  position: relative;
+}
+
+.addcertificatede .addcertificatedeone::before{
+    content:':';
+    /* overflow: hidden; */
+    height: 100%;
+    width: 6rpx;
+    position: absolute;
+    right: -8rpx;
+}
+.addcertificatede .addcertificatedeone::after{
+    content:'';
+    width: 100%;
+    display: inline-block;
+    overflow: hidden;
+    height: 0;
 }
 .addcertificatede .addcertificatedeone text{
     padding-left: 58rpx;
 }
 .addcertificatede .addcertificatedetwo{
-  width: 80%;
+  width: 68%;
   height: 90rpx;
   display: flex;
   flex-direction: column;
@@ -46,18 +67,38 @@
   border-bottom: 1px solid #F1F1F1;
 }
 .addcertificatetime .addcertificatetimeone{
-  width: 35%;
+  width: 23.5%;
   font-size: 28rpx;
   line-height: 90rpx;
   color: #2A2A2A;
   margin-left: 19rpx;
+  display: inline-block;
+  text-align: justify;
 
+  /* letter-spacing: 10px; */
+  position: relative;
+}
+
+.addcertificatetime .addcertificatetimeone::before{
+    content:':';
+    /* overflow: hidden; */
+    height: 100%;
+    width: 6rpx;
+    position: absolute;
+    right: -8rpx;
+}
+.addcertificatetime .addcertificatetimeone::after{
+    content:'';
+    width: 100%;
+    display: inline-block;
+    overflow: hidden;
+    height: 0;
 }
 .addcertificatetime .addcertificatetimeone text{
     padding-left: 58rpx;
 }
 .addcertificatetime .addcertificatetimetwo{
-  width: 80%;
+  width: 68%;
   height: 90rpx;
   display: flex;
   flex-direction: column;
@@ -195,10 +236,9 @@
 }
 
 .text .otext{
-  width: 85rpx;
   font-size: 42rpx;
   font-weight: bold;
-  margin: 0 auto;
+  text-align: center;
 }
 .text .textdetail{
   font-size: 32rpx;

@@ -44,7 +44,8 @@
   <view class="experiencethree">
     <view class="experiencethreeone">项目详情：</view>
     <view class="experiencethreetwo">
-      <textarea bindinput="bindTextAreaBlur" value="{{detail}}" maxlength="500" placeholder="主要描述工作中的项目情况..." />
+    <textarea  bindinput="bindTextAreaBlur" wx:if="{{!showModal}}" value="{{detail}}" maxlength="500" placeholder="主要描述工作中的项目情况..." />
+        <textarea  bindinput="bindTextAreaBlur" wx:if="{{showModal}}" disabled="true" value="{{detail}}" maxlength="500" placeholder="主要描述工作中的项目情况..." />
     </view>
    <text class="informationenum">{{detailength}}/500</text>
   </view>
@@ -59,22 +60,22 @@
       </image>
     </view>
   </view>
-  <view class="modalDlg" wx:if="{{showModal}}">
-    <view class="modalDlgone">
-    </view>
-    <view class="text">
-      <view class="otext">
+  <cover-view class="modalDlg" wx:if="{{showModal}}">
+    <cover-view class="modalDlgone">
+    </cover-view>
+    <cover-view class="text">
+      <cover-view class="otext">
         提示
-      </view>
-      <view class="textdetail">
+      </cover-view>
+      <cover-view class="textdetail">
         项目经验删除后，将无法恢复
-      </view>
-      <view class="buttontext">
-        <view>取消</view>
-        <view catchtap="vertify">确定</view>
-      </view>
-    </view>
-  </view>
+      </cover-view>
+      <cover-view class="buttontext">
+        <cover-view>取消</cover-view>
+        <cover-view catchtap="vertify">确定</cover-view>
+      </cover-view>
+    </cover-view>
+  </cover-view>
   <view class="experiencebottom">
     <button wx:if="{{!obtnbut}}" class="experiencebottomone" catchtap="deleteexper">删除项目经验</button>
     <button wx:if="{{obtnbut&&project_show}}" class="experiencebottomone"  bindtap="preservechixu">保存 继续添加</button>

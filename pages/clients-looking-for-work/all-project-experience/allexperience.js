@@ -11,7 +11,8 @@ Page({
     allgetexpre: 0,
     projectwo: [],
     projecthree: [],
-    allgetexpreone: false
+    allgetexpreone: false,
+    onoff: false
   },
   editor(e) {
     console.log(e)
@@ -87,7 +88,8 @@ Page({
             }
           }
           that.setData({
-            projectwo: projectall
+            projectwo: projectall,
+            onoff: true
           });
 
         }

@@ -28,7 +28,7 @@
       </view>
     </view>
   </view>
-  <button class="obtn" bindtap="addskill"  wx:if="{{skillpass == 0&&allskilength<3}}">添加技能证书</button>
+  <button class="obtn" bindtap="addskill"  wx:if="{{onoff&&skillpass == 0&&allskilength<3}}">添加技能证书</button>
 
 
   <view class="skilleight" wx:for="{{allskill}}" wx:key="{{index}}" wx:if="{{skillpass == 1}}" wx:for-index="pindex">

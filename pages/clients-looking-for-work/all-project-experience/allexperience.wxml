@@ -36,7 +36,7 @@
       </view>
     </view>
   </view>
-  <button class="obtn" bindtap="addpro" wx:if="{{allgetexpre ==0&&projectlength < 5}}">添加项目经验</button>
+  <button class="obtn" bindtap="addpro" wx:if="{{onoff&&allgetexpre ==0&&projectlength < 5}}">添加项目经验</button>
 
 
   <view class="skilleight" wx:if="{{allgetexpre ==1}}" wx:for="{{allproject}}" wx:key="{{index}}" wx:for-index="pindex">

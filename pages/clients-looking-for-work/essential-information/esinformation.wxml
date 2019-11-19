@@ -3,7 +3,7 @@
     <view class="informationtwi">
       <text class="informationtwione">姓名</text>
       <view class="informationtwitwo">
-        <input type="text" maxlength="6" placeholder="请输入你的名字" value="{{name}}" bindinput="name"></input>
+        <input type="text" maxlength="5" placeholder="请输入你的名字" value="{{name}}" bindinput="name"></input>
       </view>
     </view>
     <view class="informationthree">

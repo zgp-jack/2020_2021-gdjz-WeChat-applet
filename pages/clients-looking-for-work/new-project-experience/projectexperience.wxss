@@ -1,4 +1,4 @@
-/* experiencefour modalDlg*/
+/* experiencefour modalDlg experiencethree modalDlg experienceheaderone*/
 .experienceheader{
   width: 93%;
   margin: 0 auto;
@@ -10,7 +10,7 @@
   background-color: white;
 }
 .experienceheader .experienceheaderone{
-  width: 38%;
+  width: 24%;
   font-size: 30rpx;
   line-height: 110rpx;
   color: #2A2A2A;
@@ -196,10 +196,9 @@
 }
 
 .text .otext{
-  width: 85rpx;
   font-size: 42rpx;
   font-weight: bold;
-  margin: 0 auto;
+  text-align: center;
 }
 .text .textdetail{
   font-size: 32rpx;
@@ -216,7 +215,7 @@
    position: absolute;
    bottom: 0;
 }
-.buttontext  view{
+.buttontext cover-view{
    width: 50%;
    height: 80rpx;
    background:#0099FF;
@@ -225,16 +224,15 @@
    line-height: 80rpx;
 }
 
-.buttontext  view:first-child{
+.buttontext cover-view:first-child{
    border: 1px solid rgb(143, 142, 142);
    color: black;
    background: white;
-   border-left: 0rpx;
-   border-bottom: 0rpx;
 }
 
-.buttontext  view:last-child{
+.buttontext  cover-view:last-child{
    color: white;
+      border: 1px solid rgb(143, 142, 142);
 }
 
 .experiencethree .informationenum{

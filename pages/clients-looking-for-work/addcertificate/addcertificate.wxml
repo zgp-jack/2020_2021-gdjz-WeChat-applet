@@ -1,12 +1,12 @@
 <view bindtap="obtn">
   <view class="addcertificatede">
-    <text class="addcertificatedeone">职业技能：</text>
+    <text class="addcertificatedeone">职业技能</text>
     <view class="addcertificatedetwo">
       <input type="text" placeholder="请输入您的职业技能名称" bindinput="name" value="{{name}}"></input>
     </view>
   </view>
   <view class="addcertificatetime">
-    <text class="addcertificatetimeone">领取证书时间：</text>
+    <text class="addcertificatetimeone">领取证书时间</text>
     <view class="addcertificatetimetwo">
       <picker mode="date" value="{{date}}"bindchange="bindstartDate"
             start="1900-01-01">

@@ -1,5 +1,5 @@
 /* cardtwosonone .all .cardsixsixnum .cardotext .cardthreemobile .cardtwo .cardthree cardotext
-.cardotext findingnamecardthreemobile findingnamecardthree"*/
+.cardotext findingnamecardthreemobile findingnamecardthree contentone*/
 @import "../../userauth/userauth.wxss";
 .common-userauth{position: fixed;left: 0;top: 0;z-index:999999;width:100%;height: 100%;background: white;}
 
@@ -983,7 +983,7 @@ padding-bottom: 6rpx;
 .contentone{
   font-size: 26rpx;
   color: #202020;
-  margin-left: 8.5%;
+  margin-left: 6.5%;
   margin-bottom: 8rpx;
   padding-right: 2%;
      word-wrap:break-word;

@@ -11,7 +11,8 @@ Page({
     skillpass: 0,
     allskilltwo: [],
     allskillthree: [],
-    allskillonef:false
+    allskillonef:false,
+    onoff:false
   },
   allskill() {
     let userInfo = wx.getStorageSync("userInfo");
@@ -44,7 +45,8 @@ Page({
           // console.log(that.data.allskilltwo)
           console.log(allskilltwo)
           that.setData({
-            allskilltwo: allskilltwo
+            allskilltwo: allskilltwo,
+            onoff: true
           });
         }
       },

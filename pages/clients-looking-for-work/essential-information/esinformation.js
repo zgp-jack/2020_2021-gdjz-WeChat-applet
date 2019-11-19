@@ -438,10 +438,10 @@ Page({
       return
     }
 
-    if (vertifyNum.isNull(this.data.name) || this.data.name.length < 2) {
+    if (vertifyNum.isNull(this.data.name) || this.data.name.length < 2 || this.data.name.length >5) {
       wx.showModal({
         title: '温馨提示',
-        content: '您输入的姓名为空,或者少于两个字',
+        content: '您输入的姓名为空,或者少于两个字,或者大于五个字',
         showCancel: false,
         success(res) { }
       })
