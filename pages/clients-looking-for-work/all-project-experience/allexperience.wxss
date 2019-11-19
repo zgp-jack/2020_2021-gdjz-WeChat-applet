@@ -1,4 +1,5 @@
-/* audit  editor description*/
+/* audit  editor description skilleightfiveline skilleightall skilleightfive skilleightfiveline
+description .skilleightzong .skilleighttwo project skilleightall*/
 .skilleight {
   width: 93%;
   margin: 0 auto;
@@ -13,7 +14,10 @@
   display: flex;
   flex-direction: row;
 }
-
+.skilleightall{
+    width: 90%;
+    margin-left: 14rpx;
+}
 .skilleight .skilleightone {
   margin: 0;
   padding: 0;
@@ -26,25 +30,32 @@
 .skilleightzong .skilleighttwo {
   color: #8b8b8a;
   font-size: 22rpx;
-  margin-left: 14rpx;
+
 }
 
 .project {
-  font-size: 26rpx;
+  font-size: 0rpx;
   color: #343434;
-  margin-left: 14rpx;
   margin-top: 10rpx;
+}
+.project text{
+  font-size: 26rpx;
 }
 
 .description {
+    font-size: 0rpx;
   margin-top: 16rpx;
   color: #8b8b8a;
-  font-size: 22rpx;
-   width: 95%;
+
+   width: 100%;
    word-wrap:break-word;
   word-break:break-all;
-}
 
+
+}
+.description text{
+  font-size: 22rpx;
+}
 .skilleightzong .skilleighttwo text:last-child {
   font-size: 20rpx;
   line-height: 26rpx;
@@ -73,10 +84,49 @@
 .skilleightzong .skilleightfive image {
   width: 185rpx;
   height: 185rpx;
-  margin-left: 16rpx;
-  margin-top: 16rpx;
+
+}
+.skilleightzong .skilleightfive .skilleightfiveline{
+    width: 100%;
+}
+.temimage{
+    display: inline-block;
+    margin-top: 16rpx;
+    width: 33.333%;
+    height: 185rpx;
 }
 
+.temimage:nth-child(2){
+    display: inline-block;
+    margin-top: 16rpx;
+    width: 33.333%;
+    height: 185rpx;
+    text-align: center;
+}
+
+.temimage:nth-child(3){
+    display: inline-block;
+    margin-top: 16rpx;
+    width: 33.333%;
+    height: 185rpx;
+    text-align: right;
+}
+
+.temimage:nth-child(5){
+    display: inline-block;
+    margin-top: 16rpx;
+    width: 33.333%;
+    height: 185rpx;
+    text-align: center;
+}
+
+.temimage:nth-child(6){
+    display: inline-block;
+    margin-top: 16rpx;
+    width: 33.333%;
+    height: 185rpx;
+    text-align: right;
+}
 .skilleightzong .skilleightsix {
   padding: 0;
   width: 246rpx;

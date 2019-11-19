@@ -3,25 +3,27 @@
     <image class="audit" wx:if="{{item.check == 1}}" src="../../../images/review.png"></image>
     <image class="audit" wx:if="{{item.check == 0}}" src="../../../images/notthrough.png"></image>
     <view class="editor" bindtap="editor" data-uid="{{item}}" wx:if="{{ item.check == 2}}">编辑</view>
-        <view class="editor" bindtap="editor" data-uid="{{item}}" wx:if="{{item.check == 0}}">待修改</view>
+    <view class="editor" bindtap="editor" data-uid="{{item}}" wx:if="{{item.check == 0}}">待修改</view>
     <view class="skilleightzong">
       <view>
         <image src="../../../images/newresume-experience-item.png" class="skilleightone"></image>
       </view>
       <view class="skilleightall">
         <view class="project">
-          {{item.project_name}}
+          <text>{{item.project_name}}</text>
         </view>
         <view class="skilleighttwo">
           <text>{{item.start_time}}--{{item.completion_time}}</text>
           <text>{{item.province_name}}省{{item.city_name}}市</text>
         </view>
         <view class="description">
-          {{item.detail}}
+          <text>{{item.detail}}</text>
         </view>
         <view class="skilleightfive">
           <view class="skilleightfiveline">
-            <image wx:for="{{item.image}}" wx:key="{{index}}" src="{{item}}" catchtap="previewImage" data-url="{{ item }}" data-index="{{ pindex }}"></image>
+            <view wx:for="{{item.image}}" wx:key="{{index}}" class="temimage">
+              <image wx:key="{{index}}" src="{{item}}" catchtap="previewImage" data-url="{{ item }}" data-index="{{ pindex }}"></image>
+            </view>
           </view>
         </view>
         <view class="resson" wx:if="{{item.check == 0}}">
@@ -55,14 +57,16 @@
           <text>{{item.province_name}}省{{item.city_name}}市</text>
         </view>
         <view class="description">
-          {{item.detail}}
+          <text>{{item.detail}}</text>
         </view>
         <view class="skilleightfive">
           <view class="skilleightfiveline">
-            <image wx:for="{{item.image}}" wx:key="{{index}}" src="{{item}}" catchtap="previewImage" data-url="{{ item }}" data-index="{{ pindex }}"></image>
+            <view wx:for="{{item.image}}" class="temimage">
+              <image wx:key="{{index}}" src="{{item}}" catchtap="previewImage" data-url="{{ item }}" data-index="{{ pindex }}"></image>
+            </view>
           </view>
         </view>
-           <view class="resson" wx:if="{{item.check == 0}}">
+        <view class="resson" wx:if="{{item.check == 0}}">
           未通过原因：{{item.fail_case}}
         </view>
         <view class="skilleightsixall" wx:if="{{index == projectlength-1}}">
@@ -88,7 +92,7 @@
           <text>{{item.province_name}}省{{item.city_name}}市</text>
         </view>
         <view class="description">
-          {{item.detail}}
+         <text>{{item.detail}}</text>
         </view>
         <view class="skilleightfive">
           <view class="skilleightfiveline">

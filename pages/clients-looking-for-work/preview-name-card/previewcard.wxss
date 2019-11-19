@@ -1,5 +1,5 @@
 @import "../finding-name-card/findingnamecard.wxss";
-/* introcardtwo  obtcard*/
+/* introcardtwo  obtcard cardnine obtcardnineone */
 .cardeight {
   margin-bottom: 60rpx;
 }

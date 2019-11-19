@@ -126,7 +126,7 @@
     </view>
   </view>
   <view class="cardsix" wx:if="{{projectlength!= 0}}">
-    <view class="cardsixzong" wx:for="{{projectone}}" wx:key="{{index}}">
+    <view class="cardsixzong" wx:for="{{projectone}}" wx:for-index="pindex" wx:key="{{index}}">
       <view>
         <image src="../../images/newresume-experience-item.png" class="cardsixone"></image>
       </view>
@@ -144,7 +144,7 @@
         </text>
           </view>
           <view class="cardsixfive">
-            <image wx:for="{{item.image}}" wx:key="{{index}}" src="{{item}}"></image>
+            <image wx:for="{{item.image}}" wx:key="{{index}}" src="{{item}}" data-url="{{ item }}" catchtap="previewImage" data-index="{{ pindex }}"></image>
 
           </view>
         </view>
@@ -172,8 +172,8 @@
       <text>职业技能</text>
     </view>
   </view>
-  <view class="cardeight" wx:if="{{skilllength!= 0}}">
-    <view class="cardeightzong" wx:for="{{skillbooksone}}" wx:key="{{index}}">
+  <view class="cardeight {{(status != 0)?'eightstatus':''}}" wx:if="{{skilllength!= 0}}">
+    <view class="cardeightzong" wx:for="{{skillbooksone}}" wx:for-index="pindex" wx:key="{{index}}">
       <view>
         <image src="../../images/newresume-experience-item.png" class="cardeightone"></image>
       </view>
@@ -183,7 +183,7 @@
           <text>{{item.certificate_time}}</text>
         </view>
         <view class="cardeightfive">
-          <image wx:for="{{item.image}}" wx:key="{{index}}" src="{{item}}"></image>
+          <image wx:for="{{item.image}}" data-url="{{ item }}" catchtap="previewImagec" data-index="{{ pindex }}" wx:key="{{index}}" src="{{item}}"></image>
 
         </view>
 
@@ -257,6 +257,13 @@
     <view class='userauth-words'>招工 找活抢先一步，用的安心 赚的开心。</view>
     <button class='userauth-btn userauth-sure-btn' open-type="getUserInfo" bindgetuserinfo='bindGetUserInfo'>微信授权登录</button>
     <button class='userauth-btn  userauth-back-btn' bindtap='returnPrevPage'>返回上一页</button>
+  </view>
+  <view class="cardnine" wx:if="{{ status != 0}}">
+    <button class="obtcardnineone" open-type='share'>
+      分享
+    </button>
+  </view>
+  <view wx:if="{{ status == 0}}" style="height: 118rpx;">
   </view>
 </view>
 <!-- oworkotextonetu  cardsixone-- selectTap projectone projectlength>

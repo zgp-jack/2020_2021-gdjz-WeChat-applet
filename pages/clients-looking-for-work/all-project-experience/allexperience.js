@@ -2,7 +2,7 @@ const app = getApp();
 Page({
 
   /**
-   * 页面的初始数据 editor allgetexpre addpro
+   * 页面的初始数据 editor allgetexpre addpro previewImage
    */
   data: {
     allproject: [],
@@ -135,6 +135,7 @@ Page({
 
   },
   previewImage:function(e){
+    console.log(e)
     let url = e.currentTarget.dataset.url;
     let i = e.currentTarget.dataset.index;
     let type = e.currentTarget.dataset.type;

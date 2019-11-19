@@ -5,7 +5,8 @@ let reminder = require("../../../utils/ reminder.js");
 Page({
 
   /**
-   * 页面的初始数据 bindstartDate nowDate
+   * 页面的初始数据 bindstartDate nowDate deleteexper  obtn quit
+vertify()
    */
   data: {
     imgArrs: [],
@@ -19,7 +20,20 @@ Page({
     certificate_count:0,
     certificate_cou: 0,
     imgArrslength:true,
-    skill_show:true
+    skill_show:true,
+    display: "none",
+  },
+  vertify() {
+    this.setData({
+      showModal: false,
+      display: "none"
+    })
+  },
+  obtn() {
+    this.setData({
+      showModal: false,
+      display: "none"
+    })
   },
   getbirthall() {
     var date = new Date();
@@ -129,6 +143,7 @@ Page({
     app.appRequestAction({
       url: 'resumes/del-certificate/',
       way: 'POST',
+      mask: true,
       params: project,
       failTitle: "操作失败，请稍后重试！",
       success(res) {
@@ -149,12 +164,20 @@ Page({
       }
     })
     this.setData({
-      showModal: false
+      showModal: false,
+      display: "none"
+    })
+  },
+  quit() {
+    this.setData({
+      showModal: false,
+      display: "none"
     })
   },
   deleteexper() {
     this.setData({
-      showModal: true
+      showModal: true,
+      display: "block"
     })
   },
   obtn() {
@@ -221,6 +244,7 @@ Page({
       url: 'resumes/certificate/',
       way: 'POST',
       params: project,
+      mask: true,
       failTitle: "操作失败，请稍后重试！",
       success(res) {
         console.log(res)
@@ -302,6 +326,7 @@ Page({
       way: 'POST',
       failTitle: "操作失败，请稍后重试！",
       params: project,
+      mask: true,
       success(res) {
         remain.remain({
           tips: res.data.errmsg, callback: function () {
@@ -416,6 +441,7 @@ Page({
       url: 'resumes/certificate/',
       way: 'POST',
       failTitle: "操作失败，请稍后重试！",
+      mask: true,
       params: project,
       success(res) {
         console.log(res)

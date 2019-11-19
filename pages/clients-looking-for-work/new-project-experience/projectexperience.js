@@ -3,7 +3,8 @@ let v = require("../../../utils/v.js");
 let areas = require("../../../utils/area.js");
 let remain = require("../../../utils/remain.js");
 let reminder = require("../../../utils/ reminder.js");
-//bindstartDate delete vertify vertify preservechixu bindTextAreaBlur 大于今天 chooseImage delete preserve showModal vertify()
+let throttle = require("../../../utils/throttle.js");
+//bindstartDate delete vertify vertify preservechixu bindTextAreaBlur 大于今天 chooseImage delete preserve showModal vertify() showModal
 
 Page({
   data: {
@@ -34,7 +35,20 @@ Page({
     project_cou:0,
     project_count:0,
     project_show: true,
-    imgArrslength:true
+    imgArrslength:true,
+    display: "none",
+  },
+  vertify() {
+    this.setData({
+      showModal: false,
+      display: "none"
+    })
+  },
+  obtn() {
+    this.setData({
+      showModal: false,
+      display: "none"
+    })
   },
   getbirthall() {
     let starttime = this.data.startdate.split("-");
@@ -58,7 +72,8 @@ Page({
   },
   deleteexper() {
     this.setData({
-      showModal: true
+      showModal: true,
+      display: "block"
     })
   },
   projectname(e) {
@@ -217,7 +232,7 @@ Page({
     this.setData(data);
     console.log(data)
   },
-  preserve() {
+  preserve:function() {
     let that = this;
     if (that.data.project_cou >= that.data.project_count) {
       wx.showModal({
@@ -303,6 +318,7 @@ Page({
     app.appRequestAction({
       url: 'resumes/project/',
       way: 'POST',
+      mask:true,
       params: project,
       failTitle: "操作失败，请稍后重试！",
       success(res) {
@@ -408,6 +424,7 @@ Page({
     app.appRequestAction({
       url: 'resumes/project/',
       way: 'POST',
+      mask: true,
       params: project,
       failTitle: "操作失败，请稍后重试！",
       success(res) {
@@ -482,6 +499,7 @@ Page({
     app.appRequestAction({
       url: 'resumes/del-project/',
       way: 'POST',
+      mask: true,
       params: project,
       failTitle: "操作失败，请稍后重试！",
       success(res) {
@@ -503,10 +521,16 @@ Page({
       }
     })
     this.setData({
-      showModal: false
+      showModal: false,
+      display: "none"
     })
   },
-
+  quit(){
+    this.setData({
+      showModal: false,
+      display: "none"
+    })
+  },
   getproject() {
     let that = this;
     let project = wx.getStorageSync("projectdetail");
@@ -667,6 +691,7 @@ Page({
       way: 'POST',
       params: project,
       failTitle: "操作失败，请稍后重试！",
+      mask: true,
       success(res) {
         console.log(res)
         remain.remain({

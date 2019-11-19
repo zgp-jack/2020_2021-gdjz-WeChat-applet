@@ -1,4 +1,4 @@
-// addskill  lat nation projectlength showbot tom  view_num selectTap showbottom checkone projectone checkfour checkone ressonone note showperfection editor addproject toperfect improvementwork 修改失败 introinfo authentication returnPrevPage  userInfo
+// addskill  lat nation projectlength showbot tom  view_num selectTap showbottom checkone projectone checkfour checkone ressonone note showperfection editor addproject toperfect improvementwork 修改失败 introinfo authentication returnPrevPage  userInfo display
  
 
 const app = getApp();
@@ -77,6 +77,28 @@ Page({
     display:"none",
     popup:"",
     move:true
+  },
+  previewImage: function (e) {
+    console.log(e)
+    let url = e.currentTarget.dataset.url;
+    let i = e.currentTarget.dataset.index;
+    let type = e.currentTarget.dataset.type;
+    let urls =  this.data.projectone[i].image
+    wx.previewImage({
+      current: url,
+      urls: urls
+    })
+  },
+  previewImagec: function (e) {
+    console.log(e)
+    let url = e.currentTarget.dataset.url;
+    let i = e.currentTarget.dataset.index;
+    let type = e.currentTarget.dataset.type;
+    let urls = this.data.skillbooksone[i].image
+    wx.previewImage({
+      current: url,
+      urls: urls
+    })
   },
   vertify() {
     this.setData({

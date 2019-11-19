@@ -1,4 +1,4 @@
-<view bindtap="obtn">
+<view bindtap="quit">
   <view class="addcertificatede">
     <text class="addcertificatedeone">职业技能</text>
     <view class="addcertificatedetwo">
@@ -31,7 +31,7 @@
         提示
       </view>
       <view class="textdetail">
-        项目经验删除后，将无法恢复
+        技能证书删除后，将无法恢复
       </view>
       <view class="buttontext">
         <view>取消</view>
@@ -39,6 +39,7 @@
       </view>
     </view>
   </view>
+ <view class="bg" style='display:{{display}}' catchtouchmove="{{move}}"></view>
   <view class="addcertificatebottom">
     <button class="addcertificatebottomone" wx:if="{{!obtnbut}}" catchtap="deleteexper">删除</button>
     <button class="addcertificatebottomone" wx:if="{{obtnbut&&skill_show}}" bindtap="preservechixu">保存 继续添加</button>

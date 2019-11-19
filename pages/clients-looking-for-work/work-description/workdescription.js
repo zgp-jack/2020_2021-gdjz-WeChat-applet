@@ -1,4 +1,4 @@
-// .labelnum judge  bindMultiPickerChange bindMultiPickerColumnChange
+// .labelnum judge  bindMultiPickerChange bindMultiPickerColumnChange multiIndexvalue
 let areas = require("../../../utils/area.js");
 const app = getApp();
 let v = require("../../../utils/v.js");
@@ -181,7 +181,8 @@ Page({
     } else {
       allpro = this.data.allprovinces[this.data.multiIndex[0]].id
       this.setData({
-        multiIndexvalue: that.data.allprovinces[that.data.multiIndex[0]].name + "" + that.data.allprovinces[that.data.multiIndex[0]].name
+        multiIndexvalue: that.data.allprovinces[that.data.multiIndex[0]].name 
+        // + "" + that.data.allprovinces[that.data.multiIndex[0]].name
       })
     }
     this.setData({
@@ -310,9 +311,10 @@ Page({
       tags: this.data.labelnum
     })
     console.log(information)
-    app.doRequestAction({
+    app.appRequestAction({
       url: "resumes/introduce/",
       way: "POST",
+      mask: true,
       params: information,
       failTitle: "操作失败，请稍后重试！",
       success: function (res) {
@@ -320,7 +322,7 @@ Page({
         remain.remain({
           tips: res.data.errmsg, callback: function () {
             if (res.data.errcode == 200) {
-              wx.navigateTo({
+              wx.redirectTo({
                 url: "../finding-name-card/findingnamecard",
                })
             }

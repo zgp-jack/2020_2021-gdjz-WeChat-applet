@@ -48,12 +48,12 @@
 
   <view class="findingnamecardthree" wx:if="{{showtop}}">
     <view class="findingnamecardthreemobile">
-      <image src="../../../images/newresume-description.png"></image>
-      基本信息
+      <image src="../../../images/jichu.png"></image>
+      基础信息
     </view>
   </view>
   <view class="findingnamecardtwo" wx:if="{{showtop}}">
-    <text class="findingnamecardtwothree">您还没有完善基本信息</text>
+    <text class="findingnamecardtwothree">您还没有完善基础信息</text>
     <view class="findingnamecardtwofour" bindtap="toperfect">去完善</view>
   </view>
 
@@ -113,7 +113,7 @@
           </view>
           <view class="cardotext">
 
-              <text class="oworkotext">工作介绍</text>
+              <text class="oworkotext">自我介绍</text>
 
           </view>
         </view>
@@ -226,7 +226,7 @@
   </view>
   <view class="cardsix" wx:if="{{projectlength != 0}}">
 
-    <view class="cardsixzong" wx:for="{{projectone}}" wx:key="{{index}}">
+    <view class="cardsixzong" wx:for="{{projectone}}" wx:for-index="pindex" wx:key="{{index}}">
       <image class="checkthree" src="../../../images/audit.png" wx:if="{{item.check == 1}}"></image>
       <view class="editor" bindtap="editor" data-uid="{{item}}" wx:if="{{item.check != 1}}">编辑</view>
       <image class="audit" wx:if="{{item.check == 0}}" src="../../../images/notthrough.png"></image>
@@ -240,14 +240,14 @@
         <view class="cardsixthreeborder">
           <view class="cardsixthree">
             <text>{{item.start_time}}--{{item.completion_time}}</text>
-            <text>{{item.province_name}}省{{item.city_name}}市</text>
+            <text>{{item.province_name}}{{item.city_name}}</text>
           </view>
           <view class="cardsixfour">
             <text>{{item.detail}}
         </text>
           </view>
           <view class="cardsixfive">
-            <image wx:for="{{item.image}}" wx:key="{{index}}" src="{{item}}"></image>
+            <image wx:for="{{item.image}}" data-url="{{ item }}" catchtap="previewImage" wx:key="{{index}}" src="{{item}}" data-index="{{ pindex }}"></image>
           </view>
           <view wx:if="{{item.check == 0}}" class="resson">
             未通过原因：{{item.fail_case}}
@@ -296,7 +296,7 @@
   </view>
   <view class="cardeight" wx:if="{{skilllength != 0}}">
 
-    <view class="cardeightzong" wx:for="{{skillbooksone}}" wx:key="{{index}}">
+    <view class="cardeightzong" wx:for="{{skillbooksone}}" wx:for-index="pindex" wx:key="{{index}}">
       <image class="checkfour" src="../../../images/audit.png" wx:if="{{item.check == 1}}"></image>
       <view class="editor" bindtap="editorone" data-uid="{{item}}" wx:if="{{item.check != 1}}">编辑</view>
       <image class="audit" wx:if="{{item.check == 0}}" src="../../../images/notthrough.png"></image>
@@ -310,7 +310,7 @@
           <text>{{item.certificate_time}}</text>
         </view>
         <view class="cardeightfive">
-          <image wx:for="{{item.image}}" wx:key="{{index}}" src="{{item}}"></image>
+          <image wx:for="{{item.image}}" data-url="{{ item }}" catchtap="previewImagec" src="{{item}}" data-index="{{ pindex }}" wx:key="{{index}}" ></image>
         </view>
         <view wx:if="{{item.check == 0}}" class="resson">
           未通过原因：{{item.fail_case}}
@@ -359,6 +359,8 @@
       <image src="../../../images/bottom-one.png"></image> 预览</button>
     <button class="cardnineone" open-type='share'>
       <image src="../../../images/bottom-two.png"></image>分享</button>
+  </view>
+  <view style="height: 118rpx;">
   </view>
 </view>
 

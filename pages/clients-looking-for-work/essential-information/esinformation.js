@@ -8,7 +8,7 @@ const app = getApp();
 Page({
 
   /** 
-   * 页面的初始数据 textareavalue  typeworkarray gender submitinformation completemore
+   * 页面的初始数据 textareavalue  typeworkarray gender submitinformation completemore GPSsubmit
    */
 
   data: {
@@ -134,7 +134,7 @@ Page({
           // let onamesplit = oname.slice(0, 10) + '...';
           let onamesplit = oname;
           _this.setData({
-            regionone: data[0].name,
+            regionone: data[0].name
           });
         } else {
           _this.setData({
@@ -142,7 +142,9 @@ Page({
           });
         }
         _this.setData({
-          oadcode: data[0].regeocodeData.addressComponent.adcode
+          oadcode: data[0].regeocodeData.addressComponent.adcode,
+          longitude: data[0].latitude + "",
+          latitude: data[0].longitude + ""
         });
           
       },
@@ -515,6 +517,7 @@ Page({
       url: "resumes/add-resume/",
       way: "POST",
       params: information,
+      mask: true,
       failTitle: "操作失败，请稍后重试！",
       success: function (res) {
         console.log(res)
@@ -659,7 +662,7 @@ Page({
    */
   onShow: function () {
     this.getbirth()
-    this.getlocationdetails()
+    // this.getlocationdetails()
 
   },
 

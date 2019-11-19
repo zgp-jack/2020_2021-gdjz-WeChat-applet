@@ -1,3 +1,5 @@
+
+/* skilleightall */
 .skilleight {
   width: 93%;
   margin: 0 auto;
@@ -6,7 +8,9 @@
   position: relative;
   overflow: hidden;
 }
-
+.skilleightall{
+    width: 90%;
+}
 .skilleightzong {
   margin-top: 18rpx;
   display: flex;
@@ -55,9 +59,34 @@
 .skilleightzong .skilleightfive image {
   width: 185rpx;
   height: 185rpx;
-  margin-left: 16rpx;
-  margin-top: 16rpx;
 }
+.skilleightzong .skilleightfive .skilleightfiveline{
+    width: 100%;
+    margin-left: 14rpx;
+}
+.temimage{
+    display: inline-block;
+    margin-top: 16rpx;
+    width: 33.333%;
+    height: 185rpx;
+}
+
+.temimage:nth-child(2){
+    display: inline-block;
+    margin-top: 16rpx;
+    width: 33.333%;
+    height: 185rpx;
+    text-align: center;
+}
+
+.temimage:nth-child(3){
+    display: inline-block;
+    margin-top: 16rpx;
+    width: 33.333%;
+    height: 185rpx;
+    text-align: right;
+}
+
 
 .skilleightzong .skilleightsix {
   margin: 0;

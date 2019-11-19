@@ -84,7 +84,7 @@
   <view class="informationevaluation">
     <view class="informationevaluationone">自我介绍：</view>
     <view>
-     <textarea wx:if="{{ !showWorkType }}" class="informationevaluationtwo" bindinput="textareavalue" maxlength="500" placeholder="请简要介绍你所从事的行业以及工作经验..." value="{{otextareavalue}}">
+     <textarea     wrap="hard"  wx:if="{{ !showWorkType && !perfection}}" class="informationevaluationtwo" bindinput="textareavalue" maxlength="500" placeholder="请简要介绍你所从事的行业以及工作经验..." value="{{otextareavalue}}">
     </textarea>
     </view>
     <text class="informationenum">{{otextareavaluel}}/500</text>
@@ -111,3 +111,4 @@
   </view>
   
 </view>
+<!-- getlocationdetails -->

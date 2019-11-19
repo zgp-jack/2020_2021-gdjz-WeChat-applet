@@ -84,6 +84,28 @@ Page({
         uuid:""
     }
   },
+  previewImage: function (e) {
+    console.log(e)
+    let url = e.currentTarget.dataset.url;
+    let i = e.currentTarget.dataset.index;
+    let type = e.currentTarget.dataset.type;
+    let urls = this.data.projectone[i].image
+    wx.previewImage({
+      current: url,
+      urls: urls
+    })
+  },
+  previewImagec: function (e) {
+    console.log(e)
+    let url = e.currentTarget.dataset.url;
+    let i = e.currentTarget.dataset.index;
+    let type = e.currentTarget.dataset.type;
+    let urls = this.data.skillbooksone[i].image
+    wx.previewImage({
+      current: url,
+      urls: urls
+    })
+  },
   errImg: function (e) {
     // console.log(e)
     // let index = e.currentTarget.dataset.index;

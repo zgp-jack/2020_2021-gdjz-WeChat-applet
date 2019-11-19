@@ -1,7 +1,7 @@
 /* informationfive informationevaluationtwo informationevaluationtwo informationevaluationone informationevaluationtwo informationenum informationtheinput informationverificationcode
 informationteamsnumber publish-choose-contentbox informationseven informationevaluationtwo
 
-publish-choose-contentbox publish-choose-footer flex-row informationevaluationtwo*/
+publish-choose-contentbox publish-choose-footer flex-row informationevaluationtwo informationevaluationtwo*/
 .informationtwo{
   width: 93%;
   margin: 0 auto;
@@ -475,6 +475,8 @@ publish-choose-contentbox publish-choose-footer flex-row informationevaluationtw
   border: none;
   outline: 0;
   padding:10rpx;
+word-break:break-all;
+word-wrap:break-word;
 }
 
 .informationevaluation .informationenum{
