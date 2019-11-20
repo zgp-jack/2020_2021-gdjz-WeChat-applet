@@ -151,7 +151,7 @@
 
       </view>
     </view>
-    <view class="cardsixsixall" wx:if="{{projectlength > 1}}">
+    <view class="cardsixsixall">
       <button class="cardsixsix" bindtap="moreproject">
         <view>
           更多项目经验
@@ -189,7 +189,7 @@
 
       </view>
     </view>
-    <view class="cardeightsixall" wx:if="{{skilllength > 1}}">
+    <view class="cardeightsixall">
       <button class="cardeightsix" bindtap="moreskill">
         <view>
           更多技能证书

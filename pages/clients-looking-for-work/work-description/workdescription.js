@@ -180,6 +180,7 @@ Page({
       })
     } else {
       allpro = this.data.allprovinces[this.data.multiIndex[0]].id
+        + "," + this.data.allprovinces[this.data.multiIndex[0]].id
       this.setData({
         multiIndexvalue: that.data.allprovinces[that.data.multiIndex[0]].name 
         // + "" + that.data.allprovinces[that.data.multiIndex[0]].name

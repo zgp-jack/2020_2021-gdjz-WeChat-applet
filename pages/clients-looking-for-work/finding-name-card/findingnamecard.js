@@ -1,4 +1,4 @@
-// addskill  lat nation projectlength showbot tom  view_num selectTap showbottom checkone projectone checkfour checkone ressonone note showperfection editor addproject toperfect improvementwork 修改失败 introinfo authentication returnPrevPage  userInfo display
+// addskill  lat nation projectlength showbot tom  view_num selectTap showbottom checkone projectone checkfour checkone ressonone note showperfection editor addproject toperfect improvementwork 修改失败 introinfo authentication returnPrevPage  userInfo display selectTap
  
 
 const app = getApp();
@@ -76,7 +76,8 @@ Page({
     fail_project:"",
     display:"none",
     popup:"",
-    move:true
+    move:true,
+    show_tips:""
   },
   previewImage: function (e) {
     console.log(e)
@@ -461,6 +462,7 @@ Page({
             })
           }
           that.setData({
+            show_tips: mydata.hasOwnProperty("content") ? mydata.content.show_tips : "",
             name: mydata.info.hasOwnProperty("username") ? mydata.info.username : "",
             nation: mydata.info.hasOwnProperty("nation") ? mydata.info.nation : "",
             occupations: mydata.info.hasOwnProperty("occupations") ? mydata.info.occupations : "",

@@ -161,9 +161,9 @@
           <view class="cardsixfive">
             <image wx:for="{{item.image}}" wx:key="{{index}}" src="{{item}}"></image>
           </view>
-          <view wx:if="{{item.check == 0}}" class="resson">
+          <!-- <view wx:if="{{item.check == 0}}" class="resson">
               未通过原因：{{item.fail_case}}
-          </view>
+          </view> -->
         </view>
 
       </view>
@@ -205,9 +205,9 @@
         <view class="cardeightfive">
           <image wx:for="{{item.image}}" wx:key="{{index}}" src="{{item}}"></image>
         </view>
-         <view wx:if="{{item.check == 0}}" class="resson">
+         <!-- <view wx:if="{{item.check == 0}}" class="resson">
               未通过原因：{{item.fail_case}}
-          </view>
+          </view> -->
       </view>
     </view>
     <view class="cardeightsixall">

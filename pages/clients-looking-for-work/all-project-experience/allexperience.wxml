@@ -29,9 +29,9 @@
         <view class="resson" wx:if="{{item.check == 0}}">
           未通过原因：{{item.fail_case}}
         </view>
-        <view class="skilleightsixall" wx:if="{{index == projectlength-1}}">
+        <!-- <view class="skilleightsixall" wx:if="{{index == projectlength-1}}">
           没有更多了...
-        </view>
+        </view> -->
 
         <view class="skillsixsixallvoto">
         </view>
@@ -66,12 +66,12 @@
             </view>
           </view>
         </view>
-        <view class="resson" wx:if="{{item.check == 0}}">
+        <!-- <view class="resson" wx:if="{{item.check == 0}}">
           未通过原因：{{item.fail_case}}
-        </view>
-        <view class="skilleightsixall" wx:if="{{index == projectlength-1}}">
+        </view> -->
+        <!-- <view class="skilleightsixall" wx:if="{{index == projectlength-1}}">
           没有更多了...
-        </view>
+        </view> -->
         <view class="skillsixsixallvoto">
         </view>
       </view>
@@ -99,9 +99,9 @@
             <image wx:for="{{item.image}}" wx:key="{{index}}" src="{{item}}" catchtap="previewImage" data-url="{{ item }}" data-index="{{ pindex }}" data-type="1"></image>
           </view>
         </view>
-        <view class="skilleightsixall">
+        <!-- <view class="skilleightsixall">
           没有更多了...
-        </view>
+        </view> -->
         <view class="skillsixsixallvoto">
         </view>
       </view>
