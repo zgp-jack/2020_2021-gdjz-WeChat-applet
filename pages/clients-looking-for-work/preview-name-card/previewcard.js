@@ -1,12 +1,12 @@
-// moreproject checkfour moreproject ressonone moreskill
+// moreproject checkfour moreproject ressonone moreskill sex
 
 const app = getApp();
 
 Page({
 
   /**
-   * 页面的初始数据 nation view_num occupations
-   */
+   * 页面的初始数据 nation view_num occupations introduce
+   */ 
   data: {
     username: '',
     userimg: '',
@@ -62,6 +62,28 @@ Page({
     showtan: false,
     ressonone: false,
     note:""
+  },
+  previewImagec: function (e) {
+    console.log(e)
+    let url = e.currentTarget.dataset.url;
+    let i = e.currentTarget.dataset.index;
+    let type = e.currentTarget.dataset.type;
+    let urls = this.data.skillbooksone[i].image
+    wx.previewImage({
+      current: url,
+      urls: urls
+    })
+  },
+  previewImage: function (e) {
+    console.log(e)
+    let url = e.currentTarget.dataset.url;
+    let i = e.currentTarget.dataset.index;
+    let type = e.currentTarget.dataset.type;
+    let urls = this.data.projectone[i].image
+    wx.previewImage({
+      current: url,
+      urls: urls
+    })
   },
   telephorf(e){
     wx.makePhoneCall({
@@ -149,9 +171,15 @@ Page({
             })
             wx.setStorageSync("uuid", mydata.info.uuid)
           }
-          that.setData({
-            sex: mydata.info.gender == "1" ? "男" : "女"
-          })
+          if (mydata.info.gender != "0") {
+            that.setData({
+              sex: mydata.info.gender == "1" ? "男" : "女"
+            })
+          } else {
+            that.setData({
+              sex: ""
+            })
+          }
           if (mydata.info.birthday) {
             that.setData({
               age: dateone.getFullYear() - (mydata.info.birthday.split("-")[0] - 0)
@@ -165,7 +193,7 @@ Page({
             city: mydata.info.hasOwnProperty("address") ? mydata.info.address : "",
             intro: false,
             introne: true,
-            introduce: mydata.info.hasOwnProperty("introduce") ? mydata.info.introduce : "",
+            introduce: mydata.info.hasOwnProperty("introduce") ? (mydata.info.introduce == "" ? "请简要介绍您所从事行业以及工作经验..." : mydata.info.introduce) : "",
             workingyears: mydata.introduces.hasOwnProperty("experience") ? mydata.introduces.experience : "",
             staffcomposition: mydata.introduces.hasOwnProperty("type_str") ? mydata.introduces.type_str : "",
             cityself: mydata.introduces.hasOwnProperty("hometown") ? mydata.introduces.hometown : "",

@@ -1,5 +1,5 @@
 <view>
-  <view class="header">
+  <view class="header"> 
     注:分享名片 让你的名片排名更靠前
   </view>
 
@@ -138,7 +138,7 @@
   </view>
   <view class="cardsix" wx:if="{{projectlength != 0}}">
 
-    <view class="cardsixzong" wx:for="{{projectone}}" wx:key="{{index}}">
+    <view class="cardsixzong" wx:for="{{projectone}}" wx:for-index="pindex" wx:key="{{index}}">
             <image class="checkfour" src="../../../images/audit.png" wx:if="{{item.check==1}}"></image>
         <image class="audit" wx:if="{{item.check == 0}}" src="../../../images/notthrough.png"></image>
  
@@ -159,7 +159,7 @@
         </text>
           </view>
           <view class="cardsixfive">
-            <image wx:for="{{item.image}}" wx:key="{{index}}" src="{{item}}"></image>
+            <image wx:for="{{item.image}}" wx:key="{{index}}" src="{{item}}" data-url="{{ item }}" catchtap="previewImage" data-index="{{ pindex }}"></image>
           </view>
           <!-- <view wx:if="{{item.check == 0}}" class="resson">
               未通过原因：{{item.fail_case}}
@@ -190,7 +190,7 @@
     </view>
   </view>
    <view class="cardeight" wx:if="{{skilllength != 0}}">
-    <view class="cardeightzong" wx:for="{{skillbooksone}}" wx:key="{{index}}">
+    <view class="cardeightzong" wx:for="{{skillbooksone}}" wx:for-index="pindex" wx:key="{{index}}">
         <image class="checkfour" src="../../../images/audit.png" wx:if="{{item.check==1}}"></image>
             <image class="audit" wx:if="{{item.check == 0}}" src="../../../images/notthrough.png"></image>
 
@@ -203,7 +203,7 @@
           <text>{{item.certificate_time}}</text>
         </view>
         <view class="cardeightfive">
-          <image wx:for="{{item.image}}" wx:key="{{index}}" src="{{item}}"></image>
+          <image wx:for="{{item.image}}" wx:key="{{index}}" src="{{item}}" data-url="{{ item }}" catchtap="previewImagec" data-index="{{ pindex }}"></image>
         </view>
          <!-- <view wx:if="{{item.check == 0}}" class="resson">
               未通过原因：{{item.fail_case}}

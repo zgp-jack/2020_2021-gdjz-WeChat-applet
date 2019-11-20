@@ -5,7 +5,7 @@ Page({
 
   /** showComplain telephorft  age workingyears personnum workingyears
    * 页面的初始数据 moreskill projectone occupations introduce telephorft showThisMapInfo onoff
-   telephorft occupations moreproject telephorft telephorft authrasution resumes/get-tel/ location*/
+   telephorft occupations moreproject telephorft telephorft authrasution resumes/get-tel/ location sex*/
   data: {
     userInfo: true,
     icon: app.globalData.apiImgUrl + "userauth-topicon.png",
@@ -313,9 +313,15 @@ Page({
             })
             wx.setStorageSync("uuid", mydata.info.uuid)
           }
-          that.setData({
-            sex: mydata.info.gender == "1" ? "男" : "女"
-          })
+          if (mydata.info.gender != "0") {
+            that.setData({
+              sex: mydata.info.gender == "1" ? "男" : "女"
+            })
+          } else {
+            that.setData({
+              sex: ""
+            })
+          }
           if (mydata.info.birthday) {
             that.setData({
               age: dateone.getFullYear() - (mydata.info.birthday.split("-")[0] - 0) + "年"
@@ -329,7 +335,7 @@ Page({
             city: mydata.info.hasOwnProperty("address") ? mydata.info.address : "",
             intro: false,
             introne: true,
-            introduce: mydata.info.hasOwnProperty("introduce") ? mydata.info.introduce == "" ? "未填写" : mydata.info.introduce : "未填写",
+            introduce: mydata.info.hasOwnProperty("introduce") ? (mydata.info.introduce == "" ? "请简要介绍您所从事行业以及工作经验..." : mydata.info.introduce) : "",
             workingyears: mydata.info.hasOwnProperty("experience") ? mydata.info.experience : "",
             staffcomposition: mydata.info.hasOwnProperty("type_str") ? mydata.info.type_str : "",
             cityself: mydata.info.hasOwnProperty("hometown") ? mydata.info.hometown : "",

@@ -1,4 +1,4 @@
-// .labelnum judge  bindMultiPickerChange bindMultiPickerColumnChange multiIndexvalue
+// .labelnum judge  bindMultiPickerChange bindMultiPickerColumnChange multiIndexvalue submitmaterial
 let areas = require("../../../utils/area.js");
 const app = getApp();
 let v = require("../../../utils/v.js");
@@ -7,7 +7,7 @@ let reminder = require("../../../utils/ reminder.js");
 Page({
 
   /**
-   * multiArray bindMultiPickerColumnChange
+   * multiArray bindMultiPickerColumnChange workage
    */
   data: {
     workage: "",
@@ -323,9 +323,9 @@ Page({
         remain.remain({
           tips: res.data.errmsg, callback: function () {
             if (res.data.errcode == 200) {
-              wx.redirectTo({
-                url: "../finding-name-card/findingnamecard",
-               })
+              wx.navigateBack({
+                delta: 1
+              })
             }
           }
         })
@@ -342,7 +342,7 @@ Page({
 
 
     this.setData({
-      workage: introdetail.hasOwnProperty("experience") ? introdetail.experience : "",
+      workage: introdetail.hasOwnProperty("experience") ? (introdetail.experience == "0" ? "" : introdetail.experience) : "",
       multiIndexvalue: introdetail.hasOwnProperty("hometown") ? introdetail.hometown : "",
       provincecity: introdetail.hasOwnProperty("hometown_id") ? introdetail.hometown_id : "",
       labelnum: introdetail.hasOwnProperty("tag_id") ? introdetail.tag_id : "",

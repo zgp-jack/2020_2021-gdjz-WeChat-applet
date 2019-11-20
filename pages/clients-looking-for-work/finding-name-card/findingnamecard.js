@@ -1,5 +1,6 @@
-// addskill  lat nation projectlength showbot tom  view_num selectTap showbottom checkone projectone checkfour checkone ressonone note showperfection editor addproject toperfect improvementwork 修改失败 introinfo authentication returnPrevPage  userInfo display selectTap
- 
+// addskill  lat nation projectlength showbot tom  view_num selectTap showbottom checkone projectone checkfour checkone ressonone note showperfection editor addproject toperfect improvementwork 修改失败 introinfo authentication returnPrevPage  userInfo display selectTap intro introduce improvementwork previewImage previewImagec sex introduce selectTap check_tips_string
+
+
 
 const app = getApp();
 
@@ -10,7 +11,7 @@ Page({
    */
   data: {
     icon: app.globalData.apiImgUrl + "userauth-topicon.png",
-    userInfo:true,
+    userInfo: true,
     certificate_count: 0,
     project_count: 0,
     username: '',
@@ -71,20 +72,20 @@ Page({
     passre: true,
     nopassre: true,
     showcomplete: true,
-    checkcontent:"",
-    fail_certificate:"",
-    fail_project:"",
-    display:"none",
-    popup:"",
-    move:true,
-    show_tips:""
+    checkcontent: "",
+    fail_certificate: "",
+    fail_project: "",
+    display: "none",
+    popup: "",
+    move: true,
+    show_tips: ""
   },
   previewImage: function (e) {
     console.log(e)
     let url = e.currentTarget.dataset.url;
     let i = e.currentTarget.dataset.index;
     let type = e.currentTarget.dataset.type;
-    let urls =  this.data.projectone[i].image
+    let urls = this.data.projectone[i].image
     wx.previewImage({
       current: url,
       urls: urls
@@ -152,7 +153,7 @@ Page({
       this.setData({
         showcomplete: false
       })
-    }else{
+    } else {
       this.setData({
         showcomplete: true
       })
@@ -222,7 +223,7 @@ Page({
     if (this.data.check == "1") {
       wx.showModal({
         title: '温馨提示',
-        content: that.data.checkcontent,
+        content: "审核中请耐心等待",
         showCancel: false,
         success(res) { }
       })
@@ -231,7 +232,7 @@ Page({
     if (this.data.check == "0") {
       wx.showModal({
         title: '温馨提示',
-        content: that.data.checkcontent,
+        content: "审核未通过，请修改信息",
         showCancel: false,
         success(res) { }
       })
@@ -288,7 +289,7 @@ Page({
       })
       return
     }
-    
+
     let projectnum = this.data.projectlength
     wx.setStorageSync("projectnum", projectnum)
     wx.navigateTo({
@@ -334,7 +335,7 @@ Page({
     })
   },
   chooseImage() {
-    if (this.data.checkone){
+    if (this.data.checkone) {
       wx.showModal({
         title: '温馨提示',
         content: '信息审核中，请稍后再试',
@@ -391,7 +392,7 @@ Page({
       url: 'resumes/resume-list/',
       way: 'POST',
       params: detail,
-      success:function(res) {
+      success: function (res) {
         let mydata = res.data.data;
         console.log(mydata)
         console.log(res)
@@ -453,9 +454,15 @@ Page({
             })
             wx.setStorageSync("uuid", mydata.info.uuid)
           }
-          that.setData({
-            sex: mydata.info.gender == "1" ? "男" : "女"
-          })
+          if (mydata.info.gender != "0") {
+            that.setData({
+              sex: mydata.info.gender == "1" ? "男" : "女"
+            })
+          }else{
+            that.setData({
+              sex: ""
+            })
+          }
           if (mydata.info.birthday) {
             that.setData({
               age: dateone.getFullYear() - (mydata.info.birthday.split("-")[0] - 0)
@@ -470,7 +477,7 @@ Page({
             city: mydata.info.hasOwnProperty("address") ? mydata.info.address : "",
             intro: false,
             introne: true,
-            introduce: mydata.info.hasOwnProperty("introduce") ? mydata.info.introduce : "",
+            introduce: mydata.info.hasOwnProperty("introduce") ? (mydata.info.introduce == "" ? "请简要介绍您所从事行业以及工作经验..." : mydata.info.introduce) : "",
             workingyears: mydata.introduces.hasOwnProperty("experience") ? mydata.introduces.experience : "",
             staffcomposition: mydata.introduces.hasOwnProperty("type_str") ? mydata.introduces.type_str : "",
             cityself: mydata.introduces.hasOwnProperty("hometown") ? mydata.introduces.hometown : "",
@@ -489,7 +496,7 @@ Page({
           })
           if (that.data.showtop) {
             app.globalData.showperfection = true;
-          }else{
+          } else {
             app.globalData.showperfection = false;
           }
           wx.setStorageSync("certificate_count", that.data.certificate_count)
@@ -681,21 +688,21 @@ Page({
     wx.removeStorageSync("skilltail")
   },
 
-  authrasution(){
+  authrasution() {
     let userInfo = wx.getStorageSync("userInfo");
     if (!userInfo) {
       this.setData({
-        userInfo:false
+        userInfo: false
       })
       return false;
-    }else{
+    } else {
       this.setData({
-        userInfo:userInfo
+        userInfo: userInfo
       })
       this.getdetail();
     }
   },
-  returnPrevPage(){
+  returnPrevPage() {
     wx.navigateBack({
       delta: 1
     })
@@ -730,7 +737,6 @@ Page({
     this.authrasution()
 
   },
-
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
@@ -760,7 +766,10 @@ Page({
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-
+    // console.log(123)
+    // wx.redirectTo({
+    //   url: '/pages/ucenter/ucenter'
+    // })
   },
 
   /**

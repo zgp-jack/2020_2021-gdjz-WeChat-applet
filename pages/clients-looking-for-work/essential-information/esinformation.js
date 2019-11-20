@@ -143,8 +143,8 @@ Page({
         }
         _this.setData({
           oadcode: data[0].regeocodeData.addressComponent.adcode,
-          longitude: data[0].latitude + "",
-          latitude: data[0].longitude + ""
+          longitude: data[0].longitude + "",
+          latitude: data[0].latitude + ""
         });
           
       },

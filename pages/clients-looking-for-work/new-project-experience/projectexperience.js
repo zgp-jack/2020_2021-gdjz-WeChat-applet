@@ -4,8 +4,8 @@ let areas = require("../../../utils/area.js");
 let remain = require("../../../utils/remain.js");
 let reminder = require("../../../utils/ reminder.js");
 let throttle = require("../../../utils/throttle.js");
-//bindstartDate delete vertify vertify preservechixu bindTextAreaBlur 大于今天 chooseImage delete preserve showModal vertify() showModal
-
+//bindstartDate delete vertify vertify preservechixu bindTextAreaBlur 大于今天 chooseImage delete preserve showModal vertify() showModal deleteexper vertify multiIndexvalue
+ 
 Page({
   data: {
     project: "",
@@ -38,12 +38,7 @@ Page({
     imgArrslength:true,
     display: "none",
   },
-  vertify() {
-    this.setData({
-      showModal: false,
-      display: "none"
-    })
-  },
+
   obtn() {
     this.setData({
       showModal: false,
@@ -71,9 +66,19 @@ Page({
     })
   },
   deleteexper() {
-    this.setData({
-      showModal: true,
-      display: "block"
+    let that = this;
+    wx.showModal({
+      title: '提示',
+      content: `项目经验删除后，将无法恢复`,
+      showCancel: true,
+      success(res) { 
+
+        if (res.confirm) {
+           that.vertify()
+        } else if (res.cancel) {
+     
+        }
+      }
     })
   },
   projectname(e) {
@@ -202,7 +207,7 @@ Page({
     } else {
       allpro = this.data.allprovinces[this.data.multiIndex[0]].id + "," + this.data.allprovinces[this.data.multiIndex[0]].id
       this.setData({
-        multiIndexvalue: that.data.allprovinces[that.data.multiIndex[0]].name + that.data.allprovinces[that.data.multiIndex[0]].name
+        multiIndexvalue: that.data.allprovinces[that.data.multiIndex[0]].name
       })
     }
     this.setData({

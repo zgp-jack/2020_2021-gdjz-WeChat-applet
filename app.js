@@ -4,7 +4,7 @@ App({
     //   if (e.path) this.initUserInfo(e); valiUserUrl
     // }
     // catch(err){bindGetUserInfo gotoUserauth
-    //   console.log(err); gotoUserauth bindGetUserInfo  mini_user api_user
+    //   console.log(err); gotoUserauth bindGetUserInfo  mini_user api_user app.globalData.allTypes
     // }
   },
   globalData: {
@@ -396,6 +396,7 @@ App({
       success: function(res) {
         let mydata = res.data;
         if (mydata.errcode == "ok") {
+          console.log(mydata)
           _this.globalData.allTypes = mydata.data;
           _callback(mydata.data);
         } else {

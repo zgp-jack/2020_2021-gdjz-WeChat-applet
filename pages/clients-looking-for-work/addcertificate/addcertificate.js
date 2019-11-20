@@ -5,7 +5,7 @@ let reminder = require("../../../utils/ reminder.js");
 Page({
 
   /**
-   * 页面的初始数据 bindstartDate nowDate deleteexper  obtn quit
+   * 页面的初始数据 bindstartDate nowDate deleteexper  obtn quit deleteexper
 vertify()
    */
   data: {
@@ -129,6 +129,22 @@ vertify()
       resume_uuid: userInfo
     })
   },
+  deleteexper() {
+    let that = this;
+    wx.showModal({
+      title: '提示',
+      content: `技能证书删除后，将无法恢复`,
+      showCancel: true,
+      success(res) {
+
+        if (res.confirm) {
+          that.vertify()
+        } else if (res.cancel) {
+
+        }
+      }
+    })
+  },
   vertify() {
     let userInfo = wx.getStorageSync("userInfo");
     let project = {}
@@ -172,12 +188,6 @@ vertify()
     this.setData({
       showModal: false,
       display: "none"
-    })
-  },
-  deleteexper() {
-    this.setData({
-      showModal: true,
-      display: "block"
     })
   },
   obtn() {

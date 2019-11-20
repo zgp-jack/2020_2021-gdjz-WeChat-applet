@@ -3,7 +3,7 @@ let footerjs = require("../../utils/footer.js");
 Page({
 
     /**
-     * 页面的初始数据 valiUserUrl
+     * 页面的初始数据 valiUserUrl releaselive
      */
     data: {
         footerActive: "member",

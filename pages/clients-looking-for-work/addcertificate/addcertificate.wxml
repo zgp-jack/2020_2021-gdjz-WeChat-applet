@@ -2,7 +2,7 @@
   <view class="addcertificatede">
     <text class="addcertificatedeone">职业技能</text>
     <view class="addcertificatedetwo">
-      <input type="text" placeholder="请输入您的职业技能名称" bindinput="name" value="{{name}}"></input>
+      <input type="text" maxlength="12" placeholder="请输入您的职业技能名称" bindinput="name" value="{{name}}"></input>
     </view>
   </view>
   <view class="addcertificatetime">
@@ -23,7 +23,7 @@
       <image class='addcertificateimageone' src="../../../images/addimage.png" mode='scaleToFill' />
     </view>
   </view>
-  <view class="modalDlg" wx:if="{{showModal}}">
+  <!-- <view class="modalDlg" wx:if="{{showModal}}">
     <view class="modalDlgone">
     </view>
     <view class="text">
@@ -39,7 +39,7 @@
       </view>
     </view>
   </view>
- <view class="bg" style='display:{{display}}' catchtouchmove="{{move}}"></view>
+ <view class="bg" style='display:{{display}}' catchtouchmove="{{move}}"></view> -->
   <view class="addcertificatebottom">
     <button class="addcertificatebottomone" wx:if="{{!obtnbut}}" catchtap="deleteexper">删除</button>
     <button class="addcertificatebottomone" wx:if="{{obtnbut&&skill_show}}" bindtap="preservechixu">保存 继续添加</button>
