@@ -1,4 +1,4 @@
-// .labelnum judge  bindMultiPickerChange bindMultiPickerColumnChange multiIndexvalue submitmaterial
+// .labelnum judge  bindMultiPickerChange bindMultiPickerColumnChange multiIndexvalue submitmaterial indexperson compositionarray
 let areas = require("../../../utils/area.js");
 const app = getApp();
 let v = require("../../../utils/v.js");

@@ -1,4 +1,4 @@
-// infolists
+// infolists errImg
 let footerjs = require("../../utils/footer.js");
 let areas = require("../../utils/area.js");
 const app = getApp();
@@ -288,12 +288,12 @@ Page({
     app.valiUserUrl(e, this.data.userInfo)
   },
   errImg: function (e) {
-    // console.log(e)
-    // let index = e.currentTarget.dataset.index;
-    // console.log(index)
-    // let obj = `lists[${index}].headerimg`;
+    console.log(e)
+    let index = e.currentTarget.dataset.index;
+    console.log(index)
+    let obj = `infolists.resume.lists[${index}].headerimg`;
     this.setData({
-      headerimg: "http://cdn.yupao.com/miniprogram/images/user.png"
+      [obj]: "http://cdn.yupao.com/miniprogram/images/user.png"
     })
 
   },

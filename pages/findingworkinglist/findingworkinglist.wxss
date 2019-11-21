@@ -1,6 +1,6 @@
 @import "../index/index.wxss";
 /* listsboxname listsboxnation listsboxnum .listsboxagetwo text listsboxlableone listsboxname
-.cardfive .listsboxshow red listsboxnum  .listsboxageone text*/
+.cardfive .listsboxshow red listsboxnum  .listsboxageone text listsboxage .listsboxshow*/
 
 .listsboxdetail {
   width: 100%;
@@ -64,11 +64,14 @@
 }
 .listsboxageone text{
     font-size: 30rpx;
-  margin-left: 12rpx;
+   margin-left: 12rpx;
 
 }
+.listsboxageone .listsboxsex{
+   color: #FB8732;
+}
 .listsboxageone .listsboxage{
-  color: red;
+  color: #FB8732;
 }
 .listsboxageone .listsboxname{
   font-size: 32rpx;
@@ -83,7 +86,7 @@
   font-size: 30rpx;
   color: #353636;
   position: absolute;
-  /* top: 34rpx; */
+  top: 10rpx;
   right: 0;
 }
 .listsboxagetwo{

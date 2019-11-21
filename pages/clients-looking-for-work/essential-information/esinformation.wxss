@@ -1,4 +1,4 @@
-/*informationseventwo*/
+/*yupao-enter-footer clearfix */
 .informationtwo{
   width: 93%;
   margin: 0 auto;
@@ -506,8 +506,11 @@ word-wrap:break-word;
 }
 
 .yupao-common-enter{
-  border-radius: 0;
+  border-radius: 3px;
+  box-shadow: #e7e6e4 0 0 0;
+  padding:18rpx;
 }
+
 .yupao-enter-footer text{
   border: 1px solid #0099FF;
   color: white;

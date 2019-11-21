@@ -1,4 +1,4 @@
-//userTapSearch persondetail lists teamindex resumes/index/ errImg teamText fillterType persondetail authentication  teamText fillterArea fillterType 
+//userTapSearch persondetail lists teamindex resumes/index/ errImg teamText fillterType persondetail authentication  teamText fillterArea fillterType  errImg
 const app = getApp(); 
 let footerjs = require("../../utils/footer.js");
 let areas = require("../../utils/area.js");

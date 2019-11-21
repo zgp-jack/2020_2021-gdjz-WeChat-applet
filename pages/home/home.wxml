@@ -231,13 +231,15 @@
         wx:for="{{infolists.resume.lists}}" wx:key="{{index}}">
           <image src="../../images/finded.png" class="finded" wx:if="{{item.is_end == 2}}"></image>
           <view class="listsboxdetailo">
+           <view>
             <image class="oimg" src="{{item.headerimg}}" data-index="{{index}}" binderror="errImg"></image>
+            </view>
             <view class="listsboxintro">
               <view class="listsboxage">
                 <view class="listsboxageone">
                   <text class="listsboxname">{{item.username}}</text>
-                  <text>{{item.gender  == "1" ? "男" : item.gender == "0"?"女":""}}</text>
-                  <text>{{item.birthday}}岁</text>
+                  <text class="listsboxsex" >{{item.gender  == "1" ? "男" : item.gender == "0"?"女":""}}</text>
+                  <text class="listsboxage" wx:if="{{item.birthday != 0}}">{{item.birthday}}岁</text>
                   <image wx:if="{{authentication == 2}}" src="{{realNames}}"></image>
                   <image wx:if="{{certificate == 1}}" src="{{authentication}}"></image>
                 </view>

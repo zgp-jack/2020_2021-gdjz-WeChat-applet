@@ -8,7 +8,7 @@ const app = getApp();
 Page({
 
   /** 
-   * 页面的初始数据 textareavalue  typeworkarray gender submitinformation completemore GPSsubmit
+   * 页面的初始数据 textareavalue  typeworkarray perfection gender submitinformation completemore GPSsubmit           app.showMyTips("保存失败"); GPSsubmit
    */
 
   data: {
@@ -42,7 +42,7 @@ Page({
     status: 1,
     nowDate: "",
     perfection: false,
-    regionreal:""
+    regionreal: ""
   },
   getbirth() {
     var date = new Date();
@@ -122,6 +122,7 @@ Page({
 
   },
   getLocation: function () { //定位获取
+    app.showMyTips("获取位置中...");
     var _this = this;
     var myAmapFun = new amapFile.AMapWX({
       key: app.globalData.gdApiKey
@@ -146,7 +147,7 @@ Page({
           longitude: data[0].longitude + "",
           latitude: data[0].latitude + ""
         });
-          
+        app.showMyTips("获取位置成功");
       },
       fail: function (info) {
         app.showMyTips("定位失败,请重新定位");
@@ -154,6 +155,7 @@ Page({
     });
   },
   openSetting: function (e) {
+ 
     let that = this;
     wx.getSetting({
       success: (res) => {
@@ -440,7 +442,7 @@ Page({
       return
     }
 
-    if (vertifyNum.isNull(this.data.name) || this.data.name.length < 2 || this.data.name.length >5) {
+    if (vertifyNum.isNull(this.data.name) || this.data.name.length < 2 || this.data.name.length > 5) {
       wx.showModal({
         title: '温馨提示',
         content: '您输入的姓名为空,或者少于两个字,或者大于五个字',
@@ -457,8 +459,8 @@ Page({
       reminder.reminder({ tips: '民族' })
       return
     }
-   
-    if(!that.getbirthall()){
+
+    if (!that.getbirthall()) {
       wx.showModal({
         title: '温馨提示',
         content: '输入的年龄不能小于18',
@@ -521,21 +523,29 @@ Page({
       failTitle: "操作失败，请稍后重试！",
       success: function (res) {
         console.log(res)
-        remain.remain({
-          tips: res.data.errmsg, callback: function () {
-            if (res.data.errmsg == "保存成功") {
-              if (app.globalData.showperfection) {
-                that.setData({
-                  perfection: true,
-                })
-              } else {
+        if (res.data.errcode == 200) {
+          if (app.globalData.showperfection) {
+            that.setData({
+              perfection: true,
+            })
+          }else{
+            remain.remain({
+              tips: res.data.errmsg, callback: function () {
                 wx.navigateBack({
                   delta: 1
                 })
               }
-            }
+            })
           }
-        })
+        } else if (res.data.errcode == 5100) {
+          remain.remain({
+            tips: res.data.errmsg, callback: function () {
+     
+            }
+          })
+        } else {
+
+        }
       },
       fail: function (err) {
         app.showMyTips("保存失败");
@@ -560,7 +570,7 @@ Page({
       telephone: introinfo.hasOwnProperty("tel") ? introinfo.tel : "",
       tele: introinfo.hasOwnProperty("tel") ? introinfo.tel : "",
       otextareavalue: introinfo.hasOwnProperty("introduce") ? introinfo.introduce : "",
-      otextareavaluel: introinfo.hasOwnProperty("introduce") ? introinfo.introduce ?introinfo.introduce.length:0 : 0,
+      otextareavaluel: introinfo.hasOwnProperty("introduce") ? introinfo.introduce ? introinfo.introduce.length : 0 : 0,
     })
 
     if (introinfo.gender != "") {
@@ -695,6 +705,6 @@ Page({
   },
 
   /**
-   * 用户点击右上角分享
+   * 用户点击右上角分享 completes
    */
 })
