@@ -46,7 +46,7 @@
         </view>
         <view class="skilleightfive">
           <view class="skilleightfiveline">
-            <view wx:for="{{item.image}}" class="temimage">
+            <view wx:for="{{item.image}}" wx:key="{{index}}" class="temimage">
               <image wx:key="{{index}}" src="{{item}}" catchtap="previewImage" data-url="{{ item }}" data-index="{{ pindex }}"></image>
             </view>
           </view>

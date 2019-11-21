@@ -235,6 +235,7 @@
       <image class="checkthree" src="../../../images/audit.png" wx:if="{{item.check == 1&&show_tips==1}}"></image>
       <view class="editor" bindtap="editor" data-uid="{{item}}" wx:if="{{item.check != 1}}">编辑</view>
       <image class="audit" wx:if="{{item.check == 0}}" src="../../../images/notthrough.png"></image>
+           <image class="audit" wx:if="{{item.check == 1&&show_tips == 0}}" src="../../../images/review.png"></image>
       <view>
         <image src="../../../images/newresume-experience-item.png" class="cardsixone"></image>
       </view>
@@ -305,7 +306,7 @@
       <image class="checkfour" src="../../../images/audit.png" wx:if="{{item.check == 1&&show_tips==1}}"></image>
       <view class="editor" bindtap="editorone" data-uid="{{item}}" wx:if="{{item.check != 1}}">编辑</view>
       <image class="audit" wx:if="{{item.check == 0}}" src="../../../images/notthrough.png"></image>
-      <!-- <image class="audit" wx:if="{{item.check == 1&&!checkfour}}" src="../../../images/review.png"></image> -->
+      <image class="audit" wx:if="{{item.check == 1&&show_tips == 0}}" src="../../../images/review.png"></image>
       <view>
         <image src="../../../images/newresume-experience-item.png" class="cardeightone"></image>
       </view>

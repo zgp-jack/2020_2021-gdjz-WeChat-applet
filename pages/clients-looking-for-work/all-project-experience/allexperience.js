@@ -2,7 +2,7 @@ const app = getApp();
 Page({
 
   /**
-   * 页面的初始数据 editor allgetexpre addpro previewImage
+   * 页面的初始数据 editor allgetexpre addpro previewImage previewproject
    */
   data: {
     allproject: [],
@@ -101,7 +101,7 @@ Page({
     })
   },
 
-  projecttwo(){
+  projecttwo() {
     let that = this;
     if (!app.globalData.allexpress) {
       let allexpress = wx.getStorageSync("allexpress");
@@ -115,7 +115,7 @@ Page({
         console.log(allexpress)
         let projectall = [];
         for (let i = 0; i < allexpress.length; i++) {
-            projectall.push(allexpress[i])
+          projectall.push(allexpress[i])
         }
         that.setData({
           projecthree: projectall
@@ -126,24 +126,27 @@ Page({
   },
 
   onShow: function () {
-    if (app.globalData.allexpress) {
-      this.project()
+    if (app.globalData.previewproject) {
+      if (app.globalData.allexpress) {
+        this.project()
+      }
+      this.projecttwo()
+      this.getexpre()
+      this.delestore()
     }
-    this.projecttwo()
-    this.getexpre()
-    this.delestore()
-
+    app.globalData.previewproject = true;
   },
-  previewImage:function(e){
+  previewImage: function (e) {
     console.log(e)
     let url = e.currentTarget.dataset.url;
     let i = e.currentTarget.dataset.index;
     let type = e.currentTarget.dataset.type;
     let urls = type == "1" ? this.data.projecthree[i].image : this.data.allproject[i].image
     wx.previewImage({
-      current: url, 
+      current: url,
       urls: urls
     })
+    app.globalData.previewproject = false;
   },
   /**
    * 生命周期函数--监听页面隐藏

@@ -3,7 +3,7 @@ let remain = require("../../../utils/remain.js");
 Page({
 
   /**
-   * 页面的初始数据 addskill
+   * 页面的初始数据 addskill app.globalData.previewproject previewskill
    */
   data: {
     allskill: [],
@@ -11,8 +11,8 @@ Page({
     skillpass: 0,
     allskilltwo: [],
     allskillthree: [],
-    allskillonef:false,
-    onoff:false
+    allskillonef: false,
+    onoff: false
   },
   allskill() {
     let userInfo = wx.getStorageSync("userInfo");
@@ -82,7 +82,7 @@ Page({
     wx.removeStorageSync("skillpass")
   },
 
-  allskilleng(){
+  allskilleng() {
     let that = this;
     if (!app.globalData.allskill) {
       let allskill = wx.getStorageSync("allskill");
@@ -96,7 +96,7 @@ Page({
         console.log(allskill)
         let skill = [];
         for (let i = 0; i < allskill.length; i++) {
-            skill.push(allskill[i])
+          skill.push(allskill[i])
         }
         that.setData({
           allskillthree: skill
@@ -115,6 +115,7 @@ Page({
       current: url,
       urls: urls
     })
+    app.globalData.previewskill = false;
   },
   /**
    * 生命周期函数--监听页面加载
@@ -134,12 +135,15 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    if (app.globalData.allskill) {
-      this.allskill();
+    if (app.globalData.previewskill) {
+      if (app.globalData.allskill) {
+        this.allskill();
+      }
+      this.allskilleng()
+      this.deleskill();
+      this.getskill();
     }
-    this.allskilleng()
-    this.deleskill();
-    this.getskill();
+    app.globalData.previewskill = true;
   },
 
   /**

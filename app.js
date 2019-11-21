@@ -11,6 +11,8 @@ App({
     gpsdetail:true,
     previewshou:true,
     previewpre:true,
+    previewproject:true,
+    previewskill:true,
     allexpress: true,
     allskill: true,
     skip: false,
