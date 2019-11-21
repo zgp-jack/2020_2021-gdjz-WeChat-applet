@@ -662,7 +662,7 @@ Page({
    */
   onShow: function () {
     this.getbirth()
-    // this.getlocationdetails()
+    this.getlocationdetails()
 
   },
 

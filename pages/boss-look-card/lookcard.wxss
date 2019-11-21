@@ -133,7 +133,8 @@ page{
   margin-left: 50rpx;
   margin-right: 50rpx;
   word-break: break-all;
-  font-size: 26rpx;
+  font-size: 30rpx;
+  color: #7A7A7A;
 }
 
 .bossbottom {
@@ -201,8 +202,8 @@ page{
 }
 
 .distancet{
-  font-size: 26rpx;
-  color: #909090;
+  font-size: 30rpx;
+  color: #7A7A7A;
       margin-left: 4rpx;
 }
 .distanceo{
@@ -215,7 +216,6 @@ page{
   height: 36rpx;
   display: inline-block;
   position: relative;
-  top: -6rpx;
   /* margin-bottom: 18rpx; */
 }
 .tagsone{

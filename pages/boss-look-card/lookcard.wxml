@@ -70,7 +70,7 @@
             <text class="oworkotext">人员构成</text>
             <text class="workotextone">{{staffcomposition}}</text>
           </view>
-          <view class="cardotext" wx:if="{{personnum && personnum !=1}}">
+          <view class="cardotext" wx:if="{{personnum && personnum !=1&& personnum !=0}}">
             <text class="oworkotext">队伍人数</text>
             <text class="workotextone">{{personnum}}</text>
           </view>

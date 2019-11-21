@@ -1,4 +1,4 @@
-/*ocworkotyptu #797979 nopass*/
+/*ocworkotyptu #797979 nopass ocworkotype*/
 @import "../../userauth/userauth.wxss";
 
 .common-userauth {
@@ -1041,13 +1041,12 @@ page {
   padding: 0;
   height: 34rpx;
   display: inline-block;
-  color: rgb(173, 173, 173);
+  color: #7A7A7A;
   font-size: 30rpx;
   /* width: 100%; *//* margin-top: 14rpx;
   margin-bottom: 6rpx; */
   text-align: justify;
   position: relative;
-  font-weight: bold;
   margin-left: 46rpx;
 }
 
@@ -1450,11 +1449,10 @@ page {
   top: 0;
   height: 30rpx;
   display: inline-block;
-  color: rgb(173, 173, 173);
+  color: #7A7A7A;
   font-size: 30rpx;
   text-align: justify;
   position: absolute;
-  font-weight: bold;
   margin-left: 46rpx;
 }
 

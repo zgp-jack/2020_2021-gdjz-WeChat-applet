@@ -1,11 +1,11 @@
-// moreproject checkfour moreproject ressonone moreskill sex
+// moreproject checkfour moreproject ressonone moreskill sex cityself staffcomposition personnum
 
 const app = getApp();
 
 Page({
 
   /**
-   * 页面的初始数据 nation view_num occupations introduce
+   * 页面的初始数据 nation view_num occupations introduce workingyears procity
    */ 
   data: {
     username: '',

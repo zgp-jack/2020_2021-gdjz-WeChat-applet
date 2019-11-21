@@ -3,7 +3,7 @@ let remain = require("../../utils/remain.js");
 
 Page({
 
-  /** showComplain telephorft  age workingyears personnum workingyears
+  /** showComplain telephorft personnum   age workingyears personnum workingyears
    * 页面的初始数据 moreskill projectone occupations introduce telephorft showThisMapInfo onoff
    telephorft occupations moreproject telephorft telephorft authrasution resumes/get-tel/ location sex*/
   data: {
