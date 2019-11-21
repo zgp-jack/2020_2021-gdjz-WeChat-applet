@@ -1,4 +1,4 @@
-/*yupao-enter-footer clearfix */
+/*yupao-enter-footer clearfix solang */
 .informationtwo{
   width: 93%;
   margin: 0 auto;
@@ -550,11 +550,12 @@ word-wrap:break-word;
   border-radius: 20rpx;
   margin-top: 24rpx;
   margin-bottom: 24rpx;
+  padding-right: 80rpx;
 }
 .solang{
   background: #0099FF;
   border-radius: 20rpx;
-  height: 33rpx;
+  height:100%;
 }
 .yupao-enter-perce{
   display: inline-block;

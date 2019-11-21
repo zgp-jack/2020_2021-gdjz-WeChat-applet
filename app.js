@@ -4,10 +4,11 @@ App({
     //   if (e.path) this.initUserInfo(e); valiUserUrl
     // }
     // catch(err){bindGetUserInfo gotoUserauth
-    //   console.log(err); gotoUserauth bindGetUserInfo  mini_user api_user app.globalData.allTypes
-    // }
+    //   console.log(err); gotoUserauth bindGetUserInfo  mini_user api_user app.globalData.allTypes appRequestAction
+    // } 
   },
   globalData: {
+    gpsdetail:true,
     previewshou:true,
     previewpre:true,
     allexpress: true,

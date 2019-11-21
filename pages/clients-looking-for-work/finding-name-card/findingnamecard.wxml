@@ -2,7 +2,7 @@
   <view class="findingnamecard" wx:if="{{showtop}}">
     请完善一下信息
   </view>
-  <!-- {{selectShow&&"select_img_rotate"}} -->
+  <!-- {{selectShow&&"select_img_rotate"}} show_tips -->
   <view class="findingnamecardone">
     <view class="findingnamecardoneson">
       <view class="findingnamecardonesonone">

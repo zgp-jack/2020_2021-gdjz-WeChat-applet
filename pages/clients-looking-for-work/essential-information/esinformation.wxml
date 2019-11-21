@@ -101,7 +101,7 @@
       <text class='yupao-enter-tips'>完善更多资料可获得积分</text>
       <text class='yupao-enter-perce'>60%</text>
       <view class="slang">
-        <view class="solang" style="width:60%;"></view>
+        <view class="solang" style="width:100%;"></view>
       </view>
       <view class='yupao-enter-footer clearfix'>
         <text bindtap='completes'>完成</text>

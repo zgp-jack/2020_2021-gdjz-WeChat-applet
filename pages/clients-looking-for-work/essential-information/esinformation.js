@@ -8,7 +8,7 @@ const app = getApp();
 Page({
 
   /** 
-   * 页面的初始数据 textareavalue  typeworkarray perfection gender submitinformation completemore GPSsubmit           app.showMyTips("保存失败"); GPSsubmit
+   * 页面的初始数据 textareavalue  typeworkarray perfection gender submitinformation completemore GPSsubmit           GPSsubmit
    */
 
   data: {
@@ -122,40 +122,44 @@ Page({
 
   },
   getLocation: function () { //定位获取
-    app.showMyTips("获取位置中...");
-    var _this = this;
-    var myAmapFun = new amapFile.AMapWX({
-      key: app.globalData.gdApiKey
-    }); //key注册高德地图开发者
-    myAmapFun.getRegeo({
-      success: function (data) {
-        console.log(data);
-        let oname = data[0].name + ' ' + data[0].desc;
-        if (oname.length >= 10) {
-          // let onamesplit = oname.slice(0, 10) + '...';
-          let onamesplit = oname;
+    if (app.globalData.gpsdetail) {
+      app.globalData.gpsdetail = false
+      app.showMyTips("获取位置中...");
+      var _this = this;
+      var myAmapFun = new amapFile.AMapWX({
+        key: app.globalData.gdApiKey
+      }); //key注册高德地图开发者
+      myAmapFun.getRegeo({
+        success: function (data) {
+          console.log(data);
+          let oname = data[0].name + ' ' + data[0].desc;
+          if (oname.length >= 10) {
+            // let onamesplit = oname.slice(0, 10) + '...';
+            let onamesplit = oname;
+            _this.setData({
+              regionone: data[0].name
+            });
+          } else {
+            _this.setData({
+              regionone: data[0].name + ' ' + data[0].desc
+            });
+          }
           _this.setData({
-            regionone: data[0].name
+            oadcode: data[0].regeocodeData.addressComponent.adcode,
+            longitude: data[0].longitude + "",
+            latitude: data[0].latitude + ""
           });
-        } else {
-          _this.setData({
-            regionone: data[0].name + ' ' + data[0].desc
-          });
+          app.showMyTips("获取位置成功");
+          app.globalData.gpsdetail = true
+        },
+        fail: function (info) {
+          app.showMyTips("定位失败,请重新定位");
         }
-        _this.setData({
-          oadcode: data[0].regeocodeData.addressComponent.adcode,
-          longitude: data[0].longitude + "",
-          latitude: data[0].latitude + ""
-        });
-        app.showMyTips("获取位置成功");
-      },
-      fail: function (info) {
-        app.showMyTips("定位失败,请重新定位");
-      }
-    });
+      });
+    }
   },
   openSetting: function (e) {
- 
+
     let that = this;
     wx.getSetting({
       success: (res) => {
@@ -528,7 +532,7 @@ Page({
             that.setData({
               perfection: true,
             })
-          }else{
+          } else {
             remain.remain({
               tips: res.data.errmsg, callback: function () {
                 wx.navigateBack({
@@ -540,7 +544,7 @@ Page({
         } else if (res.data.errcode == 5100) {
           remain.remain({
             tips: res.data.errmsg, callback: function () {
-     
+
             }
           })
         } else {
