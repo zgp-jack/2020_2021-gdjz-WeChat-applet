@@ -1,4 +1,4 @@
-<view> 
+<view>
   <view class="findingnamecard" wx:if="{{showtop}}">
     请完善一下信息
   </view>
@@ -54,12 +54,12 @@
   </view>
 
 
-  <view class="findingnamecardtwo" wx:if="{{showtop}}">
+  <!-- <view class="findingnamecardtwo" wx:if="{{showtop}}">
     <text class="findingnamecardtwothree">您还没有完善基础信息</text>
     <view class="findingnamecardtwofour" bindtap="toperfect">去完善</view>
-  </view>
+  </view>  wx:if="{{showtopone}}"-->
 
-  <view class="cardtwo" wx:if="{{showtopone}}">
+  <view class="cardtwo">
     <image class="link" src="../../../images/newresume-linktag.png"></image>
     <image class="linkone" src="../../../images/newresume-linktag.png"></image>
     <view class="cardonetwof">
@@ -91,10 +91,15 @@
 
             <view class="ocworkotype">工种</view>
          <view>
-            <view class="ocworkotyp">
-              <view class="ocworkotyptu" wx:for="{{occupations}}" wx:key="{{index}}">
+            <view class="ocworkotyp" wx:if="{{!showskill}}">
+              <view class='ocworkotyptu'    wx:for="{{occupations}}" wx:key="{{index}}">
                 {{item}}
-              </view> 
+              </view>
+            </view>
+            <view class="ocworkotyp" wx:if="{{showskill}}" >
+              <view class='oimg'  wx:for="{{occupations}}" wx:key="{{index}}">
+                {{item}}
+              </view>
             </view>
           </view>
           </view>

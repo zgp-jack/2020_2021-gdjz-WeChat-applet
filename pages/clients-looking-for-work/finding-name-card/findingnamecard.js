@@ -1,5 +1,5 @@
-// addskill  lat nation projectlength showbot tom  view_num selectTap showbottom checkone projectone checkfour checkone ressonone note showperfection editor addproject toperfect improvementwork 修改失败 introinfo authentication returnPrevPage  userInfo display selectTap intro introduce improvementwork previewImage previewImagec sex introduce selectTap check_tips_string
-
+// addskill  lat nation projectlength showbot tom  view_num selectTap showbottom checkone projectone checkfour checkone ressonone note showperfection editor addproject toperfect improvementwork 修改失败 introinfo authentication returnPrevPage  userInfo display selectTap intro introduce improvementwork previewImage previewImagec sex introduce selectTap check_tips_string occupations
+ 
 
 
 const app = getApp();
@@ -22,7 +22,7 @@ Page({
     name: "未填写",
     sex: "未填写",
     nation: "未填写",
-    occupations: "未填写",
+    occupations: ["未填写"],
     telephone: "未填写",
     introduce: "未填写",
     city: "未填写",
@@ -78,7 +78,8 @@ Page({
     display: "none",
     popup: "",
     move: true,
-    show_tips: ""
+    show_tips: "",
+    showskill:true
   },
   previewImage: function (e) {
     console.log(e)
@@ -647,6 +648,7 @@ Page({
             }
           }
           that.redorblue()
+          that.showskill();
         }
       },
       fail: function (err) {
@@ -743,7 +745,11 @@ Page({
   onReady: function () {
 
   },
-
+  showskill(){
+    this.setData({
+      showskill:false
+    })
+  },
   /**
    * 生命周期函数--监听页面显示
    */
@@ -751,7 +757,7 @@ Page({
 
     this.getdetail();
     this.delestore();
-    this.deleskill()
+    this.deleskill();
 
   },
 
