@@ -120,14 +120,12 @@
       <text>自我介绍</text>
     </view>
   </view>
-  <view class="introcardtwo">
+  <view class="introcardtwo" wx:if="{{introshow}}" >
           <image class="checkone" src="../../../images/audit.png" wx:if="{{checkone}}"></image>
     <view class="introcontent">{{introduce}}</view>
-
-
     <view class="cardotextbottom"></view>
   </view>
-
+  <view wx:if="{{!introshow}}" class="jilu">暂无记录</view>
 
   <view class="cardfive">
 
@@ -152,7 +150,7 @@
         <view class="cardsixthreeborder">
           <view class="cardsixthree">
             <text>{{item.start_time}}--{{item.completion_time}}</text>
-            <text>{{item.province_name}}省{{item.city_name}}市</text>
+            <text>{{item.province_name}}{{item.city_name}}</text>
           </view>
           <view class="cardsixfour">
             <text>{{item.detail}}

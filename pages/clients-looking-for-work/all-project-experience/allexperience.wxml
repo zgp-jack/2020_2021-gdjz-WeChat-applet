@@ -54,7 +54,7 @@
         </view>
         <view class="skilleighttwo">
           <text>{{item.start_time}}--{{item.completion_time}}</text>
-          <text>{{item.province_name}}省{{item.city_name}}市</text>
+          <text>{{item.province_name}}{{item.city_name}}</text>
         </view>
         <view class="description">
           <text>{{item.detail}}</text>
@@ -89,7 +89,7 @@
         </view>
         <view class="skilleighttwo">
           <text>{{item.start_time}}--{{item.completion_time}}</text>
-          <text>{{item.province_name}}省{{item.city_name}}市</text>
+          <text>{{item.province_name}}{{item.city_name}}</text>
         </view>
         <view class="description">
          <text>{{item.detail}}</text>

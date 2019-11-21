@@ -110,14 +110,12 @@
       <text>自我介绍</text>
     </view>
   </view>
-  <view class="introcardtwo">
+  <view class="introcardtwo" wx:if="{{introshow}}" >
 
     <view class="introcontent">{{introduce}}</view>
-
-
     <view class="cardotextbottom"></view>
   </view>
-
+  <view wx:if="{{!introshow}}" class="jilu">暂无记录</view>
 
   <view class="cardfive">
     <view class="cardfivemobile">

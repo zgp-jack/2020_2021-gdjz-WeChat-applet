@@ -1,5 +1,5 @@
 // addskill  lat nation projectlength showbot tom  view_num selectTap showbottom checkone projectone checkfour checkone ressonone note showperfection editor addproject toperfect improvementwork 修改失败 introinfo authentication returnPrevPage  userInfo display selectTap intro introduce improvementwork previewImage previewImagec sex introduce selectTap check_tips_string occupations showtopone
- 
+
 
 
 const app = getApp();
@@ -79,7 +79,7 @@ Page({
     popup: "",
     move: true,
     show_tips: "",
-    showskill:true
+    showskill: true
   },
   previewImage: function (e) {
     console.log(e)
@@ -91,6 +91,7 @@ Page({
       current: url,
       urls: urls
     })
+    app.globalData.previewshou = false;
   },
   previewImagec: function (e) {
     console.log(e)
@@ -102,6 +103,7 @@ Page({
       current: url,
       urls: urls
     })
+    app.globalData.previewshou = false;
   },
   vertify() {
     this.setData({
@@ -460,7 +462,7 @@ Page({
             that.setData({
               sex: mydata.info.gender == "1" ? "男" : "女"
             })
-          }else{
+          } else {
             that.setData({
               sex: ""
             })
@@ -746,20 +748,21 @@ Page({
   onReady: function () {
 
   },
-  showskill(){
+  showskill() {
     this.setData({
-      showskill:false
+      showskill: false
     })
   },
   /**
    * 生命周期函数--监听页面显示
    */
   onShow() {
-
-    this.getdetail();
-    this.delestore();
-    this.deleskill();
-
+    if (app.globalData.previewshou) {
+      this.getdetail();
+      this.delestore();
+      this.deleskill();
+    }
+    app.globalData.previewshou = true;
   },
 
   /**

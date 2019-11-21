@@ -1,17 +1,34 @@
 <view>
   <view class="rankheader">
     <view class="information">
-       <text>我的名片信息：</text>
+      <text>我的名片信息：</text>
     </view>
     <view class="informationr">
-       <view class="rankingpoints">
-          <view class="rankingpoints">我的排名点</view>
-          <view class="rankingnum">369</view>
-       </view>
-       <view class="beviewed">
-          <view>我的排名点</view>
-          <view>29次</view>
-       </view>
+      <view class="rankingpoints">
+        <view class="rankingpoints">我的排名点</view>
+        <view class="rankingnum">369</view>
+      </view>
+      <view class="beviewed">
+        <view class="beviewedk">被查看</view>
+        <view class="beviewednum">29次</view>
+      </view>
+    </view>
+  </view>
+  <view class="profession">
+    <view class="information">
+      <text>我的名片信息：</text>
+    </view>
+    <view class="country">
+      <view class="countrynum">369</view>
+      <view class="countryrank">全国排名</view>
+    </view>
+    <view class="province">
+      <view class="provincenum">第39名</view>
+      <view class="provincerank">四川省排名</view>
+    </view>
+    <view class="city">
+      <view class="citynum">29次</view>
+      <view class="cityrank">成都市排名</view>
     </view>
   </view>
 </view>

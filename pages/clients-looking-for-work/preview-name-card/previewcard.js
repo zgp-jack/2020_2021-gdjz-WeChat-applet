@@ -5,8 +5,8 @@ const app = getApp();
 Page({
 
   /**
-   * 页面的初始数据 nation view_num occupations introduce workingyears procity
-   */ 
+   * 页面的初始数据 nation view_num occupations introduce workingyears procity introduce
+   */
   data: {
     username: '',
     userimg: '',
@@ -15,7 +15,7 @@ Page({
     name: "未填写",
     sex: "未填写",
     nation: "未填写",
-    occupations:[],
+    occupations: [],
     occupationone: "未填写",
     telephone: "未填写",
     introduce: "未填写",
@@ -61,7 +61,8 @@ Page({
     resume_uuid: "",
     showtan: false,
     ressonone: false,
-    note:""
+    note: "",
+    introshow:true
   },
   previewImagec: function (e) {
     console.log(e)
@@ -73,6 +74,7 @@ Page({
       current: url,
       urls: urls
     })
+    app.globalData.previewpre =  false;
   },
   previewImage: function (e) {
     console.log(e)
@@ -84,8 +86,9 @@ Page({
       current: url,
       urls: urls
     })
+    app.globalData.previewpre = false;
   },
-  telephorf(e){
+  telephorf(e) {
     wx.makePhoneCall({
       phoneNumber: e.currentTarget.dataset.telephone,
     })
@@ -99,7 +102,7 @@ Page({
     }
   },
   moreproject() {
-    wx.setStorageSync("pass",1)
+    wx.setStorageSync("pass", 1)
     wx.navigateTo({
       url: "/pages/clients-looking-for-work/all-project-experience/allexperience",
     })
@@ -193,7 +196,7 @@ Page({
             city: mydata.info.hasOwnProperty("address") ? mydata.info.address : "",
             intro: false,
             introne: true,
-            introduce: mydata.info.hasOwnProperty("introduce") ? (mydata.info.introduce == "" ? "请简要介绍您所从事行业以及工作经验..." : mydata.info.introduce) : "",
+            introduce: mydata.info.hasOwnProperty("introduce") ? mydata.info.introduce: "",
             workingyears: mydata.introduces.hasOwnProperty("experience") ? mydata.introduces.experience : "",
             staffcomposition: mydata.introduces.hasOwnProperty("type_str") ? mydata.introduces.type_str : "",
             cityself: mydata.introduces.hasOwnProperty("hometown") ? mydata.introduces.hometown : "",
@@ -207,7 +210,11 @@ Page({
             checktwof: mydata.introduces.hasOwnProperty("check") ? mydata.introduces.check : "",
             note: mydata.info.hasOwnProperty("note") ? mydata.info.note : "",
           })
-
+          if (that.data.introduce === "") {
+            that.setData({
+              introshow: false
+            })
+          }
           let selectD = Object.values(mydata.status)
           let selectk = Object.keys(mydata.status)
           if (mydata.info.is_end == "2") {
@@ -351,10 +358,12 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow() {
-    this.getdetail();
-    this.delestore();
-    this.deleskill()
-
+    if (app.globalData.previewpre) {
+      this.getdetail();
+      this.delestore();
+      this.deleskill();
+    }
+    app.globalData.previewpre = true;
   },
 
   /**

@@ -82,7 +82,8 @@ Page({
     options: {
         location:"",
         uuid:""
-    }
+    },
+    introshow:true
   },
   previewImage: function (e) {
     console.log(e)
@@ -335,7 +336,7 @@ Page({
             city: mydata.info.hasOwnProperty("address") ? mydata.info.address : "",
             intro: false,
             introne: true,
-            introduce: mydata.info.hasOwnProperty("introduce") ? (mydata.info.introduce == "" ? "请简要介绍您所从事行业以及工作经验..." : mydata.info.introduce) : "",
+            introduce: mydata.info.hasOwnProperty("introduce") ? mydata.info.introduce : "",
             workingyears: mydata.info.hasOwnProperty("experience") ? mydata.info.experience : "",
             staffcomposition: mydata.info.hasOwnProperty("type_str") ? mydata.info.type_str : "",
             cityself: mydata.info.hasOwnProperty("hometown") ? mydata.info.hometown : "",
@@ -353,7 +354,12 @@ Page({
             examine: false,
           })
 
-          console.log(that.data.is_read)
+          
+          if (that.data.introduce === ""){
+            that.setData({
+              introshow:false
+            })
+          }
 
           that.setData({
             headerimg: mydata.info.headerimg

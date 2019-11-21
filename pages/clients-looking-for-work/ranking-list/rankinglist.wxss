@@ -2,13 +2,11 @@
 .rankheader{
    background: white;
    margin-top: 20rpx;
-   margin-left: 18rpx;
-   margin-right: 18rpx;
 }
 .information{
   color: #333333;
   font-size: 30rpx;
-  padding: 20rpx 0rpx 25rpx 30rpx;
+  padding: 20rpx 0rpx 20rpx 30rpx;
 }
 
 .informationr{
@@ -20,26 +18,35 @@
   width: 50%;
   text-align: center;
 }
-.rankingpoints:first-child{
+.rankingpoints .rankingpoints{
+  width: 100%;
+  text-align: center;
   font-size: 28rpx;
   color: #363636;
 }
-.rankingpoints:last-child{
+.rankingpoints .rankingnum{
   font-size: 30rpx;
   color: #26A1FF;
-  padding: 20rpx 0rpx 20rpx 0rpx;
+  padding: 12rpx 0rpx 16rpx 0rpx;
+  font-weight: bold;
 }
 
 .beviewed{
   width: 50%;
   text-align: center;
 }
-.beviewed:first-child{
+.beviewed .beviewedk{
     font-size: 28rpx;
    color: #363636;
 }
-.beviewed:last-child{
+.beviewed .beviewednum{
   font-size: 30rpx;
   color: #26A1FF;
-  padding: 20rpx 0rpx 20rpx 0rpx;
+  padding: 12rpx 0rpx 16rpx 0rpx;
+  font-weight: bold;
+}
+
+.profession{
+  margin-top: 20rpx;
+  background: white;
 }

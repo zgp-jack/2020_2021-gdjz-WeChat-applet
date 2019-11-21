@@ -8,6 +8,8 @@ App({
     // }
   },
   globalData: {
+    previewshou:true,
+    previewpre:true,
     allexpress: true,
     allskill: true,
     skip: false,

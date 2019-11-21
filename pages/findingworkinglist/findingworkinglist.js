@@ -59,6 +59,7 @@ Page({
       keywords: "",
       occupations: "",
       type:1,
+      province:1
     },
     fillterArea: [],
     fillterType: [],
@@ -169,7 +170,7 @@ Page({
     let areaText = e.currentTarget.dataset.area;
     let pname = e.currentTarget.dataset.pname;
     let directCtiy = parseInt(e.currentTarget.dataset.haschild);
-    let _sid = this.data.searchDate.area_id;
+    let _sid = this.data.searchDate.province;
     this.setData({ province: index })
     //if (_id == _sid) return false;
     let mydata = { "name": areaText, "id": _id, ad_name: pname };
@@ -439,7 +440,7 @@ Page({
     let areaId = wx.getStorageSync("areaId");
     let areaText = wx.getStorageSync("areaText");
     this.setData({
-      "searchDate.area_id": areaId ? areaId : 1
+      "searchDate.province": areaId ? areaId : 1
     })
     this.doRequestAction(false);
   },
