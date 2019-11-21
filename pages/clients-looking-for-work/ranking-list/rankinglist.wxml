@@ -1,5 +1,17 @@
 <view>
-  <view>
-  123
+  <view class="rankheader">
+    <view class="information">
+       <text>我的名片信息：</text>
+    </view>
+    <view class="informationr">
+       <view class="rankingpoints">
+          <view class="rankingpoints">我的排名点</view>
+          <view class="rankingnum">369</view>
+       </view>
+       <view class="beviewed">
+          <view>我的排名点</view>
+          <view>29次</view>
+       </view>
+    </view>
   </view>
 </view>

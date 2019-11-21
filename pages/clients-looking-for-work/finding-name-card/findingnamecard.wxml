@@ -54,12 +54,12 @@
   </view>
 
 
-  <!-- <view class="findingnamecardtwo" wx:if="{{showtop}}">
+  <view class="findingnamecardtwo" wx:if="{{showtop}}">
     <text class="findingnamecardtwothree">您还没有完善基础信息</text>
     <view class="findingnamecardtwofour" bindtap="toperfect">去完善</view>
-  </view>  wx:if="{{showtopone}}"-->
+  </view>
 
-  <view class="cardtwo">
+  <view class="cardtwo"  wx:if="{{showtopone}}">
     <image class="link" src="../../../images/newresume-linktag.png"></image>
     <image class="linkone" src="../../../images/newresume-linktag.png"></image>
     <view class="cardonetwof">

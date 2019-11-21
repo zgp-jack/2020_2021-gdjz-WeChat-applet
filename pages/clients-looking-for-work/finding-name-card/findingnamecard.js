@@ -1,4 +1,4 @@
-// addskill  lat nation projectlength showbot tom  view_num selectTap showbottom checkone projectone checkfour checkone ressonone note showperfection editor addproject toperfect improvementwork 修改失败 introinfo authentication returnPrevPage  userInfo display selectTap intro introduce improvementwork previewImage previewImagec sex introduce selectTap check_tips_string occupations
+// addskill  lat nation projectlength showbot tom  view_num selectTap showbottom checkone projectone checkfour checkone ressonone note showperfection editor addproject toperfect improvementwork 修改失败 introinfo authentication returnPrevPage  userInfo display selectTap intro introduce improvementwork previewImage previewImagec sex introduce selectTap check_tips_string occupations showtopone
  
 
 
@@ -448,6 +448,7 @@ Page({
           let dateone = new Date(dateo);
           wx.setStorageSync("introdetail", mydata.introduces)
           wx.setStorageSync("introinfo", mydata.info)
+          console.log(mydata.info.uuid)
           if (mydata.info.uuid) {
             that.showtop()
             that.setData({

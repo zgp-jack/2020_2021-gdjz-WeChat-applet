@@ -1,1 +1,45 @@
 /* pages/clients-looking-for-work/ranking-list/rankinglist.wxss */
+.rankheader{
+   background: white;
+   margin-top: 20rpx;
+   margin-left: 18rpx;
+   margin-right: 18rpx;
+}
+.information{
+  color: #333333;
+  font-size: 30rpx;
+  padding: 20rpx 0rpx 25rpx 30rpx;
+}
+
+.informationr{
+  display: flex;
+}
+
+
+.rankingpoints{
+  width: 50%;
+  text-align: center;
+}
+.rankingpoints:first-child{
+  font-size: 28rpx;
+  color: #363636;
+}
+.rankingpoints:last-child{
+  font-size: 30rpx;
+  color: #26A1FF;
+  padding: 20rpx 0rpx 20rpx 0rpx;
+}
+
+.beviewed{
+  width: 50%;
+  text-align: center;
+}
+.beviewed:first-child{
+    font-size: 28rpx;
+   color: #363636;
+}
+.beviewed:last-child{
+  font-size: 30rpx;
+  color: #26A1FF;
+  padding: 20rpx 0rpx 20rpx 0rpx;
+}
