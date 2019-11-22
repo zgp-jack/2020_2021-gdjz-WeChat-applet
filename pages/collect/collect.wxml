@@ -31,5 +31,5 @@
 </view>
 
 
-<!-- 引入footer -->
+<!-- 引入footer oimg  -->
 <template is="footer" data="{{ footerImgs,publishActive,showPublishBox,footerActive }}" />

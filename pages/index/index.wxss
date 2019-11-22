@@ -1,4 +1,5 @@
 @import "../home/home.wxss";
+/* lists-template-btn */
 page{
     height: 100%;
 }

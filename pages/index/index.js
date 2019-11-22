@@ -1,4 +1,4 @@
-// pages/lists/lists.
+// pages/lists/lists. showDetailInfo
 const app = getApp();
 let footerjs = require("../../utils/footer.js");
 let areas = require("../../utils/area.js");
@@ -131,6 +131,7 @@ Page({
       })
     },             
     showDetailInfo:function(e){
+      console.log(e)
       let uinfo = this.data.userInfo;
       app.showDetailInfo(e, uinfo);
     },

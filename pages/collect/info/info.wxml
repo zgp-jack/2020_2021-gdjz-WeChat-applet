@@ -58,5 +58,5 @@
 </view>
 
 
-<!-- 引入footer -->
+<!-- 引入footer listsboxdetailo  oimg listsboxdetailo-->
 <template is="footer" data="{{ footerImgs,publishActive,showPublishBox,footerActive }}" />

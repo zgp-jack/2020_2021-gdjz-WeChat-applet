@@ -726,7 +726,11 @@ Page({
 
 
 
-
+  showDetailInfo: function (e) {
+    console.log(e)
+    let uinfo = this.data.userInfo;
+    app.showDetailInfo(e, uinfo);
+  },
 
   persondetail(e) {
     let userLocation = wx.getStorageSync("userLocation")

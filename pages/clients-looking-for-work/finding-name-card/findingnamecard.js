@@ -1,4 +1,4 @@
-// addskill  lat nation projectlength showbot tom  view_num selectTap showbottom checkone projectone checkfour checkone ressonone note showperfection editor addproject toperfect improvementwork 修改失败 introinfo authentication returnPrevPage  userInfo display selectTap intro introduce improvementwork previewImage previewImagec sex introduce selectTap check_tips_string occupations showtopone chooseImage show_tips previewImage
+// bindGetUserInfo
 
 
 
@@ -7,7 +7,7 @@ const app = getApp();
 Page({
 
   /** 
-   * 页面的初始数据 nation view_num perfection addskill
+   * 页面的初始数据 nation view_num perfection addskill fail_certificate
    */
   data: {
     icon: app.globalData.apiImgUrl + "userauth-topicon.png",

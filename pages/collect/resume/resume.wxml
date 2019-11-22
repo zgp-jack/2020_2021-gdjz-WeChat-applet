@@ -20,7 +20,9 @@
     <view class="listsboxdetail" bindtap="showCollectInfo"  data-msg="{{ item.show_tips }}" data-tips="{{ item.check_tips_string }}" data-uuid="{{ item.resume.uuid }}" wx:for="{{lists}}" wx:key="{{index}}">
       <image src="../../../images/finded.png" class="finded" wx:if="{{item.resume.is_end == 2}}"></image>
       <view class="listsboxdetailo">
+        <view>
         <image class="oimg" src="{{item.resume.headerimg}}" data-index="{{index}}" binderror="errImg"></image>
+        </view>
         <view class="listsboxintro">
           <view class="listsboxage">
             <view class="listsboxageone">
@@ -76,5 +78,5 @@
 </view>
 
 
-<!-- 引入footer -->
+<!-- 引入footer listsboxdetailo -->
 <template is="footer" data="{{ footerImgs,publishActive,showPublishBox,footerActive }}" />

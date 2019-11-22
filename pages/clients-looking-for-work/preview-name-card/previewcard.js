@@ -1,11 +1,11 @@
-// moreproject checkfour moreproject ressonone moreskill sex cityself staffcomposition personnum
+// moreproject age checkfour moreproject ressonone moreskill sex cityself staffcomposition personnum
 
 const app = getApp();
 
 Page({
 
   /**
-   * 页面的初始数据 nation view_num occupations introduce workingyears procity introduce
+   * 页面的初始数据 nation view_num occupations introduce workingyears procity introduce fail_certificate 
    */
   data: {
     username: '',
@@ -63,7 +63,9 @@ Page({
     showtan: false,
     ressonone: false,
     note: "",
-    introshow:true
+    introshow:true,
+    fail_certificate: "",
+    fail_project: "",
   },
   previewImagec: function (e) {
     console.log(e)
@@ -186,7 +188,7 @@ Page({
           }
           if (mydata.info.birthday) {
             that.setData({
-              age: dateone.getFullYear() - (mydata.info.birthday.split("-")[0] - 0)
+              age: dateone.getFullYear() - (mydata.info.birthday.split("-")[0] - 0) + "岁"
             })
           }
           that.setData({
@@ -210,6 +212,8 @@ Page({
             checktwo: mydata.introduces.check && mydata.introduces.check == 1 ? true : false,
             checktwof: mydata.introduces.hasOwnProperty("check") ? mydata.introduces.check : "",
             note: mydata.info.hasOwnProperty("note") ? mydata.info.note : "",
+            fail_certificate: mydata.hasOwnProperty("fail_certificate") ? mydata.fail_certificate : "",
+            fail_project: mydata.hasOwnProperty("fail_project") ? mydata.fail_project : "",
           })
           if (that.data.introduce === "") {
             that.setData({

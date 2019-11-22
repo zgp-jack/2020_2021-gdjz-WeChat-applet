@@ -3,7 +3,7 @@ const app = getApp();
 Page({
 
     /**
-     * 页面的初始数据
+     * 页面的初始数据 showThisRecord
      */
     data: {
         loadingGif: app.globalData.apiImgUrl + "loading.gif",
@@ -158,10 +158,12 @@ Page({
         })
     },
     showThisRecord:function(e){
+        console.log(e)
         let _this = this;
         let id = e.currentTarget.dataset.id;
         let userInfo = this.data.userInfo;
         userInfo.logId = id;
+        console.log(userInfo.logId )
         app.appRequestAction({
             title:"信息获取中",
             url:"integral/look-used-info/",

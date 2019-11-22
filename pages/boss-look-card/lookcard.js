@@ -5,7 +5,7 @@ Page({
 
   /** showComplain telephorft personnum   age workingyears personnum workingyears
    * 页面的初始数据 moreskill projectone occupations introduce telephorft showThisMapInfo onoff
-   telephorft occupations moreproject telephorft telephorft authrasution resumes/get-tel/ location sex*/
+   telephorft occupations moreproject telephorft telephorft authrasution resumes/get-tel/ location sex age*/
   data: {
     userInfo: true,
     icon: app.globalData.apiImgUrl + "userauth-topicon.png",
@@ -325,7 +325,7 @@ Page({
           }
           if (mydata.info.birthday) {
             that.setData({
-              age: dateone.getFullYear() - (mydata.info.birthday.split("-")[0] - 0) + "年"
+              age: dateone.getFullYear() - (mydata.info.birthday.split("-")[0] - 0) + "岁"
             })
           }
           that.setData({

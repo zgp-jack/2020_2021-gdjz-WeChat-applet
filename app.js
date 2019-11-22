@@ -4,7 +4,7 @@ App({
     //   if (e.path) this.initUserInfo(e); valiUserUrl
     // }
     // catch(err){bindGetUserInfo gotoUserauth
-    //   console.log(err); gotoUserauth bindGetUserInfo  mini_user api_user app.globalData.allTypes appRequestAction getAreaData
+    //   bindGetUserInfo mini_user api_user showDetailInfo
     // } 
   },
   globalData: {
@@ -201,7 +201,6 @@ App({
       // 登录 获取在我们这里user_id
       wx.login({
         success: function(res) {
-          console.log(res)
           // 发送 res.code 到后台换取 openId, sessionKey, unionId
           if (res.code) {
             //发起网络请求
@@ -235,6 +234,7 @@ App({
     var that = this
     wx.getSetting({
       success: (res) => {
+        console.log(res)
         if (!res.authSetting['scope.userInfo']) {
           wx.getUserInfo({
             fail: () => {
@@ -258,7 +258,6 @@ App({
     let that = this;
     wx.getUserInfo({
       success: (res) => {
-        console.log(res)
         let encryptedData = res.encryptedData
         let iv = res.iv
         var params = new Object()
@@ -285,7 +284,6 @@ App({
             'content-type': 'application/json' // 默认值
           },
           success(res) {
-            console.log(res)
             callback(res)
             // 授权用户执行操作
             wx.hideToast();
@@ -575,11 +573,19 @@ App({
     })
   },
   showDetailInfo: function(e, uinfo) {
+    let userLocation = wx.getStorageSync("userLocation")
+    if (!userLocation) {
+      userLocation = ""
+    } else {
+      userLocation = userLocation.split(",").reverse().join(",")
+    }
+
+    let uuid = e.currentTarget.dataset.uuid
     let _this = this;
     let formId = e.detail.formId;
     let id = e.currentTarget.dataset.id;
     let type = e.currentTarget.dataset.type;
-    let url = (type == "job") ? '/pages/detail/info/info?id=' : '/pages/detail/ucard/ucard?id='
+    let url = (type == "job") ? '/pages/detail/info/info?id=' : `/pages/boss-look-card/lookcard?uuid=${uuid}&location=${userLocation}`
     wx.navigateTo({
       url: url + id
     })
