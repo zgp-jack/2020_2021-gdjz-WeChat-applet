@@ -23,7 +23,7 @@
     </view>
   </view>
 
-    <view class="findingnamecardthree">
+  <view class="findingnamecardthree">
     <view class="findingnamecardthreemobile">
       <image src="../../../images/jichu.png"></image>
       基础信息
@@ -59,7 +59,7 @@
     <view class="findingnamecardtwofour" bindtap="toperfect">去完善</view>
   </view>
 
-  <view class="cardtwo"  wx:if="{{showtopone}}">
+  <view class="cardtwo" wx:if="{{showtopone}}">
     <image class="link" src="../../../images/newresume-linktag.png"></image>
     <image class="linkone" src="../../../images/newresume-linktag.png"></image>
     <view class="cardonetwof">
@@ -90,37 +90,37 @@
           <view class="cworkotype">
 
             <view class="ocworkotype">工种</view>
-         <view>
-            <view class="ocworkotyp" wx:if="{{!showskill}}">
-              <view class='ocworkotyptu'    wx:for="{{occupations}}" wx:key="{{index}}">
-                {{item}}
+            <view>
+              <view class="ocworkotyp" wx:if="{{!showskill}}">
+                <view class='ocworkotyptu' wx:for="{{occupations}}" wx:key="{{index}}">
+                  {{item}}
+                </view>
+              </view>
+              <view class="ocworkotyp" wx:if="{{showskill}}">
+                <view class='oimg' wx:for="{{occupations}}" wx:key="{{index}}">
+                  {{item}}
+                </view>
               </view>
             </view>
-            <view class="ocworkotyp" wx:if="{{showskill}}" >
-              <view class='oimg'  wx:for="{{occupations}}" wx:key="{{index}}">
-                {{item}}
-              </view>
-            </view>
-          </view>
           </view>
           <view class="cardotext">
 
-              <text class="oworkotext">手机</text>
+            <text class="oworkotext">手机</text>
 
-              <text class="workotextone">{{telephone}}</text>
+            <text class="workotextone">{{telephone}}</text>
 
           </view>
           <view class="cardotext">
 
-              <text class="oworkotext">所在地区</text>
+            <text class="oworkotext">所在地区</text>
 
 
-              <text class="workotextone">{{city}}</text>
+            <text class="workotextone">{{city}}</text>
 
           </view>
           <view class="cardotext">
 
-              <text class="oworkotext">自我介绍</text>
+            <text class="oworkotext">自我介绍</text>
 
           </view>
         </view>
@@ -146,8 +146,8 @@
 
   <view class="cardthree" wx:if="{{selfintrone}}">
     <view class="cardthreemobile">
-        <image src="../../../images/newresume-description.png"></image>
-        <text>人员信息</text> 
+      <image src="../../../images/newresume-description.png"></image>
+      <text>人员信息</text>
     </view>
     <view class="cardthreeone" bindtap="improvementwork" wx:if="{{!checktwo}}">
       编辑
@@ -159,49 +159,49 @@
       <view class="linezo">
         <view class="cardotext">
 
-            <text class="oworkotext">工龄</text>
+          <text class="oworkotext">工龄</text>
 
 
-            <text class="workotextone">{{workingyears}}年</text>
+          <text class="workotextone">{{workingyears}}年</text>
 
         </view>
         <view class="cardotext">
 
-            <text class="oworkotext">人员构成</text>
+          <text class="oworkotext">人员构成</text>
           <text class="workotextone">{{staffcomposition}}</text>
 
         </view>
 
         <view class="cardotext">
 
-            <text class="oworkotext">我的家乡</text>
+          <text class="oworkotext">我的家乡</text>
 
 
-            <text class="workotextone">{{cityself}}</text>
+          <text class="workotextone">{{cityself}}</text>
 
         </view>
         <view class="cardotext">
-         
-            <text class="oworkotext">熟练度</text>
+
+          <text class="oworkotext">熟练度</text>
 
 
-            <text class="workotextone">{{procity}}</text>
+          <text class="workotextone">{{procity}}</text>
 
         </view>
         <view class="cardotext" wx:if="{{personnum != 1}}">
 
-            <text class="oworkotext">队伍人数</text>
+          <text class="oworkotext">队伍人数</text>
 
 
-            <text class="workotextone">{{personnum}}人</text>
+          <text class="workotextone">{{personnum}}人</text>
 
         </view>
         <view class="cardotext">
 
-            <text class="oworkotext">标签</text>
+          <text class="oworkotext">标签</text>
 
           <view class="alllabletu">
-             <text class="labletu" wx:for="{{tags}}" wx:key="{{index}}">{{item.label_name}}</text> 
+            <text class="labletu" wx:for="{{tags}}" wx:key="{{index}}">{{item.label_name}}</text>
           </view>
         </view>
       </view>
@@ -235,7 +235,7 @@
       <image class="checkthree" src="../../../images/audit.png" wx:if="{{item.check == 1&&show_tips==1}}"></image>
       <view class="editor" bindtap="editor" data-uid="{{item}}" wx:if="{{item.check != 1}}">编辑</view>
       <image class="audit" wx:if="{{item.check == 0}}" src="../../../images/notthrough.png"></image>
-           <image class="audit" wx:if="{{item.check == 1&&show_tips == 0}}" src="../../../images/review.png"></image>
+      <image class="audit" wx:if="{{item.check == 1&&show_tips == 0}}" src="../../../images/review.png"></image>
       <view>
         <image src="../../../images/newresume-experience-item.png" class="cardsixone"></image>
       </view>
@@ -316,7 +316,7 @@
           <text>{{item.certificate_time}}</text>
         </view>
         <view class="cardeightfive">
-          <image wx:for="{{item.image}}" data-url="{{ item }}" catchtap="previewImagec" src="{{item}}" data-index="{{ pindex }}" wx:key="{{index}}" ></image>
+          <image wx:for="{{item.image}}" data-url="{{ item }}" catchtap="previewImagec" src="{{item}}" data-index="{{ pindex }}" wx:key="{{index}}"></image>
         </view>
         <view wx:if="{{item.check == 0}}" class="resson">
           未通过原因：{{item.fail_case}}

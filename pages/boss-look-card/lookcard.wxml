@@ -3,7 +3,12 @@
   <view class="header">
     注:老板对找活者满意，可以直接与他联系以及点赞或转发
   </view>
-
+  <view class="findingnamecardthree">
+    <view class="findingnamecardthreemobile">
+      <image src="../../images/jichu.png"></image>
+      基础信息
+    </view>
+  </view>
 
 
   <view class="cardtwo">
