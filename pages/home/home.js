@@ -1,4 +1,4 @@
-// infolists errImg
+// infolists errImg showArea  areadata areadata
 let footerjs = require("../../utils/footer.js");
 let areas = require("../../utils/area.js");
 const app = getApp();
@@ -324,6 +324,7 @@ Page({
       this.initIndexData();
       this.initUserInfo();
       this.initHistoryLoc();
+      console.log(this.data.areadata)
     },
 
     /**

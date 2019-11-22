@@ -1,0 +1,165 @@
+/* pages/clients-looking-for-work/finding-top/findingtop.wxss */
+.topall{
+  padding: 0 28rpx 0 28rpx;
+}
+
+.scope{
+  width: 40%;
+  margin: 0;
+  padding: 0;
+
+  color: #202021;
+  font-size: 32rpx;
+  /* text-align: justify; */
+  position: relative;
+  margin-top: 28rpx;
+}
+.scope text{
+  letter-spacing: 2rpx;
+}
+.scope::after{
+  content: '';
+  width: 100%;
+  overflow: hidden;
+  height: 0;
+}
+
+.scope::before{
+  content: ':';
+  height: 100%;
+  width: 6rpx;
+  position: absolute;
+  right: -4px;
+}
+
+.pointscope{
+  width: 300rpx;
+  height: 70rpx;
+  background: #0099FF;
+  color: white;
+  font-size: 30rpx;
+  line-height: 70rpx;
+  text-align: center;
+  margin-top: 30rpx;
+  border-radius: 8rpx;
+}
+
+
+
+.scopenum{
+  width: 35%;
+  margin: 0;
+  padding: 0;
+
+  color: #202021;
+  font-size: 32rpx;
+  position: relative;
+  margin-top: 25rpx;
+}
+.scopenum text{
+  letter-spacing: 2rpx;
+}
+.scopenum::after{
+  content: '';
+  width: 100%;
+  overflow: hidden;
+  height: 0;
+}
+.scopenum::before{
+  content: ':';
+  height: 100%;
+  width: 6rpx;
+  position: absolute;
+  right: -4px;
+}
+
+
+.day{
+  margin-top: 20rpx;
+  background: white;
+  padding: 0rpx 30rpx 0rpx 30rpx;
+}
+.daynum{
+  position: relative;
+padding-left: 26%;
+  border-bottom: 1px solid #DCDCDC;
+    line-height: 90rpx;
+  height: 90rpx;
+}
+.daynum text{
+  width: 22%;
+  display: inline-block;
+  color: #202021;
+  font-size: 30rpx;
+  position: absolute;
+  left: 0rpx;
+}
+.daynum text::after{
+  content: '';
+  width: 100%;
+  overflow: hidden;
+  height: 0;
+}
+.daynum text::before{
+  content: ':';
+  height: 100%;
+  width: 6rpx;
+  position: absolute;
+  right: 4rpx;
+}
+.daynum input{
+  width: 75%;
+  font-size: 30rpx;
+  display: inline-block;
+  height: 90rpx;
+}
+.daynum:last-child{
+  border: 0;
+}
+
+.submitscope{
+  width: 420rpx;
+  height: 80rpx;
+  background: #0099FF;
+  color: white;
+  font-size: 38rpx;
+  line-height: 80rpx;
+  text-align: center;
+  margin: 0 auto;
+  margin-top: 40rpx;
+  border-radius: 8rpx;
+}
+
+.toprule{
+   margin: 0 auto;
+   width: 420rpx;
+   color: #202021;
+   text-align: center;
+   height: 80rpx;
+   line-height: 80rpx;
+   font-size: 30rpx;
+   position: relative;
+}
+
+.toprule::before{
+  content: '';
+  border-bottom: 2rpx solid #202021;
+  width: 30%;
+  height: 2rpx;
+  position: absolute;
+  left: 8rpx;
+  top: 45%;
+}
+.toprule::after{
+  content: '';
+  border-bottom: 2rpx solid #202021;
+  width: 30%;
+  height: 2rpx;
+  position: absolute;
+  right: 8rpx;
+  top: 45%;
+}
+.bottom{
+  font-size: 30rpx;
+  color: #202021;
+}

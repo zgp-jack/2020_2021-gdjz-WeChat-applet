@@ -127,7 +127,7 @@
     </view>
   </view>
   <view class="introcardtwo" wx:if="{{introshow}}">
-    <image class="checkone" src="../../../images/audit.png" wx:if="{{checkone}}"></image>
+    <!-- <image class="checkone" src="../../../images/audit.png" wx:if="{{checkone}}"></image> -->
     <view class="introcontent">{{introduce}}</view>
     <view class="cardotextbottom"></view>
   </view>

@@ -16,19 +16,119 @@
   </view>
   <view class="profession">
     <view class="information">
-      <text>我的名片信息：</text>
+      <text>装修工人</text>
     </view>
-    <view class="country">
-      <view class="countrynum">369</view>
-      <view class="countryrank">全国排名</view>
+    <view class="professionf">
+      <view class="country">
+        <view class="countrynum">369</view>
+        <view class="countryrank">全国排名</view>
+      </view>
+      <view class="province">
+        <view class="provincenum">第39名</view>
+        <view class="provincerank">四川省排名</view>
+      </view>
+      <view class="city">
+        <view class="citynum">29次</view>
+        <view class="cityrank">成都市排名</view>
+      </view>
     </view>
-    <view class="province">
-      <view class="provincenum">第39名</view>
-      <view class="provincerank">四川省排名</view>
+  </view>
+  <view class="profession">
+    <view class="information">
+      <text>建筑工人</text>
     </view>
-    <view class="city">
-      <view class="citynum">29次</view>
-      <view class="cityrank">成都市排名</view>
+    <view class="professionf">
+      <view class="country">
+        <view class="countrynum">369</view>
+        <view class="countryrank">全国排名</view>
+      </view>
+      <view class="province">
+        <view class="provincenum">第39名</view>
+        <view class="provincerank">四川省排名</view>
+      </view>
+      <view class="city">
+        <view class="citynum">29次</view>
+        <view class="cityrank">成都市排名</view>
+      </view>
     </view>
+  </view>
+  <view class="rankingrule">
+    <view class="rankingheader">
+      <text>排名规则</text>
+    </view>
+    <view class="rankingdetail">
+      <view class="rankingzan">
+        <text>1、完成基础资料填写（5排名点）</text>
+      </view>
+    </view>
+    <view class="rankingdetail">
+      <view class="rankingzan">
+        <text>2、完成人员信息填写（1排名点）</text>
+      </view>
+    </view>
+    <view class="rankingdetail">
+      <view class="rankingzan">
+        <text>3、完成项目经验填写（5排名点）</text>
+      </view>
+      <view class="rankingde">
+        <text>每个项目经验1排名点</text>
+      </view>
+    </view>
+    <view class="rankingdetail">
+      <view class="rankingzan">
+        <text>4、完成技能证书上传（3排名点）</text>
+      </view>
+      <view class="rankingde">
+        <text>每个技能证书1排名点</text>
+      </view>
+    </view>
+    <view class="rankingdetail">
+      <view class="rankingzan">
+        <text>5、实名认证（3排名点）</text>
+      </view>
+      <view class="rankingde">
+        <text>完成身份证实名认证，可获得3排名值</text>
+      </view>
+    </view>
+    <view class="rankingdetail">
+      <view class="rankingzan">
+        <text>6、充值1积分可获得1排名值</text>
+      </view>
+    </view>
+    <view class="rankingdetail">
+      <view class="rankingzan">
+        <text>7、邀请好友注册（10排名点）</text>
+      </view>
+      <view class="rankingde">
+        <text>每邀请好友成功注册可获得10排名点，无上限</text>
+      </view>
+    </view>
+    <view class="rankingdetail">
+      <view class="rankingzan">
+        <text>8、点赞（1排名点）</text>
+      </view>
+      <view class="rankingde">
+        <text>被其他用户点赞可新增一点排名点，两个账号之间只能相互点击一次</text>
+      </view>
+    </view>
+    <view class="rankingdetail">
+      <view class="rankingzan">
+        <text>8、被用户浏览（1排名点）</text>
+      </view>
+      <view class="rankingde">
+        <text>被用户浏览一次可新增1排名点，两个账号之间浏览只能增加一次</text>
+      </view>
+    </view>
+    <view class="rankingdetail">
+      <view class="rankingzan">
+        <text>8、被用户浏览（1排名点）</text>
+      </view>
+      <view class="rankingde">
+        <text>被用户浏览一次可新增1排名点，两个账号之间浏览只能增加一次</text>
+      </view>
+    </view>
+  </view>
+  <view class="obtn">
+    <button>排名提升</button>
   </view>
 </view>

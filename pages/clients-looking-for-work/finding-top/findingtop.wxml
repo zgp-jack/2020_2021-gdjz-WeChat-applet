@@ -1,0 +1,36 @@
+<view class="topall">
+  <view class="scope">
+    <text>当前选择指定范围</text>
+  </view>
+  <view class="pointscope">
+    <text>点击选择置顶范围></text>
+  </view>
+  <view class="scopenum">
+    <text>请输入置顶天数</text>
+  </view>
+
+  <view class="day">
+    <view class="daynum">
+      <text>置顶天数</text>
+      <input type="text" placeholder="请输入天数"></input>
+    </view>
+    <view class="daynum">
+      <text>消耗积分</text>
+      <input type="text" placeholder="请输入积分"></input>
+    </view>
+  </view>
+
+  <view class="submitscope">
+    <text>确定置顶</text>
+  </view>
+
+  <view class="toprule">
+    <text>置顶规则</text>    
+  </view>
+
+  <view class="bottom">
+    <view>1、置顶一个省或直辖市每天消耗20积分，置顶一个市每天消耗5积分。</view>
+    <view>2、最多可选择5个省、五个市进行置顶；</view>
+    <view>3、如有任何疑问欢迎致电鱼泡客服，电话：400-833-1578</view>
+  </view>
+</view>

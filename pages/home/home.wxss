@@ -1,4 +1,4 @@
-/* @import "../findingworkinglist/findingworkinglist.wxss"; */
+/* @import "../findingworkinglist/findingworkinglist.wxss"; index-pullareabox-active index-pullareabox */
 
 .index-yupao-header{
     position: relative;

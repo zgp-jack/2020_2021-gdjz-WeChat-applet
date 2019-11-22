@@ -21,7 +21,7 @@
 .rankingpoints .rankingpoints{
   width: 100%;
   text-align: center;
-  font-size: 28rpx;
+  font-size: 30rpx;
   color: #363636;
 }
 .rankingpoints .rankingnum{
@@ -36,7 +36,7 @@
   text-align: center;
 }
 .beviewed .beviewedk{
-    font-size: 28rpx;
+    font-size: 30rpx;
    color: #363636;
 }
 .beviewed .beviewednum{
@@ -49,4 +49,95 @@
 .profession{
   margin-top: 20rpx;
   background: white;
+}
+
+
+.professionf{
+  width: 100%;
+  display: flex;
+}
+.professionf .country{
+  text-align: center;
+  width: 33.33%
+}
+.professionf .country .countrynum{
+  font-size: 30rpx;
+  color: #26A1FF;
+  font-weight: bold;
+}
+.professionf .country .countryrank{
+  color: #B0B0B0;
+  font-size: 30rpx;
+  padding: 16rpx 0 18rpx 0;
+}
+.professionf .province{
+  text-align: center;
+  width: 33.33%
+}
+.professionf .province .provincenum{
+  font-size: 30rpx;
+  color: #26A1FF;
+  font-weight: bold;
+}
+.professionf .province .provincerank{
+  color: #B0B0B0;
+  font-size: 30rpx;
+  padding: 16rpx 0 18rpx 0;
+}
+
+
+
+.professionf .city{
+  text-align: center;
+  width: 33.33%
+}
+.professionf .city .citynum{
+  font-size: 30rpx;
+  color: #26A1FF;
+  font-weight: bold;
+}
+.professionf .city .cityrank{
+  color: #B0B0B0;
+  font-size: 30rpx;
+  padding: 16rpx 0 18rpx 0;
+}
+
+.rankingrule{
+  margin-top: 20rpx;
+  background: white;
+  overflow: hidden;
+  padding: 0 30rpx 30rpx 30rpx;
+}
+
+.rankingrule .rankingheader{
+  padding: 37rpx 0 37rpx 0;
+  text-align: center;
+}
+.rankingrule .rankingheader text{
+  color: #333333;
+  font-size: 30rpx;
+  font-weight: bold;
+  border-bottom: 6rpx solid #26A1FF;
+}
+.rankingdetail .rankingzan{
+  font-size: 30rpx;
+  color: #26A1FF;
+  padding-bottom: 2rpx;
+}
+.rankingdetail .rankingde{
+  color: #3A3A3A;
+  font-size: 30rpx;
+}
+.obtn{
+  margin-top: 25rpx;
+  margin-bottom: 30rpx;
+  overflow: hidden;
+}
+.obtn button{
+   height: 60rpx;
+   background: #0099FF;
+   line-height: 60rpx;
+   text-align: center;
+   width: 300rpx;
+   color: white;
 }

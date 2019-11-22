@@ -1,13 +1,13 @@
 {
   "pages": [
-        "pages/index/index",
-        "pages/clients-looking-for-work/ranking-list/rankinglist",
+    "pages/index/index",
+    "pages/clients-looking-for-work/the-sticky-rule/stickyrule",
+    "pages/home/home",
+    "pages/clients-looking-for-work/finding-top/findingtop",
+    "pages/clients-looking-for-work/ranking-list/rankinglist",
     "pages/findingworkinglist/findingworkinglist",
-
     "pages/clients-looking-for-work/finding-name-card/findingnamecard",
     "pages/collect/resume/resume",
-
-    "pages/home/home",
     "pages/clients-looking-for-work/new-project-experience/projectexperience",
     "pages/boss-look-card/lookcard",
     "pages/clients-looking-for-work/preview-name-card/previewcard",
@@ -37,7 +37,6 @@
     "pages/recharge/recharge",
     "pages/turntable/turntable",
     "pages/getintegral/getintegral",
-    "pages/findwork/findwork",
     "pages/usedlist/usedlist",
     "pages/detail/usedinfo/usedinfo",
     "pages/detail/ucard/ucard",
