@@ -8,7 +8,7 @@ const app = getApp();
 Page({
 
   /** 
-   * 页面的初始数据 textareavalue  typeworkarray perfection gender submitinformation completemore GPSsubmit           GPSsubmit
+   * 页面的初始数据 textareavalue  typeworkarray perfection gender submitinformation completemore GPSsubmit           GPSsubmit userLocation 
    */
 
   data: {
@@ -169,6 +169,7 @@ Page({
             title: '是否授权当前位置',
             content: '需要获取您的地理位置，请确认授权，否则将不能为你自动推荐位置',
             success: function (res) {
+              console.log(res)
               if (res.cancel) {
               } else if (res.confirm) {
                 //village_LBS(that);

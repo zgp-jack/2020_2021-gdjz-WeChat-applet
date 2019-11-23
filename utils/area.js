@@ -2686,3 +2686,4 @@ module.exports = {
   getProviceItem: getProviceItem,
   getInputList: getInputList
 }
+// openSetting

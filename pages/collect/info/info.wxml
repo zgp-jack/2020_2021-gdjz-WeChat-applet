@@ -15,6 +15,7 @@
     <view class='published-content clearfix'>
         <view class="indxlistitem"  wx:for="{{ lists }}" wx:key="{{ index }}" data-id="{{ item.id }}" data-type="job" bindtap='showCollectInfo' data-msg="{{ item.check_status.showTips }}" data-tips="{{ item.check_status.tipsMsg }}">
           <image  wx:if="{{ (item.is_end == '2') }}" class="imgseek" src="../../../images/finded.png"></image>
+ 
             <!-- 上 -->
             <view class='toplist'>
               <view class="yupao-boxs">
@@ -29,7 +30,7 @@
                 <view class="yupao-listsname">
                   <view class="yupao-listswxyus">
                     <text style="color:black">{{ item.user_name }}</text>
-                    <image wx:if="{{ item.is_end == '1' }}" class="sjim" src="{{hirimg}}" ></image>
+                    <image wx:if="{{ item.is_end == '1' }}" class="sjim" src="../../../images/zhao.png" ></image>
                   </view>
                   <view class="yupaolistswxyu">{{ item.detail }}</view>
                 </view>

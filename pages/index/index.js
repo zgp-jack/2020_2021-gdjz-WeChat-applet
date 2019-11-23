@@ -1,4 +1,4 @@
-// pages/lists/lists. showDetailInfo
+// pages/lists/lists. showDetailInfo getLocation
 const app = getApp();
 let footerjs = require("../../utils/footer.js");
 let areas = require("../../utils/area.js");
@@ -890,7 +890,7 @@ Page({
     },
   
     /**
-     * 用户点击右上角分享
+     * 用户点击右上角分享 工地急招 gpsPorvince
      */
     onShareAppMessage: function () {
         //this.userShareAction();

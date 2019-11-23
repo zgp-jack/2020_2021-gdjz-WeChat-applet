@@ -178,9 +178,9 @@
           更多项目经验
           <image src="../../../images/downward.png" class="down"></image>
         </view>
-        <view wx:if="{{checkthreef == 0}}" class="cardsixsixnum">
+        <!-- <view wx:if="{{checkthreef == 0}}" class="cardsixsixnum">
           <text>{{fail_project}}</text>
-        </view>
+        </view> -->
       </view>
     </view>
     <view class="cardsixsixallvoto">
@@ -223,9 +223,9 @@
           更多技能证书
           <image src="../../../images/downward.png" class="down"></image>
         </view>
-        <view wx:if="{{checkfourf == 0}}" class="cardeightsixnum">
+        <!-- <view wx:if="{{checkfourf == 0}}" class="cardeightsixnum">
           <text>{{fail_certificate}}</text>
-        </view>
+        </view> -->
       </view>
     </view>
     <view class="cardsixsixallvoto">

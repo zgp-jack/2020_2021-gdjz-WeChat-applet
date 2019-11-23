@@ -1,4 +1,4 @@
-// pages/recharge/recharge.js
+// pages/recharge/recharge.js userRechargeAction
 const app = getApp();
 Page({
 

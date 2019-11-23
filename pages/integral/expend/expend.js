@@ -1,9 +1,9 @@
-// pages/source/source.js
+// pages/source/source.js showRecord showComplain showThisRecord
 const app = getApp();
 Page({
 
     /**
-     * 页面的初始数据 showThisRecord
+     * 页面的初始数据 showThisRecord  userEnterComplain userComplaintAction closeThisRerocd closeThisRerocd
      */
     data: {
         loadingGif: app.globalData.apiImgUrl + "loading.gif",
@@ -22,7 +22,8 @@ Page({
         complainInfo: "",
         infoId: "",
         type: "",
-        cindex:""
+        cindex:"",
+        showWork:false
     },
   userCancleComplain: function () {
     this.setData({ showComplain: false, complainInfo:"" })
@@ -170,9 +171,14 @@ Page({
             way:"POST",
             params:userInfo,
             success:function(res){
+              console.log(res)
                 let mydata = res.data;
                 if(mydata.errcode == "ok"){
+                  if (mydata.info.type == "job"){
                     _this.setData({ info: mydata.info, showRecord:true })
+                  } else if (mydata.info.type == "resume"){
+                    _this.setData({ info: mydata.info, showWork: true })
+                  }
                 }else{
                     wx.showModal({
                         title: '温馨提示',
@@ -191,7 +197,10 @@ Page({
         })
     },
     closeThisRerocd:function(){
-        this.setData({ showRecord:false })
+        this.setData({ 
+          showRecord:false,
+          showWork:false
+         })
     },
     callThisPhone:function(e){
         app.callThisPhone(e);

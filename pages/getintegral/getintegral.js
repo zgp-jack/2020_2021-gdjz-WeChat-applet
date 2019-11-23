@@ -1,4 +1,4 @@
-// pages/getintegral/getintegral.js
+// pages/getintegral/getintegral.js goThisPage
 const app = getApp();
 Page({
 

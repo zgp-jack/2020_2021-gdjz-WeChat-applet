@@ -8,7 +8,8 @@ const amapFun = new Amap.AMapWX({ key: app.globalData.gdApiKey });
 Page({
 
   /**
-   * 页面的初始数据
+   * 页面的初始数据 userEnterAddress clearInputVal mapInputFocus showCity showInputList searchInput
+   * allAreaLists isAllAreas nAreaLists isAllAreas areaText chooseInputCtiy userLocation
    */
   data: {
     nodataImg: app.globalData.apiImgUrl + "nodata.png",
@@ -47,6 +48,7 @@ Page({
     this.setData({ isAllAreas: true, showInputList: false, searchInputVal: "" })
   },
   searchInput: function (e) {
+    console.log(e)
     let val = e.detail.value
     this.setData({ searchInputVal: val })
     if (!val) this.setData({ showInputList: false, isAllAreas: true })

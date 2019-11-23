@@ -1,3 +1,5 @@
+<!-- addressText address-tips addressList showHisTitle showMaplist  showHisTitle showArea 
+setAddressData -->
 <view class='user-choose-address'>
   <view class='address-header'>
     <view class="choose-address-text" bindtap="showCity">{{ areaText }}<view class="map-cityarrow"></view></view>
@@ -32,7 +34,7 @@
 </view>
 
 
-<!-- 地区选择 -->
+<!-- 地区选择 filterInputList -->
 <view class='index-pullareabox {{ showArea ? "index-pullareabox-active":"" }}'>
     <view class='index-area-header'>
       <view class="searchinputbox">

@@ -1,4 +1,4 @@
-// pages/published/published.js
+// pages/published/published.js  lists
 let footerjs = require("../../../utils/footer.js");
 const app = getApp();
 Page({
@@ -58,6 +58,7 @@ Page({
                 newData.push(mydata.data[i])
               }
             }
+            console.log(_this.data.page)
             _this.setData({
               lists: (_this.data.page == 1) ? mydata.data : newData,
               pageSize: mydata.pageSize ? mydata.pageSize : 15,

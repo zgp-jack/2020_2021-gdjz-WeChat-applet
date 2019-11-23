@@ -1,6 +1,6 @@
 {
   "pages": [
-    "pages/index/index",
+    "pages/index/index",              
     "pages/clients-looking-for-work/the-sticky-rule/stickyrule",
     "pages/home/home",
     "pages/clients-looking-for-work/finding-top/findingtop",
