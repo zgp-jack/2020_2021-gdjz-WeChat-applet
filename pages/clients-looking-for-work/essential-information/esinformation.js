@@ -419,6 +419,7 @@ Page({
         if (mydata.errcode == "ok") {
           let _time = mydata.refresh;
           that.initCountDown(_time);
+          app.globalData.authcode = true;
         }
       },
       fail: function (err) {
@@ -498,6 +499,15 @@ Page({
         reminder.reminder({ tips: "验证码" })
         return
       }
+    }
+    if (!app.globalData.authcode && this.data.telephone != this.data.tele){
+      wx.showModal({
+        title: '温馨提示',
+        content: '请先获取验证码',
+        showCancel: false,
+        success(res) { }
+      })
+      return
     }
     Object.assign(information, {
       userId: userInfo.userId,

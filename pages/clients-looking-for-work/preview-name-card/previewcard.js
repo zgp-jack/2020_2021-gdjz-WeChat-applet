@@ -105,12 +105,14 @@ Page({
     }
   },
   moreproject() {
+    app.globalData.allexpress = true;
     wx.setStorageSync("pass", 1)
     wx.navigateTo({
       url: "/pages/clients-looking-for-work/all-project-experience/allexperience",
     })
   },
   moreskill() {
+    app.globalData.allskill = true;
     wx.setStorageSync("skillpass", 1)
     wx.navigateTo({
       url: "/pages/clients-looking-for-work/all-skills-certificate/skillscertificate",
@@ -254,14 +256,25 @@ Page({
             view_num: mydata.info.hasOwnProperty("view_num") ? mydata.info.view_num : 0
           });
 
-          if (mydata.project != []) {
-            console.log(mydata.project)
+          if (mydata.project.length == 0) {
+
             // let projectall = [];
             // for (let i = 0; i < mydata.project.length; i ++ ){
             //   if (mydata.project[i].check == "2"){
             //      projectall.push(mydata.project[i])
             //   }
             // }
+            that.setData({
+              project: []
+            });
+            that.setData({
+              projectone: []
+            });
+            that.setData({
+              projectlength:0
+            })
+   
+          }else{
             that.setData({
               project: mydata.project
             });
@@ -272,13 +285,13 @@ Page({
               projectlength: mydata.project.length >= 1 ? mydata.project.length : 0
             })
           }
-
+          
           that.setData({
             percent: mydata.info.hasOwnProperty("progress") ? mydata.info.progress : 0
           })
 
-          if (mydata.certificates != []) {
-            console.log(mydata.certificates)
+          if (mydata.certificates.length == 0) {
+
             // let certificatesall = [];
             // for (let i = 0; i < mydata.certificates.length; i++) {
             //   if (mydata.certificates[i].check == "2") {
@@ -286,6 +299,16 @@ Page({
             //   }
             // }
 
+            that.setData({
+              skillbooks: []
+            })
+            that.setData({
+              skilllength:0
+            })
+            that.setData({
+              skillbooksone: []
+            })
+          }else{
             that.setData({
               skillbooks: mydata.certificates
             })
@@ -296,6 +319,8 @@ Page({
               skillbooksone: [mydata.certificates[0]]
             })
           }
+          console.log(that.data.skillbooksone)
+         
           if (that.data.checkonef != "0" || that.data.checktwof != "0") {
             that.setData({
               ressonone: false

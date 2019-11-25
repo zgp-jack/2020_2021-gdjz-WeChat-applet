@@ -1,5 +1,5 @@
 <import src="/pages/footer/footer.wxml"/>
-<!-- <import src="/pages/tpl/app/app.wxml"/> gainebox -->
+<!-- <import src="/pages/tpl/app/app.wxml"/> showListsInfo  showHistoryList -->
 
 <view class='common-index-gztips' wx:if="{{ firstJoin }}">添加到我的小程序，招工找活更方便</view>
 
@@ -51,6 +51,7 @@
         </view>
     </view>
 
+
     <view class='user-choose-item {{ (showListsInfo == "2") ? "user-choose-item-active" : "" }}' wx:if="{{ showListsInfo == '2' }}">
         <view class='filtrate-list-item mybottomborder overwords {{ (worktype == index) ? "filtrate-list-active" : "" }}' wx:for="{{ fillterType }}" wx:key="{{ index }}" catchtap='userChooseWorktype' data-index="{{ index }}" wx:for-index="index"  bindtouchstart="touchStart" bindtouchend="touchEnd"   data-id='{{ item.id }}' data-haschild="{{ item.has_children }}" data-type="{{ item.name }}">
             <text>{{ item.name }}</text>
@@ -67,6 +68,7 @@
     </view>
 
 </view>
+
 
 
     <!-- 公告 -->

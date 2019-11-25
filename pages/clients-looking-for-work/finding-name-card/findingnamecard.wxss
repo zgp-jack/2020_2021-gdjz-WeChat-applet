@@ -1,4 +1,4 @@
-/*ocworkotyptu oworkotext #797979 nopass ocworkotype ocworkotyptu*/
+/*ocworkotyptu oworkotext #797979 nopass ocworkotype ocworkotyptu cardfive*/
 @import "../../userauth/userauth.wxss";
 
 .common-userauth {
@@ -524,7 +524,8 @@ page {
   background-size: 100% 100%;
   left: 14px;
   margin-left: -5px;
-  top: 8rpx;
+  top: 10rpx;
+
 }
 
 /* .cardotext .owork {
@@ -662,7 +663,7 @@ page {
   width: 93%;
   margin: 18rpx auto;
   height: 30rpx !important;
-  font-size: 28rpx;
+  font-size: 30rpx;
   position: relative;
   line-height: 30rpx;
 }
@@ -1442,7 +1443,7 @@ page {
   background-size: 100% 100%;
   left: 14px;
   margin-left: -5px;
-  top: 8rpx;
+  top: 10rpx;
 }
 
 .ocworkotype {

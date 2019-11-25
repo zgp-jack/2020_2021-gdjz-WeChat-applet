@@ -294,6 +294,8 @@ page{
     color: #0099ff;
     font-size: 30rpx;
     line-height: 60rpx;
+    max-width: 100%;
+
 }
 .yupao-common-lists-text{
     position: relative;

@@ -8,6 +8,7 @@ App({
     // } 
   },
   globalData: {
+    authcode:false,
     gpsdetail:true,
     previewshou:true,
     previewpre:true,
@@ -399,7 +400,6 @@ App({
       success: function(res) {
         let mydata = res.data;
         if (mydata.errcode == "ok") {
-          console.log(mydata)
           _this.globalData.allTypes = mydata.data;
           _callback(mydata.data);
         } else {
@@ -639,8 +639,6 @@ App({
   },
   valiUserUrl: function(e, user) {
     let url = e.currentTarget.dataset.url;
-    console.log(url)
-    console.log(user)
     wx.navigateTo({
       url: user ? url : '/pages/userauth/userauth'
     })

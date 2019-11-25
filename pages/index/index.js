@@ -1,4 +1,4 @@
-// pages/lists/lists. showDetailInfo getLocation
+// pages/lists/lists. showListsType userChooseProvince
 const app = getApp();
 let footerjs = require("../../utils/footer.js");
 let areas = require("../../utils/area.js");
@@ -148,6 +148,7 @@ Page({
         })
     },
     closeAllSelect: function () {
+
         this.setData({
             showListsInfo: 0
         }) 
@@ -890,7 +891,7 @@ Page({
     },
   
     /**
-     * 用户点击右上角分享 工地急招 gpsPorvince
+     * 用户点击右上角分享 工地急招 gpsPorvince closeAllSelect
      */
     onShareAppMessage: function () {
         //this.userShareAction();

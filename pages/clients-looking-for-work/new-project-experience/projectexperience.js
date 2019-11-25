@@ -3,7 +3,7 @@ let v = require("../../../utils/v.js");
 let areas = require("../../../utils/area.js");
 let remain = require("../../../utils/remain.js");
 let reminder = require("../../../utils/ reminder.js");
-//bindstartDate delete vertify vertify preservechixu bindTextAreaBlur 大于今天 chooseImage delete preserve showModal vertify() showModal deleteexper vertify multiIndexvalue
+//bindstartDate delete vertify vertify preservechixu bindTextAreaBlur 大于今天 chooseImage delete preserve showModal vertify() showModal deleteexper vertify multiIndexvalue projectnum
  
 Page({
   data: {
@@ -390,7 +390,7 @@ Page({
       return
     }
     if (vertifyNum.isNull(this.data.projectname)) {
-      reminder.reminder({ tips: '项目时间' })
+      reminder.reminder({ tips: '项目名称' })
       return
     }
     if (vertifyNum.isNull(this.data.detail)) {

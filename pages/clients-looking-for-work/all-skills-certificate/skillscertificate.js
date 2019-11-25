@@ -3,7 +3,7 @@ let remain = require("../../../utils/remain.js");
 Page({
 
   /**
-   * 页面的初始数据 addskill app.globalData.previewproject previewskill
+   * 页面的初始数据 addskill app.globalData.previewproject previewskill != []
    */
   data: {
     allskill: [],
@@ -29,7 +29,7 @@ Page({
       params: detail,
       failTitle: "操作失败，请稍后重试！",
       success(res) {
-        console.log(res)
+        
         if (res.data.errcode == 200) {
           that.setData({
             allskill: res.data.data.certificates,
@@ -43,7 +43,7 @@ Page({
             }
           }
           // console.log(that.data.allskilltwo)
-          console.log(allskilltwo)
+          
           that.setData({
             allskilltwo: allskilltwo,
             onoff: true
@@ -63,7 +63,7 @@ Page({
     })
   },
   editor(e) {
-    console.log(e)
+    
     wx.setStorageSync("skilltail", e.currentTarget.dataset)
     wx.navigateTo({
       url: "/pages/clients-looking-for-work/addcertificate/addcertificate",
@@ -92,23 +92,22 @@ Page({
       this.setData({
         skillpass: 8
       })
-      if (allskill != []) {
-        console.log(allskill)
-        let skill = [];
-        for (let i = 0; i < allskill.length; i++) {
-          skill.push(allskill[i])
-        }
-        that.setData({
-          allskillthree: skill
-        });
+      console.log(allskill)
+      let skill = [];
+      for (let i = 0; i < allskill.length; i++) {
+        skill.push(allskill[i])
       }
+      that.setData({
+        allskillthree: skill
+      });
+
     }
 
   },
   previewImage: function (e) {
     let url = e.currentTarget.dataset.url;
     let i = e.currentTarget.dataset.index;
-    console.log(i);
+    
     let type = e.currentTarget.dataset.type;
     let urls = type == "1" ? this.data.allskillthree[i].image : this.data.allskill[i].image
     wx.previewImage({

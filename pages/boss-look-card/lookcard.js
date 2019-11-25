@@ -5,7 +5,7 @@ Page({
 
   /** showComplain telephorft personnum   age workingyears personnum workingyears
    * 页面的初始数据 moreskill projectone occupations introduce telephorft showThisMapInfo onoff
-   telephorft occupations moreproject telephorft telephorft authrasution resumes/get-tel/ location sex age*/
+   telephorft nation age*/
   data: {
     userInfo: true,
     icon: app.globalData.apiImgUrl + "userauth-topicon.png",
@@ -86,7 +86,7 @@ Page({
     introshow:true
   },
   previewImage: function (e) {
-    console.log(e)
+    
     let url = e.currentTarget.dataset.url;
     let i = e.currentTarget.dataset.index;
     let type = e.currentTarget.dataset.type;
@@ -97,7 +97,7 @@ Page({
     })
   },
   previewImagec: function (e) {
-    console.log(e)
+    
     let url = e.currentTarget.dataset.url;
     let i = e.currentTarget.dataset.index;
     let type = e.currentTarget.dataset.type;
@@ -190,7 +190,7 @@ Page({
       app.showMyTips("请输入您的投诉内容");
       return false;
     }
-    console.log(info)
+    
     app.appRequestAction({
       url: "resumes/complain/",
       way: "POST",
@@ -204,7 +204,7 @@ Page({
       title: "正在提交投诉",
       failTitle: "网络错误，投诉失败！",
       success: function (res) {
-        console.log(res)
+        
         let mydata = res.data;
         if (mydata.errcode == "ok") _this.setData({ showComplain: false, complainInfo: "", "ucardInfo.show_complaint.show_complaint": 0 })
         wx.showModal({
@@ -231,7 +231,7 @@ Page({
     })
   },
   onShareAppMessage: function () {
-    console.log(123)
+    
     return {
       title: '在这里输入标题',
       desc: '在这里输入简介说明',
@@ -265,10 +265,10 @@ Page({
     })
   },
   getdetail(option) {
-    console.log(option)
+    
     let that = this;
     let userInfo = wx.getStorageSync("userInfo");
-    console.log(userInfo)
+ 
     if (!userInfo) {
       userInfo = { userId: null }
     }
@@ -277,7 +277,7 @@ Page({
       resume_uuid: option.uuid,
       location: option.location,
     }
-    console.log(that.data.options)
+    
     if (that.data.options.location != "" && that.data.options.uuid != "") {
       this.setData({
         detailid: option.uuid
@@ -291,7 +291,7 @@ Page({
         }
       })
     }
-    console.log(detail)
+    
     app.appRequestAction({
       url: 'resumes/resume-detail/',
       way: 'POST',
@@ -299,7 +299,7 @@ Page({
       failTitle: "操作失败，请稍后重试！",
       success(res) {
         let mydata = res.data;
-        console.log(res)
+        
 
         if (res.data.errcode == "ok") {
 
@@ -369,8 +369,18 @@ Page({
             view_num: mydata.info.hasOwnProperty("view_num") ? mydata.info.view_num : 0
           });
 
-          if (mydata.project != []) {
-            console.log(mydata.project)
+
+          if (mydata.project.length == 0){
+            that.setData({
+              project: []
+            });
+            that.setData({
+              projectone: []
+            });
+            that.setData({
+              projectlength:0
+            })
+          }else{
             let projectall = [];
             for (let i = 0; i < mydata.project.length; i++) {
               projectall.push(mydata.project[i])
@@ -385,13 +395,23 @@ Page({
               projectlength: projectall.length >= 1 ? projectall.length : 0
             })
           }
-
+          
           that.setData({
             percent: mydata.info.hasOwnProperty("progress") ? mydata.info.progress : 0
           })
 
-          if (mydata.certificates != []) {
-            console.log(mydata.certificates)
+       
+          if (mydata.certificates.length == 0){
+            that.setData({
+              skillbooks: []
+            })
+            that.setData({
+              skilllength:0
+            })
+            that.setData({
+              skillbooksone: []
+            })
+          }else{
             let certificatesall = [];
             for (let i = 0; i < mydata.certificates.length; i++) {
               certificatesall.push(mydata.certificates[i])
@@ -406,9 +426,9 @@ Page({
             that.setData({
               skillbooksone: [certificatesall[0]]
             })
-            console.log(that.data.skilllength)
-          }
 
+          }
+          
         }
       },
       fail: function (err) {
@@ -447,7 +467,7 @@ Page({
       failTitle: "网络错误！",
       params: praise,
       success: function (res) {
-        console.log(res)
+        
         if (res.data.errcode == "ok") {
           if (res.data.show == 1) {
             app.showMyTips("点赞成功");
@@ -493,7 +513,7 @@ Page({
       failTitle: "网络错误！",
       params: collect,
       success: function (res) {
-        console.log(res)
+        
         if (res.data.errcode == "ok") {
           if (res.data.show == 1) {
             app.showMyTips("收藏成功");
@@ -516,7 +536,7 @@ Page({
     })
   },
   onShareAppMessage: function () {
-    console.log(123)
+    
     return {
       title: '在这里输入标题',
       desc: '在这里输入简介说明',
@@ -547,7 +567,7 @@ Page({
     app.bindGetUserInfo(e, function (res) {
       app.mini_user(res, function (res) {
         app.api_user(res, function (res) {
-          console.log(res)
+          
           let uinfo = res.data;
           if (uinfo.errcode == "ok") {
             let userInfo = {

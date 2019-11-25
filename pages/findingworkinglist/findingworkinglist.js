@@ -284,7 +284,6 @@ Page({
       params: locate,
       success: function (res) {
         callback ? callback() : ""
-        console.log(res)
         if (res.data.errcode == "ok") {
           _this.setData({ isload: false })
           wx.hideLoading();
@@ -343,7 +342,6 @@ Page({
       url: "index/info-list-new/",
       params: _data,
       success: function (res) {
-        console.log(res)
         app.globalData.isFirstLoading ? "" : wx.hideLoading();
         let mydata = res.data;
 
@@ -426,9 +424,7 @@ Page({
     })
   },
   errImg: function (e) {
-    console.log(e)
     let index = e.currentTarget.dataset.index;
-    console.log(index)
     let obj = `lists[${index}].headerimg`;
     this.setData({
       [obj]: "http://cdn.yupao.com/miniprogram/images/user.png"

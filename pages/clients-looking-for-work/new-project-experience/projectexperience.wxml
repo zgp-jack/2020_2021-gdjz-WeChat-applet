@@ -85,4 +85,6 @@
     <button class="experiencebottomotwo" wx:if="{{obtnbut}}" bindtap="preserve">确认保存</button>
     <button class="experiencebottomotwo" wx:if="{{!obtnbut}}" bindtap="preserveone">确认保存</button>
   </view>
+     <view style="height: 88rpx;">
+  </view>
 </view>

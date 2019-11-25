@@ -7,7 +7,7 @@ const app = getApp();
 Page({
 
   /** 
-   * 页面的初始数据 nation view_num perfection addskill fail_certificate
+   * 页面的初始数据 nation view_num perfection addskill fail_certificate app.globalData.allexpress
    */
   data: {
     icon: app.globalData.apiImgUrl + "userauth-topicon.png",
@@ -451,7 +451,6 @@ Page({
           let dateone = new Date(dateo);
           wx.setStorageSync("introdetail", mydata.introduces)
           wx.setStorageSync("introinfo", mydata.info)
-          console.log(mydata.info.uuid)
           if (mydata.info.uuid) {
             that.showtop()
             that.setData({
@@ -546,7 +545,17 @@ Page({
           });
 
 
-          if (mydata.project != []) {
+          if (mydata.project.length == 0) {
+            that.setData({
+              project: []
+            });
+            that.setData({
+              projectone: []
+            });
+            that.setData({
+              projectlength:0
+            })
+          }else{
             that.setData({
               project: mydata.project
             });
@@ -557,7 +566,6 @@ Page({
             that.setData({
               projectlength: mydata.project.length >= 1 ? mydata.project.length : 0
             })
-
           }
           that.setData({
             percent: mydata.info.hasOwnProperty("progress") ? mydata.info.progress : 0
@@ -565,7 +573,17 @@ Page({
 
 
 
-          if (mydata.certificates != []) {
+          if (mydata.certificates.length == 0) {
+            that.setData({
+              skillbooks: []
+            })
+            that.setData({
+              skilllength:0
+            })
+            that.setData({
+              skillbooksone: []
+            })
+          }else{
             that.setData({
               skillbooks: mydata.certificates
             })

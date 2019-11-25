@@ -5,7 +5,7 @@ let reminder = require("../../../utils/ reminder.js");
 Page({
 
   /**
-   * 页面的初始数据 bindstartDate nowDate deleteexper  obtn quit deleteexper
+   * 页面的初始数据 bindstartDate nowDate deleteexper  obtn quit deleteexper != []
 vertify()
    */
   data: {
@@ -217,15 +217,7 @@ vertify()
       reminder.reminder({ tips: '职业技能' })
       return
     }
-    if (!that.getbirthall()){
-      wx.showModal({
-        title: '温馨提示',
-        content: '领取证书的范围必须在前20年内',
-        showCancel: false,
-        success(res) { }
-      })
-      return
-    }
+
     if (vertifyNum.isNull(this.data.idArrs)) {
       wx.showModal({
         title: '温馨提示',
@@ -238,6 +230,15 @@ vertify()
 
     if (vertifyNum.isNull(this.data.date)) {
       reminder.reminder({ tips: '领取证书时间' })
+      return
+    }
+    if (!that.getbirthall()) {
+      wx.showModal({
+        title: '温馨提示',
+        content: '领取证书的范围必须在前20年内',
+        showCancel: false,
+        success(res) { }
+      })
       return
     }
     Object.assign(project, {
@@ -290,15 +291,7 @@ vertify()
       })
       return
     }
-    if (!that.getbirthall()) {
-      wx.showModal({
-        title: '温馨提示',
-        content: '领取证书的范围必须在前20年内',
-        showCancel: false,
-        success(res) { }
-      })
-      return
-    }
+
     let userInfo = wx.getStorageSync("userInfo");
     let project = {}
     let vertifyNum = v.v.new()
@@ -319,7 +312,15 @@ vertify()
       reminder.reminder({ tips: '领取证书时间' })
       return
     }
-
+    if (!that.getbirthall()) {
+      wx.showModal({
+        title: '温馨提示',
+        content: '领取证书的范围必须在前20年内',
+        showCancel: false,
+        success(res) { }
+      })
+      return
+    }
     Object.assign(project, {
       userId: userInfo.userId,
       token: userInfo.token,
@@ -394,7 +395,6 @@ vertify()
       this.setData({
         skill: skilltail.uid
       })
-      console.log(this.data.skill)
 
       this.setData({
         name: this.data.skill.name,

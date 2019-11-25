@@ -74,7 +74,6 @@ Page({
         })
     },
   valiUserUrl:function(e){
-    console.log(this.data.userInfo)
     app.valiUserUrl(e,this.data.userInfo)
   },
   gotoUserauth:function(){

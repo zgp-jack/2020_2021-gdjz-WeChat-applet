@@ -26,7 +26,7 @@ Page({
   },
   getexpre() {
     let pass = wx.getStorageSync("pass");
-    console.log(pass)
+    
     if (pass) {
       this.setData({
         allgetexpre: pass
@@ -72,7 +72,7 @@ Page({
       params: detail,
       failTitle: "操作失败，请稍后重试！",
       success(res) {
-        console.log(res)
+        
         if (res.data.errcode == 200) {
           that.setData({
             allproject: res.data.data.project
@@ -111,16 +111,15 @@ Page({
       this.setData({
         allgetexpre: 8
       })
-      if (allexpress != []) {
-        console.log(allexpress)
-        let projectall = [];
-        for (let i = 0; i < allexpress.length; i++) {
-          projectall.push(allexpress[i])
-        }
-        that.setData({
-          projecthree: projectall
-        });
+
+      let projectall = [];
+      for (let i = 0; i < allexpress.length; i++) {
+        projectall.push(allexpress[i])
       }
+      that.setData({
+        projecthree: projectall
+      });
+
     }
 
   },

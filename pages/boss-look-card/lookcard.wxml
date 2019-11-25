@@ -22,8 +22,8 @@
             <text class="otext">{{name}}</text>
             <view class="otextone">
               <text>{{sex}}</text>
-              <text class="ochange">{{age}}</text>
-              <text class="ochange">{{nation}}</text>
+              <text class="{{sex?'ochange':''}}">{{age}}</text>
+              <text class="{{age?'ochange':''}}">{{nation}}</text>
             </view>
           </view>
         </view>
@@ -82,7 +82,7 @@
           <view class="cardotext" wx:if="{{city}}">
             <text class="oworkotext">所在地区</text>
             <view class="distancev" bindtap="showThisMapInfo">
-              <text class="workotextone">{{city}}</text>
+              <text class="({{location?'workotextone':'zong'}})">{{city}}</text>
               <view class="distanceo" wx:if="{{location}}">
                 <image src="../../images/biaoqian.png" id="distance"></image>
                 <text class="distancet">{{distance}}</text>

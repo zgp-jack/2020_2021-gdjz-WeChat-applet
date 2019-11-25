@@ -1,7 +1,7 @@
 <view>
   <view class="rankheader">
     <view class="information">
-      <text>我的名片信息：</text>
+      <text bindtap="aaa">我的名片信息：</text>
     </view>
     <view class="informationr">
       <view class="rankingpoints">
