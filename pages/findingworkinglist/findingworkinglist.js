@@ -11,6 +11,8 @@ Page({
    * 页面的初始数据
    */
   data: {
+    finded: app.globalData.apiImgUrl + "lpy/finded.png",
+    biaoqian: app.globalData.apiImgUrl + "lpy/biaoqian.png",
     testImg:"http://cdn.yupao.com/miniprogram/images/user.png",
     gender: "",
     information: "",

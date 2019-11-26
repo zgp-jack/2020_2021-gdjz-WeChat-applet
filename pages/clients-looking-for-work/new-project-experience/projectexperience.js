@@ -1,12 +1,13 @@
-const app = getApp();
+const app = getApp()
 let v = require("../../../utils/v.js");
 let areas = require("../../../utils/area.js");
 let remain = require("../../../utils/remain.js");
 let reminder = require("../../../utils/ reminder.js");
-//bindstartDate delete vertify vertify preservechixu bindTextAreaBlur 大于今天 chooseImage delete preserve showModal vertify() showModal deleteexper vertify multiIndexvalue projectnum
- 
+//bindstartDate delete vertify vertify preservechixu bindTextAreaBlur 大于今天 chooseImage delete preserve showModal vertify() showModal deleteexper vertify multiIndexvalue projectnum nowDate share
+  
 Page({
   data: {
+    addimage: app.globalData.apiImgUrl + "lpy/addimage.png",
     project: "",
     date: "",
     startdate: "",
@@ -31,6 +32,8 @@ Page({
     uuid: "",
     obtnbut: true,
     nowDate: "",
+    beforeDate: "",
+    emdDate:"",
     project_cou:0,
     project_count:0,
     project_show: true,
@@ -717,11 +720,33 @@ Page({
   delestore() {
     wx.removeStorageSync("projectdetail")
   },
+  starttimer(){
+    let timer = new Date();
+    let d = new Date(timer);
+    let times = d.getFullYear() + '-' + (d.getMonth() + 1) + '-' + d.getDate();
+    this.setData({
+      nowDate: times
+    })
+    let starttime = this.data.nowDate.split("-");
+    let starttimeone = this.data.nowDate.split("-")[0] - 0;
+    let starttimetwo = this.data.nowDate.split("-")[1];
+    let starttimethree = this.data.nowDate.split("-")[2];
+
+    let beforeDate = (starttimeone - 20) + "-" + starttimetwo + "-" + starttimethree;
+    let emdDate = (starttimeone + 20) + "-" + starttimetwo + "-" + starttimethree;
+    this.setData({
+      beforeDate: beforeDate,
+      emdDate: emdDate
+    })
+    
+  },
+
   onShow: function () {
     // this.getbirth()
     this.getuuid()
     this.projectshow()
-
+    this.starttimer()
+  
   },
   preservechixutui(){
     wx.navigateBack({

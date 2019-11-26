@@ -52,7 +52,7 @@
         </view>
 
       </view>
-      <view class="listsboxself">
+      <view class="listsboxself" wx:if="{{item.resume.introduce}}">
         {{item.resume.introduce}}
       </view>
       <view class="listsboxlocal">
@@ -78,5 +78,5 @@
 </view>
 
 
-<!-- 引入footer listsboxdetailo -->
+<!-- 引入footer listsboxdetailo listsboxself -->
 <template is="footer" data="{{ footerImgs,publishActive,showPublishBox,footerActive }}" />

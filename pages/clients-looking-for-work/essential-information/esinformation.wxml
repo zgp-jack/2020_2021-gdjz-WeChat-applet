@@ -15,7 +15,7 @@
     <view class="informationfour">
       <text class="informationfourone">出生日期：</text>
       <view class="informationfourtwo">
-        <picker mode="date" value="{{birthday}}" start="1900-01-01" end="{{nowDate}}" bindchange="birthday">
+        <picker mode="date" value="{{birthday}}" start="{{beforeDate}}" end="{{emdDate}}" bindchange="birthday">
           <input disabled name="addtime" value="{{birthday}}" placeholder="请选择出生日期"></input>
         </picker>
       </view>
@@ -96,7 +96,7 @@
 
   <view class='yupao-common-enterbox flex-row' wx:if="{{perfection}}">
     <view class='yupao-common-enter'>
-      <image src="../../../images/sucess.png"></image>
+      <image src="{{sucessful}}"></image>
       <text class='yupao-enter-title'>发布成功</text>
       <text class='yupao-enter-tips'>完善更多资料可获得积分</text>
       <text class='yupao-enter-perce'>60%</text>

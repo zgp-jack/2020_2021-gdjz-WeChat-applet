@@ -1,11 +1,11 @@
 <view>
   <view class="skilleight" wx:for="{{allskill}}" wx:if="{{skillpass == 0}}" wx:key="{{index}}" wx:for-index="pindex">
-    <image class="audit" wx:if="{{item.check == 1}}" src="../../../images/review.png"></image>
-    <image class="audit" wx:if="{{item.check == 0}}" src="../../../images/notthrough.png"></image>
+    <image class="audit" wx:if="{{item.check == 1}}" src="{{inreview}}"></image>
+    <image class="audit" wx:if="{{item.check == 0}}" src="{{notthrough}}"></image>
     <view class="editor" bindtap="editor" data-uid="{{item}}" wx:if="{{item.check == 2}}">编辑</view>
     <view class="editor" bindtap="editor" data-uid="{{item}}" wx:if="{{item.check == 0}}">待修改</view>
     <view class="skilleightzong">
-      <image src="../../../images/newresume-experience-item.png" class="skilleightone"></image>
+      <image src="{{experienceitem}}" class="skilleightone"></image>
       <view></view>
       <view class="skilleightall">
         <view class="skilleighttwo">
@@ -34,10 +34,10 @@
 
 
   <view class="skilleight" wx:for="{{allskill}}" wx:key="{{index}}" wx:if="{{skillpass == 1}}" wx:for-index="pindex">
-    <image class="audit" wx:if="{{item.check == 1}}" src="../../../images/review.png"></image>
-    <image class="audit" wx:if="{{item.check == 0}}" src="../../../images/notthrough.png"></image>
+    <image class="audit" wx:if="{{item.check == 1}}" src="{{inreview}}"></image>
+    <image class="audit" wx:if="{{item.check == 0}}" src="{{notthrough}}"></image>
     <view class="skilleightzong">
-      <image src="../../../images/newresume-experience-item.png" class="skilleightone"></image>
+      <image src="{{experienceitem}}" class="skilleightone"></image>
       <view></view>
       <view class="skilleightall">
         <view class="skilleighttwo">
@@ -66,7 +66,7 @@
 
   <view class="skilleight" wx:for="{{allskillthree}}" wx:key="{{index}}" wx:if="{{allskillonef}}" wx:for-index="pindex">
     <view class="skilleightzong">
-      <image src="../../../images/newresume-experience-item.png" class="skilleightone"></image>
+      <image src="{{experienceitem}}" class="skilleightone"></image>
       <view></view>
       <view class="skilleightall">
         <view class="skilleighttwo">

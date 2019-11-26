@@ -1,4 +1,4 @@
-// pages/lists/lists. showListsType userChooseProvince
+// pages/lists/lists. showListsType userChooseProvince /geocode/regeo ref
 const app = getApp();
 let footerjs = require("../../utils/footer.js");
 let areas = require("../../utils/area.js");

@@ -12,6 +12,7 @@ Page({
    */
 
   data: {
+    sucessful: app.globalData.apiImgUrl + "lpy/sucess.png",
     array: [],
     arrayone: [],
     nationalarray: [],
@@ -42,24 +43,26 @@ Page({
     status: 1,
     nowDate: "",
     perfection: false,
-    regionreal: ""
+    regionreal: "",
+    beforeDate:"",
+    emdDate:""
   },
-  getbirth() {
-    var date = new Date();
-    var year = date.getFullYear();
-    var month = date.getMonth() + 1;
-    var day = date.getDate();
-    if (month < 10) {
-      month = "0" + month;
-    }
-    if (day < 10) {
-      day = "0" + day;
-    }
-    var nowDate = year + "-" + month + "-" + day;
-    this.setData({
-      nowDate: nowDate
-    });
-  },
+  // getbirth() {
+  //   var date = new Date();
+  //   var year = date.getFullYear();
+  //   var month = date.getMonth() + 1;
+  //   var day = date.getDate();
+  //   if (month < 10) {
+  //     month = "0" + month;
+  //   }
+  //   if (day < 10) {
+  //     day = "0" + day;
+  //   }
+  //   var nowDate = year + "-" + month + "-" + day;
+  //   this.setData({
+  //     nowDate: nowDate
+  //   });
+  // },
   initCountDown: function (_time) {
     let _t = parseInt(_time);
     let _this = this;
@@ -668,6 +671,28 @@ Page({
     }
     return true
   },
+
+  starttimer() {
+    let timer = new Date();
+    let d = new Date(timer);
+    let times = d.getFullYear() + '-' + (d.getMonth() + 1) + '-' + d.getDate();
+    this.setData({
+      nowDate: times
+    })
+    let starttime = this.data.nowDate.split("-");
+    let starttimeone = this.data.nowDate.split("-")[0] - 0;
+    let starttimetwo = this.data.nowDate.split("-")[1];
+    let starttimethree = this.data.nowDate.split("-")[2];
+
+    let beforeDate = (starttimeone - 60) + "-" + starttimetwo + "-" + starttimethree;
+    let emdDate = (starttimeone - 18) + "-" + starttimetwo + "-" + starttimethree;
+    this.setData({
+      beforeDate: beforeDate,
+      emdDate: emdDate
+    })
+    console.log(this.data.beforeDate)
+    console.log(this.data.emdDate)
+  },
   /**
    * 生命周期函数--监听页面加载
    */
@@ -686,9 +711,8 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    this.getbirth()
     this.getlocationdetails()
-
+    this.starttimer()
   },
 
   /**

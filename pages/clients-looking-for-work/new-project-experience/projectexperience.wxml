@@ -9,7 +9,7 @@
     <text class="experienceheaderone">开始时间：</text>
     <view class="experienceheadertwo">
       <picker mode="date" value="{{startdate}}" bindchange="bindstartDate"  
-      start="1900-01-01" end="{{nowDate}}" >
+      start="{{beforeDate}}" end="{{nowDate}}" >
         <input name="addtime" value="{{startdate}}" disabled="true" placeholder="请选择开始时间"></input>
       </picker>
     </view>
@@ -18,7 +18,7 @@
     <text class="experienceheaderone">完工时间：</text>
     <view class="experienceheadertwo">
       <picker mode="date" value="{{date}}" bindchange="bindDateChange"
-      start="1900-01-01">
+      start="{{beforeDate}}" end="{{emdDate}}">
         <input name="addtime" value="{{date}}" disabled="true" placeholder="请选择完工时间"></input>
       </picker>
     </view>
@@ -56,7 +56,7 @@
       </image>
     </view>
     <view class='img_item' bindtap='chooseImage' wx:if="{{imgArrslength}}">
-      <image  class='experiencefourone' src="../../../images/addimage.png" >
+      <image  class='experiencefourone' src="{{addimage}}" >
       </image>
     </view>
   </view>

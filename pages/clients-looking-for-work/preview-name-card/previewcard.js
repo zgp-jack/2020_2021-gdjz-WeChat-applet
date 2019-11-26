@@ -1,4 +1,4 @@
-// moreproject age checkfour moreproject ressonone moreskill sex cityself staffcomposition personnum
+// moreproject age checkfour moreproject ressonone moreskill sex cityself staffcomposition personnum tags
 
 const app = getApp();
 
@@ -8,6 +8,19 @@ Page({
    * 页面的初始数据 nation view_num occupations introduce workingyears procity introduce fail_certificate 
    */
   data: {
+    baseinform: app.globalData.apiImgUrl + "lpy/jichu.png",
+    workingposition: app.globalData.apiImgUrl + "lpy/workdetail.png",
+    subscripted: app.globalData.apiImgUrl + "lpy/bottomimg.png",
+    linktag: app.globalData.apiImgUrl + "lpy/newresume-linktag.png",
+    description: app.globalData.apiImgUrl + "lpy/newresume-description.png",
+    audit: app.globalData.apiImgUrl + "lpy/audit.png",
+    projectexperience: app.globalData.apiImgUrl + "lpy/newresume-experience.png",
+    inreview: app.globalData.apiImgUrl + "lpy/review.png",
+    icon: app.globalData.apiImgUrl + "userauth-topicon.png",
+    notthrough: app.globalData.apiImgUrl + "lpy/notthrough.png",
+    experienceitem: app.globalData.apiImgUrl + "lpy/newresume-experience-item.png",
+    downward: app.globalData.apiImgUrl + "lpy/downward.png",
+    newresumeskill: app.globalData.apiImgUrl + "lpy/newresume-skill.png",
     username: '',
     userimg: '',
     showtop: true,
@@ -29,7 +42,7 @@ Page({
     cityself: "未填写",
     procity: "未填写",
     personnum: "未填写",
-    tags: "未填写",
+    tags: [],
     headerimg: "../../../images/hearding.png",
     selectk: [],
     selectkone: "",
@@ -66,6 +79,12 @@ Page({
     introshow:true,
     fail_certificate: "",
     fail_project: "",
+  },
+  errImg: function () {
+    let obj = `headerimg`;
+    this.setData({
+      [obj]: "http://cdn.yupao.com/miniprogram/images/hearding.png"
+    })
   },
   previewImagec: function (e) {
     console.log(e)
@@ -207,7 +226,7 @@ Page({
             cityself: mydata.introduces.hasOwnProperty("hometown") ? mydata.introduces.hometown : "",
             procity: mydata.introduces.hasOwnProperty("prof_degree_str") ? mydata.introduces.prof_degree_str : "",
             personnum: mydata.introduces.hasOwnProperty("number_people") ? mydata.introduces.number_people : "",
-            tags: mydata.introduces.hasOwnProperty("tags") ? mydata.introduces.tags : "",
+            tags: mydata.introduces.hasOwnProperty("tags") ? (mydata.introduces.tags.length == 0 ? [] : mydata.introduces.tags) : [],
             checkone: mydata.info.check && mydata.info.check == 1 ? true : false,
             checkpan: mydata.info.check && mydata.info.check == 0 ? true : false,
             checkonef: mydata.info.hasOwnProperty("check") ? mydata.info.check : "",
@@ -217,6 +236,7 @@ Page({
             fail_certificate: mydata.hasOwnProperty("fail_certificate") ? mydata.fail_certificate : "",
             fail_project: mydata.hasOwnProperty("fail_project") ? mydata.fail_project : "",
           })
+          console.log(that.data.tags)
           if (that.data.introduce === "") {
             that.setData({
               introshow: false

@@ -1,4 +1,4 @@
-/* .img_item  .addcertificateimageone addcertificatetimeone addcertificatetimeone addcertificatedeone modalDlg*/
+/* .img_item  .addcertificateimageone addcertificatetimeone addcertificatetimeone addcertificatedeone modalDlg addcertificateimageone */
 .addcertificatede{
   width: 93%;
   margin: 0 auto;
@@ -131,27 +131,27 @@
     height: 182rpx;
 }
 .addcertificateimage .addcertificateimageone{
-  width: 85%;
-  height: 181rpx;
+  width: 94%;
+  height: 190rpx;
   position: relative;
 }
 .img_item:nth-child(1){
    width: 33.34%; 
    display: inline-block;
    text-align: left;
-     height: 181rpx;
+     height: 190rpx;
 }
 .img_item:nth-child(2){
    width: 33.33333%; 
    display: inline-block;
    text-align: center;
-     height: 181rpx;
+     height: 190rpx;
 }
 .img_item:nth-child(3){
    width: 33.33333%; 
    display: inline-block;
    text-align: right;
-     height: 181rpx;
+     height: 190rpx;
 }
 
 

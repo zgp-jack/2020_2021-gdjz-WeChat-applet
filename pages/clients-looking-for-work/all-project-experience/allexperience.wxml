@@ -1,12 +1,12 @@
 <view>
   <view class="skilleight" wx:for="{{allproject}}" wx:key="{{index}}" wx:if="{{allgetexpre ==0}}" wx:for-index="pindex">
-    <image class="audit" wx:if="{{item.check == 1}}" src="../../../images/review.png"></image>
-    <image class="audit" wx:if="{{item.check == 0}}" src="../../../images/notthrough.png"></image>
+    <image class="audit" wx:if="{{item.check == 1}}" src="{{inreview}}"></image>
+    <image class="audit" wx:if="{{item.check == 0}}" src="{{notthrough}}"></image>
     <view class="editor" bindtap="editor" data-uid="{{item}}" wx:if="{{ item.check == 2}}">编辑</view>
     <view class="editor" bindtap="editor" data-uid="{{item}}" wx:if="{{item.check == 0}}">待修改</view>
     <view class="skilleightzong">
       <view>
-        <image src="../../../images/newresume-experience-item.png" class="skilleightone"></image>
+        <image src="{{experienceitem}}" class="skilleightone"></image>
       </view>
       <view class="skilleightall">
         <view class="project">
@@ -42,11 +42,11 @@
 
 
   <view class="skilleight" wx:if="{{allgetexpre ==1}}" wx:for="{{allproject}}" wx:key="{{index}}" wx:for-index="pindex">
-    <image class="audit" wx:if="{{item.check == 1}}" src="../../../images/review.png"></image>
-    <image class="audit" wx:if="{{item.check == 0}}" src="../../../images/notthrough.png"></image>
+    <image class="audit" wx:if="{{item.check == 1}}" src="{{inreview}}"></image>
+    <image class="audit" wx:if="{{item.check == 0}}" src="{{notthrough}}"></image>
     <view class="skilleightzong">
       <view>
-        <image src="../../../images/newresume-experience-item.png" class="skilleightone"></image>
+        <image src="{{experienceitem}}" class="skilleightone"></image>
       </view>
       <view class="skilleightall">
         <view class="project">
@@ -81,7 +81,7 @@
   <view class="skilleight" wx:if="{{allgetexpreone}}" wx:for="{{projecthree}}" wx:key="{{index}}" wx:for-index="pindex">
     <view class="skilleightzong">
       <view>
-        <image src="../../../images/newresume-experience-item.png" class="skilleightone"></image>
+        <image src="{{experienceitem}}" class="skilleightone"></image>
       </view>
       <view class="skilleightall">
         <view class="project">

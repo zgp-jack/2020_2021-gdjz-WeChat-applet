@@ -5,8 +5,15 @@ Page({
 
   /** showComplain telephorft personnum   age workingyears personnum workingyears
    * 页面的初始数据 moreskill projectone occupations introduce telephorft showThisMapInfo onoff
-   telephorft nation age*/
+   telephorft nation age fenxiang*/
   data: {
+    newresumeskill: app.globalData.apiImgUrl + "lpy/newresume-skill.png",
+    downward: app.globalData.apiImgUrl + "lpy/downward.png",
+    experienceitem: app.globalData.apiImgUrl + "lpy/newresume-experience-item.png",
+    projectexperience: app.globalData.apiImgUrl + "lpy/newresume-experience.png",
+    description: app.globalData.apiImgUrl + "lpy/newresume-description.png",
+    biaoqian: app.globalData.apiImgUrl + "lpy/biaoqian.png",
+    baseinform: app.globalData.apiImgUrl + "lpy/jichu.png",
     userInfo: true,
     icon: app.globalData.apiImgUrl + "userauth-topicon.png",
     complainInfo: "",
@@ -230,14 +237,6 @@ Page({
       phoneNumber: e.currentTarget.dataset.telephone,
     })
   },
-  onShareAppMessage: function () {
-    
-    return {
-      title: '在这里输入标题',
-      desc: '在这里输入简介说明',
-      path: '../preview-name-card/previewcard'//这是一个路径
-    }
-  },
   moreproject() {
     let userInfo = wx.getStorageSync("userInfo");
     let _this = this;
@@ -265,7 +264,6 @@ Page({
     })
   },
   getdetail(option) {
-    
     let that = this;
     let userInfo = wx.getStorageSync("userInfo");
  
@@ -299,7 +297,7 @@ Page({
       failTitle: "操作失败，请稍后重试！",
       success(res) {
         let mydata = res.data;
-        
+        console.log(mydata)
 
         if (res.data.errcode == "ok") {
 
@@ -535,14 +533,6 @@ Page({
       }
     })
   },
-  onShareAppMessage: function () {
-    
-    return {
-      title: '在这里输入标题',
-      desc: '在这里输入简介说明',
-      path: '../boss-look-card/lookcard'//这是一个路径
-    }
-  },
   authrasution() {
     let userInfo = wx.getStorageSync("userInfo");
     if (!userInfo) {
@@ -561,6 +551,27 @@ Page({
     wx.navigateBack({
       delta: 1
     })
+  },
+  onShareAppMessage: function () {
+    let userInfo = wx.getStorageSync("userInfo");
+    let uuid = this.data.resume_uuid;
+    let commonShareTips = app.globalData.commonShareTips;
+    let commonShareImg = app.globalData.commonShareImg;
+    if (userInfo) {
+      let refId = userInfo.userId;
+        return {
+          title: `${commonShareTips}`,
+          imageUrl: commonShareImg,
+          path: `/pages/boss-look-card/lookcard?uuid=${uuid}&refId=${refId}`//这是一个路径
+        }
+
+    } else {
+      return {
+        title: `${commonShareTips}`,
+        imageUrl: commonShareImg,
+        path: `/pages/boss-look-card/lookcard?uuid=${uuid}`//这是一个路径
+      }
+    }
   },
   bindGetUserInfo: function (e) {
     let that = this;

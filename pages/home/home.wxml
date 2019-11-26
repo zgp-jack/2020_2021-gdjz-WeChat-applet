@@ -229,7 +229,7 @@
 
         <view class="listsboxdetail" bindtap="persondetail" data-uuid="{{item.uuid}}" 
         wx:for="{{infolists.resume.lists}}" wx:key="{{index}}">
-          <image src="../../images/finded.png" class="finded" wx:if="{{item.is_end == 2}}"></image>
+          <image src="{{finded}}" class="finded" wx:if="{{item.is_end == 2}}"></image>
           <view class="listsboxdetailo">
            <view>
             <image class="oimg" src="{{item.headerimg}}" data-index="{{index}}" binderror="errImg"></image>
@@ -270,7 +270,7 @@
             <view>
               <view class="listsboxlocalone">
                 <view>
-                  <image src="../../images/biaoqian.png"></image>
+                  <image src="{{biaoqian}}"></image>
                 </view>
                 <view class="listsboxadree">
                   {{item.show_address}}

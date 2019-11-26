@@ -5,6 +5,9 @@ Page({
    * 页面的初始数据 editor allgetexpre addpro previewImage previewproject
    */
   data: {
+    notthrough: app.globalData.apiImgUrl + "lpy/notthrough.png",
+    inreview: app.globalData.apiImgUrl + "lpy/review.png",
+    experienceitem: app.globalData.apiImgUrl + "lpy/newresume-experience-item.png",
     allproject: [],
     projectlength: 0,
     allde: false,

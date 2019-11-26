@@ -5,7 +5,7 @@ App({
     // }
     // catch(err){bindGetUserInfo gotoUserauth 工地急招 gpsPorvince userLocation
     //   bindGetUserInfo mini_user api_user showDetailInfo getPrevPage userLocation initFirstTips
-    // } 
+    //isShowFastIssue /geocode/regeo } refId
   },
   globalData: {
     authcode:false,
@@ -558,6 +558,7 @@ App({
       hideLoading: true,
       params: userInfo,
       success: function(res) {
+        console.log(res)
         let mydata = res.data;
         if (mydata.errcode == "ok") {
           let _log = parseInt(mydata.hasLog);

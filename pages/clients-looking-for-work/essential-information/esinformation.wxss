@@ -1,4 +1,4 @@
-/*yupao-enter-footer clearfix solang */
+/*yupao-enter-footer clearfix solang clearfix*/
 .informationtwo{
   width: 93%;
   margin: 0 auto;
@@ -519,11 +519,13 @@ word-wrap:break-word;
 .yupao-enter-footer text:first-child{
   border: 1px solid #0099FF;
   color: #0099FF;
+  border-radius: 8rpx 0 0 8rpx;
 }
 .yupao-enter-footer text:last-child{
   border: 1px solid #0099FF;
   color: white;
   background: #0099FF;
+    border-radius: 0 8rpx 8rpx 0;
 }
 .yupao-enter-title{
   font-size: 40rpx;
@@ -568,6 +570,8 @@ word-wrap:break-word;
   font-size: 25rpx;
   color: #5e5d5d;
 }
+
+
 /* informationtelephone */
 
 

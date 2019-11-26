@@ -9,6 +9,7 @@ Page({
 vertify()
    */
   data: {
+    addimage: app.globalData.apiImgUrl + "lpy/addimage.png",
     imgArrs: [],
     idArrs: [],
     date: "",
@@ -22,6 +23,8 @@ vertify()
     imgArrslength:true,
     skill_show:true,
     display: "none",
+    nowDate:"",
+    beforeDate:""
   },
   vertify() {
     this.setData({
@@ -483,6 +486,24 @@ vertify()
     console.log(that.data.certificate_cou)
     console.log(that.data.certificate_count)
   },
+  starttimer() {
+    let timer = new Date();
+    let d = new Date(timer);
+    let times = d.getFullYear() + '-' + (d.getMonth() + 1) + '-' + d.getDate();
+    this.setData({
+      nowDate: times
+    })
+    let starttime = this.data.nowDate.split("-");
+    let starttimeone = this.data.nowDate.split("-")[0] - 0;
+    let starttimetwo = this.data.nowDate.split("-")[1];
+    let starttimethree = this.data.nowDate.split("-")[2];
+
+    let beforeDate = (starttimeone - 20) + "-" + starttimetwo + "-" + starttimethree;
+    this.setData({
+      beforeDate: beforeDate
+    })
+
+  },
   /**
    * 生命周期函数--监听页面加载
    */
@@ -503,6 +524,7 @@ vertify()
   onShow: function () {
     this.skillshow() 
     this.getuuid()
+    this.starttimer()
     // this.getbirth()
   },
 

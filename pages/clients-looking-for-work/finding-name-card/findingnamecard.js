@@ -1,4 +1,4 @@
-// bindGetUserInfo
+// bindGetUserInfo share
 
 
 
@@ -7,10 +7,25 @@ const app = getApp();
 Page({
 
   /** 
-   * 页面的初始数据 nation view_num perfection addskill fail_certificate app.globalData.allexpress
+   * 页面的初始数据 nation view_num perfection addskill fail_certificate app.globalData.allexpress 
+   * newresume-experience.png audit.png baseinform headerimg uuid age
    */
   data: {
+    baseinform: app.globalData.apiImgUrl + "lpy/jichu.png",
+    workingposition: app.globalData.apiImgUrl + "lpy/workdetail.png",
+    subscripted: app.globalData.apiImgUrl + "lpy/bottomimg.png",
+    linktag: app.globalData.apiImgUrl + "lpy/newresume-linktag.png",
+    description: app.globalData.apiImgUrl + "lpy/newresume-description.png",
+    audit: app.globalData.apiImgUrl + "lpy/audit.png",
+    projectexperience: app.globalData.apiImgUrl + "lpy/newresume-experience.png",
+    inreview: app.globalData.apiImgUrl + "lpy/review.png",
     icon: app.globalData.apiImgUrl + "userauth-topicon.png",
+    notthrough: app.globalData.apiImgUrl + "lpy/notthrough.png",
+    experienceitem: app.globalData.apiImgUrl + "lpy/newresume-experience-item.png",
+    downward: app.globalData.apiImgUrl + "lpy/downward.png",
+    newresumeskill: app.globalData.apiImgUrl + "lpy/newresume-skill.png",
+    pvw: app.globalData.apiImgUrl + "lpy/bottom-one.png",
+    participation: app.globalData.apiImgUrl + "lpy/bottom-two.png",
     userInfo: true,
     certificate_count: 0,
     project_count: 0,
@@ -79,7 +94,8 @@ Page({
     popup: "",
     move: true,
     show_tips: "",
-    showskill: true
+    showskill: true,
+    age:[]
   },
   previewImage: function (e) {
     console.log(e)
@@ -163,11 +179,31 @@ Page({
     }
   },
   onShareAppMessage: function () {
-    console.log(123)
-    return {
-      title: '在这里输入标题',
-      desc: '在这里输入简介说明',
-      path: '../preview-name-card/previewcard'//这是一个路径
+    let userInfo = wx.getStorageSync("userInfo");
+    let uuid = this.data.resume_uuid;
+    let commonShareTips = app.globalData.commonShareTips;
+    let commonShareImg = app.globalData.commonShareImg;
+    if (userInfo) {
+      let refId = userInfo.userId;
+      if (uuid) {
+        return {
+          title: `${commonShareTips}`,
+          imageUrl: commonShareImg,
+          path: `/pages/boss-look-card/lookcard?uuid=${uuid}&refId=${refId}`//这是一个路径
+        }
+      } else {
+        return {
+          title: `${commonShareTips}`,
+          imageUrl: commonShareImg,
+          path: `/pages/index/index?refId=${refId}`//这是一个路径
+        }
+      }
+    }else{
+      return {
+        title: `${commonShareTips}`,
+        imageUrl: commonShareImg,
+        path: `/pages/index/index`//这是一个路径
+      }
     }
   },
   selectTap() {
@@ -337,6 +373,13 @@ Page({
       url: "/pages/clients-looking-for-work/preview-name-card/previewcard",
     })
   },
+  errImg: function () {
+    let obj = `headerimg`;
+    this.setData({
+      [obj]: "http://cdn.yupao.com/miniprogram/images/hearding.png"
+    })
+  },
+
   chooseImage() {
     if (this.data.checkone) {
       wx.showModal({
@@ -350,7 +393,7 @@ Page({
     }
     let that = this;
     app.userUploadImg(function (img, url) {
-      console.log(url)
+
       wx.hideLoading()
       that.data.imgArrs = url.httpurl
       that.data.importimg = url.url
@@ -553,9 +596,9 @@ Page({
               projectone: []
             });
             that.setData({
-              projectlength:0
+              projectlength: 0
             })
-          }else{
+          } else {
             that.setData({
               project: mydata.project
             });
@@ -578,12 +621,12 @@ Page({
               skillbooks: []
             })
             that.setData({
-              skilllength:0
+              skilllength: 0
             })
             that.setData({
               skillbooksone: []
             })
-          }else{
+          } else {
             that.setData({
               skillbooks: mydata.certificates
             })

@@ -6,6 +6,9 @@ Page({
    * 页面的初始数据 addskill app.globalData.previewproject previewskill != []
    */
   data: {
+    notthrough: app.globalData.apiImgUrl + "lpy/notthrough.png",
+    inreview: app.globalData.apiImgUrl + "lpy/review.png",
+    experienceitem: app.globalData.apiImgUrl + "lpy/newresume-experience-item.png",
     allskill: [],
     allskilength: 0,
     skillpass: 0,

@@ -109,7 +109,7 @@
     <view class="listsboxdetail" wx:for="{{lists}}" wx:key="{{index}}">
       <form report-submit="true" data-uuid="{{item.uuid}}" bindsubmit="showDetailInfo" data-id="{{ item.id }}">
         <button class='lists-template-btn' form-type='submit'></button>
-        <image src="../../images/finded.png" class="finded" wx:if="{{item.is_end == 2}}"></image>
+        <image src="{{finded}}" class="finded" wx:if="{{item.is_end == 2}}"></image>
         <view class="listsboxdetailo">
           <view>
             <image class="oimg" src="{{item.headerimg}}" data-index="{{index}}" binderror="errImg"></image>
@@ -150,7 +150,7 @@
           <view>
             <view class="listsboxlocalone">
               <view>
-                <image src="../../images/biaoqian.png"></image>
+                <image src="{{biaoqian}}"></image>
               </view>
               <view class="listsboxadree">
                 {{item.show_address}}

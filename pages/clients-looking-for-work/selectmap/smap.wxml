@@ -1,4 +1,4 @@
-<!-- showHisTitle -->
+<!-- showHisTitle gpsposi clearinput -->
 <view class='user-choose-address'> 
   <view class='address-header'>
     <view class="choose-address-text" bindtap="showCity">{{ areaText }}

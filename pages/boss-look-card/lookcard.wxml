@@ -5,7 +5,7 @@
   </view>
   <view class="findingnamecardthree">
     <view class="findingnamecardthreemobile">
-      <image src="../../images/jichu.png"></image>
+      <image src="{{baseinform}}"></image>
       基础信息
     </view>
   </view>
@@ -84,7 +84,7 @@
             <view class="distancev" bindtap="showThisMapInfo">
               <text class="({{location?'workotextone':'zong'}})">{{city}}</text>
               <view class="distanceo" wx:if="{{location}}">
-                <image src="../../images/biaoqian.png" id="distance"></image>
+                <image src="{{biaoqian}}" id="distance"></image>
                 <text class="distancet">{{distance}}</text>
               </view>
             </view>
@@ -111,7 +111,7 @@
 
   <view class="cardthree">
     <view class="cardthreemobile">
-      <image src="../../images/newresume-description.png"></image>
+      <image src="{{description}}"></image>
       <text>自我介绍</text>
     </view>
   </view>
@@ -124,14 +124,14 @@
 
   <view class="cardfive">
     <view class="cardfivemobile">
-      <image src="../../images/newresume-experience.png"></image>
+      <image src="{{projectexperience}}"></image>
       <text>项目经验</text>
     </view>
   </view>
   <view class="cardsix" wx:if="{{projectlength!= 0}}">
     <view class="cardsixzong" wx:for="{{projectone}}" wx:for-index="pindex" wx:key="{{index}}">
       <view>
-        <image src="../../images/newresume-experience-item.png" class="cardsixone"></image>
+        <image src="{{experienceitem}}" class="cardsixone"></image>
       </view>
       <view class="cardsixall">
         <view class="cardsixtwo">
@@ -158,7 +158,7 @@
       <button class="cardsixsix" bindtap="moreproject">
         <view>
           更多项目经验
-          <image src="../../images/downward.png" class="down"></image>
+          <image src="{{downward}}" class="down"></image>
         </view>
       </button>
     </view>
@@ -171,14 +171,14 @@
 
   <view class="cardseven">
     <view class="cardsevenmobile">
-      <image src="../../images/newresume-skill.png"></image>
+      <image src="{{newresumeskill}}"></image>
       <text>职业技能</text>
     </view>
   </view>
   <view class="cardeight {{(status != 0)?'eightstatus':''}}" wx:if="{{skilllength!= 0}}">
     <view class="cardeightzong" wx:for="{{skillbooksone}}" wx:for-index="pindex" wx:key="{{index}}">
       <view>
-        <image src="../../images/newresume-experience-item.png" class="cardeightone"></image>
+        <image src="{{experienceitem}}" class="cardeightone"></image>
       </view>
       <view class="cardeightall">
         <view class="cardeighttwo">
@@ -196,7 +196,7 @@
       <button class="cardeightsix" bindtap="moreskill">
         <view>
           更多技能证书
-          <image src="../../images/downward.png" class="down"></image>
+          <image src="{{downward}}" class="down"></image>
         </view>
       </button>
     </view>

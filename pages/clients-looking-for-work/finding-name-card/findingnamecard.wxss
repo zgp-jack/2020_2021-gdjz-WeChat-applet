@@ -188,8 +188,9 @@ page {
 }
 
 .findingnamecardthree image {
-  width: 22rpx;
-  height: 24rpx;
+ width: 27rpx;
+height: 27rpx;
+
 }
 
 .findingnamecardthree .findingnamecardthreeone {
@@ -295,8 +296,9 @@ page {
 }
 
 .findingnamecardseven image {
-  width: 22rpx;
-  height: 24rpx;
+width: 24rpx;
+height: 26rpx;
+
 }
 
 .findingnamecardeight {
@@ -1330,7 +1332,7 @@ page {
   color: white;
   font-size: 32rpx;
   text-align: center;
-  line-height: 80rpx;
+  line-height: 74rpx;
   border-radius: 18rpx;
   margin-bottom: 50rpx;
 }
@@ -1458,7 +1460,9 @@ page {
   position: absolute;
   margin-left: 46rpx;
 }
-
+.cworkotype .ocworkotypeoo{
+  padding-right: 30rpx;
+}
 .cworkotype .ocworkotype::after {
   content: '';
   width: 100%;

@@ -1,4 +1,4 @@
-/* experiencefour modalDlg experiencethree modalDlg experienceheaderone modalDlg text*/
+/* experiencefourone text*/
 .experienceheader{
   width: 93%;
   margin: 0 auto;
@@ -67,36 +67,42 @@
   margin-bottom: 110rpx;
 }
 .experiencefour .experiencefourone{
-  width: 181rpx;
-  height: 181rpx;
+  width: 94%;
+  height: 190rpx;
   position: relative;
 }
 .img_item:nth-child(1){
+   margin-bottom: 8rpx;
    width: 33.33%;  
    display: inline-block;
    text-align: left;
 }
 .img_item:nth-child(2){
+     margin-bottom: 8rpx;
    width: 33.33%; 
    display: inline-block;
    text-align: center;
 }
 .img_item:nth-child(3){
+   margin-bottom: 8rpx;
    width: 33.33%; 
    display: inline-block;
    text-align: right;
 }
 .img_item:nth-child(4){
+
    width: 33.33%; 
    display: inline-block;
    text-align: left;
 }
 .img_item:nth-child(5){
+
    width: 33%; 
    display: inline-block;
    text-align: center;
 }
 .img_item:nth-child(6){
+
    width: 33%; 
    display: inline-block;
    text-align: right;
