@@ -60,7 +60,6 @@ Page({
       sort: 0,
       keywords: "",
       occupations: "",
-      type:1,
       province:1
     },
     fillterArea: [],
@@ -82,7 +81,7 @@ Page({
     lists: [],
     areaText: "选择城市",
     typeText: "选择工种",
-    teamText: "个人",
+    teamText: "全部",
     recommended: "最新",
     showNothinkData: false,
     nothavemore: false,
@@ -281,7 +280,7 @@ Page({
       showNothinkData: false
     })
     wx.showLoading({ title: '数据加载中' })
-    app.doRequestAction({
+    app.appRequestAction({
       url: "resumes/index/",
       params: locate,
       success: function (res) {
@@ -329,65 +328,7 @@ Page({
       }
     })
   },
-  doSearchRequestAction: function (_append) {
-    let _this = this;
-    this.setData({
-      nothavemore: false,
-      showNothinkData: false
-    })
-    let _data = _this.data.searchDate;
-    _data.system_time = (parseInt(new Date().getTime() / 1000) + app.globalData.userGapTime);
-    let _str = md5.hexMD5(_data.system_time.toString());
-    _data.system_token = md5.hexMD5(_str.substring(0, 16));
-    wx.showLoading({ title: '数据加载中' })
-    app.doRequestAction({
-      url: "index/info-list-new/",
-      params: _data,
-      success: function (res) {
-        app.globalData.isFirstLoading ? "" : wx.hideLoading();
-        let mydata = res.data;
-
-        if (mydata.errcode == "token_fail") {
-          _this.initAdminTime(function () {
-            _this.doSearchRequestAction();
-          })
-          return false;
-        }
-
-        let _page = parseInt(_this.data.searchDate.page)
-        _this.setData({ isFirstRequest: false });
-        if (mydata && mydata.length) {
-          let _data = _this.data.lists;
-          for (let i = 0; i < mydata.length; i++) {
-            _data.push(mydata[i]);
-          }
-          _this.setData({
-            "searchDate.page": (parseInt(_page) + 1),
-            lists: _append ? _data : mydata
-          })
-        } else {
-          if (_page == 1) {
-            _this.setData({
-              showNothinkData: true,
-              lists: []
-            })
-          } else {
-            _this.setData({
-              nothavemore: true
-            })
-          }
-        }
-
-      },
-      fail: function (err) {
-        wx.hideLoading();
-        wx.showToast({
-          title: '网络出错，数据加载失败！',
-          icon: "none"
-        })
-      }
-    })
-  },
+  
   initNeedData: function () {
     let _this = this;
     let _mark = true;
@@ -398,8 +339,9 @@ Page({
     if (_wx && _wx.expirTime) {
       if (parseInt(_wx.expirTime) > _time) _mark = false;
     }
-    app.doRequestAction({
+    app.appRequestAction({
       url: "index/less-search-data/",
+      failTitle:"数据请求失败",
       params: {
         type: "resume",
         userId: _mark ? (userInfo ? userInfo.userId : "") : "",
@@ -415,13 +357,6 @@ Page({
           let extime = _time + (mydata.wechat.outTime * 1000);
           wx.setStorageSync("resume_wx", { wechat: mydata.wechat.number, expirTime: extime });
         }
-      },
-      fail: function (err) {
-        wx.showToast({
-          title: '数据加载失败！',
-          icon: "none",
-          duration: 3000
-        })
       }
     })
   },
@@ -593,7 +528,7 @@ Page({
     let _str = md5.hexMD5(_data.system_time.toString());
     _data.system_token = md5.hexMD5(_str.substring(0, 16));
     wx.showLoading({ title: '数据加载中' })
-    app.doRequestAction({
+    app.appRequestAction({
       url: "index/info-list-new/",
       params: _data,
       success: function (res) {
@@ -633,10 +568,10 @@ Page({
 
       },
       fail: function (err) {
-        wx.hideLoading();
-        wx.showToast({
-          title: '网络出错，数据加载失败！',
-          icon: "none"
+        wx.showModal({
+          title: '温馨提示',
+          content: '网络错误，加载失败！',
+          showCancel:false
         })
       }
     })

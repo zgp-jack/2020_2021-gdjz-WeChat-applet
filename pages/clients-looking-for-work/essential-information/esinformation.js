@@ -557,16 +557,16 @@ Page({
           }
         } else if (res.data.errcode == 5100) {
           remain.remain({
-            tips: res.data.errmsg, callback: function () {
-
-            }
+            tips: res.data.errmsg
           })
-        } else {
-
         }
       },
       fail: function (err) {
-        app.showMyTips("保存失败");
+        wx.showModal({
+          title: '温馨提示',
+          content: '保存失败',
+          showCancel:false
+        })
       }
     })
   },

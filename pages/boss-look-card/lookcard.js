@@ -295,7 +295,6 @@ Page({
       way: 'POST',
       params: detail,
       mask: true,
-      failTitle: "操作失败，请稍后重试！",
       success(res) {
         let mydata = res.data;
         console.log(mydata)
@@ -431,7 +430,14 @@ Page({
         }
       },
       fail: function (err) {
-        app.showMyTips("请求失败");
+        wx.showModal({
+          title: '温馨提示',
+          content: '网络请求失败，请稍后重试！',
+          showCancel:false,
+          success:function(){
+            wx.navigateBack({})
+          }
+        })
       }
     })
   },

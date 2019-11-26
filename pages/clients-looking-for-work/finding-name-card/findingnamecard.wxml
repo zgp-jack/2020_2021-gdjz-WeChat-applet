@@ -351,8 +351,7 @@
         提示
       </view>
       <view class="textdetail">
-        您的
-        <text class="popup">{{popup}}</text>未通过请重新修改
+        您的<text class="popup">{{popup}}</text>未审核通过修改后再进行提交
       </view>
       <view class="buttontext" catchtap="vertify">
         确定

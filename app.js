@@ -32,8 +32,8 @@ App({
     commonShareImg: "http://cdn.yupao.com/miniprogram/images/minishare.png?t=" + new Date().getTime(),
     commonDownloadApp: "http://cdn.yupao.com/miniprogram/images/download.png?t=" + new Date().getTime(),
     commonJixieAd: "http://cdn.yupao.com/miniprogram/images/list-ad-newjixie.png?t=" + new Date().getTime(),
-    apiRequestUrl:"https://miniapi.zhaogong.vrtbbs.com/",
-    //apiRequestUrl: "https://newyupaomini.54xiaoshuo.com/",
+    //apiRequestUrl:"https://miniapi.zhaogong.vrtbbs.com/",
+    apiRequestUrl: "https://newyupaomini.54xiaoshuo.com/",
     //apiRequestUrl: "http://miniapi.qsyupao.com/",
     //apiRequestUrl:"http://mini.zhaogongdi.com/",
     apiUploadImg: "https://newyupaomini.54xiaoshuo.com/index/upload/",
@@ -167,7 +167,17 @@ App({
         if ((_options.hasOwnProperty("hideLoading") && !_options.hideLoading) || (!_options.hasOwnProperty("hideLoading"))) {
           wx.hideLoading();
         }
-        _options.hasOwnProperty("success") ? _options.success(res) : "";
+        if(res.statusCode == 200 || res.statusCode == 304){
+          _options.hasOwnProperty("success") ? _options.success(res) : "";
+        }else{
+          if (_options.hasOwnProperty("fail")) {
+            _options.fail(res)
+          } else {
+            let _title = _options.hasOwnProperty("failTitle") ? _options.failTitle : '网络错误，数据加载失败！';
+            _this.showMyTips(_title);
+          }
+        }
+        
       },
       fail:function(err) {
         if ((_options.hasOwnProperty("hideLoading") && !_options.hideLoading) || (!_options.hasOwnProperty("hideLoading"))) {

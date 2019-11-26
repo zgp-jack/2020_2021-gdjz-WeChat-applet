@@ -428,12 +428,12 @@ Page({
   },
   getdetail() {
     let userInfo = wx.getStorageSync("userInfo");
-    let detail = {}
-    Object.assign(detail, {
+    return false;
+    let detail = {
       userId: userInfo.userId,
       token: userInfo.token,
       tokenTime: userInfo.tokenTime,
-    })
+    }
     let that = this;
     app.appRequestAction({
       url: 'resumes/resume-list/',
@@ -441,10 +441,9 @@ Page({
       params: detail,
       success: function (res) {
         let mydata = res.data.data;
-        console.log(mydata)
-        console.log(res)
         if (res.data.errcode == 200) {
           for (let i = 0; i < mydata.project.length; i++) {
+            
             if (mydata.project[i].check == 1) {
               that.setData({
                 checkthree: true,
