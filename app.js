@@ -5,7 +5,7 @@ App({
     // }
     // catch(err){bindGetUserInfo gotoUserauth 工地急招 gpsPorvince userLocation
     //   bindGetUserInfo mini_user api_user showDetailInfo getPrevPage userLocation initFirstTips
-    //isShowFastIssue /geocode/regeo } refId
+    //isShowFastIssue /geocode/regeo } refId showMyTips appRequestAction
   },
   globalData: {
     authcode:false,

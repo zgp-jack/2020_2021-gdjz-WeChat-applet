@@ -273,7 +273,7 @@ Page({
     let detail = {
       userId: userInfo.userId,
       resume_uuid: option.uuid,
-      location: option.location,
+      location: option.hasOwnProperty("location") ? option.location : ""
     }
     
     if (that.data.options.location != "" && that.data.options.uuid != "") {
@@ -284,7 +284,7 @@ Page({
       this.setData({
         detailid: option.uuid,
         options: {
-          location: option.location,
+          location: option.hasOwnProperty("location") ? option.location : "",
           uuid: option.uuid
         }
       })
@@ -294,6 +294,7 @@ Page({
       url: 'resumes/resume-detail/',
       way: 'POST',
       params: detail,
+      mask: true,
       failTitle: "操作失败，请稍后重试！",
       success(res) {
         let mydata = res.data;
@@ -463,6 +464,7 @@ Page({
       url: "resumes/resume-support/",
       way: "POST",
       failTitle: "网络错误！",
+      hideLoading:true,
       params: praise,
       success: function (res) {
         
@@ -510,6 +512,7 @@ Page({
       way: "POST",
       failTitle: "网络错误！",
       params: collect,
+      hideLoading: true,
       success: function (res) {
         
         if (res.data.errcode == "ok") {

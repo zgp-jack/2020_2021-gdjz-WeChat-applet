@@ -1,5 +1,5 @@
 @import "../finding-name-card/findingnamecard.wxss";
-/* introcardtwo  obtcard cardnine obtcardnineone introcontent workotextone header workotextone .cardseven workotextone*/
+/* introcardtwo  obtcard cardnine obtcardnineone introcontent workotextone header workotextone .cardseven workotextone obtcardone */
 .cardeight {
   margin-bottom: 60rpx;
 }
@@ -35,6 +35,7 @@
 
 .obtcardone {
   margin-top: 30rpx;
+  margin-bottom: 50rpx;
 }
 
 .cardeight {

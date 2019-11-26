@@ -1,4 +1,4 @@
-// moreproject age checkfour moreproject ressonone moreskill sex cityself staffcomposition personnum tags
+// moreproject age checkfour moreproject ressonone moreskill sex cityself staffcomposition personnum tags errImg onShareAppMessage
 
 const app = getApp();
 
@@ -81,9 +81,9 @@ Page({
     fail_project: "",
   },
   errImg: function () {
-    let obj = `headerimg`;
+    // let obj = `headerimg`;
     this.setData({
-      [obj]: "http://cdn.yupao.com/miniprogram/images/hearding.png"
+      headerimg: "http://cdn.yupao.com/miniprogram/images/lpy/hearding.png"
     })
   },
   previewImagec: function (e) {
@@ -116,11 +116,36 @@ Page({
     })
   },
   onShareAppMessage: function () {
-    console.log(123)
-    return {
-      title: '在这里输入标题',
-      desc: '在这里输入简介说明',
-      path: '../preview-name-card/previewcard'//这是一个路径
+    let userInfo = wx.getStorageSync("userInfo");
+    let uuid = this.data.resume_uuid;
+    let commonShareTips = app.globalData.commonShareTips;
+    let commonShareImg = app.globalData.commonShareImg;
+    let pagt = ""
+    if (userInfo) {
+      let refId = userInfo.userId;
+      console.log(refId)
+      console.log(uuid)
+      if (uuid) {
+        pagt = `/pages/boss-look-card/lookcard?uuid=${uuid}`
+        console.log(pagt)
+        return {
+          title: `${commonShareTips}`,
+          imageUrl: commonShareImg,
+          path: `/pages/boss-look-card/lookcard?uuid=${uuid}`//这是一个路径
+        }
+      } else {
+        return {
+          title: `${commonShareTips}`,
+          imageUrl: commonShareImg,
+          path: `/pages/index/index?refId=${refId}`//这是一个路径
+        }
+      }
+    } else {
+      return {
+        title: `${commonShareTips}`,
+        imageUrl: commonShareImg,
+        path: `/pages/index/index`//这是一个路径
+      }
     }
   },
   moreproject() {

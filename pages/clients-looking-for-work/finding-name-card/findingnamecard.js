@@ -8,7 +8,7 @@ Page({
 
   /** 
    * 页面的初始数据 nation view_num perfection addskill fail_certificate app.globalData.allexpress 
-   * newresume-experience.png audit.png baseinform headerimg uuid age
+   * newresume-experience.png audit.png baseinform headerimg uuid age chooseImage onShareAppMessage
    */
   data: {
     baseinform: app.globalData.apiImgUrl + "lpy/jichu.png",
@@ -51,7 +51,7 @@ Page({
     procity: "未填写",
     personnum: "未填写",
     tags: "未填写",
-    headerimg: "../../../images/hearding.png",
+    headerimg: "",
     selectk: [],
     selectkone: "",
     selectShow: false,//控制下拉列表的显示隐藏，false隐藏、true显示
@@ -372,11 +372,11 @@ Page({
     wx.navigateTo({
       url: "/pages/clients-looking-for-work/preview-name-card/previewcard",
     })
-  },
+  }, 
   errImg: function () {
-    let obj = `headerimg`;
+
     this.setData({
-      [obj]: "http://cdn.yupao.com/miniprogram/images/hearding.png"
+      headerimg: "http://cdn.yupao.com/miniprogram/images/lpy/hearding.png"
     })
   },
 
