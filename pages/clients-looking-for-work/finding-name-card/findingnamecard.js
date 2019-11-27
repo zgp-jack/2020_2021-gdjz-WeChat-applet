@@ -189,7 +189,7 @@ Page({
         return {
           title: `${commonShareTips}`,
           imageUrl: commonShareImg,
-          path: `/pages/boss-look-card/lookcard?uuid=${uuid}&refId=${refId}`//这是一个路径
+          path: `/pages/boss-look-card/lookcard?uuid=${uuid}&refId=${refId}&sharedekeId=1`//这是一个路径
         }
       } else {
         return {
@@ -426,9 +426,11 @@ Page({
       })
     })
   },
+ 
   getdetail() {
     let userInfo = wx.getStorageSync("userInfo");
-    return false;
+    if (!userInfo) return false;
+    
     let detail = {
       userId: userInfo.userId,
       token: userInfo.token,
@@ -589,54 +591,36 @@ Page({
 
           if (mydata.project.length == 0) {
             that.setData({
-              project: []
-            });
-            that.setData({
-              projectone: []
-            });
-            that.setData({
+              project: [],
+              projectone: [],
               projectlength: 0
-            })
+            });
           } else {
             that.setData({
-              project: mydata.project
-            });
-
-            that.setData({
-              projectone: [mydata.project[0]]
-            });
-            that.setData({
+              project: mydata.project,
+              projectone: [mydata.project[0]],
               projectlength: mydata.project.length >= 1 ? mydata.project.length : 0
-            })
+            });
           }
           that.setData({
             percent: mydata.info.hasOwnProperty("progress") ? mydata.info.progress : 0
           })
 
 
-
           if (mydata.certificates.length == 0) {
             that.setData({
-              skillbooks: []
-            })
-            that.setData({
-              skilllength: 0
-            })
-            that.setData({
+              skillbooks: [],
+              skilllength: 0,
               skillbooksone: []
             })
           } else {
             that.setData({
-              skillbooks: mydata.certificates
-            })
-            that.setData({
-              skilllength: res.data.data.certificates.length >= 1 ? res.data.data.certificates.length : 0
-            })
-            that.setData({
-              skillbooksone: [that.data.skillbooks[0]]
+              skillbooks: mydata.certificates,
+              skilllength: mydata.certificates.length >= 1 ? mydata.certificates.length : 0,
+              skillbooksone: [mydata.certificates[0]]
             })
           }
-
+  
           let popup = "";
           if (mydata.hasOwnProperty("popup_text")) {
             for (let i = 0; i < mydata.popup_text.length; i++) {
@@ -649,34 +633,23 @@ Page({
           }
           if (that.data.checkonef != "0" || that.data.checktwof != "0") {
             that.setData({
-              ressonone: false
-            })
-            that.setData({
-              passre: true
-            })
-            that.setData({
+              ressonone: false,
+              passre: true,
               nopassre: true
             })
+
           }
           if (that.data.checkonef == "0" || that.data.checktwof == "0") {
             that.setData({
-              ressonone: true
-            })
-            that.setData({
-              nopassre: true
-            })
-            that.setData({
+              ressonone: true,
+              nopassre: true,
               passre: false
             })
           }
           if (that.data.checkonef == "1" || that.data.checktwof == "1") {
             that.setData({
-              ressonone: false
-            })
-            that.setData({
-              passre: true
-            })
-            that.setData({
+              ressonone: false,
+              passre: true,
               nopassre: false
             })
           }
@@ -801,7 +774,6 @@ Page({
    */
   onLoad: function (options) {
     this.authrasution()
-
   },
   /**
    * 生命周期函数--监听页面初次渲染完成
@@ -819,6 +791,7 @@ Page({
    */
   onShow() {
     if (app.globalData.previewshou) {
+
       this.getdetail();
       this.delestore();
       this.deleskill();

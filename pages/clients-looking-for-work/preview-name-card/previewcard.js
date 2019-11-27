@@ -123,15 +123,11 @@ Page({
     let pagt = ""
     if (userInfo) {
       let refId = userInfo.userId;
-      console.log(refId)
-      console.log(uuid)
       if (uuid) {
-        pagt = `/pages/boss-look-card/lookcard?uuid=${uuid}`
-        console.log(pagt)
         return {
           title: `${commonShareTips}`,
           imageUrl: commonShareImg,
-          path: `/pages/boss-look-card/lookcard?uuid=${uuid}`//这是一个路径
+          path: `/pages/boss-look-card/lookcard?uuid=${uuid}&sharedekeId=1`//这是一个路径
         }
       } else {
         return {
@@ -164,6 +160,7 @@ Page({
   },
   getdetail() {
     let userInfo = wx.getStorageSync("userInfo");
+    if (!userInfo) return false;
     let detail = {}
     Object.assign(detail, {
       userId: userInfo.userId,
@@ -302,33 +299,17 @@ Page({
           });
 
           if (mydata.project.length == 0) {
-
-            // let projectall = [];
-            // for (let i = 0; i < mydata.project.length; i ++ ){
-            //   if (mydata.project[i].check == "2"){
-            //      projectall.push(mydata.project[i])
-            //   }
-            // }
             that.setData({
-              project: []
+              project: [],
+              projectone: [],
+              projectlength: 0
             });
-            that.setData({
-              projectone: []
-            });
-            that.setData({
-              projectlength:0
-            })
-   
           }else{
             that.setData({
-              project: mydata.project
-            });
-            that.setData({
-              projectone: [mydata.project[0]]
-            });
-            that.setData({
+              project: mydata.project,
+              projectone: [mydata.project[0]],
               projectlength: mydata.project.length >= 1 ? mydata.project.length : 0
-            })
+            });
           }
           
           that.setData({
@@ -336,69 +317,52 @@ Page({
           })
 
           if (mydata.certificates.length == 0) {
-
-            // let certificatesall = [];
-            // for (let i = 0; i < mydata.certificates.length; i++) {
-            //   if (mydata.certificates[i].check == "2") {
-            //     certificatesall.push(mydata.certificates[i])
-            //   }
-            // }
-
             that.setData({
-              skillbooks: []
-            })
-            that.setData({
-              skilllength:0
-            })
-            that.setData({
+              skillbooks: [],
+              skilllength: 0,
               skillbooksone: []
             })
           }else{
             that.setData({
-              skillbooks: mydata.certificates
-            })
-            that.setData({
-              skilllength: mydata.certificates.length >= 1 ? mydata.certificates.length : 0
-            })
-            that.setData({
+              skillbooks: mydata.certificates,
+              skilllength: mydata.certificates.length >= 1 ? mydata.certificates.length : 0,
               skillbooksone: [mydata.certificates[0]]
             })
           }
-          console.log(that.data.skillbooksone)
          
-          if (that.data.checkonef != "0" || that.data.checktwof != "0") {
-            that.setData({
-              ressonone: false
-            })
-            that.setData({
-              passre: true
-            })
-            that.setData({
-              nopassre: true
-            })
-          }
-          if (that.data.checkonef == "0" || that.data.checktwof == "0") {
-            that.setData({
-              ressonone: true
-            })
-            that.setData({
-              nopassre: true
-            })
-            that.setData({
-              passre: false
-            })
-          }
-          if (that.data.checkonef == "1" || that.data.checktwof == "1") {
-            that.setData({
-              ressonone: false
-            })
-            that.setData({
-              passre: true
-            })
-            that.setData({
-              nopassre: false
-            })
-          }
+          // if (that.data.checkonef != "0" || that.data.checktwof != "0") {
+          //   that.setData({
+          //     ressonone: false
+          //   })
+          //   that.setData({
+          //     passre: true
+          //   })
+          //   that.setData({
+          //     nopassre: true
+          //   })
+          // }
+          // if (that.data.checkonef == "0" || that.data.checktwof == "0") {
+          //   that.setData({
+          //     ressonone: true
+          //   })
+          //   that.setData({
+          //     nopassre: true
+          //   })
+          //   that.setData({
+          //     passre: false
+          //   })
+          // }
+          // if (that.data.checkonef == "1" || that.data.checktwof == "1") {
+          //   that.setData({
+          //     ressonone: false
+          //   })
+          //   that.setData({
+          //     passre: true
+          //   })
+          //   that.setData({
+          //     nopassre: false
+          //   })
+          // }
         }
       },
       fail: function (err) {

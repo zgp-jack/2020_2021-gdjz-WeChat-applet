@@ -1,13 +1,13 @@
 @import "../index/index.wxss";
 /* listsboxname listsboxnation listsboxnum .listsboxagetwo text listsboxlableone listsboxname
-.cardfive .listsboxshow red listsboxnum  .listsboxageone text listsboxage .listsboxshow*/
+.cardfive .listsboxshow red listsboxnum  .listsboxageone text listsboxage finded .listsboxshow*/
 .lists-template-btn{position: absolute;width: 100%;height: 100%;display: block;background: transparent;z-index: 1;opacity: 0;left: 0;top: 0;}
 .lists-template-btn::after,.lists-template-btn::before{border: 0;}
-.listsboxdetail {
+.listsboxdetailover {
   width: 100%;
   background: white;
-  overflow: hidden;
-  margin-top: 12rpx;
+  /* overflow: hidden; */
+  margin-top: 16rpx;
   position: relative;
 }
 
@@ -17,7 +17,7 @@
   height: 40rpx;
   position: absolute;
   right: 0;
-  top: 0;
+  top: -7rpx;
 }
 
 .oimg {
@@ -54,7 +54,9 @@
 .listsboxageone{
   font-size: 26rpx;
 }
-
+.listsoverhl{
+  overflow: hidden;
+}
 .listsboxageone:nth-child(2){
   font-size: 26rpx;
   color: #FB8732;

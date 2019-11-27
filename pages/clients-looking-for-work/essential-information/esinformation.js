@@ -219,18 +219,18 @@ Page({
     console.log(provincelocal)
     if (historyregionone) {
       this.setData({
-        regionone: historyregionone.title,
-        longitude: historyregionone.location.split(",")[0],
-        latitude: historyregionone.location.split(",")[1]
+        regionone: historyregionone.hasOwnProperty("title")? historyregionone.title:"",
+        longitude: historyregionone.hasOwnProperty("location")? historyregionone.location.split(",")[0]:"",
+        latitude: historyregionone.hasOwnProperty("location") ? historyregionone.location.split(",")[1] : "",
       })
-      console.log(this.data.longitude)
+
       // wx.removeStorageSync('historyregionone')
     }
     if (provincelocal) {
       this.setData({
-        provinceid: provincelocal.province,
-        wardenryid: provincelocal.city,
-        oadcode: provincelocal.adcode
+        provinceid: provincelocal.hasOwnProperty("province") ? provincelocal.province:"",
+        wardenryid: provincelocal.hasOwnProperty("city") ? provincelocal.city : "",
+        oadcode: provincelocal.hasOwnProperty("adcode") ? provincelocal.adcode : "",
       })
     }
   },
@@ -435,6 +435,7 @@ Page({
     let that = this;
     let information = {}
     let userInfo = wx.getStorageSync("userInfo");
+    if (!userInfo) return false;
     let worktype = "";
     console.log(this.data.complexworkid)
     for (let i = 0; i < this.data.complexworkid.length; i++) {

@@ -261,6 +261,7 @@ Page({
   submitmaterial() { //发数据给后台
     let information = {}
     let userInfo = wx.getStorageSync("userInfo");
+    if (!userInfo) return false;
     let vertifyNum = v.v.new()
     let str = /^\d{1,2}$/ig;
     if (!str.test(this.data.workage)) {

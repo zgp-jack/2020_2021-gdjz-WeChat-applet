@@ -5,7 +5,7 @@ Page({
 
   /** showComplain telephorft personnum   age workingyears personnum workingyears
    * 页面的初始数据 moreskill projectone occupations introduce telephorft showThisMapInfo onoff
-   telephorft nation age fenxiang*/
+   telephorft nation age fenxiang introshow  praise returnindex */
   data: {
     newresumeskill: app.globalData.apiImgUrl + "lpy/newresume-skill.png",
     downward: app.globalData.apiImgUrl + "lpy/downward.png",
@@ -48,9 +48,9 @@ Page({
     headerimg: "../../../images/hearding.png",
     selectk: [],
     selectkone: "",
-    selectShow: false,//控制下拉列表的显示隐藏，false隐藏、true显示
-    selectData: [],//下拉列表的数据
-    index: 0,//选择的下拉列表下标
+    selectShow: false, //控制下拉列表的显示隐藏，false隐藏、true显示
+    selectData: [], //下拉列表的数据
+    index: 0, //选择的下拉列表下标
     check: "",
     checkstatus: true,
     is_introduces: false,
@@ -87,13 +87,14 @@ Page({
     detailid: "",
     examine: true,
     options: {
-        location:"",
-        uuid:""
+      location: "",
+      uuid: ""
     },
-    introshow:true
+    introshow: true,
+    sharedeke: true
   },
   previewImage: function (e) {
-    
+
     let url = e.currentTarget.dataset.url;
     let i = e.currentTarget.dataset.index;
     let type = e.currentTarget.dataset.type;
@@ -104,7 +105,7 @@ Page({
     })
   },
   previewImagec: function (e) {
-    
+
     let url = e.currentTarget.dataset.url;
     let i = e.currentTarget.dataset.index;
     let type = e.currentTarget.dataset.type;
@@ -165,11 +166,11 @@ Page({
             telephone: res.data.tel,
             onoff: true
           })
-        } else if (res.data.errcode == "get_integral"){
+        } else if (res.data.errcode == "get_integral") {
           wx.showModal({
             title: '温馨提示',
-            content:res.data.errmsg,
-            success:function(res){
+            content: res.data.errmsg,
+            success: function (res) {
               if (res.confirm) {
                 wx.navigateTo({
                   url: '/pages/getintegral/getintegral',
@@ -179,7 +180,7 @@ Page({
               }
             }
           })
-        }else{
+        } else {
           app.showMyTips(res.data.errmsg)
         }
       },
@@ -197,7 +198,7 @@ Page({
       app.showMyTips("请输入您的投诉内容");
       return false;
     }
-    
+
     app.appRequestAction({
       url: "resumes/complain/",
       way: "POST",
@@ -211,9 +212,13 @@ Page({
       title: "正在提交投诉",
       failTitle: "网络错误，投诉失败！",
       success: function (res) {
-        
+
         let mydata = res.data;
-        if (mydata.errcode == "ok") _this.setData({ showComplain: false, complainInfo: "", "ucardInfo.show_complaint.show_complaint": 0 })
+        if (mydata.errcode == "ok") _this.setData({
+          showComplain: false,
+          complainInfo: "",
+          "ucardInfo.show_complaint.show_complaint": 0
+        })
         wx.showModal({
           title: '提示',
           content: mydata.errmsg,
@@ -224,13 +229,20 @@ Page({
     })
   },
   userCancleComplain: function () {
-    this.setData({ showComplain: false, complainInfo: "" })
+    this.setData({
+      showComplain: false,
+      complainInfo: ""
+    })
   },
   userTapComplain: function () {
-    this.setData({ showComplain: true })
+    this.setData({
+      showComplain: true
+    })
   },
   userEnterComplain: function (e) {
-    this.setData({ complainInfo: e.detail.value })
+    this.setData({
+      complainInfo: e.detail.value
+    })
   },
   telephorf(e) {
     wx.makePhoneCall({
@@ -265,17 +277,29 @@ Page({
   },
   getdetail(option) {
     let that = this;
+    wx.showLoading({
+      title: '加载中',
+      mask: true
+    })
+    if (option.hasOwnProperty("sharedekeId")) {
+      if (option.sharedekeId == 1) {
+        that.setData({
+          sharedeke: false
+        })
+      }
+    }
     let userInfo = wx.getStorageSync("userInfo");
- 
     if (!userInfo) {
-      userInfo = { userId: null }
+      userInfo = {
+        userId: null
+      }
     }
     let detail = {
       userId: userInfo.userId,
       resume_uuid: option.uuid,
       location: option.hasOwnProperty("location") ? option.location : ""
     }
-    
+
     if (that.data.options.location != "" && that.data.options.uuid != "") {
       this.setData({
         detailid: option.uuid
@@ -289,18 +313,17 @@ Page({
         }
       })
     }
-    
+
     app.appRequestAction({
       url: 'resumes/resume-detail/',
       way: 'POST',
       params: detail,
-      mask: true,
       success(res) {
         let mydata = res.data;
         console.log(mydata)
 
         if (res.data.errcode == "ok") {
-
+          wx.hideLoading();
           let date = new Date();
           let dateo = date.getTime()
           let dateone = new Date(dateo);
@@ -352,10 +375,10 @@ Page({
             examine: false,
           })
 
-          
-          if (that.data.introduce === ""){
+
+          if (that.data.introduce === "") {
             that.setData({
-              introshow:false
+              introshow: false
             })
           }
 
@@ -368,76 +391,77 @@ Page({
           });
 
 
-          if (mydata.project.length == 0){
+          if (mydata.project.length == 0) {
             that.setData({
-              project: []
+              project: [],
+              projectone: [],
+              projectlength: 0
             });
-            that.setData({
-              projectone: []
-            });
-            that.setData({
-              projectlength:0
-            })
-          }else{
+
+          } else {
             let projectall = [];
             for (let i = 0; i < mydata.project.length; i++) {
               projectall.push(mydata.project[i])
             }
             that.setData({
-              project: projectall
-            });
-            that.setData({
-              projectone: [projectall[0]]
-            });
-            that.setData({
+              project: projectall,
+              projectone: [projectall[0]],
               projectlength: projectall.length >= 1 ? projectall.length : 0
-            })
+            });
           }
-          
+
           that.setData({
             percent: mydata.info.hasOwnProperty("progress") ? mydata.info.progress : 0
           })
 
-       
-          if (mydata.certificates.length == 0){
+
+          if (mydata.certificates.length == 0) {
             that.setData({
-              skillbooks: []
-            })
-            that.setData({
-              skilllength:0
-            })
-            that.setData({
+              skillbooks: [],
+              skilllength: 0,
               skillbooksone: []
             })
-          }else{
+
+          } else {
             let certificatesall = [];
             for (let i = 0; i < mydata.certificates.length; i++) {
               certificatesall.push(mydata.certificates[i])
             }
-
             that.setData({
-              skillbooks: certificatesall
-            })
-            that.setData({
-              skilllength: certificatesall.length >= 1 ? certificatesall.length : 0
-            })
-            that.setData({
+              skillbooks: certificatesall,
+              skilllength: certificatesall.length >= 1 ? certificatesall.length : 0,
               skillbooksone: [certificatesall[0]]
             })
-
           }
-          
+
         }
       },
       fail: function (err) {
-        wx.showModal({
-          title: '温馨提示',
-          content: '网络请求失败，请稍后重试！',
-          showCancel:false,
-          success:function(){
-            wx.navigateBack({})
+        let that = this;
+        // wx.hideLoading();
+        if (option.hasOwnProperty("sharedekeId")) {
+          if (option.sharedekeId == 1) {
+            wx.showModal({
+              title: '温馨提示',
+              content: '网络请求失败，即将返回首页！',
+              showCancel: false,
+              success: function () {
+                wx.navigateTo({
+                  url: '/pages/index/index',
+                })
+              }
+            })
           }
-        })
+        } else {
+          wx.showModal({
+            title: '温馨提示',
+            content: '网络请求失败，请稍后重试！',
+            showCancel: false,
+            success: function () {
+              wx.navigateBack({})
+            }
+          })
+        }
       }
     })
   },
@@ -470,10 +494,10 @@ Page({
       url: "resumes/resume-support/",
       way: "POST",
       failTitle: "网络错误！",
-      hideLoading:true,
+      hideLoading: true,
       params: praise,
       success: function (res) {
-        
+
         if (res.data.errcode == "ok") {
           if (res.data.show == 1) {
             app.showMyTips("点赞成功");
@@ -520,7 +544,7 @@ Page({
       params: collect,
       hideLoading: true,
       success: function (res) {
-        
+
         if (res.data.errcode == "ok") {
           if (res.data.show == 1) {
             app.showMyTips("收藏成功");
@@ -561,6 +585,11 @@ Page({
       delta: 1
     })
   },
+  returnindex() {
+    wx.navigateTo({
+      url: '/pages/index/index',
+    })
+  },
   onShareAppMessage: function () {
     let userInfo = wx.getStorageSync("userInfo");
     let uuid = this.data.resume_uuid;
@@ -568,17 +597,17 @@ Page({
     let commonShareImg = app.globalData.commonShareImg;
     if (userInfo) {
       let refId = userInfo.userId;
-        return {
-          title: `${commonShareTips}`,
-          imageUrl: commonShareImg,
-          path: `/pages/boss-look-card/lookcard?uuid=${uuid}&refId=${refId}`//这是一个路径
-        }
+      return {
+        title: `${commonShareTips}`,
+        imageUrl: commonShareImg,
+        path: `/pages/boss-look-card/lookcard?uuid=${uuid}&refId=${refId}&sharedekeId=1` //这是一个路径
+      }
 
     } else {
       return {
         title: `${commonShareTips}`,
         imageUrl: commonShareImg,
-        path: `/pages/boss-look-card/lookcard?uuid=${uuid}`//这是一个路径
+        path: `/pages/boss-look-card/lookcard?uuid=${uuid}&sharedekeId=1` //这是一个路径
       }
     }
   },
@@ -587,7 +616,7 @@ Page({
     app.bindGetUserInfo(e, function (res) {
       app.mini_user(res, function (res) {
         app.api_user(res, function (res) {
-          
+
           let uinfo = res.data;
           if (uinfo.errcode == "ok") {
             let userInfo = {
@@ -597,7 +626,9 @@ Page({
             }
             app.globalData.userInfo = userInfo;
             wx.setStorageSync('userInfo', userInfo)
-            that.setData({ userInfo: userInfo });
+            that.setData({
+              userInfo: userInfo
+            });
             console.log(that.data.options)
             that.getdetail(that.data.options)
 

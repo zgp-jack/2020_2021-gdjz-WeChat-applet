@@ -4,8 +4,7 @@ App({
     //   if (e.path) this.initUserInfo(e); valiUserUrl gpsOrientation userLocation
     // }
     // catch(err){bindGetUserInfo gotoUserauth 工地急招 gpsPorvince userLocation
-    //   bindGetUserInfo mini_user api_user showDetailInfo getPrevPage userLocation initFirstTips
-    //isShowFastIssue /geocode/regeo } refId showMyTips appRequestAction
+    //   bindGetUserInfo allTypes appRequestAction
   },
   globalData: {
     authcode:false,
@@ -32,8 +31,8 @@ App({
     commonShareImg: "http://cdn.yupao.com/miniprogram/images/minishare.png?t=" + new Date().getTime(),
     commonDownloadApp: "http://cdn.yupao.com/miniprogram/images/download.png?t=" + new Date().getTime(),
     commonJixieAd: "http://cdn.yupao.com/miniprogram/images/list-ad-newjixie.png?t=" + new Date().getTime(),
-    //apiRequestUrl:"https://miniapi.zhaogong.vrtbbs.com/",
-    apiRequestUrl: "https://newyupaomini.54xiaoshuo.com/",
+    apiRequestUrl:"https://miniapi.zhaogong.vrtbbs.com/",
+    // apiRequestUrl: "https://newyupaomini.54xiaoshuo.com/",
     //apiRequestUrl: "http://miniapi.qsyupao.com/",
     //apiRequestUrl:"http://mini.zhaogongdi.com/",
     apiUploadImg: "https://newyupaomini.54xiaoshuo.com/index/upload/",
@@ -408,6 +407,7 @@ App({
       hideLoading: true,
       failTitle: "数据加载失败，请重新进入小程序",
       success: function(res) {
+        console.log(res)
         let mydata = res.data;
         if (mydata.errcode == "ok") {
           _this.globalData.allTypes = mydata.data;

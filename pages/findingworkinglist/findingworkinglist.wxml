@@ -1,6 +1,6 @@
 <!-- listsboxlocalone -->
 <import src="/pages/footer/footer.wxml" />
-<!-- <import src="/pages/tpl/app/app.wxml"/> doSearchRequestAction user-choose-item user-choose-item-active  jumpThisLink overwords  stopThisAction -->
+<!-- <import src="/pages/tpl/app/app.wxml"/> doSearchRequestAction user-choose-item user-choose-item-active  jumpThisLink overwords  stopThisAction showListsType -->
 
 <!-- 搜索头部 -->
 <view class="lists-header">
@@ -106,10 +106,11 @@
 
     <!-- <block  wx:for="{{ }}" wx:key="{{ }}" wx:if="{{}}"> -->
 
-    <view class="listsboxdetail" wx:for="{{lists}}" wx:key="{{index}}">
+    <view class="listsboxdetailover" wx:for="{{lists}}" wx:key="{{index}}">
       <form report-submit="true" data-uuid="{{item.uuid}}" bindsubmit="showDetailInfo" data-id="{{ item.id }}">
         <button class='lists-template-btn' form-type='submit'></button>
         <image src="{{finded}}" class="finded" wx:if="{{item.is_end == 2}}"></image>
+        <view class="listsoverhl">
         <view class="listsboxdetailo">
           <view>
             <image class="oimg" src="{{item.headerimg}}" data-index="{{index}}" binderror="errImg"></image>
@@ -163,6 +164,7 @@
           <view class="listsboxlocaltwo">
             <text class="listsboxtime">{{item.time}}</text>
           </view>
+        </view>
         </view>
       </form>
     </view>
