@@ -133,32 +133,22 @@
                 <text wx:for="{{item.tags}}" wx:key="{{index}}">{{item.label_name}}</text>
               </view>
             </view>
-            <view class="listsboxshow">
-              {{item.type}}
-            </view>
+            <view class="listsboxshow">{{item.type}}</view>
           </view>
         </view>
         <view class="listsboxlable">
-          <view class="listsboxlableone" wx:for="{{item.occupations}}" wx:key="{{index}}">
-            {{item}}
-          </view>
+          <view class="listsboxlableone" wx:for="{{item.occupations}}" wx:key="{{index}}">{{item}}</view>
 
         </view>
-        <view class="listsboxself">
-          {{item.introduce}}
-        </view>
+        <view class="listsboxself">{{item.introduce}}</view>
         <view class="listsboxlocal">
           <view>
             <view class="listsboxlocalone">
               <view>
                 <image src="{{biaoqian}}"></image>
               </view>
-              <view class="listsboxadree">
-                {{item.show_address}}
-              </view>
-              <view class="listsboxadreeq">
-                {{item.distance}}
-              </view>
+              <view class="listsboxadree">{{item.show_address}}</view>
+              <view class="listsboxadreeq">{{item.distance}}</view>
             </view>
           </view>
           <view class="listsboxlocaltwo">

@@ -96,6 +96,7 @@
   display: flex;
   margin-top: 12rpx;
   font-size: 26rpx;
+  color: #616060;
 }
 .listsboxagetwo text{
   font-size: 28rpx;
@@ -186,6 +187,7 @@
 }
 .listsboxlocal .listsboxlocalone .listsboxadree{
   margin-left: 10rpx;
+  color: #828586;
 }
 .listsboxlocal .listsboxlocalone .listsboxadreeq{
   margin-left: 10rpx;
