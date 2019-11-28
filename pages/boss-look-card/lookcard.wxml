@@ -54,6 +54,7 @@
 
           <view class="cworkotype" wx:if="{{occupations}}">
             <view class="ocworkotype">工种</view>
+            <view class="ocworkotypeoo">
             <view class="ocworkotyp" wx:if="{{occupations != '未填写'}}">
               <view class="ocworkotyptu" wx:for="{{occupations}}" wx:key="{{index}}">
                 {{item}}
@@ -62,6 +63,7 @@
             <view class="ocworkotyp" wx:if="{{occupations.length == 0}}">
               <text class="workotextone">{{occupationone}}</text>
             </view>
+               </view>
           </view>
           <view class="cardotext" wx:if="{{workingyears}}">
             <text class="oworkotext">工龄</text>

@@ -9,6 +9,7 @@ Page({
   data: {
     footerActive: "member",
     nodataImg: app.globalData.apiImgUrl + "nodata.png",
+    finded: app.globalData.apiImgUrl + "lpy/finded.png",
     isFirstRequest: true,
     page: 1,
     lists: [],
