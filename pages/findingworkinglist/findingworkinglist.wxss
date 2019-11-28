@@ -1,6 +1,5 @@
 @import "../index/index.wxss";
-/* listsboxname listsboxnation listsboxnum .listsboxagetwo text listsboxlableone listsboxname
-.cardfive .listsboxshow red listsboxnum  .listsboxageone text listsboxage finded .listsboxshow*/
+/* listsboxname #*/
 .lists-template-btn{position: absolute;width: 100%;height: 100%;display: block;background: transparent;z-index: 1;opacity: 0;left: 0;top: 0;}
 .lists-template-btn::after,.lists-template-btn::before{border: 0;}
 .listsboxdetailover {
@@ -102,9 +101,9 @@
   font-size: 28rpx;
   margin-left: 18rpx;
 }
-#listsboxnation{
-  font-size: 28rpx;
-  margin-left: 0rpx;
+.listsboxnation{
+  font-size: 28rpx!important;
+  margin-left: 0rpx!important;
 }
 .listsboxagetwo .listsboxnum{
     font-size: 28rpx;

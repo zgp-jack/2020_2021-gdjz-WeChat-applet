@@ -1,6 +1,6 @@
 <!-- listsboxlocalone -->
 <import src="/pages/footer/footer.wxml" />
-<!-- <import src="/pages/tpl/app/app.wxml"/> doSearchRequestAction user-choose-item user-choose-item-active  jumpThisLink overwords  stopThisAction showListsType -->
+<!-- <import src="/pages/tpl/app/app.wxml"/> doSearchRequestAction user-choose-item user-choose-item-active  jumpThisLink overwords  stopThisAction showListsType listsboxnation -->
 
 <!-- 搜索头部 -->
 <view class="lists-header">
@@ -125,7 +125,7 @@
                 <image wx:if="{{item.certificate == 1}}" src="{{authentication}}"></image>
               </view>
               <view class="listsboxagetwo" wx:if="{{item.nation}}">
-                <text id="listsboxnation">{{item.nation}}</text>
+                <text class="listsboxnation">{{item.nation}}</text>
                 <text><text class="listsboxnum">{{item.experience}}</text></text>
                 <text>{{item.prof_degree}}</text>
               </view>
