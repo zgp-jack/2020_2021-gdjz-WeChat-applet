@@ -17,8 +17,9 @@
   <view class='published-content clearfix'>
 
 
-    <view class="listsboxdetail" bindtap="showCollectInfo"  data-msg="{{ item.show_tips }}" data-tips="{{ item.check_tips_string }}" data-uuid="{{ item.resume.uuid }}" wx:for="{{lists}}" wx:key="{{index}}">
-      <image src="../../../images/finded.png" class="finded" wx:if="{{item.resume.is_end == 2}}"></image>
+    <view class="listsboxdetailover" bindtap="showCollectInfo"  data-msg="{{ item.show_tips }}" data-tips="{{ item.check_tips_string }}" data-uuid="{{ item.resume.uuid }}" wx:for="{{lists}}" wx:key="{{index}}">
+      <image src="{{finded}}" class="finded" wx:if="{{item.resume.is_end == 2}}"></image>
+      <view class="listsoverhl">
       <view class="listsboxdetailo">
         <view>
         <image class="oimg" src="{{item.resume.headerimg}}" data-index="{{index}}" binderror="errImg"></image>
@@ -62,6 +63,7 @@
         <view class="listsboxlocaltwo">
           <text class="cancel-collect-item" data-id="{{ item.resume.uuid }}" catchtap="cancleCollect" data-index="{{ index }}">取消收藏</text>
         </view>
+      </view>
       </view>
     </view>
 

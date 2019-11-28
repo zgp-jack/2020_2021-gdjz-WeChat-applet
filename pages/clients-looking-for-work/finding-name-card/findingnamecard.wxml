@@ -14,7 +14,7 @@
           <text class="olangw">{{percent}}%</text>
         </view>
         <view bindtap="completeall" wx:if="{{showcomplete}}">名片越完善找活越容易,马上去完善>></view>
-        <view class="sharelive" wx:if="{{!showcomplete}}">分享找活名片,可提升名片排名度</view>
+        <button class="sharelive"  open-type='share' wx:if="{{!showcomplete}}">分享找活名片,可提升名片排名度</button>
       </view>
       <view class="findingnamecardonesontwo">
         <text>{{view_num}}</text>

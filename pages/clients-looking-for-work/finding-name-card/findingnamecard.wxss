@@ -1,4 +1,4 @@
-/*ocworkotyptu oworkotext #797979 nopass ocworkotype ocworkotyptu cardfive*/
+/*ocworkotyptu oworkotext #797979 nopass ocworkotype ocworkotyptu cardfive cardnineone sharelive */
 @import "../../userauth/userauth.wxss";
 
 .common-userauth {
@@ -73,12 +73,20 @@ page {
 }
 
 .findingnamecardoneson .findingnamecardonesonone  .sharelive {
+  margin: 0;
+  padding: 0;
+  background-color: white;
+  border-radius: 0;
   margin-bottom: 8rpx;
   font-size: 30rpx;
   color: red;
   margin-left: 13rpx;
-}
+  height: 30rpx;
+  line-height: 30rpx;
+text-align: left;
 
+}
+.findingnamecardoneson .findingnamecardonesonone  .sharelive:after{ border: none; }
 .findingnamecardoneson .findingnamecardonesonone view {
   margin-bottom: 8rpx;
   font-size: 30rpx;
