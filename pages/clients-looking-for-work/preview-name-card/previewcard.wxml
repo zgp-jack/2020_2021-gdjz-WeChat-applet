@@ -1,17 +1,24 @@
 <view>
+ <view class="cardcolore">
   <view class="header">
     注:分享名片 让你的名片排名更靠前
   </view>
+</view>
+
+
   <view class="findingnamecardthree">
     <view class="findingnamecardthreemobile">
       <image src="{{baseinform}}"></image>
       基础信息
     </view>
   </view>
+  <view class="cardcolore">
+      <image class="audit" wx:if="{{checkpan}}" src="{{notthrough}}"></image>
   <view class="cardtwo">
+
     <view class="cardonetwof">
       <image class="checkone" src="{{audit}}" wx:if="{{checkone}}"></image>
-      <image class="audit" wx:if="{{checkpan}}" src="{{notthrough}}"></image>
+
       <view class="cardtwosonone">
         <view class="cardtwosononeimg">
           <view class="oimg">
@@ -117,6 +124,7 @@
       <view class="cardotextbottom"></view>
     </view>
   </view>
+    </view>
   <!-- <view class="nopass" wx:if="{{ressonone}}">
     审核未通过原因：{{note}}
   </view> -->
@@ -127,11 +135,14 @@
       <text>自我介绍</text>
     </view>
   </view>
+  <view class="cardcolore">
   <view class="introcardtwo" wx:if="{{introshow}}">
     <!-- <image class="checkone" src="../../../images/audit.png" wx:if="{{checkone}}"></image> -->
     <view class="introcontent">{{introduce}}</view>
     <view class="cardotextbottom"></view>
   </view>
+  </view>
+
   <view wx:if="{{!introshow}}" class="jilu">暂无记录</view>
 
   <view class="cardfive">
@@ -141,6 +152,7 @@
       <text>项目经验</text>
     </view>
   </view>
+    <view class="cardcolore">
   <view class="cardsix" wx:if="{{projectlength != 0}}">
 
     <view class="cardsixzong" wx:for="{{projectone}}" wx:for-index="pindex" wx:key="{{index}}">
@@ -187,6 +199,7 @@
     <view class="cardsixsixallvoto">
     </view>
   </view>
+    </view>
   <view wx:if="{{projectlength == 0}}" class="jilu">
     暂无记录
   </view>
@@ -197,6 +210,7 @@
       <text>职业技能</text>
     </view>
   </view>
+  <view class="cardcolore">
   <view class="cardeight" wx:if="{{skilllength != 0}}">
     <view class="cardeightzong" wx:for="{{skillbooksone}}" wx:for-index="pindex" wx:key="{{index}}">
       <image class="checkfour" src="{{audit}}" wx:if="{{item.check==1}}"></image>
@@ -232,6 +246,7 @@
     <view class="cardsixsixallvoto">
     </view>
   </view>
+    </view>
   <view wx:if="{{skilllength == 0}}" class="jiluone">
     暂无记录
   </view>

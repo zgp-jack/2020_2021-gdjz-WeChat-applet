@@ -1,7 +1,9 @@
 <!-- telephorft userComplaintAction distance -->
-<view>
+<view>  
+<view class="cardcolore">
   <view class="header">
     注:老板对找活者满意，可以直接与他联系以及点赞或转发
+  </view>
   </view>
   <view class="findingnamecardthree">
     <view class="findingnamecardthreemobile">
@@ -10,7 +12,7 @@
     </view>
   </view>
 
-
+<view class="cardcolore">
   <view class="cardtwo">
     <view class="cardonetwof">
       <view class="cardtwosonone">
@@ -109,7 +111,7 @@
       <view class="cardotextbottom"></view>
     </view>
   </view>
-
+  </view>
 
   <view class="cardthree">
     <view class="cardthreemobile">
@@ -117,11 +119,13 @@
       <text>自我介绍</text>
     </view>
   </view>
+  <view class="cardcolore">
   <view class="introcardtwo" wx:if="{{introshow}}" >
 
     <view class="introcontent">{{introduce}}</view>
     <view class="cardotextbottom"></view>
   </view>
+    </view>
   <view wx:if="{{!introshow}}" class="jilu">暂无记录</view>
 
   <view class="cardfive">
@@ -130,6 +134,7 @@
       <text>项目经验</text>
     </view>
   </view>
+    <view class="cardcolore">
   <view class="cardsix" wx:if="{{projectlength!= 0}}">
     <view class="cardsixzong" wx:for="{{projectone}}" wx:for-index="pindex" wx:key="{{index}}">
       <view>
@@ -167,6 +172,7 @@
     <view class="cardsixsixallvoto">
     </view>
   </view>
+    </view>
   <view wx:if="{{projectlength == 0}}" class="jilu">
     暂无记录
   </view>
@@ -177,6 +183,7 @@
       <text>职业技能</text>
     </view>
   </view>
+      <view class="cardcolore">
   <view class="cardeight {{(status != 0)?'eightstatus':''}}" wx:if="{{skilllength!= 0}}">
     <view class="cardeightzong" wx:for="{{skillbooksone}}" wx:for-index="pindex" wx:key="{{index}}">
       <view>
@@ -205,6 +212,7 @@
     <view class="cardsixsixallvoto">
     </view>
   </view>
+    </view>
   <view wx:if="{{skilllength == 0}}" class="jiluone">
     暂无记录
   </view>

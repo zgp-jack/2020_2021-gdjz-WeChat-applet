@@ -61,6 +61,8 @@ page {
   margin-top: 20rpx;
   padding-left: 27rpx;
   padding-right: 27rpx;
+  background: white;
+
 }
 
 .findingnamecardoneson {
@@ -396,8 +398,13 @@ height: 26rpx;
   width: 100%;
   padding-left: 27rpx;
   padding-right: 27rpx;
+    background: white;
 }
 
+.cardcolore{
+  background: white;
+    position: relative;
+}
 .cardone .cardoneson {
   width: 100%;
   background-color: white;
@@ -510,9 +517,11 @@ height: 26rpx;
   color: #09f;
   line-height: 88rpx;
   position: relative;
-  right: 12rpx;
 }
-
+.cardcoloreno{
+  background: #fffbf7;
+  position: relative;
+}
 .cardotext {
   position: relative;
   width: 100%;
@@ -705,10 +714,11 @@ height: 26rpx;
   width: 93%;
   margin: 0 auto;
   background-color: white;
-  position: relative;
+  /* position: relative; */
 }
 
 .cardsixzong {
+
   display: flex;
   flex-direction: row;
 }
@@ -717,7 +727,7 @@ height: 26rpx;
   width: 20rpx;
   height: 20rpx;
   margin-left: 20rpx;
-  margin-top: 20rpx;
+  margin-top: 30rpx;
 }
 
 .cardsixzong .cardsixtwo {
@@ -725,7 +735,8 @@ height: 26rpx;
   font-size: 30rpx;
   font-weight: bold;
   margin-left: 14rpx;
-  margin-top: 10rpx;
+   margin-top: 20rpx;
+
 }
 
 .cardsixzong .cardsixthree {
@@ -807,7 +818,8 @@ height: 26rpx;
   color: #09f;
   position: absolute;
   top: 29rpx;
-  right: 29rpx;
+  right: 26rpx;
+
 }
 
 .cardseven {
@@ -846,7 +858,6 @@ height: 26rpx;
   width: 93%;
   margin: 0 auto;
   background-color: white;
-  position: relative;
   /* margin-bottom: 100rpx; */
 }
 
@@ -859,14 +870,15 @@ height: 26rpx;
   width: 20rpx;
   height: 20rpx;
   margin-left: 20rpx;
-  margin-top: 20rpx;
+  margin-top: 30rpx;
+
 }
 
 .cardeightzong .cardeighttwo {
   color: #343434;
   font-size: 30rpx;
   margin-left: 14rpx;
-  margin-top: 10rpx;
+  margin-top: 20rpx;
 }
 
 .cardeightzong .cardeighttwo text:first-child {
@@ -1021,7 +1033,7 @@ height: 26rpx;
 .contentone {
   font-size: 30rpx;
   color: #797979;
-  margin-left: 6.5%;
+  margin-left: 7.5%;
   margin-bottom: 8rpx;
   padding-right: 2%;
   word-wrap: break-word;
@@ -1061,7 +1073,7 @@ height: 26rpx;
   margin-bottom: 6rpx; */
   text-align: justify;
   position: relative;
-  margin-left: 46rpx;
+  margin-left: 52rpx;
 }
 
 .cardotext .oworkotext::after {
@@ -1252,7 +1264,7 @@ height: 26rpx;
   height: 100rpx;
   position: absolute;
   top: 10rpx;
-  right: 21rpx;
+  right: 45rpx;
   z-index: 99;
 }
 
@@ -1261,17 +1273,19 @@ height: 26rpx;
   height: 100rpx;
   position: absolute;
   top: 10rpx;
-  right: 21rpx;
+  right: 45rpx;
   z-index: 99;
 }
 
 .audit {
   display: inline-block;
-  width: 113rpx;
-  height: 113rpx;
+  width: 135rpx;
+  height: 130rpx;
   position: absolute;
   top: 0;
   left: 0;
+  z-index: 100;
+
 }
 
 .resson {
@@ -1467,7 +1481,7 @@ height: 26rpx;
   font-size: 30rpx;
   text-align: justify;
   position: absolute;
-  margin-left: 46rpx;
+  margin-left: 52rpx;
 }
 .cworkotype .ocworkotypeoo{
   padding-right: 30rpx;

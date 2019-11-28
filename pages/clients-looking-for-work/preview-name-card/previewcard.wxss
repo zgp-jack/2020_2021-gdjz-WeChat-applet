@@ -92,8 +92,8 @@
 
 .introcontent {
   margin-top: 21rpx;
-  margin-left: 50rpx;
-  margin-right: 50rpx;
+  margin-left: 54rpx;
+  margin-right: 54rpx;
   word-break: break-all;
   font-size: 30rpx;
 }
