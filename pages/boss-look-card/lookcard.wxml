@@ -254,6 +254,7 @@
       </view>
     </view>
   </view>
+  <image class="info-shareimg" src="{{homebtnImg}}"  wx:if="{{!sharedeke}}" bindtap='returnindex' ></image>
   <view class="common-userauth" wx:if="{{ !userInfo }}">
     <image src='{{ icon }}' class='userauth-topicon'></image>
     <view class='userauth-title'>登录鱼泡网</view>

@@ -5,8 +5,9 @@ Page({
 
   /** showComplain telephorft personnum   age workingyears personnum workingyears
    * 页面的初始数据 moreskill projectone occupations introduce telephorft showThisMapInfo onoff
-   telephorft nation age fenxiang introshow  praise returnindex */
+   telephorft nation age fenxiang introshow  praise returnindex sharedeke returnindex*/
   data: {
+    homebtnImg: app.globalData.apiImgUrl + "newdetailinfo-home.png",
     newresumeskill: app.globalData.apiImgUrl + "lpy/newresume-skill.png",
     downward: app.globalData.apiImgUrl + "lpy/downward.png",
     experienceitem: app.globalData.apiImgUrl + "lpy/newresume-experience-item.png",
@@ -586,7 +587,7 @@ Page({
     })
   },
   returnindex() {
-    wx.navigateTo({
+    wx.reLaunch({
       url: '/pages/index/index',
     })
   },
