@@ -8,7 +8,7 @@ Page({
 
   /** 
    * 页面的初始数据 nation view_num perfection addskill fail_certificate app.globalData.allexpress 
-   * newresume-experience.png audit.png baseinform headerimg uuid age chooseImage onShareAppMessage
+   * newresume-experience.png audit.png baseinform headerimg uuid age chooseImage onShareAppMessage checkfourf
    */
   data: {
     baseinform: app.globalData.apiImgUrl + "lpy/jichu.png",
@@ -476,14 +476,16 @@ Page({
                 checkfourf: mydata.certificates[i].check
               })
             }
+
             if (mydata.certificates[i].check == 0) {
               that.setData({
                 checkfour: false,
                 checkfourf: mydata.certificates[i].check
               })
+
               break
             }
-            if (mydata.certificates[i].check == 1) {
+            if (mydata.certificates[i].check == 2) {
               that.setData({
                 checkfour: true,
                 checkfourf: mydata.certificates[i].check
