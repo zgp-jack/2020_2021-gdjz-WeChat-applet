@@ -70,18 +70,21 @@ page{
   right:0;
   top: 0;
 }
+
+
+.cliok text{
+  padding: 4rpx 10rpx;
+  border-radius: 6rpx;
+  margin-right: 15rpx;
+}
 .cliok text:last-child {
   background: red;
-  padding: 6rpx;
-  border-radius: 6rpx;
-  /* margin-right: 24rpx; */
+  margin-right: 0;
 }
 
 .cliok text:first-child {
   background: #09f;
-  padding: 6rpx;
-  border-radius: 6rpx;
-  margin-right: 15rpx;
+  
 }
 .cliokine {
     position: absolute;
@@ -90,7 +93,7 @@ page{
 }
 .cliokine text:last-child {
   background: red;
-  padding: 6rpx;
+  padding: 6rpx 10rpx;
   border-radius: 6rpx;
   margin-right: 24rpx;
 }

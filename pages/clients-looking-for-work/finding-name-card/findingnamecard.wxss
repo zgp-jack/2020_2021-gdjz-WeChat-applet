@@ -994,6 +994,7 @@ height: 26rpx;
   width: 1px;
   height: 100%;
   background: #dcdcdc;
+  transform: scaleX(0.5);
 }
 
 /* .cardotext {
@@ -1490,12 +1491,15 @@ height: 26rpx;
   color: #414141;
   font-size: 30rpx;
   display: inline-block;
-  padding-left: 6rpx;
-  padding-right: 6rpx;
+  padding: 0 10rpx;
   text-align: center;
   margin-right: 17rpx;
   margin-bottom: 8rpx;
   background: rgb(238, 237, 237);
+  border-radius: 3rpx;
+}
+.ocworkotyp .ocworkotyptu:nth-last-child(1){
+  margin-right: 0;
 }
 .ocworkotyp  .oimg{
     color: #7A7A7A;
