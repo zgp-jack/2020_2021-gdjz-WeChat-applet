@@ -119,7 +119,7 @@
   margin-bottom: 17rpx;
 }
 .listsboxlable view{
-  background: rgb(238, 238, 238);
+  background:#F4F4F4;
   padding: 3rpx;
   color: #9A9A9A;
   display: inline-block;
@@ -129,13 +129,15 @@
     font-size: 28rpx;
     margin-left: 10rpx;
     margin-top: 10rpx;
+    padding: 3rpx 10rpx;
+    border-radius: 4rpx;
 }
 .listsboxself{
    width: 91%;
    margin: 0 auto;
    font-size: 28rpx;
    color: #828586;
-   border-bottom: 0.5px dashed #9A9A9A;
+   border-bottom: 1rpx dashed #9A9A9A;
    padding-bottom: 14rpx;
     display:block;           /*  内联对象需加  */
     word-break:keep-all;    /* 不换行 */
@@ -195,8 +197,10 @@
 .listsboxagetwot text{
   font-size: 26rpx;
   color: #0099FF;
-  padding: 4rpx;
+  padding:0 10rpx;
   border: 1px solid #0099FF;
   border-radius: 6rpx;
   margin-right: 18rpx;
+  line-height: 36rpx;
 }
+.listsboxagetwot{font-size: 0;margin-top: 6rpx;}
