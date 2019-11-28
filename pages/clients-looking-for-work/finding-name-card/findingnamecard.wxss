@@ -949,6 +949,7 @@ height: 26rpx;
   bottom: 0;
   margin-top: 18rpx;
   z-index: 7777;
+  box-shadow: 0 0 5rpx #e7e6e4;
 }
 
 .cardnine .cardnineone {
@@ -962,7 +963,6 @@ height: 26rpx;
   text-align: center;
   line-height: 91rpx;
   border-radius: 0;
-  border-top: 2px solid #ececec;
 }
 
 .cardnine .cardnineone::after {
@@ -970,7 +970,7 @@ height: 26rpx;
 }
 
 .cardnine .cardnineone:first-child {
-  border-right: 2px solid #ececec;
+  border-right: 1px solid #dcdcdc;
 }
 
 .cardnine .cardnineone image {
@@ -1109,17 +1109,17 @@ height: 26rpx;
   color: #09f;
   font-size: 26rpx;
   /* background: #E7E7E7; *//* display: inline-block; */
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding-left: 4rpx;
-  padding-right: 4rpx;
+  display: inline-block;
+  padding: 0 6rpx;
   text-align: center;
   margin-right: 17rpx;
   border-radius: 8rpx;
   border: 1px solid #09f;
+  line-height: 40rpx;
 }
-
+.labletu:nth-last-child(1){
+  margin-right: 0;
+}
 .alllabletu {
   display: flex;
   padding-left: 28rpx;
