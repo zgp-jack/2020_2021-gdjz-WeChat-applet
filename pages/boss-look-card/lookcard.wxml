@@ -7,8 +7,11 @@
   </view>
   <view class="findingnamecardthree">
     <view class="findingnamecardthreemobile">
+    <view>
+      <image src="{{baseinform}}"></image> 
+         <text>基础信息</text>
       <image src="{{baseinform}}"></image>
-      基础信息
+    </view>
     </view>
   </view>
 
@@ -118,8 +121,9 @@
 
   <view class="cardthree">
     <view class="cardthreemobile">
-      <image src="{{description}}"></image>
+      <image src="{{baseinform}}"></image>
       <text>自我介绍</text>
+      <image src="{{baseinform}}"></image>
     </view>
   </view>
   <view class="cardcolore">
@@ -131,10 +135,12 @@
     </view>
   <view wx:if="{{!introshow}}" class="jilu">暂无记录</view>
 
-  <view class="cardfive">
-    <view class="cardfivemobile">
-      <image src="{{projectexperience}}"></image>
+
+  <view class="cardthree">
+    <view class="cardthreemobile">
+      <image src="{{baseinform}}"></image>
       <text>项目经验</text>
+      <image src="{{baseinform}}"></image>
     </view>
   </view>
     <view class="cardcolore">
@@ -165,12 +171,12 @@
       </view>
     </view>
     <view class="cardsixsixall">
-      <button class="cardsixsix" bindtap="moreproject">
+      <view class="cardsixsix" bindtap="moreproject">
         <view class="more">
           更多项目经验
          <view><image src="{{downward}}" class="down"></image></view>
         </view>
-      </button>
+      </view>
     </view>
     <view class="cardsixsixallvoto">
     </view>
@@ -180,10 +186,11 @@
     暂无记录
   </view>
 
-  <view class="cardseven">
-    <view class="cardsevenmobile">
-      <image src="{{newresumeskill}}"></image>
+  <view class="cardthree">
+    <view class="cardthreemobile">
+      <image src="{{baseinform}}"></image>
       <text>职业技能</text>
+      <image src="{{baseinform}}"></image>
     </view>
   </view>
       <view class="cardcolore">
@@ -205,12 +212,12 @@
       </view>
     </view>
     <view class="cardeightsixall">
-      <button class="cardeightsix" bindtap="moreskill">
+      <view class="cardeightsix" bindtap="moreskill">
         <view class="more">
           更多技能证书
-         <view><image src="{{downward}}" class="down"></image></view>
+         <view><image src="{{downward}}" class="down"></image></view> 
         </view>
-      </button>
+      </view>
     </view>
     <view class="cardsixsixallvoto">
     </view>

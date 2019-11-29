@@ -9,7 +9,7 @@ Page({
   data: {
     footerActive: "member",
     nodataImg: app.globalData.apiImgUrl + "nodata.png",
-    finded: app.globalData.apiImgUrl + "lpy/finded.png",
+    finded: app.globalData.apiImgUrl + 'newlist-jobfindend.png', //已找到
     isFirstRequest: true,
     page: 1,
     lists: [],

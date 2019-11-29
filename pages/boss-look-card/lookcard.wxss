@@ -1,6 +1,6 @@
 @import "../clients-looking-for-work/finding-name-card/findingnamecard.wxss";
 
-/* # workotextone cardeight  cliokine bossbottomo bossbottomo .jiluone .distancec .cardsixzong .cardsixfour distancec .cardnine allone #797979 alllabletu tagsone*/
+/* # workotextone cardeight  cliokine bossbottomo bossbottomo .jiluone .distancec .cardsixzong .cardsixfour distancec .cardnine allone #797979 alllabletu tagsone findingnamecardthreemobile*/
 
 @import "../userauth/userauth.wxss";
 .common-userauth{position: fixed;left: 0;top: 0;z-index:999999;width:100%;height: 100%;background: white;}
@@ -110,7 +110,7 @@ page{
   color: #7d7d7d;
   text-align: center;
   margin-top: 19rpx;
-  padding-left: 18rpx;
+
 }
 
 .jiluone {
@@ -118,7 +118,7 @@ page{
   color: #7d7d7d;
   text-align: center;
   margin-top: 19rpx;
-  padding-left: 18rpx;
+
   margin-bottom: 108rpx;
 }
 
@@ -240,6 +240,23 @@ font-size: 30rpx;
 padding-left: 28rpx;
 width: 100%;
 
+}
+.findingnamecardthreemobile text{
+   padding: 0 16rpx;
+}
+.cardthree .cardthreemobile{
+font-weight: bold;
+position: static;
+height: 30rpx !important;
+display: flex;
+justify-content: center;
+left: 0%;
+margin-left: 0%;
+line-height: 30rpx;
+
+}
+.cardthreemobile text{
+     padding: 0 16rpx;
 }
 .info-shareimg{position: fixed;width: 100rpx;height: 100rpx;line-height: 140rpx;text-align: center;font-size:30rpx;color: #0099ff;border-radius: 50%;box-shadow: 0 0 5px #0099ff;right: 27rpx;top: 800rpx;z-index: 10;background: white;overflow: hidden;font-weight: bold;letter-spacing: 1px;border:none;padding: 0;  }
 .info-shareimg::after{border:0;}
