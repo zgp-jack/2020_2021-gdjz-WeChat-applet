@@ -283,13 +283,13 @@
     </view>
     <view class="cardsixsixall">
       <view class="cardsixsix" bindtap="moreproject">
-        <view wx:if="{{checkthreef != 0}}">
+        <view wx:if="{{checkthreef != 0}}" class="more">
           更多项目经验
-          <image src="{{downward}}" class="down"></image>
+          <view><image src="{{downward}}" class="down"></image></view>
         </view>
-        <view wx:if="{{checkthreef == 0}}">
+        <view wx:if="{{checkthreef == 0}}" class="more">
           修改项目经验
-          <image src="{{downward}}" class="down"></image>
+          <view><image src="{{downward}}" class="down"></image></view>
         </view>
         <view wx:if="{{checkthreef == 0}}" class="cardsixsixnum">
           <text>{{fail_project}}</text>
@@ -352,13 +352,13 @@
     </view>
     <view class="cardeightsixall">
       <view class="cardeightsix" bindtap="moreskill">
-        <view wx:if="{{checkfourf != 0}}">
-          更多技能证书
-          <image src="{{downward}}" class="down"></image>
+        <view wx:if="{{checkfourf != 0}}" class="more">
+            更多技能证书
+         <view><image src="{{downward}}" class="down"></image></view> 
         </view>
-        <view wx:if="{{checkfourf == 0}}">
+        <view wx:if="{{checkfourf == 0}}" class="more">
           修改技能证书
-          <image src="{{downward}}" class="down"></image>
+          <view><image src="{{downward}}" class="down"></image></view> 
         </view>
         <view wx:if="{{checkfourf == 0}}" class="cardeightsixnum">
           <text>{{fail_certificate}}</text>

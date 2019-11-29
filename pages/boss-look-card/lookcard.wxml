@@ -163,9 +163,9 @@
     </view>
     <view class="cardsixsixall">
       <button class="cardsixsix" bindtap="moreproject">
-        <view>
+        <view class="more">
           更多项目经验
-          <image src="{{downward}}" class="down"></image>
+         <view><image src="{{downward}}" class="down"></image></view>
         </view>
       </button>
     </view>
@@ -203,9 +203,9 @@
     </view>
     <view class="cardeightsixall">
       <button class="cardeightsix" bindtap="moreskill">
-        <view>
+        <view class="more">
           更多技能证书
-          <image src="{{downward}}" class="down"></image>
+         <view><image src="{{downward}}" class="down"></image></view>
         </view>
       </button>
     </view>
