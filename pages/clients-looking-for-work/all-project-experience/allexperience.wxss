@@ -180,16 +180,15 @@
 }
 
 .obtn {
-  width: 418rpx;
-  height: 47rpx;
+  width: 50%;
   margin: 0 auto;
   margin-top: 43rpx;
   background: #09f;
   text-align: center;
-  line-height: 47rpx;
-  font-size: 24rpx;
+  line-height: 60rpx;
+  font-size: 26rpx;
   color: white;
-  border-radius: 20rpx;
+  border-radius: 5px;
   margin-bottom: 43rpx;
 }
 
