@@ -229,7 +229,8 @@ page{
 }
 .workotextone{
   font-size: 30rpx;
-    color: #797979
+    color: #797979;
+    padding-left: 5rpx;
 }
 .eightstatus{
   margin-bottom: 60rpx;

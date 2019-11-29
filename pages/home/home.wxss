@@ -1,5 +1,7 @@
 /* @import "../findingworkinglist/findingworkinglist.wxss"; index-pullareabox-active index-pullareabox */
-
+.listsoverhl{
+  overflow: hidden;
+}
 .index-yupao-header{
     position: relative;
     width: 100%;
@@ -609,7 +611,6 @@
 .listsboxdetail {
   width: 100%;
   background: white;
-  overflow: hidden;
   margin-top: 12rpx;
   position: relative;
 }
@@ -620,7 +621,7 @@
   height: 40rpx;
   position: absolute;
   right: 0;
-  top: 0;
+  top: -7rpx;
 }
 
 .oimg {
@@ -636,6 +637,7 @@
   height: 92rpx;
   margin: 0 auto;
   margin-top: 30rpx;
+  margin-bottom: 10rpx;
   display: flex;
   flex-direction: row;
   justify-content: space-between;

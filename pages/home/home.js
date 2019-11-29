@@ -1,4 +1,5 @@
-// infolists errImg showArea  areadata areadata
+
+// infolists errImg showArea  areadata areadata  certificate
 let footerjs = require("../../utils/footer.js");
 let areas = require("../../utils/area.js");
 const app = getApp();
