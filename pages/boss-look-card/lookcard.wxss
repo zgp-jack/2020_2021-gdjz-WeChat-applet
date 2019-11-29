@@ -123,7 +123,7 @@ page{
 }
 
 .introcardtwo {
-  width: 93%;
+  width: 100%;
   margin: 0 auto;
   background: white;
   overflow: hidden;
@@ -225,18 +225,18 @@ page{
 }
 .tagsone{
   font-size: 30rpx;
-    color: black;
+    color: #222;
 }
 .workotextone{
   font-size: 30rpx;
-    color: black;
+    color: #222;
     padding-left: 5rpx;
 }
 .eightstatus{
   margin-bottom: 60rpx;
 }
 .cardotext .zong{
-  color: black;
+  color: #222;
 font-size: 30rpx;
 padding-left: 28rpx;
 width: 100%;
