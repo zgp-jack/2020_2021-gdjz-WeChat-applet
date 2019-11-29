@@ -113,6 +113,9 @@
   </view>
   </view>
 
+  <ad  class="lists-ad" unit-id="{{ unitid }}" style="margin-top:15rpx;"></ad>
+  
+
   <view class="cardthree">
     <view class="cardthreemobile">
       <image src="{{description}}"></image>

@@ -7,6 +7,7 @@ Page({
    * 页面的初始数据 moreskill projectone occupations introduce telephorft showThisMapInfo onoff
    telephorft nation age fenxiang introshow  praise returnindex sharedeke returnindex*/
   data: {
+    unitid: app.globalData.unitid,
     homebtnImg: app.globalData.apiImgUrl + "newdetailinfo-home.png",
     newresumeskill: app.globalData.apiImgUrl + "lpy/newresume-skill.png",
     downward: app.globalData.apiImgUrl + "lpy/downward.png",
