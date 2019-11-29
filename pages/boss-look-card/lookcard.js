@@ -44,7 +44,7 @@ Page({
     procity: "未填写",
     personnum: "未填写",
     tags: "未填写",
-    headerimg: "../../../images/hearding.png",
+    headerimg: "",
     selectk: [],
     selectkone: "",
     selectShow: false, //控制下拉列表的显示隐藏，false隐藏、true显示
