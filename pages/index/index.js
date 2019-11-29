@@ -1,4 +1,4 @@
-// pages/lists/lists. showListsType userChooseProvince /geocode/regeo ref
+// pages/lists/lists. bindInputFocus /geocode/regeo ref userLocation userChooseProvince
 const app = getApp();
 let footerjs = require("../../utils/footer.js");
 let areas = require("../../utils/area.js");
@@ -892,7 +892,7 @@ Page({
     },
   
     /**
-     * 用户点击右上角分享 工地急招 gpsPorvince closeAllSelect
+     * 用户点击右上角分享 工地急招 gpsPorvince closeAllSelect firstJoin
      */
     onShareAppMessage: function () {
         //this.userShareAction();

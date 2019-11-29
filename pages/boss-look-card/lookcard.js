@@ -293,6 +293,7 @@ Page({
         userId: null
       }
     }
+
     let detail = {
       userId: userInfo.userId,
       resume_uuid: option.uuid,
@@ -344,9 +345,15 @@ Page({
             })
           }
           if (mydata.info.birthday) {
+            if (dateone.getFullYear() - (mydata.info.birthday.split("-")[0] - 0) == 0){
+              that.setData({
+                age: ""
+              })
+            }else{
             that.setData({
               age: dateone.getFullYear() - (mydata.info.birthday.split("-")[0] - 0) + "岁"
             })
+            }
           }
           that.setData({
             name: mydata.info.hasOwnProperty("username") ? mydata.info.username : "",

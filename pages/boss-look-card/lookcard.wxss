@@ -189,8 +189,8 @@ page{
 }
 
 .cardtwosonone .cardtwosononeimg .oimg image {
-  height: 88rpx;
-  width: 88rpx;
+  height: 98rpx;
+  width: 98rpx;
   border-radius: 50%;
 }
 .distancev {

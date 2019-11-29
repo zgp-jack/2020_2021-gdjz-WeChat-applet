@@ -8,7 +8,7 @@ Page({
 
   /** 
    * 页面的初始数据 nation view_num perfection addskill fail_certificate app.globalData.allexpress 
-   * newresume-experience.png audit.png baseinform headerimg uuid age chooseImage onShareAppMessage checkfourf
+   * newresume-experience.png audit.png baseinform headerimg uuid age chooseImage onShareAppMessage checkfourf age
    */
   data: {
     baseinform: app.globalData.apiImgUrl + "lpy/jichu.png",
@@ -515,7 +515,7 @@ Page({
           }
           if (mydata.info.birthday) {
             that.setData({
-              age: dateone.getFullYear() - (mydata.info.birthday.split("-")[0] - 0)
+              age: dateone.getFullYear() - (mydata.info.birthday.split("-")[0] - 0) + "岁"
             })
           }
           that.setData({

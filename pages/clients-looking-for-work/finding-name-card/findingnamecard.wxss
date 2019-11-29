@@ -486,12 +486,11 @@ height: 26rpx;
   width: 400rpx;
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
 }
 
 .cardtwosonone .cardtwosononeimg .oimg {
-  height: 88rpx;
-  width: 88rpx;
+  height: 98rpx;
+  width: 98rpx;
   border-radius: 50%;
   margin-left: 14rpx;
 }
@@ -503,7 +502,9 @@ height: 26rpx;
 }
 
 .cardtwosonone .cardtwosononeimg  .oimgone {
-  width: 280rpx;
+
+  padding-left: 6px;
+
 }
 
 .cardtwosonone .cardtwosononeimg  .oimgone .otext {
@@ -515,10 +516,12 @@ height: 26rpx;
 .cardtwosonone .cardtwosononeimg .oimgone .otextone {
   font-size: 30rpx;
   color: black;
+  margin-top: 6rpx;
+
 }
 
 .cardtwosonone .cardtwosononeimg .oimgone .otextone .ochange {
-  margin-left: 6rpx;
+  margin-left: 12rpx;
 }
 
 .cardtwo .cardtwosontwo {
@@ -1461,6 +1464,7 @@ height: 26rpx;
   margin-top: 12rpx;
   padding-left: 190rpx;
   min-height: 30rpx;
+  margin-bottom: -12rpx;
 }
 
 .cworkotype::before {
@@ -1479,7 +1483,6 @@ height: 26rpx;
   width: 20.5%;
   left: 0;
   top: 0;
-  line-height: 50rpx;
   display: inline-block;
   color: #555;
   font-size: 30rpx;
@@ -1517,13 +1520,12 @@ height: 26rpx;
   color: rgba(42, 42, 42, 1);
   font-size: 28rpx;
   display: inline-block;
-  padding: 0 10rpx;
+  padding: 4rpx 10rpx;
   text-align: center;
   margin-right: 17rpx;
   margin-bottom: 8rpx;
   background: rgba(238, 237, 239, 1);
   border-radius: 6rpx;
-  line-height: 50rpx;
 }
 .ocworkotyp .ocworkotyptu:nth-last-child(1){
   margin-right: 0;

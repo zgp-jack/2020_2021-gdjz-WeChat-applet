@@ -4,7 +4,8 @@ App({
     //   if (e.path) this.initUserInfo(e); valiUserUrl gpsOrientation userLocation
     // }
     // catch(err){bindGetUserInfo gotoUserauth 工地急招 gpsPorvince userLocation
-    //   bindGetUserInfo allTypes appRequestAction allTypes
+    //   bindGetUserInfo allTypes pmap userLocFun showDetailInfo
+
   },
   globalData: {
     authcode:false,
@@ -595,10 +596,12 @@ App({
     let formId = e.detail.formId;
     let id = e.currentTarget.dataset.id;
     let type = e.currentTarget.dataset.type;
+
     let url = (type == "job") ? '/pages/detail/info/info?id=' : `/pages/boss-look-card/lookcard?uuid=${uuid}&location=${userLocation}`
     wx.navigateTo({
       url: url + id
     })
+
     if (!uinfo) return false;
 
     if (formId == "requestFormId:fail timeout") return false;

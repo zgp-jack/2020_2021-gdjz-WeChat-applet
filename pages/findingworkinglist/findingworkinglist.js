@@ -1,4 +1,4 @@
-//userTapSearch persondetail lists teamindex resumes/index/ errImg teamText fillterType persondetail authentication  teamText fillterArea fillterType  errImg teamText fillterTeam recommended typeText userChooseNewest fillterNewest
+//userTapSearch persondetail lists teamindex resumes/index/ errImg teamText fillterType persondetail authentication  teamText fillterArea fillterType  errImg teamText fillterTeam recommended typeText userChooseNewest fillterNewest showDetailInfo showDetailInfo
 const app = getApp(); 
 let footerjs = require("../../utils/footer.js");
 let areas = require("../../utils/area.js");
@@ -103,10 +103,6 @@ Page({
     historyList: [],
   },
 
-  showDetailInfo: function (e) {
-    let uinfo = this.data.userInfo;
-    app.showDetailInfo(e, uinfo);
-  },
   stopThisAction: function () {
     return false;
   },
@@ -660,9 +656,18 @@ Page({
 
 
   showDetailInfo: function (e) {
-    console.log(e)
-    let uinfo = this.data.userInfo;
-    app.showDetailInfo(e, uinfo);
+   
+    let uuid = e.currentTarget.dataset.uuid
+    let userLocation = wx.getStorageSync("userLocation")
+    if (!userLocation) {
+      userLocation = ""
+    } else {
+      userLocation = userLocation.split(",").reverse().join(",")
+    }
+
+    wx.navigateTo({
+      url: `/pages/boss-look-card/lookcard?uuid=${uuid}&location=${userLocation}`
+    })
   },
 
   persondetail(e) {

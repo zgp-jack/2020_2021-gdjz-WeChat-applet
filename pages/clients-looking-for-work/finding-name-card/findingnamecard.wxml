@@ -78,7 +78,7 @@
               <text class="otext">{{name}}</text>
               <view class="otextone">
                 <text>{{sex}}</text>
-                <text class="ochange" wx:if="{{age}}">{{age}}岁</text>
+                <text class="ochange" wx:if="{{age}}">{{age}}</text>
                 <text class="ochange">{{nation}}</text>
               </view>
             </view>
