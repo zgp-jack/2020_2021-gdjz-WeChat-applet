@@ -1,4 +1,4 @@
-//userTapSearch persondetail lists teamindex resumes/index/ errImg teamText fillterType persondetail authentication  teamText fillterArea fillterType  errImg teamText fillterTeam
+//userTapSearch persondetail lists teamindex resumes/index/ errImg teamText fillterType persondetail authentication  teamText fillterArea fillterType  errImg teamText fillterTeam recommended typeText userChooseNewest fillterNewest
 const app = getApp(); 
 let footerjs = require("../../utils/footer.js");
 let areas = require("../../utils/area.js");
@@ -81,8 +81,8 @@ Page({
     lists: [],
     areaText: "选择城市",
     typeText: "选择工种",
-    teamText: "全部",
-    recommended: "最新",
+    teamText: "人员构成",
+    recommended: "推荐",
     showNothinkData: false,
     nothavemore: false,
     showMyLoading: false,

@@ -686,6 +686,7 @@ Page({
                     app.globalData.userInfo = _this.data.userInfo;
                     wx.setStorageSync('userInfo', _this.data.userInfo)
                 } else if (mydata.errcode == "fail") {
+                  console.log(mydata.errmsg)
                     app.showMyTips(mydata.errmsg);
                     _this.setData({
                         userInfo: false

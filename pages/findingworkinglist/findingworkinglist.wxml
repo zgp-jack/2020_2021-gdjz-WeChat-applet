@@ -1,6 +1,6 @@
 <!-- listsboxlocalone -->
 <import src="/pages/footer/footer.wxml" />
-<!-- <import src="/pages/tpl/app/app.wxml"/> doSearchRequestAction user-choose-item user-choose-item-active  jumpThisLink overwords  stopThisAction showListsType listsboxnation -->
+<!-- <import src="/pages/tpl/app/app.wxml"/> doSearchRequestAction user-choose-item user-choose-item-active  jumpThisLink recommendteam overwords  stopThisAction showListsType listsboxnation user-choose-shade -->
 
 <!-- 搜索头部 -->
 <view class="lists-header">

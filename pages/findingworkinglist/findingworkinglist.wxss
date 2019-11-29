@@ -6,7 +6,7 @@
   width: 100%;
   background: white;
   /* overflow: hidden; */
-  margin-top: 16rpx;
+  margin-top: 15rpx;
   position: relative;
 }
 

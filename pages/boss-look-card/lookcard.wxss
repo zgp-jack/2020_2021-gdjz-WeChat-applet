@@ -137,7 +137,7 @@ page{
   margin-right: 50rpx;
   word-break: break-all;
   font-size: 30rpx;
-  color: #7A7A7A;
+  color: black;
 }
 
 .bossbottom {
@@ -208,7 +208,7 @@ page{
 
 .distancet{
   font-size: 30rpx;
-  color: #7A7A7A;
+  /* color: #7A7A7A; */
       margin-left: 4rpx;
 }
 .distanceo{
@@ -225,18 +225,18 @@ page{
 }
 .tagsone{
   font-size: 30rpx;
-    color: #797979
+    color: black;
 }
 .workotextone{
   font-size: 30rpx;
-    color: #797979;
+    color: black;
     padding-left: 5rpx;
 }
 .eightstatus{
   margin-bottom: 60rpx;
 }
 .cardotext .zong{
-  color: #7A7A7A;
+  color: black;
 font-size: 30rpx;
 padding-left: 28rpx;
 width: 100%;
