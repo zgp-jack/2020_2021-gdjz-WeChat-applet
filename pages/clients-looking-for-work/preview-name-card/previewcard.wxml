@@ -51,7 +51,7 @@
             <text class="workotextone">{{cityself}}</text>
 
           </view>
-          <view class="cworkotype">
+          <view class="cworkotype ({{occupations.length == 0?'skillcss':''}})" >
 
             <view class="ocworkotype">工种</view>
          <view class="ocworkotypeoo">

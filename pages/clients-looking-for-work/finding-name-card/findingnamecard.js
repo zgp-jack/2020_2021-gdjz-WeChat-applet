@@ -8,7 +8,7 @@ Page({
 
   /** 
    * 页面的初始数据 nation view_num perfection addskill fail_certificate app.globalData.allexpress 
-   * newresume-experience.png audit.png baseinform headerimg uuid age chooseImage onShareAppMessage checkfourf age
+   * newresume-experience.png audit.png baseinform headerimg uuid age chooseImage onShareAppMessage checkfourf age showskill
    */
   data: {
     baseinform: app.globalData.apiImgUrl + "lpy/jichu.png",

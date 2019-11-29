@@ -3,7 +3,9 @@
 .cardeight {
   margin-bottom: 60rpx;
 }
-
+.skillcss{
+  margin-bottom: 0;
+}
 .header {
   width: 93%;
   margin: 0 auto;

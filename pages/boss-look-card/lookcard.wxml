@@ -57,10 +57,10 @@
             <text class="workotextone">{{cityself}}</text>
           </view>
 
-          <view class="cworkotype" wx:if="{{occupations}}">
+          <view class="cworkotype ({{occupations.length == 0?'skillcss':''}})" wx:if="{{occupations}}">
             <view class="ocworkotype">工种</view>
             <view class="ocworkotypeoo">
-            <view class="ocworkotyp" wx:if="{{occupations != '未填写'}}">
+            <view class="ocworkotyp" wx:if="{{occupations.length!= 0}}">
               <view class="ocworkotyptu" wx:for="{{occupations}}" wx:key="{{index}}">
                 {{item}}
               </view>

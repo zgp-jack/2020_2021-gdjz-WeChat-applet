@@ -5,7 +5,7 @@ Page({
 
   /** showComplain telephorft personnum   age workingyears personnum workingyears
    * 页面的初始数据 moreskill projectone occupations introduce telephorft showThisMapInfo onoff
-   telephorft nation age fenxiang introshow  praise returnindex sharedeke returnindex*/
+   telephorft nation age fenxiang introshow  praise returnindex sharedeke returnindex occupations*/
   data: {
     unitid: app.globalData.unitid,
     homebtnImg: app.globalData.apiImgUrl + "newdetailinfo-home.png",
