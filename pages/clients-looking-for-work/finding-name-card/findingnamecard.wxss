@@ -71,7 +71,7 @@ page {
   padding-left: 27rpx;
   padding-right: 27rpx;
   background: white;
-
+  box-shadow: 0 0 1rpx #e7e6e4;
 }
 
 .findingnamecardoneson {
@@ -407,12 +407,14 @@ height: 26rpx;
   width: 100%;
   padding-left: 27rpx;
   padding-right: 27rpx;
-    background: white;
+  background: white;
+  box-shadow: 0 0 1rpx #e7e6e4;
 }
 
 .cardcolore{
   background: white;
     position: relative;
+    box-shadow: 0 0 1rpx #e7e6e4;
 }
 .cardone .cardoneson {
   width: 100%;

@@ -8,6 +8,7 @@
   /* overflow: hidden; */
   margin-top: 15rpx;
   position: relative;
+  box-shadow: 0 0 5rpx #e7e6e4;
 }
 
 
