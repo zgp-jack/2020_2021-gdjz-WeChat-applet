@@ -3,7 +3,7 @@
     <image class="audit" wx:if="{{item.check == 1}}" src="{{inreview}}"></image>
     <image class="audit" wx:if="{{item.check == 0}}" src="{{notthrough}}"></image>
     <view class="editor" bindtap="editor" data-uid="{{item}}" wx:if="{{ item.check == 2}}">编辑</view>
-    <view class="editor" bindtap="editor" data-uid="{{item}}" wx:if="{{item.check == 0}}">待修改</view>
+    <view class="editorone" bindtap="editor" data-uid="{{item}}" wx:if="{{item.check == 0}}">待修改</view>
     <view class="skilleightzong">
       <view>
         <image src="{{experienceitem}}" class="skilleightone"></image>

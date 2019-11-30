@@ -5,7 +5,7 @@ Page({
 
   /** showComplain telephorft personnum   age workingyears personnum workingyears
    * 页面的初始数据 moreskill projectone occupations introduce telephorft showThisMapInfo onoff
-   telephorft nation age fenxiang introshow  praise returnindex sharedeke returnindex occupations*/
+   telephorft nation age fenxiang introshow  praise returnindex sharedeke returnindex occupations showThisMapInfo */
   data: {
     unitid: app.globalData.unitid,
     homebtnImg: app.globalData.apiImgUrl + "newdetailinfo-home.png",
@@ -133,7 +133,7 @@ Page({
       wx.openLocation({
         latitude: parseFloat(locArr[1]),
         longitude: parseFloat(locArr[0]),
-        address: this.data.city,
+        name: this.data.city,
         scale: 18
       })
     }
@@ -335,7 +335,7 @@ Page({
             })
             wx.setStorageSync("uuid", mydata.info.uuid)
           }
-          if (mydata.info.gender != "0") {
+          if (mydata.info.gender != "0" && mydata.info.gender) {
             that.setData({
               sex: mydata.info.gender == "1" ? "男" : "女"
             })
@@ -450,6 +450,7 @@ Page({
             }
           })
         }
+        console.log(that.data.location)
       },
       fail: function (err) {
         let that = this;
@@ -658,6 +659,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    console.log(options)
     this.getdetail(options);
   },
 

@@ -110,7 +110,7 @@ Page({
     })
   },
   birthday(e) {
-    console.log(e.detail.value)
+    
     this.setData({
       birthday: e.detail.value
     })
@@ -172,13 +172,13 @@ Page({
             title: '是否授权当前位置',
             content: '需要获取您的地理位置，请确认授权，否则将不能为你自动推荐位置',
             success: function (res) {
-              console.log(res)
+              
               if (res.cancel) {
               } else if (res.confirm) {
                 //village_LBS(that);
                 wx.openSetting({
                   success: function (data) {
-                    console.log(data);
+                    
                     if (data.authSetting["scope.userLocation"] == true) {
                       wx.showToast({
                         title: '授权成功',
@@ -215,8 +215,8 @@ Page({
   getlocationdetails() { //所在地区的位置
     let historyregionone = wx.getStorageSync("historyregionone");
     let provincelocal = wx.getStorageSync("provincelocal");
-    console.log(historyregionone)
-    console.log(provincelocal)
+    
+    
     if (historyregionone) {
       this.setData({
         regionone: historyregionone.hasOwnProperty("title")? historyregionone.title:"",
@@ -243,7 +243,7 @@ Page({
       failTitle: "操作失败，请稍后重试！",
       success(res) {
         if (res.errMsg == "request:ok") {
-          console.log(res)
+          
           let nationalarray = [];
           let alllabel = [];
           let typeworkarray = [];
@@ -268,7 +268,7 @@ Page({
           that.setData({
             typeworkarray: res.data.occupation
           })
-          console.log(that.data.typeworkarray)
+          
 
           for (let i = 0; i < that.data.typeworkarray.length; i++) {
             for (let j = 0; j < that.data.typeworkarray[i].children.length; j++) {
@@ -285,7 +285,7 @@ Page({
             arrayone: res.data.gender
           })
           that.getintrodetail()
-          console.log(that.data.arrayone)
+          
         }
 
       },
@@ -314,8 +314,8 @@ Page({
   userClickItem: function (e) {
     let that = this;
     let ce = false;
-    console.log(e)
-    console.log(e.currentTarget.dataset.id)
+    
+    
 
     for (let i = 0; i < this.data.typeworkarray.length; i++) {
       for (let j = 0; j < this.data.typeworkarray[i].children.length; j++) {
@@ -357,7 +357,7 @@ Page({
     this.setData({
       typeworkarray: this.data.typeworkarray
     })
-    console.log(this.data.complexwork)
+    
   },
 
   typeworktwo() {
@@ -411,7 +411,7 @@ Page({
     Object.assign(tele, userInfo, {
       tel: this.data.telephone - 0,
     })
-    console.log(tele)
+    
     app.appRequestAction({
       url: "index/get-code/",
       way: "POST",
@@ -437,7 +437,7 @@ Page({
     let userInfo = wx.getStorageSync("userInfo");
     if (!userInfo) return false;
     let worktype = "";
-    console.log(this.data.complexworkid)
+    
     for (let i = 0; i < this.data.complexworkid.length; i++) {
       if (i == this.data.complexworkid.length - 1) {
         worktype += this.data.complexworkid[i]
@@ -541,7 +541,7 @@ Page({
       mask: true,
       failTitle: "操作失败，请稍后重试！",
       success: function (res) {
-        console.log(res)
+        
         if (res.data.errcode == 200) {
           if (app.globalData.showperfection) {
             that.setData({
@@ -573,9 +573,9 @@ Page({
   },
 
   getintrodetail() {
-    console.log(this.data.typeworkarray)
+    
     let introinfo = wx.getStorageSync("introinfo");
-    console.log(introinfo)
+    
     this.setData({
       name: introinfo.hasOwnProperty("username") ? introinfo.username : "",
       indexsex: introinfo.hasOwnProperty("gender") ? introinfo.gender - 1 : "",
@@ -609,13 +609,14 @@ Page({
         workIndexvalue: workIndexvalue
       })
     }
+  
     if (introinfo.location) {
       this.setData({
-        latitude: introinfo.hasOwnProperty("location") ? introinfo.location.split(",")[0] : ""
+        latitude: introinfo.hasOwnProperty("location") ? introinfo.location.split(",")[1] : ""
       })
 
       this.setData({
-        longitude: introinfo.hasOwnProperty("location") ? introinfo.location.split(",")[1] : ""
+        longitude: introinfo.hasOwnProperty("location") ? introinfo.location.split(",")[0] : ""
       })
     }
 
@@ -665,8 +666,8 @@ Page({
     let timeone = this.data.birthday.split("-")[0] - 0;
     let timetwo = this.data.birthday.split("-")[1] - 0;
     let timethree = this.data.birthday.split("-")[2] - 0;
-    console.log(year)
-    console.log(timeone)
+    
+    
     if (year - timeone == 18 && month - timetwo <= 0 && day - timethree < 0 || year - timeone < 18) {
       return false
     }
@@ -691,8 +692,8 @@ Page({
       beforeDate: beforeDate,
       emdDate: emdDate
     })
-    console.log(this.data.beforeDate)
-    console.log(this.data.emdDate)
+    
+    
   },
   /**
    * 生命周期函数--监听页面加载

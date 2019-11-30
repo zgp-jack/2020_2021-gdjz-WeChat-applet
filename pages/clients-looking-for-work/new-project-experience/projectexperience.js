@@ -207,7 +207,7 @@ Page({
         multiIndexvalue: that.data.allprovinces[that.data.multiIndex[0]].name + that.data.allprovinces[that.data.multiIndex[0]].children[that.data.multiIndex[1]].name
       })
     } else {
-      allpro = this.data.allprovinces[this.data.multiIndex[0]].id + "," + this.data.allprovinces[this.data.multiIndex[0]].id
+      allpro = this.data.allprovinces[this.data.multiIndex[0]].id
       this.setData({
         multiIndexvalue: that.data.allprovinces[that.data.multiIndex[0]].name
       })

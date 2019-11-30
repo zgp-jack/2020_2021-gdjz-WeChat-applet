@@ -100,9 +100,8 @@
     <view class='gainebox'>
         <block  wx:for="{{ lists }}" wx:key="{{ index }}" wx:if="{{ lists.length }}">
 
-        <view class="indxlistitem">
-          <form report-submit="true"  bindsubmit="showDetailInfo" data-id="{{ item.id }}" data-type="job">
-            <button class='lists-template-btn' form-type='submit'></button>
+        <view class="indxlistitem" bindtap="showDetailInfo"  data-id="{{ item.id }}" data-type="job">
+
             <image  wx:if="{{ (item.top == '1') }}" class="ingsasea" src="{{bring}}" mode="widthFix"></image>
             <image  wx:if="{{ (item.is_end == '2') }}" class="imgseek" src="{{doneimg}}"></image>
             <!-- 上 -->
@@ -138,7 +137,7 @@
               </view>
             </view>
 
-            </form>
+
         </view>
 
        

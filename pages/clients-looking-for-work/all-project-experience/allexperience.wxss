@@ -1,4 +1,4 @@
-/*project skilleighttwo*/
+/*project skilleighttwo editor */
 .skilleight {
   width: 93%;
   margin: 0 auto;
@@ -200,11 +200,19 @@
   right: 29rpx;
 }
 
+.editorone {
+  font-size: 30rpx;
+  color: #FB2A08;
+  position: absolute;
+  top: 29rpx;
+  right: 29rpx;
+}
+
 .resson {
   font-size: 26rpx;
   margin-top: 10rpx;
   color: #FB2A08;
-  margin-bottom: 6rpx;
+  margin-bottom: 18rpx;
 }
 .skilleightfive{
   margin-bottom: 20rpx;

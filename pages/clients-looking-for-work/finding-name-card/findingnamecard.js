@@ -504,7 +504,8 @@ Page({
             })
             wx.setStorageSync("uuid", mydata.info.uuid)
           }
-          if (mydata.info.gender != "0") {
+          if (mydata.info.gender != "0" && mydata.info.gender) {
+            console.log(123)
             that.setData({
               sex: mydata.info.gender == "1" ? "男" : "女"
             })

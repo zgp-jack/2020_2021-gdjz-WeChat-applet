@@ -4,7 +4,7 @@ App({
     //   if (e.path) this.initUserInfo(e); valiUserUrl gpsOrientation userLocation
     // }
     // catch(err){bindGetUserInfo gotoUserauth 工地急招 gpsPorvince userLocation
-    //   bindGetUserInfo allTypes pmap userLocFun showDetailInfo
+    //   bindGetUserInfo allTypes pmap userLocFun showDetailInfo showDetailInfo
 
   },
   globalData: {
@@ -583,7 +583,7 @@ App({
       fail: function() {}
     })
   },
-  showDetailInfo: function(e, uinfo) {
+  showDetailInfo: function(e) {
     let userLocation = wx.getStorageSync("userLocation")
     if (!userLocation) {
       userLocation = ""
@@ -591,9 +591,10 @@ App({
       userLocation = userLocation.split(",").reverse().join(",")
     }
 
-    let uuid = e.currentTarget.dataset.uuid
+    // let uuid = e.currentTarget.dataset.uuid
+
     let _this = this;
-    let formId = e.detail.formId;
+    // let formId = e.detail.formId;
     let id = e.currentTarget.dataset.id;
     let type = e.currentTarget.dataset.type;
 
@@ -602,43 +603,43 @@ App({
       url: url + id
     })
 
-    if (!uinfo) return false;
+    // if (!uinfo) return false;
 
-    if (formId == "requestFormId:fail timeout") return false;
-    let day = this.valiDateIsToday();
-    let tempInfo = wx.getStorageSync("tempInfo");
-    if (tempInfo) {
-      try {
-        let tday = tempInfo.day;
-        let times = parseInt(tempInfo.times);
-        if (tday == day) {
-          if (times < 1) {
-            times += 1;
-            let tempData = {
-              day: tday,
-              times: times
-            }
-            wx.setStorageSync("tempInfo", tempData)
-            _this.setTemplateInfo(formId);
-          }
-          return false;
-        } else {
-          let tempDate = {
-            day: day,
-            times: 1
-          }
-          wx.setStorageSync("tempInfo", tempDate)
-          _this.setTemplateInfo(formId);
-        }
-      } catch (err) {}
-    } else {
-      let tempDate = {
-        day: day,
-        times: 1
-      }
-      wx.setStorageSync("tempInfo", tempDate)
-      _this.setTemplateInfo(formId);
-    }
+    // if (formId == "requestFormId:fail timeout") return false;
+    // let day = this.valiDateIsToday();
+    // let tempInfo = wx.getStorageSync("tempInfo");
+    // if (tempInfo) {
+    //   try {
+    //     let tday = tempInfo.day;
+    //     let times = parseInt(tempInfo.times);
+    //     if (tday == day) {
+    //       if (times < 1) {
+    //         times += 1;
+    //         let tempData = {
+    //           day: tday,
+    //           times: times
+    //         }
+    //         wx.setStorageSync("tempInfo", tempData)
+    //         _this.setTemplateInfo(formId);
+    //       }
+    //       return false;
+    //     } else {
+    //       let tempDate = {
+    //         day: day,
+    //         times: 1
+    //       }
+    //       wx.setStorageSync("tempInfo", tempDate)
+    //       _this.setTemplateInfo(formId);
+    //     }
+    //   } catch (err) {}
+    // } else {
+    //   let tempDate = {
+    //     day: day,
+    //     times: 1
+    //   }
+    //   wx.setStorageSync("tempInfo", tempDate)
+    //   _this.setTemplateInfo(formId);
+    // }
   },
   setTemplateInfo: function(formId) {
     let data = wx.getStorageSync("userInfo") || {};

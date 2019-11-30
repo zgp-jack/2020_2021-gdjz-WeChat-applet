@@ -8,7 +8,7 @@ const amapFun = new Amap.AMapWX({ key: app.globalData.gdApiKey });
 Page({
 
     /**
-     * 页面的初始数据
+     * 页面的初始数据 showDetailInfo
      */
     data: {
         unitid: app.globalData.unitid,
@@ -131,9 +131,9 @@ Page({
       })
     },             
     showDetailInfo:function(e){
-      console.log(e)
-      let uinfo = this.data.userInfo;
-      app.showDetailInfo(e, uinfo);
+      // console.log(e)
+      // let uinfo = this.data.userInfo;
+      app.showDetailInfo(e);
     },
     touchStart: function (e) {
         this.touchStartTime = e.timeStamp
