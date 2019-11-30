@@ -1,4 +1,4 @@
-/*ocworkotyptu oworkotext #797979 nopass ocworkotype ocworkotyptu cardfive cardnineone sharelive */
+/*ocworkotyptu oworkotext #797979 nopass ocworkotype ocworkotyptu cardfive cardnineone sharelive  content .oimg */
 @import "../../userauth/userauth.wxss";
 
 .common-userauth {
@@ -1031,7 +1031,7 @@ height: 26rpx;
 
 .content {
   font-size: 30rpx;
-  color: #797979;
+  color: black;
   margin-left: 8.5%;
   margin-bottom: 8rpx;
   padding-right: 2%;
@@ -1531,10 +1531,10 @@ height: 26rpx;
   margin-right: 0;
 }
 .ocworkotyp  .oimg{
-    color: #7A7A7A;
+    color: black;
   font-size: 30rpx;
   display: inline-block;
-  /* padding-left: 6rpx; */
+  padding-left: 5rpx;
   padding-right: 6rpx;
   text-align: center;
   margin-right: 17rpx;

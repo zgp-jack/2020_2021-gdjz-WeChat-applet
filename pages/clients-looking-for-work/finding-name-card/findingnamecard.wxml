@@ -1,9 +1,9 @@
 <view>
-<view class="cardcolore">
-  <view class="findingnamecard" wx:if="{{showtop}}">
-    请完善一下信息
-  </view>
+  <view class="cardcolore">
+    <view class="findingnamecard" wx:if="{{showtop}}">
+      请完善一下信息
     </view>
+  </view>
   <!-- {{selectShow&&"select_img_rotate"}} show_tips editor -->
   <view class="findingnamecardone">
     <view class="findingnamecardoneson">
@@ -55,16 +55,17 @@
 
   </view>
 
-<view class="cardcolore">
-  <view class="findingnamecardtwo" wx:if="{{showtop}}">
-    <text class="findingnamecardtwothree">您还没有完善基础信息</text>
-    <view class="findingnamecardtwofour" bindtap="toperfect">去完善</view>
-  </view>
-  </view>
+  <!-- <view class="cardcolore">
+    <view class="findingnamecardtwo" wx:if="{{showtop}}">
+      <text class="findingnamecardtwothree">您还没有完善基础信息</text>
+      <view class="findingnamecardtwofour" bindtap="toperfect">去完善</view>
+    </view>
+  </view> -->
 
 
   <view class="cardcolore">
-    <view class="cardtwo" wx:if="{{showtopone}}">
+   <view class="cardtwo">
+    <!-- <view class="cardtwo" wx:if="{{showtopone}}"> -->
       <image class="link" src="{{linktag}}"></image>
       <image class="linkone" src="{{linktag}}"></image>
       <view class="cardonetwof">
@@ -136,10 +137,10 @@
       </view>
     </view>
   </view>
- <view class="cardcoloreno">
-  <view class="nopass" wx:if="{{ressonone}}">
-    审核未通过原因：{{note}}
-  </view>
+  <view class="cardcoloreno">
+    <view class="nopass" wx:if="{{ressonone}}">
+      审核未通过原因：{{note}}
+    </view>
   </view>
   <view class="findingnamecardthree" wx:if="{{selfintro}}">
     <view class="findingnamecardthreemobile">
@@ -149,10 +150,10 @@
   </view>
 
   <view class="cardcolore">
-  <view class="findingnamecardfour" wx:if="{{selfintro}}">
-    <text class="findingnamecardfourone">完善人员信息能让老板充分了解您或您的队伍</text>
-    <view class="findingnamecardfourtwo" bindtap="improvementwork">去完善</view>
-  </view>
+    <view class="findingnamecardfour" wx:if="{{selfintro}}">
+      <text class="findingnamecardfourone">完善人员信息能让老板充分了解您或您的队伍</text>
+      <view class="findingnamecardfourtwo" bindtap="improvementwork">去完善</view>
+    </view>
   </view>
 
   <view class="cardthree" wx:if="{{selfintrone}}">
@@ -166,62 +167,62 @@
   </view>
 
   <view class="cardcolore">
-  <view class="cardtwoif" wx:if="{{selfintrone}}">
-    <image class="checktwo" src="{{audit}}" wx:if="{{checktwo&&show_tips==1}}"></image>
-    <view class="lineone">
-      <view class="linezo">
-        <view class="cardotext">
+    <view class="cardtwoif" wx:if="{{selfintrone}}">
+      <image class="checktwo" src="{{audit}}" wx:if="{{checktwo&&show_tips==1}}"></image>
+      <view class="lineone">
+        <view class="linezo">
+          <view class="cardotext">
 
-          <text class="oworkotext">工龄</text>
-
-
-          <text class="workotextone">{{workingyears}}年</text>
-
-        </view>
-        <view class="cardotext">
-
-          <text class="oworkotext">人员构成</text>
-          <text class="workotextone">{{staffcomposition}}</text>
-
-        </view>
-
-        <view class="cardotext">
-
-          <text class="oworkotext">我的家乡</text>
+            <text class="oworkotext">工龄</text>
 
 
-          <text class="workotextone">{{cityself}}</text>
+            <text class="workotextone">{{workingyears}}年</text>
 
-        </view>
-        <view class="cardotext">
+          </view>
+          <view class="cardotext">
 
-          <text class="oworkotext">熟练度</text>
+            <text class="oworkotext">人员构成</text>
+            <text class="workotextone">{{staffcomposition}}</text>
+
+          </view>
+
+          <view class="cardotext">
+
+            <text class="oworkotext">我的家乡</text>
 
 
-          <text class="workotextone">{{procity}}</text>
+            <text class="workotextone">{{cityself}}</text>
 
-        </view>
-        <view class="cardotext" wx:if="{{personnum != 1}}">
+          </view>
+          <view class="cardotext">
 
-          <text class="oworkotext">队伍人数</text>
+            <text class="oworkotext">熟练度</text>
 
 
-          <text class="workotextone">{{personnum}}人</text>
+            <text class="workotextone">{{procity}}</text>
 
-        </view>
-        <view class="cardotext">
+          </view>
+          <view class="cardotext" wx:if="{{personnum != 1}}">
 
-          <text class="oworkotext">标签</text>
+            <text class="oworkotext">队伍人数</text>
 
-          <view class="alllabletu">
-            <text class="labletu" wx:for="{{tags}}" wx:key="{{index}}">{{item.label_name}}</text>
+
+            <text class="workotextone">{{personnum}}人</text>
+
+          </view>
+          <view class="cardotext">
+
+            <text class="oworkotext">标签</text>
+
+            <view class="alllabletu">
+              <text class="labletu" wx:for="{{tags}}" wx:key="{{index}}">{{item.label_name}}</text>
+            </view>
           </view>
         </view>
       </view>
-    </view>
 
-    <view class="cardotextbottom"></view>
-  </view>
+      <view class="cardotextbottom"></view>
+    </view>
   </view>
 
   <view class="findingnamecardfive" wx:if="{{projectlength == 0}}">
@@ -232,10 +233,10 @@
   </view>
 
   <view class="cardcolore">
-  <view class="findingnamecardsix" wx:if="{{projectlength == 0}}">
-    <text class="findingnamecardsixone">添加项目经验可提升老板对您的信任程度</text>
-    <view class="findingnamecardsixtwo" bindtap="addproject">添加项目经验</view>
-  </view>
+    <view class="findingnamecardsix" wx:if="{{projectlength == 0}}">
+      <text class="findingnamecardsixone">添加项目经验可提升老板对您的信任程度</text>
+      <view class="findingnamecardsixtwo" bindtap="addproject">添加项目经验</view>
+    </view>
   </view>
 
   <view class="cardfive" wx:if="{{projectlength != 0}}">
@@ -248,57 +249,61 @@
     </view>
   </view>
   <view class="cardcolore">
-  <view class="cardsix" wx:if="{{projectlength != 0}}">
+    <view class="cardsix" wx:if="{{projectlength != 0}}">
 
-    <view class="cardsixzong" wx:for="{{projectone}}" wx:for-index="pindex" wx:key="{{index}}">
-      <image class="checkthree" src="{{audit}}" wx:if="{{item.check == 1&&show_tips==1}}"></image>
-      <view class="editor" bindtap="editor" data-uid="{{item}}" wx:if="{{item.check != 1}}">编辑</view>
-      <image class="audit" wx:if="{{item.check == 0}}" src="{{notthrough}}"></image>
-      <image class="audit" wx:if="{{item.check == 1&&show_tips == 0}}" src="{{inreview}}"></image>
-      <view>
-        <image src="{{experienceitem}}" class="cardsixone"></image>
-      </view>
-      <view class="cardsixall">
-        <view class="cardsixtwo">
-          <text>{{item.project_name}}</text>
+      <view class="cardsixzong" wx:for="{{projectone}}" wx:for-index="pindex" wx:key="{{index}}">
+        <image class="checkthree" src="{{audit}}" wx:if="{{item.check == 1&&show_tips==1}}"></image>
+        <view class="editor" bindtap="editor" data-uid="{{item}}" wx:if="{{item.check != 1}}">编辑</view>
+        <image class="audit" wx:if="{{item.check == 0}}" src="{{notthrough}}"></image>
+        <image class="audit" wx:if="{{item.check == 1&&show_tips == 0}}" src="{{inreview}}"></image>
+        <view>
+          <image src="{{experienceitem}}" class="cardsixone"></image>
         </view>
-        <view class="cardsixthreeborder">
-          <view class="cardsixthree">
-            <text>{{item.start_time}}-{{item.completion_time}}</text>
-            <text>{{item.province_name}}{{item.city_name}}</text>
+        <view class="cardsixall">
+          <view class="cardsixtwo">
+            <text>{{item.project_name}}</text>
           </view>
-          <view class="cardsixfour">
-            <text>{{item.detail}}
+          <view class="cardsixthreeborder">
+            <view class="cardsixthree">
+              <text>{{item.start_time}}-{{item.completion_time}}</text>
+              <text>{{item.province_name}}{{item.city_name}}</text>
+            </view>
+            <view class="cardsixfour">
+              <text>{{item.detail}}
         </text>
+            </view>
+            <view class="cardsixfive">
+              <image wx:for="{{item.image}}" data-url="{{ item }}" catchtap="previewImage" wx:key="{{index}}" src="{{item}}" data-index="{{ pindex }}"></image>
+            </view>
+            <view wx:if="{{item.check == 0}}" class="resson">
+              未通过原因：{{item.fail_case}}
+            </view>
           </view>
-          <view class="cardsixfive">
-            <image wx:for="{{item.image}}" data-url="{{ item }}" catchtap="previewImage" wx:key="{{index}}" src="{{item}}" data-index="{{ pindex }}"></image>
-          </view>
-          <view wx:if="{{item.check == 0}}" class="resson">
-            未通过原因：{{item.fail_case}}
-          </view>
-        </view>
 
-      </view>
-    </view>
-    <view class="cardsixsixall">
-      <view class="cardsixsix" bindtap="moreproject">
-        <view wx:if="{{checkthreef != 0}}" class="more">
-          更多项目经验
-          <view><image src="{{downward}}" class="down"></image></view>
-        </view>
-        <view wx:if="{{checkthreef == 0}}" class="more">
-          修改项目经验
-          <view><image src="{{downward}}" class="down"></image></view>
-        </view>
-        <view wx:if="{{checkthreef == 0}}" class="cardsixsixnum">
-          <text>{{fail_project}}</text>
         </view>
       </view>
+      <view class="cardsixsixall">
+        <view class="cardsixsix" bindtap="moreproject">
+          <view wx:if="{{checkthreef != 0}}" class="more">
+            更多项目经验
+            <view>
+              <image src="{{downward}}" class="down"></image>
+            </view>
+          </view>
+          <view wx:if="{{checkthreef == 0}}" class="more">
+            修改项目经验
+            <view>
+              <image src="{{downward}}" class="down"></image>
+            </view>
+          </view>
+          <view wx:if="{{checkthreef == 0}}" class="cardsixsixnum">
+            <text>{{fail_project}}</text>
+          </view>
+        </view>
+      </view>
+      <view class="cardsixsixallvoto">
+      </view>
     </view>
-    <view class="cardsixsixallvoto">
-    </view>
-  </view>
   </view>
 
   <view class="findingnamecardseven" wx:if="{{skilllength == 0}}">
@@ -309,11 +314,11 @@
   </view>
 
   <view class="cardcolore">
-  <view class="findingnamecardeight" wx:if="{{skilllength == 0}}">
-    <text class="findingnamecardeightone">添加职业技能，用实力证明您的能力</text>
-    <view class="findingnamecardeighttwo" bindtap="addskill">添加职业技能</view>
-  </view>
+    <view class="findingnamecardeight" wx:if="{{skilllength == 0}}">
+      <text class="findingnamecardeightone">添加职业技能，用实力证明您的能力</text>
+      <view class="findingnamecardeighttwo" bindtap="addskill">添加职业技能</view>
     </view>
+  </view>
 
   <view class="cardseven" wx:if="{{skilllength != 0}}">
     <view class="cardsevenmobile">
@@ -327,47 +332,51 @@
 
 
   <view class="cardcolore">
-  <view class="cardeight" wx:if="{{skilllength != 0}}">
+    <view class="cardeight" wx:if="{{skilllength != 0}}">
 
-    <view class="cardeightzong" wx:for="{{skillbooksone}}" wx:for-index="pindex" wx:key="{{index}}">
-      <image class="checkfour" src="{{audit}}" wx:if="{{item.check == 1&&show_tips==1}}"></image>
-      <view class="editor" bindtap="editorone" data-uid="{{item}}" wx:if="{{item.check != 1}}">编辑</view>
-      <image class="audit" wx:if="{{item.check == 0}}" src="{{notthrough}}"></image>
-      <image class="audit" wx:if="{{item.check == 1&&show_tips == 0}}" src="{{inreview}}"></image>
-      <view>
-        <image src="{{experienceitem}}" class="cardeightone"></image>
+      <view class="cardeightzong" wx:for="{{skillbooksone}}" wx:for-index="pindex" wx:key="{{index}}">
+        <image class="checkfour" src="{{audit}}" wx:if="{{item.check == 1&&show_tips==1}}"></image>
+        <view class="editor" bindtap="editorone" data-uid="{{item}}" wx:if="{{item.check != 1}}">编辑</view>
+        <image class="audit" wx:if="{{item.check == 0}}" src="{{notthrough}}"></image>
+        <image class="audit" wx:if="{{item.check == 1&&show_tips == 0}}" src="{{inreview}}"></image>
+        <view>
+          <image src="{{experienceitem}}" class="cardeightone"></image>
+        </view>
+        <view class="cardeightall">
+          <view class="cardeighttwo">
+            <text>{{item.name}}</text>
+            <text>{{item.certificate_time}}</text>
+          </view>
+          <view class="cardeightfive">
+            <image wx:for="{{item.image}}" data-url="{{ item }}" catchtap="previewImagec" src="{{item}}" data-index="{{ pindex }}" wx:key="{{index}}"></image>
+          </view>
+          <view wx:if="{{item.check == 0}}" class="resson">
+            未通过原因：{{item.fail_case}}
+          </view>
+        </view>
       </view>
-      <view class="cardeightall">
-        <view class="cardeighttwo">
-          <text>{{item.name}}</text>
-          <text>{{item.certificate_time}}</text>
-        </view>
-        <view class="cardeightfive">
-          <image wx:for="{{item.image}}" data-url="{{ item }}" catchtap="previewImagec" src="{{item}}" data-index="{{ pindex }}" wx:key="{{index}}"></image>
-        </view>
-        <view wx:if="{{item.check == 0}}" class="resson">
-          未通过原因：{{item.fail_case}}
-        </view>
-      </view>
-    </view>
-    <view class="cardeightsixall">
-      <view class="cardeightsix" bindtap="moreskill">
-        <view wx:if="{{checkfourf != 0}}" class="more">
+      <view class="cardeightsixall">
+        <view class="cardeightsix" bindtap="moreskill">
+          <view wx:if="{{checkfourf != 0}}" class="more">
             更多技能证书
-         <view><image src="{{downward}}" class="down"></image></view> 
-        </view>
-        <view wx:if="{{checkfourf == 0}}" class="more">
-          修改技能证书
-          <view><image src="{{downward}}" class="down"></image></view> 
-        </view>
-        <view wx:if="{{checkfourf == 0}}" class="cardeightsixnum">
-          <text>{{fail_certificate}}</text>
+            <view>
+              <image src="{{downward}}" class="down"></image>
+            </view>
+          </view>
+          <view wx:if="{{checkfourf == 0}}" class="more">
+            修改技能证书
+            <view>
+              <image src="{{downward}}" class="down"></image>
+            </view>
+          </view>
+          <view wx:if="{{checkfourf == 0}}" class="cardeightsixnum">
+            <text>{{fail_certificate}}</text>
+          </view>
         </view>
       </view>
+      <view class="cardsixsixallvoto">
+      </view>
     </view>
-    <view class="cardsixsixallvoto">
-    </view>
-  </view>
   </view>
 
   <view class="modalDlg" wx:if="{{showModal}}">
