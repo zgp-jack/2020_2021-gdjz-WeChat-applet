@@ -291,8 +291,29 @@ Page({
       reminder.reminder({ tips: '项目名称' })
       return
     }
+    if (!vertifyNum.isChinese(this.data.projectname)) {
+      wx.showModal({
+        title: '温馨提示',
+        content: '您输入的项目名称没有汉字,请重新输入',
+        showCancel: false,
+        success(res) { }
+      })
+      return
+    }
+
     if (vertifyNum.isNull(this.data.detail)) {
       reminder.reminder({ tips: '项目描述' })
+      return
+    }
+
+
+    if (!vertifyNum.isChinese(this.data.detail)) {
+      wx.showModal({
+        title: '温馨提示',
+        content: '您输入的项目描述没有汉字,请重新输入',
+        showCancel: false,
+        success(res) { }
+      })
       return
     }
     if (vertifyNum.isNull(this.data.provincecity)) {
@@ -396,8 +417,28 @@ Page({
       reminder.reminder({ tips: '项目名称' })
       return
     }
+
+    if (!vertifyNum.isChinese(this.data.projectname)) {
+      wx.showModal({
+        title: '温馨提示',
+        content: '您输入的项目名称没有汉字,请重新输入',
+        showCancel: false,
+        success(res) { }
+      })
+      return
+    }
     if (vertifyNum.isNull(this.data.detail)) {
       reminder.reminder({ tips: '项目描述' })
+      return
+    }
+
+    if (!vertifyNum.isChinese(this.data.detail)) {
+      wx.showModal({
+        title: '温馨提示',
+        content: '您输入的项目描述没有汉字,请重新输入',
+        showCancel: false,
+        success(res) { }
+      })
       return
     }
     if (vertifyNum.isNull(this.data.provincecity)) {
@@ -659,6 +700,17 @@ Page({
       reminder.reminder({ tips: '项目名称' })
       return
     }
+
+    if (!vertifyNum.isChinese(this.data.projectname)) {
+      wx.showModal({
+        title: '温馨提示',
+        content: '您输入的项目名称没有汉字,请重新输入',
+        showCancel: false,
+        success(res) { }
+      })
+      return
+    }
+    
     if (vertifyNum.isNull(this.data.detail)) {
       reminder.reminder({ tips: '项目描述' })
       return
@@ -667,7 +719,15 @@ Page({
       reminder.reminder({ tips: '所在地区' })
       return
     }
-
+    if (!vertifyNum.isChinese(this.data.detail)) {
+      wx.showModal({
+        title: '温馨提示',
+        content: '您输入的项目描述没有汉字,请重新输入',
+        showCancel: false,
+        success(res) { }
+      })
+      return
+    }
     if (!that.getbirthall()) {
       wx.showModal({
         title: '温馨提示',

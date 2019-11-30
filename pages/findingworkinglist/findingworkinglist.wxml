@@ -154,9 +154,10 @@
           </view>
         </view>
         </view>
+            <ad class="lists-ad" unit-id="{{ unitid }}" wx:if="{{index % 5 == 0 && index > 5}}"></ad>
     </view>
 
-    <ad class="lists-ad" unit-id="{{ unitid }}" wx:if="{{index % 5 == 0 && index > 5}}"></ad>
+
     <navigator url='/pages/download/download-app' wx:if="{{ (index == 5) && (fillterType[worktype].id != '55')}}" class='lists-ad lists-ad-image'>
       <image src="{{ appLinkImg }}"></image>
     </navigator>

@@ -156,7 +156,9 @@ Page({
           app.globalData.gpsdetail = true
         },
         fail: function (info) {
+
           app.showMyTips("定位失败,请重新定位");
+          app.globalData.gpsdetail = true
         }
       });
     }
@@ -461,6 +463,15 @@ Page({
       })
       return
     }
+    if (!vertifyNum.isChinese(this.data.name)) {
+      wx.showModal({
+        title: '温馨提示',
+        content: '您输入的姓名没有汉字,请重新输入',
+        showCancel: false,
+        success(res) { }
+      })
+      return
+    }
     if (vertifyNum.isNull(this.data.sex)) {
       reminder.reminder({ tips: '性别' })
       return
@@ -495,6 +506,16 @@ Page({
     }
     if (vertifyNum.isNull(this.data.otextareavalue)) {
       reminder.reminder({ tips: '自我介绍' })
+      return
+    }
+
+    if (!vertifyNum.isChinese(this.data.otextareavalue)) {
+      wx.showModal({
+        title: '温馨提示',
+        content: '您输入的自我介绍没有汉字,请重新输入',
+        showCancel: false,
+        success(res) { }
+      })
       return
     }
     // tele != telephone

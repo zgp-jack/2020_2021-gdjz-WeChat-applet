@@ -7,7 +7,14 @@ let vali = {
             var reg = /^([hH][tT]{2}[pP]:\/\/|[hH][tT]{2}[pP][sS]:\/\/)(([A-Za-z0-9-~]+)\.)+([A-Za-z0-9-~\/])+$/;
             return !reg.test(url) ? false : true;
         }
-
+        vali.isChinese = function (v) {
+        var re = new RegExp("[\\u4E00-\\u9FFF]+", "g");
+          if (re.test(v)) {
+             return true;
+            }
+          console.log(123)
+          return false;
+        }
         //验证邮箱
         vali.isEmail = function (email) {
             return email.length > 6 && /^[\w\-\.]+@[\w\-\.]+(\.\w+)+$/.test(email);

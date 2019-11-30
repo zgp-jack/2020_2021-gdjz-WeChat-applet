@@ -1,5 +1,5 @@
 <import src="/pages/footer/footer.wxml"/>
-<!-- <import src="/pages/tpl/app/app.wxml"/> showListsInfo  showHistoryList -->
+<!-- <import src="/pages/tpl/app/app.wxml"/> showListsInfo  showHistoryList lists-ad -->
 
 <view class='common-index-gztips' wx:if="{{ firstJoin }}">添加到我的小程序，招工找活更方便</view>
 

@@ -221,6 +221,16 @@ vertify()
       return
     }
 
+    if (!vertifyNum.isChinese(this.data.name)) {
+      wx.showModal({
+        title: '温馨提示',
+        content: '您输入的职业技能没有汉字,请重新输入',
+        showCancel: false,
+        success(res) { }
+      })
+      return
+    }
+
     if (vertifyNum.isNull(this.data.idArrs)) {
       wx.showModal({
         title: '温馨提示',
@@ -300,6 +310,15 @@ vertify()
     let vertifyNum = v.v.new()
     if (vertifyNum.isNull(this.data.name)) {
       reminder.reminder({ tips: '职业技能' })
+      return
+    }
+    if (!vertifyNum.isChinese(this.data.name)) {
+      wx.showModal({
+        title: '温馨提示',
+        content: '您输入的职业技能没有汉字,请重新输入',
+        showCancel: false,
+        success(res) { }
+      })
       return
     }
     if (vertifyNum.isNull(this.data.idArrs)) {
@@ -422,7 +441,25 @@ vertify()
       reminder.reminder({ tips: '职业技能' })
       return
     }
-    this.getbirthall()
+    if (!vertifyNum.isChinese(this.data.name)) {
+      wx.showModal({
+        title: '温馨提示',
+        content: '您输入的职业技能没有汉字,请重新输入',
+        showCancel: false,
+        success(res) { }
+      })
+      return
+    }
+
+    if (!this.getbirthall()) {
+      wx.showModal({
+        title: '温馨提示',
+        content: '领取证书的范围必须在前20年内',
+        showCancel: false,
+        success(res) { }
+      })
+      return
+    }
     if (vertifyNum.isNull(this.data.idArrs)) {
 
       wx.showModal({
