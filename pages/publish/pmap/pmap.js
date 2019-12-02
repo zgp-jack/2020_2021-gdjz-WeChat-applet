@@ -8,8 +8,8 @@ const amapFun = new Amap.AMapWX({ key: app.globalData.gdApiKey });
 Page({
 
   /**
-   * 页面的初始数据 userEnterAddress clearInputVal mapInputFocus showCity showInputList searchInput
-   * allAreaLists isAllAreas nAreaLists isAllAreas areaText chooseInputCtiy userLocation
+   * showCity
+   * 
    */
   data: {
     nodataImg: app.globalData.apiImgUrl + "nodata.png",

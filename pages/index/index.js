@@ -8,7 +8,7 @@ const amapFun = new Amap.AMapWX({ key: app.globalData.gdApiKey });
 Page({
 
     /**
-     * 页面的初始数据 showDetailInfo
+     * 页面的初始数据 showDetailInfo footerImgs
      */
     data: {
         unitid: app.globalData.unitid,

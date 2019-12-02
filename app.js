@@ -1,10 +1,10 @@
 App({
   onLaunch: function(e) {
     // try{
-    //   if (e.path) this.initUserInfo(e); valiUserUrl gpsOrientation userLocation
+    //   if (e.path) this.initUserInfo(e);
     // }
     // catch(err){bindGetUserInfo gotoUserauth 工地急招 gpsPorvince userLocation
-    //   bindGetUserInfo allTypes pmap userLocFun showDetailInfo showDetailInfo
+    //   
 
   },
   globalData: {

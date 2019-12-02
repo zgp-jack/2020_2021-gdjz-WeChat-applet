@@ -43,7 +43,7 @@ Page({
     procity: "未填写",
     personnum: "未填写",
     tags: [],
-    headerimg: "../../../images/hearding.png",
+    headerimg: "",
     selectk: [],
     selectkone: "",
     selectShow: false,//控制下拉列表的显示隐藏，false隐藏、true显示
@@ -116,6 +116,11 @@ Page({
     })
   },
   onShareAppMessage: function () {
+    let tel = this.data.telephone;
+    tel = tel.substring(0, tel.length - 4) + "****";
+    this.setData({
+      telephone: tel
+    })
     let userInfo = wx.getStorageSync("userInfo");
     let uuid = this.data.resume_uuid;
     let commonShareTips = app.globalData.commonShareTips;
@@ -126,7 +131,7 @@ Page({
       if (uuid) {
         return {
           title: `${commonShareTips}`,
-          imageUrl: commonShareImg,
+          // imageUrl: commonShareImg,
           path: `/pages/boss-look-card/lookcard?uuid=${uuid}&sharedekeId=1`//这是一个路径
         }
       } else {

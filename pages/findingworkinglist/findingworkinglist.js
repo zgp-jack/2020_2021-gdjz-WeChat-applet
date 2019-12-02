@@ -690,6 +690,7 @@ Page({
 
 
   onLoad(options) {
+    console.log(123)
     this.initSearchHistory();
     this.initUserShareTimes();
     this.getFilterData();

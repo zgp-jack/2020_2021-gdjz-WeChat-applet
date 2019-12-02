@@ -360,6 +360,7 @@ Page({
             nation: mydata.info.hasOwnProperty("nation") ? mydata.info.nation : "",
             occupations: mydata.info.hasOwnProperty("occupations") ? mydata.info.occupations : "",
             telephone: mydata.info.hasOwnProperty("tel") ? mydata.info.tel : "",
+            sharetelephone: mydata.info.hasOwnProperty("tel") ? mydata.info.tel : "",
             city: mydata.info.hasOwnProperty("address") ? mydata.info.address : "",
             intro: false,
             introne: true,
@@ -450,7 +451,7 @@ Page({
             }
           })
         }
-        console.log(that.data.location)
+        
       },
       fail: function (err) {
         let that = this;
@@ -607,22 +608,27 @@ Page({
     })
   },
   onShareAppMessage: function () {
+    let tel = this.data.telephone;
+    tel = tel.substring(0, tel.length - 4) + "****";
+    this.setData({
+      telephone: tel
+    })
     let userInfo = wx.getStorageSync("userInfo");
     let uuid = this.data.resume_uuid;
     let commonShareTips = app.globalData.commonShareTips;
-    let commonShareImg = app.globalData.commonShareImg;
+    // let commonShareImg = app.globalData.commonShareImg;
     if (userInfo) {
       let refId = userInfo.userId;
       return {
         title: `${commonShareTips}`,
-        imageUrl: commonShareImg,
+        // imageUrl: commonShareImg,
         path: `/pages/boss-look-card/lookcard?uuid=${uuid}&refId=${refId}&sharedekeId=1` //这是一个路径
       }
 
     } else {
       return {
         title: `${commonShareTips}`,
-        imageUrl: commonShareImg,
+        // imageUrl: commonShareImg,
         path: `/pages/boss-look-card/lookcard?uuid=${uuid}&sharedekeId=1` //这是一个路径
       }
     }
@@ -655,6 +661,13 @@ Page({
       });
     });
   },
+
+
+  sharetelphe(){
+    this.setData({
+      telephone: this.data.sharetelephone
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
@@ -674,7 +687,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow() {
-
+    this.sharetelphe();
     this.delestore();
     this.deleskill()
   },

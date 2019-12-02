@@ -179,16 +179,21 @@ Page({
     }
   },
   onShareAppMessage: function () {
+    let tel = this.data.telephone;
+    tel = tel.substring(0, tel.length - 4) + "****";
+    this.setData({
+      telephone: tel
+    })
+
     let userInfo = wx.getStorageSync("userInfo");
     let uuid = this.data.resume_uuid;
     let commonShareTips = app.globalData.commonShareTips;
-    let commonShareImg = app.globalData.commonShareImg;
     if (userInfo) {
       let refId = userInfo.userId;
       if (uuid) {
         return {
           title: `${commonShareTips}`,
-          imageUrl: commonShareImg,
+          // imageUrl: commonShareImg,
           path: `/pages/boss-look-card/lookcard?uuid=${uuid}&refId=${refId}&sharedekeId=1`//这是一个路径
         }
       } else {
