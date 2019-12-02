@@ -3,7 +3,7 @@ App({
     // try{
     //   if (e.path) this.initUserInfo(e);
     // }
-    // catch(err){bindGetUserInfo gotoUserauth 工地急招 gpsPorvince userLocation
+    // catch(err){bindGetUserInfo gotoUserauth 工地急招 gpsPorvince userLocation 
     //   
 
   },

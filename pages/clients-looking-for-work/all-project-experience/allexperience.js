@@ -18,7 +18,7 @@ Page({
     onoff: false
   },
   editor(e) {
-    console.log(e)
+    
     wx.setStorageSync("projectdetail", e.currentTarget.dataset)
     wx.navigateTo({
       url: "/pages/clients-looking-for-work/new-project-experience/projectexperience",
@@ -83,7 +83,7 @@ Page({
           that.setData({
             projectlength: res.data.data.project.length
           })
-          console.log(that.data.allproject)
+          
           let projectall = [];
           for (let i = 0; i < that.data.allproject.length; i++) {
             if (that.data.allproject[i].check == "2") {
@@ -139,7 +139,7 @@ Page({
     app.globalData.previewproject = true;
   },
   previewImage: function (e) {
-    console.log(e)
+    
     let url = e.currentTarget.dataset.url;
     let i = e.currentTarget.dataset.index;
     let type = e.currentTarget.dataset.type;

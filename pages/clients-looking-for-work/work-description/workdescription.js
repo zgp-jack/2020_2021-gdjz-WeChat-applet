@@ -3,7 +3,7 @@ let areas = require("../../../utils/area.js");
 const app = getApp();
 let v = require("../../../utils/v.js");
 let remain = require("../../../utils/remain.js");
-let reminder = require("../../../utils/ reminder.js");
+let reminder = require("../../../utils/reminder.js");
 Page({
 
   /**
@@ -230,7 +230,7 @@ Page({
 
     if (off) {
       this.data.evaluation.push(e.currentTarget.dataset.index)
-      console.log(this.data.evaluation)
+      
       let labelnum = "";
       for (let i = 0; i < this.data.evaluation.length; i++) {
         if (this.data.evaluation.length - 1 == i) {
@@ -287,7 +287,7 @@ Page({
     }
     let strone = /^[0-9]{1,4}$/ig;
     if (!strone.test(this.data.teamsnumber) && this.data.constituttion != 1 || ~~this.data.teamsnumber - 0 <= 1 && this.data.constituttion != 1) {
-      console.log(this.data.teamsnumber)
+      
       wx.showModal({
         title: '温馨提示',
         content: '您输入的队伍人数不为数字,或者超过四位数,或者小于或等于一请重新输入',
@@ -296,7 +296,7 @@ Page({
       })
       return
     }
-    console.log(this.data.labelnum)
+    
     if (this.data.labelnum.length == 0) {
       reminder.reminder({ tips: '标签' })
       return

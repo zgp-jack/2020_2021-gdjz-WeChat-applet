@@ -3,9 +3,7 @@ let remain = require("../../utils/remain.js");
 
 Page({
 
-  /** showComplain telephorft personnum   age workingyears personnum workingyears
-   * 页面的初始数据 moreskill projectone occupations introduce telephorft showThisMapInfo onoff
-   telephorft nation age fenxiang introshow  praise returnindex sharedeke returnindex occupations showThisMapInfo */
+  /**/
   data: {
     unitid: app.globalData.unitid,
     homebtnImg: app.globalData.apiImgUrl + "newdetailinfo-home.png",
@@ -32,6 +30,7 @@ Page({
     occupations: [],
     occupationone: "未填写",
     telephone: "未填写",
+    sharetelephone:"未填写",
     introduce: "未填写",
     city: "未填写",
     intro: true,
@@ -115,9 +114,9 @@ Page({
     })
   },
   errImg: function (e) {
-    // console.log(e)
+    
     // let index = e.currentTarget.dataset.index;
-    // console.log(index)
+    
     // let obj = `lists[${index}].headerimg`;
     this.setData({
       headerimg: "http://cdn.yupao.com/miniprogram/images/user.png"
@@ -320,7 +319,7 @@ Page({
       params: detail,
       success(res) {
         let mydata = res.data;
-        console.log(mydata)
+        
 
         if (res.data.errcode == "ok") {
           wx.hideLoading();
@@ -608,6 +607,7 @@ Page({
     })
   },
   onShareAppMessage: function () {
+    console.log(213)
     let tel = this.data.telephone;
     tel = tel.substring(0, tel.length - 4) + "****";
     this.setData({
@@ -651,7 +651,7 @@ Page({
             that.setData({
               userInfo: userInfo
             });
-            console.log(that.data.options)
+            
             that.getdetail(that.data.options)
 
           } else {
@@ -672,7 +672,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    console.log(options)
+    
     this.getdetail(options);
   },
 

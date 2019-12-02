@@ -29,7 +29,7 @@
             <view class="listsboxageone">
               <text class="listsboxname">{{item.resume.username}}</text>
               <text>{{item.resume.gender  == "1" ? "男" : (item.gender == "0"?"女":"")}}</text>
-              <text>{{item.resume.birthday}}岁</text>
+              <text wx:if="{{item.resume.birthday != '' || item.resume.birthday != 0}}">{{item.resume.birthday}}岁</text>
               <image wx:if="{{authentication == '2'}}" src="{{realNames}}"></image>
               <image wx:if="{{certificate == '1'}}" src="{{authentication}}"></image>
             </view>

@@ -3,7 +3,7 @@ var amapFile = require('../../../utils/amap-wx.js');
 let areas = require("../../../utils/area.js");
 let v = require("../../../utils/v.js");
 let remain = require("../../../utils/remain.js");
-let reminder = require("../../../utils/ reminder.js");
+let reminder = require("../../../utils/reminder.js");
 const app = getApp();
 Page({
 
@@ -134,7 +134,7 @@ Page({
       }); //key注册高德地图开发者
       myAmapFun.getRegeo({
         success: function (data) {
-          console.log(data);
+          
           let oname = data[0].name + ' ' + data[0].desc;
           if (oname.length >= 10) {
             // let onamesplit = oname.slice(0, 10) + '...';
@@ -168,7 +168,7 @@ Page({
     let that = this;
     wx.getSetting({
       success: (res) => {
-        //console.log(res.authSetting['scope.userLocation']);
+        
         if (res.authSetting['scope.userLocation'] != undefined && res.authSetting['scope.userLocation'] != true) {//非初始化进入该页面,且未授权   
           wx.showModal({
             title: '是否授权当前位置',
@@ -553,7 +553,7 @@ Page({
       address: this.data.regionone,
       adcode: this.data.oadcode,
     })
-    console.log(information)
+    
 
     app.appRequestAction({
       url: "resumes/add-resume/",

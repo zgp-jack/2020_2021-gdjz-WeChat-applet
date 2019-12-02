@@ -87,7 +87,7 @@ Page({
     })
   },
   previewImagec: function (e) {
-    console.log(e)
+    
     let url = e.currentTarget.dataset.url;
     let i = e.currentTarget.dataset.index;
     let type = e.currentTarget.dataset.type;
@@ -99,7 +99,7 @@ Page({
     app.globalData.previewpre =  false;
   },
   previewImage: function (e) {
-    console.log(e)
+    
     let url = e.currentTarget.dataset.url;
     let i = e.currentTarget.dataset.index;
     let type = e.currentTarget.dataset.type;
@@ -180,8 +180,8 @@ Page({
       failTitle: "操作失败，请稍后重试！",
       success(res) {
         let mydata = res.data.data;
-        console.log(mydata)
-        console.log(res)
+        
+        
         if (res.data.errcode == 200) {
 
           let date = new Date();
@@ -235,9 +235,17 @@ Page({
             })
           }
           if (mydata.info.birthday) {
-            that.setData({
-              age: dateone.getFullYear() - (mydata.info.birthday.split("-")[0] - 0) + "岁"
-            })
+
+            if (dateone.getFullYear() - (mydata.info.birthday.split("-")[0] - 0) == 0) {
+              that.setData({
+                age: ""
+              })
+            } else {
+              that.setData({
+                age: dateone.getFullYear() - (mydata.info.birthday.split("-")[0] - 0) + "岁"
+              })
+            }
+
           }
           that.setData({
             name: mydata.info.hasOwnProperty("username") ? mydata.info.username : "",
@@ -263,7 +271,7 @@ Page({
             fail_certificate: mydata.hasOwnProperty("fail_certificate") ? mydata.fail_certificate : "",
             fail_project: mydata.hasOwnProperty("fail_project") ? mydata.fail_project : "",
           })
-          console.log(that.data.tags)
+          
           if (that.data.introduce === "") {
             that.setData({
               introshow: false

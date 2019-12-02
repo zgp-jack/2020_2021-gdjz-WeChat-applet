@@ -1,10 +1,10 @@
-//userTapSearch persondetail lists teamindex resumes/index/ errImg teamText fillterType persondetail authentication  teamText fillterArea fillterType  errImg teamText fillterTeam recommended typeText userChooseNewest fillterNewest showDetailInfo showDetailInfo unitid
+//userTapSearch 
 const app = getApp(); 
 let footerjs = require("../../utils/footer.js");
 let areas = require("../../utils/area.js");
 let md5 = require("../../utils/md5.js");
 var amapFile = require('../../utils/amap-wx.js');
-//userChooseProvince
+
 Page({
 
   /**
@@ -132,7 +132,7 @@ Page({
     _this.setData({
       isFirstRequest: true,
       "searchDate.page": 1,
-      "searchDate.sort": index,
+      "searchDate.sort": _id,
       recommended: text
     })
     _this.doRequestAction(false);
@@ -690,7 +690,6 @@ Page({
 
 
   onLoad(options) {
-    console.log(123)
     this.initSearchHistory();
     this.initUserShareTimes();
     this.getFilterData();

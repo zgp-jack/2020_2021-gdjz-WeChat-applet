@@ -1,7 +1,7 @@
 const app = getApp();
 let v = require("../../../utils/v.js");
 let remain = require("../../../utils/remain.js");
-let reminder = require("../../../utils/ reminder.js");
+let reminder = require("../../../utils/reminder.js");
 Page({
 
   /**
@@ -53,7 +53,7 @@ vertify()
     let timeone = this.data.date.split("-")[0] - 0;
     let timetwo = this.data.date.split("-")[1] - 0;
     let timethree = this.data.date.split("-")[2] - 0;
-    console.log(time)
+    
     if (year - timeone == 20 && month - timetwo >= 0 && day - timethree > 0 || year - timeone > 20 || year - timeone < 0 || year - timeone == 0 && month - timetwo <= 0 && day - timethree < 0 ) {
       return false
     }
@@ -70,7 +70,7 @@ vertify()
     })
   },
   previewImage(e) {
-    console.log(e)
+    
     let that = this
     wx.previewImage({
       urls: that.data.imgArrs,
@@ -103,7 +103,7 @@ vertify()
     })
   },
   previewImage(e) {
-    console.log(e)
+    
     let that = this
     wx.previewImage({
       urls: that.data.imgArrs,
@@ -111,7 +111,7 @@ vertify()
     })
   },
   delete(e) {
-    console.log(e)
+    
     this.data.imgArrs.splice(e.currentTarget.dataset.index, 1)
     this.data.idArrs.splice(e.currentTarget.dataset.index, 1)
     this.setData({
@@ -157,7 +157,7 @@ vertify()
       tokenTime: userInfo.tokenTime,
       certificate_uuid: this.data.uuid
     })
-    console.log(project)
+    
     let that = this;
     app.appRequestAction({
       url: 'resumes/del-certificate/',
@@ -166,7 +166,7 @@ vertify()
       params: project,
       failTitle: "操作失败，请稍后重试！",
       success(res) {
-        console.log(res)
+        
         remain.remain({
           tips: res.data.errmsg, callback: function () {
             if (res.data.errcode == "ok") {
@@ -271,7 +271,7 @@ vertify()
       mask: true,
       failTitle: "操作失败，请稍后重试！",
       success(res) {
-        console.log(res)
+        
         remain.remain({
           tips: res.data.errmsg, callback: function () {
             if (res.data.errcode == "ok") {
@@ -352,7 +352,7 @@ vertify()
       name: this.data.name,
       certificate_time: this.data.date
     })
-    console.log(project)
+    
 
     app.appRequestAction({
       url: 'resumes/certificate/',
@@ -406,7 +406,7 @@ vertify()
         certificate_count: certificate_count
       })
     }
-    console.log(skilltail)
+    
     if (skilltail) {
       wx.setNavigationBarTitle({
         title: '修改您的技能证书'
@@ -485,7 +485,7 @@ vertify()
       certificate_uuid: this.data.uuid,
       certificate_time: this.data.date
     })
-    console.log(project)
+    
     let that = this;
     app.appRequestAction({
       url: 'resumes/certificate/',
@@ -494,7 +494,7 @@ vertify()
       mask: true,
       params: project,
       success(res) {
-        console.log(res)
+        
         remain.remain({
           tips: res.data.errmsg, callback: function () {
             if (res.data.errcode == "ok") {
@@ -520,8 +520,8 @@ vertify()
       })
     }
 
-    console.log(that.data.certificate_cou)
-    console.log(that.data.certificate_count)
+    
+    
   },
   starttimer() {
     let timer = new Date();

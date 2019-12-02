@@ -2,7 +2,7 @@ const app = getApp()
 let v = require("../../../utils/v.js");
 let areas = require("../../../utils/area.js");
 let remain = require("../../../utils/remain.js");
-let reminder = require("../../../utils/ reminder.js");
+let reminder = require("../../../utils/reminder.js");
 //bindstartDate delete vertify vertify preservechixu bindTextAreaBlur 大于今天 chooseImage delete preserve showModal vertify() showModal deleteexper vertify multiIndexvalue projectnum nowDate share
   
 Page({
@@ -94,7 +94,7 @@ Page({
       }) 
   },
   previewImage(e) {
-    console.log(e)
+    
     let that = this
     wx.previewImage({
       urls: that.data.imgArrs,
@@ -237,7 +237,7 @@ Page({
 
     }
     this.setData(data);
-    console.log(data)
+    
   },
   preserve:function() {
     let that = this;
@@ -342,7 +342,7 @@ Page({
       city: this.data.provincecity.split(",")[1],
       image: this.data.importimg
     })
-    console.log(project)
+    
     app.appRequestAction({
       url: 'resumes/project/',
       way: 'POST',
@@ -350,7 +350,7 @@ Page({
       params: project,
       failTitle: "操作失败，请稍后重试！",
       success(res) {
-        console.log(res)
+        
         remain.remain({
           tips: res.data.errmsg, callback: function () {
             if (res.data.errcode == "ok") {
@@ -468,7 +468,7 @@ Page({
       city: this.data.provincecity.split(",")[1],
       image: this.data.importimg
     })
-    console.log(project)
+    
     app.appRequestAction({
       url: 'resumes/project/',
       way: 'POST',
@@ -479,7 +479,7 @@ Page({
         remain.remain({
           tips: res.data.errmsg, callback: function () {
             if (res.data.errcode == "ok") {
-              console.log(res)
+              
               that.setData({
                 project_cou: res.data.count
               })
@@ -516,7 +516,7 @@ Page({
     })
   },
   delete(e) {
-    console.log(e)
+    
     this.data.imgArrs.splice(e.currentTarget.dataset.index, 1)
     this.data.importimg.splice(e.currentTarget.dataset.index, 1)
     this.setData({
@@ -531,7 +531,7 @@ Page({
         imgArrslength: true
       })
     }
-    console.log(this.data.importimg)
+    
   },
   vertify() {
     let userInfo = wx.getStorageSync("userInfo");
@@ -542,7 +542,7 @@ Page({
       tokenTime: userInfo.tokenTime,
       project_uuid: this.data.uuid
     })
-    console.log(project)
+    
     let that = this;
     app.appRequestAction({
       url: 'resumes/del-project/',
@@ -551,7 +551,7 @@ Page({
       params: project,
       failTitle: "操作失败，请稍后重试！",
       success(res) {
-        console.log(res)
+        
         remain.remain({
           tips: res.data.errmsg, callback: function () {
             if (res.data.errcode == "ok") {
@@ -604,7 +604,7 @@ Page({
       this.setData({
         project: project.uid,
       })
-      console.log(this.data.project)
+      
 
       this.setData({
         projectname: this.data.project.project_name,
@@ -627,7 +627,7 @@ Page({
       //     date: "至今"
       //   })
       // }
-      console.log(this.data.objectMultiArray)
+      
       let one = "";
       let two = "";
       let osplit = this.data.provincecity.split(",");
@@ -751,7 +751,7 @@ Page({
       image: this.data.importimg,
       project_uuid: this.data.uuid
     })
-    console.log(project)
+    
 
     app.appRequestAction({
       url: 'resumes/project/',
@@ -760,7 +760,7 @@ Page({
       failTitle: "操作失败，请稍后重试！",
       mask: true,
       success(res) {
-        console.log(res)
+        
         remain.remain({
           tips: res.data.errmsg, callback: function () {
             if (res.data.errcode == "ok") {
@@ -821,8 +821,8 @@ Page({
         project_show: false
       })
     }
-    console.log(that.data.project_cou)
-    console.log(that.data.project_show)
+    
+    
   },
   onLoad: function (options) {
     this.initAllProvice()

@@ -98,7 +98,7 @@ Page({
     age:[]
   },
   previewImage: function (e) {
-    console.log(e)
+    
     let url = e.currentTarget.dataset.url;
     let i = e.currentTarget.dataset.index;
     let type = e.currentTarget.dataset.type;
@@ -110,7 +110,7 @@ Page({
     app.globalData.previewshou = false;
   },
   previewImagec: function (e) {
-    console.log(e)
+    
     let url = e.currentTarget.dataset.url;
     let i = e.currentTarget.dataset.index;
     let type = e.currentTarget.dataset.type;
@@ -134,14 +134,14 @@ Page({
     })
   },
   editor(e) {
-    console.log(e)
+    
     wx.setStorageSync("projectdetail", e.currentTarget.dataset)
     wx.navigateTo({
       url: "/pages/clients-looking-for-work/new-project-experience/projectexperience",
     })
   },
   editorone(e) {
-    console.log(e)
+    
     wx.setStorageSync("skilltail", e.currentTarget.dataset)
     wx.navigateTo({
       url: "/pages/clients-looking-for-work/addcertificate/addcertificate",
@@ -246,13 +246,13 @@ Page({
             resume_uuid: that.data.resume_uuid,
             type: dataId
           })
-          console.log(detail)
+          
           app.appRequestAction({
             url: 'resumes/edit-end/',
             way: 'POST',
             params: detail,
             success(res) {
-              console.log(res)
+              
               if (res.data.errcode == "ok") {
                 that.getdetail()
               }
@@ -419,7 +419,7 @@ Page({
         failTitle: "操作失败，请稍后重试！",
         params: imgdetail,
         success(res) {
-          console.log(res)
+          
           if (res.data.errcode == 200) {
             app.showMyTips("保存成功");
             that.getdetail()
@@ -510,7 +510,7 @@ Page({
             wx.setStorageSync("uuid", mydata.info.uuid)
           }
           if (mydata.info.gender != "0" && mydata.info.gender) {
-            console.log(123)
+            
             that.setData({
               sex: mydata.info.gender == "1" ? "男" : "女"
             })
@@ -520,9 +520,18 @@ Page({
             })
           }
           if (mydata.info.birthday) {
-            that.setData({
-              age: dateone.getFullYear() - (mydata.info.birthday.split("-")[0] - 0) + "岁"
-            })
+
+
+            if (dateone.getFullYear() - (mydata.info.birthday.split("-")[0] - 0) == 0) {
+              that.setData({
+                age: ""
+              })
+            } else {
+              that.setData({
+                age: dateone.getFullYear() - (mydata.info.birthday.split("-")[0] - 0) + "岁"
+              })
+            }
+
           }
           that.setData({
             show_tips: mydata.hasOwnProperty("content") ? mydata.content.show_tips : "",
@@ -818,7 +827,7 @@ Page({
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-    // console.log(123)
+    // 
     // wx.redirectTo({
     //   url: '/pages/ucenter/ucenter'
     // })

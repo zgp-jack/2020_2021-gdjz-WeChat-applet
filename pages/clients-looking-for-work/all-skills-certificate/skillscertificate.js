@@ -38,14 +38,14 @@ Page({
             allskill: res.data.data.certificates,
             allskilength: res.data.data.certificates.length
           })
-          console.log(that.data.allskilength)
+          
           let allskilltwo = [];
           for (let i = 0; i < that.data.allskill.length; i++) {
             if (that.data.allskill[i].check == "2") {
               allskilltwo.push(that.data.allskill[i])
             }
           }
-          // console.log(that.data.allskilltwo)
+          
           
           that.setData({
             allskilltwo: allskilltwo,
@@ -95,7 +95,7 @@ Page({
       this.setData({
         skillpass: 8
       })
-      console.log(allskill)
+      
       let skill = [];
       for (let i = 0; i < allskill.length; i++) {
         skill.push(allskill[i])
