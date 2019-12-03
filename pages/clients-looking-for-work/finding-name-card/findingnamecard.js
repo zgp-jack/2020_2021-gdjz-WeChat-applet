@@ -95,10 +95,10 @@ Page({
     move: true,
     show_tips: "",
     showskill: true,
-    age:[]
+    age: []
   },
   previewImage: function (e) {
-    
+
     let url = e.currentTarget.dataset.url;
     let i = e.currentTarget.dataset.index;
     let type = e.currentTarget.dataset.type;
@@ -110,7 +110,7 @@ Page({
     app.globalData.previewshou = false;
   },
   previewImagec: function (e) {
-    
+
     let url = e.currentTarget.dataset.url;
     let i = e.currentTarget.dataset.index;
     let type = e.currentTarget.dataset.type;
@@ -134,14 +134,26 @@ Page({
     })
   },
   editor(e) {
-    
-    wx.setStorageSync("projectdetail", e.currentTarget.dataset)
-    wx.navigateTo({
-      url: "/pages/clients-looking-for-work/new-project-experience/projectexperience",
-    })
+    console.log(e)
+    let timer = new Date();
+    let d = new Date(timer);
+    let times = d.getFullYear() + '-' + (d.getMonth() + 1) + '-' + (d.getDate() >= 10 ? d.getDate() : '0' + d.getDate());
+    if (e.currentTarget.dataset.uid.completion_time == "zhijin") {
+      e.currentTarget.dataset.uid.completion_time = times
+      wx.setStorageSync("projectdetail", e.currentTarget.dataset)
+      wx.navigateTo({
+        url: "/pages/clients-looking-for-work/new-project-experience/projectexperience",
+      })
+    }else{
+      wx.setStorageSync("projectdetail", e.currentTarget.dataset)
+      wx.navigateTo({
+        url: "/pages/clients-looking-for-work/new-project-experience/projectexperience",
+      })
+    }
+
   },
   editorone(e) {
-    
+
     wx.setStorageSync("skilltail", e.currentTarget.dataset)
     wx.navigateTo({
       url: "/pages/clients-looking-for-work/addcertificate/addcertificate",
@@ -203,7 +215,7 @@ Page({
           path: `/pages/index/index?refId=${refId}`//这是一个路径
         }
       }
-    }else{
+    } else {
       return {
         title: `${commonShareTips}`,
         imageUrl: commonShareImg,
@@ -246,13 +258,13 @@ Page({
             resume_uuid: that.data.resume_uuid,
             type: dataId
           })
-          
+
           app.appRequestAction({
             url: 'resumes/edit-end/',
             way: 'POST',
             params: detail,
             success(res) {
-              
+
               if (res.data.errcode == "ok") {
                 that.getdetail()
               }
@@ -377,7 +389,7 @@ Page({
     wx.navigateTo({
       url: "/pages/clients-looking-for-work/preview-name-card/previewcard",
     })
-  }, 
+  },
   errImg: function () {
 
     this.setData({
@@ -419,7 +431,7 @@ Page({
         failTitle: "操作失败，请稍后重试！",
         params: imgdetail,
         success(res) {
-          
+
           if (res.data.errcode == 200) {
             app.showMyTips("保存成功");
             that.getdetail()
@@ -431,11 +443,11 @@ Page({
       })
     })
   },
- 
+
   getdetail() {
     let userInfo = wx.getStorageSync("userInfo");
     if (!userInfo) return false;
-    
+
     let detail = {
       userId: userInfo.userId,
       token: userInfo.token,
@@ -450,7 +462,7 @@ Page({
         let mydata = res.data.data;
         if (res.data.errcode == 200) {
           for (let i = 0; i < mydata.project.length; i++) {
-            
+
             if (mydata.project[i].check == 1) {
               that.setData({
                 checkthree: true,
@@ -510,7 +522,7 @@ Page({
             wx.setStorageSync("uuid", mydata.info.uuid)
           }
           if (mydata.info.gender != "0" && mydata.info.gender) {
-            
+
             that.setData({
               sex: mydata.info.gender == "1" ? "男" : "女"
             })
@@ -613,11 +625,22 @@ Page({
               projectlength: 0
             });
           } else {
-            that.setData({
-              project: mydata.project,
-              projectone: [mydata.project[0]],
-              projectlength: mydata.project.length >= 1 ? mydata.project.length : 0
-            });
+            if (new Date(mydata.project[0].completion_time).getTime() / 86400000 < parseInt(new Date().getTime() / 86400000)) {
+              that.setData({
+                project: mydata.project,
+                projectone: [mydata.project[0]],
+                projectlength: mydata.project.length >= 1 ? mydata.project.length : 0
+              });
+            } else {
+              that.setData({
+                project: mydata.project,
+              })
+              mydata.project[0].completion_time = "zhijin"
+              that.setData({
+                projectone: [mydata.project[0]],
+                projectlength: mydata.project.length >= 1 ? mydata.project.length : 0
+              });
+            }
           }
           that.setData({
             percent: mydata.info.hasOwnProperty("progress") ? mydata.info.progress : 0
@@ -637,7 +660,7 @@ Page({
               skillbooksone: [mydata.certificates[0]]
             })
           }
-  
+
           let popup = "";
           if (mydata.hasOwnProperty("popup_text")) {
             for (let i = 0; i < mydata.popup_text.length; i++) {

@@ -262,7 +262,15 @@ Page({
       reminder.reminder({ tips: '开始时间' })
       return
     }
-
+    if (this.data.projectname.length > 12 || this.data.projectname.length < 3) {
+      wx.showModal({
+        title: '温馨提示',
+        content: '您输入的项目名称小于3个字或者大于12个字,请重新输入',
+        showCancel: false,
+        success(res) { }
+      })
+      return
+    }
     if (new Date(this.data.startdate).getTime() > new Date().getTime()) {
       wx.showModal({
         title: '温馨提示',
@@ -431,7 +439,15 @@ Page({
       reminder.reminder({ tips: '项目描述' })
       return
     }
-
+    if (this.data.projectname.length > 12 || this.data.projectname.length < 3) {
+      wx.showModal({
+        title: '温馨提示',
+        content: '您输入的项目名称小于3个字或者大于12个字,请重新输入',
+        showCancel: false,
+        success(res) { }
+      })
+      return
+    }
     if (!vertifyNum.isChinese(this.data.detail)) {
       wx.showModal({
         title: '温馨提示',
@@ -711,6 +727,16 @@ Page({
       return
     }
     
+    if (this.data.projectname.length > 12 || this.data.projectname.length < 3 ){
+      wx.showModal({
+        title: '温馨提示',
+        content: '您输入的项目名称小于3个字或者大于12个字,请重新输入',
+        showCancel: false,
+        success(res) { }
+      })
+      return
+    }
+
     if (vertifyNum.isNull(this.data.detail)) {
       reminder.reminder({ tips: '项目描述' })
       return

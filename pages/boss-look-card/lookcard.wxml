@@ -1,125 +1,125 @@
 <!-- telephorft userComplaintAction distance lists-ad -->
 <view>
-<view class="cardcolore">
-  <view class="header">
-    注:老板对找活者满意，可以直接与他联系以及点赞或转发
-  </view>
+  <view class="cardcolore">
+    <view class="header">
+      注:老板对找活者满意，可以直接与他联系以及点赞或转发
+    </view>
   </view>
   <view class="findingnamecardthree">
     <view class="findingnamecardthreemobile">
-    <view>
-      <image src="{{baseinform}}"></image> 
-         <text>基础信息</text>
-      <image src="{{baseinform}}"></image>
-    </view>
+      <view>
+        <image src="{{baseinform}}"></image>
+        <text>基础信息</text>
+        <image src="{{baseinform}}"></image>
+      </view>
     </view>
   </view>
 
-<view class="cardcolore">
-  <view class="cardtwo">
-    <view class="cardonetwof">
-      <view class="cardtwosonone">
-        <view class="cardtwosononeimg">
-          <view class="oimg">
-            <image src="{{headerimg}}" binderror="errImg"></image>
-          </view>
-          <view class="oimgone">
-            <text class="otext">{{name}}</text>
-            <view class="otextone">
-              <text>{{sex}}</text>
-              <text class="{{sex?'ochange':''}}">{{age}}</text>
-              <text class="{{age?'ochange':''}}">{{nation}}</text>
+  <view class="cardcolore">
+    <view class="cardtwo">
+      <view class="cardonetwof">
+        <view class="cardtwosonone">
+          <view class="cardtwosononeimg">
+            <view class="oimg">
+              <image src="{{headerimg}}" binderror="errImg"></image>
+            </view>
+            <view class="oimgone">
+              <text class="otext">{{name}}</text>
+              <view class="otextone">
+                <text>{{sex}}</text>
+                <text class="{{sex?'ochange':''}}">{{age}}</text>
+                <text class="{{age?'ochange':''}}">{{nation}}</text>
+              </view>
             </view>
           </view>
         </view>
-      </view>
-      <view class="lineone">
-        <view class="linezo">
-          <view class="cardotext">
-            <text class="oworkotext">手机</text>
-            <view class="allone">
-              <text class="workotextone">{{telephone}}</text>
-              <view class="cliok" wx:if="{{!examine&&onoff || is_read ==0&&is_end !=2&&!examine&&status == 0}}">
-                <text bindtap="telephorf" data-telephone="{{telephone}}">点击拨打</text>
-                <text bindtap="userTapComplain">举报</text>
-              </view>
-              <view class="cliok" wx:if="{{examine||!onoff && is_read ==1&&is_end !=2&&status == 0}}">
-                <text bindtap="authrasution" data-telephone="{{telephone}}">查看完整电话</text>
-              </view>
-              <view class="cliokine" wx:if="{{is_end ==2&&status == 0}}">
-                <text>已找到</text>
-                <text bindtap="userTapComplain" wx:if="{{is_read ==0&&is_end ==2}}">举报</text>
+        <view class="lineone">
+          <view class="linezo">
+            <view class="cardotext">
+              <text class="oworkotext">手机</text>
+              <view class="allone">
+                <text class="workotextone">{{telephone}}</text>
+                <view class="cliok" wx:if="{{!examine&&onoff || is_read ==0&&is_end !=2&&!examine&&status == 0}}">
+                  <text bindtap="telephorf" data-telephone="{{telephone}}">点击拨打</text>
+                  <text bindtap="userTapComplain">举报</text>
+                </view>
+                <view class="cliok" wx:if="{{examine||!onoff && is_read ==1&&is_end !=2&&status == 0}}">
+                  <text bindtap="authrasution" data-telephone="{{telephone}}">查看完整电话</text>
+                </view>
+                <view class="cliokine" wx:if="{{is_end ==2&&status == 0}}">
+                  <text>已找到</text>
+                  <text bindtap="userTapComplain" wx:if="{{is_read ==0&&is_end ==2}}">举报</text>
+                </view>
               </view>
             </view>
-          </view>
-          <view class="cardotext" wx:if="{{cityself}}">
-            <text class="oworkotext">我的家乡</text>
-            <text class="workotextone">{{cityself}}</text>
+            <view class="cardotext" wx:if="{{cityself}}">
+              <text class="oworkotext">我的家乡</text>
+              <text class="workotextone">{{cityself}}</text>
+            </view>
+
+            <view class="cworkotype ({{occupations.length == 0?'skillcss':''}})" wx:if="{{occupations}}">
+              <view class="ocworkotype">工种</view>
+              <view class="ocworkotypeoo">
+                <view class="ocworkotyp" wx:if="{{occupations.length!= 0}}">
+                  <view class="ocworkotyptu" wx:for="{{occupations}}" wx:key="{{index}}">
+                    {{item}}
+                  </view>
+                </view>
+                <view class="ocworkotyp" wx:if="{{occupations.length == 0}}">
+                  <text class="workotextone">{{occupationone}}</text>
+                </view>
+              </view>
+            </view>
+            <view class="cardotext" wx:if="{{workingyears}}">
+              <text class="oworkotext">工龄</text>
+              <text class="workotextone">{{workingyears}}</text>
+            </view>
+            <view class="cardotext" wx:if="{{procity}}">
+              <text class="oworkotext">熟练度</text>
+              <text class="workotextone">{{procity}}</text>
+            </view>
+            <view class="cardotext" wx:if="{{staffcomposition}}">
+              <text class="oworkotext">人员构成</text>
+              <text class="workotextone">{{staffcomposition}}</text>
+            </view>
+            <view class="cardotext" wx:if="{{personnum && personnum !=1&& personnum !=0}}">
+              <text class="oworkotext">队伍人数</text>
+              <text class="workotextone">{{personnum}}</text>
+            </view>
+            <view class="cardotext" wx:if="{{city}}">
+              <text class="oworkotext">所在地区</text>
+              <view class="distancev" bindtap="showThisMapInfo">
+                <text class="({{location?'workotextone':'zong'}})">{{city}}</text>
+                <view class="distanceo" wx:if="{{location}}">
+                  <image src="{{biaoqian}}" id="distance"></image>
+                  <text class="distancet">{{distance}}</text>
+                </view>
+              </view>
+            </view>
+
+            <view class="cardotext" wx:if="{{tags.length !=0 }}">
+              <text class="oworkotext">标签</text>
+              <view class="alllabletu" wx:if="{{tags != '未填写'}}">
+                <view class="labletu" wx:for="{{tags}}" wx:key="{{index}}">
+                  {{item.label_name}}
+                </view>
+              </view>
+              <view class="alllabletu" wx:if="{{tags == '未填写'}}">
+                <text class="tagsone">{{tags}}</text>
+              </view>
+            </view>
           </view>
 
-          <view class="cworkotype ({{occupations.length == 0?'skillcss':''}})" wx:if="{{occupations}}">
-            <view class="ocworkotype">工种</view>
-            <view class="ocworkotypeoo">
-            <view class="ocworkotyp" wx:if="{{occupations.length!= 0}}">
-              <view class="ocworkotyptu" wx:for="{{occupations}}" wx:key="{{index}}">
-                {{item}}
-              </view>
-            </view>
-            <view class="ocworkotyp" wx:if="{{occupations.length == 0}}">
-              <text class="workotextone">{{occupationone}}</text>
-            </view>
-               </view>
-          </view>
-          <view class="cardotext" wx:if="{{workingyears}}">
-            <text class="oworkotext">工龄</text>
-            <text class="workotextone">{{workingyears}}</text>
-          </view>
-          <view class="cardotext" wx:if="{{procity}}">
-            <text class="oworkotext">熟练度</text>
-            <text class="workotextone">{{procity}}</text>
-          </view>
-          <view class="cardotext" wx:if="{{staffcomposition}}">
-            <text class="oworkotext">人员构成</text>
-            <text class="workotextone">{{staffcomposition}}</text>
-          </view>
-          <view class="cardotext" wx:if="{{personnum && personnum !=1&& personnum !=0}}">
-            <text class="oworkotext">队伍人数</text>
-            <text class="workotextone">{{personnum}}</text>
-          </view>
-          <view class="cardotext" wx:if="{{city}}">
-            <text class="oworkotext">所在地区</text>
-            <view class="distancev" bindtap="showThisMapInfo">
-              <text class="({{location?'workotextone':'zong'}})">{{city}}</text>
-              <view class="distanceo" wx:if="{{location}}">
-                <image src="{{biaoqian}}" id="distance"></image>
-                <text class="distancet">{{distance}}</text>
-              </view>
-            </view>
-          </view>
-
-          <view class="cardotext" wx:if="{{tags.length !=0 }}">
-            <text class="oworkotext">标签</text>
-            <view class="alllabletu" wx:if="{{tags != '未填写'}}">
-              <view class="labletu" wx:for="{{tags}}" wx:key="{{index}}">
-                {{item.label_name}}
-              </view>
-            </view>
-            <view class="alllabletu" wx:if="{{tags == '未填写'}}">
-              <text class="tagsone">{{tags}}</text>
-            </view>
-          </view>
         </view>
-
+        <view class="cardotextbottom"></view>
       </view>
-      <view class="cardotextbottom"></view>
     </view>
   </view>
-  </view>
 
-  <ad  class="lists-ad" unit-id="{{ unitid }}" style="margin-top:15rpx;"></ad>
-  
+  <ad class="lists-ad" unit-id="{{ unitid }}" style="margin-top:15rpx;"></ad>
 
-  <view class="cardthree">
+
+  <view class="cardthree" wx:if="{{introshow}}" >
     <view class="cardthreemobile">
       <image src="{{baseinform}}"></image>
       <text>自我介绍</text>
@@ -127,105 +127,112 @@
     </view>
   </view>
   <view class="cardcolore">
-  <view class="introcardtwo" wx:if="{{introshow}}" >
+    <view class="introcardtwo" wx:if="{{introshow}}">
 
-    <view class="introcontent">{{introduce}}</view>
-    <view class="cardotextbottom"></view>
-  </view>
+      <view class="introcontent">{{introduce}}</view>
+      <view class="cardotextbottom"></view>
     </view>
-  <view wx:if="{{!introshow}}" class="jilu">暂无记录</view>
+  </view>
+  <!-- <view wx:if="{{!introshow}}" class="jilu">暂无记录</view> -->
 
 
-  <view class="cardthree">
+  <view class="cardthree" wx:if="{{projectlength != 0}}" >
     <view class="cardthreemobile">
       <image src="{{baseinform}}"></image>
       <text>项目经验</text>
       <image src="{{baseinform}}"></image>
     </view>
   </view>
-    <view class="cardcolore">
-  <view class="cardsix" wx:if="{{projectlength!= 0}}">
-    <view class="cardsixzong" wx:for="{{projectone}}" wx:for-index="pindex" wx:key="{{index}}">
-      <view>
-        <image src="{{experienceitem}}" class="cardsixone"></image>
-      </view>
-      <view class="cardsixall">
-        <view class="cardsixtwo">
-          <text>{{item.project_name}}</text>
+
+  <view class="cardcolore">
+    <view class="cardsix" wx:if="{{projectlength!= 0}}">
+      <view class="cardsixzong" wx:for="{{projectone}}" wx:for-index="pindex" wx:key="{{index}}">
+        <view>
+          <image src="{{experienceitem}}" class="cardsixone"></image>
         </view>
-        <view class="cardsixthreeborder">
-          <view class="cardsixthree">
-            <text>{{item.start_time}}--{{item.completion_time}}</text>
-            <text>{{item.province_name}}{{item.city_name}}</text>
+        <view class="cardsixall">
+          <view class="cardsixtwo">
+            <text>{{item.project_name}}</text>
           </view>
-          <view class="cardsixfour">
-            <text>{{item.detail}}
+          <view class="cardsixthreeborder">
+            <view class="cardsixthree">
+              <text>{{item.start_time}}-{{item.completion_time}}</text>
+              <text>{{item.province_name}}{{item.city_name}}</text>
+            </view>
+            <view class="cardsixfour">
+              <text>{{item.detail}}
         </text>
-          </view>
-          <view class="cardsixfive">
-            <image wx:for="{{item.image}}" wx:key="{{index}}" src="{{item}}" data-url="{{ item }}" catchtap="previewImage" data-index="{{ pindex }}"></image>
+            </view>
+            <view class="cardsixfive">
+              <image wx:for="{{item.image}}" wx:key="{{index}}" src="{{item}}" data-url="{{ item }}" catchtap="previewImage" data-index="{{ pindex }}"></image>
 
+            </view>
           </view>
-        </view>
 
-      </view>
-    </view>
-    <view class="cardsixsixall">
-      <view class="cardsixsix" bindtap="moreproject">
-        <view class="more">
-          更多项目经验
-         <view><image src="{{downward}}" class="down"></image></view>
         </view>
       </view>
-    </view>
-    <view class="cardsixsixallvoto">
+      <view class="cardsixsixall">
+        <view class="cardsixsix" bindtap="moreproject">
+          <view class="more">
+            更多项目经验
+            <view>
+              <image src="{{downward}}" class="down"></image>
+            </view>
+          </view>
+        </view>
+      </view>
+      <view class="cardsixsixallvoto">
+      </view>
     </view>
   </view>
-    </view>
-  <view wx:if="{{projectlength == 0}}" class="jilu">
+  <!-- <view wx:if="{{projectlength == 0}}" class="jilu">
     暂无记录
-  </view>
+  </view> -->
 
-  <view class="cardthree">
+  <view class="cardthree" wx:if="{{skilllength != 0}}" >
     <view class="cardthreemobile">
       <image src="{{baseinform}}"></image>
       <text>职业技能</text>
       <image src="{{baseinform}}"></image>
     </view>
   </view>
-      <view class="cardcolore">
-  <view class="cardeight {{(status != 0)?'eightstatus':''}}" wx:if="{{skilllength!= 0}}">
-    <view class="cardeightzong" wx:for="{{skillbooksone}}" wx:for-index="pindex" wx:key="{{index}}">
-      <view>
-        <image src="{{experienceitem}}" class="cardeightone"></image>
-      </view>
-      <view class="cardeightall">
-        <view class="cardeighttwo">
-          <text>{{item.name}}</text>
-          <text>{{item.certificate_time}}</text>
+  <view class="cardcolore">
+    <view class="cardeight {{(status != 0)?'eightstatus':''}}" wx:if="{{skilllength!= 0}}">
+      <view class="cardeightzong" wx:for="{{skillbooksone}}" wx:for-index="pindex" wx:key="{{index}}">
+        <view>
+          <image src="{{experienceitem}}" class="cardeightone"></image>
         </view>
-        <view class="cardeightfive">
-          <image wx:for="{{item.image}}" data-url="{{ item }}" catchtap="previewImagec" data-index="{{ pindex }}" wx:key="{{index}}" src="{{item}}"></image>
+        <view class="cardeightall">
+          <view class="cardeighttwo">
+            <text>{{item.name}}</text>
+          </view>
+          <view class="certificatetime">
+            <text>{{item.certificate_time}}</text>
+          </view>
+          <view class="cardeightfive">
+            <image wx:for="{{item.image}}" data-url="{{ item }}" catchtap="previewImagec" data-index="{{ pindex }}" wx:key="{{index}}" src="{{item}}"></image>
+
+          </view>
 
         </view>
-
       </view>
-    </view>
-    <view class="cardeightsixall">
-      <view class="cardeightsix" bindtap="moreskill">
-        <view class="more">
-          更多技能证书
-         <view><image src="{{downward}}" class="down"></image></view> 
+      <view class="cardeightsixall">
+        <view class="cardeightsix" bindtap="moreskill">
+          <view class="more">
+            更多技能证书
+            <view>
+              <image src="{{downward}}" class="down"></image>
+            </view>
+          </view>
         </view>
       </view>
-    </view>
-    <view class="cardsixsixallvoto">
+      <view class="cardsixsixallvoto">
+      </view>
     </view>
   </view>
-    </view>
-  <view wx:if="{{skilllength == 0}}" class="jiluone">
+  <!-- <view wx:if="{{skilllength == 0}}" class="jiluone">
     暂无记录
-  </view>
+  </view> -->
 
   <view class="bossbottom" wx:if="{{status == 0}}">
     <button class="bossbottomb" bindtap="praise">
@@ -261,12 +268,12 @@
     </button>
   </view>
 
-  <view class='yupao-common-enterbox flex-row' wx:if="{{ showComplain }}">
+  <view class='yupao-common-enterbox flex-row' wx:if="{{ showComplain }}" catchtouchmove="move">
     <view class='yupao-common-enter'>
       <text class='yupao-enter-title'>投诉信息</text>
       <text class='yupao-enter-tips'>请输入投诉内容</text>
       <view class='yupao-enter-body'>
-        <textarea class='yupao-enter-wrap yupao-enter-textarea' placeholder='请输入投诉内容' bindinput='userEnterComplain' maxlength='200' value='{{ complainInfo }}'></textarea>
+        <textarea class='yupao-enter-wrap yupao-enter-textarea' placeholder='请输入投诉内容' bindinput='userEnterComplain' maxlength='200' value='{{ complainInfo }}' fixed='true'></textarea>
       </view>
       <view class='yupao-enter-footer clearfix'>
         <text bindtap='userCancleComplain'>取消</text>
@@ -274,14 +281,14 @@
       </view>
     </view>
   </view>
-  <image class="info-shareimg" src="{{homebtnImg}}"  wx:if="{{!sharedeke}}" bindtap='returnindex' ></image>
+  <image class="info-shareimg" src="{{homebtnImg}}" wx:if="{{!sharedeke}}" bindtap='returnindex'></image>
   <view class="common-userauth" wx:if="{{ !userInfo }}">
     <image src='{{ icon }}' class='userauth-topicon'></image>
     <view class='userauth-title'>登录鱼泡网</view>
     <view class='userauth-words'>招工 找活抢先一步，用的安心 赚的开心。</view>
     <button class='userauth-btn userauth-sure-btn' open-type="getUserInfo" bindgetuserinfo='bindGetUserInfo'>微信授权登录</button>
     <button wx:if="{{sharedeke}}" class='userauth-btn  userauth-back-btn' bindtap='returnPrevPage'>返回上一页</button>
-     <button wx:if="{{!sharedeke}}" class='userauth-btn  userauth-back-btn' bindtap='returnindex'>返回首页</button>
+    <button wx:if="{{!sharedeke}}" class='userauth-btn  userauth-back-btn' bindtap='returnindex'>返回首页</button>
   </view>
   <view class="cardnine" wx:if="{{ status != 0}}">
     <button class="obtcardnineone" open-type='share'>

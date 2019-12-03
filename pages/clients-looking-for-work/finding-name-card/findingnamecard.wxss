@@ -896,13 +896,14 @@ height: 26rpx;
   font-weight: bold;
 }
 
-.cardeightzong .cardeighttwo text:last-child {
+
+.certificatetime{
   font-size: 28rpx;
   line-height: 26rpx;
   color: #8b8b8a;
   margin-left: 14rpx;
+  margin-top: 14rpx;
 }
-
 .cardeightzong .cardeightthree {
   color: #8b8b8a;
   font-size: 22rpx;

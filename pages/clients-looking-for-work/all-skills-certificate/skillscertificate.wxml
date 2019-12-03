@@ -10,7 +10,9 @@
       <view class="skilleightall">
         <view class="skilleighttwo">
           <text>{{item.name}}</text>
-          <text>{{item.certificate_time}}</text>
+        </view>
+       <view class="skillcertificate">
+           <text>{{item.certificate_time}}</text>
         </view>
         <view class="skilleightfive">
           <view class="skilleightfiveline">
@@ -42,7 +44,9 @@
       <view class="skilleightall">
         <view class="skilleighttwo">
           <text>{{item.name}}</text>
-          <text>{{item.certificate_time}}</text>
+        </view>
+        <view class="skillcertificate">
+           <text>{{item.certificate_time}}</text>
         </view>
         <view class="skilleightfive">
           <view class="skilleightfiveline">
@@ -71,7 +75,9 @@
       <view class="skilleightall">
         <view class="skilleighttwo">
           <text>{{item.name}}</text>
-          <text>{{item.certificate_time}}</text>
+        </view>
+               <view class="skillcertificate">
+           <text>{{item.certificate_time}}</text>
         </view>
         <view class="skilleightfive">
           <view class="skilleightfiveline">

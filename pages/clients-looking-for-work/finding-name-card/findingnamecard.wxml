@@ -252,7 +252,8 @@
 
       <view class="cardsixzong" wx:for="{{projectone}}" wx:for-index="pindex" wx:key="{{index}}">
         <image class="checkthree" src="{{audit}}" wx:if="{{item.check == 1&&show_tips==1}}"></image>
-        <view class="editor" bindtap="editor" data-uid="{{item}}" wx:if="{{item.check != 1}}">编辑</view>
+        <view class="editor" bindtap="editor" data-uid="{{item}}" wx:if="{{item.check == 2}}">编辑</view>
+          <view class="editor" bindtap="editor" data-uid="{{item}}" wx:if="{{item.check == 0}}">待修改</view>
         <image class="audit" wx:if="{{item.check == 0}}" src="{{notthrough}}"></image>
         <image class="audit" wx:if="{{item.check == 1&&show_tips == 0}}" src="{{inreview}}"></image>
         <view>
@@ -264,7 +265,7 @@
           </view>
           <view class="cardsixthreeborder">
             <view class="cardsixthree">
-              <text>{{item.start_time}}-{{item.completion_time}}</text>
+              <text>{{item.start_time}}-{{item.completion_time=="zhijin"?"至今":item.completion_time}}</text>
               <text>{{item.province_name}}{{item.city_name}}</text>
             </view>
             <view class="cardsixfour">
@@ -335,7 +336,8 @@
 
       <view class="cardeightzong" wx:for="{{skillbooksone}}" wx:for-index="pindex" wx:key="{{index}}">
         <image class="checkfour" src="{{audit}}" wx:if="{{item.check == 1&&show_tips==1}}"></image>
-        <view class="editor" bindtap="editorone" data-uid="{{item}}" wx:if="{{item.check != 1}}">编辑</view>
+        <view class="editor" bindtap="editorone" data-uid="{{item}}" wx:if="{{item.check == 2}}">编辑</view>
+        <view class="editor" bindtap="editorone" data-uid="{{item}}" wx:if="{{item.check == 0}}">待修改</view>
         <image class="audit" wx:if="{{item.check == 0}}" src="{{notthrough}}"></image>
         <image class="audit" wx:if="{{item.check == 1&&show_tips == 0}}" src="{{inreview}}"></image>
         <view>
@@ -344,7 +346,9 @@
         <view class="cardeightall">
           <view class="cardeighttwo">
             <text>{{item.name}}</text>
-            <text>{{item.certificate_time}}</text>
+          </view>
+          <view class="certificatetime">
+          <text>{{item.certificate_time}}</text>
           </view>
           <view class="cardeightfive">
             <image wx:for="{{item.image}}" data-url="{{ item }}" catchtap="previewImagec" src="{{item}}" data-index="{{ pindex }}" wx:key="{{index}}"></image>

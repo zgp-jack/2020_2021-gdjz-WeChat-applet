@@ -150,14 +150,20 @@ Page({
     footerjs.closePublishAction(this);
   },
   getIndexListData: function (callback) {
+    let userLocation = wx.getStorageSync("userLocation")
+    if (!userLocation) {
+      userLocation = ""
+    } else {
+      userLocation = userLocation.split(",").reverse().join(",")
+    }
     let _this = this;
     let id = _this.data.areaId;
     wx.showLoading({
       title: '数据加载中',
     })
     app.appRequestAction({
-      url: "index/new-msg-list/",
-      params: { area: this.data.areaId },
+      url: "index/new-index-msg/",
+      params: { area: this.data.areaId, location: userLocation},
       hideLoading: true,
       success: function (res) {
         console.log(res)

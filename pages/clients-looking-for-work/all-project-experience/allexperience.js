@@ -19,10 +19,22 @@ Page({
   },
   editor(e) {
     
-    wx.setStorageSync("projectdetail", e.currentTarget.dataset)
-    wx.navigateTo({
-      url: "/pages/clients-looking-for-work/new-project-experience/projectexperience",
-    })
+    console.log(e)
+    let timer = new Date();
+    let d = new Date(timer);
+    let times = d.getFullYear() + '-' + (d.getMonth() + 1) + '-' + (d.getDate() >= 10 ? d.getDate() : '0' + d.getDate());
+    if (e.currentTarget.dataset.uid.completion_time == "zhijin") {
+      e.currentTarget.dataset.uid.completion_time = times
+      wx.setStorageSync("projectdetail", e.currentTarget.dataset)
+      wx.navigateTo({
+        url: "/pages/clients-looking-for-work/new-project-experience/projectexperience",
+      })
+    } else {
+      wx.setStorageSync("projectdetail", e.currentTarget.dataset)
+      wx.navigateTo({
+        url: "/pages/clients-looking-for-work/new-project-experience/projectexperience",
+      })
+    }
   },
   delestore() {
     wx.removeStorageSync("projectdetail")
@@ -41,7 +53,8 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    console.log(new Date("2019-12-03").getTime() / 86400000)
+    console.log(parseInt(new Date().getTime() / 86400000))
   },
 
   /**
@@ -75,10 +88,20 @@ Page({
       params: detail,
       failTitle: "操作失败，请稍后重试！",
       success(res) {
-        
+        let allproject = [];
         if (res.data.errcode == 200) {
+          let dataproject = res.data.data.project;
+          for (let i = 0; i < dataproject.length ; i++){
+            if (new Date(dataproject[i].completion_time).getTime() / 86400000 < parseInt(new Date().getTime() / 86400000)) {
+              allproject.push(dataproject[i])
+            }else{
+              dataproject[i].completion_time = "zhijin"
+              allproject.push(dataproject[i])
+            }
+          }
+
           that.setData({
-            allproject: res.data.data.project
+            allproject: allproject
           })
           that.setData({
             projectlength: res.data.data.project.length
@@ -115,12 +138,25 @@ Page({
         allgetexpre: 8
       })
 
+
       let projectall = [];
+      let allproject = [];
       for (let i = 0; i < allexpress.length; i++) {
         projectall.push(allexpress[i])
       }
+
+
+      for (let i = 0; i < projectall.length; i++) {
+        if (new Date(projectall[i].completion_time).getTime() / 86400000 < parseInt(new Date().getTime() / 86400000)) {
+          allproject.push(projectall[i])
+        } else {
+          projectall[i].completion_time = "zhijin"
+          allproject.push(projectall[i])
+        }
+      }
+
       that.setData({
-        projecthree: projectall
+        projecthree: allproject
       });
 
     }

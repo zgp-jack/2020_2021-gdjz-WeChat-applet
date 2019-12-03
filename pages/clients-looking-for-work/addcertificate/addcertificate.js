@@ -220,7 +220,15 @@ vertify()
       reminder.reminder({ tips: '职业技能' })
       return
     }
-
+    if (this.data.name.length > 12 || this.data.name.length < 3) {
+      wx.showModal({
+        title: '温馨提示',
+        content: '您输入的职业技能小于3个字或者大于12个字,请重新输入',
+        showCancel: false,
+        success(res) { }
+      })
+      return
+    }
     if (!vertifyNum.isChinese(this.data.name)) {
       wx.showModal({
         title: '温馨提示',
@@ -316,6 +324,16 @@ vertify()
       wx.showModal({
         title: '温馨提示',
         content: '您输入的职业技能没有汉字,请重新输入',
+        showCancel: false,
+        success(res) { }
+      })
+      return
+    }
+
+    if (this.data.name.length > 12 || this.data.name.length < 3) {
+      wx.showModal({
+        title: '温馨提示',
+        content: '您输入的职业技能小于3个字或者大于12个字,请重新输入',
         showCancel: false,
         success(res) { }
       })
@@ -439,6 +457,16 @@ vertify()
     let vertifyNum = v.v.new()
     if (vertifyNum.isNull(this.data.name)) {
       reminder.reminder({ tips: '职业技能' })
+      return
+    }
+
+    if (this.data.name.length > 12 || this.data.name.length < 3) {
+      wx.showModal({
+        title: '温馨提示',
+        content: '您输入的职业技能小于3个字或者大于12个字,请重新输入',
+        showCancel: false,
+        success(res) { }
+      })
       return
     }
     if (!vertifyNum.isChinese(this.data.name)) {

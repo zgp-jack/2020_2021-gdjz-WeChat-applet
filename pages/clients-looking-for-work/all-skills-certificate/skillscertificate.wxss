@@ -32,7 +32,8 @@
   font-weight: bold;
 }
 
-.skilleightzong .skilleighttwo text:last-child {
+.skillcertificate {
+  margin-top: 12rpx;
   font-size: 26rpx;
   line-height: 26rpx;
   color: #8b8b8a;

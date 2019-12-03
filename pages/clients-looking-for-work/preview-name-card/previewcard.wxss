@@ -32,7 +32,7 @@
 }
 
 .obtcard {
-  margin-top: 12rpx;
+  margin-top: 24rpx;
 }
 
 .obtcardone {

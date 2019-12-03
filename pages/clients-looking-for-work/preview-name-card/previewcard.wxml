@@ -129,12 +129,13 @@
     审核未通过原因：{{note}}
   </view> -->
 
-  <view class="cardthree">
+  <view class="cardthree" wx:if="{{introshow}}" >
     <view class="cardthreemobile">
       <image src="{{description}}"></image>
       <text>自我介绍</text>
     </view>
   </view>
+
   <view class="cardcolore">
   <view class="introcardtwo" wx:if="{{introshow}}">
     <!-- <image class="checkone" src="../../../images/audit.png" wx:if="{{checkone}}"></image> -->
@@ -143,15 +144,16 @@
   </view>
   </view>
 
-  <view wx:if="{{!introshow}}" class="jilu">暂无记录</view>
+  <!-- <view wx:if="{{!introshow}}" class="jilu">暂无记录</view> -->
 
-  <view class="cardfive">
+  <view class="cardfive"wx:if="{{projectlength != 0}}"  >
 
     <view class="cardfivemobile">
       <image src="{{projectexperience}}"></image>
       <text>项目经验</text>
     </view>
   </view>
+
     <view class="cardcolore">
   <view class="cardsix" wx:if="{{projectlength != 0}}">
 
@@ -200,16 +202,17 @@
     </view>
   </view>
     </view>
-  <view wx:if="{{projectlength == 0}}" class="jilu">
+  <!-- <view wx:if="{{projectlength == 0}}" class="jilu">
     暂无记录
-  </view>
+  </view> -->
 
-  <view class="cardseven">
+  <view class="cardseven" wx:if="{{skilllength != 0}}" >
     <view class="cardsevenmobile">
       <image src="{{newresumeskill}}"></image>
       <text>职业技能</text>
     </view>
   </view>
+
   <view class="cardcolore">
   <view class="cardeight" wx:if="{{skilllength != 0}}">
     <view class="cardeightzong" wx:for="{{skillbooksone}}" wx:for-index="pindex" wx:key="{{index}}">
@@ -222,8 +225,10 @@
       <view class="cardeightall">
         <view class="cardeighttwo">
           <text>{{item.name}}</text>
-          <text>{{item.certificate_time}}</text>
         </view>
+        <view class="certificatetime">
+          <text>{{item.certificate_time}}</text>
+          </view>
         <view class="cardeightfive">
           <image wx:for="{{item.image}}" wx:key="{{index}}" src="{{item}}" data-url="{{ item }}" catchtap="previewImagec" data-index="{{ pindex }}"></image>
         </view>
@@ -247,9 +252,9 @@
     </view>
   </view>
     </view>
-  <view wx:if="{{skilllength == 0}}" class="jiluone">
+  <!-- <view wx:if="{{skilllength == 0}}" class="jiluone">
     暂无记录
-  </view>
+  </view> -->
 
 
   <view class="cardnine {{projectlength == 0 || skilllength == 0?'obtcard':'' }} ">

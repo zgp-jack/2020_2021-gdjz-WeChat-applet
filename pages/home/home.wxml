@@ -239,7 +239,7 @@
               <view class="listsboxage">
                 <view class="listsboxageone">
                   <text class="listsboxname">{{item.username}}</text>
-                  <text class="listsboxsex" >{{item.gender  == "1" ? "男" : item.gender == "0"?"女":""}}</text>
+                  <text class="listsboxsex" >{{item.gender  == "1" ? "男" : item.gender == "0"?"":"女"}}</text>
                   <text class="listsboxage" wx:if="{{item.birthday != 0}}">{{item.birthday}}岁</text>
                   <image wx:if="{{item.authentication == 2}}" src="{{realNames}}"></image>
                   <image wx:if="{{item.certificate == 1}}" src="{{authentication}}"></image>
