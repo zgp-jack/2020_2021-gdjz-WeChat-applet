@@ -758,7 +758,16 @@ Page({
     if ((this.data.isFirstRequest) || (this.data.showNothinkData) || (this.data.nothavemore)) return false;
     this.doRequestAction(true);
   },
+  onShareAppMessage: function () {
+    
+    let commonShareTips = app.globalData.commonShareTips;
+    return {
+      title: commonShareTips,
+      imageUrl: app.globalData.commonShareImg,
+      path: '/pages/index/index'
+    }
 
+  },
   /**
    * 用户点击右上角分享
    */

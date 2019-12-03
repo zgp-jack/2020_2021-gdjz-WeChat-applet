@@ -162,9 +162,10 @@ Page({
         if (res.data.errcode == 200) {
           that.setData({
             telephone: res.data.tel,
+            sharetelephone:res.data.tel,
             onoff: true
           })
-        } else if (res.data.errcode == "get_integral") {
+        } else if (res.data.errcode == "7405") {
           wx.showModal({
             title: '温馨提示',
             content: res.data.errmsg,
@@ -530,20 +531,11 @@ Page({
       hideLoading: true,
       params: praise,
       success: function (res) {
-
+        app.showMyTips(res.data.errmsg);
         if (res.data.errcode == "ok") {
-          if (res.data.show == 1) {
-            app.showMyTips("点赞成功");
-            _this.setData({
-              praise: 1
-            })
-          }
-          if (res.data.show == 0) {
-            app.showMyTips("取消点赞");
-            _this.setData({
-              praise: 0
-            })
-          }
+          _this.setData({
+            praise: res.data.show ? 1 : 0
+          })
         }
       },
       fail: function (err) {
@@ -577,20 +569,11 @@ Page({
       params: collect,
       hideLoading: true,
       success: function (res) {
-
+        app.showMyTips(res.data.errmsg);
         if (res.data.errcode == "ok") {
-          if (res.data.show == 1) {
-            app.showMyTips("收藏成功");
-            _this.setData({
-              collect: 1
-            })
-          }
-          if (res.data.show == 0) {
-            app.showMyTips("取消收藏");
-            _this.setData({
-              collect: 0
-            })
-          }
+          _this.setData({
+            collect: res.data.show ? 1 : 0
+          })
         }
       },
       fail: function (err) {
@@ -624,31 +607,18 @@ Page({
     })
   },
   onShareAppMessage: function () {
-    console.log(213)
     let tel = this.data.telephone;
-    tel = tel.substring(0, tel.length - 4) + "****";
-    this.setData({
-      telephone: tel
-    })
-    let userInfo = wx.getStorageSync("userInfo");
+    
     let uuid = this.data.resume_uuid;
     let commonShareTips = app.globalData.commonShareTips;
-    // let commonShareImg = app.globalData.commonShareImg;
-    if (userInfo) {
-      let refId = userInfo.userId;
-      return {
-        title: `${commonShareTips}`,
-        // imageUrl: commonShareImg,
-        path: `/pages/boss-look-card/lookcard?uuid=${uuid}&refId=${refId}&sharedekeId=1` //这是一个路径
-      }
-
-    } else {
-      return {
-        title: `${commonShareTips}`,
-        // imageUrl: commonShareImg,
-        path: `/pages/boss-look-card/lookcard?uuid=${uuid}&sharedekeId=1` //这是一个路径
-      }
+    let commonShareImg = app.globalData.commonShareImg;
+    
+    return {
+      title: commonShareTips,
+      imageUrl:commonShareImg,
+      path: '/pages/boss-look-card/lookcard?uuid=' + uuid + '&sharedekeId=1' //这是一个路径
     }
+    
   },
   bindGetUserInfo: function (e) {
     let that = this;
@@ -704,7 +674,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow() {
-    this.sharetelphe();
+    //this.sharetelphe();
     this.delestore();
     this.deleskill()
   },

@@ -526,16 +526,17 @@ Page({
     onShareAppMessage: function () {
         //this.userShareAction();
       let tel = this.data.info.tel_str;
-      tel = tel.substring(0, tel.length - 4) + "****"
-      this.setData({ "info.tel_str": tel })
+      
         if (this.data.shareFlag) this.userShareAddIntegral();
         let userId = this.data.userInfo.userId
         let _this = this;
         setTimeout(function () {
             _this.setData({ isShare: false })
         }, 500);
+      let commonShareImg = app.globalData.commonShareImg;
       return {
         title: this.data.info.title,
+        imageUrl: commonShareImg,
         path: "/pages/detail/info/info?home=1&id=" + this.data.infoId
       };
     }
