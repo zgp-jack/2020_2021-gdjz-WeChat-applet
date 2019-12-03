@@ -318,11 +318,24 @@ Page({
               projectlength: 0
             });
           }else{
-            that.setData({
-              project: mydata.project,
-              projectone: [mydata.project[0]],
-              projectlength: mydata.project.length >= 1 ? mydata.project.length : 0
-            });
+            if (new Date(mydata.project[0].completion_time).getTime() / 86400000 < parseInt(new Date().getTime() / 86400000)) {
+
+              that.setData({
+                project: mydata.project,
+                projectone: [mydata.project[0]],
+                projectlength: mydata.project.length >= 1 ? mydata.project.length : 0
+              });
+              that.data.project[0].completiontime = "zhijing"
+            } else {
+              that.setData({
+                project: [...mydata.project],
+              })
+              that.data.project[0].completiontime = "zhijin"
+              that.setData({
+                projectone: [that.data.project[0]],
+                projectlength: mydata.project.length >= 1 ? mydata.project.length : 0
+              });
+            }
           }
           
           that.setData({

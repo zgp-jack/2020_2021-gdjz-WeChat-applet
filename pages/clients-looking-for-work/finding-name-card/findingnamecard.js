@@ -134,22 +134,11 @@ Page({
     })
   },
   editor(e) {
-    console.log(e)
-    let timer = new Date();
-    let d = new Date(timer);
-    let times = d.getFullYear() + '-' + (d.getMonth() + 1) + '-' + (d.getDate() >= 10 ? d.getDate() : '0' + d.getDate());
-    if (e.currentTarget.dataset.uid.completion_time == "zhijin") {
-      e.currentTarget.dataset.uid.completion_time = times
+
       wx.setStorageSync("projectdetail", e.currentTarget.dataset)
       wx.navigateTo({
         url: "/pages/clients-looking-for-work/new-project-experience/projectexperience",
       })
-    }else{
-      wx.setStorageSync("projectdetail", e.currentTarget.dataset)
-      wx.navigateTo({
-        url: "/pages/clients-looking-for-work/new-project-experience/projectexperience",
-      })
-    }
 
   },
   editorone(e) {
@@ -626,22 +615,26 @@ Page({
             });
           } else {
             if (new Date(mydata.project[0].completion_time).getTime() / 86400000 < parseInt(new Date().getTime() / 86400000)) {
+
               that.setData({
                 project: mydata.project,
                 projectone: [mydata.project[0]],
                 projectlength: mydata.project.length >= 1 ? mydata.project.length : 0
               });
+              that.data.project[0].completiontime = "zhijing"
             } else {
               that.setData({
-                project: mydata.project,
+                project: [...mydata.project],
               })
-              mydata.project[0].completion_time = "zhijin"
+              that.data.project[0].completiontime = "zhijin"
               that.setData({
-                projectone: [mydata.project[0]],
+                projectone: [that.data.project[0]],
                 projectlength: mydata.project.length >= 1 ? mydata.project.length : 0
               });
             }
           }
+
+          console.log(that.data.project)
           that.setData({
             percent: mydata.info.hasOwnProperty("progress") ? mydata.info.progress : 0
           })

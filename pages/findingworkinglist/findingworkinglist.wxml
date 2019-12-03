@@ -122,12 +122,12 @@
                 <image wx:if="{{item.authentication == 2}}" src="{{realNames}}"></image>
                 <image wx:if="{{item.certificate == 1}}" src="{{authentication}}"></image>
               </view>
-              <view class="listsboxagetwo" wx:if="{{item.nation}}">
+              <view class="listsboxagetwo" wx:if="{{item.gender != '0'}}">
                 <text class="listsboxnation">{{item.nation}}</text>
                 <text><text class="listsboxnum">{{item.experience}}</text></text>
                 <text>{{item.prof_degree}}</text>
               </view>
-              <view class="listsboxagetwot" wx:if="{{!item.nation}}">
+              <view class="listsboxagetwot"  wx:if="{{item.gender == '0'}}">
                 <text wx:for="{{item.tags}}" wx:key="{{index}}">{{item.label_name}}</text>
               </view>
             </view>

@@ -156,7 +156,7 @@
           </view>
           <view class="cardsixthreeborder">
             <view class="cardsixthree">
-              <text>{{item.start_time}}-{{item.completion_time=="zhijin"?"至今":item.completion_time}}</text>
+              <text>{{item.start_time}}-{{item.completiontime=="zhijin"?"至今":item.completion_time}}</text>
               <text>{{item.province_name}}{{item.city_name}}</text>
             </view>
             <view class="cardsixfour">

@@ -19,22 +19,10 @@ Page({
   },
   editor(e) {
     
-    console.log(e)
-    let timer = new Date();
-    let d = new Date(timer);
-    let times = d.getFullYear() + '-' + (d.getMonth() + 1) + '-' + (d.getDate() >= 10 ? d.getDate() : '0' + d.getDate());
-    if (e.currentTarget.dataset.uid.completion_time == "zhijin") {
-      e.currentTarget.dataset.uid.completion_time = times
       wx.setStorageSync("projectdetail", e.currentTarget.dataset)
       wx.navigateTo({
         url: "/pages/clients-looking-for-work/new-project-experience/projectexperience",
       })
-    } else {
-      wx.setStorageSync("projectdetail", e.currentTarget.dataset)
-      wx.navigateTo({
-        url: "/pages/clients-looking-for-work/new-project-experience/projectexperience",
-      })
-    }
   },
   delestore() {
     wx.removeStorageSync("projectdetail")
@@ -93,9 +81,10 @@ Page({
           let dataproject = res.data.data.project;
           for (let i = 0; i < dataproject.length ; i++){
             if (new Date(dataproject[i].completion_time).getTime() / 86400000 < parseInt(new Date().getTime() / 86400000)) {
+              dataproject[i].completiontime = "zhijing"
               allproject.push(dataproject[i])
             }else{
-              dataproject[i].completion_time = "zhijin"
+              dataproject[i].completiontime = "zhijin"
               allproject.push(dataproject[i])
             }
           }
@@ -148,13 +137,14 @@ Page({
 
       for (let i = 0; i < projectall.length; i++) {
         if (new Date(projectall[i].completion_time).getTime() / 86400000 < parseInt(new Date().getTime() / 86400000)) {
+          projectall[i].completiontime = "zhijing"
           allproject.push(projectall[i])
         } else {
-          projectall[i].completion_time = "zhijin"
+          projectall[i].completiontime = "zhijin"
           allproject.push(projectall[i])
         }
       }
-
+     
       that.setData({
         projecthree: allproject
       });

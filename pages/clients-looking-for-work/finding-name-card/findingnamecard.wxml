@@ -138,7 +138,7 @@
   </view>
   <view class="cardcoloreno">
     <view class="nopass" wx:if="{{ressonone}}">
-      审核未通过原因：{{note}}
+      个人资料审核失败原因：{{note}}
     </view>
   </view>
   <view class="findingnamecardthree" wx:if="{{selfintro}}">
@@ -265,7 +265,7 @@
           </view>
           <view class="cardsixthreeborder">
             <view class="cardsixthree">
-              <text>{{item.start_time}}-{{item.completion_time=="zhijin"?"至今":item.completion_time}}</text>
+              <text>{{item.start_time}}-{{item.completiontime == "zhijin"?"至今":item.completion_time}}</text>
               <text>{{item.province_name}}{{item.city_name}}</text>
             </view>
             <view class="cardsixfour">

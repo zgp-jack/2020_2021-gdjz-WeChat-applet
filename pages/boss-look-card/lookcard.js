@@ -422,11 +422,12 @@ Page({
                 projectone: [mydata.project[0]],
                 projectlength: mydata.project.length >= 1 ? mydata.project.length : 0
               });
+              that.data.project[0].completiontime = "zhijing"
             } else {
               that.setData({
                 project: mydata.project,
               })
-              mydata.project[0].completion_time = "zhijin"
+              that.data.project[0].completiontime = "zhijin"
               that.setData({
                 projectone: [mydata.project[0]],
                 projectlength: mydata.project.length >= 1 ? mydata.project.length : 0

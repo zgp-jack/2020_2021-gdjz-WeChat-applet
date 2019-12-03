@@ -44,8 +44,8 @@ page {
   color: red;
   font-size: 30rpx;
   padding-top: 10rpx;
-  padding-left: 42rpx;
-  padding-right: 42rpx;
+  padding-left: 19rpx;
+  padding-right: 19rpx;
   padding-bottom: 10rpx;
 }
 
@@ -755,22 +755,21 @@ height: 26rpx;
 
 .cardsixzong .cardsixthree {
   color: #8b8b8a;
-  font-size: 28rpx;
+  font-size: 30rpx;
   margin-left: 14rpx;
   margin-top: 10rpx;
 }
 
 .cardsixzong .cardsixthree  text:last-child {
   margin-left: 26rpx;
-    font-size: 28rpx;
+    font-size: 30rpx;
 }
 
 .cardsixzong .cardsixfour {
   color: #8b8b8a;
-  font-size: 28rpx;
+  font-size: 30rpx;
   margin-left: 14rpx;
   margin-top: 10rpx;
-  padding-right: 5%;
   word-wrap: break-word;
   word-break: break-all;
 }
@@ -896,9 +895,11 @@ height: 26rpx;
   font-weight: bold;
 }
 
-
+.cardsixall{
+  width: 92%;
+}
 .certificatetime{
-  font-size: 28rpx;
+  font-size: 30rpx;
   line-height: 26rpx;
   color: #8b8b8a;
   margin-left: 14rpx;
