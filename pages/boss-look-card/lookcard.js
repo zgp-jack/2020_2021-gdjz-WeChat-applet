@@ -405,15 +405,32 @@ Page({
             });
 
           } else {
-            let projectall = [];
-            for (let i = 0; i < mydata.project.length; i++) {
-              projectall.push(mydata.project[i])
+            // let projectall = [];
+            // for (let i = 0; i < mydata.project.length; i++) {
+            //   projectall.push(mydata.project[i])
+            // }
+            // that.setData({
+            //   project: projectall,
+            //   projectone: [projectall[0]],
+            //   projectlength: projectall.length >= 1 ? projectall.length : 0
+            // });
+
+            if (new Date(mydata.project[0].completion_time).getTime() / 86400000 < parseInt(new Date().getTime() / 86400000)) {
+              that.setData({
+                project: mydata.project,
+                projectone: [mydata.project[0]],
+                projectlength: mydata.project.length >= 1 ? mydata.project.length : 0
+              });
+            } else {
+              that.setData({
+                project: mydata.project,
+              })
+              mydata.project[0].completion_time = "zhijin"
+              that.setData({
+                projectone: [mydata.project[0]],
+                projectlength: mydata.project.length >= 1 ? mydata.project.length : 0
+              });
             }
-            that.setData({
-              project: projectall,
-              projectone: [projectall[0]],
-              projectlength: projectall.length >= 1 ? projectall.length : 0
-            });
           }
 
           that.setData({
