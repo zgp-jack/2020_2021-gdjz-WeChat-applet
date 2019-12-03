@@ -244,8 +244,6 @@ Page({
       way: 'GET',
       failTitle: "操作失败，请稍后重试！",
       success(res) {
-        if (res.errMsg == "request:ok") {
-          
           let nationalarray = [];
           let alllabel = [];
           let typeworkarray = [];
@@ -288,11 +286,19 @@ Page({
           })
           that.getintrodetail()
           
-        }
-
-      },
+        },
       fail: function (err) {
-        app.showMyTips("请求失败");
+        wx.showModal({
+          title: '温馨提示',
+          content: "请求失败",
+          showCancel: false,
+          success(res) { 
+            wx.navigateBack({
+              delta: 1
+            })
+          }
+        })
+
       }
     })
   },

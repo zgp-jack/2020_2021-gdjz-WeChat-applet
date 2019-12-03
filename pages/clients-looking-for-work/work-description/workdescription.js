@@ -42,7 +42,7 @@ Page({
     })
   },
   proficiency(e) { //熟练度的选择
-    
+
     this.setData({
       indexproficiency: e.detail.value,
       degreeone: this.data.proficiencyarrayone[e.detail.value].id
@@ -53,8 +53,8 @@ Page({
       indexperson: e.detail.value,
       constituttion: this.data.compositionarrayone[e.detail.value].id
     })
-    
-    
+
+
     if (this.data.compositionarrayone[e.detail.value].id > 1) {
       this.setData({
         judge: true
@@ -73,7 +73,7 @@ Page({
       way: 'GET',
       failTitle: "操作失败，请稍后重试！",
       success(res) {
-        
+        console.log(res)
         let alllabel = [];
         let proficiencyarray = [];
         let compositionarray = [];
@@ -95,11 +95,21 @@ Page({
           compositionarray: compositionarray,
           compositionarrayone: res.data.type
         })
-        
+
         that.getintrodetail()
       },
       fail: function (err) {
-        app.showMyTips("请求失败");
+        wx.showModal({
+          title: '温馨提示',
+          content: "请求失败",
+          showCancel: false,
+          success(res) {
+            wx.navigateBack({
+              delta: 1
+            })
+           }
+        })
+        return
       }
     })
   },
@@ -166,7 +176,7 @@ Page({
     })
   },
   bindMultiPickerChange: function (e) { //最终家乡的选择
-    
+
     let that = this;
     this.setData({
       multiIndex: e.detail.value
@@ -182,7 +192,7 @@ Page({
       allpro = this.data.allprovinces[this.data.multiIndex[0]].id
         + "," + this.data.allprovinces[this.data.multiIndex[0]].id
       this.setData({
-        multiIndexvalue: that.data.allprovinces[that.data.multiIndex[0]].name 
+        multiIndexvalue: that.data.allprovinces[that.data.multiIndex[0]].name
         // + "" + that.data.allprovinces[that.data.multiIndex[0]].name
       })
     }
@@ -192,7 +202,7 @@ Page({
   },
 
   bindMultiPickerColumnChange: function (e) { //下滑家乡列表所产生的函数
-    
+
     let that = this;
     let namearry = this.data.multiArrayone;
     var data = {
@@ -212,12 +222,13 @@ Page({
 
     }
     this.setData(data);
-    
+
   },
 
   clock(e) { //标签选择的处理
     let that = this;
     let off = true;
+    console.log(e)
     for (let i = 0; i < this.data.evaluation.length; i++) {
       if (this.data.evaluation[i] === e.currentTarget.dataset.index) {
         this.data.evaluation.splice(i, 1)
@@ -230,7 +241,20 @@ Page({
 
     if (off) {
       this.data.evaluation.push(e.currentTarget.dataset.index)
-      
+
+      let labelnum = "";
+      for (let i = 0; i < this.data.evaluation.length; i++) {
+        if (this.data.evaluation.length - 1 == i) {
+          labelnum += this.data.evaluation[i]
+        } else {
+          labelnum += this.data.evaluation[i] + ","
+        }
+      }
+
+      that.setData({
+        labelnum: labelnum
+      })
+    }else{
       let labelnum = "";
       for (let i = 0; i < this.data.evaluation.length; i++) {
         if (this.data.evaluation.length - 1 == i) {
@@ -287,7 +311,7 @@ Page({
     }
     let strone = /^[0-9]{1,4}$/ig;
     if (!strone.test(this.data.teamsnumber) && this.data.constituttion != 1 || ~~this.data.teamsnumber - 0 <= 1 && this.data.constituttion != 1) {
-      
+
       wx.showModal({
         title: '温馨提示',
         content: '您输入的队伍人数不为数字,或者超过四位数,或者小于或等于一请重新输入',
@@ -296,7 +320,7 @@ Page({
       })
       return
     }
-    
+
     if (this.data.labelnum.length == 0) {
       reminder.reminder({ tips: '标签' })
       return
@@ -312,7 +336,7 @@ Page({
       number_people: this.data.teamsnumber,
       tags: this.data.labelnum
     })
-    
+    console.log(information)
     app.appRequestAction({
       url: "resumes/introduce/",
       way: "POST",
@@ -320,16 +344,26 @@ Page({
       params: information,
       failTitle: "操作失败，请稍后重试！",
       success: function (res) {
-        
-        remain.remain({
-          tips: res.data.errmsg, callback: function () {
-            if (res.data.errcode == 200) {
-              wx.navigateBack({
-                delta: 1
-              })
+        console.log(res.data)
+        if (res.data.errcode == 200) {
+          remain.remain({
+            tips: res.data.errmsg, callback: function () {
+              if (res.data.errcode == 200) {
+                wx.navigateBack({
+                  delta: 1
+                })
+              }
             }
-          }
-        })
+          })
+        } else {
+          wx.showModal({
+            title: '温馨提示',
+            content: res.data.errmsg,
+            showCancel: false,
+            success(res) { }
+          })
+          return
+        }
       },
       fail: function (err) {
         app.showMyTips("保存失败");
@@ -380,9 +414,9 @@ Page({
       })
 
     }
-    
-    
-    
+
+
+
     if (introdetail.hasOwnProperty("tag_id") && introdetail.tag_id != null) {
       let tagid = introdetail.tag_id.split(",")
       for (let i = 0; i < this.data.detailevaluation.length; i++) {

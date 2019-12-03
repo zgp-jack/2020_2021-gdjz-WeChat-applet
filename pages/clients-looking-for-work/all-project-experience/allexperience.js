@@ -76,6 +76,7 @@ Page({
       params: detail,
       failTitle: "操作失败，请稍后重试！",
       success(res) {
+        console.log(res)
         let allproject = [];
         if (res.data.errcode == 200) {
           let dataproject = res.data.data.project;
@@ -110,7 +111,16 @@ Page({
         }
       },
       fail: function (err) {
-        app.showMyTips("保存失败");
+        wx.showModal({
+          title: '温馨提示',
+          content: `您的网络请求失败`,
+          showCancel: false,
+          success(res) {
+            wx.navigateBack({
+              delta: 1
+            })
+          }
+        })
       }
 
     })

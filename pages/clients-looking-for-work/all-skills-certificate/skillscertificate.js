@@ -54,7 +54,16 @@ Page({
         }
       },
       fail: function (err) {
-        app.showMyTips("获取失败");
+        wx.showModal({
+          title: '温馨提示',
+          content: `您的网络请求失败`,
+          showCancel: false,
+          success(res) {
+            wx.navigateBack({
+              delta: 1
+            })
+          }
+        })
       }
     })
   },
