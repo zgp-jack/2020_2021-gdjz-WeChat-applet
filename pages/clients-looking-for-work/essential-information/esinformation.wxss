@@ -19,6 +19,27 @@
   background-color: white;
   border-bottom: 1px solid #F1F1F1;
 }
+
+.informaregionone{
+  display: inline-block;
+  min-height: 125rpx;
+
+font-size: 30rpx;
+}
+.informaregiononee{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 125rpx;
+}
+.informaselect{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 125rpx;
+  color: rgb(119, 119, 119);
+
+}
 .informationtwione{
   width: 19%;
   font-size: 30rpx;
@@ -27,6 +48,39 @@
   margin-left: 19rpx;
   text-align: justify;
   position: relative;
+}
+.informaregiononede{
+  width: 19%;
+  font-size: 30rpx;
+  color: #2A2A2A;
+  margin-left: 19rpx;
+  text-align: justify;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.informaregiononede text{
+    display: flex;
+  flex-direction: column;
+  justify-content: center;
+   position: relative;
+}
+.informaregiononede text::after{
+    content:'';
+    width: 100%;
+    display: inline-block;
+    overflow: hidden;
+    height: 0;
+}
+.informaregiononede text::before{
+    content:':';
+    /* overflow: hidden; */
+    height: 100%;
+    width: 6rpx;
+    position: absolute;
+    right: -4px;
+    /* top: 50%; */
 }
 .informationtwione::after{
     content:'';
@@ -315,7 +369,7 @@ justify-content: center;
 .informationseven{
   width: 93%;
   margin: 0 auto;
-  height: 125rpx;
+  /* min-height: 125rpx; */
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -334,7 +388,7 @@ justify-content: center;
 }
 .informationseven .informationseventwo{
   width: 72%;
-  height: 125rpx;
+  min-height: 125rpx;
   /* display: flex;
   flex-direction: row;
   justify-content: space-between; */
@@ -487,8 +541,11 @@ justify-content: center;
   padding: 20rpx;
 }
 .informationevaluationone{
+  width: 93%;
+  margin: 0 auto;
   font-size: 30rpx;
-  padding: 0 10rpx;
+  /* padding: 0 10rpx; */
+  /* padding-left: 17rpx; */
 }
 
 .informationevaluationtwo{
@@ -501,6 +558,7 @@ justify-content: center;
   border: none;
   outline: 0;
   padding:10rpx;
+  padding-left: 25rpx;
 word-break:break-all;
 word-wrap:break-word;
 }

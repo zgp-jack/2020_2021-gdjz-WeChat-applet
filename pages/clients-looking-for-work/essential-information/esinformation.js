@@ -45,7 +45,8 @@ Page({
     perfection: false,
     regionreal: "",
     beforeDate:"",
-    emdDate:""
+    emdDate:"",
+    regionone:false
   },
   // getbirth() {
   //   var date = new Date();
@@ -218,7 +219,7 @@ Page({
     let historyregionone = wx.getStorageSync("historyregionone");
     let provincelocal = wx.getStorageSync("provincelocal");
     
-    
+    console.log(historyregionone)
     if (historyregionone) {
       this.setData({
         regionone: historyregionone.hasOwnProperty("title")? historyregionone.title:"",
@@ -226,8 +227,9 @@ Page({
         latitude: historyregionone.hasOwnProperty("location") ? historyregionone.location.split(",")[1] : "",
       })
 
-      // wx.removeStorageSync('historyregionone')
+      wx.removeStorageSync('historyregionone')
     }
+    console.log(this.data.regionone)
     if (provincelocal) {
       this.setData({
         provinceid: provincelocal.hasOwnProperty("province") ? provincelocal.province:"",
