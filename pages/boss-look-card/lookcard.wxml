@@ -299,7 +299,7 @@
     <button wx:if="{{sharedeke}}" class='userauth-btn  userauth-back-btn' bindtap='returnPrevPage'>返回上一页</button>
     <button wx:if="{{!sharedeke}}" class='userauth-btn  userauth-back-btn' bindtap='returnindex'>返回首页</button>
   </view>
-  <view class="cardnine" wx:if="{{ status != 0}}">
+  <view class="cardnine nobgshade" wx:if="{{ status != 0}}">
     <button class="obtcardnineone" open-type='share'>
       分享
     </button>

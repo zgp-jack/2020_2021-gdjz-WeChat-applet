@@ -282,7 +282,7 @@
   </view> -->
 
 
-  <view class="cardnine {{projectlength == 0 || skilllength == 0?'obtcard':'' }} ">
+  <view class="cardnine nobgshade {{projectlength == 0 || skilllength == 0?'obtcard':'' }} ">
     <button class="obtcardnineone" open-type='share'>
       分享
     </button>

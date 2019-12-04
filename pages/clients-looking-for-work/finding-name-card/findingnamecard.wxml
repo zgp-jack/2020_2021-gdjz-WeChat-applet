@@ -1,4 +1,4 @@
-<view>
+<view style="padding-bottom:120rpx;">
   <view class="cardcolore">
     <view class="findingnamecard" wx:if="{{showtop}}">
       请完善以下信息
@@ -434,14 +434,16 @@
     </view>
   </view>
   <view class="bg" bindtap="obtn" style='display:{{display}}' catchtouchmove="{{move}}"></view>
-  <view class="cardnine" wx:if="{{showtopone}}">
-    <button class="cardnineone" bindtap="preview">
-      <image src="{{pvw}}"></image> 预览</button>
-    <button class="cardnineone" open-type='share'>
-      <image src="{{participation}}"></image>分享</button>
-  </view>
+  
   <view style="height: 118rpx;">
   </view>
+</view>
+
+<view class="cardnine" wx:if="{{showtopone}}">
+  <button class="cardnineone" bindtap="preview">
+    <image src="{{pvw}}"></image> 预览</button>
+  <button class="cardnineone" open-type='share'>
+    <image src="{{participation}}"></image>分享</button>
 </view>
 
 <!-- oworkotextonetu checkthree -- selectTap projectlength>
