@@ -1,3 +1,7 @@
+
+ <view class="header" >
+      注: 资料越完善，找活越容易
+</view>
 <view class="common-uinfo-editbox">
   <view class="informationtwo">
     <view class="informationtwi">
@@ -30,8 +34,8 @@
     <view class="informationpeople">
 
 
-        <text class="informationtwione">所属工种</text>
-        <text bindtap="typeworktwo" class=' {{ workIndexvalue.length==5 ? "informationTypeworktwo":"informationTypeworktwoo" }}'>{{workIndexvalue}}</text>
+      <text class="informationtwione">所属工种</text>
+      <text bindtap="typeworktwo" class=' {{ workIndexvalue.length==5 ? "informationTypeworktwo":"informationTypeworktwoo" }}'>{{workIndexvalue}}</text>
 
 
       <view class='publish-choose-wordtype' wx:if="{{ showWorkType }}">
@@ -59,7 +63,9 @@
         <input name="addregionone" disabled="true" placeholder="请选择你所在地址" bindtap='userTapAddress' value='{{regionone}}'>
 
         </input>
-        <text class="positioning" bindtap="GPSsubmit">获取定位</text>
+        <view class="informationdos">
+          <text class="positioning" bindtap="GPSsubmit">获取定位</text>
+        </view>
       </view>
     </view>
 
@@ -75,10 +81,12 @@
     <view class="informationverificationcode" wx:if="{{tele!=telephone}}">
       <text class="informationverificationcodeone">验证码</text>
       <view class="informationverificationcodetwo">
-      <view class="informationverifica">
-        <input type="text" maxlength='4' placeholder="请输入验证码" bindinput="verify"></input>
-      </view>
-        <text bindtap="vertifynum">{{codeTips}}</text>
+        <view class="informationverifica">
+          <input type="text" maxlength='4' placeholder="请输入验证码" bindinput="verify"></input>
+        </view>
+        <view class="informationdos">
+          <text bindtap="vertifynum">{{codeTips}}</text>
+        </view>
       </view>
     </view>
   </view>
@@ -86,8 +94,8 @@
   <view class="informationevaluation">
     <view class="informationevaluationone">自我介绍：</view>
     <view>
-     <textarea     wrap="hard"  wx:if="{{ !showWorkType && !perfection}}" class="informationevaluationtwo" bindinput="textareavalue" maxlength="500" placeholder="请简要介绍你所从事的行业以及工作经验..." value="{{otextareavalue}}">
-    </textarea>
+      <textarea wrap="hard" wx:if="{{ !showWorkType && !perfection}}" class="informationevaluationtwo" bindinput="textareavalue" maxlength="500" placeholder="请简要介绍你所从事的行业以及工作经验..." value="{{otextareavalue}}">
+      </textarea>
     </view>
     <text class="informationenum">{{otextareavaluel}}/500</text>
   </view>
@@ -111,6 +119,6 @@
       </view>
     </view>
   </view>
-  
+
 </view>
 <!-- getlocationdetails completes -->

@@ -262,9 +262,24 @@ margin-left: 0%;
 line-height: 30rpx;
 
 }
+.lists-ad{
+    border-radius:2px;
+    box-shadow:#e7e6e4 0 0 10rpx;
+    margin-bottom:0rpx;
+    width: 100%;
+    overflow: hidden;
+}
 .cardthreemobile text{
      padding: 0 16rpx;
 }
+.cardcolore {
+background: white;
+position: relative;
+box-shadow: 0 0 1rpx #e7e6e4;
+margin-top: 0rpx;
+
+}
+
 .info-shareimg{position: fixed;width: 100rpx;height: 100rpx;line-height: 140rpx;text-align: center;font-size:30rpx;color: #0099ff;border-radius: 50%;box-shadow: 0 0 5px #0099ff;right: 27rpx;top: 800rpx;z-index: 10;background: white;overflow: hidden;font-weight: bold;letter-spacing: 1px;border:none;padding: 0;  }
 .info-shareimg::after{border:0;}
 /* content  bossbottomo cardeight .bossbottom .jilu allone*/

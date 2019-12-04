@@ -1,8 +1,11 @@
 <!-- telephorft userComplaintAction distance lists-ad -->
 <view>
   <view class="cardcolore">
-    <view class="header">
+    <view class="header"  wx:if="{{status == 0}}">
       注:老板对找活者满意，可以直接与他联系以及点赞或转发
+    </view>
+    <view class="header" wx:if="{{status == 1}}" >
+      注:分享名片 让你的名片排名更靠前
     </view>
   </view>
   <view class="findingnamecardthree">
@@ -89,8 +92,8 @@
             <view class="cardotext" wx:if="{{city}}">
               <text class="oworkotext">所在地区</text>
               <view class="distancev" bindtap="showThisMapInfo">
-                <text class="({{location?'workotextone':'zong'}})">{{city}}</text>
-                <view class="distanceo" wx:if="{{location}}">
+                <text class="({{location&&status == 0?'workotextone':'zong'}})">{{city}}</text>
+                <view class="distanceo" wx:if="{{location&&status == 0}}">
                   <image src="{{biaoqian}}" id="distance"></image>
                   <text class="distancet">{{distance}}</text>
                 </view>
@@ -119,11 +122,13 @@
   <ad class="lists-ad" unit-id="{{ unitid }}" style="margin-top:15rpx;"></ad>
 
 
-  <view class="cardthree" wx:if="{{introshow}}" >
-    <view class="cardthreemobile">
+  <view class="findingnamecardthree" wx:if="{{introshow}}">
+    <view class="findingnamecardthreemobile">
+    <view>
       <image src="{{baseinform}}"></image>
       <text>自我介绍</text>
       <image src="{{baseinform}}"></image>
+      </view>
     </view>
   </view>
   <view class="cardcolore">
@@ -136,11 +141,13 @@
   <!-- <view wx:if="{{!introshow}}" class="jilu">暂无记录</view> -->
 
 
-  <view class="cardthree" wx:if="{{projectlength != 0}}" >
-    <view class="cardthreemobile">
+  <view class="findingnamecardthree" wx:if="{{projectlength != 0}}">
+    <view class="findingnamecardthreemobile">
+      <view>
       <image src="{{baseinform}}"></image>
       <text>项目经验</text>
       <image src="{{baseinform}}"></image>
+    </view>
     </view>
   </view>
 
@@ -189,12 +196,14 @@
     暂无记录
   </view> -->
 
-  <view class="cardthree" wx:if="{{skilllength != 0}}" >
+  <view class="cardthree" wx:if="{{skilllength != 0}}">
     <view class="cardthreemobile">
+    <view>
       <image src="{{baseinform}}"></image>
       <text>职业技能</text>
       <image src="{{baseinform}}"></image>
     </view>
+     </view>
   </view>
   <view class="cardcolore">
     <view class="cardeight {{(status != 0)?'eightstatus':''}}" wx:if="{{skilllength!= 0}}">

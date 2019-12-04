@@ -3,13 +3,16 @@
   width: 93%;
   margin: 0 auto;
   background: white;
-  margin-top: 20rpx;
 }
-
+.informationdos{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
 .informationtwi{
   width: 93%;
   margin: 0 auto;
-  height: 110rpx;
+  height: 125rpx;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -19,7 +22,7 @@
 .informationtwione{
   width: 19%;
   font-size: 30rpx;
-  line-height: 110rpx;
+  line-height: 125rpx;
   color: #2A2A2A;
   margin-left: 19rpx;
   text-align: justify;
@@ -45,7 +48,7 @@
 }
 .informationtwi .informationtwitwo{
   width: 72%;
-  height: 110rpx;
+  height: 125rpx;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -59,7 +62,7 @@
 .informationthree{
   width: 93%;
   margin: 0 auto;
-  height: 110rpx;
+  height: 125rpx;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -73,7 +76,7 @@
 }
 .informationthree .informationthreetwo{
   width: 72%;
-  height: 110rpx;
+  height: 125rpx;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -87,7 +90,7 @@
 .informationfour{
   width: 93%;
   margin: 0 auto;
-  height: 110rpx;
+  height: 125rpx;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -103,7 +106,7 @@
 }
 .informationfour .informationfourtwo{
   width: 72%;
-  height: 110rpx;
+  height: 125rpx;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -118,7 +121,7 @@
 .informationfive{
   width: 93%;
   margin: 0 auto;
-  height: 110rpx;
+  height: 125rpx;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -128,7 +131,7 @@
 
 .informationfive .informationfivetwo{
   width: 72%;
-  height: 110rpx;
+  height: 125rpx;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -142,7 +145,7 @@
 .informationpeople{
    width: 93%;
 margin: 0 auto;
-height: 110rpx;
+height: 125rpx;
 display: flex;
 flex-direction: row;
 justify-content: space-between;
@@ -189,7 +192,7 @@ border-bottom: 1px solid #F1F1F1;
   font-size: 30rpx;
 }
 .informationverifica{
-  height: 110rpx;
+  height: 125rpx;
 display: flex;
 flex-direction: column;
 justify-content: center;
@@ -312,7 +315,7 @@ justify-content: center;
 .informationseven{
   width: 93%;
   margin: 0 auto;
-  height: 110rpx;
+  height: 125rpx;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -331,7 +334,7 @@ justify-content: center;
 }
 .informationseven .informationseventwo{
   width: 72%;
-  height: 110rpx;
+  height: 125rpx;
   /* display: flex;
   flex-direction: row;
   justify-content: space-between; */
@@ -342,19 +345,19 @@ justify-content: center;
 .informationseven .informationseventwo input{
   /* margin-top: 20rpx; */
   font-size: 30rpx;
-  height: 110rpx;
+  height: 125rpx;
 }
 
 .positioning{
    position: absolute;
    right: 0;
-   top: 40rpx;
+   top: 48rpx;
    /* bottom: 0; */
    width:140rpx; 
    height: 30rpx;
    line-height: 30rpx;
    font-size: 28rpx;
-   color: #797979;
+   color: #09f;
    /* margin-top: 40rpx; */
    border-left:1px solid  rgb(143, 143, 143);
    padding-left: 20rpx;
@@ -372,7 +375,7 @@ justify-content: center;
 .informationtheinput{
   width: 93%;
   margin: 0 auto;
-  height: 110rpx;
+  height: 125rpx;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -390,7 +393,7 @@ justify-content: center;
 }
 .informationtheinput .informationtheinputtwo{
   width: 72%;
-  height: 110rpx;
+  height: 125rpx;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -405,7 +408,7 @@ justify-content: center;
 .informationverificationcode{
   width: 93%;
   margin: 0 auto;
-  height: 110rpx;
+  height: 125rpx;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -415,7 +418,7 @@ justify-content: center;
 .informationverificationcode .informationverificationcodeone{
   width: 19%;
   font-size: 30rpx;
-  line-height: 110rpx;
+  line-height: 125rpx;
   color: #2A2A2A;
   margin-left: 19rpx;
   text-align: justify;
@@ -442,10 +445,19 @@ justify-content: center;
     margin-left: 14rpx;
     margin-right: 14rpx;
 }
-
+.header {
+  width: 93%;
+  margin: 0 auto;
+  height: 60rpx;
+  background: white;
+  font-size: 30rpx;
+  color: #f87a14;
+  text-align: center;
+  line-height: 60rpx;
+}
 .informationverificationcode .informationverificationcodetwo{
   width: 72%;
-  height: 110rpx;
+  height: 125rpx;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -457,7 +469,7 @@ justify-content: center;
   background: rgb(235, 234, 234);
   height: 32rpx;
   line-height:32rpx;
-  margin-top: 38rpx;
+  color: #09f;
 }
 .informationverificationcode  input{
   font-size: 30rpx;

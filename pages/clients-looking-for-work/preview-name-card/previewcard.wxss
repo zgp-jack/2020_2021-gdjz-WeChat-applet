@@ -6,6 +6,9 @@
 .skillcss{
   margin-bottom: 0;
 }
+.findingnamecardthreemobile text{
+   padding: 0 16rpx;
+}
 .header {
   width: 93%;
   margin: 0 auto;

@@ -8,7 +8,7 @@ Page({
    * 页面的初始数据 nation view_num occupations introduce workingyears procity introduce fail_certificate 
    */
   data: {
-    baseinform: app.globalData.apiImgUrl + "lpy/jichu.png",
+    baseinform: app.globalData.apiImgUrl + "newresume-catimg.png",
     workingposition: app.globalData.apiImgUrl + "lpy/workdetail.png",
     subscripted: app.globalData.apiImgUrl + "lpy/bottomimg.png",
     linktag: app.globalData.apiImgUrl + "lpy/newresume-linktag.png",
