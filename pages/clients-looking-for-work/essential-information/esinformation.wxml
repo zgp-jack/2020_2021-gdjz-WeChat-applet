@@ -13,7 +13,7 @@
       </picker>
     </view>
     <view class="informationfour">
-      <text class="informationfourone">出生日期：</text>
+      <text class="informationtwione">出生日期</text>
       <view class="informationfourtwo">
         <picker mode="date" value="{{birthday}}" start="{{beforeDate}}" end="{{emdDate}}" bindchange="birthday">
           <input disabled name="addtime" value="{{birthday}}" placeholder="请选择出生日期"></input>
@@ -29,11 +29,11 @@
 
     <view class="informationpeople">
 
-      <view class="informationTypework">
-        <text class="informationTypeworkone">所属工种：</text>
+
+        <text class="informationtwione">所属工种</text>
         <text bindtap="typeworktwo" class=' {{ workIndexvalue.length==5 ? "informationTypeworktwo":"informationTypeworktwoo" }}'>{{workIndexvalue}}</text>
 
-      </view>
+
       <view class='publish-choose-wordtype' wx:if="{{ showWorkType }}">
         <view class='publish-choose-contentbox common-shaded-box'>
           <view class='publish-choose-header'>选择工种</view>
@@ -54,7 +54,7 @@
     </view>
 
     <view class="informationseven">
-      <text class="informationsevenone">所在地区：</text>
+      <text class="informationtwione">所在地区</text>
       <view class="informationseventwo">
         <input name="addregionone" disabled="true" placeholder="请选择你所在地址" bindtap='userTapAddress' value='{{regionone}}'>
 
@@ -66,7 +66,7 @@
   </view>
   <view class="informationtelephone">
     <view class="informationtheinput">
-      <text class="informationtheinputone">手机号码：</text>
+      <text class="informationtwione">手机号码</text>
       <view class="informationtheinputtwo">
         <input type="text" placeholder="请输入手机号" value="{{telephone}}" bindinput="telephone"></input>
       </view>
@@ -75,7 +75,9 @@
     <view class="informationverificationcode" wx:if="{{tele!=telephone}}">
       <text class="informationverificationcodeone">验证码</text>
       <view class="informationverificationcodetwo">
+      <view class="informationverifica">
         <input type="text" maxlength='4' placeholder="请输入验证码" bindinput="verify"></input>
+      </view>
         <text bindtap="vertifynum">{{codeTips}}</text>
       </view>
     </view>

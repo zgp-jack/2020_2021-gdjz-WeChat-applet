@@ -258,7 +258,7 @@
 .informationlabel{
   width: 93%; 
   margin: 0 auto;
-  height: 228rpx;
+  height: 240rpx;
   background: white;
   margin-top: 20rpx;
   overflow: hidden;
@@ -291,7 +291,8 @@
 
 .informationnosave{
   margin-top: 12rpx;
-  margin-left: 2%;
+  margin-left: 1%;
+  margin-right: 1%;
   display: inline-block;
   width: 150rpx;
   border: 1px solid #BFBFBF;
@@ -304,7 +305,8 @@
 
 .oinformationnosave{
   margin-top: 12rpx;
-  margin-left: 2%;
+  margin-left: 1%;
+  margin-right: 1%;
   display: inline-block;
   width: 150rpx;
   font-size: 26rpx;

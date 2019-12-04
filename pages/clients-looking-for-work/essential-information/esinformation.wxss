@@ -17,7 +17,7 @@
   border-bottom: 1px solid #F1F1F1;
 }
 .informationtwione{
-  width: 17.5%;
+  width: 19%;
   font-size: 30rpx;
   line-height: 110rpx;
   color: #2A2A2A;
@@ -102,7 +102,7 @@
   margin-left: 19rpx;
 }
 .informationfour .informationfourtwo{
-  width: 80%;
+  width: 72%;
   height: 110rpx;
   display: flex;
   flex-direction: column;
@@ -141,8 +141,14 @@
 
 .informationpeople{
    width: 93%;
-   margin: 0 auto;
-   background-color: white;
+margin: 0 auto;
+height: 110rpx;
+display: flex;
+flex-direction: row;
+justify-content: space-between;
+background-color: white;
+border-bottom: 1px solid #F1F1F1;
+
 }
 .informationTypework{
   /* width: 93%; */
@@ -164,8 +170,8 @@
 .informationTypework .informationTypeworkone text{
     padding-left: 58rpx;
 }
-.informationTypework .informationTypeworktwo{
-  width: 75%;
+.informationTypeworktwo{
+  width: 72%;
 
   display: flex;
   flex-direction: column;
@@ -173,14 +179,21 @@
   color: rgb(119, 119, 119);
   font-size: 30rpx;
 }
-.informationTypework .informationTypeworktwoo{
-  width: 75%;
+ .informationTypeworktwoo{
+  width: 72%;
 
   display: flex;
   flex-direction: column;
   justify-content: center;
   color: black;
   font-size: 30rpx;
+}
+.informationverifica{
+  height: 110rpx;
+display: flex;
+flex-direction: column;
+justify-content: center;
+
 }
 .informationTypework  input{
   color: rgb(179, 179, 179);
@@ -317,7 +330,7 @@
     padding-left: 58rpx;
 }
 .informationseven .informationseventwo{
-  width: 78%;
+  width: 72%;
   height: 110rpx;
   /* display: flex;
   flex-direction: row;
@@ -376,7 +389,7 @@
     padding-left: 58rpx;
 }
 .informationtheinput .informationtheinputtwo{
-  width: 80%;
+  width: 72%;
   height: 110rpx;
   display: flex;
   flex-direction: column;
@@ -400,8 +413,8 @@
     border-top: 1px solid #F1F1F1;
 }
 .informationverificationcode .informationverificationcodeone{
-  width: 17.5%;
-  font-size: 28rpx;
+  width: 19%;
+  font-size: 30rpx;
   line-height: 110rpx;
   color: #2A2A2A;
   margin-left: 19rpx;
@@ -447,8 +460,7 @@
   margin-top: 38rpx;
 }
 .informationverificationcode  input{
-  margin-top: 30rpx;
-  font-size: 28rpx;
+  font-size: 30rpx;
   height: 30rpx;
 }
 

@@ -53,6 +53,8 @@
 }
 .listsboxageone{
   font-size: 26rpx;
+  word-break: keep-all;
+  display: flex;
 }
 .listsoverhl{
   overflow: hidden;
@@ -75,11 +77,16 @@
 }
 .listsboxageone .listsboxage{
   color: #FB8732;
+  width: 16%;
 }
 .listsboxageone .listsboxname{
   font-size: 32rpx;
   margin-left: 0rpx;
-
+  display: inline-block;
+  max-width: 40%;
+  white-space: nowrap;
+overflow: hidden;
+text-overflow: ellipsis;
 }
 .listsboxageone image{
     font-size: 30rpx;
@@ -94,7 +101,7 @@
 }
 .listsboxagetwo{
   display: flex;
-  margin-top: 12rpx;
+  margin-top: 8rpx;
   font-size: 26rpx;
   color: #616060;
 }
@@ -149,6 +156,7 @@
     overflow:hidden;       /* 内容超出宽度时隐藏超出部分的内容 */
     text-overflow:ellipsis;
 }
+
 .listsboxlocal{
    width: 91%;
    margin: 0 auto;
