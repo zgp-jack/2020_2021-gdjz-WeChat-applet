@@ -39,13 +39,13 @@
 }
 
 .listsboxintro {
-  width: 100%;
+  width: 82%;
   height: 92rpx;
   /* display: flex;
   flex-direction: row;
   justify-content: space-between; */
   position: relative;
-  padding-right: 58rpx;
+  padding-right: 100rpx;
   margin-left: 26rpx;
 }
 .listsboxage{
@@ -88,9 +88,18 @@
 overflow: hidden;
 text-overflow: ellipsis;
 }
+.authenimg{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  font-size: 0;
+}
 .listsboxageone image{
     font-size: 30rpx;
     margin-left: 12rpx;
+    width: 78rpx;
+height: 30rpx;
+
 }
 .listsboxshow{
   font-size: 30rpx;
