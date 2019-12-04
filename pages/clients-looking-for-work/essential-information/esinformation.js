@@ -445,7 +445,7 @@ Page({
     let userInfo = wx.getStorageSync("userInfo");
     if (!userInfo) return false;
     let worktype = "";
-    
+    let vertifyNum = v.v.new()
     for (let i = 0; i < this.data.complexworkid.length; i++) {
       if (i == this.data.complexworkid.length - 1) {
         worktype += this.data.complexworkid[i]
@@ -453,47 +453,26 @@ Page({
         worktype += this.data.complexworkid[i] + ","
       }
     }
-
-    let vertifyNum = v.v.new()
-    if (!vertifyNum.isMobile(this.data.telephone)) {
-      reminder.reminder({ tips: '手机号' })
-      return
-    }
-
-    if (vertifyNum.isNull(this.data.name) || this.data.name.length < 2 || this.data.name.length > 5) {
+    if ((vertifyNum.isNull(this.data.name) || this.data.name.length < 2 || this.data.name.length > 5) || !vertifyNum.isChinese(this.data.name)) {
       wx.showModal({
         title: '温馨提示',
-        content: '您输入的姓名为空,或者少于两个字,或者大于五个字',
+        content: '请正确输入姓名2-5字以内且必须包含汉字',
         showCancel: false,
         success(res) { }
       })
       return
     }
-    if (!vertifyNum.isChinese(this.data.name)) {
-      wx.showModal({
-        title: '温馨提示',
-        content: '您输入的姓名没有汉字,请重新输入',
-        showCancel: false,
-        success(res) { }
-      })
-      return
-    }
+    // if (!vertifyNum.isChinese(this.data.name)) {
+    //   wx.showModal({
+    //     title: '温馨提示',
+    //     content: '请正确输入姓名2-5字以内且必须包含汉字',
+    //     showCancel: false,
+    //     success(res) { }
+    //   })
+    //   return
+    // }
     if (vertifyNum.isNull(this.data.sex)) {
       reminder.reminder({ tips: '性别' })
-      return
-    }
-    if (vertifyNum.isNull(this.data.nation)) {
-      reminder.reminder({ tips: '民族' })
-      return
-    }
-
-    if (!that.getbirthall()) {
-      wx.showModal({
-        title: '温馨提示',
-        content: '输入的年龄不能小于18',
-        showCancel: false,
-        success(res) { }
-      })
       return
     }
     if (vertifyNum.isNull(this.data.birthday)) {
@@ -501,8 +480,18 @@ Page({
       reminder.reminder({ tips: '出生日期' })
       return
     }
+
+    if (vertifyNum.isNull(this.data.nation)) {
+      reminder.reminder({ tips: '民族' })
+      return
+    }
     if (vertifyNum.isNull(worktype)) {
-      reminder.reminder({ tips: '工种' })
+      wx.showModal({
+        title: '温馨提示',
+        content: '请选择您的工种（工种最多可选3个）',
+        showCancel: false,
+        success(res) { }
+      })
       return
     }
 
@@ -510,28 +499,29 @@ Page({
       reminder.reminder({ tips: '所在地区' })
       return
     }
-    if (vertifyNum.isNull(this.data.otextareavalue)) {
-      reminder.reminder({ tips: '自我介绍' })
-      return
-    }
 
-    if (!vertifyNum.isChinese(this.data.otextareavalue)) {
+
+    if (!vertifyNum.isMobile(this.data.telephone)) {
       wx.showModal({
         title: '温馨提示',
-        content: '您输入的自我介绍没有汉字,请重新输入',
+        content: '请正确输入手机号码',
         showCancel: false,
         success(res) { }
       })
       return
     }
-    // tele != telephone
     if (this.data.telephone != this.data.tele) {
       if (vertifyNum.isNull(this.data.verify)) {
-        reminder.reminder({ tips: "验证码" })
+        wx.showModal({
+          title: '温馨提示',
+          content: '请正确填写验证码',
+          showCancel: false,
+          success(res) { }
+        })
         return
       }
     }
-    if (!app.globalData.authcode && this.data.telephone != this.data.tele){
+    if (!app.globalData.authcode && this.data.telephone != this.data.tele) {
       wx.showModal({
         title: '温馨提示',
         content: '请先获取验证码',
@@ -540,6 +530,29 @@ Page({
       })
       return
     }
+
+
+    if (vertifyNum.isNull(this.data.otextareavalue) || !vertifyNum.isChinese(this.data.otextareavalue)) {
+      wx.showModal({
+        title: '温馨提示',
+        content: '请正确输入自我介绍15-500字以内 且必须包含汉字',
+        showCancel: false,
+        success(res) { }
+      })
+      return
+    }
+
+    // if (!vertifyNum.isChinese(this.data.otextareavalue)) {
+    //   wx.showModal({
+    //     title: '温馨提示',
+    //     content: '请正确输入自我介绍15-500字以内 且必须包含汉字',
+    //     showCancel: false,
+    //     success(res) { }
+    //   })
+    //   return
+    // }
+    // tele != telephone
+ 
     Object.assign(information, {
       userId: userInfo.userId,
       token: userInfo.token,

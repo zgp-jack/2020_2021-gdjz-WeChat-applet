@@ -30,8 +30,12 @@
               <text class="listsboxname" wx:if="{{item.resume.username}}" >{{item.resume.username}}</text>
               <text>{{item.resume.gender  == "1" ? "男" : (item.gender == "0"?"女":"")}}</text>
               <text wx:if="{{item.resume.birthday != '' || item.resume.birthday != 0}}">{{item.resume.birthday}}岁</text>
-              <image wx:if="{{authentication == '2'}}" src="{{realNames}}"></image>
-              <image wx:if="{{certificate == '1'}}" src="{{authentication}}"></image>
+                <view class="authenimg">
+                <image wx:if="{{item.resume.authentication == 2}}" src="{{realNames}}"></image>
+                </view>
+                <view class="authenimg">
+                <image wx:if="{{item.resume.certificate == 1}}" src="{{authentication}}"></image>
+                </view>
             </view>
             <view class="listsboxagetwo" wx:if="{{item.resume.nation}}">
               <text id="listsboxnation">{{item.resume.nation}}</text>

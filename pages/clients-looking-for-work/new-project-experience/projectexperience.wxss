@@ -115,32 +115,34 @@
     position: fixed;
     bottom: 0;
     background-color: white;
-    height: 100rpx;
+    height: 110rpx;
     width: 100%;
+     box-shadow: 0 0 5rpx #E7E6E4;
+    z-index: 9999;
 }
 .experiencebottom .experiencebottomone{
   width: 325rpx;
-  height: 64rpx;
+  height: 80rpx;
   background:  white;
   border: 1px solid #0099FF;
   position: absolute;
   left: 27rpx;
-  top: 18rpx;
+  top: 15rpx;
   color:#0099FF;
-  line-height:  64rpx;
+  line-height:  80rpx;
   text-align: center;
   font-size: 29rpx;
 }
 
 .experiencebottom .experiencebottomotwo{
   width: 325rpx;
-  height: 64rpx;
+  height: 80rpx;
   background:#0099FF;
   position: absolute;
   right: 27rpx;
-  top: 18rpx;
+  top: 15rpx;
   color: white;
-  line-height:  64rpx;
+  line-height:  80rpx;
   text-align: center;
   font-size: 29rpx;
 }

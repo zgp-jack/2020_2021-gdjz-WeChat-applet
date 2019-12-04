@@ -291,7 +291,7 @@ Page({
     if (!str.test(this.data.workage)) {
       wx.showModal({
         title: '温馨提示',
-        content: '您输入的工龄不为数字,或者超过两位数请重新输入',
+        content: '请输入您的工龄',
         showCancel: false,
         success(res) { }
       })
@@ -314,7 +314,7 @@ Page({
 
       wx.showModal({
         title: '温馨提示',
-        content: '您输入的队伍人数不为数字,或者超过四位数,或者小于或等于一请重新输入',
+        content: '请输入您的队伍人数不得少于2人',
         showCancel: false,
         success(res) { }
       })
@@ -322,7 +322,12 @@ Page({
     }
 
     if (this.data.labelnum.length == 0) {
-      reminder.reminder({ tips: '标签' })
+      wx.showModal({
+        title: '温馨提示',
+        content: '请至少选择一个标签',
+        showCancel: false,
+        success(res) { }
+      })
       return
     }
     Object.assign(information, {
