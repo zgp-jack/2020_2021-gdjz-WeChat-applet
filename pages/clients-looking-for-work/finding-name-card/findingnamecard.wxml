@@ -332,11 +332,11 @@
 
   <view class="findingnamecardthree" wx:if="{{skilllength == 0}}">
     <view class="findingnamecardthreemobile">
-      <view class="findingnamemobile">
+
         <view class="findingnamemobile">
           <image src="{{newresumeskill}}"></image>
         </view>
-      </view>
+ 
       <view class="findingnamemobileone">
         <text>职业技能</text>
       </view>
