@@ -18,7 +18,7 @@
 }
 .informationtwione{
   width: 17.5%;
-  font-size: 28rpx;
+  font-size: 30rpx;
   line-height: 110rpx;
   color: #2A2A2A;
   margin-left: 19rpx;
@@ -51,7 +51,7 @@
   justify-content: center;
 }
 .informationtwi .informationtwitwo input{
-  font-size: 28rpx;
+  font-size: 30rpx;
   height: 30rpx;
 }
 
@@ -79,7 +79,7 @@
   justify-content: center;
 }
 .informationthree  input{
-  font-size: 28rpx;
+  font-size: 30rpx;
   height: 30rpx;
 }
 
@@ -96,7 +96,7 @@
 }
 .informationfour .informationfourone{
   width: 28%;
-  font-size: 28rpx;
+  font-size: 30rpx;
   line-height: 110rpx;
   color: #2A2A2A;
   margin-left: 19rpx;
@@ -110,7 +110,7 @@
 }
 
 .informationfour .informationfourtwo input{
-  font-size: 28rpx;
+  font-size: 30rpx;
   height: 30rpx;
 }
 
@@ -134,7 +134,7 @@
   justify-content: center;
 }
 .informationfive  input{
-  font-size: 28rpx;
+  font-size: 30rpx;
   height: 30rpx;
 }
 
@@ -156,7 +156,7 @@
 }
 .informationTypework .informationTypeworkone{
   width: 26%;
-  font-size: 28rpx;
+  font-size: 30rpx;
   line-height: 110rpx;
   color: #2A2A2A;
   margin-left: 19rpx;
@@ -171,7 +171,7 @@
   flex-direction: column;
   justify-content: center;
   color: rgb(119, 119, 119);
-  font-size: 28rpx;
+  font-size: 30rpx;
 }
 .informationTypework .informationTypeworktwoo{
   width: 75%;
@@ -180,7 +180,7 @@
   flex-direction: column;
   justify-content: center;
   color: black;
-  font-size: 28rpx;
+  font-size: 30rpx;
 }
 .informationTypework  input{
   color: rgb(179, 179, 179);
@@ -308,7 +308,7 @@
 
 .informationseven .informationsevenone{
   width: 28%;
-  font-size: 28rpx;
+  font-size: 30rpx;
   line-height: 110rpx;
   color: #2A2A2A;
   margin-left: 19rpx;
@@ -317,7 +317,7 @@
     padding-left: 58rpx;
 }
 .informationseven .informationseventwo{
-  width: 80%;
+  width: 78%;
   height: 110rpx;
   /* display: flex;
   flex-direction: row;
@@ -328,7 +328,7 @@
 
 .informationseven .informationseventwo input{
   /* margin-top: 20rpx; */
-  font-size: 28rpx;
+  font-size: 30rpx;
   height: 110rpx;
 }
 
@@ -367,7 +367,7 @@
 }
 .informationtheinput .informationtheinputone{
   width: 28%;
-  font-size: 28rpx;
+  font-size: 30rpx;
   line-height: 110rpx;
   color: #2A2A2A;
   margin-left: 19rpx;
@@ -383,7 +383,7 @@
   justify-content: center;
 }
 .informationtheinput .informationtheinputtwo input{
-  font-size: 28rpx;
+  font-size: 30rpx;
   height: 30rpx;
   margin-top: 2rpx;
 }
@@ -463,7 +463,7 @@
   padding: 20rpx;
 }
 .informationevaluationone{
-  font-size: 28rpx;
+  font-size: 30rpx;
   padding: 0 10rpx;
 }
 
@@ -471,7 +471,7 @@
   position: relative;
   display: block;
   background: white; 
-  font-size: 28rpx;
+  font-size: 30rpx;
   height: 140rpx;
   width:100%;
   border: none;

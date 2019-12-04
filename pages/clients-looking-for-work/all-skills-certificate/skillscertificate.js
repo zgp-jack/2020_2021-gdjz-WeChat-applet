@@ -51,6 +51,14 @@ Page({
             allskilltwo: allskilltwo,
             onoff: true
           });
+        } else {
+          wx.showModal({
+            title: '温馨提示',
+            content: `操作失败，请稍后重试！`,
+            showCancel: false,
+            success(res) {
+            }
+          })
         }
       },
       fail: function (err) {

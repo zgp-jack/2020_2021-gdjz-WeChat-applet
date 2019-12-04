@@ -17,12 +17,11 @@
   border-bottom: 1px solid #F1F1F1;
 }
 .informationworkage .informationworkageone{
-  width: 17.5%;
-  font-size: 28rpx;
+  width: 20%;
+  font-size: 30rpx;
   line-height: 110rpx;
   color: #2A2A2A;
   margin-left: 19rpx;
-  font-weight: bold;
   text-align: justify;
   position: relative;
 }
@@ -52,7 +51,7 @@
   justify-content: center;
 }
 .informationworkage .informationworkagetwo input{
-  font-size: 28rpx;
+  font-size: 30rpx;
   height: 110rpx;
 }
 
@@ -69,12 +68,11 @@
 }
 
 .informationsix .informationsixone{
-  width: 17.5%;
-  font-size: 28rpx;
+  width: 20%;
+  font-size: 30rpx;
   line-height: 110rpx;
   color: #2A2A2A;
   margin-left: 19rpx;
-  font-weight: bold;
   text-align: justify;
   position: relative;
 }
@@ -104,7 +102,7 @@
 }
 
 .informationsix .informationsixtwo input{
-  font-size: 28rpx;
+  font-size: 30rpx;
   height: 110rpx;
 }
 
@@ -121,12 +119,11 @@
   border-bottom: 1px solid #F1F1F1;
 }
 .informationproficiency .informationproficiencyone{
-  width: 17.5%;
-  font-size: 28rpx;
+  width: 20%;
+  font-size: 30rpx;
   line-height: 110rpx;
   color: #2A2A2A;
   margin-left: 19rpx;
-  font-weight: bold;
   text-align: justify;
   position: relative;
 }
@@ -154,7 +151,7 @@
   justify-content: center;
 }
 .informationproficiency  input{
-  font-size: 28rpx;
+  font-size: 30rpx;
   height: 110rpx;
 }
 
@@ -170,12 +167,12 @@
   border-bottom: 1px solid #F1F1F1;
 }
 .informationcomposition .informationcompositionone{
-  width: 17.5%;
-  font-size: 28rpx;
+  /* width: 17.5%; */
+  width: 20%;
+  font-size: 30rpx;
   line-height: 110rpx;
   color: #2A2A2A;
   margin-left: 19rpx;
-  font-weight: bold;
   text-align: justify;
   position: relative;
 }
@@ -203,7 +200,7 @@
   justify-content: center;
 }
 .informationcomposition  input{
-  font-size: 28rpx;
+  font-size: 30rpx;
   height: 110rpx;
 }
 
@@ -218,12 +215,11 @@
   background-color: white;
 }
 .informationteamsnumber .informationteamsnumberone{
-  width: 17.5%;
-  font-size: 28rpx;
+  width: 20%;
+  font-size: 30rpx;
   line-height: 110rpx;
   color: #2A2A2A;
   margin-left: 19rpx;
-  font-weight: bold;
   text-align: justify;
   position: relative;
 }
@@ -253,7 +249,7 @@
   justify-content: center;
 }
 .informationteamsnumber .informationteamsnumbertwo input{
-  font-size: 28rpx;
+  font-size: 30rpx;
   height: 110rpx;
 
 }
@@ -278,7 +274,6 @@
   width: 94%;
   margin: 0 auto;
   margin-top: 24rpx;
-  height: 50rpx;
 }
 
 .informationsave{
@@ -299,7 +294,6 @@
   margin-left: 2%;
   display: inline-block;
   width: 150rpx;
-  height: 50rpx;
   border: 1px solid #BFBFBF;
   color: #666666;
   font-size: 26rpx;
@@ -313,7 +307,6 @@
   margin-left: 2%;
   display: inline-block;
   width: 150rpx;
-  height: 50rpx;
   font-size: 26rpx;
   text-align:center;
   line-height: 50rpx; 
