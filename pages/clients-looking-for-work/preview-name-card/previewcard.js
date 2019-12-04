@@ -32,6 +32,7 @@ Page({
     occupationone: "未填写",
     telephone: "未填写",
     introduce: "未填写",
+    experience_str: "未填写",
     city: "未填写",
     intro: true,
     introne: false,
