@@ -31,8 +31,8 @@ App({
     commonShareImg: "http://cdn.yupao.com/miniprogram/images/minishare.png?t=" + new Date().getTime(),
     commonDownloadApp: "http://cdn.yupao.com/miniprogram/images/download.png?t=" + new Date().getTime(),
     commonJixieAd: "http://cdn.yupao.com/miniprogram/images/list-ad-newjixie.png?t=" + new Date().getTime(),
-    apiRequestUrl:"https://miniapi.zhaogong.vrtbbs.com/",
-    //apiRequestUrl: "https://newyupaomini.54xiaoshuo.com/",
+    // apiRequestUrl:"https://miniapi.zhaogong.vrtbbs.com/",
+    apiRequestUrl: "https://newyupaomini.54xiaoshuo.com/",
     //apiRequestUrl: "http://miniapi.qsyupao.com/",
     //apiRequestUrl:"http://mini.zhaogongdi.com/",
     apiUploadImg: "https://newyupaomini.54xiaoshuo.com/index/upload/",
@@ -336,7 +336,7 @@ App({
           filePath: res.tempFilePaths[0],
           name: 'file',
           success(res) {
-            console.log(res)
+           
             let mydata = JSON.parse(res.data);
 
             if (mydata.errcode == "ok") {
@@ -402,8 +402,8 @@ App({
   getListsAllType: function(_callback) {
     let _this = this;
     this.appRequestAction({
-      url: "index/top-search-tree/",
-      way: "POST",
+      url: "index/index-search-tree/",
+      way: "GET",
       hideLoading: true,
       failTitle: "数据加载失败，请重新进入小程序",
       success: function(res) {

@@ -388,7 +388,7 @@ Page({
       labelnum: introdetail.hasOwnProperty("tag_id") ? introdetail.tag_id : "",
       degreeone: introdetail.hasOwnProperty("prof_degree") ? introdetail.prof_degree : "",
       constituttion: introdetail.hasOwnProperty("type") ? introdetail.type : "",
-      teamsnumber: introdetail.hasOwnProperty("number_people") ? introdetail.number_people : "",
+      teamsnumber: introdetail.hasOwnProperty("number_people") ? introdetail.number_people == '0' ? '' : introdetail.number_people : "",
       multiIndexsuan: introdetail.hasOwnProperty("hometown_id") ? introdetail.hometown_id.split(",") : "",
     })
 

@@ -468,6 +468,13 @@ Page({
               wx.navigateBack({})
             }
           })
+        }else{
+          wx.showModal({
+            title: '温馨提示',
+            content: res.data.errmsg,
+            showCancel: false,
+            success(res) { }
+          })
         }
         
       },

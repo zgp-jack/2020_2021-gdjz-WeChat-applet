@@ -253,14 +253,22 @@ Page({
             way: 'POST',
             params: detail,
             success(res) {
-
+  
               if (res.data.errcode == "ok") {
                 that.getdetail()
+              }else{
+                wx.showModal({
+                  title: '温馨提示',
+                  content: res.data.errmsg,
+                  showCancel: false,
+                  success(res) { }
+                })
               }
             }
           })
         },
         fail(res) {
+          // console.log(res)
           // app.showMyTips("修改失败");
         }
       })
@@ -420,10 +428,18 @@ Page({
         failTitle: "操作失败，请稍后重试！",
         params: imgdetail,
         success(res) {
-
+          
           if (res.data.errcode == 200) {
             app.showMyTips("保存成功");
             that.getdetail()
+          }else{
+            wx.showModal({
+              title: '温馨提示',
+              content: res.data.errmsg,
+              showCancel: false,
+              success(res) { }
+            })
+            return
           }
         },
         fail: function (err) {
@@ -448,6 +464,7 @@ Page({
       way: 'POST',
       params: detail,
       success: function (res) {
+        console.log(res)
         let mydata = res.data.data;
         if (res.data.errcode == 200) {
           for (let i = 0; i < mydata.project.length; i++) {
@@ -719,6 +736,14 @@ Page({
           }
           that.redorblue()
           that.showskill();
+        }else{
+          wx.showModal({
+            title: '温馨提示',
+            content: res.data.errmsg,
+            showCancel: false,
+            success(res) { }
+          })
+          return
         }
       },
       fail: function (err) {

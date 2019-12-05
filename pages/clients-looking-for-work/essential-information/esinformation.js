@@ -598,7 +598,7 @@ Page({
               }
             })
           }
-        } else if (res.data.errcode == 5100) {
+        } else{
           remain.remain({
             tips: res.data.errmsg
           })

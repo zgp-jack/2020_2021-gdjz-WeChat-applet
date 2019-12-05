@@ -391,6 +391,13 @@ Page({
           //     nopassre: false
           //   })
           // }
+        }else{
+          wx.showModal({
+            title: '温馨提示',
+            content: res.data.errmsg,
+            showCancel: false,
+            success(res) { }
+          })
         }
       },
       fail: function (err) {
