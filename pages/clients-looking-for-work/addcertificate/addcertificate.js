@@ -216,52 +216,51 @@ vertify()
     let userInfo = wx.getStorageSync("userInfo");
     let project = {}
     let vertifyNum = v.v.new()
-    if (vertifyNum.isNull(this.data.name)) {
-      reminder.reminder({ tips: '职业技能' })
+    if ((vertifyNum.isNull(this.data.name)) || !vertifyNum.isChinese(this.data.name)) {
+      wx.showModal({
+        title: '温馨提示',
+        content: '请正确输入证书名称3-12字以内且 必须包含汉字',
+        showCancel: false,
+        success(res) { }
+      })
       return
     }
+
     if (this.data.name.length > 12 || this.data.name.length < 3) {
       wx.showModal({
         title: '温馨提示',
-        content: '您输入的职业技能小于3个字或者大于12个字,请重新输入',
+        content: '请正确输入证书名称3-12字以内且 必须包含汉字',
         showCancel: false,
         success(res) { }
       })
       return
     }
-    if (!vertifyNum.isChinese(this.data.name)) {
-      wx.showModal({
-        title: '温馨提示',
-        content: '您输入的职业技能没有汉字,请重新输入',
-        showCancel: false,
-        success(res) { }
-      })
+    // if (!vertifyNum.isChinese(this.data.name)) {
+    //   wx.showModal({
+    //     title: '温馨提示',
+    //     content: '您输入的职业技能没有汉字,请重新输入',
+    //     showCancel: false,
+    //     success(res) { }
+    //   })
+    //   return
+    // }
+
+    if (vertifyNum.isNull(this.data.date)) {
+      reminder.reminder({ tips: '领证时间' })
       return
     }
 
     if (vertifyNum.isNull(this.data.idArrs)) {
+
       wx.showModal({
         title: '温馨提示',
-        content: '您添加的图片为空请重新输入',
+        content: '您添加的图片为空请重新添加',
         showCancel: false,
         success(res) { }
       })
       return
     }
 
-    if (vertifyNum.isNull(this.data.date)) {
-      reminder.reminder({ tips: '领取证书时间' })
-      return
-    }
-    if (!that.getbirthall()) {
-      wx.showModal({
-        title: '温馨提示',
-        content: '领取证书的范围必须在前20年内',
-        showCancel: false,
-        success(res) { }
-      })
-      return
-    }
     Object.assign(project, {
       userId: userInfo.userId,
       token: userInfo.token,
@@ -461,54 +460,52 @@ vertify()
     let userInfo = wx.getStorageSync("userInfo");
     let project = {}
     let vertifyNum = v.v.new()
-    if (vertifyNum.isNull(this.data.name)) {
-      reminder.reminder({ tips: '职业技能' })
+    if ((vertifyNum.isNull(this.data.name)) || !vertifyNum.isChinese(this.data.name)) {
+      wx.showModal({
+        title: '温馨提示',
+        content: '请正确输入证书名称3-12字以内且 必须包含汉字',
+        showCancel: false,
+        success(res) { }
+      })
       return
     }
 
     if (this.data.name.length > 12 || this.data.name.length < 3) {
       wx.showModal({
         title: '温馨提示',
-        content: '您输入的职业技能小于3个字或者大于12个字,请重新输入',
+        content: '请正确输入证书名称3-12字以内且 必须包含汉字',
         showCancel: false,
         success(res) { }
       })
       return
     }
-    if (!vertifyNum.isChinese(this.data.name)) {
-      wx.showModal({
-        title: '温馨提示',
-        content: '您输入的职业技能没有汉字,请重新输入',
-        showCancel: false,
-        success(res) { }
-      })
+    // if (!vertifyNum.isChinese(this.data.name)) {
+    //   wx.showModal({
+    //     title: '温馨提示',
+    //     content: '您输入的职业技能没有汉字,请重新输入',
+    //     showCancel: false,
+    //     success(res) { }
+    //   })
+    //   return
+    // }
+
+    if (vertifyNum.isNull(this.data.date)) {
+      reminder.reminder({ tips: '领证时间' })
       return
     }
 
-    if (!this.getbirthall()) {
-      wx.showModal({
-        title: '温馨提示',
-        content: '领取证书的范围必须在前20年内',
-        showCancel: false,
-        success(res) { }
-      })
-      return
-    }
     if (vertifyNum.isNull(this.data.idArrs)) {
 
       wx.showModal({
         title: '温馨提示',
-        content: '您添加的图片为空请重新输入',
+        content: '您添加的图片为空请重新添加',
         showCancel: false,
         success(res) { }
       })
       return
     }
 
-    if (vertifyNum.isNull(this.data.date)) {
-      reminder.reminder({ tips: '领取证书时间' })
-      return
-    }
+
     Object.assign(project, {
       userId: userInfo.userId,
       token: userInfo.token,

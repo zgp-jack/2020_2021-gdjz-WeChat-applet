@@ -30,9 +30,9 @@
             <view class="oimgone">
               <text class="otext">{{name}}</text>
               <view class="otextone">
-                <text>{{sex}}</text>
-                <text class="ochange">{{age}}</text>
-                <text class="ochange">{{nation}}</text>
+             <text>{{sex}}</text>
+                <text class="{{sex?'ochange':''}}" wx:if="{{age}}">{{age}}</text>
+                <text class="{{age?'ochange':''}}">{{nation}}</text>
               </view>
             </view>
           </view>

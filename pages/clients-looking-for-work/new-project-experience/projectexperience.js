@@ -409,78 +409,89 @@ Page({
     let project = {}
     let vertifyNum = v.v.new()
 
-    if (vertifyNum.isNull(this.data.startdate)) {
-      reminder.reminder({ tips: '开始时间' })
+    if (vertifyNum.isNull(this.data.projectname) || !vertifyNum.isChinese(this.data.projectname)) {
+      wx.showModal({
+        title: '温馨提示',
+        content: '请正确输入项目名称3-12字以内且必须包含汉字',
+        showCancel: false,
+        success(res) { }
+      })
       return
     }
 
-    if (vertifyNum.isNull(this.data.date)) {
-      reminder.reminder({ tips: '完工时间' })
-      return
-    }
-    if (new Date(this.data.startdate).getTime() > new Date().getTime()) {
-      wx.showModal({
-        title: '温馨提示',
-        content: `您输入开始时间不能大于今天`,
-        showCancel: false,
-        success(res) { }
-      })
-      return
-    }
-    if (new Date(this.data.startdate).getTime() > new Date(this.data.date).getTime()) {
-      wx.showModal({
-        title: '温馨提示',
-        content: '您输入的开始时间大于完工时间,请重新输入',
-        showCancel: false,
-        success(res) { }
-      })
-      return
-    }
-    if (vertifyNum.isNull(this.data.projectname)) {
-      reminder.reminder({ tips: '项目名称' })
-      return
-    }
-
-    if (!vertifyNum.isChinese(this.data.projectname)) {
-      wx.showModal({
-        title: '温馨提示',
-        content: '您输入的项目名称没有汉字,请重新输入',
-        showCancel: false,
-        success(res) { }
-      })
-      return
-    }
-    if (vertifyNum.isNull(this.data.detail)) {
-      reminder.reminder({ tips: '项目描述' })
-      return
-    }
     if (this.data.projectname.length > 12 || this.data.projectname.length < 3) {
       wx.showModal({
         title: '温馨提示',
-        content: '您输入的项目名称小于3个字或者大于12个字,请重新输入',
+        content: '请正确输入项目名称3-12字以内且必须包含汉字',
         showCancel: false,
         success(res) { }
       })
       return
     }
-    if (!vertifyNum.isChinese(this.data.detail)) {
+    if (vertifyNum.isNull(this.data.startdate)) {
       wx.showModal({
         title: '温馨提示',
-        content: '您输入的项目描述没有汉字,请重新输入',
+        content: '请选择开工时间',
+        showCancel: false,
+        success(res) { }
+      })
+      return
+    }
+
+    // if (new Date(this.data.startdate).getTime() > new Date().getTime()) {
+    //   wx.showModal({
+    //     title: '温馨提示',
+    //     content: `您输入开始时间不能大于今天`,
+    //     showCancel: false,
+    //     success(res) { }
+    //   })
+    //   return
+    // }
+
+    if (vertifyNum.isNull(this.data.date)) {
+      wx.showModal({
+        title: '温馨提示',
+        content: '请选择完工时间（完工时间必须大于开工时间）',
+        showCancel: false,
+        success(res) { }
+      })
+      return
+    }
+
+    if (new Date(this.data.startdate).getTime() > new Date(this.data.date).getTime()) {
+      wx.showModal({
+        title: '温馨提示',
+        content: '请选择完工时间（完工时间必须大于开工时间）',
         showCancel: false,
         success(res) { }
       })
       return
     }
     if (vertifyNum.isNull(this.data.provincecity)) {
-      reminder.reminder({ tips: '所在地区' })
+      wx.showModal({
+        title: '温馨提示',
+        content: '请选择项目所在地区',
+        showCancel: false,
+        success(res) { }
+      })
       return
     }
 
-    if (!that.getbirthall()) {
+    if (vertifyNum.isNull(this.data.detail)) {
       wx.showModal({
         title: '温馨提示',
-        content: '输入的开工时间和完工时间间隔不能大于20年',
+        content: '请正确输入项目详情15-500字以内且 必须包含汉字',
+        showCancel: false,
+        success(res) { }
+      })
+      return
+    }
+
+
+    if ((!vertifyNum.isChinese(this.data.detail)) || this.data.detail.length < 15 || this.data.detail.length > 500) {
+      wx.showModal({
+        title: '温馨提示',
+        content: '请正确输入项目详情15-500字以内且 必须包含汉字',
         showCancel: false,
         success(res) { }
       })
@@ -700,52 +711,68 @@ Page({
     let project = {}
     let vertifyNum = v.v.new()
 
-    if (vertifyNum.isNull(this.data.startdate)) {
-      reminder.reminder({ tips: '开始时间' })
-      return
-    }
-
-    if (vertifyNum.isNull(this.data.date)) {
-      reminder.reminder({ tips: '完工时间' })
-      return
-    }
-    if (new Date(this.data.startdate).getTime() > new Date().getTime()) {
+    if (vertifyNum.isNull(this.data.projectname) || !vertifyNum.isChinese(this.data.projectname)) {
       wx.showModal({
         title: '温馨提示',
-        content: `您输入开始时间不能大于今天`,
+        content: '请正确输入项目名称3-12字以内且必须包含汉字',
         showCancel: false,
         success(res) { }
       })
       return
     }
+
+    if (this.data.projectname.length > 12 || this.data.projectname.length < 3) {
+      wx.showModal({
+        title: '温馨提示',
+        content: '请正确输入项目名称3-12字以内且必须包含汉字',
+        showCancel: false,
+        success(res) { }
+      })
+      return
+    }
+    if (vertifyNum.isNull(this.data.startdate)) {
+      wx.showModal({
+        title: '温馨提示',
+        content: '请选择开工时间',
+        showCancel: false,
+        success(res) { }
+      })
+      return
+    }
+
+    // if (new Date(this.data.startdate).getTime() > new Date().getTime()) {
+    //   wx.showModal({
+    //     title: '温馨提示',
+    //     content: `您输入开始时间不能大于今天`,
+    //     showCancel: false,
+    //     success(res) { }
+    //   })
+    //   return
+    // }
+
+    if (vertifyNum.isNull(this.data.date)) {
+      wx.showModal({
+        title: '温馨提示',
+        content: '请选择完工时间（完工时间必须大于开工时间）',
+        showCancel: false,
+        success(res) { }
+      })
+      return
+    }
+
     if (new Date(this.data.startdate).getTime() > new Date(this.data.date).getTime()) {
       wx.showModal({
         title: '温馨提示',
-        content: '您输入的开始时间大于完工时间,请重新输入',
+        content: '请选择完工时间（完工时间必须大于开工时间）',
         showCancel: false,
         success(res) { }
       })
       return
     }
-    if (vertifyNum.isNull(this.data.projectname)) {
-      reminder.reminder({ tips: '项目名称' })
-      return
-    }
-
-    if (!vertifyNum.isChinese(this.data.projectname)) {
+    if (vertifyNum.isNull(this.data.provincecity)) {
       wx.showModal({
         title: '温馨提示',
-        content: '您输入的项目名称没有汉字,请重新输入',
-        showCancel: false,
-        success(res) { }
-      })
-      return
-    }
-    
-    if (this.data.projectname.length > 12 || this.data.projectname.length < 3 ){
-      wx.showModal({
-        title: '温馨提示',
-        content: '您输入的项目名称小于3个字或者大于12个字,请重新输入',
+        content: '请选择项目所在地区',
         showCancel: false,
         success(res) { }
       })
@@ -753,26 +780,20 @@ Page({
     }
 
     if (vertifyNum.isNull(this.data.detail)) {
-      reminder.reminder({ tips: '项目描述' })
-      return
-    }
-    if (vertifyNum.isNull(this.data.provincecity)) {
-      reminder.reminder({ tips: '所在地区' })
-      return
-    }
-    if (!vertifyNum.isChinese(this.data.detail)) {
       wx.showModal({
         title: '温馨提示',
-        content: '您输入的项目描述没有汉字,请重新输入',
+        content: '请正确输入项目详情15-500字以内且 必须包含汉字',
         showCancel: false,
         success(res) { }
       })
       return
     }
-    if (!that.getbirthall()) {
+
+
+    if ((!vertifyNum.isChinese(this.data.detail)) || this.data.detail.length < 15 || this.data.detail.length > 500) {
       wx.showModal({
         title: '温馨提示',
-        content: '输入的开工时间和完工时间间隔不能大于20年',
+        content: '请正确输入项目详情15-500字以内且 必须包含汉字',
         showCancel: false,
         success(res) { }
       })
