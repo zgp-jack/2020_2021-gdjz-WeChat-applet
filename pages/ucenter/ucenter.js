@@ -121,8 +121,8 @@ Page({
     /**
      * 生命周期函数--监听页面显示
      */
-    async onShow() {
-      await this.initUserInfo();
+    onShow() {
+     this.initUserInfo();
     },
     releaselive(){
       wx.navigateTo({
