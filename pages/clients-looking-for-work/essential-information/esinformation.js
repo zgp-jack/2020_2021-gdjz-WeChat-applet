@@ -349,7 +349,7 @@ Page({
           } else {
             wx.showModal({
               title: '温馨提示',
-              content: '所需工种最多选择' + that.data.complexwork.length + '个',
+              content: '工种最多可选' + that.data.complexwork.length + '个',
               showCancel: false,
               success(res) { }
             })
@@ -483,7 +483,7 @@ Page({
     if (vertifyNum.isNull(worktype)) {
       wx.showModal({
         title: '温馨提示',
-        content: '请选择您的工种（工种最多可选3个）',
+        content: '请选择您的工种',
         showCancel: false,
         success(res) { }
       })

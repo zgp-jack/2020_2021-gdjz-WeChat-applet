@@ -233,6 +233,7 @@ Page({
           that.setData({
             index: res.tapIndex
           })
+          console.log(that.data.index)
           that.setData({
             selectData: that.data.selectData,
             selectk: that.data.selectk,

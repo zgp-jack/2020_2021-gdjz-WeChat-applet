@@ -97,6 +97,33 @@ page {
 text-align: left;
 
 }
+.findingnamecardoneson .findingnamecardonesonone  .shareliveone {
+  margin: 0;
+  padding: 0;
+  background-color: white;
+  border-radius: 0;
+  margin-bottom: 8rpx;
+  font-size: 30rpx;
+  color: #09f;
+  margin-left: 13rpx;
+  height: 30rpx;
+  line-height: 30rpx;
+text-align: left;
+}
+.findingnamecardoneson .findingnamecardonesonone  .shareliveone {
+  margin: 0;
+  padding: 0;
+  background-color: white;
+  border-radius: 0;
+  margin-bottom: 8rpx;
+  font-size: 30rpx;
+  color: #09f;
+  margin-left: 13rpx;
+  height: 30rpx;
+  line-height: 30rpx;
+text-align: left;
+}
+.findingnamecardoneson .findingnamecardonesonone  .shareliveone:after{ border: none; }
 .findingnamecardoneson .findingnamecardonesonone  .sharelive:after{ border: none; }
 .findingnamecardoneson .findingnamecardonesonone view {
   margin-bottom: 8rpx;
@@ -143,16 +170,22 @@ text-align: left;
 .findingnamecardoneson .findingnamecardonesontwo {
   text-align: center;
   margin-right: 13rpx;
+  font-size: 0;
 }
 
-.findingnamecardoneson .findingnamecardonesontwo text {
+.findingnamecardoneson .findingnamecardonesontwo .view_num {
   color: #09f;
   font-size: 30rpx;
   font-weight: bold;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-top: 20rpx;
 }
 
 .findingnamecardoneson .findingnamecardonesontwo view {
-  margin-top: 6rpx;
+  margin-top: 2rpx;
   color: #626160;
   font-size: 30rpx;
   font-weight: bold;
@@ -1234,6 +1267,15 @@ height: 26rpx;
   padding-right: 6rpx;
 
 }
+.select_box .select .select_textone {
+  font-size: 30rpx;
+  color: #078f1e;
+  line-height: 28rpx;
+  text-align: right;
+  flex: 1;
+  padding-right: 6rpx;
+
+}
 
 .select_box .select .select_img {
   width: 28rpx;
@@ -1271,8 +1313,8 @@ height: 26rpx;
 }
 
 .checkone {
-  width: 100rpx;
-  height: 100rpx;
+  width: 110rpx;
+  height: 110rpx;
   position: absolute;
   top: 10rpx;
   right: 21rpx;
@@ -1280,8 +1322,8 @@ height: 26rpx;
 }
 
 .checktwo {
-  width: 100rpx;
-  height: 100rpx;
+  width: 110rpx;
+  height: 110rpx;
   position: absolute;
   top: 10rpx;
   right: 21rpx;
@@ -1289,8 +1331,8 @@ height: 26rpx;
 }
 
 .checkthree {
-  width: 100rpx;
-  height: 100rpx;
+  width: 110rpx;
+  height: 110rpx;
   position: absolute;
   top: 10rpx;
   right: 45rpx;
@@ -1298,8 +1340,8 @@ height: 26rpx;
 }
 
 .checkfour {
-  width: 100rpx;
-  height: 100rpx;
+  width: 110rpx;
+  height: 110rpx;
   position: absolute;
   top: 10rpx;
   right: 45rpx;

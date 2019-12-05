@@ -12,6 +12,7 @@
   position: absolute;
   right: 0;
 top: 0;
+height: 125rpx;
 
 }
 .informationtwi{
@@ -257,6 +258,7 @@ border-bottom: 1px solid #F1F1F1;
 display: flex;
 flex-direction: column;
 justify-content: center;
+width: 60%;
 
 }
 .informationTypework  input{
@@ -522,6 +524,8 @@ width: 140rpx;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  position: relative;
+
 }
 .informationverificationcodetwo text{
   padding: 4rpx;

@@ -15,11 +15,12 @@
           </view>
           <text class="olangw">{{percent}}%</text>
         </view>
-        <view bindtap="completeall" wx:if="{{showcomplete}}">名片越完善 找活越容易,马上去完善>></view>
+        <button class="shareliveone" bindtap="completeall" wx:if="{{showcomplete}}">名片越完善 找活越容易,马上去完善>></button>
         <button class="sharelive" open-type='share' wx:if="{{!showcomplete}}">分享找活名片,可提升名片排名度</button>
       </view>
       <view class="findingnamecardonesontwo">
-        <text>{{view_num}}</text>
+       <text class="view_num">{{view_num}}</text> 
+
         <view>浏览次数</view>
       </view>
     </view>
@@ -45,7 +46,8 @@
       </view>
       <view class='select_box'>
         <view class='select' catchtap='selectTap' wx:if="{{passre&&nopassre}}">
-          <text class='select_text'>{{selectData[index].name}}</text>
+          <text class='select_text' wx:if="{{index ==  0}}" >{{selectData[index].name}}</text>
+          <text class='select_textone' wx:if="{{index==  1}}" >{{selectData[index].name}}</text>
           <image class='select_img' src='{{subscripted}}' background-size="contain" wx:if="{{checkstatus}}"></image>
         </view>
         <view class='select' catchtap='selectTap' wx:if="{{!passre&&nopassre}}">
@@ -171,8 +173,12 @@
       <view class="findingnamemobileone">
         <text>人员信息</text>
       </view>
-      <view class="cardthreeone" bindtap="improvementwork" wx:if="{{!checktwo}}">
+      <view class="cardthreeone" bindtap="improvementwork" wx:if="{{!checktwo&&checkonef != '0'}}">
         编辑
+      </view>
+ 
+    <view class="cardthreeone" bindtap="improvementwork" wx:if="{{!checktwo&&checkonef == '0'}}">
+       待修改
       </view>
     </view>
 
