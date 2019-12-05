@@ -529,8 +529,9 @@ Page({
       url: "resumes/resume-support/",
       way: "POST",
       failTitle: "网络错误！",
-      hideLoading: true,
       params: praise,
+      title:'正在操作',
+      mask:true,
       success: function (res) {
         app.showMyTips(res.data.errmsg);
         if (res.data.errcode == "ok") {
@@ -567,8 +568,9 @@ Page({
       url: "resumes/resume-collect/",
       way: "POST",
       failTitle: "网络错误！",
+      title: '正在操作',
+      mask: true,
       params: collect,
-      hideLoading: true,
       success: function (res) {
         app.showMyTips(res.data.errmsg);
         if (res.data.errcode == "ok") {
