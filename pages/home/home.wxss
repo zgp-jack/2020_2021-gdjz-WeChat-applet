@@ -670,7 +670,6 @@
 }
 .listsboxageone text{
     font-size: 30rpx;
-  margin-left: 12rpx;
 
 }
 .listsboxageone .listsboxsex{

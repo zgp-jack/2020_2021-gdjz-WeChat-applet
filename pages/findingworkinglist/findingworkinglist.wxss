@@ -69,15 +69,17 @@
 }
 .listsboxageone text{
     font-size: 30rpx;
-   margin-left: 12rpx;
+  
 
 }
 .listsboxageone .listsboxsex{
    color: #FB8732;
+    margin-left: 12rpx;
 }
 .listsboxageone .listsboxage{
   color: #FB8732;
   width: 16%;
+   margin-left: 12rpx;
 }
 .listsboxageone .listsboxname{
   font-size: 32rpx;

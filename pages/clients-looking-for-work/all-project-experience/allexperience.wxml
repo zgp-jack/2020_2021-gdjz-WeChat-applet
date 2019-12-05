@@ -53,7 +53,7 @@
           <text>{{item.project_name}}</text>
         </view>
         <view class="skilleighttwo">
-         <text>{{item.start_time}}-{{item.completiontime=='zhijin'?"至今":item.completion_time}}</text>
+          <text>{{item.start_time}}-{{item.completiontime=='zhijin'?"至今":item.completion_time}}</text>
           <text>{{item.province_name}}{{item.city_name}}</text>
         </view>
         <view class="description">
@@ -92,11 +92,13 @@
           <text>{{item.province_name}}{{item.city_name}}</text>
         </view>
         <view class="description">
-         <text>{{item.detail}}</text>
+          <text>{{item.detail}}</text>
         </view>
         <view class="skilleightfive">
           <view class="skilleightfiveline">
-            <image wx:for="{{item.image}}" wx:key="{{index}}" src="{{item}}" catchtap="previewImage" data-url="{{ item }}" data-index="{{ pindex }}" data-type="1"></image>
+            <view wx:for="{{item.image}}" wx:key="{{index}}" class="temimage">
+              <image wx:key="{{index}}" src="{{item}}" catchtap="previewImage" data-url="{{ item }}" data-index="{{ pindex }}"></image>
+            </view>
           </view>
         </view>
         <!-- <view class="skilleightsixall">

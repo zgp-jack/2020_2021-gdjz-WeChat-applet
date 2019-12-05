@@ -8,3 +8,6 @@ margin-top: 15rpx;
 position: relative;
 
 }
+.colortext{
+  color: #FB8732;
+}
