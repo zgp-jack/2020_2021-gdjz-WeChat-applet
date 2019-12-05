@@ -68,9 +68,10 @@
         <view class="informaregionone" bindtap='userTapAddress' wx:if="{{!regionone}}" >
          <view class="informaselect" >请选择你所在地址</view> 
         </view>
-        <view class="informationdos">
-          <text class="positioning" bindtap="GPSsubmit">获取定位</text>
-        </view>
+        <!-- <view class="informationdos">
+
+        </view> -->
+                  <text class="positioning" bindtap="GPSsubmit">获取定位</text>
       </view>
     </view>
 

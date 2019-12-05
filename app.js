@@ -31,7 +31,11 @@ App({
     commonShareImg: "http://cdn.yupao.com/miniprogram/images/minishare.png?t=" + new Date().getTime(),
     commonDownloadApp: "http://cdn.yupao.com/miniprogram/images/download.png?t=" + new Date().getTime(),
     commonJixieAd: "http://cdn.yupao.com/miniprogram/images/list-ad-newjixie.png?t=" + new Date().getTime(),
+<<<<<<< HEAD
     //apiRequestUrl:"https://miniapi.zhaogong.vrtbbs.com/",
+=======
+    // apiRequestUrl:"https://miniapi.zhaogong.vrtbbs.com/",
+>>>>>>> 2d7e49ac5fd718c4ab9be33c325013abd4fb1ddb
     apiRequestUrl: "https://newyupaomini.54xiaoshuo.com/",
     //apiRequestUrl: "http://miniapi.qsyupao.com/",
     //apiRequestUrl:"http://mini.zhaogongdi.com/",
