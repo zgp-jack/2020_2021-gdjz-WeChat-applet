@@ -35,7 +35,7 @@
 }
 
 .obtcard {
-  margin-top: 24rpx;
+  margin-top: 48rpx;
 }
 
 .obtcardone {
