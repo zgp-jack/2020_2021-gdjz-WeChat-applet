@@ -624,6 +624,7 @@ Page({
         this.setData({ userInfo: userInfo ? userInfo : false });
         this.initNeedData();
         if (userInfo) if (!app.globalData.showFastIssue.request) app.isShowFastIssue(this);
+        else this.setData({ showFastIssue: app.globalData.showFastIssue })
         
     },
   valiUserUrl:function(e){
