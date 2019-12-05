@@ -135,19 +135,12 @@ Page({
       }); //key注册高德地图开发者
       myAmapFun.getRegeo({
         success: function (data) {
-          
-          let oname = data[0].name + ' ' + data[0].desc;
-          if (oname.length >= 10) {
-            // let onamesplit = oname.slice(0, 10) + '...';
-            let onamesplit = oname;
+          console.log(data)
+
             _this.setData({
               regionone: data[0].name
             });
-          } else {
-            _this.setData({
-              regionone: data[0].name + ' ' + data[0].desc
-            });
-          }
+    
           _this.setData({
             oadcode: data[0].regeocodeData.addressComponent.adcode,
             longitude: data[0].longitude + "",
