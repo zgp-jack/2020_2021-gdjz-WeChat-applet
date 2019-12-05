@@ -26,7 +26,10 @@ Page({
         userInfo:false,
         member:{},
         showReturnIntegral:false,
-        showFastIssue: app.globalData.showFastIssue,
+      showFastIssue: {
+        show: 0,
+        request: false
+      },
       feedbackimg: app.globalData.apiImgUrl + "feedbackmsg-img.png",
       rightarrow: app.globalData.apiImgUrl + "feedback-rightarrow.png",
     },
@@ -37,7 +40,7 @@ Page({
         return false
       };
         if (!app.globalData.showFastIssue.request) app.isShowFastIssue(this);
-        
+        else this.setData({ showFastIssue:app.globalData.showFastIssue })
         this.setData({ userInfo:userInfo })
         let _this = this;
         wx.showLoading({ title: '正在初始化用户数据', })

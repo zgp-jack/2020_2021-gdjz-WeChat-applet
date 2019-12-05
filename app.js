@@ -31,8 +31,17 @@ App({
     commonShareImg: "http://cdn.yupao.com/miniprogram/images/minishare.png?t=" + new Date().getTime(),
     commonDownloadApp: "http://cdn.yupao.com/miniprogram/images/download.png?t=" + new Date().getTime(),
     commonJixieAd: "http://cdn.yupao.com/miniprogram/images/list-ad-newjixie.png?t=" + new Date().getTime(),
+<<<<<<< HEAD
     apiRequestUrl:"https://miniapi.zhaogong.vrtbbs.com/",
     // apiRequestUrl: "https://newyupaomini.54xiaoshuo.com/",
+=======
+<<<<<<< HEAD
+    //apiRequestUrl:"https://miniapi.zhaogong.vrtbbs.com/",
+=======
+    // apiRequestUrl:"https://miniapi.zhaogong.vrtbbs.com/",
+>>>>>>> 2d7e49ac5fd718c4ab9be33c325013abd4fb1ddb
+    apiRequestUrl: "https://newyupaomini.54xiaoshuo.com/",
+>>>>>>> 1ffa6bb6c9bc2fe30422a607feafe0b71e772f78
     //apiRequestUrl: "http://miniapi.qsyupao.com/",
     //apiRequestUrl:"http://mini.zhaogongdi.com/",
     apiUploadImg: "https://newyupaomini.54xiaoshuo.com/index/upload/",
@@ -571,10 +580,11 @@ App({
         console.log(res)
         let mydata = res.data;
         if (mydata.errcode == "ok") {
+          
           let _log = parseInt(mydata.hasLog);
           that.globalData.showFastIssue.show = _log;
           that.globalData.showFastIssue.request = true;
-
+          
           _this.setData({
             showFastIssue: that.globalData.showFastIssue
           });
