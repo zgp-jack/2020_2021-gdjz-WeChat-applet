@@ -77,7 +77,7 @@ page {
 .findingnamecardoneson {
   width: 100%;
   background-color: white;
-  height: 114rpx;
+  height: 120rpx;
   display: flex;
   /* flex-direction: row;
   justify-content: space-between; */
@@ -91,8 +91,8 @@ page {
   background-color: white;
   border-radius: 0;
   margin-bottom: 8rpx;
-  font-size: 30rpx;
-  color: red;
+  font-size: 26rpx;
+  color: #09f;
   margin-left: 13rpx;
   height: 30rpx;
   line-height: 30rpx;
@@ -105,7 +105,7 @@ text-align: left;
   background-color: white;
   border-radius: 0;
   margin-bottom: 8rpx;
-  font-size: 30rpx;
+  font-size: 26rpx;
   color: #09f;
   margin-left: 13rpx;
   height: 30rpx;
@@ -118,7 +118,7 @@ text-align: left;
   background-color: white;
   border-radius: 0;
   margin-bottom: 8rpx;
-  font-size: 30rpx;
+  font-size: 26rpx;
   color: #09f;
   margin-left: 13rpx;
   height: 30rpx;
@@ -131,7 +131,7 @@ padding-right: 150rpx;
 .findingnamecardoneson .findingnamecardonesonone  .shareliveone:after{ border: none; }
 .findingnamecardoneson .findingnamecardonesonone  .sharelive:after{ border: none; }
 .findingnamecardoneson .findingnamecardonesonone view {
-  margin-bottom: 8rpx;
+  margin-bottom: 10rpx;
   font-size: 30rpx;
   color: #09f;
   margin-left: 13rpx;
@@ -152,7 +152,7 @@ padding-right: 150rpx;
 
 .findingnamecardoneson .findingnamecardonesonone .lang {
   margin-top: 14rpx;
-  width: 130rpx;
+  width: 150rpx;
   background: #dedddd;
   height: 14rpx;
   border-radius: 8rpx;
@@ -718,7 +718,7 @@ height: 26rpx;
   font-size: 30rpx;
   color: #09f;
   position: absolute;
-  right: 0;
+  right: -2rpx;
   font-weight: normal;
 }
 
@@ -1289,11 +1289,12 @@ height: 26rpx;
 
 }
 
-.select_box .select .select_img {
-  width: 28rpx;
-  height: 18rpx;
-  display: block;
-  margin-top: 8rpx;
+.select_box .select image {
+width: 24rpx;
+height: 22rpx;
+display: block;
+margin-top: 4rpx;
+
   transition: transform 0.3s;
 }
 

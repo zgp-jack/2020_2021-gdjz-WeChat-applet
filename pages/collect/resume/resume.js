@@ -17,8 +17,8 @@ Page({
     pageSize: 15,
     showNoData: false,
     nothavamore: false,
-    realNames: app.globalData.apiImgUrl + 'newresume-infolist-ysm.png',
-    authentication: app.globalData.apiImgUrl + 'newresume-infolist-jnz.png',
+    realNames: app.globalData.apiImgUrl + 'newresume-infolist-ysm.png?t=1',
+    authentication: app.globalData.apiImgUrl + 'newresume-infolist-jnz.png?t=1',
     collectIcon: {
       infoIcon: app.globalData.apiImgUrl + "new-collect-info.png",
       infoTitle: '招工信息',

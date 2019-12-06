@@ -13,7 +13,7 @@ Page({
   data: {
     baseinform: app.globalData.apiImgUrl + "lpy/jichu.png",
     workingposition: app.globalData.apiImgUrl + "lpy/workdetail.png",
-    subscripted: app.globalData.apiImgUrl + "lpy/newresume-select-b.png",
+    subscripted: app.globalData.apiImgUrl + 'select.png',
     linktag: app.globalData.apiImgUrl + "lpy/newresume-linktag.png",
     description: app.globalData.apiImgUrl + "lpy/newresume-description.png",
     audit: app.globalData.apiImgUrl + "lpy/audit.png",

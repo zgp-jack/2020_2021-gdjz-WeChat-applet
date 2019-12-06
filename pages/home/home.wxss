@@ -679,7 +679,7 @@
 
 }
 .listsboxageone .listsboxsex{
-color: #FB8732;
+
 margin-left: 12rpx;
 width: 30rpx;
 display: inline-block;

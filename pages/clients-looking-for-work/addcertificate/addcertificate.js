@@ -354,7 +354,7 @@ vertify()
       })
       return
     }
-
+    console.log(this.data.idArrs)
     if (vertifyNum.isNull(this.data.idArrs)) {
       wx.showModal({
         title: '温馨提示',

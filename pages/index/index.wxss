@@ -79,8 +79,8 @@ page{
 }
 .lists-condition-item view image{
     position: absolute;
-    width: 20rpx;
-    height: 20rpx;
+    width: 24rpx;
+    height: 22rpx;
     right: 0;
     top: 30rpx;
     z-index: 1;

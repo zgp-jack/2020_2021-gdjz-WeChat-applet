@@ -54,7 +54,7 @@
         <view class='select' catchtap='selectTap' wx:if="{{passre&&nopassre}}">
           <text class='select_text' wx:if="{{index ==  0}}" >{{selectData[index].name}}</text>
           <text class='select_textone' wx:if="{{index==  1}}" >{{selectData[index].name}}</text>
-          <image class='select_img' src='{{subscripted}}' background-size="contain" wx:if="{{checkstatus}}"></image>
+          <image class='select_img' src='{{subscripted}}'  wx:if="{{checkstatus}}"></image>
         </view>
         <view class='select' catchtap='selectTap' wx:if="{{!passre&&nopassre}}">
           <text class='select_text'>审核未通过</text>
