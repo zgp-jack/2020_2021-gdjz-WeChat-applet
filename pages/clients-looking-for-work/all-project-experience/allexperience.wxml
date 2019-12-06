@@ -14,7 +14,8 @@
         </view>
         <view class="skilleighttwo">
           <text>{{item.start_time}}-{{item.completiontime=='zhijin'?"至今":item.completion_time}}</text>
-          <text>{{item.province_name}}{{item.city_name}}</text>
+       <text wx:if="{{item.city_name}}">{{item.province_name}}-{{item.city_name}}</text>
+              <text wx:if="{{!item.city_name}}">{{item.province_name}}</text>
         </view>
         <view class="description">
           <text>{{item.detail}}</text>
@@ -54,7 +55,8 @@
         </view>
         <view class="skilleighttwo">
           <text>{{item.start_time}}-{{item.completiontime=='zhijin'?"至今":item.completion_time}}</text>
-          <text>{{item.province_name}}{{item.city_name}}</text>
+                 <text wx:if="{{item.city_name}}">{{item.province_name}}-{{item.city_name}}</text>
+              <text wx:if="{{!item.city_name}}">{{item.province_name}}</text>
         </view>
         <view class="description">
           <text>{{item.detail}}</text>
@@ -89,7 +91,8 @@
         </view>
         <view class="skilleighttwo">
           <text>{{item.start_time}}-{{item.completiontime=='zhijin'?"至今":item.completion_time}}</text>
-          <text>{{item.province_name}}{{item.city_name}}</text>
+                 <text wx:if="{{item.city_name}}">{{item.province_name}}-{{item.city_name}}</text>
+              <text wx:if="{{!item.city_name}}">{{item.province_name}}</text>
         </view>
         <view class="description">
           <text>{{item.detail}}</text>

@@ -69,7 +69,7 @@ page {
   width: 100%;
   margin-top: 20rpx;
   padding-left: 27rpx;
-  padding-right: 27rpx;
+  /* padding-right: 27rpx; */
   background: white;
   box-shadow: 0 0 1rpx #e7e6e4;
 }
@@ -79,10 +79,12 @@ page {
   background-color: white;
   height: 114rpx;
   display: flex;
-  flex-direction: row;
-  justify-content: space-between;
+  /* flex-direction: row;
+  justify-content: space-between; */
 }
-
+.findingnamecardonesonone{
+  width: 100%;
+}
 .findingnamecardoneson .findingnamecardonesonone  .sharelive {
   margin: 0;
   padding: 0;
@@ -122,6 +124,9 @@ text-align: left;
   height: 30rpx;
   line-height: 30rpx;
 text-align: left;
+position: relative;
+padding-right: 150rpx;
+
 }
 .findingnamecardoneson .findingnamecardonesonone  .shareliveone:after{ border: none; }
 .findingnamecardoneson .findingnamecardonesonone  .sharelive:after{ border: none; }
@@ -140,6 +145,9 @@ text-align: left;
   letter-spacing: 4rpx;
   color: #000;
   display: flex;
+  position: relative;
+padding-right: 150rpx;
+
 }
 
 .findingnamecardoneson .findingnamecardonesonone .lang {
@@ -173,7 +181,7 @@ text-align: left;
   font-size: 0;
 }
 
-.findingnamecardoneson .findingnamecardonesontwo .view_num {
+ .view_num {
   color: #09f;
   font-size: 30rpx;
   font-weight: bold;
@@ -181,14 +189,18 @@ text-align: left;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding-top: 20rpx;
+position: absolute;
+right: 78rpx;
+
 }
 
-.findingnamecardoneson .findingnamecardonesontwo view {
-  margin-top: 2rpx;
+.sontwoview {
   color: #626160;
   font-size: 30rpx;
   font-weight: bold;
+  position: absolute;
+  right: 30rpx;
+
 }
 
 .findingnamecardtwo {

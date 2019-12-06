@@ -14,14 +14,20 @@
             <view class="olang" style="width:{{percent}}%;"></view>
           </view>
           <text class="olangw">{{percent}}%</text>
+          <text class="view_num">{{view_num}}</text> 
         </view>
-        <button class="shareliveone" bindtap="completeall" wx:if="{{showcomplete}}">名片越完善 找活越容易,马上去完善>></button>
-        <button class="sharelive" open-type='share' wx:if="{{!showcomplete}}">分享找活名片,可提升名片排名度</button>
+        <button class="shareliveone" bindtap="completeall" wx:if="{{showcomplete}}">名片越完善 找活越容易,马上去完善>>
+                <text class="sontwoview" >浏览次数</text>
+        </button>
+        <button class="sharelive" open-type='share' wx:if="{{!showcomplete}}">分享找活名片,可提升名片排名度
+                <text class="sontwoview" >浏览次数</text>
+        </button>
+
       </view>
       <view class="findingnamecardonesontwo">
-       <text class="view_num">{{view_num}}</text> 
 
-        <view>浏览次数</view>
+
+
       </view>
     </view>
   </view>
@@ -296,7 +302,8 @@
           <view class="cardsixthreeborder">
             <view class="cardsixthree">
               <text>{{item.start_time}}-{{item.completiontime == "zhijin"?"至今":item.completion_time}}</text>
-              <text>{{item.province_name}}{{item.city_name}}</text>
+              <text wx:if="{{item.city_name}}">{{item.province_name}}-{{item.city_name}}</text>
+              <text wx:if="{{!item.city_name}}">{{item.province_name}}</text>
             </view>
             <view class="cardsixfour">
               <text>{{item.detail}}
