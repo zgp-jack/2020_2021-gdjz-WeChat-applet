@@ -424,11 +424,7 @@ Page({
   },
   bindKeyInput: function (e) {
     let text = e.detail.value;
-    let his = wx.getStorageSync("searchHistory")
-    if (his.hasOwnProperty("resume")) {
-      let d = his.resume;
-      if (d.includes(text)) return false;
-    }
+    
     this.setData({
       "searchDate.keywords": text,
     })

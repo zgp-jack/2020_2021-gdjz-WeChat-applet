@@ -541,15 +541,11 @@ Page({
   },
     bindKeyInput:function(e){
       let text = e.detail.value;
-      let his = wx.getStorageSync("searchHistory")
-      if (his.hasOwnProperty("job")) {
-        let d = his.job;
-        if (d.includes(text)) return false;
-      }
       
         this.setData({
           "searchDate.keywords": text,
         })
+      
     },
     initSearchHistory:function(){
       let his = wx.getStorageSync("searchHistory")
@@ -594,12 +590,13 @@ Page({
         }
       }
 
-      this.initSearchHistory();
+      
         this.returnTop();
         this.setData({
           "searchDate.page": 1,
           showHistoryList: false
         })
+      this.initSearchHistory();
       this.doRequestAction(false);
     },
     returnTop:function(){
