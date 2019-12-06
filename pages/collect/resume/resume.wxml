@@ -62,7 +62,7 @@
       </view>
       <view class="listsboxlocal">
         <view class="listsboxlocalone">
-          <view wx:if="{{item.resume.time}}" >{{item.resume.time}}</view>
+          <view wx:if="{{item.resume.time}}" >{{item.time}}</view>
         </view>
         <view class="listsboxlocaltwo">
           <text class="cancel-collect-item" data-id="{{ item.resume.uuid }}" catchtap="cancleCollect" data-index="{{ index }}">取消收藏</text>

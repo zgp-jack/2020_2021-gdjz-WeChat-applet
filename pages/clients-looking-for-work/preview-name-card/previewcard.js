@@ -117,6 +117,7 @@ Page({
     })
   },
   onShareAppMessage: function () {
+    let that = this;
     let tel = this.data.telephone;
     tel = tel.substring(0, tel.length - 4) + "****";
     this.setData({
@@ -127,7 +128,7 @@ Page({
     let commonShareTips = app.globalData.commonShareTips;
     let commonShareImg = app.globalData.commonShareImg;
     let pagt = ""
-    if (userInfo && checkonef == '2') {
+    if (userInfo && that.data.checkonef == 2) {
       let refId = userInfo.userId;
       if (uuid) {
         return {

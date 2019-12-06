@@ -109,7 +109,7 @@
               <view class="yupao-boxs">
                 <view class="yupaoboxsfot">
                   <view class="yupaotile">{{ item.title }}</view>
-                  <view  wx:if="{{ (item.top == '1') }}"  bindtap='wantFastIssue' class="yupao-conemtes">我要置顶</view>
+                  <view  wx:if="{{ (item.top == '1') }}"  catchtap='wantFastIssue' class="yupao-conemtes">我要置顶</view>
                 </view>
               </view>
               <view class='yupao-lists-wxtipse'>

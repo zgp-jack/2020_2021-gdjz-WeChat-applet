@@ -180,16 +180,17 @@ Page({
     }
   },
   onShareAppMessage: function () {
+    let that = this;
     let tel = this.data.telephone;
     tel = tel.substring(0, tel.length - 4) + "****";
     this.setData({
       telephone: tel
     })
-
+    let commonShareImg = app.globalData.commonShareImg;
     let userInfo = wx.getStorageSync("userInfo");
     let uuid = this.data.resume_uuid;
     let commonShareTips = app.globalData.commonShareTips;
-    if (userInfo && checkonef == 2) {
+    if (userInfo && that.data.checkonef == 2) {
       let refId = userInfo.userId;
       if (uuid) {
         return {
