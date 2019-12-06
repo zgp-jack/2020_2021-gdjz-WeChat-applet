@@ -855,5 +855,5 @@ color: rgba(42, 42, 42, 1);
   border-radius: 6rpx;
   margin-right: 18rpx;
 }
-
+.listsboxagetwot{font-size: 0;margin-top: 14rpx;}
 /* 结束  listsbox listsboxshow*/

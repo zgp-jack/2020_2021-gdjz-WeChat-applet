@@ -60,6 +60,7 @@
       <view class="listsboxself" wx:if="{{item.resume.introduce}}">
         {{item.resume.introduce}}
       </view>
+         <view class="listsboxself" wx:if="{{!item.resume.introduce}}"></view>
       <view class="listsboxlocal">
         <view class="listsboxlocalone">
           <view wx:if="{{item.resume.time}}" >{{item.time}}</view>

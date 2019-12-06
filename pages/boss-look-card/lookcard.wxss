@@ -35,7 +35,7 @@ page{
 .obtcardnineone {
   background-color: #09f;
   color: white;
-  width: 345rpx;
+  width: 500rpx;
   height: 70rpx;
   outline: 0;
   line-height: 70rpx;
