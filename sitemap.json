@@ -61,7 +61,7 @@
             "matching": "partial"
         },
         {
-            "action": "disallow",
+            "action": "allow",
             "page": "pages/publish/recruit/recruit"
         },
         {
@@ -69,11 +69,11 @@
             "page": "pages/publish/fast/fast"
         },
         {
-            "action": "disallow",
+            "action": "allow",
             "page": "pages/publish/card/card"
         },
         {
-            "action": "disallow",
+            "action": "allow",
             "page": "pages/publish/used/used"
         },
         {

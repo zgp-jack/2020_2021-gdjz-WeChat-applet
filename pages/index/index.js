@@ -540,9 +540,12 @@ Page({
     this.initSearchHistory();
   },
     bindKeyInput:function(e){
+      let text = e.detail.value;
+      
         this.setData({
-            "searchDate.keywords": e.detail.value,
+          "searchDate.keywords": text,
         })
+      
     },
     initSearchHistory:function(){
       let his = wx.getStorageSync("searchHistory")
@@ -586,13 +589,15 @@ Page({
           wx.setStorageSync("searchHistory", myhis)
         }
       }
+
+      
         this.returnTop();
         this.setData({
           "searchDate.page": 1,
           showHistoryList: false
         })
-      this.doRequestAction(false);
       this.initSearchHistory();
+      this.doRequestAction(false);
     },
     returnTop:function(){
       //this.setData({ scrollTop: 0 })

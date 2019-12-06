@@ -426,8 +426,10 @@ Page({
     this.initSearchHistory();
   },
   bindKeyInput: function (e) {
+    let text = e.detail.value;
+    
     this.setData({
-      "searchDate.keywords": e.detail.value,
+      "searchDate.keywords": text,
     })
   },
   initSearchHistory: function () {
