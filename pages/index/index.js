@@ -540,8 +540,15 @@ Page({
     this.initSearchHistory();
   },
     bindKeyInput:function(e){
+      let text = e.detail.value;
+      let his = wx.getStorageSync("searchHistory")
+      if (his.hasOwnProperty("job")) {
+        let d = his.job;
+        if (d.includes(text)) return false;
+      }
+      
         this.setData({
-            "searchDate.keywords": e.detail.value,
+          "searchDate.keywords": text,
         })
     },
     initSearchHistory:function(){
