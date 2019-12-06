@@ -30,7 +30,7 @@
                 <view class="yupao-listsname">
                   <view class="yupao-listswxyus">
                     <text style="color:black">{{ item.user_name }}</text>
-                    <image wx:if="{{ item.is_end == '1' }}" class="sjim" src="../../../images/zhao.png" ></image>
+                    <image wx:if="{{ item.is_end == '1' }}" class="sjim" src="{{sjim}}" ></image>
                   </view>
                   <view class="yupaolistswxyu">{{ item.detail }}</view>
                 </view>

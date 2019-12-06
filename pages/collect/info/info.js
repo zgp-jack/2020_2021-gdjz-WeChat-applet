@@ -10,6 +10,7 @@ Page({
     footerActive: "member",
     nodataImg: app.globalData.apiImgUrl + "nodata.png",
     finded: app.globalData.apiImgUrl + 'newlist-jobfindend.png', //已找到
+    sjim: app.globalData.apiImgUrl + 'newlist-jobfinding.png', 
     isFirstRequest: true,
     page: 1,
     lists: [],

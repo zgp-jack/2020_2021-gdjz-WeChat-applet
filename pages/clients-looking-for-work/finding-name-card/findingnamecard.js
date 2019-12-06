@@ -189,11 +189,11 @@ Page({
     let userInfo = wx.getStorageSync("userInfo");
     let uuid = this.data.resume_uuid;
     let commonShareTips = app.globalData.commonShareTips;
-    if (userInfo) {
+    if (userInfo && checkonef == 2) {
       let refId = userInfo.userId;
       if (uuid) {
         return {
-          title: `${commonShareTips}`,
+          title: commonShareTips,
           // imageUrl: commonShareImg,
           path: `/pages/boss-look-card/lookcard?uuid=${uuid}&refId=${refId}&sharedekeId=1`//这是一个路径
         }
@@ -201,12 +201,12 @@ Page({
         return {
           title: `${commonShareTips}`,
           imageUrl: commonShareImg,
-          path: `/pages/index/index?refId=${refId}`//这是一个路径
+          path: `/pages/index/index`//这是一个路径
         }
       }
     } else {
       return {
-        title: `${commonShareTips}`,
+        title: commonShareTips,
         imageUrl: commonShareImg,
         path: `/pages/index/index`//这是一个路径
       }

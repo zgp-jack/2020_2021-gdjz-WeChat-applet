@@ -127,7 +127,7 @@ Page({
     let commonShareTips = app.globalData.commonShareTips;
     let commonShareImg = app.globalData.commonShareImg;
     let pagt = ""
-    if (userInfo) {
+    if (userInfo && checkonef == '2') {
       let refId = userInfo.userId;
       if (uuid) {
         return {
