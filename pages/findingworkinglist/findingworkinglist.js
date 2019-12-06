@@ -427,7 +427,10 @@ Page({
   },
   bindKeyInput: function (e) {
     let text = e.detail.value;
-    
+    if (this.data.historyList.length != 0){
+         
+    }
+
     this.setData({
       "searchDate.keywords": text,
     })

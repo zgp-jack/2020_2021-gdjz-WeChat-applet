@@ -27,7 +27,7 @@ height: 125rpx;
 }
 
 .informaregionone{
-  display: block;
+  display: inline-block;
   min-height: 125rpx;
   width: 100%;
 font-size: 30rpx;
@@ -39,7 +39,7 @@ font-size: 30rpx;
   min-height: 125rpx;
   padding-top: 4rpx;
   padding-bottom: 4rpx;
-  width: 100%;
+  /* width: 100%; */
 }
 .informaselect{
   display: flex;
