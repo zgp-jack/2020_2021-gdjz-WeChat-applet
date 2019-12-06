@@ -586,13 +586,14 @@ Page({
           wx.setStorageSync("searchHistory", myhis)
         }
       }
+
+      this.initSearchHistory();
         this.returnTop();
         this.setData({
           "searchDate.page": 1,
           showHistoryList: false
         })
       this.doRequestAction(false);
-      this.initSearchHistory();
     },
     returnTop:function(){
       //this.setData({ scrollTop: 0 })
