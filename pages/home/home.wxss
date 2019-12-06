@@ -655,11 +655,14 @@
 }
 .listsboxage{
   width: 100%;
+  margin-top: 4rpx;
 }
+
 .listsboxageone{
-  font-size: 26rpx;
-  word-break: keep-all;
-display: flex;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  line-height: 30rpx;
 
 }
 
@@ -676,54 +679,50 @@ display: flex;
 
 }
 .listsboxageone .listsboxsex{
-    color: #FB8732;
-    margin-left: 12rpx;
+color: #FB8732;
+margin-left: 12rpx;
 width: 30rpx;
-position: relative;
+display: inline-block;
+overflow: hidden;
+
 
 }
 
-.listsboxageone .listsboxsex text{
-  position: absolute;
-bottom: 0;
 
-}
 .listsboxageone .listsboxage{
   color: #FB8732;
 }
 .listsboxageone .listsboxname{
- font-size: 32rpx;
-margin-left: 0rpx;
-display: inline-block;
-max-width: 40%;
-white-space: nowrap;
+  font-size: 32rpx;
+  margin-left: 0rpx;
+  display: inline-block;
+  max-width: 40%;
+  white-space: nowrap;
 overflow: hidden;
 text-overflow: ellipsis;
 }
 .listsboxagezong{
-  color: #FB8732;
+color: #FB8732;
 width: 14%;
 margin-left: 12rpx;
-position: relative;
+display: inline-block;
+overflow: hidden;
+
 
 }
 
-.listsboxagezong text{
-  position: absolute;
-bottom: 0;
 
-}
 .authenimg{
-position: relative;
-  font-size: 0;
+/* position: relative;
+  font-size: 0; */
 }
 .listsboxageone image{
-    font-size: 30rpx;
-    margin-left: 12rpx;
-    width: 78rpx;
-    height: 30rpx;
-    position: absolute;
-    bottom: 4rpx;
+  font-size: 30rpx;
+margin-left: 12rpx;
+width: 78rpx;
+height: 30rpx;
+
+
 }
 .listsboxshow{
   font-size: 30rpx;
@@ -733,9 +732,17 @@ position: relative;
   right: 0;
 }
 .listsboxagetwo{
-  display: flex;
-  margin-top: 12rpx;
-  font-size: 26rpx;
+display: flex;
+margin-top: 6rpx;
+font-size: 26rpx;
+color: #616060;
+
+}
+
+.listsboxnation{
+  font-size: 28rpx!important;
+  margin-left: 0rpx!important;
+
 }
 .listsboxagetwo text{
   font-size: 28rpx;

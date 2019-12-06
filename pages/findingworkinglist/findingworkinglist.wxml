@@ -107,8 +107,8 @@
     <!-- <block  wx:for="{{ }}" wx:key="{{ }}" wx:if="{{}}"> -->
 
     <view class="listsboxdetailover" wx:for="{{lists}}" wx:key="{{index}}">
-        <image src="{{finded}}" class="finded" wx:if="{{item.is_end == 2}}"></image>
-        <view class="listsoverhl" data-uuid="{{item.uuid}}" bindtap="showDetailInfo" data-id="{{ item.id }}">
+      <image src="{{finded}}" class="finded" wx:if="{{item.is_end == 2}}"></image>
+      <view class="listsoverhl" data-uuid="{{item.uuid}}" bindtap="showDetailInfo" data-id="{{ item.id }}">
         <view class="listsboxdetailo">
           <view>
             <image class="oimg" src="{{item.headerimg}}" data-index="{{index}}" binderror="errImg"></image>
@@ -116,50 +116,58 @@
           <view class="listsboxintro">
             <view class="listsboxage">
               <view class="listsboxageone">
-                <view class="listsboxname" wx:if="{{item.username}}" > <text>{{item.username}}</text></view>
-                <view class="{{(item.gender =='1'||item.gender =='2')?'listsboxsex':''}}"><text>{{item.gender  == "1" ? "男" : item.gender == "2"?"女":""}}</text></view>
-                <view class="listsboxagezong" wx:if="{{item.birthday != 0}}"><text>{{item.birthday}}岁</text></view>
-                <view class="authenimg">
+                <view class="listsboxname" wx:if="{{item.username}}">
+                  <text>{{item.username}}</text>
+                </view>
+                <view wx:if="{{item.gender  == '1' ||tem.gender  == '2' }}" class="{{(item.gender =='1'||item.gender =='2')?'listsboxsex':''}}">
+                  <text>{{item.gender  == "1" ? "男" : item.gender == "2"?"女":""}}</text>
+                </view>
+                <view class="listsboxagezong" wx:if="{{item.birthday != 0}}">
+                  <text>{{item.birthday}}岁</text>
+                </view>
+
+
                 <image wx:if="{{item.authentication == 2}}" src="{{realNames}}"></image>
-                </view>
-                <view class="authenimg">
+
+
+
                 <image wx:if="{{item.certificate == 1}}" src="{{authentication}}"></image>
-                </view>
+
               </view>
               <view class="listsboxagetwo" wx:if="{{item.gender != '0'}}">
-                <text class="listsboxnation" wx:if="{{item.nation}}" >{{item.nation}}</text>
+                <text class="listsboxnation" wx:if="{{item.nation}}">{{item.nation}}</text>
                 <text><text class="listsboxnum" wx:if="{{item.experience}}" >{{item.experience}}</text></text>
-                <text wx:if="{{item.prof_degree}}" >{{item.prof_degree}}</text>
+                <text wx:if="{{item.prof_degree}}">{{item.prof_degree}}</text>
               </view>
-              <view class="listsboxagetwot"  wx:if="{{item.gender == '0'}}">
+              <view class="listsboxagetwot" wx:if="{{item.gender == '0'}}">
                 <text wx:for="{{item.tags}}" wx:key="{{index}}">{{item.label_name}}</text>
               </view>
             </view>
-            <view class="listsboxshow" wx:if="{{item.type}}" >{{item.type}}</view>
+            <view class="listsboxshow" wx:if="{{item.type}}">{{item.type}}</view>
           </view>
         </view>
         <view class="listsboxlable">
           <view class="listsboxlableone" wx:for="{{item.occupations}}" wx:key="{{index}}">{{item}}</view>
 
         </view>
-        <view class="listsboxself" wx:if="{{item.introduce}}" >{{item.introduce}}</view>
-        <view class="listsboxself" wx:if="{{!item.introduce}}" ></view>
+        <view class="listsboxself" wx:if="{{item.introduce}}">{{item.introduce}}</view>
+        <view class="listsboxself" wx:if="{{!item.introduce}}"></view>
         <view class="listsboxlocal">
           <view>
             <view class="listsboxlocalone">
               <view>
                 <image src="{{biaoqian}}"></image>
               </view>
-              <view class="listsboxadree" wx:if="{{item.show_address}}" >{{item.show_address}}</view>
-              <view class="listsboxadreeq" wx:if="{{item.distance}}" >{{item.distance}}</view>
+              <view class="listsboxadree" wx:if="{{item.show_address}}">{{item.show_address}}</view>
+              <view class="listsboxadreeq" wx:if="{{item.distance}}">{{item.distance}}</view>
             </view>
           </view>
           <view class="listsboxlocaltwo">
-            <text class="listsboxtime" wx:if="{{item.time}}" >{{item.time}}</text>
+            <text class="listsboxtime" wx:if="{{item.time}}">{{item.time}}</text>
           </view>
         </view>
-        </view>
-            <ad class="lists-ad" unit-id="{{ unitid }}" wx:if="{{index % 5 == 0 && index > 5}}"></ad>
+      </view>
+      <ad class="lists-ad" unit-id="{{ unitid }}" wx:if="{{index % 5 == 0 && index > 5}}"></ad>
     </view>
 
 

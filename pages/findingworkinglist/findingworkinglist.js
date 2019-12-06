@@ -265,10 +265,10 @@ Page({
     let _this = this;
     if (_this.data.isload) return false;
     let userLocation = wx.getStorageSync("userLocation");
-
+    
     let locate = {}
     Object.assign(locate, _this.data.searchDate, {
-      location: userLocation.split(",").reverse().join(","),
+      location: userLocation? userLocation.split(",").reverse().join(","):'',
     })
     this.setData({
       isload: true,
@@ -399,11 +399,14 @@ Page({
   },
 
   searchThisWords: function (e) {
+    
     let text = e.currentTarget.dataset.text;
+    
     this.setData({
       "searchDate.keywords": text,
       showHistoryList: false
     })
+   
     this.userTapSearch();
   },
   closeHistory: function () {
@@ -445,6 +448,7 @@ Page({
     //   return false;
     // }
     //if (this.data.searchDate.keywords == "") return false;
+    
     let text = this.data.searchDate.keywords;
     if (text) {
       let his = wx.getStorageSync("searchHistory")

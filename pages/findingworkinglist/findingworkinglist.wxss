@@ -50,17 +50,20 @@
 }
 .listsboxage{
   width: 100%;
+
 }
 .listsboxageone{
-  font-size: 26rpx;
-  word-break: keep-all;
   display: flex;
+  flex-direction: row;
+  align-items: center;
+line-height: 30rpx;
+
 }
 .listsoverhl{
   overflow: hidden;
 }
 .listsboxageone:nth-child(2){
-  font-size: 26rpx;
+  font-size: 30rpx;
   color: #FB8732;
 }
 .listsboxageone image{
@@ -77,12 +80,10 @@
     margin-left: 12rpx;
     width: 30rpx;
     /* margin-top: 2rpx; */
-    position: relative;
+    display: inline-block;
+    overflow: hidden;
 }
-.listsboxageone .listsboxsex text{
-  position: absolute;
-  bottom: 0;
-}
+
 .listsboxageone .listsboxage{
   color: #FB8732;
   width: 16%;
@@ -90,10 +91,7 @@
  /* padding-top: 2rpx; */
 position: relative;
 }
-.listsboxageone .listsboxsex text{
-  position: absolute;
-  bottom: 0;
-}
+
 .listsboxageone .listsboxname{
   font-size: 32rpx;
   margin-left: 0rpx;
@@ -103,17 +101,29 @@ position: relative;
 overflow: hidden;
 text-overflow: ellipsis;
 }
-.authenimg{
-position: relative;
-  font-size: 0;
+/* .authenimg{
+  position: relative;
+  display: inline-block;
+  overflow: hidden;
+  width: 100rpx;
+
+
+  height: 32rpx;
+} */
+
+.listsboxageone image{
+    font-size: 30rpx;
+    /* margin-left: 12rpx; */
+    width: 78rpx;
+    height: 28rpx;
+
 }
 .listsboxageone image{
     font-size: 30rpx;
     margin-left: 12rpx;
     width: 78rpx;
     height: 30rpx;
-    position: absolute;
-    bottom: 4rpx;
+
 }
 .listsboxshow{
   font-size: 30rpx;
@@ -124,7 +134,6 @@ position: relative;
 }
 .listsboxagetwo{
   display: flex;
-  margin-top: 8rpx;
   font-size: 26rpx;
   color: #616060;
 }
@@ -235,13 +244,12 @@ position: relative;
 color: #FB8732;
 width: 14%;
 margin-left: 12rpx;
-position: relative;
+display: inline-block;
+overflow: hidden;
+
 }
 
-.listsboxagezong text{
-  position: absolute;
-  bottom: 0;
-}
+
 .listsboxagetwot text{
   font-size: 26rpx;
   color: #0099FF;
@@ -251,4 +259,4 @@ position: relative;
   margin-right: 18rpx;
   line-height: 36rpx;
 }
-.listsboxagetwot{font-size: 0;margin-top: 6rpx;}
+.listsboxagetwot{font-size: 0;margin-top: 14rpx;}
