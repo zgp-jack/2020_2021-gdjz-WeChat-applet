@@ -37,12 +37,12 @@
                 <image wx:if="{{item.resume.certificate == 1}}" src="{{authentication}}"></image>
                 </view>
             </view>
-            <view class="listsboxagetwo" wx:if="{{item.resume.nation}}">
+            <view class="listsboxagetwo" wx:if="{{item.resume.gender != '0'}}">
               <text id="listsboxnation">{{item.resume.nation}}</text>
               <text><text class="listsboxnum" wx:if="{{item.resume.experience}}"  >{{item.resume.experience}}</text></text>
               <text wx:if="{{item.resume.prof_degree}}" >{{item.resume.prof_degree}}</text>
             </view>
-            <view class="listsboxagetwot" wx:if="{{!item.resume.nation}}">
+            <view class="listsboxagetwot" wx:if="{{item.resume.gender == '0'}}">
               <text wx:for="{{item.resume.tags}}" wx:key="{{index}}">{{item.label_name}}</text>
             </view>
           </view>
