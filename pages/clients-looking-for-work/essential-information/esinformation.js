@@ -44,9 +44,9 @@ Page({
     nowDate: "",
     perfection: false,
     regionreal: "",
-    beforeDate:"",
-    emdDate:"",
-    regionone:false
+    beforeDate: "",
+    emdDate: "",
+    regionone: false
   },
   // getbirth() {
   //   var date = new Date();
@@ -111,7 +111,7 @@ Page({
     })
   },
   birthday(e) {
-    
+
     this.setData({
       birthday: e.detail.value
     })
@@ -135,19 +135,44 @@ Page({
       }); //key注册高德地图开发者
       myAmapFun.getRegeo({
         success: function (data) {
-          console.log(data)
+          
 
-            _this.setData({
-              regionone: data[0].name
-            });
-    
           _this.setData({
-            oadcode: data[0].regeocodeData.addressComponent.adcode,
-            longitude: data[0].longitude + "",
-            latitude: data[0].latitude + ""
+            regionone: data[0].name
           });
-          app.showMyTips("获取位置成功");
-          app.globalData.gpsdetail = true
+          app.appRequestAction({
+            url: "resumes/check-adcode/",
+            way: "GET",
+            params: { adcode: data[0].regeocodeData.addressComponent.adcode },
+            mask: true,
+            failTitle: "操作失败，请稍后重试！",
+            success: function (res) {
+              
+              if (res.data.errcode == "ok") {
+                _this.setData({
+                  oadcode: data[0].regeocodeData.addressComponent.adcode,
+                  longitude: data[0].longitude + "",
+                  latitude: data[0].latitude + ""
+                });
+                
+                
+                
+                app.showMyTips("获取位置成功");
+                app.globalData.gpsdetail = true
+              }else{
+
+                app.showMyTips("定位失败,请重新定位");
+                app.globalData.gpsdetail = true
+
+              }
+
+            },
+            fail: function (err) {
+              app.showMyTips("定位失败,请重新定位");
+              app.globalData.gpsdetail = true
+            }
+          })
+
         },
         fail: function (info) {
 
@@ -162,19 +187,19 @@ Page({
     let that = this;
     wx.getSetting({
       success: (res) => {
-        
+
         if (res.authSetting['scope.userLocation'] != undefined && res.authSetting['scope.userLocation'] != true) {//非初始化进入该页面,且未授权   
           wx.showModal({
             title: '是否授权当前位置',
             content: '需要获取您的地理位置，请确认授权，否则将不能为你自动推荐位置',
             success: function (res) {
-              
+
               if (res.cancel) {
               } else if (res.confirm) {
                 //village_LBS(that);
                 wx.openSetting({
                   success: function (data) {
-                    
+
                     if (data.authSetting["scope.userLocation"] == true) {
                       wx.showToast({
                         title: '授权成功',
@@ -211,24 +236,25 @@ Page({
   getlocationdetails() { //所在地区的位置
     let historyregionone = wx.getStorageSync("historyregionone");
     let provincelocal = wx.getStorageSync("provincelocal");
+
     
-    console.log(historyregionone)
     if (historyregionone) {
       this.setData({
-        regionone: historyregionone.hasOwnProperty("title")? historyregionone.title:"",
-        longitude: historyregionone.hasOwnProperty("location")? historyregionone.location.split(",")[0]:"",
+        regionone: historyregionone.hasOwnProperty("title") ? historyregionone.title : "",
+        longitude: historyregionone.hasOwnProperty("location") ? historyregionone.location.split(",")[0] : "",
         latitude: historyregionone.hasOwnProperty("location") ? historyregionone.location.split(",")[1] : "",
       })
 
       wx.removeStorageSync('historyregionone')
     }
-    console.log(this.data.regionone)
+    
     if (provincelocal) {
       this.setData({
-        provinceid: provincelocal.hasOwnProperty("province") ? provincelocal.province:"",
+        provinceid: provincelocal.hasOwnProperty("province") ? provincelocal.province : "",
         wardenryid: provincelocal.hasOwnProperty("city") ? provincelocal.city : "",
         oadcode: provincelocal.hasOwnProperty("adcode") ? provincelocal.adcode : "",
       })
+      wx.removeStorageSync('provincelocal')
     }
   },
 
@@ -239,55 +265,55 @@ Page({
       way: 'GET',
       failTitle: "操作失败，请稍后重试！",
       success(res) {
-          let nationalarray = [];
-          let alllabel = [];
-          let typeworkarray = [];
-          let proficiencyarray = [];
-          let compositionarray = [];
-          let array = []
-          for (let i = 0; i < res.data.nation.length; i++) {
-            nationalarray.push(res.data.nation[i].mz_name)
-          }
-          for (let i = 0; i < res.data.label.length; i++) {
-            res.data.label[i].classname = "informationnosave"
-          }
-          for (let i = 0; i < res.data.prof_degree.length; i++) {
-            proficiencyarray.push(res.data.prof_degree[i].name)
-          }
-          for (let i = 0; i < res.data.type.length; i++) {
-            compositionarray.push(res.data.type[i].name)
-          }
-          for (let i = 0; i < res.data.gender.length; i++) {
-            array.push(res.data.gender[i].name)
-          }
-          that.setData({
-            typeworkarray: res.data.occupation
-          })
-          
+        let nationalarray = [];
+        let alllabel = [];
+        let typeworkarray = [];
+        let proficiencyarray = [];
+        let compositionarray = [];
+        let array = []
+        for (let i = 0; i < res.data.nation.length; i++) {
+          nationalarray.push(res.data.nation[i].mz_name)
+        }
+        for (let i = 0; i < res.data.label.length; i++) {
+          res.data.label[i].classname = "informationnosave"
+        }
+        for (let i = 0; i < res.data.prof_degree.length; i++) {
+          proficiencyarray.push(res.data.prof_degree[i].name)
+        }
+        for (let i = 0; i < res.data.type.length; i++) {
+          compositionarray.push(res.data.type[i].name)
+        }
+        for (let i = 0; i < res.data.gender.length; i++) {
+          array.push(res.data.gender[i].name)
+        }
+        that.setData({
+          typeworkarray: res.data.occupation
+        })
 
-          for (let i = 0; i < that.data.typeworkarray.length; i++) {
-            for (let j = 0; j < that.data.typeworkarray[i].children.length; j++) {
-              that.data.typeworkarray[i].children[j].is_check = false
-            }
+
+        for (let i = 0; i < that.data.typeworkarray.length; i++) {
+          for (let j = 0; j < that.data.typeworkarray[i].children.length; j++) {
+            that.data.typeworkarray[i].children[j].is_check = false
           }
-          that.setData({
-            typeworkarray: that.data.typeworkarray
-          })
-          that.setData({
-            nationalarray: nationalarray,
-            nationalarrayone: res.data.nation,
-            array: array,
-            arrayone: res.data.gender
-          })
-          that.getintrodetail()
-          
-        },
+        }
+        that.setData({
+          typeworkarray: that.data.typeworkarray
+        })
+        that.setData({
+          nationalarray: nationalarray,
+          nationalarrayone: res.data.nation,
+          array: array,
+          arrayone: res.data.gender
+        })
+        that.getintrodetail()
+
+      },
       fail: function (err) {
         wx.showModal({
           title: '温馨提示',
           content: "请求失败",
           showCancel: false,
-          success(res) { 
+          success(res) {
             wx.navigateBack({
               delta: 1
             })
@@ -317,8 +343,8 @@ Page({
   userClickItem: function (e) {
     let that = this;
     let ce = false;
-    
-    
+
+
 
     for (let i = 0; i < this.data.typeworkarray.length; i++) {
       for (let j = 0; j < this.data.typeworkarray[i].children.length; j++) {
@@ -360,7 +386,7 @@ Page({
     this.setData({
       typeworkarray: this.data.typeworkarray
     })
-    
+
   },
 
   typeworktwo() {
@@ -414,7 +440,7 @@ Page({
     Object.assign(tele, userInfo, {
       tel: this.data.telephone - 0,
     })
-    
+
     app.appRequestAction({
       url: "index/get-code/",
       way: "POST",
@@ -547,7 +573,7 @@ Page({
     //   return
     // }
     // tele != telephone
- 
+
     Object.assign(information, {
       userId: userInfo.userId,
       token: userInfo.token,
@@ -567,8 +593,8 @@ Page({
       address: this.data.regionone,
       adcode: this.data.oadcode,
     })
-    
 
+    
     app.appRequestAction({
       url: "resumes/add-resume/",
       way: "POST",
@@ -576,7 +602,7 @@ Page({
       mask: true,
       failTitle: "操作失败，请稍后重试！",
       success: function (res) {
-        
+
         if (res.data.errcode == 200) {
           if (app.globalData.showperfection) {
             that.setData({
@@ -591,7 +617,7 @@ Page({
               }
             })
           }
-        } else{
+        } else {
           remain.remain({
             tips: res.data.errmsg
           })
@@ -601,16 +627,16 @@ Page({
         wx.showModal({
           title: '温馨提示',
           content: '保存失败',
-          showCancel:false
+          showCancel: false
         })
       }
     })
   },
 
   getintrodetail() {
-    
+
     let introinfo = wx.getStorageSync("introinfo");
-    
+
     this.setData({
       name: introinfo.hasOwnProperty("username") ? introinfo.username : "",
       indexsex: introinfo.hasOwnProperty("gender") ? introinfo.gender - 1 : "",
@@ -644,7 +670,7 @@ Page({
         workIndexvalue: workIndexvalue
       })
     }
-  
+
     if (introinfo.location) {
       this.setData({
         latitude: introinfo.hasOwnProperty("location") ? introinfo.location.split(",")[1] : ""
@@ -669,7 +695,7 @@ Page({
     this.setData({
       typeworkarray: this.data.typeworkarray
     })
-
+    
   },
 
   completes() {
@@ -701,8 +727,8 @@ Page({
     let timeone = this.data.birthday.split("-")[0] - 0;
     let timetwo = this.data.birthday.split("-")[1] - 0;
     let timethree = this.data.birthday.split("-")[2] - 0;
-    
-    
+
+
     if (year - timeone == 18 && month - timetwo <= 0 && day - timethree < 0 || year - timeone < 18) {
       return false
     }
@@ -727,8 +753,8 @@ Page({
       beforeDate: beforeDate,
       emdDate: emdDate
     })
-    
-    
+
+
   },
   /**
    * 生命周期函数--监听页面加载

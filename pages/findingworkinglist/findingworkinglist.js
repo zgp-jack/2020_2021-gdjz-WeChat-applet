@@ -119,7 +119,7 @@ Page({
     })
   },
   userChooseNewest(e) {
-    console.log(e)
+    
     let _this = this;
     let index = parseInt(e.currentTarget.dataset.index);
     let _id = e.currentTarget.dataset.id;
@@ -160,7 +160,7 @@ Page({
     _this.closeAllSelect();
   },
   userChooseProvince: function (e) {
-    console.log(e)
+    
     let _this = this;
     let index = parseInt(e.currentTarget.dataset.index);
     let _id = e.currentTarget.dataset.id;
@@ -205,9 +205,9 @@ Page({
       var currentTime = e.timeStamp
       var lastTapTime = _this.lastTapTime
       _this.lastTapTime = currentTime
-      console.log("tap1");
+      
       if (currentTime - lastTapTime < 300) {
-        console.log("double tap");
+        
         clearTimeout(_this.lastTapTimeoutFunc);
 
         _this.setData({
@@ -222,7 +222,7 @@ Page({
 
       } else {
         _this.lastTapTimeoutFunc = setTimeout(function () {
-          console.log("tap");
+          
           if (haschild == 0) {
             _this.setData({
               isFirstRequest: true,
@@ -684,7 +684,7 @@ Page({
       userLocation = userLocation.split(",").reverse().join(",")
     }
     let uuid = e.currentTarget.dataset.uuid
-    console.log(uuid)
+    
     wx.navigateTo({
       url: `/pages/boss-look-card/lookcard?uuid=${uuid}&location=${userLocation}`,
     })
@@ -760,7 +760,7 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-    console.log(123)
+    
     if ((this.data.isFirstRequest) || (this.data.showNothinkData) || (this.data.nothavemore)) return false;
     this.doRequestAction(true);
   },

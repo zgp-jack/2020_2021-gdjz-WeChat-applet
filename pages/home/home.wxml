@@ -240,7 +240,7 @@
                 <view class="listsboxname" wx:if="{{item.username}}">
                   <text>{{item.username}}</text>
                 </view>
-                <view wx:if="{{item.gender  == '1' ||tem.gender  == '2' }}" class="{{(item.gender =='1'||item.gender =='2')?'listsboxsex':''}}">
+                <view wx:if="{{item.gender  == '1' ||item.gender  == '2' }}" class="{{(item.gender =='1'||item.gender =='2')?'listsboxsex':''}}">
                   <text>{{item.gender  == "1" ? "男" : item.gender == "2"?"女":""}}</text>
                 </view>
                 <view class="listsboxagezong" wx:if="{{item.birthday != 0}}">

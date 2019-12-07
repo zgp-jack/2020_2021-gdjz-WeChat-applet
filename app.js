@@ -222,14 +222,14 @@ App({
                 wechat_token: that.globalData.requestToken
               },
               success: function(resdata) {
-                console.log(resdata)
+                
                 //获取到session_key 解密 
                 var session_key = resdata.data.session_key
                 callback(session_key)
                 //that.mini_user(session_key)
               },
               fail: function(error) {
-                console.log(error);
+                
               }
             })
           } else {
@@ -245,7 +245,7 @@ App({
     var that = this
     wx.getSetting({
       success: (res) => {
-        console.log(res)
+        
         if (!res.authSetting['scope.userInfo']) {
           wx.getUserInfo({
             fail: () => {
@@ -408,7 +408,7 @@ App({
       hideLoading: true,
       failTitle: "数据加载失败，请重新进入小程序",
       success: function(res) {
-        console.log(res)
+        
         let mydata = res.data;
         if (mydata.errcode == "ok") {
           _this.globalData.allTypes = mydata.data;
@@ -569,7 +569,7 @@ App({
       hideLoading: true,
       params: userInfo,
       success: function(res) {
-        console.log(res)
+        
         let mydata = res.data;
         if (mydata.errcode == "ok") {
           
@@ -678,7 +678,7 @@ App({
               if (res.cancel) {} else if (res.confirm) {
                 wx.openSetting({
                   success: function(data) {
-                    console.log(data);
+                    
                     if (data.authSetting["scope.userLocation"] == true) {
 
                       wx.showToast({
