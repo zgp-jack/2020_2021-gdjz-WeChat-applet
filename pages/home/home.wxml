@@ -279,6 +279,7 @@
             <view class="listsboxself" wx:if="{{item.introduce}}">
               {{item.introduce}}
             </view>
+            <view class="listsboxself" wx:if="{{!item.introduce}}"></view>
             <view class="listsboxlocal">
               <view>
                 <view class="listsboxlocalone">
