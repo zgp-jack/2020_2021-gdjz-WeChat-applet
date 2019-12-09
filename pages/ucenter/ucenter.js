@@ -37,6 +37,7 @@ Page({
       let userInfo = wx.getStorageSync("userInfo");
       if(!userInfo){
         this.setData({ showFastIssue:false })
+        callback ? callback() : ""
         return false
       };
         if (!app.globalData.showFastIssue.request) app.isShowFastIssue(this);
@@ -77,6 +78,7 @@ Page({
         })
     },
   valiUserUrl:function(e){
+    app.globalData.showdetail = true
     app.valiUserUrl(e,this.data.userInfo)
   },
   gotoUserauth:function(){
@@ -128,6 +130,7 @@ Page({
      this.initUserInfo();
     },
     releaselive(){
+      app.globalData.showdetail = true
       wx.navigateTo({
         url: '/pages/clients-looking-for-work/finding-name-card/findingnamecard',
       })

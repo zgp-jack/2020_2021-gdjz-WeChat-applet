@@ -78,7 +78,7 @@ Page({
     status: 0,
     collect: 0,
     is_read: "",
-    distance: "0km",
+    distance: "",
     location: "",
     showdistan: true,
     is_end: 0,
@@ -89,8 +89,10 @@ Page({
       uuid: ""
     },
     introshow: true,
-    sharedeke: true
+    sharedeke: true,
+    options:{}
   },
+  
   previewImage: function (e) {
 
     let url = e.currentTarget.dataset.url;
@@ -293,7 +295,7 @@ Page({
         userId: null
       }
     }
-
+    
     let detail = {
       userId: userInfo.userId,
       resume_uuid: option.uuid,
@@ -317,6 +319,7 @@ Page({
     app.appRequestAction({
       url: 'resumes/resume-detail/',
       way: 'POST',
+      mask:true,
       params: detail,
       success(res) {
         let mydata = res.data;
@@ -376,7 +379,7 @@ Page({
             collect: mydata.operation.hasOwnProperty("is_collect") ? mydata.operation.is_collect : "",
             status: mydata.operation.hasOwnProperty("status") ? mydata.operation.status : "",
             is_read: mydata.info.hasOwnProperty("is_read") ? mydata.info.is_read : "",
-            distance: mydata.info.hasOwnProperty("distance") ? mydata.info.distance == "" ? "0km" : mydata.info.distance : "0km",
+            distance: mydata.info.hasOwnProperty("distance") ? mydata.info.distance == "" ? "" : mydata.info.distance : "",
             location: mydata.info.hasOwnProperty("location") ? mydata.info.location : "",
             is_end: mydata.info.hasOwnProperty("is_end") ? mydata.info.is_end : "",
             examine: false,
@@ -460,6 +463,18 @@ Page({
           }
 
         } else if (res.data.errcode == "fail"){
+          if (option.hasOwnProperty("sharedekeId")) {
+            wx.showModal({
+              title: '温馨提示',
+              content: '该信息已被删除！',
+              showCancel: false,
+              success: function () {
+                wx.redirectTo({
+                  url: "/pages/index/index",
+                })
+              }
+            })
+          }else{
           wx.showModal({
             title: '温馨提示',
             content: '该信息已被删除！',
@@ -468,6 +483,7 @@ Page({
               wx.navigateBack({})
             }
           })
+          }
         }else{
           wx.showModal({
             title: '温馨提示',
@@ -517,6 +533,7 @@ Page({
   },
   praise() {
     let that = this
+
     let userInfo = wx.getStorageSync("userInfo");
     let detailid = that.data.detailid;
     let _this = this;
@@ -543,18 +560,18 @@ Page({
         app.showMyTips(res.data.errmsg);
         if (res.data.errcode == "ok") {
           _this.setData({
-            praise: res.data.show ? 1 : 0
+            praise: res.data.show ? 1 : 0,
           })
         }
       },
       fail: function (err) {
-
         app.showMyTips("请求失败");
       }
     })
   },
 
   collect() {
+
     let that = this
     let userInfo = wx.getStorageSync("userInfo");
     let detailid = that.data.detailid;
@@ -587,7 +604,6 @@ Page({
         }
       },
       fail: function (err) {
-
         app.showMyTips("请求失败");
       }
     })
@@ -669,8 +685,9 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    
-    this.getdetail(options);
+    this.setData({
+      options: options
+    })
   },
 
   /**
@@ -684,6 +701,10 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow() {
+
+      this.getdetail(this.data.options);
+
+
     //this.sharetelphe();
     this.delestore();
     this.deleskill()

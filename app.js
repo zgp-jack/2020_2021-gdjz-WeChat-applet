@@ -8,6 +8,8 @@ App({
 
   },
   globalData: {
+    collectstatus: true,
+    praisestatus: true,
     authcode:false,
     gpsdetail:true,
     previewshou:true,

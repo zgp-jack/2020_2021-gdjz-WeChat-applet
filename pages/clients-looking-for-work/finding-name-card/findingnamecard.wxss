@@ -1425,7 +1425,7 @@ margin-top: 4rpx;
 
 .text .textdetail {
   font-size: 32rpx;
-  width: 88%;
+  width: 86%;
   margin: 0 auto;
   text-align: center;
   margin-bottom: 40rpx;

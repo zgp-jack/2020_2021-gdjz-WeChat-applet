@@ -166,7 +166,7 @@ Page({
       params: { area: this.data.areaId, location: userLocation},
       hideLoading: true,
       success: function (res) {
-        console.log(res)
+        
         _this.setData({
           infolists: res.data
         })
@@ -299,9 +299,9 @@ Page({
     app.valiUserUrl(e, this.data.userInfo)
   },
   errImg: function (e) {
-    console.log(e)
+    
     let index = e.currentTarget.dataset.index;
-    console.log(index)
+    
     let obj = `infolists.resume.lists[${index}].headerimg`;
     this.setData({
       [obj]: "http://cdn.yupao.com/miniprogram/images/user.png"
@@ -316,7 +316,7 @@ Page({
       userLocation = userLocation.split(",").reverse().join(",")
     }
     let uuid = e.currentTarget.dataset.uuid
-    console.log(uuid)
+    
     wx.navigateTo({
       url: `/pages/boss-look-card/lookcard?uuid=${uuid}&location=${userLocation}`,
     })
@@ -335,7 +335,7 @@ Page({
     this.initIndexData();
     this.initUserInfo();
     this.initHistoryLoc();
-    console.log(this.data.areadata)
+    
   },
 
   /**

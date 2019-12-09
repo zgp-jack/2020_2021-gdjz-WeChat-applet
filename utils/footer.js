@@ -40,7 +40,7 @@ function closePublishAction(_this) {
     }, 500)
 }
 function valiUserCard(_this,app,userInfo){
-
+  app.globalData.showdetail = true
   wx.navigateTo({
     url: '/pages/clients-looking-for-work/finding-name-card/findingnamecard',
   })

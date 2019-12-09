@@ -596,6 +596,7 @@ Page({
     footerjs.closePublishAction(this);
   },
   valiUserCard: function () {
+    
     let userInfo = this.data.userInfo;
     // if(!userInfo){
     //   app.gotoUserauth();
