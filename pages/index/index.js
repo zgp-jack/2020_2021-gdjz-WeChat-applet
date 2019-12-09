@@ -43,6 +43,7 @@ Page({
             area_id: 1,
             classify_id: "",
             keywords: "",
+            joblisttype: "newest"
         },
         fillterArea: [],
         fillterType:[],

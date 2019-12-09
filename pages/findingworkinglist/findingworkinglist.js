@@ -57,7 +57,7 @@ Page({
     searchDate: {
       page: 1,
       occupations: "resume",
-      sort: 0,
+      sort: "recommend",
       keywords: "",
       occupations: "",
       province:1
@@ -606,11 +606,11 @@ Page({
   getFilterData: function () {
     let _this = this;
     this.setData({ fillterArea: areas.getProviceList() })
-    app.globalData.allTypes ? this.setData({ fillterType: app.globalData.allTypes.classTree, fillterTeam: app.globalData.allTypes.staffTree, fillterNewest: app.globalData.allTypes.jobListType }) : app.getListsAllType(function (_data) {
+    app.globalData.allTypes ? this.setData({ fillterType: app.globalData.allTypes.classTree, fillterTeam: app.globalData.allTypes.staffTree, fillterNewest: app.globalData.allTypes.resumeListType }) : app.getListsAllType(function (_data) {
       _this.setData({
         fillterType: _data.classTree,
         fillterTeam: _data.staffTree,
-        fillterNewest: _data.jobListType
+        fillterNewest: _data.resumeListType
       })
     })
 
