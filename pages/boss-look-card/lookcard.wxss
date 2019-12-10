@@ -150,6 +150,8 @@ background: #09f;
   word-break: break-all;
   font-size: 30rpx;
   color: black;
+  margin-bottom: 21rpx;
+
 }
 
 .bossbottom {

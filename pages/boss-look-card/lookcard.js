@@ -103,6 +103,7 @@ Page({
       current: url,
       urls: urls
     })
+    app.globalData.previewboss = false;
   },
   previewImagec: function (e) {
 
@@ -114,6 +115,7 @@ Page({
       current: url,
       urls: urls
     })
+    app.globalData.previewboss = false;
   },
   errImg: function (e) {
     
@@ -701,13 +703,13 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow() {
-
+    if (app.globalData.previewboss) {
       this.getdetail(this.data.options);
-
-
     //this.sharetelphe();
     this.delestore();
     this.deleskill()
+    }
+    app.globalData.previewboss = true;
   },
 
   /**

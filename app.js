@@ -8,6 +8,7 @@ App({
 
   },
   globalData: {
+    previewboss: true,
     collectstatus: true,
     praisestatus: true,
     authcode:false,

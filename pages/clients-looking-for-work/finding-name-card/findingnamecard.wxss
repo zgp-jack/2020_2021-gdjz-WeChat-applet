@@ -93,10 +93,11 @@ page {
   margin-bottom: 8rpx;
   font-size: 26rpx;
   color: #09f;
-  margin-left: 13rpx;
+  /* margin-left: 13rpx; */
   height: 30rpx;
   line-height: 30rpx;
 text-align: left;
+display: inline-block;
 
 }
 .findingnamecardoneson .findingnamecardonesonone  .shareliveone {
@@ -107,10 +108,11 @@ text-align: left;
   margin-bottom: 8rpx;
   font-size: 26rpx;
   color: #09f;
-  margin-left: 13rpx;
+
   height: 30rpx;
   line-height: 30rpx;
 text-align: left;
+display: inline-block;
 }
 .findingnamecardoneson .findingnamecardonesonone  .shareliveone {
   margin: 0;
@@ -120,13 +122,13 @@ text-align: left;
   margin-bottom: 8rpx;
   font-size: 26rpx;
   color: #09f;
-  margin-left: 13rpx;
+
   height: 30rpx;
   line-height: 30rpx;
 text-align: left;
 position: relative;
-padding-right: 150rpx;
 
+display: inline-block;
 }
 .findingnamecardoneson .findingnamecardonesonone  .shareliveone:after{ border: none; }
 .findingnamecardoneson .findingnamecardonesonone  .sharelive:after{ border: none; }
@@ -136,7 +138,15 @@ padding-right: 150rpx;
   color: #09f;
   margin-left: 13rpx;
 }
+.findingnamecardoneson .findingnamecardonesonone .isline{
+    margin-bottom: 0rpx;
+  font-size: 30rpx;
+  color: #09f;
+  margin-left: 13rpx;
+  position: relative;
+  line-height: 30rpx;
 
+}
 .findingnamecardoneson .findingnamecardonesonone .otext {
   margin-top: 14rpx;
   font-size: 30rpx;
@@ -888,7 +898,7 @@ top: -14rpx;
   font-size: 30rpx;
   color: #09f;
   position: absolute;
-  top: 29rpx;
+  top: 14rpx;
   right: 26rpx;
 
 }

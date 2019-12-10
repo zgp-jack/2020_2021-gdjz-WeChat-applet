@@ -259,6 +259,12 @@ Page({
   
               if (res.data.errcode == "ok") {
                 that.getdetail()
+                wx.showModal({
+                  title: '温馨提示',
+                  content: res.data.errmsg,
+                  showCancel: false,
+                  success(res) { }
+                })
               }else{
                 wx.showModal({
                   title: '温馨提示',
@@ -586,7 +592,7 @@ Page({
             note: mydata.info.hasOwnProperty("note") ? mydata.info.note : "",
             fail_certificate: mydata.hasOwnProperty("fail_certificate") ? mydata.fail_certificate : "",
             fail_project: mydata.hasOwnProperty("fail_project") ? mydata.fail_project : "",
-            showpassre:true
+
           })
           if (that.data.showtop) {
             app.globalData.showperfection = true;
@@ -666,7 +672,8 @@ Page({
 
           
           that.setData({
-            percent: mydata.info.hasOwnProperty("progress") ? mydata.info.progress : 0
+            percent: mydata.info.hasOwnProperty("progress") ? mydata.info.progress : 0,
+            showpassre: true
           })
 
 
@@ -813,6 +820,9 @@ Page({
       // this.getdetail();
     }
   },
+  sontwoview(){
+    return false
+  },
   returnPrevPage() {
     wx.navigateBack({
       delta: 1
@@ -876,7 +886,7 @@ Page({
    */
   onHide: function () {
     this.setData({
-    showpassre: true
+    showpassre: false
     })
   },
 

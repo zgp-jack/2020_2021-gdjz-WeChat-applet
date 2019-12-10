@@ -6,11 +6,11 @@
     </view>
   </view>
   <view class="experienceheader">
-    <text class="experienceheaderone">开始时间：</text>
+    <text class="experienceheaderone">开工时间：</text>
     <view class="experienceheadertwo">
       <picker mode="date" value="{{startdate}}" bindchange="bindstartDate"  
       start="{{beforeDate}}" end="{{nowDate}}" >
-        <input name="addtime" value="{{startdate}}" disabled="true" placeholder="请选择开始时间"></input>
+        <input name="addtime" value="{{startdate}}" disabled="true" placeholder="请选择开工时间"></input>
       </picker>
     </view>
   </view>
