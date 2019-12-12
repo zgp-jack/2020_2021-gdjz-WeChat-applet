@@ -24,6 +24,33 @@ page{
   margin: 0 auto;
   position: static;
 }
+
+.cephalowarning{
+  width: 100%;
+margin: 15rpx 0 0;
+background: white;
+padding-left: 22rpx;
+padding-right: 22rpx;
+padding-bottom: 25rpx;
+  font-size: 30rpx;
+  line-height: 50rpx;
+padding-top: 20rpx;
+
+}
+
+.cephalowarning .warningdetail{
+  font-size: 30rpx;
+  color: red;
+}
+
+.cephalowarning .warningcomplaim{
+  color: red;
+  font-size: 26rpx;
+  border: 1px solid red;
+  border-radius: 8rpx;
+  padding: 0 6rpx;
+  margin-left: 8rpx;
+}
 .obtcardnineone {
   background-color: #09f;
   color: white;

@@ -68,6 +68,7 @@ Page({
       url: '/pages/static/notice?id=32',
     })
   },
+
   showThisMap:function(){
     let _this = this;
     let location = this.data.info.location

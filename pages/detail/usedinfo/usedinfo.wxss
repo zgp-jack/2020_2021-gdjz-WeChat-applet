@@ -1,2 +1,22 @@
 /* pages/usedinfo/usedinfo.wxss */
 @import "../../index/index.wxss";
+
+.cephalowarning{
+  width: 100%;
+margin: 15rpx 0 0;
+background: white;
+  font-size: 30rpx;
+  line-height: 50rpx;
+}
+
+.cephalowarning .warningdetail{
+  font-size: 30rpx;
+  color: red;
+}
+
+.cephalowarning .warningcomplaim{
+  color: red;
+  font-size: 26rpx;
+  padding: 0 6rpx;
+  margin-left: 8rpx;
+}

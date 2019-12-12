@@ -30,7 +30,7 @@ Page({
     occupations: [],
     occupationone: "未填写",
     telephone: "未填写",
-    sharetelephone:"未填写",
+    sharetelephone: "未填写",
     introduce: "未填写",
     city: "未填写",
     intro: true,
@@ -90,9 +90,9 @@ Page({
     },
     introshow: true,
     sharedeke: true,
-    options:{}
+    options: {}
   },
-  
+
   previewImage: function (e) {
 
     let url = e.currentTarget.dataset.url;
@@ -118,9 +118,9 @@ Page({
     app.globalData.previewboss = false;
   },
   errImg: function (e) {
-    
+
     // let index = e.currentTarget.dataset.index;
-    
+
     // let obj = `lists[${index}].headerimg`;
     this.setData({
       headerimg: "http://cdn.yupao.com/miniprogram/images/user.png"
@@ -163,11 +163,13 @@ Page({
       failTitle: "网络错误！",
       params: dert,
       success: function (res) {
+        console.log(res)
         if (res.data.errcode == 200) {
           that.setData({
             telephone: res.data.tel,
-            sharetelephone:res.data.tel,
-            onoff: true
+            sharetelephone: res.data.tel,
+            onoff: true,
+            is_read:0
           })
         } else if (res.data.errcode == "7405") {
           wx.showModal({
@@ -242,6 +244,22 @@ Page({
       showComplain: true
     })
   },
+  userTapComplai() {
+    let userInfo = wx.getStorageSync("userInfo");
+    if (!userInfo) {
+      app.gotoUserauth();
+      return false;
+    }
+    if (this.data.status == 1) {
+      app.showMyTips("自己无法投诉自己！");
+    } else if (this.data.is_read == 1){
+      app.showMyTips("请先查看电话号码！");
+    }else {
+      this.setData({
+        showComplain: true
+      })
+    }
+  },
   userEnterComplain: function (e) {
     this.setData({
       complainInfo: e.detail.value
@@ -297,7 +315,7 @@ Page({
         userId: null
       }
     }
-    
+
     let detail = {
       userId: userInfo.userId,
       resume_uuid: option.uuid,
@@ -321,11 +339,11 @@ Page({
     app.appRequestAction({
       url: 'resumes/resume-detail/',
       way: 'POST',
-      mask:true,
+      mask: true,
       params: detail,
       success(res) {
         let mydata = res.data;
-        
+
 
         if (res.data.errcode == "ok") {
           wx.hideLoading();
@@ -350,14 +368,14 @@ Page({
             })
           }
           if (mydata.info.birthday) {
-            if (dateone.getFullYear() - (mydata.info.birthday.split("-")[0] - 0) == 0){
+            if (dateone.getFullYear() - (mydata.info.birthday.split("-")[0] - 0) == 0) {
               that.setData({
                 age: ""
               })
-            }else{
-            that.setData({
-              age: dateone.getFullYear() - (mydata.info.birthday.split("-")[0] - 0) + "岁"
-            })
+            } else {
+              that.setData({
+                age: dateone.getFullYear() - (mydata.info.birthday.split("-")[0] - 0) + "岁"
+              })
             }
           }
           that.setData({
@@ -464,7 +482,7 @@ Page({
             })
           }
 
-        } else if (res.data.errcode == "fail"){
+        } else if (res.data.errcode == "fail") {
           if (option.hasOwnProperty("sharedekeId")) {
             wx.showModal({
               title: '温馨提示',
@@ -476,17 +494,17 @@ Page({
                 })
               }
             })
-          }else{
-          wx.showModal({
-            title: '温馨提示',
-            content: '该信息已被删除！',
-            showCancel: false,
-            success: function () {
-              wx.navigateBack({})
-            }
-          })
+          } else {
+            wx.showModal({
+              title: '温馨提示',
+              content: '该信息已被删除！',
+              showCancel: false,
+              success: function () {
+                wx.navigateBack({})
+              }
+            })
           }
-        }else{
+        } else {
           wx.showModal({
             title: '温馨提示',
             content: res.data.errmsg,
@@ -494,7 +512,7 @@ Page({
             success(res) { }
           })
         }
-        
+
       },
       fail: function (err) {
         let that = this;
@@ -556,8 +574,8 @@ Page({
       way: "POST",
       failTitle: "网络错误！",
       params: praise,
-      title:'正在操作',
-      mask:true,
+      title: '正在操作',
+      mask: true,
       success: function (res) {
         app.showMyTips(res.data.errmsg);
         if (res.data.errcode == "ok") {
@@ -636,17 +654,17 @@ Page({
   },
   onShareAppMessage: function () {
     let tel = this.data.telephone;
-    
+
     let uuid = this.data.resume_uuid;
     let commonShareTips = app.globalData.commonShareTips;
     let commonShareImg = app.globalData.commonShareImg;
-    
+
     return {
       title: commonShareTips,
-      imageUrl:commonShareImg,
+      imageUrl: commonShareImg,
       path: '/pages/boss-look-card/lookcard?uuid=' + uuid + '&sharedekeId=1' //这是一个路径
     }
-    
+
   },
   bindGetUserInfo: function (e) {
     let that = this;
@@ -666,7 +684,7 @@ Page({
             that.setData({
               userInfo: userInfo
             });
-            
+
             that.getdetail(that.data.options)
 
           } else {
@@ -678,7 +696,7 @@ Page({
   },
 
 
-  sharetelphe(){
+  sharetelphe() {
     this.setData({
       telephone: this.data.sharetelephone
     })
@@ -705,9 +723,9 @@ Page({
   onShow() {
     if (app.globalData.previewboss) {
       this.getdetail(this.data.options);
-    //this.sharetelphe();
-    this.delestore();
-    this.deleskill()
+      //this.sharetelphe();
+      this.delestore();
+      this.deleskill()
     }
     app.globalData.previewboss = true;
   },
