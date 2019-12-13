@@ -90,7 +90,8 @@ Page({
     },
     introshow: true,
     sharedeke: true,
-    options: {}
+    options: {},
+    show_complain:{}
   },
 
   previewImage: function (e) {
@@ -169,7 +170,8 @@ Page({
             telephone: res.data.tel,
             sharetelephone: res.data.tel,
             onoff: true,
-            is_read:0
+            is_read:0,
+            // "show_complain.show_complain":
           })
         } else if (res.data.errcode == "7405") {
           wx.showModal({
@@ -222,7 +224,7 @@ Page({
         if (mydata.errcode == "ok") _this.setData({
           showComplain: false,
           complainInfo: "",
-          "ucardInfo.show_complaint.show_complaint": 0
+          "show_complain.show_complain": 0
         })
         wx.showModal({
           title: '提示',
@@ -240,12 +242,30 @@ Page({
     })
   },
   userTapComplain: function () {
+    if (!this.data.show_complain.show_complain) {
+      wx.showModal({
+        title: '提示',
+        content: this.data.show_complain.tips_message,
+        showCancel: false,
+        confirmText: '知道了'
+      })
+      return false;
+    }
     this.setData({
       showComplain: true
     })
   },
   userTapComplai() {
     let userInfo = wx.getStorageSync("userInfo");
+    if (!this.data.show_complain.show_complain) {
+      wx.showModal({
+        title: '提示',
+        content: this.data.show_complain.tips_message,
+        showCancel: false,
+        confirmText: '知道了'
+      })
+      return false;
+    }
     if (!userInfo) {
       app.gotoUserauth();
       return false;
@@ -403,6 +423,7 @@ Page({
             location: mydata.info.hasOwnProperty("location") ? mydata.info.location : "",
             is_end: mydata.info.hasOwnProperty("is_end") ? mydata.info.is_end : "",
             examine: false,
+            show_complain: mydata.info.hasOwnProperty("show_complain") ? mydata.info.show_complain : {},
           })
 
 

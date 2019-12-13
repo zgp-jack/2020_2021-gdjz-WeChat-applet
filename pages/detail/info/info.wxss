@@ -90,6 +90,27 @@ padding-top: 20rpx;
   padding: 0 6rpx;
   margin-left: 8rpx;
 }
+.comeitstatuse{
+  display: flex;
+  align-items: center;
+}
+.cephalowarning .warningcomplaimm{
+  color: red;
+  font-size: 30rpx;
+  margin-left: 8rpx;
+}
+.complainone{
+padding: 10rpx;
+background: red;
+border-radius: 6rpx;
+font-size: 26rpx;
+font-family: Source Han Sans CN;
+font-weight: 400;
+color: white;
+text-align: center;
+margin-left: 10rpx;
+
+}
 .showallphone-btn{
     position: relative;
     display: inline-block;

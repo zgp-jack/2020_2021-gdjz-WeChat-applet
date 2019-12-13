@@ -44,7 +44,9 @@ Page({
       complainImg: app.globalData.apiImgUrl + "newjobinfo-complain.png",
       sharebtnImg: app.globalData.apiImgUrl + "newjobinfo-share.png",
       homebtnImg: app.globalData.apiImgUrl + "newdetailinfo-home.png",
-      showHomeImg:false
+      showHomeImg:false,
+      showcomplain: false,
+      usepang: 8
     },
   detailToHome:function(){
     wx.redirectTo({
@@ -200,9 +202,22 @@ Page({
                 let mydata = res.data;
               _this.setData({ info: mydata.result })
                 if (mydata.errcode != "fail") {
+                
                     let t = mydata.result.title;
                     wx.setNavigationBarTitle({ title: t })
                   _this.setData({ collectMark: mydata.result.is_collect ? true : false})
+                  let userInfo = wx.getStorageSync("userInfo");
+                  if (userInfo){
+                    if (userInfo.userId == mydata.result.user_id){
+                      _this.setData({
+                        showcomplain:true
+                      })
+                    }
+                  }
+                  _this.setData({
+                    usepang: mydata.result.hasOwnProperty("isLook") ? mydata.result.isLook:8
+                  })
+                  
                 }
                 _this.doDetailAction(mydata, {
                     success:function(){},
@@ -336,6 +351,7 @@ Page({
                             "info.tel_str": mydata.tel,
                             "info.show_ajax_btn": false
                         })
+                        console.log(123)
                     },
                     share: function () {
                         _this.setData({
@@ -354,7 +370,13 @@ Page({
         this.setData({ complainInfo: e.detail.value })
     },
     userTapComplain: function () {
-        if (this.data.info.show_ajax_btn || this.data.info.is_end == '2'){
+      console.log(123)
+      let userInfo = this.data.userInfo;
+      if (!userInfo) {
+        app.gotoUserauth();
+        return false;
+      }
+      if (this.data.info.show_ajax_btn || this.data.usepang == 0){
             app.showMyTips("请查看完整的手机号码后再操作！");
             return false; 
         }
