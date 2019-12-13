@@ -1,7 +1,7 @@
 {
   "pages": [
     "pages/index/index",
-    "pages/clients-looking-for-work/ranking-list/rankinglist",      
+    "pages/clients-looking-for-work/ranking-list/rankinglist",
     "pages/clients-looking-for-work/the-sticky-rule/stickyrule",
     "pages/home/home",
     "pages/clients-looking-for-work/finding-top/findingtop",
@@ -69,7 +69,10 @@
     "pages/map/detail",
     "pages/others/message/lists/lists",
     "pages/others/message/publish/publish",
-    "pages/others/information/lists"
+    "pages/others/information/lists",
+    "pages/ucenter/ucenterNew/ucenterNew",
+    "pages/ucenter/ucenterNew/hireMembers",
+    "pages/ucenter/ucenterNew/invite"
   ],
   "window": {
     "backgroundTextStyle": "light",

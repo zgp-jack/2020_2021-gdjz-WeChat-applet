@@ -1,0 +1,238 @@
+<import src="/pages/footer/footer.wxml" />
+
+<view class="ucener-header">
+    <text class='ucenter-title'>会员中心</text>
+
+    <view class='ucener-userinfo-wrap' wx:if="{{ userInfo }}">
+        <view class='ucenter-userinfo'>
+            <view class='ucenter-userinfo-box'>
+                <image src='{{ member.headimgurl }}' class='ucenter-userimg'></image>
+                <view class='ucenter-userinfo-words'>
+                    <navigator class='user-update-info' url='/pages/userinfo/index/index?img={{ member.headimgurl }}&auth={{ member.is_check }}&tel={{ member.tel }}&name={{ member.username || member.nickname }}&pass={{ member.pwd_status }}' open-type="navigate" wx:if="{{ member.tel }}">修改资料</navigator>
+                    <navigator class='user-update-info' url='/pages/userinfo/edit/edit' open-type="navigate" wx:else="{{ member.tel }}">完善资料</navigator>
+                    <view class='ucenter-username overwords'>
+                        {{ member.username || member.nickname }}
+                        <image src='{{ realNames }}' class='user-update-tag'></image>
+                        <image src='{{ realNames }}' class='user-update-tag'></image>
+                    </view>
+                    <view class='ucenter-usernum overwords'>会员编号：
+                        <text>{{ member.id }}</text> </view>
+                </view>
+            </view>
+            <view class='ucenter-integralbox'>
+                <navigator class='ucenter-integral-item flex-column' url='/pages/integral/return/return' open-type="navigate">
+                    <text>{{ member.return_integral }}</text>
+                    <text>退分记录</text>
+                </navigator>
+                <navigator class='ucenter-integral-item flex-column' url='/pages/integral/official/official' open-type="navigate">
+                    <text class='overwords'>{{ member.integral }}</text>
+                    <text>积分</text>
+                </navigator>
+                <navigator class='ucenter-integral-item flex-column {{ member.temporary_integral != "0" ? "click-red-point" : "" }}' url='/pages/integral/temp/temp' open-type="navigate">
+                    <text>{{ member.temporary_integral }}</text>
+                    <text>临时积分</text>
+                </navigator>
+            </view>
+        </view>
+    </view>
+
+
+
+    <view class='ucener-userinfo-wrap' wx:if="{{ !userInfo }}">
+        <view class='ucenter-userinfo'>
+            <view class='ucenter-userinfo-box ucenter-nouserinfo' bindtap='gotoUserauth'>
+                <image src='{{ nouser }}'></image>
+                <text>登录/注册</text>
+            </view>
+            <view class='ucenter-integralbox ucenter-nouserinfo-tips'>
+                点击上方登录/注册按钮可以前往登录页面，登录成功后可解锁小程序全部功能，方便您能更便捷的招工找活。
+            </view>
+        </view>
+    </view>
+
+
+</view>
+
+<view class='yupao-common-container'>
+
+    <view class='ucenter-menus-box'>
+        <!-- 新信息提示     -->
+        <view class="ucenter-hasnoticeinfo" wx:if="{{ member.has_notice_msg.hasNoticeMsg }}" data-url='../../others/message/lists/lists?tel={{ (member.tel == null) ? "" : member.tel }}&name={{ member.username || member.nickname }}' bindtap='downappfun'>
+            <view class='feedbackmsg'>
+                <image class='feedbackmsg-img' src='{{ feedbackimg }}'></image>
+                <view class="overwords">
+                    <text>[{{ member.has_notice_msg.infoTypeWord }}]</text>{{ member.has_notice_msg.tipsMsg }}</view>
+                <text class="feedback-btn">点击查看</text>
+            </view>
+        </view>
+
+        <view class="ucenter-hasnoticeinfo ucenter-pad">
+            <view class='ucenter-vipBox'>
+                <view class="ucenter-myvip">我的会员</view>
+                <view class="ucenter-open">
+                    开通会员
+                </view>
+            </view>
+            <view class='ucenter-100'>
+                <view class='ucenter-float25'>
+                    <image src='{{ ucenterimgs.published }}'></image>
+                    <text>免费查看</text>
+                </view>
+                <view class='ucenter-float25'>
+                    <image src='{{ ucenterimgs.published }}'></image>
+                    <text>充值抵扣</text>
+                </view>
+                <view class='ucenter-float25'>
+                    <image src='{{ ucenterimgs.published }}'></image>
+                    <text>专属排名</text>
+                </view>
+                <view class='ucenter-float25'>
+                    <image src='{{ ucenterimgs.published }}'></image>
+                    <text>专属图标</text>
+                </view>
+
+            </view>
+        </view>
+
+        <view class="ucenter-hasnoticeinfo">
+            <view class='ucener-theme'>
+                <image class="ucener-leftImage" src='{{ ucenterimgs.published }}'></image>
+                <view class='ucener-border-b ucener-border'>
+                    <view class="ucener-title">我的招工
+                        <text></text>
+                    </view>
+                    <view class="flex-row">
+                        <!-- <view class="ucener-detil">专属图标</view> -->
+                        <image src='{{ ucenterimgs.published }}' class="ucener-rightIcon"></image>
+                    </view>
+                </view>
+            </view>
+            <view class='ucener-theme'>
+                <image class="ucener-leftImage" src='{{ ucenterimgs.published }}'></image>
+                <view class='ucener-border-b ucener-border'>
+                    <view class="ucener-title">我的找活名片
+                    </view>
+                    <view class="flex-row">
+                        <view class="ucener-detil">更新我的找活名片</view>
+                        <image src='{{ ucenterimgs.published }}' class="ucener-rightIcon"></image>
+                    </view>
+                </view>
+            </view>
+            <view class='ucener-theme'>
+                <image class="ucener-leftImage" src='{{ ucenterimgs.published }}'></image>
+                <view class='ucener-border-b'>
+                    <view class="ucener-title">我的交易
+                    </view>
+                    <view class="flex-row">
+                        <image src='{{ ucenterimgs.published }}' class="ucener-rightIcon"></image>
+                    </view>
+                </view>
+            </view>
+        </view>
+
+        <view class="ucenter-hasnoticeinfo">
+            <view class='ucener-theme'>
+                <image class="ucener-leftImage" src='{{ ucenterimgs.published }}'></image>
+                <view class='ucener-border-b ucener-border'>
+                    <view class="ucener-title">获取积分
+                        <text></text>
+                    </view>
+                    <view class="flex-row">
+                        <image src='{{ ucenterimgs.published }}' class="ucener-rightIcon"></image>
+                    </view>
+                </view>
+            </view>
+            <view class='ucener-theme'>
+                <image class="ucener-leftImage" src='{{ ucenterimgs.published }}'></image>
+                <view class='ucener-border-b ucener-border'>
+                    <view class="ucener-title">邀请工友
+                    </view>
+                    <view class="flex-row">
+                        <view class="ucener-detil">更新我的找活名片</view>
+                        <image src='{{ ucenterimgs.published }}' class="ucener-rightIcon"></image>
+                    </view>
+                </view>
+            </view>
+            <view class='ucener-theme'>
+                <image class="ucener-leftImage" src='{{ ucenterimgs.published }}'></image>
+                <view class='ucener-border-b ucener-border'>
+                    <view class="ucener-title">积分消耗记录
+                    </view>
+                    <view class="flex-row">
+                        <image src='{{ ucenterimgs.published }}' class="ucener-rightIcon"></image>
+                    </view>
+                </view>
+            </view>
+            <view class='ucener-theme'>
+                <image class="ucener-leftImage" src='{{ ucenterimgs.published }}'></image>
+                <view class='ucener-border-b '>
+                    <view class="ucener-title">积分来源</view>
+                    <view class="flex-row">
+                        <image src='{{ ucenterimgs.published }}' class="ucener-rightIcon"></image>
+                    </view>
+                </view>
+            </view>
+        </view>
+
+        <view class="ucenter-hasnoticeinfo">
+            <view class='ucener-theme'>
+                <image class="ucener-leftImage" src='{{ ucenterimgs.published }}'></image>
+                <view class='ucener-border-b ucener-border'>
+                    <view class="ucener-title">实名认证</view>
+                    <view class="flex-row">
+                        <view class="ucener-detil">已实名</view>
+                        <image src='{{ ucenterimgs.published }}' class="ucener-rightIcon"></image>
+                    </view>
+                </view>
+            </view>
+            <view class='ucener-theme'>
+                <image class="ucener-leftImage" src='{{ ucenterimgs.published }}'></image>
+                <view class='ucener-border-b'>
+                    <view class="ucener-title">我的收藏</view>
+                    <view class="flex-row">
+                        <image src='{{ ucenterimgs.published }}' class="ucener-rightIcon"></image>
+                    </view>
+                </view>
+            </view>
+        </view>
+
+
+
+        <view class="ucenter-hasnoticeinfo">
+            <view class='ucener-theme'>
+                <image class="ucener-leftImage" src='{{ ucenterimgs.published }}'></image>
+                <view class='ucener-border-b ucener-border'>
+                    <view class="ucener-title">系统设置 <text></text></view>
+                    <view class="flex-row">
+                        <view class="ucener-detil">有最新版本，马上更新</view>
+                        <image src='{{ ucenterimgs.published }}' class="ucener-rightIcon"></image>
+                    </view>
+                </view>
+            </view>
+            <view class='ucener-theme'>
+                <image class="ucener-leftImage" src='{{ ucenterimgs.published }}'></image>
+                <view class='ucener-border-b ucener-border'>
+                    <view class="ucener-title">意见反馈</view>
+                    <view class="flex-row">
+                        <image src='{{ ucenterimgs.published }}' class="ucener-rightIcon"></image>
+                    </view>
+                </view>
+            </view>
+            <view class='ucener-theme'>
+                <image class="ucener-leftImage" src='{{ ucenterimgs.published }}'></image>
+                <view class='ucener-border-b'>
+                    <view class="ucener-title">帮助中心</view>
+                    <view class="flex-row">
+                        <view class="ucener-detil">使用教程</view>
+                        <image src='{{ ucenterimgs.published }}' class="ucener-rightIcon"></image>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </view>
+</view>
+
+
+
+<!-- 引入footer -->
+<template is="footer" data="{{ footerImgs,publishActive,showPublishBox,footerActive }}" />
