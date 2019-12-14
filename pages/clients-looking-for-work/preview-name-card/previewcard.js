@@ -266,7 +266,7 @@ Page({
           that.setData({
             name: mydata.info.hasOwnProperty("username") ? mydata.info.username : "",
             nation: mydata.info.hasOwnProperty("nation") ? mydata.info.nation : "",
-            occupations: mydata.info.hasOwnProperty("occupations") ? mydata.info.occupations : "",
+            occupations: mydata.info.hasOwnProperty("miniInfoOccupations") ? mydata.info.miniInfoOccupations : "",
             telephone: mydata.info.hasOwnProperty("tel") ? mydata.info.tel : "",
             city: mydata.info.hasOwnProperty("address") ? mydata.info.address : "",
             intro: false,
