@@ -44,8 +44,6 @@ Page({
     onLoad: function(options) {
         this.initUserInfo(options);
         //this.initUploadImgsApi();
-        console.log('订阅模块当前版本是否可用：', wx.canIUse('requestSubscribeMessage'))
-
     },
     userUploadsImg: function(e) {
         let _type = parseInt(e.currentTarget.dataset.type);
