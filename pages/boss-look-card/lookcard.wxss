@@ -29,14 +29,16 @@ page{
   width: 100%;
 margin: 15rpx 0 0;
 background: white;
-padding-left: 44rpx;
-padding-right: 44rpx;
+padding-left: 50rpx;
+padding-right: 50rpx;
+
 
 
 padding-bottom: 25rpx;
   font-size: 30rpx;
   line-height: 50rpx;
 padding-top: 20rpx;
+text-align: justify;
 
 }
 
@@ -52,6 +54,7 @@ padding-top: 20rpx;
   border-radius: 8rpx;
   padding: 0 6rpx;
   margin-left: 8rpx;
+  display: inline-block;
 }
 
 .cephalowarning .warningcomplaims{

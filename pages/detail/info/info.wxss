@@ -89,6 +89,7 @@ padding-top: 20rpx;
   border-radius: 8rpx;
   padding: 0 6rpx;
   margin-left: 8rpx;
+  display: inline-block;
 }
 .comeitstatuse{
   display: flex;
@@ -108,7 +109,7 @@ font-family: Source Han Sans CN;
 font-weight: 400;
 color: white;
 text-align: center;
-margin-left: 10rpx;
+margin-left: 16rpx;
 
 }
 .showallphone-btn{

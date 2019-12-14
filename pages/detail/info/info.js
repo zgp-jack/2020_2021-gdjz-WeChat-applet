@@ -349,7 +349,8 @@ Page({
                         }
                         _this.setData({
                             "info.tel_str": mydata.tel,
-                            "info.show_ajax_btn": false
+                            "info.show_ajax_btn": false,
+                             usepang:1
                         })
                         console.log(123)
                     },
@@ -359,7 +360,8 @@ Page({
                             "info.show_ajax_btn": false,
                             shareFlag: true,
                             isShare: true,
-                            shareMsg: mydata.errmsg
+                            shareMsg: mydata.errmsg,
+                            usepang: 1
                         })
                     }
                 });
