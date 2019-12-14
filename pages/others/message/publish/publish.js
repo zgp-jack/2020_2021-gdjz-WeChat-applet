@@ -44,6 +44,8 @@ Page({
     onLoad: function(options) {
         this.initUserInfo(options);
         //this.initUploadImgsApi();
+        console.log('订阅模块当前版本是否可用：', wx.canIUse('requestSubscribeMessage'))
+
     },
     userUploadsImg: function(e) {
         let _type = parseInt(e.currentTarget.dataset.type);
@@ -120,18 +122,7 @@ Page({
                 return false;
             }
         }
-        //   wx.requestSubscribeMessage({
-        //     tmplIds: ['z5y8OFD9gs0SY0sT7FZwiWsrzT3rNp3CJFH7yhv7dUE'],
-        //     success(res) {
-        //         wx.showToast({
-        //             title: '成功',
-        //             icon: 'success',
-        //             duration: 2000
-        //         });　　 //模拟取消
-        //         　　
-        //         setTimeout(function() {　　　　 wx.hideToast();　　　 }, 2000);
-        //     }
-        // })
+
         app.appRequestAction({
             url: "leaving-message/publish/",
             way: "POST",
@@ -151,22 +142,79 @@ Page({
             success: function(res) {
                 let mydata = res.data;
                 if (mydata.errcode == "ok") {
-                    wx.showModal({
-                        title: '系统提示',
-                        content: mydata.errmsg,
-                        showCancel: false,
-                        success: function(res) {
-                            wx.navigateBack({
-                                delta: 1
-                            })
-                        }
-                    })
+                    if (wx.canIUse('requestSubscribeMessage') === true) {
+                        wx.requestSubscribeMessage({
+                            tmplIds: ['z5y8OFD9gs0SY0sT7FZwiWsrzT3rNp3CJFH7yhv7dUE'],
+                            success(res) {
+                                app.appRequestAction({
+                                    url: "leaving-message/add-subscribe-msg/",
+                                    way: "POST",
+                                    mask: true,
+                                    params: {
+                                        userId: userInfo.userId,
+                                        token: userInfo.token,
+                                        tokenTime: userInfo.tokenTime,
+                                        type: 1
+                                    },
+                                    success: function(res) {
+                                        wx.showModal({
+                                            title: '系统提示',
+                                            content: mydata.errmsg,
+                                            showCancel: false,
+                                            success: function(res) {
+                                                wx.navigateBack({
+                                                    delta: 1
+                                                })
+                                            }
+                                        })
+                                    },
+                                })
+                            }
+                        })
+                    } else {
+                        wx.showModal({
+                            title: '系统提示',
+                            content: mydata.errmsg,
+                            showCancel: false,
+                            success: function(res) {
+                                wx.navigateBack({
+                                    delta: 1
+                                })
+                            }
+                        })
+                    }
                 } else {
-                    wx.showModal({
-                        title: '提示',
-                        content: mydata.errmsg,
-                        showCancel: false
-                    })
+                    if (wx.canIUse('requestSubscribeMessage') === true) {
+                        wx.requestSubscribeMessage({
+                            tmplIds: ['z5y8OFD9gs0SY0sT7FZwiWsrzT3rNp3CJFH7yhv7dUE'],
+                            success(res) {
+                                app.appRequestAction({
+                                    url: "leaving-message/add-subscribe-msg/",
+                                    way: "POST",
+                                    mask: true,
+                                    params: {
+                                        userId: userInfo.userId,
+                                        token: userInfo.token,
+                                        tokenTime: userInfo.tokenTime,
+                                        type: 1
+                                    },
+                                    success: function(res) {
+                                        wx.showModal({
+                                            title: '提示',
+                                            content: mydata.errmsg,
+                                            showCancel: false
+                                        })
+                                    },
+                                })
+                            }
+                        })
+                    } else {
+                        wx.showModal({
+                            title: '提示',
+                            content: mydata.errmsg,
+                            showCancel: false
+                        })
+                    }
                 }
             },
         })
