@@ -120,7 +120,6 @@ Page({
                 return false;
             }
         }
-
         app.appRequestAction({
             url: "leaving-message/publish/",
             way: "POST",
@@ -153,7 +152,6 @@ Page({
 
     },
     subscribeToNews: function(mydata, userInfo) {
-        console.log(userInfo, "userInfo")
         if (wx.canIUse('requestSubscribeMessage') === true) {
             wx.requestSubscribeMessage({
                 tmplIds: ['z5y8OFD9gs0SY0sT7FZwiWsrzT3rNp3CJFH7yhv7dUE'],
