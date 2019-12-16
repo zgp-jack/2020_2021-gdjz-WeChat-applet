@@ -1,10 +1,10 @@
 <!-- 意见反馈列表 -->
 <view class="feedback-header" id="comment">
-  <view>
-    <text class="feedback-header-texr">提示 : </text> 为提高沟通效率,建议您添加客服微信或拨打客服电话,客服微信号:
-    <text bindtap='clipboardWechat' data-wc="{{ wechat }}" class='gehu'>{{ wechat }}</text> 客服电话:
-    <text class='gehu' data-phone="{{ phone }}" bindtap='callThisPhone'>{{ phone }}</text>
-  </view>
+    <view>
+        <text class="feedback-header-texr">提示 : </text> 为提高沟通效率,建议您添加客服微信或拨打客服电话,客服微信号:
+        <text bindtap='clipboardWechat' data-wc="{{ wechat }}" class='gehu'>{{ wechat }}</text> 客服电话:
+        <text class='gehu' data-phone="{{ phone }}" bindtap='callThisPhone'>{{ phone }}</text>
+    </view>
 </view>
 
 
@@ -13,32 +13,32 @@
 
     <!-- 列表 -->
     <block wx:for="{{restaurants}}" wx:key="{{index}}">
-      <view class="feedback-body-1">
+        <view class="feedback-body-1">
 
-        <view class="superior">
-          <view class="superior-1">
-            <text>问</text>
-          </view>
-          <view class="superior-2">
-            <text>{{item.content}}</text>
-          </view>
+            <view class="superior">
+                <view class="superior-1">
+                    <text>问</text>
+                </view>
+                <view class="superior-2">
+                    <text>{{item.content}}</text>
+                </view>
+            </view>
+
+            <view class="species">
+                <view class="species-1" wx:for-item="imagesItem" wx:for="{{item.images}}" wx:key="{{index}}">
+                    <image style="width:100%;height:200rpx" data-item="{{item}}" data-index="{{index}}" bindtap="restimg" src="{{imagesItem}}" mode="aspectFill"></image>
+                </view>
+
+            </view>
+
+            <view class="species-text">{{item.ask_time}}</view>
+            <view class="superior-1s" wx:if="{{item.is_answer}}">
+                <view class="superiordati">答</view>
+                <view class="superioredase">
+                    <text wx:if="{{item.send_msg}}">{{item.send_msg}}</text>
+                </view>
+            </view>
         </view>
-
-        <view class="species">
-          <view class="species-1" wx:for-item="imagesItem" wx:for="{{item.images}}" wx:key="{{index}}">
-            <image style="width:100%;height:200rpx" data-item="{{item}}" data-index="{{index}}" bindtap="restimg" src="{{imagesItem}}" mode="aspectFill"></image>
-          </view>
-
-        </view>
-
-        <view class="species-text">{{item.ask_time}}</view>
-        <view class="superior-1s" wx:if="{{item.is_answer}}">
-          <view class="superiordati">答</view>
-          <view class="superioredase">
-            <text wx:if="{{item.send_msg}}">{{item.send_msg}}</text>
-          </view>
-        </view>
-      </view>
     </block>
 
 
@@ -48,11 +48,19 @@
 </view>
 
 <view class="footr">
-  <view class="footr-1" bindtap='valiUserUrl'>我要提意见</view>
+    <view class="footr-1" bindtap='valiUserUrl'>我要提意见</view>
 </view>
 
 
 <view class='common-nodatabox flex-column' wx:if="{{restaurants.length==0}}">
-  <image src='{{nodata}}'></image>
-  <text>暂无相关意见反馈</text>
+    <image src='{{nodata}}'></image>
+    <text>暂无相关意见反馈</text>
+</view>
+
+<view class="common-userauth" wx:if="{{ !userInfo }}">
+    <image src='{{ icon }}' class='userauth-topicon'></image>
+    <view class='userauth-title'>登录鱼泡网</view>
+    <view class='userauth-words'>招工 找活抢先一步，用的安心 赚的开心。</view>
+    <button class='userauth-btn userauth-sure-btn' open-type="getUserInfo" bindgetuserinfo='bindGetUserInfo'>微信授权登录</button>
+    <button class='userauth-btn  userauth-back-btn' bindtap='returnPrevPage'>返回上一页</button>
 </view>

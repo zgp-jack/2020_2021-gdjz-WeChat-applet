@@ -96,6 +96,13 @@
 					"pathName": "pages/others/message/publish/publish",
 					"query": "tel=19983741552&name=我服了",
 					"scene": null
+				},
+				{
+					"id": 6,
+					"name": "pages/others/message/lists/lists",
+					"pathName": "pages/others/message/lists/lists",
+					"query": "",
+					"scene": null
 				}
 			]
 		}
