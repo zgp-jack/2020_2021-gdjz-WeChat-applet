@@ -62,5 +62,5 @@
     <view class='userauth-title'>登录鱼泡网</view>
     <view class='userauth-words'>招工 找活抢先一步，用的安心 赚的开心。</view>
     <button class='userauth-btn userauth-sure-btn' open-type="getUserInfo" bindgetuserinfo='bindGetUserInfo'>微信授权登录</button>
-    <button class='userauth-btn  userauth-back-btn' bindtap='returnPrevPage'>返回上一页</button>
+    <button class='userauth-btn  userauth-back-btn' bindtap='returnPrevPage'>返回首页</button>
 </view>

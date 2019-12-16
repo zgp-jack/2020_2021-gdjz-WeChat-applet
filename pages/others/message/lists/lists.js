@@ -24,35 +24,22 @@ Page({
             this.setData({
                 userInfo: false
             })
-            return false
-        }
-        console.log(tel, name)
-        this.setData({
-            tel: tel,
-            "member.phone": tel,
-            "member.username": name,
-            userInfo: userInfo
-        });
-
-        this.initNeedData();
-
-    },
-    authrasution() {
-        let userInfo = wx.getStorageSync("userInfo");
-        if (!userInfo) {
-            this.setData({
-                userInfo: false
-            })
             return false;
         } else {
             this.setData({
                 userInfo: userInfo
             })
         }
+        this.setData({
+            tel: tel,
+            "member.phone": tel,
+            "member.username": name,
+            userInfo: userInfo
+        });
     },
     returnPrevPage() {
-        wx.navigateBack({
-            delta: 1
+        wx.reLaunch({
+          url: '/pages/index/index',
         })
     },
     bindGetUserInfo: function(e) {
@@ -85,7 +72,7 @@ Page({
      */
     onLoad: function(options) {
         this.initUserData(options)
-
+        this.initNeedData();
     },
     onShow: function() {
         if (this.data.isViewImgs) {
@@ -115,6 +102,7 @@ Page({
         let td = this.data
         let page = td.page;
         let userInfo = wx.getStorageSync("userInfo");
+        if(!userInfo) return false;
         // 发送网络请求
         app.appRequestAction({
             url: "leaving-message/list/",
@@ -162,8 +150,6 @@ Page({
     valiUserUrl: function() {
         let userInfo = wx.getStorageSync("userInfo");
         let td = this.data
-        console.log(td, "ghewrgjoper")
-        console.log(userInfo, "userInfo")
         wx.navigateTo({
             url: '/pages/others/message/publish/publish?tel=' + userInfo.tel + "&name=" + userInfo.username + "&wechat=" + td.wechat + "&phone=" + td.phone
         })
