@@ -151,7 +151,7 @@ Page({
         let userInfo = wx.getStorageSync("userInfo");
         let td = this.data
         let tels = td.tel || userInfo.tel
-        let username = td.member.username || userInfo.username
+        let username = userInfo.username || td.member.username
         wx.navigateTo({
             url: '/pages/others/message/publish/publish?tel=' + tels + "&name=" + username + "&wechat=" + td.wechat + "&phone=" + td.phone
         })
