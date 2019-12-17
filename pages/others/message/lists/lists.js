@@ -39,7 +39,7 @@ Page({
     },
     returnPrevPage() {
         wx.reLaunch({
-          url: '/pages/index/index',
+            url: '/pages/index/index',
         })
     },
     bindGetUserInfo: function(e) {
@@ -102,7 +102,7 @@ Page({
         let td = this.data
         let page = td.page;
         let userInfo = wx.getStorageSync("userInfo");
-        if(!userInfo) return false;
+        if (!userInfo) return false;
         // 发送网络请求
         app.appRequestAction({
             url: "leaving-message/list/",
@@ -150,8 +150,10 @@ Page({
     valiUserUrl: function() {
         let userInfo = wx.getStorageSync("userInfo");
         let td = this.data
+        let tels = td.tel || userInfo.tel
+        let username = td.member.username || userInfo.username
         wx.navigateTo({
-            url: '/pages/others/message/publish/publish?tel=' + userInfo.tel + "&name=" + userInfo.username + "&wechat=" + td.wechat + "&phone=" + td.phone
+            url: '/pages/others/message/publish/publish?tel=' + tels + "&name=" + username + "&wechat=" + td.wechat + "&phone=" + td.phone
         })
     },
     clipboardWechat: function(e) {

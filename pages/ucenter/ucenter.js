@@ -81,10 +81,11 @@ Page({
         app.globalData.showdetail = true
         app.valiUserUrl(e, this.data.userInfo)
     },
-    suggestUserUrl: function() {
+    suggestUserUrl: function(e) {
         app.globalData.showdetail = true
+        let url = e.currentTarget.dataset.url
         wx.navigateTo({
-            url: '/pages/others/message/lists/lists',
+            url: url,
         })
     },
     gotoUserauth: function() {
