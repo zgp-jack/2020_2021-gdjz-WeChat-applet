@@ -81,12 +81,10 @@ Page({
         app.globalData.showdetail = true
         app.valiUserUrl(e, this.data.userInfo)
     },
-    suggestUserUrl: function(e) {
+    suggestUserUrl: function() {
         app.globalData.showdetail = true
-        let url = e.currentTarget.dataset.url
         wx.navigateTo({
-            url: url,
-            // /pages/others/message/lists/lists?tel={{ (member.tel == null) ? "" : member.tel }}&name={{ member.username || member.nickname }}
+            url: '/pages/others/message/lists/lists',
         })
     },
     gotoUserauth: function() {
