@@ -80,12 +80,13 @@
     right: 0;
     bottom: 40rpx;
     font-size: 24rpx;
-    border: 1px solid #dcdcdc;
+    border: 1px solid #d3d4d5;
     border-radius: 5px;
     padding: 0 10rpx;
     font-weight: normal;
     height: 42rpx;
     line-height: 42rpx;
+    color: #656666;
 }
 
 .ucenter-usernum text {
@@ -255,7 +256,7 @@
 }
 
 .ucener-border {
-    border-bottom: 1rpx solid #cccccc;
+    border-bottom: 1rpx solid #e5e5e5;
 }
 
 .ucener-title {
@@ -268,7 +269,7 @@
 .ucener-title text {
     width: 16rpx;
     height: 16rpx;
-    background: rgba(253, 6, 24, 1);
+    background: #fd0618;
     border-radius: 50%;
     position: absolute;
     top: 0;
@@ -278,7 +279,7 @@
 .ucener-detil {
     font-size: 26rpx;
     font-weight: bold;
-    color: rgba(180, 178, 178, 1);
+    color: #b4b2b2;
 }
 
 .ucener-rightIcon {

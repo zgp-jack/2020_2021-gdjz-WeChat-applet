@@ -213,16 +213,6 @@
             <view class='ucener-theme'>
                 <image class="ucener-leftImage" src='{{ ucenterimgs.published }}'></image>
                 <view class='ucener-border-b ucener-border'>
-                    <view class="ucener-title">系统设置 <text></text></view>
-                    <view class="flex-row">
-                        <view class="ucener-detil">有最新版本，马上更新</view>
-                        <image src='{{ ucenterimgs.published }}' class="ucener-rightIcon"></image>
-                    </view>
-                </view>
-            </view>
-            <view class='ucener-theme'>
-                <image class="ucener-leftImage" src='{{ ucenterimgs.published }}'></image>
-                <view class='ucener-border-b ucener-border'>
                     <view class="ucener-title">意见反馈</view>
                     <view class="flex-row">
                         <image src='{{ ucenterimgs.published }}' class="ucener-rightIcon"></image>
