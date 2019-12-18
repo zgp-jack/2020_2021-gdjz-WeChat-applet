@@ -46,9 +46,7 @@ Page({
                         let userInfo = {
                             userId: uinfo.data.id,
                             token: uinfo.data.sign.token,
-                            tokenTime: uinfo.data.sign.time,
-                            username: uinfo.data.username,
-                            tel: uinfo.data.tel,
+                            tokenTime: uinfo.data.sign.time
                         }
                         app.globalData.userInfo = userInfo;
                         wx.setStorageSync('userInfo', userInfo)
@@ -152,7 +150,6 @@ Page({
         let td = this.data
         let tels = td.memberInfo.phone
         let username = td.memberInfo.username
-        console.log(td.tel, userInfo.tel, td.memberInfo, username, "userInfo.tel")
         wx.navigateTo({
             url: '/pages/others/message/publish/publish?tel=' + tels + "&name=" + username + "&wechat=" + td.wechat + "&phone=" + td.phone
         })
