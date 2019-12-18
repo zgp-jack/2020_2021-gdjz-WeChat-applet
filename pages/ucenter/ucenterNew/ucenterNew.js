@@ -8,20 +8,22 @@ Page({
     data: {
         footerActive: "member",
         nouser: app.globalData.apiImgUrl + "userauth-userinfo-null.png",
+        realNames: app.globalData.apiImgUrl + 'newresume-infolist-ysm.png?t=1',
+        feedbackimg: app.globalData.apiImgUrl + "feedbackmsg-img.png",
+        rightarrow: app.globalData.apiImgUrl + "new-center-rightarrow.png",
         ucenterimgs: {
-            published: app.globalData.apiImgUrl + "uc-publish.png",
-            used: app.globalData.apiImgUrl + "ucenter-used.png",
-            card: app.globalData.apiImgUrl + "uc-card.png",
-            recharge: app.globalData.apiImgUrl + "uc-recharge.png",
-            expend: app.globalData.apiImgUrl + "uc-recode.png",
-            original: app.globalData.apiImgUrl + "uc-source.png",
-            downapp: app.globalData.apiImgUrl + "uc-downapp.png",
-            feedback: app.globalData.apiImgUrl + "ucenter-feedback.png",
-            invite: app.globalData.apiImgUrl + "ucnter-yaoqing.png",
-            fastissue: app.globalData.apiImgUrl + "ucenter-fast.png",
-            fastlist: app.globalData.apiImgUrl + "ucenter-fastlist.png",
-            realname: app.globalData.apiImgUrl + "ucenter-userrealname.png",
-            collect: app.globalData.apiImgUrl + "ucenter_person_collect.jpg"
+            recruit: app.globalData.apiImgUrl + "new-ucenter-recruit.png",
+            mycard: app.globalData.apiImgUrl + "new-ucenter-mycard.png",
+            trade: app.globalData.apiImgUrl + "new-ucenter-trade.png",
+            ucenterMsg: app.globalData.apiImgUrl + "new-ucenter-msg.png",
+            getintegral: app.globalData.apiImgUrl + "new-ucenter-getintegral.png",
+            invite: app.globalData.apiImgUrl + "new-ucenter-invite.png",
+            integral: app.globalData.apiImgUrl + "new-ucenter-integral.png",
+            integrallog: app.globalData.apiImgUrl + "new-ucenter-integrallog.png",
+            realname: app.globalData.apiImgUrl + "new-ucenter-realname.png",
+            collect: app.globalData.apiImgUrl + "new-ucenter-collect.png",
+            feedback: app.globalData.apiImgUrl + "new-ucenter-feedback.png",
+            ucenterHelp: app.globalData.apiImgUrl + "new-ucenter-help.png",
         },
         userInfo: false,
         member: {},
@@ -30,12 +32,6 @@ Page({
             show: 0,
             request: false
         },
-        feedbackimg: app.globalData.apiImgUrl + "feedbackmsg-img.png",
-        rightarrow: app.globalData.apiImgUrl + "feedback-rightarrow.png",
-
-
-        realNames: app.globalData.apiImgUrl + 'newresume-infolist-ysm.png?t=1',
-        authentication: app.globalData.apiImgUrl + 'newresume-infolist-jnz.png?t=1',
     },
     initUserInfo: function(callback) {
         let userInfo = wx.getStorageSync("userInfo");

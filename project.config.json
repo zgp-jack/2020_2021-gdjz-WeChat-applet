@@ -103,6 +103,19 @@
 					"pathName": "pages/others/message/lists/lists",
 					"query": "",
 					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/course/course",
+					"pathName": "pages/course/course",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "帮助中心",
+					"pathName": "pages/ucenter/ucenterNew/helpCenter",
+					"scene": null
 				}
 			]
 		}

@@ -1,0 +1,60 @@
+/* pages/ucenter/ucenterNew/helpCenter.wxss */
+
+.list_box {
+    margin-top: 20rpx;
+}
+
+.listItem {
+    background-color: #fff;
+}
+
+.list_name_box {
+    background: #fff;
+    border-bottom: 1px solid #efefef;
+    min-height: 90rpx;
+    align-items: center;
+    padding: 0 25rpx;
+    font-size: 32rpx;
+}
+
+.list_item_name {
+    flex: 1;
+    font-size: 28rpx;
+    font-weight: 400;
+}
+
+.icon_down {
+    width: 15rpx;
+    height: 20rpx;
+    transition: transform 0.3s;
+}
+
+.list_item_box {
+    display: flex;
+}
+
+.list_item_title {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    line-height: 90rpx;
+    color: #333333;
+}
+
+.other {
+    display: flex;
+    padding: 0 25rpx 30rpx 60rpx;
+    align-items: center;
+    font-size: 30rpx;
+    color: #999999;
+}
+
+.icon_down_rotate {
+    transform: rotate(-90deg);
+}
+
+.icon_question {
+    width: 45rpx;
+    height: 48rpx;
+    padding-right: 20rpx;
+}

@@ -72,7 +72,8 @@
     "pages/others/information/lists",
     "pages/ucenter/ucenterNew/ucenterNew",
     "pages/ucenter/ucenterNew/hireMembers",
-    "pages/ucenter/ucenterNew/invite"
+    "pages/ucenter/ucenterNew/invite",
+    "pages/ucenter/ucenterNew/helpCenter"
   ],
   "window": {
     "backgroundTextStyle": "light",

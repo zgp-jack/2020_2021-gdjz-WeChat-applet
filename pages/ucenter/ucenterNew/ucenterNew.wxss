@@ -242,8 +242,8 @@
 }
 
 .ucener-leftImage {
-    width: 50rpx;
-    height: 50rpx;
+    width: 38rpx;
+    height: 36rpx;
     padding: 32rpx 20rpx 30rpx 0
 }
 
@@ -284,6 +284,6 @@
 
 .ucener-rightIcon {
     padding-left: 20rpx;
-    width: 50rpx;
-    height: 50rpx;
+    width: 18rpx;
+    height: 28rpx;
 }

@@ -13,7 +13,6 @@
                     <view class='ucenter-username overwords'>
                         {{ member.username || member.nickname }}
                         <image src='{{ realNames }}' class='user-update-tag'></image>
-                        <image src='{{ realNames }}' class='user-update-tag'></image>
                     </view>
                     <view class='ucenter-usernum overwords'>会员编号：
                         <text>{{ member.id }}</text> </view>
@@ -96,46 +95,46 @@
 
         <view class="ucenter-hasnoticeinfo">
             <view class='ucener-theme'>
-                <image class="ucener-leftImage" src='{{ ucenterimgs.published }}'></image>
+                <image class="ucener-leftImage" src='{{ ucenterimgs.recruit }}'></image>
                 <view class='ucener-border-b ucener-border'>
                     <view class="ucener-title">我的招工
                         <text></text>
                     </view>
                     <view class="flex-row">
                         <!-- <view class="ucener-detil">专属图标</view> -->
-                        <image src='{{ ucenterimgs.published }}' class="ucener-rightIcon"></image>
+                        <image src='{{ rightarrow }}' class="ucener-rightIcon"></image>
                     </view>
                 </view>
             </view>
             <view class='ucener-theme'>
-                <image class="ucener-leftImage" src='{{ ucenterimgs.published }}'></image>
+                <image class="ucener-leftImage" src='{{ ucenterimgs.mycard }}'></image>
                 <view class='ucener-border-b ucener-border'>
                     <view class="ucener-title">我的找活名片
                     </view>
                     <view class="flex-row">
                         <view class="ucener-detil">更新我的找活名片</view>
-                        <image src='{{ ucenterimgs.published }}' class="ucener-rightIcon"></image>
+                        <image src='{{ rightarrow }}' class="ucener-rightIcon"></image>
                     </view>
                 </view>
             </view>
             <view class='ucener-theme'>
-                <image class="ucener-leftImage" src='{{ ucenterimgs.published }}'></image>
+                <image class="ucener-leftImage" src='{{ ucenterimgs.trade }}'></image>
                 <view class='ucener-border-b ucener-border'>
                     <view class="ucener-title">我的交易
                     </view>
                     <view class="flex-row">
-                        <image src='{{ ucenterimgs.published }}' class="ucener-rightIcon"></image>
+                        <image src='{{ rightarrow }}' class="ucener-rightIcon"></image>
                     </view>
                 </view>
             </view>
             <view class='ucener-theme'>
-                <image class="ucener-leftImage" src='{{ ucenterimgs.published }}'></image>
+                <image class="ucener-leftImage" src='{{ ucenterimgs.ucenterMsg }}'></image>
                 <view class='ucener-border-b'>
                     <view class="ucener-title">我的信息
                         <text></text>
                     </view>
                     <view class="flex-row">
-                        <image src='{{ ucenterimgs.published }}' class="ucener-rightIcon"></image>
+                        <image src='{{ rightarrow }}' class="ucener-rightIcon"></image>
                     </view>
                 </view>
             </view>
@@ -143,43 +142,43 @@
 
         <view class="ucenter-hasnoticeinfo">
             <view class='ucener-theme'>
-                <image class="ucener-leftImage" src='{{ ucenterimgs.published }}'></image>
+                <image class="ucener-leftImage" src='{{ ucenterimgs.getintegral }}'></image>
                 <view class='ucener-border-b ucener-border'>
                     <view class="ucener-title">获取积分
                         <text></text>
                     </view>
                     <view class="flex-row">
-                        <image src='{{ ucenterimgs.published }}' class="ucener-rightIcon"></image>
+                        <image src='{{ rightarrow }}' class="ucener-rightIcon"></image>
                     </view>
                 </view>
             </view>
             <view class='ucener-theme'>
-                <image class="ucener-leftImage" src='{{ ucenterimgs.published }}'></image>
+                <image class="ucener-leftImage" src='{{ ucenterimgs.invite }}'></image>
                 <view class='ucener-border-b ucener-border'>
                     <view class="ucener-title">邀请工友
                     </view>
                     <view class="flex-row">
                         <view class="ucener-detil">更新我的找活名片</view>
-                        <image src='{{ ucenterimgs.published }}' class="ucener-rightIcon"></image>
+                        <image src='{{ rightarrow }}' class="ucener-rightIcon"></image>
                     </view>
                 </view>
             </view>
             <view class='ucener-theme'>
-                <image class="ucener-leftImage" src='{{ ucenterimgs.published }}'></image>
+                <image class="ucener-leftImage" src='{{ ucenterimgs.integral }}'></image>
                 <view class='ucener-border-b ucener-border'>
                     <view class="ucener-title">积分消耗记录
                     </view>
                     <view class="flex-row">
-                        <image src='{{ ucenterimgs.published }}' class="ucener-rightIcon"></image>
+                        <image src='{{ rightarrow }}' class="ucener-rightIcon"></image>
                     </view>
                 </view>
             </view>
             <view class='ucener-theme'>
-                <image class="ucener-leftImage" src='{{ ucenterimgs.published }}'></image>
+                <image class="ucener-leftImage" src='{{ ucenterimgs.integrallog }}'></image>
                 <view class='ucener-border-b '>
                     <view class="ucener-title">积分来源</view>
                     <view class="flex-row">
-                        <image src='{{ ucenterimgs.published }}' class="ucener-rightIcon"></image>
+                        <image src='{{ rightarrow }}' class="ucener-rightIcon"></image>
                     </view>
                 </view>
             </view>
@@ -187,21 +186,21 @@
 
         <view class="ucenter-hasnoticeinfo">
             <view class='ucener-theme'>
-                <image class="ucener-leftImage" src='{{ ucenterimgs.published }}'></image>
+                <image class="ucener-leftImage" src='{{ ucenterimgs.realname }}'></image>
                 <view class='ucener-border-b ucener-border'>
                     <view class="ucener-title">实名认证</view>
                     <view class="flex-row">
                         <view class="ucener-detil">已实名</view>
-                        <image src='{{ ucenterimgs.published }}' class="ucener-rightIcon"></image>
+                        <image src='{{ rightarrow }}' class="ucener-rightIcon"></image>
                     </view>
                 </view>
             </view>
             <view class='ucener-theme'>
-                <image class="ucener-leftImage" src='{{ ucenterimgs.published }}'></image>
+                <image class="ucener-leftImage" src='{{ ucenterimgs.collect }}'></image>
                 <view class='ucener-border-b'>
                     <view class="ucener-title">我的收藏</view>
                     <view class="flex-row">
-                        <image src='{{ ucenterimgs.published }}' class="ucener-rightIcon"></image>
+                        <image src='{{ rightarrow }}' class="ucener-rightIcon"></image>
                     </view>
                 </view>
             </view>
@@ -211,21 +210,21 @@
 
         <view class="ucenter-hasnoticeinfo">
             <view class='ucener-theme'>
-                <image class="ucener-leftImage" src='{{ ucenterimgs.published }}'></image>
+                <image class="ucener-leftImage" src='{{ ucenterimgs.feedback }}'></image>
                 <view class='ucener-border-b ucener-border'>
                     <view class="ucener-title">意见反馈</view>
                     <view class="flex-row">
-                        <image src='{{ ucenterimgs.published }}' class="ucener-rightIcon"></image>
+                        <image src='{{ rightarrow }}' class="ucener-rightIcon"></image>
                     </view>
                 </view>
             </view>
             <view class='ucener-theme'>
-                <image class="ucener-leftImage" src='{{ ucenterimgs.published }}'></image>
+                <image class="ucener-leftImage" src='{{ ucenterimgs.ucenterHelp }}'></image>
                 <view class='ucener-border-b'>
                     <view class="ucener-title">帮助中心</view>
                     <view class="flex-row">
                         <view class="ucener-detil">使用教程</view>
-                        <image src='{{ ucenterimgs.published }}' class="ucener-rightIcon"></image>
+                        <image src='{{ rightarrow }}' class="ucener-rightIcon"></image>
                     </view>
                 </view>
             </view>
