@@ -17,9 +17,6 @@ Page({
     },
     initUserData: function(options) {
         let userInfo = wx.getStorageSync("userInfo");
-        let td = this.data
-        let tel = options.tel || userInfo.tel;
-        let name = options.name || userInfo.username;
         if (!userInfo) {
             this.setData({
                 userInfo: false
@@ -31,9 +28,6 @@ Page({
             })
         }
         this.setData({
-            tel: tel,
-            "member.phone": tel,
-            "member.username": name,
             userInfo: userInfo
         });
     },
@@ -115,13 +109,19 @@ Page({
             },
             success: function(res) {
                 let mydata = res.data.data;
+                let memberInfo = res.data.memberInfo;
+                if (page === 1) {
+                    _this.setData({
+                        memberInfo: memberInfo
+                    })
+                }
                 let len = mydata.length;
                 if (len) {
                     let mylist = td.restaurants
                     let _list = bool ? mydata : mylist.concat(mydata)
                     page = page + 1;
                     _this.setData({
-                        restaurants: _list,
+                        restaurants: _list
                     })
                 } else {
                     if (page !== 1) {
@@ -150,8 +150,9 @@ Page({
     valiUserUrl: function() {
         let userInfo = wx.getStorageSync("userInfo");
         let td = this.data
-        let tels = td.tel || userInfo.tel
-        let username = userInfo.username || td.member.username
+        let tels = td.memberInfo.phone
+        let username = td.memberInfo.username
+        console.log(td.tel, userInfo.tel, td.memberInfo, username, "userInfo.tel")
         wx.navigateTo({
             url: '/pages/others/message/publish/publish?tel=' + tels + "&name=" + username + "&wechat=" + td.wechat + "&phone=" + td.phone
         })
