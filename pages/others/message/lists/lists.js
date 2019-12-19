@@ -107,8 +107,8 @@ Page({
             },
             success: function(res) {
                 let mydata = res.data.data;
-                let memberInfo = res.data.memberInfo;
                 if (page === 1) {
+                    let memberInfo = res.data.memberInfo;
                     _this.setData({
                         memberInfo: memberInfo
                     })
@@ -146,7 +146,6 @@ Page({
     },
 
     valiUserUrl: function() {
-        let userInfo = wx.getStorageSync("userInfo");
         let td = this.data
         let tels = td.memberInfo.phone
         let username = td.memberInfo.username
