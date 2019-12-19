@@ -1,0 +1,22 @@
+<view>
+  <view class="header">
+    注:排名点越高，排名越靠前
+  </view>
+  <view class="ranking-center">
+    <view class="ranking-child" wx:for="{{list}}" wx:key="{{index}}">
+      <view class="ranking-detail">
+        <text class="ranking-num">{{index+1}}</text>
+        <text class="ranking-zan">{{item.title}}</text>
+        <!-- <text class="ranking-point">(1排名点)</text> -->
+      </view>
+      <view class="ranking-content">
+        {{item.description}}
+      </view>
+    </view>
+  </view>
+  <view class="ranking-button">
+    <button class="obtn" open-type='share'>
+      排名提升
+    </button>
+  </view>
+</view>

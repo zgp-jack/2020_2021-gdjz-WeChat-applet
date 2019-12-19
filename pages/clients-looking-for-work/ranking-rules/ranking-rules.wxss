@@ -1,0 +1,85 @@
+.header {
+  margin: 0 auto;
+  background: white;
+  font-size: 30rpx;
+  color: #f87a14;
+  text-align: center;
+  line-height: 80rpx;
+  position: fixed;
+  width: 100%;
+  top: 0;
+    border-bottom: 1rpx solid rgb(209, 209, 209);
+}
+.ranking-center{
+  background: white;
+  margin-top: 100rpx;
+  overflow: hidden;
+    margin-bottom: 120rpx;
+}
+.ranking-child{
+  width: 94%;
+  border-bottom: 1rpx dashed rgb(209, 209, 209);
+  margin: auto;
+}
+.ranking-child:last-child{
+    width: 94%;
+    margin: auto;
+   border-bottom: 0;
+}
+.ranking-detail{
+  /* display: flex;
+  align-items: center; */
+  padding-top: 32rpx;
+  padding-bottom: 8rpx;
+
+}
+.ranking-childbote{
+  width: 94%;
+  margin: auto;
+
+}
+.ranking-num{
+  display: inline-block;
+  width: 36rpx;
+  height: 36rpx;
+  background: #0099ff;
+  text-align: center;
+  line-height: 36rpx;
+  color: white;
+  font-size: 26rpx;
+  border-radius:50%; 
+  vertical-align: middle;
+
+}
+.ranking-zan{
+  font-size: 30rpx;
+  padding: 0 14rpx;
+  vertical-align: middle;
+
+}
+.ranking-point{
+    font-size: 30rpx;
+    vertical-align: middle;
+
+}
+.ranking-content{
+  font-size: 30rpx;
+  color: #7F7D7D;
+  margin-bottom: 28rpx;
+}
+.ranking-button{
+  width: 100%;
+  background: white;
+  height: 110rpx;
+  position: fixed;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+}
+.obtn{
+  width: 96%;
+  height: 90rpx;
+  background: #0099ff;
+  color: white;
+  letter-spacing: 4rpx;
+}

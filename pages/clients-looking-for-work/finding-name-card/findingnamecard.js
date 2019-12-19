@@ -11,6 +11,7 @@ Page({
    * newresume-experience.png audit.png baseinform headerimg uuid age chooseImage onShareAppMessage checkfourf age showskill
    */
   data: {
+    ruleimage: app.globalData.apiImgUrl + "lpy/newresume-rank.png",
     baseinform: app.globalData.apiImgUrl + "lpy/jichu.png",
     workingposition: app.globalData.apiImgUrl + "lpy/workdetail.png",
     subscripted: app.globalData.apiImgUrl + 'select.png',
@@ -126,6 +127,12 @@ Page({
     this.setData({
       showModal: false,
       display: "none"
+    })
+  },
+  rulepoit(){
+    let rulestatus =  this.data.checkonef
+    wx.navigateTo({
+      url: `/pages/clients-looking-for-work/ranking-rules/ranking-rules?rulestatus=${rulestatus}`,
     })
   },
   obtn() {

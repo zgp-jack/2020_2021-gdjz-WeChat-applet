@@ -259,3 +259,8 @@ overflow: hidden;
   line-height: 36rpx;
 }
 .listsboxagetwot{font-size: 0;margin-top: 14rpx;}
+.fixed-get-integral{
+  top: 720rpx;
+  box-shadow: 0rpx 0rpx 8rpx #E7E6E4;
+  border-radius:50%; 
+}
