@@ -8,7 +8,7 @@
   position: fixed;
   width: 100%;
   top: 0;
-    border-bottom: 1rpx solid rgb(209, 209, 209);
+    border-bottom: 1rpx solid rgb(233, 232, 232);
 }
 .ranking-center{
   background: white;
@@ -20,11 +20,17 @@
   width: 94%;
   border-bottom: 1rpx dashed rgb(209, 209, 209);
   margin: auto;
+  display: flex;
 }
 .ranking-child:last-child{
     width: 94%;
     margin: auto;
    border-bottom: 0;
+     display: flex;
+}
+.ranking-oimg{
+  padding-top: 32rpx;
+  font-size: 0;
 }
 .ranking-detail{
   /* display: flex;
@@ -32,6 +38,11 @@
   padding-top: 32rpx;
   padding-bottom: 8rpx;
 
+  font-size: 0;
+}
+.ranking-ocontent{
+  padding-left: 14rpx;
+  padding-right: 14rpx;
 }
 .ranking-childbote{
   width: 94%;
@@ -40,11 +51,11 @@
 }
 .ranking-num{
   display: inline-block;
-  width: 36rpx;
-  height: 36rpx;
+  width: 38rpx;
+  height: 38rpx;
   background: #0099ff;
   text-align: center;
-  line-height: 36rpx;
+  line-height: 38rpx;
   color: white;
   font-size: 26rpx;
   border-radius:50%; 
@@ -53,7 +64,7 @@
 }
 .ranking-zan{
   font-size: 30rpx;
-  padding: 0 14rpx;
+
   vertical-align: middle;
 
 }
@@ -75,6 +86,7 @@
   bottom: 0;
   display: flex;
   align-items: center;
+      border-top: 1rpx solid rgb(233, 232, 232);
 }
 .obtn{
   width: 96%;

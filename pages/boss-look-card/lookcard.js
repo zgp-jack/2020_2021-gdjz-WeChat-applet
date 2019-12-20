@@ -190,9 +190,6 @@ Page({
         } else {
           app.showMyTips(res.data.errmsg)
         }
-      },
-      fail: function (err) {
-
       }
     })
   },

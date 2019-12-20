@@ -260,7 +260,18 @@ overflow: hidden;
 }
 .listsboxagetwot{font-size: 0;margin-top: 14rpx;}
 .fixed-get-integral{
-  top: 720rpx;
+  top: 700rpx;
   box-shadow: 0rpx 0rpx 8rpx #E7E6E4;
   border-radius:50%; 
+  right: 20rpx;
+    width: 110rpx;
+height: 110rpx;
+overflow: hidden;
+}
+.fixed-get-integral image{
+  width: 110rpx;
+height: 110rpx;
+display: inline-block;
+overflow: hidden;
+
 }

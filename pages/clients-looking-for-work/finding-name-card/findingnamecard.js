@@ -97,7 +97,9 @@ Page({
     move: true,
     show_tips: "",
     showskill: true,
-    age: []
+    age: [],
+    sort_flag:"",
+    ranking:""
   },
   previewImage: function (e) {
 
@@ -130,9 +132,9 @@ Page({
     })
   },
   rulepoit(){
-    let rulestatus =  this.data.checkonef
+    // let rulestatus =  this.data.checkonef
     wx.navigateTo({
-      url: `/pages/clients-looking-for-work/ranking-rules/ranking-rules?rulestatus=${rulestatus}`,
+      url: `/pages/clients-looking-for-work/ranking-rules/ranking-rules`,
     })
   },
   obtn() {
@@ -599,7 +601,8 @@ Page({
             note: mydata.info.hasOwnProperty("note") ? mydata.info.note : "",
             fail_certificate: mydata.hasOwnProperty("fail_certificate") ? mydata.fail_certificate : "",
             fail_project: mydata.hasOwnProperty("fail_project") ? mydata.fail_project : "",
-
+            sort_flag: mydata.info.hasOwnProperty("sort_flag") ? mydata.info.sort_flag:"",
+            ranking: mydata.info.hasOwnProperty("ranking") ? mydata.info.ranking : "",
           })
           if (that.data.showtop) {
             app.globalData.showperfection = true;
