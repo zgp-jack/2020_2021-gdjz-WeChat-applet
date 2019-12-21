@@ -36,8 +36,8 @@ App({
     commonJixieAd: "http://cdn.yupao.com/miniprogram/images/list-ad-newjixie.png?t=" + new Date().getTime(),
 
     // apiRequestUrl:"https://miniapi.zhaogong.vrtbbs.com/",
-    apiRequestUrl: "https://newyupaomini.54xiaoshuo.com/",
-    // apiRequestUrl: "http://miniapi.qsyupao.com/",
+    // apiRequestUrl: "https://newyupaomini.54xiaoshuo.com/",
+    apiRequestUrl: "http://miniapi.qsyupao.com/",
     //apiRequestUrl:"http://mini.zhaogongdi.com/",
     apiUploadImg: "https://newyupaomini.54xiaoshuo.com/index/upload/",
     apiImgUrl: "http://cdn.yupao.com/miniprogram/images/",

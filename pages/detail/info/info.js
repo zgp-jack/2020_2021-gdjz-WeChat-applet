@@ -46,7 +46,8 @@ Page({
       homebtnImg: app.globalData.apiImgUrl + "newdetailinfo-home.png",
       showHomeImg:false,
       showcomplain: false,
-      usepang: 8
+      usepang: 8,
+      isEnd:""
     },
   detailToHome:function(){
     wx.redirectTo({
@@ -215,7 +216,8 @@ Page({
                     }
                   }
                   _this.setData({
-                    usepang: mydata.result.hasOwnProperty("isLook") ? mydata.result.isLook:8
+                    usepang: mydata.result.hasOwnProperty("isLook") ? mydata.result.isLook:8,
+                    isEnd: mydata.result.hasOwnProperty("is_end") ? mydata.result.is_end : ""
                   })
                   
                 }
@@ -350,7 +352,8 @@ Page({
                         _this.setData({
                             "info.tel_str": mydata.tel,
                             "info.show_ajax_btn": false,
-                             usepang:1
+                             usepang:1,
+                             "info.show_complaint.show_complaint":1
                         })
                         console.log(123)
                     },
@@ -361,7 +364,8 @@ Page({
                             shareFlag: true,
                             isShare: true,
                             shareMsg: mydata.errmsg,
-                            usepang: 1
+                            usepang: 1,
+                          "info.show_complaint.show_complaint": 1
                         })
                     }
                 });
@@ -378,11 +382,11 @@ Page({
         app.gotoUserauth();
         return false;
       }
-      if (this.data.info.show_ajax_btn || this.data.usepang == 0){
+    if (this.data.info.show_ajax_btn && this.data.isEnd != 2 || this.data.usepang == 0&&this.data.isEnd != 2 ){
             app.showMyTips("请查看完整的手机号码后再操作！");
             return false; 
         }
-      if(!this.data.info.show_complaint.show_complaint){
+      if (!this.data.info.show_complaint.show_complaint || this.data.usepang == 0 &&this.data.isEnd == 2){
         wx.showModal({
           title: '提示',
           content: this.data.info.show_complaint.tips_message,
@@ -422,7 +426,12 @@ Page({
             success: function (res) {
                 let mydata = res.data;
               if (mydata.errcode == "ok"){
-                _this.setData({ showComplain: false, complainInfo: "", "info.show_complaint.show_complaint": 0 });
+                _this.setData({ 
+                  showComplain: false,
+                  complainInfo: "",
+                  "info.show_complaint.show_complaint": 0,
+                  "info.show_complaint.tips_message": "您已投诉该信息，请勿重复操作！"
+                });
               }
                 
                 wx.showModal({

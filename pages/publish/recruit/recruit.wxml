@@ -1,28 +1,35 @@
 <view class="yupao-common-container" wx:if="{{ userInfo }}">
-    <!-- <view class='common-publish-header' >
+  <!-- <view class='common-publish-header' >
         <text class='common-publish-title'>{{ infoId ? "修改" : "发布" }}招工</text>
         <view class='common-publish-tipsbox'>
             <view class='common-publish-tips'>请完善以下信息</view>
         </view>
     </view> -->
 
-    <view class='common-publish-body recruit-publish-body'>
-        <view class='common-publish-content common-shaded-box'>
-            <view class='common-publish-item'>
-                <view class='common-publish-item-content'>
-                    <text class='common-publish-words'>标题</text>
-                    <input class='common-publish-input' value='{{ cardInfo.title }}' placeholder='请输入标题(3-30个字)' bindinput='userEnterTitle' maxlength="30"></input>
-                </view>
-            </view>
-            <view class='common-publish-item'>
-                <view class='common-publish-item-content'>
-                    <text class='common-publish-words'>所需工种</text>
-                    <view class='common-publish-allwords' wx:if="{{ cardInfo.workTypeIds.length  }}" bindtap="userChangeWorktype"><block wx:for="{{ cardInfo.workType }}" wx:key="{{ index }}"><text class='user-items-text' wx:if="{{ item.is_check && (item.has_children == 0) }}">{{ item.name }}</text><block wx:for="{{ item.children }}" wx:key="{{ index }}" wx:if="{{ item.is_check }}"><text class='user-items-text'>{{ item.name }}</text></block></block></view>
-                    <input class='common-publish-input' disabled placeholder='请选择所需工种'  wx:else="{{ cardInfo.workTypeIds.length }}" bindtap="userChangeWorktype"></input>
-                </view>
-            </view>
+  <view class='common-publish-body recruit-publish-body'>
+    <view class='common-publish-content common-shaded-box'>
+      <view class='common-publish-item'>
+        <view class='common-publish-item-content'>
+          <text class='common-publish-words'>标题</text>
+          <input class='common-publish-input' value='{{ cardInfo.title }}' placeholder='请输入标题(3-30个字)' bindinput='userEnterTitle' maxlength="30"></input>
+        </view>
+      </view>
+      <view class='common-publish-item'>
+        <view class='common-publish-item-content'>
+          <text class='common-publish-words'>所需工种</text>
+          <view class='common-publish-allwords' wx:if="{{ cardInfo.workTypeIds.length  }}" bindtap="userChangeWorktype">
+            <block wx:for="{{ cardInfo.workType }}" wx:key="{{ index }}">
+              <text class='user-items-text' wx:if="{{ item.is_check && (item.has_children == 0) }}">{{ item.name }}</text>
+              <block wx:for="{{ item.children }}" wx:key="{{ index }}" wx:if="{{ item.is_check }}">
+                <text class='user-items-text'>{{ item.name }}</text>
+              </block>
+            </block>
+          </view>
+          <input class='common-publish-input' disabled placeholder='请选择所需工种' wx:else="{{ cardInfo.workTypeIds.length }}" bindtap="userChangeWorktype"></input>
+        </view>
+      </view>
 
-            <!-- <view class='common-publish-item'>
+      <!-- <view class='common-publish-item'>
                 <view class='common-publish-item-content'>
                     <text class='common-publish-words'>地区</text>
                         <picker mode="multiSelector" bindchange="bindMultiPickerChange" bindcolumnchange="bindPickerColumnChange" value="{{[pindex,cindex,]}}" range-key="name" range="{{objectAreaData}}" >
@@ -32,84 +39,109 @@
                 </view>
             </view> -->
 
-            <view class='common-publish-item'>
-                <view class='common-publish-item-content'>
-                    <text class='common-publish-words'>详细地址</text>
-                        <input class='common-publish-input' disabled placeholder='请输入详细地址'  bindtap='userTapAddress' value='{{ addressData.title }}'></input>
-                </view>
-            </view>
-            <view class='common-publish-item'>
-                <view class='common-publish-item-content'>
-                    <text class='common-publish-words'>联系人</text>
-                    <input class='common-publish-input' value='{{ cardInfo.username }}' placeholder='请输入联系人' bindinput='userEnterUsername'></input>
-                </view>
-            </view>
-            <view class='common-publish-item'>
-                <view class='common-publish-item-content'>
-                    <text class='common-publish-words'>联系电话</text>
-                    <input class='common-publish-input' value='{{ userPhone }}' placeholder='请输入联系电话' bindinput='userEnterNewtel' maxlength="11"></input>
-                </view>
-            </view>
-            <view class='common-publish-item' wx:if="{{  (userPhone == '') || ((userPhone != cardInfo.cardTel) && (userPhone != cardInfo.memberTel))  }}">
-                <view class='common-publish-item-content common-publish-item-code '>
-                    <text class='common-publish-words'>验证码</text>
-                    <input class='common-publish-input' type='number' value='' placeholder='请输入验证码' maxlength='4' bindinput='userEditPhoneCode'></input>
-                    <text class='publish-getcode-btn' bindtap='userGetCode'>{{ codeTips }}</text>
-                </view>
-            </view>
-            <view class='common-publish-item'>
-                <text class='common-publihs-contenttips'>招工详情</text>
-                <textarea placeholder='{{ textareaTips }}' wx:if="{{ showTextarea }}" value='{{ cardInfo.content }}' bindinput="userEnterContent" focus='{{ textareaActive }}' bindtap='getTextareaFocus' bindblur='userEnterContent'  maxlength="500"></textarea>
-                <view class="count-contentlen">{{ strlen }}/500</view>
-            </view>
+      <view class='common-publish-item'>
+        <view class='common-publish-item-content'>
+          <text class='common-publish-words'>详细地址</text>
+          <input class='common-publish-input' disabled placeholder='请输入详细地址' bindtap='userTapAddress' value='{{ addressData.title }}'></input>
         </view>
-        <view class='common-publish-content common-shaded-box publish-uploads-img'>
-            <view  bindtap='userDoUploads'>
-            <view class='publish-uploads-title'>上传图片<view class='allow-not-uploads'><view class='common-uploads-bgbox'><text class='common-trans {{ showUploads ? "user-uploads-active" : "" }}'></text></view>(可以不上传)</view></view>
-            <view class='publish-uploads-tips'><text>可上传工地现场照片、工程图纸、承包合同等</text></view>
-            </view>
-            <view class='publish-uploads-content  publish-uploads-content-bottom  clearfix' wx:if="{{ showUploads }}">
-                <view class='publish-uploads-item  {{ item.httpurl ? "publish-uploads-item-actice" : "" }}' wx:for="{{ cardInfo.imgs }}" wx:key="index" wx:for-index="index">
-                    <view class='uploads-item-content' bindtap='userUploadCardImg' data-index="{{ index }}"  data-type="1">
-                        <image src='{{ item.httpurl }}'></image>
-                        <view class='del-upload-item-img' catchtap="delCardImg" data-index="{{ index }}">
-                            <image src='http://cdn.yupao.com/miniprogram/images/imgs-del.png'></image>
-                        </view>
-                    </view>
-                </view>
-                <view class='publish-uploads-item' wx:if="{{ cardInfo.imgs.length < cardInfo.imgnum  }}" wx:for="{{ (cardInfo.imgnum - cardInfo.imgs.length ) }}" wx:key="index">
-                    <view class='uploads-item-content' bindtap='userUploadCardImg' data-type="0" data-index="{{ cardInfo.imgs.length + index }}"></view>
-                </view>
-            </view>
+      </view>
+      <view class='common-publish-item'>
+        <view class='common-publish-item-content'>
+          <text class='common-publish-words'>联系人</text>
+          <input class='common-publish-input' value='{{ cardInfo.username }}' placeholder='请输入联系人' bindinput='userEnterUsername'></input>
         </view>
+      </view>
+      <view class='common-publish-item'>
+        <view class='common-publish-item-content'>
+          <text class='common-publish-words'>联系电话</text>
+          <input class='common-publish-input' value='{{ userPhone }}' placeholder='请输入联系电话' bindinput='userEnterNewtel' maxlength="11"></input>
+        </view>
+      </view>
+      <view class='common-publish-item' wx:if="{{  (userPhone == '') || ((userPhone != cardInfo.cardTel) && (userPhone != cardInfo.memberTel))  }}">
+        <view class='common-publish-item-content common-publish-item-code '>
+          <text class='common-publish-words'>验证码</text>
+          <input class='common-publish-input' type='number' value='' placeholder='请输入验证码' maxlength='4' bindinput='userEditPhoneCode'></input>
+          <text class='publish-getcode-btn' bindtap='userGetCode'>{{ codeTips }}</text>
+        </view>
+      </view>
+      <view class='common-publish-item'>
+        <text class='common-publihs-contenttips'>招工详情</text>
+        <textarea placeholder='{{ textareaTips }}' wx:if="{{ showTextarea }}" value='{{ cardInfo.content }}' bindinput="userEnterContent" focus='{{ textareaActive }}' bindtap='getTextareaFocus' bindblur='userEnterContent' maxlength="500"></textarea>
+        <view class="count-contentlen">{{ strlen }}/500</view>
+      </view>
     </view>
+    <view class='common-publish-content common-shaded-box publish-uploads-img'>
+      <view bindtap='userDoUploads'>
+        <view class='publish-uploads-title'>上传图片
+          <view class='allow-not-uploads'>
+            <view class='common-uploads-bgbox'>
+              <text class='common-trans {{ showUploads ? "user-uploads-active" : "" }}'></text>
+            </view>(可以不上传)</view>
+        </view>
+        <view class='publish-uploads-tips'>
+          <text>可上传工地现场照片、工程图纸、承包合同等</text>
+        </view>
+      </view>
+      <view class='publish-uploads-content  publish-uploads-content-bottom  clearfix' wx:if="{{ showUploads }}">
+        <view class='publish-uploads-item  {{ item.httpurl ? "publish-uploads-item-actice" : "" }}' wx:for="{{ cardInfo.imgs }}" wx:key="index" wx:for-index="index">
+          <view class='uploads-item-content' bindtap='userUploadCardImg' data-index="{{ index }}" data-type="1">
+            <image src='{{ item.httpurl }}'></image>
+            <view class='del-upload-item-img' catchtap="delCardImg" data-index="{{ index }}">
+              <image src='http://cdn.yupao.com/miniprogram/images/imgs-del.png'></image>
+            </view>
+          </view>
+        </view>
+        <view class='publish-uploads-item' wx:if="{{ cardInfo.imgs.length < cardInfo.imgnum  }}" wx:for="{{ (cardInfo.imgnum - cardInfo.imgs.length ) }}" wx:key="index">
+          <view class='uploads-item-content' bindtap='userUploadCardImg' data-type="0" data-index="{{ cardInfo.imgs.length + index }}"></view>
+        </view>
+      </view>
+    </view>
+  </view>
 
-    <text class='common-sure-btn' bindtap='userPublishCard'>确认发布</text>
+  <text class='common-sure-btn' bindtap='userPublishCard'>确认发布</text>
 
 </view>
 
 <view class='publish-choose-wordtype' wx:if="{{ showWorkType }}">
-    <view class='publish-choose-contentbox common-shaded-box'>
-        <view class='publish-choose-header'>选择工种</view>
-        <view class='publish-choose-body'>
-            <view class='publish-choose-content-item' wx:for="{{ cardInfo.workType }}" wx:key="{{ index }}" wx:for-index="pindex" wx:if="{{ item.has_children }}">
-                <view class='publish-choose-content-header'>{{ item.name }}</view>
-                <view class='publish-choose-content-list' wx:for="{{ item.children }}"  wx:key="{{ index }}" wx:for-index="cindex"   bindtap='userClickItem' data-type='workType'  data-id="{{ item.id }}" data-check="{{ item.is_check }}" data-index='{{ pindex }}' data-key="{{ cindex }}">
-                    <text class='choose-content-lish-left'>{{ item.name }}</text>
-                    <text class='choose-content-checkbox {{ item.is_check ? "choose-content-checkbox-active":"" }}'></text>
-                </view>
-            </view>
+  <view class='publish-choose-contentbox common-shaded-box'>
+    <view class='publish-choose-header'>选择工种</view>
+    <view class='publish-choose-body'>
+      <view class='publish-choose-content-item' wx:for="{{ cardInfo.workType }}" wx:key="{{ index }}" wx:for-index="pindex" wx:if="{{ item.has_children }}">
+        <view class='publish-choose-content-header'>{{ item.name }}</view>
+        <view class='publish-choose-content-list' wx:for="{{ item.children }}" wx:key="{{ index }}" wx:for-index="cindex" bindtap='userClickItem' data-type='workType' data-id="{{ item.id }}" data-check="{{ item.is_check }}" data-index='{{ pindex }}' data-key="{{ cindex }}">
+          <text class='choose-content-lish-left'>{{ item.name }}</text>
+          <text class='choose-content-checkbox {{ item.is_check ? "choose-content-checkbox-active":"" }}'></text>
         </view>
-        <view class='publish-choose-footer flex-row'>
-            <view bindtap='userSureWorktype'>确定</view>
-        </view>
+      </view>
     </view>
+    <view class='publish-choose-footer flex-row'>
+      <view bindtap='userSureWorktype'>确定</view>
+    </view>
+  </view>
 </view>
-
+<view class="modalDlg" wx:if="{{showModal}}">
+  <view class="modalDlgone">
+  </view>
+  <view class="text">
+    <view class="otext">
+      提示
+    </view>
+    <view class="textdetail">
+      您的招工信息审核失败
+    </view>
+    <view class="textdetailo">
+        <text class="popup">失败原因：</text>{{resson}}
+    </view>
+    <view class="buttontext" catchtap="vertify">
+      确定
+    </view>
+  </view>
+</view>
+<view class="bg" bindtap="obtn" style='display:{{display}}' catchtouchmove="{{move}}"></view>
 <view class="common-userauth" wx:if="{{ !userInfo }}">
   <image src='{{ icon }}' class='userauth-topicon'></image>
   <view class='userauth-title'>登录鱼泡网</view>
-<view class='userauth-words'>招工 找活抢先一步，用的安心 赚的开心。</view>
-<button class='userauth-btn userauth-sure-btn'  open-type="getUserInfo"  bindgetuserinfo='bindGetUserInfo' >微信授权登录</button>
-<button class='userauth-btn  userauth-back-btn' bindtap='returnPrevPage'>返回上一页</button>
+  <view class='userauth-words'>招工 找活抢先一步，用的安心 赚的开心。</view>
+  <button class='userauth-btn userauth-sure-btn' open-type="getUserInfo" bindgetuserinfo='bindGetUserInfo'>微信授权登录</button>
+  <button class='userauth-btn  userauth-back-btn' bindtap='returnPrevPage'>返回上一页</button>
 </view>

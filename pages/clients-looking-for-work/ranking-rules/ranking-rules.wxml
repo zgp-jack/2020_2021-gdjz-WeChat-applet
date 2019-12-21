@@ -18,6 +18,8 @@
       </view>
     </view>
   </view>
+  <view class="ranking-apple">
+  </view>
   <view class="ranking-button">
     <button class="obtn" open-type='share'>
       排名提升
