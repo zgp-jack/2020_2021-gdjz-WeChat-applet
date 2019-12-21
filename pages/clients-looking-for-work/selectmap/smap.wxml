@@ -1,17 +1,16 @@
-<!-- showHisTitle gpsposi clearinput -->
+<!-- addressText address-tips addressList showHisTitle showMaplist  showHisTitle showArea 
+setAddressData -->
 <view class='user-choose-address'>
   <view class='address-header'>
-    <view class="choose-address-text" bindtap="showCity">{{ areaText }}
-      <view class="map-cityarrow"></view>
-    </view>
-    <!-- address-container -->
+    <view class="choose-address-text" bindtap="showCity">{{ areaText }}<view class="map-cityarrow"></view></view>
     <view class="inputandimg">
-      <input placeholder='请输入你的详细地址' bindinput='userEnterAddress' value='{{ addressText }}' bindtap="mapInputFocus"></input>
+      <input placeholder='请输入你的详细地址' bindinput='userEnterAddress' value='{{ addressText }}' bindfocus="mapInputFocus"></input>
       <image src="{{ clearinput }}" bindtap="clearInputVal"></image>
     </view>
     <text bindtap='closeAddressAction'>取消</text>
   </view>
-    <view class='address-body'>
+
+  <view class='address-body'>
       <view class="mapandpois">
       <view class='address-container'>
       <view class="history-title" wx:if="{{ showHisTitle && addressList.length }}">历史记录</view>
@@ -32,71 +31,47 @@
 
   </view>
 
-
-        <!-- <cover-image class="cover-image" bindtap="my_location" src="../../images/downward.png" /> -->
-        <!-- <cover-image class="cover-image_confirm" bindtap="confirm_bag" src="../../images/gps.png"  /> -->
-
- <scroll-view scroll-y="true" style="height: 600rpx; position:absolute;bottom:0;" >
-  <view >
-    <!-- <view class='address-item-title {{ (addressData.location == item.location && addressData.title == (showHisTitle ? item.title : item.name)) ? "address-title-active" : "" }}'>
-      <text class="map-locdistance"></text>
-    </view> -->
-
-    <view class='address-item-text'  bindtap='setAddressmap' wx:for="{{ mapaddressList }}" wx:key="{{ index }}" 
-     data-title='{{ showHisTitle ? item.title : item.name }}' data-adcode='{{ item.adcode }}' data-district='{{ (item.district ? item.district : "") + (item.address ? item.address : "") }}' data-location='{{ item.location }}'
-    >
-       <view style="padding-left:20rpx;padding-right:30rpx; display:flex; justify-content: space-between; font-size: 30rpx; color: #333;"><text>{{ item.name}}</text> </view>
-    <view style="padding-left:20rpx; font-size: 28rpx; color: #666;" > {{ (item.cityname+item.adname + item.address) }}</view></view>
-   </view>
-  </scroll-view>
 </view>
- 
 
-<!-- 地区选择 -->
+
+<!-- 地区选择 filterInputList -->
 <view class='index-pullareabox {{ showArea ? "index-pullareabox-active":"" }}'>
-  <view class='index-area-header'>
-    <view class="searchinputbox">
-      <input class="area-input" placeholder="请输入城市名" bindinput="searchInput" bindfocus="showInputList" value="{{ searchInputVal }}" focus="{{ areaInputFocus }}"></input>
-      <image src="{{ clearinput }}" bindtap="clearInputAction"></image>
+    <view class='index-area-header'>
+      <view class="searchinputbox">
+        <input class="area-input" placeholder="请输入城市名" bindinput="searchInput" bindfocus="showInputList" value="{{ searchInputVal }}" focus="{{ areaInputFocus }}"
+        tabindex="99999999999"
+        ></input>
+        <image src="{{ clearinput }}" bindtap="clearInputAction"></image>
+      </view>
+      <text class='index-close-area' bindtap='closeArea'>取消</text>
     </view>
-    <text class='index-close-area' bindtap='closeArea'>取消</text>
-  </view>
 
-  <view class="searchcitybox" wx:if="{{ showInputList }}">
+    <view class="searchcitybox" wx:if="{{ showInputList }}">
     <view class="search-list-item" wx:if="{{ !isAllAreas && !nAreaLists.length }}">
       <view class='common-nodatabox flex-column'>
-        <image src='{{ nodataImg }}'></image>
-        <text>暂未找到相关城市</text>
-      </view>
+            <image src='{{ nodataImg }}'></image>
+            <text>暂未找到相关城市</text>
+        </view>
     </view>
-    <view class="search-list-item" wx:for="{{ isAllAreas ? allAreaLists : nAreaLists }}" wx:key="{{ index }}" bindtap='chooseInputCtiy' data-pname="{{ item.ad_name }}" data-id="{{ item.id }}" data-area="{{ item.name }}">{{ item.cname }} </view>
-  </view>
+      <view class="search-list-item" wx:for="{{ isAllAreas ? allAreaLists : nAreaLists }}" wx:key="{{ index }}"  bindtap='chooseInputCtiy' data-pname="{{ item.ad_name }}"  data-id="{{ item.id }}" data-area="{{ item.name }}" >{{ item.cname }} </view>
+    </view>
 
 
-  <view class='index-area-tips overwords'>当前选择城市：
-    <text>{{ areaText }}</text>
-  </view>
-  <view class='index-area-body'>
-    <view class='index-area-item' wx:if="{{ gpsOrientation || locationHistory }}">
-      <text class='area-header-words'>当前定位城市/最近访问</text>
-      <view class='area-body-content clearfix'>
-        <view class="gpsposi" wx:if="{{ gpsOrientation }}">
-          <view class='overwords' data-id="{{ gpsOrientation.id }}" data-area="{{ gpsOrientation.name }}" data-pname="{{ gpsOrientation.ad_name }}" bindtap='chooseThisCtiy'>
-            <image src="{{ gpsposi }}"></image>{{ gpsOrientation.name }}</view>
+    <view class='index-area-tips overwords'>当前选择城市：<text>{{ areaText }}</text></view>
+    <view class='index-area-body'>
+        <view class='index-area-item' wx:if="{{ gpsOrientation || locationHistory }}">
+            <text class='area-header-words'>当前定位城市/最近访问</text>
+            <view class='area-body-content clearfix'>
+              <view class="gpsposi"  wx:if="{{ gpsOrientation }}"><view class='overwords' data-id="{{ gpsOrientation.id }}" data-area="{{ gpsOrientation.name }}" data-pname="{{ gpsOrientation.ad_name }}" bindtap='chooseThisCtiy'><image src="{{ gpsposi }}"></image>{{ gpsOrientation.name }}</view></view>
+                <view wx:for="{{ locationHistory }}" wx:key="{{ index }}"  wx:if="{{ gpsOrientation ? index < 2 : true }}"><text class='overwords' data-id="{{ item.id }}" data-area="{{ item.name }}"  data-pname="{{ item.ad_name || item.name  }}" bindtap='chooseThisCtiy'>{{ item.name }}</text></view>
+            </view>
         </view>
-        <view wx:for="{{ locationHistory }}" wx:key="{{ index }}" wx:if="{{ gpsOrientation ? index < 2 : true }}">
-          <text class='overwords' data-id="{{ item.id }}" data-area="{{ item.name }}" data-pname="{{ item.ad_name || item.name  }}" bindtap='chooseThisCtiy'>{{ item.name }}</text>
+        <view class='index-area-item' wx:for="{{ areadata }}" wx:key="{{ index }}"  wx:for-item="areaItem">
+            <text class='area-header-words'>{{ (index == 0) ? "热门城市" : areaItem[0].city }}</text>
+            <view class='area-body-content clearfix'>
+                <view wx:if="{{ index != 0 }}" wx:for="{{ areaItem }}" wx:key="{{ index }}"><text class='overwords' data-id="{{ item.id }}"  data-pname="{{ item.ad_name }}" data-area="{{ item.city }}"  data-pid="{{ areaItem[0].id }}"   bindtap='chooseThisCtiy'>{{ item.city }}</text></view>
+            </view>
         </view>
-      </view>
     </view>
-    <view class='index-area-item' wx:for="{{ areadata }}" wx:key="{{ index }}" wx:for-item="areaItem">
-      <text class='area-header-words'>{{ (index == 0) ? "热门城市" : areaItem[0].city }}</text>
-      <view class='area-body-content clearfix'>
-        <view wx:if="{{ index != 0 }}" wx:for="{{ areaItem }}" wx:key="{{ index }}">
-          <text class='overwords' data-id="{{ item.id }}" data-pname="{{ item.ad_name }}" data-area="{{ item.city }}" data-pid="{{ areaItem[0].id }}" bindtap='chooseThisCtiy'>{{ item.city }}</text>
-        </view>
-      </view>
-    </view>
-  </view>
 </view>
 <!-- regionchange -->

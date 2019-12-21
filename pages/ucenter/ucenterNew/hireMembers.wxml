@@ -1,0 +1,107 @@
+<!--pages/ucenter/ucenterNew/hireMembers.wxml-->
+<view class="ucener-header">
+    <view class='ucener-userinfo-wrap' wx:if="{{ userInfo }}">
+        <view class='ucenter-userinfo'>
+            <view class='ucenter-userinfo-box'>
+                <image src='{{ member.headimgurl }}' class='ucenter-userimg'></image>
+                <view class='ucenter-userinfo-words'>
+                    <view class='ucenter-username overwords'>
+                        {{ member.username || member.nickname }}
+                        <image src='{{ realNames }}' class='user-update-tag'></image>
+                        <image src='{{ realNames }}' class='user-update-tag'></image>
+                    </view>
+                    <view class='ucenter-usernum overwords'>
+                        到期时间：<text>2019-10-10 10:10</text>
+                    </view>
+                </view>
+            </view>
+            <view class='ucenter-integralbox'>
+                <navigator class='ucenter-integral-item flex-column' url='/pages/integral/return/return' open-type="navigate" wx:if="{{publishIndex===0}}">
+                    <text>10</text>
+                    <text>剩余查看次数</text>
+                </navigator>
+                <navigator class='ucenter-integral-item flex-column' url='/pages/integral/return/return' open-type="navigate" wx:if="{{publishIndex===1}}">
+                    <text>10</text>
+                    <text>剩余置顶次数</text>
+                </navigator>
+                <navigator class='ucenter-integral-item flex-column' url='/pages/integral/official/official' open-type="navigate">
+                    <text class='overwords'>{{ member.integral }}</text>
+                    <text>积分</text>
+                </navigator>
+                <navigator class='ucenter-integral-item flex-column {{ member.temporary_integral != "0" ? "click-red-point" : "" }}' url='/pages/integral/temp/temp' open-type="navigate">
+                    <text>{{ member.temporary_integral }}</text>
+                    <text>临时积分</text>
+                </navigator>
+            </view>
+        </view>
+    </view>
+
+    <view class='ucener-userinfo-wrap' wx:if="{{ !userInfo }}">
+        <view class='ucenter-userinfo'>
+            <view class='ucenter-userinfo-box ucenter-nouserinfo' bindtap='gotoUserauth'>
+                <image src='{{ nouser }}'></image>
+                <text>登录/注册</text>
+            </view>
+            <view class='ucenter-integralbox ucenter-nouserinfo-tips'>
+                点击上方登录/注册按钮可以前往登录页面，登录成功后可解锁小程序全部功能，方便您能更便捷的招工找活。
+            </view>
+        </view>
+    </view>
+</view>
+
+<view class='yupao-common-container'>
+
+    <view class='common-choose-header'>
+        <view class='choose-header-item {{ (index == publishIndex) ? "member-active" : "" }}' wx:for="{{ publishedData }}" wx:key="{{ index }}" bindtap='showThisList' data-index="{{ index }}">
+            {{ item.title }}
+        </view>
+    </view>
+
+    <view class="ucenter-menus-box">
+        <view class="ucenter-floatBox">
+            <view class="ucenter-float33 {{ (index == activeIndex) ? 'memberPay-active' : '' }}" wx:for="{{ membersData }}" wx:key="{{ index }}" bindtap='chooseThisMoney' data-index="{{ index }}">
+                <text class="ucenter-month">{{item.name}}</text>
+                <view class="ucenter-price">
+                    <text>￥</text>
+                    <text>{{item.value}}</text>
+                </view>
+                <view class="flex-row payTypes">
+                    <image src='{{ member.headimgurl}}' class="wechatIcon"></image>
+                    <text>{{item.type}}</text>
+                </view>
+
+                <view class="tuijian" wx:if="{{ index==0 }}">推荐</view>
+                <image src="{{ (index == activeIndex) ? member.headimgurl :  realNames  }}" class="radioIcon"></image>
+            </view>
+        </view>
+    </view>
+
+    <view class="ucenter-menus-box">
+        <view class="ucenter-hasnoticeinfo ucenter-pad">
+            <view class="ucenter-100">
+                <view class='ucenter-float25 '>
+                    <image src='{{ member.headimgurl }} '></image>
+                    <text>免费查看</text>
+                </view>
+                <view class='ucenter-float25 ' wx:if="{{publishIndex===0}}">
+                    <image src='{{ member.headimgurl }} '></image>
+                    <text>免费置顶</text>
+                </view>
+                <view class='ucenter-float25 ' wx:if="{{publishIndex===1}}">
+                    <image src='{{ member.headimgurl }} '></image>
+                    <text>专属排名</text>
+                </view>
+                <view class='ucenter-float25 '>
+                    <image src='{{ member.headimgurl }} '></image>
+                    <text>充值折扣</text>
+                </view>
+                <view class='ucenter-float25 '>
+                    <image src='{{ member.headimgurl }} '></image>
+                    <text>专属图标</text>
+                </view>
+
+            </view>
+        </view>
+    </view>
+
+</view>

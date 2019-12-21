@@ -22,7 +22,7 @@
 		"enhance": true
 	},
 	"compileType": "miniprogram",
-	"libVersion": "2.3.2",
+	"libVersion": "2.9.4",
 	"appid": "wx456feacb0e86162f",
 	"projectname": "gdjz",
 	"debugOptions": {
@@ -48,6 +48,10 @@
 			"currentL": -1,
 			"list": []
 		},
+		"gamePlugin": {
+			"current": -1,
+			"list": []
+		},
 		"miniprogram": {
 			"current": 1,
 			"list": [
@@ -63,6 +67,54 @@
 					"name": "/pages/publish/fast/fast",
 					"pathName": "/pages/publish/fast/fast",
 					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "会员中心-新",
+					"pathName": "pages/ucenter/ucenterNew/ucenterNew",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "充值",
+					"pathName": "pages/ucenter/ucenterNew/hireMembers",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "邀请好友",
+					"pathName": "pages/ucenter/ucenterNew/invite",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": 5,
+					"name": "订阅",
+					"pathName": "pages/others/message/publish/publish",
+					"query": "tel=19983741552&name=我服了",
+					"scene": null
+				},
+				{
+					"id": 6,
+					"name": "pages/others/message/lists/lists",
+					"pathName": "pages/others/message/lists/lists",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/course/course",
+					"pathName": "pages/course/course",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "帮助中心",
+					"pathName": "pages/ucenter/ucenterNew/helpCenter",
 					"scene": null
 				}
 			]

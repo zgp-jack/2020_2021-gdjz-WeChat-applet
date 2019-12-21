@@ -85,6 +85,7 @@ Page({
     ressonone: false,
     note: "",
     passre: true,
+    showpassre:false,
     nopassre: true,
     showcomplete: true,
     checkcontent: "",
@@ -202,14 +203,14 @@ Page({
         return {
           title: `${commonShareTips}`,
           imageUrl: commonShareImg,
-          path: `/pages/index/index`//这是一个路径
+          path: `/pages/findingworkinglist/findingworkinglist`//这是一个路径
         }
       }
     } else {
       return {
         title: commonShareTips,
         imageUrl: commonShareImg,
-        path: `/pages/index/index`//这是一个路径
+        path: `/pages/findingworkinglist/findingworkinglist`//这是一个路径
       }
     }
   },
@@ -234,7 +235,7 @@ Page({
           that.setData({
             index: res.tapIndex
           })
-          console.log(that.data.index)
+          
           that.setData({
             selectData: that.data.selectData,
             selectk: that.data.selectk,
@@ -258,6 +259,12 @@ Page({
   
               if (res.data.errcode == "ok") {
                 that.getdetail()
+                wx.showModal({
+                  title: '温馨提示',
+                  content: res.data.errmsg,
+                  showCancel: false,
+                  success(res) { }
+                })
               }else{
                 wx.showModal({
                   title: '温馨提示',
@@ -309,7 +316,7 @@ Page({
     if (this.data.resume_uuid == "") {
       wx.showModal({
         title: '温馨提示',
-        content: '您未完善基本信息填写,请先填写基本信息',
+        content: '您未完善基础信息填写,请先填写基础信息',
         showCancel: false,
         success(res) {
           wx.navigateTo({
@@ -334,7 +341,7 @@ Page({
     if (this.data.resume_uuid == "") {
       wx.showModal({
         title: '温馨提示',
-        content: '您未完善基本信息填写,请先填写基本信息',
+        content: '您未完善基础信息填写,请先填写基础信息',
         showCancel: false,
         success(res) {
           wx.navigateTo({
@@ -362,7 +369,7 @@ Page({
     if (this.data.resume_uuid == "") {
       wx.showModal({
         title: '温馨提示',
-        content: '您未完善基本信息填写,请先填写基本信息',
+        content: '您未完善基础信息填写,请先填写基础信息',
         showCancel: false,
         success(res) {
           wx.navigateTo({
@@ -385,6 +392,7 @@ Page({
     })
   },
   preview() {
+
     wx.navigateTo({
       url: "/pages/clients-looking-for-work/preview-name-card/previewcard",
     })
@@ -466,7 +474,7 @@ Page({
       way: 'POST',
       params: detail,
       success: function (res) {
-        console.log(res)
+        
         let mydata = res.data.data;
         if (res.data.errcode == 200) {
           for (let i = 0; i < mydata.project.length; i++) {
@@ -528,7 +536,13 @@ Page({
               resume_uuid: mydata.info.uuid
             })
             wx.setStorageSync("uuid", mydata.info.uuid)
+          } else {
+            that.setData({
+              showtop: true,
+              showtopone: false
+            })
           }
+
           if (mydata.info.gender != "0" && mydata.info.gender) {
 
             that.setData({
@@ -578,6 +592,7 @@ Page({
             note: mydata.info.hasOwnProperty("note") ? mydata.info.note : "",
             fail_certificate: mydata.hasOwnProperty("fail_certificate") ? mydata.fail_certificate : "",
             fail_project: mydata.hasOwnProperty("fail_project") ? mydata.fail_project : "",
+
           })
           if (that.data.showtop) {
             app.globalData.showperfection = true;
@@ -617,7 +632,9 @@ Page({
             })
           } else if (mydata.is_introduces == 0) {
             that.setData({
-              is_introduces: mydata.is_introduces
+              is_introduces: mydata.is_introduces,
+              selfintro: true,
+              selfintrone: false,
             })
           }
 
@@ -653,9 +670,10 @@ Page({
             }
           }
 
-          console.log(that.data.project)
+          
           that.setData({
-            percent: mydata.info.hasOwnProperty("progress") ? mydata.info.progress : 0
+            percent: mydata.info.hasOwnProperty("progress") ? mydata.info.progress : 0,
+            showpassre: true
           })
 
 
@@ -725,6 +743,7 @@ Page({
               //   success(res) {
               //   }
               // })
+              
               that.setData({
                 showModal: true,
                 display: "block",
@@ -801,6 +820,9 @@ Page({
       // this.getdetail();
     }
   },
+  sontwoview(){
+    return false
+  },
   returnPrevPage() {
     wx.navigateBack({
       delta: 1
@@ -863,7 +885,9 @@ Page({
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
-
+    this.setData({
+    showpassre: false
+    })
   },
 
   /**

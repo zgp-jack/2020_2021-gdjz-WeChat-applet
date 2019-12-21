@@ -14,15 +14,19 @@
             <view class="olang" style="width:{{percent}}%;"></view>
           </view>
           <text class="olangw">{{percent}}%</text>
-          <text class="view_num">{{view_num}}</text> 
+          <text class="view_num">{{view_num}}</text>
         </view>
-        <button class="shareliveone" bindtap="completeall" wx:if="{{showcomplete}}">名片越完善 找活越容易,马上去完善>>
-                <text class="sontwoview" >浏览次数</text>
-        </button>
-        <button class="sharelive" open-type='share' wx:if="{{!showcomplete}}">分享找活名片,可提升名片排名度
-                <text class="sontwoview" >浏览次数</text>
-        </button>
+        <view class="isline" wx:if="{{showcomplete}}">
+          <button class="shareliveone" bindtap="completeall" >名片越完善 找活越容易,马上去完善>>
 
+          </button>
+          <text class="sontwoview">浏览次数</text>
+        </view>
+        <view class="isline" wx:if="{{!showcomplete}}">
+          <button class="sharelive" open-type='share' >分享找活名片,可提升名片排名度
+          </button>
+          <text class="sontwoview">浏览次数</text>
+        </view>
       </view>
       <view class="findingnamecardonesontwo">
 
@@ -50,19 +54,21 @@
         </view>
         <text>我的工作状态：</text>
       </view>
-      <view class='select_box'>
-        <view class='select' catchtap='selectTap' wx:if="{{passre&&nopassre}}">
-          <text class='select_text' wx:if="{{index ==  0}}" >{{selectData[index].name}}</text>
-          <text class='select_textone' wx:if="{{index==  1}}" >{{selectData[index].name}}</text>
-          <image class='select_img' src='{{subscripted}}'  wx:if="{{checkstatus}}"></image>
+      <block wx:if="{{showpassre}}">
+        <view class='select_box'>
+          <view class='select' catchtap='selectTap' wx:if="{{passre&&nopassre}}">
+            <text class='select_text' wx:if="{{index ==  0}}">{{selectData[index].name}}</text>
+            <text class='select_textone' wx:if="{{index==  1}}">{{selectData[index].name}}</text>
+            <image class='select_img' src='{{subscripted}}' wx:if="{{checkstatus}}"></image>
+          </view>
+          <view class='select' catchtap='selectTap' wx:if="{{!passre&&nopassre}}">
+            <text class='select_text'>审核未通过</text>
+          </view>
+          <view class='select' catchtap='selectTap' wx:if="{{passre&&!nopassre}}">
+            <text class='select_text'>人工审核中</text>
+          </view>
         </view>
-        <view class='select' catchtap='selectTap' wx:if="{{!passre&&nopassre}}">
-          <text class='select_text'>审核未通过</text>
-        </view>
-        <view class='select' catchtap='selectTap' wx:if="{{passre&&!nopassre}}">
-          <text class='select_text'>人工审核中</text>
-        </view>
-      </view>
+      </block>
     </view>
 
   </view>
@@ -182,9 +188,9 @@
       <view class="cardthreeone" bindtap="improvementwork" wx:if="{{!checktwo&&checkonef != '0'}}">
         编辑
       </view>
- 
-    <view class="cardthreeone" bindtap="improvementwork" wx:if="{{!checktwo&&checkonef == '0'}}">
-       待修改
+
+      <view class="cardthreeone" bindtap="improvementwork" wx:if="{{!checktwo&&checkonef == '0'}}">
+        待修改
       </view>
     </view>
 
@@ -346,10 +352,10 @@
   <view class="findingnamecardthree" wx:if="{{skilllength == 0}}">
     <view class="findingnamecardthreemobile">
 
-        <view class="findingnamemobile">
-          <image src="{{newresumeskill}}"></image>
-        </view>
- 
+      <view class="findingnamemobile">
+        <image src="{{newresumeskill}}"></image>
+      </view>
+
       <view class="findingnamemobileone">
         <text>职业技能</text>
       </view>
@@ -447,7 +453,7 @@
     </view>
   </view>
   <view class="bg" bindtap="obtn" style='display:{{display}}' catchtouchmove="{{move}}"></view>
-  
+
   <view style="height: 118rpx;">
   </view>
 </view>

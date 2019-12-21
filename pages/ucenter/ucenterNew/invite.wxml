@@ -1,0 +1,76 @@
+<!--pages/ucenter/ucenterNew/invite.wxml-->
+
+<view class="ucener-header">
+    <text class='ucenter-title'>邀请好友</text>
+
+    <view class='ucener-userinfo-wrap' wx:if="{{ userInfo }}">
+        <view class='ucenter-userinfo'>
+            <view class='ucenter-userinfo-box'>
+                <image src='{{ member.headimgurl }}' class='ucenter-userimg'></image>
+                <view class='ucenter-userinfo-words'>
+                    <view class='user-update-info' open-type="navigate">邀请指南 > </view>
+                    <view class='ucenter-username overwords'>
+                        {{ member.username || member.nickname }}
+                        <image src='{{ realNames }}' class='user-update-tag'></image>
+                        <image src='{{ realNames }}' class='user-update-tag'></image>
+                    </view>
+                    <view class='ucenter-usernum overwords'>会员编号：
+                        <text>{{ member.id }}</text> </view>
+                </view>
+            </view>
+            <view class='ucenter-integralbox'>
+                <navigator class='ucenter-integral-item flex-column' url='/pages/integral/return/return' open-type="navigate">
+                    <text>{{ member.return_integral }}</text>
+                    <text>邀请次数</text>
+                </navigator>
+                <navigator class='ucenter-integral-item flex-column' url='/pages/integral/official/official' open-type="navigate">
+                    <text class='overwords'>{{ member.integral }}</text>
+                    <text>注册人数</text>
+                </navigator>
+                <navigator class='ucenter-integral-item flex-column {{ member.temporary_integral != "0" ? "click-red-point" : "" }}' url='/pages/integral/temp/temp' open-type="navigate">
+                    <text>{{ member.temporary_integral }}</text>
+                    <text>获得积分</text>
+                </navigator>
+            </view>
+        </view>
+    </view>
+
+
+
+    <view class='ucener-userinfo-wrap' wx:if="{{ !userInfo }}">
+        <view class='ucenter-userinfo'>
+            <view class='ucenter-userinfo-box ucenter-nouserinfo' bindtap='gotoUserauth'>
+                <image src='{{ nouser }}'></image>
+                <text>登录/注册</text>
+            </view>
+            <view class='ucenter-integralbox ucenter-nouserinfo-tips'>
+                点击上方登录/注册按钮可以前往登录页面，登录成功后可解锁小程序全部功能，方便您能更便捷的招工找活。
+            </view>
+        </view>
+    </view>
+
+
+</view>
+<view class="yupao-common-container yupao-common-nofooter">
+    <view class='integral-content'>
+        <view class='integral-list-item' wx:for="{{ lists }}" wx:key="{{ index }}" data-id='{{ item.id }}' bindtap='showThisRecord'>
+            <view class='integral-list-time'>
+                <text>{{ item.year_month }}</text>
+                <text>{{ item.day }}</text>
+            </view>
+            <view class='integral-list-words'>
+                <view class='integral-list-title overwords'>{{ item.headerText }}</view>
+                <view class='integral-list-info overwords'>{{ item.title }}</view>
+                <view class='integral-list-lasttime overwords'>时间：{{ item.His }} <text>获得积分：{{ item.expense_integral }}</text></view>
+            </view>
+        </view>
+
+    </view>
+
+    <view class='nodata-texttips' wx:if="{{ nothavemore }}">没有更多数据了</view>
+    <view class='common-nodatabox flex-column lists-nodata' wx:if="{{ isNone }}">
+        <image src='{{ nodata }}'></image>
+        <text>暂无积分消耗记录</text>
+    </view>
+
+</view>

@@ -96,8 +96,8 @@
             <view class="cardotext" wx:if="{{city}}">
               <text class="oworkotext">所在地区</text>
               <view class="distancev" bindtap="showThisMapInfo">
-                <text class="({{location&&status == 0?'workotextone':'zong'}})">{{city}}</text>
-                <view class="distanceo" wx:if="{{location&&status == 0}}">
+                <text class="({{location&&status == 0&& distance != ''?'workotextone':'zong'}})">{{city}}</text>
+                <view class="distanceo" wx:if="{{location&&status == 0&& distance != '' }}">
                   <image src="{{biaoqian}}" id="distance"></image>
                   <text class="distancet">{{distance}}</text>
                 </view>
@@ -122,7 +122,10 @@
       </view>
     </view>
   </view>
-
+      <view class="cephalowarning">
+        <text class="warningdetail">防骗警示</text>：工作前，确认好<text class="warningdetail">对方身份</text>、签好合同。工作中，<text class="warningdetail">拍照</text>、<text class="warningdetail">录视频</text>留有证据！若双方发生纠纷，请立即<text class="warningdetail">报警</text>或者去<text class="warningdetail">劳动局</text>，鱼泡网可配合调查，但<text class="warningdetail">概不负责</text>！招工找活中<text class="warningdetail">不要交任何费用</text>，如遇
+        <text>无效、虚假、诈骗</text><text class="warningcomplaim" bindtap="userTapComplai">立即举报!</text>
+      </view>
   <ad class="lists-ad" unit-id="{{ unitid }}" style="margin-top:15rpx;"></ad>
 
 
@@ -249,7 +252,7 @@
   </view> -->
 
   <view class="bossbottom" wx:if="{{status == 0}}">
-    <button class="bossbottomb" bindtap="praise">
+    <button class="bossbottomb" catchtap="praise">
       <view class="bossbottomc">
         <view>
           <image class="bossimg" src="{{praise == 0?zan:zanone}}"></image>
@@ -270,7 +273,7 @@
         </view>
       </view>
     </button>
-    <button class="bossbottomb" bindtap="collect">
+    <button class="bossbottomb" catchtap="collect">
       <view class="bossbottomc">
         <view>
           <image class="bossimg" src="{{collect ==0?soucang:soucangone}}"></image>

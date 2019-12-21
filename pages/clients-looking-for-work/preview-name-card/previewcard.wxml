@@ -102,7 +102,7 @@
               <text class="workotextone">{{personnum}}</text>
 
             </view>
-            <view class="cardotext">
+            <view class="cardotext" wx:if="{{city != ''}}" >
 
               <text class="oworkotext">所在地区</text>
 

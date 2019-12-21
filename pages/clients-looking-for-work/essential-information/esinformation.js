@@ -154,7 +154,14 @@ Page({
                   longitude: data[0].longitude + "",
                   latitude: data[0].latitude + ""
                 });
-                
+                let gpsLocation = {
+                  province: data[0].regeocodeData.addressComponent.province,
+                  city: data[0].regeocodeData.addressComponent.city,
+                  adcode: data[0].regeocodeData.addressComponent.adcode,
+                  citycode: data[0].regeocodeData.addressComponent.citycode
+                }
+                let province = areas.getProviceItem(gpsLocation.province, gpsLocation.city)
+  
                 
                 
                 app.showMyTips("获取位置成功");
@@ -239,6 +246,7 @@ Page({
 
     
     if (historyregionone) {
+      
       this.setData({
         regionone: historyregionone.hasOwnProperty("title") ? historyregionone.title : "",
         longitude: historyregionone.hasOwnProperty("location") ? historyregionone.location.split(",")[0] : "",
@@ -594,7 +602,7 @@ Page({
       adcode: this.data.oadcode,
     })
 
-    
+
     app.appRequestAction({
       url: "resumes/add-resume/",
       way: "POST",

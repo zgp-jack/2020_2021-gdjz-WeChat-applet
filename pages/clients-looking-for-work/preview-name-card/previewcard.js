@@ -140,14 +140,14 @@ Page({
         return {
           title: `${commonShareTips}`,
           imageUrl: commonShareImg,
-          path: `/pages/index/index?refId=${refId}`//这是一个路径
+          path: `/pages/findingworkinglist/findingworkinglist`//这是一个路径
         }
       }
     } else {
       return {
         title: `${commonShareTips}`,
         imageUrl: commonShareImg,
-        path: `/pages/index/index`//这是一个路径
+        path: `/pages/findingworkinglist/findingworkinglist`//这是一个路径
       }
     }
   },
@@ -185,7 +185,18 @@ Page({
         
         
         if (res.data.errcode == 200) {
-
+          if (!mydata.info.hasOwnProperty("uuid")){
+            wx.showModal({
+              title: '温馨提示',
+              content: "请重新填写信息",
+              showCancel: false,
+              success(res) { 
+                wx.navigateBack({
+                  delta: 1
+                })
+              }
+            })
+          }
           let date = new Date();
           let dateo = date.getTime()
           let dateone = new Date(dateo);
@@ -227,11 +238,14 @@ Page({
             })
             wx.setStorageSync("uuid", mydata.info.uuid)
           }
-          if (mydata.info.gender != "0") {
+
+          if (mydata.info.gender != "0" && mydata.info.hasOwnProperty("gender")) {
+            
             that.setData({
               sex: mydata.info.gender == "1" ? "男" : "女"
             })
           } else {
+            
             that.setData({
               sex: ""
             })

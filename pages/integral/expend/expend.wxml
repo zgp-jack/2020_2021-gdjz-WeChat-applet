@@ -9,7 +9,7 @@
             <view class='integral-list-words'>
                 <view class='integral-list-title overwords'>{{ item.headerText }}</view>
                 <view class='integral-list-info overwords'>{{ item.title }}</view>
-                <view class='integral-list-lasttime overwords'>时间：{{ item.His }} <text>消耗积分：{{ item.expense_integral }}</text></view>
+                <view class='integral-list-lasttime overwords'>时间：{{ item.His }} <text>{{ item.expend_integral_string }}</text></view>
             </view>
         </view>
 

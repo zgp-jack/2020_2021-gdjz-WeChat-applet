@@ -94,7 +94,7 @@ Page({
     if (p) this.setData({ gpsOrientation: p })
   },
   detailHistoryCities: function (item) {
-    let hc = wx.getStorageSync("historyCityLists");
+    let hc = wx.getStorageSync("historyfindLists");
     if (hc) {
       let len = hc.length;
       for (let i = 0; i < len; i++) {
@@ -111,13 +111,13 @@ Page({
       }
       hc.unshift(item)
       if (hc.length > 10) hc.splice(10)
-      wx.setStorageSync("historyCityLists", hc)
+      wx.setStorageSync("historyfindLists", hc)
     } else {
-      wx.setStorageSync("historyCityLists", [item])
+      wx.setStorageSync("historyfindLists", [item])
     }
   },
   initHistoryCityList: function () {
-    let hc = wx.getStorageSync("historyCityLists");
+    let hc = wx.getStorageSync("historyfindLists");
     let loc = wx.getStorageSync("userLocation");
     if (hc) {
       if (loc) {
