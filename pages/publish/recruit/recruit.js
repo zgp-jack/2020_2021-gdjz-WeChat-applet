@@ -77,8 +77,6 @@ Page({
     showInputList: false,
     searchInputVal: "",
     strlen: 0,
-    showModal: false,
-    display: "none",
     resson:""
   },
 
@@ -280,6 +278,15 @@ Page({
           if (!infoId) {
             let lastArea = wx.getStorageSync("userLastPubArea");
             if (lastArea) _this.setData({ addressData: lastArea })
+          }
+          if (options.is_check == "0") {
+            wx.showModal({
+              title: '审核失败',
+              content: _this.data.resson,
+              showCancel: false,
+              confirmText: '确定'
+            })
+            return false;
           }
           // setTimeout(function(){
           //     _this.initAreaPicker();
@@ -651,27 +658,12 @@ Page({
   returnPrevPage: function () {
     wx.navigateBack({ delta: 1 })
   },
-  modify(options) {
-    if (options.is_end == "1") {
-      this.setData({
-        showModal: true,
-        display: "block",
-      })
-    }
-  },
-  vertify() {
-    this.setData({
-      showModal: false,
-      display: "none"
-    })
-  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
     console.log(options)
     //this.initPickerData();
-    this.modify(options)
     let userInfo = wx.getStorageSync("userInfo");
     if (userInfo) {
       this.setData({

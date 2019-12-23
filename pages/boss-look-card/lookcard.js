@@ -91,7 +91,7 @@ Page({
     introshow: true,
     sharedeke: true,
     options: {},
-    show_complain:{}
+    show_complain: {}
   },
 
   previewImage: function (e) {
@@ -170,7 +170,7 @@ Page({
             telephone: res.data.tel,
             sharetelephone: res.data.tel,
             onoff: true,
-            is_read:0,
+            is_read: 0,
             // "show_complain.show_complain":
           })
         } else if (res.data.errcode == "7405") {
@@ -254,7 +254,13 @@ Page({
   },
   userTapComplai() {
     let userInfo = wx.getStorageSync("userInfo");
-    if (!this.data.show_complain.show_complain) {
+
+    if (!userInfo) {
+      app.gotoUserauth();
+      return false;
+    }
+
+    if (!this.data.show_complain.show_complain){
       wx.showModal({
         title: '提示',
         content: this.data.show_complain.tips_message,
@@ -263,19 +269,20 @@ Page({
       })
       return false;
     }
-    if (!userInfo) {
-      app.gotoUserauth();
+    if (this.data.is_read == 1) {
+      wx.showModal({
+        title: '提示',
+        content: "请先查看电话号码！",
+        showCancel: false,
+        confirmText: '知道了'
+      })
       return false;
-    }
-    if (this.data.status == 1) {
-      app.showMyTips("自己无法投诉自己！");
-    } else if (this.data.is_read == 1){
-      app.showMyTips("请先查看电话号码！");
-    }else {
+    } else {
       this.setData({
         showComplain: true
       })
     }
+
   },
   userEnterComplain: function (e) {
     this.setData({
