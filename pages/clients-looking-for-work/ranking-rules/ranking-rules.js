@@ -8,7 +8,8 @@ Page({
   data: {
     rulestatus: "",
     list: [],
-    resume_uuid:""
+    resume_uuid:"",
+    type:""
   },
 
   /**
@@ -78,8 +79,20 @@ Page({
       }
     })
   },
+
+  initGetIntegralList: function () {
+    let _this = this;
+    app.initSystemInfo(function (res) {
+      if (res && res.platform == "ios") {
+        _this.setData({
+          type: "ios"
+        })
+      }
+    })
+  },
   onLoad: function (options) {
     // this.getstatus(options)
+    this.initGetIntegralList()
   },
 
   /**
@@ -128,35 +141,35 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
-    let that = this;
-    let status = that.data.rulestatus;
+    // let that = this;
+    // let status = that.data.rulestatus;
 
-    let commonShareImg = app.globalData.commonShareImg;
-    let userInfo = wx.getStorageSync("userInfo");
-    let refId = userInfo.hasOwnProperty('userId') ? userInfo.userId : false;
-    let uuid = that.data.resume_uuid;
-    let commonShareTips = app.globalData.commonShareTips;
-    if (status == 1) {
+    // let commonShareImg = app.globalData.commonShareImg;
+    // let userInfo = wx.getStorageSync("userInfo");
+    // let refId = userInfo.hasOwnProperty('userId') ? userInfo.userId : false;
+    // let uuid = that.data.resume_uuid;
+    // let commonShareTips = app.globalData.commonShareTips;
+    // if (status == 1) {
 
-      return {
-        title: commonShareTips,
-        imageUrl: commonShareImg,
-        path: `/pages/boss-look-card/lookcard?uuid=${uuid}&refId=${refId}&sharedekeId=1`//这是一个路径
-      }
-    } else {
-      if (refId) {
-        return {
-          title: commonShareTips,
-          imageUrl: commonShareImg,
-          path: `/pages/index/index?refId=${refId}`//这是一个路径
-        }
-      } else {
-        return {
-          title: commonShareTips,
-          imageUrl: commonShareImg,
-          path: `/pages/index/index`//这是一个路径
-        }
-      }
-    }
+    //   return {
+    //     title: commonShareTips,
+    //     imageUrl: commonShareImg,
+    //     path: `/pages/boss-look-card/lookcard?uuid=${uuid}&refId=${refId}&sharedekeId=1`//这是一个路径
+    //   }
+    // } else {
+    //   if (refId) {
+    //     return {
+    //       title: commonShareTips,
+    //       imageUrl: commonShareImg,
+    //       path: `/pages/index/index?refId=${refId}`//这是一个路径
+    //     }
+    //   } else {
+    //     return {
+    //       title: commonShareTips,
+    //       imageUrl: commonShareImg,
+    //       path: `/pages/index/index`//这是一个路径
+    //     }
+    //   }
+    // }
   }
 })
