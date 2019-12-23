@@ -123,8 +123,8 @@
     </view>
   </view>
       <view class="cephalowarning">
-        <text class="warningdetail">防骗警示</text>：工作前，确认好<text class="warningdetail">对方身份</text>、签好合同。工作中，<text class="warningdetail">拍照</text>、<text class="warningdetail">录视频</text>留有证据！若双方发生纠纷，请立即<text class="warningdetail">报警</text>或者去<text class="warningdetail">劳动局</text>，鱼泡网可配合调查，但<text class="warningdetail">概不负责</text>！招工找活中<text class="warningdetail">不要交任何费用</text>，如遇
-        <text>无效、虚假、诈骗</text><text class="warningcomplaim" bindtap="userTapComplai">立即举报!</text>
+
+        <text class="warningdetail">防骗警示</text>：工作前，确认好<text class="warningdetail">对方身份、签好合同</text>，招工、找活中<text class="warningdetail">不要交任何费用</text>。工作中<text class="warningdetail">拍照</text>、<text class="warningdetail">录视频</text>留有证据！若双方发生<text class="warningdetail">经济纠纷</text>，请<text class="warningdetail">立即报警</text>或者前往<text class="warningdetail">劳动局投诉</text>，鱼泡网可<text class="warningdetail">配合调查</text>，但<text class="warningdetail">概不负责</text>。如遇<text class="warningdetail">诈骗信息</text>，请<text wx:if="{{!showcomplain}}" class="warningcomplaim" bindtap="userTapComplai">立即举报!</text>
       </view>
   <ad class="lists-ad" unit-id="{{ unitid }}" style="margin-top:15rpx;"></ad>
 

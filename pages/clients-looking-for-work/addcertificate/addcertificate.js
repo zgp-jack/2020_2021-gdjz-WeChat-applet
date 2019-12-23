@@ -432,7 +432,7 @@ vertify()
     
     if (skilltail) {
       wx.setNavigationBarTitle({
-        title: '修改您的技能证书'
+        title: '修改技能证书'
       })
       this.setData({
         obtnbut: false

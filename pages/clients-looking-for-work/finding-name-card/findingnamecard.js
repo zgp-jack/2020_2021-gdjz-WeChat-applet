@@ -11,6 +11,7 @@ Page({
    * newresume-experience.png audit.png baseinform headerimg uuid age chooseImage onShareAppMessage checkfourf age showskill
    */
   data: {
+    ruleimage: app.globalData.apiImgUrl + "lpy/newresume-rank.png",
     baseinform: app.globalData.apiImgUrl + "lpy/jichu.png",
     workingposition: app.globalData.apiImgUrl + "lpy/workdetail.png",
     subscripted: app.globalData.apiImgUrl + 'select.png',
@@ -96,7 +97,9 @@ Page({
     move: true,
     show_tips: "",
     showskill: true,
-    age: []
+    age: [],
+    sort_flag:"",
+    ranking:""
   },
   previewImage: function (e) {
 
@@ -126,6 +129,12 @@ Page({
     this.setData({
       showModal: false,
       display: "none"
+    })
+  },
+  rulepoit(){
+    // let rulestatus =  this.data.checkonef
+    wx.navigateTo({
+      url: `/pages/clients-looking-for-work/ranking-rules/ranking-rules`,
     })
   },
   obtn() {
@@ -571,7 +580,7 @@ Page({
             show_tips: mydata.hasOwnProperty("content") ? mydata.content.show_tips : "",
             name: mydata.info.hasOwnProperty("username") ? mydata.info.username : "",
             nation: mydata.info.hasOwnProperty("nation") ? mydata.info.nation : "",
-            occupations: mydata.info.hasOwnProperty("occupations") ? mydata.info.occupations : "",
+            occupations: mydata.info.hasOwnProperty("miniInfoOccupations") ? mydata.info.miniInfoOccupations : "",
             telephone: mydata.info.hasOwnProperty("tel") ? mydata.info.tel : "",
             city: mydata.info.hasOwnProperty("address") ? mydata.info.address : "",
             intro: false,
@@ -592,7 +601,8 @@ Page({
             note: mydata.info.hasOwnProperty("note") ? mydata.info.note : "",
             fail_certificate: mydata.hasOwnProperty("fail_certificate") ? mydata.fail_certificate : "",
             fail_project: mydata.hasOwnProperty("fail_project") ? mydata.fail_project : "",
-
+            sort_flag: mydata.info.hasOwnProperty("sort_flag") ? mydata.info.sort_flag:"",
+            ranking: mydata.info.hasOwnProperty("ranking") ? mydata.info.ranking : "",
           })
           if (that.data.showtop) {
             app.globalData.showperfection = true;

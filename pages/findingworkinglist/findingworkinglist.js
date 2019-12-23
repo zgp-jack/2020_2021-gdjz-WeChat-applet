@@ -12,6 +12,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    rullIntegral: app.globalData.apiImgUrl + "resume-list-rules-btn.png",
     finded: app.globalData.apiImgUrl + "lpy/finded.png",
     biaoqian: app.globalData.apiImgUrl + "lpy/biaoqian.png",
     testImg:"http://cdn.yupao.com/miniprogram/images/user.png",
@@ -117,6 +118,11 @@ Page({
     let type = parseInt(e.currentTarget.dataset.type);
     this.setData({
       showListsInfo: (this.data.showListsInfo == type) ? 0 : type
+    })
+  },
+  jumprull(){
+    wx.navigateTo({
+      url: "/pages/clients-looking-for-work/ranking-rules/ranking-rules",
     })
   },
   userChooseNewest(e) {

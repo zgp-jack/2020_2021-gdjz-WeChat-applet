@@ -1,0 +1,215 @@
+
+<!-- listsboxlocalone -->
+<import src="/pages/footer/footer.wxml" />
+<!-- <import src="/pages/tpl/app/app.wxml"/> doSearchRequestAction user-choose-item user-choose-item-active  jumpThisLink recommendteam overwords  stopThisAction showListsType listsboxnation user-choose-shade -->
+
+<!-- 搜索头部 -->
+<view class="lists-header">
+  <input placeholder="找工人，找班组，找队伍" bindconfirm="userTapSearch" confirm-type="search" bindfocus='bindInputFocus' bindinput='bindKeyInput' bindtap="closeAllSelect" value='{{ searchDate.keywords }}' />
+  <text bindtap='userTapSearch'>搜索</text>
+</view>
+
+<!-- 历史记录 -->
+<view class='usersearchhistorybox' wx:if="{{ showHistoryList && historyList.length }}" bindtap='closeHistory'>
+  <view class='usersearchhistory'>
+    <view class='usersearchhistory-item usersearchhistory-item-title'>历史记录</view>
+    <view class='usersearchhistory-box'>
+      <view class='usersearchhistory-item overwords' wx:for="{{ historyList }}" wx:key="{{ index }}" catchtap='searchThisWords' data-text='{{ item }}'>{{ item }}</view>
+    </view>
+    <view class='usersearchhistory-footer'>
+      <view bindtap='clearHistory'>清空历史记录</view>
+    </view>
+  </view>
+</view>
+
+<!-- 筛选条件 -->
+<view class='lists-condition-menu flex-row mybottomborder'>
+  <view class='lists-condition-item {{ (showListsInfo == "1") ? "lists-condition-active" : ""}}' bindtap='showListsType' data-type="1">
+    <view class='overwords'>{{ areaText }}
+      <image src='{{ selectimg }}'></image>
+    </view>
+  </view>
+  <view class='lists-condition-item {{ (showListsInfo == "2") ? "lists-condition-active" : ""}}' bindtap='showListsType' data-type="2">
+    <view class='overwords'>{{ typeText }}
+      <image src='{{ selectimg }}'></image>
+    </view>
+  </view>
+  <view class='lists-condition-item {{ (showListsInfo == "3") ? "lists-condition-active" : ""}}' bindtap='showListsType' data-type="3">
+    <view class='overwords'>{{ teamText }}
+      <image src='{{ selectimg }}'></image>
+    </view>
+  </view>
+  <view class='lists-condition-item {{ (showListsInfo == "4") ? "lists-condition-active" : ""}}' bindtap='showListsType' data-type="4">
+    <view class='overwords'>{{ recommended }}
+      <image src='{{ selectimg }}'></image>
+    </view>
+  </view>
+</view>
+
+<!-- 筛选条件列表 -->
+<view class='user-choose-shade {{ (showListsInfo != "0") ? "user-choose-shade-active":"" }}' bindtap='closeAllSelect'>
+  <view class='user-choose-item {{ (showListsInfo == "1") ? "user-choose-item-active" : "" }}' wx:if="{{ showListsInfo == '1' }}">
+    <view class='filtrate-list-item mybottomborder overwords {{ (province == index) ? "filtrate-list-active" : "" }}' wx:for="{{ fillterArea }}" wx:key="{{ index }}" catchtap='userChooseProvince' data-haschild="{{ item.has_children }}" data-index="{{ index }}"
+      data-id='{{ item.id }}' data-area="{{ item.name }}" data-pname="{{ item.ad_name }}">
+      <text>{{ item.name }}</text>
+    </view>
+  </view>
+
+
+  <view class='user-choose-item {{ (showListsInfo == "2") ? "user-choose-item-active" : "" }}' wx:if="{{ showListsInfo == '2' }}">
+    <view class='filtrate-list-item mybottomborder overwords {{ (worktype == index) ? "filtrate-list-active" : "" }}' wx:for="{{ fillterType }}" wx:key="{{ index }}" catchtap='userChooseWorktype' data-index="{{ index }}" bindtouchstart="touchStart" bindtouchend="touchEnd"
+      data-id='{{ item.id }}' data-haschild="{{ item.has_children }}" data-type="{{ item.name }}">
+      <text>{{ item.name }}</text>
+      <view class='filtrate-item-lists {{ (worktype == index) ? "filtrate-item-lists-active" : "" }}' wx:if="{{ item.has_children }}">
+        <view class='filtrate-item-info mybottomborder overwords {{ (workinfo == item.id) ? "filtrate-item-info-active" : "" }}' wx:for="{{ item.children }}" wx:key="{{ index }}" wx:for-index="cindex" catchtap='userChooseWorkinfo' data-id="{{ item.id }}" data-type="{{ (cindex == 0) ? fillterType[index].name : item.name }}">{{ item.name }}</view>
+      </view>
+    </view>
+  </view>
+  <view class='user-choose-item {{ (showListsInfo == "3") ? "user-choose-item-active" : "" }}' wx:if="{{ showListsInfo == '3' }}" catchtap='stopThisAction'>
+    <view class='filtrate-list-item mybottomborder overwords {{ ( teamindex == index) ? "filtrate-list-active" : "" }}' wx:for="{{ fillterTeam }}" wx:key="{{ index }}" catchtap='userChooseTeam' data-index="{{ index }}" data-id='{{ item.id }}' data-team="{{ item.name }}">
+      <text>{{ item.name }}</text>
+    </view>
+  </view>
+  <view class='user-choose-item {{ (showListsInfo == "4") ? "user-choose-item-active" : "" }}' wx:if="{{ showListsInfo == '4' }}" catchtap='stopThisAction'>
+    <view class='filtrate-list-item mybottomborder overwords {{ ( newindex == index) ? "filtrate-list-active" : "" }}' wx:for="{{ fillterNewest }}" wx:key="{{ index }}" catchtap='userChooseNewest' data-index="{{ index }}" data-id='{{ item.type }}' data-type="{{ item.name }}">
+      <text>{{ item.name }}</text>
+    </view>
+  </view>
+</view>
+
+
+<view class='yupao-lists-container yupao-common-container'>
+
+  <!-- 公告 -->
+  <view class='yupao-lists-notice'>
+    <view class='yupao-lists-wxinfo'>
+      <view class='yupao-lists-wxtips'>
+        <text class='yupao-lists-tips'>公告：</text>加客服微信号:
+        <text data-wechat="{{ wechat }}" bindtap='clipboardWechat'>{{ wechat }}</text> 拉你进工人微信群。客服电话:
+        <text bindtap='callThisPhone' data-phone="{{ phone }}">{{ phone }}</text>
+      </view>
+    </view>
+    <view class='yupao-lists-noticetips'>
+      <text class='yupao-common-tips yupao-lists-newtips'>鱼泡公告：</text>
+      <view class='lists-notice-swiper'>
+        <swiper indicator-dots="{{ notice.indicatorDots }}" autoplay="{{ notice.autoplay}} " interval="{{ notice.interval }}" duration="{{ notice.duration }}" circular="{{ notice.circular }}" vertical="{{ notice.vertical }}">
+          <block wx:for="{{ notice.lists }}" wx:key="{{ index }}">
+            <swiper-item>
+              <text class='lists-notice-text overwords' data-id="{{ item.id }}" bindtap='showThisNotice'>{{ item.title }}</text>
+            </swiper-item>
+          </block>
+        </swiper>
+      </view>
+    </view>
+  </view>
+
+  <view class='listsbox '>
+
+    <!-- <block  wx:for="{{ }}" wx:key="{{ }}" wx:if="{{}}"> -->
+
+    <view class="listsboxdetailover" wx:for="{{lists}}" wx:key="{{index}}">
+      <image src="{{finded}}" class="finded" wx:if="{{item.is_end == 2}}"></image>
+      <view class="listsoverhl" data-uuid="{{item.uuid}}" bindtap="showDetailInfo" data-id="{{ item.id }}">
+        <view class="listsboxdetailo">
+          <view>
+            <image class="oimg" src="{{item.headerimg}}" data-index="{{index}}" binderror="errImg"></image>
+          </view>
+          <view class="listsboxintro">
+            <view class="listsboxage">
+              <view class="listsboxageone">
+                <view class="listsboxname" wx:if="{{item.username}}">
+                  <text>{{item.username}}</text>
+                </view>
+                <view wx:if="{{item.gender  == '1' ||item.gender  == '2' }}" class="{{(item.gender =='1'||item.gender =='2')?'listsboxsex':''}}">
+                  <text>{{item.gender  == "1" ? "男" : item.gender == "2"?"女":""}}</text>
+                </view>
+                <view class="listsboxagezong" wx:if="{{item.birthday != 0}}">
+                  <text>{{item.birthday}}岁</text>
+                </view>
+
+
+                <image wx:if="{{item.authentication == 2}}" src="{{realNames}}"></image>
+
+
+
+                <image wx:if="{{item.certificate == 1}}" src="{{authentication}}"></image>
+
+              </view>
+              <view class="listsboxagetwo" wx:if="{{item.gender != '0'}}">
+                <text class="listsboxnation" wx:if="{{item.nation}}">{{item.nation}}</text>
+                <text><text class="listsboxnum" wx:if="{{item.experience}}" >{{item.experience}}</text></text>
+                <text wx:if="{{item.prof_degree}}">{{item.prof_degree}}</text>
+              </view>
+              <view class="listsboxagetwot" wx:if="{{item.gender == '0'}}">
+                <text wx:for="{{item.tags}}" wx:key="{{index}}">{{item.label_name}}</text>
+              </view>
+            </view>
+            <view class="listsboxshow" wx:if="{{item.type}}">{{item.type}}</view>
+          </view>
+        </view>
+        <view class="listsboxlable">
+          <view class="listsboxlableone" wx:for="{{item.occupations}}" wx:key="{{index}}">{{item}}</view>
+
+        </view>
+        <view class="listsboxself" wx:if="{{item.introduce}}">{{item.introduce}}</view>
+        <view class="listsboxself" wx:if="{{!item.introduce}}"></view>
+        <view class="listsboxlocal">
+          <view>
+            <view class="listsboxlocalone">
+              <view>
+                <image src="{{biaoqian}}"></image>
+              </view>
+              <view class="listsboxadree" wx:if="{{item.show_address}}">{{item.show_address}}</view>
+              <view class="listsboxadreeq" wx:if="{{item.distance}}">{{item.distance}}</view>
+            </view>
+          </view>
+          <view class="listsboxlocaltwo">
+            <text class="listsboxtime" wx:if="{{item.time}}">{{item.time}}</text>
+          </view>
+        </view>
+      </view>
+      <ad class="lists-ad" unit-id="{{ unitid }}" wx:if="{{index % 5 == 0 && index > 5}}"></ad>
+    </view>
+
+
+    <navigator url='/pages/download/download-app' wx:if="{{ (index == 5) && (fillterType[worktype].id != '55')}}" class='lists-ad lists-ad-image'>
+      <image src="{{ appLinkImg }}"></image>
+    </navigator>
+    <navigator class='lists-ad lists-ad-image' target="miniProgram" wx:if="{{ (index == 5) && (fillterType[worktype].id == '55')}}" open-type="navigate" app-id="wx0ae31bf0edad4390" path="" extra-data="" version="release">
+      <image src="{{ jixieLinkImg }}"></image>
+    </navigator>
+
+    <!-- </block> -->
+
+    <view class='nodata-texttips' wx:if="{{ nothavemore }}">没有更多内容了</view>
+
+    <view class='common-nodatabox flex-column lists-nodata' wx:if="{{ showNothinkData }}">
+      <image src='{{ listsImg.nodata }}'></image>
+      <text>暂无相关内容</text>
+    </view>
+  </view>
+
+</view>
+
+<!-- <view class='fixed-ad' bindtap='jumpThisLink' data-url="/pages/download/download-app" data-type='0'>
+  <image src='{{ fixedAdImg }}'></image>
+</view> -->
+
+<view class='bottompublishbtn' bindtap='valiUserCard'>发布找活</view>
+
+<!-- <view class='fixed-get-integral'  bindtap='jumprull'>
+        <image src='{{ rullIntegral }}'></image>
+</view> -->
+
+<!-- <button class='fixed-get-integral-btn'  open-type="share" >
+        <image src='http://cdn.yupao.com/miniprogram/images/list-share-btn.png?t=111'></image>
+</button> -->
+
+
+<image class="returntop {{ showReturnTopImg ? 'returntop-active' : '' }}" src="{{ returnTopImg }}" bindtap="returnTop"></image>
+
+<!-- 
+<template is="app"  data="{{ bgHeight,btnWidth,wordsHeight,wordsWidth,shadeWidth,winWidth,winHeight,notimesW,userShareData,userShareTime }}" /> -->
+<!-- 引入footer -->
+<template is="footer" data="{{ footerImgs,publishActive,showPublishBox,footerActive }}" />
+

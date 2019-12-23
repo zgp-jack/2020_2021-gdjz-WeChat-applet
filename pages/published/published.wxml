@@ -31,7 +31,7 @@
         <text>{{ item.end_word }}</text> </view>
       <view class='published-list-body' wx:if="{{ item.is_check != '1'  }}">
         <view class='published-list-edit'>
-          <navigator url='{{ (publishIndex == 0) ? ("../publish/recruit/recruit?id="+item.id) : ("../publish/used/used?id="+item.id) }}' open-type="navigate">
+          <navigator url='{{ (publishIndex == 0) ? ("../publish/recruit/recruit?id="+item.id+"&is_check="+item.is_check) : ("../publish/used/used?id="+item.id) }}' open-type="navigate">
             <image src='{{ publishedImg.edit }}'></image>修改</navigator>
         </view>
 
