@@ -63,13 +63,26 @@ Page({
           that.setData({
             list: mydata.data.sort_rule_lists,
             listlength: mydata.data.sort_rule_lists.length,
-            rulestatus: mydata.data.resume_data.hasOwnProperty("info")?mydata.data.resume_data.info.check:"",
-            resume_uuid: mydata.data.resume_data.hasOwnProperty("info") ? mydata.data.resume_data.info.uuid : "",
+            rulestatus: mydata.data.resume_data.hasOwnProperty("info") ? mydata.data.resume_data.info.hasOwnProperty("check")? mydata.data.resume_data.info.check:"":"",
+            resume_uuid: mydata.data.resume_data.hasOwnProperty("info") ? mydata.data.resume_data.info.hasOwnProperty("uuid") ? mydata.data.resume_data.info.uuid :"": "",
             warm_tips: mydata.data.warm_tips,
             sort_flag: mydata.data.resume_info.sort_flag,
             has_resume: mydata.data.resume_info.has_resume,
             onoff: true
           })
+
+          if (mydata.data.resume_data.hasOwnProperty("certificate_count") && mydata.data.resume_data.hasOwnProperty("project_count")){
+            console.log(123)
+            wx.setStorageSync("projectnum", mydata.data.resume_data.project.length )
+            wx.setStorageSync("skillnum", mydata.data.resume_data.certificates.length)
+            wx.setStorageSync("certificate_count", mydata.data.resume_data.certificate_count)
+            wx.setStorageSync("project_count", mydata.data.resume_data.project_count)
+          }else{
+            wx.setStorageSync("projectnum", 0)
+            wx.setStorageSync("skillnum", 0)
+            wx.setStorageSync("certificate_count", 3)
+            wx.setStorageSync("project_count", 5)
+          }
         } else {
           that.setData({
             onoff: false
@@ -86,17 +99,23 @@ Page({
 
   initGetIntegralList: function () {
     let _this = this;
-    app.initSystemInfo(function (res) {
+    try {
+      const res = wx.getSystemInfoSync()
       console.log(res)
       if (res && res.platform == "ios") {
         _this.setData({
           type: "ios"
         })
       }
-    })
+    } catch (e) {
+      // Do something when catch error
+      app.showMyTips("获取机型失败请重新进入");
+    }
+
     console.log(_this.data.type)
   },
   jumpyemian(e) {
+    console.log(e)
     let userInfo = wx.getStorageSync("userInfo");
     if (!userInfo) {
       app.gotoUserauth();
@@ -105,11 +124,15 @@ Page({
       })
       return false;
     }
-    if (this.data.has_resume == 1) {
+    if (this.data.has_resume == 1 && e.currentTarget.dataset.jump == 1) {
       wx.navigateTo({
         url: e.currentTarget.dataset.minipath,
       })
-    }else{
+    } else if (this.data.has_resume == 0 && e.currentTarget.dataset.minipath == '/pages/recharge/recharge' && e.currentTarget.dataset.jump == 1){
+      wx.navigateTo({
+        url: "/pages/recharge/recharge",
+      })
+    } else if (e.currentTarget.dataset.jump == 1){
       wx.navigateTo({
         url: "/pages/clients-looking-for-work/finding-name-card/findingnamecard",
       })
@@ -126,7 +149,8 @@ Page({
   },
   onLoad: function (options) {
     // this.getstatus(options)
-    this.initGetIntegralList()
+    this.initGetIntegralList();
+    
   },
 
   /**

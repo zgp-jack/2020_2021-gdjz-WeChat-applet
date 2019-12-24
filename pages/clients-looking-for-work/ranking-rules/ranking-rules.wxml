@@ -28,7 +28,7 @@
           <!-- <view class="ranking-obtn">
         分享名片
       </view> -->
-<button class="{{item.jump.need_jump==0?'ranking-obtngray':'ranking-obtn'}}" data-minipath="{{item.jump.mini_path}}" wx:if="{{item.is_share!=1}}" bindtap="jumpyemian">{{item.button_words}}
+<button class="{{item.jump.need_jump==0?'ranking-obtngray':'ranking-obtn'}}" data-minipath="{{item.jump.mini_path}}" data-jump="{{item.jump.need_jump}}" wx:if="{{item.is_share!=1}}" bindtap="jumpyemian">{{item.button_words}}
           </button>
 <button class="ranking-obtn" bindtap="jumpyemian" wx:if="{{!showbutton}}">{{item.button_words}}
           </button>
