@@ -8,8 +8,11 @@ Page({
   data: {
     rulestatus: "",
     list: [],
-    resume_uuid:"",
-    type:""
+    resume_uuid: "",
+    type: "",
+    warm_tips: [],
+    sort_flag: "",
+    has_resume: ""
   },
 
   /**
@@ -31,17 +34,19 @@ Page({
         userId: userInfo.userId,
         token: userInfo.token,
         tokenTime: userInfo.tokenTime,
+        system_type: that.data.type
       }
     } else {
-       detail = {
-        userId:"",
-        token:"",
-        tokenTime:"",
+      detail = {
+        userId: "",
+        token: "",
+        tokenTime: "",
+        system_type: that.data.type
       }
     }
     console.log(detail)
     app.appRequestAction({
-      url: 'resumes/sort-rules/',
+      url: 'resumes/sort/',
       way: 'POST',
       params: detail,
       failTitle: "操作失败，请稍后重试！",
@@ -50,10 +55,13 @@ Page({
         let mydata = res.data;
         if (mydata.errcode == "ok") {
           that.setData({
-            list: mydata.data.lists,
-            listlength: mydata.data.lists.length,
-            rulestatus: mydata.data.is_resume,
-            resume_uuid: mydata.data.resume_uuid
+            list: mydata.data.sort_rule_lists,
+            listlength: mydata.data.sort_rule_lists.length,
+            rulestatus: mydata.data.resume_data.info.check,
+            resume_uuid: mydata.data.resume_uuid,
+            warm_tips: mydata.data.warm_tips,
+            sort_flag: mydata.data.resume_info.sort_flag,
+            has_resume: mydata.data.resume_info.has_resume,
           })
         } else {
           wx.showModal({
@@ -83,12 +91,25 @@ Page({
   initGetIntegralList: function () {
     let _this = this;
     app.initSystemInfo(function (res) {
+      console.log(res)
       if (res && res.platform == "ios") {
         _this.setData({
           type: "ios"
         })
       }
     })
+    console.log(_this.data.type)
+  },
+  jumpyemian(e) {
+    if (this.data.has_resume == 1) {
+      wx.navigateTo({
+        url: e.currentTarget.dataset.minipath,
+      })
+    }else{
+      wx.navigateTo({
+        url: "/pages/clients-looking-for-work/finding-name-card/findingnamecard",
+      })
+    }
   },
   onLoad: function (options) {
     // this.getstatus(options)
@@ -140,36 +161,44 @@ Page({
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function () {
-    // let that = this;
-    // let status = that.data.rulestatus;
+  onShareAppMessage: function (e) {
+    console.log(e)
+    let that = this;
+    let status = that.data.rulestatus;
 
-    // let commonShareImg = app.globalData.commonShareImg;
-    // let userInfo = wx.getStorageSync("userInfo");
-    // let refId = userInfo.hasOwnProperty('userId') ? userInfo.userId : false;
-    // let uuid = that.data.resume_uuid;
-    // let commonShareTips = app.globalData.commonShareTips;
-    // if (status == 1) {
+    let commonShareImg = app.globalData.commonShareImg;
+    let userInfo = wx.getStorageSync("userInfo");
+    let refId = userInfo.hasOwnProperty('userId') ? userInfo.userId : false;
+    let uuid = that.data.resume_uuid;
+    let commonShareTips = app.globalData.commonShareTips;
 
-    //   return {
-    //     title: commonShareTips,
-    //     imageUrl: commonShareImg,
-    //     path: `/pages/boss-look-card/lookcard?uuid=${uuid}&refId=${refId}&sharedekeId=1`//这是一个路径
-    //   }
-    // } else {
-    //   if (refId) {
-    //     return {
-    //       title: commonShareTips,
-    //       imageUrl: commonShareImg,
-    //       path: `/pages/index/index?refId=${refId}`//这是一个路径
-    //     }
-    //   } else {
-    //     return {
-    //       title: commonShareTips,
-    //       imageUrl: commonShareImg,
-    //       path: `/pages/index/index`//这是一个路径
-    //     }
-    //   }
-    // }
+    if (e.target.dataset.hasOwnProperty("share")){
+      return {
+        title: commonShareTips,
+        imageUrl: commonShareImg,
+        path: `/pages/index/index?refId=${refId}`//这是一个路径
+      }
+    }else if (status == 2) {
+
+      return {
+        title: commonShareTips,
+        imageUrl: commonShareImg,
+        path: `/pages/boss-look-card/lookcard?uuid=${uuid}&refId=${refId}&sharedekeId=1`//这是一个路径
+      }
+    } else {
+      if (refId) {
+        return {
+          title: commonShareTips,
+          imageUrl: commonShareImg,
+          path: `/pages/index/index?refId=${refId}`//这是一个路径
+        }
+      } else {
+        return {
+          title: commonShareTips,
+          imageUrl: commonShareImg,
+          path: `/pages/index/index`//这是一个路径
+        }
+      }
+    }
   }
 })

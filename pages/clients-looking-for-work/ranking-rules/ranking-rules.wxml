@@ -2,7 +2,7 @@
   <view class="header">
     <view class="headerpoint">
       <text>我的排名点：</text>
-      <text>369</text>
+      <text>{{sort_flag}}</text>
     </view>
     <view class="headerdetail">
       <text>注：找活名片只有审核通过后，才会在列表页展示。排名点越高排名越靠前
@@ -11,26 +11,29 @@
   </view>
   <view class="ranking-center">
     <view class="ranking-child" wx:for="{{list}}" wx:key="{{index}}">
-    <view class="ranking-childone">
-      <view class="ranking-oimg">
-        <image src="http://cdn.yupao.com/cimages/resume-rank/collect.png"></image>
-      </view>
-      <view class="ranking-ocontent">
-        <view class="ranking-detail">
-          <view class="ranking-zan">技能证书（0/3点）</view>
-          <view class="ranking-point">分享自己的找活名片，被其他用户收藏一次可增加1排名点。</view>
+      <view class="ranking-childone">
+        <view class="ranking-oimg">
+          <image src="{{item.img_url}}"></image>
         </view>
-        <!-- <view class="ranking-content">
+        <view class="ranking-ocontent">
+          <view class="ranking-detail">
+            <view class="ranking-zan">{{item.type_name}}</view>
+            <view class="ranking-point">{{item.description}}</view>
+          </view>
+          <!-- <view class="ranking-content">
           {{item.description}}
         </view> -->
-      </view>
-      <!-- <view class="ranking-obtn">
+        </view>
+        <!-- <view class="ranking-obtn">
         分享名片
       </view> -->
-      <button class="ranking-obtn">
-         分享名片
-      </button>
-     </view> 
+        <button class="ranking-obtn" data-minipath="{{item.jump.mini_path}}" wx:if="{{item.is_share!=1}}" bindtap="jumpyemian">
+          {{item.button_words}}
+        </button>
+        <button class="ranking-obtn" data-share="{{item.only_mini_share}}" open-type='share' wx:if="{{item.is_share==1}}">
+          {{item.button_words}}
+        </button>
+      </view>
     </view>
   </view>
   <view class="ranking-button">
@@ -38,9 +41,7 @@
       <view>温馨提示</view>
     </view>
     <view class="ranking-button-odetail">
-      <view>1.知识点付付付付付付付付付付付付付付付付付付付付付付付付付付付付付付</view>
-      <view>2.飞得更高过过过过过过过过过过过过过过过过过过过梵蒂冈</view>
-      <view>3.飞得更高过过过过过过过过过过过过过过过过过过过梵蒂冈水电费付付付付付付付付付付付付付付付付付付水电费</view>
+      <view wx:for="{{warm_tips}}" wx:key="{{index}}">{{item}}</view>
     </view>
   </view>
 </view>
