@@ -139,7 +139,11 @@ App({
       data: _options.hasOwnProperty("params") ? _options.params : {},
       header: header,
       success(res) {
-        _options.hasOwnProperty("success") ? _options.success(res) : "";
+        if (res.statusCode == 200 || res.statusCode == 304) {
+          _options.hasOwnProperty("success") ? _options.success(res) : "";
+        } else {
+          _options.hasOwnProperty("fail") ? _options.fail(err) : "";
+        }
       },
       fail(err) {
         _options.hasOwnProperty("fail") ? _options.fail(err) : "";
