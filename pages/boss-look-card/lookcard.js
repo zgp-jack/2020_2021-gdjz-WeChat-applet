@@ -326,6 +326,9 @@ Page({
       title: '加载中',
       mask: true
     })
+    if (option.hasOwnProperty("refId")){
+      app.globalData.refId = option.refId;
+    }
     if (option.hasOwnProperty("sharedekeId")) {
       if (option.sharedekeId == 1) {
         that.setData({

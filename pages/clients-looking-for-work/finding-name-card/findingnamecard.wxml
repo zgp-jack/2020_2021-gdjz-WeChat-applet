@@ -160,7 +160,7 @@
   </view>
   <view class="cardcoloreno">
     <view class="nopass" wx:if="{{ressonone}}">
-      个人资料审核失败原因：{{note}}
+      <text>个人资料审核失败原因：</text> {{note}}
     </view>
   </view>
   <view class="findingnamecardthree" wx:if="{{selfintro}}">

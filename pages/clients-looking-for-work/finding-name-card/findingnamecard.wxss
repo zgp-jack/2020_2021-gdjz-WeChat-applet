@@ -48,7 +48,9 @@ page {
   padding-right: 19rpx;
   padding-bottom: 10rpx;
 }
-
+.nopass text{
+  color: black;
+}
 .link {
   width: 6px;
   height: 38rpx;

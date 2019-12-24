@@ -6,15 +6,20 @@ Page({
    * 页面的初始数据
    */
   data: {
+    nodata: app.globalData.apiImgUrl + "nodata.png",
     rulestatus: "",
     list: [],
     resume_uuid: "",
     type: "",
     warm_tips: [],
     sort_flag: "",
-    has_resume: ""
+    has_resume: "",
+    onoff:true,
+    showbutton:true
   },
-
+  againshow(){
+    this.getdetail()
+  },
   /**
    * 生命周期函数--监听页面加载
    */
@@ -44,7 +49,7 @@ Page({
         system_type: that.data.type
       }
     }
-    console.log(detail)
+   
     app.appRequestAction({
       url: 'resumes/sort/',
       way: 'POST',
@@ -54,35 +59,26 @@ Page({
         console.log(res)
         let mydata = res.data;
         if (mydata.errcode == "ok") {
+          console.log(1)
           that.setData({
             list: mydata.data.sort_rule_lists,
             listlength: mydata.data.sort_rule_lists.length,
-            rulestatus: mydata.data.resume_data.info.check,
-            resume_uuid: mydata.data.resume_uuid,
+            rulestatus: mydata.data.resume_data.hasOwnProperty("info")?mydata.data.resume_data.info.check:"",
+            resume_uuid: mydata.data.resume_data.hasOwnProperty("info") ? mydata.data.resume_data.info.uuid : "",
             warm_tips: mydata.data.warm_tips,
             sort_flag: mydata.data.resume_info.sort_flag,
             has_resume: mydata.data.resume_info.has_resume,
+            onoff: true
           })
         } else {
-          wx.showModal({
-            title: '温馨提示',
-            content: res.data.errmsg,
-            showCancel: false,
-            success(res) { }
+          that.setData({
+            onoff: false
           })
-          return
         }
       },
       fail: function (err) {
-        wx.showModal({
-          title: '温馨提示',
-          content: `您的网络请求失败`,
-          showCancel: false,
-          success(res) {
-            wx.navigateBack({
-              delta: 1
-            })
-          }
+        that.setData({
+          onoff: false
         })
       }
     })
@@ -101,6 +97,14 @@ Page({
     console.log(_this.data.type)
   },
   jumpyemian(e) {
+    let userInfo = wx.getStorageSync("userInfo");
+    if (!userInfo) {
+      app.gotoUserauth();
+      this.setData({
+        showbutton: true
+      })
+      return false;
+    }
     if (this.data.has_resume == 1) {
       wx.navigateTo({
         url: e.currentTarget.dataset.minipath,
@@ -109,6 +113,15 @@ Page({
       wx.navigateTo({
         url: "/pages/clients-looking-for-work/finding-name-card/findingnamecard",
       })
+    }
+  },
+
+  getstatus(){
+    let userInfo = wx.getStorageSync("userInfo");
+    if (!userInfo) {
+       this.setData({
+         showbutton:false
+       })
     }
   },
   onLoad: function (options) {
@@ -127,7 +140,8 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    this.getdetail()
+    this.getdetail();
+    this.getstatus()
   },
 
   /**
@@ -162,17 +176,17 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function (e) {
+
     console.log(e)
     let that = this;
     let status = that.data.rulestatus;
-
-    let commonShareImg = app.globalData.commonShareImg;
     let userInfo = wx.getStorageSync("userInfo");
+    let commonShareImg = app.globalData.commonShareImg;
     let refId = userInfo.hasOwnProperty('userId') ? userInfo.userId : false;
     let uuid = that.data.resume_uuid;
     let commonShareTips = app.globalData.commonShareTips;
 
-    if (e.target.dataset.hasOwnProperty("share")){
+    if (e.target.dataset.hasOwnProperty("share") && e.target.dataset.share == "invite_friend"){
       return {
         title: commonShareTips,
         imageUrl: commonShareImg,

@@ -68,8 +68,23 @@
   right: 0;
   margin:0rpx;
 }
-
+.ranking-obtngray{
+  width: 21%;
+  background: #D2D2D4;
+  color: white;
+  font-size: 30rpx;
+  padding: 12rpx 0;
+  line-height: 40rpx;
+  border-radius: 12rpx;
+  text-align: center;
+  position: absolute;
+  right: 0;
+  margin:0rpx;
+}
 .ranking-obtn::after {
+  border: none;
+}
+.ranking-obtngray::after {
   border: none;
 }
 .ranking-oimg{
@@ -140,4 +155,22 @@
 .ranking-button-odetail{
   font-size: 30rpx;
   color: #999999;
+}
+.common-nodataboxtwo .failstatus{
+  font-size: 32rpx;
+}
+.common-nodatabox .failstatusone{
+   font-size: 32rpx;
+   color: #0099ff;
+}
+.common-nodataboxone{
+  display: flex;
+  justify-content: center;
+}
+.common-nodataboxtwo{
+  display: flex;
+  justify-content: center;
+}
+.common-nodatabox{
+  margin-top: 200rpx;
 }
