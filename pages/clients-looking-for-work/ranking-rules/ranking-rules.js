@@ -119,8 +119,18 @@ Page({
         })
       }
     } catch (e) {
-      // Do something when catch error
-      app.showMyTips("获取机型失败请重新进入");
+      wx.showModal({
+        title: '温馨提示',
+        content: `获取机型失败请重新进入`,
+        showCancel: false,
+        success(res) {
+          wx.navigateBack({
+            delta: 1
+          })
+        }
+      })
+      // // Do something when catch error
+      // app.showMyTips("获取机型失败请重新进入");
     }
 
     console.log(_this.data.type)
@@ -136,9 +146,15 @@ Page({
       })
       return false;
     }
-    if (this.data.has_resume == 1 && e.currentTarget.dataset.jump == 1) {
+    if (this.data.has_resume == 1 && e.currentTarget.dataset.jump == 1 && e.currentTarget.dataset.minipath == "/pages/clients-looking-for-work/finding-name-card/findingnamecard") {
+      app.globalData.showdetail = true
       wx.navigateTo({
-        url: e.currentTarget.dataset.minipath + `?ranktype=${ranking}`,
+        url: e.currentTarget.dataset.minipath,
+      })
+    }else if (this.data.has_resume == 1 && e.currentTarget.dataset.jump == 1) {
+      app.globalData.showdetail = true
+      wx.navigateTo({
+        url: e.currentTarget.dataset.minipath + `?ranktype=${ranking}&`,
       })
     } else if (this.data.has_resume == 0 && e.currentTarget.dataset.minipath == '/pages/recharge/recharge' && e.currentTarget.dataset.jump == 1){
       wx.navigateTo({
