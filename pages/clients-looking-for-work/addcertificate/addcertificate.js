@@ -24,7 +24,8 @@ vertify()
     skill_show:true,
     display: "none",
     nowDate:"",
-    beforeDate:""
+    beforeDate:"",
+    ranktypes: ""
   },
   vertify() {
     this.setData({
@@ -282,10 +283,16 @@ vertify()
         remain.remain({
           tips: res.data.errmsg, callback: function () {
             if (res.data.errcode == "ok") {
+              if (that.data.ranktypes == "ranking") {
+                wx.redirectTo({
+                  url: '/pages/clients-looking-for-work/all-skills-certificate/skillscertificate',
+                });
+              } else {
               app.globalData.allskill = true;
               wx.navigateBack({
                 delta: 1
               })
+              }
             }
           }
         })
@@ -529,10 +536,16 @@ vertify()
         remain.remain({
           tips: res.data.errmsg, callback: function () {
             if (res.data.errcode == "ok") {
+              if (that.data.ranktypes == "ranking") {
+                wx.redirectTo({
+                  url: '/pages/clients-looking-for-work/all-skills-certificate/skillscertificate',
+                });
+              } else {
               app.globalData.allskill = true;
               wx.navigateBack({
                 delta: 1
               })
+              }
             }
           }
         })
@@ -575,8 +588,15 @@ vertify()
   /**
    * 生命周期函数--监听页面加载
    */
+  ranktypes(options) {
+    console.log(options)
+    this.setData({
+      ranktypes: options.ranktype
+    })
+  },
   onLoad: function (options) {
     this.getskill()
+    this.ranktypes(options)
   },
 
   /**

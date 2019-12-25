@@ -6,7 +6,7 @@
         <text>{{sort_flag}}</text>
       </view>
       <view class="headerdetail">
-        <text>注：找活名片只有审核通过后，才会在列表页展示。排名点越高排名越靠前
+        <text>注：找活名片只有审核通过后，才会在列表展示。排名点越高，排名越靠前。
     </text>
       </view>
     </view>
