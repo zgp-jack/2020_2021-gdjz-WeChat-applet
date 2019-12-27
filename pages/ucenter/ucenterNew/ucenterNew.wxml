@@ -64,35 +64,6 @@
                 <text class="feedback-btn">点击查看</text>
             </view>
         </view>
-
-        <!-- <view class="ucenter-hasnoticeinfo ucenter-pad">
-            <view class='ucenter-vipBox'>
-                <view class="ucenter-myvip">我的会员</view>
-                <view class="ucenter-open">
-                    开通会员
-                </view>
-            </view>
-            <view class='ucenter-100'>
-                <view class='ucenter-float25'>
-                    <image src='{{ ucenterimgs.published }}'></image>
-                    <text>免费查看</text>
-                </view>
-                <view class='ucenter-float25'>
-                    <image src='{{ ucenterimgs.published }}'></image>
-                    <text>充值抵扣</text>
-                </view>
-                <view class='ucenter-float25'>
-                    <image src='{{ ucenterimgs.published }}'></image>
-                    <text>专属排名</text>
-                </view>
-                <view class='ucenter-float25'>
-                    <image src='{{ ucenterimgs.published }}'></image>
-                    <text>专属图标</text>
-                </view>
-
-            </view>
-        </view> -->
-
         <view class="ucenter-hasnoticeinfo">
             <view class='ucener-theme'>
                 <image class="ucener-leftImage" src='{{ ucenterimgs.recruit }}'></image>
@@ -131,7 +102,7 @@
                 <image class="ucener-leftImage" src='{{ ucenterimgs.ucenterMsg }}'></image>
                 <view class='ucener-border-b'>
                     <view class="ucener-title">我的信息
-                        <text></text>
+                        <text>9+</text>
                     </view>
                     <view class="flex-row">
                         <image src='{{ rightarrow }}' class="ucener-rightIcon"></image>

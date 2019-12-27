@@ -8,40 +8,40 @@ Page({
     data: {
         footerActive: "member",
         nouser: app.globalData.apiImgUrl + "userauth-userinfo-null.png",
+        realNames: app.globalData.apiImgUrl + 'newresume-infolist-ysm.png?t=1',
+        feedbackimg: app.globalData.apiImgUrl + "feedbackmsg-img.png",
+        rightarrow: app.globalData.apiImgUrl + "new-center-rightarrow.png",
         ucenterimgs: {
-            published: app.globalData.apiImgUrl + "uc-publish.png",
-            used: app.globalData.apiImgUrl + "ucenter-used.png",
-            card: app.globalData.apiImgUrl + "uc-card.png",
-            recharge: app.globalData.apiImgUrl + "uc-recharge.png",
-            expend: app.globalData.apiImgUrl + "uc-recode.png",
-            original: app.globalData.apiImgUrl + "uc-source.png",
-            downapp: app.globalData.apiImgUrl + "uc-downapp.png",
-            feedback: app.globalData.apiImgUrl + "ucenter-feedback.png",
-            invite: app.globalData.apiImgUrl + "ucnter-yaoqing.png",
-            fastissue: app.globalData.apiImgUrl + "ucenter-fast.png",
-            fastlist: app.globalData.apiImgUrl + "ucenter-fastlist.png",
-            realname: app.globalData.apiImgUrl + "ucenter-userrealname.png",
-            collect: app.globalData.apiImgUrl + "ucenter_person_collect.jpg"
+            recruit: app.globalData.apiImgUrl + "new-ucenter-recruit.png",
+            mycard: app.globalData.apiImgUrl + "new-ucenter-mycard.png",
+            trade: app.globalData.apiImgUrl + "new-ucenter-trade.png",
+            ucenterMsg: app.globalData.apiImgUrl + "new-ucenter-msg.png",
+            getintegral: app.globalData.apiImgUrl + "new-ucenter-getintegral.png",
+            invite: app.globalData.apiImgUrl + "new-ucenter-invite.png",
+            integral: app.globalData.apiImgUrl + "new-ucenter-integral.png",
+            integrallog: app.globalData.apiImgUrl + "new-ucenter-integrallog.png",
+            realname: app.globalData.apiImgUrl + "new-ucenter-realname.png",
+            collect: app.globalData.apiImgUrl + "new-ucenter-collect.png",
+            feedback: app.globalData.apiImgUrl + "new-ucenter-feedback.png",
+            ucenterHelp: app.globalData.apiImgUrl + "new-ucenter-help.png",
         },
         userInfo: false,
         member: {},
         showReturnIntegral: false,
-        showFastIssue: {
-            show: 0,
-            request: false
-        },
-        feedbackimg: app.globalData.apiImgUrl + "feedbackmsg-img.png",
-        rightarrow: app.globalData.apiImgUrl + "feedback-rightarrow.png",
+        // showFastIssue: {
+        //     show: 0,
+        //     request: false
+        // },
     },
     initUserInfo: function(callback) {
         let userInfo = wx.getStorageSync("userInfo");
         if (!userInfo) {
-            this.setData({ showFastIssue: false })
+            // this.setData({ showFastIssue: false })
             callback ? callback() : ""
             return false
         };
-        if (!app.globalData.showFastIssue.request) app.isShowFastIssue(this);
-        else this.setData({ showFastIssue: app.globalData.showFastIssue })
+        // if (!app.globalData.showFastIssue.request) app.isShowFastIssue(this);
+        // else this.setData({ showFastIssue: app.globalData.showFastIssue })
         this.setData({ userInfo: userInfo })
         let _this = this;
         wx.showLoading({ title: '正在初始化用户数据', })
@@ -77,6 +77,50 @@ Page({
             }
         })
     },
+    // getUserMsg: function(callback) {
+    //     let userInfo = wx.getStorageSync("userInfo");
+    //     let userUuid = wx.getStorageSync("userUuid");
+    //     this.setData({ userInfo: userInfo })
+    //     let _this = this;
+    //     wx.showLoading({ title: '正在初始化用户数据', })
+    //     app.doRequestAction({
+    //         url: "member/original-message/",
+    //         way: "POST",
+    //         header: {
+    //             'content-type': 'application/x-www-form-urlencoded',
+    //             mid: userInfo.userId,
+    //             token: userInfo.token,
+    //             time: userInfo.tokenTime,
+    //             uuid: userUuid,
+    //         },
+    //         success: function (res) {
+    //             callback ? callback() : ""
+    //             wx.hideLoading();
+    //             let mydata = res.data;
+    //             if (mydata.errcode == "ok") {
+    //                 _this.setData({
+    //                     jobNumber: mydata.data.jobNumber,
+    //                 })
+    //             } else {
+    //                 wx.showToast({
+    //                     title: mydata.errmsg,
+    //                     icon: "none",
+    //                     duration: 5000
+    //                 })
+    //             }
+    //         },
+    //         fail: function (err) {
+    //             callback ? callback() : ""
+    //             wx.hideLoading();
+    //             // wx.showToast({
+    //             //     title: '网络出错，数据加载失败！',
+    //             //     icon: "none",
+    //             //     duration: 5000
+    //             // })
+    //         },
+    
+    //     })
+    // },
     valiUserUrl: function(e) {
         app.globalData.showdetail = true
         app.valiUserUrl(e, this.data.userInfo)
@@ -135,6 +179,7 @@ Page({
      */
     onShow() {
         this.initUserInfo();
+        // this.getUserMsg();
     },
     releaselive() {
         app.globalData.showdetail = true

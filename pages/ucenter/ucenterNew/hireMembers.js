@@ -49,12 +49,6 @@ Page({
     },
     initUserInfo: function(callback) {
         let userInfo = wx.getStorageSync("userInfo");
-        if (!userInfo) {
-            this.setData({ showFastIssue: false })
-            return false
-        };
-        if (!app.globalData.showFastIssue.request) app.isShowFastIssue(this);
-        else this.setData({ showFastIssue: app.globalData.showFastIssue })
         this.setData({ userInfo: userInfo })
         let _this = this;
         wx.showLoading({ title: '正在初始化用户数据', })

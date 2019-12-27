@@ -36,8 +36,8 @@ App({
         commonJixieAd: "http://cdn.yupao.com/miniprogram/images/list-ad-newjixie.png?t=" + new Date().getTime(),
 
         // apiRequestUrl: "https://miniapi.zhaogong.vrtbbs.com/",
-        apiRequestUrl: "https://newyupaomini.54xiaoshuo.com/",
-        //apiRequestUrl: "http://miniapi.qsyupao.com/",
+        // apiRequestUrl: "https://newyupaomini.54xiaoshuo.com/",
+        apiRequestUrl: "http://miniapi.qsyupao.com/",
         //apiRequestUrl:"http://mini.zhaogongdi.com/",
         apiUploadImg: "https://newyupaomini.54xiaoshuo.com/index/upload/",
         apiImgUrl: "http://cdn.yupao.com/miniprogram/images/",
@@ -109,6 +109,34 @@ App({
             }
         })
     },
+    getUserUuid: function (uinfo) {
+
+        let userUuid = wx.getStorageSync("userUuid");
+        if (userUuid) return false
+        let userinfo = uinfo ? uinfo : wx.getStorageSync("userInfo");
+        if (!userinfo) return false;
+        if (this.globalData.isauthuuid) return false;
+        this.globalData.isauthuuid = true
+        let that = this;
+        this.appRequestAction({
+          url: "user/get-uuid/",
+          way: "POST",
+          params: userinfo,
+          success: function (res) {
+            let mydata = res.data;
+            if (mydata.errcode == "ok") {
+              let uuid = mydata.data.uuid;
+              wx.setStorageSync("userUuid", uuid)
+            }
+          },
+          complete: function () {
+            if (that.globalData.isauthuuid) {
+              that.globalData.isauthuuid = false
+            }
+          }
+        })
+    
+      },
     doRequestAction: function(_options) {
         if (_options.hasOwnProperty("params")) {
             _options.params.wechat_token = this.globalData.requestToken;
@@ -123,9 +151,10 @@ App({
             method: _options.hasOwnProperty("way") ? _options.way : 'GET',
             url: _options.hasOwnProperty("url") ? (_this.globalData.apiRequestUrl + _options.url) : _this.globalData.apiRequestUrl,
             data: _options.hasOwnProperty("params") ? _options.params : {},
-            header: {
-                'content-type': 'application/x-www-form-urlencoded'
-            },
+            // header: {
+            //     'content-type': 'application/x-www-form-urlencoded'
+            // },
+            header:  _options.hasOwnProperty("header") ? _options.header :  {'content-type': 'application/x-www-form-urlencoded'},
             success(res) {
                 _options.hasOwnProperty("success") ? _options.success(res) : "";
             },
@@ -298,7 +327,16 @@ App({
                         'content-type': 'application/json' // 默认值
                     },
                     success(res) {
-                        callback(res)
+                        let uinfo = res.data;
+                        if (uinfo.errcode == "ok") {
+                          let userInfo = {
+                            userId: uinfo.data.id,
+                            token: uinfo.data.sign.token,
+                            tokenTime: uinfo.data.sign.time,
+                          }
+                          that.getUserUuid(userInfo)
+                          callback(res)
+                        }
                             // 授权用户执行操作
                         wx.hideToast();
                     }
