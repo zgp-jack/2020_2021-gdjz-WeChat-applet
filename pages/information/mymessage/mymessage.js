@@ -7,17 +7,19 @@ Page({
   data: {
     rightarrow: app.globalData.apiImgUrl + "new-center-rightarrow.png",
     newmessage:{
-      system:'/pages/information/system/system',
-      wanted:'/pages/information/wanted/wanted',
-      recruit:'/pages/information/recruit/recruit',
-      leaveword:'/pages/information/leaveword/leaveword',
-      complain:'/pages/information/complain/complain'
+      type1:'/pages/information/system/system',
+      type2:'/pages/information/wanted/wanted',
+      type3:'/pages/information/recruit/recruit',
+      type7:'/pages/information/leaveword/leaveword',
+      type6:'/pages/information/complain/complain'
     }
   },
   valiUserUrl: function (e) {
     let type = e.currentTarget.dataset.type
-    // console.log(type, "1")
-    
+    let jtype = "type" + type
+    wx.navigateTo({
+      url: this.data.newmessage[jtype] + "?type="+type
+    })
   },
   getMymessage: function () {
     let _this = this;
