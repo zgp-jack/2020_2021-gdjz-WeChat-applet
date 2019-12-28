@@ -12,14 +12,14 @@
                     <navigator class='user-update-info' url='/pages/userinfo/edit/edit' open-type="navigate" wx:else="{{ member.tel }}">完善资料</navigator>
                     <view class='ucenter-username overwords'>
                         {{ member.username || member.nickname }}
-                        <!-- <image src='{{ realNames }}' class='user-update-tag'></image> -->
+                        <image src='{{ realNames }}' class='user-update-tag' wx:if="{{member.check_degree===2&&member.is_check===2}}"></image>
                     </view>
                     <view class='ucenter-usernum overwords'>会员编号：
                         <text>{{ member.id }}</text> </view>
                 </view>
             </view>
             <view class='ucenter-integralbox'>
-                <navigator class='ucenter-integral-item flex-column' url='/pages/integral/return/return' open-type="navigate">
+                <navigator class='ucenter-integral-item flex-column' url='/pages/integral/return/return' open-type="navigate" wx:if="{{ showReturnIntegral }}">
                     <text>{{ member.return_integral }}</text>
                     <text>退分记录</text>
                 </navigator>
@@ -95,7 +95,7 @@
                     </view>
                 </view>
             </view>
-            <view class='ucener-theme'>
+            <view class='ucener-theme' data-url='/pages/information/mymessage/mymessage' bindtap='valiUserUrl'>
                 <image class="ucener-leftImage" src='{{ ucenterimgs.ucenterMsg }}'></image>
                 <view class='ucener-border-b'>
                     <view class="ucener-title">我的信息

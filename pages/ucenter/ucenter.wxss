@@ -158,7 +158,6 @@
     padding: 0 27rpx;
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
     align-items: center;
 }
 
@@ -167,6 +166,7 @@
     font-weight: bold;
     line-height: 50rpx;
     height: 100%;
+    flex: 1;
 }
 
 .ucenter-integral-item text:nth-child(1) {

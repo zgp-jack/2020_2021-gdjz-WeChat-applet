@@ -1,0 +1,2 @@
+/* pages/information/complain/complain.wxss */
+@import "/pages/information/mymessage/mymessage.wxss";

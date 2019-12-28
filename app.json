@@ -73,7 +73,13 @@
     "pages/ucenter/ucenterNew/ucenterNew",
     "pages/ucenter/ucenterNew/hireMembers",
     "pages/ucenter/ucenterNew/invite",
-    "pages/ucenter/ucenterNew/helpCenter"
+    "pages/ucenter/ucenterNew/helpCenter",
+    "pages/information/mymessage/mymessage",
+    "pages/information/wanted/wanted",
+    "pages/information/complain/complain",
+    "pages/information/recruit/recruit",
+    "pages/information/system/system",
+    "pages/information/leaveword/leaveword"
   ],
   "window": {
     "backgroundTextStyle": "light",
