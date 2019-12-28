@@ -6,6 +6,7 @@ Page({
      * 页面的初始数据 valiUserUrl releaselive
      */
     data: {
+        showRecharge:false,
         footerActive: "member",
         nouser: app.globalData.apiImgUrl + "userauth-userinfo-null.png",
         realNames: app.globalData.apiImgUrl + 'newresume-infolist-ysm.png?t=1',
@@ -33,6 +34,7 @@ Page({
         //     request: false
         // },
     },
+    
     initUserInfo: function(callback) {
         let userInfo = wx.getStorageSync("userInfo");
         if (!userInfo) {
@@ -165,8 +167,18 @@ Page({
      */
     onLoad: function(options) {
         this.initFooterData();
+        this.initGetIntegralList();
     },
-
+    initGetIntegralList:function(){
+        let _this = this;
+        app.initSystemInfo(function(res){
+            if (res && res.platform != "ios"){
+                _this.setData({
+                    showRecharge: true
+                })
+            }
+        })
+    },
     /**
      * 生命周期函数--监听页面初次渲染完成
      */

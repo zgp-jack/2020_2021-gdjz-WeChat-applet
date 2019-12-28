@@ -81,7 +81,7 @@
                     <view class="ucener-title">我的找活名片
                     </view>
                     <view class="flex-row">
-                        <!-- <view class="ucener-detil">更新我的找活名片</view> -->
+                        <view class="ucener-detil">{{member.resume_status.resume_tips_string}}</view>
                         <image src='{{ rightarrow }}' class="ucener-rightIcon"></image>
                     </view>
                 </view>
@@ -114,6 +114,7 @@
                 <view class='ucener-border-b ucener-border'>
                     <view class="ucener-title">获取积分</view>
                     <view class="flex-row">
+                        <view class="ucener-detil" wx:if="{{ showRecharge }}">去充值</view>
                         <image src='{{ rightarrow }}' class="ucener-rightIcon"></image>
                     </view>
                 </view>
@@ -124,6 +125,7 @@
                     <view class="ucener-title">邀请工友
                     </view>
                     <view class="flex-row">
+                        <view class="ucener-detil">邀请好友得积分</view>
                         <image src='{{ rightarrow }}' class="ucener-rightIcon"></image>
                     </view>
                 </view>
@@ -155,7 +157,7 @@
                 <view class='ucener-border-b ucener-border'>
                     <view class="ucener-title">实名认证</view>
                     <view class="flex-row">
-                        <!-- <view class="ucener-detil">已实名</view> -->
+                        <view class="ucener-detil">{{member.check_state}}</view>
                         <image src='{{ rightarrow }}' class="ucener-rightIcon"></image>
                     </view>
                 </view>

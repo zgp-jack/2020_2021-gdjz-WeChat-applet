@@ -1,47 +1,23 @@
 // pages/information/mymessage/mymessage.js
 const app = getApp();
 Page({
-
   /**
    * 页面的初始数据
    */
   data: {
     rightarrow: app.globalData.apiImgUrl + "new-center-rightarrow.png",
+    newmessage:{
+      system:'/pages/information/system/system',
+      wanted:'/pages/information/wanted/wanted',
+      recruit:'/pages/information/recruit/recruit',
+      leaveword:'/pages/information/leaveword/leaveword',
+      complain:'/pages/information/complain/complain'
+    }
   },
   valiUserUrl: function (e) {
     let type = e.currentTarget.dataset.type
     // console.log(type, "1")
-    switch (type) {
-      case 1:
-        wx.navigateTo({
-          url: '/pages/information/system/system?type=' + type
-        })
-        break
-      case 2:
-        wx.navigateTo({
-          url: '/pages/information/wanted/wanted?type=' + type
-        })
-        break
-      case 3:
-        wx.navigateTo({
-          url: '/pages/information/recruit/recruit?type=' + type
-        })
-        break
-      case 7:
-        wx.navigateTo({
-          url: '/pages/information/leaveword/leaveword?type=' + type
-        })
-        break
-      case 6:
-        wx.navigateTo({
-          url: '/pages/information/complain/complain?type=' + type
-        })
-        break
-      default:
-        console.log(e, "没有状态")
-
-        break
-    }
+    
   },
   getMymessage: function () {
     let _this = this;
