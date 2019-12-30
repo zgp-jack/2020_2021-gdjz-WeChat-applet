@@ -47,6 +47,11 @@ Page({
       }
     })
   },
+  valiUserUrl:function(){
+    wx.navigateTo({
+      url: "/pages/others/message/lists/lists"
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */

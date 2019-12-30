@@ -3,12 +3,12 @@
     <view class="messsage-lists" wx:for="{{lists}}" wx:key="{{index}}"  bindtap='valiUserUrl' data-type="{{item.type}}">
         <view class="messsage-lists-top">
             <view class="messsage-num" >
-                <image src="{{item.imageUrl}}" alt=""  style="width:70rpx;height:70rpx"></image>
-                <text wx:if="{{item.count>0}}" class="msgNumber" > </text>
+                <image src="{{item.image_url}}" alt=""  style="width:70rpx;height:70rpx"></image>
+                <text wx:if="{{item.count>0}}" class="msgNumber"> </text>
             </view>
             <view class="messsage-title" >
                 <view class="msgflex">
-                    <text> {{item.typeName}} </text>
+                    <text> {{item.type_name}} </text>
                     <image src='{{ rightarrow }}' class=" " style="width: 20rpx;height: 32rpx;"></image>
                 </view>
                 <view class="messsage-deail"> {{item.description}} </view>
@@ -16,7 +16,7 @@
         </view>
         <view class="messsage-bottom">
             <text class="messsage-deail"> 立即查看 </text>
-            <text class="messsage-deail">  {{item.timeString}} </text>
+            <text class="messsage-deail">  {{item.time}} </text>
         </view>
     </view>
 </view>

@@ -15,3 +15,12 @@
         </view>
     </view>
 </view>
+<view class='goyi' data-url='/pages/others/message/lists/lists' bindtap='suggestUserUrl'>意见反馈</view>
+
+
+<view class='nodata-texttips' wx:if="{{ nothavemore }}">没有更多内容了</view>
+
+<view class='common-nodatabox flex-column lists-nodata' wx:if="{{ showNothinkData }}">
+  <image src='{{ listsImg.nodata }}'></image>
+  <text>暂无相关内容</text>
+</view>

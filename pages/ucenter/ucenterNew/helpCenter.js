@@ -4,6 +4,12 @@ Page({
     data: {
         rightarrow: app.globalData.apiImgUrl + "new-center-rightarrow.png",
         question: app.globalData.apiImgUrl + "new-ucenter-question.png",
+        nothavemore: false,
+        showNothinkData: false,
+        page:1,
+        listsImg: {
+          nodata: app.globalData.apiImgUrl + "nodata.png",
+        },
     },
     //点击最外层列表展开收起
     listTap(e) {
@@ -29,12 +35,24 @@ Page({
     getHelpeData: function() {
         let _this = this;
         wx.showLoading({ title: '数据加载中' })
+        _this.initGetIntegralList()
+        console.log(_this.data.system)
+        this.setData({
+            nothavemore: false,
+            showNothinkData: false
+          })
         app.doRequestAction({
             url: "others/help-feedback/",
+            params: {
+                page: _this.data.page,
+                system:_this.data.system,
+            },
             success: function(res) {
                 wx.hideLoading();
                 let mydata = res.data;
                 if (mydata.errcode == "ok") {
+                    
+                    _this.setData({ isFirstRequest: false });
                     _this.setData({
                         HelpeLists: mydata.lists
                     })
@@ -56,7 +74,29 @@ Page({
             }
         })
     },
+    initGetIntegralList:function(){
+        let _this = this;
+        app.initSystemInfo(function(res){
+            if (res && res.platform == "ios"){
+                _this.setData({
+                    system: 'ios'
+                })
+            }else if( res && res.platform != "ios"){
+                _this.setData({
+                    system: 'android'
+                })
+            }
+        })
+    },
+    suggestUserUrl: function(e) {
+        app.globalData.showdetail = true
+        let url = e.currentTarget.dataset.url
+        wx.navigateTo({
+            url: url,
+        })
+    },
     onLoad: function(options) {
+        if ((this.data.isFirstRequest) || (this.data.showNothinkData) || (this.data.nothavemore)) return false;
         this.getHelpeData();
     },
 
@@ -99,7 +139,7 @@ Page({
      * 页面上拉触底事件的处理函数
      */
     onReachBottom: function() {
-
+        this.getHelpeData()
     },
 
     /**
