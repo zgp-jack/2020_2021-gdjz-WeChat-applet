@@ -190,7 +190,7 @@
 .ucener-leftImage {
     width: 38rpx;
     height: 36rpx;
-    padding: 32rpx 20rpx 30rpx 0
+    /* padding: 32rpx 20rpx 30rpx 0 */
 }
 
 .ucener-border-b {
@@ -199,6 +199,7 @@
     width: 100%;
     justify-content: space-between;
     padding: 30rpx 0;
+    margin-left: 20rpx;
 }
 
 .ucener-border {

@@ -27,7 +27,7 @@ Page({
         uuid: userUuid,
       },
       params: {
-        type:type,
+        type:_this.data.type,
         page: _this.data.page,
     },
       success: function (res) {
@@ -52,13 +52,17 @@ Page({
       url: "/pages/others/message/lists/lists"
     })
   },
+  
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    let type =options.type
+    this.setData({
+      type: type
+    })
     this.getMymessage()
   },
-
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
