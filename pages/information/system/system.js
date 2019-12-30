@@ -8,6 +8,10 @@ Page({
   data: {
     rightarrow: app.globalData.apiImgUrl + "new-center-rightarrow.png",
     page: 1,
+    newmessage:{
+      type9:'/pages/realname/realname',// 1 实名认证
+      type8:'/pages/integral/source/source',// 2 充值-跳积分列表
+    }
   },
 
   getMymessage: function () {
@@ -45,6 +49,14 @@ Page({
           duration: 5000
         })
       }
+    })
+  },
+  
+  valiUserUrl:function(){
+    let type = this.data.type
+    let jtype = "type" + type
+    wx.navigateTo({
+      url: this.data.newmessage[jtype] 
     })
   },
   /**

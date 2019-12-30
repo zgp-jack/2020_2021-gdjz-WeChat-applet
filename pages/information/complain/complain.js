@@ -8,6 +8,12 @@ Page({
   data: {
     rightarrow: app.globalData.apiImgUrl + "new-center-rightarrow.png",
     page: 1,
+    newmessage:{
+      type3:'/pages/clients-looking-for-work/finding-name-card/findingnamecard',// 3 名片列表
+      type4:'/pages/realname/realname',// 4 证书信息
+      type5:'/pages/integral/source/source',// 5 项目信息
+    }
+
   },
 
   getMymessage: function () {
@@ -48,8 +54,10 @@ Page({
     })
   },
   valiUserUrl:function(){
+    let type = this.data.type
+    let jtype = "type" + type
     wx.navigateTo({
-      url: "/pages/integral/source/source"
+      url: this.data.newmessage[jtype]
     })
   },
   /**

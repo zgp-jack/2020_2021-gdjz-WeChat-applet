@@ -47,6 +47,11 @@ Page({
       }
     })
   },
+  valiUserUrl:function(){
+    wx.navigateTo({
+      url: "/pages/clients-looking-for-work/finding-name-card/findingnamecard"
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */

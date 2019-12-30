@@ -7,13 +7,25 @@ Page({
   data: {
     rightarrow: app.globalData.apiImgUrl + "new-center-rightarrow.png",
     newmessage:{
-      type1:'/pages/information/system/system',
-      type2:'/pages/information/wanted/wanted',
-      type3:'/pages/information/recruit/recruit',
-      type7:'/pages/information/leaveword/leaveword',
-      type6:'/pages/information/complain/complain'
+      type1:'/pages/information/system/system',// 1 系统消息
+      type2:'/pages/information/wanted/wanted',// 2 招工信息
+      type3:'/pages/information/recruit/recruit',// 3 名片信息
+      type7:'/pages/information/leaveword/leaveword',// 7 留言信息
+      type6:'/pages/information/complain/complain'// 6 投诉信息
     }
   },
+  // {
+  //   "1": "系统信息",
+  //   "2": "招工信息",
+  //   "3": "名片信息",
+  //   "4": "证书信息",
+  //   "5": "项目信息",
+  //   "7": "留言信息",
+  //   "6": "投诉招工信息",
+  //   "10": "投诉找活信息",
+  //   "8": "积分管理",
+  //   "9": "实名认证"
+  //  }
   valiUserUrl: function (e) {
     let type = e.currentTarget.dataset.type
     let jtype = "type" + type
