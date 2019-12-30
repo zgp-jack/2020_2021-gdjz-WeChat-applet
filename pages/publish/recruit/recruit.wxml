@@ -119,25 +119,22 @@
     </view>
   </view>
 </view>
-<!-- <view class="modalDlg" wx:if="{{showModal}}">
+<view class="modalDlg" wx:if="{{showModal}}">
   <view class="modalDlgone">
   </view>
   <view class="text">
     <view class="otext">
-      提示
-    </view>
-    <view class="textdetail">
-      您的招工信息审核失败
+      审核失败
     </view>
     <view class="textdetailo">
         <text class="popup">失败原因：</text>{{resson}}
     </view>
     <view class="buttontext" catchtap="vertify">
-      确定
+      立即修改
     </view>
   </view>
 </view>
-<view class="bg" bindtap="obtn" style='display:{{display}}' catchtouchmove="{{move}}"></view> -->
+<view class="bg" bindtap="obtn" style='display:{{display}}' catchtouchmove="{{move}}"></view>
 <view class="common-userauth" wx:if="{{ !userInfo }}">
   <image src='{{ icon }}' class='userauth-topicon'></image>
   <view class='userauth-title'>登录鱼泡网</view>

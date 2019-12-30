@@ -16,7 +16,8 @@ Page({
     has_resume: "",
     onoff:true,
     showbutton:true,
-    ranking:""
+    ranking:"",
+    rankjump:"rankjump"
   },
   againshow(){
     this.getdetail()
@@ -30,6 +31,12 @@ Page({
   //     rulestatus: options.hasOwnProperty("rulestatus") ? options.rulestatus : ""
   //   })
   // },
+  getallstatus(){
+    wx.setStorageSync("skillpass", 0)
+    wx.setStorageSync("pass", 0)
+    app.globalData.allexpress = true;
+    app.globalData.allskill = true;
+  },
   setstorege(mydata){
     let that = this;
     if (mydata.data.resume_data.hasOwnProperty("info")) {
@@ -42,12 +49,13 @@ Page({
           ranking:"ranking"
         })
       }
- 
+      that.getallstatus()
       wx.setStorageSync("projectnum", mydata.data.resume_data.project.length)
       wx.setStorageSync("skillnum", mydata.data.resume_data.certificates.length)
       wx.setStorageSync("certificate_count", mydata.data.resume_data.certificate_count)
       wx.setStorageSync("project_count", mydata.data.resume_data.project_count)
     } else {
+      that.getallstatus()
       wx.setStorageSync("projectnum", 0)
       wx.setStorageSync("skillnum", 0)
       wx.setStorageSync("certificate_count", 3)
@@ -133,11 +141,12 @@ Page({
       // app.showMyTips("获取机型失败请重新进入");
     }
 
-    console.log(_this.data.type)
+    
   },
   jumpyemian(e) {
-    console.log(e)
-    let ranking = this.data.ranking
+    
+    let ranking = this.data.ranking;
+    let rankjump = this.data.rankjump;
     let userInfo = wx.getStorageSync("userInfo");
     if (!userInfo) {
       app.gotoUserauth();
@@ -149,12 +158,11 @@ Page({
     if (this.data.has_resume == 1 && e.currentTarget.dataset.jump == 1 && e.currentTarget.dataset.minipath == "/pages/clients-looking-for-work/finding-name-card/findingnamecard") {
       app.globalData.showdetail = true
       wx.navigateTo({
-        url: e.currentTarget.dataset.minipath,
+        url: e.currentTarget.dataset.minipath + `?rankjump=${rankjump}`,
       })
     }else if (this.data.has_resume == 1 && e.currentTarget.dataset.jump == 1) {
-      app.globalData.showdetail = true
       wx.navigateTo({
-        url: e.currentTarget.dataset.minipath + `?ranktype=${ranking}&`,
+        url: e.currentTarget.dataset.minipath + `?ranktype=${ranking}`,
       })
     } else if (this.data.has_resume == 0 && e.currentTarget.dataset.minipath == '/pages/recharge/recharge' && e.currentTarget.dataset.jump == 1){
       wx.navigateTo({
@@ -166,7 +174,7 @@ Page({
       })
     }else if (e.currentTarget.dataset.jump == 1){
       wx.navigateTo({
-        url: "/pages/clients-looking-for-work/finding-name-card/findingnamecard",
+        url: "/pages/clients-looking-for-work/finding-name-card/findingnamecard" + `?rankjump=${rankjump}`,
       })
     }
   },
@@ -241,7 +249,7 @@ Page({
     let refId = userInfo.hasOwnProperty('userId') ? userInfo.userId : false;
     let uuid = that.data.resume_uuid;
     let commonShareTips = app.globalData.commonShareTips;
-    console.log(refId)
+    
     if (e.target.dataset.hasOwnProperty("share") && e.target.dataset.share == "invite_friend"){
       return {
         title: commonShareTips,

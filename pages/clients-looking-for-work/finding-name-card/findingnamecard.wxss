@@ -41,7 +41,7 @@ page {
   width: 93%;
   margin: 0 auto;
   background: #fffbf7;
-  color: red;
+  color: black;
   font-size: 30rpx;
   padding-top: 10rpx;
   padding-left: 19rpx;
@@ -49,7 +49,7 @@ page {
   padding-bottom: 10rpx;
 }
 .nopass text{
-  color: black;
+  color: red;
 }
 .link {
   width: 6px;

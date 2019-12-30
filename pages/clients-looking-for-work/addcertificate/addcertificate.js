@@ -25,7 +25,8 @@ vertify()
     display: "none",
     nowDate:"",
     beforeDate:"",
-    ranktypes: ""
+    ranktypes: "",
+    deletestatus: true
   },
   vertify() {
     this.setData({
@@ -135,17 +136,32 @@ vertify()
   },
   deleteexper() {
     let that = this;
+    if (!this.data.deletestatus) {
+      return false
+    } else {
+      this.setData({
+        deletestatus: false
+      })
+    }
     wx.showModal({
       title: '提示',
       content: `技能证书删除后，将无法恢复`,
       showCancel: true,
       success(res) {
-
+        that.setData({
+          deletestatus: true
+        })
         if (res.confirm) {
           that.vertify()
         } else if (res.cancel) {
 
         }
+      },
+      complete() {
+        console.log(123)
+        that.setData({
+          deletestatus: true
+        })
       }
     })
   },
@@ -589,10 +605,11 @@ vertify()
    * 生命周期函数--监听页面加载
    */
   ranktypes(options) {
-    console.log(options)
+    if (options.hasOwnProperty("ranktype")) {
     this.setData({
       ranktypes: options.ranktype
     })
+    }
   },
   onLoad: function (options) {
     this.getskill()

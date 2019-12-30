@@ -6,7 +6,7 @@ Page({
   /**/
   data: {
     unitid: app.globalData.unitid,
-    homebtnImg: app.globalData.apiImgUrl + "newdetailinfo-home.png",
+    homebtnImg: app.globalData.apiImgUrl + "yp-return-jobinfo.png",
     downward: app.globalData.apiImgUrl + "lpy/downward.png",
     experienceitem: app.globalData.apiImgUrl + "lpy/newresume-experience-item.png",
     biaoqian: app.globalData.apiImgUrl + "lpy/biaoqian.png",

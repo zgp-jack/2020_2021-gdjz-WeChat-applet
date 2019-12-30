@@ -372,7 +372,7 @@ font-size: 28rpx;
 }
 
 .modalDlg {
-  width: 70%;
+  width: 80%;
   position: fixed;
   top: 340rpx;
   left: 0;
@@ -400,6 +400,7 @@ font-size: 28rpx;
   /* height: 290rpx; */
   font-size: 32rpx;
   position: relative;
+  z-index: 99
 }
 
 .text .otext {
@@ -424,6 +425,7 @@ font-size: 28rpx;
   margin: 0 auto;
   text-align: center;
   margin-bottom: 40rpx;
+  margin-top: 40rpx;
 }
 .buttontext {
   margin: 0 auto;
@@ -434,7 +436,7 @@ font-size: 28rpx;
   font-size: 32rpx;
   text-align: center;
   line-height: 74rpx;
-  border-radius: 18rpx;
+  border-radius: 60rpx;
   margin-bottom: 50rpx;
 }
 .popup {

@@ -697,7 +697,14 @@ Page({
       url: `/pages/boss-look-card/lookcard?uuid=${uuid}&location=${userLocation}`,
     })
   },
-
+  checkIsInvite: function (options) {
+    if (options.hasOwnProperty("refid")) {
+      app.globalData.refId = options.refid;
+    }
+    if (options.hasOwnProperty("source")) {
+      wx.setStorageSync("_source", options.source);
+    }
+  },
 
 
 
@@ -710,6 +717,7 @@ Page({
     this.valiFilterProvince();
     this.initFooterData();
     this.initNeedData();
+    this.checkIsInvite(options);
   },
 
   /**

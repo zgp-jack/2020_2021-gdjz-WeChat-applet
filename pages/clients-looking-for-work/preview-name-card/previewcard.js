@@ -124,30 +124,31 @@ Page({
       telephone: tel
     })
     let userInfo = wx.getStorageSync("userInfo");
+    let refId = userInfo ? userInfo.userId : "";
     let uuid = this.data.resume_uuid;
     let commonShareTips = app.globalData.commonShareTips;
     let commonShareImg = app.globalData.commonShareImg;
     let pagt = ""
     if (userInfo && that.data.checkonef == 2) {
-      let refId = userInfo.userId;
+
       if (uuid) {
         return {
           title: `${commonShareTips}`,
           // imageUrl: commonShareImg,
-          path: `/pages/boss-look-card/lookcard?uuid=${uuid}&sharedekeId=1`//这是一个路径
+          path: `/pages/boss-look-card/lookcard?uuid=${uuid}&refId=${refId}&sharedekeId=1`//这是一个路径
         }
       } else {
         return {
           title: `${commonShareTips}`,
           imageUrl: commonShareImg,
-          path: `/pages/findingworkinglist/findingworkinglist`//这是一个路径
+          path: `/pages/findingworkinglist/findingworkinglist?refid=${refId}`//这是一个路径
         }
       }
     } else {
       return {
         title: `${commonShareTips}`,
         imageUrl: commonShareImg,
-        path: `/pages/findingworkinglist/findingworkinglist`//这是一个路径
+        path: `/pages/findingworkinglist/findingworkinglist?refid=${refId}`//这是一个路径
       }
     }
   },

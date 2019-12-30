@@ -77,7 +77,8 @@ Page({
     showInputList: false,
     searchInputVal: "",
     strlen: 0,
-    resson:""
+    resson:"",
+    display: "none",
   },
 
   userRegMap: function (e) {
@@ -280,13 +281,11 @@ Page({
             if (lastArea) _this.setData({ addressData: lastArea })
           }
           if (options.is_check == "0") {
-            wx.showModal({
-              title: '审核失败',
-              content: _this.data.resson,
-              showCancel: false,
-              confirmText: '确定'
+            _this.setData({
+              showModal:true,
+              showTextarea:false,
+              display:"block"
             })
-            return false;
           }
           // setTimeout(function(){
           //     _this.initAreaPicker();
@@ -295,6 +294,13 @@ Page({
           app.showMyTips(mydata.errmsg);
         }
       }
+    })
+  },
+  vertify() {
+    this.setData({
+      showModal: false,
+      display: "none",
+      showTextarea:true
     })
   },
   initAreaPicker: function () {

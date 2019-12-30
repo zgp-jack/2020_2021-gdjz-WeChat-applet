@@ -39,7 +39,8 @@ Page({
     project_show: true,
     imgArrslength: true,
     display: "none",
-    ranktypes: ""
+    ranktypes: "",
+    deletestatus:true
   },
 
   obtn() {
@@ -69,18 +70,34 @@ Page({
     })
   },
   deleteexper() {
+    if(!this.data.deletestatus){
+          return false
+    }else{
+      this.setData({
+        deletestatus: false
+      })
+    }
+
     let that = this;
     wx.showModal({
       title: '提示',
       content: `项目经验删除后，将无法恢复`,
       showCancel: true,
       success(res) {
-
+        that.setData({
+          deletestatus: true
+        })
         if (res.confirm) {
           that.vertify()
         } else if (res.cancel) {
 
         }
+      },
+      complete(){
+        console.log(123)
+        that.setData({
+          deletestatus: true
+        })
       }
     })
   },
@@ -900,10 +917,11 @@ Page({
 
   },
   ranktypes(options) {
-    console.log(options)
+    if (options.hasOwnProperty("ranktype")) {
     this.setData({
       ranktypes: options.ranktype
     })
+    }
   },
   onLoad: function (options) {
     this.initAllProvice()

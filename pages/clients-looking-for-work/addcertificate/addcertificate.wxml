@@ -41,7 +41,7 @@
   </view>
  <view class="bg" style='display:{{display}}' catchtouchmove="{{move}}"></view> -->
   <view class="addcertificatebottom">
-    <button class="addcertificatebottomone" wx:if="{{!obtnbut}}" catchtap="deleteexper">删除</button>
+    <button class="addcertificatebottomone" wx:if="{{!obtnbut}}" bindtap="deleteexper">删除</button>
     <button class="addcertificatebottomone" wx:if="{{obtnbut&&skill_show}}" bindtap="preservechixu">保存 继续添加</button>
         <button class="addcertificatebottomone" wx:if="{{obtnbut&&!skill_show}}" bindtap="preservechixutui">取消</button>
     <button class="addcertificatebottomotwo" wx:if="{{obtnbut}}" bindtap="preserve">确认保存</button>
