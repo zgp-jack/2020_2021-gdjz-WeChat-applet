@@ -1,6 +1,6 @@
 <!--pages/ucenter/ucenterNew/helpCenter.wxml-->
-<view class='list_box'>
-    <view class='listItem' wx:for='{{HelpeLists}}' wx:key='this' wx:for-item='parentItem' wx:for-index='parentIndex'>
+<view class='list_box yupao-common-container'>
+    <view class='listItem' wx:for='{{helpeLists}}' wx:key='this' wx:for-item='parentItem' wx:for-index='parentIndex'>
         <view class='list_name_box' catchtap='listTap' data-parentindex='{{parentIndex}}'>
             <view class='list_item_title'>
                 <image src='{{ question }}' class='icon_question'></image>
@@ -14,13 +14,14 @@
             </view>
         </view>
     </view>
+    <view class='fast-list-nomore' wx:if="{{ isEnd }}">没有更多数据了</view>
+    <view class='common-nodatabox flex-column lists-nodata' wx:if="{{ helpeLists.length == 0 }}">
+        <image src='{{ listsImg.nodata }}'></image>
+        <text>暂无相关内容</text>
+    </view>
 </view>
 <view class='goyi' data-url='/pages/others/message/lists/lists' bindtap='suggestUserUrl'>意见反馈</view>
 
 
-<view class='nodata-texttips' wx:if="{{ nothavemore }}">没有更多内容了</view>
 
-<view class='common-nodatabox flex-column lists-nodata' wx:if="{{ showNothinkData }}">
-  <image src='{{ listsImg.nodata }}'></image>
-  <text>暂无相关内容</text>
-</view>
+

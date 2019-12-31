@@ -9,7 +9,7 @@
             <view class="messsage-title" >
                 <view class="msgflex">
                     <text> {{item.type_name}} </text>
-                    <image src='{{ rightarrow }}' class=" " style="width: 20rpx;height: 32rpx;"></image>
+                    <image src='{{ rightarrow }}' class="rightarrow"></image>
                 </view>
                 <view class="messsage-deail"> {{item.description}} </view>
             </view>
@@ -18,5 +18,11 @@
             <text class="messsage-deail"> 立即查看 </text>
             <text class="messsage-deail">  {{item.time}} </text>
         </view>
+    </view>
+    
+    <view class='fast-list-nomore' wx:if="{{ isEnd }}">没有更多数据了</view>
+    <view class='common-nodatabox flex-column lists-nodata' wx:if="{{ lists.length == 0 }}">
+        <image src='{{ listsImg.nodata }}'></image>
+        <text>暂无相关内容</text>
     </view>
 </view>

@@ -7,7 +7,12 @@ Page({
    */
   data: {
     rightarrow: app.globalData.apiImgUrl + "new-center-rightarrow.png",
-    page: 1,
+    isEnd: false,
+    page:1,
+    listsImg: {
+      nodata: app.globalData.apiImgUrl + "nodata.png",
+    },
+    lists:[]
   },
 
   getMymessage: function () {
@@ -33,9 +38,24 @@ Page({
       success: function (res) {
         wx.hideLoading();
         let mydata = res.data;
-        _this.setData({
-          lists: mydata.data.lists,
-        })
+        if (mydata.errcode == "ok") {
+            let _list = _this.data.lists;
+            let _lists = mydata.data.lists;
+
+            if(_lists.length == 0){
+                _this.setData({ isEnd:true})
+            }else{
+                let mylist = _list.concat(_lists);
+                let _page = _this.data.page + 1;
+                _this.setData({ lists: mylist, page: _page});
+            }
+        } else {
+            wx.showToast({
+                title: mydata.errmsg,
+                icon: 'none',
+                duration: 5000
+            })
+        }
       },
       fail: function (err) {
         wx.hideLoading();
@@ -102,7 +122,8 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-
+    if(this.data.isEnd) return false;
+    this.getMymessage()
   },
 
   /**

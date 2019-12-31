@@ -4,24 +4,24 @@ Page({
     data: {
         rightarrow: app.globalData.apiImgUrl + "new-center-rightarrow.png",
         question: app.globalData.apiImgUrl + "new-ucenter-question.png",
-        nothavemore: false,
-        showNothinkData: false,
+        isEnd: false,
         page:1,
         listsImg: {
           nodata: app.globalData.apiImgUrl + "nodata.png",
         },
+      helpeLists:[]
     },
     //点击最外层列表展开收起
     listTap(e) {
         console.log('触发了最外层');
-        let Index = e.currentTarget.dataset.parentindex, //获取点击的下标值
-            HelpeLists = this.data.HelpeLists;
-        HelpeLists[Index].show = !HelpeLists[Index].show || false; //变换其打开、关闭的状态
-        if (HelpeLists[Index].show) { //如果点击后是展开状态，则让其他已经展开的列表变为收起状态
-            this.packUp(HelpeLists, Index);
+        let aIndex = e.currentTarget.dataset.parentindex, //获取点击的下标值
+          helpeLists = this.data.helpeLists;
+      helpeLists[aIndex].show = !helpeLists[aIndex].show || false; //变换其打开、关闭的状态
+      if (helpeLists[aIndex].show) { //如果点击后是展开状态，则让其他已经展开的列表变为收起状态
+        this.packUp(helpeLists, aIndex);
         }
         this.setData({
-            HelpeLists
+          helpeLists
         });
     },
     //让所有的展开项，都变为收起
@@ -32,15 +32,11 @@ Page({
             }
         }
     },
+    
     getHelpeData: function() {
         let _this = this;
         wx.showLoading({ title: '数据加载中' })
         _this.initGetIntegralList()
-        console.log(_this.data.system)
-        this.setData({
-            nothavemore: false,
-            showNothinkData: false
-          })
         app.doRequestAction({
             url: "others/help-feedback/",
             params: {
@@ -51,11 +47,16 @@ Page({
                 wx.hideLoading();
                 let mydata = res.data;
                 if (mydata.errcode == "ok") {
-                    
-                    _this.setData({ isFirstRequest: false });
-                    _this.setData({
-                        HelpeLists: mydata.lists
-                    })
+                    let _list = _this.data.helpeLists;
+                    let _lists = mydata.lists;
+
+                    if(_lists.length == 0){
+                        _this.setData({ isEnd:true})
+                    }else{
+                        let mylist = _list.concat(_lists);
+                        let _page = _this.data.page + 1;
+                        _this.setData({ helpeLists: mylist, page: _page});
+                    }
                 } else {
                     wx.showToast({
                         title: mydata.errmsg,
@@ -96,7 +97,6 @@ Page({
         })
     },
     onLoad: function(options) {
-        if ((this.data.isFirstRequest) || (this.data.showNothinkData) || (this.data.nothavemore)) return false;
         this.getHelpeData();
     },
 
@@ -139,6 +139,7 @@ Page({
      * 页面上拉触底事件的处理函数
      */
     onReachBottom: function() {
+        if(this.data.isEnd) return false;
         this.getHelpeData()
     },
 

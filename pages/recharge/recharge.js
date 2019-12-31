@@ -117,6 +117,49 @@ Page({
             }
         })
     },
+    // subscribeToNews: function(mydata, userInfo) {
+    //     if (wx.canIUse('requestSubscribeMessage') === true) {
+    //         wx.requestSubscribeMessage({
+    //             tmplIds: ['vpEpkHfo5tlmGB8oZXq-qVU3ySmsxTzPrgNsv_2l6Go'],
+    //             success(res) {
+    //                 app.appRequestAction({
+    //                     url: "leaving-message/add-subscribe-msg/",
+    //                     way: "POST",
+    //                     mask: true,
+    //                     params: {
+    //                         userId: userInfo.userId,
+    //                         token: userInfo.token,
+    //                         tokenTime: userInfo.tokenTime,
+    //                         type: 2
+    //                     },
+    //                     success: function(res) {
+    //                         wx.showModal({
+    //                             title: '系统提示',
+    //                             content: mydata.errmsg,
+    //                             showCancel: false,
+    //                             success: function(res) {
+    //                                 wx.navigateBack({
+    //                                     delta: 1
+    //                                 })
+    //                             }
+    //                         })
+    //                     },
+    //                 })
+    //             }
+    //         })
+    //     } else {
+    //         wx.showModal({
+    //             title: '系统提示',
+    //             content: mydata.errmsg,
+    //             showCancel: false,
+    //             success: function(res) {
+    //                 wx.navigateBack({
+    //                     delta: 1
+    //                 })
+    //             }
+    //         })
+    //     }
+    // },
     /**
      * 生命周期函数--监听页面加载
      */

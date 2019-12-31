@@ -1,5 +1,6 @@
 /* pages/ucenter/ucenterNew/helpCenter.wxss */
 
+.fast-list-nomore{position: relative;width: 100%;text-align: center;line-height: 50rpx;margin-top: 30rpx;font-size: 28rpx;color: #666;}
 .list_box {
     margin-top: 20rpx;
 }

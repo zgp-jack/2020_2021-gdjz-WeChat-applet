@@ -200,6 +200,7 @@
     justify-content: space-between;
     padding: 30rpx 0;
     margin-left: 20rpx;
+    position: relative;
 }
 
 .ucener-border {
@@ -231,6 +232,9 @@
     font-size: 26rpx;
     font-weight: bold;
     color: #b4b2b2;
+    position: absolute;
+    white-space: nowrap;
+    right: 30rpx;
 }
 
 .ucener-rightIcon {

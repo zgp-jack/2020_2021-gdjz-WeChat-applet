@@ -12,7 +12,10 @@ Page({
       type3:'/pages/information/recruit/recruit',// 3 名片信息
       type7:'/pages/information/leaveword/leaveword',// 7 留言信息
       type6:'/pages/information/complain/complain'// 6 投诉信息
-    }
+    },
+    listsImg: {
+      nodata: app.globalData.apiImgUrl + "nodata.png",
+    },
   },
   // {
   //   "1": "系统信息",
