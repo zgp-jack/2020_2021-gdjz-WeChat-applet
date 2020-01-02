@@ -14,7 +14,7 @@ Page({
   },
   getAreaAll(){
     let that = this;
-    console.log(that.data.areadata)
+    // console.log(that.data.areadata)
   },
   /**
    * 生命周期函数--监听页面加载
