@@ -27,7 +27,7 @@ App({
     showdetail: true,
     requestToken: "jizhao",
     unitid: "adunit-80f40e8b4f60c3f6",
-    serverPhone: "400-833-1578",
+    serverPhone: "400-838-1888",
     userInfo: null,
     refId: "",
     fixedGetIntegral: "http://cdn.yupao.com/miniprogram/images/fixed-getintegral.png?t=" + new Date().getTime(),
@@ -39,7 +39,7 @@ App({
 
     // apiRequestUrl: "https://miniapi.zhaogong.vrtbbs.com/",
     apiRequestUrl: "https://newyupaomini.54xiaoshuo.com/",
-    //apiRequestUrl: "http://miniapi.qsyupao.com/",
+    // apiRequestUrl: "http://miniapi.qsyupao.com/",
     //apiRequestUrl:"http://mini.zhaogongdi.com/",
     apiUploadImg: "https://newyupaomini.54xiaoshuo.com/index/upload/",
     apiImgUrl: "http://cdn.yupao.com/miniprogram/images/",
