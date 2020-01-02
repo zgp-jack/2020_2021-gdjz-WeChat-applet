@@ -124,6 +124,20 @@
 					"pathName": "pages/information/mymessage/mymessage",
 					"query": "",
 					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/userauth/userauth",
+					"pathName": "pages/userauth/userauth",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/information/recruit/recruit",
+					"pathName": "pages/information/recruit/recruit",
+					"query": "",
+					"scene": null
 				}
 			]
 		}

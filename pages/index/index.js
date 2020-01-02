@@ -98,7 +98,8 @@ Page({
       showHistoryList:false,
       historyList:[],
       member_notice:{},
-      member_less_info:{}
+      member_less_info:{},
+      msgsNumber:[],
     },
   getMapInfo: function (callback) {
     let that = this;
@@ -824,7 +825,12 @@ Page({
     initFirstTips:function(){
         app.initFirstTips(this);
     },
-    
+    // getUserMsg: function (e) {
+    //   app.getUserMsg(this);
+    //   let msgsNumber = wx.getStorageSync("msgsNumber");
+    //   console.log(this.data.msgsNumber,"msgsNumber")
+    //   console.log(msgsNumber,"msgsNumber")
+    // },
     /**
      * 生命周期函数--监听页面加载
      */
@@ -851,8 +857,8 @@ Page({
      * 生命周期函数--监听页面显示
      */
     onShow: function () {
-
       this.initUserinfo();
+      // this.getUserMsg()
     },
   onPageScroll:function(e){
     let top = e.scrollTop;

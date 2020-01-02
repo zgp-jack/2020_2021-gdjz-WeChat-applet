@@ -79,50 +79,6 @@ Page({
             }
         })
     },
-    // getUserMsg: function(callback) {
-    //     let userInfo = wx.getStorageSync("userInfo");
-    //     let userUuid = wx.getStorageSync("userUuid");
-    //     this.setData({ userInfo: userInfo })
-    //     let _this = this;
-    //     wx.showLoading({ title: '正在初始化用户数据', })
-    //     app.doRequestAction({
-    //         url: "member/original-message/",
-    //         way: "POST",
-    //         header: {
-    //             'content-type': 'application/x-www-form-urlencoded',
-    //             mid: userInfo.userId,
-    //             token: userInfo.token,
-    //             time: userInfo.tokenTime,
-    //             uuid: userUuid,
-    //         },
-    //         success: function (res) {
-    //             callback ? callback() : ""
-    //             wx.hideLoading();
-    //             let mydata = res.data;
-    //             if (mydata.errcode == "ok") {
-    //                 _this.setData({
-    //                     jobNumber: mydata.data.jobNumber,
-    //                 })
-    //             } else {
-    //                 wx.showToast({
-    //                     title: mydata.errmsg,
-    //                     icon: "none",
-    //                     duration: 5000
-    //                 })
-    //             }
-    //         },
-    //         fail: function (err) {
-    //             callback ? callback() : ""
-    //             wx.hideLoading();
-    //             // wx.showToast({
-    //             //     title: '网络出错，数据加载失败！',
-    //             //     icon: "none",
-    //             //     duration: 5000
-    //             // })
-    //         },
-    
-    //     })
-    // },
     valiUserUrl: function(e) {
         app.globalData.showdetail = true
         app.valiUserUrl(e, this.data.userInfo)
@@ -179,6 +135,12 @@ Page({
             }
         })
     },
+    // getUserMsg: function () {
+    //     app.getUserMsg(this);
+    //     let msgsNumber = wx.getStorageSync("msgsNumber");
+    //     console.log(this.data.msgsNumber,"msgsNumber")
+    //     console.log(msgsNumber,"msgsNumber")
+    // },
     /**
      * 生命周期函数--监听页面初次渲染完成
      */
@@ -191,7 +153,6 @@ Page({
      */
     onShow() {
         this.initUserInfo();
-        // this.getUserMsg();
     },
     releaselive() {
         app.globalData.showdetail = true

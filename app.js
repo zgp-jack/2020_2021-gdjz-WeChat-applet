@@ -809,5 +809,43 @@ App({
             params: userInfo ? userInfo : {}
         })
     },
+    
+    // getUserMsg: function(_this) {
+    //     let userInfo = wx.getStorageSync("userInfo");
+    //     let userUuid = wx.getStorageSync("userUuid");
+    //     this.doRequestAction({
+    //         url: "member/original-message/",
+    //         way: "POST",
+    //         header: {
+    //             'content-type': 'application/x-www-form-urlencoded',
+    //             mid: userInfo.userId,
+    //             token: userInfo.token,
+    //             time: userInfo.tokenTime,
+    //             uuid: userUuid,
+    //         },
+    //         success: function (res) {
+    //             wx.hideLoading();
+    //             let mydata = res.data;
+    //             if (mydata.errcode == "ok") {
+    //                 let msgsNumber = mydata.data;
+    //                 wx.setStorageSync("msgsNumber", msgsNumber)
+    //             } else {
+    //                 wx.showToast({
+    //                     title: mydata.errmsg,
+    //                     icon: "none",
+    //                     duration: 5000
+    //                 })
+    //             }
+    //         },
+    //         fail: function (err) {
+    //             wx.showToast({
+    //                 title: '网络出错，数据加载失败！',
+    //                 icon: "none",
+    //                 duration: 5000
+    //             })
+    //         },
+    
+    //     })
+    // },
 
 })

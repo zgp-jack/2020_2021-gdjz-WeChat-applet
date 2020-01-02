@@ -95,7 +95,7 @@
                     </view>
                 </view>
             </view>
-            <view class='ucener-theme' data-url='/pages/information/mymessage/mymessage' bindtap='valiUserUrl'>
+            <view class='ucener-theme' data-url='/pages/information/mymessage/mymessage' bindtap='suggestUserUrl'>
                 <image class="ucener-leftImage" src='{{ ucenterimgs.ucenterMsg }}'></image>
                 <view class='ucener-border-b'>
                     <view class="ucener-title">我的信息

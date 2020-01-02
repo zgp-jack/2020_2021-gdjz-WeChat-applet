@@ -1,9 +1,12 @@
 /* pages/information/mymessage/mymessage.wxss */
+@import "../../userauth/userauth.wxss";
+.common-userauth {position: fixed;left: 0;top: 0;z-index: 999999;width: 100%;height: 100%;background: white;}
+page{ background: #f7f6f9;}
 .msgflex{display:flex;justify-content: space-between;align-items: center;}
 .messsage-lists{ padding:10rpx 20rpx;background:#fff;margin-top:20rpx}
-.messsage-lists-top{ border-bottom: 1rpx dashed #f2f2f2; padding-bottom:10rpx;align-items:center; display: flex;flex-direction: row;}
+.messsage-lists-top{ border-bottom: 1rpx dashed #f2f2f2; padding-bottom:10rpx;display: flex;flex-direction: row;}
 .msgNumber{ position:absolute;top:-10rpx;right:0;background:rgba(253,6,24,1);border-radius:50%; font-size:10rpx;font-weight:bold;color:rgba(255,255,255,1);width:20rpx;height: 20rpx;line-height: 20rpx;text-align: center;}
-.messsage-num{position: relative;width:100rpx;}
+.messsage-num{position: relative;width:100rpx;padding-top: 10rpx;}
 .messsage-title{width:100%;line-height: 25px;padding-left:10rpx;}
 .messsage-deail{font-size:26rpx;color:rgba(180,178,178,1);line-height: 30rpx;padding: 10rpx 0;}
 .messsage-bottom{display: flex;justify-content: space-between;padding-top:10rpx;align-items:center;}
