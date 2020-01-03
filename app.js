@@ -842,19 +842,17 @@ App({
     getUserMsg: function(_this) {
         let userInfo = wx.getStorageSync("userInfo");
         let userUuid = wx.getStorageSync("userUuid");
-        console.log(userUuid,"userUuid")
-        console.log(_this,"_this")
         if (!userInfo) return false;
         this.doRequestAction({
             url: "member/original-message/",
             way: "POST",
-            header: {
-                'content-type': 'application/x-www-form-urlencoded',
-                mid: userInfo.userId,
-                token: userInfo.token,
-                time: userInfo.tokenTime,
-                uuid: userUuid,
-            },
+            // header: {
+            //     'content-type': 'application/x-www-form-urlencoded',
+            //     mid: userInfo.userId,
+            //     token: userInfo.token,
+            //     time: userInfo.tokenTime,
+            //     uuid: userUuid,
+            // },
             success: function (res) {
                 wx.hideLoading();
                 let mydata = res.data;

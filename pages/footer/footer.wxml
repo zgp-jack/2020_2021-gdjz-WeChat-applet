@@ -30,7 +30,7 @@
     <view class='yupao-footer-item' bindtap='jumpThisLink' data-url="/pages/ucenter/ucenter" data-type='1'>
         <image src='{{ footerActive == "member" ? footerImgs.memberActive : footerImgs.memberNormal }}'></image>
         <text class='{{ footerActive == "member" ? "footer-text-active" : "" }}'>会员</text>
-        <view style="background: #fd0618; border-radius: 100%;position: absolute; top: 8rpx;right: 20%; color: #fff;font-size: 20rpx;padding: 6rpx 5rpx;box-sizing: border-box;font-weight: 500;line-height: 20rpx;">{{msgsNumber.messageNumber}}</view>
+        <!-- <view style="background: #fd0618; border-radius: 100%;position: absolute; top: 8rpx;right: 20%; color: #fff;font-size: 20rpx;padding: 5rpx 5rpx 6rpx;box-sizing: border-box;font-weight: 500;line-height: 18rpx;">9+</view> -->
     </view>
 </view>
 

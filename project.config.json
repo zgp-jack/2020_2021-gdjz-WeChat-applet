@@ -129,7 +129,7 @@
 					"id": 10,
 					"name": "pages/information/system/system?type=3",
 					"pathName": "pages/information/system/system",
-					"query": "type=9",
+					"query": "type=3",
 					"scene": null
 				},
 				{

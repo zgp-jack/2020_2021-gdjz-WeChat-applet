@@ -37,13 +37,6 @@ Page({
     app.doRequestAction({
       url: "member/user-messages/",
       way: "POST",
-      header: {
-        'content-type': 'application/x-www-form-urlencoded',
-        mid: userInfo.userId,
-        token: userInfo.token,
-        time: userInfo.tokenTime,
-        uuid: userUuid,
-      },
       success: function (res) {
         wx.hideLoading();
         let mydata = res.data;

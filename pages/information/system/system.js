@@ -41,13 +41,6 @@ Page({
     app.doRequestAction({
       url: "member/message-of-type/",
       way: "POST",
-      header: {
-        'content-type': 'application/x-www-form-urlencoded',
-        mid: userInfo.userId,
-        token: userInfo.token,
-        time: userInfo.tokenTime,
-        uuid: userUuid,
-      },
       params: {
         type:_this.data.type,
         page: _this.data.page,
