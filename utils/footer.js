@@ -1,4 +1,6 @@
 const _url = "http://cdn.yupao.com/miniprogram";
+const app = getApp();
+app.getUserMsg();
 const footerImgs = {
     homeNormal: "/images/footer-home.png",
     homeActive:"/images/footer-home-active.png",

@@ -2,7 +2,7 @@ const app = getApp()
 Page({
     data: {
         publishActive: false,
-        showPublishBox: false
+        showPublishBox: false,
     },
     // console.log(this.data,"globalData")
     doPublishAction: function () {
@@ -26,6 +26,5 @@ Page({
                 showPublishBox: false
             })
         }, 500)
-    },
-
+    }
 })

@@ -6,7 +6,6 @@ App({
       // }
       // catch(err){bindGetUserInfo gotoUserauth 工地急招 gpsPorvince userLocation 
       //   
-      this.getUserMsg();
     },
     globalData: {
       jobNumber: '',
@@ -472,7 +471,6 @@ App({
       }) : wx.navigateTo({
         url: _url
       });
-      console.log(data,"data")
     },
     getListsAllType: function (_callback) {
       let _this = this;
@@ -853,9 +851,7 @@ App({
               if (res.data.errcode == "ok") {
                 _this.globalData.jobNumber = res.data.data.jobNumber
                 _this.globalData.msgsNumber = res.data.data.messageNumber
-                console.log(
-                  _this.globalData.jobNumber,
-                  _this.globalData.msgsNumber)
+                
               }
             }
         })
