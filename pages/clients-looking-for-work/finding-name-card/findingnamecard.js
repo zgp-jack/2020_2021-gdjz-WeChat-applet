@@ -102,6 +102,11 @@ Page({
     ranking: "",
     rankjump: ""
   },
+  thestickyrule(){
+    wx.navigateTo({
+      url: `/pages/clients-looking-for-work/finding-top/findingtop`,
+    })
+  },
   previewImage: function (e) {
 
     let url = e.currentTarget.dataset.url;

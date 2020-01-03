@@ -38,6 +38,15 @@
          马上去提升排名>>
        </view>
     </view>
+     <view class="findingnamecardonesontwo">
+       <view class="rule-detail">
+         <image src="{{ruleimage}}"></image>
+         <text>我的置顶：未指定</text>
+       </view>
+       <view class="rule-odetail" bindtap="thestickyrule">
+         马上去置顶>>
+       </view>
+    </view>
   </view>
 
   <view class="findingnamecardthree">
