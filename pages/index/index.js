@@ -825,12 +825,6 @@ Page({
     initFirstTips:function(){
         app.initFirstTips(this);
     },
-    getUserMsg: function (e) {
-      app.getUserMsg(this);
-      let msgsNumber = wx.getStorageSync("msgsNumber");
-      console.log(this.data.msgsNumber,"msgsNumber")
-      console.log(msgsNumber,"msgsNumber")
-    },
     getUserUuid: function () {
       app.getUserUuid();
     },
@@ -862,7 +856,6 @@ Page({
     onShow: function () {
       this.getUserUuid();
       this.initUserinfo();
-      this.getUserMsg()
     },
   onPageScroll:function(e){
     let top = e.scrollTop;

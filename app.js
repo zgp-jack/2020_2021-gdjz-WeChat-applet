@@ -6,9 +6,11 @@ App({
       // }
       // catch(err){bindGetUserInfo gotoUserauth 工地急招 gpsPorvince userLocation 
       //   
-  
+      this.getUserMsg();
     },
     globalData: {
+      jobNumber: '',
+      msgsNumber : '',
       isauthuuid: false,
       previewboss: true,
       collectstatus: true,
@@ -470,6 +472,7 @@ App({
       }) : wx.navigateTo({
         url: _url
       });
+      console.log(data,"data")
     },
     getListsAllType: function (_callback) {
       let _this = this;
@@ -839,42 +842,22 @@ App({
         params: userInfo ? userInfo : {}
       })
     },
-    getUserMsg: function(_this) {
+    getUserMsg: function() {
+      let _this = this
         let userInfo = wx.getStorageSync("userInfo");
-        let userUuid = wx.getStorageSync("userUuid");
         if (!userInfo) return false;
         this.doRequestAction({
             url: "member/original-message/",
             way: "POST",
-            // header: {
-            //     'content-type': 'application/x-www-form-urlencoded',
-            //     mid: userInfo.userId,
-            //     token: userInfo.token,
-            //     time: userInfo.tokenTime,
-            //     uuid: userUuid,
-            // },
             success: function (res) {
-                wx.hideLoading();
-                let mydata = res.data;
-                if (mydata.errcode == "ok") {
-                    let msgsNumber = mydata.data;
-                    wx.setStorageSync("msgsNumber", msgsNumber)
-                } else {
-                    wx.showToast({
-                        title: mydata.errmsg,
-                        icon: "none",
-                        duration: 5000
-                    })
-                }
-            },
-            fail: function (err) {
-                wx.showToast({
-                    title: '网络出错，数据加载失败！',
-                    icon: "none",
-                    duration: 5000
-                })
-            },
-    
+              if (res.data.errcode == "ok") {
+                _this.globalData.jobNumber = res.data.data.jobNumber
+                _this.globalData.msgsNumber = res.data.data.messageNumber
+                console.log(
+                  _this.globalData.jobNumber,
+                  _this.globalData.msgsNumber)
+              }
+            }
         })
     },
   })

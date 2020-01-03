@@ -4,6 +4,7 @@ Page({
         publishActive: false,
         showPublishBox: false
     },
+    // console.log(this.data,"globalData")
     doPublishAction: function () {
         let _this = this;
         this.setData({

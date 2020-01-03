@@ -4,7 +4,7 @@
         <view class="messsage-lists-top">
             <view class="messsage-num" >
                 <image src="{{item.image_url}}" alt=""  style="width:70rpx;height:70rpx"></image>
-                <text wx:if="{{item.count>0}}" class="msgNumber"> </text>
+                <text wx:if="{{item.read_time==0}}" class="msgNumber"> </text>
             </view>
             <view class="messsage-title" >
                 <view class="msgflex">
@@ -15,7 +15,7 @@
             </view>
         </view>
         <view class="messsage-bottom">
-            <text class="messsage-deail"> 立即查看 </text>
+            <text class="messsage-deail"> 查看详情 </text>
             <text class="messsage-deail">  {{item.time}} </text>
         </view>
     </view>
