@@ -76,9 +76,9 @@ Page({
       that.setData({
         areaText: that.data.areaText
       })
-      if (that.data.areaText.length>3){
+      if (that.data.areaText.length>2){
         that.setData({
-          scrollLeft: "120" + ((that.data.areaText.length-3)*40)
+          scrollLeft: "120" + ((that.data.areaText.length-2)*40)
         })
       }
     } else {
