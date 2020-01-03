@@ -659,9 +659,9 @@
 }
 
 .listsboxageone{
-  display: flex;
+  /* display: flex;
   flex-direction: row;
-  align-items: center;
+  align-items: center; */
   line-height: 30rpx;
 
 }
@@ -684,7 +684,7 @@ margin-left: 12rpx;
 width: 30rpx;
 display: inline-block;
 overflow: hidden;
-
+vertical-align: baseline;
 
 }
 
@@ -707,7 +707,7 @@ width: 14%;
 margin-left: 12rpx;
 display: inline-block;
 overflow: hidden;
-
+vertical-align: baseline;
 
 }
 

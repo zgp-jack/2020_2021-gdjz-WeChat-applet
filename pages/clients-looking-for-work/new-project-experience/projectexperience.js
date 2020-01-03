@@ -4,7 +4,7 @@ let areas = require("../../../utils/area.js");
 let remain = require("../../../utils/remain.js");
 let reminder = require("../../../utils/reminder.js");
 //bindstartDate delete vertify vertify preservechixu bindTextAreaBlur 大于今天 chooseImage delete preserve showModal vertify() showModal deleteexper vertify multiIndexvalue projectnum nowDate share
-  
+
 Page({
   data: {
     addimage: app.globalData.apiImgUrl + "lpy/addimage.png",
@@ -27,18 +27,20 @@ Page({
     resume_uuid: "",
     projectname: "",
     detail: "",
-    detailength:0,
+    detailength: 0,
     showModal: false,
     uuid: "",
     obtnbut: true,
     nowDate: "",
     beforeDate: "",
-    emdDate:"",
-    project_cou:0,
-    project_count:0,
+    emdDate: "",
+    project_cou: 0,
+    project_count: 0,
     project_show: true,
-    imgArrslength:true,
+    imgArrslength: true,
     display: "none",
+    ranktypes: "",
+    deletestatus:true
   },
 
   obtn() {
@@ -68,18 +70,34 @@ Page({
     })
   },
   deleteexper() {
+    if(!this.data.deletestatus){
+          return false
+    }else{
+      this.setData({
+        deletestatus: false
+      })
+    }
+
     let that = this;
     wx.showModal({
       title: '提示',
       content: `项目经验删除后，将无法恢复`,
       showCancel: true,
-      success(res) { 
-
+      success(res) {
+        that.setData({
+          deletestatus: true
+        })
         if (res.confirm) {
-           that.vertify()
+          that.vertify()
         } else if (res.cancel) {
-     
+
         }
+      },
+      complete(){
+        console.log(123)
+        that.setData({
+          deletestatus: true
+        })
       }
     })
   },
@@ -89,12 +107,12 @@ Page({
     })
   },
   bindDateChange(e) {
-      this.setData({
-        date: e.detail.value
-      }) 
+    this.setData({
+      date: e.detail.value
+    })
   },
   previewImage(e) {
-    
+
     let that = this
     wx.previewImage({
       urls: that.data.imgArrs,
@@ -105,7 +123,7 @@ Page({
     this.setData({
       detail: e.detail.value
     })
-    
+
     this.setData({
       detailength: e.detail.value.length
     })
@@ -237,16 +255,16 @@ Page({
 
     }
     this.setData(data);
-    
+
   },
-  preserve:function() {
+  preserve: function () {
     let that = this;
     if (that.data.project_cou >= that.data.project_count) {
       wx.showModal({
         title: '温馨提示',
         content: `最多只能添加${that.data.project_count}个项目`,
         showCancel: false,
-        success(res) { 
+        success(res) {
           wx.navigateBack({
             delta: 1
           })
@@ -262,7 +280,7 @@ Page({
     //   reminder.reminder({ tips: '项目名称' })
     //   return
     // }
-    if (vertifyNum.isNull(this.data.projectname)||!vertifyNum.isChinese(this.data.projectname)) {
+    if (vertifyNum.isNull(this.data.projectname) || !vertifyNum.isChinese(this.data.projectname)) {
       wx.showModal({
         title: '温馨提示',
         content: '请正确输入项目名称3-12字以内且必须包含汉字',
@@ -311,7 +329,7 @@ Page({
       return
     }
 
-    if (new Date(this.data.startdate).getTime() > new Date(this.data.date).getTime()){
+    if (new Date(this.data.startdate).getTime() > new Date(this.data.date).getTime()) {
       wx.showModal({
         title: '温馨提示',
         content: '请选择完工时间（完工时间必须大于开工时间）',
@@ -365,22 +383,28 @@ Page({
       city: this.data.provincecity.split(",")[1],
       image: this.data.importimg
     })
-    
+
     app.appRequestAction({
       url: 'resumes/project/',
       way: 'POST',
-      mask:true,
+      mask: true,
       params: project,
       failTitle: "操作失败，请稍后重试！",
       success(res) {
-        
+
         remain.remain({
           tips: res.data.errmsg, callback: function () {
             if (res.data.errcode == "ok") {
+              if (that.data.ranktypes == "ranking") {
+                wx.redirectTo({
+                  url: '/pages/clients-looking-for-work/all-project-experience/allexperience',
+                });
+              } else {
               app.globalData.allexpress = true;
               wx.navigateBack({
                 delta: 1
               })
+              }
             }
           }
         })
@@ -392,12 +416,12 @@ Page({
   },
   preservechixu() {
     let that = this;
-    if (that.data.project_cou >= that.data.project_count){
+    if (that.data.project_cou >= that.data.project_count) {
       wx.showModal({
         title: '温馨提示',
         content: `最多只能添加${that.data.project_count}个项目`,
         showCancel: false,
-        success(res) { 
+        success(res) {
           wx.navigateBack({
             delta: 1
           })
@@ -510,7 +534,7 @@ Page({
       city: this.data.provincecity.split(",")[1],
       image: this.data.importimg
     })
-    
+
     app.appRequestAction({
       url: 'resumes/project/',
       way: 'POST',
@@ -521,7 +545,7 @@ Page({
         remain.remain({
           tips: res.data.errmsg, callback: function () {
             if (res.data.errcode == "ok") {
-              
+
               that.setData({
                 project_cou: res.data.count
               })
@@ -538,8 +562,8 @@ Page({
                 multiIndexvalue: "",
                 importimg: [],
                 imgArrs: [],
-                detailength:0,
-                imgArrslength:true
+                detailength: 0,
+                imgArrslength: true
               })
             }
           }
@@ -558,7 +582,7 @@ Page({
     })
   },
   delete(e) {
-    
+
     this.data.imgArrs.splice(e.currentTarget.dataset.index, 1)
     this.data.importimg.splice(e.currentTarget.dataset.index, 1)
     this.setData({
@@ -573,7 +597,7 @@ Page({
         imgArrslength: true
       })
     }
-    
+
   },
   vertify() {
     let userInfo = wx.getStorageSync("userInfo");
@@ -584,7 +608,7 @@ Page({
       tokenTime: userInfo.tokenTime,
       project_uuid: this.data.uuid
     })
-    
+
     let that = this;
     app.appRequestAction({
       url: 'resumes/del-project/',
@@ -593,7 +617,7 @@ Page({
       params: project,
       failTitle: "操作失败，请稍后重试！",
       success(res) {
-        
+
         remain.remain({
           tips: res.data.errmsg, callback: function () {
             if (res.data.errcode == "ok") {
@@ -615,7 +639,7 @@ Page({
       display: "none"
     })
   },
-  quit(){
+  quit() {
     this.setData({
       showModal: false,
       display: "none"
@@ -626,7 +650,7 @@ Page({
     let project = wx.getStorageSync("projectdetail");
     let project_count = wx.getStorageSync("project_count");
     let projectnum = wx.getStorageSync("projectnum");
-    if (project_count){
+    if (project_count) {
       this.setData({
         project_count: project_count
       })
@@ -646,7 +670,7 @@ Page({
       this.setData({
         project: project.uid,
       })
-      
+
 
       this.setData({
         projectname: this.data.project.project_name,
@@ -669,7 +693,7 @@ Page({
       //     date: "至今"
       //   })
       // }
-      
+
       let one = "";
       let two = "";
       let osplit = this.data.provincecity.split(",");
@@ -813,7 +837,7 @@ Page({
       image: this.data.importimg,
       project_uuid: this.data.uuid
     })
-    
+
 
     app.appRequestAction({
       url: 'resumes/project/',
@@ -822,14 +846,20 @@ Page({
       failTitle: "操作失败，请稍后重试！",
       mask: true,
       success(res) {
-        
+
         remain.remain({
           tips: res.data.errmsg, callback: function () {
             if (res.data.errcode == "ok") {
-              app.globalData.allexpress = true;
-              wx.navigateBack({
-                delta: 1
-              })
+              if (that.data.ranktypes == "ranking") {
+                wx.redirectTo({
+                  url: '/pages/clients-looking-for-work/all-project-experience/allexperience',
+                });
+              } else {
+                app.globalData.allexpress = true;
+                wx.navigateBack({
+                  delta: 1
+                })
+              }
             }
           }
         })
@@ -842,7 +872,7 @@ Page({
   delestore() {
     wx.removeStorageSync("projectdetail")
   },
-  starttimer(){
+  starttimer() {
     let timer = new Date();
     let d = new Date(timer);
     let times = d.getFullYear() + '-' + (d.getMonth() + 1) + '-' + d.getDate();
@@ -860,7 +890,7 @@ Page({
       beforeDate: beforeDate,
       emdDate: emdDate
     })
-    
+
   },
 
   onShow: function () {
@@ -868,14 +898,14 @@ Page({
     this.getuuid()
     this.projectshow()
     this.starttimer()
-  
+
   },
-  preservechixutui(){
+  preservechixutui() {
     wx.navigateBack({
       delta: 1
     })
   },
-  projectshow(){
+  projectshow() {
     let that = this;
     if (that.data.project_cou >= that.data.project_count - 1) {
 
@@ -883,13 +913,20 @@ Page({
         project_show: false
       })
     }
-    
-    
+
+
+  },
+  ranktypes(options) {
+    if (options.hasOwnProperty("ranktype")) {
+    this.setData({
+      ranktypes: options.ranktype
+    })
+    }
   },
   onLoad: function (options) {
     this.initAllProvice()
     this.getproject()
-
+    this.ranktypes(options)
   },
 
 })

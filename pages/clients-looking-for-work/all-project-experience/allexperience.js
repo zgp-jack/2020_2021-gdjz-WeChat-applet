@@ -53,6 +53,7 @@ Page({
   },
   addpro() {
     let projectnum = this.data.allproject.length
+    console.log(projectnum)
     wx.setStorageSync("projectnum", projectnum)
     wx.navigateTo({
       url: "/pages/clients-looking-for-work/new-project-experience/projectexperience",
@@ -162,7 +163,7 @@ Page({
           allproject.push(projectall[i])
         }
       }
-     
+    
       that.setData({
         projecthree: allproject
       });

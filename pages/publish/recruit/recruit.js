@@ -76,7 +76,9 @@ Page({
     isAllAreas: true,
     showInputList: false,
     searchInputVal: "",
-    strlen:0
+    strlen: 0,
+    resson:"",
+    display: "none",
   },
 
   userRegMap: function (e) {
@@ -271,11 +273,19 @@ Page({
             textareaTips: mydata.placeholder,
             "addressData.title": mydata.model.address ? mydata.model.address : "",
             "addressData.location": mydata.model.location ? mydata.model.location : "",
-            county_id: mydata.model.county_id ? mydata.model.county_id : ""
+            county_id: mydata.model.county_id ? mydata.model.county_id : "",
+            resson: mydata.model.hasOwnProperty("check_fail_msg") ? mydata.model.check_fail_msg:""
           })
-          if(!infoId){
+          if (!infoId) {
             let lastArea = wx.getStorageSync("userLastPubArea");
             if (lastArea) _this.setData({ addressData: lastArea })
+          }
+          if (options.is_check == "0") {
+            _this.setData({
+              showModal:true,
+              showTextarea:false,
+              display:"block"
+            })
           }
           // setTimeout(function(){
           //     _this.initAreaPicker();
@@ -284,6 +294,13 @@ Page({
           app.showMyTips(mydata.errmsg);
         }
       }
+    })
+  },
+  vertify() {
+    this.setData({
+      showModal: false,
+      display: "none",
+      showTextarea:true
     })
   },
   initAreaPicker: function () {
@@ -460,7 +477,7 @@ Page({
     let infoId = this.data.infoId;
     let lastPublishCity = { name: this.data.areaText, ad_name: this.data.keyAutoVal };
     let v = vali.v.new();
-    if (!v.isRequire(cardInfo.title,3)) {
+    if (!v.isRequire(cardInfo.title, 3)) {
       app.showMyTips("标题最少三个字！");
       return false;
     }
@@ -528,9 +545,7 @@ Page({
       params: dataJson,
       success: function (res) {
         let mydata = res.data;
-
         _this.subscribeToNews(mydata)
-
       }
     })
   },
@@ -591,7 +606,7 @@ Page({
   userEnterContent: function (e) {
     this.setData({
       "cardInfo.content": e.detail.value,
-      strlen:e.detail.value.length
+      strlen: e.detail.value.length
     })
   },
   delCardImg: function (e) {
@@ -684,14 +699,12 @@ Page({
   returnPrevPage: function () {
     wx.navigateBack({ delta: 1 })
   },
-  
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    
+    console.log(options)
     //this.initPickerData();
-    
     let userInfo = wx.getStorageSync("userInfo");
     if (userInfo) {
       this.setData({

@@ -41,14 +41,16 @@ page {
   width: 93%;
   margin: 0 auto;
   background: #fffbf7;
-  color: red;
+  color: black;
   font-size: 30rpx;
   padding-top: 10rpx;
   padding-left: 19rpx;
   padding-right: 19rpx;
   padding-bottom: 10rpx;
 }
-
+.nopass text{
+  color: red;
+}
 .link {
   width: 6px;
   height: 38rpx;
@@ -185,12 +187,32 @@ padding-right: 150rpx;
   font-weight: 500;
 }
 
-.findingnamecardoneson .findingnamecardonesontwo {
-  text-align: center;
-  margin-right: 13rpx;
-  font-size: 0;
+.findingnamecardonesontwo {
+  margin-left: 14rpx;
+  margin-right: 30rpx;
+  border-top: 1rpx dashed #b3b3b2;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 18rpx 0;
 }
-
+.rule-detail{
+  display: flex;
+  align-items: center;
+}
+.rule-detail image{
+  width: 34rpx;
+  height: 36rpx;
+}
+.rule-detail text{
+  font-size: 30rpx;
+  color: #6F6C6C;
+  padding-left:12rpx; 
+}
+.rule-odetail{
+    font-size: 30rpx;
+  color: #09f;
+}
  .view_num {
   color: #09f;
   font-size: 30rpx;

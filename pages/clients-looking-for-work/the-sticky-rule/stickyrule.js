@@ -6,10 +6,15 @@ Page({
    * 页面的初始数据
    */
   data: {
-    areadata:[]
+    areadata:[],
+    areadatalist:[]
   },
   getAreaData: function () {
     app.getAreaData(this);
+  },
+  getAreaAll(){
+    let that = this;
+    // console.log(that.data.areadata)
   },
   /**
    * 生命周期函数--监听页面加载
@@ -29,7 +34,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    this.getAreaAll()
   },
 
   /**

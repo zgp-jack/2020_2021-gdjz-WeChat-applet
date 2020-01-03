@@ -651,7 +651,7 @@ Page({
       sex: introinfo.hasOwnProperty("gender") ? introinfo.gender : "",
       birthday: introinfo.hasOwnProperty("birthday") ? introinfo.birthday : "",
       complexwork: introinfo.hasOwnProperty("occupations") ? introinfo.occupations : [],
-      complexworkid: introinfo.hasOwnProperty("occupations_id") ? introinfo.occupations_id.split(",") : [],
+      complexworkid: introinfo.hasOwnProperty("occupations_id") ? introinfo.occupations_id == null ? [] : introinfo.occupations_id.split(",") : [],
       regionone: introinfo.hasOwnProperty("address") ? introinfo.address : "",
       provinceid: introinfo.hasOwnProperty("province") ? introinfo.province : "",
       wardenryid: introinfo.hasOwnProperty("city") ? introinfo.city : "",
@@ -669,7 +669,7 @@ Page({
         nation: introinfo.hasOwnProperty("nation_id") ? introinfo.nation_id : ""
       })
     }
-    if (introinfo.hasOwnProperty("occupations")) {
+    if (introinfo.hasOwnProperty("occupations") && introinfo.occupations.length != 0) {
       let workIndexvalue = ""
       for (let i = 0; i < introinfo.occupations.length; i++) {
         workIndexvalue += introinfo.occupations[i] + " "

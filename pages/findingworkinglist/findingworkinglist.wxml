@@ -1,3 +1,4 @@
+
 <!-- listsboxlocalone -->
 <import src="/pages/footer/footer.wxml" />
 <!-- <import src="/pages/tpl/app/app.wxml"/> doSearchRequestAction user-choose-item user-choose-item-active  jumpThisLink recommendteam overwords  stopThisAction showListsType listsboxnation user-choose-shade -->
@@ -196,9 +197,9 @@
 
 <view class='bottompublishbtn' bindtap='valiUserCard'>发布找活</view>
 
-<!-- <view class='fixed-get-integral'  bindtap='jumpThisLink'  data-url="/pages/turntable/turntable"  data-type='0'>
-        <image src='{{ fixedGetIntegral }}'></image>
-</view> -->
+<view class='fixed-get-integral'  bindtap='jumprull'>
+        <image src='{{ rullIntegral }}'></image>
+</view>
 
 <!-- <button class='fixed-get-integral-btn'  open-type="share" >
         <image src='http://cdn.yupao.com/miniprogram/images/list-share-btn.png?t=111'></image>
@@ -211,3 +212,4 @@
 <template is="app"  data="{{ bgHeight,btnWidth,wordsHeight,wordsWidth,shadeWidth,winWidth,winHeight,notimesW,userShareData,userShareTime }}" /> -->
 <!-- 引入footer -->
 <template is="footer" data="{{ footerImgs,publishActive,showPublishBox,footerActive }}" />
+
