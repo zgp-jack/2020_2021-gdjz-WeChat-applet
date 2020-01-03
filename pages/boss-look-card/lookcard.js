@@ -248,9 +248,40 @@ Page({
       })
       return false;
     }
-    this.setData({
-      showComplain: true
-    })
+    
+    this.subscribeToNews()
+  },
+    
+  subscribeToNews: function() {
+    let userInfo = wx.getStorageSync("userInfo");
+    let _this = this;
+    if (wx.canIUse('requestSubscribeMessage') === true) {
+        wx.requestSubscribeMessage({
+            tmplIds: ['uZcoNQz86gAr3P4DYtgt85PnVgMcN_Je27TeHdKhz14'],
+            success(res) {
+                app.appRequestAction({
+                    url: "leaving-message/add-subscribe-msg/",
+                    way: "POST", 
+                    mask: true,
+                    params: {
+                        userId: userInfo.userId,
+                        token: userInfo.token,
+                        tokenTime: userInfo.tokenTime,
+                        type: 5
+                    },
+                    success: function(res) {
+                        _this.setData({
+                            showComplain: true
+                        })
+                    },
+                })
+            }
+        })
+    } else {
+        _this.setData({
+            showComplain: true
+        })
+    }
   },
   userTapComplai() {
     let userInfo = wx.getStorageSync("userInfo");

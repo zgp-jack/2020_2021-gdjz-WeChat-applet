@@ -10,16 +10,16 @@ Page({
     userInfo: true,
     icon: app.globalData.apiImgUrl + "userauth-topicon.png",
     newmessage:{
-      type1:'/pages/realname/realname',      // 1 系统信息
-      type2:'/pages/integral/source/source', // 2 招工信息
-      type3:'/pages/realname/realname',      // 3 名片信息
-      type4:'/pages/integral/source/source', // 4 证书信息
-      type5:'/pages/realname/realname',      // 5 项目信息
-      type6:'/pages/integral/source/source', // 6 投诉招工信息
-      type7:'/pages/realname/realname',      // 7 留言信息
+                                             // 1 系统信息
+      type2:'/pages/index/index',            // 2 招工信息
+      type3:'/pages/clients-looking-for-work/finding-name-card/findingnamecard',      // 3 名片信息
+      type4:'/pages/clients-looking-for-work/finding-name-card/findingnamecard', // 4 证书信息
+      type5:'/pages/clients-looking-for-work/finding-name-card/findingnamecard',      // 5 项目信息
+      type6:'/pages/integral/return/return', // 6 投诉招工信息
+      type7:'/pages/others/message/lists/lists',      // 7 留言信息
       type8:'/pages/integral/source/source', // 8 积分管理-充值
       type9:'/pages/realname/realname',      // 9 实名认证
-      type10:'/pages/realname/realname',     // 9 投诉找活信息
+      type10:'/pages/integral/return/return',     // 10 投诉找活信息
     },
     isEnd: false,
     page:1,
@@ -27,18 +27,8 @@ Page({
       nodata: app.globalData.apiImgUrl + "nodata.png",
     },
     lists:[],
-      
-    // {
-    //   "1": "系统信息",
-    //   "2": "招工信息",
-    //   "3": "名片信息",
-    //   "4": "证书信息",
-    //   "5": "项目信息",
-    //   "7": "留言信息",
-    //   "6": "投诉招工信息",
-    //   "10": "投诉找活信息",
-    //   "8": "积分管理",
-    //   "9": "实名认证"
+    type:'',
+    // 招工-列表，找活-基础资料跳名片列表and项目、证书跳对应列表，留言跳留言列表， 投诉-退分记录列表，充值跳积分来源列表，实名跳实名认证，
   },
 
   getMymessage: function () {
@@ -138,6 +128,7 @@ Page({
    */
   onLoad: function (options) {
     let type =options.type
+    console.log(type,"type")
     this.setData({
       type: type
     })

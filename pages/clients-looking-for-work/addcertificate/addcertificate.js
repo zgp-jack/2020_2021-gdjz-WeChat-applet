@@ -295,28 +295,63 @@ vertify()
       mask: true,
       failTitle: "操作失败，请稍后重试！",
       success(res) {
-        
-        remain.remain({
-          tips: res.data.errmsg, callback: function () {
-            if (res.data.errcode == "ok") {
-              if (that.data.ranktypes == "ranking") {
-                wx.redirectTo({
-                  url: '/pages/clients-looking-for-work/all-skills-certificate/skillscertificate',
-                });
-              } else {
-              app.globalData.allskill = true;
-              wx.navigateBack({
-                delta: 1
-              })
-              }
-            }
-          }
-        })
+        that.subscribeToNews(res)
       },
       fail: function (err) {
         app.showMyTips("保存失败");
       }
     })
+  },
+  subscribeToNews: function(res) {
+    let that = this;
+    let userInfo = wx.getStorageSync("userInfo");
+    if (wx.canIUse('requestSubscribeMessage') === true) {
+        wx.requestSubscribeMessage({
+            tmplIds: ['G68JCpxsyIcKPrZcQWdHTG63T2JpJIz9gXGgKLv1T0A'],
+            success(ress) {
+                app.appRequestAction({
+                    url: "leaving-message/add-subscribe-msg/",
+                    way: "POST", 
+                    mask: true,
+                    params: {
+                        userId: userInfo.userId,
+                        token: userInfo.token,
+                        tokenTime: userInfo.tokenTime,
+                        type: 4
+                    },
+                    success: function(ress) {
+                      remain.remain({
+                        tips: res.data.errmsg, callback: function () {
+                          if (res.data.errcode == "ok") {
+                            if (that.data.ranktypes == "ranking") {
+                              wx.redirectTo({
+                                url: '/pages/clients-looking-for-work/all-skills-certificate/skillscertificate',
+                              });
+                            } else {
+                            app.globalData.allskill = true;
+                            wx.navigateBack({
+                              delta: 1
+                            })
+                            }
+                          }
+                        }
+                      })
+
+                    },
+                })
+            }
+        })
+    } else {
+      remain.remain({
+        tips: res.data.errmsg, callback: function () {
+          if (res.data.errcode == 200) {
+            wx.navigateBack({
+              delta: 1
+            })
+          }
+        }
+      })
+    }
   },
   preservechixu() {
     let that = this;
@@ -407,30 +442,76 @@ vertify()
       params: project,
       mask: true,
       success(res) {
-        remain.remain({
-          tips: res.data.errmsg, callback: function () {
-            if (res.data.errcode == "ok") {
-              that.setData({
-                certificate_cou: res.data.count
-              })
-
-              that.skillshow()
-              app.globalData.allskill = true;
-              that.setData({
-                imgArrs: [],
-                idArrs: [],
-                date: "",
-                name: "",
-                imgArrslength:true
-              })
-            }
-          }
-        })
+        that.subscribeToNewsAgain(res)
       },
       fail: function (err) {
         app.showMyTips("保存失败");
       }
     })
+  },
+  subscribeToNewsAgain: function(res) { 
+    let that = this;
+    let userInfo = wx.getStorageSync("userInfo");
+    if (wx.canIUse('requestSubscribeMessage') === true) {
+        wx.requestSubscribeMessage({
+            tmplIds: ['G68JCpxsyIcKPrZcQWdHTG63T2JpJIz9gXGgKLv1T0A'],
+            success(ress) {
+                app.appRequestAction({
+                    url: "leaving-message/add-subscribe-msg/",
+                    way: "POST", 
+                    mask: true,
+                    params: {
+                        userId: userInfo.userId,
+                        token: userInfo.token,
+                        tokenTime: userInfo.tokenTime,
+                        type: 4
+                    },
+                    success: function(ress) {
+                      remain.remain({
+                        tips: res.data.errmsg, callback: function () {
+                          if (res.data.errcode == "ok") {
+                            that.setData({
+                              certificate_cou: res.data.count
+                            })
+
+                            that.skillshow()
+                            app.globalData.allskill = true;
+                            that.setData({
+                              imgArrs: [],
+                              idArrs: [],
+                              date: "",
+                              name: "",
+                              imgArrslength:true
+                            })
+                          }
+                        }
+                      })
+                    },
+                })
+            }
+        })
+    } else {
+    
+      remain.remain({
+        tips: res.data.errmsg, callback: function () {
+          if (res.data.errcode == "ok") {
+            that.setData({
+              certificate_cou: res.data.count
+            })
+
+            that.skillshow()
+            app.globalData.allskill = true;
+            that.setData({
+              imgArrs: [],
+              idArrs: [],
+              date: "",
+              name: "",
+              imgArrslength:true
+            })
+          }
+        }
+      })
+    }
   },
   preservechixutui(){
     wx.navigateBack({
@@ -548,23 +629,7 @@ vertify()
       mask: true,
       params: project,
       success(res) {
-        
-        remain.remain({
-          tips: res.data.errmsg, callback: function () {
-            if (res.data.errcode == "ok") {
-              if (that.data.ranktypes == "ranking") {
-                wx.redirectTo({
-                  url: '/pages/clients-looking-for-work/all-skills-certificate/skillscertificate',
-                });
-              } else {
-              app.globalData.allskill = true;
-              wx.navigateBack({
-                delta: 1
-              })
-              }
-            }
-          }
-        })
+        that.subscribeToNews(res)
       },
       fail: function (err) {
         app.showMyTips("保存失败");

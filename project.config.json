@@ -126,10 +126,10 @@
 					"scene": null
 				},
 				{
-					"id": -1,
-					"name": "pages/userauth/userauth",
-					"pathName": "pages/userauth/userauth",
-					"query": "",
+					"id": 10,
+					"name": "pages/information/system/system?type=3",
+					"pathName": "pages/information/system/system",
+					"query": "type=9",
 					"scene": null
 				},
 				{

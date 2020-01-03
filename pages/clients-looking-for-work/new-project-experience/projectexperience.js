@@ -391,23 +391,7 @@ Page({
       params: project,
       failTitle: "操作失败，请稍后重试！",
       success(res) {
-
-        remain.remain({
-          tips: res.data.errmsg, callback: function () {
-            if (res.data.errcode == "ok") {
-              if (that.data.ranktypes == "ranking") {
-                wx.redirectTo({
-                  url: '/pages/clients-looking-for-work/all-project-experience/allexperience',
-                });
-              } else {
-              app.globalData.allexpress = true;
-              wx.navigateBack({
-                delta: 1
-              })
-              }
-            }
-          }
-        })
+        that.subscribeToNews(res)
       },
       fail: function (err) {
         app.showMyTips("保存失败");
@@ -542,38 +526,89 @@ Page({
       params: project,
       failTitle: "操作失败，请稍后重试！",
       success(res) {
-        remain.remain({
-          tips: res.data.errmsg, callback: function () {
-            if (res.data.errcode == "ok") {
-
-              that.setData({
-                project_cou: res.data.count
-              })
-              app.globalData.allexpress = true;
-
-              that.projectshow()
-
-              that.setData({
-                projectname: "",
-                startdate: "",
-                date: "",
-                detail: "",
-                provincecity: "",
-                multiIndexvalue: "",
-                importimg: [],
-                imgArrs: [],
-                detailength: 0,
-                imgArrslength: true
-              })
-            }
-          }
-        })
-
+        that.subscribeToNewsAgain(res)
       },
       fail: function (err) {
         app.showMyTips("保存失败");
       }
     })
+  },
+  subscribeToNewsAgain: function(res) { 
+    let that = this;
+    let userInfo = wx.getStorageSync("userInfo");
+    if (wx.canIUse('requestSubscribeMessage') === true) {
+        wx.requestSubscribeMessage({
+            tmplIds: ['G68JCpxsyIcKPrZcQWdHTG63T2JpJIz9gXGgKLv1T0A'],
+            success(ress) {
+                app.appRequestAction({
+                    url: "leaving-message/add-subscribe-msg/",
+                    way: "POST", 
+                    mask: true,
+                    params: {
+                        userId: userInfo.userId,
+                        token: userInfo.token,
+                        tokenTime: userInfo.tokenTime,
+                        type: 4
+                    },
+                    success: function(ress) {
+                      remain.remain({
+                        tips: res.data.errmsg, callback: function () {
+                          if (res.data.errcode == "ok") {
+              
+                            that.setData({
+                              project_cou: res.data.count
+                            })
+                            app.globalData.allexpress = true;
+              
+                            that.projectshow()
+              
+                            that.setData({
+                              projectname: "",
+                              startdate: "",
+                              date: "",
+                              detail: "",
+                              provincecity: "",
+                              multiIndexvalue: "",
+                              importimg: [],
+                              imgArrs: [],
+                              detailength: 0,
+                              imgArrslength: true
+                            })
+                          }
+                        }
+                      })
+                    },
+                })
+            }
+        })
+    } else {
+      remain.remain({
+        tips: res.data.errmsg, callback: function () {
+          if (res.data.errcode == "ok") {
+
+            that.setData({
+              project_cou: res.data.count
+            })
+            app.globalData.allexpress = true;
+
+            that.projectshow()
+
+            that.setData({
+              projectname: "",
+              startdate: "",
+              date: "",
+              detail: "",
+              provincecity: "",
+              multiIndexvalue: "",
+              importimg: [],
+              imgArrs: [],
+              detailength: 0,
+              imgArrslength: true
+            })
+          }
+        }
+      })
+    }
   },
   getuuid() {
     let userInfo = wx.getStorageSync("uuid");
@@ -846,28 +881,70 @@ Page({
       failTitle: "操作失败，请稍后重试！",
       mask: true,
       success(res) {
-
-        remain.remain({
-          tips: res.data.errmsg, callback: function () {
-            if (res.data.errcode == "ok") {
-              if (that.data.ranktypes == "ranking") {
-                wx.redirectTo({
-                  url: '/pages/clients-looking-for-work/all-project-experience/allexperience',
-                });
-              } else {
-                app.globalData.allexpress = true;
-                wx.navigateBack({
-                  delta: 1
-                })
-              }
-            }
-          }
-        })
+        that.subscribeToNews(res)
       },
       fail: function (err) {
         app.showMyTips("保存失败");
       }
     })
+  },
+  
+  subscribeToNews: function(res) {
+    let that = this;
+    let userInfo = wx.getStorageSync("userInfo");
+    if (wx.canIUse('requestSubscribeMessage') === true) {
+        wx.requestSubscribeMessage({
+            tmplIds: ['G68JCpxsyIcKPrZcQWdHTG63T2JpJIz9gXGgKLv1T0A'],
+            success(ress) {
+                app.appRequestAction({
+                    url: "leaving-message/add-subscribe-msg/",
+                    way: "POST", 
+                    mask: true,
+                    params: {
+                        userId: userInfo.userId,
+                        token: userInfo.token,
+                        tokenTime: userInfo.tokenTime,
+                        type: 4
+                    },
+                    success: function(ress) {
+                      remain.remain({
+                        tips: res.data.errmsg, callback: function () {
+                          if (res.data.errcode == "ok") {
+                            if (that.data.ranktypes == "ranking") {
+                              wx.redirectTo({
+                                url: '/pages/clients-looking-for-work/all-project-experience/allexperience',
+                              });
+                            } else {
+                              app.globalData.allexpress = true;
+                              wx.navigateBack({
+                                delta: 1
+                              })
+                            }
+                          }
+                        }
+                      })
+                    },
+                })
+            }
+        })
+    } else {
+      remain.remain({
+        tips: res.data.errmsg, callback: function () {
+          if (res.data.errcode == "ok") {
+            if (that.data.ranktypes == "ranking") {
+              wx.redirectTo({
+                url: '/pages/clients-looking-for-work/all-project-experience/allexperience',
+              });
+            } else {
+              app.globalData.allexpress = true;
+              wx.navigateBack({
+                delta: 1
+              })
+            }
+          }
+        }
+      })
+    }
   },
   delestore() {
     wx.removeStorageSync("projectdetail")

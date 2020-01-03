@@ -612,19 +612,8 @@ Page({
       success: function (res) {
 
         if (res.data.errcode == 200) {
-          if (app.globalData.showperfection) {
-            that.setData({
-              perfection: true,
-            })
-          } else {
-            remain.remain({
-              tips: res.data.errmsg, callback: function () {
-                wx.navigateBack({
-                  delta: 1
-                })
-              }
-            })
-          }
+          that.subscribeToNews(res)
+
         } else {
           remain.remain({
             tips: res.data.errmsg
@@ -640,7 +629,58 @@ Page({
       }
     })
   },
-
+  subscribeToNews: function(res) {
+    let userInfo = wx.getStorageSync("userInfo");
+    let _this = this;
+    if (wx.canIUse('requestSubscribeMessage') === true) {
+        wx.requestSubscribeMessage({
+            tmplIds: ['G68JCpxsyIcKPrZcQWdHTG63T2JpJIz9gXGgKLv1T0A'],
+            success(ress) {
+                app.appRequestAction({
+                    url: "leaving-message/add-subscribe-msg/",
+                    way: "POST", 
+                    mask: true,
+                    params: {
+                        userId: userInfo.userId,
+                        token: userInfo.token,
+                        tokenTime: userInfo.tokenTime,
+                        type: 4
+                    },
+                    success: function(ress) {
+                      if (app.globalData.showperfection) {
+                        _this.setData({
+                          perfection: true,
+                        })
+                      } else {
+                        remain.remain({
+                          tips: res.data.errmsg, callback: function () {
+                            wx.navigateBack({
+                              delta: 1
+                            })
+                          }
+                        })
+                      }
+                    },
+                })
+            }
+        })
+    } else {
+    
+      if (app.globalData.showperfection) {
+        that.setData({
+          perfection: true,
+        })
+      } else {
+        remain.remain({
+          tips: res.data.errmsg, callback: function () {
+            wx.navigateBack({
+              delta: 1
+            })
+          }
+        })
+      }
+    }
+  },
   getintrodetail() {
 
     let introinfo = wx.getStorageSync("introinfo");
