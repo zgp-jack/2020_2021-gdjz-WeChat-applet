@@ -528,18 +528,55 @@ Page({
       params: dataJson,
       success: function (res) {
         let mydata = res.data;
-        
-        wx.showModal({
-          title: (mydata.errcode == "ok") ? '恭喜您' : '提示',
-          content: mydata.errmsg,
-          showCancel: false,
-          confirmText: (mydata.errcode == "ok") ? '确定' : '知道了',
-          success: function (res) {
-            if (mydata.errcode == "ok") wx.reLaunch({ url: '/pages/published/published' })
-          }
-        })
+
+        _this.subscribeToNews(mydata)
+
       }
     })
+  },
+  
+    
+  subscribeToNews: function(mydata) {
+    let userInfo = wx.getStorageSync("userInfo");
+    if (wx.canIUse('requestSubscribeMessage') === true) {
+        wx.requestSubscribeMessage({
+            tmplIds: ['G68JCpxsyIcKPrZcQWdHTG63T2JpJIz9gXGgKLv1T0A'],
+            success(res) {
+                app.appRequestAction({
+                    url: "leaving-message/add-subscribe-msg/",
+                    way: "POST", 
+                    mask: true,
+                    params: {
+                        userId: userInfo.userId,
+                        token: userInfo.token,
+                        tokenTime: userInfo.tokenTime,
+                        type: 3
+                    },
+                    success: function(res) {
+                      wx.showModal({
+                        title: (mydata.errcode == "ok") ? '恭喜您' : '提示',
+                        content: mydata.errmsg,
+                        showCancel: false,
+                        confirmText: (mydata.errcode == "ok") ? '确定' : '知道了',
+                        success: function (res) {
+                          if (mydata.errcode == "ok") wx.reLaunch({ url: '/pages/published/published' })
+                        }
+                      })
+                    },
+                })
+            }
+        })
+    } else {
+      wx.showModal({
+        title: (mydata.errcode == "ok") ? '恭喜您' : '提示',
+        content: mydata.errmsg,
+        showCancel: false,
+        confirmText: (mydata.errcode == "ok") ? '确定' : '知道了',
+        success: function (res) {
+          if (mydata.errcode == "ok") wx.reLaunch({ url: '/pages/published/published' })
+        }
+      })
+    }
   },
   userEnterTitle: function (e) {
     this.setData({

@@ -825,12 +825,12 @@ Page({
     initFirstTips:function(){
         app.initFirstTips(this);
     },
-    // getUserMsg: function (e) {
-    //   app.getUserMsg(this);
-    //   let msgsNumber = wx.getStorageSync("msgsNumber");
-    //   console.log(this.data.msgsNumber,"msgsNumber")
-    //   console.log(msgsNumber,"msgsNumber")
-    // },
+    getUserMsg: function (e) {
+      app.getUserMsg(this);
+      let msgsNumber = wx.getStorageSync("msgsNumber");
+      console.log(this.data.msgsNumber,"msgsNumber")
+      console.log(msgsNumber,"msgsNumber")
+    },
     /**
      * 生命周期函数--监听页面加载
      */
@@ -858,7 +858,7 @@ Page({
      */
     onShow: function () {
       this.initUserinfo();
-      // this.getUserMsg()
+      this.getUserMsg()
     },
   onPageScroll:function(e){
     let top = e.scrollTop;

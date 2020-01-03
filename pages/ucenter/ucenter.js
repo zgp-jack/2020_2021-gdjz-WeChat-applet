@@ -135,12 +135,12 @@ Page({
             }
         })
     },
-    // getUserMsg: function () {
-    //     app.getUserMsg(this);
-    //     let msgsNumber = wx.getStorageSync("msgsNumber");
-    //     console.log(this.data.msgsNumber,"msgsNumber")
-    //     console.log(msgsNumber,"msgsNumber")
-    // },
+    getUserMsg: function () {
+        app.getUserMsg(this);
+        let msgsNumber = wx.getStorageSync("msgsNumber");
+        console.log(this.data.msgsNumber,"msgsNumber")
+        console.log(msgsNumber,"msgsNumber")
+    },
     /**
      * 生命周期函数--监听页面初次渲染完成
      */
@@ -153,6 +153,7 @@ Page({
      */
     onShow() {
         this.initUserInfo();
+        this.getUserMsg();
     },
     releaselive() {
         app.globalData.showdetail = true
