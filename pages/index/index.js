@@ -705,6 +705,7 @@ Page({
     },
 
     // 共用footer
+  
     jumpThisLink: function (e) {
         app.jumpThisLink(e);
     },
@@ -714,6 +715,7 @@ Page({
             publishActive: footerjs.publishActive,
             showPublishBox: footerjs.showPublishBox
         })
+      footerjs.initMsgNum(this);
     },
     doPublishAction: function () {
         console.log("发布被点击了");
@@ -726,7 +728,7 @@ Page({
     valiUserCard:function(){
         let userInfo = this.data.userInfo;
         footerjs.valiUserCard(this,app, userInfo);
-    },
+    }, 
     initUserLocation: function () {
         let _this = this;
         let areaId = wx.getStorageSync("areaId");
