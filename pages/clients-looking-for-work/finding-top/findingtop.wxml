@@ -3,7 +3,7 @@
     <text>当前选择指定范围</text>
   </view>
   <view class="scopedetail">
-    <view wx:for="{{areaTextcrum}}" bindtap="deletelable" >
+    <view wx:for="{{areaTextcrum}}" bindtap="deletelable" wx:key="{{index}}" >
        {{item.name}} <image class="deleteimg"  data-id="{{ item }}"  data-index="{{ index }}" src="{{imgDetelte}}"></image>
     </view>
     <view class="obttn" bindtap="jumpdetail"  wx:if="{{areaTextcrum.length > 0}}">
@@ -20,7 +20,7 @@
   <view class="dayall">
     <view class="daynum">
       <text>置顶天数</text>
-      <input type="text" placeholder="请输入天数" value="{{daynumber}}"></input>
+      <input type="text" placeholder="请输入天数" value="{{daynumber}}" bindinput="dayclocy"></input>
     </view>
     <view class="daynum">
       <text>消耗积分</text>
@@ -28,7 +28,7 @@
     </view>
   </view>
 
-  <view class="submitscope">
+  <view class="submitscope"  bindtap="submitscop">
     <text>确定置顶</text>
   </view>
 
@@ -39,7 +39,7 @@
   <view class="bottom">
     <view>1、置顶一个省或直辖市每天消耗20积分，置顶一个市每天消耗5积分。</view>
     <view>2、最多可选择5个省、五个市进行置顶；</view>
-    <view>3、如有任何疑问欢迎致电鱼泡客服，电话：400-833-1578</view>
+    <view>3、如有任何疑问欢迎致电鱼泡客服，电话：<text bindtap="callThisPhone" data-phone="{{serverPhone}}">{{serverPhone}}</text></view>
   </view>
 </view>
 <view class="common-userauth" wx:if="{{ !userInfo }}">

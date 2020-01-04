@@ -17,36 +17,57 @@
           <text class="view_num">{{view_num}}</text>
         </view>
         <view class="isline" wx:if="{{showcomplete}}">
-          <button class="shareliveone" bindtap="completeall" >名片越完善 找活越容易,马上去完善>>
+          <button class="shareliveone" bindtap="completeall">名片越完善 找活越容易,马上去完善>>
 
           </button>
           <text class="sontwoview">浏览次数</text>
         </view>
         <view class="isline" wx:if="{{!showcomplete}}">
-          <button class="sharelive" open-type='share' >分享找活名片,可提升名片排名度
+          <button class="sharelive" open-type='share'>分享找活名片,可提升名片排名度
           </button>
           <text class="sontwoview">浏览次数</text>
         </view>
       </view>
     </view>
     <view class="findingnamecardonesontwo">
-       <view class="rule-detail">
-         <image src="{{ruleimage}}"></image>
-         <text>我的排名点：{{sort_flag}}</text>
-       </view>
-       <view class="rule-odetail" bindtap="rulepoit">
-         马上去提升排名>>
-       </view>
+      <view class="rule-detail">
+        <image src="{{ruleimage}}"></image>
+        <text>我的排名点：{{sort_flag}}</text>
+      </view>
+      <view class="rule-odetail" bindtap="rulepoit">
+        马上去提升排名>>
+      </view>
     </view>
-     <view class="findingnamecardonesontwo">
-       <view class="rule-detail">
-         <image src="{{ruleimage}}"></image>
-         <text>我的置顶：未指定</text>
-       </view>
-       <view class="rule-odetail" bindtap="thestickyrule">
-         马上去置顶>>
-       </view>
+    <view class="findingnamecardonesontwo">
+      <view class="rule-detail">
+        <image class="rule-oimg" src="{{topimage}}"></image>
+        <text>我的置顶：未置顶</text>
+      </view>
+      <view class="rule-odetail" bindtap="thestickyrule">
+        马上去置顶>>
+      </view>
+      <!-- <view class='topselect_box'>
+        <view class='select'>
+          <text class='select_text'>置顶中</text>
+          <image class='select_img' src='{{subscripted}}'></image>
+        </view>
+      </view> -->
     </view>
+    <!-- <view class="toptime">
+      <view>
+        <text>置顶地区：</text>
+        <text>四川省四川省</text>
+      </view>
+    </view>
+    <view class="toptime">
+      <view>
+        <text>置顶时间：</text>
+        <text>四川省四川省</text>
+      </view>
+    </view>
+    <view class="topdetail">
+      <text>点击修改找活置顶信息>></text>
+    </view> -->
   </view>
 
   <view class="findingnamecardthree">

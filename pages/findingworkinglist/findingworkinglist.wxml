@@ -146,6 +146,8 @@
             </view>
             <view class="listsboxshow" wx:if="{{item.type}}">{{item.type}}</view>
           </view>
+            <text class="listsboxstyru" catchtap="jumptop">我要置顶</text>
+            <image class="listsboxoimg" src="{{toptown}}"></image>
         </view>
         <view class="listsboxlable">
           <view class="listsboxlableone" wx:for="{{item.occupations}}" wx:key="{{index}}">{{item}}</view>

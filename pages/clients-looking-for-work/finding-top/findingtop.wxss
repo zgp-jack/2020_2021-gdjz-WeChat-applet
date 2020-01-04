@@ -213,17 +213,12 @@ padding-left: 26%;
    border: 0;
    background: #0099FF;
 }
-.scopedetail view:nth-child(3){
-   /* display: inline-block;
-   width: 28.33%;
-   font-size: 36rpx;
-   color: #6F6F6F;
-   line-height: 80rpx;
-   border:  1px solid #6F6F6F;
-   border-radius: 10rpx;
-   text-align: center;
-   margin-top: 22rpx;
-   margin-right: 4.5%;
-   position: relative; */
+.bottom text{
+  color: #0099FF;
+}
+.scopedetail view:nth-child(3n){
       margin-right: 0;
+}
+.scopedetail view:first-child{
+      margin-right: 10.5%;
 }

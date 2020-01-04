@@ -42,7 +42,7 @@ padding: 0 37rpx;
   letter-spacing: 4rpx;
 }
 .index-area-otext:first-child{
-  padding:  0  18rpx;
+  padding:  0  32rpx;
   border: 1px solid #B5B5B5;
   border-radius: 10rpx;
   font-weight: normal;
@@ -61,6 +61,8 @@ padding: 0 37rpx;
   display: inline-block;
   position: relative;
   margin-right: 60rpx;
+  line-height: 40rpx;
+
 }
 .index-area:last-child{
   margin-left: 0rpx;
@@ -69,8 +71,8 @@ padding: 0 37rpx;
    width: 30rpx;
    height: 30rpx;
    position: absolute;
-   right: -28rpx;
-   top: 12rpx;
+   right: 0rpx;
+   top:0rpx;
 }
 .body-content{
 display: block;
@@ -97,7 +99,7 @@ font-size: 28rpx;
 
 }
 .overwordsarea{
-  overflow-x: scroll;
+  /* overflow-x: scroll; */
   white-space: nowrap;
   /* text-overflow: ellipsis; */
   /* overflow: hidden; */

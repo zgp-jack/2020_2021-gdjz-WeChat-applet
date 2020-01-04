@@ -1656,7 +1656,68 @@ margin-top: 4rpx;
   background:transparent;
   box-shadow: none;
 }
+.rule-detail .rule-oimg{
+width: 34rpx;
+height: 36rpx;
 
+}
+.topselect_box{
+  width: 30%;
+height: 70%;
+border-radius: 14rpx;
+position: relative;
+/* margin-top: 28rpx; */
+margin-right: 1.5%;
+font-size: 22rpx;
+
+}
+.topselect_box .select {
+  display: flex;
+  justify-content: space-around;
+}
+
+.topselect_box .select .select_text {
+  font-size: 30rpx;
+  color: #ff1800;
+  line-height: 28rpx;
+  text-align: right;
+  flex: 1;
+  padding-right: 6rpx;
+
+}
+.topselect_box .select .select_textone {
+  font-size: 30rpx;
+  color: #078f1e;
+  line-height: 28rpx;
+  text-align: right;
+  flex: 1;
+  padding-right: 6rpx;
+
+}
+
+.topselect_box .select image {
+width: 24rpx;
+height: 22rpx;
+display: block;
+margin-top: 4rpx;
+
+  transition: transform 0.3s;
+}
+.toptime{
+  font-size: 30rpx;
+  color: #6F6C6C;
+  line-height: 40rpx;
+}
+.toptime view{
+  margin-left: 58rpx;
+  margin-right: 30rpx;
+}
+.topdetail{
+  color: #0099ff;
+  font-size: 30rpx;
+  margin-left: 58rpx;
+  padding: 22rpx 0;
+}
 /*oworkotext cardsix  tworkotextonetu.cardnine .all cardsixsixnum  cardeightsixnum bg showtop nopass findingnamecardsixtwo .workotextone oworkotextonetu cardtwoif workotextone alllabletu
 #7A7A7A
 workotype oworkotextonetu workotextone cardotext oworkotext cworkotype oworkotext ocworkotype ocworkotyp content link cardseven workotextone contentone*/

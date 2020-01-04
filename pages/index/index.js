@@ -460,6 +460,7 @@ Page({
           params: userInfo,
             success:function(res){
                 let mydata = res.data;
+              console.log(mydata)
                 _this.setData({
                     "notice.lists": mydata.notice,
                   member_notice: mydata.member_notice,

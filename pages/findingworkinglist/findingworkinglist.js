@@ -103,8 +103,13 @@ Page({
     showReturnTopImg: false,
     showHistoryList: false,
     historyList: [],
+    toptown:"../../images/top.png"
   },
-
+  jumptop(){
+    wx.navigateTo({
+      url: `/pages/clients-looking-for-work/finding-name-card/findingnamecard`,
+    })
+  },
   stopThisAction: function () {
     return false;
   },

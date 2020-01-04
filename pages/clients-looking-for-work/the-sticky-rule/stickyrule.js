@@ -10,7 +10,7 @@ Page({
     imgDetelte: '../../../images/delete.png',
     areaText: [],
     areadata: [],
-
+    maxnumber:""
   },
   changeAreaData() {
     let that = this;
@@ -63,11 +63,22 @@ Page({
     })
   },
   chooseThisCtiy(e) {
+    let that = this;
+    console.log(that.data.maxnumber)
 
     let num = e.currentTarget.dataset.id.id;
 
-    let that = this;
+
     if (that.data.areadata[num - 2].selected == 1) {
+      if (that.data.areaText.length >= that.data.maxnumber) {
+        wx.showModal({
+          title: '温馨提示',
+          content: `最多只能置顶${that.data.maxnumber}个城市`,
+          showCancel: false,
+          success(res) { }
+        })
+        return
+      }
       that.data.areadata[num - 2].selected = 2;
       that.setData({
         areadata: that.data.areadata
@@ -76,30 +87,32 @@ Page({
       that.setData({
         areaText: that.data.areaText
       })
-      if (that.data.areaText.length>2){
-        that.setData({
-          scrollLeft: "120" + ((that.data.areaText.length-2)*40)
-        })
-      }
+      // if (that.data.areaText.length > 2) {
+      //   that.setData({
+      //     scrollLeft: "120" + ((that.data.areaText.length - 2) * 40)
+      //   })
+      // }
+
+  
     } else {
       let j = ''
       that.data.areadata[num - 2].selected = 1;
       that.setData({
         areadata: that.data.areadata
       })
-      for (let i = 0; i < that.data.areaText.length ; i ++){
-        if (that.data.areaText[i].id == num){
+      for (let i = 0; i < that.data.areaText.length; i++) {
+        if (that.data.areaText[i].id == num) {
           j = i
         }
       }
-      that.data.areaText.splice(j,1)
+      that.data.areaText.splice(j, 1)
       that.setData({
         areaText: that.data.areaText
       })
     }
   },
 
-  deletelable(e){
+  deletelable(e) {
 
     let that = this;
 
@@ -109,12 +122,12 @@ Page({
     that.setData({
       areadata: that.data.areadata
     })
-    that.data.areaText.splice(number,1)
+    that.data.areaText.splice(number, 1)
     that.setData({
       areaText: that.data.areaText
     })
   },
-  seleted(){
+  seleted() {
     let that = this;
     let pages = getCurrentPages();
     let prevPage = pages[pages.length - 2];
@@ -126,15 +139,15 @@ Page({
     })
   },
 
-  modifyArea(options){
+  modifyArea(options) {
     let that = this;
-    if (options.hasOwnProperty("area")){
-    let data = JSON.parse(options.area)
+    if (options.hasOwnProperty("area")) {
+      let data = JSON.parse(options.area)
       that.setData({
         areaText: data
       })
 
-      for (let i = 0; i < data.length; i++){
+      for (let i = 0; i < data.length; i++) {
         let num = data[i].id;
         that.data.areadata[num - 2].selected = 2;
         that.setData({
@@ -142,14 +155,19 @@ Page({
         })
       }
     }
+    if (options.hasOwnProperty("maxnumber")) {
+      that.setData({
+        maxnumber: options.maxnumber
+      })
+    }
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    console.log(options)
     this.getAreaData(options);
-  
+
   },
 
   /**

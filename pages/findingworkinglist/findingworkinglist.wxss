@@ -32,7 +32,7 @@
   width: 94%;
   height: 92rpx;
   margin: 0 auto;
-  margin-top: 30rpx;
+  margin-top: 40rpx;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -40,7 +40,7 @@
 
 .listsboxintro {
   width: 82%;
-  height: 92rpx;
+  line-height: 70rpx;
   /* display: flex;
   flex-direction: row;
   justify-content: space-between; */
@@ -124,11 +124,21 @@ text-overflow: ellipsis;
     height: 30rpx;
 
 }
+.listsboxstyru{
+  font-size: 30rpx;
+  position: absolute;
+  padding: 8rpx 20rpx;
+  background: #ECF7FE;
+  color: #0099ff;
+top: 26rpx;
+right: 22rpx;
+
+}
 .listsboxshow{
   font-size: 30rpx;
   color: #353636;
   position: absolute;
-  top: 10rpx;
+  top: 40rpx;
   right: 0;
 }
 .listsboxagetwo{
@@ -143,6 +153,14 @@ text-overflow: ellipsis;
 .listsboxnation{
   font-size: 28rpx!important;
   margin-left: 0rpx!important;
+}
+.listsboxoimg{
+  position: absolute;
+  top: 0;
+  left: 0;
+ width: 100rpx;
+height: 100rpx;
+
 }
 .listsboxagetwo .listsboxnum{
     font-size: 28rpx;

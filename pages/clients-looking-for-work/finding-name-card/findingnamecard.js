@@ -27,6 +27,7 @@ Page({
     newresumeskill: app.globalData.apiImgUrl + "lpy/newresume-skill.png",
     pvw: app.globalData.apiImgUrl + "lpy/bottom-one.png",
     participation: app.globalData.apiImgUrl + "lpy/bottom-two.png",
+    topimage: "../../../images/personaltop.png",
     userInfo: true,
     certificate_count: 0,
     project_count: 0,
@@ -102,10 +103,51 @@ Page({
     ranking: "",
     rankjump: ""
   },
-  thestickyrule(){
-    wx.navigateTo({
-      url: `/pages/clients-looking-for-work/finding-top/findingtop`,
-    })
+  thestickyrule() {
+    // ressonone
+    let that = this;
+    if (that.data.showtop) {
+      wx.showModal({
+        title: '温馨提示',
+        content: `您还没有找活名片`,
+        confirmText:`去添加`,
+        success(res) { 
+          if (res.confirm) {
+            that.toperfect()
+          } else if (res.cancel) {
+          }
+        }
+      })
+      return
+    } else if (that.data.checkone){
+      wx.showModal({
+        title: '温馨提示',
+        content: `审核中：您的找活名片正在审核中`,
+        success(res) {
+        }
+      })
+      return
+    } else if (that.data.ressonone) {
+      wx.showModal({
+        title: '温馨提示',
+        content: `审核失败：您的找活名片未通过审核`,
+        success(res) {
+        }
+      })
+      return
+    } else if (that.data.index == 1) {
+      wx.showModal({
+        title: '温馨提示',
+        content: `您的工作状态为《已找到工作》`,
+        success(res) {
+        }
+      })
+      return
+    } else {
+      wx.navigateTo({
+        url: `/pages/clients-looking-for-work/finding-top/findingtop`,
+      })
+    }
   },
   previewImage: function (e) {
 
@@ -143,7 +185,7 @@ Page({
       wx.navigateBack({
         delta: 1
       })
-    }else{
+    } else {
       wx.navigateTo({
         url: `/pages/clients-looking-for-work/ranking-rules/ranking-rules`,
       })
@@ -210,7 +252,7 @@ Page({
     })
     let commonShareImg = app.globalData.commonShareImg;
     let userInfo = wx.getStorageSync("userInfo");
-    let refId = userInfo?userInfo.userId:"";
+    let refId = userInfo ? userInfo.userId : "";
     let uuid = this.data.resume_uuid;
     let commonShareTips = app.globalData.commonShareTips;
     if (userInfo && that.data.checkonef == 2) {
@@ -878,7 +920,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   cardjump(options) {
-    
+
     if (options.hasOwnProperty("rankjump")) {
       console.log(options)
       this.setData({
