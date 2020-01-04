@@ -20,7 +20,7 @@
         <text>暂无相关内容</text>
     </view>
 </view>
-<view class='goyi' data-url='/pages/others/message/lists/lists' bindtap='suggestUserUrl'>意见反馈</view>
+<view class='goyi' bindtap='suggestUserUrl'>意见反馈</view>
 
 
 

@@ -99,7 +99,7 @@
                 <image class="ucener-leftImage" src='{{ ucenterimgs.ucenterMsg }}'></image>
                 <view class='ucener-border-b'>
                     <view class="ucener-title">我的信息
-                        <text wx:if="{{ footerImgs.infoNumber > 0 }}">{{footerImgs.infoNumber}}</text>
+                        <text wx:if="{{ footerImgs.msgsNumber > 0 }}">{{footerImgs.msgsNumber>9?'9+':footerImgs.msgsNumber}}</text>
                     </view>
                     <view class="flex-row">
                         <image src='{{ rightarrow }}' class="ucener-rightIcon"></image>

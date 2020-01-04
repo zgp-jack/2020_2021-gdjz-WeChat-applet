@@ -215,17 +215,18 @@
 }
 
 .ucener-title text {
-    width: 25rpx;
-    height: 25rpx;
+    width: 28rpx;
+    height: 28rpx;
     background: #fd0618;
-    border-radius: 50%;
+    border-radius: 100%;
     position: absolute;
     top: 0;
-    right: -25rpx;
+    right: -30rpx;
     color: #fff;
-    font-size: 16rpx;
-    line-height: 25rpx;
+    font-size: 20rpx;
+    line-height: 28rpx;
     text-align: center;
+    /* padding:0 2rpx 0 0; */
 }
 
 .ucener-detil {

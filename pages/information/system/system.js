@@ -34,7 +34,6 @@ Page({
   getMymessage: function () {
     let _this = this;
     let userInfo = wx.getStorageSync("userInfo");
-    let userUuid = wx.getStorageSync("userUuid");
     this.setData({ userInfo: userInfo })
     if (!userInfo) return false;
     wx.showLoading({ title: '数据加载中' })
@@ -126,15 +125,15 @@ Page({
       type: type
     })
     if(options.type == "1" || options.type == "8" || options.type == "9"){
-      var titleTypr = "系统消息"
+      var titleTypr = "系统信息"
     } else if(options.type == "2"){
-      var titleTypr = "招工消息"
+      var titleTypr = "招工信息"
     } else if(options.type == "3" || options.type == "4" || options.type == "5"){
-      var titleTypr = "找活消息"
+      var titleTypr = "找活信息"
     } else if(options.type == "6" || options.type == "10"){
-      var titleTypr = "投诉消息"
+      var titleTypr = "投诉信息"
     } else if(options.type == "7"){
-      var titleTypr = "留言消息"
+      var titleTypr = "留言信息"
     } 
     wx.setNavigationBarTitle({
       title: titleTypr
