@@ -1,6 +1,23 @@
 const _url = "http://cdn.yupao.com/miniprogram";
 const app = getApp();
-app.getUserMsg();
+const msgsNumber = msgsNumber
+app.getUserMsg(function(jobNumber,msgsNumber){
+    console.log(jobNumber,msgsNumber,"res.data.data.messageNumber")
+});
+// app.userUploadImg(function (img, url) {
+//     wx.hideLoading()
+//     that.data.imgArrs.push(url.httpurl)
+//     that.data.idArrs.push(url.url)
+//     that.setData({
+//       imgArrs: that.data.imgArrs
+//     })
+//     if (that.data.imgArrs.length >= 3) {
+//       that.setData({
+//         imgArrslength: false
+//       })
+//     }
+//   })
+
 const footerImgs = {
     homeNormal: "/images/footer-home.png",
     homeActive:"/images/footer-home-active.png",

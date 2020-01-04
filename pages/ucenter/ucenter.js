@@ -58,6 +58,7 @@ Page({
                 if (mydata.errcode == "ok") {
                     _this.setData({
                         member: mydata.member,
+                        hasNoticeMsg: mydata.member.has_notice_msg.hasNoticeMsg,
                         showReturnIntegral: (parseInt(mydata.member.return_integral) == 0) ? false : true
                     })
                 } else {
@@ -136,10 +137,13 @@ Page({
         })
     },
     getUserMsg: function () {
-        app.getUserMsg(this);
-        let msgsNumber = wx.getStorageSync("msgsNumber");
-        console.log(this.data.msgsNumber,"msgsNumber")
-        console.log(msgsNumber,"msgsNumber")
+        app.getUserMsg(function(jobNumber,msgsNumber){
+            let _this = this
+            console.log(jobNumber,msgsNumber,"res.data.data.messageNumber")
+            // let jobNumber = jobNumber
+            // let msgsNumber = msgsNumber
+        
+        });
     },
     /**
      * 生命周期函数--监听页面初次渲染完成

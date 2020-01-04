@@ -284,6 +284,7 @@ Page({
   },
   submitmaterial() { //发数据给后台
     let information = {}
+    let _this =this 
     let userInfo = wx.getStorageSync("userInfo");
     if (!userInfo) return false;
     let vertifyNum = v.v.new()
@@ -351,9 +352,8 @@ Page({
       success: function (res) {
         console.log(res.data)
         if (res.data.errcode == 200) {
-      
-          this.subscribeToNews(res)
 
+          _this.subscribeToNew(res)
         } else {
           wx.showModal({
             title: '温馨提示',
@@ -370,7 +370,7 @@ Page({
     })
   },
 
-  subscribeToNews: function(res) {
+  subscribeToNew: function(res) {
     let userInfo = wx.getStorageSync("userInfo");
     if (wx.canIUse('requestSubscribeMessage') === true) {
         wx.requestSubscribeMessage({

@@ -11,7 +11,7 @@ Page({
     icon: app.globalData.apiImgUrl + "userauth-topicon.png",
     newmessage:{
                                              // 1 系统信息
-      type2:'/pages/index/index',            // 2 招工信息
+      type2:'/pages/published/published',            // 2 招工信息
       type3:'/pages/clients-looking-for-work/finding-name-card/findingnamecard',      // 3 名片信息
       type4:'/pages/clients-looking-for-work/finding-name-card/findingnamecard', // 4 证书信息
       type5:'/pages/clients-looking-for-work/finding-name-card/findingnamecard',      // 5 项目信息
@@ -77,8 +77,8 @@ Page({
       }
     })
   },
-  valiUserUrl:function(){
-    let type = this.data.type
+  valiUserUrl:function(e){
+    let type = e.currentTarget.dataset.type
     console.log(type,"type")
     let jtype = "type" + type
     wx.navigateTo({
@@ -125,10 +125,25 @@ Page({
     this.setData({
       type: type
     })
+    if(options.type == "1" || options.type == "8" || options.type == "9"){
+      var titleTypr = "系统消息"
+    } else if(options.type == "2"){
+      var titleTypr = "招工消息"
+    } else if(options.type == "3" || options.type == "4" || options.type == "5"){
+      var titleTypr = "找活消息"
+    } else if(options.type == "6" || options.type == "10"){
+      var titleTypr = "投诉消息"
+    } else if(options.type == "7"){
+      var titleTypr = "留言消息"
+    } 
+    wx.setNavigationBarTitle({
+      title: titleTypr
+    })
+                       
   },
 
   /**
-   * 生命周期函数--监听页面初次渲染完成
+   * 生命周期函数--监听页面初次渲染完成*
    */
   onReady: function () {
 

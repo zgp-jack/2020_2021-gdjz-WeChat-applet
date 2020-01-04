@@ -8,8 +8,6 @@ App({
       //   
     },
     globalData: {
-      jobNumber: '',
-      msgsNumber : '',
       isauthuuid: false,
       previewboss: true,
       collectstatus: true,
@@ -840,7 +838,7 @@ App({
         params: userInfo ? userInfo : {}
       })
     },
-    getUserMsg: function() {
+    getUserMsg: function(callback) {
       let _this = this
         let userInfo = wx.getStorageSync("userInfo");
         if (!userInfo) return false;
@@ -851,9 +849,10 @@ App({
               if (res.data.errcode == "ok") {
                 _this.globalData.jobNumber = res.data.data.jobNumber
                 _this.globalData.msgsNumber = res.data.data.messageNumber
-                
-              }
+                callback(res.data.data.jobNumber,res.data.data.messageNumber)
             }
+
+          }
         })
     },
   })

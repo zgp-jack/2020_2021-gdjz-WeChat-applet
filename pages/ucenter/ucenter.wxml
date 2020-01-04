@@ -89,7 +89,7 @@
             <view class='ucener-theme' data-url='../published/published?type=1' bindtap='valiUserUrl'>
                 <image class="ucener-leftImage" src='{{ ucenterimgs.trade }}'></image>
                 <view class='ucener-border-b ucener-border'>
-                    <view class="ucener-title">我的交易</view>
+                    <view class="ucener-title">我的二手交易</view>
                     <view class="flex-row">
                         <image src='{{ rightarrow }}' class="ucener-rightIcon"></image>
                     </view>
@@ -99,7 +99,7 @@
                 <image class="ucener-leftImage" src='{{ ucenterimgs.ucenterMsg }}'></image>
                 <view class='ucener-border-b'>
                     <view class="ucener-title">我的信息
-                        <text wx:if="{{jobNumber>0}}">{{jobNumber > 9 ? '9+' : jobNumber}}</text>
+                        <text >9+{{jobNumber > 9 ? '9+' : jobNumber}}</text>
                     </view>
                     <view class="flex-row">
                         <image src='{{ rightarrow }}' class="ucener-rightIcon"></image>
@@ -177,8 +177,11 @@
             <view class='ucener-theme' data-url='/pages/others/message/lists/lists' bindtap='suggestUserUrl'>
                 <image class="ucener-leftImage" src='{{ ucenterimgs.feedback }}'></image>
                 <view class='ucener-border-b ucener-border'>
-                    <view class="ucener-title">意见反馈</view>
+                    <view class="ucener-title">意见反馈
+                        <text wx:if="{{hasNoticeMsg>0}}"></text>
+                    </view>
                     <view class="flex-row">
+                        <view class="ucener-detil" wx:if="{{hasNoticeMsg>0}}">有最新回复</view>
                         <image src='{{ rightarrow }}' class="ucener-rightIcon"></image>
                     </view>
                 </view>
