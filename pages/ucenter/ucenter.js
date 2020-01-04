@@ -83,6 +83,7 @@ Page({
     valiUserUrl: function(e) {
         app.globalData.showdetail = true
         app.valiUserUrl(e, this.data.userInfo)
+        footerjs.initMsgNum(this);
     },
     suggestUserUrl: function(e) {
         app.globalData.showdetail = true
