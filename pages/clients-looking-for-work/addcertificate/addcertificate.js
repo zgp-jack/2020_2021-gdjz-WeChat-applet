@@ -217,10 +217,10 @@ vertify()
   },
   preserve() {
     let that = this;
-    
     let certificate_count = wx.getStorageSync("certificate_count");
-    // console.log(certificate_count)
-    // console.log(that.data.certificate_cou , that.data.certificate_count)
+    console.log(certificate_count)
+    console.log(that.data.certificate_cou , that.data.certificate_count)
+    // if (that.data.certificate_cou >= that.data.certificate_count) {
     if (that.data.certificate_cou >=  certificate_count) {
       wx.showModal({
         title: '温馨提示',
@@ -359,7 +359,9 @@ vertify()
   },
   preservechixu() {
     let that = this;
-    if (that.data.certificate_cou >= that.data.certificate_count) {
+    let certificate_count = wx.getStorageSync("certificate_count");
+    // if (that.data.certificate_cou >= that.data.certificate_count) {
+      if (that.data.certificate_cou >= certificate_count) {
       wx.showModal({
         title: '温馨提示',
         content: `最多只能添加${that.data.certificate_count}个技能证书`,

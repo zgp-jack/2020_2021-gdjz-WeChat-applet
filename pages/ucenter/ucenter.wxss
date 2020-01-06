@@ -6,7 +6,10 @@
     background: url("http://cdn.yupao.com/miniprogram/images/new-ucenter.png") no-repeat;
     background-size: 100% 100%;
 }
-
+.felx{
+    display: flex;
+    align-items: center;
+}
 .ucenter-title {
     position: relative;
     width: 100%;

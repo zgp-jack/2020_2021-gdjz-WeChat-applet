@@ -715,7 +715,6 @@ Page({
             publishActive: footerjs.publishActive,
             showPublishBox: footerjs.showPublishBox
         })
-      footerjs.initMsgNum(this);
     },
     doPublishAction: function () {
         console.log("发布被点击了");
@@ -858,11 +857,12 @@ Page({
     onShow: function () {
       this.getUserUuid();
       this.initUserinfo();
+      footerjs.initMsgNum(this);
     },
-  onPageScroll:function(e){
-    let top = e.scrollTop;
-    this.setData({ showReturnTopImg: (top > 960) ? true : false })
-  },
+    onPageScroll:function(e){
+      let top = e.scrollTop;
+      this.setData({ showReturnTopImg: (top > 960) ? true : false })
+    },
 
     /**
      * 生命周期函数--监听页面隐藏

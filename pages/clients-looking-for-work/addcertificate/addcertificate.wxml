@@ -44,7 +44,7 @@
     <button class="addcertificatebottomone" wx:if="{{!obtnbut}}" bindtap="deleteexper">删除</button>
     <button class="addcertificatebottomone" wx:if="{{obtnbut&&skill_show}}" bindtap="preservechixu">保存 继续添加</button>
         <button class="addcertificatebottomone" wx:if="{{obtnbut&&!skill_show}}" bindtap="preservechixutui">取消</button>
-    <button class="addcertificatebottomotwo" wx:if="{{obtnbut}}" bindtap="preserve">确认保存1</button>
+    <button class="addcertificatebottomotwo" wx:if="{{obtnbut}}" bindtap="preserve">确认保存</button>
     <button class="addcertificatebottomotwo" wx:if="{{!obtnbut}}" bindtap="preserveone">确认保存</button>
   </view>
 </view>

@@ -58,6 +58,7 @@ Page({
                 if (mydata.errcode == "ok") {
                     _this.setData({
                         member: mydata.member,
+                        is_checking: mydata.is_checking,
                         hasNoticeMsg: mydata.member.has_notice_msg.hasNoticeMsg,
                         showReturnIntegral: (parseInt(mydata.member.return_integral) == 0) ? false : true
                     })
@@ -83,7 +84,6 @@ Page({
     valiUserUrl: function(e) {
         app.globalData.showdetail = true
         app.valiUserUrl(e, this.data.userInfo)
-        footerjs.initMsgNum(this);
     },
     suggestUserUrl: function(e) {
         app.globalData.showdetail = true
@@ -109,7 +109,6 @@ Page({
             publishActive: footerjs.publishActive,
             showPublishBox: footerjs.showPublishBox
         })
-      footerjs.initMsgNum(this);
     },
     doPublishAction: function() {
         footerjs.doPublishAction(this);
@@ -138,15 +137,6 @@ Page({
             }
         })
     },
-    getUserMsg: function () {
-        app.getUserMsg(function(jobNumber,msgsNumber){
-            let _this = this
-            console.log(jobNumber,msgsNumber,"res.data.data.messageNumber")
-            // let jobNumber = jobNumber
-            // let msgsNumber = msgsNumber
-        
-        });
-    },
     /**
      * 生命周期函数--监听页面初次渲染完成
      */
@@ -159,7 +149,7 @@ Page({
      */
     onShow() {
         this.initUserInfo();
-        this.getUserMsg();
+        footerjs.initMsgNum(this);
     },
     releaselive() {
         app.globalData.showdetail = true
