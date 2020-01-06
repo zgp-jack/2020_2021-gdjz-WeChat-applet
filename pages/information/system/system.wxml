@@ -34,3 +34,6 @@
     <button class='userauth-btn userauth-sure-btn' open-type="getUserInfo" bindgetuserinfo='bindGetUserInfo'>微信授权登录</button>
     <button class='userauth-btn  userauth-back-btn' bindtap='returnPrevPage'>返回首页</button>
 </view>
+
+
+<image class="info-shareimg" src="{{homebtnImg}}" wx:if="{{isShare}}" bindtap='returnPrevPage'></image>

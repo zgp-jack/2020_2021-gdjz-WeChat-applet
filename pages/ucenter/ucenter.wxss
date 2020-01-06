@@ -191,8 +191,8 @@
 }
 
 .ucener-leftImage {
-    width: 38rpx;
-    height: 36rpx;
+    width: 42rpx;
+    height: 38rpx;
     /* padding: 32rpx 20rpx 30rpx 0 */
 }
 

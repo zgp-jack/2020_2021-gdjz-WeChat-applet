@@ -9,6 +9,7 @@ Page({
     rightarrow: app.globalData.apiImgUrl + "new-center-rightarrow.png",
     userInfo: true,
     icon: app.globalData.apiImgUrl + "userauth-topicon.png",
+    homebtnImg: app.globalData.apiImgUrl + "yp-return-jobinfo.png",
     newmessage:{
                                              // 1 系统信息
       type2:'/pages/published/published',            // 2 招工信息
@@ -28,6 +29,7 @@ Page({
     },
     lists:[],
     type:'',
+    isShare: false,
     // 招工-列表，找活-基础资料跳名片列表and项目、证书跳对应列表，留言跳留言列表， 投诉-退分记录列表，充值跳积分来源列表，实名跳实名认证，
   },
 
@@ -50,13 +52,12 @@ Page({
         if (mydata.errcode == "ok") {
             let _list = _this.data.lists;
             let _lists = mydata.data.lists;
-
             if(_lists.length == 0){
                 _this.setData({ isEnd:true})
             }else{
               let mylist = _list.concat(_lists);
-                let _page = _this.data.page + 1;
-                _this.setData({ lists: mylist, page: _page});
+              let _page = _this.data.page + 1;
+              _this.setData({ lists: mylist, page: _page});
             }
         } else {
             wx.showToast({
@@ -76,7 +77,52 @@ Page({
       }
     })
   },
+  
+
+  getshow: function () {
+    let _this = this;
+    let userInfo = wx.getStorageSync("userInfo");
+    this.setData({ userInfo: userInfo })
+    if (!userInfo) return false;
+    wx.showLoading({ title: '数据加载中' })
+    app.doRequestAction({
+      url: "member/message-of-type/",
+      way: "POST",
+      params: {
+        type:_this.data.type,
+        page: 1,
+    },
+      success: function (res) {
+        wx.hideLoading();
+        let mydata = res.data;
+        if (mydata.errcode == "ok") {
+          let _lists = mydata.data.lists;
+            if(_lists.length == 0){
+              _this.setData({ isEnd:true})
+          }else{
+            _this.setData({ lists: _lists, page: 2,isEnd:false});
+
+          }
+        } else {
+            wx.showToast({
+                title: mydata.errmsg,
+                icon: 'none',
+                duration: 5000
+            })
+        }
+      },
+      fail: function (err) {
+        wx.hideLoading();
+        wx.showToast({
+          title: '数据加载失败，请稍后重试！',
+          icon: "none",
+          duration: 5000
+        })
+      }
+    })
+  },
   valiUserUrl:function(e){
+    app.globalData.showdetail = true
     let type = e.currentTarget.dataset.type
     console.log(type,"type")
     let jtype = "type" + type
@@ -120,24 +166,30 @@ Page({
    */
   onLoad: function (options) {
     let type =options.type
-    console.log(type,"type")
+    // console.log(type,"type")
     this.setData({
       type: type
     })
     if(options.type == "1" || options.type == "8" || options.type == "9"){
-      var titleTypr = "系统信息"
+      var titleTypr = "系统提醒"
     } else if(options.type == "2"){
-      var titleTypr = "招工信息"
+      var titleTypr = "招工提醒"
     } else if(options.type == "3" || options.type == "4" || options.type == "5"){
-      var titleTypr = "找活信息"
+      var titleTypr = "找活提醒"
     } else if(options.type == "6" || options.type == "10"){
-      var titleTypr = "投诉信息"
+      var titleTypr = "投诉提醒"
     } else if(options.type == "7"){
-      var titleTypr = "留言信息"
+      var titleTypr = "留言提醒"
     } 
     wx.setNavigationBarTitle({
       title: titleTypr
     })  
+    let pages = getCurrentPages();
+    this.setData({
+      isShare: pages.length === 1 ? true : false
+    });
+        
+    // this.getMymessage()
   },
 
   /**
@@ -151,7 +203,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    this.getMymessage()
+    this.getshow()
   },
 
   /**

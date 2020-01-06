@@ -14,15 +14,15 @@ Page({
     },
     //点击最外层列表展开收起
     listTap(e) {
-        console.log('触发了最外层');
+        // console.log('触发了最外层');
         let aIndex = e.currentTarget.dataset.parentindex, //获取点击的下标值
-          helpeLists = this.data.helpeLists;
-      helpeLists[aIndex].show = !helpeLists[aIndex].show || false; //变换其打开、关闭的状态
-      if (helpeLists[aIndex].show) { //如果点击后是展开状态，则让其他已经展开的列表变为收起状态
-        this.packUp(helpeLists, aIndex);
+        helpeLists = this.data.helpeLists;
+        helpeLists[aIndex].show = !helpeLists[aIndex].show || false; //变换其打开、关闭的状态
+        if (helpeLists[aIndex].show) { //如果点击后是展开状态，则让其他已经展开的列表变为收起状态
+          this.packUp(helpeLists, aIndex);
         }
         this.setData({
-          helpeLists
+            helpeLists
         });
     },
     //让所有的展开项，都变为收起
@@ -121,7 +121,7 @@ Page({
         let _this = this;
         let _mark = true;
         let _wx = wx.getStorageSync("_wx");
-        let userInfo = this.data.userInfo;
+        let userInfo = wx.getStorageSync("userInfo");
         let _time = Date.parse(new Date());
         if (_wx && _wx.expirTime) {
             if (parseInt(_wx.expirTime) > _time) _mark = false;

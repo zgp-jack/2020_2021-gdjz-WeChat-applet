@@ -177,6 +177,7 @@ Page({
     onPullDownRefresh: function() {
         wx.showNavigationBarLoading()
             //wx.startPullDownRefresh()
+        footerjs.initMsgNum(this);
         this.initUserInfo(function() {
             wx.hideNavigationBarLoading()
             wx.stopPullDownRefresh();
