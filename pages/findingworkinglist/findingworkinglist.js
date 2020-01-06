@@ -738,7 +738,7 @@ Page({
         userInfo: userInfo
       })
     }
-
+    footerjs.initMsgNum(this);
   },
 
   /**
