@@ -66,10 +66,9 @@
             <view class='ucener-theme' data-url='../published/published?type=0' bindtap='valiUserUrl'>
                 <image class="ucener-leftImage" src='{{ ucenterimgs.recruit }}'></image>
                 <view class='ucener-border-b ucener-border'>
-                    <view class="ucener-title">我的招工
-                    </view>
+                    <view class="ucener-title">我的招工</view>
                     <view class="flex-row">
-                        <!-- <view class="ucener-detil">专属图标</view> -->
+                        <view class="ucener-detil" wx:if="{{ footerImgs.infoNumber > 0 }}">状态已更新</view>
                         <image src='{{ rightarrow }}' class="ucener-rightIcon"></image>
                     </view>
                 </view>
@@ -77,8 +76,7 @@
             <view class='ucener-theme' data-url="/pages/clients-looking-for-work/finding-name-card/findingnamecard" bindtap='valiUserUrl'>
                 <image class="ucener-leftImage" src='{{ ucenterimgs.mycard }}'></image>
                 <view class='ucener-border-b ucener-border'>
-                    <view class="ucener-title">我的找活名片
-                    </view>
+                    <view class="ucener-title">我的找活名片</view>
                     <view class="flex-row">
                         <view class="ucener-detil">{{member.resume_status.resume_tips_string}}</view>
                         <image src='{{ rightarrow }}' class="ucener-rightIcon"></image>
@@ -101,6 +99,7 @@
                         <text class="masnumber" wx:if="{{ footerImgs.msgsNumber > 0 }}">{{footerImgs.msgsNumber>9?'9+':footerImgs.msgsNumber}}</text>
                     </view>
                     <view class="flex-row">
+                        <view class="ucener-detil" wx:if="{{ footerImgs.msgsNumber > 0 }}">有新信息待查看</view>
                         <image src='{{ rightarrow }}' class="ucener-rightIcon"></image>
                     </view>
                 </view>
@@ -121,8 +120,7 @@
             <view class='ucener-theme' data-url='../static/invite' bindtap='valiUserUrl'>
                 <image class="ucener-leftImage" src='{{ ucenterimgs.invite }}'></image>
                 <view class='ucener-border-b ucener-border'>
-                    <view class="ucener-title">邀请工友
-                    </view>
+                    <view class="ucener-title">邀请工友</view>
                     <view class="flex-row">
                         <view class="ucener-detil">邀请好友得积分</view>
                         <image src='{{ rightarrow }}' class="ucener-rightIcon"></image>
@@ -190,7 +188,7 @@
                 <view class='ucener-border-b'>
                     <view class="ucener-title">帮助中心</view>
                     <view class="flex-row">
-                        <!-- <view class="ucener-detil">使用教程</view> -->
+                        <view class="ucener-detil">使用教程</view>
                         <image src='{{ rightarrow }}' class="ucener-rightIcon"></image>
                     </view>
                 </view>
