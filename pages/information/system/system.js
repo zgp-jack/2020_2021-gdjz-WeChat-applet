@@ -181,7 +181,7 @@ Page({
     } else if(options.type == "6" || options.type == "10"){
       var titleTypr = "投诉提醒"
     } else if(options.type == "7"){
-      var titleTypr = "留言提醒"
+      var titleTypr = "我的信息-留言"
     } 
     wx.setNavigationBarTitle({
       title: titleTypr
