@@ -11,6 +11,7 @@
                     <text> {{item.type_name}} </text>
                     <image src='{{ rightarrow }}' class="rightarrow"></image>
                 </view>
+                <view class="messsage-name" wx:if="{{item.title!= ''}}"> {{item.title}} </view>
                 <view class="messsage-deail"> {{item.description}} </view>
             </view>
         </view>
