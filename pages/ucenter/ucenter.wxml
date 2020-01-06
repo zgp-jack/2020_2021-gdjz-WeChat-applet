@@ -67,7 +67,6 @@
                 <image class="ucener-leftImage" src='{{ ucenterimgs.recruit }}'></image>
                 <view class='ucener-border-b ucener-border'>
                     <view class="ucener-title">我的招工
-                        <text wx:if="{{footerImgs.infoNumber>0}}"></text>
                     </view>
                     <view class="flex-row">
                         <!-- <view class="ucener-detil">专属图标</view> -->

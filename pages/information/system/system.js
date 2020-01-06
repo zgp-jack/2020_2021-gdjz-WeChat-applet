@@ -122,7 +122,9 @@ Page({
     })
   },
   valiUserUrl:function(e){
+    app.globalData.allexpress = true;
     app.globalData.showdetail = true
+    app.globalData.allskill = true;
     let type = e.currentTarget.dataset.type
     console.log(type,"type")
     let jtype = "type" + type
