@@ -113,32 +113,34 @@ Page({
             wx.requestSubscribeMessage({
                 tmplIds: ['vpEpkHfo5tlmGB8oZXq-qVU3ySmsxTzPrgNsv_2l6Go'],
                 success(res) {
-                    app.appRequestAction({
-                        url: "leaving-message/add-subscribe-msg/",
-                        way: "POST",
-                        mask: true,
-                        params: {
-                            userId: userInfo.userId,
-                            token: userInfo.token,
-                            tokenTime: userInfo.tokenTime,
-                            type: 2 
-                        },
-                        success: function(res) {
-                            wx.showModal({
-                                title: '恭喜您',
-                                content: '您已经成功充值' + _this.data.rechargeData[_this.data.activeIndex].integral+'个积分',
-                                cancelText:"会员中心",
-                                confirmText:"继续充值",
-                                success:function(res){
-                                    if (res.cancel) {
-                                        wx.reLaunch({
-                                            url: '/pages/ucenter/ucenter',
-                                        })
+                    if (res.errMsg == "requestSubscribeMessage:ok") {
+                        app.appRequestAction({
+                            url: "leaving-message/add-subscribe-msg/",
+                            way: "POST",
+                            mask: true,
+                            params: {
+                                userId: userInfo.userId,
+                                token: userInfo.token,
+                                tokenTime: userInfo.tokenTime,
+                                type: 2 
+                            },
+                            success: function(res) {
+                                wx.showModal({
+                                    title: '恭喜您',
+                                    content: '您已经成功充值' + _this.data.rechargeData[_this.data.activeIndex].integral+'个积分',
+                                    cancelText:"会员中心",
+                                    confirmText:"继续充值",
+                                    success:function(res){
+                                        if (res.cancel) {
+                                            wx.reLaunch({
+                                                url: '/pages/ucenter/ucenter',
+                                            })
+                                        }
                                     }
-                                }
-                            })
-                        },
-                    })
+                                })
+                            },
+                        })
+                    }
                 }
             })
         } else {

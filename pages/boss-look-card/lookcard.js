@@ -259,6 +259,7 @@ Page({
         wx.requestSubscribeMessage({
             tmplIds: ['uZcoNQz86gAr3P4DYtgt85PnVgMcN_Je27TeHdKhz14'],
             success(res) {
+              if (res.errMsg == "requestSubscribeMessage:ok") {
                 app.appRequestAction({
                     url: "leaving-message/add-subscribe-msg/",
                     way: "POST", 
@@ -275,6 +276,7 @@ Page({
                         })
                     },
                 })
+              }
             }
         })
     } else {
