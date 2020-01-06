@@ -98,7 +98,7 @@
                 <image class="ucener-leftImage" src='{{ ucenterimgs.ucenterMsg }}'></image>
                 <view class='ucener-border-b'>
                     <view class="ucener-title">我的信息
-                        <text wx:if="{{ footerImgs.msgsNumber > 0 }}">{{footerImgs.msgsNumber>9?'9+':footerImgs.msgsNumber}}</text>
+                        <text class="masnumber" wx:if="{{ footerImgs.msgsNumber > 0 }}">{{footerImgs.msgsNumber>9?'9+':footerImgs.msgsNumber}}</text>
                     </view>
                     <view class="flex-row">
                         <image src='{{ rightarrow }}' class="ucener-rightIcon"></image>
@@ -177,7 +177,7 @@
                 <image class="ucener-leftImage" src='{{ ucenterimgs.feedback }}'></image>
                 <view class='ucener-border-b ucener-border'>
                     <view class="ucener-title">意见反馈
-                        <text wx:if="{{hasNoticeMsg>0}}"></text>
+                        <text class="msg-dot" wx:if="{{hasNoticeMsg>0}}"></text>
                     </view>
                     <view class="flex-row">
                         <view class="ucener-detil" wx:if="{{hasNoticeMsg>0}}">有最新回复</view>

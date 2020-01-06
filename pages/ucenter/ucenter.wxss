@@ -217,7 +217,7 @@
     font-weight: bold;
 }
 
-.ucener-title text {
+.masnumber {
     width: 28rpx;
     height: 28rpx;
     background: #fd0618;
@@ -230,6 +230,9 @@
     line-height: 28rpx;
     text-align: center;
     /* padding:0 2rpx 0 0; */
+}
+.msg-dot{
+    position:absolute;top:0;right:-20rpx;background:rgba(253,6,24,1);border-radius:100%;padding:8rpx;
 }
 
 .ucener-detil {
