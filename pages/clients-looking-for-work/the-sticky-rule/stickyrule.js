@@ -1,16 +1,19 @@
 // pages/clients-looking-for-work/the-sticky-rule/stickyrule.js
 const app = getApp();
-
+let v = require("../../../utils/v.js");
+let reminder = require("../../../utils/reminder.js");
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    imgDetelte: '../../../images/delete.png',
+    imgDetelte: app.globalData.apiImgUrl + "lpy/delete.png",
     areaText: [],
     areadata: [],
-    maxnumber:""
+    maxnumber: "",
+    modify: "",
+    areaTextId: "",
   },
   changeAreaData() {
     let that = this;
@@ -93,7 +96,7 @@ Page({
       //   })
       // }
 
-  
+
     } else {
       let j = ''
       that.data.areadata[num - 2].selected = 1;
@@ -127,20 +130,99 @@ Page({
       areaText: that.data.areaText
     })
   },
+  areaId() {
+
+    let id = '';
+    let areaText = this.data.areaText;
+    for (let i = 0; i < areaText.length; i++) {
+      if (i >= areaText.length - 1) {
+        id += areaText[i].id
+      } else {
+        id += areaText[i].id + ","
+      }
+    }
+    this.data.areaTextId = id;
+    console.log(areaText)
+  },
   seleted() {
     let that = this;
-    let pages = getCurrentPages();
-    let prevPage = pages[pages.length - 2];
-    prevPage.setData({                                      //修改上一个页面的变量
-      areaTextcrum: that.data.areaText
-    })
-    wx.navigateBack({
-      delta: 1
-    })
+    let userInfo = wx.getStorageSync("userInfo");
+    let userUuid = wx.getStorageSync("userUuid");
+    let vertifyNum = v.v.new()
+    if (!userInfo || !userUuid) return false;
+    if (vertifyNum.isNull(this.data.areaText)) {
+      reminder.reminder({ tips: '置顶城市' })
+      return
+    }
+    that.areaId()
+    let detail = {
+      mid: userInfo.userId,
+      token: userInfo.token,
+      time: userInfo.tokenTime,
+      uuid: userUuid,
+      citys: 0,
+      provinces: that.data.areaTextId
+    }
+    if (that.data.modify == "modify") {
+
+      app.appRequestAction({
+        url: 'resumes/change-top-areas/',
+        way: 'POST',
+        params: detail,
+        mask: true,
+        success: function (res) {
+          let mydata = res.data;
+
+          if (mydata.errcode == "ok") {
+ 
+            wx.showModal({
+              title: '温馨提示',
+              content: res.data.errmsg,
+              showCancel: false,
+              success(res) { 
+                wx.navigateBack({
+                  delta: 1
+                })
+              }
+            })
+            return
+          } else {
+            wx.showModal({
+              title: '温馨提示',
+              content: res.data.errmsg,
+              showCancel: false,
+              success(res) { }
+            })
+            return
+          }
+        },
+        fail: function (err) {
+          wx.showModal({
+            title: '温馨提示',
+            content: `您的网络请求失败`,
+            showCancel: false,
+            success(res) {
+            }
+          })
+        }
+      })
+
+    } else {
+      let pages = getCurrentPages();
+      let prevPage = pages[pages.length - 2];
+      prevPage.setData({                                      //修改上一个页面的变量
+        areaTextcrum: that.data.areaText
+      })
+      wx.navigateBack({
+        delta: 1
+      })
+    }
   },
 
   modifyArea(options) {
+
     let that = this;
+
     if (options.hasOwnProperty("area")) {
       let data = JSON.parse(options.area)
       that.setData({
@@ -158,6 +240,11 @@ Page({
     if (options.hasOwnProperty("maxnumber")) {
       that.setData({
         maxnumber: options.maxnumber
+      })
+    }
+    if (options.hasOwnProperty("modify")) {
+      that.setData({
+        modify: options.modify
       })
     }
   },

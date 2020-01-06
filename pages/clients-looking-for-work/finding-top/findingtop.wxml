@@ -37,9 +37,7 @@
   </view>
 
   <view class="bottom">
-    <view>1、置顶一个省或直辖市每天消耗20积分，置顶一个市每天消耗5积分。</view>
-    <view>2、最多可选择5个省、五个市进行置顶；</view>
-    <view>3、如有任何疑问欢迎致电鱼泡客服，电话：<text bindtap="callThisPhone" data-phone="{{serverPhone}}">{{serverPhone}}</text></view>
+    <view wx:for="{{top_rules}}" wx:key="{{index}}">{{item}}</view>
   </view>
 </view>
 <view class="common-userauth" wx:if="{{ !userInfo }}">

@@ -2,8 +2,9 @@
 <view class="feedback-header" id="comment">
     <view>
         <text class="feedback-header-texr">提示 : </text> 为提高沟通效率,建议您添加客服微信或拨打客服电话,客服微信号:
-        <text bindtap='clipboardWechat' data-wc="{{ wechat }}" class='gehu'>{{ wechat }}</text> 客服电话:
+        <text bindtap='clipboardWechat' data-wc="{{ wechat }}" class='gehu'>{{ wechat }}</text><text class="phoneer" data-wc="{{ wechat }}" bindtap='clipboardWechat'>复制</text> 客服电话:
         <text class='gehu' data-phone="{{ phone }}" bindtap='callThisPhone'>{{ phone }}</text>
+        <text class="phoneer" bindtap='callThisPhone' data-phone="{{ phone }}">呼叫</text>
     </view>
 </view>
 

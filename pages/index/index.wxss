@@ -330,3 +330,11 @@ page{
 .usersearchhistory-footer image{position: relative;display: inline-block;width: 32rpx;height: 32rpx;vertical-align: middle;margin-right: 10rpx;}
 .feedback-rightarrow{position: absolute;right: 20rpx;width: 20rpx;height: 30rpx;display: block;top: 30rpx;}
 .feedbackmsg .feedback-btn{position: absolute;right: 15rpx;color:white;line-height: 50rpx;padding: 0 20rpx;background: #0099ff;font-size: 24rpx;border-radius: 5rpx;top: 25rpx;}
+.phoneer{
+  background: #0099ff;
+  font-size: 28rpx;
+  padding: 2rpx 16rpx;
+  color: white !important;
+  border-radius: 4rpx;
+  margin-left: 12rpx;
+}

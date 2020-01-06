@@ -18,11 +18,9 @@ Page({
     province_integral: "",
     value: 1,
     areaTextId: "",
-    serverPhone: ""
+    top_rules:[]
   },
-  callThisPhone: function (e) {
-    app.callThisPhone(e);
-  },
+
   jumpstickyrule() {
     let that = this;
     let max_number = that.data.max_number
@@ -217,9 +215,9 @@ Page({
         console.log(mydata)
         if (mydata.errcode == "ok") {
           that.setData({
-            max_number: mydata.data[0].max_number,
-            province_integral: mydata.data[0].province_integral,
-            serverPhone: app.globalData.serverPhone
+            max_number: mydata.data.max_number,
+            province_integral: mydata.data.province_integral,
+            top_rules: mydata.data.top_rules
           })
 
         } else {

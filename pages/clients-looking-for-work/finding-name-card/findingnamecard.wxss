@@ -1712,11 +1712,21 @@ margin-top: 4rpx;
   margin-left: 58rpx;
   margin-right: 30rpx;
 }
+.toptime .proviceop{
+   margin-right: 12rpx;
+}
+.toptime .proviceop:last-child{
+   margin-right: 0rpx;
+}
 .topdetail{
   color: #0099ff;
   font-size: 30rpx;
   margin-left: 58rpx;
   padding: 22rpx 0;
+}
+.rule-detail .rule-status{
+padding-left: 0rpx;
+
 }
 /*oworkotext cardsix  tworkotextonetu.cardnine .all cardsixsixnum  cardeightsixnum bg showtop nopass findingnamecardsixtwo .workotextone oworkotextonetu cardtwoif workotextone alllabletu
 #7A7A7A

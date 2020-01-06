@@ -1,11 +1,9 @@
 {
   "pages": [
-        "pages/index/index",
+    "pages/index/index",
+    "pages/clients-looking-for-work/finding-top/findingtop",
     "pages/clients-looking-for-work/finding-name-card/findingnamecard",
     "pages/clients-looking-for-work/the-sticky-rule/stickyrule",
-
-    "pages/clients-looking-for-work/finding-top/findingtop",
-
     "pages/clients-looking-for-work/ranking-rules/ranking-rules",
     "pages/clients-looking-for-work/ranking-list/rankinglist",
     "pages/home/home",

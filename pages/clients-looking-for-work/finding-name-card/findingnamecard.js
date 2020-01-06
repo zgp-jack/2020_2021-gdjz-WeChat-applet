@@ -11,7 +11,7 @@ Page({
    * newresume-experience.png audit.png baseinform headerimg uuid age chooseImage onShareAppMessage checkfourf age showskill
    */
   data: {
-    ruleimage: app.globalData.apiImgUrl + "lpy/newresume-rank.png",
+    ruleimage: app.globalData.apiImgUrl + "lpy/biaptu.png",
     baseinform: app.globalData.apiImgUrl + "lpy/jichu.png",
     workingposition: app.globalData.apiImgUrl + "lpy/workdetail.png",
     subscripted: app.globalData.apiImgUrl + 'select.png',
@@ -27,7 +27,7 @@ Page({
     newresumeskill: app.globalData.apiImgUrl + "lpy/newresume-skill.png",
     pvw: app.globalData.apiImgUrl + "lpy/bottom-one.png",
     participation: app.globalData.apiImgUrl + "lpy/bottom-two.png",
-    topimage: "../../../images/personaltop.png",
+    topimage: app.globalData.apiImgUrl + "lpy/personaltop.png",
     userInfo: true,
     certificate_count: 0,
     project_count: 0,
@@ -101,17 +101,130 @@ Page({
     age: [],
     sort_flag: "",
     ranking: "",
-    rankjump: ""
+    rankjump: "",
+    resume_top: [],
+    top_status: [],
+    indextop:0,
+    top_tips_string:"",
+    selectDatatop: [],
+    selectktop: [],
+    endtime:""
+  },
+
+
+  modifytop(){
+    let that = this;
+    let nowtime = new Date().getTime();
+    let endtime = this.data.endtime;
+    if (nowtime - 0 > nowtime - 0) {
+      wx.showModal({
+        title: '温馨提示',
+        content: '您的置顶已过期',
+        showCancel: false,
+        success(res) {
+          that.getdetail()
+        }
+      })
+      return
+    }
+
+    let area = JSON.stringify(that.data.resume_top.top_provinces_str)
+    let modify = "modify";
+    let maxnumber = that.data.resume_top.max_number;
+    wx.navigateTo({
+      url: `/pages/clients-looking-for-work/the-sticky-rule/stickyrule?area=${area}&modify=${modify}&maxnumber=${maxnumber}`,
+    })
+    
+  },
+  selectTaptop() {
+    let that = this;
+    let nowtime = new Date().getTime();
+    let endtime = this.data.endtime;
+    if (nowtime - 0 > nowtime -0){
+      wx.showModal({
+        title: '温馨提示',
+        content: '您的置顶已过期',
+        showCancel: false,
+        success(res) {
+          that.getdetail()
+        }
+      })
+      return
+    }
+
+    let userInfo = wx.getStorageSync("userInfo");
+    if (!userInfo) return false;
+    let userUuid = wx.getStorageSync("userUuid");
+    let detail = {
+      userId: userInfo.userId,
+      token: userInfo.token,
+      tokenTime: userInfo.tokenTime,
+      uuid: userUuid,
+    }
+    let selectdata = [];
+    let selectdataId = [];
+    for (let i = 0; i < this.data.top_status.length; i++) {
+      selectdata.push(this.data.top_status[i].name)
+    }
+    for (let i = 0; i < this.data.top_status.length; i++) {
+      selectdataId.push(this.data.top_status[i].id)
+    }
+    wx.showActionSheet({
+
+      itemList: selectdata,
+      success(res) {
+        console.log(res)
+        if (that.data.indextop == res.tapIndex) {
+          return
+        }
+        that.setData({
+          index: res.tapIndex
+        })
+
+        app.appRequestAction({
+          url: 'resumes/change-top-status/',
+          way: 'POST',
+          params: detail,
+          success(res) {
+            console.log(res)
+            let mydata = res.data;
+            if (mydata.errcode == "ok"){
+
+              that.getdetail()
+              wx.showModal({
+                title: '温馨提示',
+                content: res.data.errmsg,
+                showCancel: false,
+                success(res) { }
+              })
+            } else {
+              wx.showModal({
+                title: '温馨提示',
+                content: res.data.errmsg,
+                showCancel: false,
+                success(res) { }
+              })
+            }
+          }
+        })
+      },
+      fail(res) {
+        // console.log(res)
+        // app.showMyTips("修改失败");
+      }
+    })
+
   },
   thestickyrule() {
     // ressonone
     let that = this;
+    let contentom = that.data.top_tips_string
     if (that.data.showtop) {
       wx.showModal({
         title: '温馨提示',
-        content: `您还没有找活名片`,
-        confirmText:`去添加`,
-        success(res) { 
+        content: contentom,
+        confirmText: `去添加`,
+        success(res) {
           if (res.confirm) {
             that.toperfect()
           } else if (res.cancel) {
@@ -119,10 +232,11 @@ Page({
         }
       })
       return
-    } else if (that.data.checkone){
+    } else if (that.data.checkone) {
       wx.showModal({
         title: '温馨提示',
-        content: `审核中：您的找活名片正在审核中`,
+        content: contentom,
+        showCancel: false,
         success(res) {
         }
       })
@@ -130,7 +244,8 @@ Page({
     } else if (that.data.ressonone) {
       wx.showModal({
         title: '温馨提示',
-        content: `审核失败：您的找活名片未通过审核`,
+        content: contentom,
+        showCancel: false,
         success(res) {
         }
       })
@@ -138,7 +253,8 @@ Page({
     } else if (that.data.index == 1) {
       wx.showModal({
         title: '温馨提示',
-        content: `您的工作状态为《已找到工作》`,
+        content: contentom,
+        showCancel: false,
         success(res) {
         }
       })
@@ -149,6 +265,7 @@ Page({
       })
     }
   },
+
   previewImage: function (e) {
 
     let url = e.currentTarget.dataset.url;
@@ -658,7 +775,38 @@ Page({
             fail_project: mydata.hasOwnProperty("fail_project") ? mydata.fail_project : "",
             sort_flag: mydata.info.hasOwnProperty("sort_flag") ? mydata.info.sort_flag : "",
             ranking: mydata.info.hasOwnProperty("ranking") ? mydata.info.ranking : "",
+            resume_top: mydata.hasOwnProperty("resume_top") ? mydata.resume_top : [],
+            top_status: mydata.hasOwnProperty("top_status") ? mydata.top_status : []
           })
+          if (mydata.hasOwnProperty("resume_top") && that.data.resume_top.length != 0) {
+            if (mydata.resume_top.is_top == 1) {
+              that.setData({
+                indextop: 0,
+              })
+            } else if (mydata.resume_top.is_top == 0){
+              that.setData({
+                indextop: 1,
+              })
+            }else{
+              that.setData({
+                indextop: 2,
+              })
+            }
+          }
+
+          let selectDtop = Object.values(mydata.top_status)
+          let selectktop = Object.keys(mydata.top_status)
+          that.setData({
+            selectDatatop: selectDtop,
+            selectktop: selectktop
+          })
+         
+          if (mydata.hasOwnProperty("resume_top")){
+            that.setData({
+              top_tips_string: mydata.resume_top.top_tips_string,
+              endtime: mydata.resume_top.end_time
+            })
+          }
           if (that.data.showtop) {
             app.globalData.showperfection = true;
           } else {
