@@ -109,7 +109,8 @@ Page({
     selectDatatop: [],
     selectktop: [],
     endtime:"",
-    has_top:0
+    has_top:0,
+    is_show_tips:""
   },
 
 
@@ -117,10 +118,22 @@ Page({
     let that = this;
     let nowtime = new Date().getTime();
     let endtime = this.data.endtime;
+    let contentom = that.data.top_tips_string
     if (nowtime - 0 > nowtime - 0) {
       wx.showModal({
         title: '温馨提示',
         content: '您的置顶已过期',
+        showCancel: false,
+        success(res) {
+          that.getdetail()
+        }
+      })
+      return
+    }
+    if (that.data.is_show_tips == 1){
+      wx.showModal({
+        title: '温馨提示',
+        content: contentom,
         showCancel: false,
         success(res) {
           that.getdetail()
@@ -170,12 +183,25 @@ Page({
     for (let i = 0; i < this.data.top_status.length; i++) {
       selectdataId.push(this.data.top_status[i].id)
     }
+    let contentom = that.data.top_tips_string
+
     wx.showActionSheet({
 
       itemList: selectdata,
       success(res) {
         console.log(res)
         if (that.data.indextop == res.tapIndex) {
+          return
+        }
+        if (that.data.indextop == 1 && that.data.is_show_tips == 1) {
+          wx.showModal({
+            title: '温馨提示',
+            content: contentom,
+            showCancel: false,
+            success(res) {
+              that.getdetail()
+            }
+          })
           return
         }
         that.setData({
@@ -216,6 +242,7 @@ Page({
     })
 
   },
+
   thestickyrule() {
     // ressonone
     let that = this;
@@ -807,6 +834,7 @@ Page({
               top_tips_string: mydata.resume_top.top_tips_string,
               endtime: mydata.resume_top.end_time,
               has_top: mydata.resume_top.has_top,
+              is_show_tips: mydata.resume_top.is_show_tips,
             })
           }
           if (that.data.showtop) {
