@@ -247,6 +247,7 @@ Page({
     // ressonone
     let that = this;
     let contentom = that.data.top_tips_string
+    console.log(contentom)
     if (that.data.showtop) {
       wx.showModal({
         title: '温馨提示',
@@ -260,25 +261,7 @@ Page({
         }
       })
       return
-    } else if (that.data.checkone) {
-      wx.showModal({
-        title: '温馨提示',
-        content: contentom,
-        showCancel: false,
-        success(res) {
-        }
-      })
-      return
-    } else if (that.data.ressonone) {
-      wx.showModal({
-        title: '温馨提示',
-        content: contentom,
-        showCancel: false,
-        success(res) {
-        }
-      })
-      return
-    } else if (that.data.index == 1) {
+    } else if (that.data.is_show_tips == 1) {
       wx.showModal({
         title: '温馨提示',
         content: contentom,
@@ -830,12 +813,14 @@ Page({
           })
          
           if (mydata.hasOwnProperty("resume_top")){
+            console.log(123)
             that.setData({
               top_tips_string: mydata.resume_top.top_tips_string,
               endtime: mydata.resume_top.end_time,
-              has_top: mydata.resume_top.has_top,
+              has_top: mydata.resume_top.has_top ? mydata.resume_top.has_top:0,
               is_show_tips: mydata.resume_top.is_show_tips,
             })
+            console.log(that.data.is_show_tips)
           }
           if (that.data.showtop) {
             app.globalData.showperfection = true;
