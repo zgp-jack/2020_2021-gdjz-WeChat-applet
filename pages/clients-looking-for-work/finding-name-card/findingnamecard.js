@@ -108,7 +108,8 @@ Page({
     top_tips_string:"",
     selectDatatop: [],
     selectktop: [],
-    endtime:""
+    endtime:"",
+    has_top:0
   },
 
 
@@ -804,7 +805,8 @@ Page({
           if (mydata.hasOwnProperty("resume_top")){
             that.setData({
               top_tips_string: mydata.resume_top.top_tips_string,
-              endtime: mydata.resume_top.end_time
+              endtime: mydata.resume_top.end_time,
+              has_top: mydata.resume_top.has_top,
             })
           }
           if (that.data.showtop) {

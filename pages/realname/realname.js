@@ -24,7 +24,7 @@ Page({
             worktypeIds: [],
             province_id: "",
             cities: [],
-            pass:""
+            pass:"",
         },
         phone:"",
         myIndex:0,
@@ -37,8 +37,22 @@ Page({
         idcardf:"http://cdn.yupao.com/miniprogram/images/idcard-f.png",
         showWorkType:false,
         areaText: "",
+        nationalarray: [],
+        nation:"",
+        nationindex:""
     },
+    getnationdetail(item){
+      console.log(item)
+      let getId = this.data.nation;
+      for (let i = 0; i < item.length;i++){
+        if (item[i].mz_id == getId){
+          this.setData({
+            nationindex: i
+          })
+        }
+      }
 
+    },
     /**
      * 生命周期函数--监听页面加载
      */
@@ -69,8 +83,18 @@ Page({
                         "member.show_resume": mydata.show_resume,
                         "classifyTree": (mydata.show_resume == 1) ? mydata.classifyTree : [],
                         "member.cities":(mydata.show_resume == 1) ? mydata.provinceTree : [],
+                         nation: mydata.memberExt.nation_id,
                     })
-
+   
+                  let nationalarray = [];
+                  for (let i = 0; i < mydata.nation.length; i++) {
+                    nationalarray.push(mydata.nation[i].mz_name)
+                  }
+                  _this.setData({
+                    nationalarray: nationalarray,
+                    nationalarrayone: mydata.nation,
+                  })
+                  _this.getnationdetail(mydata.nation)
                     if (mydata.show_resume == 1){
                         setTimeout(function () {
                             _this.initUserAutoProvince();
@@ -101,6 +125,13 @@ Page({
             }
         })
     },
+  nation(e) {
+    console.log(e)
+    this.setData({
+      nationindex: e.detail.value,
+      nation: this.data.nationalarrayone[e.detail.value].mz_id
+    })
+  },
     initUserAutoProvince:function(){
         this.setData({
             "member.province_id": this.data.member.cities[this.data.myIndex].id
@@ -340,7 +371,8 @@ Page({
             tokenTime:userInfo.tokenTime,
             username:member.username,
             age:member.age,
-            nationality: member.nationality,
+            nation_id: _this.data.nation,
+            nationality: _this.data.nationalarray[_this.data.nationindex],
             idCard:member.id_card,
             idCardImg: member.id_card_img,
             handImg: member.hand_img,
@@ -350,7 +382,7 @@ Page({
             classifys:member.worktypeIds,
             province_id:member.province_id
         };
-
+      console.log(formData)
         app.appRequestAction({
             url:"user/do-auth/",
             way:"POST",

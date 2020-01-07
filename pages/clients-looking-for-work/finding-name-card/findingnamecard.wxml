@@ -41,31 +41,31 @@
     <view class="findingnamecardonesontwo">
       <view class="rule-detail">
         <image class="rule-oimg" src="{{topimage}}"></image>
-        <text>我的置顶：</text><text class="rule-status" wx:if="{{resume_top.length == 0 ||resume_top.is_top == 0}}">未置顶</text><text class="rule-status" wx:if="{{resume_top.is_top == 1}}">置顶中</text><text class="rule-status" wx:if="{{resume_top.is_top == 2}}">置顶已过期</text>
+        <text>我的置顶：</text><text class="rule-status" wx:if="{{has_top == 0 ||resume_top.is_top == 0}}">未置顶</text><text class="rule-status" wx:if="{{resume_top.is_top == 1}}">置顶中</text><text class="rule-status" wx:if="{{resume_top.is_top == 2}}">置顶已过期</text>
       </view>
-      <view class="rule-odetail" bindtap="thestickyrule" wx:if="{{resume_top.length == 0||resume_top.is_top == 2}}">
+      <view class="rule-odetail" bindtap="thestickyrule" wx:if="{{has_top == 0||resume_top.is_top == 2}}">
         马上去置顶>>
       </view>
-      <view class='topselect_box' wx:if="{{resume_top.length != 0 &&resume_top.is_top != 2}}">
+      <view class='topselect_box' wx:if="{{has_top != 0 &&resume_top.is_top != 2}}">
         <view class='select' catchtap='selectTaptop'>
           <text class='select_text'>{{selectDatatop[indextop].name}}</text>
           <image class='select_img' src='{{subscripted}}'></image>
         </view>
       </view>
     </view>
-    <view class="toptime" wx:if="{{resume_top.length != 0&&resume_top.is_top != 2}}">
+    <view class="toptime" wx:if="{{has_top != 0&&resume_top.is_top != 2}}">
       <view>
         <text>置顶地区：</text>
         <text class="proviceop" wx:for="{{resume_top.top_provinces_str}}" wx:key="{{index}}">{{item.name}}</text>
       </view>
     </view>
-    <view class="toptime" wx:if="{{resume_top.length != 0&&resume_top.is_top != 2}}">
+    <view class="toptime" wx:if="{{has_top != 0&&resume_top.is_top != 2}}">
       <view>
         <text>置顶时间：</text>
         <text>{{resume_top.start_time_str}} ~ {{resume_top.end_time_str}}</text>
       </view>
     </view>
-    <view class="topdetail" wx:if="{{resume_top.length != 0&&resume_top.is_top != 2}}"
+    <view class="topdetail" wx:if="{{has_top != 0&&resume_top.is_top != 2}}"
     bindtap="modifytop">
       <text>点击修改找活置顶信息>></text>
     </view>
