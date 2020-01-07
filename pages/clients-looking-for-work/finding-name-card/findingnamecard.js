@@ -11,6 +11,7 @@ Page({
    * newresume-experience.png audit.png baseinform headerimg uuid age chooseImage onShareAppMessage checkfourf age showskill
    */
   data: {
+    ruleimage: app.globalData.apiImgUrl + "lpy/newresume-rank.png",
     baseinform: app.globalData.apiImgUrl + "lpy/jichu.png",
     workingposition: app.globalData.apiImgUrl + "lpy/workdetail.png",
     subscripted: app.globalData.apiImgUrl + 'select.png',
@@ -85,7 +86,7 @@ Page({
     ressonone: false,
     note: "",
     passre: true,
-    showpassre:false,
+    showpassre: false,
     nopassre: true,
     showcomplete: true,
     checkcontent: "",
@@ -96,7 +97,10 @@ Page({
     move: true,
     show_tips: "",
     showskill: true,
-    age: []
+    age: [],
+    sort_flag: "",
+    ranking: "",
+    rankjump: ""
   },
   previewImage: function (e) {
 
@@ -128,6 +132,18 @@ Page({
       display: "none"
     })
   },
+  rulepoit() {
+    // let rulestatus =  this.data.checkonef
+    if (this.data.rankjump == "rankjump") {
+      wx.navigateBack({
+        delta: 1
+      })
+    }else{
+      wx.navigateTo({
+        url: `/pages/clients-looking-for-work/ranking-rules/ranking-rules`,
+      })
+    }
+  },
   obtn() {
     this.setData({
       showModal: false,
@@ -136,10 +152,10 @@ Page({
   },
   editor(e) {
 
-      wx.setStorageSync("projectdetail", e.currentTarget.dataset)
-      wx.navigateTo({
-        url: "/pages/clients-looking-for-work/new-project-experience/projectexperience",
-      })
+    wx.setStorageSync("projectdetail", e.currentTarget.dataset)
+    wx.navigateTo({
+      url: "/pages/clients-looking-for-work/new-project-experience/projectexperience",
+    })
 
   },
   editorone(e) {
@@ -189,10 +205,11 @@ Page({
     })
     let commonShareImg = app.globalData.commonShareImg;
     let userInfo = wx.getStorageSync("userInfo");
+    let refId = userInfo?userInfo.userId:"";
     let uuid = this.data.resume_uuid;
     let commonShareTips = app.globalData.commonShareTips;
     if (userInfo && that.data.checkonef == 2) {
-      let refId = userInfo.userId;
+
       if (uuid) {
         return {
           title: commonShareTips,
@@ -203,14 +220,14 @@ Page({
         return {
           title: `${commonShareTips}`,
           imageUrl: commonShareImg,
-          path: `/pages/findingworkinglist/findingworkinglist`//这是一个路径
+          path: `/pages/findingworkinglist/findingworkinglist?refid=${refId}`//这是一个路径
         }
       }
     } else {
       return {
         title: commonShareTips,
         imageUrl: commonShareImg,
-        path: `/pages/findingworkinglist/findingworkinglist`//这是一个路径
+        path: `/pages/findingworkinglist/findingworkinglist?refid=${refId}`//这是一个路径
       }
     }
   },
@@ -235,7 +252,7 @@ Page({
           that.setData({
             index: res.tapIndex
           })
-          
+
           that.setData({
             selectData: that.data.selectData,
             selectk: that.data.selectk,
@@ -256,7 +273,7 @@ Page({
             way: 'POST',
             params: detail,
             success(res) {
-  
+
               if (res.data.errcode == "ok") {
                 that.getdetail()
                 wx.showModal({
@@ -265,7 +282,7 @@ Page({
                   showCancel: false,
                   success(res) { }
                 })
-              }else{
+              } else {
                 wx.showModal({
                   title: '温馨提示',
                   content: res.data.errmsg,
@@ -438,11 +455,11 @@ Page({
         failTitle: "操作失败，请稍后重试！",
         params: imgdetail,
         success(res) {
-          
+
           if (res.data.errcode == 200) {
             app.showMyTips("保存成功");
             that.getdetail()
-          }else{
+          } else {
             wx.showModal({
               title: '温馨提示',
               content: res.data.errmsg,
@@ -474,7 +491,7 @@ Page({
       way: 'POST',
       params: detail,
       success: function (res) {
-        
+
         let mydata = res.data.data;
         if (res.data.errcode == 200) {
           for (let i = 0; i < mydata.project.length; i++) {
@@ -571,7 +588,7 @@ Page({
             show_tips: mydata.hasOwnProperty("content") ? mydata.content.show_tips : "",
             name: mydata.info.hasOwnProperty("username") ? mydata.info.username : "",
             nation: mydata.info.hasOwnProperty("nation") ? mydata.info.nation : "",
-            occupations: mydata.info.hasOwnProperty("occupations") ? mydata.info.occupations : "",
+            occupations: mydata.info.hasOwnProperty("miniInfoOccupations") ? mydata.info.miniInfoOccupations : "",
             telephone: mydata.info.hasOwnProperty("tel") ? mydata.info.tel : "",
             city: mydata.info.hasOwnProperty("address") ? mydata.info.address : "",
             intro: false,
@@ -592,7 +609,8 @@ Page({
             note: mydata.info.hasOwnProperty("note") ? mydata.info.note : "",
             fail_certificate: mydata.hasOwnProperty("fail_certificate") ? mydata.fail_certificate : "",
             fail_project: mydata.hasOwnProperty("fail_project") ? mydata.fail_project : "",
-
+            sort_flag: mydata.info.hasOwnProperty("sort_flag") ? mydata.info.sort_flag : "",
+            ranking: mydata.info.hasOwnProperty("ranking") ? mydata.info.ranking : "",
           })
           if (that.data.showtop) {
             app.globalData.showperfection = true;
@@ -670,7 +688,7 @@ Page({
             }
           }
 
-          
+
           that.setData({
             percent: mydata.info.hasOwnProperty("progress") ? mydata.info.progress : 0,
             showpassre: true
@@ -743,7 +761,7 @@ Page({
               //   success(res) {
               //   }
               // })
-              
+
               that.setData({
                 showModal: true,
                 display: "block",
@@ -757,7 +775,7 @@ Page({
           }
           that.redorblue()
           that.showskill();
-        }else{
+        } else {
           wx.showModal({
             title: '温馨提示',
             content: res.data.errmsg,
@@ -820,7 +838,7 @@ Page({
       // this.getdetail();
     }
   },
-  sontwoview(){
+  sontwoview() {
     return false
   },
   returnPrevPage() {
@@ -854,8 +872,18 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
+  cardjump(options) {
+    
+    if (options.hasOwnProperty("rankjump")) {
+      console.log(options)
+      this.setData({
+        rankjump: options.rankjump
+      })
+    }
+  },
   onLoad: function (options) {
-    this.authrasution()
+    this.authrasution();
+    this.cardjump(options)
   },
   /**
    * 生命周期函数--监听页面初次渲染完成
@@ -886,7 +914,7 @@ Page({
    */
   onHide: function () {
     this.setData({
-    showpassre: false
+      showpassre: false
     })
   },
 

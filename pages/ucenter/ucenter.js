@@ -58,6 +58,8 @@ Page({
                 if (mydata.errcode == "ok") {
                     _this.setData({
                         member: mydata.member,
+                        is_checking: mydata.is_checking,
+                        hasNoticeMsg: mydata.member.has_notice_msg.hasNoticeMsg,
                         showReturnIntegral: (parseInt(mydata.member.return_integral) == 0) ? false : true
                     })
                 } else {
@@ -79,50 +81,6 @@ Page({
             }
         })
     },
-    // getUserMsg: function(callback) {
-    //     let userInfo = wx.getStorageSync("userInfo");
-    //     let userUuid = wx.getStorageSync("userUuid");
-    //     this.setData({ userInfo: userInfo })
-    //     let _this = this;
-    //     wx.showLoading({ title: '正在初始化用户数据', })
-    //     app.doRequestAction({
-    //         url: "member/original-message/",
-    //         way: "POST",
-    //         header: {
-    //             'content-type': 'application/x-www-form-urlencoded',
-    //             mid: userInfo.userId,
-    //             token: userInfo.token,
-    //             time: userInfo.tokenTime,
-    //             uuid: userUuid,
-    //         },
-    //         success: function (res) {
-    //             callback ? callback() : ""
-    //             wx.hideLoading();
-    //             let mydata = res.data;
-    //             if (mydata.errcode == "ok") {
-    //                 _this.setData({
-    //                     jobNumber: mydata.data.jobNumber,
-    //                 })
-    //             } else {
-    //                 wx.showToast({
-    //                     title: mydata.errmsg,
-    //                     icon: "none",
-    //                     duration: 5000
-    //                 })
-    //             }
-    //         },
-    //         fail: function (err) {
-    //             callback ? callback() : ""
-    //             wx.hideLoading();
-    //             // wx.showToast({
-    //             //     title: '网络出错，数据加载失败！',
-    //             //     icon: "none",
-    //             //     duration: 5000
-    //             // })
-    //         },
-    
-    //     })
-    // },
     valiUserUrl: function(e) {
         app.globalData.showdetail = true
         app.valiUserUrl(e, this.data.userInfo)
@@ -191,7 +149,7 @@ Page({
      */
     onShow() {
         this.initUserInfo();
-        // this.getUserMsg();
+        footerjs.initMsgNum(this);
     },
     releaselive() {
         app.globalData.showdetail = true
@@ -219,6 +177,7 @@ Page({
     onPullDownRefresh: function() {
         wx.showNavigationBarLoading()
             //wx.startPullDownRefresh()
+        footerjs.initMsgNum(this);
         this.initUserInfo(function() {
             wx.hideNavigationBarLoading()
             wx.stopPullDownRefresh();

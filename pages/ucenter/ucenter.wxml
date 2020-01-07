@@ -10,9 +10,9 @@
                 <view class='ucenter-userinfo-words'>
                     <navigator class='user-update-info' url='/pages/userinfo/index/index?img={{ member.headimgurl }}&auth={{ member.is_check }}&tel={{ member.tel }}&name={{ member.username || member.nickname }}&pass={{ member.pwd_status }}' open-type="navigate" wx:if="{{ member.tel }}">修改资料</navigator>
                     <navigator class='user-update-info' url='/pages/userinfo/edit/edit' open-type="navigate" wx:else="{{ member.tel }}">完善资料</navigator>
-                    <view class='ucenter-username overwords'>
+                    <view class='ucenter-username overwords felx'>
                         {{ member.username || member.nickname }}
-                        <image src='{{ realNames }}' class='user-update-tag' wx:if="{{member.check_degree===2&&member.is_check===2}}"></image>
+                        <image src='{{ realNames }}' class='user-update-tag' wx:if="{{member.is_check==2&&is_checking==2}}"></image>
                     </view>
                     <view class='ucenter-usernum overwords'>会员编号：
                         <text>{{ member.id }}</text> </view>
@@ -66,11 +66,9 @@
             <view class='ucener-theme' data-url='../published/published?type=0' bindtap='valiUserUrl'>
                 <image class="ucener-leftImage" src='{{ ucenterimgs.recruit }}'></image>
                 <view class='ucener-border-b ucener-border'>
-                    <view class="ucener-title">我的招工
-                        <!-- <text></text> -->
-                    </view>
+                    <view class="ucener-title">我的招工</view>
                     <view class="flex-row">
-                        <!-- <view class="ucener-detil">专属图标</view> -->
+                        <view class="ucener-detil" wx:if="{{ footerImgs.infoNumber > 0 }}">状态已更新</view>
                         <image src='{{ rightarrow }}' class="ucener-rightIcon"></image>
                     </view>
                 </view>
@@ -78,8 +76,7 @@
             <view class='ucener-theme' data-url="/pages/clients-looking-for-work/finding-name-card/findingnamecard" bindtap='valiUserUrl'>
                 <image class="ucener-leftImage" src='{{ ucenterimgs.mycard }}'></image>
                 <view class='ucener-border-b ucener-border'>
-                    <view class="ucener-title">我的找活名片
-                    </view>
+                    <view class="ucener-title">我的找活名片</view>
                     <view class="flex-row">
                         <view class="ucener-detil">{{member.resume_status.resume_tips_string}}</view>
                         <image src='{{ rightarrow }}' class="ucener-rightIcon"></image>
@@ -89,19 +86,20 @@
             <view class='ucener-theme' data-url='../published/published?type=1' bindtap='valiUserUrl'>
                 <image class="ucener-leftImage" src='{{ ucenterimgs.trade }}'></image>
                 <view class='ucener-border-b ucener-border'>
-                    <view class="ucener-title">我的交易</view>
+                    <view class="ucener-title">我的二手交易</view>
                     <view class="flex-row">
                         <image src='{{ rightarrow }}' class="ucener-rightIcon"></image>
                     </view>
                 </view>
             </view>
-            <view class='ucener-theme' data-url='/pages/information/mymessage/mymessage' bindtap='valiUserUrl'>
+            <view class='ucener-theme' data-url='/pages/information/mymessage/mymessage' bindtap='suggestUserUrl'>
                 <image class="ucener-leftImage" src='{{ ucenterimgs.ucenterMsg }}'></image>
                 <view class='ucener-border-b'>
                     <view class="ucener-title">我的信息
-                        <!-- <text wx:if="{{jobNumber>0}}">{{jobNumber > 9 ? '9+' : jobNumber}}</text> -->
+                        <text class="masnumber" wx:if="{{ footerImgs.msgsNumber > 0 }}">{{footerImgs.msgsNumber>9?'9+':footerImgs.msgsNumber}}</text>
                     </view>
                     <view class="flex-row">
+                        <view class="ucener-detil" wx:if="{{ footerImgs.msgsNumber > 0 }}">有新信息待查看</view>
                         <image src='{{ rightarrow }}' class="ucener-rightIcon"></image>
                     </view>
                 </view>
@@ -122,8 +120,7 @@
             <view class='ucener-theme' data-url='../static/invite' bindtap='valiUserUrl'>
                 <image class="ucener-leftImage" src='{{ ucenterimgs.invite }}'></image>
                 <view class='ucener-border-b ucener-border'>
-                    <view class="ucener-title">邀请工友
-                    </view>
+                    <view class="ucener-title">邀请工友</view>
                     <view class="flex-row">
                         <view class="ucener-detil">邀请好友得积分</view>
                         <image src='{{ rightarrow }}' class="ucener-rightIcon"></image>
@@ -177,8 +174,11 @@
             <view class='ucener-theme' data-url='/pages/others/message/lists/lists' bindtap='suggestUserUrl'>
                 <image class="ucener-leftImage" src='{{ ucenterimgs.feedback }}'></image>
                 <view class='ucener-border-b ucener-border'>
-                    <view class="ucener-title">意见反馈</view>
+                    <view class="ucener-title">意见反馈
+                        <text class="msg-dot" wx:if="{{hasNoticeMsg>0}}"></text>
+                    </view>
                     <view class="flex-row">
+                        <view class="ucener-detil" wx:if="{{hasNoticeMsg>0}}">有最新回复</view>
                         <image src='{{ rightarrow }}' class="ucener-rightIcon"></image>
                     </view>
                 </view>
@@ -188,7 +188,7 @@
                 <view class='ucener-border-b'>
                     <view class="ucener-title">帮助中心</view>
                     <view class="flex-row">
-                        <!-- <view class="ucener-detil">使用教程</view> -->
+                        <view class="ucener-detil">使用教程</view>
                         <image src='{{ rightarrow }}' class="ucener-rightIcon"></image>
                     </view>
                 </view>

@@ -44,7 +44,10 @@ Page({
       complainImg: app.globalData.apiImgUrl + "newjobinfo-complain.png",
       sharebtnImg: app.globalData.apiImgUrl + "newjobinfo-share.png",
       homebtnImg: app.globalData.apiImgUrl + "newdetailinfo-home.png",
-      showHomeImg:false
+      showHomeImg:false,
+      showcomplain: false,
+      usepang: 8,
+      isEnd:""
     },
   detailToHome:function(){
     wx.redirectTo({
@@ -200,9 +203,23 @@ Page({
                 let mydata = res.data;
               _this.setData({ info: mydata.result })
                 if (mydata.errcode != "fail") {
+                
                     let t = mydata.result.title;
                     wx.setNavigationBarTitle({ title: t })
                   _this.setData({ collectMark: mydata.result.is_collect ? true : false})
+                  let userInfo = wx.getStorageSync("userInfo");
+                  if (userInfo){
+                    if (userInfo.userId == mydata.result.user_id){
+                      _this.setData({
+                        showcomplain:true
+                      })
+                    }
+                  }
+                  _this.setData({
+                    usepang: mydata.result.hasOwnProperty("isLook") ? mydata.result.isLook:8,
+                    isEnd: mydata.result.hasOwnProperty("is_end") ? mydata.result.is_end : ""
+                  })
+                  
                 }
                 _this.doDetailAction(mydata, {
                     success:function(){},
@@ -334,8 +351,11 @@ Page({
                         }
                         _this.setData({
                             "info.tel_str": mydata.tel,
-                            "info.show_ajax_btn": false
+                            "info.show_ajax_btn": false,
+                             usepang:1,
+                             "info.show_complaint.show_complaint":1
                         })
+                        console.log(123)
                     },
                     share: function () {
                         _this.setData({
@@ -343,7 +363,9 @@ Page({
                             "info.show_ajax_btn": false,
                             shareFlag: true,
                             isShare: true,
-                            shareMsg: mydata.errmsg
+                            shareMsg: mydata.errmsg,
+                            usepang: 1,
+                          "info.show_complaint.show_complaint": 1
                         })
                     }
                 });
@@ -354,11 +376,17 @@ Page({
         this.setData({ complainInfo: e.detail.value })
     },
     userTapComplain: function () {
-        if (this.data.info.show_ajax_btn || this.data.info.is_end == '2'){
+      console.log(123)
+      let userInfo = this.data.userInfo;
+      if (!userInfo) {
+        app.gotoUserauth();
+        return false;
+      }
+    if (this.data.info.show_ajax_btn && this.data.isEnd != 2 || this.data.usepang == 0&&this.data.isEnd != 2 ){
             app.showMyTips("请查看完整的手机号码后再操作！");
             return false; 
         }
-      if(!this.data.info.show_complaint.show_complaint){
+      if (!this.data.info.show_complaint.show_complaint || this.data.usepang == 0 &&this.data.isEnd == 2){
         wx.showModal({
           title: '提示',
           content: this.data.info.show_complaint.tips_message,
@@ -367,7 +395,41 @@ Page({
         })
         return false;
       }
-        this.setData({ showComplain: true })
+      this.subscribeToNews()
+    },
+    
+    subscribeToNews: function() {
+        let userInfo = wx.getStorageSync("userInfo");
+        let _this = this;
+        if (wx.canIUse('requestSubscribeMessage') === true) {
+            wx.requestSubscribeMessage({
+                tmplIds: ['uZcoNQz86gAr3P4DYtgt85PnVgMcN_Je27TeHdKhz14'],
+                success(res) {
+                    if (res.errMsg == "requestSubscribeMessage:ok") {
+                    app.appRequestAction({
+                        url: "leaving-message/add-subscribe-msg/",
+                        way: "POST", 
+                        mask: true,
+                        params: {
+                            userId: userInfo.userId,
+                            token: userInfo.token,
+                            tokenTime: userInfo.tokenTime,
+                            type: 5
+                        },
+                        success: function(res) {
+                            _this.setData({
+                                showComplain: true
+                            })
+                        },
+                    })
+                }
+                }
+            })
+        } else {
+            _this.setData({
+                showComplain: true
+            })
+        }
     },
     userCancleComplain: function () {
       this.setData({ showComplain: false, complainInfo:"" })
@@ -398,7 +460,12 @@ Page({
             success: function (res) {
                 let mydata = res.data;
               if (mydata.errcode == "ok"){
-                _this.setData({ showComplain: false, complainInfo: "", "info.show_complaint.show_complaint": 0 });
+                _this.setData({ 
+                  showComplain: false,
+                  complainInfo: "",
+                  "info.show_complaint.show_complaint": 0,
+                  "info.show_complaint.tips_message": "您已投诉该信息，请勿重复操作！"
+                });
               }
                 
                 wx.showModal({

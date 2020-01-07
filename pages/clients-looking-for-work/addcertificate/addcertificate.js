@@ -24,7 +24,9 @@ vertify()
     skill_show:true,
     display: "none",
     nowDate:"",
-    beforeDate:""
+    beforeDate:"",
+    ranktypes: "",
+    deletestatus: true
   },
   vertify() {
     this.setData({
@@ -134,17 +136,32 @@ vertify()
   },
   deleteexper() {
     let that = this;
+    if (!this.data.deletestatus) {
+      return false
+    } else {
+      this.setData({
+        deletestatus: false
+      })
+    }
     wx.showModal({
       title: '提示',
       content: `技能证书删除后，将无法恢复`,
       showCancel: true,
       success(res) {
-
+        that.setData({
+          deletestatus: true
+        })
         if (res.confirm) {
           that.vertify()
         } else if (res.cancel) {
 
         }
+      },
+      complete() {
+        console.log(123)
+        that.setData({
+          deletestatus: true
+        })
       }
     })
   },
@@ -200,7 +217,11 @@ vertify()
   },
   preserve() {
     let that = this;
-    if (that.data.certificate_cou >= that.data.certificate_count) {
+    let certificate_count = wx.getStorageSync("certificate_count");
+    console.log(certificate_count)
+    console.log(that.data.certificate_cou , that.data.certificate_count)
+    // if (that.data.certificate_cou >= that.data.certificate_count) {
+    if (that.data.certificate_cou >=  certificate_count) {
       wx.showModal({
         title: '温馨提示',
         content: `最多只能添加${that.data.certificate_count}个技能证书`,
@@ -278,26 +299,71 @@ vertify()
       mask: true,
       failTitle: "操作失败，请稍后重试！",
       success(res) {
-        
-        remain.remain({
-          tips: res.data.errmsg, callback: function () {
-            if (res.data.errcode == "ok") {
-              app.globalData.allskill = true;
-              wx.navigateBack({
-                delta: 1
-              })
-            }
-          }
-        })
+        that.subscribeToNews(res)
       },
       fail: function (err) {
         app.showMyTips("保存失败");
       }
     })
   },
+  subscribeToNews: function(res) {
+    let that = this;
+    let userInfo = wx.getStorageSync("userInfo");
+    if (wx.canIUse('requestSubscribeMessage') === true) {
+        wx.requestSubscribeMessage({
+            tmplIds: ['G68JCpxsyIcKPrZcQWdHTG63T2JpJIz9gXGgKLv1T0A'],
+            success(ress) {
+              if (ress.errMsg == "requestSubscribeMessage:ok") {
+                app.appRequestAction({
+                    url: "leaving-message/add-subscribe-msg/",
+                    way: "POST", 
+                    mask: true,
+                    params: {
+                        userId: userInfo.userId,
+                        token: userInfo.token,
+                        tokenTime: userInfo.tokenTime,
+                        type: 4
+                    },
+                    success: function(ress) {
+                      remain.remain({
+                        tips: res.data.errmsg, callback: function () {
+                          if (res.data.errcode == "ok") {
+                            if (that.data.ranktypes == "ranking") {
+                              wx.redirectTo({
+                                url: '/pages/clients-looking-for-work/all-skills-certificate/skillscertificate',
+                              });
+                            } else {
+                            app.globalData.allskill = true;
+                            wx.navigateBack({
+                              delta: 1
+                            })
+                            }
+                          }
+                        }
+                      })
+
+                    },
+                })
+              }
+            }
+        })
+    } else {
+      remain.remain({
+        tips: res.data.errmsg, callback: function () {
+          if (res.data.errcode == 200) {
+            wx.navigateBack({
+              delta: 1
+            })
+          }
+        }
+      })
+    }
+  },
   preservechixu() {
     let that = this;
-    if (that.data.certificate_cou >= that.data.certificate_count) {
+    let certificate_count = wx.getStorageSync("certificate_count");
+    // if (that.data.certificate_cou >= that.data.certificate_count) {
+      if (that.data.certificate_cou >= certificate_count) {
       wx.showModal({
         title: '温馨提示',
         content: `最多只能添加${that.data.certificate_count}个技能证书`,
@@ -384,30 +450,78 @@ vertify()
       params: project,
       mask: true,
       success(res) {
-        remain.remain({
-          tips: res.data.errmsg, callback: function () {
-            if (res.data.errcode == "ok") {
-              that.setData({
-                certificate_cou: res.data.count
-              })
-
-              that.skillshow()
-              app.globalData.allskill = true;
-              that.setData({
-                imgArrs: [],
-                idArrs: [],
-                date: "",
-                name: "",
-                imgArrslength:true
-              })
-            }
-          }
-        })
+        that.subscribeToNewsAgain(res)
       },
       fail: function (err) {
         app.showMyTips("保存失败");
       }
     })
+  },
+  subscribeToNewsAgain: function(res) { 
+    let that = this;
+    let userInfo = wx.getStorageSync("userInfo");
+    if (wx.canIUse('requestSubscribeMessage') === true) {
+        wx.requestSubscribeMessage({
+            tmplIds: ['G68JCpxsyIcKPrZcQWdHTG63T2JpJIz9gXGgKLv1T0A'],
+            success(ress) {
+              if (ress.errMsg == "requestSubscribeMessage:ok") {
+                app.appRequestAction({
+                    url: "leaving-message/add-subscribe-msg/",
+                    way: "POST", 
+                    mask: true,
+                    params: {
+                        userId: userInfo.userId,
+                        token: userInfo.token,
+                        tokenTime: userInfo.tokenTime,
+                        type: 4
+                    },
+                    success: function(ress) {
+                      remain.remain({
+                        tips: res.data.errmsg, callback: function () {
+                          if (res.data.errcode == "ok") {
+                            that.setData({
+                              certificate_cou: res.data.count
+                            })
+
+                            that.skillshow()
+                            app.globalData.allskill = true;
+                            that.setData({
+                              imgArrs: [],
+                              idArrs: [],
+                              date: "",
+                              name: "",
+                              imgArrslength:true
+                            })
+                          }
+                        }
+                      })
+                    },
+                })
+              }
+            }
+        })
+    } else {
+    
+      remain.remain({
+        tips: res.data.errmsg, callback: function () {
+          if (res.data.errcode == "ok") {
+            that.setData({
+              certificate_cou: res.data.count
+            })
+
+            that.skillshow()
+            app.globalData.allskill = true;
+            that.setData({
+              imgArrs: [],
+              idArrs: [],
+              date: "",
+              name: "",
+              imgArrslength:true
+            })
+          }
+        }
+      })
+    }
   },
   preservechixutui(){
     wx.navigateBack({
@@ -432,7 +546,7 @@ vertify()
     
     if (skilltail) {
       wx.setNavigationBarTitle({
-        title: '修改您的技能证书'
+        title: '修改技能证书'
       })
       this.setData({
         obtnbut: false
@@ -525,17 +639,7 @@ vertify()
       mask: true,
       params: project,
       success(res) {
-        
-        remain.remain({
-          tips: res.data.errmsg, callback: function () {
-            if (res.data.errcode == "ok") {
-              app.globalData.allskill = true;
-              wx.navigateBack({
-                delta: 1
-              })
-            }
-          }
-        })
+        that.subscribeToNews(res)
       },
       fail: function (err) {
         app.showMyTips("保存失败");
@@ -575,8 +679,16 @@ vertify()
   /**
    * 生命周期函数--监听页面加载
    */
+  ranktypes(options) {
+    if (options.hasOwnProperty("ranktype")) {
+    this.setData({
+      ranktypes: options.ranktype
+    })
+    }
+  },
   onLoad: function (options) {
     this.getskill()
+    this.ranktypes(options)
   },
 
   /**

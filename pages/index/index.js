@@ -98,7 +98,8 @@ Page({
       showHistoryList:false,
       historyList:[],
       member_notice:{},
-      member_less_info:{}
+      member_less_info:{},
+      msgsNumber:[],
     },
   getMapInfo: function (callback) {
     let that = this;
@@ -704,6 +705,7 @@ Page({
     },
 
     // 共用footer
+  
     jumpThisLink: function (e) {
         app.jumpThisLink(e);
     },
@@ -725,7 +727,7 @@ Page({
     valiUserCard:function(){
         let userInfo = this.data.userInfo;
         footerjs.valiUserCard(this,app, userInfo);
-    },
+    }, 
     initUserLocation: function () {
         let _this = this;
         let areaId = wx.getStorageSync("areaId");
@@ -824,7 +826,9 @@ Page({
     initFirstTips:function(){
         app.initFirstTips(this);
     },
-    
+    getUserUuid: function () {
+      app.getUserUuid();
+    },
     /**
      * 生命周期函数--监听页面加载
      */
@@ -851,13 +855,14 @@ Page({
      * 生命周期函数--监听页面显示
      */
     onShow: function () {
-
+      this.getUserUuid();
       this.initUserinfo();
+      footerjs.initMsgNum(this);
     },
-  onPageScroll:function(e){
-    let top = e.scrollTop;
-    this.setData({ showReturnTopImg: (top > 960) ? true : false })
-  },
+    onPageScroll:function(e){
+      let top = e.scrollTop;
+      this.setData({ showReturnTopImg: (top > 960) ? true : false })
+    },
 
     /**
      * 生命周期函数--监听页面隐藏

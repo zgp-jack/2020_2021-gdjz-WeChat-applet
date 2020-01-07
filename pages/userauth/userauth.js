@@ -23,12 +23,14 @@ Page({
               token: uinfo.data.sign.token,
               tokenTime: uinfo.data.sign.time,
             }
+            let userUuid = uinfo.data.uuid;
             app.globalData.userInfo = userInfo;
             wx.setStorageSync('userInfo', userInfo)
+            wx.setStorageSync('userUuid', userUuid)
             let pages = getCurrentPages();
             let r = "/" + pages[0].route;
             let prevPage = pages[pages.length - 2];
-            prevPage.setData({ userInfo:userInfo });
+            prevPage.setData({ userInfo:userInfo,userUuid:userUuid });
             wx.navigateBack({ delta: 1 })
           } else {
             app.showMyTips(uinfo.errmsg);

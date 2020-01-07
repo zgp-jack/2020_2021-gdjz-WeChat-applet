@@ -156,29 +156,31 @@ Page({
             wx.requestSubscribeMessage({
                 tmplIds: ['z5y8OFD9gs0SY0sT7FZwiWsrzT3rNp3CJFH7yhv7dUE'],
                 success(res) {
-                    app.appRequestAction({
-                        url: "leaving-message/add-subscribe-msg/",
-                        way: "POST",
-                        mask: true,
-                        params: {
-                            userId: userInfo.userId,
-                            token: userInfo.token,
-                            tokenTime: userInfo.tokenTime,
-                            type: 1
-                        },
-                        success: function(res) {
-                            wx.showModal({
-                                title: '系统提示',
-                                content: mydata.errmsg,
-                                showCancel: false,
-                                success: function(res) {
-                                    wx.navigateBack({
-                                        delta: 1
-                                    })
-                                }
-                            })
-                        },
-                    })
+                    if (res.errMsg == "requestSubscribeMessage:ok") {
+                        app.appRequestAction({
+                            url: "leaving-message/add-subscribe-msg/",
+                            way: "POST",
+                            mask: true,
+                            params: {
+                                userId: userInfo.userId,
+                                token: userInfo.token,
+                                tokenTime: userInfo.tokenTime,
+                                type: 1
+                            },
+                            success: function(res) {
+                                wx.showModal({
+                                    title: '系统提示',
+                                    content: mydata.errmsg,
+                                    showCancel: false,
+                                    success: function(res) {
+                                        wx.navigateBack({
+                                            delta: 1
+                                        })
+                                    }
+                                })
+                            },
+                        })
+                    }            
                 }
             })
         } else {

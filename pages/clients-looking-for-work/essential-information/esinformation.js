@@ -612,19 +612,8 @@ Page({
       success: function (res) {
 
         if (res.data.errcode == 200) {
-          if (app.globalData.showperfection) {
-            that.setData({
-              perfection: true,
-            })
-          } else {
-            remain.remain({
-              tips: res.data.errmsg, callback: function () {
-                wx.navigateBack({
-                  delta: 1
-                })
-              }
-            })
-          }
+          that.subscribeToNews(res)
+
         } else {
           remain.remain({
             tips: res.data.errmsg
@@ -640,7 +629,60 @@ Page({
       }
     })
   },
-
+  subscribeToNews: function(res) {
+    let userInfo = wx.getStorageSync("userInfo");
+    let _this = this;
+    if (wx.canIUse('requestSubscribeMessage') === true) {
+        wx.requestSubscribeMessage({
+            tmplIds: ['G68JCpxsyIcKPrZcQWdHTG63T2JpJIz9gXGgKLv1T0A'],
+            success(ress) {
+              if (ress.errMsg == "requestSubscribeMessage:ok") {
+                app.appRequestAction({
+                    url: "leaving-message/add-subscribe-msg/",
+                    way: "POST", 
+                    mask: true,
+                    params: {
+                        userId: userInfo.userId,
+                        token: userInfo.token,
+                        tokenTime: userInfo.tokenTime,
+                        type: 4
+                    },
+                    success: function(ress) {
+                      if (app.globalData.showperfection) {
+                        _this.setData({
+                          perfection: true,
+                        })
+                      } else {
+                        remain.remain({
+                          tips: res.data.errmsg, callback: function () {
+                            wx.navigateBack({
+                              delta: 1
+                            })
+                          }
+                        })
+                      }
+                    },
+                })
+              }
+            }
+        })
+    } else {
+    
+      if (app.globalData.showperfection) {
+        that.setData({
+          perfection: true,
+        })
+      } else {
+        remain.remain({
+          tips: res.data.errmsg, callback: function () {
+            wx.navigateBack({
+              delta: 1
+            })
+          }
+        })
+      }
+    }
+  },
   getintrodetail() {
 
     let introinfo = wx.getStorageSync("introinfo");
@@ -651,7 +693,7 @@ Page({
       sex: introinfo.hasOwnProperty("gender") ? introinfo.gender : "",
       birthday: introinfo.hasOwnProperty("birthday") ? introinfo.birthday : "",
       complexwork: introinfo.hasOwnProperty("occupations") ? introinfo.occupations : [],
-      complexworkid: introinfo.hasOwnProperty("occupations_id") ? introinfo.occupations_id.split(",") : [],
+      complexworkid: introinfo.hasOwnProperty("occupations_id") ? introinfo.occupations_id == null ? [] : introinfo.occupations_id.split(",") : [],
       regionone: introinfo.hasOwnProperty("address") ? introinfo.address : "",
       provinceid: introinfo.hasOwnProperty("province") ? introinfo.province : "",
       wardenryid: introinfo.hasOwnProperty("city") ? introinfo.city : "",
@@ -669,7 +711,7 @@ Page({
         nation: introinfo.hasOwnProperty("nation_id") ? introinfo.nation_id : ""
       })
     }
-    if (introinfo.hasOwnProperty("occupations")) {
+    if (introinfo.hasOwnProperty("occupations") && introinfo.occupations.length != 0) {
       let workIndexvalue = ""
       for (let i = 0; i < introinfo.occupations.length; i++) {
         workIndexvalue += introinfo.occupations[i] + " "

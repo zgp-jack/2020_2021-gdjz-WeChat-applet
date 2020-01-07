@@ -1,0 +1,57 @@
+<view>
+  <view wx:if="{{onoff}}">
+    <view class="header">
+      <view class="headerpoint">
+        <text>我的排名点：</text>
+        <text>{{sort_flag}}</text>
+      </view>
+      <view class="headerdetail">
+        <text>注：找活名片只有审核通过后，才会在列表展示。排名点越高，排名越靠前。
+    </text>
+      </view>
+    </view>
+    <view class="ranking-center">
+      <view class="ranking-child" wx:for="{{list}}" wx:key="{{index}}">
+        <view class="ranking-childone">
+          <view class="ranking-oimg">
+            <image src="{{item.img_url}}"></image>
+          </view>
+          <view class="ranking-ocontent">
+            <view class="ranking-detail">
+              <view class="ranking-zan">{{item.type_name}}</view>
+              <view class="ranking-point">{{item.description}}</view>
+            </view>
+            <!-- <view class="ranking-content">
+          {{item.description}}
+        </view> -->
+          </view>
+          <!-- <view class="ranking-obtn">
+        分享名片
+      </view> -->
+<button class="{{item.jump.need_jump==0?'ranking-obtngray':'ranking-obtn'}}" data-minipath="{{item.jump.mini_path}}" data-jump="{{item.jump.need_jump}}" wx:if="{{item.is_share!=1}}" bindtap="jumpyemian">{{item.button_words}}
+          </button>
+<button class="ranking-obtn" bindtap="jumpyemian" wx:if="{{!showbutton}}">{{item.button_words}}
+          </button>
+<button class="ranking-obtn" data-share="{{item.share_type}}" open-type='share' wx:if="{{item.is_share==1&&showbutton}}">{{item.button_words}}
+          </button>
+        </view>
+      </view>
+    </view>
+    <view class="ranking-button">
+      <view class="ranking-button-content">
+        <view>温馨提示</view>
+      </view>
+      <view class="ranking-button-odetail">
+        <view wx:for="{{warm_tips}}" wx:key="{{index}}">{{item}}</view>
+      </view>
+    </view>
+  </view>
+  <view wx:if="{{!onoff}}" class='common-nodatabox'>
+   <view class='common-nodataboxone'>
+    <image src='{{ nodata }}'></image>
+   </view> 
+   <view class='common-nodataboxtwo' bindtap="againshow">
+    <text class="failstatus">网络出错请点击</text><text class="failstatusone">重新加载</text>
+   </view>
+  </view>
+</view>

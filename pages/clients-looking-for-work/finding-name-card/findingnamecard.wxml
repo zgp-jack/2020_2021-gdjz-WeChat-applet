@@ -28,11 +28,15 @@
           <text class="sontwoview">浏览次数</text>
         </view>
       </view>
-      <view class="findingnamecardonesontwo">
-
-
-
-      </view>
+    </view>
+    <view class="findingnamecardonesontwo">
+       <view class="rule-detail">
+         <image src="{{ruleimage}}"></image>
+         <text>我的排名点：{{sort_flag}}</text>
+       </view>
+       <view class="rule-odetail" bindtap="rulepoit">
+         马上去提升排名>>
+       </view>
     </view>
   </view>
 
@@ -156,7 +160,7 @@
   </view>
   <view class="cardcoloreno">
     <view class="nopass" wx:if="{{ressonone}}">
-      个人资料审核失败原因：{{note}}
+      <text>个人资料审核失败原因：</text> {{note}}
     </view>
   </view>
   <view class="findingnamecardthree" wx:if="{{selfintro}}">

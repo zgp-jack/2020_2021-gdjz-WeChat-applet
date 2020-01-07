@@ -6,7 +6,10 @@
     background: url("http://cdn.yupao.com/miniprogram/images/new-ucenter.png") no-repeat;
     background-size: 100% 100%;
 }
-
+.felx{
+    display: flex;
+    align-items: center;
+}
 .ucenter-title {
     position: relative;
     width: 100%;
@@ -188,8 +191,8 @@
 }
 
 .ucener-leftImage {
-    width: 38rpx;
-    height: 36rpx;
+    width: 42rpx;
+    height: 38rpx;
     /* padding: 32rpx 20rpx 30rpx 0 */
 }
 
@@ -214,18 +217,22 @@
     font-weight: bold;
 }
 
-.ucener-title text {
-    width: 25rpx;
-    height: 25rpx;
+.masnumber {
+    width: 28rpx;
+    height: 28rpx;
     background: #fd0618;
-    border-radius: 50%;
+    border-radius: 100%;
     position: absolute;
     top: 0;
-    right: -25rpx;
+    right: -30rpx;
     color: #fff;
-    font-size: 16rpx;
-    line-height: 25rpx;
+    font-size: 20rpx;
+    line-height: 28rpx;
     text-align: center;
+    /* padding:0 2rpx 0 0; */
+}
+.msg-dot{
+    position:absolute;top:0;right:-20rpx;background:rgba(253,6,24,1);border-radius:100%;padding:8rpx;
 }
 
 .ucener-detil {

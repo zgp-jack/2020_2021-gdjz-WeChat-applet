@@ -31,7 +31,36 @@ Page({
   complainInfo: function (e) {
     let infoId = e.currentTarget.dataset.id;
     let type = e.currentTarget.dataset.type;
-    this.setData({ showComplain: true, infoId: infoId, type: type })
+    this.subscribeToNews(infoId,type)
+  },
+  subscribeToNews: function(infoId, type) {
+    let userInfo = this.data.userInfo;
+    let _this = this;
+    if (wx.canIUse('requestSubscribeMessage') === true) {
+        wx.requestSubscribeMessage({
+            tmplIds: ['uZcoNQz86gAr3P4DYtgt85PnVgMcN_Je27TeHdKhz14'],
+            success(res) {
+                if (res.errMsg == "requestSubscribeMessage:ok") {
+                    app.appRequestAction({
+                        url: "leaving-message/add-subscribe-msg/",
+                        way: "POST", 
+                        mask: true,
+                        params: {
+                            userId: userInfo.userId,
+                            token: userInfo.token,
+                            tokenTime: userInfo.tokenTime,
+                            type: 5
+                        },
+                        success: function(res) {
+                            _this.setData({ showComplain: true, infoId: infoId, type: type })
+                        },
+                    })
+                }
+            }
+        })
+    } else {
+        _this.setData({ showComplain: true, infoId: infoId, type: type })
+    }
   },
   userEnterComplain: function (e) {
     this.setData({ complainInfo: e.detail.value })

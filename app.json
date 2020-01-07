@@ -1,12 +1,13 @@
 {
   "pages": [
     "pages/index/index",
-    "pages/clients-looking-for-work/ranking-list/rankinglist",
     "pages/clients-looking-for-work/the-sticky-rule/stickyrule",
-    "pages/home/home",
+    "pages/clients-looking-for-work/ranking-rules/ranking-rules",
     "pages/clients-looking-for-work/finding-top/findingtop",
-    "pages/findingworkinglist/findingworkinglist",
     "pages/clients-looking-for-work/finding-name-card/findingnamecard",
+    "pages/clients-looking-for-work/ranking-list/rankinglist",
+    "pages/home/home",
+    "pages/findingworkinglist/findingworkinglist",
     "pages/collect/resume/resume",
     "pages/clients-looking-for-work/new-project-experience/projectexperience",
     "pages/boss-look-card/lookcard",
@@ -75,11 +76,7 @@
     "pages/ucenter/ucenterNew/invite",
     "pages/ucenter/ucenterNew/helpCenter",
     "pages/information/mymessage/mymessage",
-    "pages/information/wanted/wanted",
-    "pages/information/complain/complain",
-    "pages/information/recruit/recruit",
-    "pages/information/system/system",
-    "pages/information/leaveword/leaveword"
+    "pages/information/system/system"
   ],
   "window": {
     "backgroundTextStyle": "light",

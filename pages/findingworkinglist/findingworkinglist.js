@@ -1,3 +1,4 @@
+
 //userTapSearch 
 const app = getApp(); 
 let footerjs = require("../../utils/footer.js");
@@ -11,6 +12,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    rullIntegral: app.globalData.apiImgUrl + "resume-list-rules-btn.png",
     finded: app.globalData.apiImgUrl + "lpy/finded.png",
     biaoqian: app.globalData.apiImgUrl + "lpy/biaoqian.png",
     testImg:"http://cdn.yupao.com/miniprogram/images/user.png",
@@ -116,6 +118,11 @@ Page({
     let type = parseInt(e.currentTarget.dataset.type);
     this.setData({
       showListsInfo: (this.data.showListsInfo == type) ? 0 : type
+    })
+  },
+  jumprull(){
+    wx.navigateTo({
+      url: "/pages/clients-looking-for-work/ranking-rules/ranking-rules",
     })
   },
   userChooseNewest(e) {
@@ -588,6 +595,7 @@ Page({
       publishActive: footerjs.publishActive,
       showPublishBox: footerjs.showPublishBox
     })
+    footerjs.initMsgNum(this);
   },
   doPublishAction: function () {
     footerjs.doPublishAction(this);
@@ -690,7 +698,14 @@ Page({
       url: `/pages/boss-look-card/lookcard?uuid=${uuid}&location=${userLocation}`,
     })
   },
-
+  checkIsInvite: function (options) {
+    if (options.hasOwnProperty("refid")) {
+      app.globalData.refId = options.refid;
+    }
+    if (options.hasOwnProperty("source")) {
+      wx.setStorageSync("_source", options.source);
+    }
+  },
 
 
 
@@ -703,6 +718,7 @@ Page({
     this.valiFilterProvince();
     this.initFooterData();
     this.initNeedData();
+    this.checkIsInvite(options);
   },
 
   /**
@@ -722,7 +738,7 @@ Page({
         userInfo: userInfo
       })
     }
-
+    footerjs.initMsgNum(this);
   },
 
   /**
@@ -781,3 +797,4 @@ Page({
    * 用户点击右上角分享
    */
 })
+

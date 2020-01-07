@@ -22,14 +22,15 @@
   flex-direction: column;
   justify-content: center;
   background-color: white;
+  font-size: 0;
 }
 .obtn button{
   width: 500rpx;
-  height: 95rpx;
+  /* height: 95rpx; */
   background: #108EEF;
   line-height: 100rpx;
   text-align: center;
   color: white;
-  font-size: 45rpx;
+  font-size: 40rpx;
   letter-spacing: 4rpx;
 }
