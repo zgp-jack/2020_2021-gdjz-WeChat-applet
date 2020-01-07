@@ -183,7 +183,7 @@
                     </view>
                 </view>
             </view>
-            <view class='ucener-theme' data-url='/pages/ucenter/ucenterNew/helpCenter' bindtap='valiUserUrl'>
+            <view class='ucener-theme' data-url='/pages/helpCenter/helpCenter' bindtap='valiUserUrl'>
                 <image class="ucener-leftImage" src='{{ ucenterimgs.ucenterHelp }}'></image>
                 <view class='ucener-border-b'>
                     <view class="ucener-title">帮助中心</view>

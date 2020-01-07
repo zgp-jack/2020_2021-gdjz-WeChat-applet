@@ -71,12 +71,11 @@
     "pages/others/message/lists/lists",
     "pages/others/message/publish/publish",
     "pages/others/information/lists",
-    "pages/ucenter/ucenterNew/ucenterNew",
     "pages/ucenter/ucenterNew/hireMembers",
     "pages/ucenter/ucenterNew/invite",
-    "pages/ucenter/ucenterNew/helpCenter",
     "pages/information/mymessage/mymessage",
-    "pages/information/system/system"
+    "pages/information/system/system",
+    "pages/helpCenter/helpCenter"
   ],
   "window": {
     "backgroundTextStyle": "light",

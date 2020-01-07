@@ -842,7 +842,7 @@ App({
       let _this = this
         let userInfo = wx.getStorageSync("userInfo");
         if (!userInfo) return false;
-        this.doRequestAction({
+        this.appRequestAction({
             url: "member/original-message/",
             way: "POST",
             success: function (res) {
