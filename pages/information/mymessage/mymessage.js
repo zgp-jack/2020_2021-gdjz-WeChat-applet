@@ -31,7 +31,7 @@ Page({
     let _this = this;
     let userInfo = wx.getStorageSync("userInfo");
     let userUuid = wx.getStorageSync("userUuid");
-    this.setData({ userInfo: userInfo})
+    this.setData({ userInfo: userInfo ? userInfo : false})
     if (!userInfo) return false;
     wx.showLoading({ title: '数据加载中' })
     app.doRequestAction({
