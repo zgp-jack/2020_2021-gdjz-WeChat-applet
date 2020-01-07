@@ -156,9 +156,9 @@ Page({
         })
     },
     suggestUserUrl: function() {
-        let _this = this.data
-        let tels = _this.memberInfo.phone
-        let username = _this.memberInfo.username
+        let _this = this.data;
+        let tels = _this.memberInfo.phone || "";
+        let username = _this.memberInfo.username || "";
         wx.navigateTo({
             url: '/pages/others/message/publish/publish?tel=' + tels + "&name=" + username + "&wechat=" + _this.wechat + "&phone=" + _this.phone
         })
