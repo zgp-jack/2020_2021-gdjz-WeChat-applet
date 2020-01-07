@@ -47,13 +47,15 @@ Page({
         this.setData({ userInfo: userInfo })
         let _this = this;
         wx.showLoading({ title: '正在初始化用户数据', })
-        app.doRequestAction({
+        app.appRequestAction({
             url: "user/personal/",
             way: "POST",
             params: userInfo,
             success: function(res) {
+                setTimeout(()=>{
+                    wx.hideLoading();
+                },300)
                 callback ? callback() : ""
-                wx.hideLoading();
                 let mydata = res.data;
                 if (mydata.errcode == "ok") {
                     _this.setData({

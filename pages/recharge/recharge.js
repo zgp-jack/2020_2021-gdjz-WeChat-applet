@@ -93,7 +93,19 @@ Page({
                                         console.log(resss,"resss")
                                         let _i = parseInt(_this.data.integral) + parseInt(_this.data.rechargeData[_this.data.activeIndex].integral);
                                         _this.setData({ integral:_i });
-                                        _this.subscribeToNews()
+                                        wx.showModal({
+                                            title: '恭喜您',
+                                            content: '您已经成功充值' + _this.data.rechargeData[_this.data.activeIndex].integral+'个积分',
+                                            cancelText:"会员中心",
+                                            confirmText:"继续充值",
+                                            success:function(res){
+                                                if (res.cancel) {
+                                                    wx.reLaunch({
+                                                        url: '/pages/ucenter/ucenter',
+                                                    })
+                                                }
+                                            }
+                                        })
                                     },
                                     fail: function (res) {
                                         console.log(res)
@@ -106,59 +118,59 @@ Page({
             }
         })
     },
-    subscribeToNews: function() {
-         let userInfo = wx.getStorageSync("userInfo");
-         let _this = this;
-        if (wx.canIUse('requestSubscribeMessage') === true) {
-            wx.requestSubscribeMessage({
-                tmplIds: ['vpEpkHfo5tlmGB8oZXq-qVU3ySmsxTzPrgNsv_2l6Go'],
-                success(res) {
-                    if (res.errMsg == "requestSubscribeMessage:ok") {
-                        app.appRequestAction({
-                            url: "leaving-message/add-subscribe-msg/",
-                            way: "POST",
-                            mask: true,
-                            params: {
-                                userId: userInfo.userId,
-                                token: userInfo.token,
-                                tokenTime: userInfo.tokenTime,
-                                type: 2 
-                            },
-                            success: function(res) {
-                                wx.showModal({
-                                    title: '恭喜您',
-                                    content: '您已经成功充值' + _this.data.rechargeData[_this.data.activeIndex].integral+'个积分',
-                                    cancelText:"会员中心",
-                                    confirmText:"继续充值",
-                                    success:function(res){
-                                        if (res.cancel) {
-                                            wx.reLaunch({
-                                                url: '/pages/ucenter/ucenter',
-                                            })
-                                        }
-                                    }
-                                })
-                            },
-                        })
-                    }
-                }
-            })
-        } else {
-            wx.showModal({
-                title: '恭喜您',
-                content: '您已经成功充值' + _this.data.rechargeData[_this.data.activeIndex].integral+'个积分',
-                cancelText:"会员中心",
-                confirmText:"继续充值",
-                success:function(res){
-                    if (res.cancel) {
-                        wx.reLaunch({
-                            url: '/pages/ucenter/ucenter',
-                        })
-                    }
-                }
-            })
-        }
-    },
+    // subscribeToNews: function() {
+    //      let userInfo = wx.getStorageSync("userInfo");
+    //      let _this = this;
+    //     if (wx.canIUse('requestSubscribeMessage') === true) {
+    //         wx.requestSubscribeMessage({
+    //             tmplIds: ['vpEpkHfo5tlmGB8oZXq-qVU3ySmsxTzPrgNsv_2l6Go'],
+    //             success(res) {
+    //                 if (res.errMsg == "requestSubscribeMessage:ok") {
+    //                     app.appRequestAction({
+    //                         url: "leaving-message/add-subscribe-msg/",
+    //                         way: "POST",
+    //                         mask: true,
+    //                         params: {
+    //                             userId: userInfo.userId,
+    //                             token: userInfo.token,
+    //                             tokenTime: userInfo.tokenTime,
+    //                             type: 2 
+    //                         },
+    //                         success: function(res) {
+    //                             wx.showModal({
+    //                                 title: '恭喜您',
+    //                                 content: '您已经成功充值' + _this.data.rechargeData[_this.data.activeIndex].integral+'个积分',
+    //                                 cancelText:"会员中心",
+    //                                 confirmText:"继续充值",
+    //                                 success:function(res){
+    //                                     if (res.cancel) {
+    //                                         wx.reLaunch({
+    //                                             url: '/pages/ucenter/ucenter',
+    //                                         })
+    //                                     }
+    //                                 }
+    //                             })
+    //                         },
+    //                     })
+    //                 }
+    //             }
+    //         })
+    //     } else {
+    //         wx.showModal({
+    //             title: '恭喜您',
+    //             content: '您已经成功充值' + _this.data.rechargeData[_this.data.activeIndex].integral+'个积分',
+    //             cancelText:"会员中心",
+    //             confirmText:"继续充值",
+    //             success:function(res){
+    //                 if (res.cancel) {
+    //                     wx.reLaunch({
+    //                         url: '/pages/ucenter/ucenter',
+    //                     })
+    //                 }
+    //             }
+    //         })
+    //     }
+    // },
     /**
      * 生命周期函数--监听页面加载
      */
