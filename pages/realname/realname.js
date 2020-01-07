@@ -44,6 +44,7 @@ Page({
     getnationdetail(item){
       console.log(item)
       let getId = this.data.nation;
+      if (item){
       for (let i = 0; i < item.length;i++){
         if (item[i].mz_id == getId){
           this.setData({
@@ -51,7 +52,7 @@ Page({
           })
         }
       }
-
+      }
     },
     /**
      * 生命周期函数--监听页面加载
