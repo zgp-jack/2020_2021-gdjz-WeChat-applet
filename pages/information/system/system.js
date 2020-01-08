@@ -36,10 +36,10 @@ Page({
   getMymessage: function () {
     let _this = this;
     let userInfo = wx.getStorageSync("userInfo");
-    this.setData({ userInfo: userInfo })
+    this.setData({ userInfo: userInfo ? userInfo : false})
     if (!userInfo) return false;
     wx.showLoading({ title: '数据加载中' })
-    app.doRequestAction({
+    app.appRequestAction({
       url: "member/message-of-type/",
       way: "POST",
       params: {
@@ -85,7 +85,7 @@ Page({
     this.setData({ userInfo: userInfo })
     if (!userInfo) return false;
     wx.showLoading({ title: '数据加载中' })
-    app.doRequestAction({
+    app.appRequestAction({
       url: "member/message-of-type/",
       way: "POST",
       params: {

@@ -34,7 +34,7 @@ Page({
     this.setData({ userInfo: userInfo ? userInfo : false})
     if (!userInfo) return false;
     wx.showLoading({ title: '数据加载中' })
-    app.doRequestAction({
+    app.appRequestAction({
       url: "member/user-messages/",
       way: "POST",
       success: function (res) {
