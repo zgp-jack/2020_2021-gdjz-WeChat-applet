@@ -709,7 +709,6 @@ Page({
         project: project.uid,
       })
 
-
       this.setData({
         projectname: this.data.project.project_name,
         date: this.data.project.completion_time,
@@ -718,7 +717,7 @@ Page({
         detail: this.data.project.detail,
         detailength: this.data.project.detail.length,
         imgArrs: this.data.project.image,
-        resume_uuid: this.data.project.resume_uuid,
+        resume_uuid: this.data.project.resume_uuid||this.data.resume_uuid,
         uuid: this.data.project.uuid,
         provincecity: this.data.project.province + "," + this.data.project.city
       })
@@ -1010,11 +1009,9 @@ Page({
     this.getproject()
     this.ranktypes(options)
     let project_count = options.project_count;
-    let certificate_count = options.certificate_count;
     let resume_uuid = options.resume_uuid
     this.setData({
       project_count:project_count,
-      certificate_count:certificate_count,
       resume_uuid:resume_uuid
     })
   },

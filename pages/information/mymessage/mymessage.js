@@ -27,16 +27,28 @@ Page({
       url: '/pages/information/system/system' + "?type="+type
     })
   },
+  initGetIntegralList:function(){
+    let _this = this;
+    app.initSystemInfo(function(res){
+        if (res && res.platform == "ios"){
+            _this.terminal_type='ios'
+        }else if( res && res.platform != "ios"){
+            _this.terminal_type= 'android'
+        }
+    })
+  },
   getMymessage: function () {
     let _this = this;
     let userInfo = wx.getStorageSync("userInfo");
     let userUuid = wx.getStorageSync("userUuid");
     this.setData({ userInfo: userInfo ? userInfo : false})
     if (!userInfo) return false;
+    _this.initGetIntegralList()
     wx.showLoading({ title: '数据加载中' })
     app.appRequestAction({
       url: "member/user-messages/",
       way: "POST",
+      params: { terminal_type:_this.terminal_type },
       success: function (res) {
         wx.hideLoading();
         let mydata = res.data;

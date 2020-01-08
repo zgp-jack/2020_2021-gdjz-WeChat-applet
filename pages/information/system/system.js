@@ -32,12 +32,22 @@ Page({
     isShare: false,
     // 招工-列表，找活-基础资料跳名片列表and项目、证书跳对应列表，留言跳留言列表， 投诉-退分记录列表，充值跳积分来源列表，实名跳实名认证，
   },
-
+  initGetIntegralList:function(){
+    let _this = this;
+    app.initSystemInfo(function(res){
+        if (res && res.platform == "ios"){
+            _this.terminal_type='ios'
+        }else if( res && res.platform != "ios"){
+            _this.terminal_type= 'android'
+        }
+    })
+  },
   getMymessage: function () {
     let _this = this;
     let userInfo = wx.getStorageSync("userInfo");
     this.setData({ userInfo: userInfo ? userInfo : false})
     if (!userInfo) return false;
+    _this.initGetIntegralList()
     wx.showLoading({ title: '数据加载中' })
     app.appRequestAction({
       url: "member/message-of-type/",
@@ -45,7 +55,8 @@ Page({
       params: {
         type:_this.data.type,
         page: _this.data.page,
-    },
+        terminal_type:_this.terminal_type
+      },
       success: function (res) {
         wx.hideLoading();
         let mydata = res.data;
@@ -84,6 +95,7 @@ Page({
     let userInfo = wx.getStorageSync("userInfo");
     this.setData({ userInfo: userInfo ? userInfo : false})
     if (!userInfo) return false;
+    _this.initGetIntegralList()
     wx.showLoading({ title: '数据加载中' })
     app.appRequestAction({
       url: "member/message-of-type/",
@@ -91,6 +103,7 @@ Page({
       params: {
         type:_this.data.type,
         page: 1,
+        terminal_type:_this.terminal_type
     },
       success: function (res) {
         wx.hideLoading();

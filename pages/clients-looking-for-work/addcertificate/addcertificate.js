@@ -26,7 +26,8 @@ vertify()
     nowDate:"",
     beforeDate:"",
     ranktypes: "",
-    deletestatus: true
+    deletestatus: true,
+    skillnum:''
   },
   vertify() {
     this.setData({
@@ -217,10 +218,7 @@ vertify()
   },
   preserve() {
     let that = this;
-
-    let certificate_count = that.data.certificate_count;
-    // if (that.data.certificate_cou >= that.data.certificate_count) {
-    if (that.data.certificate_cou >=  certificate_count) {
+    if (that.data.certificate_cou >= that.data.certificate_count) {
       wx.showModal({
         title: '温馨提示',
         content: `最多只能添加${that.data.certificate_count}个技能证书`,
@@ -360,10 +358,7 @@ vertify()
   },
   preservechixu() {
     let that = this;
-    
-    let certificate_count = that.data.certificate_count;
-    // if (that.data.certificate_cou >= that.data.certificate_count) {
-      if (that.data.certificate_cou >= certificate_count) {
+    if (that.data.certificate_cou >= that.data.certificate_count) {
       wx.showModal({
         title: '温馨提示',
         content: `最多只能添加${that.data.certificate_count}个技能证书`,
@@ -554,12 +549,12 @@ vertify()
       this.setData({
         skill: skilltail.uid
       })
-
+      
       this.setData({
         name: this.data.skill.name,
         imgArrs: this.data.skill.image,
         idArrs: this.data.skill.images,
-        resume_uuid: this.data.skill.resume_uuid,
+        resume_uuid: this.data.skill.resume_uuid||this.data.resume_uuid,
         uuid: this.data.skill.uuid,
         date: this.data.skill.certificate_time
       })
@@ -689,10 +684,9 @@ vertify()
   onLoad: function (options) {
     this.getskill()
     this.ranktypes(options)
-    // console.log(options)
-    let skillnum = options.skillnum;
     let certificate_count = options.certificate_count;
     let resume_uuid = options.resume_uuid
+    let skillnum = options.skillnum || "";
     this.setData({
       skillnum:skillnum,
       certificate_count:certificate_count,

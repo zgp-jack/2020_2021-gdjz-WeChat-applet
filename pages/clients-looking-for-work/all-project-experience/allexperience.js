@@ -21,7 +21,7 @@ Page({
     
       wx.setStorageSync("projectdetail", e.currentTarget.dataset)
       wx.navigateTo({
-        url: "/pages/clients-looking-for-work/new-project-experience/projectexperience",
+        url: "/pages/clients-looking-for-work/new-project-experience/projectexperience?project_count="+this.data.project_count+"&certificate_count="+this.data.certificate_count+"&resume_uuid="+this.data.resume_uuid,
       })
   },
   delestore() {

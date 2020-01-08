@@ -840,19 +840,31 @@ App({
     },
     getUserMsg: function(callback) {
       let _this = this
-        let userInfo = wx.getStorageSync("userInfo");
-        if (!userInfo) return false;
-        this.appRequestAction({
-            url: "member/original-message/",
-            way: "POST",
-            success: function (res) {
-              if (res.data.errcode == "ok") {
-                _this.globalData.jobNumber = res.data.data.jobNumber
-                _this.globalData.msgsNumber = res.data.data.messageNumber
-                callback(res.data.data.jobNumber,res.data.data.messageNumber)
-            }
-
+      let userInfo = wx.getStorageSync("userInfo");
+      if (!userInfo) return false;
+      _this.initGetIntegralList() 
+      this.appRequestAction({
+          url: "member/original-message/",
+          way: "POST",
+          params: { terminal_type:_this.terminal_type },
+          success: function (res) {
+            if (res.data.errcode == "ok") {
+              _this.globalData.jobNumber = res.data.data.jobNumber
+              _this.globalData.msgsNumber = res.data.data.messageNumber
+              callback(res.data.data.jobNumber,res.data.data.messageNumber)
           }
-        })
+
+        }
+      })
+    },
+    initGetIntegralList:function(){
+      let _this = this;
+      _this.initSystemInfo(function(res){
+          if (res && res.platform == "ios"){
+              _this.terminal_type='ios'
+          }else if( res && res.platform != "ios"){
+              _this.terminal_type= 'android'
+          }
+      })
     },
   })

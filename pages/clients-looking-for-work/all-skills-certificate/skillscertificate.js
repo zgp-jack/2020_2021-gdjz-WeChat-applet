@@ -82,7 +82,7 @@ Page({
     let skillnum = this.data.allskill.length
     wx.setStorageSync("skillnum", skillnum)
     wx.navigateTo({
-      url: "/pages/clients-looking-for-work/addcertificate/addcertificate?project_count="+this.data.project_count+"&certificate_count="+this.data.certificate_count+"&resume_uuid="+this.data.resume_uuid,
+      url: "/pages/clients-looking-for-work/addcertificate/addcertificate?project_count="+this.data.project_count+"&certificate_count="+this.data.certificate_count+"&resume_uuid="+this.data.resume_uuid+"&skillnum=" + skillnum,
     })
   },
   editor(e) {
