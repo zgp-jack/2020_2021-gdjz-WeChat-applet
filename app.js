@@ -853,7 +853,6 @@ App({
               _this.globalData.msgsNumber = res.data.data.messageNumber
               callback(res.data.data.jobNumber,res.data.data.messageNumber)
           }
-
         }
       })
     },
