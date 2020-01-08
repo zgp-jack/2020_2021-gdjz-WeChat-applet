@@ -259,10 +259,11 @@ Page({
   },
   preserve: function () {
     let that = this;
-    if (that.data.project_cou >= that.data.project_count) {
+    let project_count = that.data.project_count
+    if (that.data.project_cou >= project_count) {
       wx.showModal({
         title: '温馨提示',
-        content: `最多只能添加${that.data.project_count}个项目`,
+        content: `最多只能添加${project_count}个项目`,
         showCancel: false,
         success(res) {
           wx.navigateBack({
@@ -369,7 +370,6 @@ Page({
       return
     }
 
-
     Object.assign(project, {
       userId: userInfo.userId,
       token: userInfo.token,
@@ -400,10 +400,11 @@ Page({
   },
   preservechixu() {
     let that = this;
-    if (that.data.project_cou >= that.data.project_count) {
+    let project_count = that.data.project_count;
+    if (that.data.project_cou >= project_count) {
       wx.showModal({
         title: '温馨提示',
-        content: `最多只能添加${that.data.project_count}个项目`,
+        content: `最多只能添加${project_count}个项目`,
         showCancel: false,
         success(res) {
           wx.navigateBack({
@@ -612,12 +613,12 @@ Page({
       })
     }
   },
-  getuuid() {
-    let userInfo = wx.getStorageSync("uuid");
-    this.setData({
-      resume_uuid: userInfo
-    })
-  },
+  // getuuid() {
+  //   let userInfo = wx.getStorageSync("uuid");
+  //   this.setData({
+  //     resume_uuid: userInfo
+  //   })
+  // },
   delete(e) {
 
     this.data.imgArrs.splice(e.currentTarget.dataset.index, 1)
@@ -976,7 +977,7 @@ Page({
 
   onShow: function () {
     // this.getbirth()
-    this.getuuid()
+    // this.getuuid()
     this.projectshow()
     this.starttimer()
 
@@ -1008,6 +1009,14 @@ Page({
     this.initAllProvice()
     this.getproject()
     this.ranktypes(options)
+    let project_count = options.project_count;
+    let certificate_count = options.certificate_count;
+    let resume_uuid = options.resume_uuid
+    this.setData({
+      project_count:project_count,
+      certificate_count:certificate_count,
+      resume_uuid:resume_uuid
+    })
   },
 
 })

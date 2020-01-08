@@ -155,6 +155,7 @@ Page({
       })
       return false;
     }
+    console.log(ranking,"ranking")
     if (this.data.has_resume == 1 && e.currentTarget.dataset.jump == 1 && e.currentTarget.dataset.minipath == "/pages/clients-looking-for-work/finding-name-card/findingnamecard") {
       app.globalData.showdetail = true
       wx.navigateTo({

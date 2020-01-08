@@ -53,10 +53,9 @@ Page({
   },
   addpro() {
     let projectnum = this.data.allproject.length
-    console.log(projectnum)
     wx.setStorageSync("projectnum", projectnum)
     wx.navigateTo({
-      url: "/pages/clients-looking-for-work/new-project-experience/projectexperience",
+      url: "/pages/clients-looking-for-work/new-project-experience/projectexperience?project_count="+this.data.project_count+"&certificate_count="+this.data.certificate_count+"&resume_uuid="+this.data.resume_uuid,
     })
   },
   /**
@@ -92,7 +91,10 @@ Page({
           }
 
           that.setData({
-            allproject: allproject
+            allproject: allproject,
+            certificate_count:res.data.data.certificate_count,
+            project_count:res.data.data.project_count,
+            resume_uuid:res.data.data.info.uuid
           })
           that.setData({
             projectlength: res.data.data.project.length

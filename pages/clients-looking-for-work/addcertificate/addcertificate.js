@@ -128,12 +128,12 @@ vertify()
       })
     }
   },
-  getuuid() {
-    let userInfo = wx.getStorageSync("uuid");
-    this.setData({
-      resume_uuid: userInfo
-    })
-  },
+  // getuuid() {
+  //   let userInfo = wx.getStorageSync("uuid");
+  //   this.setData({
+  //     resume_uuid: userInfo
+  //   })
+  // },
   deleteexper() {
     let that = this;
     if (!this.data.deletestatus) {
@@ -217,9 +217,8 @@ vertify()
   },
   preserve() {
     let that = this;
-    let certificate_count = wx.getStorageSync("certificate_count");
-    console.log(certificate_count)
-    console.log(that.data.certificate_cou , that.data.certificate_count)
+
+    let certificate_count = that.data.certificate_count;
     // if (that.data.certificate_cou >= that.data.certificate_count) {
     if (that.data.certificate_cou >=  certificate_count) {
       wx.showModal({
@@ -361,7 +360,8 @@ vertify()
   },
   preservechixu() {
     let that = this;
-    let certificate_count = wx.getStorageSync("certificate_count");
+    
+    let certificate_count = that.data.certificate_count;
     // if (that.data.certificate_cou >= that.data.certificate_count) {
       if (that.data.certificate_cou >= certificate_count) {
       wx.showModal({
@@ -532,7 +532,7 @@ vertify()
 
     let skilltail = wx.getStorageSync("skilltail");
     let certificate_count = wx.getStorageSync("certificate_count");
-    let certificate_cou = wx.getStorageSync("skillnum");
+    let certificate_cou = wx.getStorageSync("skillnum") || this.data.skillnum;
     if (certificate_cou) {
       this.setData({
         certificate_cou: certificate_cou
@@ -689,6 +689,15 @@ vertify()
   onLoad: function (options) {
     this.getskill()
     this.ranktypes(options)
+    // console.log(options)
+    let skillnum = options.skillnum;
+    let certificate_count = options.certificate_count;
+    let resume_uuid = options.resume_uuid
+    this.setData({
+      skillnum:skillnum,
+      certificate_count:certificate_count,
+      resume_uuid:resume_uuid
+    })
   },
 
   /**
@@ -703,7 +712,7 @@ vertify()
    */
   onShow: function () {
     this.skillshow() 
-    this.getuuid()
+    // this.getuuid()
     this.starttimer()
     // this.getbirth()
   },
