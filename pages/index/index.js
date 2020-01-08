@@ -80,7 +80,7 @@ Page({
         userShareTime:{},
         firstJoin: false,
         fastIssueImg: app.globalData.apiImgUrl + "index-fast-issue.png",
-        showFastIssue: app.globalData.showFastIssue,
+        // showFastIssue: app.globalData.showFastIssue,
         joblistjz: app.globalData.apiImgUrl + "joblist_zd.png",
         joblistwyjz:app.globalData.apiImgUrl+"joblist_wyzd.png",
       isload: false,
@@ -630,8 +630,8 @@ Page({
         // }
         this.setData({ userInfo: userInfo ? userInfo : false });
         this.initNeedData();
-        if (userInfo) if (!app.globalData.showFastIssue.request) app.isShowFastIssue(this);
-        else this.setData({ showFastIssue: app.globalData.showFastIssue })
+        // if (userInfo) if (!app.globalData.showFastIssue.request) app.isShowFastIssue(this);
+        // else this.setData({ showFastIssue: app.globalData.showFastIssue })
         
     },
   valiUserUrl:function(e){
@@ -658,7 +658,7 @@ Page({
                         wx.setStorageSync('userInfo', userInfo)
                         that.initNeedData();
                         //that.initUserShareTimes();
-                        if (!app.globalData.showFastIssue.request) app.isShowFastIssue(that);
+                        // if (!app.globalData.showFastIssue.request) app.isShowFastIssue(that);
                     } else {
                         app.showMyTips(uinfo.errmsg);
                     }
