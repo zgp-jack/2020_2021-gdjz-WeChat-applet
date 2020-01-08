@@ -38,7 +38,7 @@ Page({
         let _this = this;
         wx.showLoading({ title: '数据加载中' })
         _this.initGetIntegralList()
-        app.doRequestAction({
+        app.appRequestAction({
             url: "others/help-feedback/",
             params: {
                 page: _this.data.page,
@@ -126,7 +126,7 @@ Page({
         if (_wx && _wx.expirTime) {
             if (parseInt(_wx.expirTime) > _time) _mark = false;
         }
-        app.doRequestAction({
+        app.appRequestAction({
             url: "index/search-data/",
             params: {
                 type: "job",
