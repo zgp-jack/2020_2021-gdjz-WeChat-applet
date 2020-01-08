@@ -17,7 +17,7 @@ padding: 0 37rpx;
   padding-left: 37rpx;
  
   font-weight: bold;
-  margin-top: 120rpx;
+  /* margin-top: 120rpx; */
 }
 .obtn{
   position: fixed;

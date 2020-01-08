@@ -1,9 +1,9 @@
 <view class='index-pullareabox  index-pullareabox-active'>
-<view class="index-area-tips">
+<!-- <view class="index-area-tips">
   <view class='overwordsarea'>当前选择城市：
     <view wx:for="{{areaText}}" wx:key="{{ index }}" class="index-area" data-id="{{ item }}"   data-index="{{ index }}" bindtap="deletelable"><text  class="index-area-otext">{{ item.name }} </text><image class="deleteimg"   src="{{imgDetelte}}" ></image></view>
   </view>
-</view>
+</view> -->
   <view class='index-area-body'>
   <!--  -->
     <!-- <view class='index-area-item'>

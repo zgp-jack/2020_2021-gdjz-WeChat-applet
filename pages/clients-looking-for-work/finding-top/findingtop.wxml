@@ -20,7 +20,7 @@
   <view class="dayall">
     <view class="daynum">
       <text>置顶天数</text>
-      <input type="text" placeholder="请输入天数" value="{{daynumber}}" bindinput="dayclocy"></input>
+      <input type="number" placeholder="请输入天数" value="{{daynumber}}" bindinput="dayclocy"></input>
     </view>
     <view class="daynum">
       <text>消耗积分</text>

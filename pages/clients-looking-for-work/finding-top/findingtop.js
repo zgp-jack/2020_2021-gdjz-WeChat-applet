@@ -12,13 +12,13 @@ Page({
     icon: app.globalData.apiImgUrl + "userauth-topicon.png",
     point: 0,
     daynumber: 1,
-    imgDetelte: '../../../images/delete.png',
+    imgDetelte: app.globalData.apiImgUrl + "lpy/delete.png",
     areaTextcrum: [],
     max_number: "",
     province_integral: "",
     value: 1,
     areaTextId: "",
-    top_rules:[]
+    top_rules: []
   },
 
   jumpstickyrule() {
@@ -97,7 +97,15 @@ Page({
     let that = this;
     let userInfo = wx.getStorageSync("userInfo");
     let userUuid = wx.getStorageSync("userUuid");
-    if (!userInfo || !userUuid) return false;
+    if (!userInfo || !userUuid) {
+      wx.showModal({
+        title: '温馨提示',
+        content: '网络出错，请稍后重试',
+        showCancel: false,
+        success(res) { }
+      })
+      return
+    }
     let vertifyNum = v.v.new()
     if (vertifyNum.isNull(this.data.areaTextcrum)) {
       reminder.reminder({ tips: '置顶城市' })
@@ -122,12 +130,12 @@ Page({
       citys: 0,
       provinces: that.data.areaTextId
     }
-  
+
     app.appRequestAction({
       url: 'resumes/do-top/',
       way: 'POST',
       params: detail,
-           mask: true,
+      mask: true,
       success: function (res) {
         let mydata = res.data;
         console.log(mydata)
@@ -142,24 +150,37 @@ Page({
               })
             }
           })
-        } else if (mydata.errcode == "resume_null"){
+        } else if (mydata.errcode == "resume_null") {
           wx.showModal({
             title: '温馨提示',
             content: res.data.errmsg,
             // showCancel: false,
-            success(res) { 
+            success(res) {
               wx.navigateTo({
                 url: `/pages/clients-looking-for-work/finding-name-card/findingnamecard`,
               })
             }
           })
           return
-        }else {
+        } else if (mydata.errcode == "get_integral") {
+          wx.showModal({
+            title: '温馨提示',
+            content: res.data.errmsg,
+            success(res) {
+              if (res.confirm == true) {
+                wx.navigateTo({
+                  url: `/pages/getintegral/getintegral`,
+                })
+              }
+            }
+          })
+          return
+        } else {
           wx.showModal({
             title: '温馨提示',
             content: res.data.errmsg,
             showCancel: false,
-            success(res) { 
+            success(res) {
               wx.navigateBack({
                 delta: 1
               })

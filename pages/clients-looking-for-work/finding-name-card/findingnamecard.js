@@ -104,17 +104,17 @@ Page({
     rankjump: "",
     resume_top: [],
     top_status: [],
-    indextop:0,
-    top_tips_string:"",
+    indextop: 0,
+    top_tips_string: "",
     selectDatatop: [],
     selectktop: [],
-    endtime:"",
-    has_top:0,
-    is_show_tips:""
+    endtime: "",
+    has_top: 0,
+    is_show_tips: ""
   },
 
 
-  modifytop(){
+  modifytop() {
     let that = this;
     let nowtime = new Date().getTime();
     let endtime = this.data.endtime;
@@ -130,7 +130,7 @@ Page({
       })
       return
     }
-    if (that.data.is_show_tips == 1){
+    if (that.data.is_show_tips == 1) {
       wx.showModal({
         title: '温馨提示',
         content: contentom,
@@ -141,20 +141,31 @@ Page({
       })
       return
     }
-
-    let area = JSON.stringify(that.data.resume_top.top_provinces_str)
+    let all = that.data.resume_top;
+    let area = ''
+    let maxnumber = ''
+    let firstprovincenum = ''
+    if (all.hasOwnProperty('top_provinces_str')) {
+      area = JSON.stringify(all.top_provinces_str)
+    }
     let modify = "modify";
-    let maxnumber = that.data.resume_top.max_number;
+    if (all.hasOwnProperty('max_number')) {
+      maxnumber = all.max_number;
+    }
+    if (all.hasOwnProperty('first_province_num')) {
+      firstprovincenum = all.first_province_num;
+    }
+   
     wx.navigateTo({
-      url: `/pages/clients-looking-for-work/the-sticky-rule/stickyrule?area=${area}&modify=${modify}&maxnumber=${maxnumber}`,
+      url: `/pages/clients-looking-for-work/the-sticky-rule/stickyrule?area=${area}&modify=${modify}&maxnumber=${maxnumber}&firstprovincenum=${firstprovincenum}`,
     })
-    
+
   },
   selectTaptop() {
     let that = this;
     let nowtime = new Date().getTime();
     let endtime = this.data.endtime;
-    if (nowtime - 0 > nowtime -0){
+    if (nowtime - 0 > nowtime - 0) {
       wx.showModal({
         title: '温馨提示',
         content: '您的置顶已过期',
@@ -189,7 +200,7 @@ Page({
 
       itemList: selectdata,
       success(res) {
-        console.log(res)
+
         if (that.data.indextop == res.tapIndex) {
           return
         }
@@ -205,7 +216,7 @@ Page({
           return
         }
         that.setData({
-          index: res.tapIndex
+          indextop: res.tapIndex
         })
 
         app.appRequestAction({
@@ -213,9 +224,9 @@ Page({
           way: 'POST',
           params: detail,
           success(res) {
-            console.log(res)
+       
             let mydata = res.data;
-            if (mydata.errcode == "ok"){
+            if (mydata.errcode == "ok") {
 
               that.getdetail()
               wx.showModal({
@@ -247,7 +258,7 @@ Page({
     // ressonone
     let that = this;
     let contentom = that.data.top_tips_string
-    console.log(contentom)
+    
     if (that.data.showtop) {
       wx.showModal({
         title: '温馨提示',
@@ -789,19 +800,19 @@ Page({
             resume_top: mydata.hasOwnProperty("resume_top") ? mydata.resume_top : [],
             top_status: mydata.hasOwnProperty("top_status") ? mydata.top_status : []
           })
-          if (mydata.hasOwnProperty("resume_top") && that.data.resume_top.length != 0) {
+          if (mydata.hasOwnProperty("resume_top")) {
             if (mydata.resume_top.is_top == 1) {
               that.setData({
                 indextop: 0,
               })
-            } else if (mydata.resume_top.is_top == 0){
+            } else if (mydata.resume_top.is_top == 0) {
               that.setData({
                 indextop: 1,
               })
-            }else{
-              that.setData({
-                indextop: 2,
-              })
+            } else {
+              // that.setData({
+              //   indextop: 2,
+              // })
             }
           }
 
@@ -811,16 +822,16 @@ Page({
             selectDatatop: selectDtop,
             selectktop: selectktop
           })
-         
-          if (mydata.hasOwnProperty("resume_top")){
-            console.log(123)
+
+          if (mydata.hasOwnProperty("resume_top")) {
+
             that.setData({
               top_tips_string: mydata.resume_top.top_tips_string,
               endtime: mydata.resume_top.end_time,
-              has_top: mydata.resume_top.has_top ? mydata.resume_top.has_top:0,
+              has_top: mydata.resume_top.has_top ? mydata.resume_top.has_top : 0,
               is_show_tips: mydata.resume_top.is_show_tips,
             })
-            console.log(that.data.is_show_tips)
+           
           }
           if (that.data.showtop) {
             app.globalData.showperfection = true;
@@ -1085,7 +1096,7 @@ Page({
   cardjump(options) {
 
     if (options.hasOwnProperty("rankjump")) {
-      console.log(options)
+    
       this.setData({
         rankjump: options.rankjump
       })

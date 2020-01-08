@@ -14,6 +14,7 @@ Page({
     maxnumber: "",
     modify: "",
     areaTextId: "",
+    firstprovincenum:""
   },
   changeAreaData() {
     let that = this;
@@ -67,7 +68,7 @@ Page({
   },
   chooseThisCtiy(e) {
     let that = this;
-    console.log(that.data.maxnumber)
+    // console.log(that.data.maxnumber)
 
     let num = e.currentTarget.dataset.id.id;
 
@@ -115,21 +116,21 @@ Page({
     }
   },
 
-  deletelable(e) {
+  // deletelable(e) {
 
-    let that = this;
+  //   let that = this;
 
-    let num = e.currentTarget.dataset.id.id;
-    let number = e.currentTarget.dataset.index;
-    that.data.areadata[num - 2].selected = 1;
-    that.setData({
-      areadata: that.data.areadata
-    })
-    that.data.areaText.splice(number, 1)
-    that.setData({
-      areaText: that.data.areaText
-    })
-  },
+  //   let num = e.currentTarget.dataset.id.id;
+  //   let number = e.currentTarget.dataset.index;
+  //   that.data.areadata[num - 2].selected = 1;
+  //   that.setData({
+  //     areadata: that.data.areadata
+  //   })
+  //   that.data.areaText.splice(number, 1)
+  //   that.setData({
+  //     areaText: that.data.areaText
+  //   })
+  // },
   areaId() {
 
     let id = '';
@@ -142,7 +143,7 @@ Page({
       }
     }
     this.data.areaTextId = id;
-    console.log(areaText)
+    
   },
   seleted() {
     let that = this;
@@ -150,21 +151,33 @@ Page({
     let userUuid = wx.getStorageSync("userUuid");
     let vertifyNum = v.v.new()
     if (!userInfo || !userUuid) return false;
+
     if (vertifyNum.isNull(this.data.areaText)) {
       reminder.reminder({ tips: '置顶城市' })
       return
     }
     that.areaId()
-    let detail = {
-      mid: userInfo.userId,
-      token: userInfo.token,
-      time: userInfo.tokenTime,
-      uuid: userUuid,
-      citys: 0,
-      provinces: that.data.areaTextId
-    }
-    if (that.data.modify == "modify") {
 
+    if (that.data.modify == "modify") {
+      if (this.data.areaText.length > this.data.firstprovincenum - 0) {
+        wx.showModal({
+          title: '温馨提示',
+          content: '您置顶的城市的数量不能超过第一次置顶城市的数量',
+          showCancel: false,
+          success(res) {
+          }
+        })
+        return
+      }
+
+      let detail = {
+        mid: userInfo.userId,
+        token: userInfo.token,
+        time: userInfo.tokenTime,
+        uuid: userUuid,
+        citys: 0,
+        provinces: that.data.areaTextId
+      }
       app.appRequestAction({
         url: 'resumes/change-top-areas/',
         way: 'POST',
@@ -251,6 +264,12 @@ Page({
         modify: options.modify
       })
     }
+    if (options.hasOwnProperty("firstprovincenum")) {
+      that.setData({
+        firstprovincenum: options.firstprovincenum
+      })
+    }
+
   },
   /**
    * 生命周期函数--监听页面加载

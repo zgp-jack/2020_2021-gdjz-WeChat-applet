@@ -323,7 +323,7 @@ Page({
             app.showMyTips("请输入您的年龄！");
             return false;
         }
-        if (!v.isRequire(member.nationality, 1)) {
+      if (!v.isRequire(_this.data.nation, 1)) {
             app.showMyTips("请输入您的民族！");
             return false;
         }
