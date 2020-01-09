@@ -11,6 +11,8 @@ Page({
    * newresume-experience.png audit.png baseinform headerimg uuid age chooseImage onShareAppMessage checkfourf age showskill
    */
   data: {
+    realNames: app.globalData.apiImgUrl + 'newresume-infolist-ysm.png?t=1',
+    authentication: app.globalData.apiImgUrl + 'newresume-infolist-jnz.png?t=1',
     ruleimage: app.globalData.apiImgUrl + "lpy/biaptu.png",
     baseinform: app.globalData.apiImgUrl + "lpy/jichu.png",
     workingposition: app.globalData.apiImgUrl + "lpy/workdetail.png",
@@ -110,7 +112,9 @@ Page({
     selectktop: [],
     endtime: "",
     has_top: 0,
-    is_show_tips: ""
+    is_show_tips: "",
+    authenticationimg:false,
+    certificate_show:false
   },
 
 
@@ -797,6 +801,8 @@ Page({
             fail_project: mydata.hasOwnProperty("fail_project") ? mydata.fail_project : "",
             sort_flag: mydata.info.hasOwnProperty("sort_flag") ? mydata.info.sort_flag : "",
             ranking: mydata.info.hasOwnProperty("ranking") ? mydata.info.ranking : "",
+            certificate_show: mydata.info.hasOwnProperty("certificate_show") ? mydata.info.certificate_show : "",
+            authenticationimg: mydata.info.hasOwnProperty("authentication") ? mydata.info.authentication : "",
             resume_top: mydata.hasOwnProperty("resume_top") ? mydata.resume_top : [],
             top_status: mydata.hasOwnProperty("top_status") ? mydata.top_status : []
           })

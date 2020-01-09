@@ -1728,6 +1728,13 @@ margin-top: 4rpx;
 padding-left: 0rpx;
 
 }
+
+  .oimgone image{
+  width: 74rpx;
+height: 26rpx;
+margin-left: 14rpx;
+
+  }
 /*oworkotext cardsix  tworkotextonetu.cardnine .all cardsixsixnum  cardeightsixnum bg showtop nopass findingnamecardsixtwo .workotextone oworkotextonetu cardtwoif workotextone alllabletu
 #7A7A7A
 workotype oworkotextonetu workotextone cardotext oworkotext cworkotype oworkotext ocworkotype ocworkotyp content link cardseven workotextone contentone*/

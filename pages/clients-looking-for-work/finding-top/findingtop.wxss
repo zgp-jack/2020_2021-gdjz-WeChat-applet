@@ -130,7 +130,9 @@ padding-left: 26%;
 }
 .daynum view{
   display: inline-block;
-  color: #0099FF
+  color: #0099FF;
+  font-size: 30rpx;
+
 }
 .submitscope{
   width: 420rpx;

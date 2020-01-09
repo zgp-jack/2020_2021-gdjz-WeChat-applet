@@ -6,7 +6,7 @@
     <view wx:for="{{areaTextcrum}}" bindtap="deletelable" wx:key="{{index}}" data-index="{{ index }}"  >
        {{item.name}} <image class="deleteimg"  data-id="{{ item }}"  src="{{imgDetelte}}"></image>
     </view>
-    <view class="obttn" bindtap="jumpdetail"  wx:if="{{areaTextcrum.length > 0}}">
+    <view class="obttn" bindtap="jumpdetail"  wx:if="{{areaTextcrum.length > 0&&areaTextcrum.length<2}}">
      添加更多
     </view>
   </view>
