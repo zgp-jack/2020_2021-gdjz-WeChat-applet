@@ -61,6 +61,7 @@ Page({
   },
   dayclocy(e) {
     console.log(e)
+
     if (e) {
 
       this.data.value = e.detail.value;
@@ -107,6 +108,8 @@ Page({
       return
     }
     let vertifyNum = v.v.new()
+    
+
     if (vertifyNum.isNull(this.data.areaTextcrum)) {
       reminder.reminder({ tips: '置顶城市' })
       return
@@ -115,6 +118,15 @@ Page({
       wx.showModal({
         title: '温馨提示',
         content: '输入的置顶天数不能为0或者为空',
+        showCancel: false,
+        success(res) { }
+      })
+      return
+    }
+    if (that.data.value - 0 > 10) {
+      wx.showModal({
+        title: '温馨提示',
+        content: '最多可置顶10天！',
         showCancel: false,
         success(res) { }
       })
@@ -220,6 +232,7 @@ Page({
   deletelable(e) {
     let that = this;
     let number = e.currentTarget.dataset.index;
+    console.log(number)
     that.data.areaTextcrum.splice(number, 1)
     that.setData({
       areaTextcrum: that.data.areaTextcrum

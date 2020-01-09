@@ -1,10 +1,10 @@
 <view class="topall">
   <view class="scope">
-    <text>当前选择指定范围</text>
+    <text>当前选择置顶范围</text>
   </view>
   <view class="scopedetail">
-    <view wx:for="{{areaTextcrum}}" bindtap="deletelable" wx:key="{{index}}" >
-       {{item.name}} <image class="deleteimg"  data-id="{{ item }}"  data-index="{{ index }}" src="{{imgDetelte}}"></image>
+    <view wx:for="{{areaTextcrum}}" bindtap="deletelable" wx:key="{{index}}" data-index="{{ index }}"  >
+       {{item.name}} <image class="deleteimg"  data-id="{{ item }}"  src="{{imgDetelte}}"></image>
     </view>
     <view class="obttn" bindtap="jumpdetail"  wx:if="{{areaTextcrum.length > 0}}">
      添加更多
@@ -20,7 +20,7 @@
   <view class="dayall">
     <view class="daynum">
       <text>置顶天数</text>
-      <input type="number" placeholder="请输入天数" value="{{daynumber}}" bindinput="dayclocy"></input>
+      <input type="number" maxlength="2" placeholder="请输入置顶天数" value="{{daynumber}}" bindinput="dayclocy"></input>
     </view>
     <view class="daynum">
       <text>消耗积分</text>
