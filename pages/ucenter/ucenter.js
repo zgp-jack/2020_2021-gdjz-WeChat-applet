@@ -33,6 +33,7 @@ Page({
         //     show: 0,
         //     request: false
         // },
+        showAuthor: false
     },
     
     initUserInfo: function(callback) {
@@ -57,6 +58,9 @@ Page({
                 },300)
                 callback ? callback() : ""
                 let mydata = res.data;
+              _this.setData({
+                showAuthor: mydata.is_checking == 2 ? true : false
+              })
                 if (mydata.errcode == "ok") {
                     _this.setData({
                         member: mydata.member,

@@ -149,7 +149,7 @@
         </view>
 
         <view class="ucenter-hasnoticeinfo">
-            <view class='ucener-theme' data-url='../realname/realname' bindtap='valiUserUrl'>
+            <view class='ucener-theme' wx:if="{{showAuthor}}" data-url='../realname/realname' bindtap='valiUserUrl'>
                 <image class="ucener-leftImage" src='{{ ucenterimgs.realname }}'></image>
                 <view class='ucener-border-b ucener-border'>
                     <view class="ucener-title">实名认证</view>
