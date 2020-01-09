@@ -124,14 +124,10 @@ Page({
       return
     }
     if (that.data.value - 0 > 10) {
-      wx.showModal({
-        title: '温馨提示',
-        content: '最多可置顶10天！',
-        showCancel: false,
-        success(res) { }
-      })
+      app.showMyTips("最多可置顶10天！");
       return
     }
+
     that.areaId()
     let detail = {
       userId: userInfo.userId,
