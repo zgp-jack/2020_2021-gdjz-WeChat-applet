@@ -129,8 +129,8 @@
             </view>
             <view class="oimgone">
               <text class="otext">{{name}}</text>
-                <image wx:if="{{certificate_show ==1}}" src="{{authentication}}"></image>
                 <image wx:if="{{authenticationimg == 2}}" src="{{realNames}}"></image>
+                <image wx:if="{{certificate_show ==1}}" src="{{authentication}}"></image>
               <view class="otextone">
                 <text>{{sex}}</text>
                 <text class="{{sex?'ochange':''}}" wx:if="{{age}}">{{age}}</text>

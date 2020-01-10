@@ -5,7 +5,7 @@ let footerjs = require("../../utils/footer.js");
 let areas = require("../../utils/area.js");
 let md5 = require("../../utils/md5.js");
 var amapFile = require('../../utils/amap-wx.js');
-
+ 
 Page({
 
   /**

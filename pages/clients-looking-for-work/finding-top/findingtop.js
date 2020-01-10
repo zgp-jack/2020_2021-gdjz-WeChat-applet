@@ -18,7 +18,8 @@ Page({
     province_integral: "",
     value: 1,
     areaTextId: "",
-    top_rules: []
+    top_rules: [],
+    max_top_days:""
   },
 
   jumpstickyrule() {
@@ -96,6 +97,7 @@ Page({
   },
   submitscop() {
     let that = this;
+    let day = that.data.max_top_days;
     let userInfo = wx.getStorageSync("userInfo");
     let userUuid = wx.getStorageSync("userUuid");
     if (!userInfo || !userUuid) {
@@ -123,8 +125,8 @@ Page({
       })
       return
     }
-    if (that.data.value - 0 > 10) {
-      app.showMyTips("最多可置顶10天！");
+    if (that.data.value - 0 > day) {
+      app.showMyTips(`最多可置顶${day}天！`);
       return
     }
 
@@ -247,7 +249,8 @@ Page({
           that.setData({
             max_number: mydata.data.max_number,
             province_integral: mydata.data.province_integral,
-            top_rules: mydata.data.top_rules
+            top_rules: mydata.data.top_rules,
+            max_top_days: mydata.data.max_top_days,
           })
 
         } else {
