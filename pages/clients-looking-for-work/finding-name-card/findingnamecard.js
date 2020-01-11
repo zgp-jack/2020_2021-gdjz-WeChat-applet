@@ -11,6 +11,7 @@ Page({
    * newresume-experience.png audit.png baseinform headerimg uuid age chooseImage onShareAppMessage checkfourf age showskill
    */
   data: {
+    topoimage: app.globalData.apiImgUrl + 'lpy/resume-settop-daytips.png',
     realNames: app.globalData.apiImgUrl + 'newresume-infolist-ysm.png?t=1',
     authentication: app.globalData.apiImgUrl + 'newresume-infolist-jnz.png?t=1',
     ruleimage: app.globalData.apiImgUrl + "lpy/biaptu.png",
@@ -116,7 +117,8 @@ Page({
     authenticationimg:false,
     certificate_show:false,
     top_status_one:"",
-    topshow:false
+    topshow:false,
+    showindextop:false
   },
 
 
@@ -823,9 +825,9 @@ Page({
                 indextop: 1,
               })
             } else {
-              // that.setData({
-              //   indextop: 2,
-              // })
+              that.setData({
+                showindextop: 2,
+              })
             }
           }
 
@@ -1005,6 +1007,7 @@ Page({
                 resson: [that.data.skillbooks[0]],
               })
               app.globalData.showdetail = false
+              
             }
           }
           that.redorblue()
@@ -1019,6 +1022,7 @@ Page({
           })
           return
         }
+        that.gettiner()
       },
       fail: function (err) {
         wx.showModal({
@@ -1133,10 +1137,12 @@ Page({
   },
   // 86400000
   gettiner(){
+    console.log(132)
     let that = this;
     let toptimer = wx.getStorageSync("toptimer");
+    let onoff = that.data.showindextop == 2 || has_top == 0;
     let timer = new Date().getTime();
-    if (!toptimer && !showModal){
+    if (!toptimer && !that.data.showModal && !that.data.showtop && onoff ){
        app.globalData.topshow = true;
        that.setData({
          topshow: app.globalData.topshow,
@@ -1144,7 +1150,7 @@ Page({
        })
        wx.setStorageSync("toptimer", timer)
     }else{
-      if ((timer - toptimer) / 86400000 >= 7 && !showModal){
+      if ((timer - toptimer) / 86400000 >= 7 && !that.data.showModal && !that.data.showtop && onoff){
         app.globalData.topshow = true;
         that.setData({
           topshow: app.globalData.topshow,
@@ -1162,7 +1168,7 @@ Page({
       topshow: app.globalData.topshow,
       display: "none",
     })
-    
+    that.thestickyrule()
   },
   topvertifyquit(){
     let that = this;

@@ -1454,6 +1454,8 @@ margin-top: 4rpx;
   /* height: 290rpx; */
   font-size: 32rpx;
   position: relative;
+  text-align: center;
+
 }
 
 .text .otext {
@@ -1462,7 +1464,8 @@ margin-top: 4rpx;
   font-weight: bold;
   /* margin: 20rpx auto; */
   text-align: center;
-  margin-top: 20rpx;
+  margin-top: 6rpx;
+
 }
 
 .text .textdetail {
@@ -1785,6 +1788,11 @@ padding-left: 0rpx;
 height: 26rpx;
 margin-left: 14rpx;
 
+  }
+  .text  image{
+  width: 110rpx;
+height: 80rpx;
+margin-top: 10rpx;
   }
 /*oworkotext cardsix  tworkotextonetu.cardnine .all cardsixsixnum  cardeightsixnum bg showtop nopass findingnamecardsixtwo .workotextone oworkotextonetu cardtwoif workotextone alllabletu
 #7A7A7A

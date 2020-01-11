@@ -38,7 +38,7 @@
         马上去提升排名>>
       </view>
     </view>
-    <view class="{{resume_top.is_top == 2?'findingnamecardonesontwo':'findingnamecardonesontwot'}}">
+    <view class="{{resume_top.is_top == 2||has_top == 0?'findingnamecardonesontwo':'findingnamecardonesontwot'}}">
       <view class="rule-detail">
         <image class="rule-oimg" src="{{topimage}}"></image>
         <text>我的置顶：</text><text class="rule-status" wx:if="{{resume_top.is_top == 2}}">置顶已过期</text>
@@ -492,10 +492,11 @@
   </view>
 
 <!-- wx:if="{{topshow}}" -->
-  <view class="modalDlg" >
+  <view class="modalDlg" wx:if="{{topshow}}">
     <view class="modalDlgone">
     </view>
     <view class="text">
+      <image src="{{topoimage}}"></image>
       <view class="otext">
         提示
       </view>
