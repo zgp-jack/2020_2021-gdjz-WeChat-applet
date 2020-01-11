@@ -62,9 +62,23 @@ Page({
   },
   dayclocy(e) {
     console.log(e)
-
+    let that  = this;
     if (e) {
-
+      var re = /^\d{0,2}$/;
+      if (!re.test(e.detail.value)  || e.detail.value-0 < 0) {
+        wx.showModal({
+          title: '温馨提示',
+          content: '只能输入整数，请重新输入',
+          showCancel: false,
+          success(res) {
+            
+            that.setData({
+              daynumber: ''
+            })
+           }
+        })
+        return
+      }
       this.data.value = e.detail.value;
       let value = this.data.value;
       let num = this.data.province_integral;
