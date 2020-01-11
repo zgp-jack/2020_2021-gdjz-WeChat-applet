@@ -114,7 +114,9 @@ Page({
     has_top: 0,
     is_show_tips: "",
     authenticationimg:false,
-    certificate_show:false
+    certificate_show:false,
+    top_status_one:"",
+    topshow:false
   },
 
 
@@ -230,9 +232,14 @@ Page({
           success(res) {
        
             let mydata = res.data;
+            console.log(mydata.data.top_data)
             if (mydata.errcode == "ok") {
-
+              
               that.getdetail()
+              
+              that.setData({
+                top_status_one: mydata.data.top_data.top_status
+              })
               wx.showModal({
                 title: '温馨提示',
                 content: res.data.errmsg,
@@ -1002,6 +1009,7 @@ Page({
           }
           that.redorblue()
           that.showskill();
+ 
         } else {
           wx.showModal({
             title: '温馨提示',
@@ -1121,6 +1129,47 @@ Page({
   showskill() {
     this.setData({
       showskill: false
+    })
+  },
+  // 86400000
+  gettiner(){
+    let that = this;
+    let toptimer = wx.getStorageSync("toptimer");
+    let timer = new Date().getTime();
+    if (!toptimer && !showModal){
+       app.globalData.topshow = true;
+       that.setData({
+         topshow: app.globalData.topshow,
+         display: "block",
+       })
+       wx.setStorageSync("toptimer", timer)
+    }else{
+      if ((timer - toptimer) / 86400000 >= 7 && !showModal){
+        app.globalData.topshow = true;
+        that.setData({
+          topshow: app.globalData.topshow,
+          display: "block",
+        })
+        wx.setStorageSync("toptimer", timer)
+      }
+    }
+
+  },
+  topvertify(){
+    let that = this;
+    app.globalData.topshow = false;
+    that.setData({
+      topshow: app.globalData.topshow,
+      display: "none",
+    })
+    
+  },
+  topvertifyquit(){
+    let that = this;
+    app.globalData.topshow = false;
+    that.setData({
+      topshow: app.globalData.topshow,
+      display: "none",
     })
   },
   /**

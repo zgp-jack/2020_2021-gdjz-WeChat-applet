@@ -38,17 +38,18 @@
         马上去提升排名>>
       </view>
     </view>
-    <view class="findingnamecardonesontwo">
+    <view class="{{resume_top.is_top == 2?'findingnamecardonesontwo':'findingnamecardonesontwot'}}">
       <view class="rule-detail">
         <image class="rule-oimg" src="{{topimage}}"></image>
-        <text>我的置顶：</text><text class="rule-status" wx:if="{{has_top == 0 ||resume_top.is_top == 0}}">未置顶</text><text class="rule-status" wx:if="{{resume_top.is_top == 1}}">置顶中</text><text class="rule-status" wx:if="{{resume_top.is_top == 2}}">置顶已过期</text>
+        <text>我的置顶：</text><text class="rule-status" wx:if="{{resume_top.is_top == 2}}">置顶已过期</text>
       </view>
       <view class="rule-odetail" bindtap="thestickyrule" wx:if="{{has_top == 0||resume_top.is_top == 2}}">
         马上去置顶>>
       </view>
       <view class='topselect_box' wx:if="{{has_top != 0 &&resume_top.is_top != 2}}">
         <view class='select' catchtap='selectTaptop'>
-          <text class='select_text'>{{selectDatatop[indextop].name}}</text>
+          <text class="select_text" wx:if="{{has_top == 0 ||resume_top.is_top == 0}}">未置顶</text>
+          <text class='select_text' wx:if="{{resume_top.is_top == 1}}">置顶中</text>
           <image class='select_img' src='{{subscripted}}'></image>
         </view>
       </view>
@@ -93,7 +94,7 @@
         <view class='select_box'>
           <view class='select' catchtap='selectTap' wx:if="{{passre&&nopassre}}">
             <text class='select_text' wx:if="{{index ==  0}}">{{selectData[index].name}}</text>
-            <text class='select_textone' wx:if="{{index==  1}}">{{selectData[index].name}}</text>
+            <text class='select_text' wx:if="{{index==  1}}">{{selectData[index].name}}</text>
             <image class='select_img' src='{{subscripted}}' wx:if="{{checkstatus}}"></image>
           </view>
           <view class='select' catchtap='selectTap' wx:if="{{!passre&&nopassre}}">
@@ -481,11 +482,32 @@
         提示
       </view>
       <view class="textdetail">
-        您的
+       您的
         <text class="popup">{{popup}}</text>未审核通过，请修改后再进行提交
       </view>
       <view class="buttontext" catchtap="vertify">
         确定
+      </view>
+    </view>
+  </view>
+
+<!-- wx:if="{{topshow}}" -->
+  <view class="modalDlg" >
+    <view class="modalDlgone">
+    </view>
+    <view class="text">
+      <view class="otext">
+        提示
+      </view>
+      <view class="otextdetail">
+       马上去置顶提升找活名片排名，让更多老板看到您的找活名片
+      </view>
+      <view class="topwhite"></view>
+       <view class="buttontexttop" catchtap="topvertifyquit">
+        稍后再说
+      </view>
+      <view class="buttontexttoptwo" catchtap="topvertify">
+        去置顶
       </view>
     </view>
   </view>

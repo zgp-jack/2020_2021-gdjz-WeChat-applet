@@ -9,6 +9,7 @@ App({
 
   },
   globalData: {
+    topshow:false,
     isauthuuid: false,
     previewboss: true,
     collectstatus: true,

@@ -77,7 +77,7 @@ Page({
       if (that.data.areaText.length >= that.data.maxnumber) {
         wx.showModal({
           title: '温馨提示',
-          content: `最多只能置顶${that.data.maxnumber}个城市`,
+          content: `最多可选择${that.data.maxnumber}个省份置顶`,
           showCancel: false,
           success(res) { }
         })
@@ -159,16 +159,16 @@ Page({
     that.areaId()
 
     if (that.data.modify == "modify") {
-      if (this.data.areaText.length > this.data.firstprovincenum - 0) {
-        wx.showModal({
-          title: '温馨提示',
-          content: '您置顶的城市的数量不能超过第一次置顶城市的数量',
-          showCancel: false,
-          success(res) {
-          }
-        })
-        return
-      }
+      // if (this.data.areaText.length > this.data.firstprovincenum - 0) {
+      //   wx.showModal({
+      //     title: '温馨提示',
+      //     content: '您置顶的城市的数量不能超过第一次置顶城市的数量',
+      //     showCancel: false,
+      //     success(res) {
+      //     }
+      //   })
+      //   return
+      // }
 
       let detail = {
         mid: userInfo.userId,
@@ -266,7 +266,7 @@ Page({
     }
     if (options.hasOwnProperty("firstprovincenum")) {
       that.setData({
-        firstprovincenum: options.firstprovincenum
+        maxnumber: options.firstprovincenum
       })
     }
 
