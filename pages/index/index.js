@@ -137,9 +137,11 @@ Page({
       app.showDetailInfo(e);
     },
     touchStart: function (e) {
+      console.log(e)
         this.touchStartTime = e.timeStamp
     },
     touchEnd: function (e) {
+      console.log(e)
         this.touchEndTime = e.timeStamp
     },
     showListsType:function(e){
@@ -166,6 +168,8 @@ Page({
         this.setData({ province: index })
       
         //if(_id == _sid) return false;
+      console.log(_this.touchEndTime)
+      console.log(_this.touchStartTime)
         if (_this.touchEndTime - _this.touchStartTime < 350) {
             var currentTime = e.timeStamp
             var lastTapTime = _this.lastTapTime

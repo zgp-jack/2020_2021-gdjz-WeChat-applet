@@ -1,11 +1,11 @@
 
 //userTapSearch 
-const app = getApp(); 
+const app = getApp();
 let footerjs = require("../../utils/footer.js");
 let areas = require("../../utils/area.js");
 let md5 = require("../../utils/md5.js");
 var amapFile = require('../../utils/amap-wx.js');
- 
+
 Page({
 
   /**
@@ -15,7 +15,7 @@ Page({
     rullIntegral: app.globalData.apiImgUrl + "resume-list-rules-btn.png",
     finded: app.globalData.apiImgUrl + "lpy/finded.png",
     biaoqian: app.globalData.apiImgUrl + "lpy/biaoqian.png",
-    testImg:"http://cdn.yupao.com/miniprogram/images/user.png",
+    testImg: "http://cdn.yupao.com/miniprogram/images/user.png",
     gender: "",
     information: "",
     regionone: "",
@@ -62,7 +62,7 @@ Page({
       sort: "recommend",
       keywords: "",
       occupations: "",
-      province:1
+      province: 1
     },
     fillterArea: [],
     fillterType: [],
@@ -103,9 +103,9 @@ Page({
     showReturnTopImg: false,
     showHistoryList: false,
     historyList: [],
-    toptown:"../../images/top.png"
+    toptown: "../../images/top.png",
   },
-  jumptop(){
+  jumptop() {
     wx.navigateTo({
       url: `/pages/clients-looking-for-work/finding-name-card/findingnamecard`,
     })
@@ -113,25 +113,20 @@ Page({
   stopThisAction: function () {
     return false;
   },
-  touchStart: function (e) {
-    this.touchStartTime = e.timeStamp
-  },
-  touchEnd: function (e) {
-    this.touchEndTime = e.timeStamp
-  },
+
   showListsType: function (e) {
     let type = parseInt(e.currentTarget.dataset.type);
     this.setData({
       showListsInfo: (this.data.showListsInfo == type) ? 0 : type
     })
   },
-  jumprull(){
+  jumprull() {
     wx.navigateTo({
       url: "/pages/clients-looking-for-work/ranking-rules/ranking-rules",
     })
   },
   userChooseNewest(e) {
-    
+
     let _this = this;
     let index = parseInt(e.currentTarget.dataset.index);
     let _id = e.currentTarget.dataset.id;
@@ -171,33 +166,130 @@ Page({
     _this.doRequestAction(false);
     _this.closeAllSelect();
   },
+  // userChooseProvince: function (e) {
+
+  //   let _this = this;
+  //   let index = parseInt(e.currentTarget.dataset.index);
+  //   let _id = e.currentTarget.dataset.id;
+  //   let areaText = e.currentTarget.dataset.area;
+  //   let pname = e.currentTarget.dataset.pname;
+  //   let directCtiy = parseInt(e.currentTarget.dataset.haschild);
+  //   let _sid = this.data.searchDate.province;
+  //   this.setData({ province: index })
+  //   //if (_id == _sid) return false;
+  //   let mydata = { "name": areaText, "id": _id, ad_name: pname };
+  //   if (!directCtiy) app.setStorageAction(_id, mydata)
+  //   _this.returnTop();
+  //   _this.setData({
+  //     isFirstRequest: true,
+  //     "searchDate.page": 1,
+  //     "searchDate.province": _id,
+  //     areaText: areaText
+  //   })
+  //   wx.setStorageSync("areaId", _id)
+  //   wx.setStorageSync("areaText", areaText)
+  //   _this.doRequestAction(false);
+  //   // _this.closeAllSelect();
+
+
+  // },
+  touchStart: function (e) {
+    console.log(e)
+    this.touchStartTime = e.timeStamp
+  },
+  touchEnd: function (e) {
+    console.log(e)
+    this.touchEndTime = e.timeStamp
+  },
   userChooseProvince: function (e) {
-    
-    let _this = this;
+
+    var _this = this;
     let index = parseInt(e.currentTarget.dataset.index);
+    let directCtiy = parseInt(e.currentTarget.dataset.haschild);
     let _id = e.currentTarget.dataset.id;
     let areaText = e.currentTarget.dataset.area;
-    let pname = e.currentTarget.dataset.pname;
-    let directCtiy = parseInt(e.currentTarget.dataset.haschild);
+    // let _sid = this.data.searchDate.area_id;
     let _sid = this.data.searchDate.province;
+    let panme = e.currentTarget.dataset.pname;
+    let mydata = { "name": areaText, "id": _id, "ad_name": panme };
     this.setData({ province: index })
-    //if (_id == _sid) return false;
-    let mydata = { "name": areaText, "id": _id, ad_name: pname };
-    if (!directCtiy) app.setStorageAction(_id, mydata)
-    _this.returnTop();
-    _this.setData({
-      isFirstRequest: true,
-      "searchDate.page": 1,
-      "searchDate.province": _id,
-      areaText: areaText
-    })
-    wx.setStorageSync("areaId", _id)
-    wx.setStorageSync("areaText", areaText)
-    _this.doRequestAction(false);
-    _this.closeAllSelect();
+    console.log(_this.data.province)
+    if (_id == _sid) return false;
 
+    if (_this.touchEndTime - _this.touchStartTime < 350) {
 
+      var currentTime = e.timeStamp
+      var lastTapTime = _this.lastTapTime
+      _this.lastTapTime = currentTime
+      if (!directCtiy) app.setStorageAction(_id, mydata)
+      if (currentTime - lastTapTime < 300) {
+        //console.log("double tap");
+
+        clearTimeout(_this.lastTapTimeoutFunc);
+        _this.returnTop();
+        // _this.setData({
+        //   isFirstRequest: true,
+        //   "searchDate.page": 1,
+        //   "searchDate.area_id": _id,
+        //   areaText: areaText
+        // })
+        _this.setData({
+          isFirstRequest: true,
+          "searchDate.page": 1,
+          "searchDate.province": _id,
+          areaText: areaText
+        })
+        wx.setStorageSync("areaId", _id)
+        wx.setStorageSync("areaText", areaText)
+        _this.doRequestAction(false);
+        _this.closeAllSelect();
+
+      } else {
+        _this.lastTapTimeoutFunc = setTimeout(function () {
+          //console.log("tap");
+          if (directCtiy == 0) {
+            _this.returnTop();
+            _this.setData({
+              isFirstRequest: true,
+              "searchDate.page": 1,
+              "searchDate.province": _id,
+              areaText: areaText
+            })
+            _this.doRequestAction(false);
+            _this.closeAllSelect();
+            wx.setStorageSync("areaId", _id)
+            wx.setStorageSync("areaText", areaText)
+          }
+        }, 300);
+      }
+    }
   },
+  userChooseCity: function (e) {
+    let pname = e.currentTarget.dataset.pname;
+    let pid = parseInt(e.currentTarget.dataset.pid);
+    let areaText = e.currentTarget.dataset.area;
+    let id = parseInt(e.currentTarget.dataset.id);
+
+    //if(parseInt(this.data.searchDate.area_id) == id) return false;
+    this.setData({
+      userCity: id,
+      isFirstRequest: true,
+      areaText: areaText,
+      "searchDate.page": 1,
+      "searchDate.province": id
+    })
+    let mydata = { "name": areaText, "id": id, ad_name: pname };
+    if (id != pid) {
+      app.setStorageAction(id, mydata)
+    }
+
+    this.returnTop();
+    this.doRequestAction(false);
+    this.closeAllSelect();
+    wx.setStorageSync("areaId", id)
+    wx.setStorageSync("areaText", areaText)
+  },
+
   closeAllSelect: function () {
     this.setData({
       showListsInfo: 0
@@ -217,9 +309,9 @@ Page({
       var currentTime = e.timeStamp
       var lastTapTime = _this.lastTapTime
       _this.lastTapTime = currentTime
-      
+
       if (currentTime - lastTapTime < 300) {
-        
+
         clearTimeout(_this.lastTapTimeoutFunc);
 
         _this.setData({
@@ -234,7 +326,7 @@ Page({
 
       } else {
         _this.lastTapTimeoutFunc = setTimeout(function () {
-          
+
           if (haschild == 0) {
             _this.setData({
               isFirstRequest: true,
@@ -273,14 +365,14 @@ Page({
       url: '/pages/static/notice?type=1&id=' + _id,
     })
   },
-  doRequestAction: function (_append,callback) {
+  doRequestAction: function (_append, callback) {
     let _this = this;
     if (_this.data.isload) return false;
     let userLocation = wx.getStorageSync("userLocation");
-    
+
     let locate = {}
     Object.assign(locate, _this.data.searchDate, {
-      location: userLocation? userLocation.split(",").reverse().join(","):'',
+      location: userLocation ? userLocation.split(",").reverse().join(",") : '',
     })
     this.setData({
       isload: true,
@@ -336,7 +428,7 @@ Page({
       }
     })
   },
-  
+
   initNeedData: function () {
     let _this = this;
     let _mark = true;
@@ -349,7 +441,7 @@ Page({
     }
     app.appRequestAction({
       url: "index/less-search-data/",
-      failTitle:"数据请求失败",
+      failTitle: "数据请求失败",
       params: {
         type: "resume",
         userId: _mark ? (userInfo ? userInfo.userId : "") : "",
@@ -374,7 +466,7 @@ Page({
     this.setData({
       [obj]: "http://cdn.yupao.com/miniprogram/images/user.png"
     })
-  
+
   },
 
   initAreaInfo: function () {
@@ -411,14 +503,14 @@ Page({
   },
 
   searchThisWords: function (e) {
-    
+
     let text = e.currentTarget.dataset.text;
-    
+
     this.setData({
       "searchDate.keywords": text,
       showHistoryList: false
     })
-   
+
     this.userTapSearch();
   },
   closeHistory: function () {
@@ -462,7 +554,7 @@ Page({
     //   return false;
     // }
     //if (this.data.searchDate.keywords == "") return false;
-    
+
     let text = this.data.searchDate.keywords;
     if (text) {
       let his = wx.getStorageSync("searchHistory")
@@ -500,14 +592,14 @@ Page({
   returnTop: function () {
     //this.setData({ scrollTop: 0 })
     if (wx.pageScrollTo) {
-        wx.pageScrollTo({
-            scrollTop: 0
-        })
+      wx.pageScrollTo({
+        scrollTop: 0
+      })
     } else {
-        wx.showToast({
-            title: '当前微信版本过低，无法自动回到顶部，请升级到最新微信版本后重试。',
-            icon: 'none'
-        })
+      wx.showToast({
+        title: '当前微信版本过低，无法自动回到顶部，请升级到最新微信版本后重试。',
+        icon: 'none'
+      })
     }
   },
   valiFilterProvince: function () {
@@ -585,7 +677,7 @@ Page({
         wx.showModal({
           title: '温馨提示',
           content: '网络错误，加载失败！',
-          showCancel:false
+          showCancel: false
         })
       }
     })
@@ -608,7 +700,7 @@ Page({
     footerjs.closePublishAction(this);
   },
   valiUserCard: function () {
-    
+
     let userInfo = this.data.userInfo;
     // if(!userInfo){
     //   app.gotoUserauth();
@@ -618,7 +710,10 @@ Page({
   },
   getFilterData: function () {
     let _this = this;
-    this.setData({ fillterArea: areas.getProviceList() })
+    // this.setData({ fillterArea: areas.getProviceList() })
+    _this.setData({
+      fillterArea: areas.getAreaArr
+    })
     app.globalData.allTypes ? this.setData({ fillterType: app.globalData.allTypes.classTree, fillterTeam: app.globalData.allTypes.staffTree, fillterNewest: app.globalData.allTypes.resumeListType }) : app.getListsAllType(function (_data) {
       _this.setData({
         fillterType: _data.classTree,
@@ -626,7 +721,7 @@ Page({
         fillterNewest: _data.resumeListType
       })
     })
-
+    console.log(_this.data.fillterArea)
   },
   initUserShareTimes: function () {
     app.pageInitSystemInfo(this);
@@ -675,7 +770,7 @@ Page({
 
 
   showDetailInfo: function (e) {
-   
+
     let uuid = e.currentTarget.dataset.uuid
     let userLocation = wx.getStorageSync("userLocation")
     if (!userLocation) {
@@ -691,13 +786,13 @@ Page({
 
   persondetail(e) {
     let userLocation = wx.getStorageSync("userLocation")
-    if (!userLocation){
-      userLocation=""
-    }else{
+    if (!userLocation) {
+      userLocation = ""
+    } else {
       userLocation = userLocation.split(",").reverse().join(",")
     }
     let uuid = e.currentTarget.dataset.uuid
-    
+
     wx.navigateTo({
       url: `/pages/boss-look-card/lookcard?uuid=${uuid}&location=${userLocation}`,
     })
@@ -771,7 +866,7 @@ Page({
       showHistoryList: false
     })
     this.doRequestAction(false, function () {
-      
+
       wx.hideNavigationBarLoading()
       wx.stopPullDownRefresh();
     })
@@ -781,14 +876,14 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-    
+
     if ((this.data.isFirstRequest) || (this.data.showNothinkData) || (this.data.nothavemore)) return false;
     this.doRequestAction(true);
   },
 
 
   onShareAppMessage: function () {
-    
+
     let commonShareTips = app.globalData.commonShareTips;
     return {
       title: commonShareTips,

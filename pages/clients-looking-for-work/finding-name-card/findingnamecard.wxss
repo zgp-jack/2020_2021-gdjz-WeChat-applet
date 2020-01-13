@@ -1790,7 +1790,7 @@ margin-left: 14rpx;
 
   }
   .text  image{
-  width: 110rpx;
+  width: 100rpx;
 height: 80rpx;
 margin-top: 10rpx;
   }

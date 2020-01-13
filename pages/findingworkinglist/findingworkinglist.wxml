@@ -49,9 +49,12 @@
 <!-- 筛选条件列表 -->
 <view class='user-choose-shade {{ (showListsInfo != "0") ? "user-choose-shade-active":"" }}' bindtap='closeAllSelect'>
   <view class='user-choose-item {{ (showListsInfo == "1") ? "user-choose-item-active" : "" }}' wx:if="{{ showListsInfo == '1' }}">
-    <view class='filtrate-list-item mybottomborder overwords {{ (province == index) ? "filtrate-list-active" : "" }}' wx:for="{{ fillterArea }}" wx:key="{{ index }}" catchtap='userChooseProvince' data-haschild="{{ item.has_children }}" data-index="{{ index }}"
+    <view class='filtrate-list-item mybottomborder overwords {{ (province == index) ? "filtrate-list-active" : "" }}' wx:for="{{ fillterArea }}" wx:key="{{ index }}" bindtouchstart="touchStart" bindtouchend="touchEnd" catchtap='userChooseProvince' data-haschild="{{ item.has_children }}" data-index="{{ index }}"
       data-id='{{ item.id }}' data-area="{{ item.name }}" data-pname="{{ item.ad_name }}">
       <text>{{ item.name }}</text>
+                 <view class='filtrate-item-lists {{ (province == index) ? "filtrate-item-lists-active" : "" }}' wx:if="{{ item.has_children }}">
+                <view class='filtrate-item-info mybottomborder overwords {{ (userCity == item.id) ? "filtrate-item-info-active" : "" }}' wx:for="{{ item.children }}" wx:key="{{ index }}" catchtap='userChooseCity' data-id="{{ item.id }}"   data-area="{{ item.name }}">{{ item.name }}</view>
+            </view>
     </view>
   </view>
 

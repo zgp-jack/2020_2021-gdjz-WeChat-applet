@@ -97,6 +97,7 @@ Page({
     fail_certificate: "",
     fail_project: "",
     display: "none",
+    top_display: "none",
     popup: "",
     move: true,
     show_tips: "",
@@ -1142,20 +1143,20 @@ Page({
     let toptimer = wx.getStorageSync("toptimer");
     let onoff = that.data.showindextop == 2 || has_top == 0;
     let timer = new Date().getTime();
-
-    if (!toptimer && !that.data.showModal && !that.data.showtop && onoff && !that.data.checkone ){
+    let top_onoff = that.data.checkonef == "0" || that.data.checktwof == "0" || that.data.checkthreef == "0" || that.data.checkfourf == "0"
+    if (!toptimer && !top_onoff && !that.data.showtop && onoff && !that.data.checkone && that.data.index == 0){
        app.globalData.topshow = true;
        that.setData({
          topshow: app.globalData.topshow,
-         display: "block",
+         top_display: "block",
        })
        wx.setStorageSync("toptimer", timer)
     }else{
-      if ((timer - toptimer) / 86400000 >= 0.00069 && !that.data.showModal && !that.data.showtop && onoff && !that.data.checkone){
+      if ((timer - toptimer) / 86400000 >= 0.00069 && !top_onoff && !that.data.showtop && onoff && !that.data.checkone && that.data.index == 0){
         app.globalData.topshow = true;
         that.setData({
           topshow: app.globalData.topshow,
-          display: "block",
+          top_display: "block",
         })
         wx.setStorageSync("toptimer", timer)
       }
@@ -1167,7 +1168,7 @@ Page({
     app.globalData.topshow = false;
     that.setData({
       topshow: app.globalData.topshow,
-      display: "none",
+      top_display: "none",
     })
     that.thestickyrule()
   },
@@ -1176,7 +1177,7 @@ Page({
     app.globalData.topshow = false;
     that.setData({
       topshow: app.globalData.topshow,
-      display: "none",
+      top_display: "none",
     })
   },
   /**
