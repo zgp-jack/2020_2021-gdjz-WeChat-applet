@@ -1137,12 +1137,13 @@ Page({
   },
   // 86400000
   gettiner(){
-    console.log(132)
+
     let that = this;
     let toptimer = wx.getStorageSync("toptimer");
     let onoff = that.data.showindextop == 2 || has_top == 0;
     let timer = new Date().getTime();
-    if (!toptimer && !that.data.showModal && !that.data.showtop && onoff ){
+
+    if (!toptimer && !that.data.showModal && !that.data.showtop && onoff && !that.data.checkone ){
        app.globalData.topshow = true;
        that.setData({
          topshow: app.globalData.topshow,
@@ -1150,7 +1151,7 @@ Page({
        })
        wx.setStorageSync("toptimer", timer)
     }else{
-      if ((timer - toptimer) / 86400000 >= 7 && !that.data.showModal && !that.data.showtop && onoff){
+      if ((timer - toptimer) / 86400000 >= 0.00069 && !that.data.showModal && !that.data.showtop && onoff && !that.data.checkone){
         app.globalData.topshow = true;
         that.setData({
           topshow: app.globalData.topshow,
