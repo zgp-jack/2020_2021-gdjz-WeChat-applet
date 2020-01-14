@@ -1,3 +1,4 @@
+@import "../../utils/phone.wxss";
 .getintegral-content{
     position: relative;
     padding: 15rpx 27rpx 0;
@@ -87,12 +88,4 @@
 }
 .getintegral-footer view text{
     color: #0099ff;
-}
-.phoneer{
-  background: #0099ff;
-  font-size: 28rpx;
-  padding: 2rpx 16rpx;
-  color: white !important;
-  border-radius: 4rpx;
-  margin-left: 12rpx;
 }

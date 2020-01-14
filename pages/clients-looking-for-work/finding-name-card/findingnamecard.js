@@ -1141,7 +1141,7 @@ Page({
 
     let that = this;
     let toptimer = wx.getStorageSync("toptimer");
-    let onoff = that.data.showindextop == 2 || has_top == 0;
+    let onoff = that.data.showindextop == 2 || that.data.has_top == 0;
     let timer = new Date().getTime();
     let top_onoff = that.data.checkonef == "0" || that.data.checktwof == "0" || that.data.checkthreef == "0" || that.data.checkfourf == "0"
     if (!toptimer && !top_onoff && !that.data.showtop && onoff && !that.data.checkone && that.data.index == 0){

@@ -698,12 +698,5 @@ margin-left: 16rpx;
   margin-top:5rpx;
   font-size: 26rpx;
 }
-.phoneer{
-  background: #0099ff;
-  font-size: 28rpx;
-  padding: 2rpx 16rpx;
-  color: white !important;
-  border-radius: 4rpx;
-  margin-left: 12rpx;
-}
+
 .callthisphone-btn{position: absolute;line-height: 70rpx;top:25rpx;right: 30rpx;width: 32%;background-image: linear-gradient(to right , #1e9dff, #1c51f9);font-size: 26rpx;color: white;border-radius: 30px;text-align: center;}

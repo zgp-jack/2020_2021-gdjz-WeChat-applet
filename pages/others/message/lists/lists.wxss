@@ -1,4 +1,5 @@
 @import "../../../userauth/userauth.wxss";
+@import "../../../../utils/phone.wxss";
 page {
     position: relative;
     width: 100%;
@@ -197,12 +198,4 @@ page {
     font-size: 28rpx;
     color: white;
     text-align: center;
-}
-.phoneer{
-  background: #0099ff;
-  font-size: 28rpx;
-  padding: 2rpx 16rpx;
-  color: white !important;
-  border-radius: 4rpx;
-  margin-left: 12rpx;
 }

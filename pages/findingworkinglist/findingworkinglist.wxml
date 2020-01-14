@@ -169,7 +169,7 @@
             </view>
           </view>
           <view class="listsboxlocaltwo">
-            <text class="listsboxtime" wx:if="{{item.time}}">{{item.time}}</text>
+            <!-- <text class="listsboxtime" wx:if="{{item.time}}">{{item.time}}</text> -->
           </view>
         </view>
       </view>
