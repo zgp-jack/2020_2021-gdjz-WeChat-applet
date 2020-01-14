@@ -399,7 +399,7 @@ Page({
     })
     },
     
-    subscribeToNews: function() {
+    subscribeToNews: function(mydata) {
         app.subscribeToNews("complain",function(){
             wx.showModal({
                 title: '提示',

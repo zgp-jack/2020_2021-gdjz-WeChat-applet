@@ -31,7 +31,7 @@ Page({
   complainInfo: function (e) {
     let infoId = e.currentTarget.dataset.id;
     let type = e.currentTarget.dataset.type;
-    _this.setData({ showComplain: true, infoId: infoId, type: type })
+    this.setData({ showComplain: true, infoId: infoId, type: type })
     
   },
   subscribeToNews: function(mydata) {
