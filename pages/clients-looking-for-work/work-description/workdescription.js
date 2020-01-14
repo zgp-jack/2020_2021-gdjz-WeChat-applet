@@ -370,7 +370,7 @@ Page({
     })
   },
 
-  subscribeToNew: function() {
+  subscribeToNew: function(res) {
     app.subscribeToNews("resume",function(){
       remain.remain({
         tips: res.data.errmsg, callback: function () {
