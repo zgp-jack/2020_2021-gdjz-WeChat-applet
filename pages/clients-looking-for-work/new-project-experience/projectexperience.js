@@ -259,10 +259,11 @@ Page({
   },
   preserve: function () {
     let that = this;
-    if (that.data.project_cou >= that.data.project_count) {
+    let project_count = that.data.project_count
+    if (that.data.project_cou >= project_count) {
       wx.showModal({
         title: '温馨提示',
-        content: `最多只能添加${that.data.project_count}个项目`,
+        content: `最多只能添加${project_count}个项目`,
         showCancel: false,
         success(res) {
           wx.navigateBack({
@@ -369,7 +370,6 @@ Page({
       return
     }
 
-
     Object.assign(project, {
       userId: userInfo.userId,
       token: userInfo.token,
@@ -391,23 +391,12 @@ Page({
       params: project,
       failTitle: "操作失败，请稍后重试！",
       success(res) {
-
-        remain.remain({
-          tips: res.data.errmsg, callback: function () {
-            if (res.data.errcode == "ok") {
-              if (that.data.ranktypes == "ranking") {
-                wx.redirectTo({
-                  url: '/pages/clients-looking-for-work/all-project-experience/allexperience',
-                });
-              } else {
-              app.globalData.allexpress = true;
-              wx.navigateBack({
-                delta: 1
-              })
-              }
-            }
-          }
-        })
+        if(res.data.errcode == "ok"){
+          that.subscribeToNews(res)
+        }else{
+          app.showMyTips(res.data.errmsg);
+        }
+        
       },
       fail: function (err) {
         app.showMyTips("保存失败");
@@ -416,10 +405,11 @@ Page({
   },
   preservechixu() {
     let that = this;
-    if (that.data.project_cou >= that.data.project_count) {
+    let project_count = that.data.project_count;
+    if (that.data.project_cou >= project_count) {
       wx.showModal({
         title: '温馨提示',
-        content: `最多只能添加${that.data.project_count}个项目`,
+        content: `最多只能添加${project_count}个项目`,
         showCancel: false,
         success(res) {
           wx.navigateBack({
@@ -542,45 +532,53 @@ Page({
       params: project,
       failTitle: "操作失败，请稍后重试！",
       success(res) {
-        remain.remain({
-          tips: res.data.errmsg, callback: function () {
-            if (res.data.errcode == "ok") {
-
-              that.setData({
-                project_cou: res.data.count
-              })
-              app.globalData.allexpress = true;
-
-              that.projectshow()
-
-              that.setData({
-                projectname: "",
-                startdate: "",
-                date: "",
-                detail: "",
-                provincecity: "",
-                multiIndexvalue: "",
-                importimg: [],
-                imgArrs: [],
-                detailength: 0,
-                imgArrslength: true
-              })
-            }
-          }
-        })
-
+        if(res.data.errcode == "ok"){
+          that.subscribeToNewsAgain(res)
+        }else{
+          app.showMyTips(res.data.errmsg);
+        }
+        
       },
       fail: function (err) {
         app.showMyTips("保存失败");
       }
     })
   },
-  getuuid() {
-    let userInfo = wx.getStorageSync("uuid");
-    this.setData({
-      resume_uuid: userInfo
+  subscribeToNewsAgain: function(res) { 
+    let that = this;
+    app.subscribeToNews("resume",function(){
+      remain.remain({
+        tips: res.data.errmsg, callback: function () {
+          that.setData({
+            project_cou: res.data.count
+          })
+          app.globalData.allexpress = true;
+
+          that.projectshow()
+
+          that.setData({
+            projectname: "",
+            startdate: "",
+            date: "",
+            detail: "",
+            provincecity: "",
+            multiIndexvalue: "",
+            importimg: [],
+            imgArrs: [],
+            detailength: 0,
+            imgArrslength: true
+          })
+        }
+      })
     })
+    
   },
+  // getuuid() {
+  //   let userInfo = wx.getStorageSync("uuid");
+  //   this.setData({
+  //     resume_uuid: userInfo
+  //   })
+  // },
   delete(e) {
 
     this.data.imgArrs.splice(e.currentTarget.dataset.index, 1)
@@ -671,7 +669,6 @@ Page({
         project: project.uid,
       })
 
-
       this.setData({
         projectname: this.data.project.project_name,
         date: this.data.project.completion_time,
@@ -680,7 +677,7 @@ Page({
         detail: this.data.project.detail,
         detailength: this.data.project.detail.length,
         imgArrs: this.data.project.image,
-        resume_uuid: this.data.project.resume_uuid,
+        resume_uuid: this.data.project.resume_uuid||this.data.resume_uuid,
         uuid: this.data.project.uuid,
         provincecity: this.data.project.province + "," + this.data.project.city
       })
@@ -846,27 +843,36 @@ Page({
       failTitle: "操作失败，请稍后重试！",
       mask: true,
       success(res) {
-
-        remain.remain({
-          tips: res.data.errmsg, callback: function () {
-            if (res.data.errcode == "ok") {
-              if (that.data.ranktypes == "ranking") {
-                wx.redirectTo({
-                  url: '/pages/clients-looking-for-work/all-project-experience/allexperience',
-                });
-              } else {
-                app.globalData.allexpress = true;
-                wx.navigateBack({
-                  delta: 1
-                })
-              }
-            }
-          }
-        })
+        if(res.data.errcode == "ok"){
+          that.subscribeToNews(res)
+        }else{
+          app.showMyTips(res.data.errmsg);
+        }
+        
       },
       fail: function (err) {
         app.showMyTips("保存失败");
       }
+    })
+  },
+  
+  subscribeToNews: function(res) {
+    let that = this;
+    app.subscribeToNews("resume",function(){
+      remain.remain({
+        tips: res.data.errmsg, callback: function () {
+          if (that.data.ranktypes == "ranking") {
+            wx.redirectTo({
+              url: '/pages/clients-looking-for-work/all-project-experience/allexperience',
+            });
+          } else {
+            app.globalData.allexpress = true;
+            wx.navigateBack({
+              delta: 1
+            })
+          }
+        }
+      })
     })
   },
   delestore() {
@@ -895,7 +901,7 @@ Page({
 
   onShow: function () {
     // this.getbirth()
-    this.getuuid()
+    // this.getuuid()
     this.projectshow()
     this.starttimer()
 
@@ -927,6 +933,12 @@ Page({
     this.initAllProvice()
     this.getproject()
     this.ranktypes(options)
+    let project_count = options.project_count;
+    let resume_uuid = options.resume_uuid
+    this.setData({
+      project_count:project_count,
+      resume_uuid:resume_uuid
+    })
   },
 
 })

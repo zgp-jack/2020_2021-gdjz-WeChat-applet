@@ -6,56 +6,66 @@ Page({
      * 页面的初始数据 valiUserUrl releaselive
      */
     data: {
+        showRecharge:false,
         footerActive: "member",
         nouser: app.globalData.apiImgUrl + "userauth-userinfo-null.png",
+        realNames: app.globalData.apiImgUrl + 'newresume-infolist-ysm.png?t=1',
+        feedbackimg: app.globalData.apiImgUrl + "feedbackmsg-img.png",
+        rightarrow: app.globalData.apiImgUrl + "new-center-rightarrow.png",
         ucenterimgs: {
-            published: app.globalData.apiImgUrl + "uc-publish.png",
-            used: app.globalData.apiImgUrl + "ucenter-used.png",
-            card: app.globalData.apiImgUrl + "uc-card.png",
-            recharge: app.globalData.apiImgUrl + "uc-recharge.png",
-            expend: app.globalData.apiImgUrl + "uc-recode.png",
-            original: app.globalData.apiImgUrl + "uc-source.png",
-            downapp: app.globalData.apiImgUrl + "uc-downapp.png",
-            feedback: app.globalData.apiImgUrl + "ucenter-feedback.png",
-            invite: app.globalData.apiImgUrl + "ucnter-yaoqing.png",
-            fastissue: app.globalData.apiImgUrl + "ucenter-fast.png",
-            fastlist: app.globalData.apiImgUrl + "ucenter-fastlist.png",
-            realname: app.globalData.apiImgUrl + "ucenter-userrealname.png",
-            collect: app.globalData.apiImgUrl + "ucenter_person_collect.jpg"
+          recruit: app.globalData.apiImgUrl + "lpy/ucenter/newcenter-recruit.png",
+          mycard: app.globalData.apiImgUrl + "lpy/ucenter/newcenter-resume.png",
+          trade: app.globalData.apiImgUrl + "lpy/ucenter/newcenter-used.png",
+          ucenterMsg: app.globalData.apiImgUrl + "lpy/ucenter/newcenter-info.png",
+          getintegral: app.globalData.apiImgUrl + "lpy/ucenter/newcenter-integral.png",
+          invite: app.globalData.apiImgUrl + "lpy/ucenter/newcenter-invite.png",
+          integral: app.globalData.apiImgUrl + "lpy/ucenter/newcenter-expend.png",
+          integrallog: app.globalData.apiImgUrl + "lpy/ucenter/newcenter-origin.png",
+          realname: app.globalData.apiImgUrl + "lpy/ucenter/newcenter-realname.png",
+          collect: app.globalData.apiImgUrl + "lpy/ucenter/newcenter-collect.png",
+          feedback: app.globalData.apiImgUrl + "lpy/ucenter/newcenter-feedback.png",
+          ucenterHelp: app.globalData.apiImgUrl + "lpy/ucenter/newcenter-help.png",
         },
         userInfo: false,
         member: {},
         showReturnIntegral: false,
-        showFastIssue: {
-            show: 0,
-            request: false
-        },
-        feedbackimg: app.globalData.apiImgUrl + "feedbackmsg-img.png",
-        rightarrow: app.globalData.apiImgUrl + "feedback-rightarrow.png",
+        // showFastIssue: {
+        //     show: 0,
+        //     request: false
+        // },
+        showAuthor: false
     },
+    
     initUserInfo: function(callback) {
         let userInfo = wx.getStorageSync("userInfo");
         if (!userInfo) {
-            this.setData({ showFastIssue: false })
+            // this.setData({ showFastIssue: false })
             callback ? callback() : ""
             return false
         };
-        if (!app.globalData.showFastIssue.request) app.isShowFastIssue(this);
-        else this.setData({ showFastIssue: app.globalData.showFastIssue })
+        // if (!app.globalData.showFastIssue.request) app.isShowFastIssue(this);
+        // else this.setData({ showFastIssue: app.globalData.showFastIssue })
         this.setData({ userInfo: userInfo })
         let _this = this;
         wx.showLoading({ title: '正在初始化用户数据', })
-        app.doRequestAction({
+        app.appRequestAction({
             url: "user/personal/",
             way: "POST",
             params: userInfo,
             success: function(res) {
+                setTimeout(()=>{
+                    wx.hideLoading();
+                },300)
                 callback ? callback() : ""
-                wx.hideLoading();
                 let mydata = res.data;
+              _this.setData({
+                showAuthor: mydata.is_checking == 2 ? true : false
+              })
                 if (mydata.errcode == "ok") {
                     _this.setData({
                         member: mydata.member,
+                        is_checking: mydata.is_checking,
+                        hasNoticeMsg: mydata.member.has_notice_msg.hasNoticeMsg,
                         showReturnIntegral: (parseInt(mydata.member.return_integral) == 0) ? false : true
                     })
                 } else {
@@ -121,8 +131,18 @@ Page({
      */
     onLoad: function(options) {
         this.initFooterData();
+        this.initGetIntegralList();
     },
-
+    initGetIntegralList:function(){
+        let _this = this;
+        app.initSystemInfo(function(res){
+            if (res && res.platform != "ios"){
+                _this.setData({
+                    showRecharge: true
+                })
+            }
+        })
+    },
     /**
      * 生命周期函数--监听页面初次渲染完成
      */
@@ -135,6 +155,7 @@ Page({
      */
     onShow() {
         this.initUserInfo();
+        footerjs.initMsgNum(this);
     },
     releaselive() {
         app.globalData.showdetail = true
@@ -162,6 +183,7 @@ Page({
     onPullDownRefresh: function() {
         wx.showNavigationBarLoading()
             //wx.startPullDownRefresh()
+        footerjs.initMsgNum(this);
         this.initUserInfo(function() {
             wx.hideNavigationBarLoading()
             wx.stopPullDownRefresh();

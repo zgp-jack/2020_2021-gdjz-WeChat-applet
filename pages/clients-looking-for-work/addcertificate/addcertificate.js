@@ -26,7 +26,8 @@ vertify()
     nowDate:"",
     beforeDate:"",
     ranktypes: "",
-    deletestatus: true
+    deletestatus: true,
+    skillnum:''
   },
   vertify() {
     this.setData({
@@ -128,12 +129,12 @@ vertify()
       })
     }
   },
-  getuuid() {
-    let userInfo = wx.getStorageSync("uuid");
-    this.setData({
-      resume_uuid: userInfo
-    })
-  },
+  // getuuid() {
+  //   let userInfo = wx.getStorageSync("uuid");
+  //   this.setData({
+  //     resume_uuid: userInfo
+  //   })
+  // },
   deleteexper() {
     let that = this;
     if (!this.data.deletestatus) {
@@ -295,28 +296,36 @@ vertify()
       mask: true,
       failTitle: "操作失败，请稍后重试！",
       success(res) {
-        
-        remain.remain({
-          tips: res.data.errmsg, callback: function () {
-            if (res.data.errcode == "ok") {
-              if (that.data.ranktypes == "ranking") {
-                wx.redirectTo({
-                  url: '/pages/clients-looking-for-work/all-skills-certificate/skillscertificate',
-                });
-              } else {
-              app.globalData.allskill = true;
-              wx.navigateBack({
-                delta: 1
-              })
-              }
-            }
-          }
-        })
+        if(res.data.errcode == "ok"){
+          that.subscribeToNews(res)
+        }else{
+          app.showMyTips(res.data.errmsg);
+        }
       },
       fail: function (err) {
         app.showMyTips("保存失败");
       }
     })
+  },
+  subscribeToNews: function(res) {
+    let that = this;
+    app.subscribeToNews("resume",function(){
+      remain.remain({
+        tips: res.data.errmsg, callback: function () {
+          if (that.data.ranktypes == "ranking") {
+            wx.redirectTo({
+              url: '/pages/clients-looking-for-work/all-skills-certificate/skillscertificate',
+            });
+          } else {
+          app.globalData.allskill = true;
+          wx.navigateBack({
+            delta: 1
+          })
+          }
+        }
+      })
+    })
+    
   },
   preservechixu() {
     let that = this;
@@ -407,30 +416,39 @@ vertify()
       params: project,
       mask: true,
       success(res) {
-        remain.remain({
-          tips: res.data.errmsg, callback: function () {
-            if (res.data.errcode == "ok") {
-              that.setData({
-                certificate_cou: res.data.count
-              })
-
-              that.skillshow()
-              app.globalData.allskill = true;
-              that.setData({
-                imgArrs: [],
-                idArrs: [],
-                date: "",
-                name: "",
-                imgArrslength:true
-              })
-            }
-          }
-        })
+        if(res.data.errcode == "ok"){
+          that.subscribeToNewsAgain(res)
+        }else{
+          app.showMyTips(res.data.errmsg);
+        }
       },
       fail: function (err) {
         app.showMyTips("保存失败");
       }
     })
+  },
+  subscribeToNewsAgain: function(res) { 
+    let that = this;
+    app.subscribeToNews("resume",function(){
+      remain.remain({
+        tips: res.data.errmsg, callback: function () {
+          that.setData({
+            certificate_cou: res.data.count
+          })
+
+          that.skillshow()
+          app.globalData.allskill = true;
+          that.setData({
+            imgArrs: [],
+            idArrs: [],
+            date: "",
+            name: "",
+            imgArrslength:true
+          })
+        }
+      })
+    })
+    
   },
   preservechixutui(){
     wx.navigateBack({
@@ -441,7 +459,7 @@ vertify()
 
     let skilltail = wx.getStorageSync("skilltail");
     let certificate_count = wx.getStorageSync("certificate_count");
-    let certificate_cou = wx.getStorageSync("skillnum");
+    let certificate_cou = wx.getStorageSync("skillnum") || this.data.skillnum;
     if (certificate_cou) {
       this.setData({
         certificate_cou: certificate_cou
@@ -463,12 +481,12 @@ vertify()
       this.setData({
         skill: skilltail.uid
       })
-
+      
       this.setData({
         name: this.data.skill.name,
         imgArrs: this.data.skill.image,
         idArrs: this.data.skill.images,
-        resume_uuid: this.data.skill.resume_uuid,
+        resume_uuid: this.data.skill.resume_uuid||this.data.resume_uuid,
         uuid: this.data.skill.uuid,
         date: this.data.skill.certificate_time
       })
@@ -548,23 +566,7 @@ vertify()
       mask: true,
       params: project,
       success(res) {
-        
-        remain.remain({
-          tips: res.data.errmsg, callback: function () {
-            if (res.data.errcode == "ok") {
-              if (that.data.ranktypes == "ranking") {
-                wx.redirectTo({
-                  url: '/pages/clients-looking-for-work/all-skills-certificate/skillscertificate',
-                });
-              } else {
-              app.globalData.allskill = true;
-              wx.navigateBack({
-                delta: 1
-              })
-              }
-            }
-          }
-        })
+        that.subscribeToNews(res)
       },
       fail: function (err) {
         app.showMyTips("保存失败");
@@ -614,6 +616,14 @@ vertify()
   onLoad: function (options) {
     this.getskill()
     this.ranktypes(options)
+    let certificate_count = options.certificate_count;
+    let resume_uuid = options.resume_uuid
+    let skillnum = options.skillnum || "";
+    this.setData({
+      skillnum:skillnum,
+      certificate_count:certificate_count,
+      resume_uuid:resume_uuid
+    })
   },
 
   /**
@@ -628,7 +638,7 @@ vertify()
    */
   onShow: function () {
     this.skillshow() 
-    this.getuuid()
+    // this.getuuid()
     this.starttimer()
     // this.getbirth()
   },

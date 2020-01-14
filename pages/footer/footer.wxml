@@ -30,6 +30,7 @@
     <view class='yupao-footer-item' bindtap='jumpThisLink' data-url="/pages/ucenter/ucenter" data-type='1'>
         <image src='{{ footerActive == "member" ? footerImgs.memberActive : footerImgs.memberNormal }}'></image>
         <text class='{{ footerActive == "member" ? "footer-text-active" : "" }}'>会员</text>
+        <view wx:if="{{ footerImgs.msgsNumber }}" class="footer-dot">{{footerImgs.msgsNumber>9?'9+':footerImgs.msgsNumber}}</view>
     </view>
 </view>
 

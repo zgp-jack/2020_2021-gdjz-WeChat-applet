@@ -31,7 +31,18 @@ Page({
   complainInfo: function (e) {
     let infoId = e.currentTarget.dataset.id;
     let type = e.currentTarget.dataset.type;
-    this.setData({ showComplain: true, infoId: infoId, type: type })
+    _this.setData({ showComplain: true, infoId: infoId, type: type })
+    
+  },
+  subscribeToNews: function(mydata) {
+      app.subscribeToNews("complain",function(){
+        wx.showModal({
+            title: '提示',
+            content: mydata.errmsg,
+            showCancel:false
+        })
+      })
+    
   },
   userEnterComplain: function (e) {
     this.setData({ complainInfo: e.detail.value })
@@ -67,12 +78,15 @@ Page({
         let mydata = res.data;
         if (mydata.errcode == "ok"){
             _this.setData({ showComplain: false, complainInfo: "", "info.show_complain":0 })
+            _this.subscribeToNews(mydata)
+        }else{
+            wx.showModal({
+                title: '提示',
+                content: mydata.errmsg,
+                showCancel:false
+            })
         }
-        wx.showModal({
-          title: '提示',
-          content: mydata.errmsg,
-          showCancel:false
-        })
+        
       }
     })
   },

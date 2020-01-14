@@ -53,7 +53,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 1,
+			"current": -1,
 			"list": [
 				{
 					"id": -1,
@@ -115,6 +115,42 @@
 					"id": -1,
 					"name": "帮助中心",
 					"pathName": "pages/ucenter/ucenterNew/helpCenter",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": 9,
+					"name": "pages/information/mymessage/mymessage",
+					"pathName": "pages/information/mymessage/mymessage",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": 10,
+					"name": "pages/information/system/system?type=3",
+					"pathName": "pages/information/system/system",
+					"query": "type=3",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/information/recruit/recruit",
+					"pathName": "pages/information/recruit/recruit",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/information/mymessage/mymessage",
+					"pathName": "pages/information/mymessage/mymessage",
+					"query": "type=3",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/boss-look-card/lookcard",
+					"pathName": "pages/boss-look-card/lookcard",
+					"query": "uuid=1577670093341138&location=30.57447%2C103.92377",
 					"scene": null
 				}
 			]

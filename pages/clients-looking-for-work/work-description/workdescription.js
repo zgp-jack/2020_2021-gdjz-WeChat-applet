@@ -284,6 +284,7 @@ Page({
   },
   submitmaterial() { //发数据给后台
     let information = {}
+    let _this =this 
     let userInfo = wx.getStorageSync("userInfo");
     if (!userInfo) return false;
     let vertifyNum = v.v.new()
@@ -351,15 +352,8 @@ Page({
       success: function (res) {
         console.log(res.data)
         if (res.data.errcode == 200) {
-          remain.remain({
-            tips: res.data.errmsg, callback: function () {
-              if (res.data.errcode == 200) {
-                wx.navigateBack({
-                  delta: 1
-                })
-              }
-            }
-          })
+
+          _this.subscribeToNew(res)
         } else {
           wx.showModal({
             title: '温馨提示',
@@ -376,6 +370,17 @@ Page({
     })
   },
 
+  subscribeToNew: function() {
+    app.subscribeToNews("resume",function(){
+      remain.remain({
+        tips: res.data.errmsg, callback: function () {
+          wx.navigateBack({
+            delta: 1
+          })
+        }
+      })
+    })
+  },
   getintrodetail() {
     let that = this;
     let introdetail = wx.getStorageSync("introdetail");

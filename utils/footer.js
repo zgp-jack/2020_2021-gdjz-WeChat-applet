@@ -1,4 +1,6 @@
 const _url = "http://cdn.yupao.com/miniprogram";
+const app = getApp();
+
 const footerImgs = {
     homeNormal: "/images/footer-home.png",
     homeActive:"/images/footer-home-active.png",
@@ -9,17 +11,20 @@ const footerImgs = {
     zhActive: "/images/footer-zh-active.png",
     memberNormal: "/images/footer-member.png",
     memberActive: "/images/footer-member-active.png",
-  pubicon: "/images/yupao-footer-publish-btnimg.png"
+  pubicon: "/images/yupao-footer-publish-btnimg.png",
+}
+
+function initMsgNum(_this){
+  app.getUserMsg((infoNum,msgNum)=>{
+    _this.setData({
+      "footerImgs.infoNumber": infoNum,
+      "footerImgs.msgsNumber": msgNum
+    })
+  })
 }
 
 function doPublishAction (_this) {
-    // let userInfo = _this.data.userInfo;
-    // if(!userInfo){
-    //   wx.navigateTo({
-    //     url: '/pages/userauth/userauth',
-    //   })
-    //   return false;
-    // }
+    
     _this.setData({
         showPublishBox: true
     })
@@ -79,5 +84,6 @@ module.exports = {
     showPublishBox: false,
     doPublishAction: doPublishAction,
     closePublishAction: closePublishAction,
-    valiUserCard: valiUserCard
+    valiUserCard: valiUserCard,
+  initMsgNum: initMsgNum
 }

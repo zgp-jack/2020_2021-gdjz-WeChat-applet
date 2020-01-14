@@ -1,0 +1,4 @@
+/* pages/information/system/system.wxss */
+@import "/pages/information/mymessage/mymessage.wxss";
+.info-shareimg{position: fixed;width: 100rpx;height: 100rpx;line-height: 140rpx;text-align: center;font-size:30rpx;color: #0099ff;border-radius: 50%;box-shadow: 0 0 5px #0099ff;right: 27rpx;top: 800rpx;z-index: 10;background: white;overflow: hidden;font-weight: bold;letter-spacing: 1px;border:none;padding: 0;  }
+.info-shareimg::after{border:0;}

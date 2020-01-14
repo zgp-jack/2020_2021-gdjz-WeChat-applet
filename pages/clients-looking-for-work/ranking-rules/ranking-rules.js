@@ -99,7 +99,9 @@ Page({
             warm_tips: mydata.data.warm_tips,
             sort_flag: mydata.data.resume_info.sort_flag,
             has_resume: mydata.data.resume_info.has_resume,
-            onoff: true
+            onoff: true,
+            certificate_count:res.data.data.resume_data.certificate_count,
+            project_count:res.data.data.resume_data.project_count,
           })
           that.setstorege(mydata)
         } else {
@@ -148,6 +150,9 @@ Page({
     let ranking = this.data.ranking;
     let rankjump = this.data.rankjump;
     let userInfo = wx.getStorageSync("userInfo");
+    let certificate_count=this.data.certificate_count;
+    let project_count = this.data.project_count;
+    let resume_uuid = this.data.resume_uuid;
     if (!userInfo) {
       app.gotoUserauth();
       this.setData({
@@ -155,15 +160,22 @@ Page({
       })
       return false;
     }
+    console.log(ranking,"ranking")
     if (this.data.has_resume == 1 && e.currentTarget.dataset.jump == 1 && e.currentTarget.dataset.minipath == "/pages/clients-looking-for-work/finding-name-card/findingnamecard") {
       app.globalData.showdetail = true
       wx.navigateTo({
         url: e.currentTarget.dataset.minipath + `?rankjump=${rankjump}`,
       })
     }else if (this.data.has_resume == 1 && e.currentTarget.dataset.jump == 1) {
-      wx.navigateTo({
-        url: e.currentTarget.dataset.minipath + `?ranktype=${ranking}`,
-      })
+      if (e.currentTarget.dataset.minipath == '/pages/clients-looking-for-work/new-project-experience/projectexperience' || e.currentTarget.dataset.minipath =='/pages/clients-looking-for-work/addcertificate/addcertificate') {
+        wx.navigateTo({
+          url: e.currentTarget.dataset.minipath + `?ranktype=${ranking}` + `&certificate_count=${certificate_count}`+ `&resume_uuid=${resume_uuid}`+ `&project_count=${project_count}` ,
+        })
+      }else{
+        wx.navigateTo({
+          url: e.currentTarget.dataset.minipath + `?ranktype=${ranking}`,
+        })
+      }
     } else if (this.data.has_resume == 0 && e.currentTarget.dataset.minipath == '/pages/recharge/recharge' && e.currentTarget.dataset.jump == 1){
       wx.navigateTo({
         url: "/pages/recharge/recharge",

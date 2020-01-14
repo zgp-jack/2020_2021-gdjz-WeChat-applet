@@ -585,6 +585,7 @@ Page({
             publishActive: footerjs.publishActive,
             showPublishBox: footerjs.showPublishBox
         })
+      footerjs.initMsgNum(this);
     },
     doPublishAction: function () {
         footerjs.doPublishAction(this);

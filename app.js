@@ -1,4 +1,6 @@
+const tmplId = require("./utils/temp_ids.js");
 App({
+
 
   onLaunch: function (e) {
     // try{
@@ -9,7 +11,7 @@ App({
 
   },
   globalData: {
-    topshow:false,
+    topshow: false,
     isauthuuid: false,
     previewboss: true,
     collectstatus: true,
@@ -102,6 +104,7 @@ App({
   stopThisAction: function () {
     return false;
   },
+
   initSystemInfo: function (callback) {
     wx.getSystemInfo({
       success: function (res) {
@@ -375,7 +378,7 @@ App({
     })
 
   },
-  
+
   callThisPhone: function (e) {
     let phone = e.currentTarget.dataset.phone;
     wx.makePhoneCall({
@@ -840,5 +843,61 @@ App({
       params: userInfo ? userInfo : {}
     })
   },
-
+  getUserMsg: function (callback) {
+    let _this = this
+    let userInfo = wx.getStorageSync("userInfo");
+    if (!userInfo) return false;
+    _this.initGetIntegralList()
+    this.appRequestAction({
+      url: "member/original-message/",
+      way: "POST",
+      params: { terminal_type: _this.terminal_type },
+      success: function (res) {
+        if (res.data.errcode == "ok") {
+          _this.globalData.jobNumber = res.data.data.jobNumber
+          _this.globalData.msgsNumber = res.data.data.messageNumber
+          callback(res.data.data.jobNumber, res.data.data.messageNumber)
+        }
+      }
+    })
+  },
+  initGetIntegralList: function () {
+    let _this = this;
+    _this.initSystemInfo(function (res) {
+      if (res && res.platform == "ios") {
+        _this.terminal_type = 'ios'
+      } else if (res && res.platform != "ios") {
+        _this.terminal_type = 'android'
+      }
+    })
+  },
+  subscribeToNews: function (type, callback) {
+    let userInfo = wx.getStorageSync("userInfo");
+    let that = this;
+    if (wx.canIUse('requestSubscribeMessage') === true) {
+      wx.requestSubscribeMessage({
+        tmplIds: [tmplId.tmplId[type].id],
+        success(res) {
+          if (res.errMsg == "requestSubscribeMessage:ok") {
+            that.appRequestAction({
+              url: "leaving-message/add-subscribe-msg/",
+              way: "POST",
+              mask: true,
+              params: {
+                userId: userInfo.userId,
+                token: userInfo.token,
+                tokenTime: userInfo.tokenTime,
+                type: tmplId.tmplId[type].type
+              },
+              success: function (res) {
+                callback()
+              },
+            })
+          }
+        }
+      })
+    } else {
+      callback()
+    }
+  },
 })

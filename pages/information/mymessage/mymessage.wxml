@@ -1,0 +1,35 @@
+<!--pages/information/mymessage/mymessage.wxml-->
+<view > 
+    <view class="messsage-lists" wx:for="{{lists}}" wx:key="{{index}}"  bindtap='valiUserUrl' data-type="{{item.type}}">
+        <view class="messsage-lists-top">
+            <view class="messsage-num" >
+                <image src="{{item.imageUrl}}" alt=""  style="width:70rpx;height:70rpx"></image>
+                <text wx:if="{{item.count>0}}" class="msgNumber" > {{item.count > 9 ? '9+' : item.count}} </text>
+            </view>
+            <view class="messsage-title" >
+                <view class="msgflex">
+                    <text> {{item.typeName}} </text>
+                    <image src='{{ rightarrow }}' class="rightarrow"></image>
+                </view>
+                <view class="messsage-deail"> {{item.description}} </view>
+            </view>
+        </view>
+        <view class="messsage-bottom">
+            <text class="messsage-deail"> 立即查看 </text>
+            <text class="messsage-deail">  {{item.timeString}} </text>
+        </view>
+    </view>
+
+    <view class='common-nodatabox flex-column lists-nodata' wx:if="{{ lists.length == 0 }}">
+        <image src='{{ listsImg.nodata }}'></image>
+        <text>暂无相关内容</text>
+    </view>
+</view>
+
+<view class="common-userauth" wx:if="{{ !userInfo }}">
+    <image src='{{ icon }}' class='userauth-topicon'></image>
+    <view class='userauth-title'>登录鱼泡网</view>
+    <view class='userauth-words'>招工 找活抢先一步，用的安心 赚的开心。</view>
+    <button class='userauth-btn userauth-sure-btn' open-type="getUserInfo" bindgetuserinfo='bindGetUserInfo'>微信授权登录</button>
+    <button class='userauth-btn  userauth-back-btn' bindtap='returnPrevPage'>返回首页</button>
+</view>

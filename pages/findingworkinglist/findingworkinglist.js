@@ -627,7 +627,11 @@ Page({
         success: function (res) {
           let mydata = res.data;
           _this.setData({ areaText: mydata.provinceName })
+
+          wx.setStorageSync("areaId", mydata.provinceId)
+
           _this.initAreaInfo();
+
         }
       });
 
@@ -704,6 +708,7 @@ Page({
       publishActive: footerjs.publishActive,
       showPublishBox: footerjs.showPublishBox
     })
+    footerjs.initMsgNum(this);
   },
   doPublishAction: function () {
     footerjs.doPublishAction(this);
@@ -849,7 +854,7 @@ Page({
         userInfo: userInfo
       })
     }
-
+    footerjs.initMsgNum(this);
   },
 
   /**

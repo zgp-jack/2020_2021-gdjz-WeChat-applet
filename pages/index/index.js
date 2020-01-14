@@ -80,7 +80,7 @@ Page({
         userShareTime:{},
         firstJoin: false,
         fastIssueImg: app.globalData.apiImgUrl + "index-fast-issue.png",
-        showFastIssue: app.globalData.showFastIssue,
+        // showFastIssue: app.globalData.showFastIssue,
         joblistjz: app.globalData.apiImgUrl + "joblist_zd.png",
         joblistwyjz:app.globalData.apiImgUrl+"joblist_wyzd.png",
       isload: false,
@@ -98,7 +98,8 @@ Page({
       showHistoryList:false,
       historyList:[],
       member_notice:{},
-      member_less_info:{}
+      member_less_info:{},
+      msgsNumber:[],
     },
   getMapInfo: function (callback) {
     let that = this;
@@ -634,8 +635,8 @@ Page({
         // }
         this.setData({ userInfo: userInfo ? userInfo : false });
         this.initNeedData();
-        if (userInfo) if (!app.globalData.showFastIssue.request) app.isShowFastIssue(this);
-        else this.setData({ showFastIssue: app.globalData.showFastIssue })
+        // if (userInfo) if (!app.globalData.showFastIssue.request) app.isShowFastIssue(this);
+        // else this.setData({ showFastIssue: app.globalData.showFastIssue })
         
     },
   valiUserUrl:function(e){
@@ -662,7 +663,7 @@ Page({
                         wx.setStorageSync('userInfo', userInfo)
                         that.initNeedData();
                         //that.initUserShareTimes();
-                        if (!app.globalData.showFastIssue.request) app.isShowFastIssue(that);
+                        // if (!app.globalData.showFastIssue.request) app.isShowFastIssue(that);
                     } else {
                         app.showMyTips(uinfo.errmsg);
                     }
@@ -709,6 +710,7 @@ Page({
     },
 
     // 共用footer
+  
     jumpThisLink: function (e) {
         app.jumpThisLink(e);
     },
@@ -730,7 +732,7 @@ Page({
     valiUserCard:function(){
         let userInfo = this.data.userInfo;
         footerjs.valiUserCard(this,app, userInfo);
-    },
+    }, 
     initUserLocation: function () {
         let _this = this;
         let areaId = wx.getStorageSync("areaId");
@@ -829,9 +831,9 @@ Page({
     initFirstTips:function(){
         app.initFirstTips(this);
     },
-  getUserUuid: function () {
-    app.getUserUuid();
-  },
+    getUserUuid: function () {
+      app.getUserUuid();
+    },
     /**
      * 生命周期函数--监听页面加载
      */
@@ -860,11 +862,12 @@ Page({
     onShow: function () {
       this.getUserUuid();
       this.initUserinfo();
+      footerjs.initMsgNum(this);
     },
-  onPageScroll:function(e){
-    let top = e.scrollTop;
-    this.setData({ showReturnTopImg: (top > 960) ? true : false })
-  },
+    onPageScroll:function(e){
+      let top = e.scrollTop;
+      this.setData({ showReturnTopImg: (top > 960) ? true : false })
+    },
 
     /**
      * 生命周期函数--监听页面隐藏

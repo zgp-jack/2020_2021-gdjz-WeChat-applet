@@ -49,7 +49,10 @@ Page({
           
           that.setData({
             allskilltwo: allskilltwo,
-            onoff: true
+            onoff: true,
+            certificate_count:res.data.data.certificate_count,
+            project_count:res.data.data.project_count,
+            resume_uuid:res.data.data.info.uuid
           });
         } else {
           wx.showModal({
@@ -79,14 +82,14 @@ Page({
     let skillnum = this.data.allskill.length
     wx.setStorageSync("skillnum", skillnum)
     wx.navigateTo({
-      url: "/pages/clients-looking-for-work/addcertificate/addcertificate",
+      url: "/pages/clients-looking-for-work/addcertificate/addcertificate?project_count="+this.data.project_count+"&certificate_count="+this.data.certificate_count+"&resume_uuid="+this.data.resume_uuid+"&skillnum=" + skillnum,
     })
   },
   editor(e) {
     
     wx.setStorageSync("skilltail", e.currentTarget.dataset)
     wx.navigateTo({
-      url: "/pages/clients-looking-for-work/addcertificate/addcertificate",
+      url: "/pages/clients-looking-for-work/addcertificate/addcertificate?project_count="+this.data.project_count+"&certificate_count="+this.data.certificate_count+"&resume_uuid="+this.data.resume_uuid,
     })
   },
   deleskill() {

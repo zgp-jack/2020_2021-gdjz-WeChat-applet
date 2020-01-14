@@ -376,7 +376,6 @@ Page({
         this.setData({ complainInfo: e.detail.value })
     },
     userTapComplain: function () {
-      console.log(123)
       let userInfo = this.data.userInfo;
       if (!userInfo) {
         app.gotoUserauth();
@@ -395,7 +394,21 @@ Page({
         })
         return false;
       }
-        this.setData({ showComplain: true })
+      this.setData({
+        showComplain: true
+    })
+    },
+    
+    subscribeToNews: function() {
+        app.subscribeToNews("complain",function(){
+            wx.showModal({
+                title: '提示',
+                content: mydata.errmsg,
+                showCancel:false,
+                confirmText: '确定'
+              })
+              
+        })
     },
     userCancleComplain: function () {
       this.setData({ showComplain: false, complainInfo:"" })
@@ -432,14 +445,17 @@ Page({
                   "info.show_complaint.show_complaint": 0,
                   "info.show_complaint.tips_message": "您已投诉该信息，请勿重复操作！"
                 });
+                _this.subscribeToNews(mydata)
+              }else{
+                wx.showModal({
+                    title: '提示',
+                    content: mydata.errmsg,
+                    showCancel:false,
+                    confirmText: mydata.errcode == 'pass_complaint' ? '知道了' : '确定'
+                  })
               }
                 
-                wx.showModal({
-                  title: '提示',
-                  content: mydata.errmsg,
-                  showCancel:false,
-                  confirmText: mydata.errcode == 'pass_complaint' ? '知道了' : '确定'
-                })
+                
             }
         })
     },

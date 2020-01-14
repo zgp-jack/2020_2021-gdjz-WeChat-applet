@@ -351,10 +351,9 @@ Page({
     })
   },
   editor(e) {
-
     wx.setStorageSync("projectdetail", e.currentTarget.dataset)
     wx.navigateTo({
-      url: "/pages/clients-looking-for-work/new-project-experience/projectexperience",
+      url: "/pages/clients-looking-for-work/new-project-experience/projectexperience?project_count="+this.data.project_count+"&certificate_count="+this.data.certificate_count+"&resume_uuid="+this.data.resume_uuid,
     })
 
   },
@@ -362,7 +361,7 @@ Page({
 
     wx.setStorageSync("skilltail", e.currentTarget.dataset)
     wx.navigateTo({
-      url: "/pages/clients-looking-for-work/addcertificate/addcertificate",
+      url: "/pages/clients-looking-for-work/addcertificate/addcertificate?project_count="+this.data.project_count+"&certificate_count="+this.data.certificate_count+"&resume_uuid="+this.data.resume_uuid,
     })
   },
   completeall() {
@@ -568,11 +567,12 @@ Page({
       })
       return
     }
+    // console.log(this.data.project_count,this.data.certificate_count,this.data.resume_uuid, "resume_uuid")
 
     let projectnum = this.data.projectlength
     wx.setStorageSync("projectnum", projectnum)
     wx.navigateTo({
-      url: "/pages/clients-looking-for-work/new-project-experience/projectexperience",
+      url: "/pages/clients-looking-for-work/new-project-experience/projectexperience?project_count="+this.data.project_count+"&certificate_count="+this.data.certificate_count+"&resume_uuid="+this.data.resume_uuid,
     })
   },
   moreproject() {
@@ -599,7 +599,7 @@ Page({
     let skillnum = this.data.skilllength
     wx.setStorageSync("skillnum", skillnum)
     wx.navigateTo({
-      url: "/pages/clients-looking-for-work/addcertificate/addcertificate",
+      url: "/pages/clients-looking-for-work/addcertificate/addcertificate?project_count="+this.data.project_count+"&certificate_count="+this.data.certificate_count+"&resume_uuid="+this.data.resume_uuid,
     })
   },
   moreskill() {

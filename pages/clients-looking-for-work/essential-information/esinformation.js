@@ -612,19 +612,8 @@ Page({
       success: function (res) {
 
         if (res.data.errcode == 200) {
-          if (app.globalData.showperfection) {
-            that.setData({
-              perfection: true,
-            })
-          } else {
-            remain.remain({
-              tips: res.data.errmsg, callback: function () {
-                wx.navigateBack({
-                  delta: 1
-                })
-              }
-            })
-          }
+          that.subscribeToNews(res)
+
         } else {
           remain.remain({
             tips: res.data.errmsg
@@ -640,7 +629,24 @@ Page({
       }
     })
   },
-
+  subscribeToNews: function(res) {
+    let _this = this;
+    app.subscribeToNews("resume",function(){
+      if (app.globalData.showperfection) {
+        _this.setData({
+          perfection: true,
+        })
+      } else {
+        remain.remain({
+          tips: res.data.errmsg, callback: function () {
+            wx.navigateBack({
+              delta: 1
+            })
+          }
+        })
+      }
+    })
+  },
   getintrodetail() {
 
     let introinfo = wx.getStorageSync("introinfo");

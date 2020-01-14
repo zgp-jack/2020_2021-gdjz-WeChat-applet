@@ -393,14 +393,17 @@ Page({
             success:function(res){
                 let mydata = res.data;
                 if(mydata.errcode == "ok"){
-                    app.returnPrevPage(mydata.errmsg);
+                    _this.subscribeToNews(mydata, userInfo)
                 }else{
                     app.showMyTips(mydata.errmsg);
                 }
             },
-            
         })
-        
+    },
+    subscribeToNews: function(mydata, userInfo) {
+        app.subscribeToNews("auth",function(){
+            app.returnPrevPage(mydata.errmsg);
+        })
     },
     onLoad: function (options) {
         this.initUserInfo();
