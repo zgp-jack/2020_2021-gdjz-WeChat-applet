@@ -879,20 +879,23 @@ App({
         tmplIds: [tmplId.tmplId[type].id],
         success(res) {
           if (res.errMsg == "requestSubscribeMessage:ok") {
-            that.appRequestAction({
-              url: "leaving-message/add-subscribe-msg/",
-              way: "POST",
-              mask: true,
-              params: {
-                userId: userInfo.userId,
-                token: userInfo.token,
-                tokenTime: userInfo.tokenTime,
-                type: tmplId.tmplId[type].type
-              },
-              success: function (res) {
-                callback()
-              },
-            })
+            let status = res[tmplId.tmplId[type].id]
+            if(status == "accept"){
+              that.appRequestAction({
+                url: "leaving-message/add-subscribe-msg/",
+                way: "POST",
+                mask: true,
+                params: {
+                  userId: userInfo.userId,
+                  token: userInfo.token,
+                  tokenTime: userInfo.tokenTime,
+                  type: tmplId.tmplId[type].type
+                },
+                success: function (res) {
+                  callback()
+                },
+              })
+            }
           }
         }
       })
