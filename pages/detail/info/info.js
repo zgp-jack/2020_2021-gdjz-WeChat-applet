@@ -445,7 +445,7 @@ Page({
                   "info.show_complaint.show_complaint": 0,
                   "info.show_complaint.tips_message": "您已投诉该信息，请勿重复操作！"
                 });
-                this.subscribeToNews(mydata)
+                _this.subscribeToNews(mydata)
               }else{
                 wx.showModal({
                     title: '提示',
