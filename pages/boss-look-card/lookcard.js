@@ -218,17 +218,21 @@ Page({
       success: function (res) {
 
         let mydata = res.data;
-        if (mydata.errcode == "ok") _this.setData({
-          showComplain: false,
-          complainInfo: "",
-          "show_complain.show_complain": 0
-        })
-        wx.showModal({
-          title: '提示',
-          content: mydata.errmsg,
-          showCancel: false,
-          confirmText: mydata.errcode == 'pass_complaint' ? '知道了' : '确定'
-        })
+        if (mydata.errcode == "ok"){
+          _this.setData({
+            showComplain: false,
+            complainInfo: "",
+            "show_complain.show_complain": 0
+          })
+          _this.subscribeToNews(mydata)
+        }else{
+          wx.showModal({
+            title: '提示',
+            content: mydata.errmsg,
+            showCancel: false,
+            confirmText: mydata.errcode == 'pass_complaint' ? '知道了' : '确定'
+          })
+        }
       }
     })
   },
@@ -248,42 +252,22 @@ Page({
       })
       return false;
     }
+    this.setData({
+      showComplain: true
+    })
     
-    this.subscribeToNews()
   },
     
-  subscribeToNews: function() {
-    let userInfo = wx.getStorageSync("userInfo");
-    let _this = this;
-    if (wx.canIUse('requestSubscribeMessage') === true) {
-        wx.requestSubscribeMessage({
-            tmplIds: ['uZcoNQz86gAr3P4DYtgt85PnVgMcN_Je27TeHdKhz14'],
-            success(res) {
-              if (res.errMsg == "requestSubscribeMessage:ok") {
-                app.appRequestAction({
-                    url: "leaving-message/add-subscribe-msg/",
-                    way: "POST", 
-                    mask: true,
-                    params: {
-                        userId: userInfo.userId,
-                        token: userInfo.token,
-                        tokenTime: userInfo.tokenTime,
-                        type: 5
-                    },
-                    success: function(res) {
-                        _this.setData({
-                            showComplain: true
-                        })
-                    },
-                })
-              }
-            }
-        })
-    } else {
-        _this.setData({
-            showComplain: true
-        })
-    }
+  subscribeToNews: function(mydata) {
+    app.subscribeToNews("complain",function(){
+      wx.showModal({
+        title: '提示',
+        content: mydata.errmsg,
+        showCancel: false,
+        confirmText:  '确定'
+      })
+    })
+    
   },
   userTapComplai() {
     let userInfo = wx.getStorageSync("userInfo");

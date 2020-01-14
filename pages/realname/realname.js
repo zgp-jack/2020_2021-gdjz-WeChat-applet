@@ -360,7 +360,6 @@ Page({
             success:function(res){
                 let mydata = res.data;
                 if(mydata.errcode == "ok"){
-                    
                     _this.subscribeToNews(mydata, userInfo)
                 }else{
                     app.showMyTips(mydata.errmsg);
@@ -369,31 +368,9 @@ Page({
         })
     },
     subscribeToNews: function(mydata, userInfo) {
-        if (wx.canIUse('requestSubscribeMessage') === true) {
-            wx.requestSubscribeMessage({
-                tmplIds: ['6Kda5y-LXhIySRw-ouD94xMnndZplmvfsmmAZ9kbKp4'],
-                success(res) {
-                    if (res.errMsg == "requestSubscribeMessage:ok") {
-                        app.appRequestAction({
-                            url: "leaving-message/add-subscribe-msg/",
-                            way: "POST", 
-                            mask: true,
-                            params: {
-                                userId: userInfo.userId,
-                                token: userInfo.token,
-                                tokenTime: userInfo.tokenTime,
-                                type: 6
-                            },
-                            success: function(res) {
-                                app.returnPrevPage(mydata.errmsg);
-                            },
-                        })
-                    }
-                }
-            })
-        } else {
-            app.showMyTips(mydata.errmsg);
-        }
+        app.subscribeToNews("auth",function(){
+            app.returnPrevPage(mydata.errmsg);
+        })
     },
     onLoad: function (options) {
         this.initUserInfo();

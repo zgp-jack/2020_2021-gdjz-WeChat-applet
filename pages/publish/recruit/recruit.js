@@ -2,6 +2,7 @@
 const app = getApp();
 let vali = require("../../../utils/v.js");
 let areas = require("../../../utils/area.js");
+const tmplId = require("../../../utils/temp_ids.js");
 
 Page({
 
@@ -545,55 +546,34 @@ Page({
       params: dataJson,
       success: function (res) {
         let mydata = res.data;
-        _this.subscribeToNews(mydata)
+        if(mydata.errcode == "ok"){
+          _this.subscribeToNews(mydata)
+        }else{
+          wx.showModal({
+            title: '温馨提示',
+            content: mydata.errmsg,
+            showCancel: false,
+            confirmText:'知道了'
+          })
+        }
+        
       }
     })
   },
   
     
   subscribeToNews: function(mydata) {
-    let userInfo = wx.getStorageSync("userInfo");
-    if (wx.canIUse('requestSubscribeMessage') === true) {
-        wx.requestSubscribeMessage({
-            tmplIds: ['G68JCpxsyIcKPrZcQWdHTG63T2JpJIz9gXGgKLv1T0A'],
-            success(res) {
-              if (res.errMsg == "requestSubscribeMessage:ok") {
-                app.appRequestAction({
-                    url: "leaving-message/add-subscribe-msg/",
-                    way: "POST", 
-                    mask: true,
-                    params: {
-                        userId: userInfo.userId,
-                        token: userInfo.token,
-                        tokenTime: userInfo.tokenTime,
-                        type: 3
-                    },
-                    success: function(res) {
-                      wx.showModal({
-                        title: (mydata.errcode == "ok") ? '恭喜您' : '提示',
-                        content: mydata.errmsg,
-                        showCancel: false,
-                        confirmText: (mydata.errcode == "ok") ? '确定' : '知道了',
-                        success: function (res) {
-                          if (mydata.errcode == "ok") wx.reLaunch({ url: '/pages/published/published' })
-                        }
-                      })
-                    },
-                })
-              }
-            }
-        })
-    } else {
+    app.subscribeToNews("recruit",function(){
       wx.showModal({
-        title: (mydata.errcode == "ok") ? '恭喜您' : '提示',
+        title: '恭喜您',
         content: mydata.errmsg,
         showCancel: false,
-        confirmText: (mydata.errcode == "ok") ? '确定' : '知道了',
+        confirmText: '确定',
         success: function (res) {
-          if (mydata.errcode == "ok") wx.reLaunch({ url: '/pages/published/published' })
+          wx.reLaunch({ url: '/pages/published/published' })
         }
       })
-    }
+    })
   },
   userEnterTitle: function (e) {
     this.setData({
@@ -705,7 +685,6 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    console.log(options)
     //this.initPickerData();
     let userInfo = wx.getStorageSync("userInfo");
     if (userInfo) {

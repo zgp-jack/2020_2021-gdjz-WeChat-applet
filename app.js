@@ -1,5 +1,6 @@
+const tmplId = require("./utils/temp_ids.js");
 App({
-
+    
     onLaunch: function (e) {
       // try{
       //   if (e.path) this.initUserInfo(e);
@@ -36,8 +37,8 @@ App({
       commonDownloadApp: "http://cdn.yupao.com/miniprogram/images/download.png?t=" + new Date().getTime(),
       commonJixieAd: "http://cdn.yupao.com/miniprogram/images/list-ad-newjixie.png?t=" + new Date().getTime(),
   
-      // apiRequestUrl: "https://miniapi.zhaogong.vrtbbs.com/",
-      apiRequestUrl: "https://newyupaomini.54xiaoshuo.com/",
+      apiRequestUrl: "https://miniapi.zhaogong.vrtbbs.com/",
+      // apiRequestUrl: "https://newyupaomini.54xiaoshuo.com/",
       // apiRequestUrl: "http://miniapi.qsyupao.com/",
       //apiRequestUrl:"http://mini.zhaogongdi.com/",
       apiUploadImg: "https://newyupaomini.54xiaoshuo.com/index/upload/",
@@ -865,5 +866,34 @@ App({
               _this.terminal_type= 'android'
           }
       })
+    },
+    subscribeToNews: function(type,callback) {
+      let userInfo = wx.getStorageSync("userInfo");
+      let that = this;
+      if (wx.canIUse('requestSubscribeMessage') === true) {
+          wx.requestSubscribeMessage({
+              tmplIds: [tmplId.tmplId[type].id],
+              success(res) {
+                if (res.errMsg == "requestSubscribeMessage:ok") {
+                  that.appRequestAction({
+                      url: "leaving-message/add-subscribe-msg/",
+                      way: "POST", 
+                      mask: true,
+                      params: {
+                          userId: userInfo.userId,
+                          token: userInfo.token,
+                          tokenTime: userInfo.tokenTime,
+                          type: tmplId.tmplId[type].type
+                      },
+                      success: function(res) {
+                        callback()
+                      },
+                  })
+                }
+              }
+          })
+      } else {
+        callback()
+      }
     },
   })

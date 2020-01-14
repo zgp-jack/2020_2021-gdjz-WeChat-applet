@@ -376,7 +376,6 @@ Page({
         this.setData({ complainInfo: e.detail.value })
     },
     userTapComplain: function () {
-      console.log(123)
       let userInfo = this.data.userInfo;
       if (!userInfo) {
         app.gotoUserauth();
@@ -395,41 +394,21 @@ Page({
         })
         return false;
       }
-      this.subscribeToNews()
+      this.setData({
+        showComplain: true
+    })
     },
     
     subscribeToNews: function() {
-        let userInfo = wx.getStorageSync("userInfo");
-        let _this = this;
-        if (wx.canIUse('requestSubscribeMessage') === true) {
-            wx.requestSubscribeMessage({
-                tmplIds: ['uZcoNQz86gAr3P4DYtgt85PnVgMcN_Je27TeHdKhz14'],
-                success(res) {
-                    if (res.errMsg == "requestSubscribeMessage:ok") {
-                    app.appRequestAction({
-                        url: "leaving-message/add-subscribe-msg/",
-                        way: "POST", 
-                        mask: true,
-                        params: {
-                            userId: userInfo.userId,
-                            token: userInfo.token,
-                            tokenTime: userInfo.tokenTime,
-                            type: 5
-                        },
-                        success: function(res) {
-                            _this.setData({
-                                showComplain: true
-                            })
-                        },
-                    })
-                }
-                }
-            })
-        } else {
-            _this.setData({
-                showComplain: true
-            })
-        }
+        app.subscribeToNews("complain",function(){
+            wx.showModal({
+                title: '提示',
+                content: mydata.errmsg,
+                showCancel:false,
+                confirmText: '确定'
+              })
+              
+        })
     },
     userCancleComplain: function () {
       this.setData({ showComplain: false, complainInfo:"" })
@@ -466,14 +445,17 @@ Page({
                   "info.show_complaint.show_complaint": 0,
                   "info.show_complaint.tips_message": "您已投诉该信息，请勿重复操作！"
                 });
+                this.subscribeToNews(mydata)
+              }else{
+                wx.showModal({
+                    title: '提示',
+                    content: mydata.errmsg,
+                    showCancel:false,
+                    confirmText: mydata.errcode == 'pass_complaint' ? '知道了' : '确定'
+                  })
               }
                 
-                wx.showModal({
-                  title: '提示',
-                  content: mydata.errmsg,
-                  showCancel:false,
-                  confirmText: mydata.errcode == 'pass_complaint' ? '知道了' : '确定'
-                })
+                
             }
         })
     },
