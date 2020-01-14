@@ -288,6 +288,7 @@ Page({
     this.closeAllSelect();
     wx.setStorageSync("areaId", id)
     wx.setStorageSync("areaText", areaText)
+    wx.setStorageSync("showCity", id)
   },
 
   closeAllSelect: function () {
@@ -605,21 +606,32 @@ Page({
   valiFilterProvince: function () {
     let _this = this;
     let areaId = wx.getStorageSync("areaId");
+    let showCity = wx.getStorageSync("showCity");
+    let areaText = wx.getStorageSync("areaText");
     if (areaId == "1") {
       _this.setData({ areaText: "全国" })
       _this.initAreaInfo();
       return false;
     }
-    app.appRequestAction({
-      url: "resume/get-resume-province/",
-      hideLoading: true,
-      params: { area_id: areaId },
-      success: function (res) {
-        let mydata = res.data;
-        _this.setData({ areaText: mydata.provinceName })
+    if (showCity && showCity == areaId ) {
+      if (areaText) {
+        _this.setData({ areaText: areaText })
         _this.initAreaInfo();
       }
-    });
+
+    }else{
+      app.appRequestAction({
+        url: "resume/get-resume-province/",
+        hideLoading: true,
+        params: { area_id: areaId },
+        success: function (res) {
+          let mydata = res.data;
+          _this.setData({ areaText: mydata.provinceName })
+          _this.initAreaInfo();
+        }
+      });
+
+    }
   },
 
   //新版本搜索
