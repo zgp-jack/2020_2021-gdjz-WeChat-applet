@@ -5,6 +5,8 @@ Page({
 
   /**/
   data: {
+    realNames: app.globalData.apiImgUrl + 'newresume-infolist-ysm.png?t=1',
+    authentication: app.globalData.apiImgUrl + 'newresume-infolist-jnz.png?t=1',
     unitid: app.globalData.unitid,
     homebtnImg: app.globalData.apiImgUrl + "yp-return-jobinfo.png",
     downward: app.globalData.apiImgUrl + "lpy/downward.png",
@@ -91,7 +93,9 @@ Page({
     introshow: true,
     sharedeke: true,
     options: {},
-    show_complain: {}
+    show_complain: {},
+    authenticationimg: false,
+    certificate_show: false
   },
 
   previewImage: function (e) {
@@ -448,6 +452,8 @@ Page({
             is_end: mydata.info.hasOwnProperty("is_end") ? mydata.info.is_end : "",
             examine: false,
             show_complain: mydata.info.hasOwnProperty("show_complain") ? mydata.info.show_complain : {},
+            certificate_show: mydata.info.hasOwnProperty("certificate_show") ? mydata.info.certificate_show : "",
+            authenticationimg: mydata.info.hasOwnProperty("authentication") ? mydata.info.authentication : "",
           })
 
 

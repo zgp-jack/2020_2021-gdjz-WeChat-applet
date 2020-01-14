@@ -1,8 +1,11 @@
 <view class='index-pullareabox  index-pullareabox-active'>
-  <!-- <view class='index-area-tips overwords'>当前选择城市：
-    <text>{{ areaText }}</text>
-  </view> -->
+<!-- <view class="index-area-tips">
+  <view class='overwordsarea'>当前选择城市：
+    <view wx:for="{{areaText}}" wx:key="{{ index }}" class="index-area" data-id="{{ item }}"   data-index="{{ index }}" bindtap="deletelable"><text  class="index-area-otext">{{ item.name }} </text><image class="deleteimg"   src="{{imgDetelte}}" ></image></view>
+  </view>
+</view> -->
   <view class='index-area-body'>
+  <!--  -->
     <!-- <view class='index-area-item'>
       <text class='area-header-words'>请选择置顶范围（省/市）：</text>
       <view class='area-body-content clearfix'>
@@ -12,24 +15,19 @@
         </view>
       </view>
     </view> -->
-    <view class='index-area-item' wx:for="{{ areadata }}" wx:key="{{ index }}">
-      <text wx:if="{{index == 0}}" class='area-header-words'>请选择置顶范围（省/市）：</text>
-      <view wx:if="{{index == 0}}" class='area-body-content clearfix'>
-        <view class="gpsposi" wx:for="{{ item }}" wx:key="{{ index }}" wx:if="{{item.pid != 0}}">
-          <view class='overwords' data-id="{{ gpsOrientation.id }}" data-area="{{ gpsOrientation.name }}" data-pname="{{ gpsOrientation.ad_name }}" bindtap='chooseThisCtiy'>
-            {{ item.city }}</view>
-        </view>
-      </view>
-      <text class='area-header-words' wx:if="{{index != 0}}">{{ item[0].city }}</text>
-      <view class='area-body-content clearfix' wx:if="{{index != 0}}">
-        <view wx:for="{{ item }}" wx:key="{{ index }}" wx:if="{{item.pid != 0}}">
-          <text class='overwords' data-id="{{ item.id }}" data-area="{{ item.city }}" data-pname="{{ item.ad_name }}" bindtap='chooseThisCtiy'>{{ item.city }}</text>
+              <view class='area-header-words'>请选择置顶范围（省）：</view>  
+    <view class='index-area-item'>
+
+      <view class='area-body-content clearfix'>
+        <view wx:for="{{ areadata }}" wx:key="{{ index }}">
+          <text class="{{item.selected == 2 ?'body-content':'body-contentword'}}" data-id="{{ item }}"  bindtap='chooseThisCtiy'>{{ item.name }}</text>
         </view>
       </view>
     </view>
-    <view class="obtn">
-      <button>确认选择</button>
-    </view>
+
   </view>
 
 </view>
+    <view class="obtn">
+      <button bindtap="seleted">确认选择</button>
+    </view>

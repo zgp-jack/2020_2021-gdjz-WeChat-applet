@@ -11,7 +11,10 @@ Page({
    * newresume-experience.png audit.png baseinform headerimg uuid age chooseImage onShareAppMessage checkfourf age showskill
    */
   data: {
-    ruleimage: app.globalData.apiImgUrl + "lpy/newresume-rank.png",
+    topoimage: app.globalData.apiImgUrl + 'lpy/resume-settop-daytips.png',
+    realNames: app.globalData.apiImgUrl + 'newresume-infolist-ysm.png?t=1',
+    authentication: app.globalData.apiImgUrl + 'newresume-infolist-jnz.png?t=1',
+    ruleimage: app.globalData.apiImgUrl + "lpy/biaptu.png",
     baseinform: app.globalData.apiImgUrl + "lpy/jichu.png",
     workingposition: app.globalData.apiImgUrl + "lpy/workdetail.png",
     subscripted: app.globalData.apiImgUrl + 'select.png',
@@ -27,6 +30,7 @@ Page({
     newresumeskill: app.globalData.apiImgUrl + "lpy/newresume-skill.png",
     pvw: app.globalData.apiImgUrl + "lpy/bottom-one.png",
     participation: app.globalData.apiImgUrl + "lpy/bottom-two.png",
+    topimage: app.globalData.apiImgUrl + "lpy/personaltop.png",
     userInfo: true,
     certificate_count: 0,
     project_count: 0,
@@ -93,6 +97,7 @@ Page({
     fail_certificate: "",
     fail_project: "",
     display: "none",
+    top_display: "none",
     popup: "",
     move: true,
     show_tips: "",
@@ -100,8 +105,203 @@ Page({
     age: [],
     sort_flag: "",
     ranking: "",
-    rankjump: ""
+    rankjump: "",
+    resume_top: [],
+    top_status: [],
+    indextop: 0,
+    top_tips_string: "",
+    selectDatatop: [],
+    selectktop: [],
+    endtime: "",
+    has_top: 0,
+    is_show_tips: "",
+    authenticationimg:false,
+    certificate_show:false,
+    top_status_one:"",
+    topshow:false,
+    showindextop:false
   },
+
+
+  modifytop() {
+    let that = this;
+    let nowtime = new Date().getTime();
+    let endtime = this.data.endtime;
+    let contentom = that.data.top_tips_string
+    if (nowtime - 0 > nowtime - 0) {
+      wx.showModal({
+        title: '温馨提示',
+        content: '您的置顶已过期',
+        showCancel: false,
+        success(res) {
+          that.getdetail()
+        }
+      })
+      return
+    }
+    if (that.data.is_show_tips == 1) {
+      wx.showModal({
+        title: '温馨提示',
+        content: contentom,
+        showCancel: false,
+        success(res) {
+          that.getdetail()
+        }
+      })
+      return
+    }
+    let all = that.data.resume_top;
+    let area = ''
+    let maxnumber = ''
+    let firstprovincenum = ''
+    if (all.hasOwnProperty('top_provinces_str')) {
+      area = JSON.stringify(all.top_provinces_str)
+    }
+    let modify = "modify";
+    if (all.hasOwnProperty('max_number')) {
+      maxnumber = all.max_number;
+    }
+    if (all.hasOwnProperty('first_province_num')) {
+      firstprovincenum = all.first_province_num;
+    }
+   
+    wx.navigateTo({
+      url: `/pages/clients-looking-for-work/the-sticky-rule/stickyrule?area=${area}&modify=${modify}&maxnumber=${maxnumber}&firstprovincenum=${firstprovincenum}`,
+    })
+
+  },
+  selectTaptop() {
+    let that = this;
+    let nowtime = new Date().getTime();
+    let endtime = this.data.endtime;
+    if (nowtime - 0 > nowtime - 0) {
+      wx.showModal({
+        title: '温馨提示',
+        content: '您的置顶已过期',
+        showCancel: false,
+        success(res) {
+          that.getdetail()
+        }
+      })
+      return
+    }
+
+    let userInfo = wx.getStorageSync("userInfo");
+    if (!userInfo) return false;
+    let userUuid = wx.getStorageSync("userUuid");
+    let detail = {
+      userId: userInfo.userId,
+      token: userInfo.token,
+      tokenTime: userInfo.tokenTime,
+      uuid: userUuid,
+    }
+    let selectdata = [];
+    let selectdataId = [];
+    for (let i = 0; i < this.data.top_status.length; i++) {
+      selectdata.push(this.data.top_status[i].name)
+    }
+    for (let i = 0; i < this.data.top_status.length; i++) {
+      selectdataId.push(this.data.top_status[i].id)
+    }
+    let contentom = that.data.top_tips_string
+
+    wx.showActionSheet({
+
+      itemList: selectdata,
+      success(res) {
+
+        if (that.data.indextop == res.tapIndex) {
+          return
+        }
+        if (that.data.indextop == 1 && that.data.is_show_tips == 1) {
+          wx.showModal({
+            title: '温馨提示',
+            content: contentom,
+            showCancel: false,
+            success(res) {
+              that.getdetail()
+            }
+          })
+          return
+        }
+        that.setData({
+          indextop: res.tapIndex
+        })
+
+        app.appRequestAction({
+          url: 'resumes/change-top-status/',
+          way: 'POST',
+          params: detail,
+          success(res) {
+       
+            let mydata = res.data;
+            console.log(mydata.data.top_data)
+            if (mydata.errcode == "ok") {
+              
+              that.getdetail()
+              
+              that.setData({
+                top_status_one: mydata.data.top_data.top_status
+              })
+              wx.showModal({
+                title: '温馨提示',
+                content: res.data.errmsg,
+                showCancel: false,
+                success(res) { }
+              })
+            } else {
+              wx.showModal({
+                title: '温馨提示',
+                content: res.data.errmsg,
+                showCancel: false,
+                success(res) { }
+              })
+            }
+          }
+        })
+      },
+      fail(res) {
+        // console.log(res)
+        // app.showMyTips("修改失败");
+      }
+    })
+
+  },
+
+  thestickyrule() {
+    // ressonone
+    let that = this;
+    let contentom = that.data.top_tips_string
+    
+    if (that.data.showtop) {
+      wx.showModal({
+        title: '温馨提示',
+        content: contentom,
+        confirmText: `去添加`,
+        success(res) {
+          if (res.confirm) {
+            that.toperfect()
+          } else if (res.cancel) {
+          }
+        }
+      })
+      return
+    } else if (that.data.is_show_tips == 1) {
+      wx.showModal({
+        title: '温馨提示',
+        content: contentom,
+        showCancel: false,
+        success(res) {
+        }
+      })
+      return
+    } else {
+      wx.navigateTo({
+        url: `/pages/clients-looking-for-work/finding-top/findingtop`,
+      })
+    }
+  },
+
   previewImage: function (e) {
 
     let url = e.currentTarget.dataset.url;
@@ -138,7 +338,7 @@ Page({
       wx.navigateBack({
         delta: 1
       })
-    }else{
+    } else {
       wx.navigateTo({
         url: `/pages/clients-looking-for-work/ranking-rules/ranking-rules`,
       })
@@ -204,7 +404,7 @@ Page({
     })
     let commonShareImg = app.globalData.commonShareImg;
     let userInfo = wx.getStorageSync("userInfo");
-    let refId = userInfo?userInfo.userId:"";
+    let refId = userInfo ? userInfo.userId : "";
     let uuid = this.data.resume_uuid;
     let commonShareTips = app.globalData.commonShareTips;
     if (userInfo && that.data.checkonef == 2) {
@@ -611,7 +811,44 @@ Page({
             fail_project: mydata.hasOwnProperty("fail_project") ? mydata.fail_project : "",
             sort_flag: mydata.info.hasOwnProperty("sort_flag") ? mydata.info.sort_flag : "",
             ranking: mydata.info.hasOwnProperty("ranking") ? mydata.info.ranking : "",
+            certificate_show: mydata.info.hasOwnProperty("certificate_show") ? mydata.info.certificate_show : "",
+            authenticationimg: mydata.info.hasOwnProperty("authentication") ? mydata.info.authentication : "",
+            resume_top: mydata.hasOwnProperty("resume_top") ? mydata.resume_top : [],
+            top_status: mydata.hasOwnProperty("top_status") ? mydata.top_status : []
           })
+          if (mydata.hasOwnProperty("resume_top")) {
+            if (mydata.resume_top.is_top == 1) {
+              that.setData({
+                indextop: 0,
+              })
+            } else if (mydata.resume_top.is_top == 0) {
+              that.setData({
+                indextop: 1,
+              })
+            } else {
+              that.setData({
+                showindextop: 2,
+              })
+            }
+          }
+
+          let selectDtop = Object.values(mydata.top_status)
+          let selectktop = Object.keys(mydata.top_status)
+          that.setData({
+            selectDatatop: selectDtop,
+            selectktop: selectktop
+          })
+
+          if (mydata.hasOwnProperty("resume_top")) {
+
+            that.setData({
+              top_tips_string: mydata.resume_top.top_tips_string,
+              endtime: mydata.resume_top.end_time,
+              has_top: mydata.resume_top.has_top ? mydata.resume_top.has_top : 0,
+              is_show_tips: mydata.resume_top.is_show_tips,
+            })
+           
+          }
           if (that.data.showtop) {
             app.globalData.showperfection = true;
           } else {
@@ -771,10 +1008,12 @@ Page({
                 resson: [that.data.skillbooks[0]],
               })
               app.globalData.showdetail = false
+              
             }
           }
           that.redorblue()
           that.showskill();
+ 
         } else {
           wx.showModal({
             title: '温馨提示',
@@ -784,6 +1023,7 @@ Page({
           })
           return
         }
+        that.gettiner()
       },
       fail: function (err) {
         wx.showModal({
@@ -873,9 +1113,9 @@ Page({
    * 生命周期函数--监听页面加载
    */
   cardjump(options) {
-    
+
     if (options.hasOwnProperty("rankjump")) {
-      console.log(options)
+    
       this.setData({
         rankjump: options.rankjump
       })
@@ -894,6 +1134,50 @@ Page({
   showskill() {
     this.setData({
       showskill: false
+    })
+  },
+  // 86400000
+  gettiner(){
+
+    let that = this;
+    let toptimer = wx.getStorageSync("toptimer");
+    let onoff = that.data.showindextop == 2 || that.data.has_top == 0;
+    let timer = new Date().getTime();
+    let top_onoff = that.data.checkonef == "0" || that.data.checktwof == "0" || that.data.checkthreef == "0" || that.data.checkfourf == "0"
+    if (!toptimer && !top_onoff && !that.data.showtop && onoff && !that.data.checkone && that.data.index == 0){
+       app.globalData.topshow = true;
+       that.setData({
+         topshow: app.globalData.topshow,
+         top_display: "block",
+       })
+       wx.setStorageSync("toptimer", timer)
+    }else{
+      if ((timer - toptimer) / 86400000 >= 0.00069 && !top_onoff && !that.data.showtop && onoff && !that.data.checkone && that.data.index == 0){
+        app.globalData.topshow = true;
+        that.setData({
+          topshow: app.globalData.topshow,
+          top_display: "block",
+        })
+        wx.setStorageSync("toptimer", timer)
+      }
+    }
+
+  },
+  topvertify(){
+    let that = this;
+    app.globalData.topshow = false;
+    that.setData({
+      topshow: app.globalData.topshow,
+      top_display: "none",
+    })
+    that.thestickyrule()
+  },
+  topvertifyquit(){
+    let that = this;
+    app.globalData.topshow = false;
+    that.setData({
+      topshow: app.globalData.topshow,
+      top_display: "none",
     })
   },
   /**

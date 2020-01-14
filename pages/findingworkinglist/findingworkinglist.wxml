@@ -49,9 +49,12 @@
 <!-- 筛选条件列表 -->
 <view class='user-choose-shade {{ (showListsInfo != "0") ? "user-choose-shade-active":"" }}' bindtap='closeAllSelect'>
   <view class='user-choose-item {{ (showListsInfo == "1") ? "user-choose-item-active" : "" }}' wx:if="{{ showListsInfo == '1' }}">
-    <view class='filtrate-list-item mybottomborder overwords {{ (province == index) ? "filtrate-list-active" : "" }}' wx:for="{{ fillterArea }}" wx:key="{{ index }}" catchtap='userChooseProvince' data-haschild="{{ item.has_children }}" data-index="{{ index }}"
+    <view class='filtrate-list-item mybottomborder overwords {{ (province == index) ? "filtrate-list-active" : "" }}' wx:for="{{ fillterArea }}" wx:key="{{ index }}" bindtouchstart="touchStart" bindtouchend="touchEnd" catchtap='userChooseProvince' data-haschild="{{ item.has_children }}" data-index="{{ index }}"
       data-id='{{ item.id }}' data-area="{{ item.name }}" data-pname="{{ item.ad_name }}">
       <text>{{ item.name }}</text>
+                 <view class='filtrate-item-lists {{ (province == index) ? "filtrate-item-lists-active" : "" }}' wx:if="{{ item.has_children }}">
+                <view class='filtrate-item-info mybottomborder overwords {{ (userCity == item.id) ? "filtrate-item-info-active" : "" }}' wx:for="{{ item.children }}" wx:key="{{ index }}" catchtap='userChooseCity' data-id="{{ item.id }}"   data-area="{{ item.name }}">{{ item.name }}</view>
+            </view>
     </view>
   </view>
 
@@ -85,8 +88,8 @@
     <view class='yupao-lists-wxinfo'>
       <view class='yupao-lists-wxtips'>
         <text class='yupao-lists-tips'>公告：</text>加客服微信号:
-        <text data-wechat="{{ wechat }}" bindtap='clipboardWechat'>{{ wechat }}</text> 拉你进工人微信群。客服电话:
-        <text bindtap='callThisPhone' data-phone="{{ phone }}">{{ phone }}</text>
+        <text data-wechat="{{ wechat }}" bindtap='clipboardWechat'>{{ wechat }}</text><text class="phoneer" data-wechat="{{ wechat }}" bindtap='clipboardWechat'>复制</text> 拉你进工人微信群。客服电话:
+        <text bindtap='callThisPhone' data-phone="{{ phone }}">{{ phone }}</text><text class="phoneer" bindtap='callThisPhone' data-phone="{{ phone }}">呼叫</text>
       </view>
     </view>
     <view class='yupao-lists-noticetips'>
@@ -128,7 +131,7 @@
                 </view>
 
 
-                <image wx:if="{{item.authentication == 2}}" src="{{realNames}}"></image>
+                <!-- <image wx:if="{{item.authentication == 2}}" src="{{realNames}}"></image> -->
 
 
 
@@ -146,6 +149,8 @@
             </view>
             <view class="listsboxshow" wx:if="{{item.type}}">{{item.type}}</view>
           </view>
+            <text class="listsboxstyru" catchtap="jumptop" wx:if="{{item.resume_top == 1}}">我要置顶</text>
+            <image class="listsboxoimg" src="{{toptown}}" wx:if="{{item.resume_top == 1}}"></image>
         </view>
         <view class="listsboxlable">
           <view class="listsboxlableone" wx:for="{{item.occupations}}" wx:key="{{index}}">{{item}}</view>
@@ -164,7 +169,7 @@
             </view>
           </view>
           <view class="listsboxlocaltwo">
-            <text class="listsboxtime" wx:if="{{item.time}}">{{item.time}}</text>
+            <!-- <text class="listsboxtime" wx:if="{{item.time}}">{{item.time}}</text> -->
           </view>
         </view>
       </view>

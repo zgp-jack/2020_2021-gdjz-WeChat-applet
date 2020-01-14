@@ -17,26 +17,58 @@
           <text class="view_num">{{view_num}}</text>
         </view>
         <view class="isline" wx:if="{{showcomplete}}">
-          <button class="shareliveone" bindtap="completeall" >名片越完善 找活越容易,马上去完善>>
+          <button class="shareliveone" bindtap="completeall">名片越完善 找活越容易,马上去完善>>
 
           </button>
           <text class="sontwoview">浏览次数</text>
         </view>
         <view class="isline" wx:if="{{!showcomplete}}">
-          <button class="sharelive" open-type='share' >分享找活名片,可提升名片排名度
+          <button class="sharelive" open-type='share'>分享找活名片,可提升名片排名度
           </button>
           <text class="sontwoview">浏览次数</text>
         </view>
       </view>
     </view>
     <view class="findingnamecardonesontwo">
-       <view class="rule-detail">
-         <image src="{{ruleimage}}"></image>
-         <text>我的排名点：{{sort_flag}}</text>
-       </view>
-       <view class="rule-odetail" bindtap="rulepoit">
-         马上去提升排名>>
-       </view>
+      <view class="rule-detail">
+        <image src="{{ruleimage}}"></image>
+        <text>我的排名点：{{sort_flag}}</text>
+      </view>
+      <view class="rule-odetail" bindtap="rulepoit">
+        马上去提升排名>>
+      </view>
+    </view>
+    <view class="{{resume_top.is_top == 2||has_top == 0?'findingnamecardonesontwo':'findingnamecardonesontwot'}}">
+      <view class="rule-detail">
+        <image class="rule-oimg" src="{{topimage}}"></image>
+        <text>我的置顶：</text><text class="rule-status" wx:if="{{resume_top.is_top == 2}}">置顶已过期</text>
+      </view>
+      <view class="rule-odetail" bindtap="thestickyrule" wx:if="{{has_top == 0||resume_top.is_top == 2}}">
+        马上去置顶>>
+      </view>
+      <view class='topselect_box' wx:if="{{has_top != 0 &&resume_top.is_top != 2}}">
+        <view class='select' catchtap='selectTaptop'>
+          <text class="select_text" wx:if="{{has_top == 0 ||resume_top.is_top == 0}}">未置顶</text>
+          <text class='select_text' wx:if="{{resume_top.is_top == 1}}">置顶中</text>
+          <image class='select_img' src='{{subscripted}}'></image>
+        </view>
+      </view>
+    </view>
+    <view class="toptime" wx:if="{{has_top != 0&&resume_top.is_top != 2}}">
+      <view>
+        <text>置顶地区：</text>
+        <text class="proviceop" wx:for="{{resume_top.top_provinces_str}}" wx:key="{{index}}">{{item.name}}</text>
+      </view>
+    </view>
+    <view class="toptime" wx:if="{{has_top != 0&&resume_top.is_top != 2}}">
+      <view>
+        <text>置顶时间：</text>
+        <text>{{resume_top.start_time_str}} ~ {{resume_top.end_time_str}}</text>
+      </view>
+    </view>
+    <view class="topdetail" wx:if="{{has_top != 0&&resume_top.is_top != 2}}"
+    bindtap="modifytop">
+      <text>点击修改找活置顶信息>></text>
     </view>
   </view>
 
@@ -62,7 +94,7 @@
         <view class='select_box'>
           <view class='select' catchtap='selectTap' wx:if="{{passre&&nopassre}}">
             <text class='select_text' wx:if="{{index ==  0}}">{{selectData[index].name}}</text>
-            <text class='select_textone' wx:if="{{index==  1}}">{{selectData[index].name}}</text>
+            <text class='select_text' wx:if="{{index==  1}}">{{selectData[index].name}}</text>
             <image class='select_img' src='{{subscripted}}' wx:if="{{checkstatus}}"></image>
           </view>
           <view class='select' catchtap='selectTap' wx:if="{{!passre&&nopassre}}">
@@ -98,6 +130,8 @@
             </view>
             <view class="oimgone">
               <text class="otext">{{name}}</text>
+                <image wx:if="{{authenticationimg == 2}}" src="{{realNames}}"></image>
+                <image wx:if="{{certificate_show ==1}}" src="{{authentication}}"></image>
               <view class="otextone">
                 <text>{{sex}}</text>
                 <text class="{{sex?'ochange':''}}" wx:if="{{age}}">{{age}}</text>
@@ -448,7 +482,7 @@
         提示
       </view>
       <view class="textdetail">
-        您的
+       您的
         <text class="popup">{{popup}}</text>未审核通过，请修改后再进行提交
       </view>
       <view class="buttontext" catchtap="vertify">
@@ -456,8 +490,30 @@
       </view>
     </view>
   </view>
-  <view class="bg" bindtap="obtn" style='display:{{display}}' catchtouchmove="{{move}}"></view>
 
+<!-- wx:if="{{topshow}}" -->
+  <view class="modalDlg" wx:if="{{topshow}}">
+    <view class="modalDlgone">
+    </view>
+    <view class="text">
+      <image src="{{topoimage}}"></image>
+      <view class="otext">
+        提示
+      </view>
+      <view class="otextdetail">
+       马上去置顶提升找活名片排名，让更多老板看到您的找活名片
+      </view>
+      <view class="topwhite"></view>
+       <view class="buttontexttop" catchtap="topvertifyquit">
+        稍后再说
+      </view>
+      <view class="buttontexttoptwo" catchtap="topvertify">
+        去置顶
+      </view>
+    </view>
+  </view>
+  <view class="bg" bindtap="obtn" style='display:{{display}}' catchtouchmove="{{move}}"></view>
+  <view class="bg"  style='display:{{top_display}}' catchtouchmove="{{move}}"></view>
   <view style="height: 118rpx;">
   </view>
 </view>

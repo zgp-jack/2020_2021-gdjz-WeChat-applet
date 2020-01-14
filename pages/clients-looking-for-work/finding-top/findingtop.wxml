@@ -1,26 +1,34 @@
 <view class="topall">
   <view class="scope">
-    <text>当前选择指定范围</text>
+    <text>当前选择置顶范围</text>
   </view>
-  <view class="pointscope">
+  <view class="scopedetail">
+    <view wx:for="{{areaTextcrum}}" bindtap="deletelable" wx:key="{{index}}" data-index="{{ index }}"  >
+       {{item.name}} <image class="deleteimg"  data-id="{{ item }}"  src="{{imgDetelte}}"></image>
+    </view>
+    <view class="obttn" bindtap="jumpdetail"  wx:if="{{areaTextcrum.length > 0&&areaTextcrum.length<max_number}}">
+     添加更多
+    </view>
+  </view>
+  <view wx:if="{{areaTextcrum.length == 0}}" class="pointscope" bindtap="jumpstickyrule">
     <text>点击选择置顶范围></text>
   </view>
   <view class="scopenum">
     <text>请输入置顶天数</text>
   </view>
 
-  <view class="day">
+  <view class="dayall">
     <view class="daynum">
       <text>置顶天数</text>
-      <input type="text" placeholder="请输入天数"></input>
+      <input type="number" maxlength="2" placeholder="请输入置顶天数" value="{{daynumber}}" bindinput="dayclocy"></input>
     </view>
     <view class="daynum">
       <text>消耗积分</text>
-      <input type="text" placeholder="请输入积分"></input>
+      <view>{{point}}分</view>
     </view>
   </view>
 
-  <view class="submitscope">
+  <view class="submitscope"  bindtap="submitscop">
     <text>确定置顶</text>
   </view>
 
@@ -29,8 +37,13 @@
   </view>
 
   <view class="bottom">
-    <view>1、置顶一个省或直辖市每天消耗20积分，置顶一个市每天消耗5积分。</view>
-    <view>2、最多可选择5个省、五个市进行置顶；</view>
-    <view>3、如有任何疑问欢迎致电鱼泡客服，电话：400-833-1578</view>
+    <view wx:for="{{top_rules}}" wx:key="{{index}}">{{item}}</view>
   </view>
+</view>
+<view class="common-userauth" wx:if="{{ !userInfo }}">
+  <image src='{{ icon }}' class='userauth-topicon'></image>
+  <view class='userauth-title'>登录鱼泡网</view>
+  <view class='userauth-words'>招工 找活抢先一步，用的安心 赚的开心。</view>
+  <button class='userauth-btn userauth-sure-btn' open-type="getUserInfo" bindgetuserinfo='bindGetUserInfo'>微信授权登录</button>
+  <button class='userauth-btn  userauth-back-btn' bindtap='returnPrevPage'>返回上一页</button>
 </view>

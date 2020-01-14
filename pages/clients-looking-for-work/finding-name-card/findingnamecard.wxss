@@ -196,6 +196,16 @@ padding-right: 150rpx;
   align-items: center;
   padding: 18rpx 0;
 }
+.findingnamecardonesontwot {
+  margin-left: 14rpx;
+  margin-right: 30rpx;
+  border-top: 1rpx dashed #b3b3b2;
+  border-bottom: 1rpx dashed #b3b3b2;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 18rpx 0;
+}
 .rule-detail{
   display: flex;
   align-items: center;
@@ -1444,6 +1454,8 @@ margin-top: 4rpx;
   /* height: 290rpx; */
   font-size: 32rpx;
   position: relative;
+  text-align: center;
+
 }
 
 .text .otext {
@@ -1452,7 +1464,8 @@ margin-top: 4rpx;
   font-weight: bold;
   /* margin: 20rpx auto; */
   text-align: center;
-  margin-top: 20rpx;
+  margin-top: 6rpx;
+
 }
 
 .text .textdetail {
@@ -1462,6 +1475,14 @@ margin-top: 4rpx;
   text-align: center;
   margin-bottom: 40rpx;
   margin-top: 48rpx;
+}
+.text .otextdetail{
+    font-size: 30rpx;
+  width: 86%;
+  margin: 0 auto;
+  text-align: center;
+  margin-bottom: 40rpx;
+  margin-top: 8rpx;
 }
 
 .buttontext {
@@ -1476,7 +1497,39 @@ margin-top: 4rpx;
   border-radius: 18rpx;
   margin-bottom: 50rpx;
 }
+.buttontexttop {
+  /* margin: 0 auto; */
+  /* display: inline-block; */
+  position: absolute;
+  width: 200rpx;
+  height: 74rpx;
+  background: rgb(200, 200, 201);
+  color: white;
+  font-size: 32rpx;
+  text-align: center;
+  line-height: 74rpx;
+  border-radius: 18rpx;
+  bottom: 50rpx;
+    left: 40rpx;
+}
+.buttontexttoptwo{
+    /* display: inline-block; */
+    position: absolute;
+  width: 200rpx;
+  height: 74rpx;
+  background: #09f;
+  color: white;
+  font-size: 32rpx;
+  text-align: center;
+  line-height: 74rpx;
+  border-radius: 18rpx;
+  bottom: 50rpx;
+  right: 40rpx;
 
+}
+.topwhite{
+  height: 120rpx;
+}
 .bg {
   position: fixed;
   top: 0%;
@@ -1656,7 +1709,91 @@ margin-top: 4rpx;
   background:transparent;
   box-shadow: none;
 }
+.rule-detail .rule-oimg{
+width: 34rpx;
+height: 36rpx;
 
+}
+.topselect_box{
+  width: 30%;
+height: 70%;
+border-radius: 14rpx;
+position: relative;
+/* margin-top: 28rpx; */
+margin-right: 1.5%;
+font-size: 22rpx;
+
+}
+.topselect_box .select {
+  display: flex;
+  justify-content: space-around;
+}
+
+.topselect_box .select .select_text {
+  font-size: 30rpx;
+  color: #ff1800;
+  line-height: 28rpx;
+  text-align: right;
+  flex: 1;
+  padding-right: 6rpx;
+
+}
+.topselect_box .select .select_textone {
+  font-size: 30rpx;
+  color: #078f1e;
+  line-height: 28rpx;
+  text-align: right;
+  flex: 1;
+  padding-right: 6rpx;
+
+}
+
+.topselect_box .select image {
+width: 24rpx;
+height: 22rpx;
+display: block;
+margin-top: 4rpx;
+
+  transition: transform 0.3s;
+}
+.toptime{
+  margin-top: 10rpx;
+  font-size: 30rpx;
+  color: #6F6C6C;
+  line-height: 40rpx;
+}
+.toptime view{
+  margin-left: 58rpx;
+  margin-right: 30rpx;
+}
+.toptime .proviceop{
+   margin-right: 12rpx;
+}
+.toptime .proviceop:last-child{
+   margin-right: 0rpx;
+}
+.topdetail{
+  color: #0099ff;
+  font-size: 30rpx;
+  margin-left: 58rpx;
+  padding: 22rpx 0;
+}
+.rule-detail .rule-status{
+padding-left: 0rpx;
+
+}
+
+  .oimgone image{
+  width: 74rpx;
+height: 26rpx;
+margin-left: 14rpx;
+
+  }
+  .text  image{
+  width: 100rpx;
+height: 80rpx;
+margin-top: 10rpx;
+  }
 /*oworkotext cardsix  tworkotextonetu.cardnine .all cardsixsixnum  cardeightsixnum bg showtop nopass findingnamecardsixtwo .workotextone oworkotextonetu cardtwoif workotextone alllabletu
 #7A7A7A
 workotype oworkotextonetu workotextone cardotext oworkotext cworkotype oworkotext ocworkotype ocworkotyp content link cardseven workotextone contentone*/

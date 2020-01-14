@@ -8,6 +8,8 @@ Page({
    * 页面的初始数据 nation view_num occupations introduce workingyears procity introduce fail_certificate 
    */
   data: {
+    realNames: app.globalData.apiImgUrl + 'newresume-infolist-ysm.png?t=1',
+    authentication: app.globalData.apiImgUrl + 'newresume-infolist-jnz.png?t=1',
     baseinform: app.globalData.apiImgUrl + "newresume-catimg.png",
     workingposition: app.globalData.apiImgUrl + "lpy/workdetail.png",
     subscripted: app.globalData.apiImgUrl + "lpy/bottomimg.png",
@@ -80,6 +82,8 @@ Page({
     introshow:true,
     fail_certificate: "",
     fail_project: "",
+    authenticationimg: false,
+    certificate_show: false
   },
   errImg: function () {
     // let obj = `headerimg`;
@@ -287,7 +291,9 @@ Page({
             note: mydata.info.hasOwnProperty("note") ? mydata.info.note : "",
             fail_certificate: mydata.hasOwnProperty("fail_certificate") ? mydata.fail_certificate : "",
             fail_project: mydata.hasOwnProperty("fail_project") ? mydata.fail_project : "",
-            experience_str: mydata.introduces.hasOwnProperty("experience_str") ? mydata.introduces.experience_str : ""
+            experience_str: mydata.introduces.hasOwnProperty("experience_str") ? mydata.introduces.experience_str : "",
+            certificate_show: mydata.info.hasOwnProperty("certificate_show") ? mydata.info.certificate_show : "",
+            authenticationimg: mydata.info.hasOwnProperty("authentication") ? mydata.info.authentication : "",
           })
           
           if (that.data.introduce === "") {

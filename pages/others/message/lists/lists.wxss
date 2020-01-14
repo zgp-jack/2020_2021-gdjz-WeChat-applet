@@ -1,4 +1,5 @@
 @import "../../../userauth/userauth.wxss";
+@import "../../../../utils/phone.wxss";
 page {
     position: relative;
     width: 100%;

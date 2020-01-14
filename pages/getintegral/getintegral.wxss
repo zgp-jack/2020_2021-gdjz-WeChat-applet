@@ -1,3 +1,4 @@
+@import "../../utils/phone.wxss";
 .getintegral-content{
     position: relative;
     padding: 15rpx 27rpx 0;
