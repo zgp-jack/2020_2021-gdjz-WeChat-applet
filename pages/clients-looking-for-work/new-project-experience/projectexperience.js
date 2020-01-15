@@ -392,20 +392,7 @@ Page({
       failTitle: "操作失败，请稍后重试！",
       success(res) {
         if(res.data.errcode == "ok"){
-          remain.remain({
-            tips: res.data.errmsg, callback: function () {
-              if (that.data.ranktypes == "ranking") {
-                wx.redirectTo({
-                  url: '/pages/clients-looking-for-work/all-project-experience/allexperience',
-                });
-              } else {
-                app.globalData.allexpress = true;
-                wx.navigateBack({
-                  delta: 1
-                })
-              }
-            }
-          })
+          that.subscribeToNews(res)
         }else{
           app.showMyTips(res.data.errmsg);
         }
@@ -546,29 +533,7 @@ Page({
       failTitle: "操作失败，请稍后重试！",
       success(res) {
         if(res.data.errcode == "ok"){
-          remain.remain({
-            tips: res.data.errmsg, callback: function () {
-              that.setData({
-                project_cou: res.data.count
-              })
-              app.globalData.allexpress = true;
-    
-              that.projectshow()
-    
-              that.setData({
-                projectname: "",
-                startdate: "",
-                date: "",
-                detail: "",
-                provincecity: "",
-                multiIndexvalue: "",
-                importimg: [],
-                imgArrs: [],
-                detailength: 0,
-                imgArrslength: true
-              })
-            }
-          })
+          that.subscribeToNewsAgain(res)
         }else{
           app.showMyTips(res.data.errmsg);
         }
@@ -579,7 +544,35 @@ Page({
       }
     })
   },
+  subscribeToNewsAgain: function(res) { 
+    let that = this;
+    app.subscribeToNews("resume",function(){
+      remain.remain({
+        tips: res.data.errmsg, callback: function () {
+          that.setData({
+            project_cou: res.data.count
+          })
+          app.globalData.allexpress = true;
 
+          that.projectshow()
+
+          that.setData({
+            projectname: "",
+            startdate: "",
+            date: "",
+            detail: "",
+            provincecity: "",
+            multiIndexvalue: "",
+            importimg: [],
+            imgArrs: [],
+            detailength: 0,
+            imgArrslength: true
+          })
+        }
+      })
+    })
+    
+  },
   // getuuid() {
   //   let userInfo = wx.getStorageSync("uuid");
   //   this.setData({
@@ -851,20 +844,7 @@ Page({
       mask: true,
       success(res) {
         if(res.data.errcode == "ok"){
-          remain.remain({
-            tips: res.data.errmsg, callback: function () {
-              if (that.data.ranktypes == "ranking") {
-                wx.redirectTo({
-                  url: '/pages/clients-looking-for-work/all-project-experience/allexperience',
-                });
-              } else {
-                app.globalData.allexpress = true;
-                wx.navigateBack({
-                  delta: 1
-                })
-              }
-            }
-          })
+          that.subscribeToNews(res)
         }else{
           app.showMyTips(res.data.errmsg);
         }
@@ -875,7 +855,26 @@ Page({
       }
     })
   },
-
+  
+  subscribeToNews: function(res) {
+    let that = this;
+    app.subscribeToNews("resume",function(){
+      remain.remain({
+        tips: res.data.errmsg, callback: function () {
+          if (that.data.ranktypes == "ranking") {
+            wx.redirectTo({
+              url: '/pages/clients-looking-for-work/all-project-experience/allexperience',
+            });
+          } else {
+            app.globalData.allexpress = true;
+            wx.navigateBack({
+              delta: 1
+            })
+          }
+        }
+      })
+    })
+  },
   delestore() {
     wx.removeStorageSync("projectdetail")
   },

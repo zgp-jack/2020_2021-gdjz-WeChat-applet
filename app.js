@@ -880,20 +880,19 @@ App({
         success(res) {
           if (res.errMsg == "requestSubscribeMessage:ok") {
             let status = res[tmplId.tmplId[type].id]
-            if(status == "accept"){
+            callback()
+            if(status != "accept"){
               that.appRequestAction({
                 url: "leaving-message/add-subscribe-msg/",
                 way: "POST",
                 mask: true,
+                hideLoading:true,
                 params: {
                   userId: userInfo.userId,
                   token: userInfo.token,
                   tokenTime: userInfo.tokenTime,
                   type: tmplId.tmplId[type].type
-                },
-                success: function (res) {
-                  callback()
-                },
+                }
               })
             }
           }
