@@ -15,7 +15,8 @@ Page({
     allskilltwo: [],
     allskillthree: [],
     allskillonef: false,
-    onoff: false, listsImg: {
+    onoff: false,
+    listsImg: {
       nodata: app.globalData.apiImgUrl + "nodata.png",
     },
   },

@@ -15,7 +15,10 @@ Page({
     projectwo: [],
     projecthree: [],
     allgetexpreone: false,
-    onoff: false
+    onoff: false,
+    listsImg: {
+      nodata: app.globalData.apiImgUrl + "nodata.png",
+    },
   },
   editor(e) {
     

@@ -1149,7 +1149,7 @@ Page({
     let that = this;
     let toptimer = wx.getStorageSync("toptimer");
     let onoff = that.data.is_top_show || that.data.has_top == 0;
-    // console.log(that.data.is_top_show)
+    console.log(that.data.is_top_show)
 
     let timer = new Date().getTime();
     let top_onoff = that.data.checkonef == "0" || that.data.checktwof == "0" || that.data.checkthreef == "0" || that.data.checkfourf == "0"
@@ -1208,7 +1208,8 @@ Page({
    */
   onHide: function () {
     this.setData({
-      showpassre: false
+      showpassre: false,
+      is_top_show:true
     })
   },
 

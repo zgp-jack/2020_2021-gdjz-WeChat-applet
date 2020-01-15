@@ -113,7 +113,7 @@
     </view>
   </view>
 </view>
-<view class='common-nodatabox flex-column lists-nodata' wx:if="{{ resume_uuid!=undefind&&allskilength<=0 }}">
+<view class='common-nodatabox flex-column lists-nodata' wx:if="{{ resume_uuid==undefind&&projectlength<=0 }}">
     <image src='{{ listsImg.nodata }}'></image>
     <text>暂无相关内容</text>
 </view>
