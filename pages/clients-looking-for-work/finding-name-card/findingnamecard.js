@@ -1162,7 +1162,7 @@ Page({
        })
        wx.setStorageSync("toptimer", timer)
     }else{
-      if (timer_maker >= 0.00069 && !top_onoff && !that.data.showtop && onoff && !that.data.checkone && that.data.index == 0){
+      if (timer_maker >= 7 && !top_onoff && !that.data.showtop && onoff && !that.data.checkone && that.data.index == 0){
         
         app.globalData.topshow = true;
         that.setData({

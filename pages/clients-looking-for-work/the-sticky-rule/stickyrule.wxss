@@ -27,15 +27,14 @@ padding: 0 37rpx;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  background-color: white;
   font-size: 0;
   z-index: 101;
 }
 .obtn button{
-  width: 500rpx;
+  width: 550rpx;
   /* height: 95rpx; */
   background: #108EEF;
-  line-height: 100rpx;
+  line-height: 90rpx;
   text-align: center;
   color: white;
   font-size: 40rpx;
