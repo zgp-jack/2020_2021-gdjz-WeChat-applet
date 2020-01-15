@@ -214,7 +214,7 @@
     position: relative;
     font-size: 30rpx;
     color: #282A34;
-    font-weight: bold;
+
 }
 
 .masnumber {
@@ -237,7 +237,6 @@
 
 .ucener-detil {
     font-size: 26rpx;
-    font-weight: bold;
     color: #b4b2b2;
     position: absolute;
     white-space: nowrap;

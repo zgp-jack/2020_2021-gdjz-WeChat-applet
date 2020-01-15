@@ -130,12 +130,13 @@ text-overflow: ellipsis;
   color: #0099ff;
 top: 26rpx;
 right: 22rpx;
-border: 1px solid #6bd0f1;
+border: 1px solid #d8f0ff;
 border-radius: 3px;
 font-size: 26rpx;
 z-index: 3;
-line-height: 55rpx;
-padding: 0 20rpx;
+line-height: 50rpx;
+padding: 0 16rpx;
+
 box-sizing: border-box;
 
 
