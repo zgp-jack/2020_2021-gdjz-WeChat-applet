@@ -10,7 +10,7 @@ Page({
   data: {
     userInfo: true,
     icon: app.globalData.apiImgUrl + "userauth-topicon.png",
-    point: 0,
+    point:   0,
     daynumber: 1,
     imgDetelte: app.globalData.apiImgUrl + "lpy/delete.png",
     areaTextcrum: [],
