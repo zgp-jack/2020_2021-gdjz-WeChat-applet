@@ -881,7 +881,7 @@ App({
           if (res.errMsg == "requestSubscribeMessage:ok") {
             let status = res[tmplId.tmplId[type].id]
             callback()
-            if(status != "accept"){
+            if(status == "accept"){
               that.appRequestAction({
                 url: "leaving-message/add-subscribe-msg/",
                 way: "POST",
