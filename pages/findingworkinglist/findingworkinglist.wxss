@@ -232,6 +232,8 @@ height: 70rpx;
 .listsboxlocal .listsboxlocalone{
   font-size: 28rpx;
   color: #969999;
+  min-height: 28rpx;
+
 }
 .listsboxlocalone{
   display: flex;

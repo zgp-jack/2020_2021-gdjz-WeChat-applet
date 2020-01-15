@@ -39,7 +39,7 @@
       </view>
     </view>
   </view>
-  <button class="obtn" bindtap="addpro" wx:if="{{onoff&&allgetexpre ==0&&projectlength < 5}}">添加项目经验</button>
+  <button class="obtn" bindtap="addpro" wx:if="{{onoff&&allgetexpre ==0&&projectlength < 5&&resume_uuid!==''}}">添加项目经验</button>
 
 
   <view class="skilleight" wx:if="{{allgetexpre ==1}}" wx:for="{{allproject}}" wx:key="{{index}}" wx:for-index="pindex">
@@ -112,4 +112,8 @@
       </view>
     </view>
   </view>
+</view>
+<view class='common-nodatabox flex-column lists-nodata' wx:if="{{ resume_uuid==''&&projecthree.length<=0 && allproject.length<=0 }}">
+  <image src='{{ listsImg.nodata }}'></image>
+  <text>暂无相关内容</text>
 </view>

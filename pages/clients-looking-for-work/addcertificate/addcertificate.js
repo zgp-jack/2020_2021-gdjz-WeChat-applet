@@ -297,7 +297,20 @@ vertify()
       failTitle: "操作失败，请稍后重试！",
       success(res) {
         if(res.data.errcode == "ok"){
-          that.subscribeToNews(res)
+          remain.remain({
+            tips: res.data.errmsg, callback: function () {
+              if (that.data.ranktypes == "ranking") {
+                wx.redirectTo({
+                  url: '/pages/clients-looking-for-work/all-skills-certificate/skillscertificate',
+                });
+              } else {
+              app.globalData.allskill = true;
+              wx.navigateBack({
+                delta: 1
+              })
+              }
+            }
+          })
         }else{
           app.showMyTips(res.data.errmsg);
         }
@@ -307,26 +320,7 @@ vertify()
       }
     })
   },
-  subscribeToNews: function(res) {
-    let that = this;
-    app.subscribeToNews("resume",function(){
-      remain.remain({
-        tips: res.data.errmsg, callback: function () {
-          if (that.data.ranktypes == "ranking") {
-            wx.redirectTo({
-              url: '/pages/clients-looking-for-work/all-skills-certificate/skillscertificate',
-            });
-          } else {
-          app.globalData.allskill = true;
-          wx.navigateBack({
-            delta: 1
-          })
-          }
-        }
-      })
-    })
-    
-  },
+
   preservechixu() {
     let that = this;
     if (that.data.certificate_cou >= that.data.certificate_count) {
@@ -417,7 +411,23 @@ vertify()
       mask: true,
       success(res) {
         if(res.data.errcode == "ok"){
-          that.subscribeToNewsAgain(res)
+          remain.remain({
+            tips: res.data.errmsg, callback: function () {
+              that.setData({
+                certificate_cou: res.data.count
+              })
+    
+              that.skillshow()
+              app.globalData.allskill = true;
+              that.setData({
+                imgArrs: [],
+                idArrs: [],
+                date: "",
+                name: "",
+                imgArrslength:true
+              })
+            }
+          })
         }else{
           app.showMyTips(res.data.errmsg);
         }
@@ -426,29 +436,6 @@ vertify()
         app.showMyTips("保存失败");
       }
     })
-  },
-  subscribeToNewsAgain: function(res) { 
-    let that = this;
-    app.subscribeToNews("resume",function(){
-      remain.remain({
-        tips: res.data.errmsg, callback: function () {
-          that.setData({
-            certificate_cou: res.data.count
-          })
-
-          that.skillshow()
-          app.globalData.allskill = true;
-          that.setData({
-            imgArrs: [],
-            idArrs: [],
-            date: "",
-            name: "",
-            imgArrslength:true
-          })
-        }
-      })
-    })
-    
   },
   preservechixutui(){
     wx.navigateBack({
@@ -566,7 +553,20 @@ vertify()
       mask: true,
       params: project,
       success(res) {
-        that.subscribeToNews(res)
+        remain.remain({
+          tips: res.data.errmsg, callback: function () {
+            if (that.data.ranktypes == "ranking") {
+              wx.redirectTo({
+                url: '/pages/clients-looking-for-work/all-skills-certificate/skillscertificate',
+              });
+            } else {
+            app.globalData.allskill = true;
+            wx.navigateBack({
+              delta: 1
+            })
+            }
+          }
+        })
       },
       fail: function (err) {
         app.showMyTips("保存失败");

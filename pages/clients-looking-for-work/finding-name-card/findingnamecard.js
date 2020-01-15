@@ -119,7 +119,7 @@ Page({
     certificate_show:false,
     top_status_one:"",
     topshow:false,
-    showindextop:false
+    is_top_show:true
   },
 
 
@@ -235,7 +235,7 @@ Page({
           success(res) {
        
             let mydata = res.data;
-            console.log(mydata.data.top_data)
+            
             if (mydata.errcode == "ok") {
               
               that.getdetail()
@@ -677,6 +677,7 @@ Page({
   },
 
   getdetail() {
+
     let userInfo = wx.getStorageSync("userInfo");
     if (!userInfo) return false;
 
@@ -691,7 +692,7 @@ Page({
       way: 'POST',
       params: detail,
       success: function (res) {
-
+     
         let mydata = res.data.data;
         if (res.data.errcode == 200) {
           for (let i = 0; i < mydata.project.length; i++) {
@@ -816,22 +817,28 @@ Page({
             resume_top: mydata.hasOwnProperty("resume_top") ? mydata.resume_top : [],
             top_status: mydata.hasOwnProperty("top_status") ? mydata.top_status : []
           })
+          
           if (mydata.hasOwnProperty("resume_top")) {
             if (mydata.resume_top.is_top == 1) {
+              
               that.setData({
                 indextop: 0,
+                is_top_show: false,
               })
             } else if (mydata.resume_top.is_top == 0) {
               that.setData({
                 indextop: 1,
+                is_top_show: false,
               })
-            } else {
-              that.setData({
-                showindextop: 2,
-              })
-            }
+            } 
+ 
           }
-
+          // if (mydata.resume_top.is_top == 2) {
+          //   that.setData({
+          //     is_top_show: true,
+          //   })
+          // }
+          // console.log(that.data.is_top_show)
           let selectDtop = Object.values(mydata.top_status)
           let selectktop = Object.keys(mydata.top_status)
           that.setData({
@@ -843,9 +850,9 @@ Page({
 
             that.setData({
               top_tips_string: mydata.resume_top.top_tips_string,
-              endtime: mydata.resume_top.end_time,
+              endtime: mydata.resume_top.end_time ? mydata.resume_top.end_time:"",
               has_top: mydata.resume_top.has_top ? mydata.resume_top.has_top : 0,
-              is_show_tips: mydata.resume_top.is_show_tips,
+              is_show_tips: mydata.resume_top.is_show_tips ? mydata.resume_top.is_show_tips:"",
             })
            
           }
@@ -1013,7 +1020,7 @@ Page({
           }
           that.redorblue()
           that.showskill();
- 
+          that.gettiner()
         } else {
           wx.showModal({
             title: '温馨提示',
@@ -1023,7 +1030,7 @@ Page({
           })
           return
         }
-        that.gettiner()
+       
       },
       fail: function (err) {
         wx.showModal({
@@ -1136,14 +1143,17 @@ Page({
       showskill: false
     })
   },
-  // 86400000
+
   gettiner(){
 
     let that = this;
     let toptimer = wx.getStorageSync("toptimer");
-    let onoff = that.data.showindextop == 2 || that.data.has_top == 0;
+    let onoff = that.data.is_top_show || that.data.has_top == 0;
+   
+
     let timer = new Date().getTime();
     let top_onoff = that.data.checkonef == "0" || that.data.checktwof == "0" || that.data.checkthreef == "0" || that.data.checkfourf == "0"
+    let timer_maker = (timer - toptimer) / 86400000;
     if (!toptimer && !top_onoff && !that.data.showtop && onoff && !that.data.checkone && that.data.index == 0){
        app.globalData.topshow = true;
        that.setData({
@@ -1152,7 +1162,8 @@ Page({
        })
        wx.setStorageSync("toptimer", timer)
     }else{
-      if ((timer - toptimer) / 86400000 >= 0.00069 && !top_onoff && !that.data.showtop && onoff && !that.data.checkone && that.data.index == 0){
+      if (timer_maker >= 0.00069 && !top_onoff && !that.data.showtop && onoff && !that.data.checkone && that.data.index == 0){
+        
         app.globalData.topshow = true;
         that.setData({
           topshow: app.globalData.topshow,
@@ -1198,7 +1209,8 @@ Page({
    */
   onHide: function () {
     this.setData({
-      showpassre: false
+      showpassre: false,
+      is_top_show:true
     })
   },
 

@@ -42,7 +42,7 @@ Page({
         nationindex:""
     },
     getnationdetail(item){
-      console.log(item)
+      
       let getId = this.data.nation;
       if (item){
       for (let i = 0; i < item.length;i++){
@@ -127,7 +127,7 @@ Page({
         })
     },
   nation(e) {
-    console.log(e)
+    
     this.setData({
       nationindex: e.detail.value,
       nation: this.data.nationalarrayone[e.detail.value].mz_id
@@ -383,7 +383,7 @@ Page({
             classifys:member.worktypeIds,
             province_id:member.province_id
         };
-      console.log(formData)
+      
         app.appRequestAction({
             url:"user/do-auth/",
             way:"POST",

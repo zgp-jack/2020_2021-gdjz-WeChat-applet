@@ -12,6 +12,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    toptown: app.globalData.apiImgUrl + 'newlist-jobzd.png',
     rullIntegral: app.globalData.apiImgUrl + "resume-list-rules-btn.png",
     finded: app.globalData.apiImgUrl + "lpy/finded.png",
     biaoqian: app.globalData.apiImgUrl + "lpy/biaoqian.png",
@@ -103,7 +104,7 @@ Page({
     showReturnTopImg: false,
     showHistoryList: false,
     historyList: [],
-    toptown: "../../images/top.png",
+
   },
   jumptop() {
     wx.navigateTo({
@@ -194,11 +195,11 @@ Page({
 
   // },
   touchStart: function (e) {
-    console.log(e)
+    
     this.touchStartTime = e.timeStamp
   },
   touchEnd: function (e) {
-    console.log(e)
+    
     this.touchEndTime = e.timeStamp
   },
   userChooseProvince: function (e) {

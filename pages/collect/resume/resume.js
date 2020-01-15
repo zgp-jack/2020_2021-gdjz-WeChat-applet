@@ -10,7 +10,7 @@ Page({
     footerActive: "member",
     finded: app.globalData.apiImgUrl + "lpy/finded.png",
     nodataImg: app.globalData.apiImgUrl + "nodata.png",
-
+    biaoqian: app.globalData.apiImgUrl + "lpy/biaoqian.png",
     isFirstRequest: true,
     page: 1,
     lists: [],
@@ -38,6 +38,7 @@ Page({
   },
   getPublishedData: function () {
     let _this = this;
+    let userLocation = wx.getStorageSync("userLocation");
     let _index = this.data.publishIndex
     let userInfo = this.data.userInfo
     wx.showLoading({ title: '数据加载中', })
@@ -48,7 +49,8 @@ Page({
         userId: userInfo.userId,
         token: userInfo.token,
         tokenTime: userInfo.tokenTime,
-        page: _this.data.page
+        page: _this.data.page,
+        location: userLocation ? userLocation.split(",").reverse().join(",") : '',
       },
       success: function (res) {
         wx.hideLoading()
