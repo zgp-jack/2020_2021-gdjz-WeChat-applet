@@ -235,7 +235,7 @@ Page({
           success(res) {
        
             let mydata = res.data;
-            console.log(mydata.data.top_data)
+            
             if (mydata.errcode == "ok") {
               
               that.getdetail()
@@ -817,7 +817,7 @@ Page({
             resume_top: mydata.hasOwnProperty("resume_top") ? mydata.resume_top : [],
             top_status: mydata.hasOwnProperty("top_status") ? mydata.top_status : []
           })
-          console.log(mydata.resume_top.is_top)
+          
           if (mydata.hasOwnProperty("resume_top")) {
             if (mydata.resume_top.is_top == 1) {
               
@@ -1149,10 +1149,11 @@ Page({
     let that = this;
     let toptimer = wx.getStorageSync("toptimer");
     let onoff = that.data.is_top_show || that.data.has_top == 0;
-    console.log(that.data.is_top_show)
+   
 
     let timer = new Date().getTime();
     let top_onoff = that.data.checkonef == "0" || that.data.checktwof == "0" || that.data.checkthreef == "0" || that.data.checkfourf == "0"
+    let timer_maker = (timer - toptimer) / 86400000;
     if (!toptimer && !top_onoff && !that.data.showtop && onoff && !that.data.checkone && that.data.index == 0){
        app.globalData.topshow = true;
        that.setData({
@@ -1161,8 +1162,8 @@ Page({
        })
        wx.setStorageSync("toptimer", timer)
     }else{
-      if ((timer - toptimer) / 86400000 >= 0.00069 && !top_onoff && !that.data.showtop && onoff && !that.data.checkone && that.data.index == 0){
-        console.log(123445)
+      if (timer_maker >= 0.00069 && !top_onoff && !that.data.showtop && onoff && !that.data.checkone && that.data.index == 0){
+        
         app.globalData.topshow = true;
         that.setData({
           topshow: app.globalData.topshow,

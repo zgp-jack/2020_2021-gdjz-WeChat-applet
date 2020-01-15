@@ -61,7 +61,7 @@ Page({
     });
   },
   dayclocy(e) {
-    console.log(e)
+    
     let that  = this;
     if (e) {
       var re = /^\d{0,2}$/;
@@ -162,7 +162,7 @@ Page({
       mask: true,
       success: function (res) {
         let mydata = res.data;
-        console.log(mydata)
+        
         if (mydata.errcode == "ok") {
           wx.showModal({
             title: '温馨提示',
@@ -232,7 +232,7 @@ Page({
   },
   authrasution() {
     let userInfo = wx.getStorageSync("userInfo");
-    console.log(userInfo)
+    
     if (!userInfo) {
       this.setData({
         userInfo: false
@@ -244,7 +244,7 @@ Page({
   deletelable(e) {
     let that = this;
     let number = e.currentTarget.dataset.index;
-    console.log(number)
+    
     that.data.areaTextcrum.splice(number, 1)
     that.setData({
       areaTextcrum: that.data.areaTextcrum
@@ -258,7 +258,7 @@ Page({
       way: 'POST',
       success: function (res) {
         let mydata = res.data;
-        console.log(mydata)
+       
         if (mydata.errcode == "ok") {
           that.setData({
             max_number: mydata.data.max_number,

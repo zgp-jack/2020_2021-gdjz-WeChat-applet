@@ -10,7 +10,7 @@ Page({
     footerActive: "member",
     finded: app.globalData.apiImgUrl + "lpy/finded.png",
     nodataImg: app.globalData.apiImgUrl + "nodata.png",
-
+    biaoqian: app.globalData.apiImgUrl + "lpy/biaoqian.png",
     isFirstRequest: true,
     page: 1,
     lists: [],
