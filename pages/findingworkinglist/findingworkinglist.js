@@ -195,11 +195,11 @@ Page({
 
   // },
   touchStart: function (e) {
-    console.log(e)
+    
     this.touchStartTime = e.timeStamp
   },
   touchEnd: function (e) {
-    console.log(e)
+    
     this.touchEndTime = e.timeStamp
   },
   userChooseProvince: function (e) {
