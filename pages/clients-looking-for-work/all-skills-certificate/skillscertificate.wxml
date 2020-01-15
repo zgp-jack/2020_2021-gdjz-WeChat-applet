@@ -32,7 +32,7 @@
       </view>
     </view>
   </view>
-  <button class="obtn" bindtap="addskill" wx:if="{{onoff&&skillpass == 0&&allskilength<3&&resume_uuid!=undefind}}">添加技能证书</button>
+  <button class="obtn" bindtap="addskill" wx:if="{{onoff&&skillpass == 0&&allskilength<3&&resume_uuid!==''}}">添加技能证书</button>
 
 
   <view class="skilleight" wx:for="{{allskill}}" wx:key="{{index}}" wx:if="{{skillpass == 1}}" wx:for-index="pindex">
@@ -96,7 +96,7 @@
   </view>
 </view>
 
-<view class='common-nodatabox flex-column lists-nodata' wx:if="{{ resume_uuid==undefind&&allskilength<=0 }}">
+<view class='common-nodatabox flex-column lists-nodata' wx:if="{{ resume_uuid==''&&allskilength<=0 && allskillthree.length<=0 }}">
     <image src='{{ listsImg.nodata }}'></image>
     <text>暂无相关内容</text>
 </view>

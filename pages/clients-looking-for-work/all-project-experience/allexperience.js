@@ -19,6 +19,7 @@ Page({
     listsImg: {
       nodata: app.globalData.apiImgUrl + "nodata.png",
     },
+    resume_uuid:'',
   },
   editor(e) {
     
@@ -172,7 +173,6 @@ Page({
       that.setData({
         projecthree: allproject
       });
-      console.log(that.data.projecthree)
     }
 
   },
@@ -186,6 +186,7 @@ Page({
       this.getexpre()
       this.delestore()
     }
+
     app.globalData.previewproject = true;
   },
   previewImage: function (e) {

@@ -19,6 +19,7 @@ Page({
     listsImg: {
       nodata: app.globalData.apiImgUrl + "nodata.png",
     },
+    resume_uuid:''
   },
   allskill() {
     let userInfo = wx.getStorageSync("userInfo");
@@ -126,7 +127,6 @@ Page({
       that.setData({
         allskillthree: skill
       });
-
     }
 
   },
