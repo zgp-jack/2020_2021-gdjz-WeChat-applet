@@ -15,7 +15,9 @@ Page({
     allskilltwo: [],
     allskillthree: [],
     allskillonef: false,
-    onoff: false
+    onoff: false, listsImg: {
+      nodata: app.globalData.apiImgUrl + "nodata.png",
+    },
   },
   allskill() {
     let userInfo = wx.getStorageSync("userInfo");

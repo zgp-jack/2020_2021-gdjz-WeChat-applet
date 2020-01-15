@@ -50,7 +50,7 @@
                 </view>
 
 
-                <image wx:if="{{item.resume.authentication == 2}}" src="{{realNames}}"></image>
+                <!-- <image wx:if="{{item.resume.authentication == 2}}" src="{{realNames}}"></image> -->
 
 
 
@@ -83,7 +83,7 @@
         <view class="listsboxself" wx:if="{{!item.resume.introduce}}"></view>
         <view class="listsboxlocal">
           <view class="listsboxlocalone">
-            <view wx:if="{{item.resume.show_address}}">{{item.resume.show_address}}</view>
+            <view wx:if="{{item.resume.show_address}}" class="show_address_all"> <text class="show_address">{{item.resume.show_address}}</text>  <text wx:if="{{item.resume.distance}}" class="distance">{{item.resume.distance}}</text></view>
           </view>
           <view class="listsboxlocaltwo">
             <text class="cancel-collect-item" data-id="{{ item.resume.uuid }}" catchtap="cancleCollect" data-index="{{ index }}">取消收藏</text>
