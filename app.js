@@ -886,7 +886,7 @@ App({
                 url: "leaving-message/add-subscribe-msg/",
                 way: "POST",
                 mask: true,
-                showLoading:false,
+                hideLoading:true,
                 params: {
                   userId: userInfo.userId,
                   token: userInfo.token,
