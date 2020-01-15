@@ -65,7 +65,7 @@ Page({
     let that  = this;
     if (e) {
       var re = /^\d{0,2}$/;
-      if (!re.test(e.detail.value)  || e.detail.value-0 < 0) {
+      if (!re.test(e.detail.value)) {
         wx.showModal({
           title: '温馨提示',
           content: '只能输入整数，请重新输入',
@@ -345,7 +345,7 @@ Page({
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function () {
+  // onShareAppMessage: function () {
 
-  }
+  // }
 })

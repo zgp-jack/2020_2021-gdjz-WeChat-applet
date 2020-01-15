@@ -493,8 +493,8 @@
 
 <!-- wx:if="{{topshow}}" -->
   <view class="modalDlg" wx:if="{{topshow}}">
-    <view class="modalDlgone">
-    </view>
+    <!-- <view class="modalDlgone">
+    </view> -->
     <view class="text">
       <image src="{{topoimage}}"></image>
       <view class="otext">

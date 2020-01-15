@@ -119,7 +119,7 @@ Page({
     certificate_show:false,
     top_status_one:"",
     topshow:false,
-    showindextop:false
+    is_top_show:true
   },
 
 
@@ -677,6 +677,7 @@ Page({
   },
 
   getdetail() {
+
     let userInfo = wx.getStorageSync("userInfo");
     if (!userInfo) return false;
 
@@ -691,7 +692,7 @@ Page({
       way: 'POST',
       params: detail,
       success: function (res) {
-
+     
         let mydata = res.data.data;
         if (res.data.errcode == 200) {
           for (let i = 0; i < mydata.project.length; i++) {
@@ -816,22 +817,28 @@ Page({
             resume_top: mydata.hasOwnProperty("resume_top") ? mydata.resume_top : [],
             top_status: mydata.hasOwnProperty("top_status") ? mydata.top_status : []
           })
+          console.log(mydata.resume_top.is_top)
           if (mydata.hasOwnProperty("resume_top")) {
             if (mydata.resume_top.is_top == 1) {
+              
               that.setData({
                 indextop: 0,
+                is_top_show: false,
               })
             } else if (mydata.resume_top.is_top == 0) {
               that.setData({
                 indextop: 1,
+                is_top_show: false,
               })
-            } else {
-              that.setData({
-                showindextop: 2,
-              })
-            }
+            } 
+ 
           }
-
+          // if (mydata.resume_top.is_top == 2) {
+          //   that.setData({
+          //     is_top_show: true,
+          //   })
+          // }
+          // console.log(that.data.is_top_show)
           let selectDtop = Object.values(mydata.top_status)
           let selectktop = Object.keys(mydata.top_status)
           that.setData({
@@ -1013,7 +1020,7 @@ Page({
           }
           that.redorblue()
           that.showskill();
- 
+          that.gettiner()
         } else {
           wx.showModal({
             title: '温馨提示',
@@ -1023,7 +1030,7 @@ Page({
           })
           return
         }
-        that.gettiner()
+       
       },
       fail: function (err) {
         wx.showModal({
@@ -1141,7 +1148,9 @@ Page({
 
     let that = this;
     let toptimer = wx.getStorageSync("toptimer");
-    let onoff = that.data.showindextop == 2 || that.data.has_top == 0;
+    let onoff = that.data.is_top_show || that.data.has_top == 0;
+    // console.log(that.data.is_top_show)
+
     let timer = new Date().getTime();
     let top_onoff = that.data.checkonef == "0" || that.data.checktwof == "0" || that.data.checkthreef == "0" || that.data.checkfourf == "0"
     if (!toptimer && !top_onoff && !that.data.showtop && onoff && !that.data.checkone && that.data.index == 0){
@@ -1153,6 +1162,7 @@ Page({
        wx.setStorageSync("toptimer", timer)
     }else{
       if ((timer - toptimer) / 86400000 >= 0.00069 && !top_onoff && !that.data.showtop && onoff && !that.data.checkone && that.data.index == 0){
+        console.log(123445)
         app.globalData.topshow = true;
         that.setData({
           topshow: app.globalData.topshow,
