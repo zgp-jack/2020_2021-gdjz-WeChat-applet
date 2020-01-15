@@ -45,8 +45,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    console.log(new Date("2019-12-03").getTime() / 86400000)
-    console.log(parseInt(new Date().getTime() / 86400000))
+    
   },
 
   /**
@@ -80,7 +79,7 @@ Page({
       params: detail,
       failTitle: "操作失败，请稍后重试！",
       success(res) {
-        console.log(res)
+        
         let allproject = [];
         if (res.data.errcode == 200) {
           let dataproject = res.data.data.project;
