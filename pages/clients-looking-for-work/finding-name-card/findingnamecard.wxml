@@ -41,7 +41,7 @@
     <view class="{{resume_top.is_top == 2||has_top == 0?'findingnamecardonesontwo':'findingnamecardonesontwot'}}">
       <view class="rule-detail">
         <image class="rule-oimg" src="{{topimage}}"></image>
-        <text>我的置顶：</text><text class="rule-status" wx:if="{{resume_top.is_top == 2}}">置顶已过期</text>
+        <text>我的置顶：</text><text class="rule-status" wx:if="{{resume_top.is_top == 2}}">置顶已过期</text><text class="rule-status" wx:if="{{has_top == 0}}">未置顶</text>
       </view>
       <view class="rule-odetail" bindtap="thestickyrule" wx:if="{{has_top == 0||resume_top.is_top == 2}}">
         马上去置顶>>

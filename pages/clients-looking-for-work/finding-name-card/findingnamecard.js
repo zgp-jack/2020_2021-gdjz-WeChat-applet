@@ -850,9 +850,9 @@ Page({
 
             that.setData({
               top_tips_string: mydata.resume_top.top_tips_string,
-              endtime: mydata.resume_top.end_time,
+              endtime: mydata.resume_top.end_time ? mydata.resume_top.end_time:"",
               has_top: mydata.resume_top.has_top ? mydata.resume_top.has_top : 0,
-              is_show_tips: mydata.resume_top.is_show_tips,
+              is_show_tips: mydata.resume_top.is_show_tips ? mydata.resume_top.is_show_tips:"",
             })
            
           }
@@ -1143,7 +1143,7 @@ Page({
       showskill: false
     })
   },
-  // 86400000
+
   gettiner(){
 
     let that = this;

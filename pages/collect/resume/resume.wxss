@@ -11,3 +11,18 @@ position: relative;
 .colortext{
   color: #FB8732;
 }
+.show_address_all{
+  display: flex;
+  width: 100%;
+}
+.distance{
+  display:block; 
+  margin-left: 14rpx;
+}
+.show_address{
+     display:block;           /*  内联对象需加  */    /* 不换行 */
+    white-space:nowrap;     /* 不换行 */
+    overflow:hidden;       /* 内容超出宽度时隐藏超出部分的内容 */
+    text-overflow:ellipsis;  
+     max-width: 60%;
+}
