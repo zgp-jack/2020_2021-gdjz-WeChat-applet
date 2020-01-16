@@ -214,7 +214,7 @@ Page({
     let panme = e.currentTarget.dataset.pname;
     let mydata = { "name": areaText, "id": _id, "ad_name": panme };
     this.setData({ province: index })
-    console.log(_this.data.province)
+    
     if (_id == _sid) return false;
 
     if (_this.touchEndTime - _this.touchStartTime < 350) {
@@ -739,7 +739,7 @@ Page({
         fillterNewest: _data.resumeListType
       })
     })
-    console.log(_this.data.fillterArea)
+    
   },
   initUserShareTimes: function () {
     app.pageInitSystemInfo(this);
