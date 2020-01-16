@@ -328,12 +328,12 @@ Page({
     }
     
     if (!v.isRequire(_this.data.nation, 1)) {
-      app.showMyTips("请输入您的民族！");
+      app.showMyTips("请选择您的民族！");
       return false;
     }
     console.log(nationalque)
     if (!v.isRequire(nationalque, 1)) {
-      app.showMyTips("请输入您的民族！");
+      app.showMyTips("请选择您的民族！");
       return false;
     }
     if (!v.isRequire(member.id_card, 15)) {
@@ -410,7 +410,6 @@ Page({
     })
   },
   subscribeToNews: function (mydata, userInfo) {
-    console.log(mydata.errmsg)
     app.subscribeToNews("auth", function () {
       app.returnPrevPage(mydata.errmsg);
     })
