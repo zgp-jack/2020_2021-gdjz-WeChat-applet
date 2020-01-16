@@ -18,7 +18,7 @@
           <text class='common-publish-words'>民族</text>
           <!-- <input class='common-publish-input' value='{{ member.nationality }}' placeholder='请输入民族' bindinput='userEnterNationality'></input> -->
           <picker bindchange="nation" range="{{nationalarray}}" value="{{nationindex}}">
-            <input disabled name="addnational" class='common-publish-input'  value="{{nationalarray[nationindex]}}" placeholder="请选择民族"></input>
+            <input disabled name="addnational" class='common-publish-input' value="{{nationalarray[nationindex]}}" placeholder="请选择民族"></input>
           </picker>
         </view>
       </view>
@@ -66,28 +66,6 @@
           <text>请上传手持身份证</text>
         </view>
       </view>
-      <view class='common-publish-item  common-publish-item-realname' wx:if="{{ member.show_resume =='1' }}">
-        <view class='common-publish-item-content'>
-          <text class='common-publish-words'>所属工种</text>
-          <view class='common-publish-allwords' wx:if="{{ member.worktypeIds.length  }}" bindtap="userChangeWorktype">
-            <block wx:for="{{ classifyTree }}" wx:key="{{ index }}" wx:if="{{ item.has_children == 1 }}">
-              <block wx:for="{{ item.children }}" wx:key="index" wx:if="{{ item.is_check }}">
-                <text class='user-items-text'>{{ item.name }}</text>
-              </block>
-            </block>
-          </view>
-          <input class='common-publish-input' disabled placeholder='请选择所属工种' wx:else="{{ member.worktypeIds.length }}" bindtap="userChangeWorktype"></input>
-        </view>
-      </view>
-      <view class='common-publish-item common-publish-item-realname' wx:if="{{ member.show_resume =='1' }}">
-        <view class='common-publish-item-content '>
-          <text class='common-publish-words'>地区</text>
-          <picker range='{{ member.cities }}' value='{{ myIndex }}' range-key="name" bindchange='provincePickerChange'>
-            <view class='common-publish-allwords' wx:if="{{ hasChecked  }}">{{ member.cities[myIndex].name }}</view>
-            <input class='common-publish-input' disabled placeholder='请选择地区' wx:if="{{ !hasChecked  }}"></input>
-          </picker>
-        </view>
-      </view>
     </view>
   </view>
   <text class='common-sure-btn' bindtap='userSubmitIdcard'>确认提交</text>
@@ -95,7 +73,7 @@
 
 
 
-<view class='publish-choose-wordtype' wx:if="{{ showWorkType }}">
+<!-- <view class='publish-choose-wordtype' wx:if="{{ showWorkType }}">
   <view class='publish-choose-contentbox common-shaded-box'>
     <view class='publish-choose-header'>选择工种</view>
     <view class='publish-choose-body'>
@@ -112,4 +90,4 @@
       <view bindtap='userSureWorktype'>确定</view>
     </view>
   </view>
-</view>
+</view> -->
