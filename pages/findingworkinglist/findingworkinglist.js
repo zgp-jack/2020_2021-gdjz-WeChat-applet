@@ -270,7 +270,7 @@ Page({
     let pid = parseInt(e.currentTarget.dataset.pid);
     let areaText = e.currentTarget.dataset.area;
     let id = parseInt(e.currentTarget.dataset.id);
-
+    app.globalData.areaIs = true;
     //if(parseInt(this.data.searchDate.area_id) == id) return false;
     this.setData({
       userCity: id,
@@ -609,12 +609,13 @@ Page({
     let areaId = wx.getStorageSync("areaId");
     let showCity = wx.getStorageSync("showCity");
     let areaText = wx.getStorageSync("areaText");
+    
     if (areaId == "1") {
       _this.setData({ areaText: "全国" })
       _this.initAreaInfo();
       return false;
     }
-    if (showCity && showCity == areaId ) {
+    if (showCity && showCity == areaId && app.globalData.areaIs) {
       if (areaText) {
         _this.setData({ areaText: areaText })
         _this.initAreaInfo();

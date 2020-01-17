@@ -186,6 +186,7 @@ Page({
     app.getAreaData(this);
   },
   chooseThisCtiy: function (e) {
+    app.globalData.areaIs = false;
     let id = e.currentTarget.dataset.id;
     let area = e.currentTarget.dataset.area;
     let pname = e.currentTarget.dataset.pname;

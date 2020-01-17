@@ -100,8 +100,8 @@ Page({
             sort_flag: mydata.data.resume_info.sort_flag,
             has_resume: mydata.data.resume_info.has_resume,
             onoff: true,
-            certificate_count:res.data.data.resume_data.certificate_count,
-            project_count:res.data.data.resume_data.project_count,
+            certificate_count: res.data.data.resume_data.certificate_count ? res.data.data.resume_data.certificate_count:"",
+            project_count: res.data.data.resume_data.project_count ? res.data.data.resume_data.project_count:"",
           })
           that.setstorege(mydata)
         } else {

@@ -38,7 +38,8 @@ Page({
     showInputList: false,
     searchInputVal: "",
     showHisTitle:false,
-    areaInputFocus:false
+    areaInputFocus:false,
+    pmaphone: app.globalData.serverPhone
   },
   chooseInputCtiy: function (e) { 
     this.chooseThisCtiy(e);
@@ -421,7 +422,8 @@ Page({
         }
       },
       fail: function () {
-        this.setData({ addressTips: '接口出错，请联系客服电话400-838-1888' })
+        let phone =  _this.data.pmaphone;
+        this.setData({ addressTips: `接口出错，请联系客服电话${phone}` })
       }
     })
 

@@ -217,7 +217,7 @@ Page({
       let pid = parseInt(e.currentTarget.dataset.pid); 
         let areaText = e.currentTarget.dataset.area;
         let id = parseInt(e.currentTarget.dataset.id); 
-        
+      app.globalData.areaIs =false;
         //if(parseInt(this.data.searchDate.area_id) == id) return false;
         this.setData({
             userCity: id,
