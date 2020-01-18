@@ -22,7 +22,7 @@
 		"enhance": true
 	},
 	"compileType": "miniprogram",
-	"libVersion": "2.9.4",
+	"libVersion": "2.9.5",
 	"appid": "wx456feacb0e86162f",
 	"projectname": "gdjz",
 	"debugOptions": {

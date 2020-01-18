@@ -485,7 +485,7 @@ Page({
     if ((vertifyNum.isNull(this.data.name) || this.data.name.length < 2 || this.data.name.length > 5) || !vertifyNum.isChinese(this.data.name)) {
       wx.showModal({
         title: '温馨提示',
-        content: '请正确输入姓名2-5字以内且必须包含汉字',
+        content: '请填写真实姓名，2-5字，必须含有汉字',
         showCancel: false,
         success(res) { }
       })
@@ -564,7 +564,7 @@ Page({
     if (vertifyNum.isNull(this.data.otextareavalue) || !vertifyNum.isChinese(this.data.otextareavalue)) {
       wx.showModal({
         title: '温馨提示',
-        content: '请正确输入自我介绍15-500字以内 且必须包含汉字',
+        content: '请填写真实自我介绍，15-500字以内，必须含有汉字',
         showCancel: false,
         success(res) { }
       })

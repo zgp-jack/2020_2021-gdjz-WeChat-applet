@@ -292,7 +292,7 @@
       <text class='yupao-enter-title'>投诉信息</text>
       <text class='yupao-enter-tips'>请输入投诉内容</text>
       <view class='yupao-enter-body'>
-        <textarea class='yupao-enter-wrap yupao-enter-textarea' placeholder='请输入投诉内容' bindinput='userEnterComplain' maxlength='200' value='{{ complainInfo }}' fixed='true'></textarea>
+        <textarea class='yupao-enter-wrap yupao-enter-textarea' placeholder='{{complaincontent}}' bindinput='userEnterComplain' maxlength='200' value='{{ complainInfo }}' fixed='true'></textarea>
       </view>
       <view class='yupao-enter-footer clearfix'>
         <text bindtap='userCancleComplain'>取消</text>

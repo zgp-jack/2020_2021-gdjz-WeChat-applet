@@ -284,7 +284,7 @@ Page({
     if (vertifyNum.isNull(this.data.projectname) || !vertifyNum.isChinese(this.data.projectname)) {
       wx.showModal({
         title: '温馨提示',
-        content: '请正确输入项目名称3-12字以内且必须包含汉字',
+        content: '请填写真实项目名称，3-12字，必须含有汉字',
         showCancel: false,
         success(res) { }
       })
@@ -294,7 +294,7 @@ Page({
     if (this.data.projectname.length > 12 || this.data.projectname.length < 3) {
       wx.showModal({
         title: '温馨提示',
-        content: '请正确输入项目名称3-12字以内且必须包含汉字',
+        content: '请填写真实项目名称，3-12字，必须含有汉字',
         showCancel: false,
         success(res) { }
       })
@@ -426,7 +426,7 @@ Page({
     if (vertifyNum.isNull(this.data.projectname) || !vertifyNum.isChinese(this.data.projectname)) {
       wx.showModal({
         title: '温馨提示',
-        content: '请正确输入项目名称3-12字以内且必须包含汉字',
+        content: '请填写真实项目名称，3-12字，必须含有汉字',
         showCancel: false,
         success(res) { }
       })
@@ -436,7 +436,7 @@ Page({
     if (this.data.projectname.length > 12 || this.data.projectname.length < 3) {
       wx.showModal({
         title: '温馨提示',
-        content: '请正确输入项目名称3-12字以内且必须包含汉字',
+        content: '请填写真实项目名称，3-12字，必须含有汉字',
         showCancel: false,
         success(res) { }
       })
@@ -735,7 +735,7 @@ Page({
     if (vertifyNum.isNull(this.data.projectname) || !vertifyNum.isChinese(this.data.projectname)) {
       wx.showModal({
         title: '温馨提示',
-        content: '请正确输入项目名称3-12字以内且必须包含汉字',
+        content: '请填写真实项目名称，3-12字，必须含有汉字',
         showCancel: false,
         success(res) { }
       })
@@ -745,7 +745,7 @@ Page({
     if (this.data.projectname.length > 12 || this.data.projectname.length < 3) {
       wx.showModal({
         title: '温馨提示',
-        content: '请正确输入项目名称3-12字以内且必须包含汉字',
+        content: '请填写真实项目名称，3-12字，必须含有汉字',
         showCancel: false,
         success(res) { }
       })

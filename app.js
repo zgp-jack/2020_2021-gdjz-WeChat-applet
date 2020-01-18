@@ -11,6 +11,7 @@ App({
 
   },
   globalData: {
+    complaincontent: '请填写5~100字，必须有汉字。（恶意投诉会被封号，请谨慎投诉！）',
     areaIs:false,
     topshow: false,
     isauthuuid: false,
@@ -41,8 +42,8 @@ App({
     commonDownloadApp: "http://cdn.yupao.com/miniprogram/images/download.png?t=" + new Date().getTime(),
     commonJixieAd: "http://cdn.yupao.com/miniprogram/images/list-ad-newjixie.png?t=" + new Date().getTime(),
 
-    apiRequestUrl: "https://miniapi.zhaogong.vrtbbs.com/",
-    // apiRequestUrl: "https://newyupaomini.54xiaoshuo.com/",
+    // apiRequestUrl: "https://miniapi.zhaogong.vrtbbs.com/",
+    apiRequestUrl: "https://newyupaomini.54xiaoshuo.com/",
     // apiRequestUrl: "http://miniapi.qsyupao.com/",
     //apiRequestUrl:"http://mini.zhaogongdi.com/",
     apiUploadImg: "https://newyupaomini.54xiaoshuo.com/index/upload/",

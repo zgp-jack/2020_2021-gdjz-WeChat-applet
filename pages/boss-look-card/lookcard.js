@@ -1,10 +1,12 @@
 
 const app = getApp();
 let remain = require("../../utils/remain.js");
+let v = require("../../utils/v.js");
 Page({
 
   /**/
   data: {
+    complaincontent: app.globalData.complaincontent,
     realNames: app.globalData.apiImgUrl + 'newresume-infolist-ysm.png?t=1',
     authentication: app.globalData.apiImgUrl + 'newresume-infolist-jnz.png?t=1',
     unitid: app.globalData.unitid,
@@ -202,8 +204,11 @@ Page({
     let userInfo = wx.getStorageSync("userInfo");
     let info = this.data.complainInfo;
     let detailid = _this.data.detailid;
-    if (info == "") {
-      app.showMyTips("请输入您的投诉内容");
+    let complaincontent = _this.data.complaincontent
+    let vertifyNum = v.v.new()
+
+    if (info == "" || info.length < 5 || info.length > 100 || !vertifyNum.isChinese(info)) {
+      app.showMyTips(complaincontent);
       return false;
     }
 
