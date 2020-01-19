@@ -68,7 +68,7 @@ Page({
   },
   chooseThisCtiy(e) {
     let that = this;
-    // console.log(that.data.maxnumber)
+    
 
     let num = e.currentTarget.dataset.id.id;
 

@@ -94,7 +94,7 @@ Page({
         }
       },
       complete(){
-        console.log(123)
+        
         that.setData({
           deletestatus: true
         })
@@ -352,7 +352,7 @@ Page({
     if (vertifyNum.isNull(this.data.detail)) {
       wx.showModal({
         title: '温馨提示',
-        content: '请正确输入项目详情15-500字以内且 必须包含汉字',
+        content: '请填写真实项目介绍，15-500字，必须含有汉字',
         showCancel: false,
         success(res) { }
       })
@@ -363,7 +363,7 @@ Page({
     if ((!vertifyNum.isChinese(this.data.detail)) || this.data.detail.length < 15 || this.data.detail.length > 500) {
       wx.showModal({
         title: '温馨提示',
-        content: '请正确输入项目详情15-500字以内且 必须包含汉字',
+        content: '请填写真实项目介绍，15-500字，必须含有汉字',
         showCancel: false,
         success(res) { }
       })
@@ -494,7 +494,7 @@ Page({
     if (vertifyNum.isNull(this.data.detail)) {
       wx.showModal({
         title: '温馨提示',
-        content: '请正确输入项目详情15-500字以内且 必须包含汉字',
+        content: '请填写真实项目介绍，15-500字，必须含有汉字',
         showCancel: false,
         success(res) { }
       })
@@ -505,7 +505,7 @@ Page({
     if ((!vertifyNum.isChinese(this.data.detail)) || this.data.detail.length < 15 || this.data.detail.length > 500) {
       wx.showModal({
         title: '温馨提示',
-        content: '请正确输入项目详情15-500字以内且 必须包含汉字',
+        content: '请填写真实项目介绍，15-500字，必须含有汉字',
         showCancel: false,
         success(res) { }
       })
@@ -803,7 +803,7 @@ Page({
     if (vertifyNum.isNull(this.data.detail)) {
       wx.showModal({
         title: '温馨提示',
-        content: '请正确输入项目详情15-500字以内且 必须包含汉字',
+        content: '请填写真实项目介绍，15-500字，必须含有汉字',
         showCancel: false,
         success(res) { }
       })
@@ -814,7 +814,7 @@ Page({
     if ((!vertifyNum.isChinese(this.data.detail)) || this.data.detail.length < 15 || this.data.detail.length > 500) {
       wx.showModal({
         title: '温馨提示',
-        content: '请正确输入项目详情15-500字以内且 必须包含汉字',
+        content: '请填写真实项目介绍，15-500字，必须含有汉字',
         showCancel: false,
         success(res) { }
       })

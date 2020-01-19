@@ -11,7 +11,8 @@ App({
 
   },
   globalData: {
-    complaincontent: '请填写5~100字，必须有汉字。（恶意投诉会被封号，请谨慎投诉！）',
+    version:"v-2.7.0",
+    complaincontent: '请填写5~100字，必须含有汉字。（恶意投诉会被封号，请谨慎投诉！）',
     areaIs:false,
     topshow: false,
     isauthuuid: false,

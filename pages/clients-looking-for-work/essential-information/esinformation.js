@@ -564,7 +564,7 @@ Page({
     if (vertifyNum.isNull(this.data.otextareavalue) || !vertifyNum.isChinese(this.data.otextareavalue)) {
       wx.showModal({
         title: '温馨提示',
-        content: '请填写真实自我介绍，15-500字以内，必须含有汉字',
+        content: '请填写真实自我介绍，15-500字，必须含有汉字',
         showCancel: false,
         success(res) { }
       })
