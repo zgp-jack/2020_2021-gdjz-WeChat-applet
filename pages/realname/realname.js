@@ -225,7 +225,7 @@ Page({
   userUploadIdcard: function (e) {
     let _this = this;
     let _type = e.currentTarget.dataset.type;
-    app.userUploadImg(function (imgRes, mydata) {
+    app.cameraAndAlbum(function (imgRes, mydata) {
       wx.hideLoading();
       wx.showToast({
         title: mydata.errmsg,

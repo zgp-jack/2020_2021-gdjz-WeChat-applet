@@ -397,6 +397,38 @@ App({
     }, 1)
 
   },
+  detailUpimg:function(res,callback){
+    let _this = this;
+    let imgRes = res;
+    wx.uploadFile({
+      url: _this.globalData.apiUploadImg,
+      filePath: res.tempFilePaths[0],
+      name: 'file',
+      success(res) {
+
+        let mydata = JSON.parse(res.data);
+
+        if (mydata.errcode == "ok") {
+          callback ? callback(imgRes, mydata) : "";
+        } else {
+          wx.hideLoading();
+          wx.showToast({
+            title: mydata.errmsg,
+            icon: "none",
+            duration: 2000
+          })
+        }
+      },
+      fail: function () {
+        wx.hideLoading();
+        wx.showToast({
+          title: "网络错误，上传失败！",
+          icon: "none",
+          duration: 2000
+        })
+      }
+    })
+  },
   userUploadImg: function (callback) {
     let _this = this;
     wx.showLoading({
@@ -407,42 +439,43 @@ App({
       sizeType: ['compressed'],
       sourceType: ['album', 'camera'],
       success: res => {
-        let imgRes = res;
-        wx.uploadFile({
-          url: _this.globalData.apiUploadImg,
-          filePath: res.tempFilePaths[0],
-          name: 'file',
-          success(res) {
-
-            let mydata = JSON.parse(res.data);
-
-            if (mydata.errcode == "ok") {
-              callback ? callback(imgRes, mydata) : "";
-            } else {
-              wx.hideLoading();
-              wx.showToast({
-                title: mydata.errmsg,
-                icon: "none",
-                duration: 2000
-              })
-            }
-          },
-          fail: function () {
-            wx.hideLoading();
-            wx.showToast({
-              title: "网络错误，上传失败！",
-              icon: "none",
-              duration: 2000
-            })
-          }
-        })
-
+        _this.detailUpimg(res,callback);
       },
       fail: function () {
         wx.hideLoading();
       }
     })
   },
+  cameraAndAlbum:function(callback){
+    let that = this;
+    wx.showActionSheet({
+      itemList: ['拍照','从相册中选择'],
+      success(res) {
+        console.log(res.tapIndex)
+        if(res.tapIndex==0){ //0是拍照
+          wx.chooseImage({
+            count: 1,
+            sizeType: ['compressed'],
+            sourceType: ['camera'],
+            success: function (res) {
+              that.detailUpimg(res,callback);
+             },
+          })
+        } else if(res.tapIndex==1){
+          wx.chooseImage({
+            count: 1,
+            sizeType: ['compressed'],
+            sourceType: ['album'],
+            success: function(res) {
+              that.detailUpimg(res,callback);
+            },
+          })
+        }
+      }
+    })
+   
+     
+    },
   arrDeepCopy: function (source) {
     var sourceCopy = source instanceof Array ? [] : {};
     for (var item in source) {
