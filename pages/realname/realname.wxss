@@ -44,5 +44,60 @@
     width: 100%;
     font-size: 26rpx;
     text-align: center;
-    line-height: 80rpx;
+
+}
+.realname-photo{
+    padding: 20rpx 0;
+  padding-left: 20rpx;
+
+  font-size: 32rpx;
+}
+.realname-item .idengtify{
+  background:#0099ff;
+  color: white;
+  font-size: 30rpx;
+  line-height: 70rpx;
+  border-radius: 0rpx 0rpx  18rpx 18rpx;
+  margin-bottom: 12rpx;
+}
+.common-publish-contentidenty{
+  position: relative;
+width: 100%;
+margin: 20rpx 0 ;
+background: white;
+border-bottom: 1px solid #dcdcdc;
+box-shadow: #e7e6e4 0 0 10rpx;
+
+}
+.realname-identy{
+  font-size: 30rpx;
+  padding-left: 20rpx;
+  color: #919191;
+}
+.realname-photoing{
+  font-size: 30rpx;
+  padding-left: 20rpx;
+  color: #919191;
+}
+.realname-photoing text{
+  color: red;
+}
+
+.realname-oimg{
+  padding: 50rpx 20rpx;
+  display: flex;
+  justify-content: space-between;
+}
+.realname-oimg image{
+  width: 160rpx;
+  height: 115rpx;
+}
+.common-sure-reminder {
+  text-align:center;
+  font-size: 30rpx;
+  color: #919191;
+  margin-top: 8rpx;
+}
+.common-sure-reminder text{
+  color: red;
 }

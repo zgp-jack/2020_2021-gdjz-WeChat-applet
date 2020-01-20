@@ -97,7 +97,7 @@ Page({
       iImgUrl: app.globalData.apiImgUrl, //图片地址
       showHistoryList:false,
       historyList:[],
-      member_notice:{},
+      // member_notice:{},
       member_less_info:{},
       msgsNumber:[],
     },
@@ -468,7 +468,7 @@ Page({
               
                 _this.setData({
                     "notice.lists": mydata.notice,
-                  member_notice: mydata.member_notice,
+                  // member_notice: mydata.member_notice,
                   member_less_info: mydata.member_less_info,
                     phone: mydata.phone,
                     wechat: _mark ? mydata.wechat.number : (_wx.wechat ? _wx.wechat : mydata.wechat.number)

@@ -1,6 +1,33 @@
 <view class="yupao-common-container">
+  <view class='common-publish-content common-shaded-box realname-tips'>
+    <view class='realname-idcardbox clearfix' style='border-bottom:1px solid #dcdcdc;'>
+      <view class='realname-photo'>请拍摄并上传你的身份证照片</view>
+      <view class='realname-item' bindtap='userUploadIdcard' data-type="zm">
+        <image src='{{card_img_path|| idcardz}}'></image>
+        <text class="idengtify">身份证正面照</text>
+      </view>
+      <view class='realname-item' bindtap='userUploadIdcard' data-type="sc">
+        <image src='{{handone_img_path|| idcardf}}'></image>
+        <text class="idengtify">手持身份证照</text>
+      </view>
+    </view>
+  </view>
+  <view class='common-publish-contentidenty'>
+    <view class='realname-photo'>拍摄身份证要求：</view>
+    <view class='realname-identy'>大陆公民持有的本人有效二代身份证;</view>
+    <view class='realname-photoing'>拍摄时确保身份证
+      <text>边框完整，</text>
+      <text>字体清晰，</text>
+      <text>亮度均匀;</text>
+    </view>
+    <view class='realname-oimg' >
+      <image wx:for="{{card_img_array}}"  wx:key="{{ index }}" src='{{item}}'></image>
+    </view>
+  </view>
   <view class='yupao-realname-container'>
     <view class='common-publish-content common-shaded-box nopadding'>
+
+
       <view class='common-publish-item'>
         <view class='common-publish-item-content'>
           <text class='common-publish-words'>姓名</text>
@@ -10,6 +37,18 @@
       <view class='common-publish-item'>
         <view class='common-publish-item-content'>
           <text class='common-publish-words'>年龄</text>
+          <input class='common-publish-input' type='number' value='{{ member.age }}' placeholder='请输入年龄' bindinput='userEnterAge'></input>
+        </view>
+      </view>
+      <view class='common-publish-item'>
+        <view class='common-publish-item-content'>
+          <text class='common-publish-words'>性别</text>
+          <input class='common-publish-input' type='number' value='{{ member.age }}' placeholder='请输入年龄' bindinput='userEnterAge'></input>
+        </view>
+      </view>
+      <view class='common-publish-item'>
+        <view class='common-publish-item-content'>
+          <text class='common-publish-words'>出生日期</text>
           <input class='common-publish-input' type='number' value='{{ member.age }}' placeholder='请输入年龄' bindinput='userEnterAge'></input>
         </view>
       </view>
@@ -28,7 +67,13 @@
           <input class='common-publish-input' type='idcard' value='{{ member.id_card }}' placeholder='请输入身份证号' bindinput='userEnterIdcard'></input>
         </view>
       </view>
-      <view class='common-publish-item' wx:if="{{ !member.tel }}">
+      <view class='common-publish-item'>
+        <view class='common-publish-item-content'>
+          <text class='common-publish-words'>详细地址</text>
+          <input class='common-publish-input' type='idcard' value='{{ member.id_card }}' placeholder='请输入身份证号' bindinput='userEnterIdcard'></input>
+        </view>
+      </view>
+      <!-- <view class='common-publish-item' wx:if="{{ !member.tel }}">
         <view class='common-publish-item-content'>
           <text class='common-publish-words'>手机号</text>
           <input class='common-publish-input' type='number' value='{{ member.tel }}' placeholder='请输入手机号' bindinput='userEnterTel'></input>
@@ -46,29 +91,18 @@
           <text class='common-publish-words'>密码</text>
           <input class='common-publish-input' password value='{{ member.pass }}' placeholder='请输入密码' bindinput='userEnterPass'></input>
         </view>
-      </view>
+      </view> -->
     </view>
 
-    <view class='common-publish-content common-shaded-box realname-tips'>
+    <!-- <view class='common-publish-content common-shaded-box realname-tips'>
       <view class='realname-tips-box'>
         <text>重要</text>上传前，先按示范拍好两张照片，一张单独的身份证正面照(可遮掉身份证号后4位)，一张真人头像同身份证的合影照片。
       </view>
-    </view>
+    </view> -->
 
-    <view class='common-publish-content common-shaded-box realname-tips'>
-      <view class='realname-idcardbox clearfix' style='border-bottom:1px solid #dcdcdc;'>
-        <view class='realname-item' bindtap='userUploadIdcard' data-type="zm">
-          <image src='{{ member.id_card_img_path || idcardz }}'></image>
-          <text>请上传身份证正面</text>
-        </view>
-        <view class='realname-item' bindtap='userUploadIdcard' data-type="sc">
-          <image src='{{ member.hand_img_path || idcardf }}'></image>
-          <text>请上传手持身份证</text>
-        </view>
-      </view>
-    </view>
   </view>
   <text class='common-sure-btn' bindtap='userSubmitIdcard'>确认提交</text>
+  <view class='common-sure-reminder'><text>提示：</text>部分信息未识别成功，请手动修改</view>
 </view>
 
 

@@ -7,6 +7,11 @@ Page({
    * 页面的初始数据
    */
   data: {
+    card_img_path: app.globalData.apiImgUrl + "lpy/auth/idcard-z.png",
+    handone_img_path: app.globalData.apiImgUrl + "lpy/auth/idcard-l.png",
+    card_img_status: app.globalData.apiImgUrl + "lpy/auth/idcard-bkqs.png",
+    card_img_array: [app.globalData.apiImgUrl + "lpy/auth/idcard-yes.png", app.globalData.apiImgUrl + "lpy/auth/idcard-bkqs.png", app.globalData.apiImgUrl + "lpy/auth/idcard-qs.png", app.globalData.apiImgUrl + "lpy/auth/idcard-sg.png"],
+    hand_img_path:"",
     userInfo: {},
     member: {
       username: "",
