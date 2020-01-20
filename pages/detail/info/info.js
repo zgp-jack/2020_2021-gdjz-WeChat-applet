@@ -1,4 +1,5 @@
 // pages/info/info.js share share showThisMapInfo showThisMapInfo
+let v = require("../../../utils/v.js");
 const app = getApp();
 Page({
 
@@ -6,6 +7,7 @@ Page({
      * 页面的初始数据 getInfoTel
      */
     data: {
+        complaincontent: app.globalData.complaincontent,
         infoId:"",
         userInfo:false,
         notice: {
@@ -418,9 +420,11 @@ Page({
         let userInfo = this.data.userInfo;
         let infoId = this.data.infoId;
         let info = this.data.complainInfo; 
+      let complaincontent = this.data.complaincontent
+      let vertifyNum = v.v.new()
         info = info.replace(/^\s+|\s+$/g, '');
-        if (info == "") {
-            app.showMyTips("请输入您的投诉内容");
+      if (info == "" || info.length < 5 || info.length > 100 || !vertifyNum.isChinese(info)) {
+        app.showMyTips(complaincontent);
             return false;
         }
         app.appRequestAction({
@@ -520,6 +524,7 @@ Page({
         this.setData({ infoId:infoId })
         this.initNeedData();
         //this.initJobInfo(infoId);
+
     },
 
     /**

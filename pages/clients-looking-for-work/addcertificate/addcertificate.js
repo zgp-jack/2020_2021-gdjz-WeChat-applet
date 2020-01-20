@@ -237,7 +237,7 @@ vertify()
     if ((vertifyNum.isNull(this.data.name)) || !vertifyNum.isChinese(this.data.name)) {
       wx.showModal({
         title: '温馨提示',
-        content: '请正确输入证书名称3-12字以内且 必须包含汉字',
+        content: '请填写真实证书名称，3-12字，必须含有汉字',
         showCancel: false,
         success(res) { }
       })
@@ -247,7 +247,7 @@ vertify()
     if (this.data.name.length > 12 || this.data.name.length < 3) {
       wx.showModal({
         title: '温馨提示',
-        content: '请正确输入证书名称3-12字以内且 必须包含汉字',
+        content: '请填写真实证书名称，3-12字，必须含有汉字',
         showCancel: false,
         success(res) { }
       })
@@ -351,7 +351,7 @@ vertify()
     if (vertifyNum.isNull(this.data.name) || !vertifyNum.isChinese(this.data.name) || this.data.name.length > 12 || this.data.name.length < 3) {
        wx.showModal({
         title: '温馨提示',
-        content: '请正确输入证书名称3-12字以内且 必须包含汉字',
+        content: '请填写真实证书名称，3-12字，必须含有汉字',
         showCancel: false,
         success(res) { }
       })
@@ -360,7 +360,7 @@ vertify()
     // if (!vertifyNum.isChinese(this.data.name)) {
     //   wx.showModal({
     //     title: '温馨提示',
-    //     content: '请正确输入证书名称3-12字以内且 必须包含汉字',
+    //     content: '请填写真实证书名称，3-12字，必须含有汉字',
     //     showCancel: false,
     //     success(res) { }
     //   })
@@ -370,7 +370,7 @@ vertify()
     // if (this.data.name.length > 12 || this.data.name.length < 3) {
     //   wx.showModal({
     //     title: '温馨提示',
-    //     content: '请正确输入证书名称3-12字以内且 必须包含汉字',
+    //     content: '请填写真实证书名称，3-12字，必须含有汉字',
     //     showCancel: false,
     //     success(res) { }
     //   })
@@ -504,7 +504,7 @@ vertify()
     if ((vertifyNum.isNull(this.data.name)) || !vertifyNum.isChinese(this.data.name)) {
       wx.showModal({
         title: '温馨提示',
-        content: '请正确输入证书名称3-12字以内且 必须包含汉字',
+        content: '请填写真实证书名称，3-12字，必须含有汉字',
         showCancel: false,
         success(res) { }
       })
@@ -514,7 +514,7 @@ vertify()
     if (this.data.name.length > 12 || this.data.name.length < 3) {
       wx.showModal({
         title: '温馨提示',
-        content: '请正确输入证书名称3-12字以内且 必须包含汉字',
+        content: '请填写真实证书名称，3-12字，必须含有汉字',
         showCancel: false,
         success(res) { }
       })

@@ -87,6 +87,7 @@ Page({
     },
 
     userChooseProvince: function (e) {
+      app.globalData.areaIs = false;
         var _this = this;
         let index = parseInt(e.currentTarget.dataset.index);
         let directCtiy = parseInt(e.currentTarget.dataset.haschild);

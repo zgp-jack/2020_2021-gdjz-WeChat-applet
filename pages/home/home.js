@@ -5,6 +5,7 @@ let areas = require("../../utils/area.js");
 const app = getApp();
 Page({
   data: {
+    version: app.globalData.version,
     realNames: app.globalData.apiImgUrl + 'newresume-infolist-ysm.png?t=1',
     authentication: app.globalData.apiImgUrl + 'newresume-infolist-jnz.png?t=1',
     finded: app.globalData.apiImgUrl + "lpy/finded.png",

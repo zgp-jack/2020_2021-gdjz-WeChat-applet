@@ -1,11 +1,13 @@
 // pages/source/source.js showRecord showComplain showThisRecord
 const app = getApp();
+let v = require("../../../utils/v.js");
 Page({
 
     /**
      * 页面的初始数据 showThisRecord  userEnterComplain userComplaintAction closeThisRerocd closeThisRerocd
      */
     data: {
+        complaincontent: app.globalData.complaincontent,
         loadingGif: app.globalData.apiImgUrl + "loading.gif",
         nodata: app.globalData.apiImgUrl + "nodata.png",
         nothavemore:false,
@@ -56,9 +58,11 @@ Page({
     let infoId = this.data.infoId;
     let type = this.data.type;
     let info = this.data.complainInfo;
+    let complaincontent = this.data.complaincontent
+    let vertifyNum = v.v.new()
     info = info.replace(/^\s+|\s+$/g, '');
-    if (!info) {
-      app.showMyTips("请输入您的投诉内容");
+    if (!info || info.length < 5 || info.length > 100 || !vertifyNum.isChinese(info)) {
+      app.showMyTips(complaincontent);
       return false;
     }
     app.appRequestAction({
