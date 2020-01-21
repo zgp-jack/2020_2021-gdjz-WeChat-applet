@@ -37,7 +37,7 @@
 .realname-item image{
     display: block;
     width: 100%;
-    height: 200rpx;
+    height: 240rpx;
 }
 .realname-item text{
     display: block;
@@ -101,3 +101,18 @@ box-shadow: #e7e6e4 0 0 10rpx;
 .common-sure-reminder text{
   color: red;
 }
+/* .realname-item .uploadfail{
+  display: inline-block;
+  width: 100rpx;
+  height: 100rpx;
+}
+ .realname-item .realname-fail{
+   width: 100%;
+   height: 200rpx;
+    text-align: center;
+
+ }
+
+  .realname-item .realname-content{
+    font-size: 28rpx;
+  } */

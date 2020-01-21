@@ -48,6 +48,7 @@ App({
     // apiRequestUrl: "http://miniapi.qsyupao.com/",
     //apiRequestUrl:"http://mini.zhaogongdi.com/",
     apiUploadImg: "https://newyupaomini.54xiaoshuo.com/index/upload/",
+    apiUploadImgphoto: "https://miniapi.zhaogong.vrtbbs.com/index/authid-card/",
     apiImgUrl: "http://cdn.yupao.com/miniprogram/images/",
     commonShareTips: "全国建筑工地招工平台",
     isFirstLoading: true,
@@ -399,11 +400,15 @@ App({
     }, 1)
 
   },
-  detailUpimg:function(res,callback){
+  detailUpimg: function (type, res, callback, _type){
     let _this = this;
     let imgRes = res;
+    wx.showToast({
+      title: '图片上传中',
+      icon: 'loading'
+    })
     wx.uploadFile({
-      url: _this.globalData.apiUploadImg,
+      url: type == 1 || _type == "sc"? _this.globalData.apiUploadImg : _this.globalData.apiUploadImgphoto,
       filePath: res.tempFilePaths[0],
       name: 'file',
       success(res) {
@@ -411,6 +416,7 @@ App({
         let mydata = JSON.parse(res.data);
 
         if (mydata.errcode == "ok") {
+
           callback ? callback(imgRes, mydata) : "";
         } else {
           wx.hideLoading();
@@ -441,14 +447,14 @@ App({
       sizeType: ['compressed'],
       sourceType: ['album', 'camera'],
       success: res => {
-        _this.detailUpimg(res,callback);
+        _this.detailUpimg(1,res,callback);
       },
       fail: function () {
         wx.hideLoading();
       }
     })
   },
-  cameraAndAlbum:function(callback){
+  cameraAndAlbum: function (callback, _type){
     let that = this;
     wx.showActionSheet({
       itemList: ['拍照','从相册中选择'],
@@ -460,7 +466,7 @@ App({
             sizeType: ['compressed'],
             sourceType: ['camera'],
             success: function (res) {
-              that.detailUpimg(res,callback);
+              that.detailUpimg(2, res, callback, _type);
              },
           })
         } else if(res.tapIndex==1){
@@ -469,7 +475,7 @@ App({
             sizeType: ['compressed'],
             sourceType: ['album'],
             success: function(res) {
-              that.detailUpimg(res,callback);
+              that.detailUpimg(2, res, callback, _type);
             },
           })
         }

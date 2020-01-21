@@ -11,7 +11,8 @@ Page({
     handone_img_path: app.globalData.apiImgUrl + "lpy/auth/idcard-l.png",
     card_img_status: app.globalData.apiImgUrl + "lpy/auth/idcard-bkqs.png",
     card_img_array: [app.globalData.apiImgUrl + "lpy/auth/idcard-yes.png", app.globalData.apiImgUrl + "lpy/auth/idcard-bkqs.png", app.globalData.apiImgUrl + "lpy/auth/idcard-qs.png", app.globalData.apiImgUrl + "lpy/auth/idcard-sg.png"],
-    hand_img_path:"",
+    hand_img_path: "",
+    uploadfailicon: app.globalData.apiImgUrl + "lpy/auth/upload-fail-tips.png",
     userInfo: {},
     member: {
       username: "",
@@ -44,7 +45,88 @@ Page({
     areaText: "",
     nationalarray: [],
     nation: "",
-    nationindex: ""
+    nationindex: "",
+    sex: "",
+    array: [{ id: '1', name: '男' }, { id: '2', name: '女' }],
+    arrayone: [],
+    beforeDate: "",
+    emdDate: "",
+    regionone: "",
+    birthday: "",
+    indexsex:"fail",
+    check_degree:false
+  },
+  getaddress() {
+    let relname = wx.getStorageSync("relname");
+    if (relname) {
+      this.setData({
+        regionone: relname
+      })
+    }
+    wx.removeStorageSync('relname')
+  },
+  userTapAddress: function () {
+    wx.navigateTo({
+      url: '/pages/relnamemap/smap',
+    })
+  },
+  starttimer() {
+    let timer = new Date();
+    let d = new Date(timer);
+    let times = d.getFullYear() + '-' + (d.getMonth() + 1) + '-' + d.getDate();
+    this.setData({
+      nowDate: times
+    })
+    let starttime = this.data.nowDate.split("-");
+    let starttimeone = this.data.nowDate.split("-")[0] - 0;
+    let starttimetwo = this.data.nowDate.split("-")[1];
+    let starttimethree = this.data.nowDate.split("-")[2];
+
+    let beforeDate = (starttimeone - 60) + "-" + starttimetwo + "-" + starttimethree;
+    let emdDate = (starttimeone - 18) + "-" + starttimetwo + "-" + starttimethree;
+    this.setData({
+      beforeDate: beforeDate,
+      emdDate: emdDate
+    })
+
+
+  },
+  birthday(e) {
+
+    this.setData({
+      birthday: e.detail.value
+    })
+
+  },
+  getpikerdetail() {
+    let that = this;
+    let array = []
+    for (let i = 0; i < that.data.array.length; i++) {
+      array.push(that.data.array[i].name)
+    }
+    that.setData({
+      arrayone: array
+    })
+
+    if (that.data.indexsex != "fail" && that.data.indexsex >= 0 ) {
+      that.setData({
+        sex: that.data.array[that.data.indexsex].id
+      })
+    } else if (that.data.indexsex != "fail" && that.data.indexsex < 0){
+      that.setData({
+        sex: ""
+      })
+    }
+  },
+  sex: function (e) {
+    console.log(e)
+    this.setData({
+      indexsex: ~~e.detail.value
+    })
+    this.setData({
+      sex: this.data.array[~~e.detail.value].id
+    })
+
   },
   getnationdetail(item) {
 
@@ -77,23 +159,34 @@ Page({
         if (mydata.errcode == "ok") {
           mydata = mydata.authData;
           _this.setData({
-            "member.username": mydata.member.username,
-            "phone": mydata.member.tel,
-            "member.tel": mydata.member.tel,
+            "member.username": mydata.hasOwnProperty("member")? mydata.member.username:"",
+            "phone": mydata.hasOwnProperty("member") ? mydata.member.tel:"",
+            "member.tel": mydata.hasOwnProperty("member") ? mydata.member.tel:"",
             "member.age": mydata.memberExt.age,
             "member.id_card": mydata.memberExt.id_card,
             "member.hand_img": mydata.memberExt.hand_img,
-            "member.hand_img_path": mydata.memberExt.hand_img_path,
             "member.id_card_img": mydata.memberExt.id_card_img,
-            "member.id_card_img_path": mydata.memberExt.id_card_img_path,
             "member.nationality": mydata.memberExt.nationality,
             "member.idcard_check_failure_reason": mydata.memberExt.idcard_check_failure_reason,
             "member.show_resume": mydata.show_resume,
             "classifyTree": (mydata.show_resume == 1) ? mydata.classifyTree : [],
             "member.cities": (mydata.show_resume == 1) ? mydata.provinceTree : [],
             nation: mydata.memberExt.nation_id ? mydata.memberExt.nation_id : "",
+            birthday: mydata.memberExt.birthday ? mydata.memberExt.birthday == 0 ? "" : mydata.memberExt.birthday : "",
+            regionone: mydata.memberExt.address ? mydata.memberExt.address == 0 ? "" : mydata.memberExt.address: "",
+            indexsex: mydata.memberExt.sex ? mydata.memberExt.sex - 1 : "fail",
+            card_img_path: mydata.memberExt.id_card_img_path ? mydata.memberExt.id_card_img_path : "",
+            handone_img_path: mydata.memberExt.hand_img_path ? mydata.memberExt.hand_img_path : "",
           })
 
+          if (mydata.hasOwnProperty("member")){
+            if (mydata.member.check_degree==2){
+              _this.setData({
+                check_degree:true
+              })
+            }
+
+          }
           let nationalarray = [];
           for (let i = 0; i < mydata.nation.length; i++) {
             nationalarray.push(mydata.nation[i].mz_name)
@@ -117,7 +210,7 @@ Page({
               success: function (res) { }
             })
           }
-
+          _this.getpikerdetail()
         } else {
           wx.showModal({
             title: '温馨提示',
@@ -232,25 +325,90 @@ Page({
     let _type = e.currentTarget.dataset.type;
     app.cameraAndAlbum(function (imgRes, mydata) {
       wx.hideLoading();
-      wx.showToast({
-        title: mydata.errmsg,
-        icon: "none",
-        duration: 2000
-      })
+
+      console.log(mydata)
+      console.log(imgRes)
+
       if (_type == "zm") {
         _this.setData({
-          "member.id_card_img": mydata.url,
-          "member.id_card_img_path": imgRes.tempFilePaths[0]
+          "card_img_path": mydata.httpurl,
+          "member.id_card_img": mydata.url
         })
       } else if (_type == "sc") {
         _this.setData({
-          "member.hand_img": mydata.url,
-          "member.hand_img_path": imgRes.tempFilePaths[0]
+          "handone_img_path": mydata.httpurl,
+          "member.hand_img": mydata.url
+        })
+        wx.showToast({
+          title: mydata.errmsg,
+          icon: "none",
+          duration: 2000
         })
       }
+      if (mydata.hasOwnProperty("card_info")) {
 
+        if (_type == "zm"&&!mydata.card_info.success) {
+          wx.showToast({
+            title: mydata.card_info.tips_message,
+            icon: "none",
+            duration: 2000
+          })
+          _this.setData({
+            "card_img_path": _this.data.uploadfailicon,
+          })
+        } else if (_type == "zm" && mydata.card_info.success){
+          _this.setData({
+            check_degree: true,
+          })
+          wx.showToast({
+            title: mydata.errmsg,
+            icon: "none",
+            duration: 2000
+          })
+          _this.getimageDetail(mydata)
+        } 
+      }
+    }, _type)
+  },
+  getimageDetail(mydata){
+    let _this = this;
+    let nationalarrayone = this.data.nationalarrayone;
+    if (mydata.hasOwnProperty("card_info")){
+      _this.setData({
+        nation: mydata.card_info.nation_id ? mydata.card_info.nation_id : "",
+        birthday: mydata.card_info.birth ? mydata.card_info.birth : "",
+        regionone: mydata.card_info.address ? mydata.card_info.address : "",
+        indexsex: mydata.card_info.gender ? mydata.card_info.gender - 1 : "fail",
+        "member.id_card": mydata.card_info.num ? mydata.card_info.num:"",
+        "member.username": mydata.card_info.name ? mydata.card_info.name:""
+      })
+      if (_this.data.indexsex != "fail" && _this.data.indexsex >= 0) {
+        _this.setData({
+          sex: _this.data.array[_this.data.indexsex].id
+        })
+      } 
+      _this.dostatus(_this.data.birthday)
+
+      for (let i = 0; i < nationalarrayone.length; i++) {
+        if (nationalarrayone[i].mz_id == _this.data.nation) {
+          _this.setData({
+            nationindex: i
+          })
+        }
+      }
+
+    }
+  },
+  dostatus(item){
+
+    let birth = item.substring(0,4)
+    let birthtwo = item.substring(4, 6)
+    let birththree = item.substring(6, 8)
+    
+    let birthall = birth +"-"+ birthtwo+"-" + birththree;
+    this.setData({
+      birthday: birthall
     })
-
   },
   userClickItem: function (e) {
     let _id = e.currentTarget.dataset.id;
@@ -318,54 +476,72 @@ Page({
   // },
   userSubmitIdcard: function () {
     let _this = this;
-   let  nationalque = _this.data.nationalarray[_this.data.nationindex]
+    let nationalque = _this.data.nationalarray[_this.data.nationindex]
+
     let member = this.data.member;
     let userInfo = this.data.userInfo;
     let phone = this.data.phone;
     let v = vali.v.new();
-    if (!v.isRequire(member.username, 2)) {
-      app.showMyTips("请输入正确的用户名！");
-      return false;
-    }
-    if (!v.isRequire(member.age, 1)) {
-      app.showMyTips("请输入您的年龄！");
-      return false;
-    }
-    
-    if (!v.isRequire(_this.data.nation, 1)) {
-      app.showMyTips("请选择您的民族！");
-      return false;
-    }
-    console.log(nationalque)
-    if (!v.isRequire(nationalque, 1)) {
-      app.showMyTips("请选择您的民族！");
-      return false;
-    }
-    if (!v.isRequire(member.id_card, 15)) {
-      app.showMyTips("请输入正确的身份证号码！");
-      return false;
-    }
-    if (!member.tel) {
-      if (!v.isMobile(phone)) {
-        app.showMyTips("手机号码有误！");
-        return false;
-      }
-      if (!v.isRequire(member.code, 4)) {
-        app.showMyTips("请输入正确的验证码！");
-        return false;
-      }
-      if (!v.isRequire(member.pass, 6)) {
-        app.showMyTips("密码由6-16位数字或字母组成！");
-        return false;
-      }
-    }
 
+    if (_this.data.card_img_path == _this.data.uploadfailicon) {
+      app.showMyTips("请上传身份证正面照！");
+      return false;
+    }
     if (member.id_card_img == "") {
       app.showMyTips("请上传身份证正面照！");
       return false;
     }
     if (member.hand_img == "") {
       app.showMyTips("请上传手持身份证照！");
+      return false;
+    }
+    if (!v.isRequire(member.username, 2)) {
+      app.showMyTips("请输入正确的姓名！");
+      return false;
+    }
+    console.log(_this.data.sex)
+    if (!v.isRequire(_this.data.sex, 1)) {
+      app.showMyTips("请选择您的性别！");
+      return false;
+    }
+    if (_this.data.birthday == "") {
+      app.showMyTips("请选择你的出身日期");
+      return false;
+    }
+    if (_this.data.nation == "") {
+      app.showMyTips("请选择您的民族！");
+      return false;
+    }
+
+
+
+    if (!v.isRequire(nationalque, 1)) {
+      app.showMyTips("请选择您的民族！");
+      return false;
+    }
+
+    if (!v.isRequire(member.id_card, 15)) {
+      app.showMyTips("请输入正确的身份证号码！");
+      return false;
+    }
+    // if (!member.tel) {
+    //   if (!v.isMobile(phone)) {
+    //     app.showMyTips("手机号码有误！");
+    //     return false;
+    //   }
+    //   if (!v.isRequire(member.code, 4)) {
+    //     app.showMyTips("请输入正确的验证码！");
+    //     return false;
+    //   }
+    //   if (!v.isRequire(member.pass, 6)) {
+    //     app.showMyTips("密码由6-16位数字或字母组成！");
+    //     return false;
+    //   }
+    // }
+
+
+    if (_this.data.regionone == "") {
+      app.showMyTips("请选择你的地址");
       return false;
     }
 
@@ -389,15 +565,21 @@ Page({
       nation_id: _this.data.nation,
       nationality: _this.data.nationalarray[_this.data.nationindex],
       idCard: member.id_card,
+
       idCardImg: member.id_card_img,
       handImg: member.hand_img,
-      tel: phone,
-      pwd: member.pass,
-      code: member.code,
-      classifys: member.worktypeIds,
-      province_id: member.province_id
-    };
 
+      // tel: phone,
+      // pwd: member.pass,
+      // code: member.code,
+      // classifys: member.worktypeIds,
+
+      province_id: member.province_id,
+      address: _this.data.regionone,
+      birthday: _this.data.birthday,
+      gender: _this.data.sex
+    };
+    console.log(formData)
     app.appRequestAction({
       url: "user/do-auth/",
       way: "POST",
@@ -434,7 +616,8 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    this.starttimer()
+    this.getaddress()
   },
 
   /**

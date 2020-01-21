@@ -2,8 +2,12 @@
   <view class='common-publish-content common-shaded-box realname-tips'>
     <view class='realname-idcardbox clearfix' style='border-bottom:1px solid #dcdcdc;'>
       <view class='realname-photo'>请拍摄并上传你的身份证照片</view>
-      <view class='realname-item' bindtap='userUploadIdcard' data-type="zm">
+      <view class='realname-item' bindtap='userUploadIdcard' data-type="zm" wx:if="{{card_img_path != uploadfailicon}}">
         <image src='{{card_img_path|| idcardz}}'></image>
+        <text class="idengtify">身份证正面照</text>
+      </view>
+      <view class='realname-item' bindtap='userUploadIdcard' data-type="zm" wx:if="{{card_img_path == uploadfailicon}}">
+   <image src='{{uploadfailicon|| idcardz}}'></image>
         <text class="idengtify">身份证正面照</text>
       </view>
       <view class='realname-item' bindtap='userUploadIdcard' data-type="sc">
@@ -20,11 +24,11 @@
       <text>字体清晰，</text>
       <text>亮度均匀;</text>
     </view>
-    <view class='realname-oimg' >
-      <image wx:for="{{card_img_array}}"  wx:key="{{ index }}" src='{{item}}'></image>
+    <view class='realname-oimg'>
+      <image wx:for="{{card_img_array}}" wx:key="{{ index }}" src='{{item}}'></image>
     </view>
   </view>
-  <view class='yupao-realname-container'>
+  <view class='yupao-realname-container' wx:if="{{check_degree}}">
     <view class='common-publish-content common-shaded-box nopadding'>
 
 
@@ -34,22 +38,28 @@
           <input class='common-publish-input' value='{{ member.username }}' placeholder='请输入姓名' bindinput='userEnterName'></input>
         </view>
       </view>
-      <view class='common-publish-item'>
+      <!-- <view class='common-publish-item'>
         <view class='common-publish-item-content'>
           <text class='common-publish-words'>年龄</text>
           <input class='common-publish-input' type='number' value='{{ member.age }}' placeholder='请输入年龄' bindinput='userEnterAge'></input>
         </view>
-      </view>
+      </view> -->
       <view class='common-publish-item'>
         <view class='common-publish-item-content'>
           <text class='common-publish-words'>性别</text>
-          <input class='common-publish-input' type='number' value='{{ member.age }}' placeholder='请输入年龄' bindinput='userEnterAge'></input>
+          <!-- <input class='common-publish-input' type='number' value='{{ member.age }}' placeholder='请输入年龄' bindinput='userEnterAge'></input> -->
+          <picker bindchange="sex" value="{{indexsex}}" range="{{arrayone}}" class="informationthreetwo">
+            <input disabled name="addregion" class='common-publish-input' value="{{arrayone[indexsex]}}" placeholder="请选择性别"></input>
+          </picker>
         </view>
       </view>
       <view class='common-publish-item'>
         <view class='common-publish-item-content'>
           <text class='common-publish-words'>出生日期</text>
-          <input class='common-publish-input' type='number' value='{{ member.age }}' placeholder='请输入年龄' bindinput='userEnterAge'></input>
+          <!-- <input class='common-publish-input' type='number' value='{{ member.age }}' placeholder='请输入年龄' bindinput='userEnterAge'></input> -->
+          <picker mode="date" value="{{birthday}}" start="{{beforeDate}}" end="{{emdDate}}" bindchange="birthday">
+            <input disabled class='common-publish-input' name="addtime" value="{{birthday}}" placeholder="请选择出生日期"></input>
+          </picker>
         </view>
       </view>
       <view class='common-publish-item'>
@@ -70,7 +80,7 @@
       <view class='common-publish-item'>
         <view class='common-publish-item-content'>
           <text class='common-publish-words'>详细地址</text>
-          <input class='common-publish-input' type='idcard' value='{{ member.id_card }}' placeholder='请输入身份证号' bindinput='userEnterIdcard'></input>
+          <input class='common-publish-input' type='idcard' value='{{regionone}}' placeholder='请选择你所在地址' bindtap='userTapAddress' ></input>
         </view>
       </view>
       <!-- <view class='common-publish-item' wx:if="{{ !member.tel }}">
@@ -101,8 +111,9 @@
     </view> -->
 
   </view>
-  <text class='common-sure-btn' bindtap='userSubmitIdcard'>确认提交</text>
-  <view class='common-sure-reminder'><text>提示：</text>部分信息未识别成功，请手动修改</view>
+  <text class='common-sure-btn' bindtap='userSubmitIdcard'>身份认证</text>
+  <view class='common-sure-reminder'>
+    <text>提示：</text>部分信息未识别成功，请手动修改</view>
 </view>
 
 
