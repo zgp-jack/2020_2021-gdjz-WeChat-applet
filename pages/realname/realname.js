@@ -159,7 +159,7 @@ Page({
         if (mydata.errcode == "ok") {
           mydata = mydata.authData;
           _this.setData({
-            "member.username": mydata.hasOwnProperty("member")? mydata.member.username:"",
+            "member.username": mydata.hasOwnProperty("memberExt") ? mydata.memberExt.user_name:"",
             "phone": mydata.hasOwnProperty("member") ? mydata.member.tel:"",
             "member.tel": mydata.hasOwnProperty("member") ? mydata.member.tel:"",
             "member.age": mydata.memberExt.age,
@@ -524,20 +524,20 @@ Page({
       app.showMyTips("请输入正确的身份证号码！");
       return false;
     }
-    // if (!member.tel) {
-    //   if (!v.isMobile(phone)) {
-    //     app.showMyTips("手机号码有误！");
-    //     return false;
-    //   }
-    //   if (!v.isRequire(member.code, 4)) {
-    //     app.showMyTips("请输入正确的验证码！");
-    //     return false;
-    //   }
-    //   if (!v.isRequire(member.pass, 6)) {
-    //     app.showMyTips("密码由6-16位数字或字母组成！");
-    //     return false;
-    //   }
-    // }
+    if (!member.tel) {
+      if (!v.isMobile(phone)) {
+        app.showMyTips("手机号码有误！");
+        return false;
+      }
+      if (!v.isRequire(member.code, 4)) {
+        app.showMyTips("请输入正确的验证码！");
+        return false;
+      }
+      // if (!v.isRequire(member.pass, 6)) {
+      //   app.showMyTips("密码由6-16位数字或字母组成！");
+      //   return false;
+      // }
+    }
 
 
     if (_this.data.regionone == "") {
@@ -569,9 +569,9 @@ Page({
       idCardImg: member.id_card_img,
       handImg: member.hand_img,
 
-      // tel: phone,
+      tel: phone,
       // pwd: member.pass,
-      // code: member.code,
+      code: member.code,
       // classifys: member.worktypeIds,
 
       province_id: member.province_id,

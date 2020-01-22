@@ -7,7 +7,7 @@
         <text class="idengtify">身份证正面照</text>
       </view>
       <view class='realname-item' bindtap='userUploadIdcard' data-type="zm" wx:if="{{card_img_path == uploadfailicon}}">
-   <image src='{{uploadfailicon|| idcardz}}'></image>
+        <image src='{{uploadfailicon|| idcardz}}'></image>
         <text class="idengtify">身份证正面照</text>
       </view>
       <view class='realname-item' bindtap='userUploadIdcard' data-type="sc">
@@ -28,6 +28,7 @@
       <image wx:for="{{card_img_array}}" wx:key="{{ index }}" src='{{item}}'></image>
     </view>
   </view>
+  <!-- wx:if="{{check_degree}}" -->
   <view class='yupao-realname-container' wx:if="{{check_degree}}">
     <view class='common-publish-content common-shaded-box nopadding'>
 
@@ -80,37 +81,39 @@
       <view class='common-publish-item'>
         <view class='common-publish-item-content'>
           <text class='common-publish-words'>详细地址</text>
-          <input class='common-publish-input' type='idcard' value='{{regionone}}' placeholder='请选择你所在地址' bindtap='userTapAddress' ></input>
+          <input class='common-publish-input' type='idcard' value='{{regionone}}' placeholder='请选择你所在地址' bindtap='userTapAddress'></input>
         </view>
       </view>
-      <!-- <view class='common-publish-item' wx:if="{{ !member.tel }}">
-        <view class='common-publish-item-content'>
-          <text class='common-publish-words'>手机号</text>
-          <input class='common-publish-input' type='number' value='{{ member.tel }}' placeholder='请输入手机号' bindinput='userEnterTel'></input>
-        </view>
-      </view>
-      <view class='common-publish-item' wx:if="{{ !member.tel }}">
-        <view class='common-publish-item-content common-publish-item-code '>
-          <text class='common-publish-words'>验证码</text>
-          <input class='common-publish-input' type='number' value='{{ member.code }}' placeholder='请输入验证码' bindinput='userEnterCode' maxlength='4'></input>
-          <text class='publish-getcode-btn' bindtap='userGetCode'>{{ codeTips }}</text>
-        </view>
-      </view>
-      <view class='common-publish-item' wx:if="{{ !member.tel }}">
-        <view class='common-publish-item-content'>
-          <text class='common-publish-words'>密码</text>
-          <input class='common-publish-input' password value='{{ member.pass }}' placeholder='请输入密码' bindinput='userEnterPass'></input>
-        </view>
-      </view> -->
+
     </view>
 
     <!-- <view class='common-publish-content common-shaded-box realname-tips'>
       <view class='realname-tips-box'>
         <text>重要</text>上传前，先按示范拍好两张照片，一张单独的身份证正面照(可遮掉身份证号后4位)，一张真人头像同身份证的合影照片。
       </view>
-    </view> -->
+    </view>
+          <view class='common-publish-item' wx:if="{{ !member.tel }}">
+        <view class='common-publish-item-content'>
+          <text class='common-publish-words'>密码</text>
+          <input class='common-publish-input' password value='{{ member.pass }}' placeholder='请输入密码' bindinput='userEnterPass'></input>
+        </view>
+      </view> -->
 
   </view>
+  <view class='common-publish-item common-publish-top' wx:if="{{ !member.tel&&check_degree }}" >
+    <view class='common-publish-item-content'>
+      <text class='common-publish-words'>手机号</text>
+      <input class='common-publish-input' type='number' value='{{ member.tel }}' placeholder='请输入手机号' bindinput='userEnterTel'></input>
+    </view>
+  </view>
+  <view class='common-publish-item common-publish-topone' wx:if="{{ !member.tel &&  check_degree}}">
+    <view class='common-publish-item-content common-publish-item-code '>
+      <text class='common-publish-words'>验证码</text>
+      <input class='common-publish-input' type='number' value='{{ member.code }}' placeholder='请输入验证码' bindinput='userEnterCode' maxlength='4'></input>
+      <text class='publish-getcode-btn' bindtap='userGetCode'>{{ codeTips }}</text>
+    </view>
+  </view>
+
   <text class='common-sure-btn' bindtap='userSubmitIdcard'>身份认证</text>
   <view class='common-sure-reminder'>
     <text>提示：</text>部分信息未识别成功，请手动修改</view>
