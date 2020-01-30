@@ -159,7 +159,7 @@ Page({
         if (mydata.errcode == "ok") {
           mydata = mydata.authData;
           _this.setData({
-            "member.username": mydata.hasOwnProperty("memberExt") ? mydata.memberExt.user_name:"",
+            "member.username": mydata.hasOwnProperty("memberExt") ? mydata.memberExt.hasOwnProperty("user_name") ? mydata.memberExt.user_name:"":"",
             "phone": mydata.hasOwnProperty("member") ? mydata.member.tel:"",
             "member.tel": mydata.hasOwnProperty("member") ? mydata.member.tel:"",
             "member.age": mydata.memberExt.age,
