@@ -14,12 +14,12 @@ Page({
     warm_tips: [],
     sort_flag: "",
     has_resume: "",
-    onoff:true,
-    showbutton:true,
-    ranking:"",
-    rankjump:"rankjump"
+    onoff: true,
+    showbutton: true,
+    ranking: "",
+    rankjump: "rankjump"
   },
-  againshow(){
+  againshow() {
     this.getdetail()
   },
   /**
@@ -31,22 +31,22 @@ Page({
   //     rulestatus: options.hasOwnProperty("rulestatus") ? options.rulestatus : ""
   //   })
   // },
-  getallstatus(){
+  getallstatus() {
     wx.setStorageSync("skillpass", 0)
     wx.setStorageSync("pass", 0)
     app.globalData.allexpress = true;
     app.globalData.allskill = true;
   },
-  setstorege(mydata){
+  setstorege(mydata) {
     let that = this;
     if (mydata.data.resume_data.hasOwnProperty("info")) {
       wx.setStorageSync("uuid", mydata.data.resume_data.info.uuid)
     }
 
     if (mydata.data.resume_data.hasOwnProperty("certificate_count") && mydata.data.resume_data.hasOwnProperty("project_count")) {
-      if (mydata.data.resume_data.project.length == 0 || mydata.data.resume_data.certificates.length == 0){
+      if (mydata.data.resume_data.project.length == 0 || mydata.data.resume_data.certificates.length == 0) {
         that.setData({
-          ranking:"ranking"
+          ranking: "ranking"
         })
       }
       that.getallstatus()
@@ -81,7 +81,7 @@ Page({
         system_type: that.data.type
       }
     }
-   
+
     app.appRequestAction({
       url: 'resumes/sort/',
       way: 'POST',
@@ -94,14 +94,14 @@ Page({
           that.setData({
             list: mydata.data.sort_rule_lists,
             listlength: mydata.data.sort_rule_lists.length,
-            rulestatus: mydata.data.resume_data.hasOwnProperty("info") ? mydata.data.resume_data.info.hasOwnProperty("check")? mydata.data.resume_data.info.check:"":"",
-            resume_uuid: mydata.data.resume_data.hasOwnProperty("info") ? mydata.data.resume_data.info.hasOwnProperty("uuid") ? mydata.data.resume_data.info.uuid :"": "",
+            rulestatus: mydata.data.resume_data.hasOwnProperty("info") ? mydata.data.resume_data.info.hasOwnProperty("check") ? mydata.data.resume_data.info.check : "" : "",
+            resume_uuid: mydata.data.resume_data.hasOwnProperty("info") ? mydata.data.resume_data.info.hasOwnProperty("uuid") ? mydata.data.resume_data.info.uuid : "" : "",
             warm_tips: mydata.data.warm_tips,
             sort_flag: mydata.data.resume_info.sort_flag,
             has_resume: mydata.data.resume_info.has_resume,
             onoff: true,
-            certificate_count: res.data.data.resume_data.certificate_count ? res.data.data.resume_data.certificate_count:"",
-            project_count: res.data.data.resume_data.project_count ? res.data.data.resume_data.project_count:"",
+            certificate_count: res.data.data.resume_data.certificate_count ? res.data.data.resume_data.certificate_count : "",
+            project_count: res.data.data.resume_data.project_count ? res.data.data.resume_data.project_count : "",
           })
           that.setstorege(mydata)
         } else {
@@ -143,14 +143,13 @@ Page({
       // app.showMyTips("获取机型失败请重新进入");
     }
 
-    
+
   },
   jumpyemian(e) {
-    
     let ranking = this.data.ranking;
     let rankjump = this.data.rankjump;
     let userInfo = wx.getStorageSync("userInfo");
-    let certificate_count=this.data.certificate_count;
+    let certificate_count = this.data.certificate_count;
     let project_count = this.data.project_count;
     let resume_uuid = this.data.resume_uuid;
     if (!userInfo) {
@@ -160,23 +159,24 @@ Page({
       })
       return false;
     }
-    console.log(ranking,"ranking")
+    this.addclicklog(e.currentTarget.dataset.type)
+    console.log(ranking, "ranking")
     if (this.data.has_resume == 1 && e.currentTarget.dataset.jump == 1 && e.currentTarget.dataset.minipath == "/pages/clients-looking-for-work/finding-name-card/findingnamecard") {
       app.globalData.showdetail = true
       wx.navigateTo({
         url: e.currentTarget.dataset.minipath + `?rankjump=${rankjump}`,
       })
-    }else if (this.data.has_resume == 1 && e.currentTarget.dataset.jump == 1) {
-      if (e.currentTarget.dataset.minipath == '/pages/clients-looking-for-work/new-project-experience/projectexperience' || e.currentTarget.dataset.minipath =='/pages/clients-looking-for-work/addcertificate/addcertificate') {
+    } else if (this.data.has_resume == 1 && e.currentTarget.dataset.jump == 1) {
+      if (e.currentTarget.dataset.minipath == '/pages/clients-looking-for-work/new-project-experience/projectexperience' || e.currentTarget.dataset.minipath == '/pages/clients-looking-for-work/addcertificate/addcertificate') {
         wx.navigateTo({
-          url: e.currentTarget.dataset.minipath + `?ranktype=${ranking}` + `&certificate_count=${certificate_count}`+ `&resume_uuid=${resume_uuid}`+ `&project_count=${project_count}` ,
+          url: e.currentTarget.dataset.minipath + `?ranktype=${ranking}` + `&certificate_count=${certificate_count}` + `&resume_uuid=${resume_uuid}` + `&project_count=${project_count}`,
         })
-      }else{
+      } else {
         wx.navigateTo({
           url: e.currentTarget.dataset.minipath + `?ranktype=${ranking}`,
         })
       }
-    } else if (this.data.has_resume == 0 && e.currentTarget.dataset.minipath == '/pages/recharge/recharge' && e.currentTarget.dataset.jump == 1){
+    } else if (this.data.has_resume == 0 && e.currentTarget.dataset.minipath == '/pages/recharge/recharge' && e.currentTarget.dataset.jump == 1) {
       wx.navigateTo({
         url: "/pages/recharge/recharge",
       })
@@ -184,25 +184,43 @@ Page({
       wx.navigateTo({
         url: "/pages/realname/realname",
       })
-    }else if (e.currentTarget.dataset.jump == 1){
+    } else if (e.currentTarget.dataset.jump == 1) {
       wx.navigateTo({
         url: "/pages/clients-looking-for-work/finding-name-card/findingnamecard" + `?rankjump=${rankjump}`,
       })
     }
   },
 
-  getstatus(){
+  getstatus() {
     let userInfo = wx.getStorageSync("userInfo");
     if (!userInfo) {
-       this.setData({
-         showbutton:false
-       })
+      this.setData({
+        showbutton: false
+      })
+    }
+  },
+  addclicklog(item) {
+    let userInfo = wx.getStorageSync("userInfo");
+    let detail = '';
+    if (userInfo) {
+     detail = {
+        type: item
+      }
+      app.appRequestAction({
+        url: 'resumes/add-click-log/',
+        way: 'POST',
+        params: detail,
+        failTitle: "操作失败，请稍后重试！",
+        success(res) {
+
+        }
+      })
     }
   },
   onLoad: function (options) {
     // this.getstatus(options)
     this.initGetIntegralList();
-    
+
   },
 
   /**
@@ -253,7 +271,7 @@ Page({
    */
   onShareAppMessage: function (e) {
 
-    
+    console.log(e)
     let that = this;
     let status = that.data.rulestatus;
     let userInfo = wx.getStorageSync("userInfo");
@@ -261,15 +279,16 @@ Page({
     let refId = userInfo.hasOwnProperty('userId') ? userInfo.userId : false;
     let uuid = that.data.resume_uuid;
     let commonShareTips = app.globalData.commonShareTips;
-    
-    if (e.target.dataset.hasOwnProperty("share") && e.target.dataset.share == "invite_friend"){
+    if (e.target){
+    if (e.target.dataset.hasOwnProperty("share") && e.target.dataset.share == "invite_friend") {
+      that.addclicklog(e.target.dataset.type)
       return {
         title: commonShareTips,
         imageUrl: commonShareImg,
         path: `/pages/index/index?refid=${refId}`//这是一个路径
       }
-    }else if (status == 2) {
-
+    } else if (status == 2) {
+      that.addclicklog(e.target.dataset.type)
       return {
         title: commonShareTips,
         imageUrl: commonShareImg,
@@ -277,18 +296,21 @@ Page({
       }
     } else {
       if (refId) {
+        console.log(e)
         return {
           title: commonShareTips,
           imageUrl: commonShareImg,
           path: `/pages/index/index?refid=${refId}`//这是一个路径
         }
       } else {
+        console.log(e)
         return {
           title: commonShareTips,
           imageUrl: commonShareImg,
           path: `/pages/index/index`//这是一个路径
         }
       }
+    }
     }
   }
 })
