@@ -7,12 +7,14 @@ Page({
    * 页面的初始数据
    */
   data: {
-    card_img_path: app.globalData.apiImgUrl + "lpy/auth/idcard-z.png",
-    handone_img_path: app.globalData.apiImgUrl + "lpy/auth/idcard-l.png",
+    check_modify: false,
+    card_img_path: "http://cdn.yupao.com/miniprogram/images/lpy/auth/idcard-z.png?t=" + new Date().getTime(),
+    handone_img_path: "http://cdn.yupao.com/miniprogram/images/lpy/auth/idcard-l.png?t=" + new Date().getTime(),
     card_img_status: app.globalData.apiImgUrl + "lpy/auth/idcard-bkqs.png",
     card_img_array: [app.globalData.apiImgUrl + "lpy/auth/idcard-yes.png", app.globalData.apiImgUrl + "lpy/auth/idcard-bkqs.png", app.globalData.apiImgUrl + "lpy/auth/idcard-qs.png", app.globalData.apiImgUrl + "lpy/auth/idcard-sg.png"],
+    card_img_content: ["标准", "边框缺失", "边框缺失", "闪光强烈"],
     hand_img_path: "",
-    uploadfailicon: app.globalData.apiImgUrl + "lpy/auth/upload-fail-tips.png",
+    uploadfailicon: app.globalData.apiImgUrl + "lpy/auth/upload-fail-tips.png?t=" + new Date().getTime(),
     userInfo: {},
     member: {
       username: "",
@@ -39,8 +41,8 @@ Page({
     maxCount: 3,
     codeTips: "获取验证码",
     status: 1,
-    idcardz: "http://cdn.yupao.com/miniprogram/images/idcard-z.png",
-    idcardf: "http://cdn.yupao.com/miniprogram/images/idcard-f.png",
+    idcardz: "http://cdn.yupao.com/miniprogram/images/lpy/auth/idcard-z.png?t=" + new Date().getTime(),
+    idcardf: "http://cdn.yupao.com/miniprogram/images/lpy/auth/idcard-l.png?t=" + new Date().getTime(),
     showWorkType: false,
     areaText: "",
     nationalarray: [],
@@ -53,15 +55,29 @@ Page({
     emdDate: "",
     regionone: "",
     birthday: "",
-    indexsex:"fail",
-    check_degree:false
+    indexsex: "fail",
+    check_degree: false,
+    regionall: "",
+    getCode:true
+  },
+  getaddressindexof(relname) {
+    if (relname.length > 12) {
+      this.setData({
+        regionone: relname.substring(0, 18) + "...",
+        regionall: relname
+      })
+    } else {
+      this.setData({
+        regionone: relname,
+        regionall: relname
+      })
+    }
+
   },
   getaddress() {
     let relname = wx.getStorageSync("relname");
     if (relname) {
-      this.setData({
-        regionone: relname
-      })
+      this.getaddressindexof(relname)
     }
     wx.removeStorageSync('relname')
   },
@@ -108,11 +124,11 @@ Page({
       arrayone: array
     })
 
-    if (that.data.indexsex != "fail" && that.data.indexsex >= 0 ) {
+    if (that.data.indexsex != "fail" && that.data.indexsex >= 0) {
       that.setData({
         sex: that.data.array[that.data.indexsex].id
       })
-    } else if (that.data.indexsex != "fail" && that.data.indexsex < 0){
+    } else if (that.data.indexsex != "fail" && that.data.indexsex < 0) {
       that.setData({
         sex: ""
       })
@@ -159,9 +175,9 @@ Page({
         if (mydata.errcode == "ok") {
           mydata = mydata.authData;
           _this.setData({
-            "member.username": mydata.hasOwnProperty("memberExt") ? mydata.memberExt.hasOwnProperty("user_name") ? mydata.memberExt.user_name:"":"",
-            "phone": mydata.hasOwnProperty("member") ? mydata.member.tel:"",
-            "member.tel": mydata.hasOwnProperty("member") ? mydata.member.tel:"",
+            "member.username": mydata.hasOwnProperty("memberExt") ? mydata.memberExt.hasOwnProperty("user_name") ? mydata.memberExt.user_name : "" : "",
+            "phone": mydata.hasOwnProperty("member") ? mydata.member.tel : "",
+            "member.tel": mydata.hasOwnProperty("member") ? mydata.member.tel : "",
             "member.age": mydata.memberExt.age,
             "member.id_card": mydata.memberExt.id_card,
             "member.hand_img": mydata.memberExt.hand_img,
@@ -173,16 +189,16 @@ Page({
             "member.cities": (mydata.show_resume == 1) ? mydata.provinceTree : [],
             nation: mydata.memberExt.nation_id ? mydata.memberExt.nation_id : "",
             birthday: mydata.memberExt.birthday ? mydata.memberExt.birthday == 0 ? "" : mydata.memberExt.birthday : "",
-            regionone: mydata.memberExt.address ? mydata.memberExt.address == 0 ? "" : mydata.memberExt.address: "",
+            regionall: mydata.memberExt.address ? mydata.memberExt.address == 0 ? "" : mydata.memberExt.address : "",
             indexsex: mydata.memberExt.sex ? mydata.memberExt.sex - 1 : "fail",
             card_img_path: mydata.memberExt.id_card_img_path ? mydata.memberExt.id_card_img_path : "",
             handone_img_path: mydata.memberExt.hand_img_path ? mydata.memberExt.hand_img_path : "",
           })
-
-          if (mydata.hasOwnProperty("member")){
-            if (mydata.member.check_degree==2){
+          _this.getaddressindexof(_this.data.regionall)
+          if (mydata.hasOwnProperty("member")) {
+            if (mydata.member.check_degree == 2) {
               _this.setData({
-                check_degree:true
+                check_degree: true
               })
             }
 
@@ -248,9 +264,28 @@ Page({
     this.setData({ "member.nationality": e.detail.value })
   },
   userEnterIdcard: function (e) {
+    let that = this;
+    if (e) {
+      var re = /^\w{0,18}$/;
+      if (!re.test(e.detail.value)) {
+        wx.showModal({
+          title: '温馨提示',
+          content: '只能输入英文与数字，请重新输入',
+          showCancel: false,
+          success(res) {
+
+            that.setData({
+              "member.id_card": ''
+            })
+          }
+        })
+        return
+      }
+    }
     this.setData({ "member.id_card": e.detail.value })
   },
   userEnterTel: function (e) {
+
     this.setData({ phone: e.detail.value })
   },
   userEnterCode: function (e) {
@@ -266,8 +301,12 @@ Page({
     let status = this.data.status;
     if (!status) return false;
     let v = vali.v.new();
+    if (!phone) {
+      app.showMyTips("请输入正确的手机号码！");
+      return false;
+    }
     if (!v.isMobile(phone)) {
-      app.showMyTips("手机号输入有误！");
+      app.showMyTips("手机号码错误！");
       return false;
     }
     this.setData({ status: 0 });
@@ -283,6 +322,9 @@ Page({
         sendType: "have"
       },
       success: function (res) {
+        _this.setData({
+          getCode:false
+        })
         let mydata = res.data;
         app.showMyTips(mydata.errmsg);
         if (mydata.errcode == "ok") {
@@ -324,7 +366,7 @@ Page({
     let _this = this;
     let _type = e.currentTarget.dataset.type;
     app.cameraAndAlbum(function (imgRes, mydata) {
-      wx.hideLoading();
+      wx.hideToast();
 
       console.log(mydata)
       console.log(imgRes)
@@ -347,7 +389,7 @@ Page({
       }
       if (mydata.hasOwnProperty("card_info")) {
 
-        if (_type == "zm"&&!mydata.card_info.success) {
+        if (_type == "zm" && !mydata.card_info.success) {
           wx.showToast({
             title: mydata.card_info.tips_message,
             icon: "none",
@@ -356,39 +398,58 @@ Page({
           _this.setData({
             "card_img_path": _this.data.uploadfailicon,
           })
-        } else if (_type == "zm" && mydata.card_info.success){
-          _this.setData({
-            check_degree: true,
-          })
+        } else if (_type == "zm" && mydata.card_info.success) {
+
           wx.showToast({
             title: mydata.errmsg,
             icon: "none",
             duration: 2000
           })
           _this.getimageDetail(mydata)
-        } 
+        }
+
+        _this.setData({
+          check_degree: true,
+        })
+
       }
     }, _type)
   },
-  getimageDetail(mydata){
+  getimageDetail(mydata) {
     let _this = this;
     let nationalarrayone = this.data.nationalarrayone;
-    if (mydata.hasOwnProperty("card_info")){
+    if (mydata.hasOwnProperty("card_info")) {
       _this.setData({
         nation: mydata.card_info.nation_id ? mydata.card_info.nation_id : "",
         birthday: mydata.card_info.birth ? mydata.card_info.birth : "",
-        regionone: mydata.card_info.address ? mydata.card_info.address : "",
+        regionall: mydata.card_info.address ? mydata.card_info.address : "",
         indexsex: mydata.card_info.gender ? mydata.card_info.gender - 1 : "fail",
-        "member.id_card": mydata.card_info.num ? mydata.card_info.num:"",
-        "member.username": mydata.card_info.name ? mydata.card_info.name:""
+        "member.id_card": mydata.card_info.num ? mydata.card_info.num : "",
+        "member.username": mydata.card_info.name ? mydata.card_info.name : ""
       })
+      _this.getaddressindexof(_this.data.regionall)
       if (_this.data.indexsex != "fail" && _this.data.indexsex >= 0) {
         _this.setData({
           sex: _this.data.array[_this.data.indexsex].id
         })
-      } 
-      _this.dostatus(_this.data.birthday)
+      } else if (_this.data.indexsex != "fail" && _this.data.indexsex < 0) {
+        _this.setData({
+          sex: ""
+        })
 
+      } else if (_this.data.indexsex == "fail") {
+        _this.setData({
+          sex: ""
+        })
+      }
+      _this.dostatus(_this.data.birthday)
+      // console.log(_this.data.nation)
+      if (_this.data.nation == "") {
+        _this.setData({
+          nationindex: ""
+        })
+        return false
+      }
       for (let i = 0; i < nationalarrayone.length; i++) {
         if (nationalarrayone[i].mz_id == _this.data.nation) {
           _this.setData({
@@ -399,13 +460,17 @@ Page({
 
     }
   },
-  dostatus(item){
-
-    let birth = item.substring(0,4)
+  dostatus(item) {
+    let birthall = null;
+    let birth = item.substring(0, 4)
     let birthtwo = item.substring(4, 6)
     let birththree = item.substring(6, 8)
-    
-    let birthall = birth +"-"+ birthtwo+"-" + birththree;
+    if (item != "") {
+      birthall = birth + "-" + birthtwo + "-" + birththree;
+    } else {
+      birthall = ""
+    }
+
     this.setData({
       birthday: birthall
     })
@@ -461,6 +526,14 @@ Page({
   userSureWorktype: function () {
     this.setData({ showWorkType: false })
   },
+  // showAll(){
+
+  //   let show = this.data.check_degree;
+  //   if ((!this.data.member.username || !this.data.arrayone[this.data.indexsex] || !this.data.birthday || !this.data.nationalarray[this.data.nationindex] || !this.data.member.id_card || !this.data.regionone || !this.data.member.tel) && show){
+  //     this.setData({ check_modify: true })
+  //   }
+
+  // },
   // userChangeWorktype:function(){
   //     this.setData({ showWorkType: true })
   // },
@@ -483,16 +556,20 @@ Page({
     let phone = this.data.phone;
     let v = vali.v.new();
 
-    if (_this.data.card_img_path == _this.data.uploadfailicon) {
-      app.showMyTips("请上传身份证正面照！");
-      return false;
-    }
+    // if (_this.data.card_img_path == _this.data.uploadfailicon) {
+    //   app.showMyTips("请上传身份证人像照！");
+    //   return false;
+    // }
     if (member.id_card_img == "") {
-      app.showMyTips("请上传身份证正面照！");
+      app.showMyTips("请上传身份证人像照！");
       return false;
     }
     if (member.hand_img == "") {
       app.showMyTips("请上传手持身份证照！");
+      return false;
+    }
+    if (member.username.length < 2) {
+      app.showMyTips("您输入的姓名不能少于两个字！");
       return false;
     }
     if (!v.isRequire(member.username, 2)) {
@@ -505,9 +582,10 @@ Page({
       return false;
     }
     if (_this.data.birthday == "") {
-      app.showMyTips("请选择你的出身日期");
+      app.showMyTips("请选择您的出生日期");
       return false;
     }
+    console.log(_this.data.birthday)
     if (_this.data.nation == "") {
       app.showMyTips("请选择您的民族！");
       return false;
@@ -524,13 +602,26 @@ Page({
       app.showMyTips("请输入正确的身份证号码！");
       return false;
     }
+    if (_this.data.regionone == "") {
+      app.showMyTips("请选择您的地址");
+      return false;
+    }
+    console.log(phone)
+    if (!phone) {
+      app.showMyTips("请输入正确的手机号码！");
+      return false;
+    }
     if (!member.tel) {
       if (!v.isMobile(phone)) {
-        app.showMyTips("手机号码有误！");
+        app.showMyTips("手机号码错误！");
         return false;
       }
-      if (!v.isRequire(member.code, 4)) {
+      if (!v.isRequire(member.code, 4) && !_this.data.getCode) {
         app.showMyTips("请输入正确的验证码！");
+        return false;
+      }
+      if (!v.isRequire(member.code, 4) && _this.data.getCode) {
+        app.showMyTips("请先获取验证码！");
         return false;
       }
       // if (!v.isRequire(member.pass, 6)) {
@@ -540,10 +631,7 @@ Page({
     }
 
 
-    if (_this.data.regionone == "") {
-      app.showMyTips("请选择你的地址");
-      return false;
-    }
+
 
     // if (parseInt(member.show_resume) == 1){
     //     if (member.worktypeIds.length == 0) {
@@ -575,7 +663,7 @@ Page({
       // classifys: member.worktypeIds,
 
       province_id: member.province_id,
-      address: _this.data.regionone,
+      address: _this.data.regionall,
       birthday: _this.data.birthday,
       gender: _this.data.sex
     };

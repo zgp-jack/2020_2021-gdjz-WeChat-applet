@@ -19,13 +19,15 @@
   <view class='common-publish-contentidenty'>
     <view class='realname-photo'>拍摄身份证要求：</view>
     <view class='realname-identy'>大陆公民持有的本人有效二代身份证;</view>
-    <view class='realname-photoing'>拍摄时确保身份证
-      <text>边框完整，</text>
+    <view class='realname-photoing'>拍摄时确保身份证<text>边框完整，</text>
       <text>字体清晰，</text>
       <text>亮度均匀;</text>
     </view>
     <view class='realname-oimg'>
-      <image wx:for="{{card_img_array}}" wx:key="{{ index }}" src='{{item}}'></image>
+     <view  wx:for="{{card_img_array}}" wx:key="{{ index }}">
+      <image src='{{item}}'></image>
+      <text>{{card_img_content[index]}}</text>
+    </view>
     </view>
   </view>
   <!-- wx:if="{{check_degree}}" -->
@@ -36,7 +38,7 @@
       <view class='common-publish-item'>
         <view class='common-publish-item-content'>
           <text class='common-publish-words'>姓名</text>
-          <input class='common-publish-input' value='{{ member.username }}' placeholder='请输入姓名' bindinput='userEnterName'></input>
+          <input class='common-publish-input'  maxlength="6" value='{{ member.username }}' placeholder='请输入姓名' bindinput='userEnterName'></input>
         </view>
       </view>
       <!-- <view class='common-publish-item'>
@@ -75,13 +77,13 @@
       <view class='common-publish-item'>
         <view class='common-publish-item-content'>
           <text class='common-publish-words'>身份证号</text>
-          <input class='common-publish-input' type='idcard' value='{{ member.id_card }}' placeholder='请输入身份证号' bindinput='userEnterIdcard'></input>
+          <input class='common-publish-input' type='text'  maxlength="18" value='{{ member.id_card }}' placeholder='请输入身份证号' bindinput='userEnterIdcard'></input>
         </view>
       </view>
       <view class='common-publish-item'>
         <view class='common-publish-item-content'>
           <text class='common-publish-words'>详细地址</text>
-          <input class='common-publish-input' type='idcard' value='{{regionone}}' placeholder='请选择你所在地址' bindtap='userTapAddress'></input>
+          <input class='common-publish-input addressinput' type='text' value='{{regionone}}' placeholder='请选择详细地址' bindtap='userTapAddress' disabled></input>
         </view>
       </view>
 
@@ -115,7 +117,7 @@
   </view>
 
   <text class='common-sure-btn' bindtap='userSubmitIdcard'>身份认证</text>
-  <view class='common-sure-reminder'>
+  <view class='common-sure-reminder' wx:if="{{check_degree}}">
     <text>提示：</text>部分信息未识别成功，请手动修改</view>
 </view>
 

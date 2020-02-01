@@ -296,14 +296,13 @@ Page({
       }
     } else {
       if (refId) {
-        console.log(e)
+        that.addclicklog(e.target.dataset.type)
         return {
           title: commonShareTips,
           imageUrl: commonShareImg,
           path: `/pages/index/index?refid=${refId}`//这是一个路径
         }
       } else {
-        console.log(e)
         return {
           title: commonShareTips,
           imageUrl: commonShareImg,

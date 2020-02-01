@@ -405,7 +405,9 @@ App({
     let imgRes = res;
     wx.showToast({
       title: '图片上传中',
-      icon: 'loading'
+      icon: 'loading',
+      duration:8000000,
+      mask: true
     })
     wx.uploadFile({
       url: type == 1 || _type == "sc"? _this.globalData.apiUploadImg : _this.globalData.apiUploadImgphoto,
@@ -419,16 +421,18 @@ App({
 
           callback ? callback(imgRes, mydata) : "";
         } else {
-          wx.hideLoading();
+          wx.hideToast();
           wx.showToast({
             title: mydata.errmsg,
             icon: "none",
-            duration: 2000
+            duration: 2000,
+
           })
         }
       },
       fail: function () {
-        wx.hideLoading();
+
+        wx.hideToast();
         wx.showToast({
           title: "网络错误，上传失败！",
           icon: "none",
@@ -847,6 +851,7 @@ App({
     }
   },
   getAreaData: function (_this) {
+    console.log(123)
     let num = 1;
     let areadata = wx.getStorageSync("areadata");
     if (areadata) {

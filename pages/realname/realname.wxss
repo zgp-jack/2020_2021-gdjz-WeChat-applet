@@ -8,9 +8,9 @@
 .nopadding{
     padding: 0;
 }
-.realname-tips{
-    margin-top: 15rpx;
-}
+/* .realname-tips{ */
+    /* margin-top: 15rpx; */
+/* } */
 .realname-tips-box{
     position: relative;
     font-size: 28rpx;
@@ -88,6 +88,10 @@ box-shadow: #e7e6e4 0 0 10rpx;
   display: flex;
   justify-content: space-between;
 }
+.realname-oimg view{
+  text-align: center;
+  color: #919191;
+}
 .realname-oimg image{
   width: 160rpx;
   height: 115rpx;
@@ -100,6 +104,9 @@ box-shadow: #e7e6e4 0 0 10rpx;
 }
 .common-sure-reminder text{
   color: red;
+}
+.addressinput{
+  padding-right: 10rpx;
 }
 /* .realname-item .uploadfail{
   display: inline-block;

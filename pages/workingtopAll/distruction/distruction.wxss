@@ -1,0 +1,7 @@
+/* pages/workingtopAll/distruction/distruction.wxss */
+@import "../../home/home.wxss";
+.index-pullareabox{
+
+    right:0;
+
+}
