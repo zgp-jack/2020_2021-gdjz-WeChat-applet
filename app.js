@@ -43,12 +43,12 @@ App({
     commonDownloadApp: "http://cdn.yupao.com/miniprogram/images/download.png?t=" + new Date().getTime(),
     commonJixieAd: "http://cdn.yupao.com/miniprogram/images/list-ad-newjixie.png?t=" + new Date().getTime(),
 
-    // apiRequestUrl: "https://miniapi.zhaogong.vrtbbs.com/",
-    apiRequestUrl: "https://newyupaomini.54xiaoshuo.com/",
+    apiRequestUrl: "https://miniapi.zhaogong.vrtbbs.com/",
+    // apiRequestUrl: "https://newyupaomini.54xiaoshuo.com/",
     // apiRequestUrl: "http://miniapi.qsyupao.com/",
     //apiRequestUrl:"http://mini.zhaogongdi.com/",
     apiUploadImg: "https://newyupaomini.54xiaoshuo.com/index/upload/",
-    apiUploadImgphoto: "https://newyupaomini.54xiaoshuo.com/index/authid-card/",
+    apiUploadImgphoto: "https://miniapi.zhaogong.vrtbbs.com/index/authid-card/",
     apiImgUrl: "http://cdn.yupao.com/miniprogram/images/",
     commonShareTips: "全国建筑工地招工平台",
     isFirstLoading: true,
@@ -401,6 +401,8 @@ App({
 
   },
   detailUpimg: function (type, res, callback, _type) {
+    let userInfo = wx.getStorageSync("userInfo");
+    console.log(userInfo)
     let _this = this;
     let imgRes = res;
     wx.showToast({
@@ -412,6 +414,9 @@ App({
     wx.uploadFile({
       url: type == 1 || _type == "sc" ? _this.globalData.apiUploadImg : _this.globalData.apiUploadImgphoto,
       filePath: res.tempFilePaths[0],
+      header:{
+        userid: userInfo.userId
+      },
       name: 'file',
       success(res) {
         console.log(res)

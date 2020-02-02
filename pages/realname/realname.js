@@ -179,6 +179,7 @@ Page({
       params: userInfo,
       success: function (res) {
         let mydata = res.data;
+        console.log(mydata)
         if (mydata.errcode == "ok") {
           mydata = mydata.authData;
           _this.setData({
@@ -235,6 +236,7 @@ Page({
           }
           _this.getpikerdetail()
         } else {
+
           wx.showModal({
             title: '温馨提示',
             content: mydata.errmsg,
