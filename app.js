@@ -11,7 +11,7 @@ App({
 
   },
   globalData: {
-    version:"v-2.7.0",
+    version:"v-2.7.1",
     complaincontent: '请填写5~100字，必须含有汉字。（恶意投诉会被封号，请谨慎投诉！）',
     areaIs:false,
     topshow: false,
@@ -48,7 +48,7 @@ App({
     // apiRequestUrl: "http://miniapi.qsyupao.com/",
     //apiRequestUrl:"http://mini.zhaogongdi.com/",
     apiUploadImg: "https://newyupaomini.54xiaoshuo.com/index/upload/",
-    apiUploadImgphoto: "https://miniapi.zhaogong.vrtbbs.com/index/authid-card/",
+    apiUploadImgphoto: "https://newyupaomini.54xiaoshuo.com/index/authid-card/",
     apiImgUrl: "http://cdn.yupao.com/miniprogram/images/",
     commonShareTips: "全国建筑工地招工平台",
     isFirstLoading: true,
@@ -400,26 +400,32 @@ App({
     }, 1)
 
   },
-  detailUpimg: function (type, res, callback, _type){
+  detailUpimg: function (type, res, callback, _type) {
     let _this = this;
     let imgRes = res;
     wx.showToast({
       title: '图片上传中',
       icon: 'loading',
-      duration:8000000,
+      duration: 8000000,
       mask: true
     })
     wx.uploadFile({
-      url: type == 1 || _type == "sc"? _this.globalData.apiUploadImg : _this.globalData.apiUploadImgphoto,
+      url: type == 1 || _type == "sc" ? _this.globalData.apiUploadImg : _this.globalData.apiUploadImgphoto,
       filePath: res.tempFilePaths[0],
       name: 'file',
       success(res) {
-
+        console.log(res)
         let mydata = JSON.parse(res.data);
-
         if (mydata.errcode == "ok") {
 
           callback ? callback(imgRes, mydata) : "";
+        } else if (res.statusCode == 404) {
+          wx.showToast({
+            title: "网络错误",
+            icon: "none",
+            duration: 2000,
+
+          })
         } else {
           wx.hideToast();
           wx.showToast({

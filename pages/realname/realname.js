@@ -58,21 +58,28 @@ Page({
     indexsex: "fail",
     check_degree: false,
     regionall: "",
-    getCode:true
+    getCode: true
   },
   getaddressindexof(relname) {
-    if (relname.length > 12) {
+    var reg = new RegExp("[\\u4E00-\\u9FFF]+", "g");
+    if (reg.test(relname)) {
+      if (relname.length > 12) {
+        this.setData({
+          regionone: relname.substring(0, 18) + "...",
+          regionall: relname
+        })
+      } else {
+        this.setData({
+          regionone: relname,
+          regionall: relname
+        })
+      }
+    }else{
       this.setData({
-        regionone: relname.substring(0, 18) + "...",
-        regionall: relname
-      })
-    } else {
-      this.setData({
-        regionone: relname,
-        regionall: relname
+        regionone: "",
+        regionall: ""
       })
     }
-
   },
   getaddress() {
     let relname = wx.getStorageSync("relname");
@@ -323,7 +330,7 @@ Page({
       },
       success: function (res) {
         _this.setData({
-          getCode:false
+          getCode: false
         })
         let mydata = res.data;
         app.showMyTips(mydata.errmsg);
@@ -568,10 +575,17 @@ Page({
       app.showMyTips("请上传手持身份证照！");
       return false;
     }
+
+
     if (member.username.length < 2) {
       app.showMyTips("您输入的姓名不能少于两个字！");
       return false;
     }
+    var han = /^[\u4e00-\u9fa5]+$/;
+    if (!han.test(member.username)) {
+      app.showMyTips("输入的姓名只能有汉字！");
+      return false;
+    };
     if (!v.isRequire(member.username, 2)) {
       app.showMyTips("请输入正确的姓名！");
       return false;
