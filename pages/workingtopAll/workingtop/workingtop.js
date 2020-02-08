@@ -8,13 +8,15 @@ Page({
    * 页面的初始数据
    */
   data: {
+    showMore: "",
+    serverPhone: app.globalData.serverPhone,
     userInfo: true,
     icon: app.globalData.apiImgUrl + "userauth-topicon.png",
     point: 0,
     daynumber: 1,
     imgDetelte: app.globalData.apiImgUrl + "lpy/delete.png",
     areaTextcrum: [],
-    max_number: "",
+    max_province: "",
     province_integral: "",
     value: 1,
     areaTextId: "",
@@ -23,18 +25,21 @@ Page({
   },
 
   jumpstickyrule() {
+    console.log(123)
     let that = this;
-    let max_number = that.data.max_number
+    let max_province = that.data.max_province;
+    let max_city = that.data.max_city;
     wx.navigateTo({
-      url: `/pages/clients-looking-for-work/the-sticky-rule/stickyrule?maxnumber=${max_number}`,
+      url: `/pages/workingtopAll/distruction/distruction?max_province=${max_province}&max_city=${max_city}`,
     })
   },
   jumpdetail() {
     let that = this;
     let all = JSON.stringify(that.data.areaTextcrum);
-    let max_number = that.data.max_number
+    let max_province = that.data.max_province;
+    let max_city = that.data.max_city;
     wx.navigateTo({
-      url: `/pages/clients-looking-for-work/the-sticky-rule/stickyrule?maxnumber=${max_number}&area= ${all}`,
+      url: `/pages/workingtopAll/distruction/distruction?max_province=${max_province}&max_city=${max_city}&area= ${all}`,
     })
   },
   bindGetUserInfo: function (e) {
@@ -81,14 +86,14 @@ Page({
       }
       this.data.value = e.detail.value;
       let value = this.data.value;
-      let num = this.data.province_integral;
+    let num = this.data.showMore == "provice" ? this.data.province_integral : this.data.showMore == "city" ? this.data.city_integral : this.data.showMore == "allprovice" ? this.data.country_integral : 0;
       let length = this.data.areaTextcrum.length;
       this.setData({
         point: value * num * length
       })
     } else {
       let value = this.data.value;
-      let num = this.data.province_integral;
+     let num = this.data.showMore == "provice" ? this.data.province_integral : this.data.showMore == "city" ? this.data.city_integral : this.data.showMore == "allprovice" ? this.data.country_integral:0;
       let length = this.data.areaTextcrum.length;
       this.setData({
         point: value * num * length
@@ -151,12 +156,13 @@ Page({
       tokenTime: userInfo.tokenTime,
       uuid: userUuid,
       days: that.data.value,
-      citys: 0,
-      provinces: that.data.areaTextId
+      is_country: that.data.showMore == "allprovice" ? 1:0,
+      city_ids: that.data.showMore == "city" ? that.data.areaTextId : "",
+      provinces: that.data.showMore == "provice"? that.data.areaTextId:"",
     }
 
     app.appRequestAction({
-      url: 'resumes/do-top/',
+      url: 'job/do-top/',
       way: 'POST',
       params: detail,
       mask: true,
@@ -205,17 +211,20 @@ Page({
   getdetail() {
     let that = this;
     app.appRequestAction({
-      url: 'resumes/top-config/',
+      url: 'job/top-config/',
       way: 'POST',
       success: function (res) {
         let mydata = res.data;
 
         if (mydata.errcode == "ok") {
           that.setData({
-            max_number: mydata.data.max_number,
+            max_province: mydata.data.max_province,
+            max_city: mydata.data.max_city,
             province_integral: mydata.data.province_integral,
-            top_rules: mydata.data.top_rules,
+            country_integral: mydata.data.country_integral,
+            city_integral: mydata.data.city_integral,
             max_top_days: mydata.data.max_top_days,
+            top_rules: mydata.data.top_rules
           })
 
         } else {
@@ -248,7 +257,8 @@ Page({
    */
   onLoad: function (options) {
     // this.authrasution()
-    // this.getdetail()
+    this.getdetail()
+
   },
 
   /**
@@ -262,7 +272,8 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    // this.dayclocy()
+    this.dayclocy()
+
   },
 
   /**

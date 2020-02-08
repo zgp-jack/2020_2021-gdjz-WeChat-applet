@@ -1,7 +1,9 @@
 {
   "pages": [
+        "pages/index/index",
+    "pages/workingtopAll/workingtop/workingtop",
+    "pages/workingtopAll/distruction/distruction",
 
-    "pages/index/index",
     "pages/clients-looking-for-work/finding-top/findingtop",
     "pages/clients-looking-for-work/finding-name-card/findingnamecard",
     "pages/clients-looking-for-work/the-sticky-rule/stickyrule",
@@ -74,9 +76,8 @@
     "pages/ucenter/ucenterNew/invite",
     "pages/information/mymessage/mymessage",
     "pages/information/system/system",
-    "pages/helpCenter/helpCenter",
-    "pages/workingtopAll/workingtop/workingtop",
-            "pages/workingtopAll/distruction/distruction"
+    "pages/helpCenter/helpCenter"
+
   ],
   "window": {
     "backgroundTextStyle": "light",

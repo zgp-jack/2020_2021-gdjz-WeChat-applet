@@ -30,15 +30,15 @@ Page({
     showNoData: false,
     nothavamore: false,
     publishedData: [{
-        title: '招工信息',
-        normalImg: app.globalData.apiImgUrl + "published-zg.png",
-        activeImg: app.globalData.apiImgUrl + "published-zg-active.png",
-      },
-      {
-        title: '二手交易',
-        normalImg: app.globalData.apiImgUrl + "published-ershou.png",
-        activeImg: app.globalData.apiImgUrl + "published-ershou-active.png",
-      }
+      title: '招工信息',
+      normalImg: app.globalData.apiImgUrl + "published-zg.png",
+      activeImg: app.globalData.apiImgUrl + "published-zg-active.png",
+    },
+    {
+      title: '二手交易',
+      normalImg: app.globalData.apiImgUrl + "published-ershou.png",
+      activeImg: app.globalData.apiImgUrl + "published-ershou-active.png",
+    }
     ],
     publishedImg: {
       edit: app.globalData.apiImgUrl + "detail-edit.png",
@@ -54,24 +54,24 @@ Page({
     collecthand: app.globalData.apiImgUrl + "new-published-zd.png",
     showCollectTips: false
   },
-  bindAreaChange: function(e) {
+  bindAreaChange: function (e) {
     this.setData({
       areaIndex: e.detail.value
     })
     this.calcCostIntegral();
   },
-  userEnterTopDay: function(e) {
+  userEnterTopDay: function (e) {
     this.setData({
       inputValue: e.detail.value
     })
     this.calcCostIntegral();
   },
-  calcCostIntegral: function() {
+  calcCostIntegral: function () {
     this.setData({
       costIntegral: this.data.areaIntegral[this.data.areaIndex] * this.data.inputValue
     })
   },
-  cancleSetTop: function() {
+  cancleSetTop: function () {
     this.setData({
       showSetTop: false,
       inputValue: 1,
@@ -79,7 +79,7 @@ Page({
       costIntegral: 100
     })
   },
-  sureSetTop: function() {
+  sureSetTop: function () {
     let infoId = this.data.infoId;
     let userInfo = this.data.userInfo;
     let day = this.data.inputValue;
@@ -102,14 +102,14 @@ Page({
         day: day,
         level: parseInt(areaIndex) + 1
       },
-      success: function(res) {
+      success: function (res) {
         wx.hideLoading();
         let mydata = res.data;
         if (mydata.errcode == "integralBad") {
           wx.showModal({
             title: '设置置顶失败',
             content: mydata.errmsg,
-            success: function(res) {
+            success: function (res) {
               if (res.confirm) {
                 wx.navigateTo({
                   url: '/pages/getintegral/getintegral',
@@ -136,7 +136,7 @@ Page({
           }
         }
       },
-      fail: function(res) {
+      fail: function (res) {
         wx.hideLoading();
         wx.showToast({
           title: "网络错误，设置急招失败！",
@@ -146,7 +146,7 @@ Page({
       }
     })
   },
-  showThisList: function(e) {
+  showThisList: function (e) {
     let index = e.currentTarget.dataset.index;
     wx.setNavigationBarTitle({
       title: (index == "1") ? "鱼泡网-我发布的二手交易" : "鱼泡网-我发布的招工"
@@ -162,7 +162,7 @@ Page({
     })
     this.getPublishedData();
   },
-  initPublishedData: function(options) {
+  initPublishedData: function (options) {
     if (options && options.hasOwnProperty("type")) {
       this.setData({
         publishIndex: parseInt(options.type)
@@ -177,7 +177,7 @@ Page({
     })
     this.getPublishedData();
   },
-  getPublishedData: function() {
+  getPublishedData: function () {
     let _this = this;
     let _index = this.data.publishIndex
     let userInfo = this.data.userInfo
@@ -193,7 +193,7 @@ Page({
         tokenTime: userInfo.tokenTime,
         page: _this.data.page
       },
-      success: function(res) {
+      success: function (res) {
         wx.hideLoading()
         let mydata = res.data;
         if (mydata.errcode == "ok") {
@@ -209,7 +209,7 @@ Page({
               pageSize: mydata.pageSize,
               isFirstRequest: false
             })
-            setTimeout(function() {
+            setTimeout(function () {
               _this.setData({
                 nothavamore: (mydata.data.length < _this.data.pageSize) ? true : false,
               })
@@ -228,7 +228,7 @@ Page({
           })
         }
       },
-      fail: function(err) {
+      fail: function (err) {
         wx.hideLoading();
         wx.showToast({
           title: '网络出错，数据加载失败！',
@@ -238,7 +238,7 @@ Page({
       }
     })
   },
-  setThisTop: function(e) {
+  setThisTop: function (e) {
     let _id = e.currentTarget.dataset.id;
     let _index = this.data.publishIndex;
     let infoIndex = e.currentTarget.dataset.index;
@@ -259,95 +259,98 @@ Page({
       infoId: _id,
       infoIndex: infoIndex
     })
-    if (_index == 1) {
-      wx.showLoading({
-        title: '正在执行操作'
-      })
-      app.doRequestAction({
-        url: _this.data.apiSetTopLink[_index],
-        way: "POST",
-        params: {
-          userId: userInfo.userId,
-          token: userInfo.token,
-          tokenTime: userInfo.tokenTime,
-          infoId: _id
-        },
-        success: function(res) {
-          wx.hideLoading();
-          let mydata = res.data;
-          wx.showToast({
-            title: mydata.errmsg,
-            icon: "none",
-            duration: 1500
-          })
-          if (mydata.errcode == "ok") {
-            let rowData = _this.data.lists[infoIndex];
-            let reData = _this.data.lists;
-            reData.splice(infoIndex, 1);
-            reData.unshift(rowData);
-            _this.setData({
-              lists: reData
-            })
-          }
-        },
-        fail: function(err) {
-          wx.hideLoading();
-          wx.showToast({
-            title: "网络不太好，操作失败！",
-            icon: "none",
-            duration: 3000
-          })
-        }
-      })
-    } else {
-      wx.showLoading({
-        title: '正在执行操作'
-      })
-      app.doRequestAction({
-        url: _this.data.apiSetTopLink[_index],
-        way: "POST",
-        params: {
-          userId: userInfo.userId,
-          token: userInfo.token,
-          tokenTime: userInfo.tokenTime,
-          infoId: _id,
-          status: status ? status : "0"
-        },
-        success: function(res) {
-          wx.hideLoading();
-          let mydata = res.data;
-          if (mydata.errcode == "ok") {
-            let newData = _this.data.lists;
-            newData[infoIndex] = mydata.data;
-            _this.setData({
-              lists: newData
-            })
-          }
-          if (mydata.errcode == "outTime") {
-            _this.setData({
-              showSetTop: true
-            })
-          } else {
-            wx.showToast({
-              title: mydata.errmsg,
-              icon: "none",
-              duration: 1500
-            })
-          }
-        },
-        fail: function(err) {
-          wx.hideLoading();
-          wx.showToast({
-            title: "网络不太好，操作失败！",
-            icon: "none",
-            duration: 3000
-          })
-        }
-      })
-    }
+    wx.navigateTo({
+      url: `/pages/workingtopAll/workingtop/workingtop`,
+    })
+    // if (_index == 1) {
+    //   wx.showLoading({
+    //     title: '正在执行操作'
+    //   })
+    //   app.doRequestAction({
+    //     url: _this.data.apiSetTopLink[_index],
+    //     way: "POST",
+    //     params: {
+    //       userId: userInfo.userId,
+    //       token: userInfo.token,
+    //       tokenTime: userInfo.tokenTime,
+    //       infoId: _id
+    //     },
+    //     success: function (res) {
+    //       wx.hideLoading();
+    //       let mydata = res.data;
+    //       wx.showToast({
+    //         title: mydata.errmsg,
+    //         icon: "none",
+    //         duration: 1500
+    //       })
+    //       if (mydata.errcode == "ok") {
+    //         let rowData = _this.data.lists[infoIndex];
+    //         let reData = _this.data.lists;
+    //         reData.splice(infoIndex, 1);
+    //         reData.unshift(rowData);
+    //         _this.setData({
+    //           lists: reData
+    //         })
+    //       }
+    //     },
+    //     fail: function (err) {
+    //       wx.hideLoading();
+    //       wx.showToast({
+    //         title: "网络不太好，操作失败！",
+    //         icon: "none",
+    //         duration: 3000
+    //       })
+    //     }
+    //   })
+    // } else {
+    //   wx.showLoading({
+    //     title: '正在执行操作'
+    //   })
+    //   app.doRequestAction({
+    //     url: _this.data.apiSetTopLink[_index],
+    //     way: "POST",
+    //     params: {
+    //       userId: userInfo.userId,
+    //       token: userInfo.token,
+    //       tokenTime: userInfo.tokenTime,
+    //       infoId: _id,
+    //       status: status ? status : "0"
+    //     },
+    //     success: function (res) {
+    //       wx.hideLoading();
+    //       let mydata = res.data;
+    //       if (mydata.errcode == "ok") {
+    //         let newData = _this.data.lists;
+    //         newData[infoIndex] = mydata.data;
+    //         _this.setData({
+    //           lists: newData
+    //         })
+    //       }
+    //       if (mydata.errcode == "outTime") {
+    //         _this.setData({
+    //           showSetTop: true
+    //         })
+    //       } else {
+    //         wx.showToast({
+    //           title: mydata.errmsg,
+    //           icon: "none",
+    //           duration: 1500
+    //         })
+    //       }
+    //     },
+    //     fail: function (err) {
+    //       wx.hideLoading();
+    //       wx.showToast({
+    //         title: "网络不太好，操作失败！",
+    //         icon: "none",
+    //         duration: 3000
+    //       })
+    //     }
+    //   })
+    // }
 
   },
-  setInfoStatus: function(e) {
+  setInfoStatus: function (e) {
     let _id = e.currentTarget.dataset.id;
     let _index = this.data.publishIndex;
     let infoIndex = e.currentTarget.dataset.index;
@@ -365,7 +368,7 @@ Page({
         tokenTime: userInfo.tokenTime,
         infoId: _id
       },
-      success: function(res) {
+      success: function (res) {
         wx.hideLoading();
         let mydata = res.data;
         wx.showToast({
@@ -381,7 +384,7 @@ Page({
           })
         }
       },
-      fail: function() {
+      fail: function () {
         wx.hideLoading();
         wx.showToast({
           title: "网络不太好，操作失败！",
@@ -394,10 +397,10 @@ Page({
 
 
   // 共用footer
-  jumpThisLink: function(e) {
+  jumpThisLink: function (e) {
     app.jumpThisLink(e);
   },
-  initFooterData: function() {
+  initFooterData: function () {
     this.setData({
       footerImgs: footerjs.footerImgs,
       publishActive: footerjs.publishActive,
@@ -405,22 +408,22 @@ Page({
     })
     footerjs.initMsgNum(this);
   },
-  doPublishAction: function() {
+  doPublishAction: function () {
     footerjs.doPublishAction(this);
   },
-  closePublishAction: function() {
+  closePublishAction: function () {
     footerjs.closePublishAction(this);
   },
-  valiUserCard: function() {
+  valiUserCard: function () {
     let userInfo = this.data.userInfo;
     footerjs.valiUserCard(this, app, userInfo);
   },
-  initCollectTips: function(options) {
+  initCollectTips: function (options) {
     if (options.hasOwnProperty("jz")) this.setData({
       showCollectTips: true
     })
   },
-  closeCollect: function() {
+  closeCollect: function () {
     this.setData({
       showCollectTips: false
     })
@@ -428,7 +431,7 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function(options) {
+  onLoad: function (options) {
     this.initFooterData();
     this.initPublishedData(options);
     this.initCollectTips(options);
@@ -437,42 +440,42 @@ Page({
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function() {
+  onReady: function () {
 
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function() {
+  onShow: function () {
 
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
-  onHide: function() {
+  onHide: function () {
 
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
-  onUnload: function() {
+  onUnload: function () {
 
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
-  onPullDownRefresh: function() {
+  onPullDownRefresh: function () {
 
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
-  onReachBottom: function() {
+  onReachBottom: function () {
     if (this.data.isFirstRequest || this.data.showNoData || this.data.nothavamore) return false;
     this.setData({
       page: this.data.page + 1

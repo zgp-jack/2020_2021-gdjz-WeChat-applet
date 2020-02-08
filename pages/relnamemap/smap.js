@@ -14,12 +14,12 @@ Page({
   data: {
     regionone: "",
     show: false,
-    longitude:"",
+    longitude: "",
     latitude: "",
     markers: [],
     nodataImg: app.globalData.apiImgUrl + "nodata.png",
     addressList: [],
-    mapaddressList:[],
+    mapaddressList: [],
     addressText: '',
     addressData: {
       "title": "",
@@ -296,11 +296,14 @@ Page({
   },
   /**打开设置面板 */
   openSetting: function (e) {
+    console.log(123)
     let that = this;
     wx.getSetting({
       success: (res) => {
+        console.log(res)
         //console.log(res.authSetting['scope.userLocation']);
         if (res.authSetting['scope.userLocation'] != undefined && res.authSetting['scope.userLocation'] != true) {//非初始化进入该页面,且未授权   
+          
           wx.showModal({
             title: '是否授权当前位置',
             content: '需要获取您的地理位置，请确认授权，否则将不能为你自动推荐位置',
@@ -308,6 +311,7 @@ Page({
               if (res.cancel) {
               } else if (res.confirm) {
                 //village_LBS(that);
+                console.log(789)
                 wx.openSetting({
                   success: function (data) {
                     console.log(data);
@@ -421,7 +425,7 @@ Page({
 
       wx.navigateBack({ delta: 1 })
 
-   
+
     })
 
   },
@@ -466,7 +470,7 @@ Page({
     this.setData({ allAreaLists: list })
   },
 
-  addmap(){
+  addmap() {
     var that = this
     wx.getLocation({
       type: "wgs84",
@@ -504,11 +508,11 @@ Page({
       type: "wgs84",
       success: function (res) {
         that.setData({
-          latitude:  that.data.latitude,
-          longitude:  that.data.longitude,
+          latitude: that.data.latitude,
+          longitude: that.data.longitude,
           markers: [{
             id: "1",
-            latitude:that.data.latitude,
+            latitude: that.data.latitude,
             longitude: that.data.longitude,
             width: 20,
             height: 20,
@@ -532,8 +536,8 @@ Page({
       location: all,
       success: function (data) {
         let alltude = that.data.longitude + ',' + that.data.latitude;
-        for (let i = 0; i < data.poisData.length ; i++){
-          let distan = that.getGreatCircleDistance(alltude,data.poisData[i].location)
+        for (let i = 0; i < data.poisData.length; i++) {
+          let distan = that.getGreatCircleDistance(alltude, data.poisData[i].location)
           data.poisData[i].distance = distan
         }
         that.setData({
@@ -546,7 +550,7 @@ Page({
     })
 
   },
-  setAddressmap(e){
+  setAddressmap(e) {
     console.log(e)
     var that = this;
     that.setData({
@@ -558,7 +562,7 @@ Page({
   },
 
   regionchange(e) {
-  
+
     // 地图发生变化的时候，获取中间点，也就是用户选择的位置toFixed
     if (e.type == 'end' && (e.causedBy == 'scale' || e.causedBy == 'drag')) {
 
@@ -584,7 +588,7 @@ Page({
     var that = this;
     that.onLoad();
   },
-  markertap(eventhandle){
+  markertap(eventhandle) {
     console.log(eventhandle)
   },
 
@@ -611,7 +615,7 @@ Page({
   onReady: function () {
     this.mapCtx = wx.createMapContext('myMap')
   },
-  updated(){
+  updated() {
     this.aroundmap()
   },
   /**
@@ -625,7 +629,7 @@ Page({
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
-   
+
   },
 
   /**

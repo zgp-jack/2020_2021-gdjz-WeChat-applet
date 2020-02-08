@@ -3,11 +3,15 @@
     <text>当前选择置顶范围</text>
   </view>
   <view class="scopedetail">
-    <view wx:for="{{areaTextcrum}}" bindtap="deletelable" wx:key="{{index}}" data-index="{{ index }}"  >
-       {{item.name}} <image class="deleteimg"  data-id="{{ item }}"  src="{{imgDetelte}}"></image>
+    <view wx:for="{{areaTextcrum}}" bindtap="deletelable" wx:key="{{index}}" data-index="{{ index }}">
+      {{item.name}}
+      <image class="deleteimg" data-id="{{ item }}" src="{{imgDetelte}}"></image>
     </view>
-    <view class="obttn" bindtap="jumpdetail"  wx:if="{{areaTextcrum.length > 0&&areaTextcrum.length<max_number}}">
-     添加更多
+    <view class="obttn" bindtap="jumpdetail" wx:if="{{areaTextcrum.length > 0&&areaTextcrum.length<max_province&&showMore == 'provice'}}">
+      添加更多
+    </view>
+    <view class="obttn" bindtap="jumpdetail" wx:if="{{areaTextcrum.length > 0&&areaTextcrum.length<max_city&&showMore == 'city'}}">
+      添加更多
     </view>
   </view>
   <view wx:if="{{areaTextcrum.length == 0}}" class="pointscope" bindtap="jumpstickyrule">
@@ -28,16 +32,16 @@
     </view>
   </view>
 
-  <view class="submitscope"  bindtap="submitscop">
+  <view class="submitscope" bindtap="submitscop">
     <text>确定置顶</text>
   </view>
 
   <view class="toprule">
-    <text>置顶规则</text>    
+    <text>置顶规则</text>
   </view>
 
   <view class="bottom">
-    <view wx:for="{{top_rules}}" wx:key="{{index}}">{{item}}</view>
+    <view wx:for="{{top_rules}}" wx:key="{{index}}">{{index==3?item+serverPhone:item}}</view>
   </view>
 </view>
 <!-- <view class="common-userauth" wx:if="{{ !userInfo }}">
