@@ -2656,8 +2656,10 @@ function getProviceItem(p,c) {
 function getInputList(bool){
   let _lists = arrDeepCopy(areas);
   _lists.splice(0,1);
+  console.log(_lists)
   let len = _lists.length;
   let res = [];
+  console.log(len)
   for (let i = 0; i < len;i++){
     let _clists = _lists[i];
     if (_clists.has_children){
@@ -2666,7 +2668,9 @@ function getInputList(bool){
       let nlen = nlist.length;
       let start = bool ? 1 : 0;
       for (let j = start;j<nlen;j++){
+
         let data = nlist[j];
+        // data.pid = _clists[j].pid
         data.cname = name + "-" + data.name
         res.push(data)
       }

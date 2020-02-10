@@ -14,7 +14,7 @@
         <text>暂未找到相关城市</text>
       </view>
     </view>
-    <view class="search-list-item" wx:for="{{ isAllAreas ? allAreaLists : nAreaLists }}" wx:key="{{ index }}" bindtap='chooseInputCtiy' data-pname="{{ item.ad_name }}" data-id="{{ item.id }}" data-area="{{ item.name }}">{{ item.cname }} </view>
+    <view class="search-list-item" wx:for="{{ isAllAreas ? allAreaLists : nAreaLists }}" wx:key="{{ index }}" bindtap='chooseInputCtiy' data-pname="{{ item.ad_name }}" data-id="{{ item.id }}" data-area="{{ item.name }}" data-pid="{{ item.pid }}">{{ item.cname }} </view>
   </view>
 
   <view class='index-area-history' wx:if="{{!showListsTtile&&showListsAnd }}">
@@ -26,7 +26,7 @@
     </view>
 
     <view class='history-child'>
-      <text class='history-children' wx:for="{{ historyArray }}" wx:key="{{ index }}" data-id="{{item.id}}" data-name="{{item.city}}" bindtap="hischildren">{{item.city}}</text>
+      <text class='history-children' wx:for="{{ historyArray }}" wx:key="{{ index }}" data-id="{{item.id}}" data-name="{{item.city}}" data-pid="{{ item.pid }}" bindtap="hischildren">{{item.city}}</text>
 
     </view>
   </view>
@@ -46,7 +46,7 @@
       </view>
     </view>
     <view class='index-area-tips overwords'>请选择置顶范围：
-      <text>{{ areaText }}</text>
+   
     </view>
     <view class='index-area-item' wx:for="{{ areadata }}" wx:key="{{ index }}" wx:for-item="areaItem">
       <text class='area-header-words'>{{ (index == 0) ? "热门城市" : areaItem[0].city }}</text>
@@ -60,5 +60,6 @@
   </view>
 </view>
 <view class="obtn" wx:if="{{ !showInputList &&!showListsAnd}}">
-  <button bindtap="seleted">确认选择</button>
+  <button bindtap="seleted" wx:if="{{shoWmodifytop != 'modifytop'}}">确认选择</button>
+  <button bindtap="seletedsub" wx:if="{{shoWmodifytop == 'modifytop'}}">确认选择</button>
 </view>

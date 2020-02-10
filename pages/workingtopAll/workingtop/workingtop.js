@@ -21,7 +21,8 @@ Page({
     value: 1,
     areaTextId: "",
     top_rules: [],
-    max_top_days: ""
+    max_top_days: "",
+    newId: ""
   },
 
   jumpstickyrule() {
@@ -86,14 +87,14 @@ Page({
       }
       this.data.value = e.detail.value;
       let value = this.data.value;
-    let num = this.data.showMore == "provice" ? this.data.province_integral : this.data.showMore == "city" ? this.data.city_integral : this.data.showMore == "allprovice" ? this.data.country_integral : 0;
+      let num = this.data.showMore == "provice" ? this.data.province_integral : this.data.showMore == "city" ? this.data.city_integral : this.data.showMore == "allprovice" ? this.data.country_integral : 0;
       let length = this.data.areaTextcrum.length;
       this.setData({
         point: value * num * length
       })
     } else {
       let value = this.data.value;
-     let num = this.data.showMore == "provice" ? this.data.province_integral : this.data.showMore == "city" ? this.data.city_integral : this.data.showMore == "allprovice" ? this.data.country_integral:0;
+      let num = this.data.showMore == "provice" ? this.data.province_integral : this.data.showMore == "city" ? this.data.city_integral : this.data.showMore == "allprovice" ? this.data.country_integral : 0;
       let length = this.data.areaTextcrum.length;
       this.setData({
         point: value * num * length
@@ -148,17 +149,18 @@ Page({
       app.showMyTips(`最多可置顶${day}天！`);
       return
     }
-
+    console.log(that.data.value)
     that.areaId()
     let detail = {
-      userId: userInfo.userId,
+      mid: userInfo.userId,
       token: userInfo.token,
-      tokenTime: userInfo.tokenTime,
+      time: userInfo.tokenTime,
       uuid: userUuid,
-      days: that.data.value,
-      is_country: that.data.showMore == "allprovice" ? 1:0,
+      day: that.data.value,
+      is_country: that.data.showMore == "allprovice" ? 1 : 0,
       city_ids: that.data.showMore == "city" ? that.data.areaTextId : "",
-      provinces: that.data.showMore == "provice"? that.data.areaTextId:"",
+      province_ids: that.data.showMore == "provice" ? that.data.areaTextId : "",
+      job_id: that.data.newId
     }
 
     app.appRequestAction({
@@ -168,7 +170,32 @@ Page({
       mask: true,
       success: function (res) {
         let mydata = res.data;
+        if (mydata.errcode == "ok") {
 
+          wx.showModal({
+            title: '温馨提示',
+            content: res.data.errmsg,
+            showCancel: false,
+            success(res) {
+              wx.navigateBack({
+                delta: 1
+              })
+            }
+          })
+          return
+        } else {
+          wx.showModal({
+            title: '温馨提示',
+            content: res.data.errmsg,
+            showCancel: false,
+            success(res) {
+              // wx.navigateBack({
+              //   delta: 1
+              // })
+            }
+          })
+          return
+        }
       },
       fail: function (err) {
         wx.showModal({
@@ -252,13 +279,21 @@ Page({
     })
 
   },
+  getNewId(options) {
+    if (options.hasOwnProperty("id")) {
+      this.setData({
+        newId: options.id
+      })
+    }
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+
     // this.authrasution()
     this.getdetail()
-
+    this.getNewId(options)
   },
 
   /**

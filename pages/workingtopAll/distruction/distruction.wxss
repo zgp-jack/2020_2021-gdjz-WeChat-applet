@@ -16,7 +16,9 @@
   font-size: 0;
   z-index: 101;
 }
-
+.index-area-tips{
+    z-index: 0!important;
+}
 .obtn button {
   width: 550rpx;
   /* height: 95rpx; */
@@ -34,6 +36,7 @@
 
 .area-input {
   background: rgb(246, 248, 248) !important;
+  z-index: 999999!important;
 }
 
 .index-close-area {

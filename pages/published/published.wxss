@@ -321,3 +321,43 @@
   vertical-align: middle;
   margin-right: 10rpx;
 }
+.published-list-new{
+    display: flex;
+  justify-content: space-between;
+
+}
+.published-list-shnew {
+   display: flex;
+  align-items: center;
+}
+.published-list-new .published-list-shnew image{
+  width: 36rpx;
+  height: 36rpx;
+}
+.published-list-shnew text{
+  
+font-size: 28rpx;
+
+}
+.published-list-shnew .otime{
+  font-size: 30rpx;
+  margin-left: 6rpx;
+}
+.published-list-shnew .time{
+  color: gray;
+  vertical-align: baseline;
+}
+
+.published-list-new .otext{
+  display: inline-block;
+   font-size: 28rpx;
+
+    text-align: center;
+    color: red;
+    background: #F5F7F9;
+line-height: 50rpx;
+padding: 4rpx 8rpx;
+border-radius: 6rpx;
+
+
+}

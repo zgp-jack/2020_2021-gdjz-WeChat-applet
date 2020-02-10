@@ -316,7 +316,7 @@
     box-sizing: border-box;
 }
 .searchinputbox{position: relative;}
-.searchinputbox image{position: absolute;width: 40rpx;height: 40rpx;right: 20rpx;top: 27rpx;z-index: 3;}
+.searchinputbox image{position: absolute;width: 40rpx;height: 40rpx;right: 20rpx;top: 27rpx;z-index: 9999;}
 
 .area-input{position: relative;width: 100%;left: 0;top: 15rpx;height: 70rpx;line-height:70rpx;background: white;border-radius: 5px;font-size: 28rpx;text-align: left;padding: 0 20rpx;box-sizing: border-box;padding-right:80rpx;color: #333;}
 
