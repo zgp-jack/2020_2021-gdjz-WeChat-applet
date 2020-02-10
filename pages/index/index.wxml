@@ -193,3 +193,12 @@
 
 <!-- 引入footer -->
 <template is="footer" data="{{ footerImgs,publishActive,showPublishBox,footerActive }}" />
+
+<!-- 引导提示页 2020-0203新增 -->
+<view class="firstfcbox" wx:if="{{ showShadowFc }}" bindtap="closeFc">
+  <image src="{{ fcheader }}" class="fctips-header"></image>
+  <image src="{{ fcbody }}" mode="widthFix" class="fctips-body"></image>
+</view>
+
+
+

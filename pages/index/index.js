@@ -11,6 +11,9 @@ Page({
      * 页面的初始数据 showDetailInfo footerImgs
      */
     data: {
+      showShadowFc:false,
+      fcheader:app.globalData.apiImgUrl + "yindao-fc-tips.png",
+      fcbody:app.globalData.apiImgUrl + "yindao-fc-body.png",
         unitid: app.globalData.unitid,
         footerActive: "recruit",
         userInfo:true,
@@ -834,10 +837,20 @@ Page({
     getUserUuid: function () {
       app.getUserUuid();
     },
+    initFirstFcInfo:function(){
+      let isshow = wx.getStorageSync('isshowfc')
+      if(isshow) return;
+      this.setData({ showShadowFc:true })
+      wx.setStorageSync('isshowfc', 1)
+    },
+    closeFc:function(){
+      this.setData({ showShadowFc:false })
+    },
     /**
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
+      this.initFirstFcInfo();
       this.initSearchHistory();
         //this.isShowFastIssue();
         this.initFirstTips();
