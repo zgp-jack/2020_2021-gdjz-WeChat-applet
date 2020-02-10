@@ -7,7 +7,7 @@
     <text class='index-close-area' bindtap='closeArea'>取消</text>
   </view>
   <!--  -->
-  <view class="searchcitybox" wx:if="{{ showInputList }}">
+  <view class="searchcitybox" wx:if="{{ showInputList && showListsTtile }}">
     <view class="search-list-item" wx:if="{{ !isAllAreas && !nAreaLists.length }}">
       <view class='common-nodatabox flex-column'>
         <image src='{{ nodataImg }}'></image>
@@ -17,12 +17,23 @@
     <view class="search-list-item" wx:for="{{ isAllAreas ? allAreaLists : nAreaLists }}" wx:key="{{ index }}" bindtap='chooseInputCtiy' data-pname="{{ item.ad_name }}" data-id="{{ item.id }}" data-area="{{ item.name }}">{{ item.cname }} </view>
   </view>
 
+  <view class='index-area-history' wx:if="{{!showListsTtile&&showListsAnd }}">
+    <view class='history-header'>
+      <text>搜索历史</text>
+      <view bindtap="delete">
+        <image src="../../../images/laji.png"></image>
+      </view>
+    </view>
 
-  <view class='index-area-tips overwords'>当前选择城市：
-    <text>{{ areaText }}</text>
+    <view class='history-child'>
+      <text class='history-children' wx:for="{{ historyArray }}" wx:key="{{ index }}" data-id="{{item.id}}" data-name="{{item.city}}" bindtap="hischildren">{{item.city}}</text>
+
+    </view>
   </view>
+
   <view class='index-area-body'>
     <view class='index-area-item' wx:if="{{ gpsOrientation || locationHistory }}">
+
       <text class='area-header-words'>当前定位城市/最近访问</text>
       <view class='area-body-content clearfix'>
         <view class="gpsposi" wx:if="{{ gpsOrientation }}">
@@ -34,13 +45,20 @@
         </view>
       </view>
     </view>
+    <view class='index-area-tips overwords'>请选择置顶范围：
+      <text>{{ areaText }}</text>
+    </view>
     <view class='index-area-item' wx:for="{{ areadata }}" wx:key="{{ index }}" wx:for-item="areaItem">
       <text class='area-header-words'>{{ (index == 0) ? "热门城市" : areaItem[0].city }}</text>
+
       <view class='area-body-content clearfix'>
-        <view wx:if="{{ index != 0 }}" wx:for="{{ areaItem }}" wx:key="{{ index }}">
-          <text class='overwords' data-id="{{ item.id }}" data-pname="{{ item.ad_name }}" data-area="{{ item.city }}" data-pid="{{ areaItem[0].id }}" bindtap='chooseThisCtiy'>{{ item.city }}</text>
+        <view wx:for="{{ areaItem }}" wx:key="{{ index }}">
+          <text class="{{item.selected == 2 ?'body-content':'overwords'}}" data-id="{{ item.id }}" data-pname="{{ item.ad_name }}" data-area="{{ item.city }}" data-pid="{{item.pid }}" data-pro="{{ index}}" data-index="{{ item.index}}" bindtap='chooseThisCtiy'>{{ item.city }}</text>
         </view>
       </view>
     </view>
   </view>
+</view>
+<view class="obtn" wx:if="{{ !showInputList &&!showListsAnd}}">
+  <button bindtap="seleted">确认选择</button>
 </view>

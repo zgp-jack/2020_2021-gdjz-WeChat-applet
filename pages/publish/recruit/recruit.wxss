@@ -60,9 +60,9 @@
     border-bottom: 1px solid #dcdcdc;
     overflow: hidden;
 }
-/* .common-publish-content .common-publish-item:nth-last-child(1) .common-publish-item-content{
+.common-publish-content .common-publish-item:nth-last-child(1) .common-publish-item-content{
     border-bottom: 0;
-} */
+}
 .common-publish-words{
     position: absolute;
     left: 20rpx;

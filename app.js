@@ -11,9 +11,10 @@ App({
 
   },
   globalData: {
-    version:"v-2.7.1",
+    judge:"",
+    version: "v-2.7.1",
     complaincontent: '请填写5~100字，必须含有汉字。（恶意投诉会被封号，请谨慎投诉！）',
-    areaIs:false,
+    areaIs: false,
     topshow: false,
     isauthuuid: false,
     previewboss: true,
@@ -43,7 +44,7 @@ App({
     commonDownloadApp: "http://cdn.yupao.com/miniprogram/images/download.png?t=" + new Date().getTime(),
     commonJixieAd: "http://cdn.yupao.com/miniprogram/images/list-ad-newjixie.png?t=" + new Date().getTime(),
 
-    apiRequestUrl: "https://newyupaomini.54xiaoshuo.com/",
+    apiRequestUrl: "https://miniapi.zhaogong.vrtbbs.com/",
     // apiRequestUrl: "https://newyupaomini.54xiaoshuo.com/",
     // apiRequestUrl: "http://miniapi.qsyupao.com/",
     //apiRequestUrl:"http://mini.zhaogongdi.com/",
@@ -414,7 +415,7 @@ App({
     wx.uploadFile({
       url: type == 1 || _type == "sc" ? _this.globalData.apiUploadImg : _this.globalData.apiUploadImgphoto,
       filePath: res.tempFilePaths[0],
-      header:{
+      header: {
         userid: userInfo.userId
       },
       name: 'file',
@@ -462,43 +463,43 @@ App({
       sizeType: ['compressed'],
       sourceType: ['album', 'camera'],
       success: res => {
-        _this.detailUpimg(1,res,callback);
+        _this.detailUpimg(1, res, callback);
       },
       fail: function () {
         wx.hideLoading();
       }
     })
   },
-  cameraAndAlbum: function (callback, _type){
+  cameraAndAlbum: function (callback, _type) {
     let that = this;
     wx.showActionSheet({
-      itemList: ['拍照','从相册中选择'],
+      itemList: ['拍照', '从相册中选择'],
       success(res) {
         console.log(res.tapIndex)
-        if(res.tapIndex==0){ //0是拍照
+        if (res.tapIndex == 0) { //0是拍照
           wx.chooseImage({
             count: 1,
             sizeType: ['compressed'],
             sourceType: ['camera'],
             success: function (res) {
               that.detailUpimg(2, res, callback, _type);
-             },
+            },
           })
-        } else if(res.tapIndex==1){
+        } else if (res.tapIndex == 1) {
           wx.chooseImage({
             count: 1,
             sizeType: ['compressed'],
             sourceType: ['album'],
-            success: function(res) {
+            success: function (res) {
               that.detailUpimg(2, res, callback, _type);
             },
           })
         }
       }
     })
-   
-     
-    },
+
+
+  },
   arrDeepCopy: function (source) {
     var sourceCopy = source instanceof Array ? [] : {};
     for (var item in source) {
@@ -939,12 +940,12 @@ App({
           callback()
           if (res.errMsg == "requestSubscribeMessage:ok") {
             let status = res[tmplId.tmplId[type].id]
-            if(status == "accept"){
+            if (status == "accept") {
               that.appRequestAction({
                 url: "leaving-message/add-subscribe-msg/",
                 way: "POST",
                 mask: true,
-                hideLoading:true,
+                hideLoading: true,
                 params: {
                   userId: userInfo.userId,
                   token: userInfo.token,
@@ -955,7 +956,7 @@ App({
             }
           }
         },
-        fail:function(){
+        fail: function () {
           callback()
         }
       })
