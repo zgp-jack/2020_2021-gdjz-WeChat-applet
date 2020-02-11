@@ -12,7 +12,7 @@ App({
   },
   globalData: {
     judge:"",
-    version: "v-2.7.1",
+    version: "v-2.7.2",
     complaincontent: '请填写5~100字，必须含有汉字。（恶意投诉会被封号，请谨慎投诉！）',
     areaIs: false,
     topshow: false,
@@ -863,10 +863,9 @@ App({
     }
   },
   getAreaData: function (_this) {
-    wx.showToast({
+
+    wx.showLoading({
       title: '加载中',
-      icon: 'loading',
-      duration: 2000,
       mask: true
     })
     console.log(123)
@@ -877,7 +876,7 @@ App({
         _this.setData({
           areadata: areadata.data
         })
-        wx.hideToast()
+        wx.hideLoading()
         return false;
       }
     }
@@ -891,7 +890,7 @@ App({
         _this.setData({
           areadata: res.data
         })
-        wx.hideToast()
+        wx.hideLoading()
         wx.setStorageSync('areadata', mydata)
       }
     });

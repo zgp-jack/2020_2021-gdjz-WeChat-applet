@@ -30,6 +30,7 @@ Page({
     let that = this;
     let max_province = that.data.max_province;
     let max_city = that.data.max_city;
+    app.globalData.judge = ""
     wx.navigateTo({
       url: `/pages/workingtopAll/distruction/distruction?max_province=${max_province}&max_city=${max_city}`,
     })
@@ -103,9 +104,20 @@ Page({
 
   },
   areaId() {
-    // areaText
+    let that = this;
     let id = '';
     let areaText = this.data.areaTextcrum;
+
+    for (let i = 0; i < areaText.length; i++) {
+      let areahot = areaText[i].id
+      let areaIn = areahot.indexOf("hot")
+      if (areaIn != -1) {
+        areaText[i].id = areahot.substring(0, areaIn)
+      }
+    }
+
+
+
     for (let i = 0; i < areaText.length; i++) {
       if (i >= areaText.length - 1) {
         id += areaText[i].id
@@ -114,6 +126,7 @@ Page({
       }
     }
     this.data.areaTextId = id;
+
   },
   submitscop() {
     let that = this;
@@ -189,7 +202,20 @@ Page({
             }
           })
           return
-        } else {
+        } else if (mydata.errcode == "get_integral") {
+          wx.showModal({
+            title: '温馨提示',
+            content: res.data.errmsg,
+            success(res) {
+              if (res.confirm == true) {
+                wx.navigateTo({
+                  url: `/pages/getintegral/getintegral`,
+                })
+              }
+            }
+          })
+          return
+        }  else {
           wx.showModal({
             title: '温馨提示',
             content: res.data.errmsg,

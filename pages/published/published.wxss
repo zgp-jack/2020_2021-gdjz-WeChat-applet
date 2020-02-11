@@ -331,8 +331,9 @@
   align-items: center;
 }
 .published-list-new .published-list-shnew image{
-  width: 36rpx;
-  height: 36rpx;
+  width: 22rpx;
+height: 32rpx;
+
 }
 .published-list-shnew text{
   
@@ -341,7 +342,7 @@ font-size: 28rpx;
 }
 .published-list-shnew .otime{
   font-size: 30rpx;
-  margin-left: 6rpx;
+  margin-left: 8rpx;
 }
 .published-list-shnew .time{
   color: gray;
