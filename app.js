@@ -863,6 +863,12 @@ App({
     }
   },
   getAreaData: function (_this) {
+    wx.showToast({
+      title: '加载中',
+      icon: 'loading',
+      duration: 2000,
+      mask: true
+    })
     console.log(123)
     let num = 1;
     let areadata = wx.getStorageSync("areadata");
@@ -871,6 +877,7 @@ App({
         _this.setData({
           areadata: areadata.data
         })
+        wx.hideToast()
         return false;
       }
     }
@@ -884,6 +891,7 @@ App({
         _this.setData({
           areadata: res.data
         })
+        wx.hideToast()
         wx.setStorageSync('areadata', mydata)
       }
     });

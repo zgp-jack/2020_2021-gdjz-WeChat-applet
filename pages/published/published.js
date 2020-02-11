@@ -7,6 +7,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    refresh:false,
     nowtime:"",
     footerActive: "member",
     areaLists: ["全国", "省"],
@@ -459,7 +460,14 @@ Page({
       nowtime: time
     })
   },
-  
+  twoRefresh(){
+    if (this.data.refresh){
+      this.getPublishedData()
+    }
+    this.setData({
+      refresh: false
+    })
+  },
 
   /**
    * 生命周期函数--监听页面加载
@@ -482,6 +490,7 @@ Page({
    */
   onShow: function () {
     this.judge()
+    this.twoRefresh()
   },
 
   /**

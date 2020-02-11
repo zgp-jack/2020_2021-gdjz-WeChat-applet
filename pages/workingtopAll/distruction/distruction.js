@@ -151,7 +151,7 @@ Page({
       if (app.globalData.judge == "allprovice" && judgeId != 0) {
         wx.showModal({
           title: '温馨提示',
-          content: `选择了全国后，无法选择其他`,
+          content: `选择或置顶全国后，无法选择其他`,
           showCancel: false,
           success(res) {}
         })
@@ -230,6 +230,7 @@ Page({
     }
   },
   changeAreaData(options) {
+  
     let that = this;
     for (let i = 0; i < that.data.areadata.length; i++) {
       for (let j = 0; j < that.data.areadata[i].length; j++) {
@@ -256,6 +257,7 @@ Page({
       areadata: that.data.areadata
     })
     console.log(that.data.areadata)
+   
     that.modifyArea(options)
   },
   hotcities(options) {
@@ -412,6 +414,7 @@ Page({
 
     // let detail = { id: cityId, name: name, num: num, pro: pro }
     console.log(item)
+
     let that = this;
     for (let i = 0; i < item.length; i++) {
       for (let j = 0; j < that.data.areadata.length; j++) {
@@ -598,8 +601,15 @@ Page({
             content: res.data.errmsg,
             showCancel: false,
             success(res) {
-              wx.redirectTo({
-                url: '/pages/published/published',
+            console.log(res)
+              let that = this;
+              let pages = getCurrentPages();
+              let prevPage = pages[pages.length - 2];
+              prevPage.setData({ //修改上一个页面的变量
+                refresh:true
+              })
+              wx.navigateBack({
+                delta: 1
               })
             }
           })
