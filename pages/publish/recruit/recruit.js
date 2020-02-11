@@ -548,7 +548,23 @@ Page({
         let mydata = res.data;
         if(mydata.errcode == "ok"){
           _this.subscribeToNews(mydata)
-        }else{
+        }else if(mydata.errcode == "member_forbid"){
+          wx.showModal({
+              title: '温馨提示',
+              content: mydata.errmsg,
+              cancelText: "取消",
+              confirmText: "联系客服",
+              success(res) {
+                  if (res.confirm) {
+                      let tel = mydata.service_tel
+                      wx.makePhoneCall({
+                        phoneNumber: tel,
+                      })
+                  }
+
+              }
+          })
+      } else{
           wx.showModal({
             title: '温馨提示',
             content: mydata.errmsg,

@@ -315,7 +315,7 @@ Page({
 
                 }
             })
-        } else {  //用户异常、用户验证失败
+        }else {  //用户异常、用户验证失败
             wx.showModal({
                 title: '温馨提示',
                 content: mydata.errmsg,
