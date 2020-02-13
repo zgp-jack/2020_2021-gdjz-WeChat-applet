@@ -7,8 +7,8 @@ Page({
    * 页面的初始数据
    */
   data: {
-    refresh:false,
-    nowtime:"",
+    refresh: false,
+    nowtime: "",
     footerActive: "member",
     areaLists: ["全国", "省"],
     areaIntegral: [100, 20],
@@ -55,7 +55,7 @@ Page({
     collecticon: app.globalData.apiImgUrl + "collect-tipicon.png",
     collecthand: app.globalData.apiImgUrl + "new-published-zd.png",
     showCollectTips: false,
-    daytime:""
+    daytime: ""
   },
   bindAreaChange: function (e) {
     this.setData({
@@ -242,7 +242,7 @@ Page({
       }
     })
   },
-  setInfoCity(e){
+  setInfoCity(e) {
     let _id = e.currentTarget.dataset.id;
     let modifytop = "modifytop"
     wx.navigateTo({
@@ -262,115 +262,115 @@ Page({
     console.log(showTime)
     console.log(time)
     console.log(status)
-    if (status == 0 && !showTime){
-    if (s == "2") {
-      wx.showModal({
-        title: '提示',
-        content: '已招到状态不能进行置顶操作，请修改招工状态',
-        showCancel: false
-      })
-      return false;
-    }
+    if (status == 0 && !showTime && _index == 0) {
+      if (s == "2") {
+        wx.showModal({
+          title: '提示',
+          content: '已招到状态不能进行置顶操作，请修改招工状态',
+          showCancel: false
+        })
+        return false;
+      }
       console.log(1223)
-    this.setData({
-      infoId: _id,
-      infoIndex: infoIndex
-    })
-    wx.navigateTo({
-      url: `/pages/workingtopAll/workingtop/workingtop?id=${_id}`,
-    })
-
-    } else if (!status && status != 0){
+      this.setData({
+        infoId: _id,
+        infoIndex: infoIndex
+      })
       wx.navigateTo({
         url: `/pages/workingtopAll/workingtop/workingtop?id=${_id}`,
       })
-    } else{
-    if (_index == 1) {
-      wx.showLoading({
-        title: '正在执行操作'
-      })
-      app.doRequestAction({
-        url: _this.data.apiSetTopLink[_index],
-        way: "POST",
-        params: {
-          userId: userInfo.userId,
-          token: userInfo.token,
-          tokenTime: userInfo.tokenTime,
-          infoId: _id
-        },
-        success: function (res) {
-          wx.hideLoading();
-          let mydata = res.data;
-          wx.showToast({
-            title: mydata.errmsg,
-            icon: "none",
-            duration: 1500
-          })
-          if (mydata.errcode == "ok") {
-            let rowData = _this.data.lists[infoIndex];
-            let reData = _this.data.lists;
-            reData.splice(infoIndex, 1);
-            reData.unshift(rowData);
-            _this.setData({
-              lists: reData
-            })
-          }
-        },
-        fail: function (err) {
-          wx.hideLoading();
-          wx.showToast({
-            title: "网络不太好，操作失败！",
-            icon: "none",
-            duration: 3000
-          })
-        }
+
+    } else if (!status && status != 0 && _index == 0) {
+      wx.navigateTo({
+        url: `/pages/workingtopAll/workingtop/workingtop?id=${_id}`,
       })
     } else {
-      wx.showLoading({
-        title: '正在执行操作'
-      })
-      app.doRequestAction({
-        url: _this.data.apiSetTopLink[_index],
-        way: "POST",
-        params: {
-          userId: userInfo.userId,
-          token: userInfo.token,
-          tokenTime: userInfo.tokenTime,
-          infoId: _id,
-          status: status ? status : "0"
-        },
-        success: function (res) {
-          wx.hideLoading();
-          let mydata = res.data;
-          if (mydata.errcode == "ok") {
-            let newData = _this.data.lists;
-            newData[infoIndex] = mydata.data;
-            _this.setData({
-              lists: newData
-            })
-          }
-          if (mydata.errcode == "outTime") {
-            _this.setData({
-              showSetTop: true
-            })
-          } else {
+      if (_index == 1) {
+        wx.showLoading({
+          title: '正在执行操作'
+        })
+        app.doRequestAction({
+          url: _this.data.apiSetTopLink[_index],
+          way: "POST",
+          params: {
+            userId: userInfo.userId,
+            token: userInfo.token,
+            tokenTime: userInfo.tokenTime,
+            infoId: _id
+          },
+          success: function (res) {
+            wx.hideLoading();
+            let mydata = res.data;
             wx.showToast({
               title: mydata.errmsg,
               icon: "none",
               duration: 1500
             })
+            if (mydata.errcode == "ok") {
+              let rowData = _this.data.lists[infoIndex];
+              let reData = _this.data.lists;
+              reData.splice(infoIndex, 1);
+              reData.unshift(rowData);
+              _this.setData({
+                lists: reData
+              })
+            }
+          },
+          fail: function (err) {
+            wx.hideLoading();
+            wx.showToast({
+              title: "网络不太好，操作失败！",
+              icon: "none",
+              duration: 3000
+            })
           }
-        },
-        fail: function (err) {
-          wx.hideLoading();
-          wx.showToast({
-            title: "网络不太好，操作失败！",
-            icon: "none",
-            duration: 3000
-          })
-        }
-      })
-    }
+        })
+      } else {
+        wx.showLoading({
+          title: '正在执行操作'
+        })
+        app.doRequestAction({
+          url: _this.data.apiSetTopLink[_index],
+          way: "POST",
+          params: {
+            userId: userInfo.userId,
+            token: userInfo.token,
+            tokenTime: userInfo.tokenTime,
+            infoId: _id,
+            status: status ? status : "0"
+          },
+          success: function (res) {
+            wx.hideLoading();
+            let mydata = res.data;
+            if (mydata.errcode == "ok") {
+              let newData = _this.data.lists;
+              newData[infoIndex] = mydata.data;
+              _this.setData({
+                lists: newData
+              })
+            }
+            if (mydata.errcode == "outTime") {
+              _this.setData({
+                showSetTop: true
+              })
+            } else {
+              wx.showToast({
+                title: mydata.errmsg,
+                icon: "none",
+                duration: 1500
+              })
+            }
+          },
+          fail: function (err) {
+            wx.hideLoading();
+            wx.showToast({
+              title: "网络不太好，操作失败！",
+              icon: "none",
+              duration: 3000
+            })
+          }
+        })
+      }
     }
   },
   setInfoStatus: function (e) {
@@ -450,18 +450,18 @@ Page({
     this.setData({
       showCollectTips: false
     })
-  }, 
-  judge(){
+  },
+  judge() {
     app.globalData.judge = ""
     let timer = new Date()
-    let time = (timer.getTime()-0)/1000
+    let time = (timer.getTime() - 0) / 1000
     console.log(time)
     this.setData({
       nowtime: time
     })
   },
-  twoRefresh(){
-    if (this.data.refresh){
+  twoRefresh() {
+    if (this.data.refresh) {
       this.getPublishedData()
     }
     this.setData({

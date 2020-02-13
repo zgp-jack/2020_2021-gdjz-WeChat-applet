@@ -862,7 +862,7 @@ App({
       wx.setStorageSync("locationHistory", locationHistory)
     }
   },
-  getAreaData: function (_this) {
+  getAreaData: function (_this, options) {
 
     wx.showLoading({
       title: '加载中',
@@ -876,6 +876,10 @@ App({
         _this.setData({
           areadata: areadata.data
         })
+        if (_this && options){
+          _this.hotcities(options)
+        }
+
         wx.hideLoading()
         return false;
       }
@@ -890,6 +894,9 @@ App({
         _this.setData({
           areadata: res.data
         })
+        if (_this && options) {
+          _this.hotcities(options)
+        }
         wx.hideLoading()
         wx.setStorageSync('areadata', mydata)
       }

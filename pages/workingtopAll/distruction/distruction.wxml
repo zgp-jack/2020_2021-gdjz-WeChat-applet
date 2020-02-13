@@ -1,12 +1,12 @@
-<view class='index-pullareabox'>
+<view class='{{(!showInputList &&!showListsAnd)?"index-pullareabox":"index-pullareabox index-pullareaboxone"}}'>
   <view class='index-area-header'>
     <view class="searchinputbox">
       <input class="area-input" placeholder="输入城市名字进行搜索" bindinput="searchInput" bindfocus="showInputList" value="{{ searchInputVal }}" focus="{{ areaInputFocus }}" tabindex="99999999999"></input>
       <image src="{{ clearinput }}" bindtap="clearInputAction"></image>
     </view>
-    <text class='index-close-area' >搜索</text>
+    <text class='index-close-area'>搜索</text>
   </view>
-  <!-- bindtap='closeArea' -->
+  <!-- bindtap='closeArea'  -->
   <view class="searchcitybox" wx:if="{{ showInputList && showListsTtile }}">
     <view class="search-list-item" wx:if="{{ !isAllAreas && !nAreaLists.length }}">
       <view class='common-nodatabox flex-column'>
@@ -46,19 +46,25 @@
       </view>
     </view>
     <view class='index-area-tips overwords'>请选择置顶范围：
-   
+
     </view>
     <view class='index-area-item' wx:for="{{ areadata }}" wx:key="{{ index }}" wx:for-item="areaItem">
       <text class='area-header-words'>{{ (index == 0) ? "热门城市" : areaItem[0].ad_name  }}</text>
-
-      <view class='area-body-content clearfix'>
+      <view class='area-body-content clearfix' wx:if="{{index ==0}}">
         <view wx:for="{{ areaItem }}" wx:key="{{ index }}">
-          <text class="{{item.selected == 2 ?'body-content':'overwords'}}" data-id="{{ item.id }}" data-pname="{{ item.ad_name }}" data-area="{{ item.city }}" data-pid="{{item.pid }}" data-pro="{{ index}}" data-index="{{ item.index}}" bindtap='chooseThisCtiy'>{{index ==0 &&item.index!=0? item.citytop:  item.city}}</text>
+          <text class="{{item.selected == 2 ?'body-content':'overwords'}}" data-id="{{ item.id }}" data-pname="{{ item.ad_name }}" data-area="{{ item.city }}" data-pid="{{item.pid }}" data-pro="{{ index}}" data-index="{{ item.index}}" bindtap='chooseThisCtiy'>{{item.city}}</text>
+        </view>
+      </view>
+      <view class='area-body-content clearfix'  wx:if="{{index !=0}}">
+        <view wx:for="{{ areaItem }}" wx:key="{{ index }}">
+          <text class="{{item.selected == 2 ?'body-content':'overwords'}}" data-id="{{ item.id }}" data-pname="{{ item.ad_name }}" data-area="{{ item.city }}" data-pid="{{item.pid }}" data-pro="{{ index}}" data-index="{{ item.index}}" bindtap='chooseThisCtiy'>{{index ==0 &&item.index!=0? "全省置顶":item.city}}</text>
         </view>
       </view>
     </view>
   </view>
+
 </view>
+ <!-- (index == publishIndex) ? "text-active" : "" -->
 <view class="obtn" wx:if="{{ !showInputList &&!showListsAnd}}">
   <button bindtap="seleted" wx:if="{{shoWmodifytop != 'modifytop'}}">确认选择</button>
   <button bindtap="seletedsub" wx:if="{{shoWmodifytop == 'modifytop'}}">确认选择</button>

@@ -108,15 +108,6 @@ Page({
     let id = '';
     let areaText = this.data.areaTextcrum;
 
-    for (let i = 0; i < areaText.length; i++) {
-      let areahot = areaText[i].id
-      let areaIn = areahot.indexOf("hot")
-      if (areaIn != -1) {
-        areaText[i].id = areahot.substring(0, areaIn)
-      }
-    }
-
-
 
     for (let i = 0; i < areaText.length; i++) {
       if (i >= areaText.length - 1) {
