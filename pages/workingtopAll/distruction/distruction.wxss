@@ -62,7 +62,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  font-size: 34rpx;
+  font-size: 30rpx;
 }
 
 .history-header image {
@@ -104,5 +104,8 @@ font-size: 28rpx;
 
 }
 .index-pullareabox{
-  padding-bottom:100rpx; 
+  padding-bottom:120rpx; 
+}
+.index-pullareaboxone{
+   padding-bottom:0rpx; 
 }
