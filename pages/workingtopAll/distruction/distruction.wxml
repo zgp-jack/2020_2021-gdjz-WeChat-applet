@@ -66,6 +66,6 @@
 </view>
  <!-- (index == publishIndex) ? "text-active" : "" -->
 <view class="obtn" wx:if="{{ !showInputList &&!showListsAnd}}">
-  <button bindtap="seleted" wx:if="{{shoWmodifytop != 'modifytop'}}">确认选择</button>
-  <button bindtap="seletedsub" wx:if="{{shoWmodifytop == 'modifytop'}}">确认选择</button>
+  <button bindtap="seleted">确认选择</button>
+  <!-- <button bindtap="seletedsub" wx:if="{{shoWmodifytop == 'modifytop'}}">确认选择</button> -->
 </view>

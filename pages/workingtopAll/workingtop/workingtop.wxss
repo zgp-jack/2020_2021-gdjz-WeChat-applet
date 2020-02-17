@@ -136,6 +136,8 @@ padding-left: 26%;
   font-size: 30rpx;
 
 }
+
+
 .submitscope{
   width: 420rpx;
   height: 80rpx;
@@ -225,4 +227,76 @@ padding-left: 26%;
 }
 .scopedetail view:first-child{
       margin-right: 10.5%;
+}
+.daynum picker{
+
+  line-height: 90rpx;
+  width: 100%;
+}
+.daynum picker .end{
+  width: 80%;
+    display: flex;
+  align-items: center;
+}
+
+.daynumone{
+  position: relative;
+padding-left: 29%;
+  border-bottom: 1px solid #DCDCDC;
+    line-height: 90rpx;
+  height: 90rpx;
+}
+.daynumone .endtime{
+  width: 28%;
+  display: inline-block;
+  color: #202021;
+  font-size: 30rpx;
+  position: absolute;
+  left: 0rpx;
+}
+.daynumone .endtime::after{
+  content: '';
+  width: 100%;
+  overflow: hidden;
+  height: 0;
+}
+.daynumone .endtime::before{
+  content: ':';
+  height: 100%;
+  width: 6rpx;
+  position: absolute;
+  right: 4rpx;
+}
+.daynumone input{
+  width: 75%;
+  font-size: 30rpx;
+  display: inline-block;
+  height: 90rpx;
+}
+.daynumone:last-child{
+  border: 0;
+}
+.daynumone picker text{
+  display: inline-block;
+  font-size: 30rpx;
+  position: static;
+
+}
+.dayall .daynumone picker{
+  height: 90rpx;
+  width: 100%;
+}
+.dayall .daynumone .yanchang{
+  position: absolute;
+  right: 0;
+  top: 0;
+  font-size: 30rpx;
+  color: #0099FF;
+}
+.dayall .daynumone .yanchangon{
+   position: absolute;
+  right: 0;
+  top: 0;
+  font-size: 30rpx;
+  color: rgb(179, 180, 180);
 }

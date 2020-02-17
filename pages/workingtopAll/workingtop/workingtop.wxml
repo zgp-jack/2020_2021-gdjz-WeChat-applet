@@ -3,36 +3,63 @@
     <text>当前选择置顶范围</text>
   </view>
   <view class="scopedetail">
-    <view wx:for="{{areaTextcrum}}" bindtap="deletelable" wx:key="{{index}}" data-index="{{ index }}">
+    <view wx:for="{{areaProcrum}}" bindtap="deletelableP" wx:key="{{index}}" data-index="{{ index }}"> 
       {{item.name}}
       <image class="deleteimg" data-id="{{ item }}" src="{{imgDetelte}}"></image>
     </view>
-    <view class="obttn" bindtap="jumpdetail" wx:if="{{areaTextcrum.length > 0&&areaTextcrum.length<max_province&&showMore == 'provice'}}">
-      添加更多
+    <view wx:for="{{areaCitycrum}}" bindtap="deletelableC" wx:key="{{index}}" data-index="{{ index }}">
+      {{item.name}}
+      <image class="deleteimg" data-id="{{ item }}" src="{{imgDetelte}}"></image>
     </view>
-    <view class="obttn" bindtap="jumpdetail" wx:if="{{areaTextcrum.length > 0&&areaTextcrum.length<max_city&&showMore == 'city'}}">
+    <view class="obttn" bindtap="jumpdetail" wx:if="{{alllength>0}}">
       添加更多
     </view>
   </view>
-  <view wx:if="{{areaTextcrum.length == 0}}" class="pointscope" bindtap="jumpstickyrule">
+  <view wx:if="{{areaProcrum.length == 0&&areaCitycrum.length == 0}}" class="pointscope" bindtap="jumpstickyrule">
     <text>点击选择置顶范围></text>
   </view>
   <view class="scopenum">
     <text>请输入置顶天数</text>
   </view>
-
+<!-- &&alllength<(max_province+max_city -->
   <view class="dayall">
-    <view class="daynum">
+    <view class="daynum" wx:if="{{topId == 'undefined'}}">
       <text>置顶天数</text>
-      <input type="number" maxlength="2" placeholder="请输入置顶天数" value="{{daynumber}}" bindinput="dayclocy"></input>
+      <picker bindchange="dayclocy" range="{{array}}">
+        <input   type="number" disabled="true" placeholder="请输入置顶天数" value="{{daynumber}}">
+        </input>
+      </picker>
     </view>
-    <view class="daynum">
+
+   <view class="daynumone" wx:if="{{topId != 'undefined'}}">
+      <text class="endtime">当前到期时间</text>
+      <picker bindchange="dayclocyone" range="{{array}}">
+        <input class="end" wx:if="{{topId != 'undefined'}}" disabled="true"  value="{{endtime}}">
+           <text class="yanchang">延长时间</text>
+        </input>
+      </picker>
+    </view>
+
+    <view class="daynumone" wx:if="{{topId != 'undefined'&&shoutime}}">
+      <text class="endtime">最新到期时间</text>
+
+        <input class="end" wx:if="{{topId != 'undefined'}}" disabled="true"  value="{{endtimeone}}">
+           <text class="yanchangon" bindtap="deletea">取消</text>
+        </input>
+    </view>
+
+
+    <view class="daynum" wx:if="{{showpoint||topId == 'undefined'||showpointone}}"  >
       <text>消耗积分</text>
       <view>{{point}}分</view>
     </view>
   </view>
 
-  <view class="submitscope" bindtap="submitscop">
+  <view class="submitscope" bindtap="submitscop" wx:if="{{topId == 'undefined'}}" >
+    <text>确定置顶</text>
+  </view>
+
+  <view class="submitscope" bindtap="seletedsub" wx:if="{{topId != 'undefined'}}">
     <text>确定置顶</text>
   </view>
 
@@ -41,7 +68,7 @@
   </view>
 
   <view class="bottom">
-    <view wx:for="{{top_rules}}" wx:key="{{index}}">{{index==3?item+serverPhone:item}}</view>
+    <view wx:for="{{top_rules}}" wx:key="{{index}}">{{index==2?item+serverPhone:item}}</view>
   </view>
 </view>
 <!-- <view class="common-userauth" wx:if="{{ !userInfo }}">

@@ -11,7 +11,7 @@ App({
 
   },
   globalData: {
-    judge:"",
+    procity:0,
     version: "v-2.7.2",
     complaincontent: '请填写5~100字，必须含有汉字。（恶意投诉会被封号，请谨慎投诉！）',
     areaIs: false,

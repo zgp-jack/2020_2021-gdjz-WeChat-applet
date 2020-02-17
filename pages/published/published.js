@@ -244,9 +244,12 @@ Page({
   },
   setInfoCity(e) {
     let _id = e.currentTarget.dataset.id;
-    let modifytop = "modifytop"
+    let topId = e.currentTarget.dataset.toptime;
+    let endtime = e.currentTarget.dataset.endtime;
+    let endtimeh = (e.currentTarget.dataset.endtimeh-0)*1000;
+
     wx.navigateTo({
-      url: `/pages/workingtopAll/distruction/distruction?modifytop=${modifytop}&id=${_id}`,
+      url: `/pages/workingtopAll/workingtop/workingtop?id=${_id}&topId=${topId}&endtime=${endtime}&endtimeh=${endtimeh}`,
     })
   },
   setThisTop: function (e) {
@@ -259,6 +262,8 @@ Page({
     let userInfo = this.data.userInfo;
     let time = e.currentTarget.dataset.time;
     let showTime = time > _this.data.nowtime;
+    let topId = e.currentTarget.dataset.toptime;
+
     console.log(showTime)
     console.log(time)
     console.log(status)
@@ -277,12 +282,12 @@ Page({
         infoIndex: infoIndex
       })
       wx.navigateTo({
-        url: `/pages/workingtopAll/workingtop/workingtop?id=${_id}`,
+        url: `/pages/workingtopAll/workingtop/workingtop?id=${_id}&topId=${topId}`,
       })
 
     } else if (!status && status != 0 && _index == 0) {
       wx.navigateTo({
-        url: `/pages/workingtopAll/workingtop/workingtop?id=${_id}`,
+        url: `/pages/workingtopAll/workingtop/workingtop?id=${_id}&topId=${topId}`,
       })
     } else {
       if (_index == 1) {
