@@ -18,8 +18,8 @@
   </view>
 
   <view class='index-area-history' wx:if="{{!showListsTtile&&showListsAnd }}">
-    <view class='history-header'>
-      <text>搜索历史</text>
+    <view class='history-header' wx:if="{{historyArray.length>0}}">
+      <text>搜索历史</text> 
       <view bindtap="delete">
         <image src="../../../images/laji.png"></image>
       </view>
@@ -27,7 +27,6 @@
 
     <view class='history-child'>
       <text class='history-children' wx:for="{{ historyArray }}" wx:key="{{ index }}" data-id="{{item.id}}" data-name="{{item.city}}" data-pid="{{ item.pid }}" bindtap="hischildren">{{item.city}}</text>
-
     </view>
   </view>
 
@@ -55,7 +54,7 @@
           <text class="{{item.selected == 2 ?'body-content':'overwords'}}" data-id="{{ item.id }}" data-pname="{{ item.ad_name }}" data-area="{{ item.city }}" data-pid="{{item.pid }}" data-pro="{{ index}}" data-index="{{ item.index}}" bindtap='chooseThisCtiy'>{{item.city}}</text>
         </view>
       </view>
-      <view class='area-body-content clearfix'  wx:if="{{index !=0}}">
+      <view class='area-body-content clearfix' wx:if="{{index !=0}}">
         <view wx:for="{{ areaItem }}" wx:key="{{ index }}">
           <text class="{{item.selected == 2 ?'body-content':'overwords'}}" data-id="{{ item.id }}" data-pname="{{ item.ad_name }}" data-area="{{ item.city }}" data-pid="{{item.pid }}" data-pro="{{ index}}" data-index="{{ item.index}}" bindtap='chooseThisCtiy'>{{index ==0 &&item.index!=0? "全省置顶":item.city}}</text>
         </view>
@@ -64,7 +63,7 @@
   </view>
 
 </view>
- <!-- (index == publishIndex) ? "text-active" : "" -->
+<!-- (index == publishIndex) ? "text-active" : "" -->
 <view class="obtn" wx:if="{{ !showInputList &&!showListsAnd}}">
   <button bindtap="seleted">确认选择</button>
   <!-- <button bindtap="seletedsub" wx:if="{{shoWmodifytop == 'modifytop'}}">确认选择</button> -->

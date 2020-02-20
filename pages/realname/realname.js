@@ -12,7 +12,7 @@ Page({
     handone_img_path: "http://cdn.yupao.com/miniprogram/images/lpy/auth/idcard-l.png?t=" + new Date().getTime(),
     card_img_status: app.globalData.apiImgUrl + "lpy/auth/idcard-bkqs.png",
     card_img_array: [app.globalData.apiImgUrl + "lpy/auth/idcard-yes.png", app.globalData.apiImgUrl + "lpy/auth/idcard-bkqs.png", app.globalData.apiImgUrl + "lpy/auth/idcard-qs.png", app.globalData.apiImgUrl + "lpy/auth/idcard-sg.png"],
-    card_img_content: ["标准", "边框缺失", "边框缺失", "闪光强烈"],
+    card_img_content: ["标准", "边框缺失", "照片模糊", "闪光强烈"],
     hand_img_path: "",
     uploadfailicon: app.globalData.apiImgUrl + "lpy/auth/upload-fail-tips.png?t=" + new Date().getTime(),
     userInfo: {},

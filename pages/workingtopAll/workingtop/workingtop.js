@@ -21,7 +21,7 @@ Page({
     userInfo: true,
     icon: app.globalData.apiImgUrl + "userauth-topicon.png",
     point: 0,
-    daynumber: 0,
+    daynumber: "",
     imgDetelte: app.globalData.apiImgUrl + "lpy/delete.png",
     areaProcrum: [],
     areaCitycrum: [],
@@ -29,7 +29,7 @@ Page({
     max_province: "",
     province_integral: 0,
     city_integral: 0,
-    value: 1,
+    value: "",
     areaTextIdP: "",
     areaTextIdC: "",
     top_rules: [],
@@ -42,7 +42,6 @@ Page({
     showpointnum: 0,
     showpointone: false,
     detailprice: 0,
-    day: ""
   },
 
   jumpstickyrule() {
@@ -55,6 +54,9 @@ Page({
       url: `/pages/workingtopAll/distruction/distruction?max_province=${max_province}&max_city=${max_city}`,
     })
   },
+  callThisPhone: function (e) {
+    app.callThisPhone(e);
+  },
   jumpdetail() {
     let that = this;
     let allpro = JSON.stringify(that.data.areaProcrum);
@@ -65,11 +67,11 @@ Page({
       url: `/pages/workingtopAll/distruction/distruction?max_province=${max_province}&max_city=${max_city}&allpro= ${allpro}&allcity= ${allcity}`,
     })
   },
-  bindGetUserInfo: function (e) {
+  bindGetUserInfo: function(e) {
     let that = this;
-    app.bindGetUserInfo(e, function (res) {
-      app.mini_user(res, function (res) {
-        app.api_user(res, function (res) {
+    app.bindGetUserInfo(e, function(res) {
+      app.mini_user(res, function(res) {
+        app.api_user(res, function(res) {
           let uinfo = res.data;
           if (uinfo.errcode == "ok") {
             let userInfo = {
@@ -98,7 +100,7 @@ Page({
     if (e) {
 
       let day = e.detail.value - 0 + 1;
-
+      console.log(day)
       that.setData({
         daynumber: day + "天",
         day: day
@@ -122,7 +124,7 @@ Page({
           point: price
         });
 
-      } else if (this.data.topId == "undefined"){
+      } else if (this.data.topId == "undefined") {
         let price = (numcity * (that.data.areaCitycrum.length) + numprovice * (that.data.areaProcrum.length)) * that.data.day
         // point
         that.setData({
@@ -174,7 +176,7 @@ Page({
         title: '温馨提示',
         content: '网络出错，请稍后重试',
         showCancel: false,
-        success(res) { }
+        success(res) {}
       })
       return
     }
@@ -187,38 +189,39 @@ Page({
       })
       return
     }
-    if (vertifyNum.isNull(this.data.value)) {
+    console.log(that.data.value)
+    if (vertifyNum.isNull(this.data.day)) {
       wx.showModal({
         title: '温馨提示',
-        content: '输入的置顶天数不能为0或者为空',
+        content: '选择的置顶天数不能为0或者为空',
         showCancel: false,
-        success(res) { }
+        success(res) {}
       })
       return
     }
-    if (that.data.value - 0 > day) {
+    if (that.data.day - 0 > day) {
       app.showMyTips(`最多可置顶${day}天！`);
       return
     }
-    console.log(that.data.value)
+
     that.areaId()
     let detail = {
       mid: userInfo.userId,
       token: userInfo.token,
       time: userInfo.tokenTime,
       uuid: userUuid,
-      day: that.data.value,
+      day: that.data.day,
       city_ids: that.data.areaTextIdC,
       province_ids: that.data.areaTextIdP,
       job_id: that.data.newId
     }
-
+    console.log(detail)
     app.appRequestAction({
       url: 'job/do-top/',
       way: 'POST',
       params: detail,
       mask: true,
-      success: function (res) {
+      success: function(res) {
         let mydata = res.data;
         if (mydata.errcode == "ok") {
 
@@ -266,7 +269,7 @@ Page({
           return
         }
       },
-      fail: function (err) {
+      fail: function(err) {
         wx.showModal({
           title: '温馨提示',
           content: `您的网络请求失败`,
@@ -354,7 +357,7 @@ Page({
         mask: true,
         params: detail,
         failTitle: "操作失败，请稍后重试！",
-        success: function (res) {
+        success: function(res) {
           let mydata = res.data;
           if (mydata.errcode == "ok") {
             console.log(mydata)
@@ -385,15 +388,17 @@ Page({
               areaProcrum: areaProcrumall,
               areaCitycrum: areaCitycrumall,
               alllength: areaProcrumall.length + areaCitycrumall.length,
-              max_price: mydata.data.max_price
+              max_price: mydata.data.max_price,
+              endtime: mydata.data.end_time_string,
+              endtimeh: (mydata.data.end_time-0)*1000
             })
-
+            
           } else {
             wx.showModal({
               title: '温馨提示',
               content: res.data.errmsg,
               showCancel: false,
-              success(res) { }
+              success(res) {}
             })
           }
         }
@@ -411,7 +416,7 @@ Page({
         title: '温馨提示',
         content: '网络出错，请稍后重试',
         showCancel: false,
-        success(res) { }
+        success(res) {}
       })
       return
     }
@@ -423,19 +428,12 @@ Page({
       })
       return
     }
-    if (vertifyNum.isNull(this.data.value)) {
-      wx.showModal({
-        title: '温馨提示',
-        content: '输入的置顶天数不能为0或者为空',
-        showCancel: false,
-        success(res) { }
-      })
-      return
-    }
+    console.log(that.data.detailprice)
+
 
     that.areaId()
 
-    console.log(that.data.areaTextId)
+
     let detail = {
       mid: userInfo.userId,
       token: userInfo.token,
@@ -448,13 +446,13 @@ Page({
       update_integral: that.data.point,
       update_days: that.data.detailprice
     }
-
+    console.log(detail)
     app.appRequestAction({
       url: 'job/change-top-areas/',
       way: 'POST',
       params: detail,
       mask: true,
-      success: function (res) {
+      success: function(res) {
         let mydata = res.data;
         if (mydata.errcode == "ok") {
 
@@ -464,19 +462,27 @@ Page({
             showCancel: false,
             success(res) {
               console.log(res)
-              let that = this;
-              let pages = getCurrentPages();
-              let prevPage = pages[pages.length - 2];
-              prevPage.setData({ //修改上一个页面的变量
-                refresh: true
-              })
+
               wx.navigateBack({
                 delta: 1
               })
             }
           })
           return
-        } else {
+        } else if (mydata.errcode == "get_integral") {
+          wx.showModal({
+            title: '温馨提示',
+            content: res.data.errmsg,
+            success(res) {
+              if (res.confirm == true) {
+                wx.navigateTo({
+                  url: `/pages/getintegral/getintegral`,
+                })
+              }
+            }
+          })
+          return
+        }  else {
           wx.showModal({
             title: '温馨提示',
             content: res.data.errmsg,
@@ -490,7 +496,7 @@ Page({
           return
         }
       },
-      fail: function (err) {
+      fail: function(err) {
         wx.showModal({
           title: '温馨提示',
           content: `您的网络请求失败`,
@@ -507,7 +513,7 @@ Page({
     app.appRequestAction({
       url: 'job/top-config/',
       way: 'POST',
-      success: function (res) {
+      success: function(res) {
         let mydata = res.data;
 
         if (mydata.errcode == "ok") {
@@ -527,12 +533,12 @@ Page({
             title: '温馨提示',
             content: res.data.errmsg,
             showCancel: false,
-            success(res) { }
+            success(res) {}
           })
           return
         }
       },
-      fail: function (err) {
+      fail: function(err) {
         wx.showModal({
           title: '温馨提示',
           content: `您的网络请求失败`,
@@ -556,7 +562,7 @@ Page({
       oMin = oDate.getMinutes(),
       oSen = oDate.getSeconds(),
       oTime = oYear + '-' + this.addZero(oMonth) + '-' + this.addZero(oDay) + ' ' + this.addZero(oHour) + ':' +
-        this.addZero(oMin);
+      this.addZero(oMin);
     return oTime;
   },
   addZero(num) {
@@ -574,8 +580,12 @@ Page({
         shoutime: true,
         showpoint: true
       })
+      console.log(this.data.endtimeh)
       let all = 86400000 * (detail) + (this.data.endtimeh - 0)
       let time = this.getMyDate(all)
+      console.log(time)
+
+      let allprice = this.data.max_price
       console.log(that.data.areaProcrum.length)
       console.log(that.data.province_integral)
       console.log(that.data.areaCitycrum.length)
@@ -583,11 +593,21 @@ Page({
       let alllength = (that.data.areaProcrum.length) * that.data.province_integral + (that.data.areaCitycrum.length) * that.data.city_integral
       console.log(alllength)
       console.log(that.data.showpointnum)
-      this.setData({
-        endtimeone: time,
-        point: alllength * detail + that.data.showpointnum,
-        detailprice: detail
-      })
+      console.log(allprice)
+      if (alllength <= allprice) {
+        this.setData({
+          endtimeone: time,
+          point: allprice * detail,
+          detailprice: detail
+        })
+      } else {
+        this.setData({
+          endtimeone: time,
+          point: alllength * detail + that.data.showpointnum,
+          detailprice: detail
+        })
+      }
+
     }
   },
   deletea() {
@@ -611,42 +631,43 @@ Page({
       })
 
     }
-    if (options.hasOwnProperty("endtime")) {
-      this.setData({
-        endtime: options.endtime
-      })
-    }
-    if (options.hasOwnProperty("endtimeh")) {
-      this.setData({
-        endtimeh: options.endtimeh
-      })
-    }
+    // if (options.hasOwnProperty("endtime")) {
+    //   this.setData({
+    //     endtime: options.endtime
+    //   })
+    // }
+    // if (options.hasOwnProperty("endtimeh")) {
+    //   this.setData({
+    //     endtimeh: options.endtimeh
+    //   })
+    // }
     this.gettopareas()
   },
-  changeTwoDecimal(x) {
-    var f_x = parseFloat(x);
-    if (isNaN(f_x)) {
+  // changeTwoDecimal(x) {
+  //   var f_x = parseFloat(x);
+  //   if (isNaN(f_x)) {
 
-      return false;
-    }
-    f_x = Math.round(f_x * 100) / 100;
+  //     return false;
+  //   }
+  //   f_x = Math.round(f_x * 100) / 100;
 
 
 
-    return f_x;
-  },
+  //   return f_x;
+  // },
   getAllpoint() {
     let shen = this.data.allprice - this.data.max_price;
     console.log(shen)
     if (this.data.clocktime != 0) {
-      let shennum = shen / 24;
-      let shenmiao = this.changeTwoDecimal(shennum)
-      console.log(shenmiao)
-      let time = Math.ceil(((this.data.endtimeh - this.data.clocktime) / 3600 / 1000)) * (shenmiao) + "";
+      let shennum = shen;
+      // let shenmiao = this.changeTwoDecimal(shennum)
+      console.log(this.data.endtimeh)
+      console.log(this.data.clocktime)
+      let time = ((this.data.endtimeh - this.data.clocktime) / 3600 / 1000 / 24) * (shennum) + "";
       console.log(time)
       console.log(this.data.allprice)
       console.log(this.data.detailprice)
-      var str = Math.ceil(time) - 0 + (this.data.allprice - 0) * (this.data.detailprice - 0);
+      var str = Math.round(time) - 0 + (this.data.allprice - 0) * (this.data.detailprice - 0);
       this.setData({
         point: str,
         showpointnum: Math.ceil(time) - 0
@@ -658,6 +679,8 @@ Page({
   getCityNum() {
     if (this.data.topId != "undefined") {
       let all = this.data.areaCitycrum.length * this.data.city_integral + this.data.areaProcrum.length * this.data.province_integral;
+      console.log(all)
+      console.log(this.data.max_price)
       if (all > this.data.max_price) {
         this.setData({
           showpointone: true,
@@ -676,7 +699,7 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
+  onLoad: function(options) {
 
     // this.authrasution()
     this.getdetail()
@@ -686,14 +709,14 @@ Page({
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function () {
+  onReady: function() {
 
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function () {
+  onShow: function() {
     this.dayclocy()
     this.getCityNum()
   },
@@ -701,28 +724,33 @@ Page({
   /**
    * 生命周期函数--监听页面隐藏
    */
-  onHide: function () {
-
+  onHide: function() {
+    console.log("fdsdfsdfdsdf")
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
-  onUnload: function () {
-
+  onUnload: function() {
+    let that = this;
+    let pages = getCurrentPages();
+    let prevPage = pages[pages.length - 2];
+    prevPage.setData({ //修改上一个页面的变量
+      refresh: true
+    })
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
-  onPullDownRefresh: function () {
+  onPullDownRefresh: function() {
 
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
-  onReachBottom: function () {
+  onReachBottom: function() {
 
   },
 

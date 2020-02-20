@@ -11,22 +11,23 @@
       {{item.name}}
       <image class="deleteimg" data-id="{{ item }}" src="{{imgDetelte}}"></image>
     </view>
-    <view class="obttn" bindtap="jumpdetail" wx:if="{{alllength>0}}">
+    <view class="obttn" bindtap="jumpdetail" wx:if="{{alllength>0&&alllength<(max_province+max_city)}}">
       添加更多
     </view>
+      <!-- &&alllength<(max_province+max_city -->
   </view>
   <view wx:if="{{areaProcrum.length == 0&&areaCitycrum.length == 0}}" class="pointscope" bindtap="jumpstickyrule">
     <text>点击选择置顶范围></text>
   </view>
   <view class="scopenum">
-    <text>请输入置顶天数</text>
+    <text>请选择置顶天数</text>
   </view>
-<!-- &&alllength<(max_province+max_city -->
+<!--  -->
   <view class="dayall">
     <view class="daynum" wx:if="{{topId == 'undefined'}}">
       <text>置顶天数</text>
       <picker bindchange="dayclocy" range="{{array}}">
-        <input   type="number" disabled="true" placeholder="请输入置顶天数" value="{{daynumber}}">
+        <input   type="number" disabled="true" placeholder="请选择置顶天数" value="{{daynumber}}">
         </input>
       </picker>
     </view>
@@ -35,7 +36,7 @@
       <text class="endtime">当前到期时间</text>
       <picker bindchange="dayclocyone" range="{{array}}">
         <input class="end" wx:if="{{topId != 'undefined'}}" disabled="true"  value="{{endtime}}">
-           <text class="yanchang">延长时间</text>
+           <text class="yanchang">{{topId != 'undefined'&&shoutime?'修改':'延长时间'}}</text>
         </input>
       </picker>
     </view>
@@ -43,7 +44,7 @@
     <view class="daynumone" wx:if="{{topId != 'undefined'&&shoutime}}">
       <text class="endtime">最新到期时间</text>
 
-        <input class="end" wx:if="{{topId != 'undefined'}}" disabled="true"  value="{{endtimeone}}">
+        <input class="end bluet" wx:if="{{topId != 'undefined'}}" disabled="true"  value="{{endtimeone}}">
            <text class="yanchangon" bindtap="deletea">取消</text>
         </input>
     </view>
@@ -68,7 +69,7 @@
   </view>
 
   <view class="bottom">
-    <view wx:for="{{top_rules}}" wx:key="{{index}}">{{index==2?item+serverPhone:item}}</view>
+    <view wx:for="{{top_rules}}" wx:key="{{index}}">{{item}} <text data-phone="{{serverPhone}}"  bindtap="callThisPhone">{{index==2?serverPhone:""}}</text> </view>
   </view>
 </view>
 <!-- <view class="common-userauth" wx:if="{{ !userInfo }}">

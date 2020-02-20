@@ -337,12 +337,13 @@ height: 32rpx;
 }
 .published-list-shnew text{
   
-font-size: 28rpx;
+font-size: 29rpx;
 
 }
 .published-list-shnew .otime{
   font-size: 30rpx;
-  margin-left: 8rpx;
+ margin-left: 18rpx;
+
 }
 .published-list-shnew .time{
   color: gray;

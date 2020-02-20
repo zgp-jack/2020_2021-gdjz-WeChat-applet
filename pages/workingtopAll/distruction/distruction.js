@@ -26,7 +26,7 @@ Page({
     areaText: [],
     shoWmodifytop: "",
     newId: ""
-  },
+  }, 
   getAreaData: function (options) {
     app.getAreaData(this, options);
   },
@@ -110,7 +110,14 @@ Page({
         title: '温馨提示',
         content: `最多同时置顶${that.data.max_province}个省、${that.data.max_city}个市`,
         showCancel: false,
-        success(res) { }
+        success(res) { 
+          that.setData({
+            showListsTtile: false,
+            showListsAnd: false,
+            showInputList: false,
+            searchInputVal: "",
+          })
+        }
       })
       return "nil"
     }
@@ -119,7 +126,14 @@ Page({
         title: '温馨提示',
         content: `最多同时置顶${that.data.max_province}个省、${that.data.max_city}个市`,
         showCancel: false,
-        success(res) { }
+        success(res) {  
+          that.setData({
+            showListsTtile: false,
+            showListsAnd: false,
+            showInputList: false,
+            searchInputVal: "",
+          })
+        }
       })
       return "nil"
     }
@@ -128,7 +142,14 @@ Page({
         title: '温馨提示',
         content: `最多同时置顶${that.data.max_province}个省、${that.data.max_city}个市`,
         showCancel: false,
-        success(res) { }
+        success(res) {
+          that.setData({
+            showListsTtile: false,
+            showListsAnd: false,
+            showInputList: false,
+            searchInputVal: "",
+          })
+         }
       })
       return "nil"
     }
@@ -623,7 +644,13 @@ Page({
     return arr1;
 
   },
+  ranking(item){
 
+    let after = item.sort(function (a, b) {
+      return a.id - b.id
+    })
+    return after
+  },
   seleted() {
     let that = this;
     let pages = getCurrentPages();
@@ -632,12 +659,16 @@ Page({
     let areaTextC = that.data.areaTextC;
     let uareaTextP = that.unique(areaTextP)
     let uareaTextC = that.unique(areaTextC)
+    let rankingP = that.ranking(uareaTextP)
+    let rankingC = that.ranking(uareaTextC)
+   
+
     let alllength = uareaTextP.length + uareaTextC.length
     let timer = new Date()
     let time = (timer.getTime() - 0)
     prevPage.setData({ //修改上一个页面的变量
-      areaProcrum: uareaTextP,
-      areaCitycrum: uareaTextC,
+      areaProcrum: rankingP,
+      areaCitycrum: rankingC,
       alllength: alllength,
       clocktime: time
     })

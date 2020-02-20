@@ -184,6 +184,9 @@ padding-left: 26%;
   font-size: 30rpx;
   color: #202021;
 }
+.bottom text{
+  color: #0099FF;
+}
 .deleteimg{
    width: 30rpx;
    height: 30rpx;
@@ -241,19 +244,24 @@ padding-left: 26%;
 
 .daynumone{
   position: relative;
-padding-left: 29%;
+padding-left: 31%;
+
   border-bottom: 1px solid #DCDCDC;
     line-height: 90rpx;
   height: 90rpx;
 }
 .daynumone .endtime{
-  width: 28%;
+  width: 29.5%;
   display: inline-block;
   color: #202021;
   font-size: 30rpx;
   position: absolute;
   left: 0rpx;
 }
+ .daynumone .bluet{
+   color: #0099FF;
+ }
+
 .daynumone .endtime::after{
   content: '';
   width: 100%;

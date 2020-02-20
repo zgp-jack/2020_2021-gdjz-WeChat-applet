@@ -35,7 +35,7 @@
 }
 
 .area-input {
-  background: rgb(246, 248, 248) !important;
+  background: #F7F4F8 !important;
   z-index: 999999!important;
 }
 
@@ -54,8 +54,8 @@
   height: 100%;
   padding-top: 110rpx;
   overflow-y: scroll;
-  background: white;
-  padding: 110rpx 20rpx;
+  background: #F8F6F9;
+  padding: 100rpx 0rpx;
 }
 
 .history-header {
@@ -63,13 +63,22 @@
   justify-content: space-between;
   align-items: center;
   font-size: 30rpx;
+  background:white; 
+  padding: 0 20rpx;
+
 }
 
 .history-header image {
   width: 30rpx;
   height: 30rpx;
-}
+  margin-right: 6rpx;
 
+}
+.history-child{
+  background: white;
+  padding: 0 20rpx;
+  padding-bottom: 16rpx; 
+}
 
 
 .history-children {
@@ -77,7 +86,7 @@
   height: 80rpx;
   display: inline-block;
   font-size: 30rpx;
-  background: #f6f3f7;
+  background: #F7F4F8;
   width: 30%;
   color: #666366;
   margin-left: 5%;
