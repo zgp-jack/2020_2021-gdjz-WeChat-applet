@@ -25,8 +25,12 @@ Page({
     historyArray: [],
     areaText: [],
     shoWmodifytop: "",
-    newId: ""
+    newId: "",
+    specialids:[],
+    showlodinga:true,
+    showlodingimg: app.globalData.showlodingimg
   }, 
+  //
   getAreaData: function (options) {
     app.getAreaData(this, options);
   },
@@ -157,10 +161,32 @@ Page({
 
 
 
-  getFull(num){
+  getFull(num, cityId){
+    console.log(num)
     let that = this;
     for (let i = 0; i < that.data.areadata[num].length; i++) {
       that.data.areadata[num][i].selected = 1;
+    }
+   
+    for (let i = 0; i < that.data.areadata[0].length; i++){
+      if (that.data.areadata[0][i].pid == cityId){
+        for (let j = 0; j < that.data.areaTextC.length; j++) {
+          if (that.data.areaTextC[j].id == that.data.areadata[0][i].id){
+            that.data.areaTextC.splice(j, 1);
+            that.data.areadata[0][i].selected = 1;
+          } 
+        }
+      }
+    }
+
+    for (let i = 0; i < that.data.areadata[0].length; i++) {
+      if (that.data.areadata[0][i].pid == cityId) {
+        for (let j = 0; j < that.data.areaText.length; j++) {
+          if (that.data.areaText[j].id == that.data.areadata[0][i].id) {
+            that.data.areaText.splice(j, 1);
+          }
+        }
+      }
     }
 
     for (let i = 0; i < that.data.areadata[num].length; i++) {
@@ -170,6 +196,7 @@ Page({
         }
       }
     }
+
     for (let i = 0; i < that.data.areadata[num].length; i++) {
       for (let j = 0; j < that.data.areaText.length; j++) {
         if (that.data.areadata[num][i].id == that.data.areaText[j].id) {
@@ -179,7 +206,8 @@ Page({
     }
     that.setData({
       areadata: that.data.areadata,
-      areaTextC: that.data.areaTextC
+      areaTextC: that.data.areaTextC,
+      areaText: that.data.areaText
     })
   },
   getFullone(num){
@@ -200,10 +228,34 @@ Page({
     console.log(that.data.areaTextP)
     that.setData({
       areadata: that.data.areadata,
-      areaTextP: that.data.areaTextP
+      areaTextP: that.data.areaTextP,
+      areaText: that.data.areaText
     })
   },
-
+  getzero(judgeId){
+    let that = this;
+    let judgeIdone = judgeId-2;
+    that.data.areadata[judgeIdone][0].selected = 1;
+ 
+    if (that.data.areaTextP.length >0){
+      for (let j = 0; j < that.data.areaTextP.length; j++) {
+        if (that.data.areadata[judgeIdone][0].id == that.data.areaTextP[j].id) {
+          that.data.areaTextP.splice(j, 1)
+        }
+      }
+    }
+    for (let j = 0; j < that.data.areaText.length; j++) {
+      if (that.data.areadata[judgeIdone][0].id == that.data.areaText[j].id) {
+   
+          that.data.areaText.splice(j, 1)
+      }
+    }
+    that.setData({
+      areadata: that.data.areadata,
+      areaTextP: that.data.areaTextP,
+      areaText: that.data.areaText
+    })
+  },
   chooseThisCtiy(e) {
     let that = this;
     let num = e.currentTarget.dataset.index;
@@ -237,8 +289,8 @@ Page({
           return
         }
         if (num>0){
-          that.getFull(num)
-        }
+          that.getFull(num, cityId)
+        } 
    
         that.data.areaTextP.push(detail)
         that.setData({
@@ -253,6 +305,8 @@ Page({
         }
         if (num > 0) {
         that.getFullone(num)
+        } else if (num == 0) {
+          that.getzero(judgeId)
         }
         that.data.areaTextC.push(detail)
         that.setData({
@@ -346,42 +400,53 @@ Page({
     // })
     that.data.areadata.unshift(data)
     that.setData({
-      areadata: that.data.areadata
+      areadata: that.data.areadata,
+      showlodinga:false
     })
     console.log(that.data.areadata)
 
 
-
   },
   hotcities(options) {
-    console.log(options)
+ 
     let that = this;
-    app.appRequestAction({
-      url: "job/top-hot-areas/",
-      way: "POST",
-      mask: true,
-      failTitle: "操作失败，请稍后重试！",
-      success: function (res) {
-        let mydata = res.data;
-        if (mydata.errcode == "ok") {
 
-          that.changeAreaData(mydata.data)
-          that.modifyArea(options)
-          // that.gettopareas()
-        } else {
-          wx.showModal({
-            title: '温馨提示',
-            content: res.data.errmsg,
-            showCancel: false,
-            success(res) { }
-          })
+    let areadatahot = wx.getStorageSync("areadatahot");
+    if (areadatahot) {
+      console.log(areadatahot)
+      that.changeAreaData(areadatahot)
+      that.modifyArea(options)
+   
+    }else{
+      app.appRequestAction({
+        url: "job/top-hot-areas/",
+        way: "POST",
+        mask: true,
+        failTitle: "操作失败，请稍后重试！",
+        success: function (res) {
+          let mydata = res.data;
+          if (mydata.errcode == "ok") {
+ 
+            that.changeAreaData(mydata.data)
+            that.modifyArea(options)
+            wx.setStorageSync('areadatahot', mydata.data)
+            // that.gettopareas()
+          } else {
+            wx.showModal({
+              title: '温馨提示',
+              content: res.data.errmsg,
+              showCancel: false,
+              success(res) { }
+            })
+          }
+        },
+        fail(res) {
+          // console.log(res)
+          // app.showMyTips("修改失败");
         }
-      },
-      fail(res) {
-        // console.log(res)
-        // app.showMyTips("修改失败");
-      }
-    })
+      })
+    }
+
   },
 
   deleteC() {
@@ -499,11 +564,18 @@ Page({
     }
     let index = this.findIndex(item.id)
     if (item.pid == 1){
-      this.getFull(index)
-      
+      if (index>0){
+        this.getFull(index, item.id)
+      }
+
+
       that.data.areaTextP.push(detail)
     }else{
+      if (index > 0) {
       this.getFullone(index)
+      } else if (index == 0) {
+        that.getzero(item.pid)
+      }
       that.data.areaTextC.push(detail)
     }
 
@@ -626,9 +698,12 @@ Page({
         max_province: item.max_province,
         max_city: item.max_city
       })
-
     }
-
+    if (item.hasOwnProperty("specialids")){
+      this.setData({
+        specialids: JSON.parse(item.specialids)
+      })
+    }
   },
 
   unique(areaText) {
@@ -645,10 +720,31 @@ Page({
 
   },
   ranking(item){
+    console.log(item)
+    let after = [];
+    let specialids = this.data.specialids;
+    console.log(specialids)
+   
+    for (let j = 0; j < item.length; j++ ){
+      for (let i = 0; i < specialids.length; i++){
+        if (specialids[i] == item[j].id){
+          console.log(specialids[i])
+          console.log(item[j])
 
-    let after = item.sort(function (a, b) {
-      return a.id - b.id
-    })
+          after.push(item[j])
+
+        }
+      }
+    }
+    for (let i = 0; i < item.length;i++){
+      for (let j = 0; j < after.length;j++){
+        if (item[i].id == after[j].id){
+          item.splice(i,1)
+        }
+      }
+    }
+
+    after = [...after, ...item]
     return after
   },
   seleted() {
@@ -660,15 +756,19 @@ Page({
     let uareaTextP = that.unique(areaTextP)
     let uareaTextC = that.unique(areaTextC)
     let rankingP = that.ranking(uareaTextP)
-    let rankingC = that.ranking(uareaTextC)
-   
 
-    let alllength = uareaTextP.length + uareaTextC.length
+   
+    console.log(rankingP)
+
+    let alllength = rankingP.length + uareaTextC.length;
+
+
+
     let timer = new Date()
     let time = (timer.getTime() - 0)
     prevPage.setData({ //修改上一个页面的变量
       areaProcrum: rankingP,
-      areaCitycrum: rankingC,
+      areaCitycrum: uareaTextC,
       alllength: alllength,
       clocktime: time
     })

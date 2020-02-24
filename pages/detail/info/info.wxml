@@ -8,7 +8,7 @@
         <view class='yupao-lists-wxinfo'>
           <view class='yupao-lists-wxtips'>
             <text class='yupao-lists-tips'>加群：</text>加工友微信号:
-            <text data-wechat="{{ wechat }}" bindtap='clipboardWechat'>{{ wechat }}</text><text class="phoneer" data-wechat="{{ wechat }}" bindtap='clipboardWechat'>复制</text> 拉你进工人微信群。客服电话:
+            <text data-wechat="{{ wechat }}" bindtap='clipboardWechat'>{{ wechat }}</text><text class="phoneer" data-wechat="{{ wechat }}" bindtap='clipboardWechat'>复制</text> 拉你进招工找活群。客服电话:
             <text bindtap='callThisPhone' data-phone="{{ phone }}">{{ phone }}</text>
             <text class="phoneer" bindtap='callThisPhone' data-phone="{{ phone }}">呼叫</text>
           </view>

@@ -42,6 +42,8 @@ Page({
     showpointnum: 0,
     showpointone: false,
     detailprice: 0,
+    special_ids:[],
+    rangevalue:0
   },
 
   jumpstickyrule() {
@@ -49,9 +51,10 @@ Page({
     let that = this;
     let max_province = that.data.max_province;
     let max_city = that.data.max_city;
+    let specialids = JSON.stringify(that.data.special_ids);
     app.globalData.judge = ""
     wx.navigateTo({
-      url: `/pages/workingtopAll/distruction/distruction?max_province=${max_province}&max_city=${max_city}`,
+      url: `/pages/workingtopAll/distruction/distruction?max_province=${max_province}&max_city=${max_city}&specialids=${specialids}`,
     })
   },
   callThisPhone: function (e) {
@@ -61,10 +64,11 @@ Page({
     let that = this;
     let allpro = JSON.stringify(that.data.areaProcrum);
     let allcity = JSON.stringify(that.data.areaCitycrum);
+    let specialids = JSON.stringify(that.data.special_ids);
     let max_province = that.data.max_province;
     let max_city = that.data.max_city;
     wx.navigateTo({
-      url: `/pages/workingtopAll/distruction/distruction?max_province=${max_province}&max_city=${max_city}&allpro= ${allpro}&allcity= ${allcity}`,
+      url: `/pages/workingtopAll/distruction/distruction?max_province=${max_province}&max_city=${max_city}&allpro= ${allpro}&allcity= ${allcity}&specialids=${specialids}`,
     })
   },
   bindGetUserInfo: function(e) {
@@ -116,10 +120,15 @@ Page({
       console.log(numprovice)
       console.log(that.data.areaCitycrum.length)
       console.log(that.data.areaProcrum.length)
-      console.log(that.data.day)
+      console.log(this.data.allprice)
+      let price = (numcity * (that.data.areaCitycrum.length) + numprovice * (that.data.areaProcrum.length));
+      that.setData({
+        allprice: price
+      });
       if (this.data.topId != "undefined" && this.data.allprice > this.data.max_price) {
-        let price = (numcity * (that.data.areaCitycrum.length) + numprovice * (that.data.areaProcrum.length)) * that.data.detailprice
+        let price = (numcity * (that.data.areaCitycrum.length) + numprovice * (that.data.areaProcrum.length)) * that.data.detailprice;
         // point
+        console.log(34232432432)
         that.setData({
           point: price
         });
@@ -302,10 +311,15 @@ Page({
     let number = e.currentTarget.dataset.index;
 
     that.data.areaProcrum.splice(number, 1)
+    let all = this.data.areaCitycrum.length * this.data.city_integral + this.data.areaProcrum.length * this.data.province_integral;
     that.setData({
       areaProcrum: that.data.areaProcrum,
-      alllength: that.data.alllength - 1
+      alllength: that.data.alllength - 1,
+      allprice: all
     })
+  
+    console.log(that.data.alllength)
+
     that.dayclocy()
     if (this.data.clocktime != 0) {
       that.getCityNum()
@@ -316,10 +330,14 @@ Page({
     let number = e.currentTarget.dataset.index;
 
     that.data.areaCitycrum.splice(number, 1)
+    let all = this.data.areaCitycrum.length * this.data.city_integral + this.data.areaProcrum.length * this.data.province_integral;
+    console.log(all)
     that.setData({
       areaCitycrum: that.data.areaCitycrum,
-      alllength: that.data.alllength - 1
+      alllength: that.data.alllength - 1,
+      allprice: all
     })
+    console.log(that.data.alllength)
     that.dayclocy()
     if (this.data.clocktime != 0) {
       that.getCityNum()
@@ -524,7 +542,8 @@ Page({
             country_integral: mydata.data.country_integral,
             city_integral: mydata.data.city_integral,
             max_top_days: mydata.data.max_top_days,
-            top_rules: mydata.data.top_rules
+            top_rules: mydata.data.top_rules,
+            special_ids: mydata.data.special_ids
           })
 
           that.getMoreDay()
@@ -586,14 +605,9 @@ Page({
       console.log(time)
 
       let allprice = this.data.max_price
-      console.log(that.data.areaProcrum.length)
-      console.log(that.data.province_integral)
-      console.log(that.data.areaCitycrum.length)
-      console.log(that.data.city_integral)
-      let alllength = (that.data.areaProcrum.length) * that.data.province_integral + (that.data.areaCitycrum.length) * that.data.city_integral
-      console.log(alllength)
-      console.log(that.data.showpointnum)
       console.log(allprice)
+      let alllength = (that.data.areaProcrum.length) * that.data.province_integral + (that.data.areaCitycrum.length) * that.data.city_integral
+  
       if (alllength <= allprice) {
         this.setData({
           endtimeone: time,
@@ -614,7 +628,8 @@ Page({
     this.setData({
       shoutime: false,
       showpoint: false,
-      detailprice: 0
+      detailprice: 0,
+      rangevalue:0
     })
     this.getCityNum()
   },
@@ -656,9 +671,10 @@ Page({
   //   return f_x;
   // },
   getAllpoint() {
+    console.log(this.data.allprice)
     let shen = this.data.allprice - this.data.max_price;
     console.log(shen)
-    if (this.data.clocktime != 0) {
+    if (this.data.clocktime != 0 && shen>=0) {
       let shennum = shen;
       // let shenmiao = this.changeTwoDecimal(shennum)
       console.log(this.data.endtimeh)
@@ -668,9 +684,15 @@ Page({
       console.log(this.data.allprice)
       console.log(this.data.detailprice)
       var str = Math.round(time) - 0 + (this.data.allprice - 0) * (this.data.detailprice - 0);
+
+      if (str==0){
+        this.setData({
+          showpointone: false
+        })
+      }
       this.setData({
         point: str,
-        showpointnum: Math.ceil(time) - 0
+        showpointnum: Math.round(time) - 0
       })
     }
   },
@@ -682,12 +704,26 @@ Page({
       console.log(all)
       console.log(this.data.max_price)
       if (all > this.data.max_price) {
+
         this.setData({
           showpointone: true,
           allprice: all
         })
         this.getAllpoint()
-      } else {
+      } else if (all == this.data.max_price){
+        this.getAllpoint()
+      } else if (all < this.data.max_price){
+
+        this.setData({
+          point: (this.data.max_price) * (this.data.detailprice),
+        })
+        if (this.data.point == 0) {
+          this.setData({
+            showpointone: false
+          })
+        }
+      }else {
+        console.log(212)
         this.setData({
           showpointone: false
         })

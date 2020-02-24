@@ -1,3 +1,4 @@
+
 <view class='{{(!showInputList &&!showListsAnd)?"index-pullareabox":"index-pullareabox index-pullareaboxone"}}'>
   <view class='index-area-header'>
     <view class="searchinputbox">
@@ -68,3 +69,19 @@
   <button bindtap="seleted">确认选择</button>
   <!-- <button bindtap="seletedsub" wx:if="{{shoWmodifytop == 'modifytop'}}">确认选择</button> -->
 </view>
+
+<view class="showlodinga"  >
+<view class="circle-line" wx:if="{{showlodinga}}">
+   <!-- <image src="{{showlodingimg}}"></image>  -->
+   <text></text>
+   <text></text>
+   <text></text>
+   <text></text>
+   <text></text>
+   <text></text>
+   <text></text>
+   <text></text>
+</view>
+</view>
+
+<!--  -->

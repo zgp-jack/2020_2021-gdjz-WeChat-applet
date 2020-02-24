@@ -34,7 +34,7 @@
 
    <view class="daynumone" wx:if="{{topId != 'undefined'}}">
       <text class="endtime">当前到期时间</text>
-      <picker bindchange="dayclocyone" range="{{array}}">
+      <picker bindchange="dayclocyone" range="{{array}}" value="{{rangevalue}}">
         <input class="end" wx:if="{{topId != 'undefined'}}" disabled="true"  value="{{endtime}}">
            <text class="yanchang">{{topId != 'undefined'&&shoutime?'修改':'延长时间'}}</text>
         </input>
