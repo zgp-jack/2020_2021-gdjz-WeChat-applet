@@ -16,7 +16,7 @@ Page({
     max_city: "",
     showListsTtile: false,
     showListsAnd: false,
-    areadata: [],
+    areadatas: [],
     areadataHot: [],
     isAllAreas: true,
     allAreaLists: [],
@@ -112,7 +112,7 @@ Page({
     if ((that.data.areaTextP.length >= that.data.max_province && that.data.areaTextC.length >= that.data.max_city)) {
       wx.showModal({
         title: '温馨提示',
-        content: `最多同时置顶${that.data.max_province}个省、${that.data.max_city}个市`,
+        content: `最多同时${that.data.max_city}个市、置顶${that.data.max_province}个省或直辖市`,
         showCancel: false,
         success(res) { 
           that.setData({
@@ -128,7 +128,7 @@ Page({
     if (that.data.areaTextC.length >= that.data.max_city && judgeId != 1 ){
       wx.showModal({
         title: '温馨提示',
-        content: `最多同时置顶${that.data.max_province}个省、${that.data.max_city}个市`,
+        content: `最多同时${that.data.max_city}个市、置顶${that.data.max_province}个省或直辖市`,
         showCancel: false,
         success(res) {  
           that.setData({
@@ -144,7 +144,7 @@ Page({
     if (that.data.areaTextP.length >= that.data.max_province && judgeId == 1) {
       wx.showModal({
         title: '温馨提示',
-        content: `最多同时置顶${that.data.max_province}个省、${that.data.max_city}个市`,
+        content: `最多同时${that.data.max_city}个市、置顶${that.data.max_province}个省或直辖市`,
         showCancel: false,
         success(res) {
           that.setData({
@@ -164,70 +164,70 @@ Page({
   getFull(num, cityId){
     console.log(num)
     let that = this;
-    for (let i = 0; i < that.data.areadata[num].length; i++) {
-      that.data.areadata[num][i].selected = 1;
+    for (let i = 0; i < that.data.areadatas[num].length; i++) {
+      that.data.areadatas[num][i].selected = 1;
     }
    
-    for (let i = 0; i < that.data.areadata[0].length; i++){
-      if (that.data.areadata[0][i].pid == cityId){
+    for (let i = 0; i < that.data.areadatas[0].length; i++){
+      if (that.data.areadatas[0][i].pid == cityId){
         for (let j = 0; j < that.data.areaTextC.length; j++) {
-          if (that.data.areaTextC[j].id == that.data.areadata[0][i].id){
+          if (that.data.areaTextC[j].id == that.data.areadatas[0][i].id){
             that.data.areaTextC.splice(j, 1);
-            that.data.areadata[0][i].selected = 1;
+            that.data.areadatas[0][i].selected = 1;
           } 
         }
       }
     }
 
-    for (let i = 0; i < that.data.areadata[0].length; i++) {
-      if (that.data.areadata[0][i].pid == cityId) {
+    for (let i = 0; i < that.data.areadatas[0].length; i++) {
+      if (that.data.areadatas[0][i].pid == cityId) {
         for (let j = 0; j < that.data.areaText.length; j++) {
-          if (that.data.areaText[j].id == that.data.areadata[0][i].id) {
+          if (that.data.areaText[j].id == that.data.areadatas[0][i].id) {
             that.data.areaText.splice(j, 1);
           }
         }
       }
     }
 
-    for (let i = 0; i < that.data.areadata[num].length; i++) {
+    for (let i = 0; i < that.data.areadatas[num].length; i++) {
       for (let j = 0; j < that.data.areaTextC.length; j++) {
-        if (that.data.areadata[num][i].id == that.data.areaTextC[j].id) {
+        if (that.data.areadatas[num][i].id == that.data.areaTextC[j].id) {
             that.data.areaTextC.splice(j, 1)
         }
       }
     }
 
-    for (let i = 0; i < that.data.areadata[num].length; i++) {
+    for (let i = 0; i < that.data.areadatas[num].length; i++) {
       for (let j = 0; j < that.data.areaText.length; j++) {
-        if (that.data.areadata[num][i].id == that.data.areaText[j].id) {
+        if (that.data.areadatas[num][i].id == that.data.areaText[j].id) {
             that.data.areaText.splice(j, 1)
         }
       }
     }
     that.setData({
-      areadata: that.data.areadata,
+      areadatas: that.data.areadatas,
       areaTextC: that.data.areaTextC,
       areaText: that.data.areaText
     })
   },
   getFullone(num){
     let that = this;
-      that.data.areadata[num][0].selected = 1;
+      that.data.areadatas[num][0].selected = 1;
     for (let j = 0; j < that.data.areaTextP.length; j++) {
-        if (that.data.areadata[num][0].id == that.data.areaTextP[j].id) {
+        if (that.data.areadatas[num][0].id == that.data.areaTextP[j].id) {
             that.data.areaTextP.splice(j, 1)
         }
       }
 
     for (let j = 0; j < that.data.areaText.length; j++) {
-      if (that.data.areadata[num][0].id == that.data.areaText[j].id) {
+      if (that.data.areadatas[num][0].id == that.data.areaText[j].id) {
         that.data.areaText.splice(j, 1)
       }
     }
 
     console.log(that.data.areaTextP)
     that.setData({
-      areadata: that.data.areadata,
+      areadatas: that.data.areadatas,
       areaTextP: that.data.areaTextP,
       areaText: that.data.areaText
     })
@@ -235,23 +235,23 @@ Page({
   getzero(judgeId){
     let that = this;
     let judgeIdone = judgeId-2;
-    that.data.areadata[judgeIdone][0].selected = 1;
+    that.data.areadatas[judgeIdone][0].selected = 1;
  
     if (that.data.areaTextP.length >0){
       for (let j = 0; j < that.data.areaTextP.length; j++) {
-        if (that.data.areadata[judgeIdone][0].id == that.data.areaTextP[j].id) {
+        if (that.data.areadatas[judgeIdone][0].id == that.data.areaTextP[j].id) {
           that.data.areaTextP.splice(j, 1)
         }
       }
     }
     for (let j = 0; j < that.data.areaText.length; j++) {
-      if (that.data.areadata[judgeIdone][0].id == that.data.areaText[j].id) {
+      if (that.data.areadatas[judgeIdone][0].id == that.data.areaText[j].id) {
    
           that.data.areaText.splice(j, 1)
       }
     }
     that.setData({
-      areadata: that.data.areadata,
+      areadatas: that.data.areadatas,
       areaTextP: that.data.areaTextP,
       areaText: that.data.areaText
     })
@@ -277,10 +277,10 @@ Page({
 
     console.log(cityId)
     console.log(that.data.shoWmodifytop)
-    console.log(that.data.areadata)
+    console.log(that.data.areadatas)
 
 
-    if (that.data.areadata[num][pro].selected == 1) {
+    if (that.data.areadatas[num][pro].selected == 1) {
 
    
       if (judgeId == 1) {
@@ -315,16 +315,16 @@ Page({
 
       }
  
-      let areadatafor = that.data.areadata;
+      let areadatafor = that.data.areadatas;
       for (let i = 0; i < areadatafor.length; i++) {
         for (let j = 0; j < areadatafor[i].length; j++) {
           if (areadatafor[i][j].id == cityId) {
-            that.data.areadata[i][j].selected = 2
+            that.data.areadatas[i][j].selected = 2
           }
         }
       }
       that.setData({
-        areadata: that.data.areadata
+        areadatas: that.data.areadatas
       })
 
       that.setData({
@@ -333,17 +333,17 @@ Page({
       console.log(that.data.areaText)
     } else {
 
-      let areadatafor = that.data.areadata;
+      let areadatafor = that.data.areadatas;
       for (let i = 0; i < areadatafor.length; i++) {
         for (let j = 0; j < areadatafor[i].length; j++) {
           if (areadatafor[i][j].id == cityId) {
-            that.data.areadata[i][j].selected = 1
+            that.data.areadatas[i][j].selected = 1
           }
         }
       }
 
       that.setData({
-        areadata: that.data.areadata
+        areadatas: that.data.areadatas
       })
       for (let i = 0; i < that.data.areaText.length; i++) {
         if (that.data.areaText[i].id == cityId) {
@@ -373,20 +373,20 @@ Page({
   changeAreaData(data) {
 
     let that = this;
-    for (let i = 0; i < that.data.areadata.length; i++) {
-      for (let j = 0; j < that.data.areadata[i].length; j++) {
-        that.data.areadata[i][j].selected = 1
-        that.data.areadata[i][j].pro = j
-        that.data.areadata[i][j].index = i
+    for (let i = 0; i < that.data.areadatas.length; i++) {
+      for (let j = 0; j < that.data.areadatas[i].length; j++) {
+        that.data.areadatas[i][j].selected = 1
+        that.data.areadatas[i][j].pro = j
+        that.data.areadatas[i][j].index = i+1
         // if (j == 0) {
         //   that.data.areadata[i][j].citytop = "全省置顶"
         //   console.log(that.data.areadata)
         // }
       }
     }
-    console.log(that.data.areadata)
+    // that.data.areadata.shift()
     that.setData({
-      areadata: that.data.areadata
+      areadatas: that.data.areadatas
     })
     for (let i = 0; i < data.length; i++) {
       data[i].selected = 1
@@ -398,12 +398,12 @@ Page({
     // that.setData({
     //   areadataHot: data
     // })
-    that.data.areadata.unshift(data)
+    that.data.areadatas.unshift(data)
     that.setData({
-      areadata: that.data.areadata,
+      areadatas: that.data.areadatas,
       showlodinga:false
     })
-    console.log(that.data.areadata)
+    console.log(that.data.areadatas)
 
 
   },
@@ -451,9 +451,9 @@ Page({
 
   deleteC() {
     let that = this;
-    for (let i = 0; i < that.data.areadata.length; i++) {
-      for (let j = 0; j < that.data.areadata[i].length; j++) {
-        that.data.areadata[i][j].selected = 1
+    for (let i = 0; i < that.data.areadatas.length; i++) {
+      for (let j = 0; j < that.data.areadatas[i].length; j++) {
+        that.data.areadatas[i][j].selected = 1
       }
     }
   },
@@ -465,7 +465,7 @@ Page({
       let areaText = that.data.areaText
       for (let i = 0; i < areaText.length; i++) {
         if (areaText[i].id == 1) {
-          that.data.areadata[0][0].selected = 1
+          that.data.areadatas[0][0].selected = 1
           that.data.areaText = []
         }
       }
@@ -546,10 +546,10 @@ Page({
   },
   findIndex(Id){
     let that = this;
-    for (let i = 0; i < that.data.areadata.length; i++) {
-      for (let j = 0; j < that.data.areadata[i].length; j++) {
-        if (that.data.areadata[i][j].id == Id){
-          return that.data.areadata[i][j].index
+    for (let i = 0; i < that.data.areadatas.length; i++) {
+      for (let j = 0; j < that.data.areadatas[i].length; j++) {
+        if (that.data.areadatas[i][j].id == Id){
+          return that.data.areadatas[i][j].index
         }
       }
     }  
@@ -580,14 +580,14 @@ Page({
     }
 
 
-    for (let i = 0; i < that.data.areadata.length; i++) {
-      for (let j = 0; j < that.data.areadata[i].length; j++) {
+    for (let i = 0; i < that.data.areadatas.length; i++) {
+      for (let j = 0; j < that.data.areadatas[i].length; j++) {
 
-        if (that.data.areadata[i][j].id == item.id) {
-          that.data.areadata[i][j].selected = 2
+        if (that.data.areadatas[i][j].id == item.id) {
+          that.data.areadatas[i][j].selected = 2
 
           that.setData({
-            areadata: that.data.areadata,
+            areadatas: that.data.areadatas,
             showListsTtile: false,
             showListsAnd: false,
             showInputList: false,
@@ -631,16 +631,16 @@ Page({
         areaText: allall
       })
       let data = that.data.areaText
-      console.log(that.data.areadata)
+      console.log(that.data.areadatas)
       for (let i = 0; i < data.length; i++) {
         let num = data[i].id;
-        for (let j = 0; j < that.data.areadata.length; j++) {
-          for (let k = 0; k < that.data.areadata[j].length; k++) {
-            if (that.data.areadata[j][k].id == num) {
+        for (let j = 0; j < that.data.areadatas.length; j++) {
+          for (let k = 0; k < that.data.areadatas[j].length; k++) {
+            if (that.data.areadatas[j][k].id == num) {
 
-              that.data.areadata[j][k].selected = 2;
+              that.data.areadatas[j][k].selected = 2;
               that.setData({
-                areadata: that.data.areadata
+                areadatas: that.data.areadatas
               })
             }
           }
@@ -667,10 +667,10 @@ Page({
     })
     let that = this;
     for (let i = 0; i < item.length; i++) {
-      for (let j = 0; j < that.data.areadata.length; j++) {
-        for (let k = 0; k < that.data.areadata[j].length; k++) {
-          if (that.data.areadata[j][k].id == item[i]) {
-            let numner = that.data.areadata[j][k];
+      for (let j = 0; j < that.data.areadatas.length; j++) {
+        for (let k = 0; k < that.data.areadatas[j].length; k++) {
+          if (that.data.areadatas[j][k].id == item[i]) {
+            let numner = that.data.areadatas[j][k];
             console.log(numner)
             let detail = {
               id: numner.id,
@@ -679,9 +679,9 @@ Page({
               pro: numner.pro
             }
             that.data.areaText.push(detail)
-            that.data.areadata[j][k].selected = 2;
+            that.data.areadatas[j][k].selected = 2;
             that.setData({
-              areadata: that.data.areadata,
+              areadatas: that.data.areadatas,
               areaText: that.data.areaText
             })
           }

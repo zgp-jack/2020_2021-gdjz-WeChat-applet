@@ -872,23 +872,29 @@ App({
     console.log(123)
     let num = 1;
     let areadata = wx.getStorageSync("areadata");
-    if (areadata) {
+    let areadatas = wx.getStorageSync("areadatas");
+    if (areadata && _this.__route__ != "pages/workingtopAll/distruction/distruction") {
       if (areadata.hasOwnProperty("num") && (areadata.num == num)) {
-        if (_this.__route__ == "pages/workingtopAll/distruction/distruction"){
-    
-          _this.setData({
-            areadata: areadata.data
-          })
-        }else{
-          _this.setData({
-            areadata: areadata.data
-          })
-        }
+        _this.setData({
+          areadata: areadata.data
+        })
+        // if (_this && options){
+        //   _this.hotcities(options)
+        // }
 
-        if (_this && options){
+        wx.hideLoading()
+        return false;
+      }
+    }
+    if (areadatas && _this.__route__ == "pages/workingtopAll/distruction/distruction") {
+      if (areadatas.hasOwnProperty("num") && (areadatas.num == num)) {
+        _this.setData({
+          areadatas: areadatas.data
+        })
+        if (_this && options) {
           _this.hotcities(options)
         }
-
+       console.log(12123213)
         wx.hideLoading()
         return false;
       }
@@ -900,23 +906,19 @@ App({
           data: res.data,
           num: num
         }
-
-        if (_this.__route__ == "pages/workingtopAll/distruction/distruction") {
-          console.log(res.data.shift()) 
-          _this.setData({
-            areadata: res.data
-          })
-        }else{
-          _this.setData({
-            areadata: res.data
-          })
-        }
-    
+        let areadatas = JSON.parse(JSON.stringify(res.data))
+        areadatas.shift()
+        console.log(res.data)
+        _this.setData({
+          areadata: res.data,
+          areadatas: areadatas
+        })
         if (_this && options) {
           _this.hotcities(options)
         }
         wx.hideLoading()
         wx.setStorageSync('areadata', mydata)
+        wx.setStorageSync('areadatas', areadatas)
       }
     });
 

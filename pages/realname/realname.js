@@ -580,12 +580,12 @@ Page({
 
 
     if (member.username.length < 2) {
-      app.showMyTips("您输入的姓名不能少于两个字！");
+      app.showMyTips("请正确填写2~6字真实姓名！");
       return false;
     }
     var han = /^[\u4e00-\u9fa5]+$/;
     if (!han.test(member.username)) {
-      app.showMyTips("输入的姓名只能有汉字！");
+      app.showMyTips("请正确填写2~6字真实姓名！");
       return false;
     };
     if (!v.isRequire(member.username, 2)) {
