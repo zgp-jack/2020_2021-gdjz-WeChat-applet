@@ -24,7 +24,7 @@ Page({
     showInputList: false,
     historyArray: [],
     areaText: [],
-    shoWmodifytop: "",
+    // shoWmodifytop: "",
     newId: "",
     specialids:[],
     showlodinga:true,
@@ -461,15 +461,15 @@ Page({
     let that = this;
     console.log(e.currentTarget.dataset)
     let odataset = e.currentTarget.dataset;
-    if (that.data.shoWmodifytop != "modifytop") {
-      let areaText = that.data.areaText
-      for (let i = 0; i < areaText.length; i++) {
-        if (areaText[i].id == 1) {
-          that.data.areadatas[0][0].selected = 1
-          that.data.areaText = []
-        }
-      }
-    }
+    // if (that.data.shoWmodifytop != "modifytop") {
+    //   let areaText = that.data.areaText
+    //   for (let i = 0; i < areaText.length; i++) {
+    //     if (areaText[i].id == 1) {
+    //       that.data.areadatas[0][0].selected = 1
+    //       that.data.areaText = []
+    //     }
+    //   }
+    // }
     let detail = {
       id: odataset.id,
       city: odataset.area,
@@ -789,13 +789,13 @@ Page({
     }
 
   },
-  getNewId(options) {
-    if (options.hasOwnProperty("id")) {
-      this.setData({
-        newId: options.id
-      })
-    }
-  },
+  // getNewId(options) {
+  //   if (options.hasOwnProperty("id")) {
+  //     this.setData({
+  //       newId: options.id
+  //     })
+  //   }
+  // },
 
   areaId() {
     // areaText
@@ -819,7 +819,7 @@ Page({
     this.getAreaData(options);
     this.initInputList();
     this.modifytop(options)
-    this.getNewId(options)
+    // this.getNewId(options)
 
 
   },

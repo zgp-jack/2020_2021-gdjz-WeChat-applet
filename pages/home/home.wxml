@@ -1,5 +1,3 @@
-<!-- index-lists-item  showArea  allAreaLists -->
-
 <import src="/pages/footer/footer.wxml" />
 
 <!-- 首页头部 -->
@@ -40,7 +38,7 @@
 
   <!-- 鱼泡产业 -->
   <view class='index-yupao-industry clearfix'>
-    <navigator url='/pages/index/index' class='index-footer-nav' open-type="navigate">
+    <navigator target="miniProgram" open-type="navigate" app-id="wx31a1c86a67bc6c54" path="" extra-data="" version="release">
       <view class='index-industry-item'>
         <image src='{{ industry.jzzg }}'></image>
         <text>建筑招工</text>
@@ -52,7 +50,7 @@
         <text>装修招工</text>
       </view>
     </navigator>
-    <navigator class='index-footer-nav' target="miniProgram" open-type="navigate" app-id="wxd348efa56021e8d0" path="" extra-data="" version="release">
+    <navigator class='index-footer-nav' url='/pages/index/index' class='index-footer-nav' open-type="navigate">
       <view class='index-industry-item'>
         <image src='{{ industry.hgzp }}'></image>
         <text>焊工招聘</text>
@@ -109,12 +107,10 @@
         <text>邀请好友</text>
       </view>
     </navigator>
-
     <view class='index-fun-item flex-row' data-url='/pages/query/query' bindtap='valiUserUrl'>
       <image src='{{ fun.smrz }}'></image>
       <text>实名查询</text>
     </view>
-
     <navigator class='index-footer-nav' open-type="navigate" url='/pages/others/information/lists'>
       <view class='index-fun-item flex-row'>
         <image src='{{ fun.zjxm }}'></image>
@@ -130,7 +126,7 @@
       <swiper indicator-dots="{{ notice.indicatorDots }}" autoplay="{{ notice.autoplay}} " interval="{{ notice.interval }}" duration="{{ notice.duration }}" circular="{{ notice.circular }}" vertical="{{ notice.vertical }}">
         <block wx:for="{{ notice.lists }}" wx:key="{{ index }}">
           <swiper-item>
-            <navigator url='/pages/static/notice?id={{ item.id }}&type=1' open-type="navigate">
+            <navigator url='/pages/static/notice?type=1&id={{ item.id }}' open-type="navigate">
               <text class='index-notice-text' data-id="{{ item.id }}">{{ item.title }}</text>
             </navigator>
           </swiper-item>
@@ -145,7 +141,6 @@
       <navigator url='/pages/index/index' class='index-lists-header' open-type="navigate">最新招工信息
         <text>更多</text> </navigator>
       <view class='index-lists-body'>
-
 
         <view class="indxlistitem" wx:for="{{ infolists.job.lists }}" wx:key="{{ index }}" data-id="{{ item.id }}" data-type="job" bindtap='showMsgInfo'>
 
@@ -183,15 +178,15 @@
           </view>
 
         </view>
-
-
         <view class='common-nodatabox flex-column' wx:if="{{ infolists.information.lists.length == 0 }}">
           <image src='{{ indexImgs.nodata }}'></image>
-          <text>该地区暂无相关内容</text>
+          <text>该地区暂无相关数据</text>
         </view>
       </view>
     </view>
-    <view class='index-lists-item'>
+
+
+      <view class='index-lists-item'>
       <navigator url='/pages/findingworkinglist/findingworkinglist' class='index-lists-header' open-type="navigate">最新找活信息
         <text>更多</text> </navigator>
       <!-- <view class='index-lists-body'>
@@ -236,34 +231,34 @@
               </view>
               <view class="listsboxintro">
                 <view class="listsboxage">
-              <view class="listsboxageone">
-                <view class="listsboxname" wx:if="{{item.username}}">
-                  <text>{{item.username}}</text>
+                  <view class="listsboxageone">
+                    <view class="listsboxname" wx:if="{{item.username}}">
+                      <text>{{item.username}}</text>
+                    </view>
+                    <view wx:if="{{item.gender  == '1' ||item.gender  == '2' }}" class="{{(item.gender =='1'||item.gender =='2')?'listsboxsex':''}}">
+                      <text>{{item.gender  == "1" ? "男" : item.gender == "2"?"女":""}}</text>
+                    </view>
+                    <view class="listsboxagezong" wx:if="{{item.birthday != 0}}">
+                      <text>{{item.birthday}}岁</text>
+                    </view>
+
+
+                    <image wx:if="{{item.authentication == 2}}" src="{{realNames}}"></image>
+
+
+
+                    <image wx:if="{{item.certificate == 1}}" src="{{authentication}}"></image>
+
+                  </view>
+                  <view class="listsboxagetwo" wx:if="{{item.gender != '0'}}">
+                    <text class="listsboxnation" wx:if="{{item.nation}}">{{item.nation}}</text>
+                    <text><text class="listsboxnum" wx:if="{{item.experience}}" >{{item.experience}}</text></text>
+                    <text wx:if="{{item.prof_degree}}">{{item.prof_degree}}</text>
+                  </view>
+                  <view class="listsboxagetwot" wx:if="{{item.gender == '0'}}">
+                    <text wx:for="{{item.tags}}" wx:key="{{index}}">{{item.label_name}}</text>
+                  </view>
                 </view>
-                <view wx:if="{{item.gender  == '1' ||item.gender  == '2' }}" class="{{(item.gender =='1'||item.gender =='2')?'listsboxsex':''}}">
-                  <text>{{item.gender  == "1" ? "男" : item.gender == "2"?"女":""}}</text>
-                </view>
-                <view class="listsboxagezong" wx:if="{{item.birthday != 0}}">
-                  <text>{{item.birthday}}岁</text>
-                </view>
-
-
-                <image wx:if="{{item.authentication == 2}}" src="{{realNames}}"></image>
-
-   
-
-                <image wx:if="{{item.certificate == 1}}" src="{{authentication}}"></image>
-
-              </view>
-              <view class="listsboxagetwo" wx:if="{{item.gender != '0'}}">
-                <text class="listsboxnation" wx:if="{{item.nation}}">{{item.nation}}</text>
-                <text><text class="listsboxnum" wx:if="{{item.experience}}" >{{item.experience}}</text></text>
-                <text wx:if="{{item.prof_degree}}">{{item.prof_degree}}</text>
-              </view>
-              <view class="listsboxagetwot" wx:if="{{item.gender == '0'}}">
-                <text wx:for="{{item.tags}}" wx:key="{{index}}">{{item.label_name}}</text>
-              </view>
-            </view>
                 <view class="listsboxshow" wx:if="{{item.type}}">
                   {{item.type}}
                 </view>
@@ -318,6 +313,8 @@
         </view>
       </view>
     </view>
+
+
     <view class='index-lists-item'>
       <navigator url='/pages/usedlist/usedlist' class='index-lists-header' open-type="navigate">最新二手交易信息
         <text>更多</text> </navigator>
@@ -349,11 +346,10 @@
         </view>
         <view class='common-nodatabox flex-column' wx:if="{{ infolists.fleamarket.lists.length == 0 }}">
           <image src='{{ indexImgs.nodata }}'></image>
-          <text>该地区暂无相关内容</text>
+          <text>该地区暂无相关数据</text>
         </view>
       </view>
     </view>
-
 
     <view class='home-footer-about'>
       <navigator url='/pages/about/about' open-type="navigate">关于我们</navigator>
@@ -362,7 +358,7 @@
       <text bindtap='callThisPhone' data-phone="{{ phone }}">联系我们</text>
     </view>
     <view class='home-footer-copyright'>©2017-2019 版权所有 粤ICP备17088633号-1</view>
-    <view class='home-footer-copyright'>版本号:{{version}}</view>
+     <view class='home-footer-copyright'>版本号:{{version}}</view>
 
   </view>
 </view>
