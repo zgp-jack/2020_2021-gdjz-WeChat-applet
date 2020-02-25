@@ -2656,7 +2656,6 @@ function getProviceItem(p,c) {
 function getInputList(bool){
   let _lists = arrDeepCopy(areas);
   _lists.splice(0,1);
-  console.log(_lists)
   let len = _lists.length;
   let res = [];
   console.log(len)

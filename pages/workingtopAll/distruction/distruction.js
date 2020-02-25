@@ -28,11 +28,35 @@ Page({
     newId: "",
     specialids:[],
     showlodinga:true,
-    showlodingimg: app.globalData.showlodingimg
+    showlodingimg: app.globalData.showlodingimg,
+    areaDataNotEnd:[]
   }, 
   //
   getAreaData: function (options) {
-    app.getAreaData(this, options);
+    let areadata = wx.getStorageSync("areadata");
+    let num = app.globalData.areaDataNum;
+    let _this = this;
+    if(areadata){
+      let mydata = app.arrDeepCopy(areadata)
+      mydata.data.shift()
+      if (areadata.hasOwnProperty("num") && (areadata.num == num)) {
+        _this.setData({
+          areaDataNotEnd: mydata.data
+        })
+        _this.hotcities(options)
+        wx.hideLoading()
+        return false;
+      }
+    }
+    app.getAreaData(this, function(data){
+      let resdata = app.arrDeepCopy(data)
+      resdata.shift()
+      _this.hotcities(options)
+      _this.setData({
+        areaDataNotEnd: resdata
+      })
+    });
+    
   },
   searchInput: function (e) {
     let val = e.detail.value
@@ -100,7 +124,6 @@ Page({
   },
   initInputList: function () {
     let list = areas.getInputList();
-    console.log(list)
     this.setData({
       allAreaLists: list
     })
@@ -162,7 +185,6 @@ Page({
 
 
   getFull(num, cityId){
-    console.log(num)
     let that = this;
     for (let i = 0; i < that.data.areadatas[num].length; i++) {
       that.data.areadatas[num][i].selected = 1;
@@ -225,7 +247,6 @@ Page({
       }
     }
 
-    console.log(that.data.areaTextP)
     that.setData({
       areadatas: that.data.areadatas,
       areaTextP: that.data.areaTextP,
@@ -270,15 +291,6 @@ Page({
       num: num,
       pro: pro
     }
-    console.log(num)
-    console.log(pro)
-    console.log(judgeId)
-    console.log(app.globalData.judge)
-
-    console.log(cityId)
-    console.log(that.data.shoWmodifytop)
-    console.log(that.data.areadatas)
-
 
     if (that.data.areadatas[num][pro].selected == 1) {
 
@@ -330,7 +342,6 @@ Page({
       that.setData({
         areaText: [...that.data.areaTextP,...that.data.areaTextC]
       })
-      console.log(that.data.areaText)
     } else {
 
       let areadatafor = that.data.areadatas;
@@ -370,14 +381,18 @@ Page({
 
     }
   },
-  changeAreaData(data) {
+  changeAreaData(data,options) {
 
     let that = this;
-    for (let i = 0; i < that.data.areadatas.length; i++) {
-      for (let j = 0; j < that.data.areadatas[i].length; j++) {
-        that.data.areadatas[i][j].selected = 1
-        that.data.areadatas[i][j].pro = j
-        that.data.areadatas[i][j].index = i+1
+    let arr = this.data.areaDataNotEnd
+    let outlen = arr.length
+    for (let i = 0; i < outlen; i++) {
+      let inlen = arr[i].length;
+      for (let j = 0; j < inlen; j++) {
+        let inarr = arr[i][j];
+        inarr.selected = 1
+        inarr.pro = j
+        inarr.index = i+1
         // if (j == 0) {
         //   that.data.areadata[i][j].citytop = "全省置顶"
         //   console.log(that.data.areadata)
@@ -385,37 +400,32 @@ Page({
       }
     }
     // that.data.areadata.shift()
-    that.setData({
-      areadatas: that.data.areadatas
-    })
+    
     for (let i = 0; i < data.length; i++) {
       data[i].selected = 1
       data[i].pro = i
       data[i].index = 0
       data[i].city = data[i].name
-
     }
     // that.setData({
     //   areadataHot: data
     // })
-    that.data.areadatas.unshift(data)
+    arr.unshift(data)
     that.setData({
-      areadatas: that.data.areadatas,
       showlodinga:false
     })
-    console.log(that.data.areadatas)
 
-
+    that.modifyArea(options,arr)
+    
   },
   hotcities(options) {
  
     let that = this;
 
-    let areadatahot = wx.getStorageSync("areadatahot");
+    let areadatahot = app.globalData.hotAreaData.use;
     if (areadatahot) {
-      console.log(areadatahot)
-      that.changeAreaData(areadatahot)
-      that.modifyArea(options)
+      let data = app.globalData.hotAreaData.data
+      that.changeAreaData(data,options)
    
     }else{
       app.appRequestAction({
@@ -427,9 +437,12 @@ Page({
           let mydata = res.data;
           if (mydata.errcode == "ok") {
  
-            that.changeAreaData(mydata.data)
-            that.modifyArea(options)
-            wx.setStorageSync('areadatahot', mydata.data)
+            app.globalData.hotAreaData={
+              data:mydata.data,
+              use: true
+            }
+            that.changeAreaData(mydata.data,options)
+            
             // that.gettopareas()
           } else {
             wx.showModal({
@@ -459,7 +472,6 @@ Page({
   },
   chooseInputCtiy(e) {
     let that = this;
-    console.log(e.currentTarget.dataset)
     let odataset = e.currentTarget.dataset;
     if (that.data.shoWmodifytop != "modifytop") {
       let areaText = that.data.areaText
@@ -481,7 +493,6 @@ Page({
         detailArray.splice(i, 1)
       }
     }
-    console.log(that.data.areaText)
     for (let i = 0; i < that.data.areaText.length; i++) {
       if (that.data.areaText[i].id == odataset.id) {
         this.setData({
@@ -520,13 +531,10 @@ Page({
   hischildren(e) {
     let that = this;
     let data = e.currentTarget.dataset
-
-    console.log(data)
  
     for (let i = 0; i < that.data.areaText.length; i++) {
 
       if (that.data.areaText[i].id == data.id) {
-        console.log(123)
         this.setData({
           showListsTtile: false,
           showListsAnd: false,
@@ -556,7 +564,6 @@ Page({
   },
   showseleted(item) {
     let that = this;
-    console.log(item)
     let detail = {
       id: item.id,
       name: item.area ? item.area : item.name,
@@ -594,7 +601,6 @@ Page({
             searchInputVal: "",
             areaText: [...that.data.areaTextP, ...that.data.areaTextC]
           })
-          console.log(that.data.areaText)
         }
       }
     }
@@ -616,8 +622,7 @@ Page({
     }
   },
  
-  modifyArea(options) {
-    console.log(options)
+  modifyArea(options,areasArr) {
     let that = this;
 
     if (options.hasOwnProperty("allcity") || options.hasOwnProperty("allpro")) {
@@ -630,25 +635,23 @@ Page({
         areaTextC: allcity,
         areaText: allall
       })
-      let data = that.data.areaText
-      console.log(that.data.areadatas)
-      for (let i = 0; i < data.length; i++) {
-        let num = data[i].id;
-        for (let j = 0; j < that.data.areadatas.length; j++) {
-          for (let k = 0; k < that.data.areadatas[j].length; k++) {
-            if (that.data.areadatas[j][k].id == num) {
 
-              that.data.areadatas[j][k].selected = 2;
-              that.setData({
-                areadatas: that.data.areadatas
-              })
-            }
+      let hlid = allall.map(item=>item.id)
+      let outlen = areasArr.length
+      for(let i = 0;i<outlen;i++){
+        let inlen = areasArr[i].length
+        for(let j = 0;j<inlen;j++){
+          let id = areasArr[i][j].id
+          if(hlid.includes(id)){
+            areasArr[i][j].selected = 2
           }
         }
-
-
       }
     }
+
+    this.setData({
+      areadatas:areasArr
+    })
   },
 
   getedArea(item) {
@@ -659,7 +662,6 @@ Page({
     // let judgeId = e.currentTarget.dataset.pid;
 
     // let detail = { id: cityId, name: name, num: num, pro: pro }
-    console.log(item)
 
     wx.showLoading({
       title: '加载中',
@@ -671,7 +673,6 @@ Page({
         for (let k = 0; k < that.data.areadatas[j].length; k++) {
           if (that.data.areadatas[j][k].id == item[i]) {
             let numner = that.data.areadatas[j][k];
-            console.log(numner)
             let detail = {
               id: numner.id,
               name: numner.city,
@@ -689,11 +690,11 @@ Page({
       }
     }
     that.data.areaText = that.unique(that.data.areaText)
-    console.log(that.data.areaText)
+    
     wx.hideLoading()
   },
   getMax(item) {
-    console.log(item)
+    
     if (item.hasOwnProperty("max_province") && item.hasOwnProperty("max_city")) {
       this.setData({
         max_province: item.max_province,
@@ -721,17 +722,14 @@ Page({
 
   },
   ranking(item){
-    console.log(item)
+    
     let after = [];
     let specialids = this.data.specialids;
-    console.log(specialids)
-   
+    
     for (let j = 0; j < item.length; j++ ){
       for (let i = 0; i < specialids.length; i++){
         if (specialids[i] == item[j].id){
-          console.log(specialids[i])
-          console.log(item[j])
-
+         
           after.push(item[j])
 
         }
@@ -758,8 +756,7 @@ Page({
     let uareaTextC = that.unique(areaTextC)
     let rankingP = that.ranking(uareaTextP)
 
-   
-    console.log(rankingP)
+    
 
     let alllength = rankingP.length + uareaTextC.length;
 
@@ -781,7 +778,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   modifytop(options) {
-    console.log(options)
+    
     if (options.hasOwnProperty("modifytop")) {
       this.setData({
         shoWmodifytop: options.modifytop
@@ -818,8 +815,8 @@ Page({
     this.getMax(options);
     this.getAreaData(options);
     this.initInputList();
-    this.modifytop(options)
-    this.getNewId(options)
+    //this.modifytop(options)
+    //this.getNewId(options)
 
 
   },

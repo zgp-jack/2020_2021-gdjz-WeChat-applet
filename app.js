@@ -70,7 +70,12 @@ App({
       show: 0,
       request: false
     },
-    gdApiKey: "20f12aae660c04de86f993d3eff590a0"
+    gdApiKey: "20f12aae660c04de86f993d3eff590a0",
+    areaDataNum: 1,
+    hotAreaData:{
+      data:[],
+      use: false
+    }
   },
   initUserInfo: function (e) {
     let tpage = e.path;
@@ -863,41 +868,20 @@ App({
       wx.setStorageSync("locationHistory", locationHistory)
     }
   },
-  getAreaData: function (_this, options) {
-    console.log(_this)
+  getAreaData: function (_this, callback) {
+   
     wx.showLoading({
       title: '加载中',
       mask: true
     })
-    console.log(123)
-    let num = 1;
+    let num = this.globalData.areaDataNum;
     let areadata = wx.getStorageSync("areadata");
-    let areadatas = wx.getStorageSync("areadatas");
-    if (areadata && _this.__route__ != "pages/workingtopAll/distruction/distruction") {
-      if (areadata.hasOwnProperty("num") && (areadata.num == num)) {
-        _this.setData({
-          areadata: areadata.data
-        })
-        // if (_this && options){
-        //   _this.hotcities(options)
-        // }
-
-        wx.hideLoading()
-        return false;
-      }
-    }
-    if (areadatas && _this.__route__ == "pages/workingtopAll/distruction/distruction") {
-      if (areadatas.hasOwnProperty("num") && (areadatas.num == num)) {
-        _this.setData({
-          areadatas: areadatas.data
-        })
-        if (_this && options) {
-          _this.hotcities(options)
-        }
-       console.log(12123213)
-        wx.hideLoading()
-        return false;
-      }
+    if (areadata.hasOwnProperty("num") && (areadata.num == num)) {
+      _this.setData({
+        areadata: areadata.data
+      })
+      wx.hideLoading()
+      return false;
     }
     this.doRequestAction({
       url: "index/index-area/",
@@ -906,23 +890,76 @@ App({
           data: res.data,
           num: num
         }
-        let areadatas = JSON.parse(JSON.stringify(res.data))
-        areadatas.shift()
-        console.log(res.data)
         _this.setData({
-          areadata: res.data,
-          areadatas: areadatas
+          areadata: res.data
         })
-        if (_this && options) {
-          _this.hotcities(options)
-        }
+        callback(res.data)
         wx.hideLoading()
         wx.setStorageSync('areadata', mydata)
-        wx.setStorageSync('areadatas', areadatas)
       }
     });
 
   },
+  // getAreaData: function (_this, options) {
+  //   console.log(_this)
+  //   wx.showLoading({
+  //     title: '加载中',
+  //     mask: true
+  //   })
+  //   console.log(123)
+  //   let num = 1;
+  //   let areadata = wx.getStorageSync("areadata");
+  //   let areadatas = wx.getStorageSync("areadatas");
+  //   if (areadata && _this.__route__ != "pages/workingtopAll/distruction/distruction") {
+  //     if (areadata.hasOwnProperty("num") && (areadata.num == num)) {
+  //       _this.setData({
+  //         areadata: areadata.data
+  //       })
+  //       // if (_this && options){
+  //       //   _this.hotcities(options)
+  //       // }
+
+  //       wx.hideLoading()
+  //       return false;
+  //     }
+  //   }
+  //   if (areadatas && _this.__route__ == "pages/workingtopAll/distruction/distruction") {
+  //     if (areadatas.hasOwnProperty("num") && (areadatas.num == num)) {
+  //       _this.setData({
+  //         areadatas: areadatas.data
+  //       })
+  //       if (_this && options) {
+  //         _this.hotcities(options)
+  //       }
+  //      console.log(12123213)
+  //       wx.hideLoading()
+  //       return false;
+  //     }
+  //   }
+  //   this.doRequestAction({
+  //     url: "index/index-area/",
+  //     success: function (res) {
+  //       let mydata = {
+  //         data: res.data,
+  //         num: num
+  //       }
+  //       let areadatas = JSON.parse(JSON.stringify(res.data))
+  //       areadatas.shift()
+  //       console.log(res.data)
+  //       _this.setData({
+  //         areadata: res.data,
+  //         areadatas: areadatas
+  //       })
+  //       if (_this && options) {
+  //         _this.hotcities(options)
+  //       }
+  //       wx.hideLoading()
+  //       wx.setStorageSync('areadata', mydata)
+  //       wx.setStorageSync('areadatas', areadatas)
+  //     }
+  //   });
+
+  // },
   getPrevPage: function () {
     let pages = getCurrentPages();
     let prevPage = pages[pages.length - 2];
