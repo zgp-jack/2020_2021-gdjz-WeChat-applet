@@ -864,7 +864,7 @@ App({
     }
   },
   getAreaData: function (_this, options) {
-
+    console.log(_this)
     wx.showLoading({
       title: '加载中',
       mask: true
@@ -874,9 +874,17 @@ App({
     let areadata = wx.getStorageSync("areadata");
     if (areadata) {
       if (areadata.hasOwnProperty("num") && (areadata.num == num)) {
-        _this.setData({
-          areadata: areadata.data
-        })
+        if (_this.__route__ == "pages/workingtopAll/distruction/distruction"){
+    
+          _this.setData({
+            areadata: areadata.data
+          })
+        }else{
+          _this.setData({
+            areadata: areadata.data
+          })
+        }
+
         if (_this && options){
           _this.hotcities(options)
         }
@@ -892,9 +900,18 @@ App({
           data: res.data,
           num: num
         }
-        _this.setData({
-          areadata: res.data
-        })
+
+        if (_this.__route__ == "pages/workingtopAll/distruction/distruction") {
+          console.log(res.data.shift()) 
+          _this.setData({
+            areadata: res.data
+          })
+        }else{
+          _this.setData({
+            areadata: res.data
+          })
+        }
+    
         if (_this && options) {
           _this.hotcities(options)
         }

@@ -384,7 +384,7 @@ Page({
         // }
       }
     }
-    that.data.areadata.shift()
+    console.log(that.data.areadata)
     that.setData({
       areadata: that.data.areadata
     })
@@ -623,11 +623,12 @@ Page({
     if (options.hasOwnProperty("allcity") || options.hasOwnProperty("allpro")) {
       let allcity = JSON.parse(options.allcity)
       let allpro = JSON.parse(options.allpro)
+      let allall = JSON.parse(options.allall)
 
       that.setData({
         areaTextP: allpro,
         areaTextC: allcity,
-        areaText: [...allcity, ...allpro]
+        areaText: allall
       })
       let data = that.data.areaText
       console.log(that.data.areadata)

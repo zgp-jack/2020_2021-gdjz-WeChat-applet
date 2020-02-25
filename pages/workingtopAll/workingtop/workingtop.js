@@ -64,11 +64,12 @@ Page({
     let that = this;
     let allpro = JSON.stringify(that.data.areaProcrum);
     let allcity = JSON.stringify(that.data.areaCitycrum);
+    let allall = JSON.stringify([...that.data.areaProcrum,...that.data.areaCitycrum])
     let specialids = JSON.stringify(that.data.special_ids);
     let max_province = that.data.max_province;
     let max_city = that.data.max_city;
     wx.navigateTo({
-      url: `/pages/workingtopAll/distruction/distruction?max_province=${max_province}&max_city=${max_city}&allpro= ${allpro}&allcity= ${allcity}&specialids=${specialids}`,
+      url: `/pages/workingtopAll/distruction/distruction?max_province=${max_province}&max_city=${max_city}&allpro= ${allpro}&allcity= ${allcity}&specialids=${specialids}&allall=${allall}`,
     })
   },
   bindGetUserInfo: function(e) {
