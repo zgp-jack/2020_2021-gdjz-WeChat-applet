@@ -186,7 +186,8 @@ Page({
 
   getFull(num, cityId){
     let that = this;
-    for (let i = 0; i < that.data.areadatas[num].length; i++) {
+    let firstLen = that.data.areadatas[num].length
+    for (let i = 0; i < firstLen; i++) {
       that.data.areadatas[num][i].selected = 1;
     }
    
