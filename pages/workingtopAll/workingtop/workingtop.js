@@ -65,6 +65,7 @@ Page({
     let allpro = JSON.stringify(that.data.areaProcrum);
     let allcity = JSON.stringify(that.data.areaCitycrum);
     let allall = JSON.stringify([...that.data.areaProcrum,...that.data.areaCitycrum])
+    console.log(allall)
     let specialids = JSON.stringify(that.data.special_ids);
     let max_province = that.data.max_province;
     let max_city = that.data.max_city;
