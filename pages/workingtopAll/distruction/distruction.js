@@ -135,7 +135,7 @@ Page({
     if ((that.data.areaTextP.length >= that.data.max_province && that.data.areaTextC.length >= that.data.max_city)) {
       wx.showModal({
         title: '温馨提示',
-        content: `最多同时${that.data.max_city}个市、置顶${that.data.max_province}个省或直辖市`,
+        content: `最多可同时置顶${that.data.max_city}个市、${that.data.max_province}个省或直辖市`,
         showCancel: false,
         success(res) {
           that.setData({
@@ -151,7 +151,7 @@ Page({
     if (that.data.areaTextC.length >= that.data.max_city && judgeId != 1) {
       wx.showModal({
         title: '温馨提示',
-        content: `最多同时${that.data.max_city}个市、置顶${that.data.max_province}个省或直辖市`,
+        content: `最多可同时置顶${that.data.max_city}个市、${that.data.max_province}个省或直辖市`,
         showCancel: false,
         success(res) {
           that.setData({
@@ -167,7 +167,7 @@ Page({
     if (that.data.areaTextP.length >= that.data.max_province && judgeId == 1) {
       wx.showModal({
         title: '温馨提示',
-        content: `最多同时${that.data.max_city}个市、置顶${that.data.max_province}个省或直辖市`,
+        content: `最多可同时置顶${that.data.max_city}个市、${that.data.max_province}个省或直辖市`,
         showCancel: false,
         success(res) {
           that.setData({
@@ -215,7 +215,8 @@ Page({
         }
       }
     }
-
+    console.log(areaArrC)
+    console.log(areaArr[num][pro].id)
     for (let j = 0; j < areaArrC.length; j++) {
       if (areaArr[num][pro].id == areaArrC[j].pid) {
         areaArrC.splice(j, 1)

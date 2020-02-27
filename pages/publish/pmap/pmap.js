@@ -39,7 +39,9 @@ Page({
     searchInputVal: "",
     showHisTitle:false,
     areaInputFocus:false,
-    pmaphone: app.globalData.serverPhone
+    infoId:"",
+    showfor:"noshowfor",
+    showmap:"noshowmap"
   },
   chooseInputCtiy: function (e) { 
     this.chooseThisCtiy(e);
@@ -83,9 +85,12 @@ Page({
     this.setData({ showHisTitle:true })
     
   },
-  initHistoryLoc: function () {
+  // addressList
+  initHistoryLoc: function () { 
     let h = wx.getStorageSync("locationHistory");
     let p = wx.getStorageSync("gpsPorvince");
+    console.log(p)
+    console.log(h)
     if (h) this.setData({ locationHistory: h })
     if (p) this.setData({ gpsOrientation: p })
   },
@@ -163,8 +168,8 @@ Page({
     })
 
     //切换城市直接保存
-    //let lastPublishCity = { name: area, ad_name: pname };
-    //wx.setStorageSync("lastPublishCity", lastPublishCity);
+    let lastPublishCity = { name: area, ad_name: pname };
+    wx.setStorageSync("lastPublishCity", lastPublishCity);
   },
   checkAdcode: function (adcode, callback) {
     let _this = this;
@@ -196,6 +201,8 @@ Page({
   },
   getMapInfo: function () {
     let that = this;
+    // console.log(this.data.keyAutoVal)
+
     this.getKeywordsInputs(this.data.keyAutoVal, function (data) {
       that.setData({ addressList: data })
     });
@@ -326,6 +333,7 @@ Page({
       keywords: val,
       location: '',
       success: function (data) {
+        console.log(data)
         if (data) {
           //_this.setData({ addressTips: data.tips.length ? '' : '暂未搜索到相关位置' })
           _this.filtterNullData(data.tips, function (data) {
@@ -361,11 +369,11 @@ Page({
     //   //this.setData({ showMaplist: true,isKeyvalActive:true })
     // }
   },
-  saveRecruitInfo:function(info){
-    let _this = this;
-    wx.setStorageSync("userLastPubArea", info);
+  // saveRecruitInfo:function(info){
+  //   let _this = this;
+  //   wx.setStorageSync("userLastPubArea", info);
     
-  },
+  // },
   setAddressData: function (e) {
     let _this = this;
     let area = this.data.areaText;
@@ -393,9 +401,11 @@ Page({
         "addressData.location": l,
         "addressData.district": d,
         areaId: areaId, areaText: area,
+        showfor:"noshowfor",
+        showmap:"showmap"
       })
 
-      _this.saveRecruitInfo(hl);
+      // _this.saveRecruitInfo(hl);
 
       _this.detailHistoryCities(hl);
       _this.initHistoryCityList();
@@ -422,19 +432,31 @@ Page({
         }
       },
       fail: function () {
-        let phone =  _this.data.pmaphone;
-        this.setData({ addressTips: `接口出错，请联系客服电话${phone}` })
+        this.setData({ addressTips: '接口出错，请联系客服电话400-838-1888' })
       }
     })
 
   },
   initAreaText: function () {
+    let defaultname = wx.getStorageSync("defaultname");
     let lastCtiy = wx.getStorageSync("lastPublishCity");
     let gpsPorvince = wx.getStorageSync("gpsPorvince");
     let gpsloc = wx.getStorageSync("gpsPorvince");
-    this.setData({ gpsOrientation: gpsPorvince })
-    if (lastCtiy) {
-      this.setData({ areaText: lastCtiy.name, keyAutoVal: lastCtiy.ad_name })
+    this.setData({ gpsOrientation: gpsPorvince });
+    let infoId = this.data.infoId;
+    let showfor = this.data.showfor;
+    let showmap = this.data.showmap;
+    console.log(lastCtiy)
+    console.log(gpsPorvince)
+    console.log(gpsloc)
+    console.log(defaultname)
+    console.log(showfor)
+    // 
+    if (defaultname && (infoId || showmap == "showmap") && showfor == "showfor"){
+      console.log(showfor)
+      this.setData({ areaText: defaultname.name, keyAutoVal: defaultname.name + "市" })
+    } else if (lastCtiy && (infoId || showmap == "showmap")  && showfor == "noshowfor" ) {
+      this.setData({ areaText: lastCtiy.name , keyAutoVal: lastCtiy.ad_name })
     } else if (gpsloc) {
       this.setData({ areaText: gpsloc.name, keyAutoVal: gpsloc.name + "市" })
     }
@@ -443,10 +465,23 @@ Page({
     let list = areas.getInputList(true);
     this.setData({ allAreaLists: list })
   },
+  getinfoId(options){
+    if (options.infoId){
+      this.setData({ infoId: options.infoId })
+    }
+    if (options.showfor){
+      console.log(options.showfor)
+      this.setData({ showfor: options.showfor })
+    }
+    if (options.showmap) {
+      this.setData({ showmap: options.showmap })
+    }
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    this.getinfoId(options)
     this.initInputList();
     areas.getInputList();
     this.getAreaData();

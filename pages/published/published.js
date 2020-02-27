@@ -7,6 +7,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    shalou: app.globalData.apiImgUrl + "lpy/shalou.png",
     refresh: false,
     nowtime: "",
     footerActive: "member",

@@ -52,7 +52,7 @@
       <view class='published-list-new' wx:if="{{ item.top && (item.top.is_top == '1')&& item.is_check != '1' &&item.is_check != '0' }}">
 
           <view class="published-list-shnew" >
-            <image src="../../images/shalou.png"></image>
+            <image src="{{shalou}}"></image>
             <text class="otime">到期时间：</text><text class="time">{{item.top.time_str}}</text>
           </view>
           <view class="otext" data-id="{{ item.id }}" data-toptime="{{ item.top.id}}" data-endtime="{{ item.top.time_str}}" data-endtimeh="{{ item.top.end_time}}"  bindtap="setInfoCity">

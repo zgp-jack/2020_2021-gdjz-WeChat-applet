@@ -80,6 +80,9 @@ Page({
     strlen: 0,
     resson:"",
     display: "none",
+    default_search_name:"",
+    showfor:"showfor",
+    showmap:"noshowmap"
   },
 
   userRegMap: function (e) {
@@ -105,8 +108,18 @@ Page({
     }
   },
   userTapAddress: function () {
+    let default_name = this.data.default_search_name;
+    let infoId = this.data.infoId;
+    let showfor = this.data.showfor;
+    let showmap = this.data.showmap;
+    console.log(default_name)
+    if (default_name != ""){
+      wx.setStorageSync("defaultname", default_name)
+    }else{
+      wx.setStorageSync("defaultname",false)
+    }
     wx.navigateTo({
-      url: '/pages/publish/pmap/pmap',
+      url: `/pages/publish/pmap/pmap?infoId=${infoId}&showfor=${showfor}&showmap=${showmap}`,
     })
   },
   initPickerData: function () {
@@ -253,6 +266,7 @@ Page({
         let mydata = res.data;
         if (mydata.errcode == "ok") {
           console.log(mydata)
+          console.log(mydata.default_search_name)
           _this.setData({
             infoId: infoId,
             userPhone: mydata.model.user_mobile || mydata.memberInfo.tel,
@@ -275,12 +289,16 @@ Page({
             "addressData.title": mydata.model.address ? mydata.model.address : "",
             "addressData.location": mydata.model.location ? mydata.model.location : "",
             county_id: mydata.model.county_id ? mydata.model.county_id : "",
-            resson: mydata.model.hasOwnProperty("check_fail_msg") ? mydata.model.check_fail_msg:""
+            resson: mydata.model.hasOwnProperty("check_fail_msg") ? mydata.model.check_fail_msg:"",
+            default_search_name: mydata.default_search_name ? mydata.default_search_name:""
           })
-          if (!infoId) {
-            let lastArea = wx.getStorageSync("userLastPubArea");
-            if (lastArea) _this.setData({ addressData: lastArea })
-          }
+          
+          console.log(_this.data.addressData.title)
+          console.log(infoId)
+          // if (!infoId) {
+          //   let lastArea = wx.getStorageSync("userLastPubArea");
+          //   if (lastArea) _this.setData({ addressData: lastArea })
+          // }
           if (options.is_check == "0") {
             _this.setData({
               showModal:true,
@@ -548,23 +566,7 @@ Page({
         let mydata = res.data;
         if(mydata.errcode == "ok"){
           _this.subscribeToNews(mydata)
-        }else if(mydata.errcode == "member_forbid"){
-          wx.showModal({
-              title: '温馨提示',
-              content: mydata.errmsg,
-              cancelText: "取消",
-              confirmText: "联系客服",
-              success(res) {
-                  if (res.confirm) {
-                      let tel = mydata.service_tel
-                      wx.makePhoneCall({
-                        phoneNumber: tel,
-                      })
-                  }
-
-              }
-          })
-      } else{
+        }else{
           wx.showModal({
             title: '温馨提示',
             content: mydata.errmsg,

@@ -204,7 +204,7 @@ Page({
     if (vertifyNum.isNull(this.data.day)) {
       wx.showModal({
         title: '温馨提示',
-        content: '选择的置顶天数不能为0或者为空',
+        content: '请选择置顶天数',
         showCancel: false,
         success(res) {}
       })
@@ -253,7 +253,26 @@ Page({
             }
           })
           return
-        } else if (mydata.errcode == "get_integral") {
+        } else if (mydata.errcode == "member_forbid") {
+          wx.showModal({
+            title: '温馨提示',
+            content: res.data.errmsg,
+            cancelText: '取消',
+            confirmText: '联系客服',
+            success(res) {
+              if (res.cancel) {
+                wx.navigateBack({
+                  delta: 1
+                })
+              } else if (res.confirm) {
+                wx.makePhoneCall({
+                  phoneNumber: that.data.serverPhone
+                });
+              }
+            }
+          })
+          return
+        }else if (mydata.errcode == "get_integral") {
           wx.showModal({
             title: '温馨提示',
             content: res.data.errmsg,
@@ -390,7 +409,8 @@ Page({
               let areaProcrumone = {
                 id: areaProcrum[i].id,
                 index: areaProcrum[i].pid - 2 < 0 ? 0 : areaProcrum[i].pid - 2,
-                name: areaProcrum[i].name
+                name: areaProcrum[i].name,
+                // pid: areaProcrum[i].pid
               }
               areaProcrumall.push(areaProcrumone)
             }
@@ -399,7 +419,8 @@ Page({
               let areaCitycrumone = {
                 id: areaCitycrum[i].id,
                 index: areaCitycrum[i].pid - 2 < 0 ? 0 : areaCitycrum[i].pid - 2,
-                name: areaCitycrum[i].name
+                name: areaCitycrum[i].name,
+                // pid: areaCitycrum[i].pid
               }
               areaCitycrumall.push(areaCitycrumone)
             }
@@ -473,6 +494,7 @@ Page({
       params: detail,
       mask: true,
       success: function(res) {
+        console.log(res)
         let mydata = res.data;
         if (mydata.errcode == "ok") {
 
@@ -489,6 +511,25 @@ Page({
             }
           })
           return
+        } else if (mydata.errcode == "member_forbid") {
+          wx.showModal({
+            title: '温馨提示',
+            content: res.data.errmsg,
+            cancelText: '取消',
+            confirmText: '联系客服',
+            success(res) {
+              if (res.cancel) {
+                wx.navigateBack({
+                  delta: 1
+                })
+              } else if (res.confirm) {
+                wx.makePhoneCall({
+                  phoneNumber: that.data.serverPhone
+                });
+              } 
+            }
+          })
+          return
         } else if (mydata.errcode == "get_integral") {
           wx.showModal({
             title: '温馨提示',
@@ -502,7 +543,7 @@ Page({
             }
           })
           return
-        }  else {
+        } else {
           wx.showModal({
             title: '温馨提示',
             content: res.data.errmsg,
