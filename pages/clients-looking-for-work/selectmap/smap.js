@@ -45,7 +45,8 @@ Page({
     searchInputVal: "",
     showHisTitle: false,
     areaInputFocus: false,
-    pmaphone: app.globalData.serverPhone
+    pmaphone: app.globalData.serverPhone,
+    showheder:"noshowheder"
   },
   chooseInputCtiy: function (e) {
     this.chooseThisCtiy(e);
@@ -169,9 +170,9 @@ Page({
       _this.setData({ addressList: data })
     })
 
-    //切换城市直接保存
-    //let lastPublishCity = { name: area, ad_name: pname };
-    //wx.setStorageSync("lastPublishCity", lastPublishCity);
+
+    let lastPublishCity = { name: area, ad_name: pname };
+    wx.setStorageSync("lastPublishCity", lastPublishCity);
   },
   checkAdcode: function (adcode, callback) {
     let _this = this;
@@ -378,11 +379,11 @@ Page({
     //   //this.setData({ showMaplist: true,isKeyvalActive:true })
     // }
   },
-  saveInfo: function (info) {
-    let _this = this;
-    wx.setStorageSync("userLastPubArea", info);
+  // saveInfo: function (info) {
+  //   let _this = this;
+  //   wx.setStorageSync("userLastPubArea", info);
 
-  },
+  // },
   setAddressData: function (e) {
     console.log(e)
     wx.setStorageSync("historyregionone", e.currentTarget.dataset)
@@ -404,7 +405,7 @@ Page({
       let prevPage = app.getPrevPage();
 
       let lastPublishCity = { name: area, ad_name: pname };
-      wx.setStorageSync("lastPublishCity", lastPublishCity);
+      wx.setStorageSync("lastPublishCitys", lastPublishCity);
 
       prevPage.setData({
         regionone: t,
@@ -412,9 +413,10 @@ Page({
         "addressData.location": l,
         "addressData.district": d,
         areaId: areaId, areaText: area,
+        showheder:"noshowheder"
       })
 
-      _this.saveInfo(hl);
+      // _this.saveInfo(hl);
 
       _this.detailHistoryCities(hl);
       _this.initHistoryCityList();
@@ -451,11 +453,21 @@ Page({
 
   },
   initAreaText: function () {
-    let lastCtiy = wx.getStorageSync("lastPublishCity");
+    let _this = this;
+    let lastCtiy = wx.getStorageSync("lastPublishCitys");
     let gpsPorvince = wx.getStorageSync("gpsPorvince");
     let gpsloc = wx.getStorageSync("gpsPorvince");
+    let defaultwardenryid = wx.getStorageSync("defaultwardenryid");
+    let showheder = this.data.showheder
+    console.log(lastCtiy)
+    console.log(gpsPorvince)
+    console.log(gpsloc)
+    console.log(gpsloc)
     this.setData({ gpsOrientation: gpsPorvince })
-    if (lastCtiy) {
+
+    if (defaultwardenryid && showheder == "showheder"){
+      this.setData({ areaText: defaultwardenryid.city, keyAutoVal: defaultwardenryid.ad_name })
+    } else if (lastCtiy&& showheder == "noshowheder") {
       this.setData({ areaText: lastCtiy.name, keyAutoVal: lastCtiy.ad_name })
     } else if (gpsloc) {
       this.setData({ areaText: gpsloc.name, keyAutoVal: gpsloc.name + "市" })
@@ -587,12 +599,16 @@ Page({
   markertap(eventhandle){
     console.log(eventhandle)
   },
-
+  showheder(options){
+    if (options.hasOwnProperty("showheder")){
+      this.setData({ showheder: options.showheder })
+    }
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    this.showheder(options)
     this.initInputList();
     areas.getInputList();
     this.getAreaData();

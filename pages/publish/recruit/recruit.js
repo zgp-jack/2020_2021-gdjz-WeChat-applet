@@ -13,6 +13,7 @@ Page({
     userInfo: true,
     nodataImg: app.globalData.apiImgUrl + "nodata.png",
     icon: app.globalData.apiImgUrl + "userauth-topicon.png",
+    serverPhone: app.globalData.serverPhone,
     options: {},
     cardInfo: {
       username: "",
@@ -295,10 +296,10 @@ Page({
           
           console.log(_this.data.addressData.title)
           console.log(infoId)
-          // if (!infoId) {
-          //   let lastArea = wx.getStorageSync("userLastPubArea");
-          //   if (lastArea) _this.setData({ addressData: lastArea })
-          // }
+          if (!infoId) {
+            let lastArea = wx.getStorageSync("userLastPubArea");
+            if (lastArea) _this.setData({ addressData: lastArea })
+          }
           if (options.is_check == "0") {
             _this.setData({
               showModal:true,
@@ -566,6 +567,45 @@ Page({
         let mydata = res.data;
         if(mydata.errcode == "ok"){
           _this.subscribeToNews(mydata)
+        } else if (mydata.errcode == "auth_forbid") {
+          wx.showModal({
+            title: '温馨提示',
+            content: res.data.errmsg,
+            cancelText: '取消',
+            confirmText: '去实名',
+            success(res) {
+              if (res.cancel) {
+                wx.navigateBack({
+                  delta: 1
+                })
+              } else if (res.confirm) {
+                let backtwo = "backtwo"
+                wx.redirectTo({
+                  url: `/pages/realname/realname?backtwo=${backtwo}`
+                })
+              }
+            }
+          })
+          return
+        } else if (mydata.errcode == "member_forbid") {
+          wx.showModal({
+            title: '温馨提示',
+            content: res.data.errmsg,
+            cancelText: '取消',
+            confirmText: '联系客服',
+            success(res) {
+              if (res.cancel) {
+                wx.navigateBack({
+                  delta: 1
+                })
+              } else if (res.confirm) {
+                wx.makePhoneCall({
+                  phoneNumber: that.data.serverPhone
+                });
+              }
+            }
+          })
+          return
         }else{
           wx.showModal({
             title: '温馨提示',

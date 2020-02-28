@@ -253,7 +253,27 @@ Page({
             }
           })
           return
-        } else if (mydata.errcode == "member_forbid") {
+        } else if (mydata.errcode == "auth_forbid") {
+          wx.showModal({
+            title: '温馨提示',
+            content: res.data.errmsg,
+            cancelText: '取消',
+            confirmText: '去实名',
+            success(res) {
+              if (res.cancel) {
+                wx.navigateBack({
+                  delta: 1
+                })
+              } else if (res.confirm) {
+                let backtwo = "backtwo"
+                wx.redirectTo({
+                  url: `/pages/realname/realname?backtwo=${backtwo}`
+                })
+              }
+            }
+          })
+          return
+        }else if (mydata.errcode == "member_forbid") {
           wx.showModal({
             title: '温馨提示',
             content: res.data.errmsg,
@@ -530,7 +550,27 @@ Page({
             }
           })
           return
-        } else if (mydata.errcode == "get_integral") {
+        } else if (mydata.errcode == "auth_forbid") {
+          wx.showModal({
+            title: '温馨提示',
+            content: res.data.errmsg,
+            cancelText: '取消',
+            confirmText: '去实名',
+            success(res) {
+              if (res.cancel) {
+                wx.navigateBack({
+                  delta: 1
+                })
+              } else if (res.confirm) {
+                let backtwo = "backtwo"
+                wx.redirectTo({
+                  url: `/pages/realname/realname?backtwo=${backtwo}`
+                })
+              }
+            }
+          })
+          return
+        }else if (mydata.errcode == "get_integral") {
           wx.showModal({
             title: '温馨提示',
             content: res.data.errmsg,

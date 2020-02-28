@@ -169,7 +169,7 @@ Page({
 
     //切换城市直接保存
     let lastPublishCity = { name: area, ad_name: pname };
-    wx.setStorageSync("lastPublishCity", lastPublishCity);
+    wx.setStorageSync("lastPublishCitys", lastPublishCity);
   },
   checkAdcode: function (adcode, callback) {
     let _this = this;
@@ -369,11 +369,11 @@ Page({
     //   //this.setData({ showMaplist: true,isKeyvalActive:true })
     // }
   },
-  // saveRecruitInfo:function(info){
-  //   let _this = this;
-  //   wx.setStorageSync("userLastPubArea", info);
+  saveRecruitInfo:function(info){
+    let _this = this;
+    wx.setStorageSync("userLastPubArea", info);
     
-  // },
+  },
   setAddressData: function (e) {
     let _this = this;
     let area = this.data.areaText;
@@ -393,7 +393,7 @@ Page({
       let prevPage = app.getPrevPage();
 
       let lastPublishCity = { name: area, ad_name: pname };
-      wx.setStorageSync("lastPublishCity", lastPublishCity);
+      wx.setStorageSync("lastPublishCitys", lastPublishCity);
 
       prevPage.setData({
         "addressData.title": t,
@@ -405,7 +405,7 @@ Page({
         showmap:"showmap"
       })
 
-      // _this.saveRecruitInfo(hl);
+      _this.saveRecruitInfo(hl);
 
       _this.detailHistoryCities(hl);
       _this.initHistoryCityList();
@@ -439,7 +439,7 @@ Page({
   },
   initAreaText: function () {
     let defaultname = wx.getStorageSync("defaultname");
-    let lastCtiy = wx.getStorageSync("lastPublishCity");
+    let lastCtiy = wx.getStorageSync("lastPublishCitys");
     let gpsPorvince = wx.getStorageSync("gpsPorvince");
     let gpsloc = wx.getStorageSync("gpsPorvince");
     this.setData({ gpsOrientation: gpsPorvince });
@@ -448,14 +448,12 @@ Page({
     let showmap = this.data.showmap;
     console.log(lastCtiy)
     console.log(gpsPorvince)
-    console.log(gpsloc)
-    console.log(defaultname)
-    console.log(showfor)
-    // 
-    if (defaultname && (infoId || showmap == "showmap") && showfor == "showfor"){
+    //  (infoId || showmap == "showmap")     (infoId || showmap == "showmap") 
+
+    if (defaultname && showfor == "showfor"){
       console.log(showfor)
       this.setData({ areaText: defaultname.name, keyAutoVal: defaultname.name + "市" })
-    } else if (lastCtiy && (infoId || showmap == "showmap")  && showfor == "noshowfor" ) {
+    } else if (lastCtiy && !infoId ||showfor == "noshowfor" ) {
       this.setData({ areaText: lastCtiy.name , keyAutoVal: lastCtiy.ad_name })
     } else if (gpsloc) {
       this.setData({ areaText: gpsloc.name, keyAutoVal: gpsloc.name + "市" })
@@ -466,14 +464,14 @@ Page({
     this.setData({ allAreaLists: list })
   },
   getinfoId(options){
-    if (options.infoId){
+    if (options.hasOwnProperty("infoId")){
       this.setData({ infoId: options.infoId })
     }
-    if (options.showfor){
+    if (options.hasOwnProperty("showfor")){
       console.log(options.showfor)
       this.setData({ showfor: options.showfor })
     }
-    if (options.showmap) {
+    if (options.hasOwnProperty("showmap")) {
       this.setData({ showmap: options.showmap })
     }
   },

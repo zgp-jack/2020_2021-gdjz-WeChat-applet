@@ -170,8 +170,8 @@ Page({
     })
 
     //切换城市直接保存
-    //let lastPublishCity = { name: area, ad_name: pname };
-    //wx.setStorageSync("lastPublishCity", lastPublishCity);
+    // let lastPublishCity = { name: area, ad_name: pname };
+    // wx.setStorageSync("lastPublishCity", lastPublishCity);
   },
   checkAdcode: function (adcode, callback) {
     let _this = this;
@@ -408,7 +408,7 @@ Page({
       let prevPage = app.getPrevPage();
 
       let lastPublishCity = { name: area, ad_name: pname };
-      wx.setStorageSync("lastPublishCity", lastPublishCity);
+      wx.setStorageSync("lastPublishCityr", lastPublishCityr);
 
       prevPage.setData({
         regionone: t,
@@ -455,7 +455,7 @@ Page({
 
   },
   initAreaText: function () {
-    let lastCtiy = wx.getStorageSync("lastPublishCity");
+    let lastCtiy = wx.getStorageSync("lastPublishCityr");
     let gpsPorvince = wx.getStorageSync("gpsPorvince");
     let gpsloc = wx.getStorageSync("gpsPorvince");
     this.setData({ gpsOrientation: gpsPorvince })

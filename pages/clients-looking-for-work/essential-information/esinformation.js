@@ -46,7 +46,9 @@ Page({
     regionreal: "",
     beforeDate: "",
     emdDate: "",
-    regionone: false
+    regionone: false,
+    areadata:"",
+    showheder:"showheder"
   },
   // getbirth() {
   //   var date = new Date();
@@ -136,7 +138,7 @@ Page({
       myAmapFun.getRegeo({
         success: function (data) {
           
-
+          console.log(data)
           _this.setData({
             regionone: data[0].name
           });
@@ -147,12 +149,13 @@ Page({
             mask: true,
             failTitle: "操作失败，请稍后重试！",
             success: function (res) {
-              
+              console.log(res.data.city)
               if (res.data.errcode == "ok") {
                 _this.setData({
                   oadcode: data[0].regeocodeData.addressComponent.adcode,
                   longitude: data[0].longitude + "",
-                  latitude: data[0].latitude + ""
+                  latitude: data[0].latitude + "",
+                  wardenryid: res.data.city
                 });
                 let gpsLocation = {
                   province: data[0].regeocodeData.addressComponent.province,
@@ -235,9 +238,51 @@ Page({
       },
     })
   },
+
+  getallcity(){
+    let _this =this;
+    app.getAreaData(this, function (data) {
+      let resdata = app.arrDeepCopy(data)
+      _this.setData({
+        areadata: resdata
+      })
+    })
+  },
   userTapAddress: function () {
+    let defaultwardenryid = this.data.wardenryid;
+    let providesss = this.data.provinceid;
+    let areadata = this.data.areadata;
+    let showheder = this.data.showheder;
+
+    if (defaultwardenryid) {
+
+    
+      let allmodity = ""
+      for (let i = 0; i < areadata.length; i++) {
+        for (let j = 0; j < areadata[i].length; j++) {
+          if (areadata[i][j].id == defaultwardenryid) {
+            allmodity = areadata[i][j]
+          }
+        }
+      }
+
+      if (allmodity == ""){
+        for (let i = 0; i < areadata.length; i++) {
+          for (let j = 0; j < areadata[i].length; j++) {
+            if (areadata[i][j].id == providesss) {
+              allmodity = areadata[i][j]
+            }
+          }
+        }
+      }
+      wx.setStorageSync("defaultwardenryid", allmodity)
+
+
+    } else {
+      wx.setStorageSync("defaultwardenryid", defaultwardenryid)
+    }
     wx.navigateTo({
-      url: '/pages/clients-looking-for-work/selectmap/smap',
+      url: `/pages/clients-looking-for-work/selectmap/smap?showheder=${showheder}`,
     })
   },
   getlocationdetails() { //所在地区的位置
@@ -601,7 +646,7 @@ Page({
       address: this.data.regionone,
       adcode: this.data.oadcode,
     })
-
+    console.log(information)
 
     app.appRequestAction({
       url: "resumes/add-resume/",
@@ -775,6 +820,7 @@ Page({
    */
   onLoad: function (options) {
     this.accessprovince()
+    this.getallcity()
   },
 
   /**

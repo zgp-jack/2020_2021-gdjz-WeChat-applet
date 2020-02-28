@@ -58,7 +58,8 @@ Page({
     indexsex: "fail",
     check_degree: false,
     regionall: "",
-    getCode: true
+    getCode: true,
+    backtwo:""
   },
   getaddressindexof(relname) {
     var reg = new RegExp("[\\u4E00-\\u9FFF]+", "g");
@@ -705,8 +706,16 @@ Page({
       app.returnPrevPage(mydata.errmsg);
     })
   },
+  getBack(options){
+    if (options.hasOwnProperty("backtwo")){
+         this.setData({
+           backtwo: options.backtwo
+         })
+    }
+  },
   onLoad: function (options) {
     this.initUserInfo();
+    this.getBack(options)
   },
 
   /**
@@ -735,6 +744,12 @@ Page({
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
+    console.log(123)
+    if (this.data.backtwo == "backtwo"){
+      wx.navigateBack({
+        delta: 1
+      })
+    }
 
   },
 
