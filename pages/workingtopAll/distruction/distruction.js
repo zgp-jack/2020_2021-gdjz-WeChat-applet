@@ -215,8 +215,8 @@ Page({
         }
       }
     }
-    console.log(areaArrC)
-    console.log(areaArr[num][pro].id)
+    
+  
     for (let j = 0; j < areaArrC.length; j++) {
       if (areaArr[num][pro].id == areaArrC[j].pid) {
         areaArrC.splice(j, 1)
@@ -224,17 +224,17 @@ Page({
       }
     }
 
-    console.log(areaArrT)
+    
     for (let j = 0; j < areaArrT.length; j++) {
       if (areaArr[num][pro].id == areaArrT[j].pid) {
-        console.log(areaArrT[j])
+        
          areaArrT.splice(j, 1)
          j --
       }
     }
 
-    console.log(areaArrT)
-    console.log(areaArrC)
+    
+   
     that.setData({
       areadatas: areaArr,
       areaTextC: areaArrC,
@@ -250,7 +250,7 @@ Page({
     that.setData({
       areadatas: areaArr
     })
-    console.log(areaArrP)
+    
     for (let j = 0; j < areaArrP.length; j++) {
       if (areaArr[num][0].id == areaArrP[j].id) {
         areaArrP.splice(j, 1)
@@ -264,7 +264,7 @@ Page({
         j--
       }
     }
-    console.log(areaArrP)
+    
     that.setData({
       areaTextP: areaArrP,
       areaText: areaArrT
@@ -331,6 +331,7 @@ Page({
         that.setData({
           areadatas: areadatafor,
         })
+        console.log(num, cityId, pro)
         if (num > 0) {
           that.getFull(num, cityId, pro)
         }
@@ -377,7 +378,7 @@ Page({
         }
         
    
-        console.log(dareaTextC)
+     
         dareaTextC.push(detail)
 
         that.setData({
@@ -390,7 +391,7 @@ Page({
       that.setData({
         areaText: [...that.data.areaTextC, ...that.data.areaTextP]
       })
-      console.log(this.data.areaText)
+      
     } else {
 
       let areadatafor = app.arrDeepCopy(that.data.areadatas);
@@ -600,8 +601,8 @@ Page({
   hischildren(e) {
     let that = this;
     let data = e.currentTarget.dataset
-    console.log(data)
-    console.log(that.data.areaText)
+   
+    
     for (let i = 0; i < that.data.areaText.length; i++) {
 
       if (that.data.areaText[i].id == data.id) {
@@ -616,7 +617,7 @@ Page({
     }
 
     let show = this.mustjudge(data.pid)
-    console.log(show)
+   
     if (show == "nil") {
       return
     }

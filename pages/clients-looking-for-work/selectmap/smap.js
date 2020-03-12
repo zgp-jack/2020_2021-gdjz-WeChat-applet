@@ -172,7 +172,7 @@ Page({
 
 
     let lastPublishCity = { name: area, ad_name: pname };
-    wx.setStorageSync("lastPublishCity", lastPublishCity);
+    wx.setStorageSync("lastPublishCitys", lastPublishCity);
   },
   checkAdcode: function (adcode, callback) {
     let _this = this;
@@ -459,10 +459,10 @@ Page({
     let gpsloc = wx.getStorageSync("gpsPorvince");
     let defaultwardenryid = wx.getStorageSync("defaultwardenryid");
     let showheder = this.data.showheder
-    console.log(lastCtiy)
-    console.log(gpsPorvince)
-    console.log(gpsloc)
-    console.log(gpsloc)
+   
+  
+    
+   
     this.setData({ gpsOrientation: gpsPorvince })
 
     if (defaultwardenryid && showheder == "showheder"){
@@ -500,12 +500,12 @@ Page({
     var myAmapFun = new Amap.AMapWX({ key: app.globalData.gdApiKey });
     myAmapFun.getRegeo({
       success: function (data) {
-        console.log(data)
+       
         // that.setData({
         // })
       }, fail: function (info) {
 
-        console.log(info)
+       
       }
     })
   },

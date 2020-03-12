@@ -51,7 +51,7 @@ Page({
     this.setData({ isAllAreas: true, showInputList: false, searchInputVal: "" })
   },
   searchInput: function (e) {
-    console.log(e)
+   
     let val = e.detail.value
     this.setData({ searchInputVal: val })
     if (!val) this.setData({ showInputList: false, isAllAreas: true })
@@ -89,8 +89,8 @@ Page({
   initHistoryLoc: function () { 
     let h = wx.getStorageSync("locationHistory");
     let p = wx.getStorageSync("gpsPorvince");
-    console.log(p)
-    console.log(h)
+    
+    
     if (h) this.setData({ locationHistory: h })
     if (p) this.setData({ gpsOrientation: p })
   },
@@ -169,7 +169,7 @@ Page({
 
     //切换城市直接保存
     let lastPublishCity = { name: area, ad_name: pname };
-    wx.setStorageSync("lastPublishCitys", lastPublishCity);
+    wx.setStorageSync("lastPublishCity", lastPublishCity);
   },
   checkAdcode: function (adcode, callback) {
     let _this = this;
@@ -300,7 +300,7 @@ Page({
                 //village_LBS(that);
                 wx.openSetting({
                   success: function (data) {
-                    console.log(data);
+                    
                     if (data.authSetting["scope.userLocation"] == true) {
                       wx.showToast({
                         title: '授权成功',
@@ -333,7 +333,7 @@ Page({
       keywords: val,
       location: '',
       success: function (data) {
-        console.log(data)
+        
         if (data) {
           //_this.setData({ addressTips: data.tips.length ? '' : '暂未搜索到相关位置' })
           _this.filtterNullData(data.tips, function (data) {
@@ -393,7 +393,7 @@ Page({
       let prevPage = app.getPrevPage();
 
       let lastPublishCity = { name: area, ad_name: pname };
-      wx.setStorageSync("lastPublishCitys", lastPublishCity);
+      wx.setStorageSync("lastPublishCity", lastPublishCity);
 
       prevPage.setData({
         "addressData.title": t,
@@ -439,19 +439,19 @@ Page({
   },
   initAreaText: function () {
     let defaultname = wx.getStorageSync("defaultname");
-    let lastCtiy = wx.getStorageSync("lastPublishCitys");
+    let lastCtiy = wx.getStorageSync("lastPublishCity");
     let gpsPorvince = wx.getStorageSync("gpsPorvince");
     let gpsloc = wx.getStorageSync("gpsPorvince");
     this.setData({ gpsOrientation: gpsPorvince });
     let infoId = this.data.infoId;
     let showfor = this.data.showfor;
     let showmap = this.data.showmap;
-    console.log(lastCtiy)
-    console.log(gpsPorvince)
+    
+    
     //  (infoId || showmap == "showmap")     (infoId || showmap == "showmap") 
 
     if (defaultname && showfor == "showfor"){
-      console.log(showfor)
+      
       this.setData({ areaText: defaultname.name, keyAutoVal: defaultname.name + "市" })
     } else if (lastCtiy && !infoId ||showfor == "noshowfor" ) {
       this.setData({ areaText: lastCtiy.name , keyAutoVal: lastCtiy.ad_name })
@@ -468,7 +468,7 @@ Page({
       this.setData({ infoId: options.infoId })
     }
     if (options.hasOwnProperty("showfor")){
-      console.log(options.showfor)
+     
       this.setData({ showfor: options.showfor })
     }
     if (options.hasOwnProperty("showmap")) {

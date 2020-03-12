@@ -113,7 +113,7 @@ Page({
     let infoId = this.data.infoId;
     let showfor = this.data.showfor;
     let showmap = this.data.showmap;
-    console.log(default_name)
+   
     if (default_name != ""){
       wx.setStorageSync("defaultname", default_name)
     }else{
@@ -158,7 +158,7 @@ Page({
     let i = this.data.pindex;
     let j = this.data.cindex;
     let _data = arr[i].children[j];
-    console.log(_data);
+    
     return _data.has_children ? _data.children : [{ id: _data.id, pid: _data.pid, name: _data.name }];
   },
   bindPickerColumnChange: function (e) {
@@ -179,7 +179,7 @@ Page({
     let arr = e.detail.value;
     let data = arrdata[arr[0]].children[arr[1]];
     let mydata = (data.has_children) ? data.children[arr[2]] : data
-    console.log(mydata)
+    
   },
 
   bindPickerChange: function (e) {
@@ -266,8 +266,8 @@ Page({
       success: function (res) {
         let mydata = res.data;
         if (mydata.errcode == "ok") {
-          console.log(mydata)
-          console.log(mydata.default_search_name)
+          
+          
           _this.setData({
             infoId: infoId,
             userPhone: mydata.model.user_mobile || mydata.memberInfo.tel,
@@ -294,8 +294,8 @@ Page({
             default_search_name: mydata.default_search_name ? mydata.default_search_name:""
           })
           
-          console.log(_this.data.addressData.title)
-          console.log(infoId)
+         
+          
           if (!infoId) {
             let lastArea = wx.getStorageSync("userLastPubArea");
             if (lastArea) _this.setData({ addressData: lastArea })
@@ -600,7 +600,7 @@ Page({
                 })
               } else if (res.confirm) {
                 wx.makePhoneCall({
-                  phoneNumber: that.data.serverPhone
+                  phoneNumber: _this.data.serverPhone
                 });
               }
             }

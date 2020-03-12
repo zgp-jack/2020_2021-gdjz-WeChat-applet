@@ -54,7 +54,7 @@ Page({
     },
     newTopShow: false,
     collecticon: app.globalData.apiImgUrl + "collect-tipicon.png",
-    collecthand: app.globalData.apiImgUrl + "new-published-zd.png",
+    collecthand: app.globalData.apiImgUrl + "new-published-zd.png?t=" + new Date().getTime(),
     showCollectTips: false,
     daytime: ""
   },
@@ -357,23 +357,55 @@ Page({
               _this.setData({
                 showSetTop: true
               })
+            } else if (mydata.errcode == "auth_forbid") {
+              wx.showModal({
+                title: '温馨提示',
+                content: res.data.errmsg,
+                cancelText: '取消',
+                confirmText: '去实名',
+                success(res) {
+                  if (res.confirm) {
+                    let backtwo = "backtwo"
+                    wx.navigateTo({
+                      url: `/pages/realname/realname?backtwo=${backtwo}`
+                    })
+                  }
+                }
+              })
+              return
+            } else if (mydata.errcode == "member_forbid") {
+                wx.showModal({
+                  title: '温馨提示',
+                  content: mydata.errmsg,
+                  cancelText: "取消",
+                  confirmText: "联系客服",
+                  success(res) {
+                    if (res.confirm) {
+                      let tel = app.globalData.serverPhone
+                      wx.makePhoneCall({
+                        phoneNumber: tel,
+                      })
+                    }
+                  }
+                })
             } else {
+                console.log(12312312)
+                wx.showToast({
+                  title: mydata.errmsg,
+                  icon: "none",
+                  duration: 1500
+                })
+              }
+            },
+            fail: function (err) {
+              wx.hideLoading();
               wx.showToast({
-                title: mydata.errmsg,
+                title: "网络不太好，操作失败！",
                 icon: "none",
-                duration: 1500
+                duration: 3000
               })
             }
-          },
-          fail: function (err) {
-            wx.hideLoading();
-            wx.showToast({
-              title: "网络不太好，操作失败！",
-              icon: "none",
-              duration: 3000
-            })
-          }
-        })
+          })
       }
     }
   },
@@ -398,7 +430,7 @@ Page({
       success: function (res) {
         wx.hideLoading();
         let mydata = res.data;
-        
+
         if (mydata.errcode == "ok") {
           let newData = _this.data.lists;
           newData[infoIndex] = mydata.data;
@@ -410,30 +442,46 @@ Page({
             icon: "none",
             duration: 1500
           })
-        }else if(mydata.errcode == "member_forbid"){
-          if(_index === 0){
+        } else if (mydata.errcode == "auth_forbid") {
+          wx.showModal({
+            title: '温馨提示',
+            content: res.data.errmsg,
+            cancelText: '取消',
+            confirmText: '去实名',
+            success(res) {
+              if (res.confirm) {
+                let backtwo = "backtwo"
+                wx.redirectTo({
+                  url: `/pages/realname/realname?backtwo=${backtwo}`
+                })
+              }
+            }
+          })
+          return
+        } else if (mydata.errcode == "member_forbid") {
+          if (_index === 0) {
             wx.showModal({
               title: '温馨提示',
               content: mydata.errmsg,
               cancelText: "取消",
               confirmText: "联系客服",
               success(res) {
-                  if (res.confirm) {
-                      let tel = app.globalData.serverPhone
-                      wx.makePhoneCall({
-                        phoneNumber: tel,
-                      })
-                  }
-               }
+                if (res.confirm) {
+                  let tel = app.globalData.serverPhone
+                  wx.makePhoneCall({
+                    phoneNumber: tel,
+                  })
+                }
+              }
             })
-          }else{
+          } else {
             wx.showToast({
               title: mydata.errmsg,
               icon: "none",
               duration: 1500
             })
           }
-        }else{
+        } else {
           wx.showToast({
             title: mydata.errmsg,
             icon: "none",

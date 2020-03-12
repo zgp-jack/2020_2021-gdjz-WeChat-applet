@@ -116,7 +116,7 @@ Page({
 
   },
   birthday(e) {
-
+    console.log(e)
     this.setData({
       birthday: e.detail.value
     })
