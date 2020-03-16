@@ -48,7 +48,10 @@ Page({
     emdDate: "",
     regionone: false,
     areadata:"",
-    showheder:"showheder"
+    showheder:"showheder",
+    model:{},
+    checkonef:"",
+    note:""
   },
   // getbirth() {
   //   var date = new Date();
@@ -625,7 +628,7 @@ Page({
     //   })
     //   return
     // }
-    // tele != telephone
+    // tele != telephone 1122
 
     Object.assign(information, {
       userId: userInfo.userId,
@@ -646,7 +649,15 @@ Page({
       address: this.data.regionone,
       adcode: this.data.oadcode,
     })
-    console.log(information)
+    if (JSON.stringify(information) == JSON.stringify(this.data.model) && this.data.checkonef == '0'){
+      wx.showModal({
+        title: '温馨提示',
+        content: that.data.note,
+        showCancel: false,
+        success(res) { }
+      })
+      return
+    }
 
     app.appRequestAction({
       url: "resumes/add-resume/",
@@ -692,8 +703,54 @@ Page({
       }
     })
   },
-  getintrodetail() {
 
+  judgecommit(introinfo){
+    if (this.data.checkonef != "0") return false 
+    let worktype = "";
+    let nationCons = "";
+    let latitude = "";
+    let longitude = ""
+    let userInfo = wx.getStorageSync("userInfo");
+    if (!userInfo) return false;
+    for (let i = 0; i < this.data.complexworkid.length; i++) {
+      if (i == this.data.complexworkid.length - 1) {
+        worktype += this.data.complexworkid[i]
+      } else {
+        worktype += this.data.complexworkid[i] + ","
+      }
+    }
+    if (introinfo.gender != "") {
+        nationCons=introinfo.hasOwnProperty("nation_id") ? introinfo.nation_id : ""
+    }
+    if (introinfo.location) {
+        latitude=introinfo.hasOwnProperty("location") ? introinfo.location.split(",")[1] : ""
+        longitude=introinfo.hasOwnProperty("location") ? introinfo.location.split(",")[0] : ""
+    }
+    let getintrodetail = {    
+      userId: userInfo.userId,
+      token: userInfo.token,
+      tokenTime: userInfo.tokenTime,
+      code:"",
+      username: introinfo.hasOwnProperty("username") ? introinfo.username : "",
+      tel: introinfo.hasOwnProperty("tel") ? introinfo.tel : "",
+      gender: introinfo.hasOwnProperty("gender") ? introinfo.gender : "", 
+      nation: nationCons,
+      birthday: introinfo.hasOwnProperty("birthday") ? introinfo.birthday : "",
+      occupations: worktype,
+      province: introinfo.hasOwnProperty("province") ? introinfo.province : "",
+      city:introinfo.hasOwnProperty("city") ? introinfo.city : "",
+      introduce:introinfo.hasOwnProperty("introduce") ? introinfo.introduce : "",
+      lat: latitude,
+      lng: longitude,
+      address: introinfo.hasOwnProperty("address") ? introinfo.address : "",
+      adcode:"",
+    }
+    this.setData({
+      model: getintrodetail
+    })
+  },
+  getintrodetail() {
+     
     let introinfo = wx.getStorageSync("introinfo");
 
     this.setData({
@@ -710,6 +767,8 @@ Page({
       tele: introinfo.hasOwnProperty("tel") ? introinfo.tel : "",
       otextareavalue: introinfo.hasOwnProperty("introduce") ? introinfo.introduce : "",
       otextareavaluel: introinfo.hasOwnProperty("introduce") ? introinfo.introduce ? introinfo.introduce.length : 0 : 0,
+      checkonef: introinfo.hasOwnProperty("check") ? introinfo.check : "",
+      note: introinfo.hasOwnProperty("note") ? introinfo.note : "",
     })
 
     if (introinfo.gender != "") {
@@ -739,7 +798,7 @@ Page({
         longitude: introinfo.hasOwnProperty("location") ? introinfo.location.split(",")[0] : ""
       })
     }
-
+    this.judgecommit(introinfo)
     if (introinfo.hasOwnProperty("occupations")) {
       for (let i = 0; i < this.data.typeworkarray.length; i++) {
         for (let j = 0; j < this.data.typeworkarray[i].children.length; j++) {

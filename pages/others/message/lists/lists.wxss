@@ -25,6 +25,11 @@ page {
     display: flex;
     font-size: 28rpx;
     color: #545454;
+
+
+}
+.feedback-header view{
+    line-height: 50rpx;
 }
 
 .feedback-header-texr {

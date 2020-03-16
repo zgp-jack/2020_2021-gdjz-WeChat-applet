@@ -49,7 +49,8 @@ Page({
       showHomeImg:false,
       showcomplain: false,
       usepang: 8,
-      isEnd:""
+      isEnd:"",
+      joingroup: []
     },
   detailToHome:function(){
     wx.redirectTo({
@@ -516,7 +517,11 @@ Page({
     /**
      * 生命周期函数--监听页面加载
      */
-    
+  getPhonCons(){
+    this.setData({
+      joingroup: app.globalData.joingroup
+    })
+  },
     onLoad: function (options) {
       this.isShowHomeBtn(options);
         //this.initUserShareTimes();
@@ -524,7 +529,7 @@ Page({
         this.setData({ infoId:infoId })
         this.initNeedData();
         //this.initJobInfo(infoId);
-
+        this.getPhonCons()
     },
 
     /**

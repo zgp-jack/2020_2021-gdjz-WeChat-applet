@@ -227,13 +227,15 @@ page{
     padding-bottom: 10rpx;
 }
 .yupao-lists-wxtips text{
-    color: #0099ff;
+    color: #7f7e7e;
 }
 .yupao-lists-wxtips .yupao-lists-tips{
     position: relative;
     background: none;
     color: #f86e09;
 }
+
+
 .yupao-lists-noticetips{
     position: relative;
     width: 100%;

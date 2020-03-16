@@ -14,6 +14,7 @@ Page({
         isViewImgs: false,
         userInfo: true,
         icon: app.globalData.apiImgUrl + "userauth-topicon.png",
+      joingroup:[]
     },
     initUserData: function(options) {
         let userInfo = wx.getStorageSync("userInfo");
@@ -59,12 +60,18 @@ Page({
             });
         });
     },
+  getPhonCons() {
+    this.setData({
+      joingroup: app.globalData.joingroup
+    })
+  },
     /**
      * 生命周期函数--监听页面加载
      */
     onLoad: function(options) {
         this.initUserData(options)
         this.initNeedData();
+      this.getPhonCons();
     },
     onShow: function() {
         if (this.data.isViewImgs) {
@@ -153,21 +160,21 @@ Page({
             url: '/pages/others/message/publish/publish?tel=' + tels + "&name=" + username + "&wechat=" + td.wechat + "&phone=" + td.phone
         })
     },
-    clipboardWechat: function(e) {
-        let wechat = e.currentTarget.dataset.wc;
-        wx.setClipboardData({
-            data: wechat,
-            success(res) {
-                wx.hideToast();
-                wx.showModal({
-                    title: '恭喜您',
-                    content: '微信号：' + wechat + "已复制到粘贴板,去微信-添加朋友-搜索框粘贴",
-                    showCancel: false,
-                    success: function() {}
-                })
-            }
+  clipboardWechat: function (e) {
+    let wechat = e.currentTarget.dataset.wechat;
+    wx.setClipboardData({
+      data: wechat,
+      success(res) {
+        wx.hideToast();
+        wx.showModal({
+          title: '恭喜您',
+          content: '微信号：' + wechat + "已复制到粘贴板,去微信-添加朋友-搜索框粘贴",
+          showCancel: false,
+          success: function () { }
         })
-    },
+      }
+    })
+  },
     callThisPhone: function(e) {
         app.callThisPhone(e);
     },

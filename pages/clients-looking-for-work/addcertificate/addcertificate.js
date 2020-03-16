@@ -27,7 +27,9 @@ vertify()
     beforeDate:"",
     ranktypes: "",
     deletestatus: true,
-    skillnum:''
+    skillnum:'',
+    model:{},
+    checkonef:""
   },
   vertify() {
     this.setData({
@@ -92,7 +94,7 @@ vertify()
     //   return
     // }
     app.userUploadImg(function (img, url) {
-      wx.hideLoading()
+
       that.data.imgArrs.push(url.httpurl)
       that.data.idArrs.push(url.url)
       that.setData({
@@ -104,6 +106,7 @@ vertify()
         })
       }
     })
+
   },
   previewImage(e) {
     
@@ -455,6 +458,24 @@ vertify()
       delta: 1
     })
   },
+  judgecommit(){
+    if (this.data.checkonef != "0") return false 
+      let userInfo = wx.getStorageSync("userInfo");
+      let model = {
+        userId: userInfo.userId,
+        token: userInfo.token,
+        tokenTime: userInfo.tokenTime,
+        resume_uuid: this.data.skill.resume_uuid || this.data.resume_uuid,
+        name: this.data.skill.name,
+        image: JSON.parse(JSON.stringify(this.data.skill.images)),
+        certificate_uuid: this.data.skill.uuid,
+        certificate_time: this.data.skill.certificate_time
+      }
+      this.setData({
+        model: model,
+        fail_case: this.data.skill.fail_case,
+      })
+  },
   getskill() {
 
     let skilltail = wx.getStorageSync("skilltail");
@@ -488,8 +509,10 @@ vertify()
         idArrs: this.data.skill.images,
         resume_uuid: this.data.skill.resume_uuid||this.data.resume_uuid,
         uuid: this.data.skill.uuid,
-        date: this.data.skill.certificate_time
+        date: this.data.skill.certificate_time,
+        checkonef: this.data.skill.check
       })
+      this.judgecommit()
       if (this.data.imgArrs.length >= 3) {
         this.setData({
           imgArrslength: false
@@ -498,6 +521,7 @@ vertify()
     }
   },
   preserveone() {
+    let that = this;
     let userInfo = wx.getStorageSync("userInfo");
     let project = {}
     let vertifyNum = v.v.new()
@@ -557,8 +581,20 @@ vertify()
       certificate_uuid: this.data.uuid,
       certificate_time: this.data.date
     })
-    
-    let that = this;
+
+    console.log(project)
+    console.log(this.data.model)
+
+    if(JSON.stringify(project) == JSON.stringify(this.data.model) && this.data.checkonef == '0'){
+      wx.showModal({
+        title: '温馨提示',
+        content: that.data.fail_case,
+        showCancel: false,
+        success(res) { }
+      })
+      return
+    }
+
     app.appRequestAction({
       url: 'resumes/certificate/',
       way: 'POST',

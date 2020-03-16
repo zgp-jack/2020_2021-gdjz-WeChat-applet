@@ -83,7 +83,9 @@ Page({
     display: "none",
     default_search_name:"",
     showfor:"showfor",
-    showmap:"noshowmap"
+    showmap:"noshowmap",
+    model:{},
+    is_checkCons:""
   },
 
   userRegMap: function (e) {
@@ -232,6 +234,37 @@ Page({
     myarr.push(_id);
     return myarr;
   },
+
+  judgecommit(mydata, infoId){
+    let _this = this;
+    let cardInfo = _this.data.cardInfo;
+    let userInfo = wx.getStorageSync("userInfo");
+    let cardImgs = _this.getUserCardImgs();
+    let model = {
+      userId: userInfo.userId,
+      token: userInfo.token,
+      tokenTime: userInfo.tokenTime,
+      type: "job",
+      infoId: infoId,
+      user_mobile: mydata.model.user_mobile || mydata.memberInfo.tel,
+      title: mydata.model.title ? mydata.model.title : "",
+      user_name: mydata.model.user_name ? mydata.model.user_name : "",
+      classifies: mydata.selectedClassifies ? mydata.selectedClassifies : [],
+      detail: mydata.model.detail ? mydata.model.detail : "",
+      code: cardInfo.code,
+      images: cardImgs,
+      province_id: mydata.model.province_id ? mydata.model.province_id : "",
+      city_id: mydata.model.city_id ? mydata.model.city_id : "",
+      address: mydata.model.address ? mydata.model.address + "@@@@@" : "",
+      location: mydata.model.location ? mydata.model.location : "",
+      adcode: "",
+      county_id: mydata.model.county_id ? mydata.model.county_id : "",
+    }
+    _this.setData({
+      model: model
+    })
+
+  },
   resetArrItems: function (_arr, _index, _key, _bool) {
     let myarr = app.arrDeepCopy(_arr);
     (_key < 0) ? myarr[_index].is_check = _bool : myarr[_index].children[_key].is_check = _bool;
@@ -266,7 +299,7 @@ Page({
       success: function (res) {
         let mydata = res.data;
         if (mydata.errcode == "ok") {
-          
+          console.log(mydata)
           
           _this.setData({
             infoId: infoId,
@@ -293,8 +326,9 @@ Page({
             resson: mydata.model.hasOwnProperty("check_fail_msg") ? mydata.model.check_fail_msg:"",
             default_search_name: mydata.default_search_name ? mydata.default_search_name:""
           })
-          
-         
+          _this.judgecommit(mydata,infoId)
+
+
           
           if (!infoId) {
             let lastArea = wx.getStorageSync("userLastPubArea");
@@ -304,7 +338,8 @@ Page({
             _this.setData({
               showModal:true,
               showTextarea:false,
-              display:"block"
+              display:"block",
+              is_checkCons: "0"
             })
           }
           // setTimeout(function(){
@@ -555,6 +590,18 @@ Page({
       adcode: _this.data.addressData.adcode,
       county_id: _this.data.county_id
     };
+
+     
+    if (JSON.stringify(_this.data.model) == JSON.stringify(dataJson) && _this.data.is_checkCons=="0"){
+      let reson = _this.data.resson
+      wx.showModal({
+        title: '审核失败',
+        content: reson,
+        showCancel: false,
+        success: function (res) { }
+      })
+      return false;
+    }
     app.appRequestAction({
       title: "信息发布中",
       // url: "publish/publish-msg/",

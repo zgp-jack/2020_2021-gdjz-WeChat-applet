@@ -59,7 +59,9 @@ Page({
     check_degree: false,
     regionall: "",
     getCode: true,
-    backtwo:""
+    backtwo:"",
+    model:{},
+    is_check:""
   },
   getaddressindexof(relname) {
     var reg = new RegExp("[\\u4E00-\\u9FFF]+", "g");
@@ -168,8 +170,48 @@ Page({
 
   },
   /**
-   * 生命周期函数--监听页面加载
+   * 生命周期函数--监听页面加载 1122
    */
+
+  judgecommit(mydata, userInfo){
+    let _this = this;
+    let member = this.data.member;
+    if (_this.data.indexsex != "fail" && _this.data.indexsex >= 0) {
+      _this.setData({
+        sex: _this.data.array[_this.data.indexsex].id
+      })
+    } else if (_this.data.indexsex != "fail" && _this.data.indexsex < 0) {
+      _this.setData({
+        sex: ""
+      })
+
+    } else if (_this.data.indexsex == "fail") {
+      _this.setData({
+        sex: ""
+      })
+    }
+
+    let nationality = _this.data.nationalarray[_this.data.nationindex]
+    let model = {
+      userId: userInfo.userId,
+      token: userInfo.token,
+      tokenTime: userInfo.tokenTime,
+      username: mydata.hasOwnProperty("memberExt") ? mydata.memberExt.hasOwnProperty("user_name") ? mydata.memberExt.user_name : "" : "",
+      age: mydata.memberExt.age,
+      nation_id: mydata.memberExt.nation_id ? mydata.memberExt.nation_id : "",
+      nationality: nationality,
+      idCard: mydata.memberExt.id_card,
+      idCardImg: mydata.memberExt.id_card_img,
+      handImg: mydata.memberExt.hand_img,
+      tel: mydata.hasOwnProperty("member") ? mydata.member.tel : "",
+      code: member.code,
+      province_id: member.province_id,
+      address: mydata.memberExt.address ? mydata.memberExt.address == 0 ? "" : mydata.memberExt.address : "",
+      birthday: mydata.memberExt.birthday ? mydata.memberExt.birthday == 0 ? "" : mydata.memberExt.birthday : "",
+      gender: _this.data.sex
+    }
+    _this.setData({ model: model });
+  },
   initUserInfo: function () {
     let _this = this;
     let userInfo = wx.getStorageSync("userInfo");
@@ -201,8 +243,10 @@ Page({
             regionall: mydata.memberExt.address ? mydata.memberExt.address == 0 ? "" : mydata.memberExt.address : "",
             indexsex: mydata.memberExt.sex ? mydata.memberExt.sex - 1 : "fail",
             card_img_path: mydata.memberExt.id_card_img_path ? mydata.memberExt.id_card_img_path : "",
-            handone_img_path: mydata.memberExt.hand_img_path ? mydata.memberExt.hand_img_path : "",
+            handone_img_path: mydata.memberExt.hand_img_path ? mydata.memberExt.hand_img_path : "",             
+            is_check: mydata.member.is_check
           })
+       
           _this.getaddressindexof(_this.data.regionall)
           if (mydata.hasOwnProperty("member")) {
             if (mydata.member.check_degree == 2) {
@@ -221,6 +265,7 @@ Page({
             nationalarrayone: mydata.nation,
           })
           _this.getnationdetail(mydata.nation)
+          _this.judgecommit(mydata, userInfo)
           if (mydata.show_resume == 1) {
             setTimeout(function () {
               _this.initUserAutoProvince();
@@ -659,7 +704,7 @@ Page({
     //         app.showMyTips("请选择您的地区！");
     //         return false;
     //     }
-    // }
+    // }  1122
 
     let formData = {
       userId: userInfo.userId,
@@ -670,21 +715,26 @@ Page({
       nation_id: _this.data.nation,
       nationality: _this.data.nationalarray[_this.data.nationindex],
       idCard: member.id_card,
-
       idCardImg: member.id_card_img,
       handImg: member.hand_img,
-
       tel: phone,
-      // pwd: member.pass,
       code: member.code,
-      // classifys: member.worktypeIds,
-
       province_id: member.province_id,
       address: _this.data.regionall,
       birthday: _this.data.birthday,
       gender: _this.data.sex
     };
-    console.log(formData)
+
+    if (JSON.stringify(_this.data.model) == JSON.stringify(formData) && _this.data.is_check == "0" ){
+      wx.showModal({
+        title: '审核失败',
+        content: _this.data.member.idcard_check_failure_reason,
+        showCancel: false,
+        success: function (res) { }
+      })
+      return false;
+    }
+
     app.appRequestAction({
       url: "user/do-auth/",
       way: "POST",

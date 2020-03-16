@@ -11,6 +11,7 @@ App({
 
   },
   globalData: {
+    joingroup:[],
     procity:0,
     version: "v-2.7.4",
     complaincontent: '请填写5~100字，必须含有汉字。（恶意投诉会被封号，请谨慎投诉！）',
@@ -428,7 +429,7 @@ App({
         console.log(res)
         let mydata = JSON.parse(res.data);
         if (mydata.errcode == "ok") {
-
+          wx.hideToast()
           callback ? callback(imgRes, mydata) : "";
         } else if (res.statusCode == 404) {
           wx.showToast({

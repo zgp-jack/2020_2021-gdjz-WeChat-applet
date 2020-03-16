@@ -37,7 +37,9 @@ Page({
         status: 1,
         textareaActive: false,
         textareaTips: "",
-        strlen:0
+        strlen:0,
+        model:{},
+        is_check:""
     },
 
     userClickItem: function (e) {
@@ -65,6 +67,27 @@ Page({
         }
         myarr[_index].attributes[_key].is_check = true;
         return myarr;
+    },
+  judgecommit(mydata, options) {
+       let userInfo = wx.getStorageSync("userInfo");
+       let infoId = (options.hasOwnProperty("id")) ? options.id : "";
+       let model = {
+         userId: userInfo.userId,
+         token: userInfo.token,
+         tokenTime: userInfo.tokenTime,
+         type: "fleamarket",
+         infoId: infoId,
+         user_mobile: mydata.model.user_mobile || mydata.memberInfo.tel,
+         title: mydata.model.title ? mydata.model.title : "",
+         user_name: mydata.model.user_name ? mydata.model.user_name : "",
+         detail: mydata.model.detail ? mydata.model.detail : "",
+         code: "",
+         province_id: mydata.model.province_id ? mydata.model.province_id : "",
+         city_id: mydata.model.city_id ? mydata.model.city_id : "",
+         category_id: mydata.selectedClassifies ? mydata.selectedClassifies.category_id : "",
+         attribute_id: mydata.selectedClassifies ? mydata.selectedClassifies.attribute_id : "",
+       }
+      this.setData({ model: model });
     },
     initUserCardinfo: function (options) {
         let _this = this;
@@ -99,8 +122,10 @@ Page({
                         "cardInfo.cardTel": mydata.model.user_mobile,
                       "cardInfo.content": mydata.model.detail ? mydata.model.detail : "",
                         strlen: mydata.model.detail ? mydata.model.detail.length : 0,
-                        textareaTips: mydata.placeholder
+                        textareaTips: mydata.placeholder,
+                      is_check: mydata.model.hasOwnProperty("is_check") ? mydata.model.is_check : "",
                     })
+                  _this.judgecommit(mydata, options)
                     setTimeout(function () {
                         _this.initAreaPicker();
                     }, 0)
@@ -321,7 +346,16 @@ Page({
             category_id: cardInfo.category_id,
             attribute_id: cardInfo.attribute_id
         };
-
+ 
+      if (JSON.stringify(dataJson) == JSON.stringify(this.data.model) && this.data.is_check == '0') {
+        wx.showModal({
+          title: '温馨提示',
+          content:"请修改信息后，再次提交",
+          showCancel: false,
+          success(res) { }
+        })
+        return
+      }
         app.appRequestAction({
             title: "信息发布中",
             url: "publish/publish-msg/",

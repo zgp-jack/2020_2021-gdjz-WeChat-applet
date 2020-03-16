@@ -104,7 +104,7 @@ Page({
     showReturnTopImg: false,
     showHistoryList: false,
     historyList: [],
-
+    joingroup: []
   },
   jumptop() {
     wx.navigateTo({
@@ -828,7 +828,11 @@ Page({
 
 
 
-
+  getPhonCons() {
+    this.setData({
+      joingroup: app.globalData.joingroup
+    })
+  },
   onLoad(options) {
     this.initSearchHistory();
     this.initUserShareTimes();
@@ -837,6 +841,7 @@ Page({
     this.initFooterData();
     this.initNeedData();
     this.checkIsInvite(options);
+    this.getPhonCons()
   },
 
   /**

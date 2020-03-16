@@ -40,7 +40,9 @@ Page({
     imgArrslength: true,
     display: "none",
     ranktypes: "",
-    deletestatus:true
+    deletestatus:true,
+    model:{},
+    checkonef:""
   },
 
   obtn() {
@@ -643,6 +645,30 @@ Page({
       display: "none"
     })
   },
+  judgecommit(){
+      if (this.data.checkonef != "0") return false 
+      let userInfo = wx.getStorageSync("userInfo");
+
+      let model = {
+        userId: userInfo.userId,
+        token: userInfo.token,
+        tokenTime: userInfo.tokenTime,
+        resume_uuid: this.data.project.resume_uuid || this.data.resume_uuid,
+        completion_time: this.data.project.completion_time,
+        start_time: this.data.project.start_time,
+        project_name: this.data.project.project_name,
+        detail: this.data.project.detail,
+        province: (this.data.project.province + "," + this.data.project.city).split(",")[0],
+        city: (this.data.project.province + "," + this.data.project.city).split(",")[1],
+        image: this.data.project.images[0] == "" ? JSON.parse(JSON.stringify([])) : JSON.parse(JSON.stringify(this.data.project.images)) ,
+        project_uuid: this.data.project.uuid,
+        
+      }
+     this.setData({
+       model:model,
+       fail_case: this.data.project.fail_case,
+     })
+  },
   getproject() {
     let that = this;
     let project = wx.getStorageSync("projectdetail");
@@ -679,9 +705,10 @@ Page({
         imgArrs: this.data.project.image,
         resume_uuid: this.data.project.resume_uuid||this.data.resume_uuid,
         uuid: this.data.project.uuid,
-        provincecity: this.data.project.province + "," + this.data.project.city
+        provincecity: this.data.project.province + "," + this.data.project.city,
+        checkonef: this.data.project.check
       })
-
+      this.judgecommit()
       // var s = this.data.date;
       // var a = s.split(/[^0-9]/);
       // var d = new Date(a[0], a[1] - 1, a[2])
@@ -834,7 +861,17 @@ Page({
       image: this.data.importimg,
       project_uuid: this.data.uuid
     })
-
+    console.log(project)
+    console.log(this.data.model)
+    if (JSON.stringify(project) == JSON.stringify(this.data.model) && this.data.checkonef == '0') {
+      wx.showModal({
+        title: '温馨提示',
+        content: that.data.project.fail_case,
+        showCancel: false,
+        success(res) { }
+      })
+      return
+    }
 
     app.appRequestAction({
       url: 'resumes/project/',

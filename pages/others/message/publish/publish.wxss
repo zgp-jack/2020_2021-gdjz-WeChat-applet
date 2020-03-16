@@ -13,7 +13,9 @@
   font-size: 28rpx;
   color: #545454;
 }
-
+.feedback-header view{
+    line-height: 50rpx;
+}
 .feedback-boxes {
   flex: 1;
   margin-left: 20rpx;

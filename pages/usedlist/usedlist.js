@@ -68,7 +68,8 @@ Page({
         userShareTime: {},
       isload: false,
       scrollTop: 0,
-      showReturnTopImg:false
+      showReturnTopImg:false,
+      joingroup: []
     },
     stopThisAction: function () {
         return false;
@@ -574,8 +575,13 @@ Page({
         this.getFilterData();
         this.initNeedData();
         this.initAreaInfo();
+        this.getPhonCons();
     },
-
+  getPhonCons() {
+    this.setData({
+      joingroup: app.globalData.joingroup
+    })
+  },
     /**
      * 生命周期函数--监听页面初次渲染完成
      */

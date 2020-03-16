@@ -27,6 +27,7 @@ Page({
         verify: "获取验证码",
         disabled: false, //验证按钮
         texralengh: 0,
+      joingroup:[]
     },
     initUserInfo: function(options) {
         let td = this.data
@@ -41,8 +42,14 @@ Page({
         })
 
     },
+  getPhonCons() {
+    this.setData({
+      joingroup: app.globalData.joingroup
+    })
+  },
     onLoad: function(options) {
         this.initUserInfo(options);
+      this.getPhonCons()
         //this.initUploadImgsApi();
     },
     userUploadsImg: function(e) {
@@ -95,6 +102,7 @@ Page({
         let td = this.data
         let userInfo = wx.getStorageSync("userInfo");
         let imgs = this.data.imgs;
+      console.log(imgs)
         let content = this.data.content
         let username = td.member.username
         content = content.replace(/^\s+|\s+$/g, '');
@@ -167,21 +175,21 @@ Page({
     callThisPhone: function(e) {
         app.callThisPhone(e);
     },
-    clipboardWechat: function(e) {
-        let wechat = e.currentTarget.dataset.wc;
-        wx.setClipboardData({
-            data: wechat,
-            success(res) {
-                wx.hideToast();
-                wx.showModal({
-                    title: '恭喜您',
-                    content: '微信号：' + wechat + "已复制到粘贴板,去微信-添加朋友-搜索框粘贴",
-                    showCancel: false,
-                    success: function() {}
-                })
-            }
+  clipboardWechat: function (e) {
+    let wechat = e.currentTarget.dataset.wechat;
+    wx.setClipboardData({
+      data: wechat,
+      success(res) {
+        wx.hideToast();
+        wx.showModal({
+          title: '恭喜您',
+          content: '微信号：' + wechat + "已复制到粘贴板,去微信-添加朋友-搜索框粘贴",
+          showCancel: false,
+          success: function () { }
         })
-    },
+      }
+    })
+  },
     /**
      * 生命周期函数--监听页面加载
      */

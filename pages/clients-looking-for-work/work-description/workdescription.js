@@ -29,7 +29,10 @@ Page({
     teamsnumber: "",
     multiIndexvalue: "",
     multiIndexsuan: [],
-    provicemore: []
+    provicemore: [],
+    model:"",
+    checkonef:"",
+    note:""
   },
   peopleage(e) { //工龄的选择
     this.setData({
@@ -342,7 +345,16 @@ Page({
       number_people: this.data.teamsnumber,
       tags: this.data.labelnum
     })
-    console.log(information)
+   if(JSON.stringify(information) == JSON.stringify(this.data.model) && this.data.checkonef == '0'){
+     wx.showModal({
+       title: '温馨提示',
+       content: _this.data.note,
+       showCancel: false,
+       success(res) { }
+     })
+     return
+   }
+
     app.appRequestAction({
       url: "resumes/introduce/",
       way: "POST",
@@ -381,6 +393,28 @@ Page({
       })
     })
   },
+  
+  judgecommit(introdetail){
+    if (this.data.checkonef != "0") return false 
+    let userInfo = wx.getStorageSync("userInfo");
+    let introinfo = wx.getStorageSync("introinfo");
+    let model = {
+      userId: userInfo.userId,
+      token: userInfo.token,
+      tokenTime: userInfo.tokenTime,
+      experience: introdetail.hasOwnProperty("experience") ? (introdetail.experience == "0" ? "" : introdetail.experience) : "",
+      hometown: introdetail.hasOwnProperty("hometown_id") ? introdetail.hometown_id : "",
+      prof_degree: introdetail.hasOwnProperty("prof_degree") ? introdetail.prof_degree : "",
+      type: introdetail.hasOwnProperty("type") ? introdetail.type : "",
+      number_people: introdetail.hasOwnProperty("number_people") ? introdetail.number_people == '0' ? '' : introdetail.number_people : "",
+      tags: introdetail.hasOwnProperty("tag_id") ? introdetail.tag_id : "",
+
+    }
+    this.setData({
+      model:model,
+      note: introinfo.hasOwnProperty("note") ? introinfo.note : "",
+    })
+  },
   getintrodetail() {
     let that = this;
     let introdetail = wx.getStorageSync("introdetail");
@@ -395,6 +429,7 @@ Page({
       constituttion: introdetail.hasOwnProperty("type") ? introdetail.type : "",
       teamsnumber: introdetail.hasOwnProperty("number_people") ? introdetail.number_people == '0' ? '' : introdetail.number_people : "",
       multiIndexsuan: introdetail.hasOwnProperty("hometown_id") ? introdetail.hometown_id.split(",") : "",
+      checkonef: introdetail.hasOwnProperty("check") ? introdetail.check : "",
     })
 
 
@@ -469,6 +504,7 @@ Page({
         })
       }
     }
+    that.judgecommit(introdetail)
   },
   /**
    * 生命周期函数--监听页面加载

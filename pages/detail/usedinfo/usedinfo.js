@@ -19,6 +19,7 @@ Page({
         },
         phone: "",
         wechat: "",
+      joingroup:[]
     },
     initUsedinfo: function (options) {
         let _this = this;
@@ -130,12 +131,18 @@ Page({
             }
         })
     },
+  getPhonCons() {
+    this.setData({
+      joingroup: app.globalData.joingroup
+    })
+  },
     /**
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
         this.initUsedinfo(options);
         this.initNeedData();
+      this.getPhonCons()
     },
 
     /**
