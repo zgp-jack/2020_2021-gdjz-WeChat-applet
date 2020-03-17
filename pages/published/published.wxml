@@ -5,7 +5,7 @@
     <image class='collect-tips-icon' src='{{ collecticon }}'></image>
     <view class='collect-bg'>
       <text class='collect-tips-title'>鱼泡提示</text>
-      <text class='collect-tips-words'>点击信息右下角"置顶"功能，即可将信息状态升级为置顶信息，让您的信息被更多的工友浏览。</text>
+      <text class='collect-tips-words'>点击信息右下角"我要置顶"功能，即可将信息状态升级为置顶信息，让您的信息被更多的工友浏览。</text>
     </view>
     <image class='collect-tips-hand' src='{{ collecthand }}'></image>
     <text class='knowtips' bindtap='closeCollect'>我知道了</text>

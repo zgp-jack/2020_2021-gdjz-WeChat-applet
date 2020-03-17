@@ -228,3 +228,13 @@ font-size: 26rpx;
 .circle-line text:nth-child(8){
     animation-delay: 1.6s;
 }
+.allCons{
+  position: relative;
+}
+.area-body-content image{
+    position: absolute;
+    width: 30rpx;
+    height: 30rpx;
+    top: 20rpx;
+    left: 20rpx;
+}

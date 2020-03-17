@@ -9,6 +9,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    hot: app.globalData.apiImgUrl + "lpy/recruit/settop-hot.png",
     areaTextP: [],
     areaTextC: [],
     areaTextId: "",
@@ -848,7 +849,7 @@ Page({
     let alllength = rankingP.length + uareaTextC.length;
 
 
-
+    console.log(alllength)
     let timer = new Date()
     let time = (timer.getTime() - 0)
     prevPage.setData({ //修改上一个页面的变量

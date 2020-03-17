@@ -51,6 +51,7 @@ Page({
     let that = this;
     let max_province = that.data.max_province;
     let max_city = that.data.max_city;
+
     let specialids = JSON.stringify(that.data.special_ids);
     app.globalData.judge = ""
     wx.navigateTo({
@@ -619,8 +620,8 @@ Page({
 
         if (mydata.errcode == "ok") {
           that.setData({
-            max_province: mydata.data.max_province,
-            max_city: mydata.data.max_city,
+            max_province: mydata.data.max_province-0,
+            max_city: mydata.data.max_city-0,
             province_integral: mydata.data.province_integral,
             country_integral: mydata.data.country_integral,
             city_integral: mydata.data.city_integral,
@@ -628,7 +629,7 @@ Page({
             top_rules: mydata.data.top_rules,
             special_ids: mydata.data.special_ids
           })
-
+          
           that.getMoreDay()
         } else {
           wx.showModal({

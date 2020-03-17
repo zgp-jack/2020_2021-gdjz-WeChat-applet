@@ -44,6 +44,10 @@ Page({
             app.showMyTips("两次输入的密码不一致!");
             return false;
         }
+      if (_this.data.oldPass == _this.data.newPass) {
+            app.showMyTips("新旧密码相同，请重新输入!");
+            return false;
+        }
         userInfo.oldPwd = _this.data.oldPass;
         userInfo.onePwd = _this.data.newPass;
         userInfo.twoPwd = _this.data.rePass;
