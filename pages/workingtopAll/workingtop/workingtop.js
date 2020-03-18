@@ -25,6 +25,7 @@ Page({
     imgDetelte: app.globalData.apiImgUrl + "lpy/delete.png",
     areaProcrum: [],
     areaCitycrum: [],
+    areaAllcrum:[],
     alllength: 0,
     max_province: "",
     province_integral: 0,
@@ -43,7 +44,8 @@ Page({
     showpointone: false,
     detailprice: 0,
     special_ids:[],
-    rangevalue:0
+    rangevalue:0,
+    country_integral:""
   },
 
   jumpstickyrule() {
@@ -104,6 +106,7 @@ Page({
     let that = this;
     let numcity = that.data.city_integral;
     let numprovice = that.data.province_integral;
+    let numAll = that.data.country_integral;
     if (e) {
 
       let day = e.detail.value - 0 + 1;
@@ -113,7 +116,7 @@ Page({
         day: day
       });
 
-      let price = (numcity * (that.data.areaCitycrum.length) + numprovice * (that.data.areaProcrum.length)) * day
+      let price = (numcity * (that.data.areaCitycrum.length) + numprovice * (that.data.areaProcrum.length) + numAll * (that.data.areaAllcrum.length)) * day
       // point
       that.setData({
         point: price
@@ -124,12 +127,12 @@ Page({
       
       
       
-      let price = (numcity * (that.data.areaCitycrum.length) + numprovice * (that.data.areaProcrum.length));
+      let price = (numcity * (that.data.areaCitycrum.length) + numprovice * (that.data.areaProcrum.length) + numAll * (that.data.areaAllcrum.length) );
       that.setData({
         allprice: price
       });
       if (this.data.topId != "undefined" && this.data.allprice > this.data.max_price) {
-        let price = (numcity * (that.data.areaCitycrum.length) + numprovice * (that.data.areaProcrum.length)) * that.data.detailprice;
+        let price = (numcity * (that.data.areaCitycrum.length) + numprovice * (that.data.areaProcrum.length) + numAll * (that.data.areaAllcrum.length)) * that.data.detailprice;
         // point
         
         that.setData({
@@ -137,7 +140,7 @@ Page({
         });
 
       } else if (this.data.topId == "undefined") {
-        let price = (numcity * (that.data.areaCitycrum.length) + numprovice * (that.data.areaProcrum.length)) * that.data.day
+        let price = (numcity * (that.data.areaCitycrum.length) + numprovice * (that.data.areaProcrum.length) + numAll * (that.data.areaAllcrum.length)) * that.data.day
         // point
         that.setData({
           point: price
@@ -195,7 +198,7 @@ Page({
     let vertifyNum = v.v.new()
 
 
-    if (vertifyNum.isNull(this.data.areaProcrum) && vertifyNum.isNull(this.data.areaCitycrum)) {
+    if (vertifyNum.isNull(this.data.areaProcrum) && vertifyNum.isNull(this.data.areaCitycrum) && vertifyNum.isNull(this.data.areaAllcrum)) {
       reminder.reminder({
         tips: '置顶城市'
       })
@@ -215,6 +218,10 @@ Page({
       app.showMyTips(`最多可置顶${day}天！`);
       return
     }
+    let country = ""
+    if (that.data.areaAllcrum.length > 0) {
+      country = that.data.areaAllcrum[0].id
+    }
 
     that.areaId()
     let detail = {
@@ -223,6 +230,7 @@ Page({
       time: userInfo.tokenTime,
       uuid: userUuid,
       day: that.data.day,
+      is_country: country,
       city_ids: that.data.areaTextIdC,
       province_ids: that.data.areaTextIdP,
       job_id: that.data.newId
@@ -348,6 +356,19 @@ Page({
     }
 
   },
+  deletelableA(){
+    let that = this;
+    let all = this.data.areaAllcrum.length * this.data.country_integral;
+    that.setData({
+      areaAllcrum: [],
+      alllength: that.data.alllength - 1,
+      allprice: all
+    })
+    that.dayclocy()
+    if (this.data.clocktime != 0) {
+      that.getCityNum()
+    }
+  },
   deletelableP(e) {
     let that = this;
     let number = e.currentTarget.dataset.index;
@@ -425,6 +446,18 @@ Page({
             let areaProcrumall = []
             let areaCitycrum = mydata.data.top_city
             let areaCitycrumall = []
+            let areaAllcrum = mydata.data.top_country
+            let areaAllcrumall = []
+
+            for (let i = 0; i < areaAllcrum.length; i++) {
+              let areaAllcrumone = {
+                id: areaAllcrum[i].id,
+                index: areaAllcrum[i].pid - 2 < 0 ? 0 : areaAllcrum[i].pid - 2,
+                name: areaAllcrum[i].name,
+                pid: areaAllcrum[i].pid
+              }
+              areaAllcrumall.push(areaAllcrumone)
+            }
 
             for (let i = 0; i < areaProcrum.length; i++) {
               let areaProcrumone = {
@@ -449,7 +482,8 @@ Page({
             that.setData({
               areaProcrum: areaProcrumall,
               areaCitycrum: areaCitycrumall,
-              alllength: areaProcrumall.length + areaCitycrumall.length,
+              areaAllcrum: areaAllcrumall,
+              alllength: areaProcrumall.length + areaCitycrumall.length + areaAllcrumall.length,
               max_price: mydata.data.max_price,
               endtime: mydata.data.end_time_string,
               endtimeh: (mydata.data.end_time-0)*1000
@@ -484,24 +518,25 @@ Page({
     }
     let vertifyNum = v.v.new()
 
-    if (vertifyNum.isNull(this.data.areaProcrum) && vertifyNum.isNull(this.data.areaCitycrum)) {
+    if (vertifyNum.isNull(this.data.areaProcrum) && vertifyNum.isNull(this.data.areaCitycrum) && vertifyNum.isNull(this.data.areaAllcrum)) {
       reminder.reminder({
         tips: '置顶城市'
       })
       return
     }
-  
-
 
     that.areaId()
-
+    let country = ""
+    if (that.data.areaAllcrum.length>0){
+      country = that.data.areaAllcrum[0].id
+    }
 
     let detail = {
       mid: userInfo.userId,
       token: userInfo.token,
       time: userInfo.tokenTime,
       uuid: userUuid,
-
+      is_country: country,
       city_ids: that.data.areaTextIdC,
       province_ids: that.data.areaTextIdP,
       job_id: that.data.newId,
@@ -627,7 +662,8 @@ Page({
             city_integral: mydata.data.city_integral,
             max_top_days: mydata.data.max_top_days,
             top_rules: mydata.data.top_rules,
-            special_ids: mydata.data.special_ids
+            special_ids: mydata.data.special_ids,
+            country_integral: mydata.data.country_integral
           })
           
           that.getMoreDay()
@@ -690,7 +726,7 @@ Page({
 
       let allprice = this.data.max_price
     
-      let alllength = (that.data.areaProcrum.length) * that.data.province_integral + (that.data.areaCitycrum.length) * that.data.city_integral
+      let alllength = (that.data.areaProcrum.length) * that.data.province_integral + (that.data.areaCitycrum.length) * that.data.city_integral + (that.data.areaAllcrum.length) * that.data.country_integral
   
       if (alllength <= allprice) {
         this.setData({
@@ -784,9 +820,9 @@ Page({
 
   getCityNum() {
     if (this.data.topId != "undefined") {
-      let all = this.data.areaCitycrum.length * this.data.city_integral + this.data.areaProcrum.length * this.data.province_integral;
+      let all = this.data.areaCitycrum.length * this.data.city_integral + this.data.areaProcrum.length * this.data.province_integral + this.data.country_integral * this.data.areaAllcrum.length;
       
-      
+      console.log(all)
       if (all > this.data.max_price) {
 
         this.setData({

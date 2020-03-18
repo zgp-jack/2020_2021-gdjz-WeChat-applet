@@ -11,12 +11,16 @@
       {{item.name}}
       <image class="deleteimg" data-id="{{ item }}" src="{{imgDetelte}}"></image>
     </view>
-    <view class="obttn" bindtap="jumpdetail" wx:if="{{alllength>0&&alllength<(max_province+max_city)}}">
+        <view wx:for="{{areaAllcrum}}" bindtap="deletelableA" wx:key="{{index}}" data-index="{{ index }}">
+      {{item.name}}
+      <image class="deleteimg" data-id="{{ item }}" src="{{imgDetelte}}"></image>
+    </view>
+    <view class="obttn" bindtap="jumpdetail" wx:if="{{alllength>0&&alllength<(max_province+max_city)&&areaAllcrum.length == 0}}">
       添加更多
     </view>
       <!-- &&alllength<(max_province+max_city -->
   </view>
-  <view wx:if="{{areaProcrum.length == 0&&areaCitycrum.length == 0}}" class="pointscope" bindtap="jumpstickyrule">
+  <view wx:if="{{areaProcrum.length == 0&&areaCitycrum.length == 0&&areaAllcrum.length == 0}}" class="pointscope" bindtap="jumpstickyrule">
     <text>点击选择置顶范围></text>
   </view>
   <view class="scopenum">

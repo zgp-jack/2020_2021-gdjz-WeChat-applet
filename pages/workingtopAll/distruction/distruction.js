@@ -12,6 +12,7 @@ Page({
     hot: app.globalData.apiImgUrl + "lpy/recruit/settop-hot.png",
     areaTextP: [],
     areaTextC: [],
+    areaTextA:[],
     areaTextId: "",
     max_province: "",
     max_city: "",
@@ -33,7 +34,7 @@ Page({
     areaDataNotEnd: []
   },
   //
-  getAreaData: function (options) {
+  getAreaData: function(options) {
     let areadata = wx.getStorageSync("areadata");
     let num = app.globalData.areaDataNum;
     let _this = this;
@@ -49,7 +50,7 @@ Page({
         return false;
       }
     }
-    app.getAreaData(this, function (data) {
+    app.getAreaData(this, function(data) {
       let resdata = app.arrDeepCopy(data)
       resdata.shift()
       _this.hotcities(options)
@@ -59,7 +60,7 @@ Page({
     });
 
   },
-  searchInput: function (e) {
+  searchInput: function(e) {
     let val = e.detail.value
     if (val.length > 0) {
       this.setData({
@@ -85,9 +86,9 @@ Page({
       this.filterInputList(val);
     }
   },
-  filterInputList: function (val) {
+  filterInputList: function(val) {
     let list = app.arrDeepCopy(this.data.allAreaLists);
-    let nlist = list.filter(function (item) {
+    let nlist = list.filter(function(item) {
       return (item.cname.indexOf(val) != -1);
     })
     this.setData({
@@ -95,13 +96,13 @@ Page({
       isAllAreas: false
     })
   },
-  showInputList: function () {
+  showInputList: function() {
     this.setData({
       showInputList: true,
       showListsAnd: true
     })
   },
-  closeArea: function () {
+  closeArea: function() {
     this.setData({
       areaInputFocus: false
     })
@@ -116,14 +117,14 @@ Page({
       })
     }, 10)
   },
-  clearInputAction: function () {
+  clearInputAction: function() {
     this.setData({
       isAllAreas: true,
       showInputList: false,
       searchInputVal: ""
     })
   },
-  initInputList: function () {
+  initInputList: function() {
     let list = areas.getInputList();
     this.setData({
       allAreaLists: list
@@ -199,14 +200,14 @@ Page({
         }
       }
     }
-    for (let i = 0; i < areaArr[0].length; i++){
-      if (areaArr[0][i].pid == cityId){
+    for (let i = 0; i < areaArr[0].length; i++) {
+      if (areaArr[0][i].pid == cityId) {
         for (let j = 0; j < areaArrC.length; j++) {
-          if (areaArrC[j].id == areaArr[0][i].id){
+          if (areaArrC[j].id == areaArr[0][i].id) {
             areaArrC.splice(j, 1);
             areaArr[0][i].selected = 1;
-            j --
-          } 
+            j--
+          }
         }
         for (let j = 0; j < areaArrT.length; j++) {
           if (areaArrT[j].id == areaArr[0][i].id) {
@@ -216,8 +217,8 @@ Page({
         }
       }
     }
-    
-  
+
+
     for (let j = 0; j < areaArrC.length; j++) {
       if (areaArr[num][pro].id == areaArrC[j].pid) {
         areaArrC.splice(j, 1)
@@ -225,17 +226,17 @@ Page({
       }
     }
 
-    
+
     for (let j = 0; j < areaArrT.length; j++) {
       if (areaArr[num][pro].id == areaArrT[j].pid) {
-        
-         areaArrT.splice(j, 1)
-         j --
+
+        areaArrT.splice(j, 1)
+        j--
       }
     }
 
-    
-   
+
+
     that.setData({
       areadatas: areaArr,
       areaTextC: areaArrC,
@@ -251,7 +252,7 @@ Page({
     that.setData({
       areadatas: areaArr
     })
-    
+
     for (let j = 0; j < areaArrP.length; j++) {
       if (areaArr[num][0].id == areaArrP[j].id) {
         areaArrP.splice(j, 1)
@@ -265,7 +266,7 @@ Page({
         j--
       }
     }
-    
+
     that.setData({
       areaTextP: areaArrP,
       areaText: areaArrT
@@ -320,12 +321,13 @@ Page({
 
 
       if (judgeId == 1) {
+   
         let show = that.mustjudge(judgeId)
         if (show == "nil") {
           return
         }
 
-
+        areadatafor[0][0].selected = 1;
         areadatafor[num][pro].selected = 2
 
 
@@ -336,20 +338,36 @@ Page({
         if (num > 0) {
           that.getFull(num, cityId, pro)
         }
-   
+
         dareaTextP.push(detail)
         that.setData({
-          areaTextP: dareaTextP
+          areaTextP: dareaTextP,
+          areaTextA:[]
         })
 
+      } else if (judgeId == 0) {
+        for (let i = 0; i < areadatafor.length;i++){
+          for (let j = 0; j < areadatafor[i].length; j++){
+            areadatafor[i][j].selected = 1
+          }
+        }
+        areadatafor[0][0].selected = 2
+        let areaTextA = that.data.areaTextA;
+
+        areaTextA.push(detail)
+        that.setData({
+          areaTextC: [],
+          areadatas: areadatafor,
+          areaTextP: [],
+          areaTextA: areaTextA
+        })
       } else {
         let show = that.mustjudge(judgeId)
         if (show == "nil") {
-
           return
         }
 
-
+        areadatafor[0][0].selected = 1;
         areadatafor[num][pro].selected = 2
         let areadataforq = areadatafor[0]
         if (num != 0) {
@@ -368,7 +386,7 @@ Page({
           }
 
         }
-
+        console.log(areadatafor)
         that.setData({
           areadatas: areadatafor,
         })
@@ -377,22 +395,21 @@ Page({
         } else if (num == 0) {
           that.getzero(judgeId)
         }
-        
-   
-     
+
+
+
         dareaTextC.push(detail)
 
         that.setData({
-          areaTextC: dareaTextC
+          areaTextC: dareaTextC,
+          areaTextA: []
         })
 
       }
-
-
       that.setData({
-        areaText: [...that.data.areaTextC, ...that.data.areaTextP]
+        areaText: [...that.data.areaTextC, ...that.data.areaTextP, ...that.data.areaTextA]
       })
-      
+    
     } else {
 
       let areadatafor = app.arrDeepCopy(that.data.areadatas);
@@ -401,7 +418,12 @@ Page({
       let areaArrT = app.arrDeepCopy(that.data.areaText)
       if (judgeId == 1) {
         areadatafor[num][pro].selected = 1
-      }else{
+      } else if (judgeId == 0) {
+        areadatafor[0][0].selected = 1
+        that.setData({
+          areaTextA: []
+        })
+      } else {
         areadatafor[num][pro].selected = 1
         if (num != 0) {
 
@@ -420,7 +442,7 @@ Page({
         }
       }
 
-   
+
 
 
       that.setData({
@@ -500,11 +522,11 @@ Page({
 
     } else {
       app.appRequestAction({
-        url: "job/top-hot-areas/",
+        url: "/job/top-hot-areas-v1/",
         way: "POST",
         mask: true,
         failTitle: "操作失败，请稍后重试！",
-        success: function (res) {
+        success: function(res) {
           let mydata = res.data;
           if (mydata.errcode == "ok") {
 
@@ -520,7 +542,7 @@ Page({
               title: '温馨提示',
               content: res.data.errmsg,
               showCancel: false,
-              success(res) { }
+              success(res) {}
             })
           }
         },
@@ -602,8 +624,8 @@ Page({
   hischildren(e) {
     let that = this;
     let data = e.currentTarget.dataset
-   
-    
+
+
     for (let i = 0; i < that.data.areaText.length; i++) {
 
       if (that.data.areaText[i].id == data.id) {
@@ -618,7 +640,7 @@ Page({
     }
 
     let show = this.mustjudge(data.pid)
-   
+
     if (show == "nil") {
       return
     }
@@ -673,7 +695,7 @@ Page({
       }
       that.data.areaTextC.push(detail)
     }
-
+    that.data.areadatas[0][0].selected = 1;
 
     for (let i = 0; i < that.data.areadatas.length; i++) {
       for (let j = 0; j < that.data.areadatas[i].length; j++) {
@@ -692,6 +714,10 @@ Page({
         }
       }
     }
+
+    that.setData({
+      areaTextA:[]
+    })
     that.data.areaText = that.unique(that.data.areaText)
   },
   delete() {
@@ -843,10 +869,10 @@ Page({
     let uareaTextP = that.unique(areaTextP)
     let uareaTextC = that.unique(areaTextC)
     let rankingP = that.ranking(uareaTextP)
+    let areaTextA = that.data.areaTextA;
 
 
-
-    let alllength = rankingP.length + uareaTextC.length;
+    let alllength = rankingP.length + uareaTextC.length + areaTextA.length;
 
 
     console.log(alllength)
@@ -855,6 +881,7 @@ Page({
     prevPage.setData({ //修改上一个页面的变量
       areaProcrum: rankingP,
       areaCitycrum: uareaTextC,
+      areaAllcrum: areaTextA,
       alllength: alllength,
       clocktime: time
     })
@@ -899,7 +926,7 @@ Page({
     })
   },
 
-  onLoad: function (options) {
+  onLoad: function(options) {
     this.getMax(options);
     this.getAreaData(options);
     this.initInputList();
@@ -912,49 +939,49 @@ Page({
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function () {
+  onReady: function() {
 
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function () {
+  onShow: function() {
     this.gethistory()
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
-  onHide: function () {
+  onHide: function() {
 
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
-  onUnload: function () {
+  onUnload: function() {
 
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
-  onPullDownRefresh: function () {
+  onPullDownRefresh: function() {
 
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
-  onReachBottom: function () {
+  onReachBottom: function() {
 
   },
 
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function () {
+  onShareAppMessage: function() {
 
   }
 })

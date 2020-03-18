@@ -58,7 +58,7 @@
       <view class='area-body-content clearfix'>
         <view wx:for="{{ areaItem }}" class="allCons"  wx:key="{{ index }}">
           <text class="{{item.selected == 2 ?'body-content':'overwords'}}" data-id="{{ item.id }}" data-pname="{{ item.ad_name }}" data-area="{{ item.city }}" data-pid="{{item.pid }}" data-pro="{{ index}}" data-index="{{ item.index}}" bindtap='chooseThisCtiy'>{{index ==0&&item.index!=0? "全省置顶":item.city}}</text>
-          <image wx:if="{{index ==0&&item.index!=0}}" src="{{hot}}"></image>
+          <image wx:if="{{index ==0}}" src="{{hot}}"></image>
         </view>
       </view>
     </view>
