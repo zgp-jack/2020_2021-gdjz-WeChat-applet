@@ -819,6 +819,7 @@ Page({
 
 
   getCityNum() {
+
     if (this.data.topId != "undefined") {
       let all = this.data.areaCitycrum.length * this.data.city_integral + this.data.areaProcrum.length * this.data.province_integral + this.data.country_integral * this.data.areaAllcrum.length;
       
