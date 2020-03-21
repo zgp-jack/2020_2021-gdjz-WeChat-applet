@@ -1,24 +1,48 @@
 <view class="yupao-common-container yupao-common-nofooter">
-    <view class='integral-header'>显示最近{{ day }}天的积分来源记录</view>
-    <view class='integral-content'>
-        <view class='integral-list-item' wx:for="{{ lists }}" wx:key="{{ index }}">
-            <view class='integral-list-time'>
-                <text>{{ item.year_month }}</text>
-                <text>{{ item.day }}</text>
-            </view>
-            <view class='integral-list-words'>
-                <view class='integral-list-title overwords'>{{ item.source_title }}</view>
-                <view class='integral-list-info overwords'>{{ item.ext }}</view>
-                <view class='integral-list-lasttime overwords'>时间：{{ item.His }} <text> {{ item.source_integral_string }}</text></view>
-            </view>
+  <view class='integral-select'>
+    <view class='select'>
+      <picker mode="date" fields="month"	 value="{{birthday}}" start="{{beforeDate}}" end="{{emdDate}}" bindchange="birthday">
+      <view class='timeall'>
+        <text class='time'>{{birthday}}</text>
+        <image src="{{sign}}" class='triangle'></image>
+      </view>
+       </picker>
+      <view>
+        <view class="classfy"><text>来源分类</text><image src="{{signright}}"></image></view>
+      </view>
+    </view>
+    <view class="integral-detail">
+      <view class="getintegral">
+         <text>获得积分:</text>
+         <text class="num">365</text>
+      </view>
+      <view class="dointegral">
+         <text>消耗积分:</text>
+         <text class="num">365</text>
+      </view>
+    </view>
+  </view>
+  <view class='integral-content'>
+    <view class='integral-list-item' wx:for="{{ lists }}" wx:key="{{ index }}">
+      <view class='integral-list-time'>
+        <text>{{ item.year_month }}</text>
+        <text>{{ item.day }}</text>
+      </view>
+      <view class='integral-list-words'>
+        <view class='integral-list-title overwords'>{{ item.source_title }}</view>
+        <view class='integral-list-info overwords'>{{ item.ext }}</view>
+        <view class='integral-list-lasttime overwords'>时间：{{ item.His }}
+          <text> {{ item.source_integral_string }}</text>
         </view>
-
+      </view>
     </view>
 
-    <view class='nodata-texttips' wx:if="{{ nothavemore }}">没有更多数据了</view>
-    <view class='common-nodatabox flex-column lists-nodata'  wx:if="{{ isNone }}">
-        <image src='{{ nodata }}'></image>
-        <text>暂无积分来源记录</text>
-    </view>
+  </view>
+
+  <view class='nodata-texttips' wx:if="{{ nothavemore }}">没有更多数据了</view>
+  <view class='common-nodatabox flex-column lists-nodata' wx:if="{{ isNone }}">
+    <image src='{{ nodata }}'></image>
+    <text>暂无积分来源记录</text>
+  </view>
 
 </view>

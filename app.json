@@ -1,9 +1,9 @@
 {
   "pages": [
-        "pages/index/index",
+    "pages/index/index",
+    "pages/integral/source/source",
     "pages/workingtopAll/workingtop/workingtop",
     "pages/workingtopAll/distruction/distruction",
-
     "pages/clients-looking-for-work/finding-top/findingtop",
     "pages/clients-looking-for-work/finding-name-card/findingnamecard",
     "pages/clients-looking-for-work/the-sticky-rule/stickyrule",
@@ -55,7 +55,7 @@
     "pages/integral/temp/temp",
     "pages/integral/official/official",
     "pages/integral/return/return",
-    "pages/integral/source/source",
+
     "pages/integral/expend/expend",
     "pages/static/notice",
     "pages/static/invite",

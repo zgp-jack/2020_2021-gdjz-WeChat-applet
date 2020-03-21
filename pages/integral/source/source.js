@@ -13,10 +13,14 @@ Page({
         isFirst: true,
         userInfo: "",
         lists: [],
-        day:30,
         pageSize: 15,
         page: 1, 
-        system: ""
+        system: "",
+        sign: app.globalData.apiImgUrl + "lpy/integral/select2.png",
+        signright: app.globalData.apiImgUrl + "lpy/integral/select1.png",
+        beforeDate: "",
+        emdDate: "",
+        birthday:""
     },
     getIntegralHeader: function () {
         let _this = this;
@@ -105,6 +109,22 @@ Page({
             }
         })
     },
+    birthday(e) {
+      this.setData({
+        birthday: e.detail.value
+      })
+    },
+    getDate(){
+  　　let newdate = new Date();
+  　　let nowyear = newdate.getFullYear();
+  　　let nowmonth = newdate.getMonth() + 1;
+  　　if (nowmonth >= 1 && nowmonth <= 9) {
+    　　　　nowmonth = "0" + nowmonth;
+      }
+      this.setData({
+        birthday: nowyear + "-" + nowmonth
+      })
+    },
     /**
      * 生命周期函数--监听页面加载
      */
@@ -123,7 +143,7 @@ Page({
      * 生命周期函数--监听页面显示
      */
     onShow: function () {
-
+      this.getDate()
     },
 
     /**
