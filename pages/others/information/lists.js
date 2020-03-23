@@ -122,6 +122,7 @@ Page({
   },
   // 滚动切换标签样式
   switchTab: function(e) {
+    console.log(123123)
     if (e.detail.source == 'touch') {
       let td = this.data
       let index = e.detail.current

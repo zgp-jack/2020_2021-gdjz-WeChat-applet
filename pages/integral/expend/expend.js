@@ -25,7 +25,16 @@ Page({
         infoId: "",
         type: "",
         cindex:"",
-        showWork:false
+        showWork:false,
+        sign: app.globalData.apiImgUrl + "lpy/integral/select2.png",
+        signright: app.globalData.apiImgUrl + "lpy/integral/select1.png",
+        beforeDate: "",
+        emdDate: "",
+        birthday: "",
+        classify:[],
+        classifyArray: [],
+        classifyName: "",
+        classifyNameId: 0
     },
   userCancleComplain: function () {
     this.setData({ showComplain: false, complainInfo:"" })
@@ -223,11 +232,65 @@ Page({
     callThisPhone:function(e){
         app.callThisPhone(e);
     },
+    birthday(e) {
+      this.setData({
+        birthday: e.detail.value
+      })
+    },
+  getDate() {
+    let newdate = new Date();
+    let nowyear = newdate.getFullYear();
+    let nowmonth = newdate.getMonth() + 1;
+    if (nowmonth >= 1 && nowmonth <= 9) {
+      nowmonth = "0" + nowmonth;
+    }
+    this.setData({
+      birthday: nowyear + "-" + nowmonth
+    })
+    console.log(this.data.birthday)
+  },
+  selectType(e){
+    let that = this;
+    let odedail = e.detail.value;
+    this.setData({
+      classifyName: that.data.classifyArray[odedail],
+      classifyNameId: that.data.classifyArray[odedail].type
+    })
+
+  },
     /**
      * 生命周期函数--监听页面加载
      */
+    getDetail(){
+      let that = this;
+      let userInfo = wx.getStorageSync("userInfo");
+      app.appRequestAction({
+        url: "integral/expend-config/",
+        way: "POST",
+        params: userInfo,
+        success: function (res) {
+          let mydata = res.data;
+          console.log(mydata)
+          if (mydata.errcode == "ok"){
+            let classifymap = mydata.data.types.map((item, index) => item.name)
+            console.log(classifymap)
+            that.setData({
+              birthday: mydata.data.default.y + "-" + mydata.data.default.m,
+              emdDate: mydata.data.min.y + "-" + mydata.data.min.m,
+              classify: mydata.data.types,
+              classifyArray: classifymap,
+              classifyName: classifymap[0],
+              classifyNameId: mydata.data.types[0].type
+            })
+
+          }
+        }
+      })
+    },
     onLoad: function (options) {
         this.getIntegralHeader();
+        this.getDetail()
+      this.getDate()
     },
 
     /**

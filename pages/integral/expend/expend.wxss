@@ -143,3 +143,57 @@
 
 
 .list-complain-phone{background: #ff0000;}
+.integral-select{
+  background: white;
+}
+.integral-select .select{
+  padding: 24rpx 24rpx;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  font-size: 30rpx;
+}
+.select .time{
+  font-weight: bold;
+}
+.select .triangle{
+  width: 38rpx;
+  height: 34rpx;
+  margin-left: 8rpx;
+  margin-top: 6rpx;
+}
+.select .classfy{
+  background: #F6F6F6;
+  color: #4F4F4F;
+  padding: 6rpx 4rpx 6rpx 14rpx;
+  border-radius: 6rpx;
+}
+.integral-detail{
+  display: flex;
+  flex-direction: row;
+  font-size: 30rpx;
+  padding: 24rpx 24rpx;
+  border-top: 1px solid #EEEEEE;
+}
+.dointegral{
+  margin-left: 100rpx;
+}
+.integral-detail text{
+  padding-right: 10rpx;
+}
+.integral-detail .num{
+  color: #0099ff;
+}
+.timeall{
+  display: flex;
+  align-items: center;
+}
+.classfy{
+    display: flex;
+  align-items: center;
+}
+.classfy image{
+    width: 38rpx;
+    height: 34rpx;
+    
+}

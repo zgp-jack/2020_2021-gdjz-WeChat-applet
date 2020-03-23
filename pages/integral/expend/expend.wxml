@@ -1,5 +1,29 @@
 <view class="yupao-common-container yupao-common-nofooter">
-    <view class='integral-header' wx:if="{{ false }}">显示最近{{ day }}天的积分消耗记录</view>
+    <view class='integral-select'>
+    <view class='select'>
+      <picker mode="date" fields="month"	 value="{{birthday}}" start="{{beforeDate}}" end="{{emdDate}}" bindchange="birthday">
+      <view class='timeall'>
+        <text class='time'>{{birthday}}</text>
+        <image src="{{sign}}" class='triangle'></image>
+      </view>
+       </picker>
+      <view>
+      <picker  range="{{classifyArray}}"	 value="{{classifyName}}" bindchange="selectType">
+        <view class="classfy"><text>{{classifyName}}</text><image src="{{signright}}"></image></view>
+      </picker>
+      </view>
+    </view>
+    <view class="integral-detail">
+      <view class="getintegral">
+         <text>获得积分:</text>
+         <text class="num">365</text>
+      </view>
+      <view class="dointegral">
+         <text>消耗积分:</text>
+         <text class="num">365</text>
+      </view>
+     </view>
+    </view>
     <view class='integral-content'>
         <view class='integral-list-item' wx:for="{{ lists }}" wx:key="{{ index }}" data-id='{{ item.id }}' bindtap='showThisRecord'>
             <view class='integral-list-time'>
