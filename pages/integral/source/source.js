@@ -20,7 +20,8 @@ Page({
         signright: app.globalData.apiImgUrl + "lpy/integral/select1.png",
         beforeDate: "",
         emdDate: "",
-        birthday:""
+        birthday:"",
+        expend:""
     },
     getIntegralHeader: function () {
         let _this = this;
@@ -128,8 +129,16 @@ Page({
     /**
      * 生命周期函数--监听页面加载
      */
+    getjump(options){
+      if (options.hasOwnProperty("expend")){
+        this.setData({
+          expend: options.expend
+        })
+      }
+    },
     onLoad: function (options) {
         this.getIntegralHeader();
+        this.getjump(options)
     },
 
     /**

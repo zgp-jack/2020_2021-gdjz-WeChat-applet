@@ -13,6 +13,7 @@
 .integral-content{
     position: relative;
     width: 100%;
+    height: 100%;
     padding: 0 27rpx 0 87rpx;
 }
 .integral-list-item{
