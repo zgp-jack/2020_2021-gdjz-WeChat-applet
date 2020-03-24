@@ -72,7 +72,7 @@
 }
 .integral-list-lasttime text{
     float: right;
-    font-size: 30rpx;
+    font-size: 28rpx;
     color: #fd4040;
 }
 

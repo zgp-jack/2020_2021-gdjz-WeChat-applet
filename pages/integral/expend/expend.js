@@ -39,7 +39,8 @@ Page({
     bak: 0,
     getintegral:0,
     getexpend:0,
-    next_page:""
+    next_page:"",
+    showintegral:true
   },
   userCancleComplain: function() {
     this.setData({
@@ -153,11 +154,16 @@ Page({
             bak: mydata.data.bak,
             stime: mydata.data.stime,
             lists: [...mydata.data.lists, ..._this.data.lists],
-            getintegral: mydata.data.sum_data.get,
-            getexpend: mydata.data.sum_data.expend,
+
             next_page: mydata.data.next_page,
             isNone: false
           })
+          if (_this.data.showintegral){
+            _this.setData({
+            getintegral: mydata.data.sum_data.get,
+              getexpend: mydata.data.sum_data.expend,
+            })
+          }
           if (_this.data.lists.length==0){
             _this.setData({
               isNone:true
@@ -415,6 +421,7 @@ Page({
   onReachBottom: function() {
     console.log(12312)
     if ( (this.data.isNone) || (this.data.nothavemore)) return false;
+    this.setData({showintegral:false})
     this.getIntegralHeader(this.data.userInfo)
   },
 
