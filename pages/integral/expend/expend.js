@@ -284,7 +284,8 @@ Page({
       birthday: e.detail.value,
       stime: 0,
       bak: 0,
-      nothavemore: false
+      nothavemore: false,
+      lists: []
     })
     console.log(123123)
     this.getIntegralHeader(this.data.userInfo)
@@ -312,7 +313,8 @@ Page({
       classifyNameId: that.data.classify[odedail].type,
       stime: 0,
       bak: 0,
-      nothavemore: false
+      nothavemore: false,
+      lists:[]
     })
     that.getIntegralHeader(that.data.userInfo)
   },
