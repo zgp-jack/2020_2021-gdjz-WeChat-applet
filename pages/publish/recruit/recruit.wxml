@@ -11,7 +11,7 @@
       <view class='common-publish-item'>
         <view class='common-publish-item-content'>
           <text class='common-publish-words'>标题</text>
-          <input class='common-publish-input' value='{{ cardInfo.title }}' placeholder='请输入标题(3-30个字)' bindinput='userEnterTitle' maxlength="30"></input>
+          <input class='common-publish-input' value='{{ cardInfo.title }}' placeholder='请输入3~12字中文标题' bindinput='userEnterTitle' maxlength="12"></input>
         </view>
       </view>
       <view class='common-publish-item'>
@@ -48,7 +48,7 @@
       <view class='common-publish-item'>
         <view class='common-publish-item-content'>
           <text class='common-publish-words'>联系人</text>
-          <input class='common-publish-input' value='{{ cardInfo.username }}' placeholder='请输入联系人' bindinput='userEnterUsername'></input>
+          <input class='common-publish-input' value='{{ cardInfo.username }}' placeholder='请输入2~6字中文姓名' bindinput='userEnterUsername' maxlength="6"></input>
         </view>
       </view>
       <view class='common-publish-item'>

@@ -14,13 +14,13 @@
       </view>
     </view>
     <view class="integral-detail">
-      <view class="getintegral" bindtap="dointegral">
-         <text>获得积分:</text>
-         <text class="num">{{getintegral}}</text>
-      </view>
-      <view class="dointegral">
+      <view class="getintegral">
          <text>消耗积分:</text>
          <text class="num">{{getexpend}}</text>
+      </view>
+      <view class="dointegral"  bindtap="dointegral">
+         <text>获取积分:</text>
+         <text class="num">{{getintegral}}</text>
       </view>
      </view>
     </view>

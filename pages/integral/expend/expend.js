@@ -40,7 +40,9 @@ Page({
     getintegral:0,
     getexpend:0,
     next_page:"",
-    showintegral:true
+    showintegral:true,
+    system_type:"",
+    source:""
   },
   userCancleComplain: function() {
     this.setData({
@@ -120,7 +122,6 @@ Page({
             showCancel: false
           })
         }
-
       }
     })
   },
@@ -129,8 +130,11 @@ Page({
     wx.showLoading({
       title: '数据加载中'
     })
-    let date = _this.data.birthday.split("-")
-    console.log(date)
+    app.initSystemInfo(function (res) {
+      if (res)_this.setData({system_type: res.platform
+    })
+    })
+    let date = _this.data.birthdaysubmit.split("-")
     app.doRequestAction({
       url: "integral/expend-lists/",
       way: "POST",
@@ -142,18 +146,17 @@ Page({
         m: date[1],
         stime: _this.data.stime,
         type: _this.data.classifyNameId,
-        bak: _this.data.bak
+        bak: _this.data.bak,
+        system_type: _this.data.system_type
       },
       success: function(res) { 
-        console.log(res)
         wx.hideLoading();
         let mydata = res.data;
-        console.log(mydata)
         if (mydata.errcode = "ok"){
           _this.setData({
             bak: mydata.data.bak,
             stime: mydata.data.stime,
-            lists: [...mydata.data.lists, ..._this.data.lists],
+            lists: [..._this.data.lists, ...mydata.data.lists],
 
             next_page: mydata.data.next_page,
             isNone: false
@@ -286,12 +289,15 @@ Page({
     app.callThisPhone(e);
   },
   birthday(e) {
+    let date = e.detail.value.split("-")
     this.setData({
-      birthday: e.detail.value,
+      birthday: date[0] + '年' + date[1] + '月',
+      birthdaysubmit: e.detail.value,
       stime: 0,
       bak: 0,
       nothavemore: false,
-      lists: []
+      lists: [],
+      showintegral:true
     })
     console.log(123123)
     this.getIntegralHeader(this.data.userInfo)
@@ -320,16 +326,24 @@ Page({
       stime: 0,
       bak: 0,
       nothavemore: false,
-      lists:[]
+      lists:[],
+      showintegral: true
     })
     that.getIntegralHeader(that.data.userInfo)
   },
   dointegral(){
-    console.log(1232)
+    let source = this.data.source
     let expend = "expend"
-    wx.navigateTo({
-      url: `/pages/integral/source/source?expend=${expend}`,
-    })
+    if (source == "source"){
+      wx.navigateBack({
+        delta: 1
+      })
+    }else{
+      wx.navigateTo({
+        url: `/pages/integral/source/source?expend=${expend}`,
+      })
+    }
+
   },
   /**
    * 生命周期函数--监听页面加载
@@ -350,11 +364,12 @@ Page({
           let classifymap = mydata.data.types.map((item, index) => item.name)
 
           that.setData({
-            birthday: mydata.data.default.y + "-" + mydata.data.default.m,
+            birthday: mydata.data.default.y + "年" + mydata.data.default.m+"月",
+            birthdaysubmit: mydata.data.default.y + "-" + mydata.data.default.m,
             beforeDate: mydata.data.min.y + "-" + mydata.data.min.m,
             classify: mydata.data.types,
             classifyArray: classifymap,
-            classifyName: classifymap[0],
+            classifyName: "消耗分类",
             classifyNameId: mydata.data.types[0].type
           })
           that.getIntegralHeader(userInfo)
@@ -375,9 +390,17 @@ Page({
       }
     })
   },
+  getjump(options) {
+    if (options.hasOwnProperty("source")) {
+      this.setData({
+        source: options.source
+      })
+    }
+  },
   onLoad: function(options) {
     this.getDetail()
     this.getDate()
+    this.getjump(options)
   },
 
   /**

@@ -9,9 +9,9 @@
   justify-content: space-between;
   font-size: 30rpx;
 }
-.select .time{
+/* .select .time{
   font-weight: bold;
-}
+} */
 .select .triangle{
   width: 38rpx;
   height: 34rpx;

@@ -532,8 +532,8 @@ Page({
     let infoId = this.data.infoId;
     let lastPublishCity = { name: this.data.areaText, ad_name: this.data.keyAutoVal };
     let v = vali.v.new();
-    if (!v.isRequire(cardInfo.title, 3)) {
-      app.showMyTips("标题最少三个字！");
+    if (!v.isRequire(cardInfo.title, 3) || !v.isChinese(cardInfo.title) || (cardInfo.title).trim().length < 3) {
+      app.showMyTips("请正确输入3~12字中文标题");
       return false;
     }
     if (!cardInfo.workTypeIds.length) {
@@ -549,8 +549,8 @@ Page({
       app.showMyTips("请输入您的地区！");
       return false;
     }
-    if (!v.regStrNone(cardInfo.username)) {
-      app.showMyTips("请输入正确的联系人姓名！");
+    if (!v.regStrNone(cardInfo.username) || !v.allChinese(cardInfo.username) || (cardInfo.username).trim().length<2) {
+      app.showMyTips("请正确输入2~6字中文姓名！");
       return false;
     }
     if (!v.isMobile(phone)) {
@@ -564,8 +564,8 @@ Page({
         return false;
       }
     }
-    if (!v.regStrNone(cardInfo.content)) {
-      app.showMyTips("请输入招工详情");
+    if (!v.regStrNone(cardInfo.content) || !v.isChinese(cardInfo.content) || (cardInfo.content).trim().length < 15) {
+      app.showMyTips("请正确输入15~500字招工详情");
       return false;
     }
     let cardImgs = _this.getUserCardImgs();

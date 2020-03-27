@@ -129,6 +129,25 @@ Page({
                     setTimeout(function () {
                         _this.initAreaPicker();
                     }, 0)
+                } else if (mydata.errcode == "to_auth") {
+                  wx.showModal({
+                    title: '温馨提示',
+                    content: res.data.errmsg,
+                    cancelText: '取消',
+                    confirmText: '去实名',
+                    success(res) {
+                      if (res.cancel) {
+                        wx.navigateBack({
+                          delta: 1
+                        })
+                      } else if (res.confirm) {
+                        wx.navigateTo({
+                          url: `/pages/realname/realname`
+                        })
+                      }
+                    }
+                  })
+                  return
                 } else {
                     app.showMyTips(mydata.errmsg);
                 }

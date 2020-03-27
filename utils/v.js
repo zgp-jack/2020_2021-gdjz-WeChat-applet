@@ -12,9 +12,19 @@ let vali = {
           if (re.test(v)) {
              return true;
             }
-          console.log(123)
+
           return false;
         }
+
+      vali.allChinese = function (v) {
+         let vRegx, vResult; 
+            vRegx = /^[\u4E00-\u9FA5]+$/; 
+            vResult = vRegx.test(v);
+            if (vResult) { 
+              return true;
+            }
+        return false;
+      }
         //验证邮箱
         vali.isEmail = function (email) {
             return email.length > 6 && /^[\w\-\.]+@[\w\-\.]+(\.\w+)+$/.test(email);

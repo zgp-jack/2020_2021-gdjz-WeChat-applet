@@ -1,5 +1,5 @@
 <view class="yupao-common-container yupao-common-nofooter">
-  <view class='integral-select'>
+    <view class='integral-select'>
     <view class='select'>
       <picker mode="date" fields="month"	 value="{{birthday}}" start="{{beforeDate}}" end="{{emdDate}}" bindchange="birthday">
       <view class='timeall'>
@@ -8,41 +8,41 @@
       </view>
        </picker>
       <view>
-        <view class="classfy"><text>来源分类</text><image src="{{signright}}"></image></view>
+      <picker  range="{{classifyArray}}"	 value="{{classifyName}}" bindchange="selectType">
+        <view class="classfy"><text>{{classifyName}}</text><image src="{{signright}}"></image></view>
+      </picker>
       </view>
     </view>
     <view class="integral-detail">
       <view class="getintegral">
-         <text>获得积分:</text>
-         <text class="num">365</text>
+         <text>获取积分:</text>
+         <text class="num">{{getintegral}}</text>
       </view>
-      <view class="dointegral">
+      <view class="dointegral"  bindtap="dointegral">
          <text>消耗积分:</text>
-         <text class="num">365</text>
+         <text class="num">{{getexpend}}</text>
       </view>
+     </view>
     </view>
-  </view>
-  <view class='integral-content'>
-    <view class='integral-list-item' wx:for="{{ lists }}" wx:key="{{ index }}">
-      <view class='integral-list-time'>
-        <text>{{ item.year_month }}</text>
-        <text>{{ item.day }}</text>
-      </view>
-      <view class='integral-list-words'>
-        <view class='integral-list-title overwords'>{{ item.source_title }}</view>
-        <view class='integral-list-info overwords'>{{ item.ext }}</view>
-        <view class='integral-list-lasttime overwords'>时间：{{ item.His }}
-          <text> {{ item.source_integral_string }}</text>
+    <view class='integral-content'>
+        <view class='integral-list-item' wx:for="{{ lists }}" wx:key="{{ index }}" data-id='{{ item.id }}'>
+            <view class='integral-list-time'>
+                <text>{{ item.y_m }}</text>
+                <text>{{ item.day }}</text>
+            </view>
+            <view class='integral-list-words'>
+                <view class='integral-list-title overwords'>{{ item.type_name }}</view>
+                <view class='integral-list-info overwords'>{{ item.ext }}</view>
+                <view class='integral-list-lasttime overwords'>时间：{{ item.his }} <text>{{ item.source_integral_string }}</text></view>
+            </view>
         </view>
-      </view>
+
     </view>
 
-  </view>
-
-  <view class='nodata-texttips' wx:if="{{ nothavemore }}">没有更多数据了</view>
-  <view class='common-nodatabox flex-column lists-nodata' wx:if="{{ isNone }}">
-    <image src='{{ nodata }}'></image>
-    <text>暂无积分来源记录</text>
-  </view>
+    <view class='nodata-texttips' wx:if="{{ nothavemore }}">没有更多数据了</view>
+    <view class='common-nodatabox flex-column lists-nodata'  wx:if="{{ isNone }}">
+        <image src='{{ nodata }}'></image>
+        <text>暂无积分来源记录</text>
+    </view>
 
 </view>
