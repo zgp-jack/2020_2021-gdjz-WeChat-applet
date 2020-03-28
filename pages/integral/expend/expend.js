@@ -50,6 +50,7 @@ Page({
       complainInfo: ""
     })
   },
+
   complainInfo: function(e) {
     let infoId = e.currentTarget.dataset.id;
     let type = e.currentTarget.dataset.type;
@@ -289,10 +290,19 @@ Page({
     app.callThisPhone(e);
   },
   birthday(e) {
+    let data = this.data
     let date = e.detail.value.split("-")
+    let end = data.emdDate.split("-")
+    let selectdate = Date.UTC(date[0] - 0, date[1]-0);
+    let enddate = Date.UTC(end[0] - 0, end[1] - 0);
+    if (selectdate > enddate) {
+      date[0] = end[0]
+      date[1] = end[1]
+    }
+
     this.setData({
       birthday: date[0] + '年' + date[1] + '月',
-      birthdaysubmit: e.detail.value,
+      birthdaysubmit: date[0] + '-' + date[1] ,
       stime: 0,
       bak: 0,
       nothavemore: false,

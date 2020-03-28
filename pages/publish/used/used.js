@@ -158,9 +158,13 @@ Page({
                     title: '温馨提示',
                     content: res.data.errmsg,
                     confirmText: '确定',
-                    showCancel:false,
+                    cancelText: '取消',
                     success(res) {
                       if (res.confirm) {
+                        wx.navigateBack({
+                          delta: 1
+                        })
+                      } else if (res.cancel) {
                         wx.navigateBack({
                           delta: 1
                         })
