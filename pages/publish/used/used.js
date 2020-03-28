@@ -39,7 +39,8 @@ Page({
         textareaTips: "",
         strlen:0,
         model:{},
-        is_check:""
+        is_check:"",
+        showHide:false
     },
 
     userClickItem: function (e) {
@@ -124,6 +125,7 @@ Page({
                         strlen: mydata.model.detail ? mydata.model.detail.length : 0,
                         textareaTips: mydata.placeholder,
                       is_check: mydata.model.hasOwnProperty("is_check") ? mydata.model.is_check : "",
+                      showHide: false
                     })
                   _this.judgecommit(mydata, options)
                     setTimeout(function () {
@@ -143,6 +145,24 @@ Page({
                       } else if (res.confirm) {
                         wx.navigateTo({
                           url: `/pages/realname/realname`
+                        })
+                        _this.setData({
+                          showHide:true
+                        })
+                      }
+                    }
+                  })
+                  return
+                } else if (mydata.errcode == "auth_checking") {
+                  wx.showModal({
+                    title: '温馨提示',
+                    content: res.data.errmsg,
+                    confirmText: '确定',
+                    showCancel:false,
+                    success(res) {
+                      if (res.confirm) {
+                        wx.navigateBack({
+                          delta: 1
                         })
                       }
                     }
@@ -472,6 +492,7 @@ Page({
         this.setData({
           userInfo: userInfo
         })
+        this.setData({ options: options })
         this.initUserCardinfo(options);
       } else {
         this.setData({ options: options })
@@ -489,7 +510,9 @@ Page({
      * 生命周期函数--监听页面显示
      */
     onShow: function () {
-
+      if (this.data.showHide){
+        this.initUserCardinfo(this.data.options);
+      }
     },
 
     /**

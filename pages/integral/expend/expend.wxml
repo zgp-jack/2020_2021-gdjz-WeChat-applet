@@ -1,7 +1,7 @@
 <view class="yupao-common-container yupao-common-nofooter">
     <view class='integral-select'>
     <view class='select'>
-      <picker mode="date" fields="month"	 value="{{birthday}}" start="{{beforeDate}}" end="{{emdDate}}" bindchange="birthday">
+      <picker mode="date" fields="month"	 value="{{birthdaysubmit}}" start="{{beforeDate}}" end="{{emdDate}}" bindchange="birthday">
       <view class='timeall'>
         <text class='time'>{{birthday}}</text>
         <image src="{{sign}}" class='triangle'></image>

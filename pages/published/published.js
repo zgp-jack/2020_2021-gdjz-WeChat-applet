@@ -410,6 +410,7 @@ Page({
     }
   },
   setInfoStatus: function (e) {
+   
     let _id = e.currentTarget.dataset.id;
     let _index = this.data.publishIndex;
     let infoIndex = e.currentTarget.dataset.index;
@@ -481,7 +482,22 @@ Page({
               duration: 1500
             })
           }
-        } else {
+        } else if (mydata.errcode == "to_auth") {
+          wx.showModal({
+            title: '温馨提示',
+            content: res.data.errmsg,
+            cancelText: '取消',
+            confirmText: '去实名',
+            success(res) {
+              if (res.confirm) {
+                wx.navigateTo({
+                  url: `/pages/realname/realname`
+                })
+              }
+            }
+          })
+          return
+        }else {
           wx.showToast({
             title: mydata.errmsg,
             icon: "none",

@@ -139,7 +139,8 @@ App({
     }
     let header = {
       uuid: userUuid,
-      'content-type': 'application/x-www-form-urlencoded'
+      'content-type': 'application/x-www-form-urlencoded',
+      version: '1.0.0'
     }
     if (userInfo) {
       header.mid = userInfo.userId,
@@ -185,7 +186,8 @@ App({
     }
     let header = {
       uuid: userUuid,
-      'content-type': 'application/x-www-form-urlencoded'
+      'content-type': 'application/x-www-form-urlencoded',
+      version: '1.0.0'
     }
     if (userInfo) {
       header.mid = userInfo.userId,
