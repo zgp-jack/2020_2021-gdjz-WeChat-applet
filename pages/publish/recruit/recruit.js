@@ -545,8 +545,8 @@ Page({
     //     return false;
     // }
 
-    if (_this.data.addressData.adcode == "" && cardInfo.provinceId == "") {
-      app.showMyTips("请输入您的地区！");
+    if ((_this.data.addressData.adcode == "" && cardInfo.provinceId == "")||_this.data.addressData.title=="") {
+      app.showMyTips("请选择您的详细地址！");
       return false;
     }
     if (!v.regStrNone(cardInfo.username) || !v.allChinese(cardInfo.username) || (cardInfo.username).trim().length<2) {

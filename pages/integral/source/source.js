@@ -33,6 +33,7 @@ Page({
         getexpend: 0,
         next_page: "",
         showintegral: true,
+        classifyIndex:0
     },
     // getIntegralHeader: function () {
     //     let _this = this;
@@ -152,16 +153,21 @@ Page({
     let data = this.data
     let date = e.detail.value.split("-")
     let end = data.emdDate.split("-")
+    let start = data.beforeDate.split("-")
     let selectdate = Date.UTC(date[0] - 0, date[1] - 0);
     let enddate = Date.UTC(end[0] - 0, end[1] - 0);
+    let startdate = Date.UTC(start[0] - 0, start[1] - 0);
     if (selectdate > enddate) {
       date[0] = end[0]
       date[1] = end[1]
     }
-
+    if (selectdate < startdate) {
+      date[0] = start[0]
+      date[1] = start[1]
+    }
     this.setData({
-      birthday: date[0] + '年' + date[1]+'月',
-      birthdaysubmit: date[0] + '-' + date[1] ,
+      birthday: date[0] + '年' + date[1] + '月',
+      birthdaysubmit: date[0] + '-' + date[1],
       stime: 0,
       bak: 0,
       nothavemore: false,
@@ -180,6 +186,7 @@ Page({
     this.setData({
       classifyName: that.data.classifyArray[odedail],
       classifyNameId: that.data.classify[odedail].type,
+      classifyIndex: odedail,
       stime: 0,
       bak: 0,
       nothavemore: false,

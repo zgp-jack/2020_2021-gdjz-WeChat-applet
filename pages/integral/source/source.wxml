@@ -8,7 +8,7 @@
       </view>
        </picker>
       <view>
-      <picker  range="{{classifyArray}}"	 value="{{classifyName}}" bindchange="selectType">
+      <picker  range="{{classifyArray}}"	 value="{{classifyIndex}}" bindchange="selectType">
         <view class="classfy"><text>{{classifyName}}</text><image src="{{signright}}"></image></view>
       </picker>
       </view>
