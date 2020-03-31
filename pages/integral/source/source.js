@@ -33,7 +33,8 @@ Page({
         getexpend: 0,
         next_page: "",
         showintegral: true,
-        classifyIndex:0
+        classifyIndex:0,
+        office:0
     },
     // getIntegralHeader: function () {
     //     let _this = this;
@@ -258,11 +259,18 @@ Page({
      * 生命周期函数--监听页面加载
      */
     getjump(options){
+      console.log(options)
       if (options.hasOwnProperty("expend")){
         this.setData({
           expend: options.expend
         })
       }
+      if (options.hasOwnProperty("office")){
+        this.setData({
+          office: options.office
+        })
+      }
+      this.getDetail();
     },
   getDetail() {
     let that = this;
@@ -272,7 +280,7 @@ Page({
     })
     userInfo = {
       ...userInfo,
-      office:0,
+      office:that.data.office,
       system_type: that.data.system_type
     }
     this.setData({
@@ -315,7 +323,7 @@ Page({
     })
   },
     onLoad: function (options) {
-        this.getDetail();
+
         this.getjump(options)
     },
 
