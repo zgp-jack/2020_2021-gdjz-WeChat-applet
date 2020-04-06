@@ -346,7 +346,14 @@ Page({
           //     _this.initAreaPicker();
           // },0)
         } else {
-          app.showMyTips(mydata.errmsg);
+          wx.showModal({
+            title: '温馨提示',
+            content: mydata.errmsg,
+            showCancel: false,
+            success: ()=> {
+              wx.navigateBack()
+            }
+          })
         }
       }
     })
@@ -492,6 +499,8 @@ Page({
         if (mydata.errcode == "ok") {
           let _time = mydata.refresh;
           _this.initCountDown(_time);
+        }else{
+          _this.setData({ status: 1 });
         }
       },
       fail: function () {

@@ -108,6 +108,7 @@ Page({
         stime: _this.data.stime,
         source_type: _this.data.classifyNameId,
         bak: _this.data.bak,
+        office: _this.data.office,
         system_type: _this.data.system_type
       },
       success: function (res) {

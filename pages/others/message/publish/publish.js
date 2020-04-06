@@ -42,14 +42,62 @@ Page({
         })
 
     },
-  getPhonCons() {
-    this.setData({
-      joingroup: app.globalData.joingroup
+  
+  initNeedData: function () {
+    let joingroup = app.globalData.joingroup;
+    if(joingroup){
+      this.setData({
+        joingroup: joingroup,
+        wechat: app.globalData.copywechat,
+        phone: app.globalData.callphone
+      })
+      return false;
+    }
+    let _this = this;
+    let _mark = true;
+    let _wx = wx.getStorageSync("_wx");
+    let userInfo = this.data.userInfo;
+    let _time = Date.parse(new Date());
+    if (_wx && _wx.expirTime) {
+      if (parseInt(_wx.expirTime) > _time) _mark = false;
+    }
+    if (userInfo) userInfo.type = "job"
+    else userInfo = { type: "job" }
+    app.doRequestAction({
+      url: "index/less-search-data/",
+      way: "POST",
+      hideLoading: true,
+      params: userInfo,
+      success: function (res) {
+        let mydata = res.data;
+        _this.setData({
+          "notice.lists": mydata.notice,
+          // member_notice: mydata.member_notice,
+          member_less_info: mydata.member_less_info,
+          phone: mydata.phone,
+          wechat: _mark ? mydata.wechat.number : (_wx.wechat ? _wx.wechat : mydata.wechat.number),
+          joingroup: mydata.join_group_config
+        })
+        app.globalData.joingroup = mydata.join_group_config
+        app.globalData.copywechat = mydata.wechat.number
+        app.globalData.callphone = mydata.phone
+        if (_mark) {
+          let extime = _time + (mydata.wechat.outTime * 1000);
+          wx.setStorageSync("_wx", { wechat: mydata.wechat.number, expirTime: extime });
+        }
+      },
+      fail: function (err) {
+        wx.showToast({
+          title: '数据加载失败！',
+          icon: "none",
+          duration: 3000
+        })
+      }
     })
   },
     onLoad: function(options) {
         this.initUserInfo(options);
-      this.getPhonCons()
+      this.initNeedData()
         //this.initUploadImgsApi();
     },
     userUploadsImg: function(e) {

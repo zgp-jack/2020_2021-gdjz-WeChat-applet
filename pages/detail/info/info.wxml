@@ -1,201 +1,192 @@
 <!-- locatext -->
 <view style='height:100%;{{ showComplain ? "overflow:hidden;" : "" }}'>
 
-  <view class="yupao-common-container" style="{{ userInfo.userId == info.user_id ? 'padding-bottom:20rpx':'padding-bottom:130rpx' }}">
+	<view class="yupao-common-container" style="{{ userInfo.userId == info.user_id ? 'padding-bottom:20rpx':'padding-bottom:130rpx' }}">
 
-    <view class='info-yupao-tips'>
-      <view class='yupao-lists-notice'>
-        <view class='yupao-lists-wxinfo'>
-          <view class='yupao-lists-wxtips'>
-            <text  wx:for="{{joingroup}}" wx:key="{{ index }}" style="color:{{item.color}}"      data-wechat="{{ item.text== 'wechat_number'|| item.action.type == 'copy' ?wechat:'' }}" bindtap="{{item.action.type == 'replace'?'clipboardWechat':((item.action.type == 'copy'?'clipboardWechat':(item.action.type == 'call'?'callThisPhone':''))) }}" data-phone="{{ item.action.type == 'call'?phone:'' }}"  class="{{item.action.is_btn == '1'?'phoneer':'' }}" >{{item.text== 'wechat_number'?wechat:item.text}}</text>
-          </view>
+		<view class='info-yupao-tips'>
+			<view class='yupao-lists-notice'>
+				<view class='yupao-lists-wxinfo'>
+					<view class='yupao-lists-wxtips'>
+						<text  wx:for="{{joingroup}}" wx:key="{{ index }}" style="color:{{item.color}}"      data-wechat="{{ item.text== 'wechat_number'|| item.action.type == 'copy' ?wechat:'' }}" bindtap="{{item.action.type == 'replace'?'clipboardWechat':((item.action.type == 'copy'?'clipboardWechat':(item.action.type == 'call'?'callThisPhone':''))) }}" data-phone="{{ item.action.type == 'call'?phone:'' }}"  class="{{item.action.is_btn == '1'?'phoneer':'' }}" >{{item.text== 'wechat_number'?wechat:item.text}}</text>
+					</view>
+				</view>
+			</view>
+		</view>
+
+		<view class="matter">
+
+			<view class="cephalosomea">
+
+				<view class="linkman">
+					<view class="linkmana">{{ info.title }}</view>
+					<view class="linkmanb">发布时间：{{ info.time }}</view>
+
+					<!-- 新代码 -->
+					<view class="newdetail-recruitinfo">
+						<view class="recruit-publisherinfo">
+							<image class="recruit-publisher-img" src="{{ info.image }}"></image>
+							<view class="publisher-username">{{ info.user_name }}</view>
+							<view class="publisher-phone">{{ info.tel_str }}</view>
+							<view class="newdetail-callbox" wx:if="{{ userInfo.userId != info.user_id }}">
+								<view class="newdetail-call-show" wx:if="{{ info.show_ajax_btn }}" bindtap='getInfoTel'>查看完整电话</view>
+								<view class="newdetail-call-report" bindtap='userTapComplain' wx:if="{{ (info.isLook == 1)&&info.is_end == '2'}}">投诉</view>
+								<view class="newdetail-call-end" wx:if="{{ info.is_end == '2' }}">已招到</view>
+								<block wx:if="{{ !info.show_ajax_btn && (info.is_end == '1') }}">
+									<view class="newdetail-call-tell" bindtap='callThisPhone' data-phone="{{ info.tel_str }}">点击拨打</view>
+									<view class="newdetail-call-report" bindtap='userTapComplain'>投诉</view>
+								</block>
+							</view>
+						</view>
+						<view class="newdetail-recruitfooter">
+							<view class="newdetail-recruitfooter-tips">联系我时请说明是在“<text>鱼泡网</text>”上看到的</view>
+						</view>
+					</view>
+
+
+				</view>
+			</view>
+
+			<view class="cephalosomebox">
+
+				<view class="craft">项目描述：</view>
+				<view class="genre">
+					<view class="jiaznu" wx:for="{{ info.classifyName }}" wx:key="{{ index }}">{{ item }}</view>
+				</view>
+				<view class="craftas">{{ info.detail }}</view>
+
+				<view class='ucard-imgsbox clearfix' wx:if="{{ info.view_images.length }}">
+					<view class='ucard-imgs-item' wx:for="{{ info.view_images }}" wx:key="{{ index }}">
+						<image src='{{ item }}' bindtap='previewImage' data-src="{{ item }}"></image>
+					</view>
+				</view>
+				<view class="ephalos">
+
+					<view class="locatext" wx:if="{{ !info.location }}">项目地址：
+						<text class="locdez">{{ info.show_full_address }}</text>
+					</view>
+
+					<view class="locatext" wx:if="{{ info.location }}">
+						<view class="register">
+							<text>项目地址：</text>
+							<view class="gister" bindtap="showThisMapInfo">
+								<image class="maps" src="{{ mapimg }}"></image>
+								<text class="maptexr">查看地图</text>
+							</view>
+						</view>
+						<view class="locdez">{{ info.show_full_address }}</view>
+					</view>
+
+				</view>
+			</view>
+
+
+			<view class='info-wenxintips clearfix'>
+				<view class='wenxintips-words'>
+					<navigator url='/pages/anti-fraud/anti-fraud' open-type="navigate" class='text-nav-name text-active'>《防骗指南》</navigator>
+					<view class='wenxintips-info'>：此信息由鱼泡网用户提供，但联系时仍需注意识别
+						信息真伪。</view>
+				</view>
+				<view class='wenxintips-info'>关注 “鱼泡网” 微信公众号接收新工作提醒
+					<text class='text-active' bindtap='userTapConcern'>如何关注</text>。</view>
+			</view>
+
+			<view class='info-concern-img'>
+				<navigator url='/pages/download/download-app' open-type="navigate">
+					<image mode='widthFix' src='{{ appLinkImg }}'></image>
+				</navigator>
+			</view>
+
+
+      <!-- 相关推荐 -->
+      <view class="recommend-info-container">
+        <view class="recommend-info-header flex-row">
+          <text>相关推荐</text>
         </view>
-        <view class='yupao-lists-noticetips'>
-          <text class='yupao-common-tips yupao-lists-newtips'>鱼泡资讯：</text>
-          <view class='lists-notice-swiper'>
-            <swiper indicator-dots="{{ notice.indicatorDots }}" autoplay="{{ notice.autoplay}} " interval="{{ notice.interval }}" duration="{{ notice.duration }}" circular="{{ notice.circular }}" vertical="{{ notice.vertical }}">
-              <block wx:for="{{ notice.lists }}" wx:key="{{ index }}">
-                <swiper-item>
-                  <text class='lists-notice-text overwords' data-id="{{ item.id }}" bindtap='showThisNotice'>{{ item.title }}</text>
-                </swiper-item>
-              </block>
-            </swiper>
-          </view>
-        </view>
-      </view>
-    </view>
+        <view class="recommend-info-body">
 
-    <view class="matter" >
-
-      <view class="cephalosomea">
-
-        <view class="linkman">
-          <view class="linkmana">{{ info.title }}</view>
-          <view class="linkmanb">发布时间：{{ info.time }}</view>
-
-          <view class="nlianc">
-            <view class="nlileftsidebar">
-              <view class="newjobinfopactive">
-                <view class="pactive">
-                  <view class="pactiveciome">
-                    <view class="comeit">联系人：{{ info.user_name }}</view>
-                  </view>
-                </view>
-              </view>
-
-              <view class="newjobinfopactive">
-                <view class="pactive">
-                  <view class="pactiveciome">
-                    <view class="comeite">
-                      <view>电话号码：{{ info.tel_str }}</view>
-                      <view class="comeitstatuse" wx:if="{{ userInfo.userId != info.user_id }}">
-                        <view class="substance" wx:if="{{ info.show_ajax_btn }}" bindtap='getInfoTel'>查看完整电话</view>
-                        <view class="seek" wx:if="{{ info.is_end == '2' }}">已招到</view>
-                         <view class="complainone" bindtap='userTapComplain' 
-                          wx:if="{{ (info.isLook == 1)&&info.is_end == '2'}}">投诉</view>
-
-                        <view class="substan" wx:if="{{ !info.show_ajax_btn && (info.is_end == '1') }}">
-                          <view class="substanphone" bindtap='callThisPhone' data-phone="{{ info.tel_str }}">拨打电话</view>
-                          <view class="complain" bindtap='userTapComplain'>投诉</view>
-                        </view>
-                      </view>
-                    </view>
-                  </view>
-                </view>
-              </view>
-              <view class="newjobin">
-                <view class="pactive">
-                  <view class="pactiveciome">
-                    <view class="comeitex">联系我时请说明是在 “鱼泡网” 上看到的</view>
-                  </view>
-                </view>
-              </view>
-            </view>
-
-          </view>
-        </view>
-      </view>
-      
-      <view class="cephalowarning">
-        <text class="warningdetail">防骗警示</text>：工作前，确认好<text class="warningdetail">对方身份、签好合同</text>，招工、找活中<text class="warningdetail">不要交任何费用</text>。工作中<text class="warningdetail">拍照</text>、<text class="warningdetail">录视频</text>留有证据！若双方发生<text class="warningdetail">经济纠纷</text>，请<text class="warningdetail">立即报警</text>或者前往<text class="warningdetail">劳动局投诉</text>，鱼泡网可<text class="warningdetail">配合调查</text>，但<text class="warningdetail">概不负责</text>。如遇<text class="warningdetail">诈骗信息</text>，请<text wx:if="{{!showcomplain}}" class="warningcomplaim" bindtap="userTapComplain">立即举报!</text>
-        <text wx:if="{{showcomplain}}" class="warningcomplaimm" >立即举报!</text>
-      </view>
-
-      <view class="cephalosomebox">
-        <view class="ephalos">
-
-          <view class="locatext" wx:if="{{ !info.location }}">项目地址：
-            <text class="locdez">{{ info.show_full_address }}</text>
-          </view>
-
-          <view class="locatext" wx:if="{{ info.location }}">
-            <view class="register">
-              <text>项目地址：</text>
-              <view class="gister" bindtap="showThisMapInfo">
-                <image class="maps" src="{{ mapimg }}"></image>
-                <text class="maptexr">查看地图</text>
-              </view>
-            </view>
-            <view class="locdez">{{ info.show_full_address }}</view>
-          </view>
-
-        </view>
-
-        <view class="craft">项目工种：</view>
-        <view class="genre">
-          <view class="jiaznu" wx:for="{{ info.classifyName }}" wx:key="{{ index }}">{{ item }}</view>
-        </view>
-      </view>
-
-      <view class="cephalosomebox">
-        <view class="craft">项目描述：</view>
-        <view class="craftas">{{ info.detail }}</view>
-
-        <view class='ucard-imgsbox clearfix' wx:if="{{ info.view_images.length }}">
-          <view class='ucard-imgs-item' wx:for="{{ info.view_images }}" wx:key="{{ index }}">
-            <image src='{{ item }}' bindtap='previewImage' data-src="{{ item }}"></image>
-          </view>
         </view>
       </view>
 
 
-      <view class='info-wenxintips clearfix'>
-        <view class='wenxintips-words'>温馨提示：
-          <view class='wenxintips-info'>此信息由鱼泡网的用户提供，但联系时仍需要注意识别信息真假，
-            <navigator url='/pages/anti-fraud/anti-fraud' open-type="navigate" class='text-active'>防骗指南</navigator>。</view>
-        </view>
-        <view class='wenxintips-info'>关注 “鱼泡网” 微信公众号接收新工作提醒
-          <text class='text-active' bindtap='userTapConcern'>如何关注</text>。</view>
-      </view>
-
-      <view class='info-concern-img'>
-        <navigator url='/pages/download/download-app' open-type="navigate">
-          <image mode='widthFix' src='{{ appLinkImg }}'></image>
-        </navigator>
-      </view>
-
-
-    </view>
+		</view>
 
 
 
 
-  </view>
+	</view>
 
 
-  <view class='info-needusershare flex-row' wx:if="{{ isShare }}">
-    <view class='usershare-box'>
-      <view class='usershare-header'>温馨提示</view>
-      <view class='usershare-body'>{{ shareMsg }}</view>
-      <view class='usershare-footer'>
-        <button open-type="share">立即分享</button>
-      </view>
-    </view>
-  </view>
+	<view class='info-needusershare flex-row' wx:if="{{ isShare }}">
+		<view class='usershare-box'>
+			<view class='usershare-header'>温馨提示</view>
+			<view class='usershare-body'>{{ shareMsg }}</view>
+			<view class='usershare-footer'>
+				<button open-type="share">立即分享</button>
+			</view>
+		</view>
+	</view>
 
-  <view class='yupao-common-enterbox flex-row' wx:if="{{ showComplain }}">
-    <view class='yupao-common-enter'>
-      <text class='yupao-enter-title'>投诉信息</text>
-      <text class='yupao-enter-tips'>请输入投诉内容</text>
-      <view class='yupao-enter-body'>
-        <textarea class='yupao-enter-wrap yupao-enter-textarea' placeholder='{{complaincontent}}' bindinput='userEnterComplain' maxlength='200' value='{{ complainInfo }}'></textarea>
-      </view>
-      <view class='yupao-enter-footer clearfix'>
-        <text bindtap='userCancleComplain'>取消</text>
-        <text bindtap='userComplaintAction'>确定</text>
-      </view>
-    </view>
-  </view>
+	<view class='yupao-common-enterbox flex-row' wx:if="{{ showComplain }}">
+		<view class='yupao-common-enter'>
+			<text class='yupao-enter-title'>投诉信息</text>
+			<text class='yupao-enter-tips'>请输入投诉内容</text>
+			<view class='yupao-enter-body'>
+				<textarea class='yupao-enter-wrap yupao-enter-textarea' placeholder='{{complaincontent}}' bindinput='userEnterComplain' maxlength='200' value='{{ complainInfo }}'></textarea>
+			</view>
+			<view class='yupao-enter-footer clearfix'>
+				<text bindtap='userCancleComplain'>取消</text>
+				<text bindtap='userComplaintAction'>确定</text>
+			</view>
+		</view>
+	</view>
 
 </view>
 
 
 <view class="newdetail-info-footer" wx:if="{{ userInfo.userId != info.user_id }}">
-  <view class="newdetail-info-itembox clearfix">
-    <view class="newdetail-info-item" bindtap='userCollectAction'>
-      <image src="{{ collectMark ? collectedImg : collectImg }}"></image>
-      <text wx:if="{{ !collectMark }}">收藏</text>
-      <text style="color:#0099ff;" wx:if="{{ collectMark}}">已收藏</text>
-    </view>
-    <view class="newdetail-info-item" bindtap="userTapComplain">
-      <image src="{{ complainImg }}"></image>
-      <text>投诉</text>
-    </view>
-    <button class="newdetail-info-item" open-type="share">
-      <image src="{{ sharebtnImg }}"></image>
-      <text>分享</text>
-    </button>
-  </view>
-  <view class="callthisphone-btn" wx:if="{{ info.show_ajax_btn }}" bindtap='getInfoTel'>查看完整电话</view>
-  <view class="callthisphone-btn" wx:if="{{ !info.show_ajax_btn && (info.is_end == '1') }}" bindtap='callThisPhone' data-phone="{{ info.tel_str }}">拨打电话</view>
-  <view class="callthisphone-btn" wx:if="{{ info.is_end == '2' }}">{{ info.is_end_word }}</view>
+	<view class="newdetail-info-itembox clearfix">
+		<view class="newdetail-info-item" bindtap='userCollectAction'>
+			<image src="{{ collectMark ? collectedImg : collectImg }}"></image>
+			<text wx:if="{{ !collectMark }}">收藏</text>
+			<text style="color:#0099ff;" wx:if="{{ collectMark}}">已收藏</text>
+		</view>
+		<view class="newdetail-info-item" bindtap="userTapComplain">
+			<image src="{{ complainImg }}"></image>
+			<text>投诉</text>
+		</view>
+		<button class="newdetail-info-item" open-type="share">
+			<image src="{{ sharebtnImg }}"></image>
+			<text>分享</text>
+		</button>
+	</view>
+	<view class="callthisphone-btn" wx:if="{{ info.show_ajax_btn }}" bindtap='getInfoTel'>查看完整电话</view>
+	<view class="callthisphone-btn" wx:if="{{ !info.show_ajax_btn && (info.is_end == '1') }}" bindtap='callThisPhone' data-phone="{{ info.tel_str }}">拨打电话</view>
+	<view class="callthisphone-btn" wx:if="{{ info.is_end == '2' }}">{{ info.is_end_word }}</view>
 </view>
 
 <view class='fixed-get-integral fixed-get-integral-bottom' bindtap='detailToHome' wx:if="{{ showHomeImg }}">
-    <image src='{{ homebtnImg }}'></image>
+	<image src='{{ homebtnImg }}'></image>
 </view>
 
-<!-- <button class='fixed-get-integral-btn fixed-get-integral-btn-info'  open-type="share" >
-        <image src='http://cdn.yupao.com/miniprogram/images/list-share-btn.png?t=111'></image>
-        分享
-</button> -->
+<!-- 新改动 拨号弹窗 -->
+<view class="newdetail-fixedshadow flex-row" wx:if="{{ shownewtips }}">
+	<view class="newdetail-fixed-content">
+		<view class="newdetail-tips-box">
+			<view class="newdetail-tips-header">鱼泡网提醒</view>
+			<view class="newdetail-tips-body">
+				<view class="newdetail-tips-item">
+					<view class="newdetail-tips-title">工作前</view>
+					<view class="newdetail-tips-text">确认好对方身份、签好合同，招工、找活中不要交任何费用。</view>
+				</view>
+				<view class="newdetail-tips-item">
+					<view class="newdetail-tips-title">工作中</view>
+					<view class="newdetail-tips-text">拍照、录视频留有证据！若双方发生经济纠纷，请立即报警或前往劳动局投诉，鱼泡网可配合调查，但概不负责。</view>
+				</view>
+			</view>
+		</view>
+		<view class="newdetail-tips-footer flex-row">
+			<view class="newdetail-footer-item" bindtap="recentlynottips">暂不提示</view>
+			<view class="newdetail-footer-item" bindtap="callthisphonehide">拨打电话</view>
+		</view>
+	</view>
+</view>

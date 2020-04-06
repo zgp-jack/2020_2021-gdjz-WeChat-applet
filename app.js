@@ -3,17 +3,14 @@ App({
 
 
   onLaunch: function (e) {
-    // try{
-    //   if (e.path) this.initUserInfo(e);
-    // }
-    // catch(err){bindGetUserInfo gotoUserauth 工地急招 gpsPorvince userLocation 
-    //   
-
+    
   },
   globalData: {
-    joingroup:[],
+    joingroup: false,
+    copywechat: '',
+    callphone: '',
     procity:0,
-    version: "v-2.7.4",
+    version: "1.0.0",
     complaincontent: '请填写5~100字，必须含有汉字。（恶意投诉会被封号，请谨慎投诉！）',
     areaIs: false,
     topshow: false,
@@ -44,8 +41,9 @@ App({
     commonShareImg: "http://cdn.yupao.com/miniprogram/images/minishare.png?t=" + new Date().getTime(),
     commonDownloadApp: "http://cdn.yupao.com/miniprogram/images/download.png?t=" + new Date().getTime(),
     commonJixieAd: "http://cdn.yupao.com/miniprogram/images/list-ad-newjixie.png?t=" + new Date().getTime(),
-
-    apiRequestUrl: "https://miniapi.zhaogong.vrtbbs.com/",
+    // apiRequestUrl:"http://60.205.221.14:8087/",
+    // apiRequestUrl: "https://miniapi.zhaogong.vrtbbs.com/",
+    apiRequestUrl:"http://miniapitest.zhaogong.vrtbbs.com/",
     // apiRequestUrl: "https://newyupaomini.54xiaoshuo.com/",
     // apiRequestUrl: "http://miniapi.qsyupao.com/",
     //apiRequestUrl:"http://mini.zhaogongdi.com/",
@@ -140,7 +138,7 @@ App({
     let header = {
       uuid: userUuid,
       'content-type': 'application/x-www-form-urlencoded',
-      version: '1.0.0'
+      version: this.globalData.version
     }
     if (userInfo) {
       header.mid = userInfo.userId,
@@ -187,7 +185,7 @@ App({
     let header = {
       uuid: userUuid,
       'content-type': 'application/x-www-form-urlencoded',
-      version: '1.0.0'
+      version: this.globalData.version
     }
     if (userInfo) {
       header.mid = userInfo.userId,
@@ -983,6 +981,7 @@ App({
     this.appRequestAction({
       url: "member/original-message/",
       way: "POST",
+      hideLoading: true,
       params: { terminal_type: _this.terminal_type },
       success: function (res) {
         if (res.data.errcode == "ok") {

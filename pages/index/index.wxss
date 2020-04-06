@@ -223,8 +223,6 @@ page{
     font-size: 28rpx;
     line-height: 50rpx;
     color: #7f7e7e;
-    border-bottom: 1px dashed #0099ff;
-    padding-bottom: 10rpx;
 }
 .yupao-lists-wxtips text{
     color: #7f7e7e;
@@ -234,12 +232,12 @@ page{
     background: none;
     color: #f86e09;
 }
-
-
 .yupao-lists-noticetips{
     position: relative;
     width: 100%;
     height: 65rpx;
+    margin-top: 20rpx;
+    border-top: 1px dashed #dcdcdc;
 }
 .yupao-lists-newtips{
     position: absolute;
@@ -340,4 +338,8 @@ page{
 .fctips-header{position: absolute;width:400rpx;height:100rpx;right: 120rpx;top:0;}
 .fctips-body{position: absolute;width:100%;right: 0;bottom:0;}
 
+
+.text-nav-name{
+    display: inline-block;
+}
 

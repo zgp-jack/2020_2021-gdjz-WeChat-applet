@@ -159,6 +159,27 @@
 					"pathName": "pages/ucenter/ucenter",
 					"query": "",
 					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "招工详情",
+					"pathName": "pages/detail/info/info",
+					"query": "id=6771211",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "找活列表",
+					"pathName": "pages/findingworkinglist/findingworkinglist",
+					"query": "id=6771211",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "二手列表",
+					"pathName": "pages/usedlist/usedlist",
+					"query": "id=6771211",
+					"scene": null
 				}
 			]
 		}

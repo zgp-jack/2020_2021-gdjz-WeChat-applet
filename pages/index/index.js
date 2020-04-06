@@ -479,9 +479,11 @@ Page({
           wechat: _mark ? mydata.wechat.number : (_wx.wechat ? _wx.wechat : mydata.wechat.number),
           joingroup: mydata.join_group_config
         })
-        app.globalData.serverPhone = mydata.phone;
-        app.globalData.joingroup = mydata.join_group_config;
 
+        app.globalData.joingroup = mydata.join_group_config
+        app.globalData.copywechat = mydata.wechat.number
+        app.globalData.callphone = mydata.phone
+       
         if (_mark) {
           let extime = _time + (mydata.wechat.outTime * 1000);
           wx.setStorageSync("_wx", { wechat: mydata.wechat.number, expirTime: extime });

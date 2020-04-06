@@ -372,8 +372,13 @@ Page({
                 _this.setData({
                     "notice.lists": mydata.notice,
                     phone: mydata.phone,
-                    wechat: _mark ? mydata.wechat.number : _wx.wechat
+                    wechat: _mark ? mydata.wechat.number : _wx.wechat,
+                    joingroup: mydata.join_group_config
                 })
+
+                app.globalData.joingroup = mydata.join_group_config
+                app.globalData.copywechat = mydata.wechat.number
+                app.globalData.callphone = mydata.phone
                 if (_mark) {
                     let extime = _time + (mydata.wechat.outTime * 1000);
                     wx.setStorageSync("_wx", { wechat: mydata.wechat.number, expirTime: extime });
@@ -575,13 +580,7 @@ Page({
         this.getFilterData();
         this.initNeedData();
         this.initAreaInfo();
-        this.getPhonCons();
     },
-  getPhonCons() {
-    this.setData({
-      joingroup: app.globalData.joingroup
-    })
-  },
     /**
      * 生命周期函数--监听页面初次渲染完成
      */

@@ -453,8 +453,14 @@ Page({
         _this.setData({
           "notice.lists": mydata.notice,
           phone: mydata.phone,
-          wechat: _mark ? mydata.wechat.number : _wx.wechat
+          wechat: _mark ? mydata.wechat.number : _wx.wechat,
+          joingroup: mydata.join_group_config
         })
+
+        app.globalData.joingroup = mydata.join_group_config
+        app.globalData.copywechat = mydata.wechat.number
+        app.globalData.callphone = mydata.phone
+
         if (_mark) {
           let extime = _time + (mydata.wechat.outTime * 1000);
           wx.setStorageSync("resume_wx", { wechat: mydata.wechat.number, expirTime: extime });
@@ -824,15 +830,6 @@ Page({
       wx.setStorageSync("_source", options.source);
     }
   },
-
-
-
-
-  getPhonCons() {
-    this.setData({
-      joingroup: app.globalData.joingroup
-    })
-  },
   onLoad(options) {
     this.initSearchHistory();
     this.initUserShareTimes();
@@ -841,7 +838,6 @@ Page({
     this.initFooterData();
     this.initNeedData();
     this.checkIsInvite(options);
-    this.getPhonCons()
   },
 
   /**

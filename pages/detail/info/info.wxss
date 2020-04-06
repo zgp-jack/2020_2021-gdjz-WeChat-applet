@@ -105,7 +105,6 @@ padding: 10rpx;
 background: red;
 border-radius: 6rpx;
 font-size: 26rpx;
-font-family: Source Han Sans CN;
 font-weight: 400;
 color: white;
 text-align: center;
@@ -148,7 +147,6 @@ margin-left: 16rpx;
 .ucard-imgsbox{
     position: relative;
     width: 100%;
-    margin-top:15rpx;
     background: white;
     padding: 20rpx 10rpx;
 }
@@ -195,7 +193,6 @@ margin-left: 16rpx;
 
 .linkmana {
   font-size: 30rpx;
-  font-family: Source Han Sans CN;
   font-weight: 400;
   color: rgba(42, 42, 42, 1);
   padding: 20rpx 0;
@@ -203,7 +200,6 @@ margin-left: 16rpx;
 
 .linkmanb {
   font-size: 28rpx;
-  font-family: Source Han Sans CN;
   font-weight: 400;
   color: rgba(127, 126, 126, 1);
   padding-bottom: 20rpx;
@@ -288,7 +284,6 @@ margin-left: 16rpx;
 
 .comeit {
   font-size: 28rpx;
-  font-family: Source Han Sans CN;
   font-weight: 400;
   color: rgba(42, 42, 42, 1);
 }
@@ -313,7 +308,6 @@ margin-left: 16rpx;
 
 .comeite {
   font-size: 28rpx;
-  font-family: Source Han Sans CN;
   font-weight: 400;
   color: rgba(42, 42, 42, 1);
   display: flex;
@@ -322,7 +316,6 @@ margin-left: 16rpx;
 
 .comeitex {
   font-size: 28rpx;
-  font-family: Source Han Sans CN;
   font-weight: 400;
   color: rgba(247, 17, 17, 1);
 }
@@ -333,7 +326,6 @@ margin-left: 16rpx;
   background: rgba(0, 153, 255, 1);
   border-radius: 6rpx;
   font-size: 26rpx;
-  font-family: Source Han Sans CN;
   font-weight: 400;
   color: rgb(255, 255, 255);
   text-align: center;
@@ -351,7 +343,6 @@ margin-left: 16rpx;
   height: 40rpx;
   background: rgba(52, 176, 49, 1);
   font-size: 26rpx;
-  font-family: Source Han Sans CN;
   font-weight: 400;
   color: rgba(255, 255, 255, 1);
   text-align: center;
@@ -364,7 +355,6 @@ margin-left: 16rpx;
   height: 40rpx;
   background: rgba(247, 17, 17, 1);
   font-size: 26rpx;
-  font-family: Source Han Sans CN;
   font-weight: 400;
   color: rgba(255, 255, 255, 1);
   text-align: center;
@@ -375,12 +365,10 @@ margin-left: 16rpx;
 
 .seek {
   padding: 10rpx;
-  background: rgba(0, 153, 255, 1);
   background: rgba(246, 243, 243, 1);
   border: 1rpx solid rgba(212, 211, 211, 1);
   border-radius: 6rpx;
   font-size: 26rpx;
-  font-family: Source Han Sans CN;
   font-weight: 400;
   color: rgba(127, 126, 126, 1);
   text-align: center;
@@ -389,6 +377,7 @@ margin-left: 16rpx;
 
 .ephalos {
   padding-top: 20rpx;
+  border-top: 1px solid #dcdcdc;
 }
 
 .register {
@@ -413,21 +402,18 @@ margin-left: 16rpx;
 
 .locatext {
   font-size: 28rpx;
-  font-family: Source Han Sans CN;
   font-weight: 400;
   color: rgb(127, 126, 126);
 }
 
 .maptexr {
   font-size: 28rpx;
-  font-family: Source Han Sans CN;
   font-weight: 400;
-  color: rgba(127, 126, 126, 1);
+  color: #0099ff;
 }
 
 .locdez {
   font-size: 28rpx;
-  font-family: Source Han Sans CN;
   font-weight: 400;
   color: rgb(42, 42, 42);
   margin-top: 10rpx;
@@ -435,7 +421,6 @@ margin-left: 16rpx;
 
 .craft {
   font-size: 28rpx;
-  font-family: Source Han Sans CN;
   font-weight: 400;
   color: rgba(127, 126, 126, 1);
   padding: 20rpx 0;
@@ -445,7 +430,6 @@ margin-left: 16rpx;
   padding: 10rpx;
   background: rgba(238, 237, 239, 1);
   font-size: 26rpx;
-  font-family: Source Han Sans CN;
   font-weight: 400;
   color: rgba(42, 42, 42, 1);
   text-align: center;
@@ -471,7 +455,6 @@ margin-left: 16rpx;
 
 .craftas {
   font-size: 28rpx;
-  font-family: Source Han Sans CN;
   font-weight: 400;
   color: rgba(42, 42, 42, 1);
   line-height: 40rpx;
@@ -612,7 +595,6 @@ margin-left: 16rpx;
 .ucard-imgsbox {
   position: relative;
   width: 100%;
-  margin-top: 15rpx;
   background: white;
   padding: 20rpx 10rpx;
 }
@@ -700,3 +682,188 @@ margin-left: 16rpx;
 }
 
 .callthisphone-btn{position: absolute;line-height: 70rpx;top:25rpx;right: 30rpx;width: 32%;background-image: linear-gradient(to right , #1e9dff, #1c51f9);font-size: 26rpx;color: white;border-radius: 30px;text-align: center;}
+
+.newdetail-recruitinfo{
+  position: relative;
+  border-top: 1px solid #dcdcdc;
+  padding: 20rpx 0;
+}
+.recruit-publisherinfo{
+  position: relative;
+  padding-left: 120rpx;
+}
+.recruit-publisher-img{
+  position: absolute;
+  display: block;
+  width: 100rpx;
+  height: 100rpx;
+  left: 0;
+  top: 10rpx;
+  border-radius: 50%;
+}
+.publisher-username,.publisher-phone{
+  position: relative;
+  display: block;
+  line-height: 60rpx;
+  color: #333;
+}
+.newdetail-callbox{
+  position: absolute;
+  right: 20rpx;
+  top: 38rpx;
+}
+
+.newdetail-call-show,.newdetail-call-tell,.newdetail-call-report,.newdetail-call-end{
+  font-size: 26rpx;
+  line-height: 40rpx;
+  padding: 2rpx 10rpx;
+  background: #0099ff;
+  color: white;
+  display: inline-block;
+  border-radius: 5rpx;
+}
+.newdetail-call-tell{
+  background: rgba(52, 176, 49, 1);
+}
+.newdetail-call-report{
+  margin-left: 25rpx;
+  background: #ff0000;
+}
+.newdetail-call-end{
+  background:rgba(246, 243, 243, 1);
+}
+.newdetail-recruitfooter{
+  position: relative;
+  padding-top: 20rpx;
+}
+.newdetail-recruitfooter-tips{
+  display: block;
+  margin: 0 auto;
+  background: rgba(238, 237, 239, 1);
+  color: #333;
+  line-height: 50rpx;
+  padding: 0 30rpx;
+  font-size: 28rpx;
+  border-radius: 20px;
+  width: max-content;
+}
+.newdetail-recruitfooter-tips text{
+  color: #ff0000;
+}
+.newdetail-fixedshadow{
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  left: 0;
+  top: 0;
+  z-index: 999;
+}
+.newdetail-fixed-content{
+  position: relative;
+  background: white;
+  width: 90%;
+  border-radius: 5px;
+}
+.newdetail-tips-box{
+  position: relative;
+  padding: 0 30rpx;
+}
+.newdetail-tips-header{
+  position: relative;
+  line-height: 120rpx;
+  font-weight: bold;
+  font-size: 34rpx;
+  color: #111;
+  text-align: center;
+  border-bottom: 1px solid #DDDDDD;
+}
+.newdetail-tips-body{
+  position: relative;
+  padding: 30rpx 0;
+}
+.newdetail-tips-item{
+  position: relative;
+  margin-bottom: 30rpx;
+}
+.newdetail-tips-item:nth-last-child(1){
+  margin-bottom: 0;
+}
+.newdetail-tips-title{
+  position: relative;
+  padding-left: 50rpx;
+  font-size: 30rpx;
+  font-weight: bold;
+}
+.newdetail-tips-title::before{
+  position: absolute;
+  content: '';
+  display: block;
+  width: 40rpx;
+  height: 40rpx;
+  left: 0;
+  top: 0;
+  background: url(http://cdn.yupao.com/miniprogram/images/usercallphone-tips.png) no-repeat;
+  background-size: 100% 100%;
+}
+.newdetail-tips-text{
+  line-height: 45rpx;
+  color: #7C7C7C;
+  padding: 10rpx 0;
+  font-size: 28rpx;
+}
+.newdetail-tips-footer{
+  position: relative;
+  border-top: 1px solid #DDDDDD;
+}
+.newdetail-footer-item{
+  position: relative;
+  flex: 1;
+  text-align: center;
+  font-size: 30rpx;
+  color: #666666;
+  line-height: 120rpx;
+  border-right: 1px solid #DDDDDD;
+}
+.newdetail-footer-item:nth-last-child(1){
+  color: #0099ff;
+  border-right: 0;
+}
+.recommend-info-container{
+  position: relative;
+  width: 100%;
+  margin-top: 20rpx;
+}
+.recommend-info-header{
+  position: relative;
+  font-size: 34rpx;
+  text-align: center;
+  line-height: 80rpx;
+  background: white;
+}
+.recommend-info-header text{
+  position: relative;
+  display: block;
+  width: max-content;
+}
+.recommend-info-header text::after,.recommend-info-header text::before{
+  position: absolute;
+  display: block;
+  content: '';
+  height: 1px;
+  width: 150rpx;
+  background: #E5E5E5;
+  top: 40rpx;
+}
+.recommend-info-header text::after{
+  left: -170rpx;
+}
+.recommend-info-header text::before{
+  right: -170rpx;
+}
+.recommend-info-body{
+  position: relative;
+  margin-top: 15rpx;
+}
+
+

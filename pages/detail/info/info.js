@@ -7,6 +7,7 @@ Page({
      * 页面的初始数据 getInfoTel
      */
     data: {
+      shownewtips:false, //查看完整号码后弹窗
         complaincontent: app.globalData.complaincontent,
         infoId:"",
         userInfo:false,
@@ -51,6 +52,17 @@ Page({
       usepang: 8,
       isEnd:"",
       joingroup: []
+    },
+    recentlynottips:function(){
+      this.setData({shownewtips: false})
+      let time = new Date().getTime()
+      wx.setStorageSync('recruitHideTipsTime', time)
+    },
+    callthisphonehide:function(){
+      this.setData({shownewtips: false})
+      wx.makePhoneCall({
+        phoneNumber: this.data.info.tel_str,
+      })
     },
   detailToHome:function(){
     wx.redirectTo({
@@ -150,6 +162,15 @@ Page({
         })
     },
     initNeedData: function () {
+      let joingroup = app.globalData.joingroup;
+      if(joingroup){
+        this.setData({
+          joingroup: joingroup,
+          wechat: app.globalData.copywechat,
+          phone: app.globalData.callphone
+        })
+        return false;
+      }
         let _this = this;
         let _mark = true;
         let _wx = wx.getStorageSync("_wx");
@@ -160,7 +181,7 @@ Page({
             if (parseInt(_wx.expirTime) > _time) _mark = false;
         }
         app.doRequestAction({
-            url: "index/search-data/",
+            url: "index/less-search-data/",
             params: {
                 type: "job",
                 userId: _mark ? userInfo.userId : "",
@@ -168,12 +189,14 @@ Page({
             success: function (res) {
                 let mydata = res.data;
                 _this.setData({
-                    fillterArea: mydata.areaTree,
-                    fillterType: mydata.classifyTree,
                     "notice.lists": mydata.notice,
                     phone: mydata.phone,
-                    wechat: _mark ? mydata.wechat.number : _wx.wechat
+                    wechat: _mark ? mydata.wechat.number : _wx.wechat,
+                    joingroup: mydata.join_group_config
                 })
+                app.globalData.joingroup = mydata.join_group_config
+                app.globalData.copywechat = mydata.wechat.number
+                app.globalData.callphone = mydata.phone
                 if (_mark) {
                     let extime = _time + (mydata.wechat.outTime * 1000);
                     wx.setStorageSync("_wx", { wechat: mydata.wechat.number, expirTime: extime });
@@ -256,11 +279,15 @@ Page({
             wx.showModal({
                 title: '温馨提示',
                 content: mydata.errmsg,
-                showCancel: false,
                 success(res) {
-                    wx.navigateTo({
+                    if(res.confirm){
+                      wx.navigateTo({
                         url: '/pages/realname/realname',
-                    })
+                      })
+                    }else{
+                      wx.navigateBack()
+                    }
+                    
                 }
             })
         } else if (mydata.errcode == "to_auth") { //是否进入实名 （取消=>返回、确定=>实名）
@@ -348,7 +375,18 @@ Page({
                 let mydata = res.data;
                 _this.doDetailAction(mydata, {
                     success: function () {
-                        if (mydata.errcode == "end"){
+                        if(mydata.errcode == "ok"){
+                          let rtime = wx.getStorageSync('recruitHideTipsTime')
+                          if(rtime){
+                            let t = 15 * 60 * 60 * 24 * 1000
+                            let tt = new Date().getTime()
+                            if(tt - rtime >= t){
+                              _this.setData({shownewtips:true})
+                            }
+                          }else{
+                            _this.setData({shownewtips:true})
+                          }
+                        }else if(mydata.errcode == "end"){
                             app.showMyTips(mydata.errmsg);
                             return false;
                         }
@@ -529,7 +567,7 @@ Page({
         this.setData({ infoId:infoId })
         this.initNeedData();
         //this.initJobInfo(infoId);
-        this.getPhonCons()
+        //this.getPhonCons()
     },
 
     /**

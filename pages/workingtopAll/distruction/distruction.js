@@ -525,7 +525,7 @@ Page({
         url: "/job/top-hot-areas-v1/",
         way: "POST",
         mask: true,
-        failTitle: "操作失败，请稍后重试！",
+        failTitle: "数据加载失败，请稍后重试！",
         success: function(res) {
           let mydata = res.data;
           if (mydata.errcode == "ok") {
@@ -545,10 +545,6 @@ Page({
               success(res) {}
             })
           }
-        },
-        fail(res) {
-          // console.log(res)
-          // app.showMyTips("修改失败");
         }
       })
     }

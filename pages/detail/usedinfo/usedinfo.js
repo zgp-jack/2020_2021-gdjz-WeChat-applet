@@ -103,7 +103,7 @@ Page({
             if (parseInt(_wx.expirTime) > _time) _mark = false;
         }
         app.doRequestAction({
-            url: "index/search-data/",
+            url: "index/less-search-data/",
             params: {
               type: "job",
               userId: _mark ? (userInfo ? userInfo.userId : "") : "",
@@ -111,12 +111,16 @@ Page({
             success: function (res) {
                 let mydata = res.data;
                 _this.setData({
-                    fillterArea: mydata.areaTree,
-                    fillterType: mydata.classifyTree,
                     "notice.lists": mydata.notice,
                     phone: mydata.phone,
-                    wechat: _mark ? mydata.wechat.number : _wx.wechat
+                    wechat: _mark ? mydata.wechat.number : _wx.wechat,
+                    joingroup: mydata.join_group_config
                 })
+
+                app.globalData.joingroup = mydata.join_group_config
+                app.globalData.copywechat = mydata.wechat.number
+                app.globalData.callphone = mydata.phone
+
                 if (_mark) {
                     let extime = _time + (mydata.wechat.outTime * 1000);
                     wx.setStorageSync("_wx", { wechat: mydata.wechat.number, expirTime: extime });
@@ -142,7 +146,6 @@ Page({
     onLoad: function (options) {
         this.initUsedinfo(options);
         this.initNeedData();
-      this.getPhonCons()
     },
 
     /**
