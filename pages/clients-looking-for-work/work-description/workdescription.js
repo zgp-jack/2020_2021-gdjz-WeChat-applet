@@ -340,11 +340,12 @@ Page({
       tokenTime: userInfo.tokenTime,
       experience: this.data.workage,
       hometown: this.data.provincecity,
-      prof_degree: this.data.degreeone,
-      type: this.data.constituttion,
+      prof_degree: String(this.data.degreeone),
+      type: String(this.data.constituttion),
       number_people: this.data.teamsnumber,
       tags: this.data.labelnum
     })
+    
    if(JSON.stringify(information) == JSON.stringify(this.data.model) && this.data.checkonef == '0'){
      wx.showModal({
        title: '温馨提示',

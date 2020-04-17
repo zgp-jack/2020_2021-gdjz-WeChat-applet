@@ -662,3 +662,54 @@ page{
 
 .yupao-footer-item-newpub image{width: 46rpx;height: 46rpx;top: 7rpx;margin-left: -23rpx;}
 .footer-dot{width: 28rpx;height: 28rpx; background: #fd0618; border-radius: 100%; position: absolute; top: 8rpx;  right: 35rpx; color: #fff;  font-size: 20rpx; line-height: 28rpx;  text-align: center;}
+
+
+/* 详情推荐列表 */
+.recommend-info-container{
+    position: relative;
+    width: 100%;
+    margin-top: 20rpx;
+  }
+  .recommend-info-header{
+    position: relative;
+    font-size: 34rpx;
+    text-align: center;
+    line-height: 80rpx;
+    background: white;
+  }
+  .recommend-info-header text{
+    position: relative;
+    display: block;
+    width: max-content;
+  }
+  .recommend-info-header text::after,.recommend-info-header text::before{
+    position: absolute;
+    display: block;
+    content: '';
+    height: 1px;
+    width: 150rpx;
+    background: #E5E5E5;
+    top: 40rpx;
+  }
+  .recommend-info-header text::after{
+    left: -170rpx;
+  }
+  .recommend-info-header text::before{
+    right: -170rpx;
+  }
+  .recommend-info-body{
+    position: relative;
+    margin-top: 15rpx;
+  }
+  
+
+.seemore-recommend-recruit{
+    background: white;
+    line-height: 100rpx;
+    margin-top: 15rpx;
+    color: #0099ff;
+    text-align: center;
+    font-size: 30rpx;
+    letter-spacing: 3rpx;
+  }
+  

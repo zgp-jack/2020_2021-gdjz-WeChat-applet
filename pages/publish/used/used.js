@@ -368,7 +368,12 @@ Page({
                 app.showMyTips("请输入正确的验证码！");
                 return false;
             }
+        }else{
+            this.setData({
+                "cardInfo.code": ''
+            })
         }
+
         if (!v.regStrNone(cardInfo.content)) {
             app.showMyTips("请输入交易详情");
             return false;
@@ -384,12 +389,12 @@ Page({
             user_name: cardInfo.username,
             detail: cardInfo.content,
             code: cardInfo.code,
-            province_id: cardInfo.provinceId,
-            city_id: (cardInfo.provinceId == cardInfo.cityId) ? "" : cardInfo.cityId,
-            category_id: cardInfo.category_id,
-            attribute_id: cardInfo.attribute_id
+            province_id: parseInt(cardInfo.provinceId),
+            city_id: (cardInfo.provinceId == cardInfo.cityId) ? "" : parseInt(cardInfo.cityId),
+            category_id: parseInt(cardInfo.category_id),
+            attribute_id: parseInt(cardInfo.attribute_id)
         };
- 
+
       if (JSON.stringify(dataJson) == JSON.stringify(this.data.model) && this.data.is_check == '0') {
         wx.showModal({
           title: '温馨提示',

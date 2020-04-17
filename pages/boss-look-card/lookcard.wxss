@@ -1,5 +1,5 @@
 @import "../clients-looking-for-work/finding-name-card/findingnamecard.wxss";
-
+@import "../findingworkinglist/findingworkinglist.wxss";
 /* # workotextone cardeight  cliokine bossbottomo bossbottomo .jiluone .distancec .cardsixzong .cardsixfour distancec .cardnine allone #797979 alllabletu tagsone findingnamecardthreemobile*/
 
 @import "../userauth/userauth.wxss";

@@ -1,0 +1,5 @@
+@import '../../findingworkinglist/findingworkinglist.wxss';
+
+.worker-recommend-lists{
+  position: relative;
+}

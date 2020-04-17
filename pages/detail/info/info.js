@@ -51,7 +51,52 @@ Page({
       showcomplain: false,
       usepang: 8,
       isEnd:"",
-      joingroup: []
+      joingroup: [],
+      recommendlist: [],
+      more: 0,
+      aid: '',
+      cid: ''
+    },
+    detailinfoaction:function(e){
+      let id = e.currentTarget.dataset.id
+      let more = this.data.more
+      let url = more ? '/pages/detail/info/info?more=1&id=' + id : '/pages/detail/info/info?id=' + id
+      wx.redirectTo({
+        url: url,
+      })
+    },
+    seemoreaction:function(){
+      let { aid, cid } = this.data
+      let more = this.data.more
+      if(more){
+        wx.navigateBack()
+      }else {
+        wx.navigateTo({
+          url: '/pages/lists/recruit/index?ids='+cid + '&aid='+aid,
+        })
+      }
+    },
+    getRecommendList: function(){
+      let _this = this;
+      let { aid, cid } = this.data
+      app.appRequestAction({
+        url: '/job/job-recommend-list/',
+        way: 'POST',
+        params:{
+          area_id: aid,
+          classify_id: cid,
+          page: 1
+        },
+        hideLoading: true,
+        success:(res)=>{
+          let mydata = res.data
+          if(mydata.errcode == 'ok'){
+            _this.setData({
+              recommendlist: mydata.data.list
+            })
+          }
+        }
+      })
     },
     recentlynottips:function(){
       this.setData({shownewtips: false})
@@ -224,10 +269,13 @@ Page({
             url: url,
             way: "POST",
             params: userInfo,
-            success: function (res) {  
-              console.log(res.data)
+            success: function (res) { 
                 let mydata = res.data;
-              _this.setData({ info: mydata.result })
+                let aid = mydata.result.city_id;
+                let cid = mydata.result.occupations.join(',')
+                _this.setData({ info: mydata.result, aid: aid, cid: cid })
+                _this.getRecommendList()
+              
                 if (mydata.errcode != "fail") {
                 
                     let t = mydata.result.title;
@@ -561,6 +609,11 @@ Page({
     })
   },
     onLoad: function (options) {
+      if(options.hasOwnProperty('more')){
+        this.setData({
+          more: parseInt(options.more)
+        })
+      }
       this.isShowHomeBtn(options);
         //this.initUserShareTimes();
         let infoId = options.id;

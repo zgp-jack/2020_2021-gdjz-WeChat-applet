@@ -180,6 +180,33 @@
 					"pathName": "pages/usedlist/usedlist",
 					"query": "id=6771211",
 					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "新版本-我的招工信息",
+					"pathName": "pages/published/recruit/list",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "推荐招工子页面",
+					"pathName": "pages/lists/recruit/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "已发布列表",
+					"pathName": "pages/published/published",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "新版本-适合您的工人",
+					"pathName": "pages/published/resume/list",
+					"scene": null
 				}
 			]
 		}

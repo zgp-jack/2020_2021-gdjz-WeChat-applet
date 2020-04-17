@@ -572,6 +572,10 @@ Page({
         app.showMyTips("请输入正确的验证码！");
         return false;
       }
+    }else{
+      this.setData({
+        "cardInfo.code": ''
+      })
     }
     if (!v.regStrNone(cardInfo.content) || !v.isChinese(cardInfo.content) || (cardInfo.content).trim().length < 15) {
       app.showMyTips("请正确输入15~500字招工详情");

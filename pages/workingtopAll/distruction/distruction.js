@@ -299,6 +299,10 @@ Page({
       areaText: areaArrT
     })
   },
+  validIsChina:function(){
+    let area = this.data.areadatas[0][0]
+    return (area.id == '1') ? true : false
+  },
   chooseThisCtiy(e) {
     let that = this;
     let num = e.currentTarget.dataset.index;
@@ -315,7 +319,7 @@ Page({
       num: num,
       pro: pro,
       pid: judgeId
-    }
+    } 
 
     if (areadatafor[num][pro].selected == 1) {
 
@@ -327,14 +331,16 @@ Page({
           return
         }
 
-        areadatafor[0][0].selected = 1;
+        console.log('点击直辖市/全省影响击全国')
+        
+        let first = that.validIsChina()
+        if(first) areadatafor[0][0].selected = 1;
         areadatafor[num][pro].selected = 2
 
 
         that.setData({
           areadatas: areadatafor,
         })
-        console.log(num, cityId, pro)
         if (num > 0) {
           that.getFull(num, cityId, pro)
         }
@@ -351,6 +357,7 @@ Page({
             areadatafor[i][j].selected = 1
           }
         }
+        console.log('直接点击全国 点亮')
         areadatafor[0][0].selected = 2
         let areaTextA = that.data.areaTextA;
 
@@ -366,8 +373,9 @@ Page({
         if (show == "nil") {
           return
         }
-
-        areadatafor[0][0].selected = 1;
+        console.log('点击普通市')
+        let firstarea = that.validIsChina()
+        if(firstarea) areadatafor[0][0].selected = 1;
         areadatafor[num][pro].selected = 2
         let areadataforq = areadatafor[0]
         if (num != 0) {
@@ -386,7 +394,6 @@ Page({
           }
 
         }
-        console.log(areadatafor)
         that.setData({
           areadatas: areadatafor,
         })
@@ -419,6 +426,7 @@ Page({
       if (judgeId == 1) {
         areadatafor[num][pro].selected = 1
       } else if (judgeId == 0) {
+        console.log('直接点击全国 取消')
         areadatafor[0][0].selected = 1
         that.setData({
           areaTextA: []

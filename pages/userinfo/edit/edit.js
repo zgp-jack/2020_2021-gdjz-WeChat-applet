@@ -1,6 +1,7 @@
 // pages/userinfo/edit/edit.js
 const app = getApp();
 let vali = require("../../../utils/v.js");
+let v = vali.v.new();
 Page({
 
   /**
@@ -42,12 +43,46 @@ Page({
       pass: e.detail.value
     })
   },
+  valiPhoneband:function(){
+    let _this = this;
+    let phone = this.data.phone;
+    if (v.isMobile(phone)) {
+      app.appRequestAction({
+        url:"/user/check-tel-allowed/",
+        title:'验证手机中',
+        mask: true,
+        params:{
+          tel: phone
+        },
+        success:function(res){
+          let mydata = res.data
+          if(mydata.errcode == 'ok'){
+            _this.getPhoneCode();
+          }else if(mydata.errcode == 'has'){
+            wx.showModal({
+              title: '提示',
+              content: mydata.errmsg,
+              confirmColor: '#0099ff',
+              success:(res)=>{
+                if(res.confirm){
+                  _this.getPhoneCode()
+                }
+              }
+            })
+          }else{
+            app.showMyTips(mydata.errmsg)
+          }
+        }
+      })
+    }else{
+      app.showMyTips("请先输入正确的手机号")
+    }
+  },
   getPhoneCode: function (e) {
     let _this = this;
-    let dis = parseInt(e.currentTarget.dataset.dis);
+    let dis = parseInt(this.data.dis);
     if (!dis) return false;
     let phone = this.data.phone;
-    let v = vali.v.new();
     let userInfo = this.data.userInfo;
     if (v.isMobile(phone)) {
       wx.showLoading({ title: '正在获取验证码' })

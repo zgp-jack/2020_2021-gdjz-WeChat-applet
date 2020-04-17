@@ -55,7 +55,6 @@
     "pages/integral/temp/temp",
     "pages/integral/official/official",
     "pages/integral/return/return",
-
     "pages/integral/expend/expend",
     "pages/static/notice",
     "pages/static/invite",
@@ -76,8 +75,11 @@
     "pages/ucenter/ucenterNew/invite",
     "pages/information/mymessage/mymessage",
     "pages/information/system/system",
-    "pages/helpCenter/helpCenter"
-
+    "pages/helpCenter/helpCenter",
+    "pages/published/recruit/list",
+    "pages/published/resume/list",
+    "pages/lists/recruit/index",
+    "pages/lists/resume/index"
   ],
   "window": {
     "backgroundTextStyle": "light",

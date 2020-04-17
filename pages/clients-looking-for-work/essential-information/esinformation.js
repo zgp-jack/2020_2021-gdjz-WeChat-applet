@@ -597,6 +597,10 @@ Page({
         })
         return
       }
+    }else{
+      this.setData({
+        verify: ""
+      })
     }
     if (!app.globalData.authcode && this.data.telephone != this.data.tele) {
       wx.showModal({
@@ -637,18 +641,19 @@ Page({
       code: this.data.verify,
       username: this.data.name,
       tel: this.data.telephone,
-      gender: this.data.sex,
-      nation: this.data.nation,
+      gender: String(this.data.sex),
+      nation: String(this.data.nation),
       birthday: this.data.birthday,
       occupations: worktype,
-      province: this.data.provinceid,
-      city: this.data.wardenryid,
+      province: String(this.data.provinceid),
+      city: String(this.data.wardenryid),
       introduce: this.data.otextareavalue,
       lat: this.data.latitude,
       lng: this.data.longitude,
       address: this.data.regionone,
       adcode: this.data.oadcode,
     })
+    
     if (JSON.stringify(information) == JSON.stringify(this.data.model) && this.data.checkonef == '0'){
       wx.showModal({
         title: '温馨提示',

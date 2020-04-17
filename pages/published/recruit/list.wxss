@@ -1,0 +1,127 @@
+.recruit-list-header{
+  position: fixed;
+  width: 100%;
+  background: white;
+  left: 0;
+  top: 0;
+  z-index: 10;
+  box-shadow: 0 0 10rpx #dcdcdc;
+}
+.recruit-header-item{
+  position: relative;
+  flex: 1;
+  color: #353535;
+  font-size: 30rpx;
+  text-align: center;
+}
+.recruit-header-text{
+  position: relative;
+  display: inline-block;
+  line-height: 90rpx;
+}
+.recruit-header-text-active{
+  color: #0099ff;
+}
+.recruit-header-text-active::after{
+  position: absolute;
+  width: 100%;
+  left: 0;
+  bottom: -2rpx;
+  height: 4rpx;
+  content: '';
+  background: #0099ff;
+}
+.recruit-list-container{
+  position: relative;
+  padding-top: 100rpx;
+}
+.recruit-list-item{
+  position: relative;
+  padding: 20rpx 20rpx 0;
+  margin-top: 10rpx;
+  background: white;
+  box-shadow: 0 0 10rpx #dcdcdc;
+}
+.recruit-list-endimg{
+  position: absolute;
+  right: 0;
+  top: -40rpx;
+  width: 120rpx;
+  height: 120rpx;
+  z-index: 2;
+}
+.recruit-item-title{
+  position: relative;
+  line-height: 60rpx;
+  font-size: 30rpx;
+  font-weight: bold;
+}
+.recruit-item-content{
+  position: relative;
+  line-height: 50rpx;
+  font-size: 28rpx;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.recruit-item-footerbox{
+  position: relative;
+  width: 100%;
+}
+.recruit-item-footer{
+  position: relative;
+  width: 100%;
+  margin-top: 10rpx;
+  padding: 12rpx 0;
+  border-top: 1px dashed #dcdcdc;
+  justify-items: start;
+  justify-content: space-between;
+}
+.recruit-footer-item{
+  display: inline-block;
+  border: 1px solid #dcdcdc;
+  font-size: 30rpx;
+  color: #333;
+  padding: 5rpx 10rpx;
+}
+.recruit-settop-time{
+  position: relative;
+  line-height: 70rpx;
+  font-size: 28rpx;
+  color: #333;
+}
+.recruit-settop-time text{
+  color: #777;
+}
+.recruit-settop-btn{
+  background: #F5F5F5;
+  color: #F12424;
+  font-size: 30rpx;
+  position: absolute;
+  right: 0;
+  bottom: 10rpx;
+  display: inline-block;
+  line-height: 50rpx;
+  padding: 0 10rpx;
+  border: 1px solid #F5F5F5;
+}
+.recruit-checking{
+  line-height: 80rpx;
+  color: #ff0000;
+  font-size: 28rpx;
+  border-top: 1px dashed #dcdcdc;
+  margin-top: 15rpx;
+  padding-left: 50rpx;
+}
+
+.recruit-checking image{
+  display: inline-block;
+  width: 30rpx;
+  height: 30rpx;
+  border-radius: 50%;
+  position: absolute;
+  top: 27rpx;
+  left: 0;
+}

@@ -381,8 +381,8 @@ Page({
       start_time: this.data.startdate,
       project_name: this.data.projectname,
       detail: this.data.detail,
-      province: this.data.provincecity.split(",")[0],
-      city: this.data.provincecity.split(",")[1],
+      province: String(this.data.provincecity.split(",")[0]),
+      city: String(this.data.provincecity.split(",")[1]),
       image: this.data.importimg
     })
 

@@ -426,7 +426,6 @@ App({
       },
       name: 'file',
       success(res) {
-        console.log(res)
         let mydata = JSON.parse(res.data);
         if (mydata.errcode == "ok") {
           wx.hideToast()

@@ -253,6 +253,81 @@
     暂无记录
   </view> -->
 
+
+  <!-- 推荐列表开始 -->
+  <view class="recommend-info-container">
+    <view class="recommend-info-header flex-row">
+      <text>相关推荐</text>
+    </view>
+    <view class="recommend-info-body">
+
+      <view class="listsboxdetailover" wx:for="{{recommendlist}}" wx:key="{{index}}">
+      <image src="{{finded}}" class="finded" wx:if="{{item.is_end == 2}}"></image>
+      <view class="listsoverhl" data-uuid="{{item.uuid}}" bindtap="showDetailInfo" data-id="{{ item.id }}">
+        <view class="listsboxdetailo">
+          <view>
+            <image class="oimg" src="{{item.headerimg}}" data-index="{{index}}" binderror="errImg"></image>
+          </view>
+          <view class="listsboxintro">
+            <view class="listsboxage">
+              <view class="listsboxageone">
+                <view class="listsboxname" wx:if="{{item.username}}">
+                  <text>{{item.username}}</text>
+                </view>
+                <view wx:if="{{item.gender  == '1' ||item.gender  == '2' }}" class="{{(item.gender =='1'||item.gender =='2')?'listsboxsex':''}}">
+                  <text>{{item.gender  == "1" ? "男" : item.gender == "2"?"女":""}}</text>
+                </view>
+                <view class="listsboxagezong" wx:if="{{item.birthday != 0}}">
+                  <text>{{item.birthday}}岁</text>
+                </view>
+                <image wx:if="{{item.certificate == 1}}" src="{{authentication}}"></image>
+
+              </view>
+              <view class="listsboxagetwo" wx:if="{{item.gender != '0'}}">
+                <text class="listsboxnation" wx:if="{{item.nation}}">{{item.nation}}</text>
+                <text><text class="listsboxnum" wx:if="{{item.experience}}" >{{item.experience}}</text></text>
+        
+              </view>
+              <view class="listsboxagetwot" wx:if="{{item.gender == '0'}}">
+                <text wx:for="{{item.tags}}" wx:key="{{index}}">{{item.label_name}}</text>
+              </view>
+            </view>
+            <view class="listsboxshow" wx:if="{{item.type}}">{{item.type}}</view>
+          </view>
+            <text class="listsboxstyru" catchtap="jumptop" wx:if="{{item.resume_top == 1}}">我要置顶</text>
+            <image class="listsboxoimg" src="{{toptown}}" wx:if="{{item.resume_top == 1}}"></image>
+        </view>
+        <view class="listsboxlable">
+          <view class="listsboxlableone" wx:for="{{item.occupations}}" wx:key="{{index}}">{{item}}</view>
+
+        </view>
+        <view class="listsboxself" wx:if="{{item.introduce}}">{{item.introduce}}</view>
+        <view class="listsboxself" wx:if="{{!item.introduce}}"></view>
+        <view class="listsboxlocal">
+          <view>
+            <view class="listsboxlocalone">
+              <view>
+                <image src="{{biaoqian}}"></image>
+              </view>
+              <view class="listsboxadree" wx:if="{{item.show_address}}">{{item.show_address}}</view>
+              <view class="listsboxadreeq" wx:if="{{item.distance}}">{{item.distance}}</view>
+            </view>
+          </view>
+          <view class="listsboxlocaltwo">
+            <!-- <text class="listsboxtime" wx:if="{{item.time}}">{{item.time}}</text> -->
+                    <text wx:if="{{item.prof_degree}}">{{item.prof_degree}}</text>
+          </view>
+        </view>
+      </view>
+      <ad class="lists-ad" unit-id="{{ unitid }}" wx:if="{{index % 5 == 0 && index > 5}}"></ad>
+    </view>
+    <view class='nodata-texttips' wx:if="{{ !recommendlist.length }}">没有更多内容了</view>
+		<view class="seemore-recommend-recruit" bindtap="seemoreaction" wx:if="{{ recommendlist.length }}">查看更多招工信息</view>
+    </view>
+  </view>
+
+  <!-- 推荐列表结束 -->
+
   <view class="bossbottom" wx:if="{{status == 0}}">
     <button class="bossbottomb" catchtap="praise">
       <view class="bossbottomc">

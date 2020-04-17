@@ -422,10 +422,6 @@ Page({
     let _type = e.currentTarget.dataset.type;
     app.cameraAndAlbum(function (imgRes, mydata) {
       wx.hideToast();
-
-      console.log(mydata)
-      console.log(imgRes)
-
       if (_type == "zm") {
         _this.setData({
           "card_img_path": mydata.httpurl,
