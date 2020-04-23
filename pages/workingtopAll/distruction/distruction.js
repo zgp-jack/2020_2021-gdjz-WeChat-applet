@@ -523,12 +523,12 @@ Page({
 
     let that = this;
 
-    let areadatahot = app.globalData.hotAreaData.use;
-    if (areadatahot) {
-      let data = app.globalData.hotAreaData.data
-      that.changeAreaData(data, options)
+    // let areadatahot = app.globalData.hotAreaData.use;
+    // if (areadatahot) {
+    //   let data = app.globalData.hotAreaData.data
+    //   that.changeAreaData(data, options)
 
-    } else {
+    // } else {
       app.appRequestAction({
         url: "/job/top-hot-areas-v1/",
         way: "POST",
@@ -555,7 +555,7 @@ Page({
           }
         }
       })
-    }
+    // }
 
   },
 
@@ -699,8 +699,10 @@ Page({
       }
       that.data.areaTextC.push(detail)
     }
-    that.data.areadatas[0][0].selected = 1;
-
+    console.log('触发了')
+    if(that.validIsChina()){
+      that.data.areadatas[0][0].selected = 1;
+    }
     for (let i = 0; i < that.data.areadatas.length; i++) {
       for (let j = 0; j < that.data.areadatas[i].length; j++) {
 

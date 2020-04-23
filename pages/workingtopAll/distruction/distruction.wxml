@@ -15,7 +15,7 @@
         <text>暂未找到相关城市</text>
       </view>
     </view>
-    <view class="search-list-item" wx:for="{{ isAllAreas ? allAreaLists : nAreaLists }}" wx:key="{{ index }}" bindtap='chooseInputCtiy' data-pname="{{ item.ad_name }}" data-id="{{ item.id }}" data-area="{{ item.name }}" data-pid="{{ item.pid }}">{{ item.cname }} </view>
+    <view class="search-list-item" wx:for="{{ isAllAreas ? allAreaLists : nAreaLists }}" wx:key="{{ index }}" bindtap='chooseInputCtiy' data-pname="{{ item.ad_name }}" data-id="{{ item.id }}" data-area="{{ item.name }}" data-pid="{{ item.pid }}">{{ item.cname }}</view>
   </view>
 
   <view class='index-area-history' wx:if="{{!showListsTtile&&showListsAnd }}">

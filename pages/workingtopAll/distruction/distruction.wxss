@@ -16,9 +16,6 @@
   font-size: 0;
   z-index: 101;
 }
-.index-area-tips{
-    z-index: 0!important;
-}
 .obtn button {
   width: 550rpx;
   /* height: 95rpx; */
@@ -44,8 +41,12 @@
 }
 
 .index-area-tips {
+    position: fixed;
   box-shadow: 0 0px 0px !important;
-  background: rgba(0, 0, 0, 0);
+  background: #f7f6f9;
+    left: 0;
+    top: 100rpx;
+    z-index: 3;
 }
 
 .index-area-history {
@@ -56,6 +57,7 @@
   overflow-y: scroll;
   background: #F8F6F9;
   padding: 100rpx 0rpx;
+  z-index: 5;
 }
 
 .history-header {

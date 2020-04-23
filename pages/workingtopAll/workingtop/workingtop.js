@@ -448,6 +448,7 @@ Page({
             let areaCitycrumall = []
             let areaAllcrum = mydata.data.top_country
             let areaAllcrumall = []
+            let top_province_ids = mydata.data.top_province_ids
 
             for (let i = 0; i < areaAllcrum.length; i++) {
               let areaAllcrumone = {
@@ -468,6 +469,12 @@ Page({
               }
               areaProcrumall.push(areaProcrumone)
             }
+            let myarr = []
+            for(let i = 0; i < top_province_ids.length; i++){
+              let mydata = top_province_ids[i]
+              let d = areaProcrumall.find(item => item.id == mydata)
+              myarr.push(d)
+            }
 
             for (let i = 0; i < areaCitycrum.length; i++) {
               let areaCitycrumone = {
@@ -478,9 +485,10 @@ Page({
               }
               areaCitycrumall.push(areaCitycrumone)
             }
+            
 
             that.setData({
-              areaProcrum: areaProcrumall,
+              areaProcrum: myarr,
               areaCitycrum: areaCitycrumall,
               areaAllcrum: areaAllcrumall,
               alllength: areaProcrumall.length + areaCitycrumall.length + areaAllcrumall.length,
@@ -530,6 +538,8 @@ Page({
     if (that.data.areaAllcrum.length>0){
       country = that.data.areaAllcrum[0].id
     }
+
+    that.getAllpoint()
 
     let detail = {
       mid: userInfo.userId,

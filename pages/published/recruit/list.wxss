@@ -38,16 +38,16 @@
 .recruit-list-item{
   position: relative;
   padding: 20rpx 20rpx 0;
-  margin-top: 10rpx;
+  margin-bottom: 20rpx;
   background: white;
   box-shadow: 0 0 10rpx #dcdcdc;
 }
 .recruit-list-endimg{
   position: absolute;
   right: 0;
-  top: -40rpx;
-  width: 120rpx;
-  height: 120rpx;
+  top: -7rpx;
+  width: 100rpx;
+  height: 40rpx;
   z-index: 2;
 }
 .recruit-item-title{

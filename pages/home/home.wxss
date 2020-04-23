@@ -453,7 +453,7 @@
   height: 45rpx;
   position: absolute;
   right: 0;
-  top:-5rpx;
+  top:-8rpx;
   z-index: 2;
 }
 
