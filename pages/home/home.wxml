@@ -38,11 +38,7 @@
 
   <!-- 鱼泡产业 -->
   <view class='index-yupao-industry clearfix'>
-<<<<<<< HEAD
-    <navigator class='index-footer-nav' url='/pages/index/index' class='index-footer-nav' open-type="navigate" >
-=======
     <navigator class='index-footer-nav' url='/pages/index/index' class='index-footer-nav' open-type="navigate">
->>>>>>> fab70cdbd39d8434435a96549afb211d431ac5b3
       <view class='index-industry-item'>
         <image src='{{ industry.jzzg }}'></image>
         <text>建筑招工</text>
@@ -54,11 +50,7 @@
         <text>装修招工</text>
       </view>
     </navigator>
-<<<<<<< HEAD
-    <navigator class='index-footer-nav' target="miniProgram" open-type="navigate" app-id="wxd348efa56021e8d0" path="" extra-data="" version="release">
-=======
     <navigator  class='index-footer-nav' target="miniProgram" open-type="navigate" app-id="wxd348efa56021e8d0" path="" extra-data="" version="release">
->>>>>>> fab70cdbd39d8434435a96549afb211d431ac5b3
       <view class='index-industry-item'>
         <image src='{{ industry.hgzp }}'></image>
         <text>焊工招聘</text>
