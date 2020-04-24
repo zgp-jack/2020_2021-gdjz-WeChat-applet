@@ -10,3 +10,6 @@
 .user-changepass-box .common-publish-item{
     background: white;
 }
+/* .user-changepass-box .common-publish-item:nth-last-child(1) .common-publish-item-content{
+    border-bottom: 0;
+} */

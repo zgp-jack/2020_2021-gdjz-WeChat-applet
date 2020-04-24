@@ -16,7 +16,7 @@
                 <view class='common-publish-item-content common-publish-item-code common-publish-item-line'>
                     <text class='common-publish-words'>验证码</text>
                     <input type='number' class='common-publish-input' value='{{ code }}' placeholder='请输入验证码' bindinput="enterPhoneCode"></input>
-                    <text class='publish-getcode-btn' bindtap='valiPhoneband' data-dis="{{ dis }}">{{ codeTips }}</text>
+                    <text class='publish-getcode-btn' bindtap='getPhoneCode' data-dis="{{ dis }}">{{ codeTips }}</text>
                 </view>
             </view>
         <view class='common-publish-item'>

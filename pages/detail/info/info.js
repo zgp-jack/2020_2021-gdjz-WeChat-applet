@@ -51,57 +51,12 @@ Page({
       showcomplain: false,
       usepang: 8,
       isEnd:"",
-      joingroup: [],
-      recommendlist: [],
-      more: 0,
-      aid: '',
-      cid: ''
-    },
-    detailinfoaction:function(e){
-      let id = e.currentTarget.dataset.id
-      let more = this.data.more
-      let url = more ? '/pages/detail/info/info?more=1&id=' + id : '/pages/detail/info/info?id=' + id
-      wx.redirectTo({
-        url: url,
-      })
-    },
-    seemoreaction:function(){
-      let { aid, cid } = this.data
-      let more = this.data.more
-      if(more){
-        wx.navigateBack()
-      }else {
-        wx.navigateTo({
-          url: '/pages/lists/recruit/index?ids='+cid + '&aid='+aid,
-        })
-      }
-    },
-    getRecommendList: function(){
-      let _this = this;
-      let { aid, cid } = this.data
-      app.appRequestAction({
-        url: '/job/job-recommend-list/',
-        way: 'POST',
-        params:{
-          area_id: aid,
-          classify_id: cid,
-          page: 1
-        },
-        hideLoading: true,
-        success:(res)=>{
-          let mydata = res.data
-          if(mydata.errcode == 'ok'){
-            _this.setData({
-              recommendlist: mydata.data.list
-            })
-          }
-        }
-      })
+      joingroup: []
     },
     recentlynottips:function(){
       this.setData({shownewtips: false})
       let time = new Date().getTime()
-      wx.setStorageSync('recruitHideTipsTime', time)
+      wx.setStorageSync('hideTipsTime', time)
     },
     callthisphonehide:function(){
       this.setData({shownewtips: false})
@@ -207,15 +162,6 @@ Page({
         })
     },
     initNeedData: function () {
-      let joingroup = app.globalData.joingroup;
-      if(joingroup){
-        this.setData({
-          joingroup: joingroup,
-          wechat: app.globalData.copywechat,
-          phone: app.globalData.callphone
-        })
-        return false;
-      }
         let _this = this;
         let _mark = true;
         let _wx = wx.getStorageSync("_wx");
@@ -269,13 +215,10 @@ Page({
             url: url,
             way: "POST",
             params: userInfo,
-            success: function (res) { 
+            success: function (res) {  
+              console.log(res.data)
                 let mydata = res.data;
-                let aid = mydata.result.city_id;
-                let cid = mydata.result.occupations.join(',')
-                _this.setData({ info: mydata.result, aid: aid, cid: cid })
-                _this.getRecommendList()
-              
+              _this.setData({ info: mydata.result })
                 if (mydata.errcode != "fail") {
                 
                     let t = mydata.result.title;
@@ -424,16 +367,7 @@ Page({
                 _this.doDetailAction(mydata, {
                     success: function () {
                         if(mydata.errcode == "ok"){
-                          let rtime = wx.getStorageSync('recruitHideTipsTime')
-                          if(rtime){
-                            let t = 15 * 60 * 60 * 24 * 1000
-                            let tt = new Date().getTime()
-                            if(tt - rtime >= t){
-                              _this.setData({shownewtips:true})
-                            }
-                          }else{
-                            _this.setData({shownewtips:true})
-                          }
+                          _this.setData({shownewtips:true})
                         }else if(mydata.errcode == "end"){
                             app.showMyTips(mydata.errmsg);
                             return false;
@@ -609,11 +543,6 @@ Page({
     })
   },
     onLoad: function (options) {
-      if(options.hasOwnProperty('more')){
-        this.setData({
-          more: parseInt(options.more)
-        })
-      }
       this.isShowHomeBtn(options);
         //this.initUserShareTimes();
         let infoId = options.id;

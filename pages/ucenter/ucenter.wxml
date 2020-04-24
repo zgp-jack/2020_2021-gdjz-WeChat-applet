@@ -19,11 +19,11 @@
                 </view>
             </view>
             <view class='ucenter-integralbox'>
-                <!-- <navigator class='ucenter-integral-item flex-column' url='/pages/integral/return/return' open-type="navigate" wx:if="{{ showReturnIntegral }}">
+                <navigator class='ucenter-integral-item flex-column' url='/pages/integral/return/return' open-type="navigate" wx:if="{{ showReturnIntegral }}">
                     <text>{{ member.return_integral }}</text>
                     <text>退分记录</text>
-                </navigator> -->
-                <navigator class='ucenter-integral-item flex-column' url='/pages/integral/source/source?office=1' open-type="navigate">
+                </navigator>
+                <navigator class='ucenter-integral-item flex-column' url='/pages/integral/official/official' open-type="navigate">
                     <text class='overwords'>{{ member.integral }}</text>
                     <text>积分</text>
                 </navigator>
