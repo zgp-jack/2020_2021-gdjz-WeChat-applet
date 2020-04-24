@@ -43,8 +43,8 @@ App({
     commonJixieAd: "http://cdn.yupao.com/miniprogram/images/list-ad-newjixie.png?t=" + new Date().getTime(),
     // apiRequestUrl:"http://60.205.221.14:8087/",
     // apiRequestUrl: "https://miniapi.zhaogong.vrtbbs.com/",
-    apiRequestUrl:"http://miniapitest.zhaogong.vrtbbs.com/",
-    // apiRequestUrl: "https://newyupaomini.54xiaoshuo.com/",
+    // apiRequestUrl:"http://miniapitest.zhaogong.vrtbbs.com/",
+    apiRequestUrl: "https://newyupaomini.54xiaoshuo.com/",
     // apiRequestUrl: "http://miniapi.qsyupao.com/",
     //apiRequestUrl:"http://mini.zhaogongdi.com/",
     apiUploadImg: "https://newyupaomini.54xiaoshuo.com/index/upload/",
@@ -156,7 +156,7 @@ App({
         if (res.statusCode == 200 || res.statusCode == 304) {
           _options.hasOwnProperty("success") ? _options.success(res) : "";
         } else {
-          _options.hasOwnProperty("fail") ? _options.fail(err) : "";
+          _options.hasOwnProperty("fail") ? _options.fail(res) : "";
         }
       },
       fail(err) {
