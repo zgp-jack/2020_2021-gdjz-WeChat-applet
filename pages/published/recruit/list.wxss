@@ -85,6 +85,11 @@
   font-size: 30rpx;
   color: #333;
   padding: 5rpx 10rpx;
+  text-align: center;
+  width: 160rpx;
+}
+.recruit-footer-item.btn-visib{
+  visibility: hidden;
 }
 .recruit-settop-time{
   position: relative;
@@ -105,6 +110,7 @@
   display: inline-block;
   line-height: 50rpx;
   padding: 0 10rpx;
+  width: 160rpx;
   border: 1px solid #F5F5F5;
 }
 .recruit-checking{

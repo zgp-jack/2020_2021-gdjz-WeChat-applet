@@ -5,6 +5,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    refresh: false,
     statusCheck: app.globalData.apiImgUrl + 'published-recruit-checking.png',
     statusEnd: app.globalData.apiImgUrl + 'published-recruit-end.png',
     statusNopass: app.globalData.apiImgUrl + 'published-recruit-nopass.png',
@@ -32,38 +33,39 @@ Page({
   userSetTopAction:function(e){
     let _this = this;
     let id = e.currentTarget.dataset.id; // 信息id
-    let infoIndex = e.currentTarget.dataset.index; // 信息下标
-    let time = e.currentTarget.dataset.time; // 到期时间
-    let status = e.currentTarget.dataset.status; // 招工状态
-    let top = e.currentTarget.dataset.top; //是否置顶
-    let end = e.currentTarget.dataset.end // 是否已招到
+    let infoIndex = parseInt(e.currentTarget.dataset.index); // 信息下标
+    let topdata = this.data.lists[infoIndex]; //当前数据
+    let end = topdata.is_end // 是否已招到
+    let status = topdata.is_check; // 招工状态
     let now = new Date().getTime() / 1000 // 当前时间戳
+    let top = topdata.top; //是否有置顶数据
     let userInfo = wx.getStorageSync('userInfo') // 用户信息
-    let showTime = time > now; // 置顶是否过期
-    let topId = e.currentTarget.dataset.topid; // 置顶id
+    
 
-    if (top == '0' && !showTime) { // 置顶已过期
-      if (end == "2") {
-        wx.showModal({
-          title: '提示',
-          content: '已招到状态不能进行置顶操作，请修改招工状态',
-          showCancel: false
+    if(end == '2'){ //如果已招到
+      wx.showModal({
+        title: '提示',
+        content: '已招到状态不能进行置顶操作，请修改招工状态',
+        showCancel: false
+      })
+      return false;
+    }
+  
+    if(top == '1'){ //如果说有置顶数据
+      let data = topdata.top_data; //置顶数据
+      let endtime = data.end_time //置顶到期时间
+      let toping = data.is_top // 是否置顶状态
+      let showTime = now > parseInt(endtime) ? true : false; // 置顶是否过期 已过期
+      
+      
+      if(showTime){ //如果置顶过期
+        console.log(showTime)
+        wx.navigateTo({
+          url: `/pages/workingtopAll/workingtop/workingtop?id=${id}$topId=${data}`,
         })
-        return false;
+        return false
       }
-      this.setData({
-        infoId: id,
-        infoIndex: index
-      })
-      wx.navigateTo({
-        url: `/pages/workingtopAll/workingtop/workingtop?id=${id}&topId=${topId}`,
-      })
 
-    } else if (!status && status != 0) { // 从没置顶
-      wx.navigateTo({
-        url: `/pages/workingtopAll/workingtop/workingtop?id=${id}&topId=${topId}`,
-      })
-    } else {
       wx.showLoading({
         title: '正在执行操作'
       })
@@ -75,14 +77,15 @@ Page({
           token: userInfo.token,
           tokenTime: userInfo.tokenTime,
           infoId: id,
-          status: top ? top : "0"
+          status: toping == '0' ? '1' : "0"
         },
         success: function (res) {
           wx.hideLoading();
           let mydata = res.data;
+          console.log(mydata)
           if (mydata.errcode == "ok") {
             let newData = _this.data.lists;
-            newData[infoIndex] = mydata.data;
+            newData[infoIndex].top_data.is_top = mydata.data.top.is_top
             _this.setData({
               lists: newData
             })
@@ -135,13 +138,126 @@ Page({
             })
           }
         })
+
+    }else{
+      wx.navigateTo({
+        url: `/pages/workingtopAll/workingtop/workingtop?id=${id}&topId=undefined`,
+      })
     }
+
   },
   userSetTop: function (e) {
     let id = e.currentTarget.dataset.id;
     let time = e.currentTarget.dataset.time
     wx.navigateTo({
       url: `/pages/workingtopAll/workingtop/workingtop?id=${id}&topId=${time}`,
+    })
+  },
+  changeRecruitStatus:function(e){
+    let status = e.currentTarget.dataset.status
+    let _id = e.currentTarget.dataset.id;
+    let infoIndex = e.currentTarget.dataset.index;
+    let userInfo = wx.getStorageSync('userInfo');
+    let _this = this;
+    wx.showLoading({
+      title: '正在修改状态'
+    })
+    app.doRequestAction({
+      way: "POST",
+      url: "job/job-end-status/",
+      params: {
+        userId: userInfo.userId,
+        token: userInfo.token,
+        tokenTime: userInfo.tokenTime,
+        infoId: _id
+      },
+      success: function (res) {
+        wx.hideLoading();
+        let mydata = res.data;
+        if (mydata.errcode == "ok") {
+          let newData = _this.data.lists;
+          newData[infoIndex].is_end = mydata.data.is_end;
+          newData[infoIndex].is_check = mydata.data.is_check;
+          let top = newData[infoIndex].top_data;
+          if(top) newData[infoIndex].top_data.is_top = mydata.data.top.is_top
+          _this.setData({
+            lists: newData
+          })
+          wx.showToast({
+            title: mydata.errmsg,
+            icon: "none",
+            duration: 1500
+          })
+        } else if (mydata.errcode == "auth_forbid") {
+          wx.showModal({
+            title: '温馨提示',
+            content: res.data.errmsg,
+            cancelText: '取消',
+            confirmText: '去实名',
+            success(res) {
+              if (res.confirm) {
+                let backtwo = "backtwo"
+                wx.redirectTo({
+                  url: `/pages/realname/realname?backtwo=${backtwo}`
+                })
+              }
+            }
+          })
+          return
+        } else if (mydata.errcode == "member_forbid") {
+          if (_index === 0) {
+            wx.showModal({
+              title: '温馨提示',
+              content: mydata.errmsg,
+              cancelText: "取消",
+              confirmText: "联系客服",
+              success(res) {
+                if (res.confirm) {
+                  let tel = app.globalData.serverPhone
+                  wx.makePhoneCall({
+                    phoneNumber: tel,
+                  })
+                }
+              }
+            })
+          } else {
+            wx.showToast({
+              title: mydata.errmsg,
+              icon: "none",
+              duration: 1500
+            })
+          }
+        } else if (mydata.errcode == "to_auth") {
+          wx.showModal({
+            title: '温馨提示',
+            content: res.data.errmsg,
+            cancelText: '取消',
+            confirmText: '去实名',
+            success(res) {
+              if (res.confirm) {
+                wx.navigateTo({
+                  url: `/pages/realname/realname`
+                })
+              }
+            }
+          })
+          return
+        }else {
+          wx.showToast({
+            title: mydata.errmsg,
+            icon: "none",
+            duration: 1500
+          })
+        }
+      },
+      fail: function () {
+        wx.hideLoading();
+        wx.showToast({
+          title: "网络不太好，操作失败！",
+          icon: "none",
+          duration: 3000
+        })
+      }
     })
   },
   getRecruitList:function(){
@@ -203,7 +319,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    this.pageRefresh()
   },
 
   /**
@@ -226,7 +342,15 @@ Page({
   onPullDownRefresh: function () {
 
   },
-
+  pageRefresh() {
+    if (this.data.refresh) {
+      this.setData({ lists: [], page: 1, hasmore: true })
+      this.getRecruitList()
+    }
+    this.setData({
+      refresh: false
+    })
+  },
   /**
    * 页面上拉触底事件的处理函数
    */

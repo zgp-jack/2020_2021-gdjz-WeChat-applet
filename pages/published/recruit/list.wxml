@@ -6,7 +6,7 @@
 
 <view class="recruit-list-container">
 
-  <view class="recruit-list-item" wx:for="{{ lists }}" wx:key="{{ item.id }}" data-id="{{ item.id }}" bindtap="jumpRecruitInfo">
+  <view class="recruit-list-item" wx:for="{{ lists }}" wx:key="{{ index }}" data-id="{{ item.id }}" bindtap="jumpRecruitInfo">
     <image class="recruit-list-endimg" src="{{ statusCheck }}" wx:if="{{ item.is_check == '1' }}"></image>
     <image class="recruit-list-endimg" src="{{ statusNopass }}" wx:if="{{ item.is_check == '0' }}"></image>
     <image class="recruit-list-endimg" src="{{ statusEnd }}" wx:if="{{ item.is_end == '2' }}"></image>
@@ -17,11 +17,11 @@
       <view class="recruit-item-footer flex-row" wx:if="{{ item.is_check != '1'  }}">
         <view class="recruit-footer-item" data-id="{{ item.id }}" bindtap="userEditRecuritInfo">修改</view>
         <block wx:if="{{ item.is_check == '2'  }}">
-          <view class="recruit-footer-item">重新招工</view>
-          <view class="recruit-footer-item" bindtap="userSetTopAction" data-id="{{ item.id }}" data-status="{{ item.is_check }}" data-top="{{ item.top }}" data-end="{{ item.is_end }}" data-time="{{ item.sort_time }}" data-index="{{ index }}">{{ item.top && item.top == '1' ? '取消置顶' : '我要置顶' }}</view>
+          <view class="recruit-footer-item" bindtap="changeRecruitStatus" data-id="{{ item.id }}" data-index="{{ index }}" data-status="{{ item.is_end }}">{{ item.is_end == '2' ? '重新招工' : '停止招工' }}</view>
+          <view class="recruit-footer-item {{ item.is_end == '2' ? 'btn-visib' : '' }} " bindtap="userSetTopAction" data-id="{{ item.id }}" data-index="{{ index }}">{{ item.top && item.top_data.is_top == '1' ? '取消置顶' : '我要置顶' }}</view>
         </block>
       </view>
-      <view class="recruit-settop-time" wx:if="{{ item.top == '1' }}">到期时间：<text>2020-04-09 18:53:35</text> <view class="recruit-settop-btn" bindtap="userSetTop" data-id="{{ item.id }}" data-time="{{ item.sort_time }}">修改置顶</view> </view>
+      <view class="recruit-settop-time" wx:if="{{ item.top_data.is_top == '1' && item.is_check == '2' }}">到期时间：<text>{{ item.top_data.time_str }}</text> <view class="recruit-settop-btn" bindtap="userSetTop" data-topId="1" data-id="{{ item.id }}" data-time="{{ item.sort_time }}">修改置顶</view> </view>
     </view>
   </view>
   <view class='nodata-texttips' wx:if="{{ !hasmore && page != 1 }}">没有更多内容了</view>

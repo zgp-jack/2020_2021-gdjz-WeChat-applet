@@ -569,7 +569,11 @@ Page({
             content: res.data.errmsg,
             showCancel: false,
             success(res) {
-             
+              let pages = getCurrentPages();
+              let prevPage = pages[pages.length - 2];
+              prevPage.setData({ //修改上一个页面的变量
+                refresh: true
+              })
 
               wx.navigateBack({
                 delta: 1
@@ -902,9 +906,9 @@ Page({
     let that = this;
     let pages = getCurrentPages();
     let prevPage = pages[pages.length - 2];
-    prevPage.setData({ //修改上一个页面的变量
-      refresh: true
-    })
+    // prevPage.setData({ //修改上一个页面的变量
+    //   refresh: true
+    // })
   },
 
   /**
