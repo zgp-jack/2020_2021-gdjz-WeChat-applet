@@ -206,6 +206,13 @@
 					"id": -1,
 					"name": "新版本-适合您的工人",
 					"pathName": "pages/published/resume/list",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "新版本-我的二手交易",
+					"pathName": "pages/published/used/list",
 					"scene": null
 				}
 			]

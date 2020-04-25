@@ -77,7 +77,7 @@
     "pages/information/system/system",
     "pages/helpCenter/helpCenter",
     "pages/published/recruit/list",
-    "pages/published/resume/list",
+    "pages/published/used/list",
     "pages/lists/recruit/index",
     "pages/lists/resume/index"
   ],

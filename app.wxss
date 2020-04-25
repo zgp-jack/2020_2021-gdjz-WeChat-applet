@@ -160,12 +160,12 @@ page{
 }
 .common-publish-img{
     position: absolute;
-    width: 40rpx;
-    height: 40rpx;
+    width: 50rpx;
+    height: 50rpx;
     background: white;
     left: 50%;
-    margin-left: -20rpx;
-    bottom: 70rpx;
+    margin-left: -25rpx;
+    bottom: 50rpx;
 }
 .common-publish-img image{
     position: relative;

@@ -51,9 +51,9 @@
             <text>发布二手交易</text>
         </view>
     </view>
-    <!-- <view class='common-publish-img {{ publishActive ? "publish-rotate-active":"" }}'>
+    <view class='common-publish-img {{ publishActive ? "publish-rotate-active":"" }}'>
         <image src='http://cdn.yupao.com/miniprogram/images/publish.png'></image>
-    </view> -->
+    </view>
 </view>
 
 </template>

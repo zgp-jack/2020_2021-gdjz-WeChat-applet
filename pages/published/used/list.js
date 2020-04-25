@@ -5,7 +5,6 @@ Page({
    * 页面的初始数据
    */
   data: {
-    refresh: false,
     statusCheck: app.globalData.apiImgUrl + 'published-recruit-checking.png',
     statusEnd: app.globalData.apiImgUrl + 'published-recruit-end.png',
     statusNopass: app.globalData.apiImgUrl + 'published-recruit-nopass.png',
@@ -18,18 +17,19 @@ Page({
     nodata: app.globalData.apiImgUrl + 'nodata.png',
     checkingimg: app.globalData.apiImgUrl + 'published-info.png',
     infoId: '',
-    infoIndex: -1
+    infoIndex: -1,
+    tipmsg: '提示：人工审核，该信息仅自己可见。'
   },
-  jumpRecruitInfo:function(e){
+  jumpUsedInfo:function(e){
     let id = e.currentTarget.dataset.id
     wx.navigateTo({
-      url: `/pages/detail/info/info?id=${id}`,
+      url: '/pages/detail/usedinfo/usedinfo?id='+id,
     })
   },
-  userEditRecuritInfo:function(e){
+  userEditUsedInfo:function(e){
     let id = e.currentTarget.dataset.id
     wx.navigateTo({
-      url: '/pages/publish/recruit/recruit?id='+id,
+      url: '/pages/publish/used/used?id='+id,
     })
   },
   userSetTopAction:function(e){
@@ -38,9 +38,6 @@ Page({
     let infoIndex = parseInt(e.currentTarget.dataset.index); // 信息下标
     let topdata = this.data.lists[infoIndex]; //当前数据
     let end = topdata.is_end // 是否已招到
-    let status = topdata.is_check; // 招工状态
-    let now = new Date().getTime() / 1000 // 当前时间戳
-    let top = topdata.top; //是否有置顶数据
     let userInfo = wx.getStorageSync('userInfo') // 用户信息
     
 
@@ -53,109 +50,124 @@ Page({
       return false;
     }
   
-    if(top == '1'){ //如果说有置顶数据
-      let data = topdata.top_data; //置顶数据
-      let endtime = data.end_time //置顶到期时间
-      let toping = data.is_top // 是否置顶状态
-      let showTime = now > parseInt(endtime) ? true : false; // 置顶是否过期 已过期
-      
-      
-      if(showTime){ //如果置顶过期
-        console.log(showTime)
-        wx.navigateTo({
-          url: `/pages/workingtopAll/workingtop/workingtop?id=${id}$topId=${data}`,
-        })
-        return false
-      }
-
-      wx.showLoading({
-        title: '正在执行操作'
-      })
-      app.doRequestAction({
-        url: 'job/update-top-status/',
-        way: "POST",
-        params: {
-          userId: userInfo.userId,
-          token: userInfo.token,
-          tokenTime: userInfo.tokenTime,
-          infoId: id,
-          status: toping == '0' ? '1' : "0"
-        },
-        success: function (res) {
-          wx.hideLoading();
-          let mydata = res.data;
-          console.log(mydata)
-          if (mydata.errcode == "ok") {
-            let newData = _this.data.lists;
-            newData[infoIndex].top_data.is_top = mydata.data.top.is_top
-            _this.setData({
-              lists: newData
-            })
-          }
-          if (mydata.errcode == "auth_forbid") {
+    wx.showLoading({
+      title: '正在执行操作'
+    })
+    app.doRequestAction({
+      url: 'fleamarket/update-time/',
+      way: "POST",
+      params: {
+        userId: userInfo.userId,
+        token: userInfo.token,
+        tokenTime: userInfo.tokenTime,
+        infoId: id
+      },
+      success: function (res) {
+        wx.hideLoading();
+        let mydata = res.data;
+        console.log(mydata)
+        if (mydata.errcode == "ok") {
+          let newData = _this.data.lists;
+          let rowData = newData[infoIndex]
+          newData.splice(infoIndex,1)
+          newData.unshift(rowData)
+          _this.setData({
+            lists: newData
+          })
+        }
+        if (mydata.errcode == "auth_forbid") {
+          wx.showModal({
+            title: '温馨提示',
+            content: res.data.errmsg,
+            cancelText: '取消',
+            confirmText: '去实名',
+            success(res) {
+              if (res.confirm) {
+                let backtwo = "backtwo"
+                wx.navigateTo({
+                  url: `/pages/realname/realname?backtwo=${backtwo}`
+                })
+              }
+            }
+          })
+          return
+        } else if (mydata.errcode == "member_forbid") {
             wx.showModal({
               title: '温馨提示',
-              content: res.data.errmsg,
-              cancelText: '取消',
-              confirmText: '去实名',
+              content: mydata.errmsg,
+              cancelText: "取消",
+              confirmText: "联系客服",
               success(res) {
                 if (res.confirm) {
-                  let backtwo = "backtwo"
-                  wx.navigateTo({
-                    url: `/pages/realname/realname?backtwo=${backtwo}`
+                  let tel = app.globalData.serverPhone
+                  wx.makePhoneCall({
+                    phoneNumber: tel,
                   })
                 }
               }
             })
-            return
-          } else if (mydata.errcode == "member_forbid") {
-              wx.showModal({
-                title: '温馨提示',
-                content: mydata.errmsg,
-                cancelText: "取消",
-                confirmText: "联系客服",
-                success(res) {
-                  if (res.confirm) {
-                    let tel = app.globalData.serverPhone
-                    wx.makePhoneCall({
-                      phoneNumber: tel,
-                    })
-                  }
-                }
-              })
-          } else {
-              wx.showToast({
-                title: mydata.errmsg,
-                icon: "none",
-                duration: 1500
-              })
-            }
-          },
-          fail: function (err) {
-            wx.hideLoading();
+        } else {
             wx.showToast({
-              title: "网络不太好，操作失败！",
+              title: mydata.errmsg,
               icon: "none",
-              duration: 3000
+              duration: 1500
             })
           }
-        })
-
-    }else{
-      wx.navigateTo({
-        url: `/pages/workingtopAll/workingtop/workingtop?id=${id}&topId=undefined`,
+        },
+        fail: function (err) {
+          wx.hideLoading();
+          wx.showToast({
+            title: "网络不太好，操作失败！",
+            icon: "none",
+            duration: 3000
+          })
+        }
       })
-    }
 
   },
-  userSetTop: function (e) {
-    let id = e.currentTarget.dataset.id;
-    let time = e.currentTarget.dataset.time
-    wx.navigateTo({
-      url: `/pages/workingtopAll/workingtop/workingtop?id=${id}&topId=${time}`,
+  userChangeType:function(e){
+    let key = e.currentTarget.dataset.key
+    this.setData({
+      current: parseInt(key),
+      page: 1,
+      hasmore: true,
+      lists: []
+    })
+    this.getUsedList()
+  },
+  getUsedList:function(){
+    let _this = this
+    let userinfo = wx.getStorageSync('userInfo')
+    let userUuid = wx.getStorageSync('userUuid')
+    userinfo.mid = userinfo.userId
+    userinfo.uuid = userUuid
+    userinfo.type = this.data.types[this.data.current].id
+    userinfo.page = this.data.page
+    app.appRequestAction({
+      url: 'fleamarket/issues-v1/',
+      way: 'POST',
+      params: userinfo,
+      title: '正在加载数据',
+      success:function(res){
+        let mydata = res.data
+        if(mydata.errcode == 'ok'){
+          let lists = _this.data.lists
+          let newlist = mydata.data.lists
+          let page = _this.data.page
+          let len = newlist.length
+          _this.setData({
+            lists: lists.concat(newlist),
+            hasmore: len ? true : false,
+            page: len ? page + 1 : page,
+            tipmsg: mydata.data.checking_tips
+          })
+        }else{
+          app.showMyTips(mydata.errmsg)
+        }
+      }
     })
   },
-  changeRecruitStatus:function(e){
+  changeUsedStatus:function(e){
     let status = e.currentTarget.dataset.status
     let _id = e.currentTarget.dataset.id;
     let infoIndex = e.currentTarget.dataset.index;
@@ -166,7 +178,7 @@ Page({
     })
     app.doRequestAction({
       way: "POST",
-      url: "job/job-end-status/",
+      url: "fleamarket/fleamarket-end-status/",
       params: {
         userId: userInfo.userId,
         token: userInfo.token,
@@ -176,6 +188,7 @@ Page({
       success: function (res) {
         wx.hideLoading();
         let mydata = res.data;
+        console.log(mydata)
         if (mydata.errcode == "ok") {
           let newData = _this.data.lists;
           newData[infoIndex].is_end = mydata.data.is_end;
@@ -262,52 +275,11 @@ Page({
       }
     })
   },
-  getRecruitList:function(){
-    let _this = this
-    let userinfo = wx.getStorageSync('userInfo')
-    let userUuid = wx.getStorageSync('userUuid')
-    userinfo.mid = userinfo.userId
-    userinfo.uuid = userUuid
-    userinfo.type = this.data.types[this.data.current].id
-    userinfo.page = this.data.page
-    app.appRequestAction({
-      url: 'job/issue-lists/',
-      way: 'POST',
-      params: userinfo,
-      title: '获取发布列表',
-      success:function(res){
-        let mydata = res.data
-        if(mydata.errcode == 'ok'){
-          let lists = _this.data.lists
-          let newlist = mydata.data.lists
-          let page = _this.data.page
-          let len = newlist.length
-          _this.setData({
-            lists: lists.concat(newlist),
-            hasmore: len ? true : false,
-            page: len ? page + 1 : page
-          })
-        }else{
-          app.showMyTips(mydata.errmsg)
-        }
-      }
-    })
-  },
-  userChangeType:function(e){
-    let key = e.currentTarget.dataset.key
-    this.setData({
-      current: parseInt(key),
-      page: 1,
-      hasmore: true,
-      lists: []
-    })
-    this.getRecruitList()
-  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    this.getRecruitList()
+    this.getUsedList();
   },
 
   /**
@@ -321,7 +293,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    this.pageRefresh()
+
   },
 
   /**
@@ -344,21 +316,13 @@ Page({
   onPullDownRefresh: function () {
 
   },
-  pageRefresh() {
-    if (this.data.refresh) {
-      this.setData({ lists: [], page: 1, hasmore: true })
-      this.getRecruitList()
-    }
-    this.setData({
-      refresh: false
-    })
-  },
+
   /**
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
     if(!this.data.hasmore) return false
-    this.getRecruitList()
+    this.getUsedList()
   },
 
   /**
