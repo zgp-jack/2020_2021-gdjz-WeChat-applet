@@ -105,7 +105,6 @@ padding: 10rpx;
 background: red;
 border-radius: 6rpx;
 font-size: 26rpx;
-font-family: Source Han Sans CN;
 font-weight: 400;
 color: white;
 text-align: center;
@@ -148,7 +147,6 @@ margin-left: 16rpx;
 .ucard-imgsbox{
     position: relative;
     width: 100%;
-    margin-top:15rpx;
     background: white;
     padding: 20rpx 10rpx;
 }
@@ -195,7 +193,6 @@ margin-left: 16rpx;
 
 .linkmana {
   font-size: 30rpx;
-  font-family: Source Han Sans CN;
   font-weight: 400;
   color: rgba(42, 42, 42, 1);
   padding: 20rpx 0;
@@ -203,7 +200,6 @@ margin-left: 16rpx;
 
 .linkmanb {
   font-size: 28rpx;
-  font-family: Source Han Sans CN;
   font-weight: 400;
   color: rgba(127, 126, 126, 1);
   padding-bottom: 20rpx;
@@ -288,7 +284,6 @@ margin-left: 16rpx;
 
 .comeit {
   font-size: 28rpx;
-  font-family: Source Han Sans CN;
   font-weight: 400;
   color: rgba(42, 42, 42, 1);
 }
@@ -313,7 +308,6 @@ margin-left: 16rpx;
 
 .comeite {
   font-size: 28rpx;
-  font-family: Source Han Sans CN;
   font-weight: 400;
   color: rgba(42, 42, 42, 1);
   display: flex;
@@ -322,7 +316,6 @@ margin-left: 16rpx;
 
 .comeitex {
   font-size: 28rpx;
-  font-family: Source Han Sans CN;
   font-weight: 400;
   color: rgba(247, 17, 17, 1);
 }
@@ -333,7 +326,6 @@ margin-left: 16rpx;
   background: rgba(0, 153, 255, 1);
   border-radius: 6rpx;
   font-size: 26rpx;
-  font-family: Source Han Sans CN;
   font-weight: 400;
   color: rgb(255, 255, 255);
   text-align: center;
@@ -351,7 +343,6 @@ margin-left: 16rpx;
   height: 40rpx;
   background: rgba(52, 176, 49, 1);
   font-size: 26rpx;
-  font-family: Source Han Sans CN;
   font-weight: 400;
   color: rgba(255, 255, 255, 1);
   text-align: center;
@@ -364,7 +355,6 @@ margin-left: 16rpx;
   height: 40rpx;
   background: rgba(247, 17, 17, 1);
   font-size: 26rpx;
-  font-family: Source Han Sans CN;
   font-weight: 400;
   color: rgba(255, 255, 255, 1);
   text-align: center;
@@ -379,7 +369,6 @@ margin-left: 16rpx;
   border: 1rpx solid rgba(212, 211, 211, 1);
   border-radius: 6rpx;
   font-size: 26rpx;
-  font-family: Source Han Sans CN;
   font-weight: 400;
   color: rgba(127, 126, 126, 1);
   text-align: center;
@@ -388,6 +377,7 @@ margin-left: 16rpx;
 
 .ephalos {
   padding-top: 20rpx;
+  border-top: 1px solid #dcdcdc;
 }
 
 .register {
@@ -412,21 +402,18 @@ margin-left: 16rpx;
 
 .locatext {
   font-size: 28rpx;
-  font-family: Source Han Sans CN;
   font-weight: 400;
   color: rgb(127, 126, 126);
 }
 
 .maptexr {
   font-size: 28rpx;
-  font-family: Source Han Sans CN;
   font-weight: 400;
-  color: rgba(127, 126, 126, 1);
+  color: #0099ff;
 }
 
 .locdez {
   font-size: 28rpx;
-  font-family: Source Han Sans CN;
   font-weight: 400;
   color: rgb(42, 42, 42);
   margin-top: 10rpx;
@@ -434,7 +421,6 @@ margin-left: 16rpx;
 
 .craft {
   font-size: 28rpx;
-  font-family: Source Han Sans CN;
   font-weight: 400;
   color: rgba(127, 126, 126, 1);
   padding: 20rpx 0;
@@ -444,7 +430,6 @@ margin-left: 16rpx;
   padding: 10rpx;
   background: rgba(238, 237, 239, 1);
   font-size: 26rpx;
-  font-family: Source Han Sans CN;
   font-weight: 400;
   color: rgba(42, 42, 42, 1);
   text-align: center;
@@ -470,7 +455,6 @@ margin-left: 16rpx;
 
 .craftas {
   font-size: 28rpx;
-  font-family: Source Han Sans CN;
   font-weight: 400;
   color: rgba(42, 42, 42, 1);
   line-height: 40rpx;
@@ -611,7 +595,6 @@ margin-left: 16rpx;
 .ucard-imgsbox {
   position: relative;
   width: 100%;
-  margin-top: 15rpx;
   background: white;
   padding: 20rpx 10rpx;
 }
@@ -722,7 +705,6 @@ margin-left: 16rpx;
   position: relative;
   display: block;
   line-height: 60rpx;
-  font-size: 30rpx;
   color: #333;
 }
 .newdetail-callbox{
@@ -847,4 +829,3 @@ margin-left: 16rpx;
   color: #0099ff;
   border-right: 0;
 }
-
