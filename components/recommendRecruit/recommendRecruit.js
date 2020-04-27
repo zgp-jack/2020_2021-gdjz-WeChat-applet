@@ -19,6 +19,10 @@ Component({
     more: {
       type: Number,
       value:0
+    },
+    mine:{
+      type: Number,
+      value : 0,
     }
   },
   observers:{
@@ -32,7 +36,7 @@ Component({
    */
   data: {
     lists:[],
-   
+    unitid: app.globalData.unitid
   },
 
   /**

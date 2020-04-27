@@ -19,6 +19,14 @@ Component({
     more: {
       type: Number,
       value:0
+    },
+    location:{
+      type: String,
+      value: ''
+    },
+    mine:{
+      type: Number,
+      value: 0
     }
   },
   observers:{
@@ -32,42 +40,42 @@ Component({
    */
   data: {
     lists:[],
-   
+    page: 1,
+    unitid: app.globalData.unitid
   },
 
   /**
    * 组件的方法列表
    */
   methods: {
-    detailinfoaction:function(e){
-      let id = e.currentTarget.dataset.id
-      let more = this.properties.more
-      let url = more ? '/pages/detail/info/info?more=1&id=' + id : '/pages/detail/info/info?id=' + id
-      wx.redirectTo({
-        url: url,
+    showDetailInfo:function(e){
+      let id = e.currentTarget.dataset.uuid
+      wx.navigateTo({
+        url: `/pages/boss-look-card/lookcard?more=1&uuid=${id}&location=${this.properties.location}`,
       })
     },
     seemoreaction:function(){
-      let { aid, cid } = this.properties
-      let more = this.properties.more
+      let { aid, cid,more } = this.properties
+      console.log(aid,cid,more)
       if(more){
         wx.navigateBack()
       }else {
         wx.navigateTo({
-          url: '/pages/lists/recruit/index?ids='+cid + '&aid='+aid,
+          url: '/pages/lists/resume/index?ids='+cid + '&aid='+aid,
         })
       }
     },
     getRecommendList: function(){
       let _this = this;
       let { aid, cid } = this.properties
+      let page = this.data.page
       app.appRequestAction({
-        url: '/job/job-recommend-list/',
-        way: 'POST',
+        url: 'resumes/resume-recommend-list/',
+        way: 'GET',
         params:{
-          area_id: aid,
-          classify_id: cid,
-          page: 1
+          province: aid,
+          occupations: cid,
+          page: page
         },
         hideLoading: true,
         success:(res)=>{

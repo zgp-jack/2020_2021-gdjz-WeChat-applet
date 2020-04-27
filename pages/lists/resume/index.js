@@ -19,18 +19,13 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    console.log(options)
     this.setData({
       aid: options.aid,
-      cid: options.cid,
+      cid: options.ids,
       location: options.location
     })
     this.getRecommendList()
-  },
-  showDetailInfo:function(e){
-    let id = e.currentTarget.dataset.uuid
-    wx.navigateTo({
-      url: `/pages/boss-look-card/lookcard?more=1&uuid=${id}&location=${this.data.location}`,
-    })
   },
   getRecommendList:function(){
     let _this = this;

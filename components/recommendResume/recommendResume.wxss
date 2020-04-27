@@ -1,1 +1,1 @@
-/* components/recommendResume/recommendResume.wxss */
+@import '../../pages/findingworkinglist/findingworkinglist.wxss';

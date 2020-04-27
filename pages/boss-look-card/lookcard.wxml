@@ -206,6 +206,9 @@
     暂无记录
   </view> -->
 
+  <recommendRecruit mine='1' aid="{{ aid }}" cid="{{ cid }}" more="{{ more }}" wx:if="{{ userInfo&&userInfo.userId == userId }}" />
+  <recommendResume aid="{{ aid }}" cid="{{ cid }}" more="{{ more }}" wx:if="{{ userInfo&&userInfo.userId != userId }}"  />
+
   <view class="cardthree" wx:if="{{skilllength != 0}}">
     <view class="cardthreemobile">
     <view>
@@ -252,6 +255,7 @@
   <!-- <view wx:if="{{skilllength == 0}}" class="jiluone">
     暂无记录
   </view> -->
+
 
   <view class="bossbottom" wx:if="{{status == 0}}">
     <button class="bossbottomb" catchtap="praise">

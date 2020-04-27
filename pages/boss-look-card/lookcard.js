@@ -15,7 +15,7 @@ Page({
     experienceitem: app.globalData.apiImgUrl + "lpy/newresume-experience-item.png",
     biaoqian: app.globalData.apiImgUrl + "lpy/biaoqian.png",
     baseinform: app.globalData.apiImgUrl + "newresume-catimg.png",
-    userInfo: true,
+    userInfo: false,
     icon: app.globalData.apiImgUrl + "userauth-topicon.png",
     complainInfo: "",
     showComplain: false,
@@ -97,11 +97,44 @@ Page({
     options: {},
     show_complain: {},
     authenticationimg: false,
-    certificate_show: false
+    certificate_show: false,
+    cid: '',
+    aid: '',
+    rpage: 1,
+    recommendlist: [],
+    toptown: app.globalData.apiImgUrl + 'newlist-jobzd.png',
+    rullIntegral: app.globalData.apiImgUrl + "resume-list-rules-btn.png",
+    finded: app.globalData.apiImgUrl + "lpy/finded.png",
+    biaoqian: app.globalData.apiImgUrl + "lpy/biaoqian.png",
+    userImg: "http://cdn.yupao.com/miniprogram/images/user.png",
+    more: 0,
+    user_id: ''
   },
-
+  showDetailInfo:function(e){
+    let id = e.currentTarget.dataset.uuid
+    let url = `/pages/boss-look-card/lookcard?uuid=${id}&more=${this.data.more}&location=${this.data.options.location}`
+    wx.redirectTo({ url: url })
+  },
+  seemoreaction:function(){
+    let { more, cid, aid } = this.data
+    let url = `/pages/lists/resume/index?aid=${aid}&cid=${cid}&location=${this.data.options.location}`
+    if(parseInt(more)){
+      wx.navigateBack()
+    }else{
+      wx.navigateTo({
+        url: url
+      })
+    }
+  },
+  errImg: function (e) {
+    let index = e.currentTarget.dataset.index;
+    let obj = `recommendlist[${index}].headerimg`;
+    this.setData({
+      [obj]: this.data.userImg
+    })
+  },
+  
   previewImage: function (e) {
-
     let url = e.currentTarget.dataset.url;
     let i = e.currentTarget.dataset.index;
     let type = e.currentTarget.dataset.type;
@@ -435,6 +468,8 @@ Page({
             name: mydata.info.hasOwnProperty("username") ? mydata.info.username : "",
             nation: mydata.info.hasOwnProperty("nation") ? mydata.info.nation : "",
             occupations: mydata.info.hasOwnProperty("occupations") ? mydata.info.occupations : "",
+            cid: mydata.info.hasOwnProperty("occupations_id") ? mydata.info.occupations_id : '',
+            aid: mydata.info.hasOwnProperty('city') ? mydata.info.city : '',
             telephone: mydata.info.hasOwnProperty("tel") ? mydata.info.tel : "",
             sharetelephone: mydata.info.hasOwnProperty("tel") ? mydata.info.tel : "",
             city: mydata.info.hasOwnProperty("address") ? mydata.info.address : "",
@@ -459,8 +494,11 @@ Page({
             show_complain: mydata.info.hasOwnProperty("show_complain") ? mydata.info.show_complain : {},
             certificate_show: mydata.info.hasOwnProperty("certificate_show") ? mydata.info.certificate_show : "",
             authenticationimg: mydata.info.hasOwnProperty("authentication") ? mydata.info.authentication : "",
+            userId: mydata.info.user_id
           })
 
+          // 加载推荐列表
+          //that.getRecommendList()
 
           if (that.data.introduce === "") {
             that.setData({
@@ -764,6 +802,11 @@ Page({
     this.setData({
       options: options
     })
+    if(options.hasOwnProperty('more')){
+      this.setData({
+        more: options.more
+      })
+    }
   },
 
   /**

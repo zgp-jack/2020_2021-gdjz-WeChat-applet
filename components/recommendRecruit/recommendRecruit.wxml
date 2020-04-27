@@ -1,7 +1,7 @@
 <!-- 相关推荐 -->
   <view class="recommend-info-container" wx:if="{{ recommendlist.length }}">
     <view class="recommend-info-header flex-row">
-      <text>相关推荐</text>
+      <text>{{ mine ? '适合您的工作' : '相关推荐' }}</text>
     </view>
     <view class="recommend-info-body">
 

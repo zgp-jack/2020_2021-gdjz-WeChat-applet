@@ -79,7 +79,8 @@
 				</view>
 			</view>
 
-			<recommendRecruit  cid="{{ cid }}" aid="{{ aid }}" more="{{ more }}" />
+			<recommendRecruit  cid="{{ cid }}" aid="{{ aid }}" more="{{ more }}" wx:if="{{ !userInfo || userInfo.userId != info.user_id }}" />
+			<recommendResume mine="1" cid="{{ cid }}" aid="{{ aid }}" more="{{ more }}"  wx:if="{{ userInfo&&userInfo.userId == info.user_id }}"/>
 
 			<view class='info-wenxintips clearfix'>
 				<view class='wenxintips-words'>

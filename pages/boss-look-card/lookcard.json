@@ -1,3 +1,6 @@
 {
-  "navigationBarTitleText": "找活名片"
+  "navigationBarTitleText": "找活名片",
+  "usingComponents": {
+    "recommendResume": "/components/recommendResume/recommendResume"
+  }
 }
