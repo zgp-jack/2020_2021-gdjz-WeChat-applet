@@ -1,5 +1,4 @@
 @import "../../index/index.wxss";
-
 .info-yupao-tips{
     position: relative;
     width: 100%;
@@ -828,4 +827,7 @@ margin-left: 16rpx;
 .newdetail-footer-item:nth-last-child(1){
   color: #0099ff;
   border-right: 0;
+}
+.text-nav-name{
+  display: inline-block;
 }

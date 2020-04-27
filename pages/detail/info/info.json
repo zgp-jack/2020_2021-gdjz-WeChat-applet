@@ -1,3 +1,6 @@
 {
-  "navigationBarTitleText": "鱼泡网-招工详情"
+  "navigationBarTitleText": "鱼泡网-招工详情",
+  "usingComponents": {
+    "recommendRecruit": "/components/recommendRecruit/recommendRecruit"
+  }
 }

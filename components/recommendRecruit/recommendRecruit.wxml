@@ -1,0 +1,65 @@
+<!-- 相关推荐 -->
+  <view class="recommend-info-container" wx:if="{{ recommendlist.length }}">
+    <view class="recommend-info-header flex-row">
+      <text>相关推荐</text>
+    </view>
+    <view class="recommend-info-body">
+
+
+      <view class='gainebox'>
+        <block  wx:for="{{ recommendlist }}" wx:key="{{ index }}" wx:if="{{ recommendlist.length }}">
+
+        <view class="indxlistitem" bindtap="detailinfoaction"  data-id="{{ item.id }}" data-type="job" >
+
+            <image  wx:if="{{ (item.top == '1') }}" class="ingsasea" src="{{bring}}" mode="widthFix"></image>
+            <image  wx:if="{{ (item.is_end == '2') }}" class="imgseek" src="{{doneimg}}"></image>
+            <!-- 上 -->
+            <view class='toplist'>
+              <view class="yupao-boxs">
+                <view class="yupaoboxsfot">
+                  <view class="yupaotile">{{ item.title }}</view>
+                  <view  wx:if="{{ (item.top == '1') }}"  catchtap='wantFastIssue' class="yupao-conemtes">我要置顶</view>
+                </view>
+              </view>
+              <view class='yupao-lists-wxtipse'>
+                <view class="yupao-liststou">
+                  <image class="yupao-lists-img" src="{{ item.image }}"></image>
+                </view>
+                <view class="yupao-listsname">
+                  <view class="yupao-listswxyus">
+                    <text style="color:black">{{ item.user_name }}</text>
+                    <!-- <image class="sjim" src="{{autimg}}" mode="widthFix"></image> -->
+                    <image wx:if="{{ item.is_end == '1' }}" class="sjim" src="{{hirimg}}" ></image>
+                  </view>
+                  <view class="yupaolistswxyu">{{ item.detail }}</view>
+                </view>
+              </view>
+            </view>
+            <!-- 下 -->
+            <view class='bottomlist'>
+              <view class="bottomcomet">
+                <view class="boomcom">
+                  <image class="imgheas" src="{{iondzs}}"></image>
+                  <text class="cometstexre">{{ item.show_address }}</text>
+                </view>
+                <view class="cometime">{{ item.time }}</view>
+              </view>
+            </view>
+        </view>
+
+        <ad  class="lists-ad" unit-id="{{ unitid }}"  wx:if="{{index % 5 == 0 && index > 5}}"></ad>
+        <navigator url='/pages/download/download-app' wx:if="{{ (index == 5) && (fillterType[worktype].id != '55')}}" class='lists-ad lists-ad-image'>
+            <image  src="{{ appLinkImg }}"></image>
+        </navigator>
+        <navigator class='lists-ad lists-ad-image' target="miniProgram"  wx:if="{{ (index == 5) && (fillterType[worktype].id == '55')}}" open-type="navigate" app-id="wx0ae31bf0edad4390" path="" extra-data="" version="release" >
+            <image  src="{{ jixieLinkImg }}"></image>
+        </navigator>
+
+        </block>
+
+        <view class="seemore-recommend-recruit" bindtap="seemoreaction">查看更多招工信息</view>
+    </view>
+
+
+    </view>
+  </view>
