@@ -133,6 +133,11 @@
 
 </view>
 
+<view class="usermine-footer" wx:if="{{ userinfo.userId == info.user_id }}">
+	<view class="usermine-footer-item">修改</view>
+	<view class="usermine-footer-item">停止招工</view>
+	<view class="usermine-footer-item">我的置顶</view>
+</view>
 
 <view class="newdetail-info-footer" wx:if="{{ userInfo.userId != info.user_id }}">
 	<view class="newdetail-info-itembox clearfix">

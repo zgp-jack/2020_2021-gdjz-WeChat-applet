@@ -231,16 +231,16 @@ Page({
             params: userInfo,
             success: function (res) { 
                 let mydata = res.data;
-                let aid = mydata.result.city_id;
-                let cid = mydata.result.occupations.join(',')
-                _this.setData({ info: mydata.result, aid: aid, cid: cid })
+                
+                _this.setData({ info: mydata.result })
                 //_this.getRecommendList()
               
                 if (mydata.errcode != "fail") {
-                
+                  let aid = mydata.result.city_id;
+                  let cid = mydata.result.occupations.join(',')
                     let t = mydata.result.title;
                     wx.setNavigationBarTitle({ title: t })
-                  _this.setData({ collectMark: mydata.result.is_collect ? true : false})
+                  _this.setData({ collectMark: mydata.result.is_collect ? true : false, aid: aid, cid: cid})
                   let userInfo = wx.getStorageSync("userInfo");
                   if (userInfo){
                     if (userInfo.userId == mydata.result.user_id){
@@ -569,6 +569,8 @@ Page({
     })
   },
     onLoad: function (options) {
+      
+    
       if(options.hasOwnProperty('more')){
         this.setData({
           more: parseInt(options.more)
