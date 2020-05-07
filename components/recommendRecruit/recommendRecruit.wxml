@@ -1,5 +1,5 @@
 <!-- 相关推荐 -->
-  <view class="recommend-info-container" wx:if="{{ recommendlist.length }}">
+  <view class="recommend-info-container" wx:if="{{ lists.length }}">
     <view class="recommend-info-header flex-row">
       <text>{{ mine ? '适合您的工作' : '相关推荐' }}</text>
     </view>
@@ -7,7 +7,7 @@
 
 
       <view class='gainebox'>
-        <block  wx:for="{{ recommendlist }}" wx:key="{{ index }}" wx:if="{{ recommendlist.length }}">
+        <block  wx:for="{{ lists }}" wx:key="{{ index }}" wx:if="{{ lists.length }}">
 
         <view class="indxlistitem" bindtap="detailinfoaction"  data-id="{{ item.id }}" data-type="job" >
 
@@ -47,14 +47,8 @@
             </view>
         </view>
 
-        <ad  class="lists-ad" unit-id="{{ unitid }}"  wx:if="{{index % 5 == 0 && index > 5}}"></ad>
-        <navigator url='/pages/download/download-app' wx:if="{{ (index == 5) && (fillterType[worktype].id != '55')}}" class='lists-ad lists-ad-image'>
-            <image  src="{{ appLinkImg }}"></image>
-        </navigator>
-        <navigator class='lists-ad lists-ad-image' target="miniProgram"  wx:if="{{ (index == 5) && (fillterType[worktype].id == '55')}}" open-type="navigate" app-id="wx0ae31bf0edad4390" path="" extra-data="" version="release" >
-            <image  src="{{ jixieLinkImg }}"></image>
-        </navigator>
-
+        <ad  class="lists-ad" unit-id="{{ unitid }}"  wx:if="{{index % 7 == 0 && index > 0 }}"></ad>
+        
         </block>
 
         <view class="seemore-recommend-recruit" bindtap="seemoreaction">查看更多招工信息</view>

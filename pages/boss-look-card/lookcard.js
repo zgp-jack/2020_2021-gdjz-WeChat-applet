@@ -381,10 +381,6 @@ Page({
   },
   getdetail(option) {
     let that = this;
-    wx.showLoading({
-      title: '加载中',
-      mask: true
-    })
     if (option.hasOwnProperty("refId")){
       app.globalData.refId = option.refId;
     }
@@ -400,7 +396,19 @@ Page({
       userInfo = {
         userId: null
       }
+      this.setData({
+        userInfo: true
+      })
+    }else{
+      this.setData({
+        userInfo: userInfo
+      })
     }
+    wx.showLoading({
+      title: '加载中',
+      mask: true
+    })
+    
 
     let detail = {
       userId: userInfo.userId,
@@ -469,7 +477,8 @@ Page({
             nation: mydata.info.hasOwnProperty("nation") ? mydata.info.nation : "",
             occupations: mydata.info.hasOwnProperty("occupations") ? mydata.info.occupations : "",
             cid: mydata.info.hasOwnProperty("occupations_id") ? mydata.info.occupations_id : '',
-            aid: mydata.info.hasOwnProperty('city') ? mydata.info.city : '',
+            aid: mydata.info.hasOwnProperty('city') ? mydata.info.city :  mydata.info.hasOwnProperty('province')? mydata.info.province : '',
+            uuid: mydata.info.hasOwnProperty('uuid') ? mydata.info.uuid : '',
             telephone: mydata.info.hasOwnProperty("tel") ? mydata.info.tel : "",
             sharetelephone: mydata.info.hasOwnProperty("tel") ? mydata.info.tel : "",
             city: mydata.info.hasOwnProperty("address") ? mydata.info.address : "",

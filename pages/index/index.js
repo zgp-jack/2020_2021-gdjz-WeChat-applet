@@ -133,13 +133,21 @@ Page({
       return false;
     }
     wx.navigateTo({
-      url: '/pages/published/published?type=0&jz=1',
+      url: '/pages/published/recruit/list?jz=1',
     })
   },
   showDetailInfo: function (e) {
-    // console.log(e)
-    // let uinfo = this.data.userInfo;
-    app.showDetailInfo(e);
+    let userLocation = wx.getStorageSync("userLocation")
+    if (!userLocation) {
+      userLocation = ""
+    } else {
+      userLocation = userLocation.split(",").reverse().join(",")
+    }
+    let id = e.currentTarget.dataset.id;
+    wx.navigateTo({
+      url: '/pages/detail/info/info?id=' + id
+    })
+    
   },
   touchStart: function (e) {
     console.log(e)

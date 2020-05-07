@@ -63,7 +63,7 @@
             </view>
         </view> -->
         <view class="ucenter-hasnoticeinfo">
-            <view class='ucener-theme' data-url='../published/published?type=0' bindtap='valiUserUrl'>
+            <view class='ucener-theme' data-url='../published/recruit/list' bindtap='valiUserUrl'>
                 <image class="ucener-leftImage" src='{{ ucenterimgs.recruit }}'></image>
                 <view class='ucener-border-b ucener-border'>
                     <view class="ucener-title">我的招工</view>
@@ -83,7 +83,7 @@
                     </view>
                 </view>
             </view>
-            <view class='ucener-theme' data-url='../published/published?type=1' bindtap='valiUserUrl'>
+            <view class='ucener-theme' data-url='../published/used/list' bindtap='valiUserUrl'>
                 <image class="ucener-leftImage" src='{{ ucenterimgs.trade }}'></image>
                 <view class='ucener-border-b ucener-border'>
                     <view class="ucener-title">我的二手交易</view>

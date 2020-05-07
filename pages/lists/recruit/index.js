@@ -14,10 +14,12 @@ Page({
     unitid: app.globalData.unitid,
     ids: '',
     area_id: '',
+    rids: '',
+    area_id: '',
     page: 1,
     lists: [],
     hasmore: true,
-    nodata: app.globalData.apiImgUrl + 'nodata.png'
+    nodata: app.globalData.apiImgUrl + 'nodata.png',
   },
 
   /**
@@ -38,13 +40,14 @@ Page({
         if(mydata.errcode == 'ok'){
           let list = mydata.data.list
           let _list = _this.data.lists
-          if(list.length){
+          if(list.length >= mydata.data.page_size){
             _this.setData({
               lists: _list.concat(list),
-              page: _this.data.page + 1
+              page: _this.data.page + 1,
             })
           }else{
             _this.setData({
+              lists: _list.concat(list),
               hasmore: false,
             })
           }
@@ -54,11 +57,12 @@ Page({
   },
   onLoad: function (options) {
     if(options.hasOwnProperty('ids')){
-      this.setData({ids: options.ids})
+      this.setData({ids: options.ids,rids: options.ids})
     }
     if(options.hasOwnProperty('aid')){
       this.setData({
-        area_id: options.aid
+        area_id: options.aid,
+        rarea_id: options.aid
       })
     }
     this.getRecommendLists()
@@ -66,7 +70,16 @@ Page({
   showDetailInfo:function(e){
     let id = e.currentTarget.dataset.id
     wx.navigateTo({
-      url: '/pages/detail/info/info?more=1&id='+id,
+      url: `/pages/detail/info/info?id=${id}&child=1`,
+    })
+  },
+  wantFastIssue: function () {
+    if (!this.data.userInfo) {
+      app.gotoUserauth();
+      return false;
+    }
+    wx.navigateTo({
+      url: '/pages/published/recruit/list?jz=1',
     })
   },
   /**
@@ -75,12 +88,33 @@ Page({
   onReady: function () {
 
   },
-
+  sortNumber: function (a,b)
+    {
+    return a - b
+    },
   /**
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
 
+    try{
+      let oldaid = this.data.area_id.split(',').sort(this.sortNumber).join();
+      let oldcid = this.data.ids.split(',').sort(this.sortNumber).join();
+      let newaid = this.data.rarea_id.split(',').sort(this.sortNumber).join();
+      let newcid = this.data.rids.split(',').sort(this.sortNumber).join();
+
+      if(oldaid != newaid || oldcid != newcid){
+        
+        this.setData({
+          lists: [],
+          area_id: newaid,
+          ids: newcid
+        })
+        this.getRecommendLists()
+      }
+    }catch(err){
+      console.log(err)
+    }
   },
 
   /**
@@ -112,11 +146,4 @@ Page({
     if(!flag) return false
     this.getRecommendLists()
   },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
-  }
 })

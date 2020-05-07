@@ -12,7 +12,7 @@ Page({
     homebtnImg: app.globalData.apiImgUrl + "yp-return-jobinfo.png",
     newmessage:{
                                              // 1 系统信息
-      type2:'/pages/published/published',            // 2 招工信息
+      type2:'/pages/published/recruit/list',            // 2 招工信息
       type3:'/pages/clients-looking-for-work/finding-name-card/findingnamecard',      // 3 名片信息
       type4:'/pages/clients-looking-for-work/all-skills-certificate/skillscertificate', // 4 证书信息
       type5:'/pages/clients-looking-for-work/all-project-experience/allexperience',      // 5 项目信息

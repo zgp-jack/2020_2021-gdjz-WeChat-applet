@@ -23,7 +23,7 @@ Page({
   jumpRecruitInfo:function(e){
     let id = e.currentTarget.dataset.id
     wx.navigateTo({
-      url: `/pages/detail/info/info?id=${id}`,
+      url: `/pages/detail/info/info?id=${id}&more=1`,
     })
   },
   userEditRecuritInfo:function(e){
@@ -307,7 +307,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    this.getRecruitList()
+    
   },
 
   /**
@@ -321,7 +321,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    this.pageRefresh()
+    this.pageRefresh()  
   },
 
   /**
@@ -345,13 +345,8 @@ Page({
 
   },
   pageRefresh() {
-    if (this.data.refresh) {
-      this.setData({ lists: [], page: 1, hasmore: true })
-      this.getRecruitList()
-    }
-    this.setData({
-      refresh: false
-    })
+    this.setData({ lists: [], page: 1, hasmore: true })
+    this.getRecruitList()
   },
   /**
    * 页面上拉触底事件的处理函数

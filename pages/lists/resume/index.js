@@ -6,15 +6,22 @@ Page({
    */
   data: {
     nodata: app.globalData.apiImgUrl + 'nodata.png',
+    biaoqian: app.globalData.apiImgUrl + "lpy/biaoqian.png",
     unitid: app.globalData.unitid,
-    location: '',
     aid: '',
     cid: '',
+    raid: '',
+    rcid: '',
     page: 1,
     lists: [],
     hasmore: true
   },
-
+  showDetailInfo:function(e){
+    let id = e.currentTarget.dataset.uuid
+    wx.navigateTo({
+      url: `/pages/boss-look-card/lookcard?uuid=${id}`,
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
@@ -23,9 +30,15 @@ Page({
     this.setData({
       aid: options.aid,
       cid: options.ids,
-      location: options.location
+      raid: options.aid,
+      rcid: options.ids
     })
     this.getRecommendList()
+  },
+  jumptop:function(){
+    wx.navigateTo({
+      url: `/pages/clients-looking-for-work/finding-name-card/findingnamecard`,
+    })
   },
   getRecommendList:function(){
     let _this = this;
@@ -45,15 +58,24 @@ Page({
           let mylist = _this.data.lists
           let lists = mydata.data.list
           let len = lists.length
-          _this.setData({
-            lists: mylist.concat(mydata.data.list),
-            hasmore: len ? true : false,
-            page: len ? _this.data.page+1 : _this.data.page
-          })
+          if(len >= mydata.data.page_size){
+            _this.setData({
+              lists: mylist.concat(mydata.data.list),
+              hasmore: true,
+              page: _this.data.page+1
+            })
+          }else{
+            _this.setData({
+              lists: mylist.concat(mydata.data.list),
+              hasmore: false,
+            })
+          }
+          
         }
       }
     })
   },
+  
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
@@ -65,7 +87,24 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
+    try{
+      let oldaid = this.data.aid.split(',').sort(this.sortNumber).join();
+      let oldcid = this.data.cid.split(',').sort(this.sortNumber).join();
+      let newaid = this.data.raid.split(',').sort(this.sortNumber).join();
+      let newcid = this.data.rcid.split(',').sort(this.sortNumber).join();
 
+      if(oldaid != newaid || oldcid != newcid){
+        
+        this.setData({
+          lists: [],
+          area_id: newaid,
+          ids: newcid
+        })
+        this.getRecommendList()
+      }
+    }catch(err){
+      console.log(err)
+    }
   },
 
   /**
@@ -98,10 +137,5 @@ Page({
     this.getRecommendList()
   },
 
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
 
-  }
 })

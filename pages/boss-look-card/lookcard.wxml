@@ -207,7 +207,7 @@
   </view> -->
 
   <recommendRecruit mine='1' aid="{{ aid }}" cid="{{ cid }}" more="{{ more }}" wx:if="{{ userInfo&&userInfo.userId == userId }}" />
-  <recommendResume aid="{{ aid }}" cid="{{ cid }}" more="{{ more }}" wx:if="{{ userInfo&&userInfo.userId != userId }}"  />
+  <recommendResume aid="{{ aid }}" cid="{{ cid }}" more="{{ more }}" uuid="{{ uuid }}" wx:if="{{ userInfo&&userInfo.userId != userId }}"  />
 
   <view class="cardthree" wx:if="{{skilllength != 0}}">
     <view class="cardthreemobile">

@@ -1,7 +1,7 @@
 <!-- locatext -->
 <view style='height:100%;{{ showComplain ? "overflow:hidden;" : "" }}'>
 
-	<view class="yupao-common-container" style="{{ userInfo.userId == info.user_id ? 'padding-bottom:20rpx':'padding-bottom:130rpx' }}">
+	<view class="yupao-common-container" style="padding-bottom:130rpx">
 
 		<view class='info-yupao-tips'>
 			<view class='yupao-lists-notice'>
@@ -78,9 +78,8 @@
 
 				</view>
 			</view>
-
-			<recommendRecruit  cid="{{ cid }}" aid="{{ aid }}" more="{{ more }}" wx:if="{{ !userInfo || userInfo.userId != info.user_id }}" />
-			<recommendResume mine="1" cid="{{ cid }}" aid="{{ aid }}" more="{{ more }}"  wx:if="{{ userInfo&&userInfo.userId == info.user_id }}"/>
+			<recommendRecruit infoId='{{ infoId }}' cid="{{ cid }}" aid="{{ aid }}" more="{{ more }}" child="{{ child }}" wx:if="{{ !more }}" />
+			<recommendResume mine="1" cid="{{ cid }}" aid="{{ aid }}" more="{{ more }}" child="{{ child }}"  wx:if="{{ more && userInfo.userId == info.user_id }}"/>
 
 			<view class='info-wenxintips clearfix'>
 				<view class='wenxintips-words'>
@@ -133,10 +132,29 @@
 
 </view>
 
-<view class="usermine-footer" wx:if="{{ userinfo.userId == info.user_id }}">
-	<view class="usermine-footer-item">修改</view>
-	<view class="usermine-footer-item">停止招工</view>
-	<view class="usermine-footer-item">我的置顶</view>
+<view class="usermine-footer" wx:if="{{ userInfo.userId == info.user_id }}">
+	<view class="info-checking-text" wx:if="{{ info.is_check == '1' }}">
+		<image src="{{ checkimg }}"></image>
+		<text>提示：人工审核中，该信息仅自己可见。</text>
+	</view>
+	<block wx:if="{{ info.is_check != '1' }}">
+		<view class="usermine-footer-item" bindtap="editThisInfo" >
+			<text>修改</text>
+		</view>
+		<block wx:if="{{ info.is_check == '2' }}">
+			<view class="usermine-footer-item" bindtap="userChangeRecruitStatus">
+				<text>{{ info.is_end == '1' ? '停止招工' : '重新招工' }}</text>
+			</view>
+			<block wx:if="{{ info.is_end != '2' }}">
+			<view class="usermine-footer-item" bindtap="userSetTopAction" wx:if="{{ !info.has_top || info.top_info.is_top == '0' }}">
+				<text>我要置顶</text>
+			</view>
+			<view class="usermine-footer-item usermine-edit-topinfo" bindtap="userSetTop" wx:if="{{ info.has_top&&info.top_info.is_top == '1' }}">
+				<text>修改置顶</text>
+			</view>
+			</block>
+		</block>
+	</block>
 </view>
 
 <view class="newdetail-info-footer" wx:if="{{ userInfo.userId != info.user_id }}">

@@ -12,6 +12,7 @@
 		"newFeature": true,
 		"coverView": true,
 		"autoAudits": false,
+		"uglifyFileName": true,
 		"checkInvalidKey": true,
 		"checkSiteMap": true,
 		"uploadWithSourceMap": true,
@@ -19,7 +20,8 @@
 			"ignore": [],
 			"disablePlugins": [],
 			"outputPath": ""
-		}
+		},
+		"showShadowRootInWxmlPanel": true
 	},
 	"compileType": "miniprogram",
 	"libVersion": "2.8.0",
@@ -182,7 +184,7 @@
 					"scene": null
 				},
 				{
-					"id": -1,
+					"id": 18,
 					"name": "新版本-我的招工信息",
 					"pathName": "pages/published/recruit/list",
 					"query": "",
@@ -213,6 +215,7 @@
 					"id": -1,
 					"name": "新版本-我的二手交易",
 					"pathName": "pages/published/used/list",
+					"query": "",
 					"scene": null
 				}
 			]

@@ -1,5 +1,6 @@
 /*ocworkotyptu oworkotext #797979 nopass ocworkotype ocworkotyptu cardfive cardnineone sharelive  content .oimg */
 @import "../../userauth/userauth.wxss";
+@import "../../index/index.wxss";
 
 .common-userauth {
   position: fixed;

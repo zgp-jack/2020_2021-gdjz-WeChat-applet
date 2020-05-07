@@ -705,6 +705,7 @@ margin-left: 16rpx;
   display: block;
   line-height: 60rpx;
   color: #333;
+  font-size: 30rpx;
 }
 .newdetail-callbox{
   position: absolute;
@@ -840,7 +841,7 @@ margin-left: 16rpx;
   z-index: 20;
   left: 0;
   bottom: 0;
-  padding: 20rpx;
+  padding: 10rpx;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -848,11 +849,39 @@ margin-left: 16rpx;
   box-shadow: 0 0 10rpx #e7e6e4;
 }
 .usermine-footer-item{
-  width: 180rpx;
-  line-height: 60rpx;
+  flex: 1;
   display: inline-block;
+  color: #525252;
+  padding: 0 5px;
+}
+.usermine-edit-topinfo{
+  color: #ff0000;
+}
+.usermine-footer-item text{
+  position: relative;
+  display: block;
   border: 1px solid #f5f5f5;
   border-radius: 5rpx;
-  color: #525252;
+  line-height: 70rpx;
   text-align: center;
+  width: 100%;
+  font-size: 28rpx;
+}
+.info-checking-text{
+  position: relative;
+  padding-left: 60rpx;
+  
+}
+.info-checking-text image{
+  position: absolute;
+  left: 20rpx;
+  display: block;
+  width: 30rpx;
+  height: 30rpx;
+  top: 15rpx;
+  border-radius: 50%;
+}
+.info-checking-text text{
+  font-size: 28rpx;
+  color: #ff0000;
 }

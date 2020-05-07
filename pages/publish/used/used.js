@@ -420,7 +420,7 @@ Page({
                         showCancel: false,
                         success: function (res) {
                             wx.reLaunch({
-                                url: '/pages/published/published?type=1',
+                                url: '/pages/published/used/list',
                             })
                         }
                     })

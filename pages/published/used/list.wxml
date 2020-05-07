@@ -5,7 +5,6 @@
 </view>
 
 <view class="recruit-list-container">
-
   <view class="recruit-list-item" wx:for="{{ lists }}" wx:key="{{ index }}" data-id="{{ item.id }}" bindtap="jumpUsedInfo">
     <image class="recruit-list-endimg" src="{{ statusCheck }}" wx:if="{{ item.is_check == '1' }}"></image>
     <image class="recruit-list-endimg" src="{{ statusNopass }}" wx:if="{{ item.is_check == '0' }}"></image>

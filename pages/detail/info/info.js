@@ -41,7 +41,7 @@ Page({
         collectTrue: app.globalData.apiImgUrl + "collect-true.png",
         collectMark:false,
        locationicon: app.globalData.apiImgUrl +"detail-info-map.png",
-
+       checkimg: app.globalData.apiImgUrl+"published-info.png",
       mapimg: app.globalData.apiImgUrl + "newdetail-info-map.png",
       collectImg: app.globalData.apiImgUrl + "job-collect-normal.png",
       collectedImg: app.globalData.apiImgUrl + "job-collect-active.png",
@@ -54,9 +54,136 @@ Page({
       isEnd:"",
       joingroup: [],
       recommendlist: [],
-      more: 0,
-      aid: '',
-      cid: ''
+      more: 0,  // 是否取反推荐列表
+      aid: '', // 地区
+      cid: '', // 工种
+      child: 0, // 是否是子列表
+    },
+    userChangeRecruitStatus:function(){
+      let that = this
+      let userInfo = this.data.userInfo
+      let id = this.data.infoId
+      wx.showLoading({
+        title: '正在修改状态'
+      })
+      app.doRequestAction({
+        way: "POST",
+        url: "job/job-end-status/",
+        params: {
+          userId: userInfo.userId,
+          token: userInfo.token,
+          tokenTime: userInfo.tokenTime,
+          infoId: id
+        },
+        success: function (res) {
+          wx.hideLoading();
+          let mydata = res.data;
+          if (mydata.errcode == "ok") {
+            that.setData({
+              "info.is_end":mydata.data.is_end,
+              "info.is_check":mydata.data.is_check,
+
+            })
+            if(that.data.info.has_top&&that.data.info.top_info.is_top == '1'){
+              that.setData({
+                'info.top_info.is_top' : mydata.data.top.is_top
+              })
+            }
+            
+            wx.showToast({
+              title: mydata.errmsg,
+              icon: "none",
+              duration: 1500
+            })
+          } else if (mydata.errcode == "auth_forbid") {
+            wx.showModal({
+              title: '温馨提示',
+              content: res.data.errmsg,
+              cancelText: '取消',
+              confirmText: '去实名',
+              success(res) {
+                if (res.confirm) {
+                  let backtwo = "backtwo"
+                  wx.redirectTo({
+                    url: `/pages/realname/realname?backtwo=${backtwo}`
+                  })
+                }
+              }
+            })
+            return
+          } else if (mydata.errcode == "member_forbid") {
+            if (_index === 0) {
+              wx.showModal({
+                title: '温馨提示',
+                content: mydata.errmsg,
+                cancelText: "取消",
+                confirmText: "联系客服",
+                success(res) {
+                  if (res.confirm) {
+                    let tel = app.globalData.serverPhone
+                    wx.makePhoneCall({
+                      phoneNumber: tel,
+                    })
+                  }
+                }
+              })
+            } else {
+              wx.showToast({
+                title: mydata.errmsg,
+                icon: "none",
+                duration: 1500
+              })
+            }
+          } else if (mydata.errcode == "to_auth") {
+            wx.showModal({
+              title: '温馨提示',
+              content: res.data.errmsg,
+              cancelText: '取消',
+              confirmText: '去实名',
+              success(res) {
+                if (res.confirm) {
+                  wx.navigateTo({
+                    url: `/pages/realname/realname`
+                  })
+                }
+              }
+            })
+            return
+          }else {
+            wx.showToast({
+              title: mydata.errmsg,
+              icon: "none",
+              duration: 1500
+            })
+          }
+        },
+        fail: function () {
+          wx.hideLoading();
+          wx.showToast({
+            title: "网络不太好，操作失败！",
+            icon: "none",
+            duration: 3000
+          })
+        }
+      })
+    },
+    editThisInfo:function(){
+      let id = this.data.infoId
+      wx.navigateTo({
+        url: '/pages/publish/recruit/recruit?id='+id,
+      })
+    },
+    userSetTopAction:function(e){
+      let id = this.data.infoId
+      wx.navigateTo({
+        url: `/pages/workingtopAll/workingtop/workingtop?id=${id}&topId=undefined`,
+      })
+    },
+    userSetTop:function(e){
+      let id = this.data.infoId;
+      wx.navigateTo({
+        url: `/pages/workingtopAll/workingtop/workingtop?id=${id}&topId=${id}`,
+      })
     },
     recentlynottips:function(){
       this.setData({shownewtips: false})
@@ -91,7 +218,15 @@ Page({
       url: '/pages/static/notice?id=32',
     })
   },
-
+  wantFastIssue: function () {
+    if (!this.data.userInfo) {
+      app.gotoUserauth();
+      return false;
+    }
+    wx.navigateTo({
+      url: '/pages/published/recruit/list',
+    })
+  },
   showThisMap:function(){
     let _this = this;
     let location = this.data.info.location
@@ -234,10 +369,12 @@ Page({
                 
                 _this.setData({ info: mydata.result })
                 //_this.getRecommendList()
-              
+                let cityid = mydata.result.hasOwnProperty('city_id') ? parseInt(mydata.result.city_id) : 0
+                let provinceid = mydata.result.hasOwnProperty('province_id') ? parseInt(mydata.result.province_id) : 0
                 if (mydata.errcode != "fail") {
-                  let aid = mydata.result.city_id;
+                  let aid =  cityid || provinceid;
                   let cid = mydata.result.occupations.join(',')
+                  console.log(aid,cid)
                     let t = mydata.result.title;
                     wx.setNavigationBarTitle({ title: t })
                   _this.setData({ collectMark: mydata.result.is_collect ? true : false, aid: aid, cid: cid})
@@ -569,11 +706,15 @@ Page({
     })
   },
     onLoad: function (options) {
-      
-    
+
       if(options.hasOwnProperty('more')){
         this.setData({
           more: parseInt(options.more)
+        })
+      }
+      if(options.hasOwnProperty('child')){
+        this.setData({
+          child: parseInt(options.child)
         })
       }
       this.isShowHomeBtn(options);
@@ -647,10 +788,12 @@ Page({
             _this.setData({ isShare: false })
         }, 500);
       let commonShareImg = app.globalData.commonShareImg;
+      let is_check = tshi.data.is_check;
+      let path = is_check == '2' ? "/pages/detail/info/info?home=1&id=" + this.data.infoId : '/pages/index/index'
       return {
         title: this.data.info.title,
         imageUrl: commonShareImg,
-        path: "/pages/detail/info/info?home=1&id=" + this.data.infoId
+        path: path
       };
     }
 })

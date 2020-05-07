@@ -1,5 +1,5 @@
 <view class="recommend-info-body">
-  <view class="listsboxdetailover" wx:for="{{lists}}" wx:key="{{index}}">
+  <view class="listsboxdetailover" wx:for="{{lists}}" wx:key="{{index}}" wx:if="{{ lists.length }}">
     <image src="{{finded}}" class="finded" wx:if="{{item.is_end == 2}}"></image>
     <view class="listsoverhl" data-uuid="{{item.uuid}}" bindtap="showDetailInfo" data-id="{{ item.id }}">
       <view class="listsboxdetailo">
@@ -60,7 +60,7 @@
     <ad class="lists-ad" unit-id="{{ unitid }}" wx:if="{{index % 5 == 0 && index > 5}}"></ad>
   </view>
     <view class='nodata-texttips' wx:if="{{ !hasmore && page != 1 }}">没有更多内容了</view>
-  <view class='common-nodatabox flex-column lists-nodata'  wx:if="{{ page === 1 && !hasmore }}">
+    <view class='common-nodatabox flex-column lists-nodata'  wx:if="{{ page === 1 && !lists.length }}">
         <image src='{{ nodata }}'></image>
         <text>暂无相关内容</text>
     </view>

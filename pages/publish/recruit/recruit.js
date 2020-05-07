@@ -688,7 +688,7 @@ Page({
         showCancel: false,
         confirmText: '确定',
         success: function (res) {
-          wx.reLaunch({ url: '/pages/published/published' })
+          wx.reLaunch({ url: '/pages/published/recruit/list' })
         }
       })
     })

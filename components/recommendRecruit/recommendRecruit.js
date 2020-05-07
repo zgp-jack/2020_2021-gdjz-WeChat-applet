@@ -10,7 +10,10 @@ Component({
   properties: {
     cid: {
       type: String,
-      value: ''
+      value: '',
+      observer:function(newval){
+        
+      }
     },
     aid: {
       type: String,
@@ -23,12 +26,16 @@ Component({
     mine:{
       type: Number,
       value : 0,
-    }
+    },
+    child:{
+      type: Number,
+      value: 0
+    },
   },
   observers:{
-    aid:function(aid){
-      if(!aid) return false
-      this.getRecommendList()
+    'aid,cid':function(aid,cid){
+      if(!cid) return false
+        this.getRecommendList()
     }
   },
   /**
@@ -36,31 +43,47 @@ Component({
    */
   data: {
     lists:[],
-    unitid: app.globalData.unitid
+    pagesize: 15,
+    unitid: app.globalData.unitid,
+    bring: app.globalData.apiImgUrl + 'newlist-jobzd.png', //顶置图片
+    autimg: app.globalData.apiImgUrl + 'newlist-jobrealname.png', //实名图片
+    hirimg: app.globalData.apiImgUrl + 'newlist-jobfinding.png', //招人图片
+    doneimg: app.globalData.apiImgUrl + 'newlist-jobfindend.png', //已找到
+    iondzs: app.globalData.apiImgUrl + 'newlist-jobposi.png',//定位,
   },
-
   /**
    * 组件的方法列表
    */
   methods: {
     detailinfoaction:function(e){
       let id = e.currentTarget.dataset.id
-      let more = this.properties.more
-      let url = more ? '/pages/detail/info/info?more=1&id=' + id : '/pages/detail/info/info?id=' + id
       wx.redirectTo({
-        url: url,
+        url: '/pages/detail/info/info?id=' + id ,
       })
     },
     seemoreaction:function(){
-      let { aid, cid } = this.properties
-      let more = this.properties.more
-      if(more){
-        wx.navigateBack()
-      }else {
-        wx.navigateTo({
-          url: '/pages/lists/recruit/index?ids='+cid + '&aid='+aid,
+      let len = this.data.lists.length
+      let num = parseInt(this.data.pagesize)
+      if(len < num){
+        wx.reLaunch({
+          url: '/pages/index/index',
         })
+        return false
       }
+      let { aid, cid } = this.properties
+      if(this.properties.child){
+        var pages = getCurrentPages() 
+        var prePage = pages[pages.length-2]
+        prePage.setData({
+          rarea_id: aid,
+          rids: cid
+        })
+        wx.navigateBack()
+        return false
+      }
+      wx.navigateTo({
+        url: '/pages/lists/recruit/index?ids='+cid + '&aid='+aid,
+      })
     },
     getRecommendList: function(){
       let _this = this;
@@ -78,7 +101,8 @@ Component({
           let mydata = res.data
           if(mydata.errcode == 'ok'){
             _this.setData({
-              recommendlist: mydata.data.list
+              lists: mydata.data.list,
+              pagesize: mydata.data.page_size
             })
           }
         }

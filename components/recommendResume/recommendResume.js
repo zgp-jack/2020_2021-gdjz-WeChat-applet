@@ -27,11 +27,15 @@ Component({
     mine:{
       type: Number,
       value: 0
+    },
+    child:{
+      type: Number,
+      value: 0
     }
   },
   observers:{
-    aid:function(aid){
-      if(!aid) return false
+    'aid,cid':function(aid,cid){
+      if(!cid) return false
       this.getRecommendList()
     }
   },
@@ -40,8 +44,10 @@ Component({
    */
   data: {
     lists:[],
+    pagesize: 15,
     page: 1,
-    unitid: app.globalData.unitid
+    unitid: app.globalData.unitid,
+    biaoqian: app.globalData.apiImgUrl + "lpy/biaoqian.png",
   },
 
   /**
@@ -51,19 +57,41 @@ Component({
     showDetailInfo:function(e){
       let id = e.currentTarget.dataset.uuid
       wx.navigateTo({
-        url: `/pages/boss-look-card/lookcard?more=1&uuid=${id}&location=${this.properties.location}`,
+        url: `/pages/boss-look-card/lookcard?more=1&uuid=${id}`,
       })
     },
     seemoreaction:function(){
-      let { aid, cid,more } = this.properties
-      console.log(aid,cid,more)
-      if(more){
+      let { aid, cid, child } = this.properties
+      
+      let len = this.data.lists.length
+      let num = parseInt(this.data.pagesize)
+      if(len < num){
+        wx.reLaunch({
+          url: '/pages/findingworkinglist/findingworkinglist',
+        })
+        return false
+      }
+      
+      
+      if(parseInt(child)){
+        var pages = getCurrentPages() 
+        var prePage = pages[pages.length-2]
+        prePage.setData({
+          raid: aid,
+          rcid: cid
+        })
         wx.navigateBack()
+        return false
       }else {
         wx.navigateTo({
           url: '/pages/lists/resume/index?ids='+cid + '&aid='+aid,
         })
       }
+    },
+    jumptop:function(){
+      wx.navigateTo({
+        url: `/pages/clients-looking-for-work/finding-name-card/findingnamecard`,
+      })
     },
     getRecommendList: function(){
       let _this = this;
@@ -73,7 +101,7 @@ Component({
         url: 'resumes/resume-recommend-list/',
         way: 'GET',
         params:{
-          province: aid,
+          area_id: aid,
           occupations: cid,
           page: page
         },
@@ -82,7 +110,8 @@ Component({
           let mydata = res.data
           if(mydata.errcode == 'ok'){
             _this.setData({
-              recommendlist: mydata.data.list
+              lists: mydata.data.list,
+              pagesize: mydata.data.page_size
             })
           }
         }
