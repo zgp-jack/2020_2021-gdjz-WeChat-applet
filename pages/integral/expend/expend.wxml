@@ -1,15 +1,39 @@
 <view class="yupao-common-container yupao-common-nofooter">
-    <view class='integral-header' wx:if="{{ false }}">显示最近{{ day }}天的积分消耗记录</view>
+    <view class='integral-select'>
+    <view class='select'>
+      <picker mode="date" fields="month"	 value="{{birthdaysubmit}}" start="{{beforeDate}}" end="{{emdDate}}" bindchange="birthday">
+      <view class='timeall'>
+        <text class='time'>{{birthday}}</text>
+        <image src="{{sign}}" class='triangle'></image>
+      </view>
+       </picker>
+      <view>
+      <picker  range="{{classifyArray}}"	 value="{{classifyIndex}}" bindchange="selectType">
+        <view class="classfy"><text>{{classifyName}}</text><image src="{{signright}}"></image></view>
+      </picker>
+      </view>
+    </view>
+    <view class="integral-detail">
+      <view class="getintegral">
+         <text>消耗积分:</text>
+         <text class="num">{{getexpend}}</text>
+      </view>
+      <view class="dointegral"  bindtap="dointegral">
+         <text>获取积分:</text>
+         <text class="num">{{getintegral}}</text>
+      </view>
+     </view>
+    </view>
     <view class='integral-content'>
         <view class='integral-list-item' wx:for="{{ lists }}" wx:key="{{ index }}" data-id='{{ item.id }}' bindtap='showThisRecord'>
             <view class='integral-list-time'>
-                <text>{{ item.year_month }}</text>
+                <text>{{ item.y_m }}</text>
                 <text>{{ item.day }}</text>
             </view>
             <view class='integral-list-words'>
-                <view class='integral-list-title overwords'>{{ item.headerText }}</view>
+                <view class='integral-list-title overwords'>{{ item.type_name }}</view>
                 <view class='integral-list-info overwords'>{{ item.title }}</view>
-                <view class='integral-list-lasttime overwords'>时间：{{ item.His }} <text>{{ item.expend_integral_string }}</text></view>
+                <view class='integral-list-lasttime overwords'>时间：{{ item.his }} <text>{{ item.tips }}</text></view>
             </view>
         </view>
 

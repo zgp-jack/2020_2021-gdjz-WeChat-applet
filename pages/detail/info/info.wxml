@@ -78,10 +78,12 @@
 
 				</view>
 			</view>
-			<recommendRecruit infoId='{{ infoId }}' cid="{{ cid }}" aid="{{ aid }}" more="{{ more }}" child="{{ child }}" wx:if="{{ !more }}" />
-			<recommendResume mine="1" cid="{{ cid }}" aid="{{ aid }}" more="{{ more }}" child="{{ child }}"  wx:if="{{ more && userInfo.userId == info.user_id }}"/>
-
+			
 			<view class='info-wenxintips clearfix'>
+				<view class="yupao-tips-newcon">
+					<image class="yupaotipsimg" src=""></image>
+					鱼泡提示
+				</view>
 				<view class='wenxintips-words'>
 					<navigator url='/pages/anti-fraud/anti-fraud' open-type="navigate" class='text-nav-name text-active'>《防骗指南》</navigator>
 					<view class='wenxintips-info'>：此信息由鱼泡网用户提供，但联系时仍需注意识别
@@ -90,6 +92,10 @@
 				<view class='wenxintips-info'>关注 “鱼泡网” 微信公众号接收新工作提醒
 					<text class='text-active' bindtap='userTapConcern'>如何关注</text>。</view>
 			</view>
+
+			<recommendRecruit infoId='{{ infoId }}' cid="{{ cid }}" aid="{{ aid }}" more="{{ more }}" child="{{ child }}" wx:if="{{ !more }}" />
+			<recommendResume mine="1" cid="{{ cid }}" aid="{{ aid }}" more="{{ more }}" child="{{ child }}"  wx:if="{{ more && userInfo.userId == info.user_id }}"/>
+
 
 			<view class='info-concern-img'>
 				<navigator url='/pages/download/download-app' open-type="navigate">
