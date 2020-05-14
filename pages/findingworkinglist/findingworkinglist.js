@@ -167,33 +167,7 @@ Page({
     _this.doRequestAction(false);
     _this.closeAllSelect();
   },
-  // userChooseProvince: function (e) {
-
-  //   let _this = this;
-  //   let index = parseInt(e.currentTarget.dataset.index);
-  //   let _id = e.currentTarget.dataset.id;
-  //   let areaText = e.currentTarget.dataset.area;
-  //   let pname = e.currentTarget.dataset.pname;
-  //   let directCtiy = parseInt(e.currentTarget.dataset.haschild);
-  //   let _sid = this.data.searchDate.province;
-  //   this.setData({ province: index })
-  //   //if (_id == _sid) return false;
-  //   let mydata = { "name": areaText, "id": _id, ad_name: pname };
-  //   if (!directCtiy) app.setStorageAction(_id, mydata)
-  //   _this.returnTop();
-  //   _this.setData({
-  //     isFirstRequest: true,
-  //     "searchDate.page": 1,
-  //     "searchDate.province": _id,
-  //     areaText: areaText
-  //   })
-  //   wx.setStorageSync("areaId", _id)
-  //   wx.setStorageSync("areaText", areaText)
-  //   _this.doRequestAction(false);
-  //   // _this.closeAllSelect();
-
-
-  // },
+  
   touchStart: function (e) {
     
     this.touchStartTime = e.timeStamp
@@ -215,7 +189,7 @@ Page({
     let mydata = { "name": areaText, "id": _id, "ad_name": panme };
     this.setData({ province: index })
     
-    if (_id == _sid) return false;
+    //if (_id == _sid) return false;
 
     if (_this.touchEndTime - _this.touchStartTime < 350) {
 
@@ -228,17 +202,11 @@ Page({
 
         clearTimeout(_this.lastTapTimeoutFunc);
         _this.returnTop();
-        // _this.setData({
-        //   isFirstRequest: true,
-        //   "searchDate.page": 1,
-        //   "searchDate.area_id": _id,
-        //   areaText: areaText
-        // })
         _this.setData({
           isFirstRequest: true,
           "searchDate.page": 1,
           "searchDate.province": _id,
-          areaText: areaText
+          areaText: areaText,
         })
         wx.setStorageSync("areaId", _id)
         wx.setStorageSync("areaText", areaText)

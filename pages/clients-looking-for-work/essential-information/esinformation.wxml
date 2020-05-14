@@ -40,7 +40,7 @@
 
       <view class='publish-choose-wordtype' wx:if="{{ showWorkType }}">
         <view class='publish-choose-contentbox common-shaded-box'>
-          <view class='publish-choose-header'>选择工种</view>
+          <view class='publish-choose-header'>选择工种（可多选）</view>
           <view class='publish-choose-body'>
             <view class='publish-choose-content-item' wx:for="{{ typeworkarray }}" wx:key="{{ index }}" wx:for-index="pindex" wx:if="{{ item.has_children }}">
               <view class='publish-choose-content-header'>{{ item.name }}</view>
