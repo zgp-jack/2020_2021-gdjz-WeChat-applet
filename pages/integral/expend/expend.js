@@ -28,7 +28,7 @@ Page({
     showWork: false,
     sign: app.globalData.apiImgUrl + "lpy/integral/select2.png",
     signright: app.globalData.apiImgUrl + "lpy/integral/select1.png",
-    beforeDate: "",
+    beforeDate: "2017-01-01",
     emdDate: "",
     birthday: "",
     classify: [],
@@ -383,7 +383,7 @@ Page({
           that.setData({
             beforeDate: mydata.data.min.y + "-" + mydata.data.min.m,
             classify: mydata.data.types,
-            classifyArray: classifymap,
+            classifyArray: classifymap, 
             classifyName: "消耗分类",
             classifyNameId: mydata.data.types[0].type
           })

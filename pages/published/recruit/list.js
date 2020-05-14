@@ -1,14 +1,17 @@
 const app = getApp()
+let footerjs = require("../../../utils/footer.js");
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
+    footerActive: "member",
     refresh: false,
     statusCheck: app.globalData.apiImgUrl + 'published-recruit-checking.png',
     statusEnd: app.globalData.apiImgUrl + 'published-recruit-end.png',
     statusNopass: app.globalData.apiImgUrl + 'published-recruit-nopass.png',
+    handsettop:app.globalData.apiImgUrl + "new-published-settop-tips.png",
     page: 1,
     types: [{id:'all',name:'全部'},{id:'being',name:'正在招'},{id:'end',name:'已招满'}],
     current: 0,
@@ -18,7 +21,13 @@ Page({
     nodata: app.globalData.apiImgUrl + 'nodata.png',
     checkingimg: app.globalData.apiImgUrl + 'published-info.png',
     infoId: '',
-    infoIndex: -1
+    infoIndex: -1,
+    showTopTips: false
+  },
+  closeHandTips:function(){
+    this.setData({
+      showTopTips: false
+    })
   },
   jumpRecruitInfo:function(e){
     let id = e.currentTarget.dataset.id
@@ -303,11 +312,37 @@ Page({
     })
     this.getRecruitList()
   },
+  initFooterData: function () {
+    this.setData({
+      footerImgs: footerjs.footerImgs,
+      publishActive: footerjs.publishActive,
+      showPublishBox: footerjs.showPublishBox
+    })
+    footerjs.initMsgNum(this);
+  },
+  doPublishAction: function () {
+    footerjs.doPublishAction(this);
+  },
+  closePublishAction: function () {
+    footerjs.closePublishAction(this);
+  },
+  valiUserCard: function () {
+    let userInfo = this.data.userInfo;
+    footerjs.valiUserCard(this, app, userInfo);
+  },
+  jumpThisLink: function (e) {
+    app.jumpThisLink(e);
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    
+    if(options.hasOwnProperty('jz')){
+      this.setData({
+        showTopTips:true
+      })
+    }
+    this.initFooterData()
   },
 
   /**

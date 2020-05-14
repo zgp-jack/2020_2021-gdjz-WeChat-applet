@@ -544,7 +544,7 @@
 }
 
 .sjim {
-  width: 100rpx;
+  width: 110rpx;
   height: 30rpx;
   margin-left: 20rpx;
 }

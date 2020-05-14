@@ -32,8 +32,8 @@
           </view>
           <view class="listsboxshow" wx:if="{{item.type}}">{{item.type}}</view>
         </view>
-          <text class="listsboxstyru" catchtap="jumptop" wx:if="{{item.resume_top == 1}}">我要置顶</text>
-          <image class="listsboxoimg" src="{{toptown}}" wx:if="{{item.resume_top == 1}}"></image>
+          <!-- <text class="listsboxstyru" catchtap="jumptop" wx:if="{{item.resume_top == 1}}">我要置顶</text> -->
+          <!-- <image class="listsboxoimg" src="{{toptown}}" wx:if="{{item.resume_top == 1}}"></image> -->
       </view>
       <view class="listsboxlable">
         <view class="listsboxlableone" wx:for="{{item.occupations}}" wx:key="{{index}}">{{item}}</view>
@@ -59,8 +59,10 @@
     </view>
     <ad class="lists-ad" unit-id="{{ unitid }}" wx:if="{{index % 5 == 0 && index > 5}}"></ad>
   </view>
-    <view class='nodata-texttips' wx:if="{{ !hasmore && page != 1 }}">没有更多内容了</view>
-    <view class='common-nodatabox flex-column lists-nodata'  wx:if="{{ page === 1 && !lists.length }}">
+    <view class='nodata-texttips' wx:if="{{ !hasmore && lists.length }}">
+      <view class="seemore-recommend-recruit" bindtap="seemoretoresume">查看更多</view>
+    </view>
+    <view class='common-nodatabox flex-column lists-nodata'  wx:if="{{ !hasmore && !lists.length }}">
         <image src='{{ nodata }}'></image>
         <text>暂无相关内容</text>
     </view>

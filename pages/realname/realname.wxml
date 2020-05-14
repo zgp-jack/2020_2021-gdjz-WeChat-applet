@@ -1,6 +1,6 @@
 <view class="yupao-common-container">
   <view class='common-publish-content common-shaded-box realname-tips'>
-    <view class='realname-idcardbox clearfix' style='border-bottom:1px solid #dcdcdc;'>
+    <view class='realname-idcardbox clearfix' >
       <view class='realname-photo'>请拍摄并上传你的身份证照片</view>
       <view class='realname-item' bindtap='userUploadIdcard' data-type="zm" wx:if="{{card_img_path != uploadfailicon}}">
         <image src='{{card_img_path|| idcardf}}'></image>
@@ -102,18 +102,22 @@
       </view> -->
 
   </view>
-  <view class='common-publish-item common-publish-top' wx:if="{{ !member.tel&&check_degree }}" >
-    <view class='common-publish-item-content'>
-      <text class='common-publish-words'>手机号</text>
-      <input class='common-publish-input' type='number' value='{{ member.tel }}' placeholder='请输入手机号' bindinput='userEnterTel'></input>
+
+  <view class="userbandphton-container">
+    <view class='common-publish-item common-publish-top' wx:if="{{ !member.tel&&check_degree }}" >
+      <view class='common-publish-item-content'>
+        <text class='common-publish-words'>手机号</text>
+        <input class='common-publish-input' type='number' value='{{ member.tel }}' placeholder='请输入手机号' bindinput='userEnterTel'></input>
+      </view>
     </view>
-  </view>
-  <view class='common-publish-item common-publish-topone' wx:if="{{ !member.tel &&  check_degree}}">
-    <view class='common-publish-item-content common-publish-item-code '>
-      <text class='common-publish-words'>验证码</text>
-      <input class='common-publish-input' type='number' value='{{ member.code }}' placeholder='请输入验证码' bindinput='userEnterCode' maxlength='4'></input>
-      <text class='publish-getcode-btn' bindtap='userGetCode'>{{ codeTips }}</text>
+    <view class='common-publish-item common-publish-topone' wx:if="{{ !member.tel &&  check_degree}}">
+      <view class='common-publish-item-content common-publish-item-code ' style="border-bottom:0;">
+        <text class='common-publish-words'>验证码</text>
+        <input class='common-publish-input' type='number' value='{{ member.code }}' placeholder='请输入验证码' bindinput='userEnterCode' maxlength='4'></input>
+        <text class='publish-getcode-btn' bindtap='userGetCode'>{{ codeTips }}</text>
+      </view>
     </view>
+
   </view>
 
   <text class='common-sure-btn' bindtap='userSubmitIdcard'>身份认证</text>

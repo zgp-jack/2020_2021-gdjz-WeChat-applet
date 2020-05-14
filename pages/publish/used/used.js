@@ -118,7 +118,7 @@ Page({
                         "cardInfo.category_id": mydata.selectedClassifies ? mydata.selectedClassifies.category_id : "",
                         "cardInfo.cities": mydata.areaTree,
                         "cardInfo.provinceId": mydata.model.province_id ? mydata.model.province_id : "",
-                        "cardInfo.cityId": mydata.model.city_id ? mydata.model.city_id : "",
+                        "cardInfo.cityId": mydata.model.city_id ? mydata.model.city_id : (mydata.memberInfo.city_id == 0) ? 0 : "",
                         "cardInfo.memberTel": mydata.memberInfo.tel,
                         "cardInfo.cardTel": mydata.model.user_mobile,
                       "cardInfo.content": mydata.model.detail ? mydata.model.detail : "",
@@ -378,6 +378,7 @@ Page({
             app.showMyTips("请输入交易详情");
             return false;
         }
+        
         let dataJson = {
             userId: userInfo.userId,
             token: userInfo.token,
@@ -390,7 +391,7 @@ Page({
             detail: cardInfo.content,
             code: cardInfo.code,
             province_id: parseInt(cardInfo.provinceId),
-            city_id: (cardInfo.provinceId == cardInfo.cityId) ? "" : parseInt(cardInfo.cityId),
+            city_id: (cardInfo.provinceId == cardInfo.cityId || cardInfo.cityId == "") ? "" : parseInt(cardInfo.cityId),
             category_id: parseInt(cardInfo.category_id),
             attribute_id: parseInt(cardInfo.attribute_id)
         };

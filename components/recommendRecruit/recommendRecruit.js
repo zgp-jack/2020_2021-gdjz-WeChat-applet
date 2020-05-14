@@ -47,7 +47,7 @@ Component({
     unitid: app.globalData.unitid,
     bring: app.globalData.apiImgUrl + 'newlist-jobzd.png', //顶置图片
     autimg: app.globalData.apiImgUrl + 'newlist-jobrealname.png', //实名图片
-    hirimg: app.globalData.apiImgUrl + 'newlist-jobfinding.png', //招人图片
+    hirimg: app.globalData.apiImgUrl + 'recruit-lists-new-finding.png', //招人图片
     doneimg: app.globalData.apiImgUrl + 'newlist-jobfindend.png', //已找到
     iondzs: app.globalData.apiImgUrl + 'newlist-jobposi.png',//定位,
   },
@@ -55,10 +55,19 @@ Component({
    * 组件的方法列表
    */
   methods: {
+    wantFastIssue: function () {
+      if (!this.data.userInfo) {
+        app.gotoUserauth();
+        return false;
+      }
+      wx.navigateTo({
+        url: '/pages/published/recruit/list?jz=1',
+      })
+    },
     detailinfoaction:function(e){
       let id = e.currentTarget.dataset.id
       wx.redirectTo({
-        url: '/pages/detail/info/info?id=' + id ,
+        url: '/pages/detail/info/info?id=' + id + '&child=' + this.properties.child,
       })
     },
     seemoreaction:function(){

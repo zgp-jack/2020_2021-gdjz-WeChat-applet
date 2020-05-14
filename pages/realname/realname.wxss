@@ -1,4 +1,11 @@
 @import '../publish/recruit/recruit.wxss';
+page{
+  background: #f7f6f9;
+}
+.userbandphton-container{
+  margin-top: 25rpx;
+  background: white;
+}
 
 .yupao-realname-container{
     position: relative;
@@ -65,7 +72,6 @@
 width: 100%;
 margin: 20rpx 0 ;
 background: white;
-border-bottom: 1px solid #dcdcdc;
 box-shadow: #e7e6e4 0 0 10rpx;
 
 }

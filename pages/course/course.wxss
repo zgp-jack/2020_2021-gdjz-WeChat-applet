@@ -27,6 +27,7 @@
     text-align: center;
     color: #6c6d6d;
 }
+
 .choose-header-item:nth-last-child(1){
     border-right: 0;
 }

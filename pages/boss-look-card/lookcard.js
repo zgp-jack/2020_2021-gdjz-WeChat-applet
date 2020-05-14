@@ -6,16 +6,17 @@ Page({
 
   /**/
   data: {
+    shownewtips: false,
     complaincontent: app.globalData.complaincontent,
-    realNames: app.globalData.apiImgUrl + 'newresume-infolist-ysm.png?t=1',
-    authentication: app.globalData.apiImgUrl + 'newresume-infolist-jnz.png?t=1',
+    realNames: app.globalData.apiImgUrl + 'new-list-realname-icon.png',
+    authentication: app.globalData.apiImgUrl + 'new-list-jnzs-icon.png',
     unitid: app.globalData.unitid,
     homebtnImg: app.globalData.apiImgUrl + "yp-return-jobinfo.png",
     downward: app.globalData.apiImgUrl + "lpy/downward.png",
     experienceitem: app.globalData.apiImgUrl + "lpy/newresume-experience-item.png",
     biaoqian: app.globalData.apiImgUrl + "lpy/biaoqian.png",
     baseinform: app.globalData.apiImgUrl + "newresume-catimg.png",
-    userInfo: false,
+    userInfo: true,
     icon: app.globalData.apiImgUrl + "userauth-topicon.png",
     complainInfo: "",
     showComplain: false,
@@ -108,7 +109,25 @@ Page({
     biaoqian: app.globalData.apiImgUrl + "lpy/biaoqian.png",
     userImg: "http://cdn.yupao.com/miniprogram/images/user.png",
     more: 0,
+    child: 0,
     user_id: ''
+  },
+  closeNewPhoneFc:function(){
+    this.setData({shownewtips: false})
+  },
+  returnAction:function(){
+    return false
+  },
+  recentlynottips:function(){
+    this.setData({shownewtips: false})
+    let time = new Date().getTime()
+    wx.setStorageSync('resumeHideTipsTime', time)
+  },
+  callthisphonehide:function(){
+    this.setData({shownewtips: false})
+    wx.makePhoneCall({
+      phoneNumber: this.data.info.tel_str,
+    })
   },
   showDetailInfo:function(e){
     let id = e.currentTarget.dataset.uuid
@@ -203,7 +222,6 @@ Page({
       failTitle: "网络错误！",
       params: dert,
       success: function (res) {
-        console.log(res)
         if (res.data.errcode == 200) {
           that.setData({
             telephone: res.data.tel,
@@ -212,6 +230,18 @@ Page({
             is_read: 0,
             // "show_complain.show_complain":
           })
+
+          let rtime = wx.getStorageSync('resumeHideTipsTime')
+          if(rtime){
+            let t = 15 * 60 * 60 * 24 * 1000
+            let tt = new Date().getTime()
+            if(tt - rtime >= t){
+              _this.setData({shownewtips:true})
+            }
+          }else{
+            _this.setData({shownewtips:true})
+          }
+
         } else if (res.data.errcode == "7405") {
           wx.showModal({
             title: '温馨提示',
@@ -808,12 +838,19 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    console.log(options)
     this.setData({
       options: options
     })
     if(options.hasOwnProperty('more')){
       this.setData({
         more: options.more
+      })
+    }
+    if(options.hasOwnProperty('child')){
+      console.log(options.child)
+      this.setData({
+        child: options.child
       })
     }
   },

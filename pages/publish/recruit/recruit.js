@@ -334,7 +334,7 @@ Page({
             let lastArea = wx.getStorageSync("userLastPubArea");
             if (lastArea) _this.setData({ addressData: lastArea })
           }
-          if (options.is_check == "0") {
+          if (parseInt(mydata.model.is_check) == 0) {
             _this.setData({
               showModal:true,
               showTextarea:false,

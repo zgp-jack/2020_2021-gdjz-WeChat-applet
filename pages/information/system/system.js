@@ -20,7 +20,7 @@ Page({
       type7:'/pages/others/message/lists/lists',      // 7 留言信息
       type8:'/pages/integral/source/source', // 8 积分管理-充值
       type9:'/pages/realname/realname',      // 9 实名认证
-      type10:'/pages/integral/return/return',     // 10 投诉找活信息
+      type10:'/pages/integral/source/source',     // 10 投诉找活信息
     },
     isEnd: false,
     page:1,

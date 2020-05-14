@@ -8,8 +8,8 @@ Page({
    * 页面的初始数据 nation view_num occupations introduce workingyears procity introduce fail_certificate 
    */
   data: {
-    realNames: app.globalData.apiImgUrl + 'newresume-infolist-ysm.png?t=1',
-    authentication: app.globalData.apiImgUrl + 'newresume-infolist-jnz.png?t=1',
+    realNames: app.globalData.apiImgUrl + 'new-list-realname-icon.png',
+    authentication: app.globalData.apiImgUrl + 'new-list-jnzs-icon.png',
     baseinform: app.globalData.apiImgUrl + "newresume-catimg.png",
     workingposition: app.globalData.apiImgUrl + "lpy/workdetail.png",
     subscripted: app.globalData.apiImgUrl + "lpy/bottomimg.png",

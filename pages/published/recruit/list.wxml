@@ -1,3 +1,5 @@
+<import src="/pages/footer/footer.wxml" />
+
 <view class="recruit-list-header flex-row">
   <view class="recruit-header-item" wx:for="{{ types }}" wx:key="{{ index }}" bindtap="userChangeType" data-key="{{ index }}"> 
     <view class="recruit-header-text {{ current===index ? 'recruit-header-text-active' : '' }}">{{ item.name }}</view>
@@ -30,3 +32,18 @@
       <text>暂无相关内容</text>
   </view>
 </view>
+
+<view class='collect-warp' wx:if="{{ showTopTips }}">
+  <view class='collectbox-tips'>
+    <image class='collect-tips-icon' src='{{ collecticon }}'></image>
+    <view class='collect-bg'>
+      <text class='collect-tips-title'>鱼泡提示</text>
+      <text class='collect-tips-words'>点击信息右下角"我要置顶"功能，即可将信息状态升级为置顶信息，让您的信息被更多的工友浏览。</text>
+    </view>
+    <image class='collect-tips-hand' src='{{ handsettop }}'></image>
+    <text class='knowtips' bindtap='closeHandTips'>我知道了</text>
+  </view>
+</view>
+
+<!-- 引入footer -->
+<template is="footer" data="{{ footerImgs,publishActive,showPublishBox,footerActive }}" />

@@ -9,7 +9,7 @@ Page({
         showRecharge:false,
         footerActive: "member",
         nouser: app.globalData.apiImgUrl + "userauth-userinfo-null.png",
-        realNames: app.globalData.apiImgUrl + 'newresume-infolist-ysm.png?t=1',
+        realNames: app.globalData.apiImgUrl + 'new-list-realname-icon.png',
         feedbackimg: app.globalData.apiImgUrl + "feedbackmsg-img.png",
         rightarrow: app.globalData.apiImgUrl + "new-center-rightarrow.png",
         ucenterimgs: {

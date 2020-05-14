@@ -1,15 +1,17 @@
 const app = getApp()
+let footerjs = require("../../../utils/footer.js");
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
+    footerActive: "member",
     statusCheck: app.globalData.apiImgUrl + 'published-recruit-checking.png',
-    statusEnd: app.globalData.apiImgUrl + 'published-recruit-end.png',
+    statusEnd: app.globalData.apiImgUrl + 'mini-used-endicon.png',
     statusNopass: app.globalData.apiImgUrl + 'published-recruit-nopass.png',
     page: 1,
-    types: [{id:'all',name:'全部'},{id:'being',name:'正在招'},{id:'end',name:'已招满'}],
+    types: [{id:'all',name:'全部'},{id:'being',name:'交易中'},{id:'end',name:'已成交'}],
     current: 0,
     hasmore: true,
     lists: [],
@@ -274,12 +276,35 @@ Page({
         })
       }
     })
+    
+  },
+  jumpThisLink: function (e) {
+    app.jumpThisLink(e);
+  },
+  initFooterData: function () {
+    this.setData({
+      footerImgs: footerjs.footerImgs,
+      publishActive: footerjs.publishActive,
+      showPublishBox: footerjs.showPublishBox
+    })
+    footerjs.initMsgNum(this);
+  },
+  doPublishAction: function () {
+    footerjs.doPublishAction(this);
+  },
+  closePublishAction: function () {
+    footerjs.closePublishAction(this);
+  },
+  valiUserCard: function () {
+    let userInfo = this.data.userInfo;
+    footerjs.valiUserCard(this, app, userInfo);
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
     this.getUsedList();
+    this.initFooterData()
   },
 
   /**

@@ -37,7 +37,10 @@
   </view>
 
   <view class="bottom">
-    <view wx:for="{{top_rules}}" wx:key="{{index}}">{{item}}</view>
+    <view wx:for="{{top_rules}}" wx:key="{{index}}">
+      {{item}}
+      <!-- <text class="rules-phone" wx:if="{{ index === top_rules.length-1 }}" bindtap="callThisPhone" data-phone="{{ serverPhone }}">{{ serverPhone }}</text> -->
+    </view>
   </view>
 </view>
 <view class="common-userauth" wx:if="{{ !userInfo }}">

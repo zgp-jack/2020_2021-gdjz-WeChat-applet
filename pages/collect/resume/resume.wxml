@@ -7,8 +7,8 @@
         <view>
           <image src='{{ collectIcon.infoIcon }}'></image>{{ collectIcon.infoTitle }}</view>
       </view>
-      <view class='choose-header-item'>
-        <view class='text-active'>
+      <view class='choose-header-item choose-header-item-active'>
+        <view>
           <image src='{{ collectIcon.resumeIcon }}'></image>{{ collectIcon.resumeTitle }}</view>
       </view>
     </view>

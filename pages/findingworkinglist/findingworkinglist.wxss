@@ -120,7 +120,7 @@ text-overflow: ellipsis;
 .listsboxageone image{
     font-size: 30rpx;
     margin-left: 12rpx;
-    width: 78rpx;
+    width: 110rpx;
     height: 30rpx;
 
 }

@@ -224,3 +224,7 @@ padding-left: 26%;
 .scopedetail view:first-child{
       margin-right: 10.5%;
 }
+.rules-phone{
+  position: relative;
+  color: #0099FF;
+}

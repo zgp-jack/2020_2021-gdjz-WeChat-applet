@@ -183,7 +183,7 @@
 
 .sjim {
 width: 100rpx;
-height: 36rpx;
+height: 30rpx;
 margin-left: 20rpx;
 
 }
@@ -225,4 +225,23 @@ margin-left: 20rpx;
 
 .common-choose-header{position:relative;padding:15rpx 0;}
 .cancel-collect-item{position: relative;padding:2rpx 10rpx;background:#0099ff;color:white;border-radius: 2px;margin-right: 5rpx;}
+
+
+.choose-header-item-active{
+    position: relative;
+}
+.choose-header-item-active view{
+    color: #0099ff;
+}
+.choose-header-item-active::after{
+    position: absolute;
+    content: '';
+    width: 60%;
+    bottom: 0;
+    left: 20%;
+    height: 2px;
+    background: #0099ff;
+    z-index: 2;
+}
+
 

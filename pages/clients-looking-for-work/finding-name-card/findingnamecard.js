@@ -12,8 +12,8 @@ Page({
    */
   data: {
     topoimage: app.globalData.apiImgUrl + 'lpy/resume-settop-daytips.png',
-    realNames: app.globalData.apiImgUrl + 'newresume-infolist-ysm.png?t=1',
-    authentication: app.globalData.apiImgUrl + 'newresume-infolist-jnz.png?t=1',
+    realNames: app.globalData.apiImgUrl + 'new-list-realname-icon.png',
+    authentication: app.globalData.apiImgUrl + 'new-list-jnzs-icon.png',
     ruleimage: app.globalData.apiImgUrl + "lpy/biaptu.png",
     baseinform: app.globalData.apiImgUrl + "lpy/jichu.png",
     workingposition: app.globalData.apiImgUrl + "lpy/workdetail.png",

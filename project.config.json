@@ -217,6 +217,20 @@
 					"pathName": "pages/published/used/list",
 					"query": "",
 					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "积分记录",
+					"pathName": "pages/integral/return/return",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": 24,
+					"name": "pages/fast-issue/index/index",
+					"pathName": "pages/fast-issue/index/index",
+					"query": "",
+					"scene": null
 				}
 			]
 		}

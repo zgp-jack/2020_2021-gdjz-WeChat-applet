@@ -1791,8 +1791,8 @@ padding-left: 0rpx;
 }
 
   .oimgone image{
-  width: 74rpx;
-height: 26rpx;
+  width: 120rpx;
+height: 30rpx;
 margin-left: 14rpx;
 
   }

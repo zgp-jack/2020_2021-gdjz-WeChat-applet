@@ -40,7 +40,7 @@ Page({
     selectimg: app.globalData.apiImgUrl + 'select.png',
     returnTopImg: app.globalData.apiImgUrl + 'returntop.png',
     realNames: app.globalData.apiImgUrl + 'newresume-infolist-ysm.png?t=1',
-    authentication: app.globalData.apiImgUrl + 'newresume-infolist-jnz.png?t=1',
+    authentication: app.globalData.apiImgUrl + 'new-list-jnzs-icon.png',
     showListsInfo: 0,
     province: -1,
     userCity: -1,
@@ -628,6 +628,9 @@ Page({
       }
 
     }else{
+      _this.setData({ areaText: areaText })
+      _this.initAreaInfo();
+      return false
       app.appRequestAction({
         url: "resume/get-resume-province/",
         hideLoading: true,

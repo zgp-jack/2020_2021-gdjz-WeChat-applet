@@ -7,6 +7,7 @@ Page({
   data: {
     nodata: app.globalData.apiImgUrl + 'nodata.png',
     biaoqian: app.globalData.apiImgUrl + "lpy/biaoqian.png",
+    authentication:app.globalData.apiImgUrl + "new-list-jnzs-icon.png",
     unitid: app.globalData.unitid,
     aid: '',
     cid: '',
@@ -19,7 +20,7 @@ Page({
   showDetailInfo:function(e){
     let id = e.currentTarget.dataset.uuid
     wx.navigateTo({
-      url: `/pages/boss-look-card/lookcard?uuid=${id}`,
+      url: `/pages/boss-look-card/lookcard?uuid=${id}&child=1`,
     })
   },
   /**
@@ -82,7 +83,11 @@ Page({
   onReady: function () {
 
   },
-
+  seemoretoresume:function(){
+    wx.reLaunch({
+      url: '/pages/findingworkinglist/findingworkinglist',
+    })
+  },
   /**
    * 生命周期函数--监听页面显示
    */
@@ -98,7 +103,8 @@ Page({
         this.setData({
           lists: [],
           area_id: newaid,
-          ids: newcid
+          ids: newcid,
+          page: 1
         })
         this.getRecommendList()
       }

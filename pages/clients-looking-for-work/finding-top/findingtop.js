@@ -19,9 +19,12 @@ Page({
     value: 1,
     areaTextId: "",
     top_rules: [],
-    max_top_days:""
+    max_top_days:"",
+    serverPhone: app.globalData.serverPhone
   },
-
+  callThisPhone:function(e){
+    app.callThisPhone(e)
+  },
   jumpstickyrule() {
     let that = this;
     let max_number = that.data.max_number
@@ -256,6 +259,9 @@ Page({
     app.appRequestAction({
       url: 'resumes/top-config/',
       way: 'POST',
+      // params:{
+        // interface_version: 'v2',
+      // },
       success: function (res) {
         let mydata = res.data;
        
@@ -296,6 +302,8 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    console.log(app.globalData.serverPhone)
+    console.log(this.data.serverPhone)
     this.authrasution()
     this.getdetail()
   },

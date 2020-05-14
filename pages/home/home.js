@@ -6,8 +6,8 @@ const app = getApp();
 Page({
   data: {
     version: app.globalData.version,
-    realNames: app.globalData.apiImgUrl + 'newresume-infolist-ysm.png?t=1',
-    authentication: app.globalData.apiImgUrl + 'newresume-infolist-jnz.png?t=1',
+    realNames: app.globalData.apiImgUrl + 'new-list-realname-icon.png',
+    authentication: app.globalData.apiImgUrl + 'new-list-jnzs-icon.png',
     finded: app.globalData.apiImgUrl + "lpy/finded.png",
     biaoqian: app.globalData.apiImgUrl + "lpy/biaoqian.png",
     headerimg: "",
@@ -83,8 +83,8 @@ Page({
     searchInputVal: "",
     areaInputFocus: false,
     bring: app.globalData.apiImgUrl + 'newlist-jobzd.png', //顶置图片
-    autimg: app.globalData.apiImgUrl + 'newlist-jobrealname.png', //实名图片
-    hirimg: app.globalData.apiImgUrl + 'newlist-jobfinding.png', //招人图片
+    autimg: app.globalData.apiImgUrl + 'new-list-realname-icon.png', //实名图片
+    hirimg: app.globalData.apiImgUrl + 'recruit-lists-new-finding.png', //招人图片
     doneimg: app.globalData.apiImgUrl + 'newlist-jobfindend.png', //已找到
     iondzs: app.globalData.apiImgUrl + 'newlist-jobposi.png',//定位
     iImgUrl: app.globalData.apiImgUrl, //图片地址

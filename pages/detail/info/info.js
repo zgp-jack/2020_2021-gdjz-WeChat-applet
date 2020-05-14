@@ -48,6 +48,7 @@ Page({
       complainImg: app.globalData.apiImgUrl + "newjobinfo-complain.png",
       sharebtnImg: app.globalData.apiImgUrl + "newjobinfo-share.png",
       homebtnImg: app.globalData.apiImgUrl + "newdetailinfo-home.png",
+      tipsimg:app.globalData.apiImgUrl + 'recruitinfo/recruit-tips.png',
       showHomeImg:false,
       showcomplain: false,
       usepang: 8,
@@ -175,6 +176,87 @@ Page({
     },
     userSetTopAction:function(e){
       let id = this.data.infoId
+      let _this = this
+      let info = this.data.info
+      let userInfo = this.data.userInfo
+      let top = info.has_top
+      if(top){
+        let endtime = parseInt(info.top_info.end_time)
+        let timestr = new Date().getTime() / 1000
+        if(timestr < endtime){
+          wx.showLoading({
+            title: '正在执行操作'
+          })
+          app.doRequestAction({
+            url: 'job/update-top-status/',
+            way: "POST",
+            params: {
+              userId: userInfo.userId,
+              token: userInfo.token,
+              tokenTime: userInfo.tokenTime,
+              infoId: id
+            },
+            success: function (res) {
+              wx.hideLoading();
+              let mydata = res.data;
+              console.log(mydata)
+              if (mydata.errcode == "ok") {
+                _this.setData({
+                  "info.top_info.is_top": mydata.data.top.is_top
+                })
+              }
+              if (mydata.errcode == "auth_forbid") {
+                wx.showModal({
+                  title: '温馨提示',
+                  content: res.data.errmsg,
+                  cancelText: '取消',
+                  confirmText: '去实名',
+                  success(res) {
+                    if (res.confirm) {
+                      let backtwo = "backtwo"
+                      wx.navigateTo({
+                        url: `/pages/realname/realname?backtwo=${backtwo}`
+                      })
+                    }
+                  }
+                })
+                return
+              } else if (mydata.errcode == "member_forbid") {
+                  wx.showModal({
+                    title: '温馨提示',
+                    content: mydata.errmsg,
+                    cancelText: "取消",
+                    confirmText: "联系客服",
+                    success(res) {
+                      if (res.confirm) {
+                        let tel = app.globalData.serverPhone
+                        wx.makePhoneCall({
+                          phoneNumber: tel,
+                        })
+                      }
+                    }
+                  })
+              } else {
+                  wx.showToast({
+                    title: mydata.errmsg,
+                    icon: "none",
+                    duration: 1500
+                  })
+                }
+              },
+              fail: function (err) {
+                wx.hideLoading();
+                wx.showToast({
+                  title: "网络不太好，操作失败！",
+                  icon: "none",
+                  duration: 3000
+                })
+              }
+            })
+          return false
+        }
+      }
+      
       wx.navigateTo({
         url: `/pages/workingtopAll/workingtop/workingtop?id=${id}&topId=undefined`,
       })
@@ -185,10 +267,16 @@ Page({
         url: `/pages/workingtopAll/workingtop/workingtop?id=${id}&topId=${id}`,
       })
     },
+    closeNewPhoneFc:function(){
+      this.setData({shownewtips: false})
+    },
+    returnAction:function(){
+      return false
+    },
     recentlynottips:function(){
       this.setData({shownewtips: false})
       let time = new Date().getTime()
-      wx.setStorageSync('recruitHideTipsTime', time)
+      wx.setStorageSync('resumeHideTipsTime', time)
     },
     callthisphonehide:function(){
       this.setData({shownewtips: false})

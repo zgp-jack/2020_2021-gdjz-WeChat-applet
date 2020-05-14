@@ -11,14 +11,14 @@
 
         <view class="indxlistitem" bindtap="detailinfoaction"  data-id="{{ item.id }}" data-type="job" >
 
-            <image  wx:if="{{ (item.top == '1') }}" class="ingsasea" src="{{bring}}" mode="widthFix"></image>
+            <!-- <image  wx:if="{{ (item.top == '1') }}" class="ingsasea" src="{{bring}}" mode="widthFix"></image> -->
             <image  wx:if="{{ (item.is_end == '2') }}" class="imgseek" src="{{doneimg}}"></image>
             <!-- 上 -->
             <view class='toplist'>
               <view class="yupao-boxs">
                 <view class="yupaoboxsfot">
                   <view class="yupaotile">{{ item.title }}</view>
-                  <view  wx:if="{{ (item.top == '1') }}"  catchtap='wantFastIssue' class="yupao-conemtes">我要置顶</view>
+                  <!-- <view  wx:if="{{ (item.top == '1') }}"  catchtap='wantFastIssue' class="yupao-conemtes">我要置顶</view> -->
                 </view>
               </view>
               <view class='yupao-lists-wxtipse'>
@@ -47,7 +47,7 @@
             </view>
         </view>
 
-        <ad  class="lists-ad" unit-id="{{ unitid }}"  wx:if="{{index % 7 == 0 && index > 0 }}"></ad>
+        <ad  class="lists-ad" unit-id="{{ unitid }}"  wx:if="{{index % 6 == 0 && index > 1 }}"></ad>
         
         </block>
 

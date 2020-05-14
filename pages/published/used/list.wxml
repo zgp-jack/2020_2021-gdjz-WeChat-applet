@@ -1,3 +1,5 @@
+<import src="/pages/footer/footer.wxml" />
+
 <view class="recruit-list-header flex-row">
   <view class="recruit-header-item" wx:for="{{ types }}" wx:key="{{ index }}" bindtap="userChangeType" data-key="{{ index }}"> 
     <view class="recruit-header-text {{ current===index ? 'recruit-header-text-active' : '' }}">{{ item.name }}</view>
@@ -5,7 +7,7 @@
 </view>
 
 <view class="recruit-list-container">
-  <view class="recruit-list-item" wx:for="{{ lists }}" wx:key="{{ index }}" data-id="{{ item.id }}" bindtap="jumpUsedInfo">
+  <view class="recruit-list-item" wx:for="{{ lists }}" wx:key="{{ index }}" data-id="{{ item.id }}" >
     <image class="recruit-list-endimg" src="{{ statusCheck }}" wx:if="{{ item.is_check == '1' }}"></image>
     <image class="recruit-list-endimg" src="{{ statusNopass }}" wx:if="{{ item.is_check == '0' }}"></image>
     <image class="recruit-list-endimg" src="{{ statusEnd }}" wx:if="{{ item.is_end == '2' }}"></image>
@@ -14,13 +16,12 @@
     <view class="recruit-item-footerbox">
       <view class="recruit-checking" wx:if="{{ item.is_check == '1'  }}"> <image src="{{ checkingimg }}"></image> {{ tipmsg }}</view>
       <view class="recruit-item-footer flex-row" wx:if="{{ item.is_check != '1'  }}">
-        <view class="recruit-footer-item" data-id="{{ item.id }}" bindtap="userEditUsedInfo">修改</view>
+        <view class="recruit-footer-item" data-id="{{ item.id }}" catchtap="userEditUsedInfo">修改</view>
         <block wx:if="{{ item.is_check == '2'  }}">
-          <view class="recruit-footer-item" bindtap="changeUsedStatus" data-id="{{ item.id }}" data-index="{{ index }}" data-status="{{ item.is_end }}">{{ item.is_end == '2' ? '重新交易' : '停止交易' }}</view>
-          <view class="recruit-footer-item " wx:if="{{ item.is_end != '2' }}" bindtap="userSetTopAction" data-id="{{ item.id }}" data-index="{{ index }}">我要置顶</view>
+          <view class="recruit-footer-item" catchtap="changeUsedStatus" data-id="{{ item.id }}" data-index="{{ index }}" data-status="{{ item.is_end }}">{{ item.is_end == '2' ? '重新交易' : '停止交易' }}</view>
+          <view class="recruit-footer-item " wx:if="{{ item.is_end != '2' }}" catchtap="userSetTopAction" data-id="{{ item.id }}" data-index="{{ index }}">刷新置顶</view>
         </block>
       </view>
-      <view class="recruit-settop-time" wx:if="{{ item.top_data.is_top == '1' && item.is_check == '2' }}">到期时间：<text>{{ item.top_data.time_str }}</text> <view class="recruit-settop-btn" bindtap="userSetTop" data-topId="1" data-id="{{ item.id }}" data-time="{{ item.sort_time }}">修改置顶</view> </view>
     </view>
   </view>
   <view class='nodata-texttips' wx:if="{{ !hasmore && page != 1 }}">没有更多内容了</view>
@@ -29,3 +30,6 @@
       <text>暂无相关内容</text>
   </view>
 </view>
+
+<!-- 引入footer -->
+<template is="footer" data="{{ footerImgs,publishActive,showPublishBox,footerActive }}" />

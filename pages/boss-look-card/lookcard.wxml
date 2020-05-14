@@ -124,13 +124,11 @@
       </view>
     </view>
   </view>
-      <view class="cephalowarning">
+      <!-- <view class="cephalowarning">
 
         <text class="warningdetail">防骗警示</text>：工作前，确认好<text class="warningdetail">对方身份、签好合同</text>，招工、找活中<text class="warningdetail">不要交任何费用</text>。工作中<text class="warningdetail">拍照</text>、<text class="warningdetail">录视频</text>留有证据！若双方发生<text class="warningdetail">经济纠纷</text>，请<text class="warningdetail">立即报警</text>或者前往<text class="warningdetail">劳动局投诉</text>，鱼泡网可<text class="warningdetail">配合调查</text>，但<text class="warningdetail">概不负责</text>。如遇<text class="warningdetail">诈骗信息</text>，请<text wx:if="{{status == 0}}" class="warningcomplaim" bindtap="userTapComplai">立即举报!</text><text wx:if="{{status == 1}}" class="warningcomplaims" >立即举报!</text>
-      </view>
-  <ad class="lists-ad" unit-id="{{ unitid }}" style="margin-top:15rpx;"></ad>
-
-
+      </view> -->
+  
   <view class="findingnamecardthree" wx:if="{{introshow}}">
     <view class="findingnamecardthreemobile">
     <view>
@@ -206,9 +204,6 @@
     暂无记录
   </view> -->
 
-  <recommendRecruit mine='1' aid="{{ aid }}" cid="{{ cid }}" more="{{ more }}" wx:if="{{ userInfo&&userInfo.userId == userId }}" />
-  <recommendResume aid="{{ aid }}" cid="{{ cid }}" more="{{ more }}" uuid="{{ uuid }}" wx:if="{{ userInfo&&userInfo.userId != userId }}"  />
-
   <view class="cardthree" wx:if="{{skilllength != 0}}">
     <view class="cardthreemobile">
     <view>
@@ -218,6 +213,7 @@
     </view>
      </view>
   </view>
+
   <view class="cardcolore">
     <view class="cardeight {{(status != 0)?'eightstatus':''}}" wx:if="{{skilllength!= 0}}">
       <view class="cardeightzong" wx:for="{{skillbooksone}}" wx:for-index="pindex" wx:key="{{index}}">
@@ -255,6 +251,12 @@
   <!-- <view wx:if="{{skilllength == 0}}" class="jiluone">
     暂无记录
   </view> -->
+
+
+  <ad class="lists-ad" unit-id="{{ unitid }}" style="margin-top:15rpx;"></ad> 
+  <!-- <recommendRecruit mine='1' aid="{{ aid }}" cid="{{ cid }}" more="{{ more }}" child="{{ child }}"  wx:if="{{ userInfo&&userInfo.userId == userId }}" /> -->
+  <!-- <recommendResume aid="{{ aid }}" cid="{{ cid }}" more="{{ more }}" uuid="{{ uuid }}" child="{{ child }}" /> -->
+
 
 
   <view class="bossbottom" wx:if="{{status == 0}}">
@@ -322,3 +324,27 @@
   </view>
 </view>
 <!-- oworkotextonetu  cardsixone-- selectTap projectone projectlength>
+
+
+<!-- 新改动 拨号弹窗 -->
+<view class="newdetail-fixedshadow flex-row" wx:if="{{ shownewtips }}" bindtap="closeNewPhoneFc">
+	<view class="newdetail-fixed-content" catchtap="returnAction">
+		<view class="newdetail-tips-box">
+			<view class="newdetail-tips-header">鱼泡网提醒</view>
+			<view class="newdetail-tips-body">
+				<view class="newdetail-tips-item">
+					<view class="newdetail-tips-title">工作前</view>
+					<view class="newdetail-tips-text">确认好对方身份、签好合同，招工、找活中不要交任何费用。</view>
+				</view>
+				<view class="newdetail-tips-item">
+					<view class="newdetail-tips-title">工作中</view>
+					<view class="newdetail-tips-text">拍照、录视频留有证据！若双方发生经济纠纷，请立即报警或前往劳动局投诉，鱼泡网可配合调查，但概不负责。</view>
+				</view>
+			</view>
+		</view>
+		<view class="newdetail-tips-footer flex-row">
+			<view class="newdetail-footer-item" catchtap="recentlynottips">暂不提示</view>
+			<view class="newdetail-footer-item" catchtap="callthisphonehide">拨打电话</view>
+		</view>
+	</view>
+</view>

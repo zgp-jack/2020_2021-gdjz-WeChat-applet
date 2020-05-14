@@ -44,7 +44,6 @@
     "pages/publish/card/card",
     "pages/publish/used/used",
     "pages/realname/realname",
-    "pages/mycard/mycard",
     "pages/userinfo/setpass/setpass",
     "pages/userinfo/pass/pass",
     "pages/userinfo/index/index",

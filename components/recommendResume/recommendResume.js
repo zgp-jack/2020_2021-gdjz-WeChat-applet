@@ -48,6 +48,7 @@ Component({
     page: 1,
     unitid: app.globalData.unitid,
     biaoqian: app.globalData.apiImgUrl + "lpy/biaoqian.png",
+    authentication:app.globalData.apiImgUrl + "new-list-jnzs-icon.png",
   },
 
   /**
@@ -56,12 +57,13 @@ Component({
   methods: {
     showDetailInfo:function(e){
       let id = e.currentTarget.dataset.uuid
-      wx.navigateTo({
-        url: `/pages/boss-look-card/lookcard?more=1&uuid=${id}`,
+      wx.redirectTo({
+        url: `/pages/boss-look-card/lookcard?more=1&uuid=${id}&child=${this.properties.child}`,
       })
     },
     seemoreaction:function(){
       let { aid, cid, child } = this.properties
+      console.log(child)
       
       let len = this.data.lists.length
       let num = parseInt(this.data.pagesize)

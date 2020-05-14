@@ -3,8 +3,8 @@
 <view class="yupao-common-container">
     <view class='common-choose-header'>
         <view class='choose-headerbox common-shaded-box flex-row'>
-            <view class='choose-header-item' >
-                <view class='text-active'><image src='{{ collectIcon.infoIcon }}'></image>{{ collectIcon.infoTitle }}</view>
+            <view class='choose-header-item choose-header-item-active' >
+                <view><image src='{{ collectIcon.infoIcon }}'></image>{{ collectIcon.infoTitle }}</view>
             </view>
             <view class='choose-header-item'  bindtap='showThisList' >
                 <view><image src='{{ collectIcon.resumeIcon }}'></image>{{ collectIcon.resumeTitle }}</view>

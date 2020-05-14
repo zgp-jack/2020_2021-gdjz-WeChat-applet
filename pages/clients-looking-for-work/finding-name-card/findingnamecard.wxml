@@ -514,7 +514,7 @@
   </view>
 
 
-<recommendRecruit aid="{{ cityid }}" cid="{{ occupations_id }}"></recommendRecruit>
+<!-- <recommendRecruit aid="{{ cityid }}" cid="{{ occupations_id }}" more="1"></recommendRecruit> -->
 
   <view class="bg" bindtap="obtn" style='display:{{display}}' catchtouchmove="{{move}}"></view>
   <view class="bg"  style='display:{{top_display}}' catchtouchmove="{{move}}"></view>

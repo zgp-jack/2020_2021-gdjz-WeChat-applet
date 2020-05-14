@@ -18,7 +18,7 @@ Page({
         system: "",
         sign: app.globalData.apiImgUrl + "lpy/integral/select2.png",
         signright: app.globalData.apiImgUrl + "lpy/integral/select1.png",
-        beforeDate: "",
+        beforeDate: "2017-01-01",
         emdDate: "",
         birthday:"",
         expend:"",

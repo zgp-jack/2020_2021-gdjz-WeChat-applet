@@ -38,8 +38,8 @@
             </view>
             <view class="listsboxshow" wx:if="{{item.type}}">{{item.type}}</view>
           </view>
-            <text class="listsboxstyru" catchtap="jumptop" wx:if="{{item.resume_top == 1}}">我要置顶</text>
-            <image class="listsboxoimg" src="{{toptown}}" wx:if="{{item.resume_top == 1}}"></image>
+            <!-- <text class="listsboxstyru" catchtap="jumptop" wx:if="{{item.resume_top == 1}}">我要置顶</text> -->
+            <!-- <image class="listsboxoimg" src="{{toptown}}" wx:if="{{item.resume_top == 1}}"></image> -->
         </view>
         <view class="listsboxlable">
           <view class="listsboxlableone" wx:for="{{item.occupations}}" wx:key="{{index}}">{{item}}</view>
@@ -63,7 +63,7 @@
           </view>
         </view>
       </view>
-      <ad class="lists-ad" unit-id="{{ unitid }}" wx:if="{{index % 5 == 0 && index > 5}}"></ad>
+      <ad class="lists-ad" unit-id="{{ unitid }}" wx:if="{{index % 6 == 0 && index > 1}}"></ad>
     </view>
 		<view class="seemore-recommend-recruit" bindtap="seemoreaction">查看更多找活信息</view>
     </view>
