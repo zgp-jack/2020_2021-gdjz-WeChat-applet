@@ -251,7 +251,7 @@ Page({
       success: function(res) {
         console.log(res)
         let mydata = res.data;
-        if (mydata.errcode == "ok") {
+        if (mydata.errcode == "ok" || mydata.errcode == "deleted") {
           if (mydata.info.type == "job") {
             _this.setData({
               info: mydata.info,

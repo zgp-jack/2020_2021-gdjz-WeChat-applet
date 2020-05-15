@@ -97,10 +97,10 @@
 					<image mode='widthFix' src='{{ appLinkImg }}'></image>
 				</navigator>
 			</view>
-<!-- 
+
 			<recommendRecruit infoId='{{ infoId }}' cid="{{ cid }}" aid="{{ aid }}" more="{{ more }}" child="{{ child }}" wx:if="{{ !more }}" />
 			<recommendResume mine="1" cid="{{ cid }}" aid="{{ aid }}" more="{{ more }}" child="{{ child }}"  wx:if="{{ more && userInfo.userId == info.user_id }}"/> 
--->
+
 
 		</view>
 
