@@ -18,8 +18,10 @@ Page({
     area_id: '',
     page: 1,
     lists: [],
+    type:1,
     hasmore: true,
     nodata: app.globalData.apiImgUrl + 'nodata.png',
+    infoId: ''
   },
 
   /**
@@ -33,24 +35,22 @@ Page({
       params:{
         area_id: _this.data.area_id,
         classify_id: _this.data.ids,
-        page: _this.data.page
+        page: _this.data.page,
+        type: _this.data.type,
+        job_ids: _this.data.infoId
       },
       success:(res)=>{
         let mydata = res.data
         if(mydata.errcode == 'ok'){
           let list = mydata.data.list
           let _list = _this.data.lists
-          if(list.length >= mydata.data.page_size){
-            _this.setData({
-              lists: _list.concat(list),
-              page: _this.data.page + 1,
-            })
-          }else{
-            _this.setData({
-              lists: _list.concat(list),
-              hasmore: false,
-            })
-          }
+          let len = list.length
+          _this.setData({
+            lists: _list.concat(list),
+            page: mydata.data.next_page,
+            type: mydata.data.type,
+            hasmore: len ? true:  false,
+          })
         }
       }
     })
@@ -58,6 +58,9 @@ Page({
   onLoad: function (options) {
     if(options.hasOwnProperty('ids')){
       this.setData({ids: options.ids,rids: options.ids})
+    }
+    if(options.hasOwnProperty('infoId')){
+      this.setData({infoId: options.infoId})
     }
     if(options.hasOwnProperty('aid')){
       this.setData({

@@ -15,7 +15,10 @@ Page({
     rcid: '',
     page: 1,
     lists: [],
-    hasmore: true
+    type: 1,
+    nextpage: 1,
+    hasmore: true,
+    uuid: ''
   },
   showDetailInfo:function(e){
     let id = e.currentTarget.dataset.uuid
@@ -32,7 +35,8 @@ Page({
       aid: options.aid,
       cid: options.ids,
       raid: options.aid,
-      rcid: options.ids
+      rcid: options.ids,
+      uuid: options.uuid
     })
     this.getRecommendList()
   },
@@ -43,14 +47,18 @@ Page({
   },
   getRecommendList:function(){
     let _this = this;
-    let { aid, cid, page } = this.data
+    let { aid, cid, page,type,uuid } = this.data
+    let user = wx.getStorageSync('userInfo')
     app.appRequestAction({
       url: 'resumes/resume-recommend-list/',
-      way: 'GET',
+      way: 'POST',
       params:{
         province: aid,
         occupations: cid,
-        page: page
+        page: page,
+        type: type,
+        uuid: uuid,
+        uid: user ? user.userId : ''
       },
       hideLoading: true,
       success:(res)=>{
@@ -59,18 +67,13 @@ Page({
           let mylist = _this.data.lists
           let lists = mydata.data.list
           let len = lists.length
-          if(len >= mydata.data.page_size){
-            _this.setData({
-              lists: mylist.concat(mydata.data.list),
-              hasmore: true,
-              page: _this.data.page+1
-            })
-          }else{
-            _this.setData({
-              lists: mylist.concat(mydata.data.list),
-              hasmore: false,
-            })
-          }
+          
+          _this.setData({
+            lists: mylist.concat(mydata.data.list),
+            hasmore: len ? true : false,
+            page: mydata.data.next_page,
+            type: mydata.data.type
+          })
           
         }
       }

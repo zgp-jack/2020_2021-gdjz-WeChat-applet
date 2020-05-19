@@ -31,6 +31,10 @@ Component({
       type: Number,
       value: 0
     },
+    infoId:{
+      type: String,
+      value:''
+    }
   },
   observers:{
     'aid,cid':function(aid,cid){
@@ -79,7 +83,7 @@ Component({
         })
         return false
       }
-      let { aid, cid } = this.properties
+      let { aid, cid, infoId } = this.properties
       if(this.properties.child){
         var pages = getCurrentPages() 
         var prePage = pages[pages.length-2]
@@ -91,7 +95,7 @@ Component({
         return false
       }
       wx.navigateTo({
-        url: '/pages/lists/recruit/index?ids='+cid + '&aid='+aid,
+        url: '/pages/lists/recruit/index?ids='+cid + '&aid='+aid+'&infoId='+infoId,
       })
     },
     getRecommendList: function(){
@@ -103,7 +107,9 @@ Component({
         params:{
           area_id: aid,
           classify_id: cid,
-          page: 1
+          job_ids: _this.properties.infoId,
+          page: 1,
+          type: 1,
         },
         hideLoading: true,
         success:(res)=>{

@@ -31,6 +31,10 @@ Component({
     child:{
       type: Number,
       value: 0
+    },
+    uuid: {
+      type: String,
+      value: ''
     }
   },
   observers:{
@@ -46,6 +50,7 @@ Component({
     lists:[],
     pagesize: 15,
     page: 1,
+    type: 1,
     unitid: app.globalData.unitid,
     biaoqian: app.globalData.apiImgUrl + "lpy/biaoqian.png",
     authentication:app.globalData.apiImgUrl + "new-list-jnzs-icon.png",
@@ -62,8 +67,7 @@ Component({
       })
     },
     seemoreaction:function(){
-      let { aid, cid, child } = this.properties
-      console.log(child)
+      let { aid, cid, child, uuid } = this.properties
       
       let len = this.data.lists.length
       let num = parseInt(this.data.pagesize)
@@ -80,13 +84,14 @@ Component({
         var prePage = pages[pages.length-2]
         prePage.setData({
           raid: aid,
-          rcid: cid
+          rcid: cid,
+          uuid: uuid
         })
         wx.navigateBack()
         return false
       }else {
         wx.navigateTo({
-          url: '/pages/lists/resume/index?ids='+cid + '&aid='+aid,
+          url: '/pages/lists/resume/index?ids='+cid + '&aid='+aid+'&uuid='+uuid,
         })
       }
     },
@@ -97,15 +102,20 @@ Component({
     },
     getRecommendList: function(){
       let _this = this;
-      let { aid, cid } = this.properties
+      let { aid, cid, uuid } = this.properties
       let page = this.data.page
+      let type = this.data.type
+      let user = wx.getStorageSync('userInfo')
       app.appRequestAction({
         url: 'resumes/resume-recommend-list/',
-        way: 'GET',
+        way: 'POST',
         params:{
           area_id: aid,
           occupations: cid,
-          page: page
+          page: page,
+          type: type,
+          uuid: uuid,
+          uid: user ? user.userId : ''
         },
         hideLoading: true,
         success:(res)=>{
@@ -113,7 +123,7 @@ Component({
           if(mydata.errcode == 'ok'){
             _this.setData({
               lists: mydata.data.list,
-              pagesize: mydata.data.page_size
+              pagesize: mydata.data.page_size,
             })
           }
         }

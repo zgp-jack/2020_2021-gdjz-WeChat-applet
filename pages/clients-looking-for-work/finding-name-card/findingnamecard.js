@@ -12,8 +12,8 @@ Page({
    */
   data: {
     topoimage: app.globalData.apiImgUrl + 'lpy/resume-settop-daytips.png',
-    realNames: app.globalData.apiImgUrl + 'new-list-realname-icon.png',
-    authentication: app.globalData.apiImgUrl + 'new-list-jnzs-icon.png',
+    realNames: app.globalData.apiImgUrl + 'newresume-infolist-ysm.png?t=1',
+    authentication: app.globalData.apiImgUrl + 'newresume-infolist-jnz.png?t=1',
     ruleimage: app.globalData.apiImgUrl + "lpy/biaptu.png",
     baseinform: app.globalData.apiImgUrl + "lpy/jichu.png",
     workingposition: app.globalData.apiImgUrl + "lpy/workdetail.png",
@@ -786,8 +786,6 @@ Page({
 
           }
           that.setData({
-            occupations_id: mydata.info.hasOwnProperty("occupations_id")?mydata.info.occupations_id : '',
-            cityid:mydata.info.hasOwnProperty("city") ? parseInt(mydata.info.city) || 0 : mydata.info.hasOwnProperty("province") ? mydata.info.province || 0 : 0,
             show_tips: mydata.hasOwnProperty("content") ? mydata.content.show_tips : "",
             name: mydata.info.hasOwnProperty("username") ? mydata.info.username : "",
             nation: mydata.info.hasOwnProperty("nation") ? mydata.info.nation : "",

@@ -113,20 +113,28 @@ Page({
             })
             return
           } else if (mydata.errcode == "member_forbid") {
-            wx.showModal({
-              title: '温馨提示',
-              content: mydata.errmsg,
-              cancelText: "取消",
-              confirmText: "联系客服",
-              success(res) {
-                if (res.confirm) {
-                  let tel = app.globalData.serverPhone
-                  wx.makePhoneCall({
-                    phoneNumber: tel,
-                  })
+            if (_index === 0) {
+              wx.showModal({
+                title: '温馨提示',
+                content: mydata.errmsg,
+                cancelText: "取消",
+                confirmText: "联系客服",
+                success(res) {
+                  if (res.confirm) {
+                    let tel = app.globalData.serverPhone
+                    wx.makePhoneCall({
+                      phoneNumber: tel,
+                    })
+                  }
                 }
-              }
-            })
+              })
+            } else {
+              wx.showToast({
+                title: mydata.errmsg,
+                icon: "none",
+                duration: 1500
+              })
+            }
           } else if (mydata.errcode == "to_auth") {
             wx.showModal({
               title: '温馨提示',

@@ -85,7 +85,7 @@
 					鱼泡提示
 				</view>
 				<view class='wenxintips-words'>
-					<navigator url='/pages/anti-fraud/anti-fraud' open-type="navigate" ><text class='text-nav-name text-active'>《防骗指南》</text>
+					<navigator url='/packageOther/pages/anti-fraud/anti-fraud' open-type="navigate" ><text class='text-nav-name text-active'>《防骗指南》</text>
 						<view class='wenxintips-info'>：此信息由鱼泡网用户提供，但联系时仍需注意识别信息真伪。</view>
 					</navigator>
 				</view>
@@ -93,7 +93,7 @@
 			</view>
 
 			<view class='info-concern-img'>
-				<navigator url='/pages/download/download-app' open-type="navigate">
+				<navigator url='/packageOther/pages/download/download-app' open-type="navigate">
 					<image mode='widthFix' src='{{ appLinkImg }}'></image>
 				</navigator>
 			</view>
