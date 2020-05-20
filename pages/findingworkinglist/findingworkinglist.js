@@ -409,30 +409,17 @@ Page({
     if (_wx && _wx.expirTime) {
       if (parseInt(_wx.expirTime) > _time) _mark = false;
     }
-    app.appRequestAction({
-      url: "index/less-search-data/",
-      failTitle: "数据请求失败",
-      params: {
-        type: "resume",
-        userId: _mark ? (userInfo ? userInfo.userId : "") : "",
-      },
-      success: function (res) {
-        let mydata = res.data;
-        _this.setData({
-          "notice.lists": mydata.notice,
-          phone: mydata.phone,
-          wechat: _mark ? mydata.wechat.number : _wx.wechat,
-          joingroup: mydata.join_group_config
-        })
-
-        app.globalData.joingroup = mydata.join_group_config
-        app.globalData.copywechat = mydata.wechat.number
-        app.globalData.callphone = mydata.phone
-
-        if (_mark) {
-          let extime = _time + (mydata.wechat.outTime * 1000);
-          wx.setStorageSync("resume_wx", { wechat: mydata.wechat.number, expirTime: extime });
-        }
+    app.getNoticeInfo(userInfo,function(mydata){
+      _this.setData({
+        "notice.lists": mydata.notice,
+        member_less_info: mydata.member_less_info,
+        phone: mydata.phone,
+        wechat: _mark ? mydata.wechat.number : (_wx.wechat ? _wx.wechat : mydata.wechat.number),
+        joingroup: mydata.join_group_config
+      })
+      if (_mark) {
+        let extime = _time + (mydata.wechat.outTime * 1000);
+        wx.setStorageSync("resume_wx", { wechat: mydata.wechat.number, expirTime: extime });
       }
     })
   },

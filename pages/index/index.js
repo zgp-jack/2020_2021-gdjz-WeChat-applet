@@ -471,38 +471,17 @@ Page({
     }
     if (userInfo) userInfo.type = "job"
     else userInfo = { type: "job" }
-    app.doRequestAction({
-      url: "index/less-search-data/",
-      way: "POST",
-      params: userInfo,
-      success: function (res) {
-        let mydata = res.data;
-
-        console.log(mydata)
-        _this.setData({
-          "notice.lists": mydata.notice,
-          // member_notice: mydata.member_notice,
-          member_less_info: mydata.member_less_info,
-          phone: mydata.phone,
-          wechat: _mark ? mydata.wechat.number : (_wx.wechat ? _wx.wechat : mydata.wechat.number),
-          joingroup: mydata.join_group_config
-        })
-
-        app.globalData.joingroup = mydata.join_group_config
-        app.globalData.copywechat = mydata.wechat.number
-        app.globalData.callphone = mydata.phone
-       
-        if (_mark) {
-          let extime = _time + (mydata.wechat.outTime * 1000);
-          wx.setStorageSync("_wx", { wechat: mydata.wechat.number, expirTime: extime });
-        }
-      },
-      fail: function (err) {
-        wx.showToast({
-          title: '数据加载失败！',
-          icon: "none",
-          duration: 3000
-        })
+    app.getNoticeInfo(userInfo,function(mydata){
+      _this.setData({
+        "notice.lists": mydata.notice,
+        member_less_info: mydata.member_less_info,
+        phone: mydata.phone,
+        wechat: _mark ? mydata.wechat.number : (_wx.wechat ? _wx.wechat : mydata.wechat.number),
+        joingroup: mydata.join_group_config
+      })
+      if (_mark) {
+        let extime = _time + (mydata.wechat.outTime * 1000);
+        wx.setStorageSync("_wx", { wechat: mydata.wechat.number, expirTime: extime });
       }
     })
   },

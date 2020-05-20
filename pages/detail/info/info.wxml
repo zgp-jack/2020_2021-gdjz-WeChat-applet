@@ -30,7 +30,7 @@
 							<view class="newdetail-callbox" wx:if="{{ userInfo.userId != info.user_id }}">
 								<view class="newdetail-call-show" wx:if="{{ info.show_ajax_btn }}" bindtap='getInfoTel'>查看完整电话</view>
 								<view class="newdetail-call-report" bindtap='userTapComplain' wx:if="{{ (info.isLook == 1)&&info.is_end == '2'}}">投诉</view>
-								<view class="newdetail-call-end" wx:if="{{ info.is_end == '2' }}">已招到</view>
+								<view class="newdetail-call-end" wx:if="{{ info.is_end == '2' }}">已招满</view>
 								<block wx:if="{{ !info.show_ajax_btn && (info.is_end == '1') }}">
 									<view class="newdetail-call-tell" bindtap='callThisPhone' data-phone="{{ info.tel_str }}">点击拨打</view>
 									<view class="newdetail-call-report" bindtap='userTapComplain'>投诉</view>
@@ -179,7 +179,7 @@
 	</view>
 	<view class="callthisphone-btn" wx:if="{{ info.show_ajax_btn }}" bindtap='getInfoTel'>查看完整电话</view>
 	<view class="callthisphone-btn" wx:if="{{ !info.show_ajax_btn && (info.is_end == '1') }}" bindtap='callThisPhone' data-phone="{{ info.tel_str }}">拨打电话</view>
-	<view class="callthisphone-btn" wx:if="{{ info.is_end == '2' }}">{{ info.is_end_word }}</view>
+	<view class="callthisphone-btn" wx:if="{{ info.is_end == '2' }}">已招满</view>
 </view>
 
 <view class='fixed-get-integral fixed-get-integral-bottom' bindtap='detailToHome' wx:if="{{ showHomeImg }}">

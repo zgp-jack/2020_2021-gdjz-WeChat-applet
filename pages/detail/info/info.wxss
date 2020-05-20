@@ -736,6 +736,7 @@ margin-left: 16rpx;
 .newdetail-call-end{
   background:rgba(246, 243, 243, 1);
   color: #151515;
+  margin-left: 15rpx;
 }
 .newdetail-recruitfooter{
   position: relative;

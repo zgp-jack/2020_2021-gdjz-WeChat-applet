@@ -76,7 +76,7 @@ Component({
     },
     seemoreaction:function(){
       let len = this.data.lists.length
-      let num = parseInt(this.data.pagesize)
+      let num = this.data.pagesize
       if(len < num){
         wx.reLaunch({
           url: '/pages/index/index',
@@ -116,8 +116,7 @@ Component({
           let mydata = res.data
           if(mydata.errcode == 'ok'){
             _this.setData({
-              lists: mydata.data.list,
-              pagesize: mydata.data.page_size
+              lists: mydata.data.list
             })
           }
         }

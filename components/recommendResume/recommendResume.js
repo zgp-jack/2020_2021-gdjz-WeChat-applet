@@ -122,8 +122,7 @@ Component({
           let mydata = res.data
           if(mydata.errcode == 'ok'){
             _this.setData({
-              lists: mydata.data.list,
-              pagesize: mydata.data.page_size,
+              lists: mydata.data.list
             })
           }
         }

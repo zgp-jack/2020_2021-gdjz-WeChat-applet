@@ -73,7 +73,8 @@ App({
     hotAreaData:{
       data:[],
       use: false
-    }
+    },
+    firstSaveUserLoginLog: false
   },
   initUserInfo: function (e) {
     let tpage = e.path;
@@ -1035,4 +1036,30 @@ App({
       callback()
     }
   },
+
+  getNoticeInfo:function(userinfo,callback){
+    let flag = this.globalData.firstSaveUserLoginLog
+    userinfo.record = flag ? 0 : 1
+    let that = this
+    this.doRequestAction({
+      url: "index/less-search-data/",
+      way: "POST",
+      params: userinfo,
+      success: function (res) {
+        let mydata = res.data;
+        callback(mydata)
+        that.globalData.joingroup = mydata.join_group_config
+        that.globalData.copywechat = mydata.wechat.number
+        that.globalData.callphone = mydata.phone
+        that.globalData.firstSaveUserLoginLog = true
+      },
+      fail: function (err) {
+        wx.showToast({
+          title: '数据加载失败！',
+          icon: "none",
+          duration: 3000
+        })
+      }
+    })
+  }
 })
