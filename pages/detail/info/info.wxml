@@ -85,7 +85,7 @@
 					鱼泡提示
 				</view>
 				<view class='wenxintips-words'>
-					<navigator url='/packageOther/pages/anti-fraud/anti-fraud' open-type="navigate" ><text class='text-nav-name text-active'>《防骗指南》</text>
+					<navigator url='/pages/anti-fraud/anti-fraud' open-type="navigate" ><text class='text-nav-name text-active'>《防骗指南》</text>
 						<view class='wenxintips-info'>：此信息由鱼泡网用户提供，但联系时仍需注意识别信息真伪。</view>
 					</navigator>
 				</view>
@@ -179,7 +179,7 @@
 	</view>
 	<view class="callthisphone-btn" wx:if="{{ info.show_ajax_btn }}" bindtap='getInfoTel'>查看完整电话</view>
 	<view class="callthisphone-btn" wx:if="{{ !info.show_ajax_btn && (info.is_end == '1') }}" bindtap='callThisPhone' data-phone="{{ info.tel_str }}">拨打电话</view>
-	<view class="callthisphone-btn" wx:if="{{ info.is_end == '2' }}">已招满</view>
+	<view class="callthisphone-btn callthisphone-dis" wx:if="{{ info.is_end == '2' }}">已招满</view>
 </view>
 
 <view class='fixed-get-integral fixed-get-integral-bottom' bindtap='detailToHome' wx:if="{{ showHomeImg }}">

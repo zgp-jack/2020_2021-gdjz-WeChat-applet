@@ -719,7 +719,7 @@ vertical-align: baseline;
 .listsboxageone image{
   font-size: 30rpx;
 margin-left: 12rpx;
-width: 78rpx;
+width: 120rpx;
 height: 30rpx;
 
 

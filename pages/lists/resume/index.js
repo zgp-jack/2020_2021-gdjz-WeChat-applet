@@ -18,7 +18,8 @@ Page({
     type: 1,
     nextpage: 1,
     hasmore: true,
-    uuid: ''
+    uuid: '',
+    loading: false
   },
   showDetailInfo:function(e){
     let id = e.currentTarget.dataset.uuid
@@ -30,6 +31,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    
     console.log(options)
     this.setData({
       aid: options.aid,
@@ -47,13 +49,16 @@ Page({
   },
   getRecommendList:function(){
     let _this = this;
+    this.setData({
+      loading: true
+    })
     let { aid, cid, page,type,uuid } = this.data
     let user = wx.getStorageSync('userInfo')
     app.appRequestAction({
       url: 'resumes/resume-recommend-list/',
       way: 'POST',
       params:{
-        province: aid,
+        area_id: aid,
         occupations: cid,
         page: page,
         type: type,
@@ -76,6 +81,11 @@ Page({
           })
           
         }
+      },
+      complete:()=>{
+        _this.setData({
+          loading: false
+        })
       }
     })
   },
@@ -91,6 +101,10 @@ Page({
       url: '/pages/findingworkinglist/findingworkinglist',
     })
   },
+  sortNumber: function (a,b)
+    {
+    return a - b
+    },
   /**
    * 生命周期函数--监听页面显示
    */
@@ -100,16 +114,24 @@ Page({
       let oldcid = this.data.cid.split(',').sort(this.sortNumber).join();
       let newaid = this.data.raid.split(',').sort(this.sortNumber).join();
       let newcid = this.data.rcid.split(',').sort(this.sortNumber).join();
-
+      console.log(oldaid,newaid)
+      console.log(oldcid,newcid)
       if(oldaid != newaid || oldcid != newcid){
         
         this.setData({
           lists: [],
           area_id: newaid,
           ids: newcid,
-          page: 1
+          page: 1,
+          type:1,
+          hasmore: true
         })
         this.getRecommendList()
+        if (wx.canIUse('pageScrollTo')) {
+          wx.pageScrollTo({
+            scrollTop: 0
+          })
+        }
       }
     }catch(err){
       console.log(err)
@@ -141,8 +163,8 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-    let flag = this.data.hasmore
-    if(!flag) return false
+    let {loading} = this.data
+    if(loading) return false
     this.getRecommendList()
   },
 

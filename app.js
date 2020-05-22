@@ -42,8 +42,8 @@ App({
     commonDownloadApp: "http://cdn.yupao.com/miniprogram/images/download.png?t=" + new Date().getTime(),
     commonJixieAd: "http://cdn.yupao.com/miniprogram/images/list-ad-newjixie.png?t=" + new Date().getTime(),
     // apiRequestUrl:"http://60.205.221.14:8087/",
-    // apiRequestUrl: "http://miniapi.kkbbi.com/",
-    apiRequestUrl:"http://miniapitest.zhaogong.vrtbbs.com/",
+    apiRequestUrl: "http://miniapi.kkbbi.com/",
+    // apiRequestUrl:"http://miniapitest.zhaogong.vrtbbs.com/",
     // apiRequestUrl: "https://newyupaomini.54xiaoshuo.com/",
     // apiRequestUrl: "http://miniapi.qsyupao.com/",
     //apiRequestUrl:"http://mini.zhaogongdi.com/",
@@ -1039,7 +1039,13 @@ App({
 
   getNoticeInfo:function(userinfo,callback){
     let flag = this.globalData.firstSaveUserLoginLog
-    userinfo.record = flag ? 0 : 1
+    if(userinfo&&userinfo.userId){
+      userinfo.record = flag ? 0 : 1
+    }else{
+      userinfo = {
+        record : 0
+      }
+    }
     let that = this
     this.doRequestAction({
       url: "index/less-search-data/",
@@ -1051,7 +1057,7 @@ App({
         that.globalData.joingroup = mydata.join_group_config
         that.globalData.copywechat = mydata.wechat.number
         that.globalData.callphone = mydata.phone
-        that.globalData.firstSaveUserLoginLog = true
+        if(userinfo.record) that.globalData.firstSaveUserLoginLog = true
       },
       fail: function (err) {
         wx.showToast({

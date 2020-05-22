@@ -43,7 +43,8 @@ Page({
     showintegral:true,
     system_type:"",
     source:"",
-    classifyIndex:0
+    classifyIndex:0,
+    showend: false, // 软删除不展示已招满
   },
   userCancleComplain: function() {
     this.setData({
@@ -255,7 +256,8 @@ Page({
           if (mydata.info.type == "job") {
             _this.setData({
               info: mydata.info,
-              showRecord: true
+              showRecord: true,
+              showend: mydata.errcode == "ok" ? true : false
             })
           } else if (mydata.info.type == "resume") {
             _this.setData({

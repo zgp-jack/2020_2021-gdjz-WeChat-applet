@@ -136,7 +136,7 @@
   position: relative;
 }
 .img_item:nth-child(1){
-   width: 33.34%; 
+   width: 33.333333%; 
    display: inline-block;
    text-align: left;
      height: 190rpx;

@@ -39,6 +39,7 @@ Component({
   observers:{
     'aid,cid':function(aid,cid){
       if(!cid) return false
+      if(this.data.isload) return false
         this.getRecommendList()
     }
   },
@@ -54,6 +55,7 @@ Component({
     hirimg: app.globalData.apiImgUrl + 'recruit-lists-new-finding.png', //招人图片
     doneimg: app.globalData.apiImgUrl + 'newlist-jobfindend.png', //已找到
     iondzs: app.globalData.apiImgUrl + 'newlist-jobposi.png',//定位,
+    isload: false
   },
   /**
    * 组件的方法列表
@@ -75,9 +77,22 @@ Component({
       })
     },
     seemoreaction:function(){
+      
+
       let len = this.data.lists.length
       let num = this.data.pagesize
       if(len < num){
+        // 如果是列表页就返回
+        var pages = getCurrentPages() //获取加载的页面
+        var prePage = pages[pages.length-2]
+        if(prePage){
+          let flag = prePage.route == 'pages/index/index'
+          if(flag){
+            wx.navigateBack()
+            return false
+          }
+        }
+        // 不是列表页就销毁去主列表
         wx.reLaunch({
           url: '/pages/index/index',
         })
@@ -91,6 +106,9 @@ Component({
           rarea_id: aid,
           rids: cid
         })
+        this.setData({
+          isload: true
+        })
         wx.navigateBack()
         return false
       }
@@ -99,6 +117,7 @@ Component({
       })
     },
     getRecommendList: function(){
+      console.log('组件触发')
       let _this = this;
       let { aid, cid } = this.properties
       app.appRequestAction({

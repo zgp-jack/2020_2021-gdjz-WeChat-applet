@@ -54,6 +54,7 @@ Component({
     unitid: app.globalData.unitid,
     biaoqian: app.globalData.apiImgUrl + "lpy/biaoqian.png",
     authentication:app.globalData.apiImgUrl + "new-list-jnzs-icon.png",
+    
   },
 
   /**
@@ -72,6 +73,17 @@ Component({
       let len = this.data.lists.length
       let num = parseInt(this.data.pagesize)
       if(len < num){
+        // 如果是列表页就返回
+        var pages = getCurrentPages() //获取加载的页面
+        var prePage = pages[pages.length-2]
+        if(prePage){
+          let flag = prePage.route == 'pages/findingworkinglist/findingworkinglist'
+          if(flag){
+            wx.navigateBack()
+            return false
+          }
+        }
+        // 不是列表页就销毁去主列表
         wx.reLaunch({
           url: '/pages/findingworkinglist/findingworkinglist',
         })
@@ -87,6 +99,7 @@ Component({
           rcid: cid,
           uuid: uuid
         })
+        
         wx.navigateBack()
         return false
       }else {

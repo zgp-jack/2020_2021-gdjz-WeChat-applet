@@ -1,4 +1,0 @@
-<view class='detail-info'>
-  <view wx:for="{{ steps }}" wx:key="{{ index }}">{{ item }}</view>
-  <image class='detail-return' src='{{ returnicon }}' bindtap='closeDetail'></image>
-</view>

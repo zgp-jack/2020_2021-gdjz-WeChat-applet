@@ -21,7 +21,8 @@ Page({
     type:1,
     hasmore: true,
     nodata: app.globalData.apiImgUrl + 'nodata.png',
-    infoId: ''
+    infoId: '',
+    loading: false
   },
 
   /**
@@ -29,6 +30,9 @@ Page({
    */
   getRecommendLists: function(){
     let _this = this;
+    this.setData({
+      loading: true
+    })
     app.appRequestAction({
       url: '/job/job-recommend-list/',
       way: 'POST',
@@ -52,6 +56,11 @@ Page({
             hasmore: len ? true:  false,
           })
         }
+      },
+      complete:()=>{
+        _this.setData({
+          loading: false
+        })
       }
     })
   },
@@ -110,16 +119,22 @@ Page({
       let oldcid = this.data.ids.split(',').sort(this.sortNumber).join();
       let newaid = this.data.rarea_id.split(',').sort(this.sortNumber).join();
       let newcid = this.data.rids.split(',').sort(this.sortNumber).join();
-
       if(oldaid != newaid || oldcid != newcid){
         
         this.setData({
           lists: [],
           area_id: newaid,
           ids: newcid,
-          page:1
+          page:1,
+          type: 1,
+          hasmore: true
         })
         this.getRecommendLists()
+        if (wx.canIUse('pageScrollTo')) {
+          wx.pageScrollTo({
+            scrollTop: 0
+          })
+        }
       }
     }catch(err){
       console.log(err)
@@ -151,8 +166,8 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-    let flag = this.data.hasmore
-    if(!flag) return false
+    let {loading} = this.data
+    if(loading) return false
     this.getRecommendLists()
   },
 })
