@@ -502,12 +502,14 @@ Page({
               })
             }
           }
+          let cityid = mydata.info.hasOwnProperty("city")? parseInt(mydata.info.city) : 0
+          let province = mydata.info.hasOwnProperty("province") ? mydata.info.province : 0
           that.setData({
             name: mydata.info.hasOwnProperty("username") ? mydata.info.username : "",
             nation: mydata.info.hasOwnProperty("nation") ? mydata.info.nation : "",
             occupations: mydata.info.hasOwnProperty("occupations") ? mydata.info.occupations : "",
             cid: mydata.info.hasOwnProperty("occupations_id") ? mydata.info.occupations_id : '',
-            aid: mydata.info.hasOwnProperty('city') ? mydata.info.city :  mydata.info.hasOwnProperty('province')? mydata.info.province : '',
+            aid: cityid || province,
             uuid: mydata.info.hasOwnProperty('uuid') ? mydata.info.uuid : '',
             telephone: mydata.info.hasOwnProperty("tel") ? mydata.info.tel : "",
             sharetelephone: mydata.info.hasOwnProperty("tel") ? mydata.info.tel : "",

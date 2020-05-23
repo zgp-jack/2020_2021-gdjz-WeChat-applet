@@ -268,7 +268,7 @@ Page({
       })
     },
     closeNewPhoneFc:function(){
-      this.setData({shownewtips: false})
+      this.setData({shownewtips: false}) 
     },
     returnAction:function(){
       return false
@@ -276,7 +276,7 @@ Page({
     recentlynottips:function(){
       this.setData({shownewtips: false})
       let time = new Date().getTime()
-      wx.setStorageSync('resumeHideTipsTime', time)
+      wx.setStorageSync('recruitHideTipsTime', time)
     },
     callthisphonehide:function(){
       this.setData({shownewtips: false})

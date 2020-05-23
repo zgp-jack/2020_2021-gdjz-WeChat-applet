@@ -238,12 +238,11 @@ Page({
   //   })
   // },
   showThisRecord: function(e) {
-    console.log(e)
     let _this = this;
     let id = e.currentTarget.dataset.id;
     let userInfo = this.data.userInfo;
     userInfo.logId = id;
-    console.log(userInfo.logId)
+    userInfo.time = e.currentTarget.dataset.time;
     app.appRequestAction({
       title: "信息获取中",
       url: "integral/look-used-info/",

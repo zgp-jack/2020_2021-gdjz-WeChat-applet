@@ -785,9 +785,12 @@ Page({
             }
 
           }
+          let cityid = mydata.info.hasOwnProperty("city")? parseInt(mydata.info.city) : 0
+          let province = mydata.info.hasOwnProperty("province") ? mydata.info.province : 0
+
           that.setData({
             occupations_id: mydata.info.hasOwnProperty("occupations_id")?mydata.info.occupations_id : '',	
-            cityid:mydata.info.hasOwnProperty("city") ? parseInt(mydata.info.city) || 0 : mydata.info.hasOwnProperty("province") ? mydata.info.province || 0 : 0,
+            cityid: cityid || province,
             show_tips: mydata.hasOwnProperty("content") ? mydata.content.show_tips : "",
             name: mydata.info.hasOwnProperty("username") ? mydata.info.username : "",
             nation: mydata.info.hasOwnProperty("nation") ? mydata.info.nation : "",

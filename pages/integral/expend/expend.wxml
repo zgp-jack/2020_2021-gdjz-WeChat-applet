@@ -25,7 +25,7 @@
      </view>
     </view>
     <view class='integral-content'>
-        <view class='integral-list-item' wx:for="{{ lists }}" wx:key="{{ index }}" data-id='{{ item.id }}' bindtap='showThisRecord'>
+        <view class='integral-list-item' wx:for="{{ lists }}" wx:key="{{ index }}" data-id='{{ item.id }}' data-time='{{ item.time }}' bindtap='showThisRecord'>
             <view class='integral-list-time'>
                 <text>{{ item.y_m }}</text>
                 <text>{{ item.day }}</text>
