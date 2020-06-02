@@ -123,7 +123,7 @@ Page({
   },
   jumprull() {
     wx.navigateTo({
-      url: "/pages/clients-looking-for-work/ranking-rules/ranking-rules",
+      url: "/packageOther/pages/ranking-rules/ranking-rules",
     })
   },
   userChooseNewest(e) {

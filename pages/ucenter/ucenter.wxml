@@ -8,8 +8,8 @@
             <view class='ucenter-userinfo-box'>
                 <image src='{{ member.headimgurl }}' class='ucenter-userimg'></image>
                 <view class='ucenter-userinfo-words'>
-                    <navigator class='user-update-info' url='/pages/userinfo/index/index?img={{ member.headimgurl }}&auth={{ member.is_check }}&tel={{ member.tel }}&name={{ member.username || member.nickname }}&pass={{ member.pwd_status }}' open-type="navigate" wx:if="{{ member.tel }}">修改资料</navigator>
-                    <navigator class='user-update-info' url='/pages/userinfo/edit/edit' open-type="navigate" wx:else="{{ member.tel }}">完善资料</navigator>
+                    <navigator class='user-update-info' url='/packageOther/pages/userinfo/index/index?img={{ member.headimgurl }}&auth={{ member.is_check }}&tel={{ member.tel }}&name={{ member.username || member.nickname }}&pass={{ member.pwd_status }}' open-type="navigate" wx:if="{{ member.tel }}">修改资料</navigator>
+                    <navigator class='user-update-info' url='/packageOther/pages/userinfo/edit/edit' open-type="navigate" wx:else="{{ member.tel }}">完善资料</navigator>
                     <view class='ucenter-username overwords felx'>
                         {{ member.username || member.nickname }}
                         <image src='{{ realNames }}' class='user-update-tag' wx:if="{{member.is_check==2&&is_checking==2}}"></image>
@@ -167,7 +167,7 @@
         </view>
 
         <view class="ucenter-hasnoticeinfo">
-            <view class='ucener-theme' data-url='/pages/others/message/lists/lists' bindtap='suggestUserUrl'>
+            <view class='ucener-theme' data-url='/packageOther/pages/others/message/lists/lists' bindtap='suggestUserUrl'>
                 <image class="ucener-leftImage" src='{{ ucenterimgs.feedback }}'></image>
                 <view class='ucener-border-b ucener-border'>
                     <view class="ucener-title">意见反馈
@@ -179,7 +179,7 @@
                     </view>
                 </view>
             </view>
-            <view class='ucener-theme' data-url='/pages/helpCenter/helpCenter' bindtap='valiUserUrl'>
+            <view class='ucener-theme' data-url='/packageOther/pages/helpCenter/helpCenter' bindtap='valiUserUrl'>
                 <image class="ucener-leftImage" src='{{ ucenterimgs.ucenterHelp }}'></image>
                 <view class='ucener-border-b'>
                     <view class="ucener-title">帮助中心</view>

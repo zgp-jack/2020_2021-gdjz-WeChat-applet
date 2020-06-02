@@ -1,4 +1,4 @@
-@import "../../publish/recruit/recruit.wxss";
+@import "../../../../pages/publish/recruit/recruit.wxss";
 .common-publish-item-line{
   border-bottom: 1px solid #dcdcdc !important;
 

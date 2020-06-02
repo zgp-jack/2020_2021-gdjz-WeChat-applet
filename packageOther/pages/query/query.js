@@ -1,5 +1,5 @@
 // pages/query/query.js
-let vali = require("../../utils/v.js");
+let vali = require("../../../utils/v.js");
 const app = getApp();
 Page({
 
@@ -32,7 +32,7 @@ Page({
             mask:true
         })
         app.doRequestAction({
-            url:"resume/auth-status/",
+            url:"resume/auth-worker-find/",
             way:"POST",
             params:userInfo,
             success:function(res){
@@ -40,7 +40,16 @@ Page({
                 let mydata = res.data;
                 if (mydata.errcode == "auth_pass"){
 
-                } else if (mydata.errcode == "auth_not_pass" || mydata.errcode == "not_auth"){
+                } else if (mydata.errcode == "auth_check"){
+                    wx.showModal({
+                        title: '温馨提示',
+                        content: mydata.errmsg,
+                        showCancel: false,
+                        success() {
+                            wx.navigateBack()
+                        }
+                    })
+                }else if(mydata.errcode == "auth_fail" || mydata.errcode == "auth_no"){
                     wx.showModal({
                         title: '温馨提示',
                         content: mydata.errmsg,
@@ -50,9 +59,7 @@ Page({
                                     url: '/pages/realname/realname',
                                 })
                             } else if (res.cancel) {
-                                wx.reLaunch({
-                                    url: '/pages/index/index',
-                                })
+                                wx.navigateBack()
                             }
                         }
                     })

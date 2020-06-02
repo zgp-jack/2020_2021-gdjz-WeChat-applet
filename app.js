@@ -43,8 +43,8 @@ App({
     commonJixieAd: "http://cdn.yupao.com/miniprogram/images/list-ad-newjixie.png?t=" + new Date().getTime(),
     // apiRequestUrl:"http://60.205.221.14:8087/",
     // apiRequestUrl: "http://miniapi.kkbbi.com/",
-    // apiRequestUrl:"http://miniapitest.zhaogong.vrtbbs.com/",
-    apiRequestUrl: "https://newyupaomini.54xiaoshuo.com/",
+    apiRequestUrl:"http://miniapitest.zhaogong.vrtbbs.com/",
+    // apiRequestUrl: "https://newyupaomini.54xiaoshuo.com/",
     // apiRequestUrl: "http://miniapi.qsyupao.com/",
     //apiRequestUrl:"http://mini.zhaogongdi.com/",
     apiUploadImg: "https://newyupaomini.54xiaoshuo.com/index/upload/",
@@ -459,6 +459,17 @@ App({
       }
     })
   },
+  valiImgRules:function(img){
+    let r = /\.\w+$/;
+    let types = ['bmp','jpg','png','gif','jpeg'];
+    let type = img.match(r)
+    if(type){
+      let str = type[0].substr(1,type[0].length)
+      let ok = types.find(item=>item === str)
+      return ok ? true : false
+    }
+    return false
+  },
   userUploadImg: function (callback) {
     let _this = this;
     wx.showLoading({
@@ -469,7 +480,17 @@ App({
       sizeType: ['compressed'],
       sourceType: ['album', 'camera'],
       success: res => {
-        _this.detailUpimg(1, res, callback);
+        console.log(res)
+        if(res.errMsg == "chooseImage:ok"){
+          let img = res.tempFiles[0].path
+          let ok = this.valiImgRules(img)
+          if(ok){
+            _this.detailUpimg(1, res, callback);
+          }else{
+            wx.hideLoading()
+            this.showMyTips('图片格式不正确,请重新选择')
+          }
+        }
       },
       fail: function () {
         wx.hideLoading();

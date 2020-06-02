@@ -1,5 +1,5 @@
 // pages/feedback/feedback.js
-const v = require('../../../../utils/v.js');
+const v = require('../../../../../utils/v.js');
 const vali = v.v.new();
 const app = getApp();
 Page({

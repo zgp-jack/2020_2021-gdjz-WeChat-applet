@@ -125,8 +125,9 @@ Page({
   },
   callthisphonehide:function(){
     this.setData({shownewtips: false})
+    let tel = this.data.telephone
     wx.makePhoneCall({
-      phoneNumber: this.data.info.tel_str,
+      phoneNumber: tel,
     })
   },
   showDetailInfo:function(e){

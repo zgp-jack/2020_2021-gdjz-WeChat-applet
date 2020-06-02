@@ -1,6 +1,6 @@
 // pages/userinfo/edit/edit.js
 const app = getApp();
-let vali = require("../../../utils/v.js");
+let vali = require("../../../../utils/v.js");
 Page({
 
   /**

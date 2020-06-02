@@ -1,4 +1,9 @@
-@import "../../publish/recruit/recruit.wxss";
+@import "../../../../pages/publish/recruit/recruit.wxss";
+
+page{
+    background: #f7f6f9;
+}
+    
 
 .user-changepass-box .user-changepass-tips{
     position: relative;
@@ -10,6 +15,6 @@
 .user-changepass-box .common-publish-item{
     background: white;
 }
-/* .user-changepass-box .common-publish-item:nth-last-child(1) .common-publish-item-content{
+.user-changepass-box .common-publish-item:nth-last-child(1) .common-publish-item-content{
     border-bottom: 0;
-} */
+}

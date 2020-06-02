@@ -157,7 +157,7 @@ Page({
         let tels = td.memberInfo.phone || "";
         let username = td.memberInfo.username || "";
         wx.navigateTo({
-            url: '/pages/others/message/publish/publish?tel=' + tels + "&name=" + username + "&wechat=" + td.wechat + "&phone=" + td.phone
+            url: '/packageOther/pages/others/message/publish/publish?tel=' + tels + "&name=" + username + "&wechat=" + td.wechat + "&phone=" + td.phone
         })
     },
   clipboardWechat: function (e) {

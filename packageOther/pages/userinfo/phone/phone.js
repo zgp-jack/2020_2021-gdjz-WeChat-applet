@@ -1,5 +1,5 @@
 // pages/userinfo/phone/phone.js
-let vali = require("../../../utils/v.js");
+let vali = require("../../../../utils/v.js");
 const app = getApp();
 Page({
 

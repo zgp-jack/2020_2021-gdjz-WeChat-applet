@@ -88,7 +88,7 @@ Page({
           token: userInfo.token,
           tokenTime: userInfo.tokenTime,
           infoId: id,
-          status: toping == '0' ? '1' : "0"
+          status: toping == '1' ? '1' : '0'
         },
         success: function (res) {
           wx.hideLoading();
@@ -100,8 +100,12 @@ Page({
             _this.setData({
               lists: newData
             })
-          }
-          if (mydata.errcode == "auth_forbid") {
+            wx.showModal({
+              title: '温馨提示',
+              content: mydata.errmsg,
+              showCancel: false
+            })
+          }else if(mydata.errcode == "auth_forbid") {
             wx.showModal({
               title: '温馨提示',
               content: res.data.errmsg,
@@ -133,11 +137,20 @@ Page({
                 }
               })
           } else {
-              wx.showToast({
-                title: mydata.errmsg,
-                icon: "none",
-                duration: 1500
+              wx.showModal({
+                title: '温馨提示',
+                content: mydata.errmsg,
+                showCancel: false,
+                success:()=>{
+                  _this.setData({
+                    page: 1,
+                    hasmore: true,
+                    lists: []
+                  })
+                  _this.getRecruitList()
+                }
               })
+              
             }
           },
           fail: function (err) {

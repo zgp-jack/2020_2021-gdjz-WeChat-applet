@@ -92,7 +92,7 @@ Page({
     bring: app.globalData.apiImgUrl + 'newlist-jobzd.png', //顶置图片
     autimg: app.globalData.apiImgUrl + 'new-list-realname-icon.png', //实名图片
     hirimg: app.globalData.apiImgUrl + 'recruit-lists-new-finding.png', //招人图片
-    doneimg: app.globalData.apiImgUrl + 'newlist-jobfindend.png', //已找到
+    doneimg: app.globalData.apiImgUrl + 'published-recruit-end.png', //已找到
     iondzs: app.globalData.apiImgUrl + 'newlist-jobposi.png',//定位
     historydel: app.globalData.apiImgUrl + "historylist-del.png",
     feedbackimg: app.globalData.apiImgUrl + "feedbackmsg-img.png",

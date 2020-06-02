@@ -28,7 +28,7 @@
 							<view class="publisher-username">{{ info.user_name }}</view>
 							<view class="publisher-phone">{{ info.tel_str }}</view>
 							<view class="newdetail-callbox" wx:if="{{ userInfo.userId != info.user_id }}">
-								<view class="newdetail-call-show" wx:if="{{ info.show_ajax_btn }}" bindtap='getInfoTel'>查看完整电话</view>
+								<view class="newdetail-call-show" wx:if="{{ info.show_ajax_btn }}" bindtap='getInfoTel'>查看招工电话</view>
 								<view class="newdetail-call-report" bindtap='userTapComplain' wx:if="{{ (info.isLook == 1)&&info.is_end == '2'}}">投诉</view>
 								<view class="newdetail-call-end" wx:if="{{ info.is_end == '2' }}">已招满</view>
 								<block wx:if="{{ !info.show_ajax_btn && (info.is_end == '1') }}">
@@ -85,7 +85,7 @@
 					鱼泡提示
 				</view>
 				<view class='wenxintips-words'>
-					<navigator url='/pages/anti-fraud/anti-fraud' open-type="navigate" ><text class='text-nav-name text-active'>《防骗指南》</text>
+					<navigator url='/packageOther/pages/anti-fraud/anti-fraud' open-type="navigate" ><text class='text-nav-name text-active'>《防骗指南》</text>
 						<view class='wenxintips-info'>：此信息由鱼泡网用户提供，但联系时仍需注意识别信息真伪。</view>
 					</navigator>
 				</view>
@@ -100,12 +100,7 @@
 
 			<recommendRecruit infoId='{{ infoId }}' cid="{{ cid }}" aid="{{ aid }}" more="{{ more }}" child="{{ child }}" wx:if="{{ !more }}" />
 			<recommendResume mine="1" cid="{{ cid }}" aid="{{ aid }}" more="{{ more }}" child="{{ child }}"  wx:if="{{ more && userInfo.userId == info.user_id }}"/> 
-
-
 		</view>
-
-
-
 
 	</view>
 
@@ -177,7 +172,7 @@
 			<text>分享</text>
 		</button>
 	</view>
-	<view class="callthisphone-btn" wx:if="{{ info.show_ajax_btn }}" bindtap='getInfoTel'>查看完整电话</view>
+	<view class="callthisphone-btn" wx:if="{{ info.show_ajax_btn }}" bindtap='getInfoTel'>查看招工电话</view>
 	<view class="callthisphone-btn" wx:if="{{ !info.show_ajax_btn && (info.is_end == '1') }}" bindtap='callThisPhone' data-phone="{{ info.tel_str }}">拨打电话</view>
 	<view class="callthisphone-btn callthisphone-dis" wx:if="{{ info.is_end == '2' }}">已招满</view>
 </view>

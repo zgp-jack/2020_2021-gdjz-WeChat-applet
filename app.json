@@ -7,7 +7,6 @@
     "pages/clients-looking-for-work/finding-top/findingtop",
     "pages/clients-looking-for-work/finding-name-card/findingnamecard",
     "pages/clients-looking-for-work/the-sticky-rule/stickyrule",
-    "pages/clients-looking-for-work/ranking-rules/ranking-rules",
     "pages/clients-looking-for-work/ranking-list/rankinglist",
     "pages/home/home",
     "pages/findingworkinglist/findingworkinglist",
@@ -43,40 +42,59 @@
     "pages/publish/card/card",
     "pages/publish/used/used",
     "pages/realname/realname",
-    "pages/userinfo/setpass/setpass",
-    "pages/userinfo/pass/pass",
-    "pages/userinfo/index/index",
-    "pages/userinfo/edit/edit",
-    "pages/userinfo/phone/phone",
     "pages/feedback/feedback",
-    "pages/course/course",
     "pages/integral/temp/temp",
     "pages/integral/official/official",
     "pages/integral/return/return",
     "pages/integral/expend/expend",
     "pages/static/notice",
     "pages/static/invite",
-    "pages/download/download-app",
-    "pages/about/about",
-    "pages/query/query",
-    "pages/report/report",
-    "pages/anti-fraud/anti-fraud",
     "pages/footer/footer",
     "pages/tpl/win/win",
     "pages/tpl/app/app",
-    "pages/others/message/lists/lists",
-    "pages/others/message/publish/publish",
-    "pages/others/information/lists",
     "pages/ucenter/ucenterNew/hireMembers",
     "pages/ucenter/ucenterNew/invite",
     "pages/information/mymessage/mymessage",
     "pages/information/system/system",
-    "pages/helpCenter/helpCenter",
     "pages/published/recruit/list",
     "pages/published/used/list",
     "pages/lists/recruit/index",
     "pages/lists/resume/index"
   ],
+  "subpackages": [
+    {
+      "name": "other",
+      "root": "packageOther",
+      "pages": [
+        "pages/anti-fraud/anti-fraud",
+        "pages/about/about",
+        "pages/course/course",
+        "pages/download/download-app",
+        "pages/query/query",
+        "pages/others/information/lists",
+        "pages/others/message/lists/lists",
+        "pages/others/message/publish/publish",
+        "pages/helpCenter/helpCenter",
+        "pages/report/report",
+        "pages/ranking-rules/ranking-rules",
+        "pages/userinfo/setpass/setpass",
+        "pages/userinfo/pass/pass",
+        "pages/userinfo/index/index",
+        "pages/userinfo/edit/edit",
+        "pages/userinfo/phone/phone"
+      ]
+    }
+  ],
+  "preloadRule": {
+    "pages/ucenter/ucenter": {
+      "network": "all",
+      "packages": ["packageOther"]
+    },
+    "pages/index/index": {
+      "network": "all",
+      "packages": ["packageOther"]
+    }
+  },
   "window": {
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#0099ff",

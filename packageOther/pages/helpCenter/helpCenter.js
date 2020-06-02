@@ -15,7 +15,7 @@ Page({
     //点击最外层列表展开收起
     listTap(e) {
         // console.log('触发了最外层');
-        let aIndex = e.currentTarget.dataset.parentindex, //获取点击的下标值
+        let asuggestUserUrlIndex = e.currentTarget.dataset.parentindex, //获取点击的下标值
         helpeLists = this.data.helpeLists;
         helpeLists[aIndex].show = !helpeLists[aIndex].show || false; //变换其打开、关闭的状态
         if (helpeLists[aIndex].show) { //如果点击后是展开状态，则让其他已经展开的列表变为收起状态
@@ -160,7 +160,7 @@ Page({
         let tels = _this.memberInfo.phone || "";
         let username = _this.memberInfo.username || "";
         wx.navigateTo({
-            url: '/pages/others/message/publish/publish?tel=' + tels + "&name=" + username + "&wechat=" + _this.wechat + "&phone=" + _this.phone
+            url: '/packageOther/pages/others/message/publish/publish?tel=' + tels + "&name=" + username + "&wechat=" + _this.wechat + "&phone=" + _this.phone
         })
     },
     onLoad: function(options) {

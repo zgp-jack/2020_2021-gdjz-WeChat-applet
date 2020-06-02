@@ -1,4 +1,4 @@
-@import "../../../../utils/phone.wxss";
+@import "../../../../../utils/phone.wxss";
 .yupao-feedback {
   position: relative;
   width: 100%;

@@ -1,5 +1,5 @@
 // pages/userinfo/pass/pass.js
-let vali = require("../../../utils/v.js");
+let vali = require("../../../../utils/v.js");
 const app = getApp();
 Page({
 
@@ -7,16 +7,21 @@ Page({
      * 页面的初始数据
      */
     data: {
+        oldicon: true,
         newicon: true,
         sureicon: true,
+        oldPass: "",
         newPass: "",
         rePass: "",
         userInfo: {}
     },
     changeInputType: function (e) {
         let _type = e.currentTarget.dataset.type;
-        ((_type == "new") ? this.setData({ newicon: !this.data.newicon }) : this.setData({ sureicon: !this.data.sureicon }))
+        (_type == "old") ? this.setData({ oldicon: !this.data.oldicon }) : ((_type == "new") ? this.setData({ newicon: !this.data.newicon }) : this.setData({ sureicon: !this.data.sureicon }))
     },
+    enterOldPass: function (e) {
+        this.setData({ oldPass: e.detail.value })
+    }, 
     enterNewPass: function (e) {
         this.setData({ newPass: e.detail.value })
     },
@@ -27,28 +32,38 @@ Page({
         let _this = this;
         let userInfo = this.data.userInfo;
         let v = vali.v.new();
+        if (!v.isRequire(_this.data.oldPass, 6)) {
+            app.showMyTips("原密码有误!");
+            return false;
+        }
         if (!v.isRequire(_this.data.newPass, 6)) {
-            app.showMyTips("新密码由6-16位数字字母组成");
+            app.showMyTips("新密码由6-16位数字字母组成!");
             return false;
         }
         if (_this.data.newPass != _this.data.rePass) {
             app.showMyTips("两次输入的密码不一致!");
             return false;
         }
+        userInfo.oldPwd = _this.data.oldPass;
         userInfo.onePwd = _this.data.newPass;
         userInfo.twoPwd = _this.data.rePass;
         app.doRequestAction({
-            url: "user/set-pwd/",
+            url: "user/update-pwd/",
             way: "POST",
             params: userInfo,
             success: function (res) {
                 let mydata = res.data;
-                app.showMyTips(mydata.errmsg);
                 if (mydata.errcode == "ok") {
-                    _this.setData({
-                        newPass: "",
-                        rePass: ""
+                    wx.showModal({
+                        title: '温馨提示',
+                        content: mydata.errmsg,
+                        showCancel:false,
+                        success:function(){
+                            wx.reLaunch({ url: '/pages/ucenter/ucenter' })
+                        }
                     })
+                }else{
+                    app.showMyTips(mydata.errmsg);
                 }
             },
             fail: function () {

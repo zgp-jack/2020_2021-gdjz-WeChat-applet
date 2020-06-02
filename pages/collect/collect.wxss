@@ -1,4 +1,4 @@
-@import "../course/course.wxss";
+/* @import "../course/course.wxss"; */
 .published-title{
     position: relative;
     width: 100%;

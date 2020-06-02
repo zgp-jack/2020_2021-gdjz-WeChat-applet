@@ -513,7 +513,7 @@
     </view>
   </view>
 
-  <recommendRecruit aid="{{ cityid }}" cid="{{ occupations_id }}" more="1"></recommendRecruit>
+  <recommendRecruit mine="1" aid="{{ cityid }}" cid="{{ occupations_id }}" more="1"></recommendRecruit>
 
 
   <view class="bg" bindtap="obtn" style='display:{{display}}' catchtouchmove="{{move}}"></view>

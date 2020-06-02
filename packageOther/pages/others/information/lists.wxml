@@ -1,5 +1,5 @@
 <!-- 新闻列表 -->
-<import src="/pages/footer/footer.wxml" />
+<import src="/packageOther/pages/footer/footer.wxml" />
 <!-- 滚动选项卡 -->
 <scroll-view scroll-x="true" class="tab-h" scroll-left="{{scrollLeft}}">
   <blick wx:for="{{tabBars}}" wx:key="index">

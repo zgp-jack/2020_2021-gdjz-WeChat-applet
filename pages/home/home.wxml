@@ -8,7 +8,7 @@
     <text class='index-area-text'>{{ areaText }}</text>
     <image src='{{ indexImgs.areamore }}' class='index-area-more'></image>
   </view>
-  <navigator url='/pages/download/download-app' open-type="navigate">
+  <navigator url='/packageOther/pages/download/download-app' open-type="navigate">
     <view class='index-download-app'>
       <image src='{{ indexImgs.loadapp }}'></image>
     </view>
@@ -107,11 +107,11 @@
         <text>邀请好友</text>
       </view>
     </navigator>
-    <view class='index-fun-item flex-row' data-url='/pages/query/query' bindtap='valiUserUrl'>
+    <view class='index-fun-item flex-row' data-url='/packageOther/pages/query/query' bindtap='valiUserUrl'>
       <image src='{{ fun.smrz }}'></image>
       <text>实名查询</text>
     </view>
-    <navigator class='index-footer-nav' open-type="navigate" url='/pages/others/information/lists'>
+    <navigator class='index-footer-nav' open-type="navigate" url='/packageOther/pages/others/information/lists'>
       <view class='index-fun-item flex-row'>
         <image src='{{ fun.zjxm }}'></image>
         <text>鱼泡动态</text>
@@ -352,9 +352,9 @@
     </view>
 
     <view class='home-footer-about'>
-      <navigator url='/pages/about/about' open-type="navigate">关于我们</navigator>
-      <navigator url='/pages/course/course' open-type="navigate">使用教程</navigator>
-      <navigator url='/pages/report/report' open-type="navigate">举报骗子</navigator>
+      <navigator url='/packageOther/pages/about/about' open-type="navigate">关于我们</navigator>
+      <navigator url='/packageOther/pages/course/course' open-type="navigate">使用教程</navigator>
+      <navigator url='/packageOther/pages/report/report' open-type="navigate">举报骗子</navigator>
       <text bindtap='callThisPhone' data-phone="{{ phone }}">联系我们</text>
     </view>
     <view class='home-footer-copyright'>©2017-2019 版权所有 粤ICP备17088633号-1</view>

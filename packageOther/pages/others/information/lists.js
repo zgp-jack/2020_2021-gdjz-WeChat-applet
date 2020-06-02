@@ -1,5 +1,5 @@
 const app = getApp();
-let footerjs = require("../../../utils/footer.js");
+let footerjs = require("../../../../utils/footer.js");
 Page({
 
   /**

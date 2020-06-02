@@ -49,7 +49,7 @@
                   <text bindtap="userTapComplain">举报</text>
                 </view>
                 <view class="clioktel" wx:if="{{examine||!onoff && is_read ==1&&is_end !=2&&status == 0}}">
-                  <text bindtap="authrasution" data-telephone="{{telephone}}">查看完整电话</text>
+                  <text bindtap="authrasution" data-telephone="{{telephone}}">查看找活电话</text>
                 </view>
                 <view class="cliokine" wx:if="{{is_end ==2&&status == 0}}">
                   <text>已找到</text>
