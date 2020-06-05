@@ -1,5 +1,6 @@
 // components/recommendRecruit.js
 const app = getApp();
+const ads = require('../../utils/ad')
 Component({
   options:{
     addGlobalClass: true,
@@ -51,7 +52,7 @@ Component({
     pagesize: 15,
     page: 1,
     type: 1,
-    unitid: app.globalData.unitid,
+    unitid: ads.resumeRecommendAd,
     biaoqian: app.globalData.apiImgUrl + "lpy/biaoqian.png",
     authentication:app.globalData.apiImgUrl + "new-list-jnzs-icon.png",
     
@@ -99,7 +100,7 @@ Component({
           rcid: cid,
           uuid: uuid
         })
-        
+        console.log('我返回了')
         wx.navigateBack()
         return false
       }else {

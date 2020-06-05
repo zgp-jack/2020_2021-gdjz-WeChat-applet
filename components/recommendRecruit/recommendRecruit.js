@@ -1,5 +1,6 @@
 // components/recommendRecruit.js
 const app = getApp();
+const ads = require('../../utils/ad')
 Component({
   options:{
     addGlobalClass: true,
@@ -49,7 +50,7 @@ Component({
   data: {
     lists:[],
     pagesize: 15,
-    unitid: app.globalData.unitid,
+    unitid: ads.recruitRecommendAd,
     bring: app.globalData.apiImgUrl + 'newlist-jobzd.png', //顶置图片
     autimg: app.globalData.apiImgUrl + 'newlist-jobrealname.png', //实名图片
     hirimg: app.globalData.apiImgUrl + 'recruit-lists-new-finding.png', //招人图片

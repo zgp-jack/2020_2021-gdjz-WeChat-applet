@@ -5,7 +5,7 @@ let footerjs = require("../../utils/footer.js");
 let areas = require("../../utils/area.js");
 let md5 = require("../../utils/md5.js");
 var amapFile = require('../../utils/amap-wx.js');
-
+const ads = require('../../utils/ad')
 Page({
 
   /**
@@ -21,7 +21,7 @@ Page({
     information: "",
     regionone: "",
     userInfo: "",
-    unitid: app.globalData.unitid,
+    unitid: ads.resumeListAd,
     footerActive: "findwork",
     touchStartTime: 0,
     touchEndTime: 0,

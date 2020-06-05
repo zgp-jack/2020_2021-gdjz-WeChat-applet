@@ -1,4 +1,5 @@
 const app = getApp()
+const ads = require('../../../utils/ad')
 Page({
 
   /**
@@ -11,7 +12,7 @@ Page({
     hirimg: app.globalData.apiImgUrl + 'recruit-lists-new-finding.png', //招人图片
     doneimg: app.globalData.apiImgUrl + 'published-recruit-end.png', //已找到
     iondzs: app.globalData.apiImgUrl + 'newlist-jobposi.png',//定位
-    unitid: app.globalData.unitid,
+    unitid: ads.recruitRecommendAd,
     ids: '',
     area_id: '',
     rids: '',

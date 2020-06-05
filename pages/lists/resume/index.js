@@ -1,4 +1,5 @@
 const app = getApp()
+const ads = require('../../../utils/ad')
 Page({
 
   /**
@@ -8,7 +9,7 @@ Page({
     nodata: app.globalData.apiImgUrl + 'nodata.png',
     biaoqian: app.globalData.apiImgUrl + "lpy/biaoqian.png",
     authentication:app.globalData.apiImgUrl + "new-list-jnzs-icon.png",
-    unitid: app.globalData.unitid,
+    unitid: ads.resumeRecommendAd,
     aid: '',
     cid: '',
     raid: '',
@@ -114,18 +115,16 @@ Page({
       let oldcid = this.data.cid.split(',').sort(this.sortNumber).join();
       let newaid = this.data.raid.split(',').sort(this.sortNumber).join();
       let newcid = this.data.rcid.split(',').sort(this.sortNumber).join();
-      console.log(oldaid,newaid)
-      console.log(oldcid,newcid)
       if(oldaid != newaid || oldcid != newcid){
-        
         this.setData({
           lists: [],
-          area_id: newaid,
-          ids: newcid,
+          aid: newaid,
+          cid: newcid,
           page: 1,
           type:1,
           hasmore: true
         })
+        console.log(this.data.ids)
         this.getRecommendList()
         if (wx.canIUse('pageScrollTo')) {
           wx.pageScrollTo({

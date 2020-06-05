@@ -89,7 +89,7 @@
 						<view class='wenxintips-info'>：此信息由鱼泡网用户提供，但联系时仍需注意识别信息真伪。</view>
 					</navigator>
 				</view>
-				<view class='wenxintips-info' bindtap='userTapConcern'>关注 “鱼泡网” 微信公众号接收新工作提醒<text class='text-active'>如何关注</text>。</view>
+				<view class='wenxintips-info' bindtap='userFollowAccount'>关注 “鱼泡网” 微信公众号接收新工作提醒。<text class='text-active-gz'>去关注</text></view>
 			</view>
 
 			<view class='info-concern-img'>
@@ -201,5 +201,16 @@
 			<view class="newdetail-footer-item" catchtap="recentlynottips">暂不提示</view>
 			<view class="newdetail-footer-item" catchtap="callthisphonehide">拨打电话</view>
 		</view>
+	</view>
+</view>
+
+<view class="common-follow-container flex-row" bindtap="userCloseFollowBox" wx:if="{{ showFollow }}">
+	<view class="common-follow-box">
+		<view class="common-follow-title">开启消息推送</view>
+		<view class="common-follow-content">
+			<view class="common-follow-text">关注[鱼泡网]公众号，即可接收各种招工、找活提醒通知</view>
+		</view>
+		<button class="common-follow-button" open-type="contact">点击回复“1”获取二维码</button>
+		<view class="common-follow-close">我知道了</view>
 	</view>
 </view>

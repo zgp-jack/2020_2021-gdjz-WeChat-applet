@@ -1,5 +1,9 @@
 // pages/getintegral/getintegral.js goThisPage
 const app = getApp();
+const ads = require('../../utils/ad')
+let videoAd = null
+let num = 1
+let max = 2
 Page({
 
     /**
@@ -29,12 +33,41 @@ Page({
             }
         })
     },
+    userSeeVideo:function(){
+        if (videoAd) {
+            videoAd.show().catch(() => {
+              // 失败重试
+              videoAd.load()
+                .then(() => videoAd.show())
+                .catch(err => {
+                  console.log('激励视频 广告显示失败')
+                })
+            })
+        }
+    },
+    createVideo:function(){
+        console.log(ads.videoAd)
+        if(num > max) return
+        if (wx.createRewardedVideoAd) {
+            num = num + 1
+            videoAd = wx.createRewardedVideoAd({
+                adUnitId: ads.videoAd
+            })
+            videoAd.onLoad(() => {})
+            videoAd.onError((err) => {
+                this.createVideo()
+                console.log(err)
+            })
+            videoAd.onClose((res) => {})
+        }
+    },
     /**
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
         this.setData({ phone:app.globalData.serverPhone })
         this.initGetIntegralList();
+        this.createVideo()
     },
 
     /**

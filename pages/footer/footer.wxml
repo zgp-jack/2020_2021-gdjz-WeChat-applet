@@ -8,7 +8,7 @@
     </view>
     <view class='yupao-footer-item' bindtap='jumpThisLink' data-url="/pages/index/index" data-type='1'>
         <image src='{{ footerActive == "recruit" ? footerImgs.zgActive : footerImgs.zgNormal }}'></image>
-        <text class='{{ footerActive == "recruit" ? "footer-text-active" : "" }}'>招工信息</text>
+        <text class='{{ footerActive == "recruit" ? "footer-text-active" : "" }}'>找工作</text>
     </view>
 
     <view class='yupao-footer-item yupao-footer-item-newpub' bindtap='doPublishAction' >
@@ -25,11 +25,11 @@
 
     <view class='yupao-footer-item' bindtap='jumpThisLink' data-url="/pages/findingworkinglist/findingworkinglist" data-type='1'>
         <image src='{{ footerActive == "findwork" ? footerImgs.zhActive : footerImgs.zhNormal }}'></image>
-        <text class='{{ footerActive == "findwork" ? "footer-text-active" : "" }}'>工人找活</text>
+        <text class='{{ footerActive == "findwork" ? "footer-text-active" : "" }}'>找工人</text>
     </view>
     <view class='yupao-footer-item' bindtap='jumpThisLink' data-url="/pages/ucenter/ucenter" data-type='1'>
         <image src='{{ footerActive == "member" ? footerImgs.memberActive : footerImgs.memberNormal }}'></image>
-        <text class='{{ footerActive == "member" ? "footer-text-active" : "" }}'>会员</text>
+        <text class='{{ footerActive == "member" ? "footer-text-active" : "" }}'>会员中心</text>
         <view wx:if="{{ footerImgs.msgsNumber }}" class="footer-dot">{{footerImgs.msgsNumber>9?'9+':footerImgs.msgsNumber}}</view>
     </view>
 </view>

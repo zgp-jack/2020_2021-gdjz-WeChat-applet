@@ -5,7 +5,7 @@
             <image class='user-editinfo-right user-editinfo-userimg' src='{{ member.img }}'></image>
         </view>
         <view class='user-editinfo-item clearfix' bindtap='allowUserEntername' data-auth="{{ member.auth }}">
-            <text class='user-editinfo-left'>姓名</text>
+            <text class='user-editinfo-left'>名字</text>
             <text class='user-editinfo-right {{ (parseInt(member.auth) > 0) ?  "user-editinfo-right-dis" : ""  }}'>{{ member.name }}</text>
         </view>
         <view class='user-editinfo-item clearfix'>

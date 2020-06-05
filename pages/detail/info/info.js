@@ -59,6 +59,17 @@ Page({
       aid: '', // 地区
       cid: '', // 工种
       child: 0, // 是否是子列表
+      showFollow: false
+    },
+    userFollowAccount:function(){
+      this.setData({
+        showFollow: true
+      })
+    },
+    userCloseFollowBox:function(){
+      this.setData({
+        showFollow: false
+      })
     },
     userChangeRecruitStatus:function(){
       let that = this

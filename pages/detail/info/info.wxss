@@ -916,3 +916,11 @@ margin-left: 16rpx;
   background-image: none;
   color: #333;
 }
+.wenxintips-info .text-active-gz{
+  position: relative;
+  background-color: #0099ff;
+  font-size: 26rpx;
+  padding: 2rpx 15rpx;
+  border-radius: 5rpx;
+  color: #ffffff;
+}

@@ -253,11 +253,9 @@
   </view> -->
 
 
-  <ad class="lists-ad" unit-id="{{ unitid }}" style="margin-top:15rpx;"></ad> 
+  <ad class="lists-ad" unit-id="{{ unitid }}" ad-type="video" ad-theme="white" style="margin-top:15rpx;"></ad> 
   <recommendRecruit mine='1' aid="{{ aid }}" cid="{{ cid }}" more="{{ more }}" child="{{ child }}"  wx:if="{{ userInfo&&userInfo.userId == userId }}" />
   <recommendResume aid="{{ aid }}" cid="{{ cid }}" more="{{ more }}" uuid="{{ uuid }}" child="{{ child }}" />
-
-
 
   <view class="bossbottom" wx:if="{{status == 0}}">
     <button class="bossbottomb" catchtap="praise">

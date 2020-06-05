@@ -5,6 +5,7 @@ let areas = require("../../utils/area.js");
 let md5 = require("../../utils/md5.js");
 const Amap = require("../../utils/amap-wx.js");
 const amapFun = new Amap.AMapWX({ key: app.globalData.gdApiKey });
+const ads = require('../../utils/ad')
 Page({
 
   /**
@@ -14,7 +15,7 @@ Page({
     showShadowFc: false,
     fcheader: app.globalData.apiImgUrl + "yindao-fc-tips.png",
     fcbody: app.globalData.apiImgUrl + "yindao-fc-body.png",
-    unitid: app.globalData.unitid,
+    unitid: ads.recruitListAd,
     footerActive: "recruit",
     userInfo: true,
     touchStartTime: 0,

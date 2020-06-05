@@ -72,7 +72,7 @@
             <view class='ucener-theme' data-url="/pages/clients-looking-for-work/finding-name-card/findingnamecard" bindtap='valiUserUrl'>
                 <image class="ucener-leftImage" src='{{ ucenterimgs.mycard }}'></image>
                 <view class='ucener-border-b ucener-border'>
-                    <view class="ucener-title">我的找活名片</view>
+                    <view class="ucener-title">我的找活</view>
                     <view class="flex-row">
                         <view class="ucener-detil">{{member.resume_status.resume_tips_string}}</view>
                         <image src='{{ rightarrow }}' class="ucener-rightIcon"></image>
@@ -91,7 +91,7 @@
             <view class='ucener-theme' data-url='/pages/information/mymessage/mymessage' bindtap='suggestUserUrl'>
                 <image class="ucener-leftImage" src='{{ ucenterimgs.ucenterMsg }}'></image>
                 <view class='ucener-border-b'>
-                    <view class="ucener-title">我的信息
+                    <view class="ucener-title">我的消息
                         <text class="masnumber" wx:if="{{ footerImgs.msgsNumber > 0 }}">{{footerImgs.msgsNumber>9?'9+':footerImgs.msgsNumber}}</text>
                     </view>
                     <view class="flex-row">
@@ -100,6 +100,16 @@
                     </view>
                 </view>
             </view>
+            <button class='ucener-theme' open-type="contact">
+                <image class="ucener-leftImage" src='{{ ucenterimgs.ucenterMsg }}'></image>
+                <view class='ucener-border-b'>
+                    <view class="ucener-title">在线客服</view>
+                    <view class="flex-row">
+                        <view class="ucener-detil">小学生3000问</view>
+                        <image src='{{ rightarrow }}' class="ucener-rightIcon"></image>
+                    </view>
+                </view>
+            </button>
         </view>
 
         <view class="ucenter-hasnoticeinfo">
@@ -136,7 +146,7 @@
             <view class='ucener-theme' data-url='../integral/source/source' bindtap='valiUserUrl'>
                 <image class="ucener-leftImage" src='{{ ucenterimgs.integrallog }}'></image>
                 <view class='ucener-border-b '>
-                    <view class="ucener-title">积分来源</view>
+                    <view class="ucener-title">积分来源记录</view>
                     <view class="flex-row">
                         <image src='{{ rightarrow }}' class="ucener-rightIcon"></image>
                     </view>

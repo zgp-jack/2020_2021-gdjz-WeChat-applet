@@ -488,7 +488,7 @@ App({
             _this.detailUpimg(1, res, callback);
           }else{
             wx.hideLoading()
-            this.showMyTips('图片格式不正确,请重新选择')
+            _this.showMyTips('图片格式不正确,请重新选择')
           }
         }
       },
@@ -509,7 +509,14 @@ App({
             sizeType: ['compressed'],
             sourceType: ['camera'],
             success: function (res) {
-              that.detailUpimg(2, res, callback, _type);
+              let img = res.tempFiles[0].path
+              let ok = that.valiImgRules(img)
+              if(ok){
+                that.detailUpimg(2, res, callback, _type);
+              }else{
+                wx.hideLoading()
+                that.showMyTips('图片格式不正确,请重新选择')
+              }
             },
           })
         } else if (res.tapIndex == 1) {
@@ -518,7 +525,14 @@ App({
             sizeType: ['compressed'],
             sourceType: ['album'],
             success: function (res) {
-              that.detailUpimg(2, res, callback, _type);
+              let img = res.tempFiles[0].path
+              let ok = that.valiImgRules(img)
+              if(ok){
+                that.detailUpimg(2, res, callback, _type);
+              }else{
+                wx.hideLoading()
+                that.showMyTips('图片格式不正确,请重新选择')
+              }
             },
           })
         }

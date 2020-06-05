@@ -2,6 +2,7 @@
 const app = getApp();
 let areas = require("../../utils/area.js");
 let md5 = require("../../utils/md5.js");
+const ads = require('../../utils/ad')
 Page({
 
     /**
@@ -9,7 +10,7 @@ Page({
      */
     data: {
       userInfo:false,
-        unitid: app.globalData.unitid,
+        unitid: ads.usedListAd,
         touchStartTime: 0,
         touchEndTime: 0,
         lastTapTime: 0,

@@ -2,6 +2,7 @@
 const app = getApp();
 let remain = require("../../utils/remain.js");
 let v = require("../../utils/v.js");
+const ads = require('../../utils/ad')
 Page({
 
   /**/
@@ -10,7 +11,7 @@ Page({
     complaincontent: app.globalData.complaincontent,
     realNames: app.globalData.apiImgUrl + 'new-list-realname-icon.png',
     authentication: app.globalData.apiImgUrl + 'new-list-jnzs-icon.png',
-    unitid: app.globalData.unitid,
+    unitid: ads.ResumeInfoVideoAd,
     homebtnImg: app.globalData.apiImgUrl + "yp-return-jobinfo.png",
     downward: app.globalData.apiImgUrl + "lpy/downward.png",
     experienceitem: app.globalData.apiImgUrl + "lpy/newresume-experience-item.png",
