@@ -165,7 +165,6 @@ Page({
     }
     let type = e.currentTarget.dataset.type
     let jump = e.currentTarget.dataset.jump
-    console.log(ranking, "ranking")
     if(type == '7'){
       if(jump != "0"){
         this.addclicklog(type)

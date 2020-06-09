@@ -416,7 +416,6 @@ App({
   },
   detailUpimg: function (type, res, callback, _type) {
     let userInfo = wx.getStorageSync("userInfo");
-    console.log(userInfo)
     let _this = this;
     let imgRes = res;
     wx.showToast({
@@ -471,6 +470,7 @@ App({
     let type = img.match(r)
     if(type){
       let str = type[0].substr(1,type[0].length)
+      str = str.toLowerCase()
       let ok = types.find(item=>item === str)
       return ok ? true : false
     }
