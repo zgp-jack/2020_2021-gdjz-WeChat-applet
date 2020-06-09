@@ -27,10 +27,15 @@
         </navigator>
       </swiper-item>
       <block wx:for="{{ swiper.imgUrls }}" wx:key="{{ index }}">
-        <swiper-item>
+        <swiper-item wx:if="{{ !item.is_download }}">
           <navigator url='{{ item.small_url }}' open-type="navigate">
             <image src="{{ item.banner }}" class="index-swiper-img" />
           </navigator>
+        </swiper-item>
+        <swiper-item wx:if="{{ item.is_download }}">
+          <view bindtap="showdownappaction">
+            <image src="{{ item.banner }}" class="index-swiper-img" />
+          </view>
         </swiper-item>
       </block>
     </swiper>
@@ -411,9 +416,14 @@
   </view>
 </view>
 
-<view class='fixed-ad' bindtap='jumpThisLink' data-url="/pages/publish/recruit/recruit" data-type='0'>
+<view class='fixed-ad' bindtap='userSeeVideo' wx:if="{{ showAd }}">
   <image src='{{ fixedAdImg }}'></image>
+</view>
+<view class='fixed-ad' bindtap='userInvite' wx:if="{{ !showAd }}">
+  <image src='{{ inviteUserImg }}'></image>
 </view>
 
 <!-- 引入footer -->
 <template is="footer" data="{{ footerImgs,publishActive,showPublishBox,footerActive }}" />
+
+<downapptips id='downapptips'></downapptips>

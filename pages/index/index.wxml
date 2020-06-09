@@ -147,9 +147,9 @@
 
        
         <ad  class="lists-ad" unit-id="{{ unitid }}"  wx:if="{{index % 5 == 0 && index > 5}}"></ad>
-        <navigator url='/packageOther/pages/download/download-app' wx:if="{{ (index == 5) && (fillterType[worktype].id != '55')}}" class='lists-ad lists-ad-image'>
+        <view  wx:if="{{ (index == 5) && (fillterType[worktype].id != '55')}}" class='lists-ad lists-ad-image' bindtap="showdownappaction">
             <image  src="{{ appLinkImg }}"></image>
-        </navigator>
+        </view>
         <navigator class='lists-ad lists-ad-image' target="miniProgram"  wx:if="{{ (index == 5) && (fillterType[worktype].id == '55')}}" open-type="navigate" app-id="wx0ae31bf0edad4390" path="" extra-data="" version="release" >
             <image  src="{{ jixieLinkImg }}"></image>
         </navigator>
@@ -172,7 +172,7 @@
     <button  open-type="getUserInfo"  bindgetuserinfo='bindGetUserInfo' style='height:{{ userAuthBtn }}px;background:url({{ userAuthImg }}) no-repeat;background-size:100% 100%;'></button>
 </view> -->
 
-<view class='fixed-ad'   bindtap='jumpThisLink'  data-url="/packageOther/pages/download/download-app"  data-type='0'>
+<view class='fixed-ad'   bindtap='showdownappaction'>
     <image src='{{ fixedAdImg }}'></image>
 </view>
 
@@ -181,7 +181,8 @@
     <image src='{{ fastIssueImg }}'></image>
 </view>
 
-<view class='bottompublishbtn'  bindtap='jumpThisLink' data-url="/pages/publish/recruit/recruit"    data-type='0' >发布招工</view>
+<!-- <view class='bottompublishbtn'  bindtap='jumpThisLink' data-url="/pages/publish/recruit/recruit"    data-type='0' >发布招工</view> -->
+<button class='bottompublishbtn' open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber">发布招工</button>
 
 <image class="returntop {{ showReturnTopImg ? 'returntop-active' : '' }}" src="{{ returnTopImg }}" bindtap="returnTop" ></image>
 
@@ -207,3 +208,4 @@
 
 
 
+<downapptips id='downapptips'></downapptips>

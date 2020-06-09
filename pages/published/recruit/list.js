@@ -193,7 +193,8 @@ Page({
         userId: userInfo.userId,
         token: userInfo.token,
         tokenTime: userInfo.tokenTime,
-        infoId: _id
+        infoId: _id,
+        end_status:status
       },
       success: function (res) {
         wx.hideLoading();

@@ -69,4 +69,7 @@
       <view class='yupao-common-lists-text'>{{ usedInfo.detail }}</view>
     </view>
   </view>
+
+  <ad ad-type='video' unit-id="{{ unitid }}" style="margin-top:15rpx;"></ad> 
 </view>
+

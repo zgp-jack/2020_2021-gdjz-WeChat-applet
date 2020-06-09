@@ -177,9 +177,9 @@
     </view>
 
 
-    <navigator url='/packageOther/pages/download/download-app' wx:if="{{ (index == 5) && (fillterType[worktype].id != '55')}}" class='lists-ad lists-ad-image'>
+    <view wx:if="{{ (index == 5) && (fillterType[worktype].id != '55')}}" class='lists-ad lists-ad-image' bindtap="showdownappaction">
       <image src="{{ appLinkImg }}"></image>
-    </navigator>
+    </view>
     <navigator class='lists-ad lists-ad-image' target="miniProgram" wx:if="{{ (index == 5) && (fillterType[worktype].id == '55')}}" open-type="navigate" app-id="wx0ae31bf0edad4390" path="" extra-data="" version="release">
       <image src="{{ jixieLinkImg }}"></image>
     </navigator>
@@ -218,3 +218,4 @@
 <!-- 引入footer -->
 <template is="footer" data="{{ footerImgs,publishActive,showPublishBox,footerActive }}" />
 
+<downapptips id='downapptips'></downapptips>

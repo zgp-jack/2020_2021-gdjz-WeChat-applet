@@ -1,5 +1,6 @@
 // pages/usedinfo/usedinfo.js
 const app = getApp();
+const ads = require('../../../utils/ad')
 Page({
 
     /**
@@ -19,7 +20,8 @@ Page({
         },
         phone: "",
         wechat: "",
-      joingroup:[]
+      joingroup:[],
+      unitid: ads.usedInfoAd
     },
     initUsedinfo: function (options) {
         let _this = this;

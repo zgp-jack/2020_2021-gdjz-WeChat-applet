@@ -2,7 +2,11 @@
 // infolists errImg showArea  areadata areadata  certificate
 let footerjs = require("../../utils/footer.js");
 let areas = require("../../utils/area.js");
+let ads = require("../../utils/ad")
 const app = getApp();
+let videoAd = null
+let num = app.globalData.userSeeVideoNum
+let max = app.globalData.userSeeVideoMax
 Page({
   data: {
     version: app.globalData.version,
@@ -70,7 +74,7 @@ Page({
     isScroll: true,
     areadata: [],
     jixieLinkImg: app.globalData.commonJixieAd,
-    fixedAdImg: app.globalData.fixedPublishImg,
+    fixedAdImg: app.globalData.apiImgUrl + 'seevideo-getintegral.png',
     phone: app.globalData.serverPhone,
     locationHistory: false,
     gpsOrientation: false,
@@ -87,7 +91,67 @@ Page({
     hirimg: app.globalData.apiImgUrl + 'recruit-lists-new-finding.png', //招人图片
     doneimg: app.globalData.apiImgUrl + 'published-recruit-end.png', //已找到
     iondzs: app.globalData.apiImgUrl + 'newlist-jobposi.png',//定位
-    iImgUrl: app.globalData.apiImgUrl, //图片地址
+    iImgUrl: app.globalData.apiImgUrl, //图片地址,
+    inviteUserImg: app.globalData.apiImgUrl + 'inviteuser-getintegral.png',
+    showAd: true,
+    showFollow: false
+  },
+  showVideoAd:function(){
+    if (videoAd) {
+        videoAd.show().catch(() => {
+          // 失败重试
+          videoAd.load()
+            .then(() => videoAd.show())
+            .catch(err => {
+              console.log('激励视频 广告显示失败')
+            })
+          })
+      }
+
+  },
+  createVideo:function(){
+      let times = app.globalData.userSeeVideoTimes
+      if(times.ok && !times.times){
+        this.setData({
+          showAd: false
+        })
+        return
+      }
+      if(num > max) return
+      if (wx.createRewardedVideoAd) {
+          num = num + 1
+          videoAd = wx.createRewardedVideoAd({
+              adUnitId: ads.videoAd
+          })
+          videoAd.onLoad(() => {})
+          videoAd.onError((err) => {
+              this.createVideo()
+              console.log(err)
+          })
+          videoAd.onClose(status => {
+            if (status && status.isEnded || status === undefined) {
+              app.userGetTempIntegral()
+            }
+          })
+      }
+  },
+  userSeeVideo:function(){
+    let _this = this
+    app.valiUserVideoAdStatus(function(data){
+      if(data.errcode == 'ok'){
+        _this.showVideoAd()
+      }else if(data.errcode == 'to_invite'){
+        _this.setData({
+          fixedAdImg: _this.data.inviteUserImg
+        })
+        app.showMyTips(mydata.errmsg)
+      }else{
+        app.showMyTips(mydata.errmsg)
+      }
+    })
+  },
+  showdownappaction:function(){
+    this.selectComponent("#downapptips").showaction()
   },
   chooseInputCtiy: function (e) {
     this.chooseThisCtiy(e);
@@ -294,6 +358,7 @@ Page({
     this.setData({ allAreaLists: list })
   },
   onLoad: function (options) {
+    this.createVideo()
     this.initInputList();
     this.initFooterData();
     this.getAreaData();

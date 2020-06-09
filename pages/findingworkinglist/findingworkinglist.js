@@ -106,6 +106,9 @@ Page({
     historyList: [],
     joingroup: []
   },
+  showdownappaction:function(){
+    this.selectComponent("#downapptips").showaction()
+  },
   jumptop() {
     wx.navigateTo({
       url: `/pages/clients-looking-for-work/finding-name-card/findingnamecard`,

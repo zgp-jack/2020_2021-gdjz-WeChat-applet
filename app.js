@@ -74,7 +74,13 @@ App({
       data:[],
       use: false
     },
-    firstSaveUserLoginLog: false
+    firstSaveUserLoginLog: false,
+    userSeeVideoTimes: {
+      ok: false,
+      times: 0
+    },
+    userSeeVideoNum : 1,
+    userSeeVideoMax:2
   },
   initUserInfo: function (e) {
     let tpage = e.path;
@@ -480,7 +486,6 @@ App({
       sizeType: ['compressed'],
       sourceType: ['album', 'camera'],
       success: res => {
-        console.log(res)
         if(res.errMsg == "chooseImage:ok"){
           let img = res.tempFiles[0].path
           let ok = this.valiImgRules(img)
@@ -1100,6 +1105,68 @@ App({
           icon: "none",
           duration: 3000
         })
+      }
+    })
+  },
+  valiUserVideoAdStatus:function(callback){
+    let _this = this;
+    let userInfo = wx.getStorageSync('userInfo')
+    let userUuid = wx.getStorageSync('userUuid')
+    if(!userInfo) return
+    userInfo.mid = userInfo.userId
+    userInfo.uuid = userUuid
+    this.appRequestAction({
+      url:'/member/get-adv-status/',
+      way: 'POST',
+      params:userInfo,
+      success:(res) => {
+        let mydata = res.data
+        if(mydata.errcode == 'ok'){
+          _this.globalData.userSeeVideoTimes = {
+            ok: true,
+            times: mydata.data.times
+          }
+        }else if(mydata.errcode == 'to_invited'){
+          _this.globalData.userSeeVideoTimes.times = {
+            ok: true,
+            times: 0
+          }
+        }
+        callback&&callback(mydata)
+      },
+      fail:(err) => {
+        _this.showMyTips('网络错误，加载失败')
+      }
+    })
+  },
+  userGetTempIntegral:function(callback){
+    let _this = this
+    let userInfo = wx.getStorageSync('userInfo')
+    let userUuid = wx.getStorageSync('userUuid')
+    if(!userInfo) return
+    userInfo.mid = userInfo.userId
+    userInfo.uuid = userUuid
+    this.appRequestAction({
+      url: '/member/watched-integral/',
+      way: 'POST',
+      params: userInfo,
+      add_rank: 0,
+      success: function(res){
+        let mydata = res.data
+        wx.showModal({
+          title: '提示',
+          content: mydata.errmsg || '',
+          showCancel: false,
+        })
+        if(mydata.errcode == "ok"){
+          _this.globalData.userSeeVideoTimes.times = mydata.data.times
+        }else if(mydata.errcode == "to_invite"){
+          _this.globalData.userSeeVideoTimes.times = 0
+        }
+        callback&&callback()
+      },
+      fail:()=>{
+        _this.showMyTips('网络错误，加载失败！')
       }
     })
   }

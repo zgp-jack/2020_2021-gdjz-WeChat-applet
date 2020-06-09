@@ -238,6 +238,13 @@
 					"id": -1,
 					"name": "我的找活名片",
 					"pathName": "pages/clients-looking-for-work/finding-name-card/findingnamecard",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/clients-looking-for-work/preview-name-card/previewcard名片",
+					"pathName": "pages/clients-looking-for-work/preview-name-card/previewcard",
 					"scene": null
 				}
 			]

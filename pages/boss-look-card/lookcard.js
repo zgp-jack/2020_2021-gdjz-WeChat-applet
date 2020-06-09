@@ -11,7 +11,7 @@ Page({
     complaincontent: app.globalData.complaincontent,
     realNames: app.globalData.apiImgUrl + 'new-list-realname-icon.png',
     authentication: app.globalData.apiImgUrl + 'new-list-jnzs-icon.png',
-    unitid: ads.ResumeInfoVideoAd,
+    unitid: ads.resumeInfoAd,
     homebtnImg: app.globalData.apiImgUrl + "yp-return-jobinfo.png",
     downward: app.globalData.apiImgUrl + "lpy/downward.png",
     experienceitem: app.globalData.apiImgUrl + "lpy/newresume-experience-item.png",
@@ -111,7 +111,8 @@ Page({
     userImg: "http://cdn.yupao.com/miniprogram/images/user.png",
     more: 0,
     child: 0,
-    user_id: ''
+    user_id: '',
+    teltipsimg: app.globalData.apiImgUrl + 'usercallphone-tips.png'
   },
   closeNewPhoneFc:function(){
     this.setData({shownewtips: false})
@@ -123,6 +124,9 @@ Page({
     this.setData({shownewtips: false})
     let time = new Date().getTime()
     wx.setStorageSync('resumeHideTipsTime', time)
+    wx.makePhoneCall({
+      phoneNumber: this.data.telephone,
+    })
   },
   callthisphonehide:function(){
     this.setData({shownewtips: false})

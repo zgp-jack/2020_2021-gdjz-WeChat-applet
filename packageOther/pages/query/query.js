@@ -32,7 +32,7 @@ Page({
             mask:true
         })
         app.doRequestAction({
-            url:"resume/auth-worker-find/",
+            url:"resume/auth-status/",
             way:"POST",
             params:userInfo,
             success:function(res){
@@ -40,16 +40,7 @@ Page({
                 let mydata = res.data;
                 if (mydata.errcode == "auth_pass"){
 
-                } else if (mydata.errcode == "auth_check"){
-                    wx.showModal({
-                        title: '温馨提示',
-                        content: mydata.errmsg,
-                        showCancel: false,
-                        success() {
-                            wx.navigateBack()
-                        }
-                    })
-                }else if(mydata.errcode == "auth_fail" || mydata.errcode == "auth_no"){
+                } else if (mydata.errcode == "auth_not_pass" || mydata.errcode == "not_auth"){
                     wx.showModal({
                         title: '温馨提示',
                         content: mydata.errmsg,
@@ -59,7 +50,9 @@ Page({
                                     url: '/pages/realname/realname',
                                 })
                             } else if (res.cancel) {
-                                wx.navigateBack()
+                                wx.reLaunch({
+                                    url: '/pages/index/index',
+                                })
                             }
                         }
                     })
@@ -102,7 +95,7 @@ Page({
         if (v.isMobile(phone)) {
             wx.showLoading({ title: '正在查询该用户' })
             app.doRequestAction({
-                url: "resume/query-worker/",
+                url: "resume/auth-worker-find/",
                 way: "POST",
                 params: {
                     userId: userInfo.userId,
@@ -124,13 +117,34 @@ Page({
                             username: mydata.member.username,
                             tel:mydata.member.tel
                         })
-                    }else{
-                        _this.setData({ showResult : false })
+                    }if (mydata.errcode == "auth_check"){
                         wx.showModal({
                             title: '温馨提示',
                             content: mydata.errmsg,
-                            showCancel:false,
-                            success(res) {}
+                            showCancel: false,
+                            success() {
+                                wx.navigateBack()
+                            }
+                        })
+                    }else if(mydata.errcode == "auth_fail" || mydata.errcode == "auth_no"){
+                        wx.showModal({
+                            title: '温馨提示',
+                            content: mydata.errmsg,
+                            success(res) {
+                                if (res.confirm) {
+                                    wx.navigateTo({
+                                        url: '/pages/realname/realname',
+                                    })
+                                } else if (res.cancel) {
+                                    wx.navigateBack()
+                                }
+                            }
+                        })
+                    }else{
+                        wx.showModal({
+                            title: '温馨提示',
+                            content: mydata.errmsg,
+                            showCancel: false
                         })
                     }
                 },

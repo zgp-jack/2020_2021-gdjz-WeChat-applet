@@ -100,16 +100,6 @@
                     </view>
                 </view>
             </view>
-            <button class='ucener-theme' open-type="contact">
-                <image class="ucener-leftImage" src='{{ ucenterimgs.ucenterMsg }}'></image>
-                <view class='ucener-border-b'>
-                    <view class="ucener-title">在线客服</view>
-                    <view class="flex-row">
-                        <view class="ucener-detil">小学生3000问</view>
-                        <image src='{{ rightarrow }}' class="ucener-rightIcon"></image>
-                    </view>
-                </view>
-            </button>
         </view>
 
         <view class="ucenter-hasnoticeinfo">

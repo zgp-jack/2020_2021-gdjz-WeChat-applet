@@ -791,17 +791,18 @@ margin-left: 16rpx;
 .newdetail-tips-item{
   position: relative;
   margin-bottom: 30rpx;
+  overflow: initial;
 }
 .newdetail-tips-item:nth-last-child(1){
   margin-bottom: 0;
 }
-.newdetail-tips-title{
+.newdetail-tips-title,.newdetail-tips-mytitle{
   position: relative;
   padding-left: 50rpx;
   font-size: 30rpx;
   font-weight: bold;
 }
-.newdetail-tips-title::before{
+.newdetail-tips-title::after{
   position: absolute;
   content: '';
   display: block;
@@ -812,11 +813,21 @@ margin-left: 16rpx;
   background: url(http://cdn.yupao.com/miniprogram/images/usercallphone-tips.png) no-repeat;
   background-size: 100% 100%;
 }
+
+.newdetail-tips-title-img{
+  position: absolute;
+  display: block;
+  width: 40rpx;
+  height: 40rpx;
+  left: 0;
+  top: -2rpx;
+}
 .newdetail-tips-text{
   line-height: 45rpx;
   color: #7C7C7C;
   padding: 10rpx 0;
   font-size: 28rpx;
+  white-space: normal;
 }
 .newdetail-tips-footer{
   position: relative;
@@ -829,10 +840,22 @@ margin-left: 16rpx;
   font-size: 30rpx;
   color: #666666;
   line-height: 120rpx;
+  box-sizing: border-box;
+  overflow: initial;
+}
+.newdetail-footer-item::after{
+  position: absolute;
+  content: '';
+  left: 100%;
+  top: 0;
+  height: 100%;
+  width: 0;
   border-right: 1px solid #DDDDDD;
 }
 .newdetail-footer-item:nth-last-child(1){
   color: #0099ff;
+}
+.newdetail-footer-item:nth-last-child(1)::after{
   border-right: 0;
 }
 .text-nav-name{

@@ -104,7 +104,10 @@ Page({
     // member_notice:{},
     member_less_info: {},
     msgsNumber: [],
-    joingroup: []
+    joingroup: [],
+  },
+  showdownappaction:function(){
+    this.selectComponent("#downapptips").showaction() 
   },
   getMapInfo: function (callback) {
     let that = this;

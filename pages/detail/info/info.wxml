@@ -93,9 +93,9 @@
 			</view>
 
 			<view class='info-concern-img'>
-				<navigator url='/packageOther/pages/download/download-app' open-type="navigate">
+				<view bindtap="showdownappaction">
 					<image mode='widthFix' src='{{ appLinkImg }}'></image>
-				</navigator>
+				</view>
 			</view>
 
 			<recommendRecruit infoId='{{ infoId }}' cid="{{ cid }}" aid="{{ aid }}" more="{{ more }}" child="{{ child }}" wx:if="{{ !more }}" />
@@ -214,3 +214,5 @@
 		<view class="common-follow-close">我知道了</view>
 	</view>
 </view>
+
+<downapptips id='downapptips'></downapptips>

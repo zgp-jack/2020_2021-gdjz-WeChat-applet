@@ -253,7 +253,7 @@
   </view> -->
 
 
-  <ad class="lists-ad" unit-id="{{ unitid }}" ad-type="video" ad-theme="white" style="margin-top:15rpx;"></ad> 
+  <ad class="lists-ad" unit-id="{{ unitid }}" style="margin-top:15rpx;"></ad> 
   <recommendRecruit mine='1' aid="{{ aid }}" cid="{{ cid }}" more="{{ more }}" child="{{ child }}"  wx:if="{{ userInfo&&userInfo.userId == userId }}" />
   <recommendResume aid="{{ aid }}" cid="{{ cid }}" more="{{ more }}" uuid="{{ uuid }}" child="{{ child }}" />
 
@@ -325,24 +325,26 @@
 
 
 <!-- 新改动 拨号弹窗 -->
-<view class="newdetail-fixedshadow flex-row" wx:if="{{ shownewtips }}" bindtap="closeNewPhoneFc">
-	<view class="newdetail-fixed-content" catchtap="returnAction">
-		<view class="newdetail-tips-box">
-			<view class="newdetail-tips-header">鱼泡网提醒</view>
-			<view class="newdetail-tips-body">
-				<view class="newdetail-tips-item">
-					<view class="newdetail-tips-title">工作前</view>
-					<view class="newdetail-tips-text">确认好对方身份、签好合同，招工、找活中不要交任何费用。</view>
-				</view>
-				<view class="newdetail-tips-item">
-					<view class="newdetail-tips-title">工作中</view>
-					<view class="newdetail-tips-text">拍照、录视频留有证据！若双方发生经济纠纷，请立即报警或前往劳动局投诉，鱼泡网可配合调查，但概不负责。</view>
-				</view>
-			</view>
-		</view>
-		<view class="newdetail-tips-footer flex-row">
-			<view class="newdetail-footer-item" catchtap="recentlynottips">暂不提示</view>
-			<view class="newdetail-footer-item" catchtap="callthisphonehide">拨打电话</view>
-		</view>
-	</view>
-</view>
+<cover-view class="newdetail-fixedshadow flex-row" wx:if="{{ shownewtips }}" bindtap="closeNewPhoneFc">
+	<cover-view class="newdetail-fixed-content" catchtap="returnAction">
+		<cover-view class="newdetail-tips-box">
+			<cover-view class="newdetail-tips-header">鱼泡网提醒</cover-view>
+			<cover-view class="newdetail-tips-body">
+				<cover-view class="newdetail-tips-item">
+					<cover-view class="newdetail-tips-mytitle">工作前</cover-view>
+          <cover-image class="newdetail-tips-title-img" src="{{ teltipsimg }}"></cover-image>
+					<cover-view class="newdetail-tips-text">确认好对方身份、签好合同，招工、找活中不要交任何费用。</cover-view>
+				</cover-view>
+				<cover-view class="newdetail-tips-item">
+					<cover-view class="newdetail-tips-mytitle">工作中</cover-view>
+          <cover-image class="newdetail-tips-title-img" src="{{ teltipsimg }}"></cover-image>
+					<cover-view class="newdetail-tips-text">拍照、录视频留有证据！若双方发生经济纠纷，请立即报警或前往劳动局投诉，鱼泡网可配合调查，但概不负责。</cover-view>
+				</cover-view>
+			</cover-view>
+		</cover-view>
+		<cover-view class="newdetail-tips-footer flex-row">
+			<cover-view class="newdetail-footer-item" catchtap="recentlynottips">暂不提示</cover-view>
+			<cover-view class="newdetail-footer-item" catchtap="callthisphonehide">拨打电话</cover-view>
+		</cover-view>
+	</cover-view>
+</cover-view>

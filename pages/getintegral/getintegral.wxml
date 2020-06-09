@@ -18,7 +18,7 @@
                 <text class='getintegral-list-info'>充值付钱购买积分。（我们不鼓励付钱购买，我们希望大家多帮忙宣传）</text>
                 <text class='getintegral-list-btn' bindtap='goThisPage' data-url="/pages/recharge/recharge">去充值</text>
             </view>
-            <view class='getintegral-list-item'>
+            <view class='getintegral-list-item' wx:if="{{ showad }}">
                 <view class='getintegral-list-title'>看视频，赚积分</view>
                 <text class='getintegral-list-info'>每天观看15秒视频可获得1分。</text>
                 <text class='getintegral-list-btn' bindtap='userSeeVideo' >看视频</text>

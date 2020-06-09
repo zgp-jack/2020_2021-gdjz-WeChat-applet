@@ -72,6 +72,9 @@ Page({
       showReturnTopImg:false,
       joingroup: []
     },
+    showdownappaction:function(){
+      this.selectComponent("#downapptips").showaction()
+    },
     stopThisAction: function () {
         return false;
     },

@@ -1094,9 +1094,17 @@ Page({
     return false
   },
   returnPrevPage() {
-    wx.navigateBack({
-      delta: 1
-    })
+    let pages = getCurrentPages()
+    if(pages.length >= 2){
+      wx.navigateBack({
+        delta: 1
+      })
+    }else{
+      wx.redirectTo({
+        url: '/pages/findingworkinglist/findingworkinglist',
+      })
+    }
+    
   },
   bindGetUserInfo: function (e) {
     let that = this;

@@ -117,9 +117,9 @@
       </view>
     </navigator>
     <ad class="lists-ad" unit-id="{{ unitid }}" wx:if="{{index % 5 == 0 && index > 5}}"></ad>
-    <navigator url='/pages/download/download-app' wx:if="{{ (index == 5) && ( index >= 5) }}" class='lists-ad lists-ad-image'>
+    <view  wx:if="{{ (index == 5) && ( index >= 5) }}" class='lists-ad lists-ad-image' bindtap="showdownappaction"  >
       <image src="{{ appLinkImg }}"></image>
-    </navigator>
+    </view>
   </block>
 
   <view class='nodata-texttips' wx:if="{{ nothavemore }}">没有更多内容了</view>
@@ -148,3 +148,5 @@
 <image class="returntop {{ showReturnTopImg ? 'returntop-active' : '' }}" src="{{ returnTopImg }}" bindtap="returnTop"></image>
 
 <!-- <template is="app"  data="{{ bgHeight,btnWidth,wordsHeight,wordsWidth,shadeWidth,winWidth,winHeight,notimesW,userShareData,userShareTime }}" /> -->
+
+<downapptips id='downapptips'></downapptips>

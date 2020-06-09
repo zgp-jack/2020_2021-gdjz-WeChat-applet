@@ -2,8 +2,8 @@
 const app = getApp();
 const ads = require('../../utils/ad')
 let videoAd = null
-let num = 1
-let max = 2
+let num = app.globalData.userSeeVideoNum
+let max = app.globalData.userSeeVideoMax
 Page({
 
     /**
@@ -11,7 +11,8 @@ Page({
      */
     data: {
         showRecharge:false,
-        phone: ""
+        phone: "",
+        showad: true
     },
     callThisPhone:function(e){
         let phone = e.currentTarget.dataset.phone;
@@ -45,9 +46,30 @@ Page({
             })
         }
     },
+    userClickVideoBtn:function(){
+        let _this = this
+        app.valiUserVideoAdStatus(function(data){
+            if(data.errcode == 'ok'){
+                _this.userSeeVideo()
+            }else if(data.errcode == 'to_invite'){
+                _this.setData({
+                    showad: false
+                })
+                app.showMyTips(mydata.errmsg)
+            }else{
+                app.showMyTips(mydata.errmsg)
+            }
+        })
+    },
     createVideo:function(){
-        console.log(ads.videoAd)
         if(num > max) return
+        let times = app.globalData.userSeeVideoTimes
+        if(times.ok && !times.times){
+            this.setData({
+            showAd: false
+            })
+            return
+        }
         if (wx.createRewardedVideoAd) {
             num = num + 1
             videoAd = wx.createRewardedVideoAd({
@@ -65,6 +87,7 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
+        app.valiUserVideoAdStatus()
         this.setData({ phone:app.globalData.serverPhone })
         this.initGetIntegralList();
         this.createVideo()

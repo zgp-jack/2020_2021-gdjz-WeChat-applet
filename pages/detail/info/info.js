@@ -61,6 +61,9 @@ Page({
       child: 0, // 是否是子列表
       showFollow: false
     },
+    showdownappaction:function(){
+      this.selectComponent("#downapptips").showaction()
+    },
     userFollowAccount:function(){
       this.setData({
         showFollow: true
@@ -85,7 +88,8 @@ Page({
           userId: userInfo.userId,
           token: userInfo.token,
           tokenTime: userInfo.tokenTime,
-          infoId: id
+          infoId: id,
+          end_status: that.data.info.is_end
         },
         success: function (res) {
           wx.hideLoading();
@@ -124,28 +128,20 @@ Page({
             })
             return
           } else if (mydata.errcode == "member_forbid") {
-            if (_index === 0) {
-              wx.showModal({
-                title: '温馨提示',
-                content: mydata.errmsg,
-                cancelText: "取消",
-                confirmText: "联系客服",
-                success(res) {
-                  if (res.confirm) {
-                    let tel = app.globalData.serverPhone
-                    wx.makePhoneCall({
-                      phoneNumber: tel,
-                    })
-                  }
+            wx.showModal({
+              title: '温馨提示',
+              content: mydata.errmsg,
+              cancelText: "取消",
+              confirmText: "联系客服",
+              success(res) {
+                if (res.confirm) {
+                  let tel = app.globalData.serverPhone
+                  wx.makePhoneCall({
+                    phoneNumber: tel,
+                  })
                 }
-              })
-            } else {
-              wx.showToast({
-                title: mydata.errmsg,
-                icon: "none",
-                duration: 1500
-              })
-            }
+              }
+            })
           } else if (mydata.errcode == "to_auth") {
             wx.showModal({
               title: '温馨提示',
@@ -288,6 +284,9 @@ Page({
       this.setData({shownewtips: false})
       let time = new Date().getTime()
       wx.setStorageSync('recruitHideTipsTime', time)
+      wx.makePhoneCall({
+        phoneNumber: this.data.info.tel_str,
+      })
     },
     callthisphonehide:function(){
       this.setData({shownewtips: false})
@@ -448,6 +447,17 @@ Page({
             params: userInfo,
             success: function (res) { 
                 let mydata = res.data;
+                if(mydata.errcode == "fail"){
+                  wx.showModal({
+                    title: '温馨提示',
+                    content: mydata.errmsg,
+                    showCancel: false,
+                    success:()=>{
+                      wx.navigateBack()
+                    }
+                  })
+                  return
+                }
                 
                 _this.setData({ info: mydata.result })
                 //_this.getRecommendList()

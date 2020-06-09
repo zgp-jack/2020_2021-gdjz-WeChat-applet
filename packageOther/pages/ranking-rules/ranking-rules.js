@@ -1,5 +1,9 @@
 // pages/clients-looking-for-work/ranking-rules/ranking-rules.js
 const app = getApp();
+let num = app.globalData.userSeeVideoNum
+let max = app.globalData.userSeeVideoMax
+let ads = require('../../../utils/ad')
+let videoAd = null
 Page({
 
   /**
@@ -81,7 +85,7 @@ Page({
         system_type: that.data.type
       }
     }
-
+    detail.load_adv = 1
     app.appRequestAction({
       url: 'resumes/sort/',
       way: 'POST',
@@ -159,8 +163,17 @@ Page({
       })
       return false;
     }
-    this.addclicklog(e.currentTarget.dataset.type)
+    let type = e.currentTarget.dataset.type
+    let jump = e.currentTarget.dataset.jump
     console.log(ranking, "ranking")
+    if(type == '7'){
+      if(jump != "0"){
+        this.addclicklog(type)
+        this.showVideoAd()
+        return
+      }
+    }
+    this.addclicklog(type)
     if (this.data.has_resume == 1 && e.currentTarget.dataset.jump == 1 && e.currentTarget.dataset.minipath == "/pages/clients-looking-for-work/finding-name-card/findingnamecard") {
       app.globalData.showdetail = true
       wx.navigateTo({
@@ -217,8 +230,67 @@ Page({
       })
     }
   },
+  showVideoAd:function(){
+    if (videoAd) {
+        videoAd.show().catch(() => {
+          // 失败重试
+          videoAd.load()
+            .then(() => videoAd.show())
+            .catch(err => {
+              console.log('激励视频 广告显示失败')
+            })
+          })
+      }
+
+  },
+  createVideo:function(){
+    let _this = this;
+      let times = app.globalData.userSeeVideoTimes
+      if(times.ok && !times.times){
+        this.setData({
+          showAd: false
+        })
+        return
+      }
+      if(num > max) return
+      if (wx.createRewardedVideoAd) {
+          num = num + 1
+          videoAd = wx.createRewardedVideoAd({
+              adUnitId: ads.videoAd
+          })
+          videoAd.onLoad(() => {})
+          videoAd.onError((err) => {
+              this.createVideo()
+              console.log(err)
+          })
+          videoAd.onClose(status => {
+            if (status && status.isEnded || status === undefined) {
+              app.userGetTempIntegral(()=>{
+                _this.getdetail()
+              })
+              
+            }
+          })
+      }
+  },
+  userSeeVideo:function(){
+    let _this = this
+    app.valiUserVideoAdStatus(function(data){
+      if(data.errcode == 'ok'){
+        _this.showVideoAd()
+      }else if(data.errcode == 'to_invite'){
+        _this.setData({
+          fixedAdImg: _this.data.inviteUserImg
+        })
+        app.showMyTips(mydata.errmsg)
+      }else{
+        app.showMyTips(mydata.errmsg)
+      }
+    })
+  },
   onLoad: function (options) {
     // this.getstatus(options)
+    this.createVideo()
     this.initGetIntegralList();
 
   },

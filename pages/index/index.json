@@ -1,5 +1,8 @@
 {
   "navigationBarTitleText": "工地急招|工地招工|工地建筑招聘",
   "enablePullDownRefresh": true,
-  "backgroundTextStyle": "dark"
+  "backgroundTextStyle": "dark",
+  "usingComponents": {
+    "downapptips": "/components/downapptips/index"
+  }
 }

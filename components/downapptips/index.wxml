@@ -1,0 +1,11 @@
+<view class="common-follow-container flex-row" bindtap="showaction" wx:if="{{ showdownapp }}">
+	<view class="common-follow-box">
+		<view class="common-follow-title">温馨提示</view>
+		<view class="common-follow-content">
+			<view class="common-follow-text">回复数字“1”</view>
+			<view class="common-follow-text">即可下载[鱼泡网]APP</view>
+		</view>
+		<button class="common-follow-button" open-type="contact">点击回复“1”下载APP</button>
+		<view class="common-follow-close">我知道了</view>
+	</view>
+</view>
