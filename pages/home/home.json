@@ -3,6 +3,7 @@
   "enablePullDownRefresh": true,
   "backgroundTextStyle":"dark",
   "usingComponents": {
-    "downapptips": "/components/downapptips/index"
+    "downapptips": "/components/downapptips/index",
+    "minitoast": "/components/minitoast/index"
   }
 }

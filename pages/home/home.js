@@ -5,10 +5,9 @@ let areas = require("../../utils/area.js");
 let ads = require("../../utils/ad")
 const app = getApp();
 let videoAd = null
-let num = app.globalData.userSeeVideoNum
-let max = app.globalData.userSeeVideoMax
 Page({
   data: {
+    source: app.globalData.requestToken,
     version: app.globalData.version,
     realNames: app.globalData.apiImgUrl + 'new-list-realname-icon.png',
     authentication: app.globalData.apiImgUrl + 'new-list-jnzs-icon.png',
@@ -96,6 +95,11 @@ Page({
     showAd: true,
     showFollow: false
   },
+  userInvite:function(){
+    wx.navigateTo({
+      url: '/pages/static/invite'
+    })
+  },
   showVideoAd:function(){
     if (videoAd) {
         videoAd.show().catch(() => {
@@ -103,50 +107,91 @@ Page({
           videoAd.load()
             .then(() => videoAd.show())
             .catch(err => {
-              console.log('激励视频 广告显示失败')
+              this.videoAdStop()
             })
           })
       }
 
   },
   createVideo:function(){
-      let times = app.globalData.userSeeVideoTimes
-      if(times.ok && !times.times){
-        this.setData({
-          showAd: false
-        })
-        return
-      }
-      if(num > max) return
+    let _this = this
+      
       if (wx.createRewardedVideoAd) {
-          num = num + 1
+          
           videoAd = wx.createRewardedVideoAd({
               adUnitId: ads.videoAd
           })
-          videoAd.onLoad(() => {})
+          videoAd.onLoad(() => {
+            
+          })
           videoAd.onError((err) => {
-              this.createVideo()
-              console.log(err)
+            this.setData({
+              showAd: false
+            })
           })
           videoAd.onClose(status => {
             if (status && status.isEnded || status === undefined) {
-              app.userGetTempIntegral()
+              this.videoAdStop()
             }
           })
       }
   },
+  videoAdStop:function(){
+    
+    app.userGetTempIntegral(0,function(data){
+      
+      if(data.errcode == "ok"){
+        let times = data.data.times
+        if(times == 0){
+          _this.setData({
+            showAd: false
+          })
+        }
+      }else if(data.errcode == "to_invited"){
+        _this.setData({
+          showAd: false
+        })
+      }
+    })
+  },
   userSeeVideo:function(){
     let _this = this
+    let userinfo = wx.getStorageSync('userInfo')
+    if(!userinfo){
+      wx.navigateTo({
+        url: '/pages/userauth/userauth',
+      })
+      return
+    }
     app.valiUserVideoAdStatus(function(data){
       if(data.errcode == 'ok'){
         _this.showVideoAd()
-      }else if(data.errcode == 'to_invite'){
+      }else if(data.errcode == 'to_invited'){
         _this.setData({
-          fixedAdImg: _this.data.inviteUserImg
+          showAd: false
         })
-        app.showMyTips(mydata.errmsg)
+        _this.selectComponent("#minitoast").showToast(data.errmsg)
+        //app.showMyTips(data.errmsg)
       }else{
-        app.showMyTips(mydata.errmsg)
+        _this.selectComponent("#minitoast").showToast(data.errmsg)
+        //app.showMyTips(data.errmsg)
+      }
+    })
+  },
+  initVideoTimes:function(){
+    let _this = this
+    app.valiUserVideoAdStatus(function(data){
+      if(data.errcode == 'ok'){
+        let times = data.data.times
+        if(times == 0){
+          _this.setData({
+            showAd: false
+          })
+        }
+      }else if(data.errcode == 'to_invited'){
+        _this.setData({
+          showAd: false
+        })
       }
     })
   },
@@ -359,6 +404,7 @@ Page({
   },
   onLoad: function (options) {
     this.createVideo()
+    this.initVideoTimes()
     this.initInputList();
     this.initFooterData();
     this.getAreaData();
@@ -417,7 +463,7 @@ Page({
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-
+    videoAd = null
   },
 
   /**

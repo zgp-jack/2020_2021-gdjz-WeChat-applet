@@ -8,11 +8,11 @@
     <text class='index-area-text'>{{ areaText }}</text>
     <image src='{{ indexImgs.areamore }}' class='index-area-more'></image>
   </view>
-  <navigator url='/packageOther/pages/download/download-app' open-type="navigate">
+  <view bindtap="showdownappaction">
     <view class='index-download-app'>
       <image src='{{ indexImgs.loadapp }}'></image>
     </view>
-  </navigator>
+  </view>
 </view>
 
 <!-- container -->
@@ -73,7 +73,7 @@
         <text>工厂招人</text>
       </view>
     </navigator>
-    <navigator class='index-footer-nav' target="miniProgram" open-type="navigate" app-id="wx0ae31bf0edad4390" path="pages/tenant/index" extra-data="" version="release">
+    <navigator class='index-footer-nav' target="miniProgram" open-type="navigate" app-id="wx0ae31bf0edad4390" path="pages/common/index?source={{ source }}" extra-data="" version="trial">
       <view class='index-industry-item'>
         <image src='{{ industry.jxzl }}'></image>
         <text>机械租赁</text>
@@ -427,3 +427,5 @@
 <template is="footer" data="{{ footerImgs,publishActive,showPublishBox,footerActive }}" />
 
 <downapptips id='downapptips'></downapptips>
+
+<minitoast id='minitoast' />

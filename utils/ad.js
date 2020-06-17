@@ -14,6 +14,8 @@ const recruitRecommendAd = 'adunit-f43849b0be35aeae'
 const resumeRecommendAd = 'adunit-7cd38a7faa897241'
 // 激励视频
 const videoAd = 'adunit-31b05acadbd2a1d1'
+// 排名点激励视频
+const videoSortAd = 'adunit-293ed939de948562'
 
 module.exports = {
   recruitListAd,
@@ -23,5 +25,6 @@ module.exports = {
   usedInfoAd,
   recruitRecommendAd,
   resumeRecommendAd,
-  videoAd
+  videoAd,
+  videoSortAd
 }

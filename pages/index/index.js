@@ -106,6 +106,43 @@ Page({
     msgsNumber: [],
     joingroup: [],
   },
+  getPhoneNumber:function(e){
+    console.log(e)
+    if(e.detail.errMsg != "getPhoneNumber:ok"){
+      wx.navigateTo({
+        url: '/packageOther/pages/userinfo/phone/phone',
+      })
+      return
+      
+    }
+    wx.login({
+      complete: (res) => {
+        let code = res.code
+        app.appRequestAction({
+          url: 'http://localhost/axin/login',
+          params:{
+            code: code
+          },
+          success:(data => {
+            let datajson = data.data.data
+            let mydata = JSON.parse(datajson)
+            app.appRequestAction({
+              url: 'http://localhost/axin/en',
+              params:{
+                sessionKey: mydata.session_key,
+                encryptedData:e.detail.encryptedData,
+                iv: e.detail.iv
+              },
+              success:res=>{
+                console.log(res)
+              }
+            })
+            
+          })
+        })
+      },
+    })
+  },
   showdownappaction:function(){
     this.selectComponent("#downapptips").showaction() 
   },

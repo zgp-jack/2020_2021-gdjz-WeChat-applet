@@ -10,7 +10,7 @@ App({
     copywechat: '',
     callphone: '',
     procity:0,
-    version: "1.0.1",
+    version: "1.0.2",
     complaincontent: '请填写5~100字，必须含有汉字。（恶意投诉会被封号，请谨慎投诉！）',
     areaIs: false,
     topshow: false,
@@ -42,7 +42,7 @@ App({
     commonDownloadApp: "http://cdn.yupao.com/miniprogram/images/download.png?t=" + new Date().getTime(),
     commonJixieAd: "http://cdn.yupao.com/miniprogram/images/list-ad-newjixie.png?t=" + new Date().getTime(),
     // apiRequestUrl:"http://60.205.221.14:8087/",
-    // apiRequestUrl: "http://miniapi.kkbbi.com/",
+    // apiRequestUrl: "http://miniapi.kkbbi.com/", 
     apiRequestUrl:"http://miniapitest.zhaogong.vrtbbs.com/",
     // apiRequestUrl: "https://newyupaomini.54xiaoshuo.com/",
     // apiRequestUrl: "http://miniapi.qsyupao.com/",
@@ -79,8 +79,7 @@ App({
       ok: false,
       times: 0
     },
-    userSeeVideoNum : 1,
-    userSeeVideoMax:2
+    userSeeVideoTips: '抱歉，您今日领取次数已达上限，休息一下明天再来吧。'
   },
   initUserInfo: function (e) {
     let tpage = e.path;
@@ -204,7 +203,7 @@ App({
 
     let url = _options.hasOwnProperty("url") ? _this.globalData.apiRequestUrl + _options.url : _this.globalData.apiRequestUrl
 
-
+    // let url = _options.url;
 
     wx.request({
       method: _options.hasOwnProperty("way") ? _options.way : 'GET',
@@ -1108,17 +1107,20 @@ App({
       }
     })
   },
-  valiUserVideoAdStatus:function(callback){
+  valiUserVideoAdStatus:function(callback,flag){
+    let vf = flag || 1
     let _this = this;
-    let userInfo = wx.getStorageSync('userInfo')
-    let userUuid = wx.getStorageSync('userUuid')
-    if(!userInfo) return
-    userInfo.mid = userInfo.userId
-    userInfo.uuid = userUuid
+    // let userInfo = wx.getStorageSync('userInfo')
+    // let userUuid = wx.getStorageSync('userUuid')
+    // if(!userInfo) return
+    // userInfo.mid = userInfo.userId
+    // userInfo.uuid = userUuid
+    //userInfo.check_type = vf
     this.appRequestAction({
       url:'/member/get-adv-status/',
-      way: 'POST',
-      params:userInfo,
+      way: 'GET',
+      mask: true,
+      params:{check_type:vf},
       success:(res) => {
         let mydata = res.data
         if(mydata.errcode == 'ok'){
@@ -1139,18 +1141,19 @@ App({
       }
     })
   },
-  userGetTempIntegral:function(callback){
+  userGetTempIntegral:function(flag, callback){
     let _this = this
     let userInfo = wx.getStorageSync('userInfo')
     let userUuid = wx.getStorageSync('userUuid')
     if(!userInfo) return
     userInfo.mid = userInfo.userId
     userInfo.uuid = userUuid
+    userInfo.add_rank = flag || 0
     this.appRequestAction({
       url: '/member/watched-integral/',
       way: 'POST',
       params: userInfo,
-      add_rank: 0,
+      mask: true,
       success: function(res){
         let mydata = res.data
         wx.showModal({
@@ -1160,10 +1163,10 @@ App({
         })
         if(mydata.errcode == "ok"){
           _this.globalData.userSeeVideoTimes.times = mydata.data.times
-        }else if(mydata.errcode == "to_invite"){
+        }else if(mydata.errcode == "to_invited"){
           _this.globalData.userSeeVideoTimes.times = 0
         }
-        callback&&callback()
+        callback&&callback(mydata)
       },
       fail:()=>{
         _this.showMyTips('网络错误，加载失败！')

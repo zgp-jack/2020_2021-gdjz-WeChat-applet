@@ -259,9 +259,9 @@ Page({
     app.appRequestAction({
       url: 'resumes/top-config/',
       way: 'POST',
-      params:{
-        interface_version: 'v2',
-      },
+      // params:{
+      //   interface_version: 'v2',
+      // },
       success: function (res) {
         let mydata = res.data;
        

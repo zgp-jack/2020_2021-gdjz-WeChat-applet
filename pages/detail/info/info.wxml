@@ -29,8 +29,8 @@
 							<view class="publisher-phone">{{ info.tel_str }}</view>
 							<view class="newdetail-callbox" wx:if="{{ userInfo.userId != info.user_id }}">
 								<view class="newdetail-call-show" wx:if="{{ info.show_ajax_btn }}" bindtap='getInfoTel'>查看招工电话</view>
-								<view class="newdetail-call-report" bindtap='userTapComplain' wx:if="{{ (info.isLook == 1)&&info.is_end == '2'}}">投诉</view>
 								<view class="newdetail-call-end" wx:if="{{ info.is_end == '2' }}">已招满</view>
+								<view class="newdetail-call-report" bindtap='userTapComplain' wx:if="{{ (info.isLook == 1)&&info.is_end == '2'}}">投诉</view>
 								<block wx:if="{{ !info.show_ajax_btn && (info.is_end == '1') }}">
 									<view class="newdetail-call-tell" bindtap='callThisPhone' data-phone="{{ info.tel_str }}">点击拨打</view>
 									<view class="newdetail-call-report" bindtap='userTapComplain'>投诉</view>
@@ -210,7 +210,7 @@
 		<view class="common-follow-content">
 			<view class="common-follow-text">关注[鱼泡网]公众号，即可接收各种招工、找活提醒通知</view>
 		</view>
-		<button class="common-follow-button" open-type="contact">点击回复“1”获取二维码</button>
+		<button class="common-follow-button" open-type="contact">点击回复“2”获取二维码</button>
 		<view class="common-follow-close">我知道了</view>
 	</view>
 </view>

@@ -88,11 +88,15 @@
   "preloadRule": {
     "pages/ucenter/ucenter": {
       "network": "all",
-      "packages": ["packageOther"]
+      "packages": [
+        "packageOther"
+      ]
     },
     "pages/index/index": {
       "network": "all",
-      "packages": ["packageOther"]
+      "packages": [
+        "packageOther"
+      ]
     }
   },
   "window": {

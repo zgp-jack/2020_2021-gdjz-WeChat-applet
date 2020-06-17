@@ -28,6 +28,9 @@ Component({
       this.setData({
         showdownapp: !this.data.showdownapp
       })
+    },
+    aaaa:function(){
+      console.log('kefu')
     }
   }
 })

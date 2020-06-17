@@ -28,7 +28,8 @@
           <!-- <view class="ranking-obtn">
         分享名片
       </view> -->
-<button class="{{item.jump.need_jump==0 ? 'ranking-obtngray':'ranking-obtn'}}" data-minipath="{{item.jump.mini_path}}" data-type="{{item.click_type}}" data-jump="{{item.jump.need_jump}}" wx:if="{{item.is_share!=1}}" bindtap="jumpyemian">{{item.button_words}}
+      
+<button class="{{ item.button_allowed ? 'ranking-obtn' : (item.jump.need_jump==0 ? 'ranking-obtngray':'ranking-obtn')}}" data-allow="{{ item.button_allowed ? 1 : 0 }}" data-minipath="{{item.jump.mini_path}}" data-type="{{item.click_type}}" data-jump="{{item.jump.need_jump}}" wx:if="{{item.is_share!=1}}" bindtap="jumpyemian">{{item.button_words}}
           </button>
 <button class="ranking-obtn" bindtap="jumpyemian" wx:if="{{!showbutton}}">{{item.button_words}}</button>
 <button class="ranking-obtn" data-type="{{item.click_type}}" data-share="{{item.share_type}}" open-type='share' wx:if="{{item.is_share==1&&showbutton}}">{{item.button_words}}
@@ -54,3 +55,5 @@
    </view>
   </view>
 </view>
+
+<minitoast id="minitoast" />

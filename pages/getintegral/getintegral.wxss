@@ -47,7 +47,10 @@
 .getintegral-list-item{
     position: relative;
     padding:20rpx 200rpx 20rpx 0;
-    border-top: 1rpx solid #dcdcdc;
+    border-bottom: 1rpx solid #dcdcdc;
+}
+.getintegral-list-item:nth-last-child(1){
+    border-bottom: 0;
 }
 .getintegral-list-title{
     position: relative;
@@ -88,4 +91,34 @@
 }
 .getintegral-footer view text{
     color: #0099ff;
+}
+
+.getintegral-footer{
+    position: relative;
+    margin-top: 15rpx;
+    padding: 20rpx;
+    border-radius: 5rpx;
+    box-shadow:0 0 10rpx #e7e6e4;
+}
+.getintegral-footer-header{
+    position: relative;
+    text-align: center;
+    font-weight: bold;
+    color: #2B2B32;
+}
+.getintegral-footer-header text{
+    margin: 0 10rpx;
+    color: #2B2B32;
+}
+.tips-icon{
+    position: relative;
+    display: inline-block;
+    width: 25rpx;
+    height: 25rpx;
+}
+.getintegral-footer-body{
+    margin-top: 10rpx;
+    font-size: 28rpx;
+    font-weight: normal;
+    color: #7B7C82;
 }

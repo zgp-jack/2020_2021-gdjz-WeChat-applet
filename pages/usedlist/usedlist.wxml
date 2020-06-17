@@ -132,7 +132,7 @@
 
 </view>
 
-<view class='fixed-ad' bindtap='jumpThisLink' data-url="/pages/download/download-app" data-type='0'>
+<view class='fixed-ad' bindtap='showdownappaction' >
   <image src='{{ fixedAdImg }}'></image>
 </view>
 

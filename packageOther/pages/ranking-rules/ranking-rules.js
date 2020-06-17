@@ -21,7 +21,8 @@ Page({
     onoff: true,
     showbutton: true,
     ranking: "",
-    rankjump: "rankjump"
+    rankjump: "rankjump",
+    showAd: true
   },
   againshow() {
     this.getdetail()
@@ -150,6 +151,7 @@ Page({
 
   },
   jumpyemian(e) {
+    let _this = this
     let ranking = this.data.ranking;
     let rankjump = this.data.rankjump;
     let userInfo = wx.getStorageSync("userInfo");
@@ -165,11 +167,42 @@ Page({
     }
     let type = e.currentTarget.dataset.type
     let jump = e.currentTarget.dataset.jump
+    let minipath = e.currentTarget.dataset.minipath
     if(type == '7'){
-      if(jump != "0"){
-        this.addclicklog(type)
-        this.showVideoAd()
+      if(jump == "1"){
+        wx.navigateTo({
+          url: minipath,
+        })
         return
+      }else{
+        let allowed = parseInt(e.currentTarget.dataset.allow)
+        if(allowed){
+          _this.addclicklog(type)
+          app.valiUserVideoAdStatus(function(data){
+            if(data.errcode == 'ok'){
+              let times = data.data.times
+              if(times){
+                _this.showVideoAd()
+              }else{
+                _this.selectComponent("#minitoast").showToast(app.globalData.userSeeVideoTips)
+                //app.showMyTips(app.globalData.userSeeVideoTips)
+              }
+            }else if(data.errcode == 'to_invited'){
+              _this.setData({
+                showAd: false
+              })
+              _this.selectComponent("#minitoast").showToast(data.errmsg)
+              //app.showMyTips(data.errmsg)
+            }else{
+              _this.selectComponent("#minitoast").showToast(data.errmsg)
+              //app.showMyTips(data.errmsg)
+            }
+          },2)
+        }else{
+          _this.selectComponent("#minitoast").showToast(app.globalData.userSeeVideoTips)
+          //app.showMyTips(app.globalData.userSeeVideoTips)
+        }
+        return 
       }
     }
     this.addclicklog(type)
@@ -236,7 +269,7 @@ Page({
           videoAd.load()
             .then(() => videoAd.show())
             .catch(err => {
-              console.log('激励视频 广告显示失败')
+              this.videoAdStop()
             })
           })
       }
@@ -246,44 +279,47 @@ Page({
     let _this = this;
       let times = app.globalData.userSeeVideoTimes
       if(times.ok && !times.times){
-        this.setData({
-          showAd: false
-        })
+        //app.showMyTips(app.globalData.userSeeVideoTips)
+        
         return
       }
-      if(num > max) return
+      
       if (wx.createRewardedVideoAd) {
-          num = num + 1
           videoAd = wx.createRewardedVideoAd({
-              adUnitId: ads.videoAd
+              adUnitId: ads.videoSortAd
           })
           videoAd.onLoad(() => {})
           videoAd.onError((err) => {
-              this.createVideo()
-              console.log(err)
+            this.setData({
+              showAd: false
+            })
           })
           videoAd.onClose(status => {
             if (status && status.isEnded || status === undefined) {
-              app.userGetTempIntegral(()=>{
-                _this.getdetail()
-              })
-              
+              this.videoAdStop()
             }
           })
       }
+  },
+  videoAdStop:function(){
+    let _this = this
+    app.userGetTempIntegral(1,()=>{
+      
+      _this.getdetail()
+    })
   },
   userSeeVideo:function(){
     let _this = this
     app.valiUserVideoAdStatus(function(data){
       if(data.errcode == 'ok'){
         _this.showVideoAd()
-      }else if(data.errcode == 'to_invite'){
+      }else if(data.errcode == 'to_invited'){
         _this.setData({
           fixedAdImg: _this.data.inviteUserImg
         })
-        app.showMyTips(mydata.errmsg)
+        app.showMyTips(data.errmsg)
       }else{
-        app.showMyTips(mydata.errmsg)
+        app.showMyTips(data.errmsg)
       }
     })
   },
@@ -320,7 +356,7 @@ Page({
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-
+    videoAd = null
   },
 
   /**

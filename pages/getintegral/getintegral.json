@@ -1,3 +1,6 @@
 {
-"navigationBarTitleText": "鱼泡网-获取积分"
+  "navigationBarTitleText": "鱼泡网-获取积分",
+  "usingComponents": {
+    "minitoast": "/components/minitoast/index"
+  }
 }

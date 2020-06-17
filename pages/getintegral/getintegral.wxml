@@ -2,12 +2,9 @@
 
     <view class='getintegral-content'>
 
-        <view class='getintegral-header common-shaded-box'>
-            <view><text class='getintegral-notice'>公告：</text>如果有任何疑问，请拨打客服电话：<text class='getintegral-phone' data-phone="{{ phone }}" bindtap='callThisPhone'>{{ phone }}</text> <text class="phoneer" bindtap='callThisPhone' data-phone="{{ phone }}">呼叫</text>。鱼泡网投入大量的人力物力开发平台、审核信息，免费服务千万工友。因此请大家帮忙多邀请工友注册，感谢您对鱼泡网的支持！</view>
-            </view>
-
+    
         <view class='getintegral-body common-shaded-box '>
-            <text class='getintegral-how'>如何获取积分</text>
+            <!-- <text class='getintegral-how'>如何获取积分</text> -->
             <view class='getintegral-list-item'>
                 <view class='getintegral-list-title'>邀请工友获取积分</view>
                 <text class='getintegral-list-info'>每成功邀请一位工友注册，最高可获得2-18积分。（推荐）</text>
@@ -18,13 +15,20 @@
                 <text class='getintegral-list-info'>充值付钱购买积分。（我们不鼓励付钱购买，我们希望大家多帮忙宣传）</text>
                 <text class='getintegral-list-btn' bindtap='goThisPage' data-url="/pages/recharge/recharge">去充值</text>
             </view>
-            <view class='getintegral-list-item' wx:if="{{ showad }}">
-                <view class='getintegral-list-title'>看视频，赚积分</view>
-                <text class='getintegral-list-info'>每天观看15秒视频可获得1分。</text>
-                <text class='getintegral-list-btn' bindtap='userSeeVideo' >看视频</text>
+            <view class='getintegral-list-item' wx:if="{{ total }}">
+                <view class='getintegral-list-title'>{{ title }}({{ times }}/{{ total }})</view>
+                <text class='getintegral-list-info'>{{ content }}</text>
+                <text class='getintegral-list-btn' bindtap='userClickVideoBtn' >看视频</text>
             </view>
+        </view>
+
+        <view class="getintegral-footer">
+            <view class="getintegral-footer-header"> <image class="tips-icon" src="{{ icon }}"/><text>温馨提示</text><image class="tips-icon" src="{{ icon }}" /></view>
+            <view class="getintegral-footer-body">如果有任何疑问，请拨打客服电话：<text bindtap="callThisPhone" data-phone="{{ phone }}">{{ phone }}</text>。鱼泡网投入大量的人力物力开发平台、审核信息，免费服务千万工友。因此请大家帮忙多邀请工友注册，感谢您对鱼泡网的支持！</view>
         </view>
 
     </view>
 
 </view>
+
+<minitoast id='minitoast' />
