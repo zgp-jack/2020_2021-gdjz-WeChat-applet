@@ -362,7 +362,7 @@
       <navigator url='/packageOther/pages/report/report' open-type="navigate">举报骗子</navigator>
       <text bindtap='callThisPhone' data-phone="{{ phone }}">联系我们</text>
     </view>
-    <view class='home-footer-copyright'>©2017-2019 版权所有 粤ICP备17088633号-1</view>
+    <view class='home-footer-copyright'>©2017-{{ thisyear }} 版权所有 粤ICP备17088633号-1</view>
      <view class='home-footer-copyright'>版本号:{{version}}</view>
 
   </view>
@@ -416,10 +416,10 @@
   </view>
 </view>
 
-<view class='fixed-ad' bindtap='userSeeVideo' wx:if="{{ showAd }}">
+<!-- <view class='fixed-ad' bindtap='userSeeVideo' wx:if="{{ showAd }}">
   <image src='{{ fixedAdImg }}'></image>
-</view>
-<view class='fixed-ad' bindtap='userInvite' wx:if="{{ !showAd }}">
+</view> -->
+<view class='fixed-ad' bindtap='userInvite'>
   <image src='{{ inviteUserImg }}'></image>
 </view>
 

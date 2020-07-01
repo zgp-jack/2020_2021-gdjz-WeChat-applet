@@ -155,10 +155,10 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
-        this.initVideoAd()
+        //this.initVideoAd()
         this.setData({ phone:app.globalData.serverPhone })
         this.initGetIntegralList();
-        this.createVideo()
+        //this.createVideo()
     },
 
     /**

@@ -93,7 +93,8 @@ Page({
     iImgUrl: app.globalData.apiImgUrl, //图片地址,
     inviteUserImg: app.globalData.apiImgUrl + 'inviteuser-getintegral.png',
     showAd: true,
-    showFollow: false
+    showFollow: false,
+    thisyear: new Date().getFullYear()
   },
   userInvite:function(){
     wx.navigateTo({
@@ -403,8 +404,8 @@ Page({
     this.setData({ allAreaLists: list })
   },
   onLoad: function (options) {
-    this.createVideo()
-    this.initVideoTimes()
+    //this.createVideo()
+    //this.initVideoTimes()
     this.initInputList();
     this.initFooterData();
     this.getAreaData();

@@ -17,7 +17,7 @@ Page({
       type4:'/pages/clients-looking-for-work/all-skills-certificate/skillscertificate', // 4 证书信息
       type5:'/pages/clients-looking-for-work/all-project-experience/allexperience',      // 5 项目信息
       type6:'/pages/integral/source/source', // 6 投诉招工信息
-      type7:'/pages/others/message/lists/lists',      // 7 留言信息
+      type7:'/packageOther/pages/others/message/lists/lists',      // 7 留言信息
       type8:'/pages/integral/source/source', // 8 积分管理-充值
       type9:'/pages/realname/realname',      // 9 实名认证
       type10:'/pages/integral/source/source',     // 10 投诉找活信息
