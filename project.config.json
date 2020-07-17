@@ -22,11 +22,11 @@
 			"disablePlugins": [],
 			"outputPath": ""
 		},
-		"useCompilerModule": true,
+		"useCompilerModule": false,
 		"userConfirmedUseCompilerModuleSwitch": false
 	},
 	"compileType": "miniprogram",
-	"libVersion": "2.8.0",
+	"libVersion": "2.7.7",
 	"appid": "wx456feacb0e86162f",
 	"projectname": "gdjz",
 	"debugOptions": {
@@ -245,6 +245,13 @@
 					"id": -1,
 					"name": "pages/clients-looking-for-work/preview-name-card/previewcard名片",
 					"pathName": "pages/clients-looking-for-work/preview-name-card/previewcard",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/turntable/turntable",
+					"pathName": "pages/turntable/turntable",
 					"scene": null
 				}
 			]

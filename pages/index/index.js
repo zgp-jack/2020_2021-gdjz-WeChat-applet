@@ -105,6 +105,9 @@ Page({
     member_less_info: {},
     msgsNumber: [],
     joingroup: [],
+    turntableimg:app.globalData.apiImgUrl + 'mini-turntable-new.png',
+    inviteturntable:app.globalData.apiImgUrl + 'inviteuser-getintegral.png',
+    showturntable: true
   },
   getPhoneNumber:function(e){
     console.log(e)
@@ -752,6 +755,18 @@ Page({
   jumpThisLink: function (e) {
     app.jumpThisLink(e);
   },
+  userTapTurntable:function(){
+    let user = wx.getStorageSync('userInfo')
+    if(!user){
+      wx.navigateTo({
+        url: '/pages/userauth/userauth',
+      })
+    }else{
+      wx.navigateTo({
+        url: '/pages/turntable/turntable',
+      })
+    }
+  },
   initFooterData: function () {
     this.setData({
       footerImgs: footerjs.footerImgs,
@@ -881,6 +896,30 @@ Page({
   closeFc: function () {
     this.setData({ showShadowFc: false })
   },
+  initTurntable:function(){
+    let userinfo = wx.getStorageSync('userInfo')
+    if(!userinfo) return
+
+    let _this = this
+    app.appRequestAction({
+        url: 'member/turntable/',
+        way: 'POST',
+        mask: true,
+        params: userinfo,
+        success: function(res){
+          let mydata = res.data
+          if(mydata.errcode == "ok"){
+            let f = mydata.data.is_turntable
+            _this.setData({
+                showturntable: f,
+            })
+          }
+        },
+        fail:()=>{
+          app.showMyTips('网络错误，加载失败！')
+        }
+      })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
@@ -911,6 +950,7 @@ Page({
     this.getUserUuid();
     this.initUserinfo();
     footerjs.initMsgNum(this);
+    this.initTurntable();
   },
   onPageScroll: function (e) {
     let top = e.scrollTop;
@@ -962,5 +1002,6 @@ Page({
   onShareAppMessage: function () {
     //this.userShareAction();
     return app.getUserShareJson();
-  }
+  },
+  
 })

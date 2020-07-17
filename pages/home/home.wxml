@@ -419,7 +419,7 @@
 <!-- <view class='fixed-ad' bindtap='userSeeVideo' wx:if="{{ showAd }}">
   <image src='{{ fixedAdImg }}'></image>
 </view> -->
-<view class='fixed-ad' bindtap='userInvite'>
+<view class='fixed-ad' bindtap='showdownappaction'>
   <image src='{{ inviteUserImg }}'></image>
 </view>
 

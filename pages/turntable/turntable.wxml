@@ -1,18 +1,23 @@
 <view class="yupao-common-container">
     
     <view class='turntable-container'>
-        <image src='{{ xydzp }}' class='xydzpimg' style='width:{{ wordsWidth }}px;height:{{ wordsHeight }}px;'></image>
+        <image src='{{ daywin }}' class='xydzpimg' style='width:187px;height:26px;'></image>
         <view class='turntable-content' style='width:{{ bgHeight }}px;height:{{ bgHeight }}px;'>
-            <view bindtap='startTurntable' class='turntable-btnbox' style='transition:  transform {{ transTime }}s ease-in-out 0s;width:{{ btnWidth }}px;height:{{ btnWidth }}px;margin-left:-{{ btnWidth/2 }}px;margin-top:-{{ btnWidth/2 }}px;transform:rotate({{ rotateDeg }}deg);'></view>
+            <view class="turntable-content-bg" style='width:{{ bgHeight }}px;height:{{ bgHeight }}px;transition:  transform {{ transTime }}s ease-in-out 0s;transform:rotate({{ rotateDeg }}deg);'></view>
+            <view bindtap='startTurntable' class='turntable-btnbox' style='width:{{ btnWidth }}px;height:{{ btnWidth }}px;margin-left:-{{ btnWidth/2 }}px;margin-top:-{{ btnWidth/2 }}px;'></view>
             <view class='turntable-shade' style='width:{{ shadeWidth }}px;height:{{ shadeWidth/10 }}px;margin-left:-{{ shadeWidth/2 }}px;'></view>
         </view>
 
         <view class='turntable-footer'>
             <view class='truntable-footer-arrows'></view>
             <view class='turntable-footer-item'>
-                <view class='turntable-times-tips' wx:if="{{ userTimes == 0 }}">您今日抽奖次数已用完</view>
-                <view class='turntable-times-tips'  wx:else="{{ userTimes == 0 }}">您还有{{ userTimes }}次抽奖机会</view>
+                <view class='turntable-times-tips' >我的抽奖次数：{{ userTimes }} <image bindtap="userGetVideo" class="gettimes-img" src="http://cdn.yupao.com/newyupao/images/m-turntable-gettimes.png"></image></view>
             </view>
+            <view class="turntable-newtips">
+                <view class="turntable-newtips-title">每天观看视频可获得抽奖次数，最多{{ max }}次。</view>
+                <view class="turntable-newtips-body">[小妙招：连续观看视频后抽奖，中奖机率更高哦]</view>
+            </view>
+            
             <view class='turntable-footer-item'>
                 <view class='turntable-names-scroll'>
                     <view class='index-swiperbox'>
@@ -22,7 +27,7 @@
                             <block wx:for="{{ scrollname.nameArr }}" wx:key="{{ index }}">
                                 <swiper-item>
                                     <view class='scrollname-item'>
-                                        <view wx:for="{{ item }}" wx:key="{{ index }}">恭喜 {{ item.name }} 获得了 {{ item.integral }} 积分</view>
+                                        <view wx:for="{{ item }}" wx:key="{{ index }}">恭喜 {{ item.name }} 中奖！获得 {{ item.integral }} 临时积分</view>
                                     </view>
                                 </swiper-item>
                             </block>

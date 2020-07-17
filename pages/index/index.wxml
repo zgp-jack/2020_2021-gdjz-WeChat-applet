@@ -172,8 +172,12 @@
     <button  open-type="getUserInfo"  bindgetuserinfo='bindGetUserInfo' style='height:{{ userAuthBtn }}px;background:url({{ userAuthImg }}) no-repeat;background-size:100% 100%;'></button>
 </view> -->
 
-<view class='fixed-ad'   bindtap='showdownappaction'>
-    <image src='{{ fixedAdImg }}'></image>
+<view class='fixed-ad' wx:if="{{ showturntable }}"  bindtap='userTapTurntable' >
+    <image src='{{ turntableimg }}'></image>
+</view>
+
+<view class='fixed-ad' wx:else   bindtap='jumpThisLink' data-url="/pages/static/invite">
+    <image src='{{ inviteturntable }}'></image>
 </view>
 
 <!-- 快速发布 -->

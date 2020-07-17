@@ -18,8 +18,7 @@ page{
     position: relative;
     margin: 0 auto;
     display: block;
-    background: url("http://cdn.yupao.com/miniprogram/images/truntable-bg.png") no-repeat;
-    background-size: 100% 100%;
+    
 }
 .turntable-btnbox{
     position: absolute;
@@ -28,7 +27,7 @@ page{
     display: block;
     background: url("http://cdn.yupao.com/miniprogram/images/truntable-btn.png") no-repeat;
     background-size: 100% 100%;
-    z-index:5;
+    z-index:15;
     transform-origin: center;
 }
 .turntable-footer{
@@ -59,7 +58,7 @@ page{
 }
 .turntable-times-tips::after,.turntable-times-tips::before{
     position: absolute;
-    content: '';
+    /* content: ''; */
     width:4rpx;
     height:80rpx;
     background:  #efea3c;
@@ -69,7 +68,7 @@ page{
 }
 .turntable-footer-item::before,.turntable-footer-item::after{
     position: absolute;
-    content: '';
+    /* content: ''; */
     width:16rpx;
     height: 16rpx;
     background: #e9463d;
@@ -161,7 +160,7 @@ page{
     left: 0;
     top: 0;
     background: rgba(0, 0, 0, 0.6);
-    z-index: 10;
+    z-index: 100;
 }
 .turntable-wined-box{
     position: relative;
@@ -306,4 +305,39 @@ page{
     left: 19%;
     z-index: 10;
     opacity: 0;
+}
+.gettimes-img{
+    position: relative;
+    display: inline-block;
+    width: 180rpx;
+    height: 55rpx;
+    margin-left: 15rpx;
+    vertical-align: middle;
+}
+.turntable-newtips{
+    position: relative;
+    padding: 0 20rpx 40rpx;
+    color: white;
+}
+.turntable-newtips-title{
+    position: relative;
+    text-align: center;
+    font-weight: bold;
+    font-size: 30rpx;
+    line-height: 60rpx;
+}
+.turntable-newtips-body{
+    position: relative;
+    text-align: center;
+    font-size: 28rpx;
+}
+.turntable-content-bg{
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 10;
+    transition:transform 5s ease-in-out 0s;
+    transform-origin: center;
+    background: url("http://cdn.yupao.com/miniprogram/images/new-turntable-integral-img.png") no-repeat;
+    background-size: 100% 100%;
 }

@@ -91,7 +91,7 @@ Page({
     doneimg: app.globalData.apiImgUrl + 'published-recruit-end.png', //已找到
     iondzs: app.globalData.apiImgUrl + 'newlist-jobposi.png',//定位
     iImgUrl: app.globalData.apiImgUrl, //图片地址,
-    inviteUserImg: app.globalData.apiImgUrl + 'inviteuser-getintegral.png',
+    inviteUserImg: app.globalData.fixedDownApp,
     showAd: true,
     showFollow: false,
     thisyear: new Date().getFullYear()

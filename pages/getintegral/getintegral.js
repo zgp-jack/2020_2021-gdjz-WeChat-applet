@@ -10,15 +10,12 @@ Page({
     data: {
         showRecharge:false,
         phone: "",
-        showad: true,
         title: '',
         content: '',
-        total: 0,
-        times: 0,
-        have:0,
         tips: app.globalData.userSeeVideoTips,
         showAd: false,
-        icon: app.globalData.apiImgUrl + 'integral/new-integral-tips-icon.png'
+        icon: app.globalData.apiImgUrl + 'integral/new-integral-tips-icon.png',
+        showTurntable: 0
     },
     callThisPhone:function(e){
         let phone = e.currentTarget.dataset.phone;
@@ -129,33 +126,40 @@ Page({
     },
     initVideoAd:function(){
         let userinfo = wx.getStorageSync('userInfo')
-        userinfo.mid = userinfo.userId
         let _this = this
         app.appRequestAction({
-            url: 'integral/adv-introduce/',
+            url: 'member/turntable/',
             way: 'POST',
+            mask: true,
             params: userinfo,
             success: function(res){
               let mydata = res.data
-              let have = mydata.data.totalTimes - mydata.data.usedTimes
+              if(mydata.errcode == "ok"){
+                let f = mydata.data.is_turntable
                 _this.setData({
-                    title: mydata.data.title,
-                    content: mydata.data.describe,
-                    total: mydata.data.totalTimes,
-                    times: mydata.data.usedTimes,
-                    have: have < 0 ? 0 : have
+                    showTurntable: f,
                 })
+              }
             },
             fail:()=>{
               app.showMyTips('网络错误，加载失败！')
             }
           })
     },
+    userTurntable:function(e){
+        let ac = parseInt(e.currentTarget.dataset.ac)
+        if(ac){
+            wx.navigateTo({
+              url: '/pages/turntable/turntable',
+            })
+        }else{
+            return false;
+        }
+    },
     /**
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
-        //this.initVideoAd()
         this.setData({ phone:app.globalData.serverPhone })
         this.initGetIntegralList();
         //this.createVideo()
@@ -172,7 +176,7 @@ Page({
      * 生命周期函数--监听页面显示
      */
     onShow: function () {
-
+        this.initVideoAd()
     },
 
     /**
