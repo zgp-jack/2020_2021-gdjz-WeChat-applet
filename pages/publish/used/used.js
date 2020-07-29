@@ -354,10 +354,10 @@ Page({
             app.showMyTips("请选择您的地区！");
             return false;
         }
-        if (!v.regStrNone(cardInfo.username)) {
-            app.showMyTips("请输入正确的联系人姓名！");
+        if (!v.regStrNone(cardInfo.username) || !v.chineseReg(cardInfo.username) || (cardInfo.username).trim().length<2) {
+            app.showMyTips("请正确输入2~5字纯中文姓名！");
             return false;
-        }
+          }
         if (!v.isMobile(phone)) {
             app.showMyTips("手机号输入有误！");
             return false;
@@ -435,7 +435,17 @@ Page({
         this.setData({ "cardInfo.title": e.detail.value })
     },
     userEnterUsername: function (e) {
-        this.setData({ "cardInfo.username": e.detail.value })
+        let reg = /^[\u4e00-\u9fa5]$/
+        let value = e.detail.value
+        let values = value.split("")
+        let userNames = []
+        for (let i = 0; i < values.length; i++) {
+            if (reg.test(values[i])) {
+                userNames.push(values[i])
+            }
+        }
+        let userName = userNames.join("")
+        this.setData({ "cardInfo.username": userName })
     },
     getTextareaFocus: function () {
         this.setData({ textareaActive: true })

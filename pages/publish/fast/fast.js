@@ -258,7 +258,7 @@ Page({
             return false;
         }
         if (!v.regStrNone(cardInfo.username)) {
-            app.showMyTips("请输入正确的联系人姓名！");
+            app.showMyTips("请输入2~5字纯中文姓名！");
             return false;
         }
 
@@ -325,8 +325,18 @@ Page({
         })
     },
     userEnterUsername: function (e) {
+        let reg = /^[\u4e00-\u9fa5]$/
+        let value = e.detail.value
+        let values = value.split("")
+        let userNames = []
+        for (let i = 0; i < values.length; i++) {
+            if (reg.test(values[i])) {
+                userNames.push(values[i])
+            }
+        }
+        let userName = userNames.join("")
         this.setData({
-            "cardInfo.username": e.detail.value
+            "cardInfo.username": userName
              })
     },
     userEnterContent: function (e) {

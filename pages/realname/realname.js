@@ -310,7 +310,17 @@ Page({
     })
   },
   userEnterName: function (e) {
-    this.setData({ "member.username": e.detail.value })
+    let reg = /^[\u4e00-\u9fa5]$/
+        let value = e.detail.value
+        let values = value.split("")
+        let userNames = []
+        for (let i = 0; i < values.length; i++) {
+            if (reg.test(values[i])) {
+                userNames.push(values[i])
+            }
+        }
+    let userName = userNames.join("")
+    this.setData({ "member.username": userName })
   },
   userEnterAge: function (e) {
     this.setData({ "member.age": e.detail.value })
@@ -622,12 +632,12 @@ Page({
 
 
     if (member.username.length < 2) {
-      app.showMyTips("请正确填写2~6字真实姓名！");
+      app.showMyTips("请正确填写2~5字真实姓名！");
       return false;
     }
     var han = /^[\u4e00-\u9fa5]+$/;
     if (!han.test(member.username)) {
-      app.showMyTips("请正确填写2~6字真实姓名！");
+      app.showMyTips("请正确填写2~5字真实姓名！");
       return false;
     };
     if (!v.isRequire(member.username, 2)) {

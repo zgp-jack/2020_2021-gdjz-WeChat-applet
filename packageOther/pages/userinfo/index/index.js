@@ -27,12 +27,22 @@ Page({
     },
     allowUserEntername:function(e){
         let auth = parseInt(e.currentTarget.dataset.auth);
-        if(auth > 0) return false;
+        if(auth > 0) return false
         this.setData({ allowEditName:true })
     },
     userEntername:function(e){
+        let reg = /^[\u4e00-\u9fa5]$/
+        let value = e.detail.value
+        let values = value.split("")
+        let userNames = []
+        for (let i = 0; i < values.length; i++) {
+            if (reg.test(values[i])) {
+                userNames.push(values[i])
+            }
+        }
+        let userName = userNames.join("")
         this.setData({
-            userName: e.detail.value
+            userName: userName
         })
     },
     cancleEditInfo:function(){
@@ -58,7 +68,7 @@ Page({
                 if(mydata.errcode == "ok"){
                     _this.setData({
                         "member.name": _this.data.userName,
-                        allowEditName: false
+                        allowEditName: false,
                     })
                 }
                 

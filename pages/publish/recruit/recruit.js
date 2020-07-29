@@ -533,6 +533,7 @@ Page({
       _this.setData({ codeTips: _t + "秒后重试" })
     }, 1000)
   },
+  
   userPublishCard: function () {
     let _this = this;
     let userInfo = this.data.userInfo;
@@ -558,15 +559,14 @@ Page({
       app.showMyTips("请选择您的详细地址！");
       return false;
     }
-    if (!v.regStrNone(cardInfo.username) || !v.allChinese(cardInfo.username) || (cardInfo.username).trim().length<2) {
-      app.showMyTips("请正确输入2~6字中文姓名！");
+    if (!v.regStrNone(cardInfo.username) || !v.chineseReg(cardInfo.username) || (cardInfo.username).trim().length<2) {
+      app.showMyTips("请正确输入2~5字纯中文姓名！");
       return false;
     }
     if (!v.isMobile(phone)) {
       app.showMyTips("手机号输入有误！");
       return false;
     }
-
     if ((phone != cardInfo.memberTel) && (phone != cardInfo.cardTel)) {
       if (!v.isRequire(cardInfo.code, 4)) {
         app.showMyTips("请输入正确的验证码！");
@@ -699,8 +699,18 @@ Page({
     })
   },
   userEnterUsername: function (e) {
+    let reg = /^[\u4e00-\u9fa5]$/
+    let value = e.detail.value
+    let values = value.split("")
+    let userNames = []
+    for (let i = 0; i < values.length; i++) {
+        if (reg.test(values[i])) {
+            userNames.push(values[i])
+          }
+        }
+    let userName = userNames.join("")
     this.setData({
-      "cardInfo.username": e.detail.value
+      "cardInfo.username": userName
     })
   },
   userEnterContent: function (e) {

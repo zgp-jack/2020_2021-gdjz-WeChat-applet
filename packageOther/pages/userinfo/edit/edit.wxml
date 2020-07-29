@@ -3,7 +3,7 @@
         <view class='common-publish-item'>
             <view class='common-publish-item-content'>
                 <text class='common-publish-words'>姓名</text>
-                <input type='type' class='common-publish-input' value='{{ username }}' placeholder='请输入您的姓名' bindinput="enterUsername"></input>
+                <input type='type' class='common-publish-input' value='{{ username }}' placeholder='请输入您的姓名' bindinput="enterUsername" maxlength="5"></input>
             </view>
         </view>
         <view class='common-publish-item'>

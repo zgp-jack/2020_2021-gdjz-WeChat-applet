@@ -382,6 +382,7 @@ page{
     line-height: 40rpx;
     color: #666;
 }
+
 .yupao-enter-body{
     position: relative;
     padding:20rpx;

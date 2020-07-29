@@ -298,8 +298,8 @@ Page({
             app.showMyTips("请选择您的接活省份！");
             return false;
         }
-        if (!v.regStrNone(cardInfo.username)){
-            app.showMyTips("请输入正确的联系人姓名！");
+        if (!v.regStrNone(cardInfo.username) || !v.chineseReg(cardInfo.username) || (cardInfo.username).trim().length<2){
+            app.showMyTips("请正确输入2~5字纯中文姓名！");
             return false;
         }
         if (!v.isMobile(phone)){
@@ -364,9 +364,19 @@ Page({
             "cardInfo.title": e.detail.value
         })
     },
-    userEnterUsername:function(e){
+    userEnterUsername: function (e) {
+        let reg = /^[\u4e00-\u9fa5]$/
+            let value = e.detail.value
+            let values = value.split("")
+            let userNames = []
+            for (let i = 0; i < values.length; i++) {
+                if (reg.test(values[i])) {
+                    userNames.push(values[i])
+                }
+            }
+        let userName = userNames.join("")
         this.setData({
-            "cardInfo.username": e.detail.value
+            "cardInfo.username": userName
         })
     },
     userEnterContent:function(e){
