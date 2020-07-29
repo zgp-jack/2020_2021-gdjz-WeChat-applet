@@ -122,7 +122,7 @@ Component({
       let _this = this;
       let { aid, cid } = this.properties
       app.appRequestAction({
-        url: '/job/job-recommend-list/',
+        url: '/job/details-recommend-list/',
         way: 'POST',
         params:{
           area_id: aid,
