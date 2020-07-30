@@ -273,6 +273,13 @@
 					"pathName": "packageOther/pages/helpCenter/helpCenter",
 					"query": "",
 					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/static/invite",
+					"pathName": "pages/static/invite",
+					"query": "",
+					"scene": null
 				}
 			]
 		}

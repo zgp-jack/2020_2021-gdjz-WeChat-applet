@@ -1,3 +1,16 @@
+.invite-header{
+    height: 74rpx;
+    background-color: #FFFFFF;
+    margin-bottom: 20rpx;
+    border-radius: 2px;
+    position: relative;
+}
+.invite-shareimg {
+    position: absolute;
+    right: 80rpx;
+    width: 44rpx;
+    height: 60rpx;
+}
 .invite-content{
     position: relative;
     width: 100%;
@@ -20,35 +33,63 @@
     line-height: 50rpx;
 }
 .invite-padding-left{
-    padding-left: 150rpx;
+    padding-left: 60rpx;
 }
 .invite-padding-left::before{
     position: absolute;
     content: '';
-    width: 10rpx;
-    height: 50rpx;
-    background: linear-gradient(0deg, #0c7afa, #2ab3ff);
-    left: 70rpx;
-    top: -40rpx;
+    width: 13rpx;
+    height: 31rpx;
+    background: linear-gradient(0deg, #0c7afa, #2ab4ff);
+    left: 20rpx;
+    top: -25rpx;
     border-radius: 5px;
 }
 .invite-padding-left::after{
     position: absolute;
     content: '';
-    width: 10rpx;
-    height: 50rpx;
-    background: linear-gradient(0deg, #0c7afa, #2ab3ff);
-    right: 70rpx;
-    top: -40rpx;
+    width: 13rpx;
+    height: 31rpx;
+    background: linear-gradient(0deg, #0c7afa, #2ab4ff);
+    right: 20rpx;
+    top: -25rpx;
     border-radius: 5px;
 }
 .invite-padding-left image{
     position: absolute;
     display: block;
-    width: 110rpx;
-    height: 110rpx;
-    left: 20rpx;
+    width: 68rpx;
+    height: 68rpx;
+    left: 0rpx;
     top: 30rpx;
+}
+.invite-padding-left view:first-of-type view{
+    display: inline-block;
+}
+.invite-padding-left>view>.textTwo {
+    margin-left: 30rpx;
+}
+.pointOne {
+    width: 6rpx;
+    height: 6rpx;
+    border-radius: 50%;
+    background-color: #0099FF;
+    margin-bottom: 3rpx;
+}
+.pointTwo {
+    width: 10rpx;
+    height: 10rpx;
+    border-radius: 50%;
+    background-color: #0099FF;
+    margin-left: 5rpx;
+    margin-right: 5rpx;
+}
+.pointThree{
+    width: 6rpx;
+    height: 6rpx;
+    border-radius: 50%;
+    background-color: #0099FF;
+    margin-bottom: 3rpx;
 }
 .user-share-box{
     position: relative;
@@ -57,6 +98,8 @@
 }
 .user-share-box input{
     border: 1px solid #dcdcdc;
+    font-size: 24rpx;
+    color: #0099FF;
     height: 70rpx;
     line-height: 70rpx;
     border-radius: 2px;
@@ -64,7 +107,6 @@
     padding: 0 10rpx;
     box-sizing: border-box;
 }
-
 
 
 .invite-item-noline::before,.invite-item-noline::after{
