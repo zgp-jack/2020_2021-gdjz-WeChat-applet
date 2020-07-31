@@ -321,12 +321,14 @@ Page({
     })
   },
   userTapComplain: function () {
+    console.log(this.data)
     if (!this.data.show_complain.show_complain) {
       wx.showModal({
         title: '提示',
         content: this.data.show_complain.tips_message,
         showCancel: false,
         confirmText: '知道了'
+        
       })
       return false;
     }

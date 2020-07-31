@@ -54,6 +54,9 @@ Page({
   },
 
   complainInfo: function(e) {
+    if (e.currentTarget.dataset.complain === 0) {
+      return
+    }
     let infoId = e.currentTarget.dataset.id;
     let type = e.currentTarget.dataset.type;
     this.setData({
@@ -61,7 +64,6 @@ Page({
       infoId: infoId,
       type: type
     })
-
   },
   subscribeToNews: function(mydata) {
     app.subscribeToNews("complain", function() {
@@ -152,6 +154,7 @@ Page({
         system_type: _this.data.system_type
       },
       success: function(res) { 
+        console.log(res)
         wx.hideLoading();
         let mydata = res.data;
         if (mydata.errcode = "ok"){
@@ -439,14 +442,14 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function() {
-
+    
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
   onShow: function() {
-
+    
   },
 
   /**
@@ -479,5 +482,4 @@ Page({
     this.setData({showintegral:false})
     this.getIntegralHeader(this.data.userInfo)
   },
-
 })

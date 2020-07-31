@@ -653,7 +653,8 @@ Page({
     userEnterComplain: function (e) {
         this.setData({ complainInfo: e.detail.value })
     },
-    userTapComplain: function () {
+    userTapComplain: function (e) {
+      console.log(e)
       let userInfo = this.data.userInfo;
       if (!userInfo) {
         app.gotoUserauth();
