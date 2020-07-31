@@ -6,13 +6,13 @@
 	"setting": {
 		"urlCheck": false,
 		"es6": true,
-		"enhance": true,
+		"enhance": false,
 		"postcss": true,
 		"minified": true,
 		"newFeature": true,
 		"coverView": true,
 		"autoAudits": false,
-		"showShadowRootInWxmlPanel": true,
+		"showShadowRootInWxmlPanel": false,
 		"uglifyFileName": true,
 		"checkInvalidKey": true,
 		"checkSiteMap": true,
@@ -23,10 +23,10 @@
 			"outputPath": ""
 		},
 		"useCompilerModule": false,
-		"userConfirmedUseCompilerModuleSwitch": false
+		"userConfirmedUseCompilerModuleSwitch": true
 	},
 	"compileType": "miniprogram",
-	"libVersion": "2.7.7",
+	"libVersion": "2.10.4",
 	"appid": "wx456feacb0e86162f",
 	"projectname": "gdjz",
 	"debugOptions": {
@@ -252,6 +252,49 @@
 					"id": -1,
 					"name": "pages/turntable/turntable",
 					"pathName": "pages/turntable/turntable",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": 28,
+					"name": "新版本发布招工",
+					"pathName": "pages/fast/issue/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": 29,
+					"name": "新版发布招工获取验证码",
+					"pathName": "pages/fast/code/code",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": 30,
+					"name": "新版本发布选择地区",
+					"pathName": "pages/fast/area/area",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "新版快速发布提示页",
+					"pathName": "pages/fast/tips/tips",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "新版本发布",
+					"pathName": "pages/issue/index/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": 33,
+					"name": "新版发布招工地址地图选择",
+					"pathName": "pages/issue/area/area",
+					"query": "showfor=showfor&showmap=noshowmap",
 					"scene": null
 				}
 			]

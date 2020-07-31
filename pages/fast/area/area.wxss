@@ -1,0 +1,29 @@
+@import "../code/code.wxss";
+
+.issue-area-container{
+  position: relative;
+  padding: 20rpx;
+}
+.issue-area-tips{
+  position: relative;
+  margin-top: 35rpx;
+  width: 100%;
+  line-height: 80rpx;
+  font-size: 28rpx;
+}
+.issue-contact-input{
+  margin-top: 0;
+}
+.issue-area-box{
+  position: relative;
+}
+.issue-area-triangle{
+  position: absolute;
+  width: 0; 
+  height: 0;
+  right: 20rpx;
+  top: 30rpx;
+  border-width: 12rpx;
+  border-style: solid;
+  border-color:#111 transparent transparent  transparent;
+}

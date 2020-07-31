@@ -268,12 +268,11 @@ height: 70rpx;
   margin-right: 10rpx;
 } */
 .listsboxagezong {
-color: #FB8732;
-width: 14%;
-margin-left: 12rpx;
-display: inline-block;
-overflow: hidden;
-
+  color: #FB8732;
+  width: 14%;
+  margin-left: 12rpx;
+  display: inline-block;
+  overflow: hidden;
 }
 
 

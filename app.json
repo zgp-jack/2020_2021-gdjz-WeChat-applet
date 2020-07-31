@@ -59,7 +59,13 @@
     "pages/published/recruit/list",
     "pages/published/used/list",
     "pages/lists/recruit/index",
-    "pages/lists/resume/index"
+    "pages/lists/resume/index",
+    "pages/fast/issue/index",
+    "pages/fast/code/code",
+    "pages/fast/area/area",
+    "pages/fast/tips/tips",
+    "pages/issue/index/index",
+    "pages/issue/area/area"
   ],
   "subpackages": [
     {

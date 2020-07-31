@@ -1,0 +1,68 @@
+@import "../issue/index.wxss";
+
+page{
+  background-color: white;
+}
+
+.code-container{
+  position: relative;
+  width: 100%;
+  padding: 20rpx;
+  background-color: white;
+}
+.issue-contactbox {
+  margin-top: 0;
+}
+.issue-contact-body{
+  text-align: left;
+  font-weight: bold;
+}
+.issue-contact-body text{
+  color: #FF0B0B;
+  display: inline;
+}
+.issue-code-box{
+  position: relative;
+  margin-top: 50rpx;
+  padding-left: 120rpx;
+}
+.issue-code-box text{
+  position: absolute;
+  line-height: 75rpx;
+  left: 0;
+  font-size: 28rpx;
+}
+.issue-code-tips{
+  position: relative;
+  line-height: 70rpx;
+}
+.issue-code-words{
+  font-size: 28rpx;
+}
+.issue-code-words text{
+  color: #0099ff;
+}
+.issue-code-reget{
+  position: absolute;
+  padding:2rpx 10rpx;
+  background-color: #0099ff;
+  color: #fff;
+  font-size: 26rpx;
+  display: inline-block;
+  right: 0;
+  top: 15rpx;
+  line-height: 45rpx;
+  height: 45rpx;
+  border-radius: 5rpx;
+}
+.issue-code-btn{
+  position: relative;
+  margin: 50rpx auto 20rpx;
+  width: 300rpx;
+  background-color: #0099ff;
+  color: #fff;
+  font-size: 30rpx;
+  text-align: center;
+  line-height: 75rpx;
+  border-radius: 5rpx;
+}

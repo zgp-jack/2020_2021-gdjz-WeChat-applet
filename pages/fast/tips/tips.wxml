@@ -1,0 +1,12 @@
+<view class="issue-tip-container">
+  <view class="success-box flex-column">
+    <image src="{{ icon }}" class="success-tips-icon"></image>
+    <text>发布成功！</text>
+  </view>
+  <view class="flex-row success-tips-btns">
+    <button bindtap="goToResumeList">筛选找活简历</button>
+    <button wx:if="{{ userInfo }}" bindtap="manageRecruit" >管理招工信息</button>
+    <button wx:else open-type="getUserInfo"  bindgetuserinfo='bindGetUserInfo'>管理招工信息</button>
+    
+  </view>
+</view>
