@@ -301,6 +301,55 @@
 					"pathName": "pages/issue/area/area",
 					"query": "showfor=showfor&showmap=noshowmap",
 					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "packageOther/pages/helpCenter/helpCenter",
+					"pathName": "packageOther/pages/helpCenter/helpCenter",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/static/invite",
+					"pathName": "pages/static/invite",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/integral/expend/expend",
+					"pathName": "pages/integral/expend/expend",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/boss-look-card/lookcard",
+					"pathName": "pages/boss-look-card/lookcard",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/findingworkinglist/findingworkinglist",
+					"pathName": "pages/findingworkinglist/findingworkinglist",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/integral/expend/expend",
+					"pathName": "pages/integral/expend/expend",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/findingworkinglist/findingworkinglist",
+					"pathName": "pages/findingworkinglist/findingworkinglist",
+					"query": "",
+					"scene": null
 				}
 			]
 		}

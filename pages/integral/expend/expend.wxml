@@ -48,7 +48,7 @@
 </view>
 
 
-
+<!-- 积分消耗记录“查看招工信息” -->
 <view class='expend-showthis-record' wx:if="{{ showRecord }}">
     <view class='expend-show-recruit'>
         <view class='expend-close-record' bindtap='closeThisRerocd'></view>
@@ -61,8 +61,8 @@
                 <view class='yupao-common-list-left'>电话</view>
                 <view class='yupao-common-list-right'>{{ info.user_mobile }} 
                 <block wx:if="{{ info.is_end == '2' && showend }}"><text>({{ info.end_word }})</text></block>
-                <block wx:if="{{ !info.show_complain && !showend }}"><text class="info-complained">已投诉</text></block>
                 <block wx:if="{{ info.is_end != '2' }}">({{ info.user_name }})<text class='list-call-phone'   bindtap='callThisPhone'  data-phone="{{ info.user_mobile }}">拨打</text></block>
+                <block wx:if="{{ !info.show_complain && showend }}"><text class="info-complained">已投诉</text></block>
                 <block wx:if="{{ info.show_complain }}"><text class='list-call-phone list-complain-phone' data-id="{{ info.id }}"  data-type="{{ info.type }}" bindtap='complainInfo'>投诉</text></block>
                 </view>
             </view>
@@ -81,6 +81,7 @@
         </view>
     </view>
 </view>
+<!-- 积分消耗记录“查看找活信息” -->
 
 <view class='expend-showthis-record' wx:if="{{ showWork }}">
     <view class='expend-show-recruit'>
@@ -90,7 +91,7 @@
                 <view class='yupao-common-list-left'>电话</view>
                 <view class='yupao-common-list-right'>{{ info.user_mobile }} <block wx:if="{{ info.is_end == '2' }}">({{ info.end_word }})</block><block wx:else="{{ info.is_end == '2' }}">({{ info.user_name }})
                 <text class='list-call-phone' wx:if="{{ info.is_end == '1' }}"   bindtap='callThisPhone'  data-phone="{{ info.user_mobile }}">拨打</text></block>
-                <block wx:if="{{ info.show_complain }}"><text class='list-call-phone list-complain-phone' data-id="{{ info.id }}"  data-type="{{ info.type }}" bindtap='complainInfo'>投诉</text></block>
+                <block><text class="{{info.show_complain==1?'list-call-phone list-complain-phone':'list-call-phone info-complained'}}" data-id="{{ info.id }}" data-complain="{{ info.show_complain }}" data-type="{{ info.type }}" bindtap="complainInfo">{{info.show_complain===1?"投诉":"已投诉"}}</text></block>
                 </view>
             </view>
             <view class='yupao-common-lists-item clearfix' wx:if="{{ info.type =='resume' }}">
@@ -113,7 +114,7 @@
 
 
 
-
+<!-- 投诉填写界面 -->
 <view class='yupao-common-enterbox flex-row' catchtouchmove="move" wx:if="{{ showComplain }}">
     <view class='yupao-common-enter'>
         <text class='yupao-enter-title'>投诉信息</text>

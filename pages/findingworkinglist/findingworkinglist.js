@@ -694,20 +694,37 @@ Page({
     // }
     footerjs.valiUserCard(this, app, userInfo);
   },
+  // getFilterData: function () {
+  //   let _this = this;
+  //   // this.setData({ fillterArea: areas.getProviceList() })
+  //   _this.setData({
+  //     fillterArea: areas.getAreaArr
+  //   })
+  //   app.globalData.allTypes ? this.setData({ fillterType: app.globalData.allTypes.classTree, fillterTeam: app.globalData.allTypes.staffTree, fillterNewest: app.globalData.allTypes.resumeListType }) : app.getListsAllType(function (_data) {
+  //     _this.setData({
+  //       fillterType: _data.classTree,
+  //       fillterTeam: _data.staffTree,
+  //       fillterNewest: _data.resumeListType
+  //     })
+  //   })
+  // },
+  
+  //如果加载工种信息的时候如果只有一条数据，那么选择工种默认选择那一条数据
   getFilterData: function () {
     let _this = this;
-    // this.setData({ fillterArea: areas.getProviceList() })
-    _this.setData({
+    console.log(app.globalData)
+    this.setData({
       fillterArea: areas.getAreaArr
     })
-    app.globalData.allTypes ? this.setData({ fillterType: app.globalData.allTypes.classTree, fillterTeam: app.globalData.allTypes.staffTree, fillterNewest: app.globalData.allTypes.resumeListType }) : app.getListsAllType(function (_data) {
-      _this.setData({
-        fillterType: _data.classTree,
-        fillterTeam: _data.staffTree,
-        fillterNewest: _data.resumeListType
-      })
-    })
-    
+    if (app.globalData.allTypes) {
+      _this.setData({ fillterType: app.globalData.allTypes.classTree, fillterTeam: app.globalData.allTypes.staffTree, fillterNewest: app.globalData.allTypes.resumeListType });
+      if (_this.data.fillterType.length == 1) _this.setData({ typeText: _this.data.fillterType[0].name })
+    } else {
+      app.getListsAllType(function (_data) {
+        _this.setData({ fillterType: _data.classTree, fillterTeam: _data.staffTree, fillterNewest: _data.resumeListType })
+        if (_this.data.fillterType.length == 1) _this.setData({ typeText: _this.data.fillterType[0].name })
+      });
+    }
   },
   initUserShareTimes: function () {
     app.pageInitSystemInfo(this);
