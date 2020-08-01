@@ -185,7 +185,7 @@
     <image src='{{ fastIssueImg }}'></image>
 </view>
 
-<view class='bottompublishbtn'  bindtap='jumpThisLink' data-url="/pages/publish/recruit/recruit"    data-type='0' >发布招工</view>
+<view class='bottompublishbtn'  bindtap='publishJob' data-url="/pages/publish/recruit/recruit"    data-type='0' >发布招工</view>
 
 <!-- <button class='bottompublishbtn' open-type="getPhoneNumber"  bindgetphonenumber="getPhoneNumber" >获取手机号</button> -->
 
