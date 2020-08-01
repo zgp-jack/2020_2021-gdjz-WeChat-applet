@@ -1,0 +1,109 @@
+<view class="issue-container">
+  <view class="issue-textarea-box">
+    <text class="issue-textarea-title">招工详情：</text>
+    <textarea 
+      class="issue-textarea" 
+      placeholder="{{ placeholder }}"
+      bindblur="mateClassifyIdsFun"
+      value="{{ data.detail }}"
+      bindinput="userEnterDetail"
+    ></textarea>
+    <!-- <text class="issue-text-clear">清空内容</text> -->
+  </view>
+  <view class="issue-form">
+    <view class="issue-form-item" bindtap="showWorkArea">
+      <text>招工城市：</text>
+      <input placeholder="请选择招工城市" disabled value="{{ addressData.title }}"></input>
+    </view>
+    <view class="issue-form-item" bindtap="showWorkTypePicker">
+      <text>所需工种：</text>
+      <input placeholder="请输入工种" disabled  wx:if="{{ !showClassifyText }}"></input>
+      <view class="input-item-text" wx:if="{{ showClassifyText }}">{{ showClassifyText }}</view>
+    </view>
+    <view class="issue-form-item">
+      <text>联系电话：</text>
+      <input placeholder="请输入联系电话" value="{{ data.user_mobile }}" type="number" bindinput="userEnterPhone" maxlength="11"></input>
+    </view>
+    <view class="issue-form-item" wx:if="{{ phone != data.user_mobile || user.user_mobile=='' }}">
+      <text>验证码：</text>
+      <input placeholder="请输入验证码" type="number" maxlength="8" bindinput="userEnterCode"></input>
+      <view class="getphonecode" bindtap="userGetCode" >{{ codeTips }}</view>
+    </view>
+  </view>
+  <view class="issue-form-upload">
+    <view class="issue-form-header">
+      上传图片： <switch class="issue-upload-switch" checked="{{ switch }}"  bindchange="switchClick" type="switch" />
+    </view>
+    <view class="issue-upload-show" wx:if="{{ switch }}">
+      <view class="issue-upload-tips">可上传工地现场照片。工程图纸、承包合同等</view>
+      <view class="issue-upload-body clearfix">
+        
+        <view class="issue-upload-item" wx:for="{{ imgs }}" wx:key="{{ item.url }}">
+          <view class="imgitem-box" bindtap="userChangeImg" data-index="{{ index }}">
+            <image src="{{ item.httpurl }}"></image>
+            <view class="mini-del" catchtap="delImgAction" data-index="{{ index }}"></view>
+          </view>
+        </view>
+        <view class="issue-upload-item" wx:if="{{ imglen < maxNum }}">
+          <view class="imgitem-box" bindtap="userUploadImg">
+            <image src="{{ upload }}"></image>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+  <!-- <view class="issue-history-published">
+    <view class="issue-history-title flex-row">
+      <text>历史记录</text>
+    </view>
+    <view class="flex-row issue-history-item">
+      <view class="issue-hisroty-text">四川成都招木工，300块钱1天，联系电话13243421432的发电房时间分肯定是积分卡视角开始就</view>
+      <view class="issue-history-btn">重新发布</view>
+    </view>
+  </view> -->
+  <view class="issue-sure-btn" bindtap="publishRecruitInfo">确认发布</view>
+</view>
+
+
+<view class="common-picker-container {{ showPicker ? '':'common-picker-none' }}">
+  <view class="common-picker-box">
+    <view class="common-picker-header">
+      <view class="common-picker-left" bindtap="cancelWorkTypePicker">取消</view>
+      <view class="common-picker-title">选择工种(可多选)</view>
+      <view class="common-picker-right" bindtap="sureWorkTypePicker">确定</view>
+    </view>
+    <view class="common-picker-body">
+      <view class="common-picker-content">
+        <view
+          data-index="{{ index }}"
+          class="common-picker-item {{ pindex === index ? 'common-picker-item-active':'' }}" 
+          wx:for="{{ classifies }}" 
+          wx:key="{{ item.id }}"
+          bindtap="userCheckPindex"
+        >{{ item.name }}<text wx:if="{{ item.num }}">{{ item.num }}</text></view>
+      </view>
+      <view class="common-picker-content2">
+        <view 
+          class="common-picker-item {{ item.checked ? 'common-picker-text-active' : '' }}" 
+          data-id="{{ item.id }}" 
+          data-checked="{{ item.checked }}"
+          data-name="{{ item.name }}"
+          wx:for="{{ childClassifies }}" 
+          wx:key="{{ item.id }}"
+          bindtap="userCheckWorkType"
+        >{{ item.name }}</view>
+      </view>
+    </view>
+  </view>
+</view>
+
+<issueok id="issueok" />
+
+<!-- 
+<view class="common-userauth" wx:if="{{ !userInfo }}">
+  <image src='{{ icon }}' class='userauth-topicon'></image>
+  <view class='userauth-title'>登录鱼泡网</view>
+  <view class='userauth-words'>招工 找活抢先一步，用的安心 赚的开心。</view>
+  <button class='userauth-btn userauth-sure-btn' open-type="getUserInfo" bindgetuserinfo='bindGetUserInfo'>微信授权登录</button>
+  <button class='userauth-btn  userauth-back-btn' bindtap='returnPrevPage'>返回上一页</button>
+</view> -->

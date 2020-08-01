@@ -1,0 +1,15 @@
+<view class="code-container">
+  <view class="issue-contactbox">
+    <view class="issue-contact-title">温馨提示</view>
+    <view class="issue-contact-body">为了确保本条招工信息的真实性，鱼泡网已经向手机号<text>{{ phone }}</text>发送验证码，请您将收到的验证码填写到下方输入框内。</view>
+    <view class="issue-code-box">
+      <text>验证码：</text>
+      <input class="issue-contact-input" placeholder="请输入验证码" bindinput="enterCode"></input>
+    </view>
+    <view class="issue-code-tips">
+      <view class="issue-code-words">没有收到验证码？<text wx:if="{{ sendrefresh }}">{{ sendrefresh }}秒后可重新获取</text></view>
+      <view class="issue-code-reget" wx:if="{{ !sendrefresh }}" bindtap="reGetPhoneCode">重新获取</view>
+    </view>
+    <view class="issue-code-btn" bindtap="surePublishAction">确认发布</view>
+  </view>
+</view>

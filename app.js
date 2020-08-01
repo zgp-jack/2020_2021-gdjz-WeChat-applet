@@ -194,6 +194,10 @@ App({
       'content-type': 'application/x-www-form-urlencoded',
       version: this.globalData.version
     }
+    if (_options.hasOwnProperty("header")) {
+      header = {...header,..._options.header}
+    }
+
     if (userInfo) {
       header.mid = userInfo.userId,
         header.token = userInfo.token,
@@ -1173,5 +1177,98 @@ App({
         _this.showMyTips('网络错误，加载失败！')
       }
     })
+  },
+  // 多图上传
+  multiImageUpload:function(num,callback){
+
+    let _this = this;
+    wx.showLoading({
+      title: '正在上传图片'
+    });
+    wx.chooseImage({
+      count: num || 1,
+      sizeType: ['compressed'],
+      sourceType: ['album', 'camera'],
+      success: res => {
+        if(res.errMsg == "chooseImage:ok"){
+          _this.multiImageUploading(res.tempFiles, callback);
+        }else{
+          wx.showModal({
+            title: '提示',
+            content: '图片上传失败，请重新上传',
+            showCancel: false
+          })
+        }
+      },
+      fail: function () {
+        wx.hideLoading();
+      }
+    })
+  },
+  multiImageUploading:function(tempFiles,callback){
+    let len = tempFiles.length
+    let start = 0
+    let arr = []
+    let _this = this;
+    wx.showToast({
+      title: '图片上传中',
+      icon: 'loading',
+      mask: true
+    })
+    for(let i = 0; i< len;i++){
+      let img = tempFiles[i].path
+      let ok = this.valiImgRules(img)
+      if(ok){
+        wx.uploadFile({
+          url: _this.globalData.apiUploadImg,
+          filePath: img,
+          name: 'file',
+          success(res) {
+            let mydata = JSON.parse(res.data);
+            start+=1
+            if (mydata.errcode == "ok") {
+              arr.push({httpurl:mydata.httpurl,url:mydata.url})
+              if(start == len){
+                wx.hideLoading()
+                callback(arr)
+              }
+            }else {
+              wx.hideToast();
+              wx.showModal({
+                title: '提示',
+                content: '图片上传失败，请重新上传',
+                showCancel: false,
+                success:function(){
+                  callback(arr)
+                }
+              })
+            }
+          },
+          fail: function () {
+            start+=1
+            wx.hideToast();
+            wx.showModal({
+              title: '提示',
+              content: '图片上传失败，请重新上传',
+              showCancel: false,
+              success:function(){
+                callback(arr)
+              }
+            })
+          }
+        })
+      }else{
+        start+=1
+        wx.hideLoading()
+        wx.showModal({
+          title: '提示',
+          content: '图片上传失败，请重新上传',
+          showCancel: false,
+          success:function(){
+            callback(arr)
+          }
+        })
+      }
+    }
   }
 })

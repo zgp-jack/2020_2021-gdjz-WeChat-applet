@@ -2655,7 +2655,7 @@ function getProviceItem(p,c) {
 
 function getInputList(bool){
   let _lists = arrDeepCopy(areas);
-  _lists.splice(0,1);
+  _lists = _lists.slice(1);
   let len = _lists.length;
   let res = [];
   console.log(len)
@@ -2683,10 +2683,9 @@ function getInputList(bool){
 
 
 module.exports = {
-    getAreaArr: areas,
-    getProviceList: getProviceList,
+  getAreaArr: areas,
+  getProviceList: getProviceList,
   getPublishArea: getPublishArea,
   getProviceItem: getProviceItem,
   getInputList: getInputList
 }
-// getInputList

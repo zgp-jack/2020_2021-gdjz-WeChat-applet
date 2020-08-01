@@ -239,7 +239,7 @@ Page({
         let nameArr = [];
         for (let i = 0; i < this.data.scrollname.num; i++) {
             let nameStr = firstName[this.getRand(0, firstLen)] + "先生";
-            let integral = _integral[this.getRand(0, _integral.length)];
+            let integral = _integral[this.getRand(0, _integral.length-1)];
             nameArr.push({ name: nameStr, integral: integral });
         }
 

@@ -1,0 +1,77 @@
+.issue-container{
+  position: relative;
+  padding: 20rpx;
+}
+.issue-textarea-box{
+  position: relative;
+  width: 100%;
+}
+.issue-textarea{
+  position: relative;
+  background-color: white;
+  border-radius: 5rpx;
+  font-size: 28rpx;
+  line-height: 60rpx;
+  height: 300rpx;
+  display: block;
+  width: 100%;
+  padding: 20rpx;
+  border: 1px solid #dcdcdc;
+}
+.issue-text-clear{
+  position: absolute;
+  right: 10rpx;
+  bottom: 10rpx;
+  display: inline-block;
+  padding: 2rpx 10rpx;
+  background-color: #f2f2f2;
+  color: #111;
+  font-size: 28rpx;
+}
+.issue-contactbox{
+  position: relative;
+  width: 100%;
+  margin-top: 50rpx;
+}
+.issue-contactbox{
+  position: relative;
+  width: 100%;
+}
+.issue-contact-title{
+  position: relative;
+  text-align: center;
+  font-weight: bold;
+  font-size: 30rpx;
+  color: #333;
+  line-height: 60rpx;
+}
+.issue-contact-body{
+  position: relative;
+  text-align: center;
+  font-size: 28rpx;
+  line-height: 50rpx;
+}
+.issue-contact-input{
+  position: relative;
+  margin-top: 20rpx;
+  display: block;
+  width: 100%;
+  border: 1px solid #dcdcdc;
+  border-radius: 5rpx;
+  height: 75rpx;
+  line-height: 75rpx;
+  background-color: white;
+  padding: 0 20rpx;
+  font-size: 28rpx;
+}
+.issue-btn{
+  position: relative;
+  width: 300rpx;
+  margin: 50rpx auto 20rpx;
+  text-align: center;
+  line-height: 75rpx;
+  background-color: #0099ff;
+  color: #ffffff;
+  font-size: 28rpx;
+  border-radius: 5rpx;
+}
