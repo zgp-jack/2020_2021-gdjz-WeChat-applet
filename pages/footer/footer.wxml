@@ -38,7 +38,7 @@
 
 <view class='common-publish-box {{ publishActive ? "common-publish-box-active":"" }}' bindtap='closePublishAction' wx:if="{{ showPublishBox }}">
     <view class='common-publish-container flex-row {{ publishActive ? "common-publish-container-active":"" }}'>
-        <view class='commo-publish-item flex-column'  bindtap='jumpThisLink' data-url="/pages/publish/recruit/recruit"  data-type='0'>
+        <view class='commo-publish-item flex-column'  bindtap='publishJob' data-url="/pages/publish/recruit/recruit"  data-type='0'>
             <image src='http://cdn.yupao.com/miniprogram/images/publish-recruit.png'></image>
             <text>发布招工</text>
         </view>
