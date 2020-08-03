@@ -85,7 +85,7 @@ Page({
     areaText: "选择城市",
     typeText: "选择工种",
     teamText: "人员构成",
-    recommended: "推荐",
+    recommended: "智能推荐",
     showNothinkData: false,
     nothavemore: false,
     showMyLoading: false,
