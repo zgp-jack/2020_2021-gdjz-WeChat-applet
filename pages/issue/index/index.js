@@ -79,11 +79,24 @@ Page({
       "data.code": e.detail.value
     })
   },
+  checkType: function(obj, _type){
+    var _re = Object.prototype.toString.call(obj).slice(8, -1).toLowerCase();
+    if(_type == undefined) return _re;
+    if (_re == _type) return true;
+    return false;
+  },
   userEnterDetail:function(e){
     let val = e.detail.value
     this.setData({
       "data.detail": val
     })
+    let content = val.replace(/\s+/g, "");
+    let _partten = /1[3-9]\d{9}/g;
+    let phone = content.match(_partten);
+    if(this.checkType(phone,'array')){
+        let tel = phone[0];
+        this.setData({ 'data.user_mobile': tel });
+    }
     this.setEnterInfo('detail',val)
   },
   userSetAreaInfo:function(){
@@ -610,7 +623,7 @@ Page({
         if(res.data.errcode == "ok"){
           wx.removeStorageSync('jiSuData')
           wx.reLaunch({
-            url: '/pages/published/recruit/list',
+            url: '/pages/issue/tips/tips',
           })
         }else{
           wx.showModal({
