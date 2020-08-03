@@ -724,7 +724,7 @@ Page({
                   showComplain: false,
                   complainInfo: "",
                   "info.show_complaint.show_complaint": 0,
-                  "info.show_complaint.tips_message": "您已投诉该信息，请勿重复操作！"
+                  "info.show_complaint.tips_message": "您已经投诉过这条信息，请勿重复投诉!"
                 });
                 _this.subscribeToNews(mydata)
               }else{
