@@ -37,20 +37,29 @@ Page({
     })
   },
   contentBlur:function(){
-    this.setData({
-      showTel: true
-    })
+    if (this.data.phone) {
+      this.setData({
+        showTel: true
+      })
+    }
   },
   publishRecurit:function(){
-
     let vali = v.v.new();
     let { content, phone } = this.data
-    if(content.length < 3){
-      app.showMyTips('请输入正确的招工信息')
+    if(content == ""){
+      app.showMyTips('请输入招工详情。')
       return false;
     }
-    if(!vali.isMobile(phone)){
-      app.showMyTips('请输入正确的手机号')
+    if(content.length < 3 || content.length > 500){
+      app.showMyTips('请正确输入3~500字招工详情。')
+      return false;
+    }
+    if (phone == "") {
+      app.showMyTips('请输入联系电话。')
+      return false
+    }
+    if(phone && !vali.isMobile(phone)){
+      app.showMyTips('请正确输入11位联系电话。')
       return false;
     }
     app.appRequestAction({
@@ -58,6 +67,7 @@ Page({
       params: {content,phone},
       way: 'POST',
       success:function(res){
+        console.log(res)
         if(res.data.errcode == "ok"){
           let mydata = res.data.data
           if(mydata.checked){
@@ -105,6 +115,12 @@ Page({
   startRecord:function(){
     restful.startRecord()
   },
+  //清除招工信息的内容
+  // clearContent:function () {
+  //   this.setData({
+  //     content:"",
+  //   })
+  // },
   /**
    * 生命周期函数--监听页面加载
    */

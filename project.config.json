@@ -350,6 +350,12 @@
 					"pathName": "pages/findingworkinglist/findingworkinglist",
 					"query": "",
 					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/fast/issue/index",
+					"pathName": "pages/fast/issue/index",
+					"scene": null
 				}
 			]
 		}

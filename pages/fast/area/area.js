@@ -138,7 +138,11 @@ Page({
   sureAreaAction:function(){
     let { token,id } = this.data;
     if(!id){
-      app.showMyTips("请选择您的招工所在地");
+      wx.showModal({
+        title: '提示',
+        content: "请选择招工所在地。",
+        showCancel: false
+      })
       return
     }
     app.appRequestAction({

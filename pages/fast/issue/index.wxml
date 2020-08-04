@@ -6,7 +6,9 @@
       bindinput="enterContent"
       bindblur="contentBlur"
       value="{{ content }}"
-    ></textarea>
+    >
+      <!-- <view class="clearContent" bindtap="clearContent">清除内容</view> -->
+    </textarea>
     <!-- <text class="issue-text-clear" bindtap="clearContent">清空内容</text> -->
   </view>
   <view class="issue-contactbox" wx:if="{{ showTel }}">
@@ -17,4 +19,5 @@
   <view class="issue-btn" bindtap="publishRecurit">发布招工</view>
 </view>
 
+<!-- 发布招工成功提示框 -->
 <issueok  id="issueok" />

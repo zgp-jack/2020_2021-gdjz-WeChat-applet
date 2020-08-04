@@ -6,7 +6,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    sendrefresh: 100,
+    sendrefresh: 60,
     token: '',
     phone: '',
     timer: null,
@@ -77,6 +77,7 @@ Page({
           token: token
         },
         success: function (res) {
+          console.log(res)
             let mydata = res.data;
             if (mydata.errcode == "ok") {
                 wx.redirectTo({

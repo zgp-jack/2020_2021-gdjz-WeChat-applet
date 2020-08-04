@@ -1,5 +1,6 @@
 {
   "usingComponents": {
     "issueok": "/components/issueok/index"
-  }
+  },
+  "navigationBarTitleText":"发布招工"
 }

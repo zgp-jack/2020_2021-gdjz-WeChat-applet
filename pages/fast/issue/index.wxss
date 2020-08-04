@@ -75,3 +75,16 @@
   font-size: 28rpx;
   border-radius: 5rpx;
 }
+.clearContent{
+  position: absolute;
+  right: 17rpx;
+  bottom: 17rpx;
+  padding: 4rpx 8rpx;
+  height: 45rpx;
+  color: #313232;
+  display: flex;
+  align-items: center;
+  border-radius: 4rpx;
+  background-color: #EFECEC;
+  z-index: 1001;
+}
