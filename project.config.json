@@ -28,7 +28,11 @@
 		},
 		"useIsolateContext": true,
 		"useCompilerModule": false,
+<<<<<<< HEAD
 		"userConfirmedUseCompilerModuleSwitch": true
+=======
+		"userConfirmedUseCompilerModuleSwitch": false
+>>>>>>> YC-YP3221
 	},
 	"compileType": "miniprogram",
 	"libVersion": "2.10.4",

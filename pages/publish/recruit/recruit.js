@@ -699,6 +699,39 @@ Page({
     })
   },
   userEnterUsername: function (e) {
+    //一
+    // var that = this
+    // let value = (e.detail.value || "").trim()
+    // if (value) {
+    //   const reg =  /[^\u4e00-\u9fa5]/ig
+    //   if (reg.test(value)) {
+    //     console.log("if")
+    //     value = value.replace(reg, '')
+    //     console.log(value)
+    //     // var weixin = that.data.cardInfo.username
+    //     this.setData({
+    //       "cardInfo.username": value
+    //     })
+    //   }
+    //   else {
+    //     console.log("else")
+    //     var weixin = that.data.cardInfo.username
+    //     this.setData({
+    //       "cardInfo.username": value
+    //     })
+    //   }
+    // }
+    
+    //二
+    // let reg = /^[\u4e00-\u9fa5]{1,5}/ig
+    // let value = e.detail.value
+    // console.log(value)
+    // let userName = value.match(reg)
+    // console.log(userName)
+    // this.setData({
+    //   "cardInfo.username": userName
+    // })
+    //三
     let reg = /^[\u4e00-\u9fa5]$/
     let value = e.detail.value
     let values = value.split("")
