@@ -172,7 +172,7 @@ Page({
     })
     
     let {infoId} = this.data
-    let postData = {...u,infoId: infoId,type: 'job'}
+    let postData = {...u, infoId: infoId,type: 'job'}
     let _this = this;
     app.appRequestAction({
       url: 'publish/new-mate-job/',
@@ -185,7 +185,7 @@ Page({
           let tel = mydata.memberInfo.tel || ''
           let username = mydata.memberInfo.username || ''
           _this.setData({
-            "data.userId": mydata.memberInfo.id,
+            "data.userId": mydata.memberInfo.id || '',
             "data.user_mobile": tel,
             "data.user_name": username,
             maxNum: mydata.typeTextArr.maxImageCount,
@@ -281,12 +281,28 @@ Page({
     })
     this.getWorkText()
   },
+  checkType: function(obj, _type){
+    var _re = Object.prototype.toString.call(obj).slice(8, -1).toLowerCase();
+    if(_type == undefined) return _re;
+    if (_re == _type) return true;
+    return false;
+  },
+  // 匹配电话号码
+  matchPhoneFun:function(){
+    let content = this.data.data.detail;
+    let p = /1[3-9]\d{9}/g;
+    let phone = content.match(p);
+    if (this.checkType(phone, 'array')) {
+      this.setData({ "data.user_mobile": phone[0] })
+    }
+  },
   mateClassifyIdsFun:function(){
     wx.showLoading({
       title: '匹配中',
       icon: 'none',
       mask: true
     })
+    this.matchPhoneFun()
     let content = this.data.data.detail;
     let notRules = this.data.notMateData;
     let notLen = notRules.length;
@@ -505,12 +521,9 @@ Page({
     this.setData({ status: false });
     app.appRequestAction({
       title: "正在获取验证码",
-      url: "index/get-code/",
+      url: "index/send-tel-code/",
       way: "POST",
       params: {
-        userId: userInfo.userId,
-        token: userInfo.token,
-        tokenTime: userInfo.tokenTime,
         tel: phone,
         sendType: "have"
       },
@@ -555,32 +568,76 @@ Page({
     }, 1000)
   },
   publishRecruitInfo:function(){
+    let v = vali.v.new();
     let { infoId,addressData,data,phone,userClassifyids,rulesClassifyids,userInfo } = this.data
     if(!data.detail){
-      app.showMyTips('请输入招工详情')
+      wx.showModal({
+        title: '提示',
+        content: '请输入招工详情。',
+        showCancel: false
+      })
+      return false
+    }
+    if(data.detail.length < 2){
+      wx.showModal({
+        title: '提示',
+        content: '请正确输入3~500字招工详情。',
+        showCancel: false
+      })
+      return false
+    }
+    if(!v.isChinese(data.detail)){
+      wx.showModal({
+        title: '提示',
+        content: '请输入招工详情。',
+        showCancel: false
+      })
       return false
     }
     if(!addressData.location){
-      app.showMyTips('请选择招工地址')
+      wx.showModal({
+        title: '提示',
+        content: '请选择招工城市。',
+        showCancel: false
+      })
       return false
     }
     let works = [...userClassifyids,...rulesClassifyids]
     works.splice(5)
-    console.log(works)
     let ids = works.map(item => item.id)
     console.log(ids)
     if(!works.length){
-      app.showMyTips('请选择招工工种')
+      wx.showModal({
+        title: '提示',
+        content: '请选择工种。',
+        showCancel: false
+      })
       return false
     }
-    let v = vali.v.new();
+    if(!data.user_mobile){
+      wx.showModal({
+        title: '提示',
+        content: '请输入联系电话。',
+        showCancel: false
+      })
+      return false
+    }
+    
     if (!v.isMobile(data.user_mobile)) {
-      app.showMyTips("手机号输入有误！");
+      wx.showModal({
+        title: '提示',
+        content: '请正确输入11位联系电话。',
+        showCancel: false
+      })
       return false;
     }
     if(!data.code){
       if(data.user_mobile != phone){
-        app.showMyTips('请输入验证码')
+        wx.showModal({
+          title: '提示',
+          content: '请输入验证码。',
+          showCancel: false
+        })
         return false
       }
     }
@@ -609,8 +666,49 @@ Page({
         let resdata = res.data
         if(res.data.errcode == "ok"){
           wx.removeStorageSync('jiSuData')
-          wx.reLaunch({
-            url: '/pages/published/recruit/list',
+          // 存入最近两个成功信息
+          if(!userInfo){
+            let jobid = res.data.id
+            let tel = res.data.tel
+            let jsdata = wx.getStorageSync('userJiSuPublishedData')
+            if(jsdata){
+              jsdata.push({id: jobid,tel: tel})
+              jsdata = jsdata.slice(jsdata.length-2)
+            }else{
+              jsdata = [{id:jobid,tel:tel}]
+            }
+            wx.setStorageSync('userJiSuPublishedData', jsdata)
+          }
+          wx.navigateTo({
+            url: '/pages/issue/tips/tips',
+          })
+        }else if(res.data.errcode == "member_forbid" || res.data.errcode == "login_over_time"){
+          wx.showModal({
+            title: '提示',
+            content: resdata.errmsg,
+            cancelText: '确定',
+            confirmText: '联系客服',
+            success:function(res){
+              if(res.confirm){
+                wx.makePhoneCall({
+                  phoneNumber: app.globalData.serverPhone
+                })
+              }
+            }
+          })
+        }else if(res.data.errcode == "auth_forbid" ){
+          wx.showModal({
+            title: '提示',
+            content: resdata.errmsg,
+            cancelText: '取消',
+            confirmText: '确定',
+            success:function(res){
+              if(res.confirm){
+                wx.navigateTo({
+                  url: '/pages/realname/realname',
+                })
+              }
+            }
           })
         }else{
           wx.showModal({

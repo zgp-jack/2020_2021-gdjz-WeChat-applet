@@ -317,8 +317,6 @@ App({
       }
     })
   },
-
-
   api_user(session_key, callback) {
     let that = this;
     wx.getUserInfo({
@@ -1269,5 +1267,6 @@ App({
         })
       }
     }
-  }
+  },
+
 })
