@@ -9,7 +9,6 @@
         <text class="issue-area-triangle"></text>
       </picker>
     </view>
-    
-    <view class="issue-code-btn" bindtap="sureAreaAction">确认地址</view>
+    <button class="issue-code-btn" open-type="{{ id?'getUserInfo':''}}" bindtap="sureAreaAction" bindgetuserinfo="bindGetUserInfo">确认地址</button>
   </view>
 </view>

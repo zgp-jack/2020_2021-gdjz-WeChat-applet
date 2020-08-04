@@ -15,7 +15,8 @@ Page({
     index: [0,0],
     mindex: [0,0],
     areatext: '',
-    token: ''
+    token: '',
+    userInfo:{}
   },
   initLocArea:function(){
     let province = wx.getStorageSync('gpsPorvince')
@@ -135,17 +136,174 @@ Page({
     })
     this.getAreaText()
   },
-  sureAreaAction:function(){
+  mini_user: function(session_key){
     let { token,id } = this.data;
-    if(!id){
-      wx.showModal({
-        title: '提示',
-        content: "请选择招工所在地。",
-        showCancel: false
+    var that = this
+    wx.getSetting({
+      success: (res) => {
+        if (!res.authSetting['scope.userInfo']) {
+          wx.getUserInfo({
+            fail: () => {
+              wx.openSetting({})
+            },
+            success: (res) => {
+              /**获取encryptdata **/
+              that.api_user(session_key,(res) =>{
+                let uinfo = res.data;
+                if (uinfo.errcode == "ok") {
+                  let userInfo = {
+                    userId: uinfo.data.id,
+                    token: uinfo.data.sign.token,
+                    tokenTime: uinfo.data.sign.time,
+                  }
+                  that.setData({
+                    userInfo: userInfo
+                  })
+                  app.globalData.userInfo = userInfo;
+                  console.log(app.globalData)
+                  wx.setStorageSync('userInfo', userInfo)
+                  app.appRequestAction({
+                    title: "发布中",
+                    mask: true,
+                    failTitle: "网络错误，保存失败！",
+                    url: "fast-issue/set-area/",
+                    way: "POST",
+                    params: {
+                      token: token,
+                      area_id: id
+                    },
+                    success: function (res) {
+                      let mydata = res.data;
+                      if (mydata.errcode == "ok") {
+                        wx.redirectTo({
+                          url: '/pages/fast/tips/tips',
+                        })
+                      }else{
+                        app.showMyTips(mydata.errmsg);
+                      }}
+                  })
+                } else {
+                  app.showMyTips(uinfo.errmsg);
+                }
+            })
+              //that.api_user(session_key);
+            }
+          })
+        } else {
+          /**获取encryptdata **/
+          that.api_user(session_key,(res) =>{
+            let uinfo = res.data;
+            if (uinfo.errcode == "ok") {
+              let userInfo = {
+                userId: uinfo.data.id,
+                token: uinfo.data.sign.token,
+                tokenTime: uinfo.data.sign.time,
+              }
+              that.setData({
+                userInfo: userInfo
+              })
+              app.globalData.userInfo = userInfo;
+              wx.setStorageSync('userInfo', userInfo)
+              wx.reLaunch({
+                url: '/pages/fast/tips/tips',
+              })
+            } else {
+              app.showMyTips(uinfo.errmsg);
+            }
+        })
+          //that.api_user(session_key)
+        }
+      }
+    })
+  },
+  api_user:function(session_key, callback){
+    let that = this;
+    wx.getUserInfo({
+      success: (res) => {
+        let encryptedData = res.encryptedData
+        let iv = res.iv
+        var params = new Object()
+        let _source = wx.getStorageSync("_source");
+
+        let fastId = wx.getStorageSync("fastId");
+        let fastTel = wx.getStorageSync("fastTel");
+        let fastJobId = wx.getStorageSync("fastJobId") ? wx.getStorageSync("fastJobId") : "";
+        if (fastId && fastTel) {
+          params.fastId = fastId;
+          params.phone = fastTel;
+        }
+        params.fast_job_id = fastJobId;
+
+        params.session_key = session_key
+        params.encryptedData = encryptedData
+        params.iv = iv
+        params.refid = app.globalData.refId
+        params.source = _source ? _source : "";
+        params.wechat_token = app.globalData.requestToken
+        //发起请求  
+        wx.request({
+          url: app.globalData.apiRequestUrl + '/user/make-user/',
+          data: params,
+          header: {
+            'content-type': 'application/json' // 默认值
+          },
+          success(res) {
+            let uinfo = res.data;
+            if (uinfo.errcode == "ok") {
+              let userInfo = {
+                userId: uinfo.data.id,
+                token: uinfo.data.sign.token,
+                tokenTime: uinfo.data.sign.time,
+              }
+              app.getUserUuid(userInfo)
+              callback(res)
+            }
+            // 授权用户执行操作
+            wx.hideToast();
+          },
+
+        })
+
+      }
+    })
+  },
+  bindGetUserInfo:function (e) {
+    let { token,id } = this.data;
+    let that = this;
+    if (e.detail.userInfo) {
+      wx.showToast({
+        title: '正在授权',
+        icon: 'loading',
+        duration: 5000
+      });
+      app.globalData.userInfo = e.detail.userInfo; //设置用户信息 
+      // 登录 获取在我们这里user_id
+      wx.login({
+        success: function (res) {
+          // 发送 res.code 到后台换取 openId, sessionKey, unionId
+          if (res.code) {
+            //发起网络请求
+            wx.request({
+              url: app.globalData.apiRequestUrl + 'user/user-info/',
+              data: {
+                code: res.code,
+                wechat_token: app.globalData.requestToken
+              },
+              success: function (resdata) {
+                var session_key = resdata.data.session_key
+                that.mini_user(session_key)
+              },
+              fail: function (error) {
+              }
+            })
+          } else {
+            console.log('登录失败！' + res.errMsg)
+          }
+        }
       })
-      return
-    }
-    app.appRequestAction({
+    }else{
+      console.log("deny")
+      app.appRequestAction({
         title: "发布中",
         mask: true,
         failTitle: "网络错误，保存失败！",
@@ -156,16 +314,29 @@ Page({
           area_id: id
         },
         success: function (res) {
-            let mydata = res.data;
-            if (mydata.errcode == "ok") {
-                wx.redirectTo({
-                  url: '/pages/fast/tips/tips',
-                })
-            }else{
-              app.showMyTips(mydata.errmsg);
-            }
-        }
-    })
+          let mydata = res.data;
+          if (mydata.errcode == "ok") {
+            wx.redirectTo({
+              url: '/pages/fast/tips/tips',
+            })
+          }else{
+            app.showMyTips(mydata.errmsg);
+            }}
+        })
+    }
+  },
+  //招工发布
+  sureAreaAction:function(e){
+      console.log("userInfo",e)
+      let { token,id } = this.data;
+      if(!id){
+        wx.showModal({
+          title: '提示',
+          content: "请选择招工所在地。",
+          showCancel: false
+        })
+        return
+      }
   },
   /**
    * 生命周期函数--监听页面加载

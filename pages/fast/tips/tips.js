@@ -19,6 +19,12 @@ Page({
       url: '/pages/published/recruit/list',
     })
   },
+  //登录状态下打开招工信息列表
+  manageRecruit:function () {
+    wx.reLaunch({
+      url: '/pages/published/recruit/list',
+    })
+  },
   bindGetUserInfo:function(e){
     let that = this;
     app.bindGetUserInfo(e, function (res) {

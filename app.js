@@ -256,6 +256,7 @@ App({
     //如果选择授权 则含有用户信息 
     var that = this
     if (e.detail.userInfo) {
+      console.log(e)
       wx.showToast({
         title: '正在授权',
         icon: 'loading',
@@ -273,6 +274,7 @@ App({
               data: {
                 code: res.code,
                 wechat_token: that.globalData.requestToken
+                
               },
               success: function (resdata) {
 
@@ -291,6 +293,7 @@ App({
         }
       })
     } else {
+      console.log(e)
       console.log('拒绝授权')
     }
   },

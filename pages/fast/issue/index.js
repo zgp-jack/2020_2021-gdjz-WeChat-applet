@@ -79,11 +79,28 @@ Page({
               url: '/pages/fast/code/code?token='+mydata.token+'&tel='+phone,
             })
           }
-        }else{
+        }
+        if (res.data.errcode == "unusable") {
           wx.showModal({
             title: '提示',
             content: res.data.errmsg,
-            showCancel: false
+            showCancel: true,
+            cancelColor:"#797979",
+            cancelText:"知道了",
+            confirmText:"联系客服",
+            confirmColor:"#009CFF",
+            success:function (res) {
+              if(res.confirm){
+                
+              }
+            }
+          })
+        }
+        if(res.data.errcode !== "unusable" && res.data.errcode !== "ok"){
+          wx.showModal({
+            title: '提示',
+            content: res.data.errmsg,
+            showCancel: false,
           })
         }
       }

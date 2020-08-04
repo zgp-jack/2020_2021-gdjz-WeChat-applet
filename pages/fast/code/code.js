@@ -57,7 +57,7 @@ Page({
             app.showMyTips(mydata.errmsg);
             //console.log(mydata);
             if (mydata.errcode == "ok") {
-                _this.setData({ sendrefresh: 100 });
+                _this.setData({ sendrefresh: 60 });
                 _this.initCodeTime();
             }
         }
