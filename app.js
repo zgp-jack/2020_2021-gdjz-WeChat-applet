@@ -3,7 +3,7 @@ App({
 
 
   onLaunch: function (e) {
-    
+   
   },
   globalData: {
     joingroup: false,

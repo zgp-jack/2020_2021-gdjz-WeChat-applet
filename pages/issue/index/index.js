@@ -780,9 +780,10 @@ Page({
    */
   onShow: function () {
     let pages = getCurrentPages();
-    let path = pages[0].__displayReporter.showReferpagepath
+    let index = pages.length-1
+    let path = pages[index].__displayReporter.showReferpagepath
     path = path.slice(0,-5)
-    if( path == "pages/fast/tips/tips"){
+    if( path == "pages/issue/tips/tips"){
       this.selectComponent("#issueok").show() 
     }
   },

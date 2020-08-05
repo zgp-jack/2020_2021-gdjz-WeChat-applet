@@ -100,7 +100,7 @@
   </view>
 </view>
 
-<issueok id="issueok" />
+<jisuissue id="issueok" />
 
 <!-- 
 <view class="common-userauth" wx:if="{{ !userInfo }}">

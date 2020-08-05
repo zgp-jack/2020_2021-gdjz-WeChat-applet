@@ -125,6 +125,7 @@ Page({
   onShow: function () {
     let pages = getCurrentPages();
     let path = pages[0].__displayReporter.showReferpagepath
+    
     path = path.slice(0,-5)
     if( path == "pages/fast/tips/tips" || path == "pages/fast/area/area"){
       this.selectComponent("#issueok").show() 
@@ -144,7 +145,6 @@ Page({
   onUnload: function () {
 
   },
-
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
