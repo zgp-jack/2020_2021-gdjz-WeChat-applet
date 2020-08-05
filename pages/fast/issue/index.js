@@ -91,7 +91,9 @@ Page({
             confirmColor:"#009CFF",
             success:function (res) {
               if(res.confirm){
-                
+                wx.makePhoneCall({
+                  phoneNumber: app.globalData.serverPhone
+                })
               }
             }
           })

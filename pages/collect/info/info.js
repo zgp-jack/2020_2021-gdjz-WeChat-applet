@@ -25,7 +25,19 @@ Page({
       resumeTitle: '找活信息'
     },
   },
-
+  publishJob:function () {
+    let userInfo = wx.getStorageSync("userInfo");
+    console.log(userInfo)
+    if (!userInfo || app.globalData.publishMethod === "fast_add_job") {
+      wx.navigateTo({
+        url: '/pages/fast/issue/index',
+      })
+    }else{
+      wx.navigateTo({
+        url: '/pages/issue/index/index',
+      })
+    }
+  },
   showThisList: function (e) {
     wx.redirectTo({ url: "/pages/collect/resume/resume"})
   },

@@ -24,6 +24,19 @@ Page({
     infoIndex: -1,
     showTopTips: false
   },
+  publishJob:function () {
+    let userInfo = wx.getStorageSync("userInfo");
+    console.log(userInfo)
+    if (!userInfo || app.globalData.publishMethod === "fast_add_job") {
+      wx.navigateTo({
+        url: '/pages/fast/issue/index',
+      })
+    }else{
+      wx.navigateTo({
+        url: '/pages/issue/index/index',
+      })
+    }
+  },
   closeHandTips:function(){
     this.setData({
       showTopTips: false

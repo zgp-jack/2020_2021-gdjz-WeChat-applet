@@ -676,6 +676,7 @@ Page({
       way: 'POST',
       params: mydata,
       success:function(res){
+        console.log("res",res)
         let resdata = res.data
         if(res.data.errcode == "ok"){
           wx.removeStorageSync('jiSuData')

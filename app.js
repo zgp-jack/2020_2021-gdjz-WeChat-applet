@@ -85,6 +85,20 @@ App({
     //极速发布与快速发布方式快。速发布（fast_add_job）普通发布（ordinary_add_job）
     publishMethod:""
   },
+  //是否为极速发布与快速发布请求
+  initJobView:function () {
+    let userInfo = wx.getStorageSync("userInfo");
+    if (userInfo) {
+      let that = this
+      wx.request({
+        url: that.globalData.apiRequestUrl+'index/get-job-view/',
+        success(res){
+          let publishMethod = res.data.add_job_type
+          that.globalData.publishMethod = publishMethod
+       }
+     }) 
+    } 
+  },
   initUserInfo: function (e) {
     let tpage = e.path;
 

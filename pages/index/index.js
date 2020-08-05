@@ -680,16 +680,19 @@ Page({
     // else this.setData({ showFastIssue: app.globalData.showFastIssue })
 
   },
-  initJobView:function () {
-      let that = this
-      wx.request({
-        url: app.globalData.apiRequestUrl+'index/get-job-view/',
-        success(res){
-          let publishMethod = res.data.add_job_type
-          app.globalData.publishMethod = publishMethod
-       }
-     })
-  },
+  // initJobView:function () {
+  //   let userInfo = wx.getStorageSync("userInfo");
+  //   if (userInfo) {
+  //     let that = this
+  //     wx.request({
+  //       url: app.globalData.apiRequestUrl+'index/get-job-view/',
+  //       success(res){
+  //         let publishMethod = res.data.add_job_type
+  //         app.globalData.publishMethod = publishMethod
+  //      }
+  //    }) 
+  //   } 
+  // },
   valiUserUrl: function (e) {
     let userInfo = this.data.userInfo;
     app.valiUserUrl(e, userInfo);
@@ -762,6 +765,7 @@ Page({
 
   // 根据发布方式不同发布招工：未登录或者“fast_add_job”是快速发布，“ordinary_add_job”是普通发布。
   publishJob:function () {
+    app.initJobView()
     let userInfo = wx.getStorageSync("userInfo");
     console.log(userInfo)
     if (!userInfo || app.globalData.publishMethod === "fast_add_job") {
@@ -839,19 +843,6 @@ Page({
 
     }
 
-  },
-  // 根据发布方式不同发布招工：未登录或者“fast_add_job”是快速发布，“ordinary_add_job”是普通发布。
-  publishJob:function () {
-    let userInfo = wx.getStorageSync("userInfo");
-    if (!userInfo || app.globalData.publishMethod === "fast_add_job") {
-    wx.navigateTo({
-        url: '/pages/fast/issue/index',
-    })
-    }else{
-    wx.navigateTo({
-        url: '/pages/issue/index/index',
-    })
-    }
   },
   timerLoading: function () {
     let _this = this;
@@ -989,7 +980,6 @@ Page({
     this.initUserinfo();
     footerjs.initMsgNum(this);
     this.initTurntable();
-    this.initJobView()
   },
   onPageScroll: function (e) {
     let top = e.scrollTop;

@@ -22,6 +22,19 @@ Page({
     infoIndex: -1,
     tipmsg: '提示：人工审核，该信息仅自己可见。'
   },
+  publishJob:function () {
+    let userInfo = wx.getStorageSync("userInfo");
+    console.log(userInfo)
+    if (!userInfo || app.globalData.publishMethod === "fast_add_job") {
+      wx.navigateTo({
+        url: '/pages/fast/issue/index',
+      })
+    }else{
+      wx.navigateTo({
+        url: '/pages/issue/index/index',
+      })
+    }
+  },
   jumpUsedInfo:function(e){
     let id = e.currentTarget.dataset.id
     wx.navigateTo({

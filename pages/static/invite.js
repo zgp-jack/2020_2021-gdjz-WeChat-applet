@@ -10,7 +10,19 @@ Page({
         shareUrl:'',
         userInfo:false
     },
-
+    publishJob:function () {
+        let userInfo = wx.getStorageSync("userInfo");
+        console.log(userInfo)
+        if (!userInfo || app.globalData.publishMethod === "fast_add_job") {
+          wx.navigateTo({
+            url: '/pages/fast/issue/index',
+          })
+        }else{
+          wx.navigateTo({
+            url: '/pages/issue/index/index',
+          })
+        }
+      },
     /**
      * 生命周期函数--监听页面加载
      */
