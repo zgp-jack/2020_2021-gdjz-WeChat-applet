@@ -672,10 +672,10 @@ Page({
             let tel = res.data.tel
             let jsdata = wx.getStorageSync('userJiSuPublishedData')
             if(jsdata){
-              jsdata.push({id: jobid,tel: tel})
+              jsdata.push({job_id: jobid,tel: tel})
               jsdata = jsdata.slice(jsdata.length-2)
             }else{
-              jsdata = [{id:jobid,tel:tel}]
+              jsdata = [{job_id:jobid,tel:tel}]
             }
             wx.setStorageSync('userJiSuPublishedData', jsdata)
           }

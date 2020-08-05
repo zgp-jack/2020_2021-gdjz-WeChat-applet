@@ -111,7 +111,8 @@ Page({
         params.data = userJiSuPublishedData || []
         //发起请求  
         wx.request({
-          url: app.globalData.apiRequestUrl + '/user/make-user/',
+          url: app.globalData.apiRequestUrl + '/user/haste-jpb-make-user/',
+          method: 'GET',
           data: params,
           header: {
             'content-type': 'application/json' // 默认值
