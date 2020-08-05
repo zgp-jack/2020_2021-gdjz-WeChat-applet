@@ -186,7 +186,7 @@ Page({
                         success:function (res) {
                           if(res.data.errcode == "ok"){
                             wx.redirectTo({
-                              url: '/pages/fast/tips/tips',
+                              url: '/pages/fast/tips/tips?token='+token,
                             })
                           }else{
                             app.showMyTips(mydata.errmsg);
@@ -228,7 +228,7 @@ Page({
                   let mydata = res.data;
                   if (mydata.errcode == "ok") {
                     wx.redirectTo({
-                      url: '/pages/fast/tips/tips',
+                      url: '/pages/fast/tips/tips?token='+token,
                     })
                   }else{
                     app.showMyTips(mydata.errmsg);
@@ -344,7 +344,7 @@ Page({
           let mydata = res.data;
           if (mydata.errcode == "ok") {
             wx.redirectTo({
-              url: '/pages/fast/tips/tips?token=' + that.data.token,
+              url: '/pages/fast/tips/tips?token=' + token,
             })
           }else{
             app.showMyTips(mydata.errmsg);
