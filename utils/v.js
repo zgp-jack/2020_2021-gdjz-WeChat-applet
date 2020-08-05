@@ -8,12 +8,12 @@ let vali = {
             return !reg.test(url) ? false : true;
         }
         vali.isChinese = function (v) {
-        var re = new RegExp("[\\u4E00-\\u9FFF]+", "g");
-          if (re.test(v)) {
-             return true;
-            }
+            var re = new RegExp("[\\u4E00-\\u9FFF]+", "g");
+            if (re.test(v)) {
+                return true;
+                }
 
-          return false;
+            return false;
         }
 
       vali.allChinese = function (v) {

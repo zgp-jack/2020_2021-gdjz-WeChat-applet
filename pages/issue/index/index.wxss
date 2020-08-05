@@ -16,6 +16,7 @@ page{
 }
 .issue-container{
   position: relative;
+  padding-bottom: 130rpx;
   z-index: 10;
 }
 .issue-textarea-title{
@@ -96,18 +97,7 @@ page{
   font-size: 28rpx;
   color: #A8A8A8;
 }
-.issue-sure-btn{
-  position: relative;
-  width: 100%;
-  background-color: #0099ff;
-  color: #fff;
-  line-height: 80rpx;
-  text-align: center;
-  font-size: 28rpx;
-  margin-top: 50rpx;
-  border-radius: 5rpx;
-  letter-spacing: 5rpx;
-}
+
 .common-picker-container{
   position: fixed;
   width: 100%;
@@ -305,4 +295,26 @@ page{
   padding: 20rpx 0;
   line-height: 45rpx;
   font-size: 28rpx;
+}
+.issue-sure-btn-box{
+  position: fixed;
+  width: 100%;
+  left: 0;
+  bottom: 0;
+  padding: 20rpx 30rpx;
+  z-index: 15;
+  background-color: white;
+  box-shadow: 0 0 2rpx #dcdcdc;
+}
+
+.issue-sure-btn{
+  position: relative;
+  width: 100%;
+  background-color: #0099ff;
+  color: #fff;
+  line-height: 80rpx;
+  text-align: center;
+  font-size: 28rpx;
+  border-radius: 5rpx;
+  letter-spacing: 5rpx;
 }

@@ -61,7 +61,10 @@
       <view class="issue-history-btn">重新发布</view>
     </view>
   </view> -->
-  <view class="issue-sure-btn" bindtap="publishRecruitInfo">确认发布</view>
+</view>
+
+<view class="issue-sure-btn-box">
+  <view class="issue-sure-btn" bindtap="publishRecruitInfo">确认发布</view> 
 </view>
 
 
@@ -97,7 +100,7 @@
   </view>
 </view>
 
-<issueok id="issueok" />
+<jisuissue id="issueok" />
 
 <!-- 
 <view class="common-userauth" wx:if="{{ !userInfo }}">
