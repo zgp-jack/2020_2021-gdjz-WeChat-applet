@@ -6,6 +6,7 @@ App({
     
   },
   globalData: {
+    fastToken:"",
     joingroup: false,
     copywechat: '',
     callphone: '',
@@ -80,7 +81,9 @@ App({
       ok: false,
       times: 0
     },
-    userSeeVideoTips: '抱歉，您今日领取次数已达上限，休息一下明天再来吧。'
+    userSeeVideoTips: '抱歉，您今日领取次数已达上限，休息一下明天再来吧。',
+    //极速发布与快速发布方式快。速发布（fast_add_job）普通发布（ordinary_add_job）
+    publishMethod:""
   },
   initUserInfo: function (e) {
     let tpage = e.path;

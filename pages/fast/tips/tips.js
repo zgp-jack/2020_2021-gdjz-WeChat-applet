@@ -6,6 +6,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    token:"",
     userInfo: false,
     icon: app.globalData.apiImgUrl + 'mini-fast-success-icon.png'
   },
@@ -42,8 +43,24 @@ Page({
             })
             app.globalData.userInfo = userInfo;
             wx.setStorageSync('userInfo', userInfo)
-            wx.reLaunch({
-              url: '/pages/published/recruit/list',
+            app.appRequestAction({
+              title: "发布中",
+              mask: true,
+              failTitle: "网络错误，保存失败！",
+              url: "fast-issue/to-job/",
+              way: "POST",
+              params: { 
+                token: that.data.token,
+              },
+              success: function (res) {
+                let mydata = res.data;
+                if (mydata.errcode == "ok") {
+                  wx.reLaunch({
+                    url: '/pages/published/recruit/list',
+                  })
+                }else{
+                  app.showMyTips(mydata.errmsg);
+                  }}
             })
           } else {
             app.showMyTips(uinfo.errmsg);
@@ -64,6 +81,9 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    this.setData({
+      token: options.token
+    })
     this.initUserinfo()
   },
 
@@ -78,7 +98,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    console.log("tips",this.data.token)
   },
 
   /**

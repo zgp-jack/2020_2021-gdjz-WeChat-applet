@@ -85,5 +85,5 @@ module.exports = {
     doPublishAction: doPublishAction,
     closePublishAction: closePublishAction,
     valiUserCard: valiUserCard,
-  initMsgNum: initMsgNum
+    initMsgNum: initMsgNum
 }

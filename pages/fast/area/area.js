@@ -148,6 +148,7 @@ Page({
             },
             success: (res) => {
               /**获取encryptdata **/
+              
               that.api_user(session_key,(res) =>{
                 let uinfo = res.data;
                 if (uinfo.errcode == "ok") {
@@ -160,7 +161,6 @@ Page({
                     userInfo: userInfo
                   })
                   app.globalData.userInfo = userInfo;
-                  console.log(app.globalData)
                   wx.setStorageSync('userInfo', userInfo)
                   app.appRequestAction({
                     title: "发布中",
@@ -174,20 +174,31 @@ Page({
                     },
                     success: function (res) {
                       let mydata = res.data;
-                      if (mydata.errcode == "ok") {
-                        wx.redirectTo({
-                          url: '/pages/fast/tips/tips',
-                        })
-                      }else{
-                        app.showMyTips(mydata.errmsg);
-                      }}
+                      app.appRequestAction({
+                        title: "发布中",
+                        mask: true,
+                        failTitle: "网络错误，保存失败！",
+                        url: "fast-issue/to-job/",
+                        way: "POST",
+                        params: {
+                          token: token,
+                        },
+                        success:function (res) {
+                          if(res.data.errcode == "ok"){
+                            wx.redirectTo({
+                              url: '/pages/fast/tips/tips',
+                            })
+                          }else{
+                            app.showMyTips(mydata.errmsg);
+                          }
+                        }
+                      })
+                    }
                   })
                 } else {
                   app.showMyTips(uinfo.errmsg);
                 }
-            })
-              //that.api_user(session_key);
-            }
+            })}
           })
         } else {
           /**获取encryptdata **/
@@ -204,9 +215,25 @@ Page({
               })
               app.globalData.userInfo = userInfo;
               wx.setStorageSync('userInfo', userInfo)
-              wx.reLaunch({
-                url: '/pages/fast/tips/tips',
-              })
+              app.appRequestAction({
+                title: "发布中",
+                mask: true,
+                failTitle: "网络错误，保存失败！",
+                url: "fast-issue/to-job/",
+                way: "POST",
+                params: { 
+                  token: token,
+                },
+                success: function (res) {
+                  let mydata = res.data;
+                  if (mydata.errcode == "ok") {
+                    wx.redirectTo({
+                      url: '/pages/fast/tips/tips',
+                    })
+                  }else{
+                    app.showMyTips(mydata.errmsg);
+                    }}
+                })
             } else {
               app.showMyTips(uinfo.errmsg);
             }
@@ -267,6 +294,7 @@ Page({
       }
     })
   },
+  //未登录状态下，确定地址后获取用户信息和授权
   bindGetUserInfo:function (e) {
     let { token,id } = this.data;
     let that = this;
@@ -302,7 +330,6 @@ Page({
         }
       })
     }else{
-      console.log("deny")
       app.appRequestAction({
         title: "发布中",
         mask: true,
@@ -317,7 +344,7 @@ Page({
           let mydata = res.data;
           if (mydata.errcode == "ok") {
             wx.redirectTo({
-              url: '/pages/fast/tips/tips',
+              url: '/pages/fast/tips/tips?token=' + that.data.token,
             })
           }else{
             app.showMyTips(mydata.errmsg);
@@ -327,7 +354,6 @@ Page({
   },
   //招工发布
   sureAreaAction:function(e){
-      console.log("userInfo",e)
       let { token,id } = this.data;
       if(!id){
         wx.showModal({

@@ -77,7 +77,6 @@ Page({
           token: token
         },
         success: function (res) {
-          console.log(res)
             let mydata = res.data;
             if (mydata.errcode == "ok") {
                 wx.redirectTo({

@@ -108,8 +108,6 @@ Page({
     turntableimg:app.globalData.apiImgUrl + 'mini-turntable-new.png',
     inviteturntable:app.globalData.apiImgUrl + 'inviteuser-getintegral.png',
     showturntable: true,
-    //极速发布与快速发布方式
-    publishMethod:""
   },
   getPhoneNumber:function(e){
     console.log(e)
@@ -687,11 +685,8 @@ Page({
       wx.request({
         url: app.globalData.apiRequestUrl+'index/get-job-view/',
         success(res){
-          console.log(res)
           let publishMethod = res.data.add_job_type
-          that.setData({
-            publishMethod,
-          })
+          app.globalData.publishMethod = publishMethod
        }
      })
   },
@@ -769,7 +764,7 @@ Page({
   publishJob:function () {
     let userInfo = wx.getStorageSync("userInfo");
     console.log(userInfo)
-    if (!userInfo || this.data.publishMethod === "fast_add_job") {
+    if (!userInfo || app.globalData.publishMethod === "fast_add_job") {
       wx.navigateTo({
         url: '/pages/fast/issue/index',
       })
@@ -844,6 +839,19 @@ Page({
 
     }
 
+  },
+  // 根据发布方式不同发布招工：未登录或者“fast_add_job”是快速发布，“ordinary_add_job”是普通发布。
+  publishJob:function () {
+    let userInfo = wx.getStorageSync("userInfo");
+    if (!userInfo || app.globalData.publishMethod === "fast_add_job") {
+    wx.navigateTo({
+        url: '/pages/fast/issue/index',
+    })
+    }else{
+    wx.navigateTo({
+        url: '/pages/issue/index/index',
+    })
+    }
   },
   timerLoading: function () {
     let _this = this;

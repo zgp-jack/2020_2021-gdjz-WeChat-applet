@@ -20,4 +20,4 @@
 </view>
 
 <!-- 发布招工成功提示框 -->
-<issueok  id="issueok" />
+<issueok  id="issueok" token="{{ }}"/>

@@ -67,9 +67,9 @@ Page({
       params: {content,phone},
       way: 'POST',
       success:function(res){
-        console.log(res)
         if(res.data.errcode == "ok"){
           let mydata = res.data.data
+          app.globalData.fastToken = mydata.token
           if(mydata.checked){
             wx.navigateTo({
               url: '/pages/fast/area/area?token='+mydata.token,
@@ -132,12 +132,6 @@ Page({
   startRecord:function(){
     restful.startRecord()
   },
-  //清除招工信息的内容
-  // clearContent:function () {
-  //   this.setData({
-  //     content:"",
-  //   })
-  // },
   /**
    * 生命周期函数--监听页面加载
    */
@@ -157,7 +151,9 @@ Page({
    */
   onShow: function () {
     let pages = getCurrentPages();
-    let path = pages[0].__displayReporter.showReferpagepath
+
+    let path = pages[1].__displayReporter.showReferpagepath
+    console.log("path",pages)
     path = path.slice(0,-5)
     if( path == "pages/fast/tips/tips" || path == "pages/fast/area/area"){
       this.selectComponent("#issueok").show() 

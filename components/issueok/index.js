@@ -42,6 +42,7 @@ Component({
       })
     },
     bindGetUserInfo:function(e){
+      let token = app.globalData.fastToken
       let that = this;
       app.bindGetUserInfo(e, function (res) {
         app.mini_user(res, function (res) {
@@ -58,8 +59,24 @@ Component({
               })
               app.globalData.userInfo = userInfo;
               wx.setStorageSync('userInfo', userInfo)
-              wx.reLaunch({
-                url: '/pages/published/recruit/list',
+              app.appRequestAction({
+                title: "发布中",
+                mask: true,
+                failTitle: "网络错误，保存失败！",
+                url: "fast-issue/to-job/",
+                way: "POST",
+                params: { 
+                  token: token,
+                },
+                success: function (res) {
+                  let mydata = res.data;
+                  if (mydata.errcode == "ok") {
+                    wx.reLaunch({
+                      url: '/pages/published/recruit/list',
+                    })
+                  }else{
+                    app.showMyTips(mydata.errmsg);
+                    }}
               })
             } else {
               app.showMyTips(uinfo.errmsg);
