@@ -355,7 +355,7 @@ Page({
             return false;
         }
         if (!v.regStrNone(cardInfo.username) || !v.chineseReg(cardInfo.username) || (cardInfo.username).trim().length<2) {
-            app.showMyTips("请正确输入2~5字纯中文姓名！");
+            app.showMyTips("请输入2~5字纯中文姓名！");
             return false;
           }
         if (!v.isMobile(phone)) {
@@ -435,17 +435,8 @@ Page({
         this.setData({ "cardInfo.title": e.detail.value })
     },
     userEnterUsername: function (e) {
-        let reg = /^[\u4e00-\u9fa5]$/
         let value = e.detail.value
-        let values = value.split("")
-        let userNames = []
-        for (let i = 0; i < values.length; i++) {
-            if (reg.test(values[i])) {
-                userNames.push(values[i])
-            }
-        }
-        let userName = userNames.join("")
-        this.setData({ "cardInfo.username": userName })
+        this.setData({ "cardInfo.username": value })
     },
     getTextareaFocus: function () {
         this.setData({ textareaActive: true })

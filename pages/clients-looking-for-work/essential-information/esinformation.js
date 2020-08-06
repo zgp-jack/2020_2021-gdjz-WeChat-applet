@@ -97,18 +97,9 @@ Page({
     })
   },
   name(e) {
-    let reg = /^[\u4e00-\u9fa5]$/
-        let value = e.detail.value
-        let values = value.split("")
-        let userNames = []
-        for (let i = 0; i < values.length; i++) {
-            if (reg.test(values[i])) {
-                userNames.push(values[i])
-            }
-        }
-    let userName = userNames.join("")
+    let value = e.detail.value
     this.setData({
-      name: userName
+      name: value
     })
   },
   sex: function (e) {
@@ -543,7 +534,7 @@ Page({
     if ((vertifyNum.isNull(this.data.name) || this.data.name.length < 2 || this.data.name.length > 5) || !vertifyNum.isChinese(this.data.name)) {
       wx.showModal({
         title: '温馨提示',
-        content: '请输入2~5字纯中文姓名',
+        content: '请输入2~5字纯中文姓名!',
         showCancel: false,
         success(res) { }
       })

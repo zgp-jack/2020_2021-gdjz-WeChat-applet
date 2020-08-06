@@ -560,7 +560,7 @@ Page({
       return false;
     }
     if (!v.regStrNone(cardInfo.username) || !v.chineseReg(cardInfo.username) || (cardInfo.username).trim().length<2) {
-      app.showMyTips("请正确输入2~5字纯中文姓名！");
+      app.showMyTips("请输入2~5字纯中文姓名!");
       return false;
     }
     if (!v.isMobile(phone)) {
@@ -699,51 +699,9 @@ Page({
     })
   },
   userEnterUsername: function (e) {
-    //一
-    // var that = this
-    // let value = (e.detail.value || "").trim()
-    // if (value) {
-    //   const reg =  /[^\u4e00-\u9fa5]/ig
-    //   if (reg.test(value)) {
-    //     console.log("if")
-    //     value = value.replace(reg, '')
-    //     console.log(value)
-    //     // var weixin = that.data.cardInfo.username
-    //     this.setData({
-    //       "cardInfo.username": value
-    //     })
-    //   }
-    //   else {
-    //     console.log("else")
-    //     var weixin = that.data.cardInfo.username
-    //     this.setData({
-    //       "cardInfo.username": value
-    //     })
-    //   }
-    // }
-    
-    //二
-    // let reg = /^[\u4e00-\u9fa5]{1,5}/ig
-    // let value = e.detail.value
-    // console.log(value)
-    // let userName = value.match(reg)
-    // console.log(userName)
-    // this.setData({
-    //   "cardInfo.username": userName
-    // })
-    //三
-    let reg = /^[\u4e00-\u9fa5]$/
     let value = e.detail.value
-    let values = value.split("")
-    let userNames = []
-    for (let i = 0; i < values.length; i++) {
-        if (reg.test(values[i])) {
-            userNames.push(values[i])
-          }
-        }
-    let userName = userNames.join("")
     this.setData({
-      "cardInfo.username": userName
+      "cardInfo.username": value
     })
   },
   userEnterContent: function (e) {
