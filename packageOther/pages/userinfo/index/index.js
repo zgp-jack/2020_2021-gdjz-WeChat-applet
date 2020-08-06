@@ -1,4 +1,5 @@
 // pages/userinfo/index/index.js
+let vali = require("../../../../utils/v.js");
 const app = getApp();
 Page({
 
@@ -31,26 +32,23 @@ Page({
         this.setData({ allowEditName:true })
     },
     userEntername:function(e){
-        let reg = /^[\u4e00-\u9fa5]$/
         let value = e.detail.value
-        let values = value.split("")
-        let userNames = []
-        for (let i = 0; i < values.length; i++) {
-            if (reg.test(values[i])) {
-                userNames.push(values[i])
-            }
-        }
-        let userName = userNames.join("")
         this.setData({
-            userName: userName
+            userName: value
         })
     },
     cancleEditInfo:function(){
         this.setData({ allowEditName: false })
     },
     sureEditInfo:function(){
+        let v = vali.v.new();
         let _this = this;
+        let username = this.data.userName
         let userInfo = this.data.userInfo;
+        if (!v.regStrNone(username) || !v.chineseReg(username) || (username).trim().length<2) {
+            app.showMyTips("请输入2~5字纯中文姓名！");
+            return false;
+        }
         wx.showLoading({ title: '正在修改姓名' })
         app.doRequestAction({
             url:"user/update-username/",
