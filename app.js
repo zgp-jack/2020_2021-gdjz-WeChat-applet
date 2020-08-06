@@ -91,50 +91,38 @@ App({
   //是否为极速发布与快速发布请求,快速发布与极速发布跳转
   initJobView:function () {
     let userInfo = wx.getStorageSync("userInfo");
-    if (userInfo && this.globalData.publish.publishMethodRequestNumber === 0) {
-      let that = this
-      wx.request({
-        url: that.globalData.apiRequestUrl+'index/get-job-view/',
-        success(res){
-          let publishMethod = res.data.add_job_type
-          that.globalData.publish.publishMethod = publishMethod
-          that.globalData.publish.publishMethodRequestNumber += 1
-          wx.navigateTo({
-            url: '/pages/issue/index/index',
-          })
-       },
-        fail () {
-          that.globalData.publish.publishMethod = "fast_add_job"
-          wx.navigateTo({
-            url: '/pages/fast/issue/index',
-          })
-        }
-     })
-    }
-    if (userInfo && this.globalData.publish.publishMethodRequestNumber === 1) {
-      wx.navigateTo({
-        url: '/pages/issue/index/index',
-      })
-    }
-    if (!userInfo || app.globalData.publish.publishMethod === "fast_add_job") {
+    let that = this
+    if(userInfo){
+      if(this.globalData.publish.publishMethodRequestNumber === 0){
+        this.appRequestAction({
+          url: 'index/get-job-view/',
+          success(res){
+            let publishMethod = res.data.add_job_type
+            that.globalData.publish.publishMethod = publishMethod
+            that.globalData.publish.publishMethodRequestNumber = 1
+            wx.navigateTo({
+              url: '/pages/issue/index/index',
+            })
+         },
+          fail () {
+            that.globalData.publish.publishMethod = "fast_add_job"
+            wx.navigateTo({
+              url: '/pages/fast/issue/index',
+            })
+          }
+       })
+      }else{
+        wx.navigateTo({
+          url: '/pages/issue/index/index',
+        })
+      }
+    }else{
       wx.navigateTo({
         url: '/pages/fast/issue/index',
       })
     }
+    
   },
-  //快速发布极速发布的跳转页面
-  // publishJob: function () {
-  //   let userInfo = wx.getStorageSync("userInfo");
-  //   if (!userInfo || app.globalData.publish.publishMethod === "fast_add_job") {
-  //     wx.navigateTo({
-  //       url: '/pages/fast/issue/index',
-  //     })
-  //   }else{
-  //     wx.navigateTo({
-  //       url: '/pages/issue/index/index',
-  //     })
-  //   }
-  // },
   initUserInfo: function (e) {
     let tpage = e.path;
 
