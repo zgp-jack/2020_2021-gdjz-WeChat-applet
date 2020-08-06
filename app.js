@@ -82,29 +82,59 @@ App({
       times: 0
     },
     userSeeVideoTips: '抱歉，您今日领取次数已达上限，休息一下明天再来吧。',
-    //极速发布与快速发布方式快。速发布（fast_add_job）普通发布（ordinary_add_job）
-    publishMethod:"",
-    //发布方式请求次数，只需请求一次
-    publishMethodRequestNumber:0
+    //极速发布与快速发布方式快。速发布（fast_add_job）普通发布（ordinary_add_job）发布方式请求次数，只需请求一次
+    publish: {
+      publishMethod:"",
+      publishMethodRequestNumber:0
+    }
   },
-  //是否为极速发布与快速发布请求
+  //是否为极速发布与快速发布请求,快速发布与极速发布跳转
   initJobView:function () {
     let userInfo = wx.getStorageSync("userInfo");
-    if (userInfo && this.globalData.publishMethodRequestNumber === 0) {
+    if (userInfo && this.globalData.publish.publishMethodRequestNumber === 0) {
       let that = this
       wx.request({
         url: that.globalData.apiRequestUrl+'index/get-job-view/',
         success(res){
           let publishMethod = res.data.add_job_type
-          that.globalData.publishMethod = publishMethod
-          that.globalData.publishMethodRequestNumber += 1
+          that.globalData.publish.publishMethod = publishMethod
+          that.globalData.publish.publishMethodRequestNumber += 1
+          wx.navigateTo({
+            url: '/pages/issue/index/index',
+          })
        },
         fail () {
-          that.globalData.publishMethod = "fast_add_job"
+          that.globalData.publish.publishMethod = "fast_add_job"
+          wx.navigateTo({
+            url: '/pages/fast/issue/index',
+          })
         }
-     }) 
-    } 
+     })
+    }
+    if (userInfo && this.globalData.publish.publishMethodRequestNumber === 1) {
+      wx.navigateTo({
+        url: '/pages/issue/index/index',
+      })
+    }
+    if (!userInfo || app.globalData.publish.publishMethod === "fast_add_job") {
+      wx.navigateTo({
+        url: '/pages/fast/issue/index',
+      })
+    }
   },
+  //快速发布极速发布的跳转页面
+  // publishJob: function () {
+  //   let userInfo = wx.getStorageSync("userInfo");
+  //   if (!userInfo || app.globalData.publish.publishMethod === "fast_add_job") {
+  //     wx.navigateTo({
+  //       url: '/pages/fast/issue/index',
+  //     })
+  //   }else{
+  //     wx.navigateTo({
+  //       url: '/pages/issue/index/index',
+  //     })
+  //   }
+  // },
   initUserInfo: function (e) {
     let tpage = e.path;
 

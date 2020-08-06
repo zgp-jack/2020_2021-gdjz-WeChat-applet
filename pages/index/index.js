@@ -766,17 +766,6 @@ Page({
   // 根据发布方式不同发布招工：未登录或者“fast_add_job”是快速发布，“ordinary_add_job”是普通发布。
   publishJob:function () {
     app.initJobView()
-    let userInfo = wx.getStorageSync("userInfo");
-    console.log(userInfo)
-    if (!userInfo || app.globalData.publishMethod === "fast_add_job") {
-      wx.navigateTo({
-        url: '/pages/fast/issue/index',
-      })
-    }else{
-      wx.navigateTo({
-        url: '/pages/issue/index/index',
-      })
-    }
   },
 
   // 共用footer

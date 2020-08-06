@@ -24,7 +24,6 @@ function initMsgNum(_this){
 }
 
 function doPublishAction (_this) {
-    app.initJobView()
     _this.setData({
         showPublishBox: true
     })
