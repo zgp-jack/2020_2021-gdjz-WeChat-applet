@@ -872,16 +872,14 @@ Page({
      */
     onShareAppMessage: function () {
         //this.userShareAction();
-      let tel = this.data.info.tel_str;
       
         if (this.data.shareFlag) this.userShareAddIntegral();
-        let userId = this.data.userInfo.userId
         let _this = this;
         setTimeout(function () {
             _this.setData({ isShare: false })
         }, 500);
       let commonShareImg = app.globalData.commonShareImg;
-      let is_check = tshi.data.is_check;
+      let is_check = this.data.info.is_check;
       let path = is_check == '2' ? "/pages/detail/info/info?home=1&id=" + this.data.infoId : '/pages/index/index'
       return {
         title: this.data.info.title,
