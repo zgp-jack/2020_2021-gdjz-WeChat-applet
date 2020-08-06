@@ -3,14 +3,14 @@ App({
 
 
   onLaunch: function (e) {
-   
+
   },
   globalData: {
-    fastToken:"",
+    fastToken: "",
     joingroup: false,
     copywechat: '',
     callphone: '',
-    procity:0,
+    procity: 0,
     version: "1.0.2",
     complaincontent: '请填写5~100字，必须含有汉字。（恶意投诉会被封号，请谨慎投诉！）',
     areaIs: false,
@@ -44,7 +44,7 @@ App({
     commonJixieAd: "http://cdn.yupao.com/miniprogram/images/list-ad-newjixie.png?t=" + new Date().getTime(),
     // apiRequestUrl:"http://60.205.221.14:8087/",
     // apiRequestUrl: "http://miniapi.kkbbi.com/",
-    apiRequestUrl:"https://miniapi.zhaogong.vrtbbs.com/",
+    apiRequestUrl: "https://miniapi.zhaogong.vrtbbs.com/",
     // apiRequestUrl:"http://miniapitest.zhaogong.vrtbbs.com/",
     // apiRequestUrl: "https://newyupaomini.54xiaoshuo.com/",
     // apiRequestUrl: "http://miniapi.qsyupao.com/",
@@ -72,8 +72,8 @@ App({
     },
     gdApiKey: "20f12aae660c04de86f993d3eff590a0",
     areaDataNum: 1,
-    hotAreaData:{
-      data:[],
+    hotAreaData: {
+      data: [],
       use: false
     },
     firstSaveUserLoginLog: false,
@@ -84,44 +84,54 @@ App({
     userSeeVideoTips: '抱歉，您今日领取次数已达上限，休息一下明天再来吧。',
     //极速发布与快速发布方式快。速发布（fast_add_job）普通发布（ordinary_add_job）发布方式请求次数，只需请求一次
     publish: {
-      publishMethod:"",
-      publishMethodRequestNumber:0
+      publishMethod: "",
+      publishMethodRequestNumber: 0
     }
   },
   //是否为极速发布与快速发布请求,快速发布与极速发布跳转
-  initJobView:function () {
+  initJobView: function () {
     let userInfo = wx.getStorageSync("userInfo");
     let that = this
-    if(userInfo){
-      if(this.globalData.publish.publishMethodRequestNumber === 0){
-        this.appRequestAction({
+    if (userInfo) {
+      if (that.globalData.publish.publishMethodRequestNumber === 0) {
+        that.appRequestAction({
           url: 'index/get-job-view/',
-          success(res){
+          success(res) {
             let publishMethod = res.data.add_job_type
             that.globalData.publish.publishMethod = publishMethod
-            that.globalData.publish.publishMethodRequestNumber = 1
-            wx.navigateTo({
-              url: '/pages/issue/index/index',
-            })
-         },
-          fail () {
-            that.globalData.publish.publishMethod = "fast_add_job"
+            that.globalData.publish.publishMethodRequestNumber += 1
+            if (publishMethod === "ordinary_add_job") {
+              wx.navigateTo({
+                url: '/pages/issue/index/index',
+              })
+            } else {
+              wx.navigateTo({
+                url: '/pages/fast/issue/index',
+              })
+            }
+          },
+          fail() {
             wx.navigateTo({
               url: '/pages/fast/issue/index',
             })
           }
-       })
-      }else{
-        wx.navigateTo({
-          url: '/pages/issue/index/index',
         })
+      } else {
+        if (that.globalData.publish.publishMethod === "ordinary_add_job") {
+          wx.navigateTo({
+            url: '/pages/issue/index/index',
+          })
+        } else {
+          wx.navigateTo({
+            url: '/pages/fast/issue/index',
+          })
+        }
       }
-    }else{
+    } else {
       wx.navigateTo({
         url: '/pages/fast/issue/index',
       })
     }
-    
   },
   initUserInfo: function (e) {
     let tpage = e.path;
@@ -236,7 +246,10 @@ App({
       version: this.globalData.version
     }
     if (_options.hasOwnProperty("header")) {
-      header = {...header,..._options.header}
+      header = {
+        ...header,
+        ..._options.header
+      }
     }
 
     if (userInfo) {
@@ -315,7 +328,7 @@ App({
               data: {
                 code: res.code,
                 wechat_token: that.globalData.requestToken
-                
+
               },
               success: function (resdata) {
 
@@ -455,7 +468,7 @@ App({
         title: _msg,
         icon: 'none',
         duration: 2000,
-        success: function () { }
+        success: function () {}
       })
     }, 1)
 
@@ -510,14 +523,14 @@ App({
       }
     })
   },
-  valiImgRules:function(img){
+  valiImgRules: function (img) {
     let r = /\.\w+$/;
-    let types = ['bmp','jpg','png','gif','jpeg'];
+    let types = ['bmp', 'jpg', 'png', 'gif', 'jpeg'];
     let type = img.match(r)
-    if(type){
-      let str = type[0].substr(1,type[0].length)
+    if (type) {
+      let str = type[0].substr(1, type[0].length)
       str = str.toLowerCase()
-      let ok = types.find(item=>item === str)
+      let ok = types.find(item => item === str)
       return ok ? true : false
     }
     return false
@@ -532,12 +545,12 @@ App({
       sizeType: ['compressed'],
       sourceType: ['album', 'camera'],
       success: res => {
-        if(res.errMsg == "chooseImage:ok"){
+        if (res.errMsg == "chooseImage:ok") {
           let img = res.tempFiles[0].path
           let ok = this.valiImgRules(img)
-          if(ok){
+          if (ok) {
             _this.detailUpimg(1, res, callback);
-          }else{
+          } else {
             wx.hideLoading()
             _this.showMyTips('图片格式不正确,请重新选择')
           }
@@ -562,9 +575,9 @@ App({
             success: function (res) {
               let img = res.tempFiles[0].path
               let ok = that.valiImgRules(img)
-              if(ok){
+              if (ok) {
                 that.detailUpimg(2, res, callback, _type);
-              }else{
+              } else {
                 wx.hideLoading()
                 that.showMyTips('图片格式不正确,请重新选择')
               }
@@ -578,9 +591,9 @@ App({
             success: function (res) {
               let img = res.tempFiles[0].path
               let ok = that.valiImgRules(img)
-              if(ok){
+              if (ok) {
                 that.detailUpimg(2, res, callback, _type);
-              }else{
+              } else {
                 wx.hideLoading()
                 that.showMyTips('图片格式不正确,请重新选择')
               }
@@ -621,7 +634,7 @@ App({
     let _type = e.currentTarget.dataset.type;
     (_type == "1") ? wx.reLaunch({
       url: _url
-    }) : wx.navigateTo({
+    }): wx.navigateTo({
       url: _url
     });
   },
@@ -761,7 +774,7 @@ App({
         _this.globalData.userGapTime = _this.globalData.appNetTime - parseInt(new Date().getTime() / 1000);
         callback ? callback() : ""
       },
-      fail: function () { }
+      fail: function () {}
     })
   },
   initFirstTips: function (_this) {
@@ -807,7 +820,7 @@ App({
           });
         }
       },
-      fail: function () { }
+      fail: function () {}
     })
   },
   showDetailInfo: function (e) {
@@ -900,7 +913,7 @@ App({
             title: '是否授权当前位置',
             content: '需要获取您的地理位置，请确认授权，否则将不能为你自动推荐位置',
             success: function (res) {
-              if (res.cancel) { } else if (res.confirm) {
+              if (res.cancel) {} else if (res.confirm) {
                 wx.openSetting({
                   success: function (data) {
 
@@ -955,7 +968,7 @@ App({
     }
   },
   getAreaData: function (_this, callback) {
-   
+
     wx.showLoading({
       title: '加载中',
       mask: true
@@ -979,7 +992,7 @@ App({
         _this.setData({
           areadata: res.data
         })
-        callback?callback(res.data):""
+        callback ? callback(res.data) : ""
         wx.hideLoading()
         wx.setStorageSync('areadata', mydata)
       }
@@ -1068,7 +1081,9 @@ App({
       url: "member/original-message/",
       way: "POST",
       hideLoading: true,
-      params: { terminal_type: _this.terminal_type },
+      params: {
+        terminal_type: _this.terminal_type
+      },
       success: function (res) {
         if (res.data.errcode == "ok") {
           _this.globalData.jobNumber = res.data.data.jobNumber
@@ -1123,13 +1138,13 @@ App({
     }
   },
 
-  getNoticeInfo:function(userinfo,callback){
+  getNoticeInfo: function (userinfo, callback) {
     let flag = this.globalData.firstSaveUserLoginLog
-    if(userinfo&&userinfo.userId){
+    if (userinfo && userinfo.userId) {
       userinfo.record = flag ? 0 : 1
-    }else{
+    } else {
       userinfo = {
-        record : 0
+        record: 0
       }
     }
     let that = this
@@ -1143,7 +1158,7 @@ App({
         that.globalData.joingroup = mydata.join_group_config
         that.globalData.copywechat = mydata.wechat.number
         that.globalData.callphone = mydata.phone
-        if(userinfo.record) that.globalData.firstSaveUserLoginLog = true
+        if (userinfo.record) that.globalData.firstSaveUserLoginLog = true
       },
       fail: function (err) {
         wx.showToast({
@@ -1154,7 +1169,7 @@ App({
       }
     })
   },
-  valiUserVideoAdStatus:function(callback,flag){
+  valiUserVideoAdStatus: function (callback, flag) {
     let vf = flag || 1
     let _this = this;
     // let userInfo = wx.getStorageSync('userInfo')
@@ -1164,35 +1179,37 @@ App({
     // userInfo.uuid = userUuid
     //userInfo.check_type = vf
     this.appRequestAction({
-      url:'/member/get-adv-status/',
+      url: '/member/get-adv-status/',
       way: 'GET',
       mask: true,
-      params:{check_type:vf},
-      success:(res) => {
+      params: {
+        check_type: vf
+      },
+      success: (res) => {
         let mydata = res.data
-        if(mydata.errcode == 'ok'){
+        if (mydata.errcode == 'ok') {
           _this.globalData.userSeeVideoTimes = {
             ok: true,
             times: mydata.data.times
           }
-        }else if(mydata.errcode == 'to_invited'){
+        } else if (mydata.errcode == 'to_invited') {
           _this.globalData.userSeeVideoTimes.times = {
             ok: true,
             times: 0
           }
         }
-        callback&&callback(mydata)
+        callback && callback(mydata)
       },
-      fail:(err) => {
+      fail: (err) => {
         _this.showMyTips('网络错误，加载失败')
       }
     })
   },
-  userGetTempIntegral:function(flag, callback){
+  userGetTempIntegral: function (flag, callback) {
     let _this = this
     let userInfo = wx.getStorageSync('userInfo')
     let userUuid = wx.getStorageSync('userUuid')
-    if(!userInfo) return
+    if (!userInfo) return
     userInfo.mid = userInfo.userId
     userInfo.uuid = userUuid
     userInfo.add_rank = flag || 0
@@ -1201,27 +1218,27 @@ App({
       way: 'POST',
       params: userInfo,
       mask: true,
-      success: function(res){
+      success: function (res) {
         let mydata = res.data
         wx.showModal({
           title: '提示',
           content: mydata.errmsg || '',
           showCancel: false,
         })
-        if(mydata.errcode == "ok"){
+        if (mydata.errcode == "ok") {
           _this.globalData.userSeeVideoTimes.times = mydata.data.times
-        }else if(mydata.errcode == "to_invited"){
+        } else if (mydata.errcode == "to_invited") {
           _this.globalData.userSeeVideoTimes.times = 0
         }
-        callback&&callback(mydata)
+        callback && callback(mydata)
       },
-      fail:()=>{
+      fail: () => {
         _this.showMyTips('网络错误，加载失败！')
       }
     })
   },
   // 多图上传
-  multiImageUpload:function(num,callback){
+  multiImageUpload: function (num, callback) {
 
     let _this = this;
     wx.showLoading({
@@ -1232,9 +1249,9 @@ App({
       sizeType: ['compressed'],
       sourceType: ['album', 'camera'],
       success: res => {
-        if(res.errMsg == "chooseImage:ok"){
+        if (res.errMsg == "chooseImage:ok") {
           _this.multiImageUploading(res.tempFiles, callback);
-        }else{
+        } else {
           wx.showModal({
             title: '提示',
             content: '图片上传失败，请重新上传',
@@ -1247,7 +1264,7 @@ App({
       }
     })
   },
-  multiImageUploading:function(tempFiles,callback){
+  multiImageUploading: function (tempFiles, callback) {
     let len = tempFiles.length
     let start = 0
     let arr = []
@@ -1257,56 +1274,59 @@ App({
       icon: 'loading',
       mask: true
     })
-    for(let i = 0; i< len;i++){
+    for (let i = 0; i < len; i++) {
       let img = tempFiles[i].path
       let ok = this.valiImgRules(img)
-      if(ok){
+      if (ok) {
         wx.uploadFile({
           url: _this.globalData.apiUploadImg,
           filePath: img,
           name: 'file',
           success(res) {
             let mydata = JSON.parse(res.data);
-            start+=1
+            start += 1
             if (mydata.errcode == "ok") {
-              arr.push({httpurl:mydata.httpurl,url:mydata.url})
-              if(start == len){
+              arr.push({
+                httpurl: mydata.httpurl,
+                url: mydata.url
+              })
+              if (start == len) {
                 wx.hideLoading()
                 callback(arr)
               }
-            }else {
+            } else {
               wx.hideToast();
               wx.showModal({
                 title: '提示',
                 content: '图片上传失败，请重新上传',
                 showCancel: false,
-                success:function(){
+                success: function () {
                   callback(arr)
                 }
               })
             }
           },
           fail: function () {
-            start+=1
+            start += 1
             wx.hideToast();
             wx.showModal({
               title: '提示',
               content: '图片上传失败，请重新上传',
               showCancel: false,
-              success:function(){
+              success: function () {
                 callback(arr)
               }
             })
           }
         })
-      }else{
-        start+=1
+      } else {
+        start += 1
         wx.hideLoading()
         wx.showModal({
           title: '提示',
           content: '图片上传失败，请重新上传',
           showCancel: false,
-          success:function(){
+          success: function () {
             callback(arr)
           }
         })

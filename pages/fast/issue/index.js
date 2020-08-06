@@ -12,13 +12,13 @@ Page({
     phone: '',
     showTel: false,
   },
-  checkType: function(obj, _type){
+  checkType: function (obj, _type) {
     var _re = Object.prototype.toString.call(obj).slice(8, -1).toLowerCase();
-    if(_type == undefined) return _re;
+    if (_type == undefined) return _re;
     if (_re == _type) return true;
     return false;
   },
-  enterContent:function(e){
+  enterContent: function (e) {
     let val = e.detail.value;
     this.setData({
       content: val
@@ -26,57 +26,96 @@ Page({
     let content = val.replace(/\s+/g, "");
     let _partten = /1[3-9]\d{9}/g;
     let phone = content.match(_partten);
-    if(this.checkType(phone,'array')){
-        let tel = phone[0];
-        this.setData({ showTel: true, phone: tel });
+    let regx = /^[\u4E00-\u9FA5]{3}/g;
+    if (regx.test(content)) {
+      this.setData({
+        showTel: true,
+      });
+    }
+    if (this.checkType(phone, 'array')) {
+      let tel = phone[0];
+      this.setData({
+        showTel: true,
+        phone: tel
+      });
     }
   },
-  enterPhone:function(e){
+  enterPhone: function (e) {
     this.setData({
       phone: e.detail.value
     })
   },
-  contentBlur:function(){
+  contentBlur: function () {
     if (this.data.phone) {
       this.setData({
         showTel: true
       })
     }
   },
-  publishRecurit:function(){
+  publishRecurit: function () {
     let vali = v.v.new();
-    let { content, phone } = this.data
-    if(content == ""){
-      app.showMyTips('请输入招工详情。')
+    let {
+      content,
+      phone
+    } = this.data
+    if (content == "") {
+      wx.showModal({
+        title: '提示',
+        content: '请输入招工详情。',
+        showCancel: false
+      })
       return false;
     }
-    if(content.length < 3 || content.length > 500){
-      app.showMyTips('请正确输入3~500字招工详情。')
+    if (!vali.isChinese(content) && (content.length < 3 || content.length > 500)) {
+      wx.showModal({
+        title: '提示',
+        content: '请正确输入3~500字招工详情,必须含有汉字。',
+        showCancel: false
+      })
+      return false
+    }
+    if (content.length < 3 || content.length > 500) {
+      wx.showModal({
+        title: '提示',
+        content: '请正确输入3~500字招工详情。',
+        showCancel: false
+      })
       return false;
     }
     if (phone == "") {
-      app.showMyTips('请输入联系电话。')
+      wx.showModal({
+        title: '提示',
+        content: '请输入联系电话。',
+        showCancel: false
+      })
       return false
     }
-    if(phone && !vali.isMobile(phone)){
-      app.showMyTips('请正确输入11位联系电话。')
+    if (phone && !vali.isMobile(phone)) {
+      wx.showModal({
+        title: '提示',
+        content: '请正确输入11位联系电话。',
+        showCancel: false
+      })
       return false;
     }
     app.appRequestAction({
       url: 'fast-issue/issue/',
-      params: {content,phone},
+      params: {
+        content,
+        phone
+      },
       way: 'POST',
-      success:function(res){
-        if(res.data.errcode == "ok"){
+      success: function (res) {
+        if (res.data.errcode == "ok") {
           let mydata = res.data.data
           app.globalData.fastToken = mydata.token
-          if(mydata.checked){
+          if (mydata.checked) {
             wx.navigateTo({
-              url: '/pages/fast/area/area?token='+mydata.token,
+              url: '/pages/fast/area/area?token=' + mydata.token,
             })
-          }else{
+          } else {
             wx.navigateTo({
-              url: '/pages/fast/code/code?token='+mydata.token+'&tel='+phone,
+              url: '/pages/fast/code/code?token=' + mydata.token + '&tel=' + phone,
             })
           }
         }
@@ -85,12 +124,12 @@ Page({
             title: '提示',
             content: res.data.errmsg,
             showCancel: true,
-            cancelColor:"#797979",
-            cancelText:"知道了",
-            confirmText:"联系客服",
-            confirmColor:"#009CFF",
-            success:function (res) {
-              if(res.confirm){
+            cancelColor: "#797979",
+            cancelText: "知道了",
+            confirmText: "联系客服",
+            confirmColor: "#009CFF",
+            success: function (res) {
+              if (res.confirm) {
                 wx.makePhoneCall({
                   phoneNumber: app.globalData.serverPhone
                 })
@@ -98,7 +137,7 @@ Page({
             }
           })
         }
-        if(res.data.errcode !== "unusable" && res.data.errcode !== "ok"){
+        if (res.data.errcode !== "unusable" && res.data.errcode !== "ok") {
           wx.showModal({
             title: '提示',
             content: res.data.errmsg,
@@ -108,30 +147,33 @@ Page({
       }
     })
   },
-  clearContent:function(){
+  clearContent: function () {
     this.setData({
       content: ''
     })
   },
-  initClipboardData:function(){
+  initClipboardData: function () {
     let _this = this;
-    try{
-        wx.getClipboardData({
-            success(res) {
-              let d = res.data;
-              let p = /1[3-9]\d{9}/g;
-              let phone = d.match(p);
-              if (_this.checkType(phone, 'array')) {
-                _this.setData({ content: res.data, phone: phone[0],showTel: true })
-              }
-            }
-        })
-    }
-    catch(err){
-        console.log(err);
+    try {
+      wx.getClipboardData({
+        success(res) {
+          let d = res.data;
+          let p = /1[3-9]\d{9}/g;
+          let phone = d.match(p);
+          if (_this.checkType(phone, 'array')) {
+            _this.setData({
+              content: res.data,
+              phone: phone[0],
+              showTel: true
+            })
+          }
+        }
+      })
+    } catch (err) {
+      console.log(err);
     }
   },
-  startRecord:function(){
+  startRecord: function () {
     restful.startRecord()
   },
   /**
@@ -155,10 +197,10 @@ Page({
     let pages = getCurrentPages();
 
     let path = pages[1].__displayReporter.showReferpagepath
-    console.log("path",pages)
-    path = path.slice(0,-5)
-    if( path == "pages/fast/tips/tips" || path == "pages/fast/area/area"){
-      this.selectComponent("#issueok").show() 
+    console.log("path", pages)
+    path = path.slice(0, -5)
+    if (path == "pages/fast/tips/tips" || path == "pages/fast/area/area") {
+      this.selectComponent("#issueok").show()
     }
   },
 
