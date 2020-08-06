@@ -51,6 +51,9 @@ Page({
     codeTips: '获取验证码',
     selectedClassifies:[],
     icon: app.globalData.apiImgUrl + "userauth-topicon.png",
+    normalTel: "18349296434",
+    placeholder: '请粘贴或输入您要发布的招工信息（如：四川成都找木工，联系电话：18349296434）',
+    userEnteredTel: false
   },
   // 设置缓存保留已填写信息
   setEnterInfo:function(name,data){
@@ -70,7 +73,8 @@ Page({
   userEnterPhone:function(e){
     let val = e.detail.value
     this.setData({
-      "data.user_mobile": val
+      "data.user_mobile": val,
+      userEnteredTel: true
     })
     this.setEnterInfo('phone',val)
   },
@@ -90,13 +94,6 @@ Page({
     this.setData({
       "data.detail": val
     })
-    let content = val.replace(/\s+/g, "");
-    let _partten = /1[3-9]\d{9}/g;
-    let phone = content.match(_partten);
-    if(this.checkType(phone,'array')){
-        let tel = phone[0];
-        this.setData({ 'data.user_mobile': tel });
-    }
     this.setEnterInfo('detail',val)
   },
   userSetAreaInfo:function(){
@@ -303,10 +300,14 @@ Page({
   // 匹配电话号码
   matchPhoneFun:function(){
     let content = this.data.data.detail;
-    let p = /1[3-9]\d{9}/g;
-    let phone = content.match(p);
-    if (this.checkType(phone, 'array')) {
-      this.setData({ "data.user_mobile": phone[0] })
+    let userEnteredTel = this.data.userEnteredTel
+    let tel = this.data.data.user_mobile
+    if(!userEnteredTel || !tel){
+      let p = /1[3-9]\d{9}/g;
+      let phone = content.match(p);
+      if (this.checkType(phone, 'array')) {
+        this.setData({ "data.user_mobile": phone[0] })
+      }
     }
   },
   mateClassifyIdsFun:function(){
@@ -635,7 +636,6 @@ Page({
       })
       return false
     }
-    
     if (!v.isMobile(data.user_mobile)) {
       wx.showModal({
         title: '提示',
@@ -643,6 +643,14 @@ Page({
         showCancel: false
       })
       return false;
+    }
+    if(data.user_mobile == this.data.normalTel){
+      wx.showModal({
+        title: '提示',
+        content: '手机号输入错误，请重新输入。',
+        showCancel: false
+      })
+      return false
     }
     if(!data.code){
       if(data.user_mobile != phone){
