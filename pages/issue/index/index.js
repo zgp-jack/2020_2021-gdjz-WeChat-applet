@@ -603,7 +603,7 @@ Page({
     if(!v.isChinese(data.detail)){
       wx.showModal({
         title: '提示',
-        content: '请输入招工详情。',
+        content: '请正确输入3~500字招工详情,必须含有汉字。',
         showCancel: false
       })
       return false
