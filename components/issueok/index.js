@@ -17,7 +17,7 @@ Component({
     icon: app.globalData.apiImgUrl + 'mini-fast-success-icon.png',
     close: app.globalData.apiImgUrl + 'mini-close-icon.png',
   },
-  ready:function(){
+  attached:function(){
     this.initUserinfo()
     console.log(this.data.userInfo)
   },
