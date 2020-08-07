@@ -88,7 +88,7 @@ App({
       loginAfter: false,
       logoutWay: "",
       loginWay: "",
-      userInfoReq:false
+      userPhone:""
     }
   },
   //是否为极速发布与快速发布请求,快速发布与极速发布跳转

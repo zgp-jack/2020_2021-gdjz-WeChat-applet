@@ -28,19 +28,19 @@ Page({
       content: val
     })
     wx.setStorageSync("fastData",{
-      content:e.detail.value,
       phone:this.data.phone
     })
     let content = val.replace(/\s+/g, "");
     if (u) {
       this.setData({
-        phone:fastData.phone
+        phone:app.globalData.publish.phone
       })
     } else {
       let _partten = /1[3-9]\d{9}/g;
       let phone = content.match(_partten);
-      let regx = /^[\u4E00-\u9FA5]{3}/g;
-      if (regx.test(content)) {
+      let regx = /[\u4E00-\u9FA5]+/g;
+      console.log(content.length)
+      if ( content.length > 2 && regx.test(content)) {
         this.setData({
           showTel: true,
         });
@@ -52,7 +52,6 @@ Page({
           phone: tel
         });
         wx.setStorageSync("fastData",{
-          content:e.detail.value,
           phone:tel
         })
       }
@@ -62,7 +61,6 @@ Page({
     let that = this
     wx.setStorageSync("fastData",{
       phone:e.detail.value,
-      content:that.data.content,
     })
     this.setData({
       phone: e.detail.value
@@ -71,7 +69,6 @@ Page({
   contentBlur: function (e) {
     let that = this
     wx.setStorageSync("fastData",{
-      content:e.detail.value,
       phone:that.data.phone
     })
     if (this.data.phone) {
@@ -79,9 +76,6 @@ Page({
         showTel: true
       })
     }
-  },
-  phoneBlur:function () {
-    wx.setStorageSync("fastData",{phone:e.detail.value})
   },
   publishRecurit: function () {
     console.log("phone",this.data.phone)
@@ -98,14 +92,6 @@ Page({
       })
       return false;
     }
-    if (!vali.isChinese(content) && (content.length < 3 || content.length > 500)) {
-      wx.showModal({
-        title: '提示',
-        content: '请正确输入3~500字招工详情,必须含有汉字。',
-        showCancel: false
-      })
-      return false
-    }
     if (content.length < 3 || content.length > 500) {
       wx.showModal({
         title: '提示',
@@ -113,6 +99,14 @@ Page({
         showCancel: false
       })
       return false;
+    }
+    if (!vali.isChinese(content) && (content.length > 2)) {
+      wx.showModal({
+        title: '提示',
+        content: '请正确输入3~500字招工详情,必须含有汉字。',
+        showCancel: false
+      })
+      return false
     }
     if (phone == "") {
       wx.showModal({
@@ -184,75 +178,77 @@ Page({
       content: ''
     })
   },
+  getUserInfo:function () {
+    let _this = this;
+    let u = wx.getStorageSync('userInfo')
+    _this.setData({
+      userInfo: u ? u : false,
+    })
+    let postData = {...u,type: 'job'}
+    app.appRequestAction({
+    url: 'publish/new-mate-job/',
+    way: 'POST',
+    mask: true,
+    params:postData,
+    success:function(res){
+      let mydata = res.data
+      console.log("mydata",mydata)
+      if(mydata.errcode == "ok"){
+        let tel = mydata.memberInfo.tel || ''
+        _this.setData({
+          phone:tel,
+          showTel: true
+        })
+        wx.setStorageSync('fastData', {
+          phone:mydata.memberInfo.tel,
+        })
+        app.globalData.publish.userPhone = mydata.memberInfo.tel
+        }else{
+          wx.showModal({
+          title:'提示',
+          content: mydata.errmsg,
+          showCancel: false,
+          success:function(){
+            let pages = getCurrentPages()
+            let prePage = pages[pages.length -2]
+            if(prePage){
+                wx.navigateBack()
+              }else{
+                wx.reLaunch({
+                  url: '/pages/index/index',
+                })
+              }
+            }
+          })
+        }
+      }
+    })
+  },
   initClipboardData: function () {
     let _this = this;
     let u = wx.getStorageSync('userInfo')
     let fastData = wx.getStorageSync('fastData')
     if (u) {
-      if(!app.globalData.publish.userInfoReq){
-        app.globalData.publish.userInfoReq = true
-        _this.setData({
-          userInfo: u ? u : false,
-        })
-        let postData = {...u,type: 'job'}
-        app.appRequestAction({
-          url: 'publish/new-mate-job/',
-          way: 'POST',
-          mask: true,
-          params:postData,
-          success:function(res){
-            let mydata = res.data
-            console.log("mydata",mydata)
-            if(mydata.errcode == "ok"){
-              let tel = mydata.memberInfo.tel || ''
-              _this.setData({
-                phone:tel,
-                showTel: true
-              })
-              wx.setStorageSync('fastData', {phone:mydata.memberInfo.tel})
-            }else{
-              wx.showModal({
-                title:'提示',
-                content: mydata.errmsg,
-                showCancel: false,
-                success:function(){
-                  let pages = getCurrentPages()
-                  let prePage = pages[pages.length -2]
-                  if(prePage){
-                    wx.navigateBack()
-                  }else{
-                    wx.reLaunch({
-                      url: '/pages/index/index',
-                    })
-                  }
-                }
-              })
-            }
-          }
-        })
-      }else{
-        if(fastData){
-          _this.setData({ 
-            phone:fastData.phone,
-            content:fastData.content,
-          })
-          if(fastData.phone){
-            _this.setData({ 
-              showTel: true
+      if (!fastData) {
+        _this.getUserInfo()
+      } else {
+        if (!app.globalData.publish.userPhone) {
+          _this.getUserInfo()
+        }else{
+          console.log(app.globalData.publish.userPhone)
+          if (fastData.phone.length != 0) {
+            console.log("我采集了数据")
+            _this.setData({
+              phone:fastData.phone,
+              showTel:true
+            })
+          } else {
+            console.log()
+            _this.setData({
+              phone:app.globalData.publish.userPhone,
+              showTel:true
             })
           }
-        }
-      }
-    } else {
-      if(fastData){
-        _this.setData({ 
-          phone:fastData.phone,
-          content:fastData.content,
-        })
-        if(fastData.phone){
-          _this.setData({ 
-            showTel: true
-          })
         }
       }
     }

@@ -15,7 +15,7 @@
                 <text class='getintegral-list-info'>充值付钱购买积分。（我们不鼓励付钱购买，我们希望大家多帮忙宣传）</text>
                 <text class='getintegral-list-btn' bindtap='goThisPage' data-url="/pages/recharge/recharge">去充值</text>
             </view>
-            <view class='getintegral-list-item' >
+            <view class='getintegral-list-item' wx:if="{{ show }}">
                 <view class='getintegral-list-title'>玩游戏，赚积分</view>
                 <text class='getintegral-list-info'>玩游戏，每天可获1~300分。（推荐）</text>
                 <text class='getintegral-list-btn ' wx:if="{{ showTurntable }}" bindtap='userTurntable' data-ac="{{ showTurntable }}" >去看看</text>
