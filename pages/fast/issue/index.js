@@ -28,12 +28,15 @@ Page({
       content: val
     })
     wx.setStorageSync("fastData",{
-      phone:this.data.phone
+      phone:app.globalData.publish.userPhone
     })
     let content = val.replace(/\s+/g, "");
     if (u) {
       this.setData({
-        phone:app.globalData.publish.phone
+        phone:app.globalData.publish.userPhone
+      })
+      wx.setStorage("fastData",{
+        phone:app.globalData.publish.userPhone
       })
     } else {
       let _partten = /1[3-9]\d{9}/g;
@@ -67,10 +70,6 @@ Page({
     })
   },
   contentBlur: function (e) {
-    let that = this
-    wx.setStorageSync("fastData",{
-      phone:that.data.phone
-    })
     if (this.data.phone) {
       this.setData({
         showTel: true
@@ -238,7 +237,6 @@ Page({
         }else{
           console.log(app.globalData.publish.userPhone)
           if (fastData.phone.length != 0) {
-            console.log("我采集了数据")
             _this.setData({
               phone:fastData.phone,
               showTel:true
