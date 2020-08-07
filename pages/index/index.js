@@ -663,7 +663,6 @@ Page({
   initUserinfo: function () {
     let _this = this;
     let userInfo = wx.getStorageSync("userInfo");
-    app.globalData.publish.loginBefore = userInfo
     // app.initSystemInfo(function (res) {
     //     if (res) {
     //         let _h = (res.windowWidth * 0.7) / 0.6216;
@@ -681,19 +680,6 @@ Page({
     // else this.setData({ showFastIssue: app.globalData.showFastIssue })
 
   },
-  // initJobView:function () {
-  //   let userInfo = wx.getStorageSync("userInfo");
-  //   if (userInfo) {
-  //     let that = this
-  //     wx.request({
-  //       url: app.globalData.apiRequestUrl+'index/get-job-view/',
-  //       success(res){
-  //         let publishMethod = res.data.add_job_type
-  //         app.globalData.publishMethod = publishMethod
-  //      }
-  //    }) 
-  //   } 
-  // },
   valiUserUrl: function (e) {
     let userInfo = this.data.userInfo;
     app.valiUserUrl(e, userInfo);
