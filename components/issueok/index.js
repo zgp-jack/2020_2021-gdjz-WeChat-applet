@@ -17,7 +17,7 @@ Component({
     icon: app.globalData.apiImgUrl + 'mini-fast-success-icon.png',
     close: app.globalData.apiImgUrl + 'mini-close-icon.png',
   },
-  created:function(){
+  attached:function(){
     this.initUserinfo()
     console.log(this.data.userInfo)
   },
@@ -29,6 +29,12 @@ Component({
       let bool = this.data.show
       this.setData({
         show: !bool
+      })
+    },
+    //登录状态下打开招工信息列表
+    manageRecruit:function () {
+      wx.reLaunch({
+        url: '/pages/published/recruit/list',
       })
     },
     goToResumeList:function(){

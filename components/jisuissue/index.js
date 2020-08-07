@@ -17,9 +17,9 @@ Component({
     icon: app.globalData.apiImgUrl + 'mini-fast-success-icon.png',
     close: app.globalData.apiImgUrl + 'mini-close-icon.png',
   },
-  created:function(){
+  attached:function(){
     this.initUserinfo()
-    console.log(this.data.userInfo)
+    console.log("created",this.data.userInfo)
   },
   /**
    * 组件的方法列表
@@ -29,6 +29,12 @@ Component({
       let bool = this.data.show
       this.setData({
         show: !bool
+      })
+    },
+    //登录状态下打开招工信息列表
+    manageRecruit:function () {
+      wx.reLaunch({
+        url: '/pages/published/recruit/list',
       })
     },
     goToResumeList:function(){
@@ -51,6 +57,7 @@ Component({
           duration: 500
         });
         app.globalData.userInfo = e.detail.userInfo; //设置用户信息 
+        app.globalData.publish.loginAfter = e.detail.userInfo;//设置登录后用户信息
         // 登录 获取在我们这里user_id
         wx.login({
           success: function (res) {
@@ -133,7 +140,7 @@ Component({
           params.data = userJiSuPublishedData || []
           //发起请求  
           wx.request({
-            url: app.globalData.apiRequestUrl + '/user/haste-job-make-user/',
+            url: app.globalData.apiRequestUrl + 'user/haste-job-make-user/',
             method: 'GET',
             data: params,
             header: {

@@ -121,7 +121,7 @@ Component({
       let type = this.data.type
       let user = wx.getStorageSync('userInfo')
       app.appRequestAction({
-        url: 'resumes/resume-recommend-list/',
+        url: 'resumes/details-recommend-list/',
         way: 'POST',
         params:{
           area_id: aid,

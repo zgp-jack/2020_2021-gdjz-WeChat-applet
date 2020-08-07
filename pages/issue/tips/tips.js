@@ -29,6 +29,7 @@ Page({
         duration: 500
       });
       app.globalData.userInfo = e.detail.userInfo; //设置用户信息 
+      app.globalData.publish.loginAfter = e.detail.userInfo;//设置登录后用户信息
       // 登录 获取在我们这里user_id
       wx.login({
         success: function (res) {
@@ -111,7 +112,7 @@ Page({
         params.data = userJiSuPublishedData || []
         //发起请求  
         wx.request({
-          url: app.globalData.apiRequestUrl + '/user/haste-job-make-user/',
+          url: app.globalData.apiRequestUrl + 'user/haste-job-make-user/',
           method: 'GET',
           data: params,
           header: {
