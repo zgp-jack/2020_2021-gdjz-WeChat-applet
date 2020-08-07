@@ -14,7 +14,7 @@
   <view class="issue-contactbox" wx:if="{{ showTel }}">
     <view class="issue-contact-title">联系电话</view>
     <view class="issue-contact-body">请确定招工联系电话，如若有误，请自行修改。</view>
-    <input class="issue-contact-input" type="number" maxlength="11" placeholder="请输入联系电话" bindinput="enterPhone" value="{{ phone }}"></input>
+    <input class="issue-contact-input" type="number" maxlength="11" placeholder="请输入联系电话" bindinput="enterPhone" value="{{ phone }}" bindblur="phoneBlur"></input>
   </view>
   <view class="issue-btn" bindtap="publishRecurit">发布招工</view>
 </view>

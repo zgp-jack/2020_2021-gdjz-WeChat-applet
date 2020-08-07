@@ -8,9 +8,11 @@ Page({
    * 页面的初始数据
    */
   data: {
+    userInfo:true,
     content: '',
     phone: '',
     showTel: false,
+    request:false
   },
   checkType: function (obj, _type) {
     var _re = Object.prototype.toString.call(obj).slice(8, -1).toLowerCase();
@@ -19,40 +21,70 @@ Page({
     return false;
   },
   enterContent: function (e) {
+    let u = wx.getStorageSync('userInfo')
     let val = e.detail.value;
+    let fastData = wx.getStorageSync('fastData')
     this.setData({
       content: val
     })
+    wx.setStorageSync("fastData",{
+      content:e.detail.value,
+      phone:this.data.phone
+    })
     let content = val.replace(/\s+/g, "");
-    let _partten = /1[3-9]\d{9}/g;
-    let phone = content.match(_partten);
-    let regx = /^[\u4E00-\u9FA5]{3}/g;
-    if (regx.test(content)) {
+    if (u) {
       this.setData({
-        showTel: true,
-      });
-    }
-    if (this.checkType(phone, 'array')) {
-      let tel = phone[0];
-      this.setData({
-        showTel: true,
-        phone: tel
-      });
-    }
+        phone:fastData.phone
+      })
+    } else {
+      let _partten = /1[3-9]\d{9}/g;
+      let phone = content.match(_partten);
+      let regx = /^[\u4E00-\u9FA5]{3}/g;
+      if (regx.test(content)) {
+        this.setData({
+          showTel: true,
+        });
+      }
+      if (this.checkType(phone, 'array')) {
+        let tel = phone[0];
+        this.setData({
+          showTel: true,
+          phone: tel
+        });
+        wx.setStorageSync("fastData",{
+          content:e.detail.value,
+          phone:tel
+        })
+      }
+      }
   },
   enterPhone: function (e) {
+    let that = this
+    wx.setStorageSync("fastData",{
+      phone:e.detail.value,
+      content:that.data.content,
+    })
     this.setData({
       phone: e.detail.value
     })
   },
-  contentBlur: function () {
+  contentBlur: function (e) {
+    let that = this
+    wx.setStorageSync("fastData",{
+      content:e.detail.value,
+      phone:that.data.phone
+    })
     if (this.data.phone) {
       this.setData({
         showTel: true
       })
     }
   },
+  phoneBlur:function () {
+    wx.setStorageSync("fastData",{phone:e.detail.value})
+  },
   publishRecurit: function () {
+    console.log("phone",this.data.phone)
     let vali = v.v.new();
     let {
       content,
@@ -154,23 +186,75 @@ Page({
   },
   initClipboardData: function () {
     let _this = this;
-    try {
-      wx.getClipboardData({
-        success(res) {
-          let d = res.data;
-          let p = /1[3-9]\d{9}/g;
-          let phone = d.match(p);
-          if (_this.checkType(phone, 'array')) {
-            _this.setData({
-              content: res.data,
-              phone: phone[0],
+    let u = wx.getStorageSync('userInfo')
+    let fastData = wx.getStorageSync('fastData')
+    if (u) {
+      if(!app.globalData.publish.userInfoReq){
+        app.globalData.publish.userInfoReq = true
+        _this.setData({
+          userInfo: u ? u : false,
+        })
+        let postData = {...u,type: 'job'}
+        app.appRequestAction({
+          url: 'publish/new-mate-job/',
+          way: 'POST',
+          mask: true,
+          params:postData,
+          success:function(res){
+            let mydata = res.data
+            console.log("mydata",mydata)
+            if(mydata.errcode == "ok"){
+              let tel = mydata.memberInfo.tel || ''
+              _this.setData({
+                phone:tel,
+                showTel: true
+              })
+              wx.setStorageSync('fastData', {phone:mydata.memberInfo.tel})
+            }else{
+              wx.showModal({
+                title:'提示',
+                content: mydata.errmsg,
+                showCancel: false,
+                success:function(){
+                  let pages = getCurrentPages()
+                  let prePage = pages[pages.length -2]
+                  if(prePage){
+                    wx.navigateBack()
+                  }else{
+                    wx.reLaunch({
+                      url: '/pages/index/index',
+                    })
+                  }
+                }
+              })
+            }
+          }
+        })
+      }else{
+        if(fastData){
+          _this.setData({ 
+            phone:fastData.phone,
+            content:fastData.content,
+          })
+          if(fastData.phone){
+            _this.setData({ 
               showTel: true
             })
           }
         }
-      })
-    } catch (err) {
-      console.log(err);
+      }
+    } else {
+      if(fastData){
+        _this.setData({ 
+          phone:fastData.phone,
+          content:fastData.content,
+        })
+        if(fastData.phone){
+          _this.setData({ 
+            showTel: true
+          })
+        }
+      }
     }
   },
   startRecord: function () {
