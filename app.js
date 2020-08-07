@@ -84,188 +84,70 @@ App({
     userSeeVideoTips: '抱歉，您今日领取次数已达上限，休息一下明天再来吧。',
     //极速发布与快速发布方式快。速发布（fast_add_job）普通发布（ordinary_add_job）发布方式请求次数，只需请求一次
     publish: {
-      loginBefore:"",
-      loginAfter:"",
-      publishMethod: "",
-      publishMethodRequestNumber: 0
+      loginBefore: false,
+      loginAfter: false,
+      logoutWay: "",
+      loginWay: ""
     }
   },
   //是否为极速发布与快速发布请求,快速发布与极速发布跳转
   initJobView: function () {
     let userInfo = wx.getStorageSync("userInfo");
     let that = this
-<<<<<<< HEAD
+    
     if(userInfo){
-      if(this.globalData.publish.publishMethodRequestNumber === 0){
-        this.appRequestAction({
+      let flag = JSON.parse(JSON.stringify(that.globalData.publish))
+      if(!flag.loginAfter){
+        that.appRequestAction({
           url: 'index/get-job-view/',
           success(res){
             let publishMethod = res.data.add_job_type
-            that.globalData.publish.publishMethod = publishMethod
-            that.globalData.publish.publishMethodRequestNumber = 1
+            that.globalData.publish.loginWay = publishMethod
+            that.globalData.publish.loginAfter = true
             let url = publishMethod == "fast_add_job" ? '/pages/fast/issue/index' : '/pages/issue/index/index'
-=======
-    if (that.globalData.publish.loginAfter === that.globalData.publish.loginBefore) {
-      console.log("相同")
-      if (userInfo) {
-        if (that.globalData.publish.publishMethodRequestNumber === 0) {
-          that.appRequestAction({
-            url: 'index/get-job-view/',
-            success(res) {
-              let publishMethod = res.data.add_job_type
-              that.globalData.publish.publishMethod = publishMethod
-              that.globalData.publish.publishMethodRequestNumber += 1
-              if (publishMethod === "ordinary_add_job") {
-                wx.navigateTo({
-                  url: '/pages/issue/index/index',
-                })
-              } else {
-                wx.navigateTo({
-                  url: '/pages/fast/issue/index',
-                })
-              }
-            },
-            fail() {
-              that.globalData.publish.publishMethod === "ordinary_add_job"
-              wx.navigateTo({
-                url: '/pages/issue/index/index',
-              })
-            }
-          })
-        } else {
-          if (that.globalData.publish.publishMethod === "ordinary_add_job") {
->>>>>>> 9d4b52ff3b68e864084b0ba698f41e25795bb65b
             wx.navigateTo({
               url: url
             })
-          } else {
+          },
+          fail:function(){
             wx.navigateTo({
-              url: '/pages/fast/issue/index',
+              url: '/pages/issue/index/index'
             })
           }
-<<<<<<< HEAD
        })
       }else{
-        let way = this.globalData.publish.publishMethod
+        let way = this.globalData.publish.loginWay
         let url = way == "fast_add_job" ? '/pages/fast/issue/index' : '/pages/issue/index/index'
         wx.navigateTo({
           url: url
         })
-=======
-        }
-      } else {
-        if (that.globalData.publish.publishMethodRequestNumber === 0) {
-          that.appRequestAction({
-            url: 'index/get-job-view/',
-            success(res) {
-              let publishMethod = res.data.add_job_type
-              that.globalData.publish.publishMethod = publishMethod
-              that.globalData.publish.publishMethodRequestNumber += 1
-              if (publishMethod === "ordinary_add_job") {
-                wx.navigateTo({
-                  url: '/pages/issue/index/index',
-                })
-              } else {
-                wx.navigateTo({
-                  url: '/pages/fast/issue/index',
-                })
-              }
-            },
-            fail() {
-              that.globalData.publish.publishMethod === "ordinary_add_job"
-              wx.navigateTo({
-                url: '/pages/issue/index/index',
-              })
-            }
-          })
-        } else {
-          if (that.globalData.publish.publishMethod === "ordinary_add_job") {
-            wx.navigateTo({
-              url: '/pages/issue/index/index',
-            })
-          } else {
-            wx.navigateTo({
-              url: '/pages/fast/issue/index',
-            })
-          }
-        }
       }
-    } else {
-      console.log("不相等")
-      that.globalData.publish.publishMethodRequestNumber = 0
-      if (userInfo) {
-        if (that.globalData.publish.publishMethodRequestNumber === 0) {
-          that.appRequestAction({
-            url: 'index/get-job-view/',
-            success(res) {
-              let publishMethod = res.data.add_job_type
-              that.globalData.publish.publishMethod = publishMethod
-              that.globalData.publish.publishMethodRequestNumber += 1
-              if (publishMethod === "ordinary_add_job") {
-                wx.navigateTo({
-                  url: '/pages/issue/index/index',
-                })
-              } else {
-                wx.navigateTo({
-                  url: '/pages/fast/issue/index',
-                })
-              }
-            },
-            fail() {
-              that.globalData.publish.publishMethod === "ordinary_add_job"
-              wx.navigateTo({
-                url: '/pages/issue/index/index',
-              })
-            }
-          })
-        } else {
-          if (that.globalData.publish.publishMethod === "ordinary_add_job") {
+    }else{
+      let flag = JSON.parse(JSON.stringify(that.globalData.publish))
+      if(!flag.loginBefore){
+        that.appRequestAction({
+          url: 'index/get-job-view/',
+          success(res){
+            let publishMethod = res.data.add_job_type
+            that.globalData.publish.logoutWay = publishMethod
+            that.globalData.publish.loginBefore = true
+            let url = publishMethod == "fast_add_job" ? '/pages/fast/issue/index' : '/pages/issue/index/index'
             wx.navigateTo({
-              url: '/pages/issue/index/index',
+              url: url
             })
-          } else {
+          },
+          fail:function(){
             wx.navigateTo({
-              url: '/pages/fast/issue/index',
+              url: '/pages/issue/index/index'
             })
           }
-        }
-      } else {
-        if (that.globalData.publish.publishMethodRequestNumber === 0) {
-          that.appRequestAction({
-            url: 'index/get-job-view/',
-            success(res) {
-              let publishMethod = res.data.add_job_type
-              that.globalData.publish.publishMethod = publishMethod
-              that.globalData.publish.publishMethodRequestNumber += 1
-              if (publishMethod === "ordinary_add_job") {
-                wx.navigateTo({
-                  url: '/pages/issue/index/index',
-                })
-              } else {
-                wx.navigateTo({
-                  url: '/pages/fast/issue/index',
-                })
-              }
-            },
-            fail() {
-              that.globalData.publish.publishMethod === "ordinary_add_job"
-              wx.navigateTo({
-                url: '/pages/issue/index/index',
-              })
-            }
-          })
-        } else {
-          if (that.globalData.publish.publishMethod === "ordinary_add_job") {
-            wx.navigateTo({
-              url: '/pages/issue/index/index',
-            })
-          } else {
-            wx.navigateTo({
-              url: '/pages/fast/issue/index',
-            })
-          }
-        }
->>>>>>> 9d4b52ff3b68e864084b0ba698f41e25795bb65b
+       })
+      }else{
+        let way = this.globalData.publish.logoutWay
+        let url = way == "fast_add_job" ? '/pages/fast/issue/index' : '/pages/issue/index/index'
+        wx.navigateTo({
+          url: url
+        })
       }
     }
   },
