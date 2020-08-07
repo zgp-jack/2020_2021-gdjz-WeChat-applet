@@ -27,17 +27,9 @@ Page({
     this.setData({
       content: val
     })
-    wx.setStorageSync("fastData",{
-      phone:app.globalData.publish.userPhone
-    })
     let content = val.replace(/\s+/g, "");
     if (u) {
-      this.setData({
-        phone:app.globalData.publish.userPhone
-      })
-      wx.setStorage("fastData",{
-        phone:app.globalData.publish.userPhone
-      })
+      
     } else {
       let _partten = /1[3-9]\d{9}/g;
       let phone = content.match(_partten);
