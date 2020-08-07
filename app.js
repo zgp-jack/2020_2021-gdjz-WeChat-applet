@@ -100,8 +100,9 @@ App({
             let publishMethod = res.data.add_job_type
             that.globalData.publish.publishMethod = publishMethod
             that.globalData.publish.publishMethodRequestNumber = 1
+            let url = publishMethod == "fast_add_job" ? '/pages/fast/issue/index' : '/pages/issue/index/index'
             wx.navigateTo({
-              url: '/pages/issue/index/index',
+              url: url
             })
          },
           fail () {
@@ -112,8 +113,10 @@ App({
           }
        })
       }else{
+        let way = this.globalData.publish.publishMethod
+        let url = way == "fast_add_job" ? '/pages/fast/issue/index' : '/pages/issue/index/index'
         wx.navigateTo({
-          url: '/pages/issue/index/index',
+          url: url
         })
       }
     }else{

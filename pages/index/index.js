@@ -107,7 +107,7 @@ Page({
     joingroup: [],
     turntableimg:app.globalData.apiImgUrl + 'mini-turntable-new.png',
     inviteturntable:app.globalData.apiImgUrl + 'inviteuser-getintegral.png',
-    showturntable: true,
+    showturntable: false,
   },
   getPhoneNumber:function(e){
     console.log(e)
@@ -929,7 +929,7 @@ Page({
           if(mydata.errcode == "ok"){
             let f = mydata.data.is_turntable
             _this.setData({
-                showturntable: f,
+                showturntable: f && mydata.data.show_turntable
             })
           }
         },

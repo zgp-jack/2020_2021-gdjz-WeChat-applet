@@ -15,7 +15,8 @@ Page({
         tips: app.globalData.userSeeVideoTips,
         showAd: false,
         icon: app.globalData.apiImgUrl + 'integral/new-integral-tips-icon.png',
-        showTurntable: 0
+        showTurntable: 0,
+        show: false
     },
     callThisPhone:function(e){
         let phone = e.currentTarget.dataset.phone;
@@ -138,6 +139,7 @@ Page({
                 let f = mydata.data.is_turntable
                 _this.setData({
                     showTurntable: f,
+                    show: mydata.data.show_turntable
                 })
               }
             },
