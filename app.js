@@ -105,7 +105,6 @@ App({
             publishData.loginWay = publishMethod
             publishData.loginAfter = true
             that.globalData.publishData = publishData
-            console.log(publishData)
             let url = publishMethod == "fast_add_job" ? '/pages/fast/issue/index' : '/pages/issue/index/index'
             wx.navigateTo({
               url: url
@@ -338,7 +337,6 @@ App({
         duration: 5000
       });
       that.globalData.userInfo = e.detail.userInfo; //设置用户信息 
-      that.globalData.publish.loginAfter = e.detail.userInfo;//设置登录后用户信息
       // 登录 获取在我们这里user_id
       wx.login({
         success: function (res) {

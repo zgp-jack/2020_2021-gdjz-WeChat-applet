@@ -108,6 +108,7 @@ Page({
     turntableimg:app.globalData.apiImgUrl + 'mini-turntable-new.png',
     inviteturntable:app.globalData.apiImgUrl + 'inviteuser-getintegral.png',
     showturntable: false,
+    jgjzData: {}
   },
   getPhoneNumber:function(e){
     console.log(e)
@@ -942,6 +943,14 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+
+    let u =wx.getStorageSync('userInfo')
+    let uuid = wx.getStorageSync('userUuid')
+    this.setData({
+      jgjzData: {...u,uuid: uuid}
+    })
+    console.log(this.data.jgjzData)
+
     this.initFirstFcInfo();
     this.initSearchHistory();
     //this.isShowFastIssue();

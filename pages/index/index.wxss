@@ -353,3 +353,6 @@ page{
     width: 140rpx;
     height: 140rpx;
 }
+
+
+.jumpjgjz{position: fixed;background-color: #0099ff;color: white;line-height: 75rpx;padding: 0 35rpx;border-radius: 20px;font-size: 28rpx;right: 10rpx;top: 500rpx;z-index: 999;}
