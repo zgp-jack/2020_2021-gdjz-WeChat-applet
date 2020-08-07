@@ -178,6 +178,7 @@ Page({
       content: ''
     })
   },
+  //获取用户信息并将电话信息存入缓存和globalData
   getUserInfo:function () {
     let _this = this;
     let u = wx.getStorageSync('userInfo')
