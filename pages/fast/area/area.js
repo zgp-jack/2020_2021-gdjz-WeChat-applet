@@ -305,7 +305,7 @@ Page({
         duration: 5000
       });
       app.globalData.userInfo = e.detail.userInfo; //设置用户信息 
-      app.globalData.publish.loginAfter = e.detail.userInfo;//设置登录后用户信息
+      // app.globalData.publish.loginAfter = e.detail.userInfo;//设置登录后用户信息
       // 登录 获取在我们这里user_id
       wx.login({
         success: function (res) {

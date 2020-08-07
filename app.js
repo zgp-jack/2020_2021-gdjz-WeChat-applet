@@ -83,7 +83,7 @@ App({
     },
     userSeeVideoTips: '抱歉，您今日领取次数已达上限，休息一下明天再来吧。',
     //极速发布与快速发布方式快。速发布（fast_add_job）普通发布（ordinary_add_job）发布方式请求次数，只需请求一次
-    publish: {
+    publishData: {
       loginBefore: false,
       loginAfter: false,
       logoutWay: "",
@@ -94,16 +94,18 @@ App({
   initJobView: function () {
     let userInfo = wx.getStorageSync("userInfo");
     let that = this
-    
+    let publishData = JSON.parse(JSON.stringify(that.globalData.publishData))
+    console.log(publishData)
     if(userInfo){
-      let flag = JSON.parse(JSON.stringify(that.globalData.publish))
-      if(!flag.loginAfter){
+      if(!publishData.loginAfter){
         that.appRequestAction({
           url: 'index/get-job-view/',
           success(res){
             let publishMethod = res.data.add_job_type
-            that.globalData.publish.loginWay = publishMethod
-            that.globalData.publish.loginAfter = true
+            publishData.loginWay = publishMethod
+            publishData.loginAfter = true
+            that.globalData.publishData = publishData
+            console.log(publishData)
             let url = publishMethod == "fast_add_job" ? '/pages/fast/issue/index' : '/pages/issue/index/index'
             wx.navigateTo({
               url: url
@@ -116,21 +118,22 @@ App({
           }
        })
       }else{
-        let way = this.globalData.publish.loginWay
+        let way = this.globalData.publishData.loginWay
         let url = way == "fast_add_job" ? '/pages/fast/issue/index' : '/pages/issue/index/index'
         wx.navigateTo({
           url: url
         })
       }
     }else{
-      let flag = JSON.parse(JSON.stringify(that.globalData.publish))
-      if(!flag.loginBefore){
+      if(!publishData.loginBefore){
         that.appRequestAction({
           url: 'index/get-job-view/',
           success(res){
             let publishMethod = res.data.add_job_type
-            that.globalData.publish.logoutWay = publishMethod
-            that.globalData.publish.loginBefore = true
+            publishData.logoutWay = publishMethod
+            publishData.loginBefore = true
+            that.globalData.publishData = publishData
+            console.log(publishData)
             let url = publishMethod == "fast_add_job" ? '/pages/fast/issue/index' : '/pages/issue/index/index'
             wx.navigateTo({
               url: url
@@ -143,7 +146,7 @@ App({
           }
        })
       }else{
-        let way = this.globalData.publish.logoutWay
+        let way = this.globalData.publishData.logoutWay
         let url = way == "fast_add_job" ? '/pages/fast/issue/index' : '/pages/issue/index/index'
         wx.navigateTo({
           url: url
