@@ -663,6 +663,7 @@ Page({
   initUserinfo: function () {
     let _this = this;
     let userInfo = wx.getStorageSync("userInfo");
+    app.globalData.publish.loginBefore = userInfo
     // app.initSystemInfo(function (res) {
     //     if (res) {
     //         let _h = (res.windowWidth * 0.7) / 0.6216;
