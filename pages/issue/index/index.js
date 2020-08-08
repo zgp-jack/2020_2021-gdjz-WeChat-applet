@@ -205,7 +205,7 @@ Page({
             mateData: mydata.mate_data,
             classifies: mydata.classifyTree,
             selectedClassifies: mydata.selectedClassifies,
-            placeholder: mydata.placeholder
+            // placeholder: mydata.placeholder
           })
           if(infoId){
             _this.setData({
@@ -592,7 +592,7 @@ Page({
       })
       return false
     }
-    if(data.detail.length < 2){
+    if(data.detail.length < 3){
       wx.showModal({
         title: '提示',
         content: '请正确输入3~500字招工详情。',
@@ -647,7 +647,7 @@ Page({
     if(data.user_mobile == this.data.normalTel){
       wx.showModal({
         title: '提示',
-        content: '手机号输入错误，请重新输入。',
+        content: '该手机号暂不支持发布招工信息，请重新输入。',
         showCancel: false
       })
       return false

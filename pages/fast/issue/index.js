@@ -27,19 +27,10 @@ Page({
     this.setData({
       content: val
     })
-    let content = val.replace(/\s+/g, "");
-    if (u) {
-      
-    } else {
+    if (!u) {
+      let content = val.replace(/\s+/g, "");
       let _partten = /1[3-9]\d{9}/g;
       let phone = content.match(_partten);
-      let regx = /[\u4E00-\u9FA5]+/g;
-      console.log(content.length)
-      if ( content.length > 2 && regx.test(content)) {
-        this.setData({
-          showTel: true,
-        });
-      }
       if (this.checkType(phone, 'array')) {
         let tel = phone[0];
         this.setData({
@@ -50,12 +41,11 @@ Page({
           phone:tel
         })
       }
-      }
+    }
   },
   enterPhone: function (e) {
-    let that = this
     wx.setStorageSync("fastData",{
-      phone:e.detail.value,
+      phone:app.globalData.publish.userPhone,
     })
     this.setData({
       phone: e.detail.value
@@ -69,7 +59,6 @@ Page({
     }
   },
   publishRecurit: function () {
-    console.log("phone",this.data.phone)
     let vali = v.v.new();
     let {
       content,
@@ -105,12 +94,23 @@ Page({
         content: '请输入联系电话。',
         showCancel: false
       })
+      this.setData({
+        showTel:true
+      })
       return false
     }
     if (phone && !vali.isMobile(phone)) {
       wx.showModal({
         title: '提示',
         content: '请正确输入11位联系电话。',
+        showCancel: false
+      })
+      return false;
+    }
+    if (phone == "18349296434") {
+      wx.showModal({
+        title: '提示',
+        content: '该手机号暂不支持发布招工信息，请重新输入。',
         showCancel: false
       })
       return false;
@@ -184,7 +184,6 @@ Page({
     params:postData,
     success:function(res){
       let mydata = res.data
-      console.log("mydata",mydata)
       if(mydata.errcode == "ok"){
         let tel = mydata.memberInfo.tel || ''
         _this.setData({
@@ -219,6 +218,7 @@ Page({
   initClipboardData: function () {
     let _this = this;
     let u = wx.getStorageSync('userInfo')
+    console.log("userInfo",u)
     let fastData = wx.getStorageSync('fastData')
     if (u) {
       if (!fastData) {
@@ -227,14 +227,12 @@ Page({
         if (!app.globalData.publish.userPhone) {
           _this.getUserInfo()
         }else{
-          console.log(app.globalData.publish.userPhone)
           if (fastData.phone.length != 0) {
             _this.setData({
               phone:fastData.phone,
               showTel:true
             })
           } else {
-            console.log()
             _this.setData({
               phone:app.globalData.publish.userPhone,
               showTel:true
@@ -268,7 +266,6 @@ Page({
     let pages = getCurrentPages();
 
     let path = pages[1].__displayReporter.showReferpagepath
-    console.log("path", pages)
     path = path.slice(0, -5)
     if (path == "pages/fast/tips/tips" || path == "pages/fast/area/area") {
       this.selectComponent("#issueok").show()

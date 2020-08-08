@@ -71,6 +71,7 @@ Page({
                         hasNoticeMsg: mydata.member.has_notice_msg.hasNoticeMsg,
                         showReturnIntegral: (parseInt(mydata.member.return_integral) == 0) ? false : true
                     })
+                    app.globalData.publish.userPhone = mydata.tel
                 } else {
                     wx.showToast({
                         title: mydata.errmsg,

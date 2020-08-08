@@ -19,28 +19,44 @@ Page({
     userInfo:{}
   },
   initLocArea:function(){
+    //获取手机本地缓存地理位置信息
     let province = wx.getStorageSync('gpsPorvince')
+    //获取所有省的信息
     let allProvince = this.getProvinceLists()
-    let cities = this.getCityLists()
+    //判断如果有本地缓存地理位置信息
     if(province){
+    //本地地理位置信息与所有省份信息相同对应的allProvince的index
       let index = allProvince.findIndex(item => item.id == province.pid)
+    //本地地理位置信息具体信息
+    console.log("index",index)
       let item = allProvince[index]
+    //记录本地位置信息到data中
       this.setData({
         id: province.id,
         areatext: item.name + '-' + province.name,
-        index:[index,0]
+        index:[index,0],
+        "mindex[0]":index
       })
-    
+      //获取所有城市信息
+      let cities = this.getCityLists()
+    //从城市列表中匹配与本地位置对应的index
       let ci = cities.findIndex(item=>item.id == province.id)
       this.setData({
         "index[1]": ci,
         "mindex[1]": ci
       })
+      let areapicker = [allProvince,cities]
+      this.setData({
+        areapicker
+      })
+    }else{
+      //获取所有城市信息
+      let cities = this.getCityLists()
+      let areapicker = [allProvince,cities]
+      this.setData({
+        areapicker
+      })
     }
-    let areapicker = [allProvince,cities]
-    this.setData({
-      areapicker
-    })
   },
   initAreaData:function(){
     let _this = this;
@@ -71,6 +87,7 @@ Page({
   },
   getProvinceLists:function(){
     let len = area.length
+    //省信息数组
     let arr = []
     for(let i = 0;i< len; i++){
       let data = area[i]
@@ -79,18 +96,25 @@ Page({
     return arr;
   },
   getCityLists:function(){
-
+    //获取省的信息
     let index = this.data.mindex[0]
-    let data = area[index]
-    let has = data.has_children
     let arr = []
+    //获取省
+    let data = area[index]
+    //是否是直辖市
+    let has = data.has_children
     if(has){
+    //如果不是直辖市
+    //市长度
       let len = data.children.length
       for(let i = 1; i< len;i++){
+    //获取每一个市的具体信息
         let cdata = data.children[i]
+    //市的数据保存到arr
         arr.push({id:cdata.id,pid:cdata.pid,name:cdata.name})
       }
     }else{
+    //是直辖市，直接存储直辖市信息
       arr.push({id:data.id,pid:data.pid,name:data.name})
     }
     return arr;
@@ -141,6 +165,7 @@ Page({
     var that = this
     wx.getSetting({
       success: (res) => {
+        console.log("scope.userInfo",res)
         if (!res.authSetting['scope.userInfo']) {
           wx.getUserInfo({
             fail: () => {
@@ -148,6 +173,7 @@ Page({
             },
             success: (res) => {
               /**获取encryptdata **/
+              console.log("我打印了1")
               
               that.api_user(session_key,(res) =>{
                 let uinfo = res.data;
@@ -202,6 +228,7 @@ Page({
           })
         } else {
           /**获取encryptdata **/
+          console.log("我打印了2")
           that.api_user(session_key,(res) =>{
             let uinfo = res.data;
             if (uinfo.errcode == "ok") {
@@ -219,21 +246,35 @@ Page({
                 title: "发布中",
                 mask: true,
                 failTitle: "网络错误，保存失败！",
-                url: "fast-issue/to-job/",
+                url: "fast-issue/set-area/",
                 way: "POST",
-                params: { 
+                params: {
                   token: token,
+                  area_id: id
                 },
                 success: function (res) {
                   let mydata = res.data;
-                  if (mydata.errcode == "ok") {
-                    wx.redirectTo({
-                      url: '/pages/fast/tips/tips?token='+token,
-                    })
-                  }else{
-                    app.showMyTips(mydata.errmsg);
-                    }}
-                })
+                  app.appRequestAction({
+                    title: "发布中",
+                    mask: true,
+                    failTitle: "网络错误，保存失败！",
+                    url: "fast-issue/to-job/",
+                    way: "POST",
+                    params: {
+                      token: token,
+                    },
+                    success:function (res) {
+                      if(res.data.errcode == "ok"){
+                        wx.redirectTo({
+                          url: '/pages/fast/tips/tips?token='+token,
+                        })
+                      }else{
+                        app.showMyTips(mydata.errmsg);
+                      }
+                    }
+                  })
+                }
+              })
             } else {
               app.showMyTips(uinfo.errmsg);
             }

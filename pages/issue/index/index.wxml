@@ -35,7 +35,7 @@
       上传图片： <switch class="issue-upload-switch" checked="{{ switch }}"  bindchange="switchClick" type="switch" />
     </view>
     <view class="issue-upload-show" wx:if="{{ switch }}">
-      <view class="issue-upload-tips">可上传工地现场照片。工程图纸、承包合同等</view>
+      <view class="issue-upload-tips">可上传工地现场照片、工程图纸、承包合同等</view>
       <view class="issue-upload-body clearfix">
         
         <view class="issue-upload-item" wx:for="{{ imgs }}" wx:key="{{ item.url }}">
