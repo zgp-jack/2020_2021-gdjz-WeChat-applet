@@ -176,7 +176,7 @@ Page({
   },
   initInfo:function(){
     let u = wx.getStorageSync('userInfo')
-    wx.setStorageSync('defaultname', false)
+    //wx.setStorageSync('defaultname', false)
     this.setData({
       userInfo: u ? u : false
     })
@@ -220,7 +220,7 @@ Page({
               selectedClassifies: mydata.selectedClassifies,
               switch: mydata.view_image.length ? true:false
             })
-            wx.setStorageSync('defaultname', mydata.default_search_name)
+            //wx.setStorageSync('defaultname', mydata.default_search_name)
             _this.initSelectedClassifies()
           }else{
             let jiSuData = wx.getStorageSync('jiSuData')
@@ -334,42 +334,42 @@ Page({
       return false;
     }
     // 匹配地区
-    let areaName = this.data.addressData.title
-    if(!areaName){
-      let areaData = JSON.parse(JSON.stringify(areas.getAreaArr))
-      areaData.splice(0,1)
-      let areaLen = areaData.length
-      let flag = false
-      for(let i = 0 ; i < areaLen; i++){
-        let rowData = areaData[i]
-        let has = rowData.has_children
-        if(has){
-          let newData = rowData.children
-          for(let j = 1 ; j < newData.length; j ++){
-            if(content.indexOf(newData[j].name) !== -1){
-              console.log(newData[j].name)
-              flag = true
-              wx.setStorageSync('defaultname', newData[j])
-              break
-            }
-          }
-          if(flag){
-            break;
-          }
-        }else{
-          if(content.indexOf(rowData.name) !== -1){
-            wx.setStorageSync('defaultname', 
-            {
-              id:rowData.id,
-              pid:rowData.pid,
-              name:rowData.name,
-              letter: rowData.letter
-            })
-            break
-          }
-        }
-      }
-    }
+    // let areaName = this.data.addressData.title
+    // if(!areaName){
+    //   let areaData = JSON.parse(JSON.stringify(areas.getAreaArr))
+    //   areaData.splice(0,1)
+    //   let areaLen = areaData.length
+    //   let flag = false
+    //   for(let i = 0 ; i < areaLen; i++){
+    //     let rowData = areaData[i]
+    //     let has = rowData.has_children
+    //     if(has){
+    //       let newData = rowData.children
+    //       for(let j = 1 ; j < newData.length; j ++){
+    //         if(content.indexOf(newData[j].name) !== -1){
+    //           console.log(newData[j].name)
+    //           flag = true
+    //           wx.setStorageSync('defaultname', newData[j])
+    //           break
+    //         }
+    //       }
+    //       if(flag){
+    //         break;
+    //       }
+    //     }else{
+    //       if(content.indexOf(rowData.name) !== -1){
+    //         wx.setStorageSync('defaultname', 
+    //         {
+    //           id:rowData.id,
+    //           pid:rowData.pid,
+    //           name:rowData.name,
+    //           letter: rowData.letter
+    //         })
+    //         break
+    //       }
+    //     }
+    //   }
+    // }
     // 不需要匹配的关键词
     for(let i = 0;i<notLen;i++){
       if(content.indexOf(notRules[i].keywords) !== -1){
