@@ -139,6 +139,7 @@ Page({
   },
   showWorkTypePicker: function () {
     // 避免用户选择之后取消，所以对数据进行一次备份
+    //用户在点击一次工种选择框后，便不再自动匹配详情内容
     app.globalData.isRuleClass = true
     this.setData({
       rchildClassifies: JSON.parse(JSON.stringify(this.data.childClassifies)),

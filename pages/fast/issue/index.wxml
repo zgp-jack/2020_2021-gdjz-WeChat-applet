@@ -6,6 +6,7 @@
       bindinput="enterContent"
       bindblur="contentBlur"
       value="{{ content }}"
+      maxlength = "500"
     >
       <!-- <view class="clearContent" bindtap="clearContent">清除内容</view> -->
     </textarea>
