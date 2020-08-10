@@ -54,6 +54,8 @@ Page({
     normalTel: "18349296434",
     placeholder: '请粘贴或输入您要发布的招工信息（如：四川成都找木工，联系电话：18349296434）',
     userEnteredTel: false,
+    //电话号码自动根据详情匹配，当点击了联系电话输入框不再进行匹配
+    isRulePhone:true
   },
   // 设置缓存保留已填写信息
   setEnterInfo: function (name, data) {
@@ -85,10 +87,12 @@ Page({
     }
   },
   userEnterPhone: function (e) {
+    //点击了联系电话后不再匹配
     let val = e.detail.value
     this.setData({
       "data.user_mobile": val,
-      userEnteredTel: true
+      userEnteredTel: true,
+      isRulePhone:false
     })
     this.setEnterInfo('phone', val)
   },
@@ -138,7 +142,7 @@ Page({
   },
   showWorkTypePicker: function () {
     //用户在点击一次工种选择框后，便不再自动匹配详情内容
-    // app.globalData.isRuleClass = true
+    app.globalData.isRuleClass = true
     // 避免用户选择之后取消，所以对数据进行一次备份
     this.setData({
       rchildClassifies: JSON.parse(JSON.stringify(this.data.childClassifies)),
@@ -191,7 +195,7 @@ Page({
   },
   initInfo: function () {
     let u = wx.getStorageSync('userInfo')
-    wx.setStorageSync('defaultname', false)
+    //wx.setStorageSync('defaultname', false)
     this.setData({
       userInfo: u ? u : false
     })
@@ -241,7 +245,7 @@ Page({
               selectedClassifies: mydata.selectedClassifies,
               switch: mydata.view_image.length ? true : false
             })
-            wx.setStorageSync('defaultname', mydata.default_search_name)
+            //wx.setStorageSync('defaultname', mydata.default_search_name)
             _this.initSelectedClassifies()
           } else {
             let jiSuData = wx.getStorageSync('jiSuData')
@@ -352,10 +356,19 @@ Page({
       icon: 'none',
       mask: true
     })
-    this.matchPhoneFun()
+    //点击联系电话框后，不再根据招工详情进行匹配
+    let userInfo = wx.getStorageSync('userInfo')
+    if (!userInfo) {
+      if (this.data.isRulePhone) {
+        this.matchPhoneFun()
+    }} 
+    //用户根据所需工作自行选择工种
     let uids = JSON.parse(JSON.stringify(this.data.userClassifyids))
+    //获取招工详情的内容
     let content = this.data.data.detail;
+    //所需工种最大选择数
     let maxWorkNum = this.data.maxWorkNum
+    //不匹配的数据
     let notRules = this.data.notMateData;
     //不匹配数据长度
     let notLen = notRules.length;
@@ -370,41 +383,42 @@ Page({
       return false;
     }
     // 匹配地区
-    let areaName = this.data.addressData.title
-    if (!areaName) {
-      let areaData = JSON.parse(JSON.stringify(areas.getAreaArr))
-      areaData.splice(0, 1)
-      let areaLen = areaData.length
-      let flag = false
-      for (let i = 0; i < areaLen; i++) {
-        let rowData = areaData[i]
-        let has = rowData.has_children
-        if (has) {
-          let newData = rowData.children
-          for (let j = 1; j < newData.length; j++) {
-            if (content.indexOf(newData[j].name) !== -1) {
-              console.log(newData[j].name)
-              flag = true
-              wx.setStorageSync('defaultname', newData[j])
-              break
-            }
-          }
-          if (flag) {
-            break;
-          }
-        } else {
-          if (content.indexOf(rowData.name) !== -1) {
-            wx.setStorageSync('defaultname', {
-              id: rowData.id,
-              pid: rowData.pid,
-              name: rowData.name,
-              letter: rowData.letter
-            })
-            break
-          }
-        }
-      }
-    }
+    // let areaName = this.data.addressData.title
+    // if(!areaName){
+    //   let areaData = JSON.parse(JSON.stringify(areas.getAreaArr))
+    //   areaData.splice(0,1)
+    //   let areaLen = areaData.length
+    //   let flag = false
+    //   for(let i = 0 ; i < areaLen; i++){
+    //     let rowData = areaData[i]
+    //     let has = rowData.has_children
+    //     if(has){
+    //       let newData = rowData.children
+    //       for(let j = 1 ; j < newData.length; j ++){
+    //         if(content.indexOf(newData[j].name) !== -1){
+    //           console.log(newData[j].name)
+    //           flag = true
+    //           wx.setStorageSync('defaultname', newData[j])
+    //           break
+    //         }
+    //       }
+    //       if(flag){
+    //         break;
+    //       }
+    //     }else{
+    //       if(content.indexOf(rowData.name) !== -1){
+    //         wx.setStorageSync('defaultname', 
+    //         {
+    //           id:rowData.id,
+    //           pid:rowData.pid,
+    //           name:rowData.name,
+    //           letter: rowData.letter
+    //         })
+    //         break
+    //       }
+    //     }
+    //   }
+    // }
     // 不需要匹配的关键词
     for (let i = 0; i < notLen; i++) {
       if (content.indexOf(notRules[i].keywords) !== -1) {
@@ -450,18 +464,20 @@ Page({
       }
     }
     let uidsLen = uids.length
-    if(uidsLen >= maxWorkNum){
-      this.setData({
-        rulesClassifyids: []
-      })
-    }else{
-      let needLen = maxWorkNum - uidsLen
-      needArr.splice(needLen)
-      this.setData({
-        rulesClassifyids: needArr
-      })
+    if (!app.globalData.isRuleClass) {
+      if(uidsLen >= maxWorkNum){
+        this.setData({
+          rulesClassifyids: []
+        })
+      }else{
+        let needLen = maxWorkNum - uidsLen
+        needArr.splice(needLen)
+        this.setData({
+          rulesClassifyids: needArr
+        })
+      }
+      this.setEnterInfo('rulesClassifyids',needArr)
     }
-    this.setEnterInfo('rulesClassifyids',needArr)
     this.countWorkNum()
     this.initChildWorkType()
     this.getWorkText()
@@ -521,6 +537,7 @@ Page({
     this.setData({
       childClassifies: data
     })
+    console.log("childClassifies",this.data.childClassifies)
   },
   userCheckPindex: function (e) {
     let index = parseInt(e.currentTarget.dataset.index)
