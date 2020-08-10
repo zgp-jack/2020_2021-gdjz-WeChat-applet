@@ -26,9 +26,9 @@
 			"disablePlugins": [],
 			"outputPath": ""
 		},
-		"useCompilerModule": true,
-		"userConfirmedUseCompilerModuleSwitch": false,
-		"useIsolateContext": true
+		"useIsolateContext": true,
+		"useCompilerModule": false,
+		"userConfirmedUseCompilerModuleSwitch": false
 	},
 	"compileType": "miniprogram",
 	"libVersion": "2.10.4",
@@ -376,6 +376,13 @@
 					"id": -1,
 					"name": "pages/workingtopAll/workingtop/workingtop",
 					"pathName": "pages/workingtopAll/workingtop/workingtop",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/collect/info/info",
+					"pathName": "pages/collect/info/info",
 					"scene": null
 				}
 			]
