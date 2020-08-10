@@ -122,6 +122,11 @@ Page({
             success: function (res) {
                 wx.hideLoading();
                 let mydata = res.data;
+                wx.showToast({
+                    title: mydata.errmsg,
+                    icon: "none",
+                    duration: 2000
+                })
                 if (mydata.errcode == "ok") {
                     wx.showModal({
                         title: '温馨提示',
