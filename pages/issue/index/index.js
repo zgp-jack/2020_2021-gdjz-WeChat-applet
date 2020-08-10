@@ -135,12 +135,11 @@ Page({
       })
       _this.setEnterInfo('imgs', imgs)
     })
-
   },
   showWorkTypePicker: function () {
-    // 避免用户选择之后取消，所以对数据进行一次备份
     //用户在点击一次工种选择框后，便不再自动匹配详情内容
-    app.globalData.isRuleClass = true
+    // app.globalData.isRuleClass = true
+    // 避免用户选择之后取消，所以对数据进行一次备份
     this.setData({
       rchildClassifies: JSON.parse(JSON.stringify(this.data.childClassifies)),
       rrulesClassifyids: JSON.parse(JSON.stringify(this.data.rulesClassifyids)),
@@ -449,15 +448,7 @@ Page({
           needids.splice(index, 1)
         }
       }
-
     }
-    if (!app.globalData.isRuleClass) {
-      this.setEnterInfo('rulesClassifyids', needArr)
-      this.setData({
-        rulesClassifyids: needArr
-      })
-    }
-
     let uidsLen = uids.length
     if(uidsLen >= maxWorkNum){
       this.setData({
@@ -470,8 +461,6 @@ Page({
         rulesClassifyids: needArr
       })
     }
-    
-    
     this.setEnterInfo('rulesClassifyids',needArr)
     this.countWorkNum()
     this.initChildWorkType()
@@ -504,9 +493,9 @@ Page({
         if(has !== -1){
           inum++
           //let num = classifyids[i].num || 0
-          classifyids[i].num = inum
+          // classifyids[i].num = inum
         }
-        classifyids[i].num = num
+        classifyids[i].num = inum
       }
     }
     this.setData({

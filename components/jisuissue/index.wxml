@@ -1,12 +1,12 @@
-<cover-view class="issueok-container" wx:if="{{ show }}">
-  <cover-view class="issueok-box">
-    <cover-view class="issueok-title">提示</cover-view>
-    <cover-view class="issueok-body">发布成功</cover-view>
-    <cover-view class="issueok-footer">
+<view class="issueok-container" wx:if="{{ show }}">
+  <view class="issueok-box">
+    <view class="issueok-title">提示</view>
+    <view class="issueok-body">发布成功</view>
+    <view class="issueok-footer">
       <button class="issueok-btn" bindtap="goToResumeList">筛选找活简历</button>
       <button class="issueok-btn" bindtap="manageRecruit"  wx:if="{{ userInfo }}">管理招工信息</button>
       <button class="issueok-btn" wx:else open-type="getUserInfo"  bindgetuserinfo='bindGetUserInfo'>管理招工信息</button>
-    </cover-view>
-    <cover-image class="issueok-close" bindtap="show" src="{{ close }}"></cover-image>
-  </cover-view>
-</cover-view>
+    </view>
+    <image class="issueok-close" bindtap="show" src="{{ close }}"></image>
+  </view>
+</view>
