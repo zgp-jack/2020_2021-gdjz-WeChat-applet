@@ -1,5 +1,5 @@
 <view class="issue-container">
-  <view class="issue-textarea-box">
+  <view class="issue-textarea-box" wx:if="{{ !showPicker }}">
     <text class="issue-textarea-title">招工详情：</text>
     <textarea 
       class="issue-textarea" 

@@ -131,7 +131,7 @@ Page({
       ruserClassifyids: JSON.parse(JSON.stringify(this.data.userClassifyids)),
       rclassifies: JSON.parse(JSON.stringify(this.data.classifies)),
       rpindex: this.data.pindex,
-      showPicker: true
+      showPicker: true,
     })
   },
   cancelWorkTypePicker:function(){
@@ -147,7 +147,7 @@ Page({
   },
   sureWorkTypePicker:function(){
     this.setData({
-      showPicker: false,
+      showPicker: false
     })
     this.getWorkText()
   },
@@ -224,7 +224,10 @@ Page({
             _this.initSelectedClassifies()
           }else{
             let jiSuData = wx.getStorageSync('jiSuData')
-            if(!jiSuData){return false;}
+            if(!jiSuData){
+              _this.initChildWorkType()
+              return false;
+            }
             if(jiSuData.detail){
               _this.setData({ "data.detail":jiSuData.detail })
             }
@@ -317,7 +320,9 @@ Page({
       mask: true
     })
     this.matchPhoneFun()
+    let uids = JSON.parse(JSON.stringify(this.data.userClassifyids))
     let content = this.data.data.detail;
+    let maxWorkNum = this.data.maxWorkNum
     let notRules = this.data.notMateData;
     let notLen = notRules.length;
     let needRules = this.data.mateData;
@@ -400,7 +405,6 @@ Page({
     let infoId = this.data.infoId
     
     if(infoId){
-      let uids = JSON.parse(JSON.stringify(this.data.userClassifyids))
       let needids = needArr.map(item => item.id)
       for(let i = 0;i<uids.length;i++){
         let index = needids.indexOf(uids[i].id)
@@ -411,9 +415,21 @@ Page({
       }
       
     }
-    this.setData({
-      rulesClassifyids: needArr
-    })
+
+    let uidsLen = uids.length
+    if(uidsLen >= maxWorkNum){
+      this.setData({
+        rulesClassifyids: []
+      })
+    }else{
+      let needLen = maxWorkNum - uidsLen
+      needArr.splice(needLen)
+      this.setData({
+        rulesClassifyids: needArr
+      })
+    }
+    
+    
     this.setEnterInfo('rulesClassifyids',needArr)
     this.countWorkNum()
     this.initChildWorkType()
@@ -431,11 +447,13 @@ Page({
     if(!ruleLen) return
     for(let i = 0;i < len;i++){
       let data = classifyids[i].children
+      let inum = 0
       for(let j = 0;j<data.length;j++){
         let has = rulesClassifyids.indexOf(data[j].id)
         if(has !== -1){
-          let num = classifyids[i].num || 0
-          classifyids[i].num = num + 1
+          inum++
+          //let num = classifyids[i].num || 0
+          classifyids[i].num = inum
         }
       }
     }
