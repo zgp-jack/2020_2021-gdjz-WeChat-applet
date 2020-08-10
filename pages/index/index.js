@@ -933,10 +933,10 @@ Page({
 
     let u =wx.getStorageSync('userInfo')
     let uuid = wx.getStorageSync('userUuid')
+    
     this.setData({
-      jgjzData: {...u,uuid: uuid}
+      jgjzData: {...u,userUuid: uuid}
     })
-    console.log(this.data.jgjzData)
 
     this.initFirstFcInfo();
     this.initSearchHistory();

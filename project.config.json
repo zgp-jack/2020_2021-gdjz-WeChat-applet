@@ -26,9 +26,16 @@
 			"disablePlugins": [],
 			"outputPath": ""
 		},
+<<<<<<< HEAD
 		"useIsolateContext": true,
 		"useCompilerModule": false,
 		"userConfirmedUseCompilerModuleSwitch": false
+=======
+		"useCompilerModule": false,
+		"userConfirmedUseCompilerModuleSwitch": false,
+		"compileHotReLoad": false,
+		"useIsolateContext": true
+>>>>>>> d3c24c2f94ca6ce07e4f5d9f0dc2844d900042fe
 	},
 	"compileType": "miniprogram",
 	"libVersion": "2.10.4",

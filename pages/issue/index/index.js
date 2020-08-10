@@ -147,7 +147,7 @@ Page({
       ruserClassifyids: JSON.parse(JSON.stringify(this.data.userClassifyids)),
       rclassifies: JSON.parse(JSON.stringify(this.data.classifies)),
       rpindex: this.data.pindex,
-      showPicker: true
+      showPicker: true,
     })
   },
   cancelWorkTypePicker: function () {
@@ -163,7 +163,7 @@ Page({
   },
   sureWorkTypePicker: function () {
     this.setData({
-      showPicker: false,
+      showPicker: false
     })
     this.getWorkText()
   },
@@ -246,8 +246,12 @@ Page({
             _this.initSelectedClassifies()
           } else {
             let jiSuData = wx.getStorageSync('jiSuData')
-            if (!jiSuData) {
+            if(!jiSuData){
+              _this.initChildWorkType()
               return false;
+            }
+            if(jiSuData.detail){
+              _this.setData({ "data.detail":jiSuData.detail })
             }
             if (jiSuData.detail) {
               _this.setData({
@@ -350,9 +354,9 @@ Page({
       mask: true
     })
     this.matchPhoneFun()
-    //获取data中招工详情
+    let uids = JSON.parse(JSON.stringify(this.data.userClassifyids))
     let content = this.data.data.detail;
-    //获取data中不匹配数据
+    let maxWorkNum = this.data.maxWorkNum
     let notRules = this.data.notMateData;
     //不匹配数据长度
     let notLen = notRules.length;
@@ -435,9 +439,8 @@ Page({
       }
     }
     let infoId = this.data.infoId
-
-    if (infoId) {
-      let uids = JSON.parse(JSON.stringify(this.data.userClassifyids))
+    
+    if(infoId){
       let needids = needArr.map(item => item.id)
       for (let i = 0; i < uids.length; i++) {
         let index = needids.indexOf(uids[i].id)
@@ -454,6 +457,22 @@ Page({
         rulesClassifyids: needArr
       })
     }
+
+    let uidsLen = uids.length
+    if(uidsLen >= maxWorkNum){
+      this.setData({
+        rulesClassifyids: []
+      })
+    }else{
+      let needLen = maxWorkNum - uidsLen
+      needArr.splice(needLen)
+      this.setData({
+        rulesClassifyids: needArr
+      })
+    }
+    
+    
+    this.setEnterInfo('rulesClassifyids',needArr)
     this.countWorkNum()
     this.initChildWorkType()
     this.getWorkText()
@@ -479,11 +498,13 @@ Page({
     //记录选择或者详情匹配工种的数量
     for (let i = 0; i < len; i++) {
       let data = classifyids[i].children
-      let num = 0
-      for (let j = 0; j < data.length; j++) {
+      let inum = 0
+      for(let j = 0;j<data.length;j++){
         let has = rulesClassifyids.indexOf(data[j].id)
-        if (has !== -1) {
-          num = num + 1
+        if(has !== -1){
+          inum++
+          //let num = classifyids[i].num || 0
+          classifyids[i].num = inum
         }
         classifyids[i].num = num
       }
