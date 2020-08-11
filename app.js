@@ -91,7 +91,9 @@ App({
       userPhone:""
     },
     //极速发布点击所需工种后是否根据招工详情自动匹配，点击所属工种后不再匹配
-    isRuleClass:false
+    isRuleClass:false,
+    //首次从未授权状态到授权状态读取用户信息的手机号
+    isRedPhone:true
   },
   //是否为极速发布与快速发布请求,快速发布与极速发布跳转
   initJobView: function () {

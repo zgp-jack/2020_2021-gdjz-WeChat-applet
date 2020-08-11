@@ -21,6 +21,10 @@
       <input placeholder="请输入工种" disabled  wx:if="{{ !showClassifyText }}"></input>
       <view class="input-item-text" wx:if="{{ showClassifyText }}">{{ showClassifyText }}</view>
     </view>
+    <view class="issue-form-item" wx:if="{{ infoId }}">
+      <text>姓名：</text>
+      <input placeholder="请正确输入2~5字中文姓名" value="{{ data.user_name }}" type="number" bindinput="userEnterName" maxlength="5"></input>
+    </view>
     <view class="issue-form-item">
       <text>联系电话：</text>
       <input placeholder="请输入联系电话" value="{{ data.user_mobile }}" type="number" bindinput="userEnterPhone" maxlength="11"></input>

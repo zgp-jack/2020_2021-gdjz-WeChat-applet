@@ -55,7 +55,7 @@ Page({
     placeholder: '请粘贴或输入您要发布的招工信息（如：四川成都找木工，联系电话：18349296434）',
     userEnteredTel: false,
     //电话号码自动根据详情匹配，当点击了联系电话输入框不再进行匹配
-    isRulePhone:true
+    isRulePhone:true,
   },
   // 设置缓存保留已填写信息
   setEnterInfo: function (name, data) {
@@ -106,6 +106,13 @@ Page({
     if (_type == undefined) return _re;
     if (_re == _type) return true;
     return false;
+  },
+  //输入姓名修改姓名信息
+  userEnterName:function (e) {
+    let val = e.detail.value
+    this.setData({
+      "data.user_name": val
+    })
   },
   userEnterDetail: function (e) {
     let val = e.detail.value
@@ -215,6 +222,7 @@ Page({
       mask: true,
       params: postData,
       success: function (res) {
+        console.log("resdata",res)
         let mydata = res.data
         if (mydata.errcode == "ok") {
           let tel = mydata.memberInfo.tel || ''
@@ -232,8 +240,11 @@ Page({
             selectedClassifies: mydata.selectedClassifies,
             // placeholder: mydata.placeholder
           })
+          //如果是从个人中心我的招工界面过来的，为修改界面，采集修改数据
           if (infoId) {
             _this.setData({
+              "data.user_mobile":mydata.model.user_mobile,
+              "data.user_name": mydata.model.user_name,
               "addressData.title": mydata.model.address,
               "addressData.location": mydata.model.location,
               "data.detail": mydata.model.detail,
@@ -245,9 +256,15 @@ Page({
               selectedClassifies: mydata.selectedClassifies,
               switch: mydata.view_image.length ? true : false
             })
+            console.log("infoId",infoId)
             //wx.setStorageSync('defaultname', mydata.default_search_name)
             _this.initSelectedClassifies()
+            _this.countWorkNum()
+            _this.getWorkText()
+            _this.initChildWorkType()
+            console.log("data",_this.data)
           } else {
+            console.log("我进来了")
             let jiSuData = wx.getStorageSync('jiSuData')
             if(!jiSuData){
               _this.initChildWorkType()
@@ -262,9 +279,22 @@ Page({
               })
             }
             if (jiSuData.phone) {
-              _this.setData({
-                "data.user_mobile": jiSuData.phone
-              })
+              if (u) {
+                if (app.globalData.isRedPhone) {
+                  _this.setData({
+                    "data.user_mobile": res.data.memberInfo.tel,
+                  })
+                  app.globalData.isRedPhone = false
+                }else{
+                  _this.setData({
+                    "data.user_mobile": jiSuData.phone
+                  })
+                }
+              }else {
+                _this.setData({
+                  "data.user_mobile": jiSuData.phone
+                })
+              } 
             }
             if (jiSuData.area) {
               _this.setData({
@@ -720,6 +750,15 @@ Page({
       })
       return false
     }
+    
+    if (!v.regStrNone(this.data.data.user_name) || !v.chineseReg(this.data.data.user_name) || (this.data.data.user_name).trim().length<2) {
+      console.log(this.data.data.user_name)
+      if (infoId) {
+        app.showMyTips("请输入2~5字纯中文姓名！");
+        return false;
+      }
+    }
+  
     if (!data.user_mobile) {
       wx.showModal({
         title: '提示',
