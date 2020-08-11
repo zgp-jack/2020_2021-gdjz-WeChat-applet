@@ -12,7 +12,8 @@ Page({
     content: '',
     phone: '',
     showTel: false,
-    request:false
+    request:false,
+    isRule:true
   },
   checkType: function (obj, _type) {
     var _re = Object.prototype.toString.call(obj).slice(8, -1).toLowerCase();
@@ -28,27 +29,29 @@ Page({
       content: val
     })
     if (!u) {
-      let content = val.replace(/\s+/g, "");
-      let _partten = /1[3-9]\d{9}/g;
-      let phone = content.match(_partten);
-      if (this.checkType(phone, 'array')) {
-        let tel = phone[0];
-        this.setData({
-          showTel: true,
-          phone: tel
-        });
-        wx.setStorageSync("fastData",{
-          phone:tel
-        })
-      }
-    }
+      if (this.data.isRule) {
+        let content = val.replace(/\s+/g, "");
+        let _partten = /1[3-9]\d{9}/g;
+        let phone = content.match(_partten);
+        if (this.checkType(phone, 'array')) {
+          let tel = phone[0];
+          this.setData({
+            showTel: true,
+            phone: tel
+          });
+          wx.setStorageSync("fastData",{
+            phone:tel
+          })
+        }
+    }}
   },
   enterPhone: function (e) {
     wx.setStorageSync("fastData",{
       phone:app.globalData.publish.userPhone,
     })
     this.setData({
-      phone: e.detail.value
+      phone: e.detail.value,
+      isRule:false
     })
   },
   contentBlur: function (e) {

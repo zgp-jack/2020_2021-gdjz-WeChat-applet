@@ -225,7 +225,7 @@ Page({
         console.log("resdata",res)
         let mydata = res.data
         if (mydata.errcode == "ok") {
-          let tel = mydata.memberInfo.tel || ''
+          let tel = mydata.memberInfo.tel || mydata.model.user_mobile
           let username = mydata.memberInfo.username || ''
           _this.setData({
             "data.userId": mydata.memberInfo.id || '',
