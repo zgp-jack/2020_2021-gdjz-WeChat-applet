@@ -8,6 +8,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    id:"0",
     userInfo: true,
     infoId: '', //
     showPicker: false,
@@ -56,6 +57,9 @@ Page({
     userEnteredTel: false,
     //电话号码自动根据详情匹配，当点击了联系电话输入框不再进行匹配
     isRulePhone:true,
+    //个人中心招工列表点击拒绝的招工修改显示提示框
+    showModal:false,
+    reason:""
   },
   // 设置缓存保留已填写信息
   setEnterInfo: function (name, data) {
@@ -254,8 +258,19 @@ Page({
               imgs: mydata.view_image,
               imglen: mydata.view_image.length,
               selectedClassifies: mydata.selectedClassifies,
-              switch: mydata.view_image.length ? true : false
+              switch: mydata.view_image.length ? true : false,
+              reason:mydata.model.check_fail_msg,
+              id:mydata.default_search_name.id
             })
+            if (mydata.model.check_fail_msg != "0") {
+              wx.showModal({
+                title: '审核失败',
+                content: _this.data.reason,
+                showCancel:false,
+                confirmText:"立即修改",
+                confirmColor:"#09f"
+              })
+            }
             console.log("infoId",infoId)
             //wx.setStorageSync('defaultname', mydata.default_search_name)
             _this.initSelectedClassifies()
@@ -335,6 +350,11 @@ Page({
           })
         }
       }
+    })
+  },
+  vertify() {
+    this.setData({
+      showModal: false,
     })
   },
   initSelectedClassifies: function () {
@@ -696,6 +716,7 @@ Page({
     }, 1000)
   },
   publishRecruitInfo: function () {
+    var _this =this
     let v = vali.v.new();
     let {
       infoId,
@@ -705,7 +726,7 @@ Page({
       userClassifyids,
       rulesClassifyids,
       userInfo
-    } = this.data
+    } = _this.data
     if (!data.detail) {
       wx.showModal({
         title: '提示',
@@ -731,12 +752,23 @@ Page({
       return false
     }
     if (!addressData.location) {
-      wx.showModal({
-        title: '提示',
-        content: '请选择招工城市。',
-        showCancel: false
-      })
-      return false
+      if(_this.data.infoId) {
+        let { id } = _this.data;
+        if(!id){
+          wx.showModal({
+            title: '提示',
+            content: "请选择招工所在地。",
+            showCancel: false
+          })
+          return
+      }}else{
+        wx.showModal({
+          title: '提示',
+          content: '请选择招工城市。',
+          showCancel: false
+        })
+        return false
+      }
     }
     let works = [...userClassifyids, ...rulesClassifyids]
     works.splice(5)
@@ -751,8 +783,8 @@ Page({
       return false
     }
     
-    if (!v.regStrNone(this.data.data.user_name) || !v.chineseReg(this.data.data.user_name) || (this.data.data.user_name).trim().length<2) {
-      console.log(this.data.data.user_name)
+    if (!v.regStrNone(_this.data.data.user_name) || !v.chineseReg(_this.data.data.user_name) || (_this.data.data.user_name).trim().length<2) {
+      console.log(_this.data.data.user_name)
       if (infoId) {
         app.showMyTips("请输入2~5字纯中文姓名！");
         return false;
@@ -775,7 +807,7 @@ Page({
       })
       return false;
     }
-    if (data.user_mobile == this.data.normalTel) {
+    if (data.user_mobile == _this.data.normalTel) {
       wx.showModal({
         title: '提示',
         content: '该手机号暂不支持发布招工信息，请重新输入。',
@@ -795,8 +827,8 @@ Page({
     }
 
     let imgs = []; // 图片数组
-    if (this.data.switch) {
-      imgs = this.data.imgs.map(item => item.url)
+    if (_this.data.switch) {
+      imgs = _this.data.imgs.map(item => item.url)
     }
 
     let mydata = {
@@ -838,9 +870,16 @@ Page({
             }
             wx.setStorageSync('userJiSuPublishedData', jsdata)
           }
-          wx.navigateTo({
-            url: '/pages/issue/tips/tips',
-          })
+          if (_this.data.infoId) {
+            wx.navigateTo({
+              url: '/pages/published/recruit/list',
+            })
+          }else{
+            wx.navigateTo({
+              url: '/pages/issue/tips/tips',
+            })
+          }
+          
         } else if (res.data.errcode == "member_forbid" || res.data.errcode == "login_over_time") {
           wx.showModal({
             title: '提示',

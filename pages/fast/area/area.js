@@ -26,7 +26,7 @@ Page({
     //判断如果有本地缓存地理位置信息
     if(province){
     //本地地理位置信息与所有省份信息相同对应的allProvince的index
-      let index = allProvince.findIndex(item => item.id == province.pid)
+    let index = allProvince.findIndex(item => item.id == province.pid)
     //本地地理位置信息具体信息
     console.log("index",index)
       let item = allProvince[index]

@@ -178,7 +178,7 @@ Page({
     editThisInfo:function(){
       let id = this.data.infoId
       wx.navigateTo({
-        url: '/pages/publish/recruit/recruit?id='+id,
+        url: '/pages/issue/index/index?id='+id,
       })
     },
     userSetTopAction:function(e){
