@@ -871,8 +871,17 @@ Page({
             wx.setStorageSync('userJiSuPublishedData', jsdata)
           }
           if (_this.data.infoId) {
-            wx.navigateTo({
-              url: '/pages/published/recruit/list',
+            wx.showModal({
+              title: '恭喜您',
+              content: '修改成功！',
+              showCancel:false,
+              success (res) {
+                if (res.confirm) {
+                  wx.navigateTo({
+                    url: '/pages/published/recruit/list',
+                  })
+                }
+              }
             })
           }else{
             wx.navigateTo({
