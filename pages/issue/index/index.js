@@ -59,7 +59,8 @@ Page({
     isRulePhone:true,
     //个人中心招工列表点击拒绝的招工修改显示提示框
     showModal:false,
-    reason:""
+    reason:"",
+    model:{}
   },
   // 设置缓存保留已填写信息
   setEnterInfo: function (name, data) {
@@ -260,15 +261,24 @@ Page({
               selectedClassifies: mydata.selectedClassifies,
               switch: mydata.view_image.length ? true : false,
               reason:mydata.model.check_fail_msg,
-              id:mydata.default_search_name.id
+              id:mydata.default_search_name.id,
+              //this.data.model为修改界面进入后采集的修改前数据
+              "model.detail":mydata.model.detail,
+              "model.address":mydata.model.address,
+              "model.province_id":mydata.model.province_id,
+              "model.city_id":mydata.model.city_id,
+              "model.county_id":mydata.model.county_id,
+              "model.selectedClassifies":mydata.selectedClassifies,
+              "model.user_name":mydata.model.user_name,
+              "model.user_mobile":mydata.model.user_mobile,
+              "model.imgs":mydata.model.view_image,
             })
             if (mydata.model.check_fail_msg != "0") {
               wx.showModal({
                 title: '审核失败',
-                content: _this.data.reason,
+                content: "失败原因："+_this.data.reason,
                 showCancel:false,
                 confirmText:"立即修改",
-                confirmColor:"#09f"
               })
             }
             console.log("infoId",infoId)
@@ -727,6 +737,36 @@ Page({
       rulesClassifyids,
       userInfo
     } = _this.data
+    //输入信息后的字段对象
+    let dataJson = {
+      detail:_this.data.data.detail,
+      address:_this.data.addressData.title,
+      province_id:_this.data.data.province_id,
+      city_id:_this.data.data.city_id,
+      county_id:_this.data.data.county_id,
+      selectedClassifies:_this.data.selectedClassifies,
+      user_name:_this.data.data.user_name,
+      user_mobile:_this.data.data.user_mobile,
+      imgs:_this.data.imgs,
+    }
+    //输入信息前的字段对象
+    let model = _this.data.model
+    //如果是修改界面再没有更改数据的情况下不能保存
+    if (_this.data.infoId) {
+      if (_this.data.reason != "0") {
+        if (JSON.stringify(model) == JSON.stringify(dataJson)){
+          let reason = _this.data.reason
+          wx.showModal({
+            title: '审核失败',
+            content: "失败原因："+reason,
+            showCancel: false,
+            confirmText:"立即修改",
+            success: function (res) { }
+          })
+          return false;
+        }
+      }
+    }
     if (!data.detail) {
       wx.showModal({
         title: '提示',
@@ -830,7 +870,8 @@ Page({
     if (_this.data.switch) {
       imgs = _this.data.imgs.map(item => item.url)
     }
-
+    
+    
     let mydata = {
       ...userInfo,
       ...data,
