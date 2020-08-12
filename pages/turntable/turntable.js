@@ -183,6 +183,9 @@ Page({
                             _this.setData({
                                 adtype: mydata.data.video
                             })
+                            wx.showLoading({
+                              mask: true
+                            })
                             _this.userSeeVideo()
                             //_this.userGetVideo()
                           }
@@ -342,6 +345,7 @@ Page({
         if (videoAd) {
             videoAd.show()
             .then(()=>{
+                wx.hideLoading()
                 _this.setData({
                     btndis: false
                 })
@@ -356,6 +360,7 @@ Page({
                     })
                 })
                 .catch(err => {
+                    wx.hideLoading()
                     _this.setData({
                         btndis: false
                     })
@@ -385,7 +390,7 @@ Page({
                 })
             })
             videoAd.onClose((status) => {
-                wx.hideLoading()
+                
                 if (status && status.isEnded || status === undefined) {
                     this.videoAdStop()
                 }
@@ -408,6 +413,7 @@ Page({
                 console.log(mydata)
                 if(mydata.code == 200){
                     wx.showLoading({
+                      title: '视频加载中',
                       mask: true
                     })
                     _this.startTurntable()

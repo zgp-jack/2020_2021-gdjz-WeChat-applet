@@ -9,7 +9,7 @@
         </view>
 
         <view class='turntable-footer'>
-            <view class='truntable-footer-arrows'></view>
+            <!-- <view class='truntable-footer-arrows'></view> -->
             <view class='turntable-footer-item'>
                 <view class='turntable-times-tips' >
                     今日可抽奖次数：{{ userTimes }} 次
