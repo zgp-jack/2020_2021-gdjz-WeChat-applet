@@ -18,7 +18,7 @@ page{
     position: relative;
     margin: 0 auto;
     display: block;
-    
+    overflow: hidden;
 }
 .turntable-btnbox{
     position: absolute;
