@@ -192,8 +192,9 @@ Page({
     })
   },
   showWorkArea: function () {
+    let infoId = this.data.infoId
     wx.navigateTo({
-      url: '/pages/issue/area/area?showfor=showfor&showmap=showmap',
+      url: '/pages/issue/area/area?showfor=showfor&showmap=showmap&infoId=' + infoId,
     })
   },
   userUploadImg: function () {
@@ -291,48 +292,57 @@ Page({
             _this.initChildWorkType()
           } else {
             let jiSuData = wx.getStorageSync('jiSuData')
+            let gpsPorvince = wx.getStorageSync('gpsPorvince')
+            let defaultPosition = areas.getAreaArr[1]
+            let defaultname = jiSuData.defaultname ? jiSuData.defaultname :(gpsPorvince?gpsPorvince:defaultPosition)
+            console.log("defaultname",defaultname)
+            wx.setStorageSync('defaultname', defaultname)
             if(!jiSuData){
               _this.initChildWorkType()
               return false;
-            }
-            if(jiSuData.detail){
-              _this.setData({ "data.detail":jiSuData.detail })
-            }
-            if (jiSuData.detail) {
-              _this.setData({
-                "data.detail": jiSuData.detail
-              })
-            }
-            if (jiSuData.phone) {
-              if (u) {
-                if (app.globalData.isRedPhone) {
-                  console.log("我进来了")
-                  _this.setData({
-                    "data.user_mobile": res.data.memberInfo.tel,
-                  })
-                }else{
+            } else {
+              jiSuData.defaultname = defaultname
+              wx.setStorageSync('jiSuData', jiSuData)
+              if(jiSuData.detail){
+                _this.setData({ "data.detail":jiSuData.detail })
+              }
+              if (jiSuData.detail) {
+                _this.setData({
+                  "data.detail": jiSuData.detail
+                })
+              }
+              if (jiSuData.phone) {
+                if (u) {
+                  if (app.globalData.isRedPhone) {
+                    console.log("我进来了")
+                    _this.setData({
+                      "data.user_mobile": res.data.memberInfo.tel,
+                    })
+                  }else{
+                    _this.setData({
+                      "data.user_mobile": jiSuData.phone
+                    })
+                  }
+                }else {
                   _this.setData({
                     "data.user_mobile": jiSuData.phone
                   })
-                }
-              }else {
+                } 
+              }
+              if (jiSuData.area) {
                 _this.setData({
-                  "data.user_mobile": jiSuData.phone
+                  addressData: jiSuData.area
                 })
-              } 
+              }
+              if (jiSuData.imgs) {
+                _this.setData({
+                  imgs: jiSuData.imgs,
+                  imglen: jiSuData.imgs.length,
+                  switch: jiSuData.imgs.length ? true : false
+                })
+              }
             }
-            if (jiSuData.area) {
-              _this.setData({
-                addressData: jiSuData.area
-              })
-            }
-            if (jiSuData.imgs) {
-              _this.setData({
-                imgs: jiSuData.imgs,
-                imglen: jiSuData.imgs.length,
-                switch: jiSuData.imgs.length ? true : false
-              })
-            }
+            
             _this.setData({
               userClassifyids: jiSuData.userClassifyids || [],
               rulesClassifyids: jiSuData.rulesClassifyids || [],
@@ -917,7 +927,7 @@ Page({
         if (res.data.errcode == "ok") {
           //发布成功后，清除缓存数据中的detail、rulesClassifyids、userClassifyids、imgs
           let jiSuData = wx.getStorageSync('jiSuData')
-          jiSuData.detail = ""
+          jiSuData.detail = ''
           jiSuData.rulesClassifyids = []
           jiSuData.userClassifyids = []
           jiSuData.imgs = []

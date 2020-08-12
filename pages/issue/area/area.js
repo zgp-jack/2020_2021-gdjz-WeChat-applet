@@ -41,10 +41,12 @@ Page({
     areaInputFocus:false,
     infoId:"",
     showfor:"noshowfor",
-    showmap:"noshowmap"
+    showmap:"noshowmap",
+    isHistory:false
   },
   chooseInputCtiy: function (e) { 
     this.chooseThisCtiy(e);
+    
     this.setData({ isAllAreas: true, searchInputVal: "", showArea: false, showInputList: false })
   },
   clearInputAction: function () {
@@ -75,14 +77,25 @@ Page({
     this.setData({ showInputList: true })
   },
   clearInputVal: function () {
-    this.setData({ showMaplist: true, addressText: "",showHisTitle:false })
+    this.setData({ 
+      showMaplist: true, 
+      addressText: "",
+      showHisTitle:false,
+      isHistory:false
+     })
+     console.log("isHistory",this.data.isHistory)
     this.getMapInfo();
   },
   mapInputFocus: function (e) {
+    console.log(e)
+    let isHistory = e.currentTarget.dataset.isHistory
     let val = e.detail.value;
     if(val) return false;
     this.initHistoryCityList()
-    this.setData({ showHisTitle:true })
+    this.setData({ 
+      showHisTitle:true ,
+      isHistory:true
+    })
     
   },
   // addressList
@@ -145,8 +158,6 @@ Page({
     setTimeout(() => {
       this.setData({ showArea: false, addressActive: true, showInputList: false, searchInputVal: "", isAllAreas: true })
     }, 10)
-
-    
   },
   chooseThisCtiy: function (e) {
     let _this = this;
@@ -350,6 +361,7 @@ Page({
     wx.navigateBack({ delta:1 })
   },
   userEnterAddress: function (e) {
+    console.log(e)
     let _this = this;
     let val = e.detail.value;
     this.setData({ addressText: val }) //, showMaplist: false
@@ -376,8 +388,64 @@ Page({
     
   },
   setAddressData: function (e) {
-    let defaultname = wx.getStorageSync("locationHistory")[0]
-    wx.setStorageSync('defaultname', defaultname)
+    console.log("e.currentTarget.dataset.index",e.currentTarget.dataset.index)
+    // return
+    //点击详细地址将位置信息设置给jiSuData缓存
+    let jiSuData = wx.getStorageSync('jiSuData')
+    let historyCityLists = wx.getStorageSync('historyCityLists')
+     //点击详细地址将位置信息设置给defaultname缓存
+    let locationHistory = wx.getStorageSync("locationHistory")
+    let infoId = this.data.infoId
+    let isHistory = this.data.isHistory
+    if (isHistory) {
+      let index = e.currentTarget.dataset.index
+      if (!infoId) {
+        if (jiSuData) {
+          let defaulPosition = jiSuData.defaultname
+          let defaultname = historyCityLists?historyCityLists[index]:defaulPosition
+          jiSuData.defaultname = defaultname
+          wx.setStorageSync('jiSuData', jiSuData)
+        }
+      } else {
+        this.setData({
+          isHistory:false
+        })
+      }
+    } else {
+      if (!infoId) {
+        if (jiSuData) {
+          let defaulPosition = jiSuData.defaultname
+          let defaultname = locationHistory?locationHistory[0]:defaulPosition
+          jiSuData.defaultname = defaultname
+          wx.setStorageSync('jiSuData', jiSuData)
+        }
+      } 
+    }
+    // if (!infoId) {
+    //   if (jiSuData) {
+    //     let defaulPosition = jiSuData.defaultname
+    //     let defaultname = locationHistory?locationHistory[0]:defaulPosition
+    //     jiSuData.defaultname = defaultname
+    //     wx.setStorageSync('jiSuData', jiSuData)
+    //   }
+    // } else {
+    //   wx.setStorageSync('defaultname', locationHistory[0])
+    // }
+    // if (jiSuData) {
+    //   let defaulPosition = jiSuData.defaultname
+    //   if (!infoId) {
+    //     let defaultname = locationHistory?locationHistory[0]:defaulPosition
+    //     jiSuData.defaultname = defaultname
+    //     wx.setStorageSync('jiSuData', jiSuData)
+    //   }else{
+    //     wx.setStorageSync('defaultname', locationHistory[0])
+    //   }
+    // }
+    // if(locationHistory){
+    //   wx.setStorageSync('defaultname', locationHistory[0])
+    // }
+    
+    
     let _this = this;
     let area = this.data.areaText;
     let pname = this.data.keyAutoVal;
@@ -392,6 +460,9 @@ Page({
       location: l,
       district: d
     }
+    console.log("h1",h1)
+    return
+    wx.setStorageSync('defaultname', h1)
     this.checkAdcode(a, function () {
       let prevPage = app.getPrevPage();
 
@@ -440,21 +511,37 @@ Page({
 
   },
   initAreaText: function () {
-    //获取缓存中默认的地理位置信息
-    let defaultname = wx.getStorageSync("defaultname");
+    console.log("this.data",this.data)
+    let jiSuData = wx.getStorageSync('jiSuData')
+    let infoId = this.data.infoId
+    let defaultname = ""
+    if (infoId) {
+      defaultname = wx.getStorageSync("defaultname")
+    } else {
+      if (jiSuData) {
+        let defaultPositon = jiSuData.defaultname
+         //获取缓存中默认的地理位置信息
+        defaultname = infoId? wx.getStorageSync("defaultname"):defaultPositon
+      }else {
+        defaultname = wx.getStorageSync("defaultname")
+      }
+    }
+   
+    
     //左后一次选择的城市
     let lastCtiy = wx.getStorageSync("lastPublishCity");
     //获取gps定位的城市
     let gpsPorvince = wx.getStorageSync("gpsPorvince");
     let gpsloc = wx.getStorageSync("gpsPorvince");
     this.setData({ gpsOrientation: gpsPorvince });
-    let infoId = this.data.infoId;
     let showfor = this.data.showfor;
     let showmap = this.data.showmap;
 
     if (defaultname && showfor == "showfor"){
+      console.log("areaText1",this.data.areaText)
       this.setData({ areaText: defaultname.name, keyAutoVal: defaultname.name + "市" })
     } else if (lastCtiy && lastCtiy.hasOwnProperty('name') && !infoId ||showfor == "noshowfor" ) {
+      console.log("areaText2",this.data.areaText)
       this.setData({ areaText: lastCtiy.name , keyAutoVal: lastCtiy.ad_name })
     } else if (gpsloc) {
       this.setData({ areaText: gpsloc.name, keyAutoVal: gpsloc.name + "市" })
@@ -480,6 +567,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    console.log("options",options)
     this.getinfoId(options)
     this.initInputList();
     areas.getInputList();

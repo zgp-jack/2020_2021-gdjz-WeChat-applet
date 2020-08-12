@@ -4,7 +4,7 @@ setAddressData -->
   <view class='address-header'>
     <view class="choose-address-text" bindtap="showCity">{{ areaText }}<view class="map-cityarrow"></view></view>
     <view class="inputandimg">
-      <input placeholder='请输入你的详细地址' bindinput='userEnterAddress' value='{{ addressText }}' bindfocus="mapInputFocus"></input>
+      <input placeholder='请输入你的详细地址' bindinput='userEnterAddress' value='{{ addressText }}' bindfocus="mapInputFocus" data-isHistory="true"></input>
       <image src="{{ clearinput }}" bindtap="clearInputVal"></image>
     </view>
     <text bindtap='closeAddressAction'>取消</text>
@@ -21,7 +21,7 @@ setAddressData -->
                 <text>{{ addressTips }}</text>
             </view>
           </view>
-          <view class='address-item' bindtap='setAddressData' data-title='{{ showHisTitle ? item.title : item.name }}' data-adcode='{{ item.adcode }}' data-district='{{ (item.district ? item.district : "") + (item.address ? item.address : "") }}' data-location='{{ item.location }}' wx:for="{{ addressList }}" wx:key="{{ index }}">
+          <view class='address-item' bindtap='setAddressData' data-title='{{ showHisTitle ? item.title : item.name }}' data-adcode='{{ item.adcode }}' data-district='{{ (item.district ? item.district : "") + (item.address ? item.address : "") }}' data-location='{{ item.location }}' wx:for="{{ addressList }}" data-index = "{{ index }}" wx:key="{{ index }}">
             <view class='address-item-title {{ (addressData.location == item.location && addressData.title == (showHisTitle ? item.title : item.name)) ? "address-title-active" : "" }}'>{{ showHisTitle ? item.title : item.name }}<text class="map-locdistance">{{ item.distance }}</text></view>
             <view class='address-item-text'>{{ (item.district ? item.district : "") + (item.address ? item.address : "") }}</view>
           </view>
