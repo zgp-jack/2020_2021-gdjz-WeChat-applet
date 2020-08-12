@@ -196,7 +196,6 @@ Page({
     let that = this
     let num = this.data.maxNum - this.data.imglen
     app.multiImageUpload(num, function (data) {
-      console.log(data)
       let imgs = [...that.data.imgs, ...data]
       that.setData({
         imgs: imgs,
@@ -207,7 +206,7 @@ Page({
   },
   initInfo: function () {
     let u = wx.getStorageSync('userInfo')
-    //wx.setStorageSync('defaultname', false)
+    wx.setStorageSync('defaultname', false)//标记
     this.setData({
       userInfo: u ? u : false
     })
@@ -227,7 +226,6 @@ Page({
       mask: true,
       params: postData,
       success: function (res) {
-        console.log("resdata",res)
         let mydata = res.data
         if (mydata.errcode == "ok") {
           let tel = mydata.memberInfo.tel || mydata.model.user_mobile
@@ -271,7 +269,7 @@ Page({
               "model.selectedClassifies":mydata.selectedClassifies,
               "model.user_name":mydata.model.user_name,
               "model.user_mobile":mydata.model.user_mobile,
-              "model.imgs":mydata.model.view_image,
+              "model.imgs":mydata.model.view_images,
             })
             if (mydata.model.check_fail_msg != "0") {
               wx.showModal({
@@ -281,15 +279,13 @@ Page({
                 confirmText:"立即修改",
               })
             }
-            console.log("infoId",infoId)
-            //wx.setStorageSync('defaultname', mydata.default_search_name)
+            wx.setStorageSync('defaultname', mydata.default_search_name)//标记
+            console.log("data",_this.data)
             _this.initSelectedClassifies()
             _this.countWorkNum()
             _this.getWorkText()
             _this.initChildWorkType()
-            console.log("data",_this.data)
           } else {
-            console.log("我进来了")
             let jiSuData = wx.getStorageSync('jiSuData')
             if(!jiSuData){
               _this.initChildWorkType()
@@ -442,43 +438,43 @@ Page({
       wx.hideLoading()
       return false;
     }
-    // 匹配地区
-    // let areaName = this.data.addressData.title
-    // if(!areaName){
-    //   let areaData = JSON.parse(JSON.stringify(areas.getAreaArr))
-    //   areaData.splice(0,1)
-    //   let areaLen = areaData.length
-    //   let flag = false
-    //   for(let i = 0 ; i < areaLen; i++){
-    //     let rowData = areaData[i]
-    //     let has = rowData.has_children
-    //     if(has){
-    //       let newData = rowData.children
-    //       for(let j = 1 ; j < newData.length; j ++){
-    //         if(content.indexOf(newData[j].name) !== -1){
-    //           console.log(newData[j].name)
-    //           flag = true
-    //           wx.setStorageSync('defaultname', newData[j])
-    //           break
-    //         }
-    //       }
-    //       if(flag){
-    //         break;
-    //       }
-    //     }else{
-    //       if(content.indexOf(rowData.name) !== -1){
-    //         wx.setStorageSync('defaultname', 
-    //         {
-    //           id:rowData.id,
-    //           pid:rowData.pid,
-    //           name:rowData.name,
-    //           letter: rowData.letter
-    //         })
-    //         break
-    //       }
-    //     }
-    //   }
-    // }
+    // 匹配地区 标记
+    let areaName = this.data.addressData.title
+    if(!areaName){
+      let areaData = JSON.parse(JSON.stringify(areas.getAreaArr))
+      areaData.splice(0,1)
+      let areaLen = areaData.length
+      let flag = false
+      for(let i = 0 ; i < areaLen; i++){
+        let rowData = areaData[i]
+        let has = rowData.has_children
+        if(has){
+          let newData = rowData.children
+          for(let j = 1 ; j < newData.length; j ++){
+            if(content.indexOf(newData[j].name) !== -1){
+              console.log(newData[j].name)
+              flag = true
+              wx.setStorageSync('defaultname', newData[j])
+              break
+            }
+          }
+          if(flag){
+            break;
+          }
+        }else{
+          if(content.indexOf(rowData.name) !== -1){
+            wx.setStorageSync('defaultname', 
+            {
+              id:rowData.id,
+              pid:rowData.pid,
+              name:rowData.name,
+              letter: rowData.letter
+            })
+            break
+          }
+        }
+      }
+    }
     // 不需要匹配的关键词
     for (let i = 0; i < notLen; i++) {
       if (content.indexOf(notRules[i].keywords) !== -1) {
@@ -555,7 +551,6 @@ Page({
     //rulesClassifyids数组长度
     let ruleLen = rulesClassifyids.length
     let classifyids = this.data.classifies
-    console.log("classifyids",classifyids)
     //所有工种数组长度
     let len = classifyids.length
     //如果既没有选择工种也没有匹配工种那么就不需要循环统计匹配工种num
@@ -597,7 +592,6 @@ Page({
     this.setData({
       childClassifies: data
     })
-    console.log("childClassifies",this.data.childClassifies)
   },
   userCheckPindex: function (e) {
     let index = parseInt(e.currentTarget.dataset.index)
@@ -738,6 +732,12 @@ Page({
       userInfo
     } = _this.data
     //输入信息后的字段对象
+    //处理图片数组取出数组对象中url
+    let imagsArry = []
+    _this.data.imgs.forEach(function (item,index) {
+      imagsArry.push(item.url)
+    })
+    let imags = imagsArry.join(",")
     let dataJson = {
       detail:_this.data.data.detail,
       address:_this.data.addressData.title,
@@ -747,7 +747,7 @@ Page({
       selectedClassifies:_this.data.selectedClassifies,
       user_name:_this.data.data.user_name,
       user_mobile:_this.data.data.user_mobile,
-      imgs:_this.data.imgs,
+      imgs:imags,
     }
     //输入信息前的字段对象
     let model = _this.data.model
@@ -813,7 +813,7 @@ Page({
     let works = [...userClassifyids, ...rulesClassifyids]
     works.splice(5)
     let ids = works.map(item => item.id)
-    console.log(ids)
+    
     if (!works.length) {
       wx.showModal({
         title: '提示',
@@ -824,7 +824,6 @@ Page({
     }
     
     if (!v.regStrNone(_this.data.data.user_name) || !v.chineseReg(_this.data.data.user_name) || (_this.data.data.user_name).trim().length<2) {
-      console.log(_this.data.data.user_name)
       if (infoId) {
         app.showMyTips("请输入2~5字纯中文姓名！");
         return false;
@@ -888,7 +887,6 @@ Page({
       way: 'POST',
       params: mydata,
       success: function (res) {
-        console.log("res", res)
         let resdata = res.data
         if (res.data.errcode == "ok") {
           wx.removeStorageSync('jiSuData')
@@ -918,7 +916,7 @@ Page({
               showCancel:false,
               success (res) {
                 if (res.confirm) {
-                  wx.navigateTo({
+                  wx.reLaunch({
                     url: '/pages/published/recruit/list',
                   })
                 }
