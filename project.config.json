@@ -355,6 +355,14 @@
 					"id": -1,
 					"name": "pages/fast/issue/index",
 					"pathName": "pages/fast/issue/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "大转盘",
+					"pathName": "pages/turntable/turntable",
+					"query": "",
 					"scene": null
 				}
 			]

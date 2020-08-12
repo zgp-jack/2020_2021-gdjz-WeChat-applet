@@ -25,7 +25,7 @@ page{
     left: 50%;
     top: 50%;
     display: block;
-    background: url("http://cdn.yupao.com/miniprogram/images/truntable-btn.png") no-repeat;
+    background: url("http://cdn.yupao.com/miniprogram/images/turntable-btn-new.png") no-repeat;
     background-size: 100% 100%;
     z-index:15;
     transform-origin: center;
@@ -338,6 +338,62 @@ page{
     z-index: 10;
     transition:transform 5s ease-in-out 0s;
     transform-origin: center;
-    background: url("http://cdn.yupao.com/miniprogram/images/new-turntable-integral-img.png") no-repeat;
+    background: url("http://cdn.yupao.com/miniprogram/images/new-turntable-integral-bg.png") no-repeat;
     background-size: 100% 100%;
+}
+
+/* 新增规则等 */
+.turntable-rules-btn{
+    position: fixed;
+    line-height: 70rpx;
+    background-color: #FFF3F0;
+    color: #FF4B40;
+    border-radius: 20px 0 0 20px;
+    font-size: 30rpx;
+    z-index: 20;
+    top: 200rpx;
+    right: 0;
+    padding: 0 30rpx;
+    letter-spacing: 3rpx;
+}
+.turntable-rules-box{
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.3);
+    left: 0;
+    top: 0;
+    z-index: 50;
+}
+.turntable-rules-container{
+    position: relative;
+    width: 80%;
+    padding: 30rpx;
+    border-radius: 15rpx;
+    background-color: white;
+}
+.turntable-rules-title{
+    line-height: 70rpx;
+    color: #333;
+    font-weight: bold;
+    font-size: 30rpx;
+    text-align: center;
+}
+.turntable-rules-body{
+    position: 30rpx 0;
+}
+.turntable-rules-body view{
+    line-height: 50rpx;
+    font-size: 28rpx;
+    color: #444;
+}
+.turantable-rules-footer{
+    width: 300rpx;
+    background-color: #e9463f;
+    color: #fff;
+    font-size: 30rpx;
+    text-align: center;
+    line-height: 70rpx;
+    border-radius: 20px;
+    margin: 30rpx auto 0;
 }

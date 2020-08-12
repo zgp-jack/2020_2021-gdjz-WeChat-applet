@@ -51,7 +51,18 @@ Page({
         overVideoTimes: 0 ,
         adtype: 'tx',
         btndis: false,
-        max: 10
+        max: 10,
+        showRules: false
+    },
+    closeRules:function(){
+        this.setData({
+            showRules: false
+        })
+    },
+    showRules:function(){
+        this.setData({
+            showRules: true
+        })
     },
     initSystemInfo:function(){
         let _this = this;
@@ -85,15 +96,18 @@ Page({
         this.setData({btndis: true})
         let _this = this;
         let userInfo = this.data.userInfo;
+        userInfo.is_new = 1
         app.appRequestAction({
             url:"turntable/draw/",
             way:"POST",
+            mask: true,
             params: userInfo,
             success:function(res){
                 let mydata = res.data;
                 if(mydata.code == 200){
+                    let userTimes = mydata.data.all_video_times - mydata.data.over_video_times
                     _this.setData({
-                        userTimes: mydata.data.times,
+                        userTimes: userTimes,
                         overVideoTimes: mydata.data.over_video_times,
                         allVideoTimes: mydata.data.all_video_times,
                         "winData.integral": mydata.data.integral,
@@ -120,8 +134,9 @@ Page({
                     },5000)
                     //_this.doRandomIntegral(parseInt(mydata.data.rotate));
                 }else if(mydata.code == 206 || mydata.code == 207){
+                    let userTimes = mydata.data.all_video_times - mydata.data.over_video_times
                     _this.setData({
-                        userTimes: mydata.data.times,
+                        userTimes: userTimes,
                         overVideoTimes: mydata.data.over_video_times,
                         allVideoTimes: mydata.data.all_video_times,
                         "winData.integral": mydata.data.integral,
@@ -155,10 +170,14 @@ Page({
                         title: '温馨提示',
                         content: mydata.errmsg,
                         cancelText: '取消',
-                        confirmText: '获取次数',
+                        confirmText: '去观看',
                         success:(res)=>{
                           if(res.confirm){
-                              _this.userGetVideo()
+                            _this.setData({
+                                adtype: mydata.data.video
+                            })
+                            _this.userSeeVideo()
+                            //_this.userGetVideo()
                           }
                         }
                       })
@@ -290,14 +309,16 @@ Page({
         app.appRequestAction({
             url:"turntable/index/",
             way:"POST",
+            mask: true,
             title:"正在初始化数据",
             params:userinfo,
             success:function(res){
                 let mydata = res.data;
                 console.log(mydata)
+                let userTimes = mydata.data.all_video_times - mydata.data.over_video_times
                 if(mydata.errcode == "ok"){
                     _this.setData({
-                        userTimes: mydata.data.times,
+                        userTimes: userTimes,
                         allVideoTimes: mydata.data.all_video_times,
                         overVideoTimes: mydata.data.over_video_times,
                         max: mydata.data.max_times
@@ -372,42 +393,50 @@ Page({
             url:"/turntable/video-end/",
             way:"POST",
             title:"数据加载中",
+            mask: true,
             params:userinfo,
             success:function(res){
                 let mydata = res.data;
                 console.log(mydata)
                 if(mydata.code == 200){
-                    wx.showModal({
-                        title: '温馨提示',
-                        content: mydata.errmsg,
-                        cancelText: '去抽奖',
-                        confirmText: '继续观看',
-                        success:(res)=>{
-                            if(res.confirm){
-                                _this.userGetVideo()
-                            }
-                        }
-                    })
                     
-                    _this.setData({
-                        userTimes: mydata.data.times,
-                        allVideoTimes: mydata.data.all_video_times,
-                        overVideoTimes: mydata.data.over_video_times
-                    })
+                    // wx.showModal({
+                    //     title: '温馨提示',
+                    //     content: mydata.errmsg,
+                    //     cancelText: '去抽奖',
+                    //     confirmText: '继续观看',
+                    //     success:(res)=>{
+                    //         if(res.confirm){
+                    //             _this.setData({
+                    //                 adtype: mydata.data.video
+                    //             })
+                    //             _this.userSeeVideo()
+                    //             //_this.userGetVideo()
+                    //         }
+                    //     }
+                    // })
+                    //let userTimes = mydata.data.all_video_times - mydata.data.over_video_times
+                    // _this.setData({
+                    //     userTimes: userTimes,
+                    //     allVideoTimes: mydata.data.all_video_times,
+                    //     overVideoTimes: mydata.data.over_video_times
+                    // })
+                    _this.startTurntable()
                     
                 }else if(mydata.code == 205){
-                    wx.showModal({
-                        title: '温馨提示',
-                        content: mydata.errmsg,
-                        showCancel: false,
-                        confirmText: '去抽奖'
-                    })
-                    _this.setData({
-                        userTimes: mydata.data.times,
-                        allVideoTimes: mydata.data.all_video_times,
-                        overVideoTimes: mydata.data.over_video_times
-                    })
-                    
+                    // wx.showModal({
+                    //     title: '温馨提示',
+                    //     content: mydata.errmsg,
+                    //     showCancel: false,
+                    //     confirmText: '去抽奖'
+                    // })
+                    // _this.setData({
+                    //     userTimes: mydata.data.times,
+                    //     allVideoTimes: mydata.data.all_video_times,
+                    //     overVideoTimes: mydata.data.over_video_times,
+                    //     userTimes: mydata.data.all_video_times - mydata.data.over_video_times
+                    // })
+                    _this.startTurntable()
                 }else{
                     app.showMyTips(mydata.errmsg)
                 }
@@ -425,6 +454,7 @@ Page({
         app.appRequestAction({
             url:"turntable/show-video/",
             way:"POST",
+            mask: true,
             title:"数据加载中",
             params:userinfo,
             success:function(res){

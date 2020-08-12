@@ -11,12 +11,15 @@
         <view class='turntable-footer'>
             <view class='truntable-footer-arrows'></view>
             <view class='turntable-footer-item'>
-                <view class='turntable-times-tips' >我的抽奖次数：{{ userTimes }} <image bindtap="userGetVideo" class="gettimes-img" src="http://cdn.yupao.com/newyupao/images/m-turntable-gettimes.png"></image></view>
+                <view class='turntable-times-tips' >
+                    今日可抽奖次数：{{ userTimes }} 次
+                    <!-- <image bindtap="userGetVideo" class="gettimes-img" src="http://cdn.yupao.com/newyupao/images/m-turntable-gettimes.png"></image> -->
+                </view>
             </view>
-            <view class="turntable-newtips">
+            <!-- <view class="turntable-newtips">
                 <view class="turntable-newtips-title">每天观看视频可获得抽奖次数，最多{{ max }}次。</view>
                 <view class="turntable-newtips-body">[小妙招：连续观看视频后抽奖，中奖机率更高哦]</view>
-            </view>
+            </view> -->
             
             <view class='turntable-footer-item'>
                 <view class='turntable-names-scroll'>
@@ -37,6 +40,23 @@
             </view>
         </view>
 
+    </view>
+
+</view>
+
+<view class="turntable-rules-btn" bindtap="showRules">规则</view>
+
+<view class="turntable-rules-box flex-row" wx:if="{{ showRules }}">
+    <view class="turntable-rules-container">
+        <view class="turntable-rules-title">玩法介绍</view>
+        <view class="turntable-rules-body">
+            <view>1、每天每人有{{ max }}次抽奖机会。</view>
+            <view>2、每天0点刷新抽奖机会。</view>
+            <view>3、本活动最终解释权归鱼泡网平台所有。</view>
+            <view>4、若发现用户存在恶意违规行为，鱼泡网平台有权取消其抽奖资格。</view>
+            <view>1、每天每人有4次抽奖机会。</view>
+        </view>
+        <view class="turantable-rules-footer" bindtap="closeRules">确定</view>
     </view>
 
 </view>
