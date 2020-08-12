@@ -360,22 +360,9 @@
 				},
 				{
 					"id": -1,
-					"name": "pages/index/index",
-					"pathName": "pages/fast/issue/index.wxml",
+					"name": "大转盘",
+					"pathName": "pages/turntable/turntable",
 					"query": "",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "pages/fast/issue/index.wxml",
-					"pathName": "pages/fast/issue/index",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "pages/workingtopAll/workingtop/workingtop",
-					"pathName": "pages/workingtopAll/workingtop/workingtop",
 					"scene": null
 				}
 			]
