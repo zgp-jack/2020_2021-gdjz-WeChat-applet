@@ -105,18 +105,18 @@
   </view>
 
   <!-- 快捷功能 -->
-  <view class='index-yupao-function clearfix'>
-    <navigator url='/pages/static/invite' open-type="navigate">
+  <view class='index-yupao-function flex-row clearfix'>
+    <navigator url='/pages/static/invite' open-type="navigate" class='index-fun-nav'>
       <view class='index-fun-item flex-row'>
         <image src='{{ fun.yqhy }}'></image>
         <text>邀请好友</text>
       </view>
     </navigator>
-    <view class='index-fun-item flex-row' data-url='/packageOther/pages/query/query' bindtap='valiUserUrl'>
+    <view class='index-fun-item flex-row index-fun-nav' data-url='/packageOther/pages/query/query' bindtap='valiUserUrl' wx:if="{{ showAuthQuery && userInfo }}">
       <image src='{{ fun.smrz }}'></image>
       <text>实名查询</text>
     </view>
-    <navigator class='index-footer-nav' open-type="navigate" url='/packageOther/pages/others/information/lists'>
+    <navigator class='index-footer-nav index-fun-nav' open-type="navigate" url='/packageOther/pages/others/information/lists'>
       <view class='index-fun-item flex-row'>
         <image src='{{ fun.zjxm }}'></image>
         <text>鱼泡动态</text>
