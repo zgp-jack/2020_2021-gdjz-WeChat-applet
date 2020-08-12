@@ -54,7 +54,6 @@
             <view>2、每天0点刷新抽奖机会。</view>
             <view>3、本活动最终解释权归鱼泡网平台所有。</view>
             <view>4、若发现用户存在恶意违规行为，鱼泡网平台有权取消其抽奖资格。</view>
-            <view>1、每天每人有4次抽奖机会。</view>
         </view>
         <view class="turantable-rules-footer" bindtap="closeRules">确定</view>
     </view>

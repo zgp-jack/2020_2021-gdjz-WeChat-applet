@@ -30,7 +30,7 @@ Page({
         topay:0,
         toPaymsg:"",
         scrollname: {
-            num:200,
+            num:100,
             current:0,
             autoplay: true,
             indicatorDots: false,
@@ -52,7 +52,8 @@ Page({
         adtype: 'tx',
         btndis: false,
         max: 10,
-        showRules: false
+        showRules: false,
+        isClick: true,
     },
     closeRules:function(){
         this.setData({
@@ -60,6 +61,7 @@ Page({
         })
     },
     showRules:function(){
+        if(!this.data.isClick) return false;
         this.setData({
             showRules: true
         })
@@ -105,6 +107,7 @@ Page({
             success:function(res){
                 let mydata = res.data;
                 if(mydata.code == 200){
+
                     let userTimes = mydata.data.all_video_times - mydata.data.over_video_times
                     _this.setData({
                         userTimes: userTimes,
@@ -113,6 +116,7 @@ Page({
                         "winData.integral": mydata.data.integral,
                         transTime:5,
                         rotateDeg: 1440 + mydata.data.rotate,
+                        isClick: false
                     })
                     let timer = setTimeout(function(){
                         clearTimeout(timer)
@@ -128,6 +132,7 @@ Page({
                             _this.setData({
                                 rotateDeg: 0,
                                 transTime:0,
+                                isClick: true
                             })
                           }
                         })
@@ -142,6 +147,7 @@ Page({
                         "winData.integral": mydata.data.integral,
                         transTime:5,
                         rotateDeg: 10800 + mydata.data.rotate,
+                        isClick: false
                     })
                     let timer = setTimeout(function(){
                         _this.setData({
@@ -157,6 +163,7 @@ Page({
                             _this.setData({
                                 rotateDeg: 0,
                                 transTime:0,
+                                isClick: true
                             })
                           }
                         })
