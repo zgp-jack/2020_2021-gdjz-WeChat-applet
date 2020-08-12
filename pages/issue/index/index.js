@@ -92,7 +92,11 @@ Page({
     }
   },
   userEnterPhone: function (e) {
-    //点击了联系电话后不再匹配
+    //如果有用户信息点击了联系电话后不再取个人中心用户信息的手机号码
+    let u = wx.getStorageSync('userInfo')
+    if(u){
+      app.globalData.isRedPhone = false
+    }
     let val = e.detail.value
     this.setData({
       "data.user_mobile": val,
@@ -302,10 +306,10 @@ Page({
             if (jiSuData.phone) {
               if (u) {
                 if (app.globalData.isRedPhone) {
+                  console.log("我进来了")
                   _this.setData({
                     "data.user_mobile": res.data.memberInfo.tel,
                   })
-                  app.globalData.isRedPhone = false
                 }else{
                   _this.setData({
                     "data.user_mobile": jiSuData.phone
@@ -609,7 +613,10 @@ Page({
     let userClassifyids = this.data.userClassifyids
     let data = JSON.parse(JSON.stringify(this.data.classifies))
     let pindex = this.data.pindex
+    console.log("classifies",this.data.childClassifies)
+    console.log("this.data",this.data)
     if (checked) {
+      console.log("e.currentTarget.dataset.id",e.currentTarget.dataset.id)
       let ri = rulesClassifyids.findIndex(item => item.id == id)
       if (ri !== -1) {
         rulesClassifyids.splice(ri, 1)
@@ -645,10 +652,15 @@ Page({
   },
   getWorkText: function () {
     let list = this.data.userClassifyids.concat(this.data.rulesClassifyids)
+    //记录选中工种的id并存入this.data.selectedClassifies中
+    let selectWorkType = list.map(function (item,index) {
+      return item.id
+    })
     list.splice(5)
     list = list.map(item => item.name)
     this.setData({
-      showClassifyText: list.join(',')
+      showClassifyText: list.join(','),
+      selectedClassifies: selectWorkType
     })
   },
   userGetCode: function () {
@@ -719,6 +731,19 @@ Page({
       })
     }, 1000)
   },
+  subscribeToNews: function(mydata) {
+    app.subscribeToNews("recruit",function(){
+      wx.showModal({
+        title: '恭喜您',
+        content: mydata.errmsg,
+        showCancel: false,
+        confirmText: '确定',
+        success: function (res) {
+          wx.reLaunch({ url: '/pages/published/recruit/list' })
+        }
+      })
+    })
+  },
   publishRecruitInfo: function () {
     var _this =this
     let v = vali.v.new();
@@ -752,8 +777,6 @@ Page({
     //输入信息前的字段对象
     let model = _this.data.model
     //如果是修改界面再没有更改数据的情况下不能保存
-    console.log("dataJson",dataJson)
-    console.log("model",model)
     if (_this.data.infoId) {
       if (_this.data.reason != "0") {
         if (JSON.stringify(model) == JSON.stringify(dataJson)){
@@ -884,6 +907,7 @@ Page({
       infoId: infoId,
     }
 
+    console.log("mydata1",mydata)
     app.appRequestAction({
       url: 'publish/new-save-job/',
       way: 'POST',
@@ -920,18 +944,8 @@ Page({
             wx.setStorageSync('userJiSuPublishedData', jsdata)
           }
           if (_this.data.infoId) {
-            wx.showModal({
-              title: '恭喜您',
-              content: '修改成功！',
-              showCancel:false,
-              success (res) {
-                if (res.confirm) {
-                  wx.reLaunch({
-                    url: '/pages/published/recruit/list',
-                  })
-                }
-              }
-            })
+            //弹出接收通知的提示框
+            _this.subscribeToNews(resdata)
           }else{
             wx.navigateTo({
               url: '/pages/issue/tips/tips',
@@ -1018,6 +1032,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    console.log("option",options)
     if (options.hasOwnProperty('id')) {
       this.setData({
         infoId: options.id

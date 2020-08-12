@@ -440,8 +440,11 @@ Page({
 
   },
   initAreaText: function () {
+    //获取缓存中默认的地理位置信息
     let defaultname = wx.getStorageSync("defaultname");
+    //左后一次选择的城市
     let lastCtiy = wx.getStorageSync("lastPublishCity");
+    //获取gps定位的城市
     let gpsPorvince = wx.getStorageSync("gpsPorvince");
     let gpsloc = wx.getStorageSync("gpsPorvince");
     this.setData({ gpsOrientation: gpsPorvince });
