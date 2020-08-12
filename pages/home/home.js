@@ -94,7 +94,8 @@ Page({
     inviteUserImg: app.globalData.fixedDownApp,
     showAd: true,
     showFollow: false,
-    thisyear: new Date().getFullYear()
+    thisyear: new Date().getFullYear(),
+    showAuthQuery: false
   },
   // 根据发布方式不同发布招工：未登录或者“fast_add_job”是快速发布，“ordinary_add_job”是普通发布。
   publishJob:function () {
@@ -329,7 +330,8 @@ Page({
           "notice.lists": mydata.notice,
           "swiper.imgUrls": mydata.banner,
           areaId: areaId ? areaId : mydata.address.id,
-          areaText: areaText ? areaText : mydata.address.name
+          areaText: areaText ? areaText : mydata.address.name,
+          showAuthQuery: mydata.show_auth_query ? true : false
         })
         areaId ? "" : wx.setStorageSync("areaId", mydata.address.id);
         areaText ? "" : wx.setStorageSync("areaText", mydata.address.name);

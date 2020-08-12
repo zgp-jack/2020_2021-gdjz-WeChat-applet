@@ -385,6 +385,7 @@ Page({
                 })
             })
             videoAd.onClose((status) => {
+                wx.hideLoading()
                 if (status && status.isEnded || status === undefined) {
                     this.videoAdStop()
                 }
@@ -406,43 +407,15 @@ Page({
                 let mydata = res.data;
                 console.log(mydata)
                 if(mydata.code == 200){
-                    
-                    // wx.showModal({
-                    //     title: '温馨提示',
-                    //     content: mydata.errmsg,
-                    //     cancelText: '去抽奖',
-                    //     confirmText: '继续观看',
-                    //     success:(res)=>{
-                    //         if(res.confirm){
-                    //             _this.setData({
-                    //                 adtype: mydata.data.video
-                    //             })
-                    //             _this.userSeeVideo()
-                    //             //_this.userGetVideo()
-                    //         }
-                    //     }
-                    // })
-                    //let userTimes = mydata.data.all_video_times - mydata.data.over_video_times
-                    // _this.setData({
-                    //     userTimes: userTimes,
-                    //     allVideoTimes: mydata.data.all_video_times,
-                    //     overVideoTimes: mydata.data.over_video_times
-                    // })
+                    wx.showLoading({
+                      mask: true
+                    })
                     _this.startTurntable()
                     
                 }else if(mydata.code == 205){
-                    // wx.showModal({
-                    //     title: '温馨提示',
-                    //     content: mydata.errmsg,
-                    //     showCancel: false,
-                    //     confirmText: '去抽奖'
-                    // })
-                    // _this.setData({
-                    //     userTimes: mydata.data.times,
-                    //     allVideoTimes: mydata.data.all_video_times,
-                    //     overVideoTimes: mydata.data.over_video_times,
-                    //     userTimes: mydata.data.all_video_times - mydata.data.over_video_times
-                    // })
+                    wx.showLoading({
+                        mask: true
+                    })
                     _this.startTurntable()
                 }else{
                     app.showMyTips(mydata.errmsg)

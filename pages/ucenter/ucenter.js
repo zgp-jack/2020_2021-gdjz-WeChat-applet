@@ -62,7 +62,7 @@ Page({
                 callback ? callback() : ""
                 let mydata = res.data;
               _this.setData({
-                showAuthor: mydata.is_checking == 2 ? true : false
+                showAuthor: mydata.show_auth == 1 ? true : false
               })
                 if (mydata.errcode == "ok") {
                     _this.setData({
