@@ -154,7 +154,7 @@ Page({
     let area = e.currentTarget.dataset.area;
     let pid = parseInt(e.currentTarget.dataset.pid);
     let pname = e.currentTarget.dataset.pname;
-    let mydata = { "name": area, "id": id, "ad_name": pname };
+    let mydata = { "name": area, "id": id, "ad_name": pname, "pid": pid };
     this.setData({ areaId: parseInt(id), areaText: area, showHisTitle: false, keyAutoVal: pname, addressText: "" })
     this.closeArea();
     app.setStorageAction(id, mydata, true)
@@ -376,6 +376,8 @@ Page({
     
   },
   setAddressData: function (e) {
+    let defaultname = wx.getStorageSync("locationHistory")[0]
+    wx.setStorageSync('defaultname', defaultname)
     let _this = this;
     let area = this.data.areaText;
     let pname = this.data.keyAutoVal;

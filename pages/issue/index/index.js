@@ -206,7 +206,7 @@ Page({
   },
   initInfo: function () {
     let u = wx.getStorageSync('userInfo')
-    wx.setStorageSync('defaultname', false)//标记
+    // wx.setStorageSync('defaultname', false)//标记
     this.setData({
       userInfo: u ? u : false
     })
@@ -752,6 +752,8 @@ Page({
     //输入信息前的字段对象
     let model = _this.data.model
     //如果是修改界面再没有更改数据的情况下不能保存
+    console.log("dataJson",dataJson)
+    console.log("model",model)
     if (_this.data.infoId) {
       if (_this.data.reason != "0") {
         if (JSON.stringify(model) == JSON.stringify(dataJson)){
@@ -889,7 +891,15 @@ Page({
       success: function (res) {
         let resdata = res.data
         if (res.data.errcode == "ok") {
-          wx.removeStorageSync('jiSuData')
+          //发布成功后，清除缓存数据中的detail、rulesClassifyids、userClassifyids、imgs
+          let jiSuData = wx.getStorageSync('jiSuData')
+          jiSuData.detail = ""
+          jiSuData.rulesClassifyids = []
+          jiSuData.userClassifyids = []
+          jiSuData.imgs = []
+          wx.setStorageSync('jiSuData', jiSuData)
+          //发布成功后再次进入发布界面重新读取用户信息手机号码
+          app.globalData.isRedPhone = true
           // 存入最近两个成功信息
           if (!userInfo) {
             let jobid = res.data.id
