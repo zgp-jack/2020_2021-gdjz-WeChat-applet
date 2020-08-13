@@ -102,9 +102,9 @@
 
   <view class='common-nodatabox flex-column lists-nodata' wx:if="{{ showNoData || lists.length == 0 }}">
     <image src='{{ nodataImg }}'></image>
-    <text>您还没有收藏过找活信息</text>
-    <text class="nodataText">点击下方按钮去收藏</text>
-    <button bindtap="goFindWork">马上去收藏</button>
+    <text>没有找到相关数据</text>
+    <!-- <text class="nodataText">点击下方按钮去收藏</text>
+    <button bindtap="goFindWork">马上去收藏</button> -->
   </view>
 
 </view>

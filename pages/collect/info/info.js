@@ -162,11 +162,11 @@ Page({
     footerjs.valiUserCard(this, app, userInfo);
   },
   //点击跳转到招工信息界面
-  goFindWorker:function () {
-    wx.navigateTo({
-      url: '/pages/findingworkinglist/findingworkinglist',
-    })
-  },
+  // goFindWorker:function () {
+  //   wx.navigateTo({
+  //     url: '/pages/findingworkinglist/findingworkinglist',
+  //   })
+  // },
   
   /**
    * 生命周期函数--监听页面加载

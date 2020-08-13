@@ -820,9 +820,9 @@ Page({
     }
     //输入信息前的字段对象
     
-    if (model.imgs == null) {
-      model.imgs = ""
-    }
+    // if (model.imgs == null) {
+    //   model.imgs = ""
+    // }
     console.log("dataJson",dataJson)
     console.log("model",model)
     //如果是修改界面再没有更改数据的情况下不能保存
