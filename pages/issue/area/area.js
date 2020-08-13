@@ -312,9 +312,9 @@ Page({
   },
   /**打开设置面板 */
   openSetting: function (e) {
+    console.log("eeeeee")
     let that = this;
     let defaultname =  wx.getStorageSync('defaultname')
-    if (!defaultname) {
       wx.getSetting({
         success: (res) => {
           //console.log(res.authSetting['scope.userLocation']);
@@ -338,6 +338,8 @@ Page({
                         that.userLocFun()
                         // let gpsOrientation = wx.getStorageSync('gpsOrientation')
                         // wx.setStorageSync('defaultname', gpsOrientation)
+                        let gpsPorvince =wx.getStorageSync('gpsPorvince')
+                        wx.setStorageSync('defaultname', gpsPorvince)
                       } else {
                         wx.showToast({
                           title: '授权失败',
@@ -354,8 +356,6 @@ Page({
           }
         },
       })
-    }
-    
   },
   getKeywordsInputs: function (val, callback) {
     let _this = this;
@@ -501,6 +501,13 @@ Page({
 
   },
   initAreaText: function () {
+    let infoId = this.data.infoId
+    //获取招工填写数据缓存
+    let jiSuData = wx.getStorageSync('jiSuData')
+    //获取缓存历史城市信息
+    let locationHistory = wx.getStorageSync('locationHistory')
+    //获取缓存的历史记录信息
+    let historyCityLists = wx.getStorageSync('historyCityLists')
     //获取缓存中默认的地理位置信息
     let defaultname = wx.getStorageSync("defaultname");
     //左后一次选择的城市
@@ -508,8 +515,25 @@ Page({
     //获取gps定位的城市
     let gpsPorvince = wx.getStorageSync("gpsPorvince");
     let gpsloc = wx.getStorageSync("gpsPorvince");
+    //如果缓存历史城市列表与最后选择城市都不存在，表明是首次进入地区选择
+    
+    if (!historyCityLists && !lastCtiy) {
+      //如果进入城市选择获得位置信息授权将位置信息保存到locationHistory、defaultname、jisuData中
+      if (gpsPorvince) {
+        locationHistory.unshift(gpsPorvince)
+        wx.setStorageSync('locationHistory', locationHistory)
+        wx.setStorageSync('defaultname', gpsPorvince)
+        if (jiSuData) {
+          jiSuData["defaultname"] = gpsPorvince
+        } else {
+          jiSuData = {}
+          jiSuData["defaultname"] = gpsPorvince
+        }
+        wx.setStorageSync('jiSuData', jiSuData)
+      }
+    }
+    
     this.setData({ gpsOrientation: gpsPorvince });
-    let infoId = this.data.infoId;
     let showfor = this.data.showfor;
     let showmap = this.data.showmap;
 

@@ -304,12 +304,12 @@ Page({
             _this.getWorkText()
             _this.initChildWorkType()
           } else {
-            // let gpsPorvince = wx.getStorageSync('gpsPorvince')
-            // let defaultPosition = areas.getAreaArr[1]
+            let gpsPorvince = wx.getStorageSync('gpsPorvince')
+            let defaultPosition = areas.getAreaArr[1]
             let jiSuData = wx.getStorageSync('jiSuData')
             if(!jiSuData){
-              // let defaultname = gpsPorvince?gpsPorvince:defaultPosition
-              // wx.setStorageSync('defaultname', defaultname)
+              let defaultname = gpsPorvince?gpsPorvince:defaultPosition
+              wx.setStorageSync('defaultname', defaultname)
               let locationHistory = wx.getStorageSync('locationHistory')
               if (locationHistory) {
                 locationHistory.unshift(defaultname)
