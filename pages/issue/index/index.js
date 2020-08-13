@@ -299,12 +299,25 @@ Page({
             _this.getWorkText()
             _this.initChildWorkType()
           } else {
-            // let defaultname = jiSuData.defaultname ? jiSuData.defaultname :(gpsPorvince?gpsPorvince:defaultPosition)
+            let gpsPorvince = wx.getStorageSync('gpsPorvince')
+            let defaultPosition = areas.getAreaArr[1]
             let jiSuData = wx.getStorageSync('jiSuData')
             if(!jiSuData){
+              let defaultname = gpsPorvince?gpsPorvince:defaultPosition
+              wx.setStorageSync('defaultname', defaultname)
+              let locationHistory = wx.getStorageSync('locationHistory')
+              if (locationHistory) {
+                locationHistory.unshift(defaultname)
+                wx.setStorageSync('locationHistory', locationHistory)
+              } else {
+                let locationHistory = []
+                locationHistory.unshift(defaultname)
+                wx.setStorageSync('locationHistory', locationHistory)
+              }
               _this.initChildWorkType()
               return false;
             } else {
+              let jiSuData = wx.getStorageSync('jiSuData')
               if(jiSuData.detail){
                 _this.setData({ "data.detail":jiSuData.detail })
               }
@@ -345,13 +358,14 @@ Page({
               }
               if (jiSuData.defaultname) {
                 wx.setStorageSync('defaultname', jiSuData.defaultname)//标记
+                
                 let locationHistory = wx.getStorageSync('locationHistory')
                 if (locationHistory) {
-                  locationHistory.unshift(mydata.default_search_name)
+                  locationHistory.unshift(jiSuData.defaultname)
                   wx.setStorageSync('locationHistory', locationHistory)
                 } else {
                   let locationHistory = []
-                  locationHistory.unshift(mydata.default_search_name)
+                  locationHistory.unshift(jiSuData.defaultname)
                   wx.setStorageSync('locationHistory', locationHistory)
                 }
               }
