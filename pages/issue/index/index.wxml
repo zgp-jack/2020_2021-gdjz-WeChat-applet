@@ -45,7 +45,7 @@
         
         <view class="issue-upload-item" wx:for="{{ imgs }}" wx:key="{{ item.url }}">
           <view class="imgitem-box" bindtap="userChangeImg" data-index="{{ index }}">
-            <image src="{{ item.httpurl }}"></image>
+            <image src="{{ item.httpurl }}" mode="aspectFill"></image>
             <view class="mini-del" catchtap="delImgAction" data-index="{{ index }}"></view>
           </view>
         </view>

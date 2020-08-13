@@ -261,7 +261,7 @@ Page({
               errcode:mydata.errcode,
               info: mydata.info,
               showRecord: true,
-              showend: mydata.errcode == "ok" ? true : false
+              showend: mydata.errcode == "ok"||"deleted" ? true : false
             })
           } else if (mydata.info.type == "resume") {
             _this.setData({
