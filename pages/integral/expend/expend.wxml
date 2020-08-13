@@ -63,7 +63,7 @@
                 <block wx:if="{{ info.is_end == '2' && showend }}"><text>({{ info.end_word }})</text></block>
                 <block wx:if="{{ info.is_end != '2' }}">({{ info.user_name }})<text class='list-call-phone'   bindtap='callThisPhone'  data-phone="{{ info.user_mobile }}">拨打</text></block>
                 <block wx:if="{{ !info.show_complain && showend }}"><text class="info-complained">已投诉</text></block>
-                <block wx:if="{{ info.show_complain }}"><text class='list-call-phone list-complain-phone' data-id="{{ info.id }}"  data-type="{{ info.type }}" bindtap='complainInfo'>投诉</text></block>
+                <block wx:if="{{ info.show_complain && (errcode !='errcode') }}"><text class='list-call-phone list-complain-phone' data-id="{{ info.id }}"  data-type="{{ info.type }}" bindtap='complainInfo'>投诉</text></block>
                 </view>
             </view>
             <view class='yupao-common-lists-item clearfix' wx:if="{{ info.type =='resume' }}">

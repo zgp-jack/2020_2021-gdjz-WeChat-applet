@@ -45,6 +45,7 @@ Page({
     source:"",
     classifyIndex:0,
     showend: false, // 软删除不展示已招满
+    errcode:false
   },
   userCancleComplain: function() {
     this.setData({
@@ -257,6 +258,7 @@ Page({
         if (mydata.errcode == "ok" || mydata.errcode == "deleted") {
           if (mydata.info.type == "job") {
             _this.setData({
+              errcode:mydata.errcode,
               info: mydata.info,
               showRecord: true,
               showend: mydata.errcode == "ok" ? true : false
