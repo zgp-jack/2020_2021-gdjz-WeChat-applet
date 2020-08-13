@@ -409,10 +409,12 @@ Page({
     if (!infoId) {
       let jiSuData = wx.getStorageSync('jiSuData')
       if (jiSuData) {
-        jiSuData[defaultname] = defaultname
+        jiSuData["defaultname"] = defaultname
+        wx.setStorageSync('jiSuData', jiSuData)
       } else {
         jiSuData = {}
-        jiSuData[defaultname] = defaultname
+        jiSuData["defaultname"]= defaultname
+        wx.setStorageSync('jiSuData', jiSuData)
       }
     }
     
