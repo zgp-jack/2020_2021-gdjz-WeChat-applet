@@ -78,7 +78,9 @@ Page({
             jiSuData[name] = data
           }
         } else {
-          jiSuData[name] = ""
+          if (jiSuData) {
+            jiSuData[name] = ""
+          }
         }
       } else {
         if (jiSuData) {
@@ -480,6 +482,7 @@ Page({
       wx.hideLoading()
       return false;
     }
+    let infoId = this.data.infoId
     // 匹配地区 标记
     let areaName = this.data.addressData.title
     if(!areaName){
@@ -517,7 +520,8 @@ Page({
         }
       }
     }
-    // 不需要匹配的关键词
+    if(!infoId){
+      // 不需要匹配的关键词
     for (let i = 0; i < notLen; i++) {
       if (content.indexOf(notRules[i].keywords) !== -1) {
         let id = notRules[i].occupation_id;
@@ -547,10 +551,9 @@ Page({
       let index = needArr.findIndex(item => item.id == id)
       if (index !== -1) {
         needArr.splice(index, 1)
+        }
       }
     }
-    let infoId = this.data.infoId
-    
     if(infoId){
       let needids = needArr.map(item => item.id)
       for (let i = 0; i < uids.length; i++) {

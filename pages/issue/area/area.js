@@ -47,7 +47,13 @@ Page({
   chooseInputCtiy: function (e) { 
     this.chooseThisCtiy(e);
     
-    this.setData({ isAllAreas: true, searchInputVal: "", showArea: false, showInputList: false })
+    this.setData({ 
+      isAllAreas: true, 
+      searchInputVal: "", 
+      showArea: false, 
+      showInputList: false,
+      isHistory:false
+    })
   },
   clearInputAction: function () {
     this.setData({ isAllAreas: true, showInputList: false, searchInputVal: "" })
@@ -149,7 +155,10 @@ Page({
     app.getAreaData(this);
   },
   showCity: function () {
-    this.setData({ showArea: true, addressActive: false })
+    this.setData({ 
+      showArea: true, 
+      addressActive: false
+     })
   },
   closeArea: function () {
 
@@ -165,7 +174,14 @@ Page({
     let pid = parseInt(e.currentTarget.dataset.pid);
     let pname = e.currentTarget.dataset.pname;
     let mydata = { "name": area, "id": id, "ad_name": pname, "pid": pid };
-    this.setData({ areaId: parseInt(id), areaText: area, showHisTitle: false, keyAutoVal: pname, addressText: "" })
+    this.setData({ 
+      areaId: parseInt(id), 
+      areaText: area, 
+      showHisTitle: false,
+       keyAutoVal: pname, 
+       addressText: "",
+       isHistory:false
+      })
     this.closeArea();
     app.setStorageAction(id, mydata, true)
     let prevPage = app.getPrevPage();

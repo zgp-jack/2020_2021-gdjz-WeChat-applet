@@ -366,9 +366,24 @@
 					"scene": null
 				},
 				{
-					"id": -1,
-					"name": "pages/fast/issue/index",
+					"id": 43,
+					"name": "快速发布",
 					"pathName": "pages/fast/issue/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": 44,
+					"name": "极速发布",
+					"pathName": "pages/issue/index/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "个人中心",
+					"pathName": "pages/published/recruit/list",
+					"query": "",
 					"scene": null
 				}
 			]
