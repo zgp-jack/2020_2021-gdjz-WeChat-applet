@@ -46,7 +46,6 @@ Page({
   },
   chooseInputCtiy: function (e) { 
     this.chooseThisCtiy(e);
-    
     this.setData({ 
       isAllAreas: true, 
       searchInputVal: "", 
@@ -178,9 +177,9 @@ Page({
       areaId: parseInt(id), 
       areaText: area, 
       showHisTitle: false,
-       keyAutoVal: pname, 
-       addressText: "",
-       isHistory:false
+      keyAutoVal: pname, 
+      addressText: "",
+      isHistory:false
       })
     this.closeArea();
     app.setStorageAction(id, mydata, true)

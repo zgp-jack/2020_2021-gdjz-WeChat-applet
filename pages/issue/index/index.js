@@ -818,6 +818,16 @@ Page({
       user_mobile:_this.data.data.user_mobile,
       imgs:imags,
     }
+<<<<<<< HEAD
+=======
+    //输入信息前的字段对象
+    
+    // if (model.imgs == null) {
+    //   model.imgs = ""
+    // }
+    console.log("dataJson",dataJson)
+    console.log("model",model)
+>>>>>>> 5b4189950f8361b7eff16742892c75bd4e10bdc8
     //如果是修改界面再没有更改数据的情况下不能保存
     if (_this.data.infoId) {
       if (_this.data.reason != "0") {
