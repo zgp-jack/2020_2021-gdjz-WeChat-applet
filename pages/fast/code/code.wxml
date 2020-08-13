@@ -1,6 +1,10 @@
 <view class="code-container">
   <view class="issue-contactbox">
-    <view class="issue-contact-title">温馨提示</view>
+    <view class="issue-tip">
+      <image src="{{ imageUrl }}" mode="widthFix" class="issue-tip-image"></image>
+      <view class="issue-contact-title">温馨提示</view>
+      <image src="{{ imageUrl }}" mode="widthFix" class="issue-tip-image"></image>
+    </view>
     <view class="issue-contact-body">为了确保本条招工信息的真实性，鱼泡网已经向手机号<text>{{ phone }}</text>发送验证码，请您将收到的验证码填写到下方输入框内。</view>
     <view class="issue-code-box">
       <text>验证码：</text>

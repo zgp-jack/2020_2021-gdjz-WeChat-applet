@@ -10,7 +10,8 @@ Page({
     token: '',
     phone: '',
     timer: null,
-    code: ''
+    code: '',
+    imageUrl: app.globalData.apiImgUrl +"new-publish-title-t-icon.png"
   },
 
   /**

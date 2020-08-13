@@ -16,7 +16,8 @@ Page({
     mindex: [0,0],
     areatext: '',
     token: '',
-    userInfo:{}
+    userInfo:{},
+    imageUrl: app.globalData.apiImgUrl +"new-publish-title-t-icon.png"
   },
   initLocArea:function(){
     //获取手机本地缓存地理位置信息
