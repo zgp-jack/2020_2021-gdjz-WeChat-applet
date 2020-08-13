@@ -722,7 +722,7 @@ Page({
     });
     app.appRequestAction({
       title: "正在获取验证码",
-      url: "index/get-code/",
+      url: "index/send-tel-code/",
       way: "POST",
       params: {
         tel: phone,
