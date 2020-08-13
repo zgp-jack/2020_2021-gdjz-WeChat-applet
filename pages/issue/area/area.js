@@ -83,18 +83,17 @@ Page({
       showHisTitle:false,
       isHistory:false
      })
-     console.log("isHistory",this.data.isHistory)
     this.getMapInfo();
   },
   mapInputFocus: function (e) {
     console.log(e)
-    let isHistory = e.currentTarget.dataset.isHistory
+    let history = e.currentTarget.dataset.history
     let val = e.detail.value;
     if(val) return false;
     this.initHistoryCityList()
     this.setData({ 
       showHisTitle:true ,
-      isHistory:true
+      isHistory:history
     })
     
   },
@@ -358,6 +357,9 @@ Page({
     })
   },
   closeAddressAction:function(){
+    this.setData({
+      isHistory:false
+    })
     wx.navigateBack({ delta:1 })
   },
   userEnterAddress: function (e) {
@@ -388,62 +390,31 @@ Page({
     
   },
   setAddressData: function (e) {
-    console.log("e.currentTarget.dataset.index",e.currentTarget.dataset.index)
-    // return
-    //点击详细地址将位置信息设置给jiSuData缓存
-    let jiSuData = wx.getStorageSync('jiSuData')
-    let historyCityLists = wx.getStorageSync('historyCityLists')
-     //点击详细地址将位置信息设置给defaultname缓存
-    let locationHistory = wx.getStorageSync("locationHistory")
+    let history = this.data.isHistory
     let infoId = this.data.infoId
-    let isHistory = this.data.isHistory
-    if (isHistory) {
+    if (history) {
       let index = e.currentTarget.dataset.index
-      if (!infoId) {
-        if (jiSuData) {
-          let defaulPosition = jiSuData.defaultname
-          let defaultname = historyCityLists?historyCityLists[index]:defaulPosition
-          jiSuData.defaultname = defaultname
-          wx.setStorageSync('jiSuData', jiSuData)
-        }
-      } else {
-        this.setData({
-          isHistory:false
-        })
-      }
-    } else {
-      if (!infoId) {
-        if (jiSuData) {
-          let defaulPosition = jiSuData.defaultname
-          let defaultname = locationHistory?locationHistory[0]:defaulPosition
-          jiSuData.defaultname = defaultname
-          wx.setStorageSync('jiSuData', jiSuData)
-        }
-      } 
+      let historyCityLists = wx.getStorageSync('historyCityLists')
+      let historyDefaultname = historyCityLists[index].defaultname
+      let locationHistory = wx.getStorageSync("locationHistory")
+      locationHistory.unshift(historyDefaultname)
+      wx.setStorageSync('locationHistory', locationHistory)
+      this.setData({
+        isHistory:false
+      })
     }
-    // if (!infoId) {
-    //   if (jiSuData) {
-    //     let defaulPosition = jiSuData.defaultname
-    //     let defaultname = locationHistory?locationHistory[0]:defaulPosition
-    //     jiSuData.defaultname = defaultname
-    //     wx.setStorageSync('jiSuData', jiSuData)
-    //   }
-    // } else {
-    //   wx.setStorageSync('defaultname', locationHistory[0])
-    // }
-    // if (jiSuData) {
-    //   let defaulPosition = jiSuData.defaultname
-    //   if (!infoId) {
-    //     let defaultname = locationHistory?locationHistory[0]:defaulPosition
-    //     jiSuData.defaultname = defaultname
-    //     wx.setStorageSync('jiSuData', jiSuData)
-    //   }else{
-    //     wx.setStorageSync('defaultname', locationHistory[0])
-    //   }
-    // }
-    // if(locationHistory){
-    //   wx.setStorageSync('defaultname', locationHistory[0])
-    // }
+    let locationHistory = wx.getStorageSync("locationHistory")
+    let defaultname = locationHistory[0]
+    wx.setStorageSync('defaultname', defaultname)
+    if (!infoId) {
+      let jiSuData = wx.getStorageSync('jiSuData')
+      if (jiSuData) {
+        jiSuData[defaultname] = defaultname
+      } else {
+        jiSuData = {}
+        jiSuData[defaultname] = defaultname
+      }
+    }
     
     
     let _this = this;
@@ -458,11 +429,10 @@ Page({
       title: t,
       adcode: a,
       location: l,
-      district: d
+      district: d,
+      defaultname:defaultname
     }
-    console.log("h1",h1)
-    return
-    wx.setStorageSync('defaultname', h1)
+    // return
     this.checkAdcode(a, function () {
       let prevPage = app.getPrevPage();
 
@@ -484,7 +454,6 @@ Page({
       _this.initHistoryCityList();
       wx.navigateBack({ delta: 1 })
     })
-
   },
   getAddressList: function () {
     let _this = this;
@@ -511,37 +480,21 @@ Page({
 
   },
   initAreaText: function () {
-    console.log("this.data",this.data)
-    let jiSuData = wx.getStorageSync('jiSuData')
-    let infoId = this.data.infoId
-    let defaultname = ""
-    if (infoId) {
-      defaultname = wx.getStorageSync("defaultname")
-    } else {
-      if (jiSuData) {
-        let defaultPositon = jiSuData.defaultname
-         //获取缓存中默认的地理位置信息
-        defaultname = infoId? wx.getStorageSync("defaultname"):defaultPositon
-      }else {
-        defaultname = wx.getStorageSync("defaultname")
-      }
-    }
-   
-    
+    //获取缓存中默认的地理位置信息
+    let defaultname = wx.getStorageSync("defaultname");
     //左后一次选择的城市
     let lastCtiy = wx.getStorageSync("lastPublishCity");
     //获取gps定位的城市
     let gpsPorvince = wx.getStorageSync("gpsPorvince");
     let gpsloc = wx.getStorageSync("gpsPorvince");
     this.setData({ gpsOrientation: gpsPorvince });
+    let infoId = this.data.infoId;
     let showfor = this.data.showfor;
     let showmap = this.data.showmap;
 
     if (defaultname && showfor == "showfor"){
-      console.log("areaText1",this.data.areaText)
       this.setData({ areaText: defaultname.name, keyAutoVal: defaultname.name + "市" })
     } else if (lastCtiy && lastCtiy.hasOwnProperty('name') && !infoId ||showfor == "noshowfor" ) {
-      console.log("areaText2",this.data.areaText)
       this.setData({ areaText: lastCtiy.name , keyAutoVal: lastCtiy.ad_name })
     } else if (gpsloc) {
       this.setData({ areaText: gpsloc.name, keyAutoVal: gpsloc.name + "市" })
@@ -567,7 +520,6 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    console.log("options",options)
     this.getinfoId(options)
     this.initInputList();
     areas.getInputList();

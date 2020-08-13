@@ -1,0 +1,590 @@
+[33mcommit fb32fff25d0bf0243da3aacd6fbede6be9a58746[m[33m ([m[1;36mHEAD -> [m[1;32mYC-DEV[m[33m)[m
+Author: yangchao <1206662047@qq.com>
+Date:   Wed Aug 12 22:19:41 2020 +0800
+
+    修改
+
+[33mcommit 5b0cd0336b75ca2a010a74c0d1b4ea89c807bd02[m[33m ([m[1;31morigin/master[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Merge: c45b2d6 3c72e21
+Author: yangchao <1206662047@qq.com>
+Date:   Wed Aug 12 17:00:47 2020 +0800
+
+    Merge branch 'master' of gitee.com:yupao/gdjz into YC-DEV
+
+[33mcommit 3c72e216369dff5bea4cd2c6f651fa18e096d783[m
+Author: 阿鑫 <33578191@qq.com>
+Date:   Wed Aug 12 16:59:48 2020 +0800
+
+    小程序大转盘  闪动问题
+
+[33mcommit c45b2d6c487f7cd6ca421ff963bb6d4a02bae2a2[m
+Merge: 3be0eff 122134c
+Author: yangchao <1206662047@qq.com>
+Date:   Wed Aug 12 16:47:27 2020 +0800
+
+    Merge branch 'master' of gitee.com:yupao/gdjz into YC-DEV
+
+[33mcommit 3be0eff23396fdd31cd15cfd2851428570364469[m
+Author: yangchao <1206662047@qq.com>
+Date:   Wed Aug 12 16:47:13 2020 +0800
+
+    审核通知框
+
+[33mcommit 122134cf7f83851ff64a2cc506ad8b608cdac8f9[m
+Author: 阿鑫 <33578191@qq.com>
+Date:   Wed Aug 12 15:51:17 2020 +0800
+
+    小程序  大转盘 loading
+
+[33mcommit 7ed07bb3e5e648554ef46b372e01e4def4c8fa4c[m
+Merge: 1fb8d5e 7b02622
+Author: yangchao <1206662047@qq.com>
+Date:   Wed Aug 12 14:35:39 2020 +0800
+
+    Merge branch 'master' of gitee.com:yupao/gdjz into YC-DEV
+
+[33mcommit 1fb8d5e7f399a0849353f039f8e6553a5fbae9d1[m
+Author: yangchao <1206662047@qq.com>
+Date:   Wed Aug 12 14:35:14 2020 +0800
+
+    极速发布数据缓存，招工城市缓存
+
+[33mcommit 7b02622024852fbbe543ba2a683343fe17db1fbe[m
+Author: 阿鑫 <33578191@qq.com>
+Date:   Wed Aug 12 14:34:12 2020 +0800
+
+    小程序 文案修改
+
+[33mcommit 79da843894e3bd1c891e53f1863df684852ba9a4[m
+Author: 阿鑫 <33578191@qq.com>
+Date:   Wed Aug 12 11:41:18 2020 +0800
+
+    小程序 大转盘
+
+[33mcommit c878bf698165b316c031533d3ef75b1f908b4e7f[m
+Merge: 51f34fb 8ab0eb5
+Author: yangchao <1206662047@qq.com>
+Date:   Wed Aug 12 10:42:38 2020 +0800
+
+    pull code
+
+[33mcommit 51f34fbf0788a0996bf7d0aecc2be4b62e21d956[m
+Author: yangchao <1206662047@qq.com>
+Date:   Wed Aug 12 10:32:10 2020 +0800
+
+    修改招工姓名输入问题，拒绝招工修改不修改提交提示问题
+
+[33mcommit 8ab0eb58715276989b76b2dd55e9af84aea81d98[m
+Author: 阿鑫 <33578191@qq.com>
+Date:   Wed Aug 12 10:26:40 2020 +0800
+
+    小程序 大转盘
+
+[33mcommit db2a1b5602be8713f9b27b1b7071ce64a3a17aeb[m
+Author: yangchao <1206662047@qq.com>
+Date:   Tue Aug 11 20:54:02 2020 +0800
+
+    发布修改审核失败修改详情提示问题
+
+[33mcommit 9a1c9307011bc67e3bfb1b96733dd61228ae32b3[m
+Author: yangchao <1206662047@qq.com>
+Date:   Tue Aug 11 19:01:08 2020 +0800
+
+    修改提交成功提示框
+
+[33mcommit 2c8547c3f38014d61c788023eb17998fc83d3c96[m
+Author: yangchao <1206662047@qq.com>
+Date:   Tue Aug 11 18:52:53 2020 +0800
+
+    修改招工城市保存问题，拒绝状态下修改提示框
+
+[33mcommit 222c1c6647df1c283ffb51c3da5569cd26b26818[m
+Author: yangchao <1206662047@qq.com>
+Date:   Tue Aug 11 17:24:02 2020 +0800
+
+    快速发布匹配修改，修改界面验证码显示问题
+
+[33mcommit fc0ca8eaa0066815d49692d84a57653baacdc9d4[m
+Author: yangchao <1206662047@qq.com>
+Date:   Tue Aug 11 16:24:42 2020 +0800
+
+    修改招工
+
+[33mcommit f6986d38d0c03979e59ce8e32f8cccedb04a7756[m[33m ([m[1;32mmaster[m[33m)[m
+Author: yangchao <1206662047@qq.com>
+Date:   Mon Aug 10 17:44:31 2020 +0800
+
+    提示框
+
+[33mcommit 633765c942f3453b74609101e0ea55644c2eea67[m
+Author: yangchao <1206662047@qq.com>
+Date:   Mon Aug 10 17:43:44 2020 +0800
+
+    修改手机号提示框问题
+
+[33mcommit dbdd6f212e727ed2e0ddf04ba23ae4760f49abfd[m
+Merge: 8b8cd15 0f45270
+Author: yangchao <1206662047@qq.com>
+Date:   Mon Aug 10 17:34:12 2020 +0800
+
+    极速发布完善
+
+[33mcommit 8b8cd155009aff26c10faea1cb4627c656b36e50[m
+Author: yangchao <1206662047@qq.com>
+Date:   Mon Aug 10 15:13:34 2020 +0800
+
+    config
+
+[33mcommit 0f45270c309d5260796fb4ea81505201b21dc300[m
+Author: 阿鑫 <33578191@qq.com>
+Date:   Mon Aug 10 15:12:16 2020 +0800
+
+    极速发布  不匹配详情地址
+
+[33mcommit 68385817a7b663c886a85c9d8e1d9b1fa214ba4a[m
+Author: yangchao <1206662047@qq.com>
+Date:   Mon Aug 10 14:32:01 2020 +0800
+
+    发布提示框显示问题
+
+[33mcommit 75c8c5af1427379e218bf64768791822e93406f6[m
+Merge: 5f387c2 d3c24c2
+Author: yangchao <1206662047@qq.com>
+Date:   Mon Aug 10 10:20:38 2020 +0800
+
+    merge
+
+[33mcommit 5f387c2bce72914bc2820c6c104543e7bcff2a35[m
+Author: yangchao <1206662047@qq.com>
+Date:   Mon Aug 10 10:09:33 2020 +0800
+
+    招工详情输入长度
+
+[33mcommit d3c24c2f94ca6ce07e4f5d9f0dc2844d900042fe[m
+Author: 阿鑫 <33578191@qq.com>
+Date:   Mon Aug 10 09:22:53 2020 +0800
+
+    极速发布 部分bug修改
+
+[33mcommit 53da81ffdf5de1bea95827340d20e97f93e4c9e2[m
+Author: yanghan <1206662047@qq.com>
+Date:   Sun Aug 9 15:16:45 2020 +0800
+
+    极速发布部分更新
+
+[33mcommit 6f1ec87017ad02bfdad30009b21579f123a148d4[m
+Author: yangchao <1206662047@qq.com>
+Date:   Sat Aug 8 18:07:43 2020 +0800
+
+    发布完善
+
+[33mcommit b6629572e9cd81d554c0b0eab4e00a07f872144d[m
+Author: yangchao <1206662047@qq.com>
+Date:   Fri Aug 7 21:06:27 2020 +0800
+
+    优化
+
+[33mcommit 0948fa6fdcc6859c8fdc7914799271fab98787da[m
+Author: yangchao <1206662047@qq.com>
+Date:   Fri Aug 7 20:52:04 2020 +0800
+
+    发布优化
+
+[33mcommit fdc68b84aff4a3d831d6dade6f00c55efdcd7b04[m
+Author: yangchao <1206662047@qq.com>
+Date:   Fri Aug 7 20:26:19 2020 +0800
+
+    备注
+
+[33mcommit 0cf4c4e0e11d71054a604a44a14781d9ee44ced8[m
+Merge: 86ce310 95be961
+Author: yangchao <1206662047@qq.com>
+Date:   Fri Aug 7 20:23:12 2020 +0800
+
+    快速发布授权数据存储及提示更正
+
+[33mcommit a091ff84443e612c240bb81b4bd40249fc048366[m
+Author: 阿鑫 <33578191@qq.com>
+Date:   Fri Aug 7 20:01:51 2020 +0800
+
+    跳转工地急招
+
+[33mcommit 86ce310f01562f2c7fadc8e6b1f9bc6cdba3fb58[m
+Author: yangchao <1206662047@qq.com>
+Date:   Fri Aug 7 16:15:50 2020 +0800
+
+    快速发布登录状态下信息自动填充信息与填写缓存
+
+[33mcommit 95be9614417abb17fac98a8e0240aff08a995f6f[m
+Author: 阿鑫 <33578191@qq.com>
+Date:   Fri Aug 7 15:49:57 2020 +0800
+
+    整合记工记账跳转
+
+[33mcommit ae3083ec494611a7755b538d39fc67720410cd8e[m
+Author: yangchao <1206662047@qq.com>
+Date:   Fri Aug 7 11:40:58 2020 +0800
+
+    发布方式
+
+[33mcommit a7178b7f3448416c717ea32726ae74d2c36d218f[m
+Author: 阿鑫 <33578191@qq.com>
+Date:   Fri Aug 7 11:31:29 2020 +0800
+
+    小程序 调整
+
+[33mcommit 787f2031831dd6d8a97de8e93430082bb329171b[m
+Author: 阿鑫 <33578191@qq.com>
+Date:   Fri Aug 7 10:49:34 2020 +0800
+
+    小程序 区分发布方式
+
+[33mcommit dbab98bdbea6cbadbabe5da5ecd0a37c5a2a8e61[m
+Merge: bce54dc 9d4b52f
+Author: 阿鑫 <33578191@qq.com>
+Date:   Fri Aug 7 10:32:41 2020 +0800
+
+    大转盘是否显示
+
+[33mcommit bce54dc676217e906579212df000ef692dd7d6d7[m
+Author: 阿鑫 <33578191@qq.com>
+Date:   Fri Aug 7 10:32:05 2020 +0800
+
+    判断大转盘是否显示
+
+[33mcommit 9d4b52ff3b68e864084b0ba698f41e25795bb65b[m
+Author: yangchao <1206662047@qq.com>
+Date:   Fri Aug 7 10:30:47 2020 +0800
+
+    发布更正
+
+[33mcommit 1c15cb433bb832b29cd58490617d9850a77ac766[m
+Author: yanghan <1206662047@qq.com>
+Date:   Thu Aug 6 21:45:45 2020 +0800
+
+    修复发布方式跳转及快速发布提示信息
+
+[33mcommit 931e74ca58f33a77b7bb8197a5b4f1c7713e12e8[m
+Author: yangchao <1206662047@qq.com>
+Date:   Thu Aug 6 17:35:45 2020 +0800
+
+    代码调整
+
+[33mcommit f2c1b108a1845b9fdde7c49cfe7a05be39b118bd[m
+Author: yangchao <1206662047@qq.com>
+Date:   Thu Aug 6 17:05:09 2020 +0800
+
+    极速发布成功后跳转问题
+
+[33mcommit 6efcf3abd8f474a578fe9a372a6208b5cecc5704[m
+Author: yangchao <1206662047@qq.com>
+Date:   Thu Aug 6 15:13:02 2020 +0800
+
+    个人中心完善资料昵称校验
+
+[33mcommit 177aba80aca80ab68fbba4a1b1cc230202064629[m
+Author: yangchao <1206662047@qq.com>
+Date:   Thu Aug 6 11:40:37 2020 +0800
+
+    昵称填写提交不合规范提示
+
+[33mcommit 7d31dde81853ed346480e94c59b6e3ec4944c36b[m
+Author: 阿鑫 <33578191@qq.com>
+Date:   Thu Aug 6 11:03:59 2020 +0800
+
+    判断用户发布
+
+[33mcommit 3850d77f6df7e0d11aaf021d971b00627b90029e[m
+Author: yangchao <1206662047@qq.com>
+Date:   Thu Aug 6 10:58:14 2020 +0800
+
+    极速发布快速发布代码优化
+
+[33mcommit bf047b4223eb276ba096964631e25d8a0c8dd05a[m
+Merge: 9236a93 6b74a51
+Author: yangchao <1206662047@qq.com>
+Date:   Thu Aug 6 09:53:27 2020 +0800
+
+    Merge branch 'YC-080501'
+
+[33mcommit 6b74a519833282ac9c3eb609a5617b73323e24b7[m
+Author: 阿鑫 <33578191@qq.com>
+Date:   Thu Aug 6 09:49:39 2020 +0800
+
+    分享 报错
+
+[33mcommit 9236a93681bfa278e54e79f9184a8158830c40b3[m[33m ([m[1;31morigin/barnchYC[m[33m)[m
+Merge: 5165a9f 2644b9b
+Author: yangchao <1206662047@qq.com>
+Date:   Thu Aug 6 09:04:40 2020 +0800
+
+    Merge branch 'YC-080501'
+
+[33mcommit 5165a9ff2a811f8efd5793a33fb61fef719308b1[m
+Author: yangchao <1206662047@qq.com>
+Date:   Thu Aug 6 09:00:08 2020 +0800
+
+    发布方式请求次数优化
+
+[33mcommit 2644b9bfefad724c8a16e6cb9229031c7b516a73[m
+Author: 阿鑫 <33578191@qq.com>
+Date:   Wed Aug 5 20:19:05 2020 +0800
+
+    修改快速发布 代码问题
+
+[33mcommit 30e74c4bab0df69726434abb8d49ee54bf6160e0[m
+Author: yangchao <1206662047@qq.com>
+Date:   Wed Aug 5 19:22:41 2020 +0800
+
+    优化快速发布与极速发布并测试
+
+[33mcommit 7fac95b2a525daa6341a111c7b73c236e534b90c[m
+Merge: 3283eac 2eb29c0
+Author: yangchao <1206662047@qq.com>
+Date:   Wed Aug 5 16:19:41 2020 +0800
+
+    快速极速合并
+
+[33mcommit 2eb29c021e5001031b1161d3df4656ea3e538e25[m
+Author: 阿鑫 <33578191@qq.com>
+Date:   Wed Aug 5 14:57:14 2020 +0800
+
+    极速发布完善
+
+[33mcommit 3283eac878f6bd507379577ae68fce6654f361e9[m
+Author: yangchao <1206662047@qq.com>
+Date:   Wed Aug 5 14:49:48 2020 +0800
+
+    极速发布完善
+
+[33mcommit b1419c4927b70392e07e6ffe4ed0a46af379a3c8[m
+Author: 阿鑫 <33578191@qq.com>
+Date:   Wed Aug 5 09:31:29 2020 +0800
+
+    极速发布 修改job_id
+
+[33mcommit 7f6dfd81404111f31867f294a21301408812b78f[m
+Author: yangchao <1206662047@qq.com>
+Date:   Tue Aug 4 19:27:26 2020 +0800
+
+    快速发布
+
+[33mcommit 26dc4ac6a682b9fa4aefe3e9648c5fbe830f9013[m
+Author: yangchao <1206662047@qq.com>
+Date:   Tue Aug 4 19:26:36 2020 +0800
+
+    快速发布
+
+[33mcommit 8e2038be06aece9ac01384dfafe5710df93fc64e[m
+Author: 阿鑫 <33578191@qq.com>
+Date:   Tue Aug 4 17:43:51 2020 +0800
+
+    极速发布招工
+
+[33mcommit 06052bf41447928f25710bf2a4200cf564220988[m
+Merge: ca4708d 44506bb
+Author: yangchao <1206662047@qq.com>
+Date:   Tue Aug 4 14:20:34 2020 +0800
+
+    投诉
+
+[33mcommit ca4708d14d0da399d571c43d2a2b7e2402323083[m
+Author: yangchao <1206662047@qq.com>
+Date:   Tue Aug 4 14:14:25 2020 +0800
+
+    快速发布
+
+[33mcommit a4bdb51f4a2d61575bbc7f3105d0a089126456ae[m
+Author: yangchao <1206662047@qq.com>
+Date:   Mon Aug 3 18:59:15 2020 +0800
+
+    极速发布与普通发布
+
+[33mcommit 44506bbfd52ff612e5dde640cea47a5365414185[m[33m ([m[1;32mYC-YP3221[m[33m)[m
+Author: yangchao <1206662047@qq.com>
+Date:   Mon Aug 3 16:54:27 2020 +0800
+
+    第一次投诉后，点击投诉提示信息更改
+
+[33mcommit 1a84230071852b92f07455cb1e2475f87a0f9e65[m
+Author: yangchao <1206662047@qq.com>
+Date:   Mon Aug 3 15:42:59 2020 +0800
+
+    发布招工联系人验证
+
+[33mcommit 895dd6046b3e76529868308e65a4803c558db026[m
+Author: yangchao <1206662047@qq.com>
+Date:   Mon Aug 3 11:09:48 2020 +0800
+
+    找工筛选条件改为智能推荐 投诉信息统一更改
+
+[33mcommit 54792459bfd1d98e65fa65aef072e4122f41999a[m
+Author: yangchao <1206662047@qq.com>
+Date:   Mon Aug 3 09:59:01 2020 +0800
+
+    发布中快速和极速发布招工
+
+[33mcommit 95ef4dfe2f50c98e91f5aed93cd2bd49cca9dbc0[m
+Author: yangchao <1206662047@qq.com>
+Date:   Sat Aug 1 17:39:09 2020 +0800
+
+    快速发布与极速发布
+
+[33mcommit 64cb1e84dc6d453aae8adf4c0ec75f6560267836[m
+Author: yangchao <1206662047@qq.com>
+Date:   Sat Aug 1 11:43:48 2020 +0800
+
+    iphone home键优化
+
+[33mcommit 311da45cc15eac26f0336dfb11f3bd022e9f4c5d[m
+Merge: fe558af c06a5b4
+Author: yangchao <1206662047@qq.com>
+Date:   Sat Aug 1 10:19:43 2020 +0800
+
+    Merge branch 'YC-YP3221'
+
+[33mcommit c06a5b420365b06d691d2f9414eccd3b3cb71520[m
+Author: yangchao <1206662047@qq.com>
+Date:   Sat Aug 1 10:18:58 2020 +0800
+
+    config
+
+[33mcommit fe558af08bd369dbc24a9e09e62e4f7885aab79c[m
+Merge: 3a39161 555ea51
+Author: yangchao <1206662047@qq.com>
+Date:   Sat Aug 1 10:15:45 2020 +0800
+
+    new pull
+
+[33mcommit 9d268e91fc8c96151913c2db51b81cf68e851f71[m
+Author: yangchao <1206662047@qq.com>
+Date:   Fri Jul 31 17:44:01 2020 +0800
+
+    config.json
+
+[33mcommit c0e01d66d344172d3dd6c644ea26d913928f868d[m
+Author: yangchao <1206662047@qq.com>
+Date:   Fri Jul 31 15:43:35 2020 +0800
+
+    水电工小程序工人找活自动选择工种
+
+[33mcommit 555ea5151dc50f6d24bda4d28ef1da0938b09d7e[m
+Author: 阿鑫 <33578191@qq.com>
+Date:   Fri Jul 31 11:37:37 2020 +0800
+
+    发布招工版本
+
+[33mcommit c01587f524a1967d1338767519cbf42cac9232da[m
+Author: yangchao <1206662047@qq.com>
+Date:   Fri Jul 31 11:35:39 2020 +0800
+
+    积分消耗记录已投诉状态更改
+
+[33mcommit d9b4eedb5f78d166ba795330ebcc09943907c26b[m
+Author: yangchao <1206662047@qq.com>
+Date:   Thu Jul 30 14:47:20 2020 +0800
+
+    举报统一改成投诉
+
+[33mcommit 9ac20e6d7f5be1a24bdfa3eb604a7ab5d79be13d[m
+Author: yangchao <1206662047@qq.com>
+Date:   Thu Jul 30 11:49:38 2020 +0800
+
+    邀请好友界面整体布局修改
+
+[33mcommit 8ec8e6aa151026d440db412cd9d2bdc416caa3d1[m
+Author: yangchao <1206662047@qq.com>
+Date:   Wed Jul 29 17:40:43 2020 +0800
+
+    我的招工详情界面IOS端按钮与home键重叠处理
+
+[33mcommit 56f89e091b5d3a8cec1348f7c0c92d66c38d2a9f[m
+Author: yangchao <1206662047@qq.com>
+Date:   Wed Jul 29 17:00:01 2020 +0800
+
+    修改招工、找活详情底部推荐标题
+
+[33mcommit 3a39161fb81f66bbb72851304e222c6cf505aaa6[m
+Author: yangchao <1206662047@qq.com>
+Date:   Wed Jul 29 15:13:47 2020 +0800
+
+    更改了推荐列表接口
+
+[33mcommit baaf888997cee2d9a7e3178c41eeb73c523de8b8[m
+Author: yangchao <1206662047@qq.com>
+Date:   Wed Jul 29 14:02:25 2020 +0800
+
+    昵称姓名联系人填写限制与提交提示
+
+[33mcommit cf9fcfd4e1cfc52839ecf08b05a0255e8d072934[m[33m ([m[1;31morigin/newBranchWLP[m[33m)[m
+Author: 阿鑫 <33578191@qq.com>
+Date:   Fri Jul 17 10:01:19 2020 +0800
+
+    add README.md.
+
+[33mcommit 5d9324021282988b6a39ec13d3be63350e29f2e6[m
+Author: axinjs <33578191@qq.com>
+Date:   Fri Jul 17 09:54:47 2020 +0800
+
+    小程序 大转盘
+
+[33mcommit e701712534b752475e08bd033e7666e5648e1f58[m
+Author: axinjs <33578191@qq.com>
+Date:   Wed Jul 1 10:17:04 2020 +0800
+
+    分包 激励视频
+
+[33mcommit f7c273ded8039f76c215954582b5e91ef319985f[m
+Author: axinjs <33578191@qq.com>
+Date:   Wed Jun 17 09:48:56 2020 +0800
+
+    排名点规则看视频
+
+[33mcommit 73c6887c2ca9c273bd76931bd571a567039f5afe[m
+Author: axinjs <33578191@qq.com>
+Date:   Tue Jun 9 17:41:04 2020 +0800
+
+    图片上传转小写
+
+[33mcommit 510d25754b95c733b6ef08ab3e5647f3f2738c04[m
+Author: axinjs <33578191@qq.com>
+Date:   Tue Jun 9 17:32:27 2020 +0800
+
+    排名点 看视频
+
+[33mcommit 5abb01d6a84bb68c070817bffe612a315ec55b1c[m
+Author: axinjs <33578191@qq.com>
+Date:   Fri Jun 5 14:52:09 2020 +0800
+
+    调试客服消息
+
+[33mcommit d9b5c3a7454898e351410340dda3e820f8dea2e5[m
+Author: axinjs <33578191@qq.com>
+Date:   Tue Jun 2 15:57:13 2020 +0800
+
+    图片类型 分包
+
+[33mcommit f6592f99199bf064c8393af4ec777b6b1c378ad2[m
+Author: axinjs <33578191@qq.com>
+Date:   Sat May 23 09:51:32 2020 +0800
+
+    正式站备份
+
+[33mcommit 9cfada7f356e13947ae0f649accf737178d1ffbe[m
+Author: axinjs <33578191@qq.com>
+Date:   Fri May 22 15:14:29 2020 +0800
+
+    整理预发布
+
+[33mcommit 01f9a70c2190700c9fbfa03bf0249bfa87de71c0[m
+Merge: 05ed575 39488e7
+Author: axinjs <33578191@qq.com>
+Date:   Wed May 20 17:04:13 2020 +0800
+
+    Merge branch 'master' of https://git.dev.tencent.com/jsxin/jizhao
+
+[33mcommit 05ed575fd33a46545b34e5c622d7b43e2abc0138[m
+Author: axinjs <33578191@qq.com>
+Date:   Wed May 20 17:01:57 2020 +0800
+
+    我的名片 推荐招工

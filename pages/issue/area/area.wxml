@@ -4,7 +4,7 @@ setAddressData -->
   <view class='address-header'>
     <view class="choose-address-text" bindtap="showCity">{{ areaText }}<view class="map-cityarrow"></view></view>
     <view class="inputandimg">
-      <input placeholder='请输入你的详细地址' bindinput='userEnterAddress' value='{{ addressText }}' bindfocus="mapInputFocus" data-isHistory="true"></input>
+      <input placeholder='请输入你的详细地址' bindinput='userEnterAddress' value='{{ addressText }}' bindfocus="mapInputFocus" data-history="true"></input>
       <image src="{{ clearinput }}" bindtap="clearInputVal"></image>
     </view>
     <text bindtap='closeAddressAction'>取消</text>

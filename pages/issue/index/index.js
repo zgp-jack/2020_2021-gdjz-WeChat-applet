@@ -285,24 +285,26 @@ Page({
               })
             }
             wx.setStorageSync('defaultname', mydata.default_search_name)//标记
-            console.log("data",_this.data)
+            let locationHistory = wx.getStorageSync('locationHistory')
+            if (locationHistory) {
+              locationHistory.unshift(mydata.default_search_name)
+              wx.setStorageSync('locationHistory', locationHistory)
+            } else {
+              let locationHistory = []
+              locationHistory.unshift(mydata.default_search_name)
+              wx.setStorageSync('locationHistory', locationHistory)
+            }
             _this.initSelectedClassifies()
             _this.countWorkNum()
             _this.getWorkText()
             _this.initChildWorkType()
           } else {
+            // let defaultname = jiSuData.defaultname ? jiSuData.defaultname :(gpsPorvince?gpsPorvince:defaultPosition)
             let jiSuData = wx.getStorageSync('jiSuData')
-            let gpsPorvince = wx.getStorageSync('gpsPorvince')
-            let defaultPosition = areas.getAreaArr[1]
-            let defaultname = jiSuData.defaultname ? jiSuData.defaultname :(gpsPorvince?gpsPorvince:defaultPosition)
-            console.log("defaultname",defaultname)
-            wx.setStorageSync('defaultname', defaultname)
             if(!jiSuData){
               _this.initChildWorkType()
               return false;
             } else {
-              jiSuData.defaultname = defaultname
-              wx.setStorageSync('jiSuData', jiSuData)
               if(jiSuData.detail){
                 _this.setData({ "data.detail":jiSuData.detail })
               }
@@ -340,6 +342,18 @@ Page({
                   imglen: jiSuData.imgs.length,
                   switch: jiSuData.imgs.length ? true : false
                 })
+              }
+              if (jiSuData.defaultname) {
+                wx.setStorageSync('defaultname', jiSuData.defaultname)//标记
+                let locationHistory = wx.getStorageSync('locationHistory')
+                if (locationHistory) {
+                  locationHistory.unshift(mydata.default_search_name)
+                  wx.setStorageSync('locationHistory', locationHistory)
+                } else {
+                  let locationHistory = []
+                  locationHistory.unshift(mydata.default_search_name)
+                  wx.setStorageSync('locationHistory', locationHistory)
+                }
               }
             }
             
