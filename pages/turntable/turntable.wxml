@@ -48,7 +48,7 @@
 
 <view class="turntable-rules-box flex-row" wx:if="{{ showRules }}">
     <view class="turntable-rules-container">
-        <view class="turntable-rules-title">玩法介绍</view>
+        <view class="turntable-rules-title">玩法说明</view>
         <view class="turntable-rules-body">
             <view>1、每天每人有{{ max }}次抽奖机会。</view>
             <view>2、每天0点刷新抽奖机会。</view>
