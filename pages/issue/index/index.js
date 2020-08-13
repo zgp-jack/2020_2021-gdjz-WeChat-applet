@@ -814,6 +814,12 @@ Page({
     }
     //输入信息前的字段对象
     let model = _this.data.model
+    if (model.imgs == null) {
+      model.imgs = ""
+    }
+    console.log("dataJson",dataJson)
+    console.log("model",model)
+    // return
     //如果是修改界面再没有更改数据的情况下不能保存
     if (_this.data.infoId) {
       if (_this.data.reason != "0") {
@@ -944,7 +950,6 @@ Page({
       images: imgs,
       infoId: infoId,
     }
-
     console.log("mydata1",mydata)
     app.appRequestAction({
       url: 'publish/new-save-job/',
@@ -954,12 +959,14 @@ Page({
         let resdata = res.data
         if (res.data.errcode == "ok") {
           //发布成功后，清除缓存数据中的detail、rulesClassifyids、userClassifyids、imgs
-          let jiSuData = wx.getStorageSync('jiSuData')
-          jiSuData.detail = ''
-          jiSuData.rulesClassifyids = []
-          jiSuData.userClassifyids = []
-          jiSuData.imgs = []
-          wx.setStorageSync('jiSuData', jiSuData)
+          if (!infoId) {
+            let jiSuData = wx.getStorageSync('jiSuData')
+            jiSuData.detail = ''
+            jiSuData.rulesClassifyids = []
+            jiSuData.userClassifyids = []
+            jiSuData.imgs = []
+            wx.setStorageSync('jiSuData', jiSuData)
+          }
           //发布成功后再次进入发布界面重新读取用户信息手机号码
           app.globalData.isRedPhone = true
           // 存入最近两个成功信息

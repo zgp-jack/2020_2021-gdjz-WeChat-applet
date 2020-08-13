@@ -37,13 +37,32 @@
   position: relative;
   width: 100%;
 }
-.issue-contact-title{
+/* .issue-contact-title{
   position: relative;
   text-align: center;
   font-weight: bold;
   font-size: 30rpx;
   color: #333;
   line-height: 60rpx;
+} */
+.issue-phone{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  text-align: center;
+  font-weight: bold;
+  font-size: 30rpx;
+  color: #333;
+  line-height: 60rpx;
+}
+.issue-phone-image {
+  display: inline-block;
+  width:30rpx
+}
+.issue-contact-title{
+  margin: 0rpx 10rpx;
 }
 .issue-contact-body{
   position: relative;

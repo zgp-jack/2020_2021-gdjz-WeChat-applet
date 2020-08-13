@@ -13,7 +13,8 @@ Page({
     phone: '',
     showTel: false,
     request:false,
-    isRule:true
+    isRule:true,
+    imageUrl: app.globalData.apiImgUrl +"new-publish-title-t-icon.png"
   },
   checkType: function (obj, _type) {
     var _re = Object.prototype.toString.call(obj).slice(8, -1).toLowerCase();
@@ -144,10 +145,8 @@ Page({
             title: '提示',
             content: res.data.errmsg,
             showCancel: true,
-            cancelColor: "#797979",
             cancelText: "知道了",
             confirmText: "联系客服",
-            confirmColor: "#009CFF",
             success: function (res) {
               if (res.confirm) {
                 wx.makePhoneCall({
