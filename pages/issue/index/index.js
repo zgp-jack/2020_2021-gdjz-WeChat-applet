@@ -258,7 +258,7 @@ Page({
               province_id:mydata.model.province_id,
               city_id:mydata.model.city_id,
               county_id:mydata.model.county_id,
-              selectedClassifies:mydata.selectedClassifies,
+              selectedClassifies:mydata.selectedClassifies.sort(),
               user_name:mydata.model.user_name,
               user_mobile:mydata.model.user_mobile,
               imgs:mydata.model.view_images,
@@ -722,7 +722,7 @@ Page({
     });
     app.appRequestAction({
       title: "正在获取验证码",
-      url: "index/send-tel-code/",
+      url: "index/get-code/",
       way: "POST",
       params: {
         tel: phone,
@@ -813,18 +813,11 @@ Page({
       province_id:_this.data.data.province_id,
       city_id:_this.data.data.city_id,
       county_id:_this.data.data.county_id,
-      selectedClassifies:_this.data.selectedClassifies,
+      selectedClassifies:_this.data.selectedClassifies.sort(),
       user_name:_this.data.data.user_name,
       user_mobile:_this.data.data.user_mobile,
       imgs:imags,
     }
-    //输入信息前的字段对象
-    
-    if (model.imgs == null) {
-      model.imgs = ""
-    }
-    console.log("dataJson",dataJson)
-    console.log("model",model)
     //如果是修改界面再没有更改数据的情况下不能保存
     if (_this.data.infoId) {
       if (_this.data.reason != "0") {
