@@ -261,7 +261,7 @@ Page({
               selectedClassifies:mydata.selectedClassifies.sort(),
               user_name:mydata.model.user_name,
               user_mobile:mydata.model.user_mobile,
-              imgs:mydata.model.view_images,
+              imgs:mydata.model.view_images || "",
             }
             _this.setData({
               "data.user_mobile":mydata.model.user_mobile,
