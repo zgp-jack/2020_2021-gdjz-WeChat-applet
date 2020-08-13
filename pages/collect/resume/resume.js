@@ -185,6 +185,12 @@ Page({
       [obj]: "http://cdn.yupao.com/miniprogram/images/user.png"
     })
   },
+  //点击跳转到找活列表界面
+  goFindWork:function () {
+    wx.navigateTo({
+      url: '/pages/index/index',
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */

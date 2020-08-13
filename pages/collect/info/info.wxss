@@ -335,5 +335,18 @@ margin-left: 20rpx;
     background: #0099ff;
     z-index: 2;
 }
+.lists-nodata button {
+    width: 320rpx;
+    height:88rpx;
+    background-color: #0099FF;
+    color:#FFFFFF;
+    border-radius: 44rpx;
+    margin-top: 50rpx;
+    font-size: 35rpx;
+}
+.nodataText {
+    margin-top: -60rpx;
+}
+
 
 
