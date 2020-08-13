@@ -313,45 +313,49 @@ Page({
   /**打开设置面板 */
   openSetting: function (e) {
     let that = this;
-    wx.getSetting({
-      success: (res) => {
-        //console.log(res.authSetting['scope.userLocation']);
-        if (res.authSetting['scope.userLocation'] != undefined && res.authSetting['scope.userLocation'] != true) {//非初始化进入该页面,且未授权   
-          wx.showModal({
-            title: '是否授权当前位置',
-            content: '需要获取您的地理位置，请确认授权，否则将不能为你自动推荐位置',
-            success: function (res) {
-              if (res.cancel) {
-              } else if (res.confirm) {
-                //village_LBS(that);
-                wx.openSetting({
-                  success: function (data) {
-                    
-                    if (data.authSetting["scope.userLocation"] == true) {
-                      wx.showToast({
-                        title: '授权成功',
-                        icon: 'success',
-                        duration: 2000
-                      })
-
-                      //再次授权，调用getLocationt的API
-                      that.userLocFun()
-                    } else {
-                      wx.showToast({
-                        title: '授权失败',
-                        icon: 'success',
-                        duration: 2000
-                      })
+    let defaultname =  wx.getStorageSync('defaultname')
+    if (!defaultname) {
+      wx.getSetting({
+        success: (res) => {
+          //console.log(res.authSetting['scope.userLocation']);
+          if (res.authSetting['scope.userLocation'] != undefined && res.authSetting['scope.userLocation'] != true) {//非初始化进入该页面,且未授权   
+            wx.showModal({
+              title: '是否授权当前位置',
+              content: '需要获取您的地理位置，请确认授权，否则将不能为你自动推荐位置',
+              success: function (res) {
+                if (res.cancel) {
+                } else if (res.confirm) {
+                  //village_LBS(that);
+                  wx.openSetting({
+                    success: function (data) {
+                      if (data.authSetting["scope.userLocation"] == true) {
+                        wx.showToast({
+                          title: '授权成功',
+                          icon: 'success',
+                          duration: 2000
+                        })
+                        //再次授权，调用getLocationt的API
+                        that.userLocFun()
+                        // let gpsOrientation = wx.getStorageSync('gpsOrientation')
+                        // wx.setStorageSync('defaultname', gpsOrientation)
+                      } else {
+                        wx.showToast({
+                          title: '授权失败',
+                          icon: 'success',
+                          duration: 2000
+                        })
+                      }
                     }
-                  }
-                })
+                  })
+                }
               }
-            }
-          })
-          return false;
-        }
-      },
-    })
+            })
+            return false;
+          }
+        },
+      })
+    }
+    
   },
   getKeywordsInputs: function (val, callback) {
     let _this = this;
