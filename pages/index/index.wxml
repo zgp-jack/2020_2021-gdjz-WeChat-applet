@@ -190,7 +190,7 @@
 <!-- <button class='bottompublishbtn' open-type="getPhoneNumber"  bindgetphonenumber="getPhoneNumber" >获取手机号</button> -->
 
 <image class="returntop {{ showReturnTopImg ? 'returntop-active' : '' }}" src="{{ returnTopImg }}" bindtap="returnTop" ></image>
-
+<!-- 
 <navigator 
   class="jumpjgjz"
   target="miniProgram"
@@ -198,7 +198,7 @@
   app-id="wx3abff5d74de220d2"
   version="trial"
   extra-data="{{ jgjzData }}"
->跳转记工记账</navigator>
+>跳转记工记账</navigator> -->
 
 <!-- <view class='fixed-get-integral'  bindtap='jumpThisLink'  data-url="/pages/turntable/turntable"  data-type='0'>
         <image src='{{ fixedGetIntegral }}'></image>
