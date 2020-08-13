@@ -252,6 +252,17 @@ Page({
           })
           //如果是从个人中心我的招工界面过来的，为修改界面，采集修改数据
           if (infoId) {
+            let model = {
+              detail:mydata.model.detail,
+              address:mydata.model.address,
+              province_id:mydata.model.province_id,
+              city_id:mydata.model.city_id,
+              county_id:mydata.model.county_id,
+              selectedClassifies:mydata.selectedClassifies,
+              user_name:mydata.model.user_name,
+              user_mobile:mydata.model.user_mobile,
+              imgs:mydata.model.view_images,
+            }
             _this.setData({
               "data.user_mobile":mydata.model.user_mobile,
               "data.user_name": mydata.model.user_name,
@@ -268,15 +279,7 @@ Page({
               reason:mydata.model.check_fail_msg,
               id:mydata.default_search_name.id,
               //this.data.model为修改界面进入后采集的修改前数据
-              "model.detail":mydata.model.detail,
-              "model.address":mydata.model.address,
-              "model.province_id":mydata.model.province_id,
-              "model.city_id":mydata.model.city_id,
-              "model.county_id":mydata.model.county_id,
-              "model.selectedClassifies":mydata.selectedClassifies,
-              "model.user_name":mydata.model.user_name,
-              "model.user_mobile":mydata.model.user_mobile,
-              "model.imgs":mydata.model.view_images,
+              model: JSON.stringify(model)
             })
             if (mydata.model.check_fail_msg != "0") {
               wx.showModal({
@@ -707,7 +710,6 @@ Page({
   userGetCode: function () {
     let _this = this;
     let phone = this.data.data.user_mobile;
-    let userInfo = this.data.userInfo;
     let status = this.data.status;
     if (!status) return false;
     let v = vali.v.new();
@@ -795,7 +797,8 @@ Page({
       phone,
       userClassifyids,
       rulesClassifyids,
-      userInfo
+      userInfo,
+      model
     } = _this.data
     //输入信息后的字段对象
     //处理图片数组取出数组对象中url
@@ -816,17 +819,16 @@ Page({
       imgs:imags,
     }
     //输入信息前的字段对象
-    let model = _this.data.model
+    
     if (model.imgs == null) {
       model.imgs = ""
     }
     console.log("dataJson",dataJson)
     console.log("model",model)
-    // return
     //如果是修改界面再没有更改数据的情况下不能保存
     if (_this.data.infoId) {
       if (_this.data.reason != "0") {
-        if (JSON.stringify(model) == JSON.stringify(dataJson)){
+        if (model == JSON.stringify(dataJson)){
           let reason = _this.data.reason
           wx.showModal({
             title: '审核失败',
