@@ -263,6 +263,8 @@ Page({
               user_mobile:mydata.model.user_mobile,
               imgs:mydata.model.view_images || "",
             }
+            // console.log(model)
+            // console.log(JSON.stringify(model))
             _this.setData({
               "data.user_mobile":mydata.model.user_mobile,
               "data.user_name": mydata.model.user_name,
@@ -818,6 +820,9 @@ Page({
       user_mobile:_this.data.data.user_mobile,
       imgs:imags,
     }
+    // console.log(dataJson)
+    // console.log(JSON.stringify(dataJson))
+    
     //如果是修改界面再没有更改数据的情况下不能保存
     if (_this.data.infoId) {
       if (_this.data.reason != "0") {
