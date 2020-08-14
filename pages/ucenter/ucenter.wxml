@@ -1,56 +1,56 @@
 <import src="/pages/footer/footer.wxml" />
 
 <view class="ucener-header">
-    <text class='ucenter-title'>会员中心</text>
+	<text class='ucenter-title'>会员中心</text>
 
-    <view class='ucener-userinfo-wrap' wx:if="{{ userInfo }}">
-        <view class='ucenter-userinfo'>
-            <view class='ucenter-userinfo-box'>
-                <image src='{{ member.headimgurl }}' class='ucenter-userimg'></image>
-                <view class='ucenter-userinfo-words'>
-                    <navigator class='user-update-info' url='/packageOther/pages/userinfo/index/index?img={{ member.headimgurl }}&auth={{ member.is_check }}&tel={{ member.tel }}&name={{ member.username || member.nickname }}&pass={{ member.pwd_status }}' open-type="navigate" wx:if="{{ member.tel }}">修改资料</navigator>
-                    <navigator class='user-update-info' url='/packageOther/pages/userinfo/edit/edit' open-type="navigate" wx:else="{{ member.tel }}">完善资料</navigator>
-                    <view class='ucenter-username overwords felx'>
-                        {{ member.username || member.nickname }}
-                        <image src='{{ realNames }}' class='user-update-tag' wx:if="{{member.is_check==2&&is_checking==2}}"></image>
-                    </view>
-                    <view class='ucenter-usernum overwords'>会员编号：
-                        <text>{{ member.id }}</text> </view>
-                </view>
-            </view>
-            <view class='ucenter-integralbox'>
-                <navigator class='ucenter-integral-item flex-column' url='/pages/integral/source/source?office=1' open-type="navigate">
-                    <text class='overwords'>{{ member.integral }}</text>
-                    <text>积分</text>
-                </navigator>
-                <navigator class='ucenter-integral-item flex-column {{ member.temporary_integral != "0" ? "click-red-point" : "" }}' url='/pages/integral/temp/temp' open-type="navigate">
-                    <text>{{ member.temporary_integral }}</text>
-                    <text>临时积分</text>
-                </navigator>
-            </view>
-        </view>
-    </view>
+	<view class='ucener-userinfo-wrap' wx:if="{{ userInfo }}">
+		<view class='ucenter-userinfo'>
+			<view class='ucenter-userinfo-box'>
+				<image src='{{ member.headimgurl }}' class='ucenter-userimg'></image>
+				<view class='ucenter-userinfo-words'>
+					<navigator class='user-update-info' url='/packageOther/pages/userinfo/index/index?img={{ member.headimgurl }}&auth={{ member.is_check }}&tel={{ member.tel }}&name={{ member.username || member.nickname }}&pass={{ member.pwd_status }}' open-type="navigate" wx:if="{{ member.tel }}">修改资料</navigator>
+					<navigator class='user-update-info' url='/packageOther/pages/userinfo/edit/edit' open-type="navigate" wx:else="{{ member.tel }}">完善资料</navigator>
+					<view class='ucenter-username overwords felx'>
+						{{ member.username || member.nickname }}
+						<image src='{{ realNames }}' class='user-update-tag' wx:if="{{member.is_check==2&&showAuthor==1&&member.check_degree==2}}"></image>
+					</view>
+					<view class='ucenter-usernum overwords'>会员编号：
+						<text>{{ member.id }}</text> </view>
+				</view>
+			</view>
+			<view class='ucenter-integralbox'>
+				<navigator class='ucenter-integral-item flex-column' url='/pages/integral/source/source?office=1' open-type="navigate">
+					<text class='overwords'>{{ member.integral }}</text>
+					<text>积分</text>
+				</navigator>
+				<navigator class='ucenter-integral-item flex-column {{ member.temporary_integral != "0" ? "click-red-point" : "" }}' url='/pages/integral/temp/temp' open-type="navigate">
+					<text>{{ member.temporary_integral }}</text>
+					<text>临时积分</text>
+				</navigator>
+			</view>
+		</view>
+	</view>
 
-    <view class='ucener-userinfo-wrap' wx:if="{{ !userInfo }}">
-        <view class='ucenter-userinfo'>
-            <view class='ucenter-userinfo-box ucenter-nouserinfo' bindtap='gotoUserauth'>
-                <image src='{{ nouser }}'></image>
-                <text>登录/注册</text>
-            </view>
-            <view class='ucenter-integralbox ucenter-nouserinfo-tips'>
-                点击上方登录/注册按钮可以前往登录页面，登录成功后可解锁小程序全部功能，方便您能更便捷的招工找活。
-            </view>
-        </view>
-    </view>
+	<view class='ucener-userinfo-wrap' wx:if="{{ !userInfo }}">
+		<view class='ucenter-userinfo'>
+			<view class='ucenter-userinfo-box ucenter-nouserinfo' bindtap='gotoUserauth'>
+				<image src='{{ nouser }}'></image>
+				<text>登录/注册</text>
+			</view>
+			<view class='ucenter-integralbox ucenter-nouserinfo-tips'>
+				点击上方登录/注册按钮可以前往登录页面，登录成功后可解锁小程序全部功能，方便您能更便捷的招工找活。
+			</view>
+		</view>
+	</view>
 
 
 </view>
 
 <view class='yupao-common-container'>
 
-    <view class='ucenter-menus-box'>
-        <!-- 新信息提示     -->
-        <!-- <view class="ucenter-hasnoticeinfo" wx:if="{{ member.has_notice_msg.hasNoticeMsg }}" data-url='../../others/message/lists/lists?tel={{ (member.tel == null) ? "" : member.tel }}&name={{ member.username || member.nickname }}' bindtap='downappfun'>
+	<view class='ucenter-menus-box'>
+		<!-- 新信息提示     -->
+		<!-- <view class="ucenter-hasnoticeinfo" wx:if="{{ member.has_notice_msg.hasNoticeMsg }}" data-url='../../others/message/lists/lists?tel={{ (member.tel == null) ? "" : member.tel }}&name={{ member.username || member.nickname }}' bindtap='downappfun'>
             <view class='feedbackmsg'>
                 <image class='feedbackmsg-img' src='{{ feedbackimg }}'></image>
                 <view class="overwords">
@@ -58,139 +58,139 @@
                 <text class="feedback-btn">点击查看</text>
             </view>
         </view> -->
-        <view class="ucenter-hasnoticeinfo">
-            <view class='ucener-theme' data-url='../published/recruit/list' bindtap='valiUserUrl'>
-                <image class="ucener-leftImage" src='{{ ucenterimgs.recruit }}'></image>
-                <view class='ucener-border-b ucener-border'>
-                    <view class="ucener-title">我的招工</view>
-                    <view class="flex-row">
-                        <view class="ucener-detil" wx:if="{{ footerImgs.infoNumber > 0 }}">状态已更新</view>
-                        <image src='{{ rightarrow }}' class="ucener-rightIcon"></image>
-                    </view>
-                </view>
-            </view>
-            <view class='ucener-theme' data-url="/pages/clients-looking-for-work/finding-name-card/findingnamecard" bindtap='valiUserUrl'>
-                <image class="ucener-leftImage" src='{{ ucenterimgs.mycard }}'></image>
-                <view class='ucener-border-b ucener-border'>
-                    <view class="ucener-title">我的找活</view>
-                    <view class="flex-row">
-                        <view class="ucener-detil">{{member.resume_status.resume_tips_string}}</view>
-                        <image src='{{ rightarrow }}' class="ucener-rightIcon"></image>
-                    </view>
-                </view>
-            </view>
-            <view class='ucener-theme' data-url='../published/used/list' bindtap='valiUserUrl'>
-                <image class="ucener-leftImage" src='{{ ucenterimgs.trade }}'></image>
-                <view class='ucener-border-b ucener-border'>
-                    <view class="ucener-title">我的二手交易</view>
-                    <view class="flex-row">
-                        <image src='{{ rightarrow }}' class="ucener-rightIcon"></image>
-                    </view>
-                </view>
-            </view>
-            <view class='ucener-theme' data-url='/pages/information/mymessage/mymessage' bindtap='suggestUserUrl'>
-                <image class="ucener-leftImage" src='{{ ucenterimgs.ucenterMsg }}'></image>
-                <view class='ucener-border-b'>
-                    <view class="ucener-title">我的消息
-                        <text class="masnumber" wx:if="{{ footerImgs.msgsNumber > 0 }}">{{footerImgs.msgsNumber>9?'9+':footerImgs.msgsNumber}}</text>
-                    </view>
-                    <view class="flex-row">
-                        <view class="ucener-detil" wx:if="{{ footerImgs.msgsNumber > 0 }}">有新信息待查看</view>
-                        <image src='{{ rightarrow }}' class="ucener-rightIcon"></image>
-                    </view>
-                </view>
-            </view>
-        </view>
+		<view class="ucenter-hasnoticeinfo">
+			<view class='ucener-theme' data-url='../published/recruit/list' bindtap='valiUserUrl'>
+				<image class="ucener-leftImage" src='{{ ucenterimgs.recruit }}'></image>
+				<view class='ucener-border-b ucener-border'>
+					<view class="ucener-title">我的招工</view>
+					<view class="flex-row">
+						<view class="ucener-detil" wx:if="{{ footerImgs.infoNumber > 0 }}">状态已更新</view>
+						<image src='{{ rightarrow }}' class="ucener-rightIcon"></image>
+					</view>
+				</view>
+			</view>
+			<view class='ucener-theme' data-url="/pages/clients-looking-for-work/finding-name-card/findingnamecard" bindtap='valiUserUrl'>
+				<image class="ucener-leftImage" src='{{ ucenterimgs.mycard }}'></image>
+				<view class='ucener-border-b ucener-border'>
+					<view class="ucener-title">我的找活</view>
+					<view class="flex-row">
+						<view class="ucener-detil">{{member.resume_status.resume_tips_string}}</view>
+						<image src='{{ rightarrow }}' class="ucener-rightIcon"></image>
+					</view>
+				</view>
+			</view>
+			<view class='ucener-theme' data-url='../published/used/list' bindtap='valiUserUrl'>
+				<image class="ucener-leftImage" src='{{ ucenterimgs.trade }}'></image>
+				<view class='ucener-border-b ucener-border'>
+					<view class="ucener-title">我的二手交易</view>
+					<view class="flex-row">
+						<image src='{{ rightarrow }}' class="ucener-rightIcon"></image>
+					</view>
+				</view>
+			</view>
+			<view class='ucener-theme' data-url='/pages/information/mymessage/mymessage' bindtap='suggestUserUrl'>
+				<image class="ucener-leftImage" src='{{ ucenterimgs.ucenterMsg }}'></image>
+				<view class='ucener-border-b'>
+					<view class="ucener-title">我的消息
+						<text class="masnumber" wx:if="{{ footerImgs.msgsNumber > 0 }}">{{footerImgs.msgsNumber>9?'9+':footerImgs.msgsNumber}}</text>
+					</view>
+					<view class="flex-row">
+						<view class="ucener-detil" wx:if="{{ footerImgs.msgsNumber > 0 }}">有新信息待查看</view>
+						<image src='{{ rightarrow }}' class="ucener-rightIcon"></image>
+					</view>
+				</view>
+			</view>
+		</view>
 
-        <view class="ucenter-hasnoticeinfo">
-            <view class='ucener-theme' data-url='../getintegral/getintegral' bindtap='valiUserUrl'>
-                <image class="ucener-leftImage" src='{{ ucenterimgs.getintegral }}'></image>
-                <view class='ucener-border-b ucener-border'>
-                    <view class="ucener-title">获取积分</view>
-                    <view class="flex-row">
-                        <view class="ucener-detil" wx:if="{{ showRecharge }}">去充值</view>
-                        <image src='{{ rightarrow }}' class="ucener-rightIcon"></image>
-                    </view>
-                </view>
-            </view>
-            <view class='ucener-theme' data-url='../static/invite' bindtap='valiUserUrl'>
-                <image class="ucener-leftImage" src='{{ ucenterimgs.invite }}'></image>
-                <view class='ucener-border-b ucener-border'>
-                    <view class="ucener-title">邀请工友</view>
-                    <view class="flex-row">
-                        <view class="ucener-detil">邀请好友得积分</view>
-                        <image src='{{ rightarrow }}' class="ucener-rightIcon"></image>
-                    </view>
-                </view>
-            </view>
-            <view class='ucener-theme' data-url='../integral/expend/expend' bindtap='valiUserUrl'>
-                <image class="ucener-leftImage" src='{{ ucenterimgs.integral }}'></image>
-                <view class='ucener-border-b ucener-border'>
-                    <view class="ucener-title">积分消耗记录
-                    </view>
-                    <view class="flex-row">
-                        <image src='{{ rightarrow }}' class="ucener-rightIcon"></image>
-                    </view>
-                </view>
-            </view>
-            <view class='ucener-theme' data-url='../integral/source/source' bindtap='valiUserUrl'>
-                <image class="ucener-leftImage" src='{{ ucenterimgs.integrallog }}'></image>
-                <view class='ucener-border-b '>
-                    <view class="ucener-title">积分来源记录</view>
-                    <view class="flex-row">
-                        <image src='{{ rightarrow }}' class="ucener-rightIcon"></image>
-                    </view>
-                </view>
-            </view>
-        </view>
+		<view class="ucenter-hasnoticeinfo">
+			<view class='ucener-theme' data-url='../getintegral/getintegral' bindtap='valiUserUrl'>
+				<image class="ucener-leftImage" src='{{ ucenterimgs.getintegral }}'></image>
+				<view class='ucener-border-b ucener-border'>
+					<view class="ucener-title">获取积分</view>
+					<view class="flex-row">
+						<view class="ucener-detil" wx:if="{{ showRecharge }}">去充值</view>
+						<image src='{{ rightarrow }}' class="ucener-rightIcon"></image>
+					</view>
+				</view>
+			</view>
+			<view class='ucener-theme' data-url='../static/invite' bindtap='valiUserUrl'>
+				<image class="ucener-leftImage" src='{{ ucenterimgs.invite }}'></image>
+				<view class='ucener-border-b ucener-border'>
+					<view class="ucener-title">邀请工友</view>
+					<view class="flex-row">
+						<view class="ucener-detil">邀请好友得积分</view>
+						<image src='{{ rightarrow }}' class="ucener-rightIcon"></image>
+					</view>
+				</view>
+			</view>
+			<view class='ucener-theme' data-url='../integral/expend/expend' bindtap='valiUserUrl'>
+				<image class="ucener-leftImage" src='{{ ucenterimgs.integral }}'></image>
+				<view class='ucener-border-b ucener-border'>
+					<view class="ucener-title">积分消耗记录
+					</view>
+					<view class="flex-row">
+						<image src='{{ rightarrow }}' class="ucener-rightIcon"></image>
+					</view>
+				</view>
+			</view>
+			<view class='ucener-theme' data-url='../integral/source/source' bindtap='valiUserUrl'>
+				<image class="ucener-leftImage" src='{{ ucenterimgs.integrallog }}'></image>
+				<view class='ucener-border-b '>
+					<view class="ucener-title">积分来源记录</view>
+					<view class="flex-row">
+						<image src='{{ rightarrow }}' class="ucener-rightIcon"></image>
+					</view>
+				</view>
+			</view>
+		</view>
 
-        <view class="ucenter-hasnoticeinfo">
-            <view class='ucener-theme' wx:if="{{showAuthor}}" data-url='../realname/realname' bindtap='valiUserUrl'>
-                <image class="ucener-leftImage" src='{{ ucenterimgs.realname }}'></image>
-                <view class='ucener-border-b ucener-border'>
-                    <view class="ucener-title">实名认证</view>
-                    <view class="flex-row">
-                        <view class="ucener-detil">{{member.check_state}}</view>
-                        <image src='{{ rightarrow }}' class="ucener-rightIcon"></image>
-                    </view>
-                </view>
-            </view>
-            <view class='ucener-theme' data-url='../collect/info/info' bindtap='valiUserUrl'>
-                <image class="ucener-leftImage" src='{{ ucenterimgs.collect }}'></image>
-                <view class='ucener-border-b'>
-                    <view class="ucener-title">我的收藏</view>
-                    <view class="flex-row">
-                        <image src='{{ rightarrow }}' class="ucener-rightIcon"></image>
-                    </view>
-                </view>
-            </view>
-        </view>
+		<view class="ucenter-hasnoticeinfo">
+			<view class='ucener-theme' wx:if="{{showAuthor}}" data-url='../realname/realname' bindtap='valiUserUrl'>
+				<image class="ucener-leftImage" src='{{ ucenterimgs.realname }}'></image>
+				<view class='ucener-border-b ucener-border'>
+					<view class="ucener-title">实名认证</view>
+					<view class="flex-row">
+						<view class="ucener-detil">{{member.check_state}}</view>
+						<image src='{{ rightarrow }}' class="ucener-rightIcon"></image>
+					</view>
+				</view>
+			</view>
+			<view class='ucener-theme' data-url='../collect/info/info' bindtap='valiUserUrl'>
+				<image class="ucener-leftImage" src='{{ ucenterimgs.collect }}'></image>
+				<view class='ucener-border-b'>
+					<view class="ucener-title">我的收藏</view>
+					<view class="flex-row">
+						<image src='{{ rightarrow }}' class="ucener-rightIcon"></image>
+					</view>
+				</view>
+			</view>
+		</view>
 
-        <view class="ucenter-hasnoticeinfo">
-            <view class='ucener-theme' data-url='/packageOther/pages/others/message/lists/lists' bindtap='suggestUserUrl'>
-                <image class="ucener-leftImage" src='{{ ucenterimgs.feedback }}'></image>
-                <view class='ucener-border-b ucener-border'>
-                    <view class="ucener-title">意见反馈
-                        <text class="msg-dot" wx:if="{{hasNoticeMsg>0}}"></text>
-                    </view>
-                    <view class="flex-row">
-                        <view class="ucener-detil" wx:if="{{hasNoticeMsg>0}}">有最新回复</view>
-                        <image src='{{ rightarrow }}' class="ucener-rightIcon"></image>
-                    </view>
-                </view>
-            </view>
-            <view class='ucener-theme' data-url='/packageOther/pages/helpCenter/helpCenter' bindtap='valiUserUrl'>
-                <image class="ucener-leftImage" src='{{ ucenterimgs.ucenterHelp }}'></image>
-                <view class='ucener-border-b'>
-                    <view class="ucener-title">帮助中心</view>
-                    <view class="flex-row">
-                        <view class="ucener-detil">使用教程</view>
-                        <image src='{{ rightarrow }}' class="ucener-rightIcon"></image>
-                    </view>
-                </view>
-            </view>
-        </view>
-    </view>
+		<view class="ucenter-hasnoticeinfo">
+			<view class='ucener-theme' data-url='/packageOther/pages/others/message/lists/lists' bindtap='suggestUserUrl'>
+				<image class="ucener-leftImage" src='{{ ucenterimgs.feedback }}'></image>
+				<view class='ucener-border-b ucener-border'>
+					<view class="ucener-title">意见反馈
+						<text class="msg-dot" wx:if="{{hasNoticeMsg>0}}"></text>
+					</view>
+					<view class="flex-row">
+						<view class="ucener-detil" wx:if="{{hasNoticeMsg>0}}">有最新回复</view>
+						<image src='{{ rightarrow }}' class="ucener-rightIcon"></image>
+					</view>
+				</view>
+			</view>
+			<view class='ucener-theme' data-url='/packageOther/pages/helpCenter/helpCenter' bindtap='valiUserUrl'>
+				<image class="ucener-leftImage" src='{{ ucenterimgs.ucenterHelp }}'></image>
+				<view class='ucener-border-b'>
+					<view class="ucener-title">帮助中心</view>
+					<view class="flex-row">
+						<view class="ucener-detil">使用教程</view>
+						<image src='{{ rightarrow }}' class="ucener-rightIcon"></image>
+					</view>
+				</view>
+			</view>
+		</view>
+	</view>
 </view>
 
 
