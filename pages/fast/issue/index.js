@@ -23,13 +23,14 @@ Page({
     return false;
   },
   enterContent: function (e) {
+    let phone = this.data.phone
     let u = wx.getStorageSync('userInfo')
     let val = e.detail.value;
     let fastData = wx.getStorageSync('fastData')
     this.setData({
       content: val
     })
-    if (!u) {
+    if (!u || (u && !phone)) {
       if (this.data.isRule) {
         let content = val.replace(/\s+/g, "");
         let _partten = /1[3-9]\d{9}/g;
@@ -190,7 +191,7 @@ Page({
         let tel = mydata.memberInfo.tel || ''
         _this.setData({
           phone:tel,
-          showTel: true
+          showTel: tel?true:false
         })
         wx.setStorageSync('fastData', {
           phone:mydata.memberInfo.tel,
