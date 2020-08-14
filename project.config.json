@@ -24,23 +24,11 @@
 		"showShadowRootInWxmlPanel": false,
 		"checkInvalidKey": true,
 		"checkSiteMap": true,
-<<<<<<< HEAD
-		"uploadWithSourceMap": true,
-=======
->>>>>>> 17256a40a8025d8cf32adc1e9073602f2266a4e7
 		"babelSetting": {
 			"ignore": [],
 			"disablePlugins": [],
 			"outputPath": ""
-<<<<<<< HEAD
-		},
-		"useCompilerModule": false,
-		"userConfirmedUseCompilerModuleSwitch": false,
-		"compileHotReLoad": false,
-		"useIsolateContext": true
-=======
 		}
->>>>>>> 17256a40a8025d8cf32adc1e9073602f2266a4e7
 	},
 	"compileType": "miniprogram",
 	"libVersion": "2.10.4",
