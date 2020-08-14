@@ -202,7 +202,10 @@ Page({
     })
   },
   showdownappaction:function(){
-    this.selectComponent("#downapptips").showaction()
+    wx.navigateTo({
+      url: '/packageOther/pages/download/download-app',
+    })
+    //this.selectComponent("#downapptips").showaction()
   },
   chooseInputCtiy: function (e) {
     this.chooseThisCtiy(e);

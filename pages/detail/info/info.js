@@ -62,7 +62,10 @@ Page({
       showFollow: false
     },
     showdownappaction:function(){
-      this.selectComponent("#downapptips").showaction()
+      wx.navigateTo({
+        url: '/packageOther/pages/download/download-app',
+      })
+      //this.selectComponent("#downapptips").showaction()
     },
     userFollowAccount:function(){
       this.setData({

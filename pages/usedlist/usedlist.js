@@ -73,7 +73,10 @@ Page({
       joingroup: []
     },
     showdownappaction:function(){
-      this.selectComponent("#downapptips").showaction()
+      wx.navigateTo({
+        url: '/packageOther/pages/download/download-app',
+      })
+      //this.selectComponent("#downapptips").showaction()
     },
     stopThisAction: function () {
         return false;

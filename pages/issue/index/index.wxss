@@ -209,7 +209,7 @@ page{
 }
 .issue-form-header{
   position: relative;
-  line-height: 80rpx;
+  line-height: 100rpx;
   font-size: 28rpx;
   border-radius: 5rpx;
   z-index: 2;
@@ -236,7 +236,7 @@ page{
 }
 .issue-upload-item{
   position: relative;
-  width: 33.333%;
+  width: 190rpx;
   height: 190rpx;
   padding: 20rpx 10rpx;
   float: left;
@@ -254,7 +254,7 @@ page{
   width: 35rpx;
   height: 35rpx;
   border-radius: 50%;
-  background: white url(http://cdn.yupao.com/miniprogram/images/mini-del.png) no-repeat;
+  background: white url(http://cdn.yupao.com/miniprogram/images/new-published-close-icon.png) no-repeat;
   background-size: 100% 100%;
   right: 10rpx;
   top: 10rpx;

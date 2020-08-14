@@ -148,7 +148,10 @@ Page({
     })
   },
   showdownappaction:function(){
-    this.selectComponent("#downapptips").showaction() 
+    wx.navigateTo({
+      url: '/packageOther/pages/download/download-app',
+    })
+    //this.selectComponent("#downapptips").showaction() 
   },
   getMapInfo: function (callback) {
     let that = this;

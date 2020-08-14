@@ -14,7 +14,7 @@ Page({
     showPicker: false,
     switch: false,
     upload: app.globalData.apiImgUrl + 'mini-new-publish-upload-img.png',
-    del: app.globalData.apiImgUrl + 'mini-del.png',
+    del: app.globalData.apiImgUrl + 'new-published-close-icon.png',
     addressData: {
       title: '',
       location: '',
