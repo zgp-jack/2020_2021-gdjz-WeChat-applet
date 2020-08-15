@@ -777,6 +777,7 @@ Page({
     }, 1000)
   },
   subscribeToNews: function(mydata) {
+    let id = this.data.infoId
     app.subscribeToNews("recruit",function(){
       wx.showModal({
         title: '恭喜您',
@@ -784,7 +785,13 @@ Page({
         showCancel: false,
         confirmText: '确定',
         success: function (res) {
-          wx.reLaunch({ url: '/pages/published/recruit/list' })
+          if(id){
+            wx.reLaunch({ url: '/pages/published/recruit/list' })
+          }else{
+            wx.navigateTo({
+              url: '/pages/issue/tips/tips',
+            })
+          }
         }
       })
     })
@@ -992,14 +999,8 @@ Page({
             }
             wx.setStorageSync('userJiSuPublishedData', jsdata)
           }
-          if (_this.data.infoId) {
-            //弹出接收通知的提示框
-            _this.subscribeToNews(resdata)
-          }else{
-            wx.navigateTo({
-              url: '/pages/issue/tips/tips',
-            })
-          }
+          _this.subscribeToNews(resdata)
+          
           
         } else if (res.data.errcode == "member_forbid" || res.data.errcode == "login_over_time") {
           wx.showModal({
