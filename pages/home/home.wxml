@@ -73,7 +73,7 @@
         <text>工厂招人</text>
       </view>
     </navigator>
-    <navigator class='index-footer-nav' target="miniProgram" open-type="navigate" app-id="wx0ae31bf0edad4390" path="pages/common/index?source={{ source }}" extra-data="" version="trial">
+    <navigator class='index-footer-nav' target="miniProgram" open-type="navigate" app-id="wx0ae31bf0edad4390" path="pages/common/list?source={{ source }}" extra-data="" >
       <view class='index-industry-item'>
         <image src='{{ industry.jxzl }}'></image>
         <text>机械租赁</text>
