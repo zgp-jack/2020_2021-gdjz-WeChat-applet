@@ -23,7 +23,7 @@
     </view>
     <view class="issue-form-item" wx:if="{{ infoId }}">
       <text>姓名：</text>
-      <input placeholder="请正确输入2~5字中文姓名" value="{{ data.user_name }}"  bindinput="userEnterName" maxlength="5"></input>
+      <input placeholder="请正确输入2~5字中文姓名" value="{{ data.user_name }}"  bindinput="userEnterName" ></input>
     </view>
     <view class="issue-form-item">
       <text>联系电话：</text>

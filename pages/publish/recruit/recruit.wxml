@@ -48,7 +48,7 @@
       <view class='common-publish-item'>
         <view class='common-publish-item-content'>
           <text class='common-publish-words'>联系人</text>
-          <input class='common-publish-input' value='{{ cardInfo.username }}' placeholder='请输入2~5字中文姓名' bindinput='userEnterUsername' maxlength="5"></input>
+          <input class='common-publish-input' value='{{ cardInfo.username }}' placeholder='请输入2~5字中文姓名' bindinput='userEnterUsername'></input>
         </view>
       </view>
       <view class='common-publish-item'>

@@ -894,8 +894,8 @@ Page({
       })
       return false
     }
-    
-    if (!v.regStrNone(_this.data.data.user_name) || !v.chineseReg(_this.data.data.user_name) || (_this.data.data.user_name).trim().length<2) {
+    console.log(_this.data.data.user_name)
+    if (!v.chineseReg(_this.data.data.user_name)) {
       if (infoId) {
         app.showMyTips("请输入2~5字纯中文姓名！");
         return false;
