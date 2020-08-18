@@ -404,6 +404,28 @@
 					"id": -1,
 					"name": "修改绑定手机号",
 					"pathName": "packageOther/pages/userinfo/phone/phone",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": 49,
+					"name": "我的收藏-招工",
+					"pathName": "pages/collect/info/info",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "我的收藏-找活",
+					"pathName": "pages/collect/resume/resume",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "我的招工信息",
+					"pathName": "pages/published/recruit/list",
+					"query": "",
 					"scene": null
 				}
 			]

@@ -343,8 +343,10 @@ Page({
     app.jumpThisLink(e);
   },
   goPublish:function () {
+    let publishMethod = app.globalData.publish.loginWay
+    let url = publishMethod == "fast_add_job" ? '/pages/fast/issue/index' : '/pages/issue/index/index'
     wx.navigateTo({
-      url: '/pages/findingworkinglist/findingworkinglist',
+      url: url
     })
   },
   /**
