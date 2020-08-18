@@ -6,12 +6,11 @@ App({
 
   },
   globalData: {
-    fastToken: "",
     joingroup: false,
     copywechat: '',
     callphone: '',
     procity: 0,
-    version: "1.0.2",
+    version: "1.0.3",
     complaincontent: '请填写5~100字，必须含有汉字。（恶意投诉会被封号，请谨慎投诉！）',
     areaIs: false,
     topshow: false,
@@ -42,8 +41,8 @@ App({
     commonShareImg: "http://cdn.yupao.com/miniprogram/images/minishare.png?t=" + new Date().getTime(),
     commonDownloadApp: "http://cdn.yupao.com/miniprogram/images/download.png?t=" + new Date().getTime(),
     commonJixieAd: "http://cdn.yupao.com/miniprogram/images/list-ad-newjixie.png?t=" + new Date().getTime(),
-    apiRequestUrl: "http://miniapi.kkbbi.com/",
-    // apiRequestUrl: "https://miniapi.zhaogong.vrtbbs.com/",
+    // apiRequestUrl: "http://miniapi.kkbbi.com/",
+    apiRequestUrl: "https://miniapi.zhaogong.vrtbbs.com/",
     // apiRequestUrl: "https://newyupaomini.54xiaoshuo.com/",
     apiUploadImg: "https://newyupaomini.54xiaoshuo.com/index/upload/",
     apiUploadImgphoto: "https://newyupaomini.54xiaoshuo.com/index/authid-card/",
@@ -84,24 +83,25 @@ App({
       loginAfter: false,
       logoutWay: "",
       loginWay: "",
-      userPhone:""
+      userPhone: ""
     },
     //极速发布点击所需工种后是否根据招工详情自动匹配，点击所属工种后不再匹配
-    isRuleClass:false,
+    isRuleClass: false,
     //首次从未授权状态到授权状态读取用户信息的手机号
-    isRedPhone:true
+    isRedPhone: true,
+    fastToken: "",
   },
   //是否为极速发布与快速发布请求,快速发布与极速发布跳转
   initJobView: function () {
     let userInfo = wx.getStorageSync("userInfo");
     let that = this
-    if(userInfo){
+    if (userInfo) {
       console.log("login")
       let flag = JSON.parse(JSON.stringify(that.globalData.publish))
-      if(!flag.loginAfter){
+      if (!flag.loginAfter) {
         that.appRequestAction({
           url: 'index/get-job-view/',
-          success(res){
+          success(res) {
             let publishMethod = res.data.add_job_type
             that.globalData.publish.loginWay = publishMethod
             that.globalData.publish.loginAfter = true
@@ -110,26 +110,26 @@ App({
               url: url
             })
           },
-          fail:function(){
+          fail: function () {
             wx.navigateTo({
               url: '/pages/issue/index/index'
             })
           }
-       })
-      }else{
+        })
+      } else {
         let way = that.globalData.publish.loginWay
         let url = way == "fast_add_job" ? '/pages/fast/issue/index' : '/pages/issue/index/index'
         wx.navigateTo({
           url: url
         })
       }
-    }else{
+    } else {
       console.log("loginout")
       let flag = JSON.parse(JSON.stringify(that.globalData.publish))
-      if(!flag.loginBefore){
+      if (!flag.loginBefore) {
         that.appRequestAction({
           url: 'index/get-job-view/',
-          success(res){
+          success(res) {
             let publishMethod = res.data.add_job_type
             that.globalData.publish.logoutWay = publishMethod
             that.globalData.publish.loginBefore = true
@@ -138,13 +138,13 @@ App({
               url: url
             })
           },
-          fail:function(){
+          fail: function () {
             wx.navigateTo({
               url: '/pages/issue/index/index'
             })
           }
-       })
-      }else{
+        })
+      } else {
         let way = this.globalData.publish.logoutWay
         let url = way == "fast_add_job" ? '/pages/fast/issue/index' : '/pages/issue/index/index'
         wx.navigateTo({

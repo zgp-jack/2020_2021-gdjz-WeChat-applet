@@ -15,8 +15,11 @@ Page({
         source:0,
     },
     userEnterPhone:function(e){
+        let value = e.detail.value
+        var partten = /^\d{1,11}$/;
+        let phone = value.match(partten)
         this.setData({
-            phone: e.detail.value
+            phone: phone
         })
     },
     userEnterCode:function(e){

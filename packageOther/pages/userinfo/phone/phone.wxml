@@ -3,7 +3,7 @@
         <view class='common-publish-item'>
             <view class='common-publish-item-content'>
                 <text class='common-publish-words'>手机号</text>
-                <input class='common-publish-input' value='{{ phone }}' placeholder='请输入您的手机号' bindinput='userEnterPhone'></input>
+                <input class='common-publish-input' value='{{ phone }}' placeholder='请输入您的手机号' bindinput='userEnterPhone' maxlength="11"></input>
             </view>
         </view> 
         <view class='common-publish-item'>
