@@ -603,8 +603,14 @@ Page({
     let classifyids = this.data.classifies
     //所有工种数组长度
     let len = classifyids.length
-    //如果既没有选择工种也没有匹配工种那么就不需要循环统计匹配工种num
-    if (!ruleLen) return
+    //如果既没有选择工种也没有匹配工种那么就将num置为0
+    if (!ruleLen) {
+      classifyids.forEach(function(item){
+        if (item.num) {
+          item.num = 0
+        }
+      })
+    }
     //记录选择或者详情匹配工种的数量
     for (let i = 0; i < len; i++) {
       let data = classifyids[i].children
@@ -955,7 +961,7 @@ Page({
       ...data,
       adcode: addressData.adcode,
       location: addressData.location,
-      address: addressData.title + '@@@@@@' + addressData.district,
+      address: addressData.title + '@@@@@' + addressData.district,
       classifies: ids,
       images: imgs,
       infoId: infoId,
