@@ -10,11 +10,17 @@ Page({
    * 页面的初始数据
    */
   data: {
+    areaId:"",
     id:0,
     areapicker: [],
     index: [0,0],
     mindex: [0,0],
-    areatext: '',
+    addressData: {
+      title: '',
+      location: '',
+      adcode: '',
+      district: ''
+    },
     token: '',
     userInfo:{},
     imageUrl: app.globalData.apiImgUrl +"new-publish-title-t-icon.png"
@@ -29,7 +35,6 @@ Page({
     //本地地理位置信息与所有省份信息相同对应的allProvince的index
     let index = allProvince.findIndex(item => item.id == province.pid)
     //本地地理位置信息具体信息
-    console.log("index",index)
       let item = allProvince[index]
     //记录本地位置信息到data中
       this.setData({
@@ -396,6 +401,8 @@ Page({
   },
   //招工发布
   sureAreaAction:function(e){
+      console.log("areaId",this.data.areaId)
+      return
       let { token,id } = this.data;
       if(!id){
         wx.showModal({
@@ -406,6 +413,66 @@ Page({
         return
       }
   },
+  //点击选择招工发布地址都地址详情界面
+  showWorkArea: function () {
+    wx.navigateTo({
+      url: '/pages/fast/detailarea/detailarea?showfor=showfor&showmap=showmap'
+    })
+  },
+  //点击地址详情页的详细地址设置当前页面的地址栏的地址信息
+  userSetAreaInfo: function () {
+    let val = this.data.addressData
+    this.setEnterInfo('area', val)
+  },
+  //初始化位置信息
+  initArea:function () {
+  //获取地理定位的位置缓存信息  
+    let gpsPorvince = wx.getStorageSync('gpsPorvince')
+  //获取区域数组的北京数据
+    let defaultPosition = areas.getAreaArr[1]
+  //获取缓存的fastData数据
+    let fastData = wx.getStorageSync('fastData')
+    let defaultname = gpsPorvince?gpsPorvince:defaultPosition
+    wx.setStorageSync('defaultname', defaultname)
+    let locationHistory = wx.getStorageSync('locationHistory')
+    if (locationHistory) {
+      locationHistory.unshift(defaultname)
+      wx.setStorageSync('locationHistory', locationHistory)
+    } else {
+      let locationHistory = []
+      locationHistory.unshift(defaultname)
+      wx.setStorageSync('locationHistory', locationHistory)
+    }
+    if (fastData.area) {
+      this.setData({
+        addressData: fastData.area
+      })
+    }
+    if (fastData.defaultname) {
+      wx.setStorageSync('defaultname', fastData.defaultname)//标记
+      let locationHistory = wx.getStorageSync('locationHistory')
+      if (locationHistory) {
+        locationHistory.unshift(fastData.defaultname)
+        wx.setStorageSync('locationHistory', locationHistory)
+      } else {
+        let locationHistory = []
+        locationHistory.unshift(fastData.defaultname)
+        wx.setStorageSync('locationHistory', locationHistory)
+      }
+    }
+  },
+  // 设置缓存保留已填写信息
+  setEnterInfo: function (name, data) {
+    let key = 'fastData'
+    let fastData = wx.getStorageSync(key)
+    if (fastData) {
+      fastData[name] = data
+    } else {
+      fastData = {}
+      fastData[name] = data
+    }
+    wx.setStorageSync(key, fastData)
+  },
   /**
    * 生命周期函数--监听页面加载
    */
@@ -414,6 +481,8 @@ Page({
       token: options.token
     })
     this.initAreaData()
+    //初始化用户位置信息
+    this.initArea()
   },
 
   /**
