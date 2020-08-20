@@ -187,13 +187,8 @@ Page({
       })
     this.closeArea();
     if (gpsPorvince.id == id) {
-      if (locationHistory) {
-        console.log("locationHistory111111")
-        locationHistory.unshift(mydata)
-        wx.setStorageSync('locationHistory', locationHistory)
-      }else {
-        locationHistory = []
-        locationHistory.unshift(mydata)
+      if (!locationHistory) {
+        locationHistory = [mydata]
         wx.setStorageSync('locationHistory', locationHistory)
       }
     }else{
