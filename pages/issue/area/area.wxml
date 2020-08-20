@@ -62,8 +62,8 @@ setAddressData -->
         <view class='index-area-item' wx:if="{{ gpsOrientation || locationHistory }}">
             <text class='area-header-words'>当前定位城市/最近访问</text>
             <view class='area-body-content clearfix'>
-              <view class="gpsposi"  wx:if="{{ gpsOrientation }}"><view class='overwords' data-id="{{ gpsOrientation.id }}" data-area="{{ gpsOrientation.name }}" data-pname="{{ gpsOrientation.ad_name }}" bindtap='chooseThisCtiy'><image src="{{ gpsposi }}"></image>{{ gpsOrientation.name }}</view></view>
-                <view wx:for="{{ locationHistory }}" wx:key="{{ index }}"  wx:if="{{ gpsOrientation ? index < 2 : true }}"><text class='overwords' data-id="{{ item.id }}" data-area="{{ item.name }}"  data-pname="{{ item.ad_name || item.name  }}" bindtap='chooseThisCtiy'>{{ item.name }}</text></view>
+              <view class="gpsposi"  wx:if="{{ gpsOrientation }}"><view class='overwords' data-id="{{ gpsOrientation.id }}" data-area="{{ gpsOrientation.name }}" data-pname="{{ gpsOrientation.ad_name }}"  data-pid="{{gpsOrientation.pid}} "bindtap='chooseThisCtiy'><image src="{{ gpsposi }}"></image>{{ gpsOrientation.name }}</view></view>
+                <view wx:for="{{ locationHistory }}" wx:key="{{ index }}"  wx:if="{{ gpsOrientation ? index < 2 : true }}"><text class='overwords' data-id="{{ item.id }}" data-area="{{ item.name }}"  data-pname="{{ item.ad_name || item.name  }}" data-pid = "{{ item.pid }}" bindtap='chooseThisCtiy'>{{ item.name }}</text></view>
             </view>
         </view>
         <view class='index-area-item' wx:for="{{ areadata }}" wx:key="{{ index }}"  wx:for-item="areaItem">
