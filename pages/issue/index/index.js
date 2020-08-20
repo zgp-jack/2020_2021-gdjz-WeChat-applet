@@ -292,15 +292,12 @@ Page({
               })
             }
             wx.setStorageSync('defaultname', mydata.default_search_name)//标记
-            let locationHistory = wx.getStorageSync('locationHistory')
-            if (locationHistory) {
-              locationHistory.unshift(mydata.default_search_name)
-              wx.setStorageSync('locationHistory', locationHistory)
-            } else {
-              let locationHistory = []
-              locationHistory.unshift(mydata.default_search_name)
-              wx.setStorageSync('locationHistory', locationHistory)
-            }
+            let id = mydata.default_search_name.id;
+            let name = mydata.default_search_name.name;
+            let pid = parseInt(mydata.default_search_name.pid);
+            let pname = mydata.default_search_name.pname || "";
+            let positonData = { "name": name, "id": id, "ad_name": pname, "pid": pid };
+            app.setStorageAction(id, positonData, true)
             _this.initSelectedClassifies()
             _this.countWorkNum()
             _this.getWorkText()
@@ -312,15 +309,12 @@ Page({
             if(!jiSuData){
               let defaultname = gpsPorvince?gpsPorvince:defaultPosition
               wx.setStorageSync('defaultname', defaultname)
-              let locationHistory = wx.getStorageSync('locationHistory')
-              if (locationHistory) {
-                locationHistory.unshift(defaultname)
-                wx.setStorageSync('locationHistory', locationHistory)
-              } else {
-                let locationHistory = []
-                locationHistory.unshift(defaultname)
-                wx.setStorageSync('locationHistory', locationHistory)
-              }
+              let id = defaultname.id;
+              let name = defaultname.name;
+              let pid = parseInt(defaultname.pid);
+              let pname = defaultname.ad_name || "";
+              let positonData = { "name": name, "id": id, "ad_name": pname, "pid": pid };
+              app.setStorageAction(id, positonData, true)
               _this.initChildWorkType()
               return false;
             } else {
@@ -365,18 +359,15 @@ Page({
               }
               if (jiSuData.defaultname) {
                 wx.setStorageSync('defaultname', jiSuData.defaultname)//标记
-                
-                let locationHistory = wx.getStorageSync('locationHistory')
-                if (locationHistory) {
-                  locationHistory.unshift(jiSuData.defaultname)
-                  wx.setStorageSync('locationHistory', locationHistory)
-                } else {
-                  let locationHistory = []
-                  locationHistory.unshift(jiSuData.defaultname)
-                  wx.setStorageSync('locationHistory', locationHistory)
+                  let id = jiSuData.defaultname.id;
+                  let name = jiSuData.defaultname.name;
+                  let pid = parseInt(jiSuData.defaultname.pid);
+                  let pname = jiSuData.defaultname.ad_name || "";
+                  let positonData = { "name": name, "id": id, "ad_name": pname, "pid": pid };
+                  app.setStorageAction(id, positonData, true)
                 }
               }
-            }
+            // }
             
             _this.setData({
               userClassifyids: jiSuData.userClassifyids || [],
@@ -833,9 +824,6 @@ Page({
       user_mobile:_this.data.data.user_mobile,
       imgs:imags,
     }
-    // console.log(dataJson)
-    // console.log(JSON.stringify(dataJson))
-    
     //如果是修改界面再没有更改数据的情况下不能保存
     if (_this.data.infoId) {
       if (_this.data.reason != "0") {
