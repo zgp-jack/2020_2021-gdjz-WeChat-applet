@@ -544,6 +544,20 @@ Page({
     let showmap = this.data.showmap;
     
     if (gpsloc && isGpsPorvince) {
+      let locationHistory = wx.getStorageSync('locationHistory')
+      let id = gpsloc.id;
+      let name = gpsloc.name;
+      let pid = parseInt(gpsloc.pid);
+      let pname = gpsloc.ad_name || "";
+      let positonData = { "name": name, "id": id, "ad_name": pname, "pid": pid };
+      if (locationHistory) {
+        locationHistory.unshift(positonData)
+        wx.setStorageSync('locationHistory', locationHistory)
+      }else {
+        locationHistory = []
+        locationHistory.unshift(positonData)
+        wx.setStorageSync('locationHistory', locationHistory)
+      }
       this.setData({areaText:gpsloc.name, keyAutoVal: gpsloc.name + "市", isGpsPorvince:false})
     }else if (defaultname && showfor == "showfor"){
       this.setData({ areaText: defaultname.name, keyAutoVal: defaultname.name + "市" })
