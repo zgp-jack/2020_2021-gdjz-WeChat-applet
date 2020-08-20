@@ -168,6 +168,9 @@ Page({
     }, 10)
   },
   chooseThisCtiy: function (e) {
+    let gpsPorvince = wx.getStorageSync('gpsPorvince')
+    let locationHistory = wx.getStorageSync('locationHistory')
+
     let _this = this;
     let id = e.currentTarget.dataset.id;
     let area = e.currentTarget.dataset.area;
@@ -183,7 +186,19 @@ Page({
       isHistory:false
       })
     this.closeArea();
-    app.setStorageAction(id, mydata, true)
+    if (gpsPorvince.id == id) {
+      if (locationHistory) {
+        console.log("locationHistory111111")
+        locationHistory.unshift(mydata)
+        wx.setStorageSync('locationHistory', locationHistory)
+      }else {
+        locationHistory = []
+        locationHistory.unshift(mydata)
+        wx.setStorageSync('locationHistory', locationHistory)
+      }
+    }else{
+      app.setStorageAction(id, mydata, true)
+    }
     let prevPage = app.getPrevPage();
     prevPage.setData({ 
       areaId: parseInt(id), areaText: area, showHisTitle: false, keyAutoVal: pname, addressText: ""
