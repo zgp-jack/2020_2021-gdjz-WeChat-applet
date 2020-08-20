@@ -424,15 +424,13 @@ Page({
         areaText:name, 
         keyAutoVal: pname + "市", 
         areaId:parseInt(id), 
-        pid: parseInt(pid)
+        pid: parseInt(pid),
+        isHistory:false
       })
       app.setStorageAction(id, positonData, true)
       if (defaultname) {
         wx.setStorageSync('defaultname', positonData)
       }
-      this.setData({
-        isHistory:false
-      })
     }
     let id = _this.data.areaId;
     let name = _this.data.areaText;
