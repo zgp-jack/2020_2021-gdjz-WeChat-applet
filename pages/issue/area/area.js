@@ -408,8 +408,8 @@ Page({
   },
   setAddressData: function (e) {
     let _this = this;
-    let history = this.data.isHistory
-    let infoId = this.data.infoId
+    let history = _this.data.isHistory
+    let infoId = _this.data.infoId
     if (history) {
       let index = e.currentTarget.dataset.index
       let defaultname = wx.getStorageSync('defaultname')
@@ -420,7 +420,7 @@ Page({
       let pid = parseInt(historyDefaultname.pid);
       let pname = historyDefaultname.ad_name || "";
       let positonData = { "name": name, "id": id, "ad_name": pname, "pid": pid };
-      this.setData({
+      _this.setData({
         areaText:name, 
         keyAutoVal: pname + "市", 
         areaId:parseInt(id), 
