@@ -2,7 +2,7 @@
   <view class="issue-textarea-box">
     <textarea 
       class="issue-textarea" 
-      placeholder="请粘贴或输入您要发布的招工信息（如：四川成都找木工，联系电话：18349296434）" 
+      placeholder="请粘贴或输入您要发布的招工信息" 
       bindinput="enterContent"
       bindblur="contentBlur"
       value="{{ content }}"
