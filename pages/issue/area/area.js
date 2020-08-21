@@ -30,6 +30,7 @@ Page({
     clearinput: "../../../images/clear-input.png",
     areaText: "北京",
     areaId: 2,
+    pid: 1,
     keyAutoVal: "北京市",
     showMaplist: true,
     allAreaLists: [],
@@ -42,7 +43,8 @@ Page({
     infoId:"",
     showfor:"noshowfor",
     showmap:"noshowmap",
-    isHistory:false
+    isHistory:false,
+    isGpsPorvince: false
   },
   chooseInputCtiy: function (e) { 
     this.chooseThisCtiy(e);
@@ -179,6 +181,7 @@ Page({
       showHisTitle: false,
       keyAutoVal: pname, 
       addressText: "",
+      pid: pid,
       isHistory:false
       })
     this.closeArea();
@@ -336,10 +339,13 @@ Page({
                         })
                         //再次授权，调用getLocationt的API
                         that.userLocFun()
+                        that.setData({
+                          isGpsPorvince:true
+                        })
                         // let gpsOrientation = wx.getStorageSync('gpsOrientation')
                         // wx.setStorageSync('defaultname', gpsOrientation)
-                        let gpsPorvince =wx.getStorageSync('gpsPorvince')
-                        wx.setStorageSync('defaultname', gpsPorvince)
+                        // let gpsPorvince =wx.getStorageSync('gpsPorvince')
+                        // wx.setStorageSync('defaultname', gpsPorvince)
                       } else {
                         wx.showToast({
                           title: '授权失败',
@@ -385,23 +391,15 @@ Page({
     console.log(e)
     let _this = this;
     let val = e.detail.value;
-    this.setData({ addressText: val }) //, showMaplist: false
-
+    this.setData({ 
+      addressText: val,
+      isHistory:false
+     }) 
     let keywords = this.data.keyAutoVal + this.data.addressText;
     this.getKeywordsInputs(keywords, function (data) {
       _this.setData({ addressList: data,showHisTitle:false })
       if (!data.length) _this.setData({ addressTips:"暂无数据" })
     });
-    // if (val){
-    //   let keywords = this.data.keyAutoVal + this.data.addressText;
-    //   this.getKeywordsInputs(keywords,function(data){
-    //     _this.setData({ historyCityLists: data })
-    //   });
-    //   this.setData({ isKeyvalActive: true })
-    // }else{
-    //   this.initHistoryCityList()
-    //   //this.setData({ showMaplist: true,isKeyvalActive:true })
-    // }
   },
   saveRecruitInfo:function(info){
     let _this = this;
@@ -409,21 +407,41 @@ Page({
     
   },
   setAddressData: function (e) {
-    let history = this.data.isHistory
-    let infoId = this.data.infoId
+    let _this = this;
+    let history = _this.data.isHistory
+    let infoId = _this.data.infoId
     if (history) {
       let index = e.currentTarget.dataset.index
+      let defaultname = wx.getStorageSync('defaultname')
       let historyCityLists = wx.getStorageSync('historyCityLists')
       let historyDefaultname = historyCityLists[index].defaultname
-      let locationHistory = wx.getStorageSync("locationHistory")
-      locationHistory.unshift(historyDefaultname)
-      wx.setStorageSync('locationHistory', locationHistory)
-      this.setData({
+      let id = historyDefaultname.id;
+      let name = historyDefaultname.name;
+      let pid = parseInt(historyDefaultname.pid);
+      let pname = historyDefaultname.ad_name || "";
+      let positonData = { "name": name, "id": id, "ad_name": pname, "pid": pid };
+      _this.setData({
+        areaText:name, 
+        keyAutoVal: pname + "市", 
+        areaId:parseInt(id), 
+        pid: parseInt(pid),
         isHistory:false
       })
+      app.setStorageAction(id, positonData, true)
+      if (defaultname) {
+        wx.setStorageSync('defaultname', positonData)
+      }
     }
-    let locationHistory = wx.getStorageSync("locationHistory")
-    let defaultname = locationHistory[0]
+    let id = _this.data.areaId;
+    let name = _this.data.areaText;
+    let pid = parseInt(_this.data.pid);
+    let adName = _this.data.keyAutoVal;
+    let defaultname = {
+      "name": name, 
+      "id": id, 
+      "ad_name": adName, 
+      "pid": pid 
+    }
     wx.setStorageSync('defaultname', defaultname)
     if (!infoId) {
       let jiSuData = wx.getStorageSync('jiSuData')
@@ -438,7 +456,6 @@ Page({
     }
     
     
-    let _this = this;
     let area = this.data.areaText;
     let pname = this.data.keyAutoVal;
     let areaId = parseInt(this.data.areaId);
@@ -468,9 +485,7 @@ Page({
       })
 
       prevPage.userSetAreaInfo()
-
       _this.saveRecruitInfo(hl);
-
       _this.detailHistoryCities(hl);
       _this.initHistoryCityList();
       wx.navigateBack({ delta: 1 })
@@ -504,8 +519,6 @@ Page({
     let infoId = this.data.infoId
     //获取招工填写数据缓存
     let jiSuData = wx.getStorageSync('jiSuData')
-    //获取缓存历史城市信息
-    let locationHistory = wx.getStorageSync('locationHistory')
     //获取缓存的历史记录信息
     let historyCityLists = wx.getStorageSync('historyCityLists')
     //获取缓存中默认的地理位置信息
@@ -515,13 +528,21 @@ Page({
     //获取gps定位的城市
     let gpsPorvince = wx.getStorageSync("gpsPorvince");
     let gpsloc = wx.getStorageSync("gpsPorvince");
+    //是否获得位置授权
+    let isGpsPorvince = this.data.isGpsPorvince
     //如果缓存历史城市列表与最后选择城市都不存在，表明是首次进入地区选择
     
     if (!historyCityLists && !lastCtiy) {
       //如果进入城市选择获得位置信息授权将位置信息保存到locationHistory、defaultname、jisuData中
       if (gpsPorvince) {
-        locationHistory.unshift(gpsPorvince)
-        wx.setStorageSync('locationHistory', locationHistory)
+        let id = gpsPorvince.id;
+        let name = gpsPorvince.name;
+        let pid = parseInt(gpsPorvince.pid);
+        let pname = gpsPorvince.ad_name || "";
+        let positonData = { "name": name, "id": id, "ad_name": pname, "pid": pid };
+        app.setStorageAction(id, positonData, true)
+        // locationHistory.unshift(gpsPorvince)
+        // wx.setStorageSync('locationHistory', locationHistory)
         wx.setStorageSync('defaultname', gpsPorvince)
         if (jiSuData) {
           jiSuData["defaultname"] = gpsPorvince
@@ -533,16 +554,17 @@ Page({
       }
     }
     
+    
     this.setData({ gpsOrientation: gpsPorvince });
     let showfor = this.data.showfor;
     let showmap = this.data.showmap;
-
-    if (defaultname && showfor == "showfor"){
+    
+    if (gpsloc && isGpsPorvince) {
+      this.setData({areaText:gpsloc.name, keyAutoVal: gpsloc.name + "市", isGpsPorvince:false ,areaId:parseInt(gpsloc.id), pid: parseInt(gpsloc.pid)})
+    }else if (defaultname && showfor == "showfor"){
       this.setData({ areaText: defaultname.name, keyAutoVal: defaultname.name + "市" })
     } else if (lastCtiy && lastCtiy.hasOwnProperty('name') && !infoId ||showfor == "noshowfor" ) {
       this.setData({ areaText: lastCtiy.name , keyAutoVal: lastCtiy.ad_name })
-    } else if (gpsloc) {
-      this.setData({ areaText: gpsloc.name, keyAutoVal: gpsloc.name + "市" })
     }
   },
   initInputList: function () {

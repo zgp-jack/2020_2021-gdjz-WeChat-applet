@@ -10,164 +10,28 @@ Page({
    * 页面的初始数据
    */
   data: {
-    areaId:"",
-    id:0,
-    areapicker: [],
-    index: [0,0],
-    mindex: [0,0],
+    areaId:0,
+    //选择具体地理位置信息详细数据
     addressData: {
+      //地址大标题
       title: '',
+      //经纬度
       location: '',
       adcode: '',
+      //详细地理位置信息
       district: ''
     },
+    //保存onload传过来的token
     token: '',
+    //用户信息
     userInfo:{},
     imageUrl: app.globalData.apiImgUrl +"new-publish-title-t-icon.png"
   },
-  initLocArea:function(){
-    //获取手机本地缓存地理位置信息
-    let province = wx.getStorageSync('gpsPorvince')
-    //获取所有省的信息
-    let allProvince = this.getProvinceLists()
-    //判断如果有本地缓存地理位置信息
-    if(province){
-    //本地地理位置信息与所有省份信息相同对应的allProvince的index
-    let index = allProvince.findIndex(item => item.id == province.pid)
-    //本地地理位置信息具体信息
-      let item = allProvince[index]
-    //记录本地位置信息到data中
-      this.setData({
-        id: province.id,
-        areatext: item.name + '-' + province.name,
-        index:[index,0],
-        "mindex[0]":index
-      })
-      //获取所有城市信息
-      let cities = this.getCityLists()
-    //从城市列表中匹配与本地位置对应的index
-      let ci = cities.findIndex(item=>item.id == province.id)
-      this.setData({
-        "index[1]": ci,
-        "mindex[1]": ci
-      })
-      let areapicker = [allProvince,cities]
-      this.setData({
-        areapicker
-      })
-    }else{
-      //获取所有城市信息
-      let cities = this.getCityLists()
-      let areapicker = [allProvince,cities]
-      this.setData({
-        areapicker
-      })
-    }
-  },
-  initAreaData:function(){
-    let _this = this;
-    let province = wx.getStorageSync('gpsOrientation')
-    if(province){
-      this.initLocArea()
-    }else{
-      amapFun.getRegeo({
-        success: function (data) {
-          let gpsLocation = {
-            province: data[0].regeocodeData.addressComponent.province,
-            city: data[0].regeocodeData.addressComponent.city,
-            adcode: data[0].regeocodeData.addressComponent.adcode,
-            citycode: data[0].regeocodeData.addressComponent.citycode
-          }
-          areas.getProviceItem(gpsLocation.province, gpsLocation.city)
-          _this.initLocArea()
-        },
-        fail:function(){
-          _this.setData({
-            id: 0,
-            areatext: ""
-          })
-          _this.initLocArea();
-        }
-      })
-    }
-  },
-  getProvinceLists:function(){
-    let len = area.length
-    //省信息数组
-    let arr = []
-    for(let i = 0;i< len; i++){
-      let data = area[i]
-      arr.push({id:data.id,pid:data.pid,name:data.name})
-    }
-    return arr;
-  },
-  getCityLists:function(){
-    //获取省的信息
-    let index = this.data.mindex[0]
-    let arr = []
-    //获取省
-    let data = area[index]
-    //是否是直辖市
-    let has = data.has_children
-    if(has){
-    //如果不是直辖市
-    //市长度
-      let len = data.children.length
-      for(let i = 1; i< len;i++){
-    //获取每一个市的具体信息
-        let cdata = data.children[i]
-    //市的数据保存到arr
-        arr.push({id:cdata.id,pid:cdata.pid,name:cdata.name})
-      }
-    }else{
-    //是直辖市，直接存储直辖市信息
-      arr.push({id:data.id,pid:data.pid,name:data.name})
-    }
-    return arr;
-  },
-  getAreaText:function(){
-    let index = this.data.index
-    let areapicker = this.data.areapicker
-    let ptext = areapicker[0][index[0]].name
-    let ctext = areapicker[1][index[1]].name
-    let id = areapicker[1][index[1]].id
-    let text = ''
-    if(ptext == ctext){
-      text = ptext
-    }else{
-      text = ptext + '-' + ctext
-    }
-    this.setData({
-      areatext: text,
-      id:id
-    })
-  },
-  bindMultiPickerColumnChange:function(e){
-    let val = e.detail.value
-    if(e.detail.column === 0){
-      this.setData({
-        "mindex[0]": val
-      })
-      let cities = this.getCityLists();
-      let data = this.data.areapicker
-      data[1] = cities
-      this.setData({
-        "areapicker": data
-      })
-    }
-  },
-  bindPickerChange:function(e){
-    let data = e.detail.value
-    let mydata = this.data.areapicker[1]
-    let id = mydata[data[1]].id
-    this.setData({
-      id: id,
-      index: data
-    })
-    this.getAreaText()
-  },
   mini_user: function(session_key){
-    let { token,id } = this.data;
+    let { token,areaId } = this.data;
+    let location = this.data.addressData.location
+    let adName = this.data.addressData.title
+    let address = this.data.addressData.district
     var that = this
     wx.getSetting({
       success: (res) => {
@@ -179,8 +43,6 @@ Page({
             },
             success: (res) => {
               /**获取encryptdata **/
-              console.log("我打印了1")
-              
               that.api_user(session_key,(res) =>{
                 let uinfo = res.data;
                 if (uinfo.errcode == "ok") {
@@ -202,7 +64,10 @@ Page({
                     way: "POST",
                     params: {
                       token: token,
-                      area_id: id
+                      area_id: areaId,
+                      location: location,
+                      ad_name: adName,
+                      address: address
                     },
                     success: function (res) {
                       let mydata = res.data;
@@ -256,7 +121,10 @@ Page({
                 way: "POST",
                 params: {
                   token: token,
-                  area_id: id
+                  area_id: areaId,
+                  location: location,
+                  ad_name: adName,
+                  address: address
                 },
                 success: function (res) {
                   let mydata = res.data;
@@ -343,7 +211,10 @@ Page({
   },
   //未登录状态下，确定地址后获取用户信息和授权
   bindGetUserInfo:function (e) {
-    let { token,id } = this.data;
+    let { token,areaId } = this.data;
+    let location = this.data.addressData.location
+    let adName = this.data.addressData.title
+    let address = this.data.addressData.district
     let that = this;
     if (e.detail.userInfo) {
       wx.showToast({
@@ -385,7 +256,10 @@ Page({
         way: "POST",
         params: { 
           token: token,
-          area_id: id
+          area_id: areaId,
+          location: location,
+          ad_name: adName,
+          address: address
         },
         success: function (res) {
           let mydata = res.data;
@@ -399,12 +273,11 @@ Page({
         })
     }
   },
-  //招工发布
+  //确定地址招工发布
   sureAreaAction:function(e){
       console.log("areaId",this.data.areaId)
-      return
-      let { token,id } = this.data;
-      if(!id){
+      let { token,areaId } = this.data;
+      if(!areaId){
         wx.showModal({
           title: '提示',
           content: "请选择招工所在地。",
@@ -419,48 +292,6 @@ Page({
       url: '/pages/fast/detailarea/detailarea?showfor=showfor&showmap=showmap'
     })
   },
-  //点击地址详情页的详细地址设置当前页面的地址栏的地址信息
-  userSetAreaInfo: function () {
-    let val = this.data.addressData
-    this.setEnterInfo('area', val)
-  },
-  //初始化位置信息
-  initArea:function () {
-  //获取地理定位的位置缓存信息  
-    let gpsPorvince = wx.getStorageSync('gpsPorvince')
-  //获取区域数组的北京数据
-    let defaultPosition = areas.getAreaArr[1]
-  //获取缓存的fastData数据
-    let fastData = wx.getStorageSync('fastData')
-    let defaultname = gpsPorvince?gpsPorvince:defaultPosition
-    wx.setStorageSync('defaultname', defaultname)
-    let locationHistory = wx.getStorageSync('locationHistory')
-    if (locationHistory) {
-      locationHistory.unshift(defaultname)
-      wx.setStorageSync('locationHistory', locationHistory)
-    } else {
-      let locationHistory = []
-      locationHistory.unshift(defaultname)
-      wx.setStorageSync('locationHistory', locationHistory)
-    }
-    if (fastData.area) {
-      this.setData({
-        addressData: fastData.area
-      })
-    }
-    if (fastData.defaultname) {
-      wx.setStorageSync('defaultname', fastData.defaultname)//标记
-      let locationHistory = wx.getStorageSync('locationHistory')
-      if (locationHistory) {
-        locationHistory.unshift(fastData.defaultname)
-        wx.setStorageSync('locationHistory', locationHistory)
-      } else {
-        let locationHistory = []
-        locationHistory.unshift(fastData.defaultname)
-        wx.setStorageSync('locationHistory', locationHistory)
-      }
-    }
-  },
   // 设置缓存保留已填写信息
   setEnterInfo: function (name, data) {
     let key = 'fastData'
@@ -473,6 +304,69 @@ Page({
     }
     wx.setStorageSync(key, fastData)
   },
+  //点击地址详情页的详细地址设置到fastData缓存数据中
+  userSetAreaInfo: function () {
+    let val = this.data.addressData
+    //调用函数设置缓存
+    this.setEnterInfo('area', val)
+  },
+  //初始化位置信息
+  initArea:function () {
+  //获取地理定位的位置缓存信息  
+    let gpsPorvince = wx.getStorageSync('gpsPorvince')
+  //获取区域数组的北京数据
+    let defaultPosition = areas.getAreaArr[1]
+  //获取缓存的fastData数据
+    let fastData = wx.getStorageSync('fastData')
+  //判断是否有授权获取地理位置信息，没有则获取默认位置北京
+    let position = gpsPorvince?gpsPorvince:defaultPosition
+  //生成需要缓存locationHistory数据
+    let id = parseInt(position.id) 
+    let pid = parseInt(position.pid)
+    let name = position.name
+    let adName = position.ad_name
+    let defaultname = {
+      id: id,
+      pid: pid,
+      name: name,
+      ad_name: adName
+    }
+  //设置到defaultname缓存数据中
+    wx.setStorageSync('defaultname', defaultname)
+  //调用app中方法设置到locationHistory缓存数据中
+    app.setStorageAction(id, defaultname, true)
+  //如果缓存fastData中有选择的详细区域信息则将数据存到data的addressData中
+  //初始化时将fastData中的城市信息id存入到data中
+    if (fastData) {
+      if (fastData.area) {
+        this.setData({
+          addressData: fastData.area,
+        })
+      }
+      if (fastData.defaultname) {
+        this.setData({
+          areaId: fastData.defaultname.id,
+        })
+      }
+    }
+  //如果缓存fastData中有选择过的区域信息则将区域信息压入缓存locationHistory中和缓存defaultname中
+    if (fastData.defaultname) {
+      wx.setStorageSync('defaultname', fastData.defaultname)//标记
+  //生成需要缓存locationHistory数据
+      let id = parseInt(fastData.defaultname.id) 
+      let pid = parseInt(fastData.defaultname.pid)
+      let name = fastData.defaultname.name
+      let adName = fastData.defaultname.ad_name
+      let defaultname = {
+        id: id,
+        pid: pid,
+        name: name,
+        ad_name: adName
+      }
+  //调用app中方法设置到locationHistory缓存数据中
+      app.setStorageAction(id, defaultname, true)
+    }
+  },
   /**
    * 生命周期函数--监听页面加载
    */
@@ -480,7 +374,6 @@ Page({
     this.setData({
       token: options.token
     })
-    this.initAreaData()
     //初始化用户位置信息
     this.initArea()
   },

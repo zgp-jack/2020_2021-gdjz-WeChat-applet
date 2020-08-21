@@ -23,8 +23,11 @@ Page({
         })
     },
     userEnterCode:function(e){
+        let value = e.detail.value
+        var partten = /^\d{1,6}/ig;
+        let code = value.match(partten)
         this.setData({
-            code:e.detail.value
+            code:code
         })
     },
     userGetCode:function(e){

@@ -17,6 +17,6 @@
       <!-- <text>招工城市：</text> -->
       <input placeholder="请选择招工发布地址" disabled class="issue-contact-input" value="{{ addressData.title }}"></input>
     </view>
-    <button class="issue-code-btn" open-type="{{ id?'getUserInfo':''}}" bindtap="sureAreaAction" bindgetuserinfo="bindGetUserInfo">确认地址</button>
+    <button class="issue-code-btn" open-type="{{ areaId?'getUserInfo':''}}" bindtap="sureAreaAction" bindgetuserinfo="bindGetUserInfo">确认地址</button>
   </view>
 </view>

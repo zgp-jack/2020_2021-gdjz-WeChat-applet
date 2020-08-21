@@ -292,15 +292,12 @@ Page({
               })
             }
             wx.setStorageSync('defaultname', mydata.default_search_name)//标记
-            let locationHistory = wx.getStorageSync('locationHistory')
-            if (locationHistory) {
-              locationHistory.unshift(mydata.default_search_name)
-              wx.setStorageSync('locationHistory', locationHistory)
-            } else {
-              let locationHistory = []
-              locationHistory.unshift(mydata.default_search_name)
-              wx.setStorageSync('locationHistory', locationHistory)
-            }
+            let id = mydata.default_search_name.id;
+            let name = mydata.default_search_name.name;
+            let pid = parseInt(mydata.default_search_name.pid);
+            let pname = mydata.default_search_name.pname || "";
+            let positonData = { "name": name, "id": id, "ad_name": pname, "pid": pid };
+            app.setStorageAction(id, positonData, true)
             _this.initSelectedClassifies()
             _this.countWorkNum()
             _this.getWorkText()
@@ -312,15 +309,12 @@ Page({
             if(!jiSuData){
               let defaultname = gpsPorvince?gpsPorvince:defaultPosition
               wx.setStorageSync('defaultname', defaultname)
-              let locationHistory = wx.getStorageSync('locationHistory')
-              if (locationHistory) {
-                locationHistory.unshift(defaultname)
-                wx.setStorageSync('locationHistory', locationHistory)
-              } else {
-                let locationHistory = []
-                locationHistory.unshift(defaultname)
-                wx.setStorageSync('locationHistory', locationHistory)
-              }
+              let id = defaultname.id;
+              let name = defaultname.name;
+              let pid = parseInt(defaultname.pid);
+              let pname = defaultname.ad_name || "";
+              let positonData = { "name": name, "id": id, "ad_name": pname, "pid": pid };
+              app.setStorageAction(id, positonData, true)
               _this.initChildWorkType()
               return false;
             } else {
@@ -365,18 +359,15 @@ Page({
               }
               if (jiSuData.defaultname) {
                 wx.setStorageSync('defaultname', jiSuData.defaultname)//标记
-                
-                let locationHistory = wx.getStorageSync('locationHistory')
-                if (locationHistory) {
-                  locationHistory.unshift(jiSuData.defaultname)
-                  wx.setStorageSync('locationHistory', locationHistory)
-                } else {
-                  let locationHistory = []
-                  locationHistory.unshift(jiSuData.defaultname)
-                  wx.setStorageSync('locationHistory', locationHistory)
+                  let id = jiSuData.defaultname.id;
+                  let name = jiSuData.defaultname.name;
+                  let pid = parseInt(jiSuData.defaultname.pid);
+                  let pname = jiSuData.defaultname.ad_name || "";
+                  let positonData = { "name": name, "id": id, "ad_name": pname, "pid": pid };
+                  app.setStorageAction(id, positonData, true)
                 }
               }
-            }
+            // }
             
             _this.setData({
               userClassifyids: jiSuData.userClassifyids || [],
@@ -620,9 +611,9 @@ Page({
         if(has !== -1){
           inum++
           //let num = classifyids[i].num || 0
-          classifyids[i].num = inum
+          // classifyids[i].num = inum
         }
-        // classifyids[i].num = inum
+        classifyids[i].num = inum
       }
     }
     this.setData({
@@ -783,6 +774,7 @@ Page({
     }, 1000)
   },
   subscribeToNews: function(mydata) {
+    let id = this.data.infoId
     app.subscribeToNews("recruit",function(){
       wx.showModal({
         title: '恭喜您',
@@ -790,7 +782,13 @@ Page({
         showCancel: false,
         confirmText: '确定',
         success: function (res) {
-          wx.reLaunch({ url: '/pages/published/recruit/list' })
+          if(id){
+            wx.reLaunch({ url: '/pages/published/recruit/list' })
+          }else{
+            wx.navigateTo({
+              url: '/pages/issue/tips/tips',
+            })
+          }
         }
       })
     })
@@ -826,9 +824,6 @@ Page({
       user_mobile:_this.data.data.user_mobile,
       imgs:imags,
     }
-    // console.log(dataJson)
-    // console.log(JSON.stringify(dataJson))
-    
     //如果是修改界面再没有更改数据的情况下不能保存
     if (_this.data.infoId) {
       if (_this.data.reason != "0") {
@@ -900,8 +895,8 @@ Page({
       })
       return false
     }
-    
-    if (!v.regStrNone(_this.data.data.user_name) || !v.chineseReg(_this.data.data.user_name) || (_this.data.data.user_name).trim().length<2) {
+    console.log(_this.data.data.user_name)
+    if (!v.chineseReg(_this.data.data.user_name)) {
       if (infoId) {
         app.showMyTips("请输入2~5字纯中文姓名！");
         return false;
@@ -954,7 +949,7 @@ Page({
       ...data,
       adcode: addressData.adcode,
       location: addressData.location,
-      address: addressData.title + '@@@@@@' + addressData.district,
+      address: addressData.title + '@@@@@' + addressData.district,
       classifies: ids,
       images: imgs,
       infoId: infoId,
@@ -998,14 +993,8 @@ Page({
             }
             wx.setStorageSync('userJiSuPublishedData', jsdata)
           }
-          if (_this.data.infoId) {
-            //弹出接收通知的提示框
-            _this.subscribeToNews(resdata)
-          }else{
-            wx.navigateTo({
-              url: '/pages/issue/tips/tips',
-            })
-          }
+          _this.subscribeToNews(resdata)
+          
           
         } else if (res.data.errcode == "member_forbid" || res.data.errcode == "login_over_time") {
           wx.showModal({

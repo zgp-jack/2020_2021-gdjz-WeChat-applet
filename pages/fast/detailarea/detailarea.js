@@ -14,7 +14,9 @@ Page({
   data: {
     nodataImg: app.globalData.apiImgUrl + "nodata.png",
     addressList: [],
+    //详细地址输入框中内容
     addressText: '',
+    //详细地理位置信息
     addressData: {
       "title": "",
       "adcode": "",
@@ -22,22 +24,30 @@ Page({
       "district": ""
     },
     addressTips: "请先输入您的详细地址",
+    //是否显示城市下拉列表
     showArea: false,
     areadata: [],
     locationHistory: false,
     gpsOrientation: false,
     gpsposi: "../../../images/gps-posi.png",
     clearinput: "../../../images/clear-input.png",
+    //当前选择城市信息
     areaText: "北京",
     areaId: 2,
     keyAutoVal: "北京市",
+    pid: 1,
     showMaplist: true,
     allAreaLists: [],
     nAreaLists: [],
+    //城市选择列表是否有城市信息
     isAllAreas: true,
+    //是否显示城市列表
     showInputList: false,
+    //城市搜索框输入值
     searchInputVal: "",
+    //是否历史记录
     showHisTitle:false,
+    //城市名输入框是否获取焦点
     areaInputFocus:false,
     infoId:"",
     showfor:"noshowfor",
@@ -104,10 +114,9 @@ Page({
   },
   // addressList
   initHistoryLoc: function () { 
+    //获取历史城市信息和定位城市信息分别存入data中
     let h = wx.getStorageSync("locationHistory");
     let p = wx.getStorageSync("gpsPorvince");
-    
-    
     if (h) this.setData({ locationHistory: h })
     if (p) this.setData({ gpsOrientation: p })
   },
@@ -152,6 +161,7 @@ Page({
   },
   getAreaData: function () {
     app.getAreaData(this);
+    console.log("getAreaData",this.data.areadata)
   },
   showCity: function () {
     this.setData({ 
@@ -159,8 +169,8 @@ Page({
       addressActive: false
      })
   },
+  //关闭地区选择
   closeArea: function () {
-
     this.setData({ areaInputFocus: false })
     setTimeout(() => {
       this.setData({ showArea: false, addressActive: true, showInputList: false, searchInputVal: "", isAllAreas: true })
@@ -168,32 +178,40 @@ Page({
   },
   chooseThisCtiy: function (e) {
     let _this = this;
-    let id = e.currentTarget.dataset.id;
-    let area = e.currentTarget.dataset.area;
+    //获取选择城市信息
+    let id = parseInt(e.currentTarget.dataset.id);
+    let name = e.currentTarget.dataset.name;
     let pid = parseInt(e.currentTarget.dataset.pid);
-    let pname = e.currentTarget.dataset.pname;
-    let mydata = { "name": area, "id": id, "ad_name": pname, "pid": pid };
+    let adName = e.currentTarget.dataset.adname;
+    let mydata = { "name": name, "id": id, "ad_name": adName, "pid": pid };
+    //将选择城市信息保存到data中
     this.setData({ 
-      areaId: parseInt(id), 
-      areaText: area, 
+      areaId: id, 
+      areaText: name, 
       showHisTitle: false,
-      keyAutoVal: pname, 
+      pid: pid,
+      keyAutoVal: adName, 
       addressText: "",
       isHistory:false
       })
+    //关闭城市选择界面
     this.closeArea();
+    //将选择城市信息保存到lacationHistory中
     app.setStorageAction(id, mydata, true)
-    let prevPage = app.getPrevPage();
-    prevPage.setData({ 
-      areaId: parseInt(id), 
-    })
+    // //获取页面栈prevPage为上一界面
+    // let prevPage = app.getPrevPage();
+    // //设置上一个页面data中数据
+    // prevPage.setData({ 
+    //   areaId: parseInt(id), 
+    // })
+    //获取历史城市信息和定位城市信息存入data中
     this.initHistoryLoc();
-    this.getKeywordsInputs(pname, function (data) {
+
+    this.getKeywordsInputs(adName, function (data) {
       _this.setData({ addressList: data })
     })
-
     //切换城市直接保存
-    let lastPublishCity = { name: area, ad_name: pname };
+    let lastPublishCity = { name: name, ad_name: adName };
     wx.setStorageSync("lastPublishCity", lastPublishCity);
   },
   checkAdcode: function (adcode, callback) {
@@ -363,7 +381,6 @@ Page({
       keywords: val,
       location: '',
       success: function (data) {
-        
         if (data) {
           //_this.setData({ addressTips: data.tips.length ? '' : '暂未搜索到相关位置' })
           _this.filtterNullData(data.tips, function (data) {
@@ -382,11 +399,12 @@ Page({
     wx.navigateBack({ delta:1 })
   },
   userEnterAddress: function (e) {
-    console.log(e)
     let _this = this;
     let val = e.detail.value;
-    this.setData({ addressText: val }) //, showMaplist: false
-
+    this.setData({ 
+      addressText: val,
+      isHistory: false
+     }) 
     let keywords = this.data.keyAutoVal + this.data.addressText;
     this.getKeywordsInputs(keywords, function (data) {
       _this.setData({ addressList: data,showHisTitle:false })
@@ -404,40 +422,63 @@ Page({
     // }
   },
   saveRecruitInfo:function(info){
-    let _this = this;
     wx.setStorageSync("userLastPubArea", info);
-    
   },
   setAddressData: function (e) {
-    let history = this.data.isHistory
-    let infoId = this.data.infoId
+    let _this = this;
+    let history = _this.data.isHistory
     if (history) {
       let index = e.currentTarget.dataset.index
       let historyCityLists = wx.getStorageSync('historyCityLists')
       let historyDefaultname = historyCityLists[index].defaultname
-      let locationHistory = wx.getStorageSync("locationHistory")
-      locationHistory.unshift(historyDefaultname)
-      wx.setStorageSync('locationHistory', locationHistory)
-      this.setData({
-        isHistory:false
+      //读取历史城市记录中当前城市的信息
+      let id = historyDefaultname.id
+      let name = historyDefaultname.name
+      let adName = historyDefaultname.ad_nama
+      let pid = historyDefaultname.pid
+      //组合成mydata对象
+      let mydata = {
+        id: id,
+        name: name,
+        ad_name:adName,
+        pid: pid
+      }
+      //将历史记录城市信息记录到locationHstory中
+    app.setStorageAction(id, mydata, true)
+    //选择历史记录将当前历史记录的城市信息存入data中
+    _this.setData({ 
+      areaId: id, 
+      areaText: name, 
+      pid: pid,
+      keyAutoVal: adName, 
+      isHistory:false
       })
     }
-    let locationHistory = wx.getStorageSync("locationHistory")
-    let defaultname = locationHistory[0]
-    wx.setStorageSync('defaultname', defaultname)
+    //读取data中当前城市的信息
+    let id = _this.data.areaId
+    let name = _this.data.areaText
+    let adName = _this.data.keyAutoVal
+    let pid = _this.data.pid
+    //组合成mydata对象
+    let mydata = {
+      id: id,
+      name: name,
+      ad_name:adName,
+      pid: pid
+    }
+    //点击详细地址将当前城市信息保存到缓存defaultname
+    wx.setStorageSync('defaultname', mydata)
+    //点击详细地址将当前城市信息保存到缓存fastData
     let fastData = wx.getStorageSync('fastData')
     if (fastData) {
-      fastData["defaultname"] = defaultname
+      fastData["defaultname"] = mydata
       wx.setStorageSync('fastData', fastData)
     } else {
       fastData = {}
-      fastData["defaultname"]= defaultname
+      fastData["defaultname"]= mydata
       wx.setStorageSync('fastData', fastData)
     }
-    let _this = this;
-    let area = this.data.areaText;
-    let pname = this.data.keyAutoVal;
-    let areaId = parseInt(this.data.areaId);
+    //获取选择详细地址的位置信息
     let t = e.currentTarget.dataset.title
     let a = e.currentTarget.dataset.adcode
     let l = e.currentTarget.dataset.location
@@ -447,13 +488,13 @@ Page({
       adcode: a,
       location: l,
       district: d,
-      defaultname:defaultname
+      defaultname:mydata
     }
     // return
-    this.checkAdcode(a, function () {
+    _this.checkAdcode(a, function () {
       let prevPage = app.getPrevPage();
       
-      let lastPublishCity = { name: area, ad_name: pname };
+      let lastPublishCity = { name: name, ad_name: adName };
       wx.setStorageSync("lastPublishCity", lastPublishCity);
 
       prevPage.setData({
@@ -461,12 +502,11 @@ Page({
         "addressData.adcode": a,
         "addressData.location": l,
         "addressData.district": d,
+        areaId: id
       })
 
       prevPage.userSetAreaInfo()
-
       _this.saveRecruitInfo(hl);
-
       _this.detailHistoryCities(hl);
       _this.initHistoryCityList();
       wx.navigateBack({ delta: 1 })
