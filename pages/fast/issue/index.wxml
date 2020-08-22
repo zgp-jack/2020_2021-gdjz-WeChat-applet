@@ -4,7 +4,6 @@
       class="issue-textarea" 
       placeholder="请粘贴或输入您要发布的招工信息" 
       bindinput="enterContent"
-      bindblur="contentBlur"
       value="{{ content }}"
       maxlength = "500"
     >

@@ -13,7 +13,6 @@ const footerImgs = {
     memberActive: "/images/footer-member-active.png",
   pubicon: "/images/yupao-footer-publish-btnimg.png",
 }
-
 function initMsgNum(_this){
   app.getUserMsg((infoNum,msgNum)=>{
     _this.setData({
@@ -84,5 +83,5 @@ module.exports = {
     doPublishAction: doPublishAction,
     closePublishAction: closePublishAction,
     valiUserCard: valiUserCard,
-    initMsgNum: initMsgNum
+    initMsgNum: initMsgNum,
 }

@@ -312,8 +312,26 @@ Page({
   },
   //初始化位置信息
   initArea:function () {
+    let _this = this
   //获取地理定位的位置缓存信息  
     let gpsPorvince = wx.getStorageSync('gpsPorvince')
+    let userLocation = wx.getStorageSync('userLocation')
+    if (userLocation) {
+      amapFun.getRegeo({
+        location: userLocation,
+        success: function (data) {
+          _this.setData({
+            "addressData.title":data[0].regeocodeData.addressComponent.neighborhood.name
+          })
+        },
+        fail: function (info) {
+          //失败回调
+          // that.openSetting(function(){
+          //   that.initHistoryCityList();
+          // })
+        }
+      })
+    }
   //获取区域数组的北京数据
     let defaultPosition = areas.getAreaArr[1]
   //获取缓存的fastData数据

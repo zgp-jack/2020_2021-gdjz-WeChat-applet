@@ -161,7 +161,6 @@ Page({
   },
   getAreaData: function () {
     app.getAreaData(this);
-    console.log("getAreaData",this.data.areadata)
   },
   showCity: function () {
     this.setData({ 
@@ -555,8 +554,19 @@ Page({
     if (!historyCityLists && !lastCtiy) {
       //如果进入城市选择获得位置信息授权将位置信息保存到locationHistory、defaultname、fastData中
       if (gpsPorvince) {
-        locationHistory.unshift(gpsPorvince)
-        wx.setStorageSync('locationHistory', locationHistory)
+        let id = gpsPorvince.id
+        let name = gpsPorvince.name
+        let adName = gpsPorvince.ad_nama
+        let pid = gpsPorvince.pid
+        //组合成mydata对象
+        let mydata = {
+          id: id,
+          name: name,
+          ad_name:adName,
+          pid: pid
+        }
+        //将历史记录城市信息记录到locationHstory中
+        app.setStorageAction(id, mydata, true)
         wx.setStorageSync('defaultname', gpsPorvince)
         if (fastData) {
           fastData["defaultname"] = gpsPorvince

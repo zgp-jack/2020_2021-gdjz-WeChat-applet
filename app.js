@@ -90,6 +90,8 @@ App({
     //首次从未授权状态到授权状态读取用户信息的手机号
     isRedPhone: true,
     fastToken: "",
+    //找活显示内容
+    resumeText:"",
   },
   //是否为极速发布与快速发布请求,快速发布与极速发布跳转
   initJobView: function () {

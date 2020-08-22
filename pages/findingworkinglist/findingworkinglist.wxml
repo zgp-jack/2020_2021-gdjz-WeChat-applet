@@ -200,7 +200,7 @@
   <image src='{{ fixedAdImg }}'></image>
 </view> -->
 
-<view class='bottompublishbtn' bindtap='valiUserCard'>发布找活</view>
+<view class='bottompublishbtn' bindtap='valiUserCard'>{{resumeText}}</view>
 
 <view class='fixed-get-integral'  bindtap='jumprull'>
         <image src='{{ rullIntegral }}'></image>
@@ -216,6 +216,6 @@
 <!-- 
 <template is="app"  data="{{ bgHeight,btnWidth,wordsHeight,wordsWidth,shadeWidth,winWidth,winHeight,notimesW,userShareData,userShareTime }}" /> -->
 <!-- 引入footer -->
-<template is="footer" data="{{ footerImgs,publishActive,showPublishBox,footerActive }}" />
+<template is="footer" data="{{ footerImgs,publishActive,showPublishBox,footerActive,resumeText }}" />
 
 <downapptips id='downapptips'></downapptips>

@@ -14,6 +14,8 @@ Page({
     showTel: false,
     request:false,
     isRule:true,
+    //进入页面是否发起过请求，请求过一次就就不再请求
+    isGetUserInfo:true,
     imageUrl: app.globalData.apiImgUrl +"new-publish-title-t-icon.png"
   },
   checkType: function (obj, _type) {
@@ -22,45 +24,106 @@ Page({
     if (_re == _type) return true;
     return false;
   },
+  // 设置缓存保留已填写信息
+  setEnterInfo: function (name, data) {
+    let regx = /1[3-9]\d{9}/g
+    let key = 'fastData'
+    let fastData = wx.getStorageSync(key)
+    if (name === "phone") {
+      if (regx.test(data)) {
+        if (fastData) {
+          console.log("fastDataphone",data)
+          fastData[name] = data
+        } else {
+          fastData = {}
+          fastData[name] = data
+        }
+      } else {
+        if (fastData) {
+          fastData[name] = ""
+        }
+      }
+    } else {
+      if (fastData) {
+        fastData[name] = data
+      } else {
+        fastData = {}
+        fastData[name] = data
+      }
+    }
+    wx.setStorageSync(key, fastData)
+  },
   enterContent: function (e) {
-    let phone = this.data.phone
+    // let phone = this.data.phone
+    let isRule = this.data.isRule
+    let userPhone = app.globalData.publish.userPhone
+    console.log("userPhone",userPhone)
     let u = wx.getStorageSync('userInfo')
     let val = e.detail.value;
     let fastData = wx.getStorageSync('fastData')
     this.setData({
       content: val
     })
-    if (!u || (u && !phone)) {
-      if (this.data.isRule) {
-        let content = val.replace(/\s+/g, "");
-        let _partten = /1[3-9]\d{9}/g;
-        let phone = content.match(_partten);
-        if (this.checkType(phone, 'array')) {
-          let tel = phone[0];
-          this.setData({
-            showTel: true,
-            phone: tel
-          });
-          wx.setStorageSync("fastData",{
-            phone:tel
-          })
+    let content = val.replace(/\s+/g, "");
+    this.setEnterInfo("content",content)
+    let _partten = /1[3-9]\d{9}/g;
+    let phone = content.match(_partten);
+    if (phone) {
+      if (this.checkType(phone, 'array')) {
+        let tel = phone[0];
+        if (u) {
+          if (phone == userPhone) {
+            this.setData({
+              showTel:false,
+              phone:tel
+            })
+            this.setEnterInfo("phone",tel)
+          }else {
+            this.setData({
+              showTel: true,
+              phone:tel
+            })
+            this.setEnterInfo("phone",tel)
+          }
+        }else{
+          if (isRule) {
+            this.setData({
+              showTel: true,
+              phone:tel
+            })
+            this.setEnterInfo("phone",tel)
+          }else{
+            this.setEnterInfo("phone",tel)
+          }
         }
-    }}
+      }
+    }else{
+      if (!u) {
+        if (isRule) {
+          this.setData({
+            phone:""
+          })
+          this.setEnterInfo("phone","")
+        }else{
+          this.setEnterInfo("phone","")
+        }
+      }
+    }
   },
   enterPhone: function (e) {
-    wx.setStorageSync("fastData",{
-      phone:app.globalData.publish.userPhone,
-    })
+    let value = e.detail.value
     this.setData({
-      phone: e.detail.value,
+      phone: value,
       isRule:false
     })
-  },
-  contentBlur: function (e) {
-    if (this.data.phone) {
-      this.setData({
-        showTel: true
-      })
+    let _partten = /1[3-9]\d{9}/g;
+    let u = wx.getStorageSync('userInfo')
+    if (!u) {
+      if(!_partten.test(phone)) {
+        this.setData({
+          phone:""
+        })
+      }
     }
   },
   publishRecurit: function () {
@@ -189,14 +252,7 @@ Page({
       let mydata = res.data
       if(mydata.errcode == "ok"){
         let tel = mydata.memberInfo.tel || ''
-        _this.setData({
-          phone:tel,
-          showTel: tel?true:false
-        })
-        wx.setStorageSync('fastData', {
-          phone:mydata.memberInfo.tel,
-        })
-        app.globalData.publish.userPhone = mydata.memberInfo.tel
+        app.globalData.publish.userPhone = tel
         }else{
           wx.showModal({
           title:'提示',
@@ -220,27 +276,86 @@ Page({
   },
   initClipboardData: function () {
     let _this = this;
+    //获取本地缓存用户信息
     let u = wx.getStorageSync('userInfo')
-    console.log("userInfo",u)
+    //获取本地缓存的快速发布信息
     let fastData = wx.getStorageSync('fastData')
+    //获取globalData中的用户手机号码
+    let userPhone = app.globalData.publish.userPhone
+    console.log("userPhone",userPhone)
+    //判断用户是否授权登录
+    //如果用户授权
     if (u) {
-      if (!fastData) {
-        _this.getUserInfo()
-      } else {
-        if (!app.globalData.publish.userPhone) {
-          _this.getUserInfo()
-        }else{
-          if (fastData.phone.length != 0) {
-            _this.setData({
-              phone:fastData.phone,
-              showTel:true
-            })
-          } else {
-            _this.setData({
-              phone:app.globalData.publish.userPhone,
-              showTel:true
-            })
+    //判断是否已经获取到用户信息手机号码
+    //如果已经有用户手机号码信息就读取缓存用户手机号信息
+      if (userPhone) {
+    //判断如果存在fastData信息
+        if (fastData) {
+          let content = fastData.content
+          let phone = fastData.phone
+          if (phone) {
+            if (userPhone == phone) {
+              _this.setData({
+                showTel: false,
+                phone: phone,
+                content: content
+              })
+            }else{
+              _this.setData({
+                showTel:true,
+                phone:phone,
+                content: content
+              })
+            }
           }
+        }else{
+          _this.setData({
+            showTel: false,
+            phone: userPhone,
+          })
+        }
+      }else{
+        _this.getUserInfo()
+        //判断如果存在fastData信息
+        if (fastData) {
+          console.log("fastData",fastData)
+          let content = fastData.content
+          let phone = fastData.phone
+          if (phone) {
+            if (userPhone == phone) {
+              _this.setData({
+                showTel: false,
+                phone: phone,
+                content: content
+              })
+            }else{
+              _this.setData({
+                showTel:true,
+                phone:phone,
+                content: content
+              })
+            }
+          }
+        }else{
+          _this.setData({
+            showTel: false,
+            phone: userPhone,
+          })
+        }
+      }
+    }else{
+    //如果用户没有授权
+      if (fastData) {
+        let content = fastData.content
+        let phone = fastData.phone
+        this.setData({
+          content: content || "",
+          phone: phone || ""
+        })
+        if (phone) {
+          _this.setData({
+            showTel:true
+          })
         }
       }
     }

@@ -211,7 +211,7 @@
 <!-- <template is="app"  data="{{ bgHeight,btnWidth,wordsHeight,wordsWidth,shadeWidth,winWidth,winHeight,notimesW,userShareData,userShareTime }}" /> -->
 
 <!-- 引入footer -->
-<template is="footer" data="{{ footerImgs,publishActive,showPublishBox,footerActive }}" />
+<template is="footer" data="{{ footerImgs,publishActive,showPublishBox,footerActive,resumeText }}" />
 
 <!-- 引导提示页 2020-0203新增 -->
 <view class="firstfcbox" wx:if="{{ showShadowFc }}" bindtap="closeFc">

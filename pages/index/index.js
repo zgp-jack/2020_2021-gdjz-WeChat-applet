@@ -108,7 +108,8 @@ Page({
     turntableimg:app.globalData.apiImgUrl + 'mini-turntable-new.png',
     inviteturntable:app.globalData.apiImgUrl + 'inviteuser-getintegral.png',
     showturntable: false,
-    jgjzData: {}
+    jgjzData: {},
+    resumeText:""
   },
   getPhoneNumber:function(e){
     console.log(e)
@@ -780,7 +781,8 @@ Page({
     this.setData({
       footerImgs: footerjs.footerImgs,
       publishActive: footerjs.publishActive,
-      showPublishBox: footerjs.showPublishBox
+      showPublishBox: footerjs.showPublishBox,
+      resumeText:app.globalData.resumeText
     })
   },
   doPublishAction: function () {
@@ -929,6 +931,22 @@ Page({
         }
       })
   },
+  initResume:function(){
+    app.appRequestAction({
+      url: 'resumes/exists/',
+      way: 'POST',
+      mask: true,
+      success: function(res){
+        let mydata = res.data
+        if(mydata.errcode == "ok"){
+          app.globalData.resumeText = mydata.data.title
+        }
+      },
+      fail:()=>{
+        app.showMyTips('网络错误，加载失败！')
+      }
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
@@ -968,6 +986,7 @@ Page({
     this.initUserinfo();
     footerjs.initMsgNum(this);
     this.initTurntable();
+    this.initResume()
   },
   onPageScroll: function (e) {
     let top = e.scrollTop;
