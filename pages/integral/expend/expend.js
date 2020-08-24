@@ -45,7 +45,11 @@ Page({
     source:"",
     classifyIndex:0,
     showend: false, // 软删除不展示已招满
-    errcode:false
+    errcode:false,
+    //置顶详情窗口是否显示
+    showTop:false,
+    //置顶招工或者找活详细信息
+    topDetail: {}
   },
   userCancleComplain: function() {
     this.setData({
@@ -255,6 +259,7 @@ Page({
       success: function(res) {
         console.log(res)
         let mydata = res.data;
+        console.log(res.data.data)
         if (mydata.errcode == "ok" || mydata.errcode == "deleted") {
           if (mydata.info.type == "job") {
             _this.setData({
@@ -268,7 +273,33 @@ Page({
               info: mydata.info,
               showWork: true
             })
-          }
+          } 
+        } else if (mydata.errcode == "top_resume") {
+          _this.setData({
+            "topDetail.occupations": mydata.data.occupations,
+            "topDetail.detail": mydata.data.detail,
+            "topDetail.address": mydata.data.address ,
+            "topDetail.e_time": mydata.data.e_time,
+            "topDetail.s_time": mydata.data.s_time,
+            "topDetail.team_type": mydata.data.team_type,
+            "topDetail.tel": mydata.data.tel,
+            "topDetail.title": mydata.data.title,
+            "topDetail.topType":mydata.errcode,
+            showTop:true
+          })
+        } else if (mydata.errcode == "top_job"){
+          _this.setData({
+            "topDetail.occupations": mydata.data.occupations,
+            "topDetail.detail": mydata.data.detail,
+            "topDetail.address": mydata.data.address ,
+            "topDetail.e_time": mydata.data.e_time,
+            "topDetail.s_time": mydata.data.s_time,
+            "topDetail.team_type": mydata.data.team_type,
+            "topDetail.tel": mydata.data.tel,
+            "topDetail.title": mydata.data.title,
+            "topDetail.topType":mydata.errcode,
+            showTop:true
+          })
         } else {
           wx.showModal({
             title: '温馨提示',
@@ -289,7 +320,8 @@ Page({
   closeThisRerocd: function() {
     this.setData({
       showRecord: false,
-      showWork: false
+      showWork: false,
+      showTop: false
     })
   },
   callThisPhone: function(e) {

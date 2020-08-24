@@ -87,11 +87,12 @@
     <view class='expend-show-recruit'>
         <view class='expend-close-record' bindtap='closeThisRerocd'></view>
         <view class='yupao-common-list'>
+            <view class='yupao-common-lists-item clearfix'>{{ info.user_name }}的找活名片</view>
             <view class='yupao-common-lists-item clearfix'>
                 <view class='yupao-common-list-left'>电话</view>
                 <view class='yupao-common-list-right'>{{ info.user_mobile }} <block wx:if="{{ info.is_end == '2' }}">({{ info.end_word }})</block><block wx:else="{{ info.is_end == '2' }}">({{ info.user_name }})
                 <text class='list-call-phone' wx:if="{{ info.is_end == '1' }}"   bindtap='callThisPhone'  data-phone="{{ info.user_mobile }}">拨打</text></block>
-                <block><text class="{{info.show_complain==1?'list-call-phone list-complain-phone':'list-call-phone info-complained'}}" data-id="{{ info.id }}" data-complain="{{ info.show_complain }}" data-type="{{ info.type }}" bindtap="complainInfo">{{info.show_complain===1?"投诉":"已投诉"}}</text></block>
+                <block><text class="{{info.show_complain==1?'list-call-phone list-complain-phone':'list-call-phone info-complained'}}" data-id="{{ info.id }}" data-complain="{{ info.show_complain }}" data-type="{{ info.type }}" bindtap="complainInfo" wx-if="{{ info.show_complain }}">{{info.show_complain===1?"投诉":"已投诉"}}</text></block>
                 </view>
             </view>
             <view class='yupao-common-lists-item clearfix' wx:if="{{ info.type =='resume' }}">
@@ -106,6 +107,50 @@
                 <view class='yupao-common-list-left'><text wx:for="{{ info.classifyName }}"  wx:key="index">{{ item }}</text></view>
             </view>
             <view class='yupao-common-lists-text'>{{ info.detail }}</view>
+        </view>
+    </view>
+</view>
+
+<!-- 积分消耗记录“置顶招工找活信息” -->
+<view class='expend-showthis-record' wx:if="{{ showTop }}">
+    <view class='expend-show-recruit'>
+        <view class='expend-close-record' bindtap='closeThisRerocd'></view>
+        <view class='yupao-common-list'>
+            <view class='yupao-common-lists-item clearfix' wx-if = "{{ topDetail.topType =='top_resume' }}">{{ topDetail.user_name }}的找活名片</view>
+            <view class='yupao-common-lists-item clearfix'>
+                <view class='yupao-common-list-left'>项目名称</view>
+                <view class='yupao-common-list-right'>{{ topDetail.title }}</view>
+            </view>
+            <view class='yupao-common-lists-item clearfix'>
+                <view class='yupao-common-list-left'>置顶范围</view>
+                <view class='yupao-common-list-right' wx:for = "{{topDetail.address}}" wx:key="index" >[{{ item }}]
+                </view>
+            </view>
+            <view class='yupao-common-lists-item clearfix'>
+                <view class='yupao-common-list-left'>置顶开始时间</view>
+                <view class='yupao-common-list-right'>{{ topDetail.s_time }} 
+                </view>
+            </view>
+            <view class='yupao-common-lists-item clearfix'>
+                <view class='yupao-common-list-left'>置顶结束时间</view>
+                <view class='yupao-common-list-right'>{{ topDetail.e_time }} 
+                </view>
+            </view>
+            <view class='yupao-common-lists-item clearfix'>
+                <view class='yupao-common-list-left'>电话</view>
+                <view class='yupao-common-list-right'>{{ topDetail.tel }} 
+                </view>
+            </view>
+            <view class='yupao-common-lists-item clearfix'>
+                <view class='yupao-common-list-left'>工种</view>
+                <view class='yupao-common-list-right' wx:for = "{{topDetail.occupations}}" wx:key="index" >[{{ item }}]
+                </view>
+            </view>
+            <view class='yupao-common-lists-item clearfix' wx:if="{{ topDetail.topType =='top_resume' }}">
+                <view class='yupao-common-list-left'>规模</view>
+                <view class='yupao-common-list-right'>{{ topDetail.team_type }}</view>
+            </view>
+            <view class='yupao-common-lists-text'>{{ topDetail.detail }}</view>
         </view>
     </view>
 </view>

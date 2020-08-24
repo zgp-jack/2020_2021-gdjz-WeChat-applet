@@ -187,8 +187,8 @@ Page({
   },
   //点击跳转到找活列表界面
   goFindWork:function () {
-    wx.navigateTo({
-      url: '/pages/index/index',
+    wx.reLaunch({
+      url: '/pages/findingworkinglist/findingworkinglist',
     })
   },
   /**

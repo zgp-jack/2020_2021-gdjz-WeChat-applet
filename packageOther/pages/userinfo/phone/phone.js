@@ -16,18 +16,14 @@ Page({
     },
     userEnterPhone:function(e){
         let value = e.detail.value
-        var partten = /^\d{1,11}/ig;
-        let phone = value.match(partten)
         this.setData({
-            phone: phone
+            phone: value
         })
     },
     userEnterCode:function(e){
         let value = e.detail.value
-        var partten = /^\d{1,6}/ig;
-        let code = value.match(partten)
         this.setData({
-            code:code
+            code:value
         })
     },
     userGetCode:function(e){

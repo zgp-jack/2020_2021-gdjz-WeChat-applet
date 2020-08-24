@@ -163,8 +163,8 @@ Page({
   },
   //点击跳转到招工信息界面
   goFindWorker:function () {
-    wx.navigateTo({
-      url: '/pages/findingworkinglist/findingworkinglist',
+    wx.reLaunch({
+      url: '/pages/index/index',
     })
   },
   

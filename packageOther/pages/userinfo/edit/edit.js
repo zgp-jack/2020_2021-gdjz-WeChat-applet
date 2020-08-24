@@ -38,10 +38,8 @@ Page({
   },
   enterPhoneCode: function (e) {
     let value = e.detail.value
-    var partten = /^\d{1,6}/ig;
-    let code = value.match(partten)
     this.setData({
-        code:code
+        code:value
     })
   },
   enterUserpass: function (e) {

@@ -22,7 +22,9 @@ Page({
     checkingimg: app.globalData.apiImgUrl + 'published-info.png',
     infoId: '',
     infoIndex: -1,
-    showTopTips: false
+    showTopTips: false,
+    //我的全部招工信息是否有数据
+    isAllList : false
   },
   publishJob:function () {
     app.initJobView()
@@ -305,6 +307,11 @@ Page({
             hasmore: len ? true : false,
             page: len ? page + 1 : page
           })
+          if(userinfo.type === "all" && _this.data.hasmore){
+            _this.setData({
+              isAllList: true
+            })
+          }
         }else{
           app.showMyTips(mydata.errmsg)
         }

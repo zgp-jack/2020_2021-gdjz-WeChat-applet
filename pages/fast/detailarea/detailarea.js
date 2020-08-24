@@ -52,7 +52,8 @@ Page({
     infoId:"",
     showfor:"noshowfor",
     showmap:"noshowmap",
-    isHistory:false
+    isHistory:false,
+    isGpsPorvince: false
   },
   chooseInputCtiy: function (e) { 
     this.chooseThisCtiy(e);
@@ -353,10 +354,13 @@ Page({
                         })
                         //再次授权，调用getLocationt的API
                         that.userLocFun()
+                        that.setData({
+                          isGpsPorvince:true
+                        })
                         // let gpsOrientation = wx.getStorageSync('gpsOrientation')
                         // wx.setStorageSync('defaultname', gpsOrientation)
-                        let gpsPorvince =wx.getStorageSync('gpsPorvince')
-                        wx.setStorageSync('defaultname', gpsPorvince)
+                        // let gpsPorvince =wx.getStorageSync('gpsPorvince')
+                        // wx.setStorageSync('defaultname', gpsPorvince)
                       } else {
                         wx.showToast({
                           title: '授权失败',
@@ -546,6 +550,8 @@ Page({
     let defaultname = wx.getStorageSync("defaultname");
     //左后一次选择的城市
     let lastCtiy = wx.getStorageSync("lastPublishCity");
+    //是否获得位置授权
+    let isGpsPorvince = this.data.isGpsPorvince
     //获取gps定位的城市
     let gpsPorvince = wx.getStorageSync("gpsPorvince");
     let gpsloc = wx.getStorageSync("gpsPorvince");
@@ -565,6 +571,9 @@ Page({
           ad_name:adName,
           pid: pid
         }
+        this.setData({
+          areaId:id
+        })
         //将历史记录城市信息记录到locationHstory中
         app.setStorageAction(id, mydata, true)
         wx.setStorageSync('defaultname', gpsPorvince)
@@ -581,8 +590,9 @@ Page({
     this.setData({ gpsOrientation: gpsPorvince });
     let showfor = this.data.showfor;
     let showmap = this.data.showmap;
-
-    if (defaultname && showfor == "showfor"){
+    if (gpsloc && isGpsPorvince) {
+      this.setData({areaText:gpsloc.name, keyAutoVal: gpsloc.name + "市", isGpsPorvince:false ,areaId:parseInt(gpsloc.id), pid: parseInt(gpsloc.pid)})
+    } else if (defaultname && showfor == "showfor"){
       this.setData({ areaText: defaultname.name, keyAutoVal: defaultname.name + "市" })
     } else if (lastCtiy && lastCtiy.hasOwnProperty('name') && !infoId ||showfor == "noshowfor" ) {
       this.setData({ areaText: lastCtiy.name , keyAutoVal: lastCtiy.ad_name })
