@@ -348,13 +348,10 @@ Page({
   },
   jumpThisLink: function (e) {
     app.jumpThisLink(e);
+    app.initResume()
   },
   goPublish:function () {
-    let publishMethod = app.globalData.publish.loginWay
-    let url = publishMethod == "fast_add_job" ? '/pages/fast/issue/index' : '/pages/issue/index/index'
-    wx.navigateTo({
-      url: url
-    })
+    app.initJobView()
   },
   /**
    * 生命周期函数--监听页面加载

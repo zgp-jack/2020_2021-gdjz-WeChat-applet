@@ -91,7 +91,14 @@ App({
     isRedPhone: true,
     fastToken: "",
     //找活显示内容
-    resumeText:"",
+    publishFindWork:{
+      resumeText:"",
+      loginBefore: false,
+      loginAfter: false,
+      logoutWay: "",
+      loginWay: "",
+    }
+    
   },
   //是否为极速发布与快速发布请求,快速发布与极速发布跳转
   initJobView: function () {
@@ -1356,5 +1363,53 @@ App({
       }
     }
   },
-
+  //我的找活文本显示内容
+  initResume:function(_this){
+    let userInfo = wx.getStorageSync("userInfo");
+    let that = this
+    if (userInfo) {
+      let flag = JSON.parse(JSON.stringify(that.globalData.publishFindWork))
+      if (!flag.loginAfter) {
+        that.appRequestAction({
+          url: 'resumes/exists/',
+          way: 'POST',
+          mask: true,
+          success: function(res){
+            let mydata = res.data
+            if(mydata.errcode == "ok"){
+              that.globalData.publishFindWork.resumeText = mydata.data.title
+              that.globalData.publishFindWork.loginAfter = true
+            }
+          },
+          fail:()=>{
+            that.showMyTips('网络错误，加载失败！')
+            that.globalData.resumeText = "发布找活"
+          }
+        })
+      } 
+    } else {
+      let flag = JSON.parse(JSON.stringify(that.globalData.publishFindWork))
+      if (!flag.loginBefore) {
+        that.appRequestAction({
+          url: 'resumes/exists/',
+          way: 'POST',
+          mask: true,
+          success: function(res){
+            let mydata = res.data
+            if(mydata.errcode == "ok"){
+              that.globalData.publishFindWork.resumeText = mydata.data.title
+              that.globalData.publishFindWork.loginBefore = true
+            }
+          },
+          fail:()=>{
+            that.showMyTips('网络错误，加载失败！')
+            that.globalData.publishFindWork.resumeText = "发布找活"
+          }
+        })
+      } 
+    }
+    _this.setData({
+      resumeText:that.globalData.publishFindWork.resumeText
+    })
+  },
 })

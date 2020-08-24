@@ -23,12 +23,14 @@ function initMsgNum(_this){
 }
 
 function doPublishAction (_this) {
+    app.initResume(_this)
+    console.log("111111111",app.globalData.publishFindWork.resumeText)
     _this.setData({
-        showPublishBox: true
+      showPublishBox: true,
     })
     setTimeout(function () {
         _this.setData({
-            publishActive: true
+            publishActive: true,
         })
     }, 0)
 }

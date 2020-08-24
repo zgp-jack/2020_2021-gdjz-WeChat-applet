@@ -827,6 +827,22 @@ Page({
     wx.navigateBack({
       delta: 1
     })
+    app.appRequestAction({
+      url: 'resumes/exists/',
+      way: 'POST',
+      mask: true,
+      success: function(res){
+        let mydata = res.data
+        if(mydata.errcode == "ok"){
+          app.globalData.publishFindWork.resumeText = mydata.data.title
+          app.globalData.publishFindWork.loginAfter = true
+        }
+      },
+      fail:()=>{
+        app.showMyTips('网络错误，加载失败！')
+        app.globalData.resumeText = "发布找活"
+      }
+    })
   },
   completemore() {
     app.globalData.showperfection = false;

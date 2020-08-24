@@ -931,22 +931,6 @@ Page({
         }
       })
   },
-  initResume:function(){
-    app.appRequestAction({
-      url: 'resumes/exists/',
-      way: 'POST',
-      mask: true,
-      success: function(res){
-        let mydata = res.data
-        if(mydata.errcode == "ok"){
-          app.globalData.resumeText = mydata.data.title
-        }
-      },
-      fail:()=>{
-        app.showMyTips('网络错误，加载失败！')
-      }
-    })
-  },
   /**
    * 生命周期函数--监听页面加载
    */
@@ -975,7 +959,7 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-
+    
   },
 
   /**
@@ -986,7 +970,7 @@ Page({
     this.initUserinfo();
     footerjs.initMsgNum(this);
     this.initTurntable();
-    this.initResume()
+    app.initResume(this)
   },
   onPageScroll: function (e) {
     let top = e.scrollTop;
