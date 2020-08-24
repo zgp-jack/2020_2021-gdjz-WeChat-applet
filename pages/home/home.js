@@ -460,6 +460,7 @@ Page({
     this.initIndexData();
     this.initUserInfo();
     this.initHistoryLoc();
+    app.initResume(this)
     
   },
 

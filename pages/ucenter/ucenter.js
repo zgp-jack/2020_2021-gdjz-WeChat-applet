@@ -152,9 +152,7 @@ Page({
      * 生命周期函数--监听页面初次渲染完成
      */
     onReady: function() {
-    this.setData({
-        resumeText:app.globalData.resumeText
-      })
+
     },
 
     /**
@@ -163,6 +161,7 @@ Page({
     onShow() {
         this.initUserInfo();
         footerjs.initMsgNum(this);
+        app.initResume(this)
     },
     releaselive() {
         app.globalData.showdetail = true
