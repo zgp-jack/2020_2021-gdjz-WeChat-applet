@@ -282,7 +282,6 @@ Page({
     let fastData = wx.getStorageSync('fastData')
     //获取globalData中的用户手机号码
     let userPhone = app.globalData.publish.userPhone
-    console.log("userPhone",userPhone)
     //判断用户是否授权登录
     //如果用户授权
     if (u) {
@@ -307,6 +306,12 @@ Page({
                 content: content
               })
             }
+          }else{
+            _this.setData({
+              showTel: false,
+              phone: userPhone,
+              content: content
+            })
           }
         }else{
           _this.setData({
@@ -316,6 +321,8 @@ Page({
         }
       }else{
         _this.getUserInfo()
+        let userPhone = app.globalData.publish.userPhone
+        console.log("getUserInfo11111",userPhone)
         //判断如果存在fastData信息
         if (fastData) {
           console.log("fastData",fastData)
@@ -335,6 +342,12 @@ Page({
                 content: content
               })
             }
+          }else{
+            _this.setData({
+              showTel: false,
+              phone: userPhone,
+              content: content
+            })
           }
         }else{
           _this.setData({
