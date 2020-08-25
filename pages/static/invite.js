@@ -8,7 +8,8 @@ Page({
    */
   data: {
     shareUrl: '',
-    userInfo: false
+    userInfo: false,
+    resumeText:""
   },
   publishJob: function () {
     app.initJobView()
@@ -126,6 +127,7 @@ Page({
    */
   onShow: function () {
     if (!this.data.shareUrl) this.getUserInviteLink();
+    app.initResume(this)
   },
 
   /**

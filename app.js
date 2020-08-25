@@ -1379,6 +1379,9 @@ App({
             if(mydata.errcode == "ok"){
               that.globalData.publishFindWork.resumeText = mydata.data.title
               that.globalData.publishFindWork.loginAfter = true
+              _this.setData({
+                resumeText:mydata.data.title
+              })
             }
           },
           fail:()=>{
@@ -1386,7 +1389,11 @@ App({
             that.globalData.resumeText = "发布找活"
           }
         })
-      } 
+      } else {
+        _this.setData({
+          resumeText:that.globalData.publishFindWork.resumeText
+        })
+      }
     } else {
       let flag = JSON.parse(JSON.stringify(that.globalData.publishFindWork))
       if (!flag.loginBefore) {
@@ -1399,6 +1406,9 @@ App({
             if(mydata.errcode == "ok"){
               that.globalData.publishFindWork.resumeText = mydata.data.title
               that.globalData.publishFindWork.loginBefore = true
+              _this.setData({
+                resumeText:mydata.data.title
+              })
             }
           },
           fail:()=>{
@@ -1406,10 +1416,11 @@ App({
             that.globalData.publishFindWork.resumeText = "发布找活"
           }
         })
-      } 
+      } else {
+        _this.setData({
+          resumeText:that.globalData.publishFindWork.resumeText
+        })
+      }
     }
-    _this.setData({
-      resumeText:that.globalData.publishFindWork.resumeText
-    })
   },
 })

@@ -448,6 +448,13 @@
 					"pathName": "packageOther/pages/userinfo/edit/edit",
 					"query": "",
 					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "找活名片",
+					"pathName": "pages/clients-looking-for-work/finding-name-card/findingnamecard",
+					"query": "",
+					"scene": null
 				}
 			]
 		}

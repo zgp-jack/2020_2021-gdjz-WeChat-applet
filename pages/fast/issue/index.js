@@ -13,9 +13,8 @@ Page({
     phone: '',
     showTel: false,
     request:false,
+    //对电话输入框填写东西后是否需要匹配
     isRule:true,
-    //进入页面是否发起过请求，请求过一次就就不再请求
-    isGetUserInfo:true,
     imageUrl: app.globalData.apiImgUrl +"new-publish-title-t-icon.png"
   },
   checkType: function (obj, _type) {
@@ -116,15 +115,15 @@ Page({
       phone: value,
       isRule:false
     })
-    let _partten = /1[3-9]\d{9}/g;
-    let u = wx.getStorageSync('userInfo')
-    if (!u) {
-      if(!_partten.test(phone)) {
-        this.setData({
-          phone:""
-        })
-      }
-    }
+    // let _partten = /1[3-9]\d{9}/g;
+    // let u = wx.getStorageSync('userInfo')
+    // if (!u) {
+    //   if(!_partten.test(value)) {
+    //     this.setData({
+    //       phone:""
+    //     })
+    //   }
+    // }
   },
   publishRecurit: function () {
     let vali = v.v.new();

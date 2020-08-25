@@ -20,7 +20,8 @@ Page({
     checkingimg: app.globalData.apiImgUrl + 'published-info.png',
     infoId: '',
     infoIndex: -1,
-    tipmsg: '提示：人工审核，该信息仅自己可见。'
+    tipmsg: '提示：人工审核，该信息仅自己可见。',
+    resumeText:""
   },
   publishJob:function () {
     app.initJobView()
@@ -321,7 +322,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    app.initResume(this)
   },
 
   /**

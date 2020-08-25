@@ -117,7 +117,7 @@
         <view class='expend-close-record' bindtap='closeThisRerocd'></view>
         <view class='yupao-common-list'>
             <view class='yupao-common-lists-item clearfix' wx-if = "{{ topDetail.topType =='top_resume' }}">{{ topDetail.title }}</view>
-            <view class='yupao-common-lists-item clearfix'>
+            <view class='yupao-common-lists-item clearfix' wx-if = "{{ topDetail.topType =='top_job' }}">
                 <view class='yupao-common-list-left'>项目名称</view>
                 <view class='yupao-common-list-right'>{{ topDetail.title }}</view>
             </view>

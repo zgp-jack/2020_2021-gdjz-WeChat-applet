@@ -24,7 +24,8 @@ Page({
     infoIndex: -1,
     showTopTips: false,
     //我的全部招工信息是否有数据
-    isAllList : false
+    isAllList : false,
+    resumeText:""
   },
   publishJob:function () {
     app.initJobView()
@@ -377,6 +378,7 @@ Page({
    */
   onShow: function () {
     this.pageRefresh()  
+    app.initResume(this)
   },
 
   /**

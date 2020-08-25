@@ -971,6 +971,7 @@ Page({
     footerjs.initMsgNum(this);
     this.initTurntable();
     app.initResume(this)
+    console.log("this.data.fillterArea",this.data)
   },
   onPageScroll: function (e) {
     let top = e.scrollTop;

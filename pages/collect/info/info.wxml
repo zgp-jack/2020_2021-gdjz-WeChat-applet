@@ -61,4 +61,4 @@
 
 
 <!-- 引入footer listsboxdetailo  oimg listsboxdetailo-->
-<template is="footer" data="{{ footerImgs,publishActive,showPublishBox,footerActive }}" />
+<template is="footer" data="{{ footerImgs,publishActive,showPublishBox,footerActive,resumeText}}" />

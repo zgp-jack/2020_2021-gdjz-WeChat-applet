@@ -321,7 +321,8 @@ Page({
         location: userLocation,
         success: function (data) {
           _this.setData({
-            "addressData.title":data[0].regeocodeData.addressComponent.neighborhood.name
+            "addressData.title":data[0].regeocodeData.addressComponent.neighborhood.name,
+            areaId:gpsPorvince.id
           })
         },
         fail: function (info) {
