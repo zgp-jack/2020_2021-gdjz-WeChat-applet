@@ -562,7 +562,7 @@ Page({
     if (gpsloc && isGpsPorvince) {
       this.setData({areaText:gpsloc.name, keyAutoVal: gpsloc.name + "市", isGpsPorvince:false ,areaId:parseInt(gpsloc.id), pid: parseInt(gpsloc.pid)})
     }else if (defaultname && showfor == "showfor"){
-      this.setData({ areaText: defaultname.name, keyAutoVal: defaultname.name + "市" })
+      this.setData({ areaText: defaultname.name, keyAutoVal: defaultname.name + "市", areaId: defaultname.id, pid: defaultname.pid })
     } else if (lastCtiy && lastCtiy.hasOwnProperty('name') && !infoId ||showfor == "noshowfor" ) {
       this.setData({ areaText: lastCtiy.name , keyAutoVal: lastCtiy.ad_name })
     }
