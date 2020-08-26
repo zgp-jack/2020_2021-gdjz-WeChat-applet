@@ -54,21 +54,23 @@
         </view>
       </view>
     </view>
-    <view class="toptime" wx:if="{{has_top != 0&&resume_top.is_top != 2}}">
-      <view>
-        <text>置顶地区：</text>
-        <text class="proviceop" wx:for="{{resume_top.top_provinces_str}}" wx:key="{{index}}">{{item.name}}</text>
+    <view wx:if="{{resume_top.is_top == 1}}">
+      <view class="toptime" wx:if="{{has_top != 0&&resume_top.is_top != 2}}">
+        <view>
+          <text>置顶地区：</text>
+          <text class="proviceop" wx:for="{{resume_top.top_provinces_str}}" wx:key="{{index}}">{{item.name}}</text>
+        </view>
       </view>
-    </view>
-    <view class="toptime" wx:if="{{has_top != 0&&resume_top.is_top != 2}}">
-      <view>
-        <text>置顶时间：</text>
-        <text>{{resume_top.start_time_str}} ~ {{resume_top.end_time_str}}</text>
+      <view class="toptime" wx:if="{{has_top != 0&&resume_top.is_top != 2}}">
+        <view>
+          <text>置顶时间：</text>
+          <text>{{resume_top.start_time_str}} ~ {{resume_top.end_time_str}}</text>
+        </view>
       </view>
-    </view>
-    <view class="topdetail" wx:if="{{has_top != 0&&resume_top.is_top != 2}}"
-    bindtap="modifytop">
-      <text>点击修改找活置顶信息>></text>
+      <view class="topdetail" wx:if="{{has_top != 0&&resume_top.is_top != 2}}"
+      bindtap="modifytop">
+        <text>点击修改找活置顶信息>></text>
+      </view>
     </view>
   </view>
 
@@ -173,7 +175,7 @@
             </view>
             <view class="cardotext">
 
-              <text class="oworkotext">所在地区</text>
+              <text class="oworkotext">期望地区</text>
 
 
               <text class="workotextone">{{city}}</text>

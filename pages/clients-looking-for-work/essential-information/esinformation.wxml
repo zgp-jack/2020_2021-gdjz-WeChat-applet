@@ -58,7 +58,7 @@
     </view>
 
     <view class="informationseven">
-      <view class="informaregiononede"><text>所在地区</text></view>
+      <view class="informaregiononede"><text>期望地区</text></view>
       <view class="informationseventwo">
         <!-- <input name="addregionone" disabled="true" placeholder="请选择你所在地址" bindtap='userTapAddress' value='{{regionone}}'>
         </input> -->

@@ -26,30 +26,30 @@ Page({
   // 设置缓存保留已填写信息
   setEnterInfo: function (name, data) {
     let regx = /1[3-9]\d{9}/g
-    let key = 'fastData'
-    let fastData = wx.getStorageSync(key)
+    let key = 'jiSuData'
+    let jiSuData = wx.getStorageSync(key)
     if (name === "phone") {
       if (regx.test(data)) {
-        if (fastData) {
-          fastData[name] = data
+        if (jiSuData) {
+          jiSuData[name] = data
         } else {
-          fastData = {}
-          fastData[name] = data
+          jiSuData = {}
+          jiSuData[name] = data
         }
       } else {
-        if (fastData) {
-          fastData[name] = ""
+        if (jiSuData) {
+          jiSuData[name] = ""
         }
       }
     } else {
-      if (fastData) {
-        fastData[name] = data
+      if (jiSuData) {
+        jiSuData[name] = data
       } else {
-        fastData = {}
-        fastData[name] = data
+        jiSuData = {}
+        jiSuData[name] = data
       }
     }
-    wx.setStorageSync(key, fastData)
+    wx.setStorageSync(key, jiSuData)
   },
   enterContent: function (e) {
     // let phone = this.data.phone
@@ -57,12 +57,12 @@ Page({
     let userPhone = app.globalData.publish.userPhone
     let u = wx.getStorageSync('userInfo')
     let val = e.detail.value;
-    let fastData = wx.getStorageSync('fastData')
+    let jiSuData = wx.getStorageSync('jiSuData')
     this.setData({
       content: val
     })
     let content = val.replace(/\s+/g, "");
-    this.setEnterInfo("content",content)
+    this.setEnterInfo("detail",content)
     let _partten = /1[3-9]\d{9}/g;
     let phone = content.match(_partten);
     if (phone) {
@@ -238,7 +238,7 @@ Page({
   getUserInfo:function () {
     let _this = this;
     let u = wx.getStorageSync('userInfo')
-    let fastData = wx.getStorageSync("fastData")
+    let jiSuData = wx.getStorageSync("jiSuData")
     _this.setData({
       userInfo: u ? u : false,
     })
@@ -253,10 +253,17 @@ Page({
       if(mydata.errcode == "ok"){
         let tel = mydata.memberInfo.tel || ''
         app.globalData.publish.userPhone = tel
-        if (fastData.phone) {
-          _this.setData({
-            phone:fastData.phone
-          })
+        if (jiSuData.phone) {
+          if(tel == jiSuData.phone){
+            _this.setData({
+              phone:jiSuData.phone,
+              showTel:false
+            })
+          }else{
+            _this.setData({
+              phone:jiSuData.phone
+            })
+          }
         }else{
           _this.setData({
             phone:tel
@@ -288,20 +295,19 @@ Page({
     //获取本地缓存用户信息
     let u = wx.getStorageSync('userInfo')
     //获取本地缓存的快速发布信息
-    let fastData = wx.getStorageSync('fastData')
+    let jiSuData = wx.getStorageSync('jiSuData')
     //获取globalData中的用户手机号码
     let userPhone = app.globalData.publish.userPhone
-    console.log("userPhone2222222",userPhone)
     //判断用户是否授权登录
     //如果用户授权
     if (u) {
     //判断是否已经获取到用户信息手机号码
     //如果已经有用户手机号码信息就读取缓存用户手机号信息
       if (userPhone) {
-    //判断如果存在fastData信息
-        if (fastData) {
-          let content = fastData.content
-          let phone = fastData.phone
+    //判断如果存在jiSuData信息
+        if (jiSuData) {
+          let content = jiSuData.detail
+          let phone = jiSuData.phone
           if (phone) {
             if (userPhone == phone) {
               _this.setData({
@@ -332,10 +338,10 @@ Page({
       }else{
         _this.getUserInfo()
         let userTel = app.globalData.publish.userPhone
-        //判断如果存在fastData信息
-        if (fastData) {
-          let content = fastData.content
-          let phone = fastData.phone
+        //判断如果存在jiSuData信息
+        if (jiSuData) {
+          let content = jiSuData.detail
+          let phone = jiSuData.phone
           if (phone) {
             if (userPhone == phone) {
               _this.setData({
@@ -366,9 +372,9 @@ Page({
       }
     }else{
     //如果用户没有授权
-      if (fastData) {
-        let content = fastData.content
-        let phone = fastData.phone
+      if (jiSuData) {
+        let content = jiSuData.detail
+        let phone = jiSuData.phone
         this.setData({
           content: content || "",
           phone: phone || ""

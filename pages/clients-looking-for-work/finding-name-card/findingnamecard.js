@@ -825,7 +825,6 @@ Page({
             resume_top: mydata.hasOwnProperty("resume_top") ? mydata.resume_top : [],
             top_status: mydata.hasOwnProperty("top_status") ? mydata.top_status : []
           })
-          
           if (mydata.hasOwnProperty("resume_top")) {
             if (mydata.resume_top.is_top == 1) {
               
@@ -833,6 +832,7 @@ Page({
                 indextop: 0,
                 is_top_show: false,
               })
+              
             } else if (mydata.resume_top.is_top == 0) {
               that.setData({
                 indextop: 1,

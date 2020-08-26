@@ -13,7 +13,7 @@ Page({
     statusNopass: app.globalData.apiImgUrl + 'published-recruit-nopass.png',
     handsettop:app.globalData.apiImgUrl + "new-published-settop-tips.png",
     page: 1,
-    types: [{id:'all',name:'全部'},{id:'being',name:'正在招'},{id:'end',name:'已招满'}],
+    types: [{id:'all',name:'全部'},{id:'being',name:'正在招'},{id:'checking',name:'审核中'},{id:'fail',name:'未通过'},{id:'end',name:'已招满'}],
     current: 0,
     hasmore: true,
     lists: [],
@@ -291,6 +291,7 @@ Page({
     userinfo.uuid = userUuid
     userinfo.type = this.data.types[this.data.current].id
     userinfo.page = this.data.page
+    console.log("userinfo",userinfo)
     app.appRequestAction({
       url: 'job/issue-lists/',
       way: 'POST',

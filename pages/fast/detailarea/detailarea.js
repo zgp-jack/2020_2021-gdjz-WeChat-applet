@@ -430,6 +430,7 @@ Page({
   setAddressData: function (e) {
     let _this = this;
     let history = _this.data.isHistory
+    let defaultname = wx.getStorageSync('defaultname')
     if (history) {
       let index = e.currentTarget.dataset.index
       let historyCityLists = wx.getStorageSync('historyCityLists')
@@ -471,15 +472,15 @@ Page({
     }
     //点击详细地址将当前城市信息保存到缓存defaultname
     wx.setStorageSync('defaultname', mydata)
-    //点击详细地址将当前城市信息保存到缓存fastData
-    let fastData = wx.getStorageSync('fastData')
-    if (fastData) {
-      fastData["defaultname"] = mydata
-      wx.setStorageSync('fastData', fastData)
+    //点击详细地址将当前城市信息保存到缓存jiSuData
+    let jiSuData = wx.getStorageSync('jiSuData')
+    if (jiSuData) {
+      jiSuData["defaultname"] = mydata
+      wx.setStorageSync('jiSuData', jiSuData)
     } else {
-      fastData = {}
-      fastData["defaultname"]= mydata
-      wx.setStorageSync('fastData', fastData)
+      jiSuData = {}
+      jiSuData["defaultname"]= mydata
+      wx.setStorageSync('jiSuData', jiSuData)
     }
     //获取选择详细地址的位置信息
     let t = e.currentTarget.dataset.title
@@ -505,7 +506,7 @@ Page({
         "addressData.adcode": a,
         "addressData.location": l,
         "addressData.district": d,
-        areaId: id
+        areaId: defaultname.id
       })
 
       prevPage.userSetAreaInfo()
@@ -541,7 +542,7 @@ Page({
   initAreaText: function () {
     let infoId = this.data.infoId
     //获取招工填写数据缓存
-    let fastData = wx.getStorageSync('fastData')
+    let jiSuData = wx.getStorageSync('jiSuData')
     //获取缓存历史城市信息
     let locationHistory = wx.getStorageSync('locationHistory')
     //获取缓存的历史记录信息
@@ -558,7 +559,7 @@ Page({
     //如果缓存历史城市列表与最后选择城市都不存在，表明是首次进入地区选择
     
     if (!historyCityLists && !lastCtiy) {
-      //如果进入城市选择获得位置信息授权将位置信息保存到locationHistory、defaultname、fastData中
+      //如果进入城市选择获得位置信息授权将位置信息保存到locationHistory、defaultname、jiSuData中
       if (gpsPorvince) {
         let id = gpsPorvince.id
         let name = gpsPorvince.name
@@ -577,13 +578,13 @@ Page({
         //将历史记录城市信息记录到locationHstory中
         app.setStorageAction(id, mydata, true)
         wx.setStorageSync('defaultname', gpsPorvince)
-        if (fastData) {
-          fastData["defaultname"] = gpsPorvince
+        if (jiSuData) {
+          jiSuData["defaultname"] = gpsPorvince
         } else {
-          fastData = {}
-          fastData["defaultname"] = gpsPorvince
+          jiSuData = {}
+          jiSuData["defaultname"] = gpsPorvince
         }
-        wx.setStorageSync('fastData', fastData)
+        wx.setStorageSync('jiSuData', jiSuData)
       }
     }
     

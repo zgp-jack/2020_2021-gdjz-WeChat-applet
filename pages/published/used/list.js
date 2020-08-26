@@ -11,7 +11,7 @@ Page({
     statusEnd: app.globalData.apiImgUrl + 'mini-used-endicon.png',
     statusNopass: app.globalData.apiImgUrl + 'published-recruit-nopass.png',
     page: 1,
-    types: [{id:'all',name:'全部'},{id:'being',name:'交易中'},{id:'end',name:'已成交'}],
+    types: [{id:'all',name:'全部'},{id:'being',name:'交易中'},{id:'checking',name:'审核中'},{id:'fail',name:'未通过'},{id:'end',name:'已成交'}],
     current: 0,
     hasmore: true,
     lists: [],

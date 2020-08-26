@@ -455,6 +455,20 @@
 					"pathName": "pages/clients-looking-for-work/finding-name-card/findingnamecard",
 					"query": "",
 					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "我的二手交易",
+					"pathName": "pages/published/used/list",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "我的找活",
+					"pathName": "pages/clients-looking-for-work/finding-name-card/findingnamecard",
+					"query": "",
+					"scene": null
 				}
 			]
 		}

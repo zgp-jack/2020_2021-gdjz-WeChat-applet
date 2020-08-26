@@ -215,6 +215,7 @@ Page({
     let location = this.data.addressData.location
     let adName = this.data.addressData.title
     let address = this.data.addressData.district
+    console.log("location detail",areaId,location,adName,address)
     let that = this;
     if (e.detail.userInfo) {
       wx.showToast({
@@ -294,17 +295,17 @@ Page({
   },
   // 设置缓存保留已填写信息
   setEnterInfo: function (name, data) {
-    let key = 'fastData'
-    let fastData = wx.getStorageSync(key)
-    if (fastData) {
-      fastData[name] = data
+    let key = 'jiSuData'
+    let jiSuData = wx.getStorageSync(key)
+    if (jiSuData) {
+      jiSuData[name] = data
     } else {
-      fastData = {}
-      fastData[name] = data
+      jiSuData = {}
+      jiSuData[name] = data
     }
-    wx.setStorageSync(key, fastData)
+    wx.setStorageSync(key, jiSuData)
   },
-  //点击地址详情页的详细地址设置到fastData缓存数据中
+  //点击地址详情页的详细地址设置到jiSuData缓存数据中
   userSetAreaInfo: function () {
     let val = this.data.addressData
     //调用函数设置缓存
@@ -316,27 +317,33 @@ Page({
   //获取地理定位的位置缓存信息  
     let gpsPorvince = wx.getStorageSync('gpsPorvince')
     let userLocation = wx.getStorageSync('userLocation')
-    if (userLocation) {
-      amapFun.getRegeo({
-        location: userLocation,
-        success: function (data) {
-          _this.setData({
-            "addressData.title":data[0].regeocodeData.addressComponent.neighborhood.name,
-            areaId:gpsPorvince.id
-          })
-        },
-        fail: function (info) {
-          //失败回调
-          // that.openSetting(function(){
-          //   that.initHistoryCityList();
-          // })
-        }
-      })
+    //获取缓存的jiSuData数据
+    let jiSuData = wx.getStorageSync('jiSuData')
+    if (!jiSuData || (jiSuData && !jiSuData.area)) {
+      if (userLocation) {
+        amapFun.getRegeo({
+          location: userLocation,
+          success: function (data) {
+            console.log("positiondata",data)
+            _this.setData({
+              "addressData.title":data[0].regeocodeData.addressComponent.neighborhood.name,
+              "addressData.location":userLocation,
+              "addressData.adcode":data[0].regeocodeData.addressComponent.adcode,
+              "addressData.district":data[0].regeocodeData.formatted_address,
+              areaId:gpsPorvince.id
+            })
+          },
+          fail: function (info) {
+            //失败回调
+            // that.openSetting(function(){
+            //   that.initHistoryCityList();
+            // })
+          }
+        })
+      }
     }
   //获取区域数组的北京数据
     let defaultPosition = areas.getAreaArr[1]
-  //获取缓存的fastData数据
-    let fastData = wx.getStorageSync('fastData')
   //判断是否有授权获取地理位置信息，没有则获取默认位置北京
     let position = gpsPorvince?gpsPorvince:defaultPosition
   //生成需要缓存locationHistory数据
@@ -350,41 +357,39 @@ Page({
       name: name,
       ad_name: adName
     }
-  //设置到defaultname缓存数据中
-    wx.setStorageSync('defaultname', defaultname)
-  //调用app中方法设置到locationHistory缓存数据中
-    app.setStorageAction(id, defaultname, true)
-  //如果缓存fastData中有选择的详细区域信息则将数据存到data的addressData中
-  //初始化时将fastData中的城市信息id存入到data中
-    if (fastData) {
-      if (fastData.area) {
-        this.setData({
-          addressData: fastData.area,
-        })
-      }
-      if (fastData.defaultname) {
-        this.setData({
-          areaId: fastData.defaultname.id,
-        })
-      }
-    }
-  //如果缓存fastData中有选择过的区域信息则将区域信息压入缓存locationHistory中和缓存defaultname中
-    if (fastData.defaultname) {
-      wx.setStorageSync('defaultname', fastData.defaultname)//标记
-  //生成需要缓存locationHistory数据
-      let id = parseInt(fastData.defaultname.id) 
-      let pid = parseInt(fastData.defaultname.pid)
-      let name = fastData.defaultname.name
-      let adName = fastData.defaultname.ad_name
-      let defaultname = {
-        id: id,
-        pid: pid,
-        name: name,
-        ad_name: adName
-      }
-  //调用app中方法设置到locationHistory缓存数据中
+    if(!jiSuData){
+      wx.setStorageSync('defaultname', defaultname)
       app.setStorageAction(id, defaultname, true)
-    }
+      return false;
+    } else {
+      if(jiSuData.detail){
+        _this.setData({ content:jiSuData.detail })
+      }
+      if (jiSuData.area) {
+        _this.setData({
+          addressData: jiSuData.area
+        })
+      }
+      if (jiSuData.defaultname) {
+        wx.setStorageSync('defaultname', jiSuData.defaultname)//标记
+        //生成需要缓存locationHistory数据
+          let id = parseInt(jiSuData.defaultname.id) 
+          let pid = parseInt(jiSuData.defaultname.pid)
+          let name = jiSuData.defaultname.name
+          let adName = jiSuData.defaultname.ad_name
+          let defaultname = {
+            id: id,
+            pid: pid,
+            name: name,
+            ad_name: adName
+          }
+        //调用app中方法设置到locationHistory缓存数据中
+          app.setStorageAction(id, defaultname, true)
+          this.setData({
+            areaId: jiSuData.defaultname.id,
+          })
+        }
+      }
   },
   /**
    * 生命周期函数--监听页面加载
