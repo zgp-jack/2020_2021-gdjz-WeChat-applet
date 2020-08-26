@@ -470,6 +470,7 @@ Page({
       ad_name:adName,
       pid: pid
     }
+    console.log("mydata1111111",mydata)
     //点击详细地址将当前城市信息保存到缓存defaultname
     wx.setStorageSync('defaultname', mydata)
     //点击详细地址将当前城市信息保存到缓存jiSuData
@@ -506,7 +507,7 @@ Page({
         "addressData.adcode": a,
         "addressData.location": l,
         "addressData.district": d,
-        areaId: defaultname.id
+        areaId: id
       })
 
       prevPage.userSetAreaInfo()
@@ -573,7 +574,10 @@ Page({
           pid: pid
         }
         this.setData({
-          areaId:id
+          areaId:id,
+          areaText:name,
+          keyAutoVal:adName,
+          pid:pid
         })
         //将历史记录城市信息记录到locationHstory中
         app.setStorageAction(id, mydata, true)
@@ -587,14 +591,13 @@ Page({
         wx.setStorageSync('jiSuData', jiSuData)
       }
     }
-    
     this.setData({ gpsOrientation: gpsPorvince });
     let showfor = this.data.showfor;
     let showmap = this.data.showmap;
     if (gpsloc && isGpsPorvince) {
       this.setData({areaText:gpsloc.name, keyAutoVal: gpsloc.name + "市", isGpsPorvince:false ,areaId:parseInt(gpsloc.id), pid: parseInt(gpsloc.pid)})
     } else if (defaultname && showfor == "showfor"){
-      this.setData({ areaText: defaultname.name, keyAutoVal: defaultname.name + "市" })
+      this.setData({ areaText: defaultname.name, keyAutoVal: defaultname.name + "市", areaId: defaultname.id, pid: defaultname.pid})
     } else if (lastCtiy && lastCtiy.hasOwnProperty('name') && !infoId ||showfor == "noshowfor" ) {
       this.setData({ areaText: lastCtiy.name , keyAutoVal: lastCtiy.ad_name })
     } else if (gpsloc) {
