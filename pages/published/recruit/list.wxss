@@ -43,7 +43,7 @@ page {
   padding-top: 100rpx;
   padding-bottom: 120rpx;
   padding-bottom: 120rpx;
-  height: 83%;
+  height: calc(100% - 200rpx)
 }
 .recruit-list-item{
   position: relative;
