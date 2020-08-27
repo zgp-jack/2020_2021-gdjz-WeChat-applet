@@ -551,6 +551,14 @@ Page({
    */
   onShareAppMessage: function () {
     return app.getUserShareJson();
+  },
+  onShareTimeline:function () {
+    let commonShareTips = app.globalData.commonShareTips;
+    let commonShareImg = app.globalData.commonShareImg;
+    return {
+      title: commonShareTips,
+      imageUrl: commonShareImg
+    }
   }
 
 })

@@ -895,6 +895,14 @@ Page({
     }
 
   },
+  onShareTimeline:function () {
+    let commonShareTips = app.globalData.commonShareTips;
+    let commonShareImg = app.globalData.commonShareImg;
+    return {
+      title: commonShareTips,
+      imageUrl: commonShareImg
+    }
+  }
   /**
    * 用户点击右上角分享
    */

@@ -430,6 +430,14 @@ Page({
       }
     }
   },
+  onShareTimeline:function () {
+    let commonShareTips = app.globalData.commonShareTips;
+    let commonShareImg = app.globalData.commonShareImg;
+    return {
+      title: commonShareTips,
+      imageUrl: commonShareImg
+    }
+  },
   selectTap() {
     let that = this;
     if (this.data.check == "2") {
