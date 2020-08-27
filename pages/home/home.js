@@ -36,7 +36,8 @@ Page({
       circular: true,
       interval: 5000,
       duration: 1000,
-      imgUrls: []
+      imgUrls: [],
+      newBanner:[]
     },
     notice: {
       autoplay: true,
@@ -333,6 +334,7 @@ Page({
         _this.setData({
           "notice.lists": mydata.notice,
           "swiper.imgUrls": mydata.banner,
+          "swiper.newBanner":mydata.banner_newest,
           areaId: areaId ? areaId : mydata.address.id,
           areaText: areaText ? areaText : mydata.address.name,
           showAuthQuery: mydata.show_auth_query ? true : false
@@ -445,6 +447,53 @@ Page({
     wx.navigateTo({
       url: `/pages/boss-look-card/lookcard?uuid=${uuid}&location=${userLocation}`,
     })
+  },
+  //授权登录
+  bindUserInfo :function(e){
+    let that = this;
+    app.bindGetUserInfo(e, function (res) {
+      app.mini_user(res, function (res) {
+        app.api_user(res, function (res) {
+          let uinfo = res.data;
+          if (uinfo.errcode == "ok") {
+            let userInfo = {
+              userId: uinfo.data.id,
+              token: uinfo.data.sign.token,
+              tokenTime: uinfo.data.sign.time,
+            }
+            let userUuid = uinfo.data.uuid;
+            app.globalData.userInfo = userInfo;
+            wx.setStorageSync('userInfo', userInfo)
+            wx.setStorageSync('userUuid', userUuid)
+            wx.navigateBack({ delta: 1 })
+          } else {
+            app.showMyTips(uinfo.errmsg);
+          }
+        });
+      });
+    });
+  },
+  //根据后端返回状态点击判断是会否需要授权登录
+  bindGetUserInfo:function (e) {
+    let url = e.currentTarget.dataset.url
+    let login = e.currentTarget.dataset.need_login
+    let u = wx.getStorageSync('userInfo')
+    if (login) {
+      if (u) {
+        wx.navigateTo({
+          url: url,
+        })
+      } else {
+        this.bindUserInfo()
+        wx.navigateTo({
+          url: url,
+        })
+      }
+    }else{
+      wx.navigateTo({
+        url:url,
+      })
+    }
   },
   /**
      * 生命周期函数--监听页面初次渲染完成
