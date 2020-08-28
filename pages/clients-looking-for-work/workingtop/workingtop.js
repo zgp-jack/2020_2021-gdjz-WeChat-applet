@@ -238,7 +238,7 @@ Page({
     }
     
     app.appRequestAction({
-      url: 'job/do-top/',
+      url: 'resumes/do-top-v2/',
       way: 'POST',
       params: detail,
       mask: true,

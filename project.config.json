@@ -474,7 +474,7 @@
 					"id": 58,
 					"name": "找活置顶界面",
 					"pathName": "pages/clients-looking-for-work/workingtop/workingtop",
-					"query": "topdata= \"{\"has_top\":0,\"is_top\":0}\"",
+					"query": "",
 					"scene": null
 				},
 				{
