@@ -1,0 +1,310 @@
+/* pages/clients-looking-for-work/finding-top/findingtop.wxss */
+@import "../../userauth/userauth.wxss";
+page {
+  background: #fdfdff;
+}
+.topall{
+  padding: 0 28rpx 0 28rpx;
+}
+.common-userauth {
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 999999;
+  width: 100%;
+  height: 100%;
+  background: white;
+}
+.scope{
+  width: 40%;
+  margin: 0;
+  padding: 0;
+
+  color: #202021;
+  font-size: 32rpx;
+  /* text-align: justify; */
+  position: relative;
+  margin-top: 28rpx;
+}
+.scope text{
+  letter-spacing: 2rpx;
+}
+.scope::after{
+  content: '';
+  width: 100%;
+  overflow: hidden;
+  height: 0;
+}
+
+.scope::before{
+  content: ':';
+  height: 100%;
+  width: 6rpx;
+  position: absolute;
+  right: -4px;
+}
+
+.pointscope{
+  width: 300rpx;
+  height: 70rpx;
+  background: #0099FF;
+  color: white;
+  font-size: 30rpx;
+  line-height: 70rpx;
+  text-align: center;
+  margin-top: 30rpx;
+  border-radius: 8rpx;
+}
+
+
+
+.scopenum{
+  width: 35%;
+  margin: 0;
+  padding: 0;
+
+  color: #202021;
+  font-size: 32rpx;
+  position: relative;
+  margin-top: 25rpx;
+}
+.scopenum text{
+  letter-spacing: 2rpx;
+}
+.scopenum::after{
+  content: '';
+  width: 100%;
+  overflow: hidden;
+  height: 0;
+}
+.scopenum::before{
+  content: ':';
+  height: 100%;
+  width: 6rpx;
+  position: absolute;
+  right: -4px;
+}
+
+
+.dayall{
+  margin-top: 20rpx;
+  background: white!important;
+  padding: 0rpx 30rpx 0rpx 30rpx;
+  box-shadow: 2rpx 4rpx 4rpx 4rpx #DCDCDC;
+
+}
+.daynum{
+  position: relative;
+padding-left: 26%;
+  border-bottom: 1px solid #DCDCDC;
+    line-height: 90rpx;
+  height: 90rpx;
+}
+.daynum text{
+  width: 22%;
+  display: inline-block;
+  color: #202021;
+  font-size: 30rpx;
+  position: absolute;
+  left: 0rpx;
+}
+.daynum text::after{
+  content: '';
+  width: 100%;
+  overflow: hidden;
+  height: 0;
+}
+.daynum text::before{
+  content: ':';
+  height: 100%;
+  width: 6rpx;
+  position: absolute;
+  right: 4rpx;
+}
+.daynum input{
+  width: 75%;
+  font-size: 30rpx;
+  display: inline-block;
+  height: 90rpx;
+}
+.daynum:last-child{
+  border: 0;
+}
+.daynum view{
+  display: inline-block;
+  color: #0099FF;
+  font-size: 30rpx;
+
+}
+
+
+.submitscope{
+  width: 420rpx;
+  height: 80rpx;
+  background: #0099FF;
+  color: white;
+  font-size: 38rpx;
+  line-height: 80rpx;
+  text-align: center;
+  margin: 0 auto;
+  margin-top: 40rpx;
+  border-radius: 8rpx;
+}
+
+.toprule{
+   margin: 0 auto;
+   width: 420rpx;
+   color: #202021;
+   text-align: center;
+   height: 80rpx;
+   line-height: 80rpx;
+   font-size: 30rpx;
+   position: relative;
+}
+
+.toprule::before{
+  content: '';
+  border-bottom: 2rpx solid #202021;
+  width: 30%;
+  height: 2rpx;
+  position: absolute;
+  left: 8rpx;
+  top: 45%;
+}
+.toprule::after{
+  content: '';
+  border-bottom: 2rpx solid #202021;
+  width: 30%;
+  height: 2rpx;
+  position: absolute;
+  right: 8rpx;
+  top: 45%;
+}
+.bottom{
+  font-size: 30rpx;
+  color: #202021;
+}
+.bottom text{
+  color: #0099FF;
+}
+.deleteimg{
+   width: 30rpx;
+   height: 30rpx;
+   position: absolute;
+   right: 0rpx;
+   top: 0rpx;
+}
+.scopedetail view{
+   display: inline-block;
+   width: 26.33%;
+   font-size: 36rpx;
+   color: #6F6F6F;
+   line-height: 80rpx;
+   border:  1px solid #6F6F6F;
+   border-radius: 10rpx;
+   text-align: center;
+   margin-top: 22rpx;
+   margin-right: 10.5%;
+   position: relative;
+}
+.scopedetail .obttn{
+   display: inline-block;
+   /* width: 28.33%; */
+   font-size: 36rpx;
+   color: white;
+   line-height: 80rpx;
+   border-radius: 10rpx;
+   text-align: center;
+   margin-top: 22rpx;
+   margin-right: 10.5%;
+   /* margin-right: 4.5%; */
+   position: relative;
+   border: 0;
+   background: #0099FF;
+}
+.bottom text{
+  color: #0099FF;
+}
+.scopedetail view:nth-child(3n){
+      margin-right: 0;
+}
+.scopedetail view:first-child{
+      margin-right: 10.5%;
+}
+.daynum picker{
+
+  line-height: 90rpx;
+  width: 100%;
+}
+.daynum picker .end{
+  width: 80%;
+    display: flex;
+  align-items: center;
+}
+
+.daynumone{
+  position: relative;
+padding-left: 31%;
+
+  border-bottom: 1px solid #DCDCDC;
+    line-height: 90rpx;
+  height: 90rpx;
+}
+.daynumone .endtime{
+  width: 29.5%;
+  display: inline-block;
+  color: #202021;
+  font-size: 30rpx;
+  position: absolute;
+  left: 0rpx;
+}
+ .daynumone .bluet{
+   color: #0099FF;
+ }
+
+.daynumone .endtime::after{
+  content: '';
+  width: 100%;
+  overflow: hidden;
+  height: 0;
+}
+.daynumone .endtime::before{
+  content: ':';
+  height: 100%;
+  width: 6rpx;
+  position: absolute;
+  right: 4rpx;
+}
+.daynumone input{
+  width: 75%;
+  font-size: 30rpx;
+  display: inline-block;
+  height: 90rpx;
+}
+.daynumone:last-child{
+  border: 0;
+}
+.daynumone picker text{
+  display: inline-block;
+  font-size: 30rpx;
+  position: static;
+
+}
+.dayall .daynumone picker{
+  height: 90rpx;
+  width: 100%;
+}
+.dayall .daynumone .yanchang{
+  position: absolute;
+  right: 0;
+  top: 0;
+  font-size: 30rpx;
+  color: #0099FF;
+}
+.dayall .daynumone .yanchangon{
+   position: absolute;
+  right: 0;
+  top: 0;
+  font-size: 30rpx;
+  color: rgb(179, 180, 180);
+}

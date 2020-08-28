@@ -119,7 +119,8 @@ Page({
     certificate_show:false,
     top_status_one:"",
     topshow:false,
-    is_top_show:true
+    is_top_show:true,
+    id:""
   },
 
 
@@ -269,10 +270,15 @@ Page({
   },
 
   thestickyrule() {
-    // ressonone
+    // 去置顶前检查是否有填写名片信息
     let that = this;
+    // 获取是否可以置顶的文案
     let contentom = that.data.top_tips_string
-    
+    //如果需要去完善数据跳转去发布填写找活名片界面
+    let topdata = JSON.stringify(that.data.resume_top)
+    let hastop = parseInt(topdata.has_top) 
+    let istop = parseInt(topdata.is_top)
+    let id = that.data.id
     if (that.data.showtop) {
       wx.showModal({
         title: '温馨提示',
@@ -286,6 +292,7 @@ Page({
         }
       })
       return
+    //如果需要展示提示框，显示提示信息
     } else if (that.data.is_show_tips == 1) {
       wx.showModal({
         title: '温馨提示',
@@ -295,9 +302,10 @@ Page({
         }
       })
       return
+    //如果有找活名片信息跳转去招工置顶界面
     } else {
       wx.navigateTo({
-        url: `/pages/clients-looking-for-work/finding-top/findingtop`,
+        url: "/pages/clients-looking-for-work/workingtop/workingtop?id="+ id + "&&topdata=" + topdata,
       })
     }
   },
@@ -759,7 +767,9 @@ Page({
           let dateone = new Date(dateo);
           wx.setStorageSync("introdetail", mydata.introduces)
           wx.setStorageSync("introinfo", mydata.info)
+          //初始化数据如果有uuid就隐藏提示完善信息窗口
           if (mydata.info.uuid) {
+          //隐藏提示信息窗口
             that.showtop()
             that.setData({
               resume_uuid: mydata.info.uuid
@@ -831,7 +841,8 @@ Page({
             certificate_show: mydata.info.hasOwnProperty("certificate_show") ? mydata.info.certificate_show : "",
             authenticationimg: mydata.info.hasOwnProperty("authentication") ? mydata.info.authentication : "",
             resume_top: mydata.hasOwnProperty("resume_top") ? mydata.resume_top : [],
-            top_status: mydata.hasOwnProperty("top_status") ? mydata.top_status : []
+            top_status: mydata.hasOwnProperty("top_status") ? mydata.top_status : [],
+            id: mydata.info.hasOwnProperty("id")? mydata.info.id : ""
           })
           if (mydata.hasOwnProperty("resume_top")) {
             if (mydata.resume_top.is_top == 1) {

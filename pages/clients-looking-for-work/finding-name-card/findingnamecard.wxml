@@ -68,7 +68,7 @@
         </view>
       </view>
       <view class="topdetail" wx:if="{{has_top != 0&&resume_top.is_top != 2}}"
-      bindtap="modifytop">
+      bindtap="modifytop" data-topId="1">
         <text>点击修改找活置顶信息>></text>
       </view>
     </view>

@@ -40,7 +40,7 @@
       </block>
       <block wx:for="{{ swiper.newBanner }}" wx:key="{{ item.id }}">
         <swiper-item>
-          <button url='{{ item.self_url }}' bindtap="shownewpage" data-url = "{{ item.self_url }}" data-login ="{{ item.need_login }}" open-type="{{ getUserInfo }}" bindgetuserinfo="bindGetUserInfo">
+          <button data-url = "{{ item.self_url }}" data-login ="{{ item.need_login }}" open-type="getUserInfo" bindgetuserinfo="bindUserInfo">
             <image src="{{ item.image_url }}" class="index-swiper-img" />
           </button>
         </swiper-item>

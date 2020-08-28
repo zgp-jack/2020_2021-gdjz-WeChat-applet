@@ -38,7 +38,6 @@
     "pages/getintegral/getintegral",
     "pages/usedlist/usedlist",
     "pages/detail/usedinfo/usedinfo",
-    "pages/detail/ucard/ucard",
     "pages/publish/card/card",
     "pages/publish/used/used",
     "pages/realname/realname",
@@ -65,7 +64,8 @@
     "pages/fast/area/area",
     "pages/fast/tips/tips",
     "pages/issue/index/index",
-    "pages/issue/area/area"
+    "pages/issue/area/area",
+    "pages/clients-looking-for-work/workingtop/workingtop"
   ],
   "subpackages": [
     {

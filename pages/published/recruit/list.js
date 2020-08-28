@@ -329,7 +329,7 @@ Page({
       hasmore: true,
       lists: []
     })
-    this.getRecruitList()
+    // this.getRecruitList()
   },
   initFooterData: function () {
     this.setData({

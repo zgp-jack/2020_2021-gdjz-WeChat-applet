@@ -139,7 +139,7 @@ Page({
       hasmore: true,
       lists: []
     })
-    this.getUsedList()
+    // this.getUsedList()
   },
   getUsedList:function(){
     let _this = this
@@ -315,7 +315,7 @@ Page({
   },
   loadmore:function(){
     if(!this.data.hasmore) return false
-    this.getRecruitList()
+    this.getUsedList()
   },
   /**
    * 生命周期函数--监听页面加载

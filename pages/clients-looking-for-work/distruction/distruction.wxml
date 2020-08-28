@@ -1,0 +1,91 @@
+
+<view class='{{(!showInputList &&!showListsAnd)?"index-pullareabox":"index-pullareabox index-pullareaboxone"}}'>
+  <view class='index-area-header'>
+    <view class="searchinputbox">
+      <input class="area-input" placeholder="输入城市名字进行搜索" bindinput="searchInput" bindfocus="showInputList" value="{{ searchInputVal }}" focus="{{ areaInputFocus }}" tabindex="99999999999"></input>
+      <image src="{{ clearinput }}" bindtap="clearInputAction"></image>
+    </view>
+    <text class='index-close-area'>搜索</text>
+  </view>
+  <!-- bindtap='closeArea'  -->
+  <view class="searchcitybox" wx:if="{{ showInputList && showListsTtile }}">
+    <view class="search-list-item" wx:if="{{ !isAllAreas && !nAreaLists.length }}">
+      <view class='common-nodatabox flex-column'>
+        <image src='{{ nodataImg }}'></image>
+        <text>暂未找到相关城市</text>
+      </view>
+    </view>
+    <view class="search-list-item" wx:for="{{ isAllAreas ? allAreaLists : nAreaLists }}" wx:key="{{ index }}" bindtap='chooseInputCtiy' data-pname="{{ item.ad_name }}" data-id="{{ item.id }}" data-area="{{ item.name }}" data-pid="{{ item.pid }}">{{ item.cname }}</view>
+  </view>
+
+  <view class='index-area-history' wx:if="{{!showListsTtile&&showListsAnd }}">
+    <view class='history-header' wx:if="{{historyArray.length>0}}">
+      <text>搜索历史</text> 
+      <view bindtap="delete">
+        <image src="../../../images/laji.png"></image>
+      </view>
+    </view>
+
+    <view class='history-child'>
+      <text class='history-children' wx:for="{{ historyArray }}" wx:key="{{ index }}" data-id="{{item.id}}" data-name="{{item.city}}" data-pid="{{ item.pid }}" bindtap="hischildren">{{item.city}}</text>
+    </view>
+  </view>
+
+  <view class='index-area-body'>
+    <view class='index-area-item' wx:if="{{ gpsOrientation || locationHistory }}">
+
+      <text class='area-header-words'>当前定位城市/最近访问</text>
+      <view class='area-body-content clearfix'>
+        <view class="gpsposi" wx:if="{{ gpsOrientation }}">
+          <view class='overwords' data-id="{{ gpsOrientation.id }}" data-area="{{ gpsOrientation.name }}" data-pname="{{ gpsOrientation.ad_name }}" bindtap='chooseThisCtiy'>
+            <image src="{{ gpsposi }}"></image>{{ gpsOrientation.name }}</view>
+        </view>
+        <view wx:for="{{ locationHistory }}" wx:key="{{ index }}" wx:if="{{ gpsOrientation ? index < 2 : true }}">
+          <text class='overwords' data-id="{{ item.id }}" data-area="{{ item.name }}" data-pname="{{ item.ad_name || item.name  }}" bindtap='chooseThisCtiy'>{{ item.name }}</text>
+        </view>
+      </view>
+    </view>
+    <view class='index-area-tips overwords'>请选择置顶范围：
+
+    </view>
+    <view class='index-area-item' wx:for="{{ areadatas }}" wx:key="{{ index }}" wx:for-item="areaItem">
+      <text class='area-header-words'>{{ (index == 0) ? "热门城市" : areaItem[0].ad_name  }}</text>
+      <!-- <view class='area-body-content clearfix' wx:if="{{index ==0}}">
+        <view wx:for="{{ areaItem }}" wx:key="{{ index }}">
+          <text class="{{item.selected == 2 ?'body-content':'overwords'}}" data-id="{{ item.id }}" data-pname="{{ item.ad_name }}" data-area="{{ item.city }}" data-pid="{{item.pid }}" data-pro="{{ index}}" data-index="{{ item.index}}" bindtap='chooseThisCtiy'>{{item.city}}</text>
+        </view>
+      </view> -->
+      <view class='area-body-content clearfix'>
+        <view wx:for="{{ areaItem }}" class="allCons"  wx:key="{{ index }}">
+          <text class="{{item.selected == 2 ?'body-content':'overwords'}}" data-id="{{ item.id }}" data-pname="{{ item.ad_name }}" data-area="{{ item.city }}" data-pid="{{item.pid }}" data-pro="{{ index}}" data-index="{{ item.index}}" bindtap='chooseThisCtiy'>{{index ==0&&item.index!=0? "全省置顶":item.city}}</text>
+          <block wx:if="{{index == 0}}">
+            <image wx:if="{{ item.index != 0 }}"  src="{{hot}}"></image>
+            <image wx:if="{{ item.index == 0 && item.id == 1 }}"  src="{{hot}}"></image>
+          </block>
+        </view>
+      </view>
+    </view>
+  </view>
+
+</view>
+<!-- (index == publishIndex) ? "text-active" : "" -->
+<view class="obtn" wx:if="{{ !showInputList &&!showListsAnd}}">
+  <button bindtap="seleted">确认选择</button>
+  <!-- <button bindtap="seletedsub" wx:if="{{shoWmodifytop == 'modifytop'}}">确认选择</button> -->
+</view>
+
+<view class="showlodinga"  >
+<view class="circle-line" wx:if="{{showlodinga}}">
+   <!-- <image src="{{showlodingimg}}"></image>  -->
+   <text></text>
+   <text></text>
+   <text></text>
+   <text></text>
+   <text></text>
+   <text></text>
+   <text></text>
+   <text></text>
+</view>
+</view>
+
+<!--  -->
