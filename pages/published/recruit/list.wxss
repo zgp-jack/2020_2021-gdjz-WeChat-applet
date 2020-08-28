@@ -1,3 +1,10 @@
+page {
+  height: 100%;
+}
+.recruit-content{
+  height: 100%;
+  
+}
 .recruit-list-header{
   position: fixed;
   width: 100%;
@@ -36,6 +43,7 @@
   padding-top: 100rpx;
   padding-bottom: 120rpx;
   padding-bottom: 120rpx;
+  height: calc(100% - 200rpx)
 }
 .recruit-list-item{
   position: relative;
@@ -218,7 +226,6 @@
   margin-left: -175rpx;
   border-radius: 20px;
 }
-
 .lists-nodata button {
   width: 300rpx;
   background-color: #0099FF;

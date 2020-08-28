@@ -156,6 +156,14 @@ Page({
       }
     }
   },
+  onShareTimeline:function () {
+    let commonShareTips = app.globalData.commonShareTips;
+    let commonShareImg = app.globalData.commonShareImg;
+    return {
+      title: commonShareTips,
+      imageUrl: commonShareImg
+    }
+  },
   moreproject() {
     app.globalData.allexpress = true;
     wx.setStorageSync("pass", 1)

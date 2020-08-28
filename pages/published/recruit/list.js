@@ -14,6 +14,7 @@ Page({
     handsettop:app.globalData.apiImgUrl + "new-published-settop-tips.png",
     page: 1,
     types: [{id:'all',name:'全部'},{id:'being',name:'正在招'},{id:'checking',name:'审核中'},{id:'fail',name:'未通过'},{id:'end',name:'已招满'}],
+    //当前选中tab
     current: 0,
     hasmore: true,
     lists: [],
@@ -25,7 +26,7 @@ Page({
     showTopTips: false,
     //我的全部招工信息是否有数据
     isAllList : false,
-    resumeText:""
+    resumeText:"",
   },
   publishJob:function () {
     app.initJobView()
@@ -355,6 +356,20 @@ Page({
   goPublish:function () {
     app.initJobView()
   },
+  switchTab:function(e){
+    let key = e.detail.current
+    this.setData({
+      current: parseInt(key),
+      page: 1,
+      hasmore: true,
+      lists: []
+    })
+    this.getRecruitList()
+  },
+  loadmore:function(){
+    if(!this.data.hasmore) return false
+    this.getRecruitList()
+  },
   /**
    * 生命周期函数--监听页面加载
    */
@@ -419,5 +434,13 @@ Page({
    */
   onShareAppMessage: function () {
 
+  },
+  onShareTimeline:function () {
+    let commonShareTips = app.globalData.commonShareTips;
+    let commonShareImg = app.globalData.commonShareImg;
+    return {
+      title: commonShareTips,
+      imageUrl: commonShareImg
+    }
   }
 })

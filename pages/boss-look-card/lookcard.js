@@ -809,6 +809,14 @@ Page({
     }
 
   },
+  onShareTimeline:function () {
+    let commonShareTips = app.globalData.commonShareTips;
+    let commonShareImg = app.globalData.commonShareImg;
+    return {
+      title: commonShareTips,
+      imageUrl: commonShareImg
+    }
+  },
   bindGetUserInfo: function (e) {
     let that = this;
     app.bindGetUserInfo(e, function (res) {
