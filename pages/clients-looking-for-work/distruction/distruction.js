@@ -459,7 +459,6 @@ Page({
       if (judgeId == 1) {
         areadatafor[num][pro].selected = 1
       } else if (judgeId == 0) {
-        console.log('直接点击全国 取消')
         areadatafor[0][0].selected = 1
         that.setData({
           areaTextA: []
@@ -574,7 +573,6 @@ Page({
     })
     //修改data中城市数组并将新数组存入data中
     that.modifyArea(options, arr)
-    console.log("arr",arr)
   },
   //获取热门城市
   hotcities(options) {
@@ -726,11 +724,6 @@ Page({
     }
     let index = this.findIndex(item.id)
     let pro = this.findPro(index, item.id)
-
-    console.log(item.id)
-    console.log(pro)
-    console.log(index)
-
     if (item.pid == 1) {
       if (index > 0) {
         this.getFull(index, item.id, pro)
@@ -746,7 +739,6 @@ Page({
       }
       that.data.areaTextC.push(detail)
     }
-    console.log('触发了')
     if(that.validIsChina()){
       that.data.areadatas[0][0].selected = 1;
     }
@@ -822,7 +814,6 @@ Page({
   },
   // 获取选择最大省数量和城市数量
   getMax(item) {
-    console.log("item",item)
     // 获取传过来的最大省数量和最大城市数量
     if (item.hasOwnProperty("max_province") && item.hasOwnProperty("max_city")) {
       this.setData({
@@ -885,8 +876,6 @@ Page({
 
     let alllength = rankingP.length + uareaTextC.length + areaTextA.length;
 
-
-    console.log(alllength)
     let timer = new Date()
     let time = (timer.getTime() - 0)
     prevPage.setData({ //修改上一个页面的变量
@@ -949,7 +938,7 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function() {
-    console.log("this.data",this.data)
+  
   },
 
   /**

@@ -15,7 +15,7 @@
       {{item.name}}
       <image class="deleteimg" data-id="{{ item }}" src="{{imgDetelte}}"></image>
     </view>
-    <view class="obttn" bindtap="jumpdetail" wx:if="{{alllength>0&&alllength<(max_province+max_city)&&areaAllcrum.length == 0}}">
+    <view class="obttn" bindtap="jumpdetail" wx:if="{{alllength>0&&alllength<(max_province + max_city)&&areaAllcrum.length == 0 }}">
       添加更多
     </view>
       <!-- &&alllength<(max_province+max_city -->
@@ -31,7 +31,7 @@
     <view class="daynum" wx:if="{{topdata.has_top == 0 || topdata.is_top == 2}}">
       <text>置顶天数</text>
       <picker bindchange="dayclocy" range="{{array}}" value="{{defaultDayIndex}}">
-        <input   type="number" disabled="true" placeholder="请选择置顶天数" value="{{daynumber}}">
+        <input type="number" disabled="true" placeholder="请选择置顶天数" value="{{daynumber}}">
         </input>
       </picker>
     </view>
@@ -54,17 +54,17 @@
     </view>
 
 
-    <view class="daynum" wx:if="{{ hastop == 0 || istop == 2 }}"  >
+    <view class="daynum" wx:if="{{ topdata.has_top == 0 || topdata.is_top == 2 }}"  >
       <text>消耗积分</text>
       <view>{{point}}分</view>
     </view>
   </view>
 
-  <view class="submitscope" bindtap="submitscop" wx:if="{{topId == 'undefined'}}" >
+  <view class="submitscope" bindtap="submitscop" wx:if="{{ topdata.has_top == 0 || topdata.is_top == 2 }}" >
     <text>确定置顶</text>
   </view>
 
-  <view class="submitscope" bindtap="seletedsub" wx:if="{{topId != 'undefined'}}">
+  <view class="submitscope" bindtap="seletedsub" wx:if="{{ topdata.has_top != 0 && topdata.is_top == 1 }}">
     <text>确定置顶</text>
   </view>
 

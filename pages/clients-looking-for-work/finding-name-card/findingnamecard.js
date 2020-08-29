@@ -120,7 +120,8 @@ Page({
     top_status_one:"",
     topshow:false,
     is_top_show:true,
-    id:""
+    default_top_area:false,
+    userTopArea:[]//初始化用户置顶城市数据
   },
 
 
@@ -151,23 +152,10 @@ Page({
       })
       return
     }
-    let all = that.data.resume_top;
-    let area = ''
-    let maxnumber = ''
-    let firstprovincenum = ''
-    if (all.hasOwnProperty('top_provinces_str')) {
-      area = JSON.stringify(all.top_provinces_str)
-    }
+    let topdata = JSON.stringify(that.data.resume_top);
     let modify = "modify";
-    if (all.hasOwnProperty('max_number')) {
-      maxnumber = all.max_number;
-    }
-    if (all.hasOwnProperty('first_province_num')) {
-      firstprovincenum = all.first_province_num;
-    }
-   
     wx.navigateTo({
-      url: `/pages/clients-looking-for-work/the-sticky-rule/stickyrule?area=${area}&modify=${modify}&maxnumber=${maxnumber}&firstprovincenum=${firstprovincenum}`,
+      url: `/pages/clients-looking-for-work/workingtop/workingtop?topdata=${topdata}&modify=${modify}`,
     })
 
   },
@@ -276,8 +264,7 @@ Page({
     let contentom = that.data.top_tips_string
     //如果需要去完善数据跳转去发布填写找活名片界面
     let topdata = JSON.stringify(that.data.resume_top)
-    let hastop = parseInt(topdata.has_top) 
-    let istop = parseInt(topdata.is_top)
+    let defalutTop = that.data.default_top_area
     let id = that.data.id
     if (that.data.showtop) {
       wx.showModal({
@@ -305,7 +292,7 @@ Page({
     //如果有找活名片信息跳转去招工置顶界面
     } else {
       wx.navigateTo({
-        url: "/pages/clients-looking-for-work/workingtop/workingtop?id="+ id + "&&topdata=" + topdata,
+        url: "/pages/clients-looking-for-work/workingtop/workingtop?topdata=" + topdata + "&&defaulttop=" + defalutTop,
       })
     }
   },
@@ -842,7 +829,7 @@ Page({
             authenticationimg: mydata.info.hasOwnProperty("authentication") ? mydata.info.authentication : "",
             resume_top: mydata.hasOwnProperty("resume_top") ? mydata.resume_top : [],
             top_status: mydata.hasOwnProperty("top_status") ? mydata.top_status : [],
-            id: mydata.info.hasOwnProperty("id")? mydata.info.id : ""
+            default_top_area: mydata.hasOwnProperty("default_top_area")?mydata.default_top_area : false,
           })
           if (mydata.hasOwnProperty("resume_top")) {
             if (mydata.resume_top.is_top == 1) {
@@ -1045,9 +1032,25 @@ Page({
               
             }
           }
+          let area = wx.getStorageSync('areadata')
+          //获取置顶区域的信息
+          let areaProcrum = mydata.resume_top.top_provinces_str;
+          let areaCitycrum = mydata.resume_top.top_citys_str;
+          let isCountry = mydata.resume_top.is_country
+          let areaAllcrum = [];
+          let areaItem = area.data[0][0];
+          areaItem.name = areaItem.city;
+          if (isCountry == 1) {
+           areaAllcrum = areaItem
+          }
+          let userTopArea = [...areaProcrum,...areaCitycrum,...areaAllcrum]
+          that.setData({
+            userTopArea,
+          })
           that.redorblue()
           that.showskill();
           that.gettiner()
+        
         } else {
           wx.showModal({
             title: '温馨提示',
@@ -1175,7 +1178,6 @@ Page({
   cardjump(options) {
 
     if (options.hasOwnProperty("rankjump")) {
-    
       this.setData({
         rankjump: options.rankjump
       })
@@ -1244,15 +1246,35 @@ Page({
       top_display: "none",
     })
   },
+  // 初始化置顶地区
+  initTopArea:function(){
+    let that = this;
+    let area = wx.getStorageSync('areadata')
+    //获取置顶区域的信息
+    let areaProcrum = that.data.resume_top.top_provinces_str;
+    let areaCitycrum = that.data.resume_top.top_citys_str;
+    let isCountry = that.data.resume_top.is_country
+    let areaAllcrum = [];
+    let areaItem = area.data[0][0];
+    areaItem.name = areaItem.city;
+    if (isCountry == 1) {
+     areaAllcrum = areaItem
+    }
+    let userTopArea = [...areaProcrum,...areaCitycrum,...areaAllcrum]
+    that.setData({
+      userTopArea,
+    })
+  },
   /**
    * 生命周期函数--监听页面显示
    */
   onShow() {
     if (app.globalData.previewshou) {
-
       this.getdetail();
+      this.initTopArea();
       this.delestore();
       this.deleskill();
+      // console.log("this.data",this.data)
     }
     app.globalData.previewshou = true;
   },

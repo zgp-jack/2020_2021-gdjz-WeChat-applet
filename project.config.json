@@ -478,13 +478,6 @@
 					"scene": null
 				},
 				{
-					"id": -1,
-					"name": "我的找活招工置顶",
-					"pathName": "pages/clients-looking-for-work/distruction/distruction",
-					"query": "",
-					"scene": null
-				},
-				{
 					"id": 60,
 					"name": "找活置顶-城市选择",
 					"pathName": "pages/clients-looking-for-work/distruction/distruction",

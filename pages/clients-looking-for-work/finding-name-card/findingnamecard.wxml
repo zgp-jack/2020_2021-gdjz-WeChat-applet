@@ -43,7 +43,7 @@
         <image class="rule-oimg" src="{{topimage}}"></image>
         <text>我的置顶：</text><text class="rule-status" wx:if="{{resume_top.is_top == 2}}">置顶已过期</text><text class="rule-status" wx:if="{{ has_top == 1 && resume_top.is_top == 0}}">已取消置顶</text><text class="rule-status" wx:if="{{has_top == 0}}">未置顶</text>
       </view>
-      <view class="rule-odetail" bindtap="thestickyrule" wx:if="{{has_top == 0||resume_top.is_top == 2}}">
+      <view class="rule-odetail" bindtap="thestickyrule" wx:if="{{has_top == 0||resume_top.is_top == 2 }}">
         马上去置顶>>
       </view>
       <view class='topselect_box' wx:if="{{has_top != 0 &&resume_top.is_top != 2}}">
@@ -58,7 +58,7 @@
       <view class="toptime" wx:if="{{has_top != 0&&resume_top.is_top != 2}}">
         <view>
           <text>置顶地区：</text>
-          <text class="proviceop" wx:for="{{resume_top.top_provinces_str}}" wx:key="{{index}}">{{item.name}}</text>
+          <text class="proviceop" wx:for="{{userTopArea}}" wx:key="{{index}}">{{item.name}}</text>
         </view>
       </view>
       <view class="toptime" wx:if="{{has_top != 0&&resume_top.is_top != 2}}">
