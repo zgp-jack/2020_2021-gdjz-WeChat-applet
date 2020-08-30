@@ -122,6 +122,7 @@ Page({
     // 计算出需要的积分
       let price = (numcity * (that.data.areaCitycrum.length) + numprovice * (that.data.areaProcrum.length) + numAll * (that.data.areaAllcrum.length)) * day
     // 将积分设置到data中
+    console.log("price",price)
       that.setData({
         point: price
       });
@@ -587,27 +588,46 @@ Page({
   // 获取置顶配置信息
   getdetail() {
     let that = this;
+    let areaAllcrum = that.data.areaAllcrum;
+    let areaProcrum =  that.data.areaProcrum;
+    let areaCitycrum = that.data.areaCitycrum;
+    let day = that.data.day;
+    let istop = that.data.topdata.is_top;
+    let hastop = that.data.topdata.has_top;
     app.appRequestAction({
       url: 'resumes/top-config/',
       way: 'POST',
       success: function(res) {
         let mydata = res.data;
         if (mydata.errcode == "ok") {
+          let max_province = mydata.data.max_province-0;
+          let max_city = mydata.data.max_city-0;
+          let province_integral = mydata.data.province_integral;
+          let country_integral = mydata.data.country_integral;
+          let city_integral = mydata.data.city_integral;
+          let top_rules = mydata.data.top_rules;
+          let max_top_days = mydata.data.max_top_days;
+          if (hastop == 0 || istop == 2) {
+            let point = (areaProcrum.length * province_integral + areaCitycrum * city_integral + areaAllcrum * country_integral) * day;
+            that.setData({
+              point: point
+            })
+          }
           that.setData({
             //最大省份数
-            max_province: mydata.data.max_province-0,
+            max_province: max_province,
             //最大城市数
-            max_city: mydata.data.max_city-0,
+            max_city: max_city,
             //置顶省份消耗积分
-            province_integral: mydata.data.province_integral,
+            province_integral: province_integral,
             //置顶区县消耗积分
-            country_integral: mydata.data.country_integral,
+            country_integral: country_integral,
             //置顶城市消耗积分
-            city_integral: mydata.data.city_integral,
+            city_integral: city_integral,
             //最大置顶天数
-            max_top_days: mydata.data.max_top_days,
+            max_top_days: max_top_days,
             //置顶规则
-            top_rules: mydata.data.top_rules,
+            top_rules: top_rules,
           })
           // 初始化选择置顶天数
           that.getMoreDay()
@@ -661,7 +681,7 @@ Page({
       let detail = e.detail.value - 0 + 1
       this.setData({
         shoutime: true,
-        showpoint: true
+        showpoint: true,
       })
       
       let all = 86400000 * (detail) + (this.data.endtimeh - 0)
@@ -741,7 +761,7 @@ Page({
 
   getCityNum() {
 
-    if (this.data.istop == 1) {
+    if (this.data.topdata.is_top == 1) {
       let all = this.data.areaCitycrum.length * this.data.city_integral + this.data.areaProcrum.length * this.data.province_integral + this.data.country_integral * this.data.areaAllcrum.length;
       if (all > this.data.max_price) {
         this.setData({
@@ -849,24 +869,28 @@ Page({
   let hastop = this.data.topdata.has_top
   let istop = this.data.topdata.is_top
   let defaultTop = this.data.defaultTop
-    if(!hastop || istop == 2){
-      this.getDefaultArea(defaultTop)
-      this.areaId()
-      this.setData({
-        daynumber: "48小时(" + 2 + "天)",
-        day: 2,
-        defaultDayIndex:1
-      });
-    }
+  //如果时初次置顶或者置顶到期，置顶地区默认找活名片地区
+  if(hastop == 0 || istop == 2){
+    this.getDefaultArea(defaultTop)
+  }
+  //初始化默认置顶时间为两天
+  this.setData({
+    daynumber: "48小时(" + 2 + "天)",
+    day: 2,
+    defaultDayIndex:1,
+    rangevalue:1
+  });
+
  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-    this.getdetail()
     // 获取url带过来的数据
     this.getNewId(options)
+    // 初始化置顶城市与置顶天数
     this.initTopData()
+    this.getdetail()
   },
 
   /**

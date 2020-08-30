@@ -1246,36 +1246,16 @@ Page({
       top_display: "none",
     })
   },
-  // 初始化置顶地区
-  initTopArea:function(){
-    let that = this;
-    let area = wx.getStorageSync('areadata')
-    //获取置顶区域的信息
-    let areaProcrum = that.data.resume_top.top_provinces_str;
-    let areaCitycrum = that.data.resume_top.top_citys_str;
-    let isCountry = that.data.resume_top.is_country
-    let areaAllcrum = [];
-    let areaItem = area.data[0][0];
-    areaItem.name = areaItem.city;
-    if (isCountry == 1) {
-     areaAllcrum = areaItem
-    }
-    let userTopArea = [...areaProcrum,...areaCitycrum,...areaAllcrum]
-    that.setData({
-      userTopArea,
-    })
-  },
   /**
    * 生命周期函数--监听页面显示
    */
   onShow() {
     if (app.globalData.previewshou) {
       this.getdetail();
-      this.initTopArea();
       this.delestore();
       this.deleskill();
-      // console.log("this.data",this.data)
     }
+    app.getAreaData(this)
     app.globalData.previewshou = true;
   },
 

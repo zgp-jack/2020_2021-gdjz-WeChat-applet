@@ -571,6 +571,7 @@ Page({
     that.setData({
       showlodinga: false
     })
+    console.log("arr",arr)
     //修改data中城市数组并将新数组存入data中
     that.modifyArea(options, arr)
   },

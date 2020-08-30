@@ -40,7 +40,7 @@
       <text class="endtime">当前到期时间</text>
       <picker bindchange="dayclocyone" range="{{array}}" value="{{rangevalue}}">
         <input class="end" wx:if="{{topId != 'undefined'}}" disabled="true"  value="{{endtime}}">
-           <text class="yanchang">{{ topdata.is_top != 1 && shoutime?'修改':'延长'}}</text>
+           <text class="yanchang">{{ topdata.is_top == 1 && shoutime?'修改':'延长'}}</text>
         </input>
       </picker>
     </view>
@@ -54,7 +54,7 @@
     </view>
 
 
-    <view class="daynum" wx:if="{{ topdata.has_top == 0 || topdata.is_top == 2 }}"  >
+    <view class="daynum" wx:if="{{ topdata.has_top == 0 || topdata.is_top == 2 || showpointone || showpoint}}"  >
       <text>消耗积分</text>
       <view>{{point}}分</view>
     </view>
