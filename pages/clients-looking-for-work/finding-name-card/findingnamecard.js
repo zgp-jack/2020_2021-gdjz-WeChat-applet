@@ -925,26 +925,63 @@ Page({
               projectlength: 0
             });
           } else {
-            if (new Date(mydata.project[0].completion_time).getTime() / 86400000 < parseInt(new Date().getTime() / 86400000)) {
+            // 获取项目经验对象
+            let project = mydata.project;
+            let hasImageProject = [];
+            let imagesNum = 0
+            // 获取项目经验对象中images不为空的项目
+            for (let i = 0; i < project.length; i++) {
+              if (project[i].images.length != 0) {
+                // 处理如果图片数量大于3就只保留三张图片
+                if (project[i].images.length > 3) {
+                  project[i].images.splice(3,project[i].images.length-3)
+                }
+                // 将时间转成毫秒并存入数组
+                project[i].endTime = new Date(project[i].completion_time).getTime()
+                hasImageProject.push(project[i])
+              }else{
+                imagesNum ++
+              }
+            }
+            // 获取项目结束时间比较近的项目
+            // 排序规则
+            function projectSort(key) {
+              return function (objectN,objectM) {
+                let valueN = objectN[key];
+                let valueM = objectM[key];
+                if (valueN < valueM) return 1
+                else if (valueN > valueM) return -1
+                else return 0
+              }
+            }
+            // 如果所有的项目经验都没有图片就保持原数组
+            if (imagesNum == project.length) {
+              hasImageProject = project
+            } else {
+              hasImageProject.sort(projectSort("endTime"))
+            }
+            // 获取排序后的第一个元素
+            let projectOne = hasImageProject[0]
+
+            if (new Date(projectOne.completion_time).getTime() / 86400000 < parseInt(new Date().getTime() / 86400000)) {
 
               that.setData({
-                project: mydata.project,
-                projectone: [mydata.project[0]],
-                projectlength: mydata.project.length >= 1 ? mydata.project.length : 0
+                project: project,
+                projectone: [projectOne],
+                projectlength: project.length >= 1 ? project.length : 0
               });
               that.data.project[0].completiontime = "zhijing"
             } else {
               that.setData({
-                project: [...mydata.project],
+                project: [...project],
               })
               that.data.project[0].completiontime = "zhijin"
               that.setData({
-                projectone: [that.data.project[0]],
-                projectlength: mydata.project.length >= 1 ? mydata.project.length : 0
+                projectone: [projectOne],
+                projectlength: project.length >= 1 ? project.length : 0
               });
             }
           }
-
 
           that.setData({
             percent: mydata.info.hasOwnProperty("progress") ? mydata.info.progress : 0,

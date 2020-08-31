@@ -41,16 +41,16 @@
     <view class="{{resume_top.is_top == 2||has_top == 0?'findingnamecardonesontwo':'findingnamecardonesontwot'}}">
       <view class="rule-detail">
         <image class="rule-oimg" src="{{topimage}}"></image>
-        <text>我的置顶：</text><text class="rule-status" wx:if="{{resume_top.is_top == 2}}">置顶已过期</text><text class="rule-status" wx:if="{{ has_top == 1 && resume_top.is_top == 0}}">已取消置顶</text><text class="rule-status" wx:if="{{has_top == 0}}">未置顶</text>
+        <text>我的置顶：</text><text class="rule-status" wx:if="{{resume_top.is_top == 2}}">置顶已过期</text><text class="rule-status" wx:if="{{ has_top == 1 && resume_top.is_top == 0}}">已取消置顶</text><text class="rule-status" wx:if="{{has_top == 0}}">未置顶</text><text class="rule-status" wx:if="{{ has_top != 0 && resume_top.is_top == 1 }}">置顶中</text>
       </view>
-      <view class="rule-odetail" bindtap="thestickyrule" wx:if="{{has_top == 0||resume_top.is_top == 2 }}">
+      <view class="rule-odetail" bindtap="thestickyrule" wx:if="{{ has_top == 0 }}">
         马上去置顶>>
       </view>
-      <view class='topselect_box' wx:if="{{has_top != 0 &&resume_top.is_top != 2}}">
+      <view class='topselect_box' wx:if="{{ has_top != 0 }}">
         <view class='select' catchtap='selectTaptop'>
-          <text class="select_text" wx:if="{{has_top == 0 || resume_top.is_top == 0}}">{{(has_top == 0 && resume_top.is_top == 0)?"未置顶":"继续置顶"}}</text>
-          <text class='select_text' wx:if="{{resume_top.is_top == 1}}">取消置顶</text>
-          <image class='select_img' src='{{subscripted}}'></image>
+          <text class="select_text" wx:if="{{resume_top.is_top != 1 }}" bindtap="coutinueTop" data-istop = "{{ resume_top.is_top }}">继续置顶</text>
+          <text class='select_text' wx:if="{{resume_top.is_top == 1 }}" bindtap="cancelTop">取消置顶</text>
+          <!-- <image class='select_img' src='{{subscripted}}'></image> -->
         </view>
       </view>
     </view>
