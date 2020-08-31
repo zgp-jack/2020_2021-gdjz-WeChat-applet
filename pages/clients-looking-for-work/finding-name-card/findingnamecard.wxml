@@ -49,7 +49,7 @@
       <view class='topselect_box' wx:if="{{has_top != 0 &&resume_top.is_top != 2}}">
         <view class='select' catchtap='selectTaptop'>
           <text class="select_text" wx:if="{{has_top == 0 || resume_top.is_top == 0}}">{{(has_top == 0 && resume_top.is_top == 0)?"未置顶":"继续置顶"}}</text>
-          <text class='select_text' wx:if="{{resume_top.is_top == 1}}">置顶中</text>
+          <text class='select_text' wx:if="{{resume_top.is_top == 1}}">取消置顶</text>
           <image class='select_img' src='{{subscripted}}'></image>
         </view>
       </view>

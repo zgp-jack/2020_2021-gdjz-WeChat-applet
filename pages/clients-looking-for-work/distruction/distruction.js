@@ -200,7 +200,7 @@ Page({
     let areaArrT = app.arrDeepCopy(that.data.areaText)
     // 当前二维数组的长度
     let firstLen = areaArr[num].length;
-    // 如果不是热门城市
+    // 如果不是热门城市且选择的是省，那么将省下面的市全部置成未选择状态
     if (num != 0) {
       for (let i = 0; i < firstLen; i++) {
         if (i != pro) {
@@ -208,6 +208,7 @@ Page({
         }
       }
     }
+    // 如果选中的是热门城市pid =1 那么将这个城市从areaArrC中删除
     for (let i = 0; i < areaArr[0].length; i++) {
       if (areaArr[0][i].pid == cityId) {
         for (let j = 0; j < areaArrC.length; j++) {
@@ -341,11 +342,11 @@ Page({
       pro: pro,
       pid: judgeId
     } 
-    // 如果区域信息是可选择状态
+    // 如果区域信息是未选择状态
     if (areadatafor[num][pro].selected == 1) {
     // 如果pid即选择的是省
       if (judgeId == 1) {
-    
+        // 如果选择的区域超过了要求的数量给出提示并返回
         let show = that.mustjudge(judgeId)
         if (show == "nil") {
           return
@@ -507,7 +508,6 @@ Page({
         areaTextP: dareaTextP,
         areaTextC: dareaTextC
       })
-
     }
   },
   modifyArea(options, areasArr) {
@@ -571,7 +571,6 @@ Page({
     that.setData({
       showlodinga: false
     })
-    console.log("arr",arr)
     //修改data中城市数组并将新数组存入data中
     that.modifyArea(options, arr)
   },
@@ -611,6 +610,17 @@ Page({
       for (let j = 0; j < that.data.areadatas[i].length; j++) {
         that.data.areadatas[i][j].selected = 1
       }
+    }
+  },
+  hideInputList:function(e){
+    let val = e.detail.value
+    if (val.length == 0) {
+      this.setData({
+        showListsTtile: false,
+        showListsAnd: false,
+        showInputList: false,
+        searchInputVal: "",
+      })
     }
   },
   chooseInputCtiy(e) {
@@ -822,6 +832,11 @@ Page({
         max_city: item.max_city
       })
     }
+    if (item.hasOwnProperty("specialids")) {
+      this.setData({
+        specialids: JSON.parse(item.specialids)
+      })
+    }
   },
 
   unique(areaText) {
@@ -900,7 +915,6 @@ Page({
         shoWmodifytop: options.modifytop
       })
     }
-
   },
   getNewId(options) {
     if (options.hasOwnProperty("id")) {

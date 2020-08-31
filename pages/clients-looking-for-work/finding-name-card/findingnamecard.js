@@ -265,7 +265,6 @@ Page({
     //如果需要去完善数据跳转去发布填写找活名片界面
     let topdata = JSON.stringify(that.data.resume_top)
     let defalutTop = that.data.default_top_area
-    let id = that.data.id
     if (that.data.showtop) {
       wx.showModal({
         title: '温馨提示',
@@ -1034,23 +1033,24 @@ Page({
           }
           let area = wx.getStorageSync('areadata')
           //获取置顶区域的信息
-          let areaProcrum = mydata.resume_top.top_provinces_str;
-          let areaCitycrum = mydata.resume_top.top_citys_str;
-          let isCountry = mydata.resume_top.is_country
-          let areaAllcrum = [];
-          let areaItem = area.data[0][0];
-          areaItem.name = areaItem.city;
-          if (isCountry == 1) {
-           areaAllcrum = areaItem
+          if (mydata.resume_top.has_top != 0 && mydata.resume_top.is_top ==1 ) {
+            let areaProcrum = mydata.resume_top.top_provinces_str;
+            let areaCitycrum = mydata.resume_top.top_citys_str;
+            let isCountry = mydata.resume_top.is_country
+            let areaAllcrum = [];
+            let areaItem = area.data[0][0];
+            areaItem.name = areaItem.city;
+            if (isCountry == 1) {
+             areaAllcrum = areaItem
+            }
+            let userTopArea = [...areaProcrum,...areaCitycrum,...areaAllcrum]
+            that.setData({
+              userTopArea,
+            })
           }
-          let userTopArea = [...areaProcrum,...areaCitycrum,...areaAllcrum]
-          that.setData({
-            userTopArea,
-          })
           that.redorblue()
           that.showskill();
           that.gettiner()
-        
         } else {
           wx.showModal({
             title: '温馨提示',
