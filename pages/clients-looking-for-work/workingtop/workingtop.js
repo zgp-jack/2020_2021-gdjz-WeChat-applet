@@ -699,6 +699,7 @@ Page({
   },
   // 延长修改置顶日期的点击事件
   dayclocyone(e) {
+    console.log("dfdfdfdfdfdfd")
     let that = this;
     // 存在点击事件
     if (e && (e.detail.value - 0 + 1 > 0)) {
@@ -732,7 +733,6 @@ Page({
           detailprice: detail
         })
       }
-
     }
   },
   deletea() {
@@ -740,7 +740,7 @@ Page({
       shoutime: false,
       showpoint: false,
       detailprice: 0,
-      rangevalue:0
+      rangevalue:1
     })
     this.getCityNum()
   },
