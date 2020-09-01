@@ -428,60 +428,45 @@ Page({
     let areaProcrumall = []
     let areaCitycrumall = []
     let areaAllcrumall = []
-    if(province_id==1){
-      areadata.data.forEach((item) => {
-        item.forEach((val) => {
-          if(province_id == val.id){
-            let areaProcrumone = {
-              id: val.id,
-              index: val.pid - 2 < 0 ? 0 : val.pid - 2,
-              name: val.city,
-              pid: val.pid
-            }
-            areaProcrumall.push(areaProcrumone);
-            return;
-          }
-        })
-      })
-    }
     if(city_id){
-      areadata.data.forEach((item) => {
-        item.forEach((val) => {
-          if(city_id == val.id){
-            let areaCitycrumone = {
-              id: val.id,
-              index: val.pid - 2 < 0 ? 0 : val.pid - 2,
-              name: val.city,
-              pid: val.pid
-            }
-            areaCitycrumall.push(areaCitycrumone);
-            return;
-          }
-        })
-      })
-    }else if(province_id){
-      areadata.data.forEach((item) => {
-        item.forEach((val) => {
-          if(province_id == val.id){
-            let areaProcrumone = {
-              id: val.id,
-              index: val.pid - 2 < 0 ? 0 : val.pid - 2,
-              name: val.city,
-              pid: val.pid
-            }
-            areaProcrumall.push(areaProcrumone);
-            return;
-          }
-        })
-      })
-    }else{
-      let areaAllcrumone = {
-        id: areadata.data[0][0].id,
-        index: areadata.data[0][0].pid - 2 < 0 ? 0 : areadata.data[0][0].pid - 2,
-        name: areadata.data[0][0].city,
-        pid: areadata.data[0][0].pid
+      try{
+          areadata.data.forEach((item) => {
+            item.forEach((val) => {
+              if(city_id == val.id){
+                if(val.pid == 1){
+                  let areaProcrumone = {
+                    id: val.id,
+                    index: val.pid - 2 < 0 ? 0 : val.pid - 2,
+                    name: val.city,
+                    pid: val.pid
+                  }
+                  areaProcrumall.push(areaProcrumone);
+                  throw '123'
+                }else if(val.pid == 0){
+                  let areaAllcrumone = {
+                    id: areadata.data[0][0].id,
+                    index: areadata.data[0][0].pid - 2 < 0 ? 0 : areadata.data[0][0].pid - 2,
+                    name: areadata.data[0][0].city,
+                    pid: areadata.data[0][0].pid
+                  }
+                  areaAllcrumall.push(areaAllcrumone);
+                  throw '125'
+                }else{
+                  let areaCitycrumone = {
+                    id: val.id,
+                    index: val.pid - 2 < 0 ? 0 : val.pid - 2,
+                    name: val.city,
+                    pid: val.pid
+                  }
+                  areaCitycrumall.push(areaCitycrumone);
+                  throw '124'
+                }
+              }
+            })
+          })
+      }catch(e){
+
       }
-      areaAllcrumall.push(areaAllcrumone);
     }
     that.setData({
       areaProcrum: areaProcrumall,
