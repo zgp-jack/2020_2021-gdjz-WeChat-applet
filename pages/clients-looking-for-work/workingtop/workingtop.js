@@ -410,10 +410,12 @@ Page({
   // 初始化点击置顶时间的选择框数据
   getMoreDay() {
     let topDay = this.data.max_top_days - 0;
-    let array = []
+    let oldArray = [];
+    let newArray = ["15天","30天","60天"]
     for (let i = 0; i < topDay; i++) {
-      array.push((i + 1)*24 + "小时(" + (i+1) + "天)")
+      oldArray.push((i + 1)*24 + "小时(" + (i+1) + "天)")
     }
+    let array = [...oldArray, ...newArray]
     this.setData({
       array: array
     })
@@ -959,6 +961,7 @@ Page({
     let that = this;
     let pages = getCurrentPages();
     let prevPage = pages[pages.length - 2];
+    console.log("pages",pages)
     // prevPage.setData({ //修改上一个页面的变量
     //   refresh: true
     // })

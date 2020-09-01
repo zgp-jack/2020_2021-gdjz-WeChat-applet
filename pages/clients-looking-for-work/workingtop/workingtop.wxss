@@ -283,7 +283,7 @@ padding-left: 31%;
   height: 100%;
   width: 6rpx;
   position: absolute;
-  right: 4rpx;
+  right: -6rpx;
 }
 .daynumone input{
   width: 75%;
