@@ -159,11 +159,58 @@ Page({
     })
 
   },
-  selectTaptop() {
+  // 修改置顶的请求方法
+  isTopReq:function () {
+    let that = this
+    // 获取缓存用户信息
+    let userInfo = wx.getStorageSync("userInfo");
+    // 没用户信息直接返回
+    if (!userInfo) return false;
+    let userUuid = wx.getStorageSync("userUuid");
+    // 发送请求参数对象
+    let detail = {
+      userId: userInfo.userId,
+      token: userInfo.token,
+      tokenTime: userInfo.tokenTime,
+      uuid: userUuid,
+    }
+    app.appRequestAction({
+      url: 'resumes/change-top-status/',
+      way: 'POST',
+      params: detail,
+      success(res) {
+        let mydata = res.data;
+        if (mydata.errcode == "ok") {
+          that.getdetail()
+          that.setData({
+            top_status_one: mydata.data.top_data.top_status
+          })
+          wx.showModal({
+            title: '温馨提示',
+            content: res.data.errmsg,
+            showCancel: false,
+            success(res) { }
+          })
+        } else {
+          wx.showModal({
+            title: '温馨提示',
+            content: res.data.errmsg,
+            showCancel: false,
+            success(res) { }
+          })
+        }
+      }
+    })
+  },
+  // 点击置顶或者取消置顶
+  tabTop:function(){
     let that = this;
+    // 现在时间
     let nowtime = new Date().getTime();
-    let endtime = this.data.endtime;
-    if (nowtime - 0 > nowtime - 0) {
+    // 置顶结束时间
+    let endtime = this.data.endtime * 1000;
+    // 如果现在时间大于项目置顶结束时间提示置顶到期并更新项目
+    if (nowtime - 0 > endtime - 0) {
       wx.showModal({
         title: '温馨提示',
         content: '您的置顶已过期',
@@ -174,95 +221,39 @@ Page({
       })
       return
     }
-
-    let userInfo = wx.getStorageSync("userInfo");
-    if (!userInfo) return false;
-    let userUuid = wx.getStorageSync("userUuid");
-    let detail = {
-      userId: userInfo.userId,
-      token: userInfo.token,
-      tokenTime: userInfo.tokenTime,
-      uuid: userUuid,
-    }
-    let selectdata = [];
-    let selectdataId = [];
-    for (let i = 0; i < this.data.top_status.length; i++) {
-      selectdata.push(this.data.top_status[i].name)
-    }
-    for (let i = 0; i < this.data.top_status.length; i++) {
-      selectdataId.push(this.data.top_status[i].id)
-    }
-    let contentom = that.data.top_tips_string
-
-    wx.showActionSheet({
-
-      itemList: selectdata,
-      success(res) {
-
-        if (that.data.indextop == res.tapIndex) {
-          return
-        }
-        if (that.data.indextop == 1 && that.data.is_show_tips == 1) {
-          wx.showModal({
-            title: '温馨提示',
-            content: contentom,
-            showCancel: false,
-            success(res) {
-              that.getdetail()
-            }
-          })
-          return
-        }
-        that.setData({
-          indextop: res.tapIndex
-        })
-
-        app.appRequestAction({
-          url: 'resumes/change-top-status/',
-          way: 'POST',
-          params: detail,
+    // 发送修改置顶请求
+    this.isTopReq()
+  },
+  // 点击继续置顶
+  coutinueTop:function(e){
+    let that = this
+    let istop = e.currentTarget.dataset.istop;
+    // 如果是置顶到期那么就跟初次置顶一样跳转到对应界面
+    if ( istop == 2 ) {
+      that.thestickyrule()
+    // 如果是置顶未到期且继续置顶发送置顶请求
+    } else {
+      let contentom = that.data.top_tips_string
+      if (that.data.is_show_tips == 1) {
+        wx.showModal({
+          title: '温馨提示',
+          content: contentom,
+          showCancel: false,
           success(res) {
-       
-            let mydata = res.data;
-            
-            if (mydata.errcode == "ok") {
-              
-              that.getdetail()
-              
-              that.setData({
-                top_status_one: mydata.data.top_data.top_status
-              })
-              wx.showModal({
-                title: '温馨提示',
-                content: res.data.errmsg,
-                showCancel: false,
-                success(res) { }
-              })
-            } else {
-              wx.showModal({
-                title: '温馨提示',
-                content: res.data.errmsg,
-                showCancel: false,
-                success(res) { }
-              })
-            }
+            that.getdetail()
           }
         })
-      },
-      fail(res) {
-        // console.log(res)
-        // app.showMyTips("修改失败");
+        return
       }
-    })
-
+      that.tabTop()
+    }
   },
-
   thestickyrule() {
     // 去置顶前检查是否有填写名片信息
     let that = this;
     // 获取是否可以置顶的文案
     let contentom = that.data.top_tips_string
-    //如果需要去完善数据跳转去发布填写找活名片界面
+    // 如果需要去完善数据跳转去发布填写找活名片界面
     let topdata = JSON.stringify(that.data.resume_top)
     let defalutTop = that.data.default_top_area
     if (that.data.showtop) {
@@ -927,24 +918,29 @@ Page({
           } else {
             // 获取项目经验对象
             let project = mydata.project;
+            // 定义有图片项目数组
             let hasImageProject = [];
-            let imagesNum = 0
-            // 获取项目经验对象中images不为空的项目
+            // 定义项目是否都有图片数据
+            let imagesNum = 0;
             for (let i = 0; i < project.length; i++) {
-              if (project[i].images.length != 0) {
+              // 获取项目经验对象中images不为空的项目
+              if (project[i].image.length != 0) {
                 // 处理如果图片数量大于3就只保留三张图片
-                if (project[i].images.length > 3) {
-                  project[i].images.splice(3,project[i].images.length-3)
+                if (project[i].image.length > 3) {
+                  project[i].image.splice(3,project[i].image.length-3)
                 }
                 // 将时间转成毫秒并存入数组
                 project[i].endTime = new Date(project[i].completion_time).getTime()
+                // 增加index字段作为project数组查找标识
+                project[i].index = i
                 hasImageProject.push(project[i])
               }else{
+                project[i].index = i
                 imagesNum ++
               }
             }
             // 获取项目结束时间比较近的项目
-            // 排序规则
+            // 排序规则降序排列
             function projectSort(key) {
               return function (objectN,objectM) {
                 let valueN = objectN[key];
@@ -954,7 +950,7 @@ Page({
                 else return 0
               }
             }
-            // 如果所有的项目经验都没有图片就保持原数组
+            // 如果所有的项目经验都没有图片就保持原数组,否则按照处理过的图片数组按照结束时间进行降序排序
             if (imagesNum == project.length) {
               hasImageProject = project
             } else {
@@ -970,12 +966,12 @@ Page({
                 projectone: [projectOne],
                 projectlength: project.length >= 1 ? project.length : 0
               });
-              that.data.project[0].completiontime = "zhijing"
+              that.data.project[projectOne.index].completiontime = "zhijing"
             } else {
               that.setData({
                 project: [...project],
               })
-              that.data.project[0].completiontime = "zhijin"
+              that.data.project[projectOne.index].completiontime = "zhijin"
               that.setData({
                 projectone: [projectOne],
                 projectlength: project.length >= 1 ? project.length : 0
