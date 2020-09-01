@@ -15,14 +15,15 @@ Page({
     endtimeone: "",
     shoutime: false,
     showpoint: false,
-    day: 0,
+    day: 2,
     array: [],
     serverPhone: app.globalData.serverPhone,
     userInfo: true,
     icon: app.globalData.apiImgUrl + "userauth-topicon.png",
     point: 0,
-    daynumber: "",
+    daynumber: "48小时（2天）",
     imgDetelte: app.globalData.apiImgUrl + "lpy/delete.png",
+    rightarrow: app.globalData.apiImgUrl + "new-center-rightarrow.png",
     areaProcrum: [],
     areaCitycrum: [],
     areaAllcrum:[],
@@ -44,7 +45,7 @@ Page({
     showpointone: false,
     detailprice: 0,
     special_ids:[],
-    rangevalue:0,
+    rangevalue:1,
     country_integral:""
   },
 
@@ -112,7 +113,7 @@ Page({
       let day = e.detail.value - 0 + 1;
       
       that.setData({
-        daynumber: day + "天",
+        daynumber: day*24 + "小时" + '（' + day + '天' + '）',
         day: day
       });
 
@@ -410,10 +411,83 @@ Page({
     let topDay = this.data.max_top_days - 0;
     let array = []
     for (let i = 0; i < topDay; i++) {
-      array.push(i + 1 + "天")
+      array.push((i + 1)*24 + "小时"  + '（' + (i + 1) + '天' + '）')
     }
     this.setData({
       array: array
+    })
+  },
+  getAreaData: function (options) {
+    if(options.topId != 'undefined'){
+      return
+    }
+    let that = this;
+    let city_id = options.city_id;
+    let province_id = options.province_id;
+    let areadata = wx.getStorageSync("areadata");
+    let areaProcrumall = []
+    let areaCitycrumall = []
+    let areaAllcrumall = []
+    if(province_id==1){
+      areadata.data.forEach((item) => {
+        item.forEach((val) => {
+          if(province_id == val.id){
+            let areaProcrumone = {
+              id: val.id,
+              index: val.pid - 2 < 0 ? 0 : val.pid - 2,
+              name: val.city,
+              pid: val.pid
+            }
+            areaProcrumall.push(areaProcrumone);
+            return;
+          }
+        })
+      })
+    }
+    if(city_id){
+      areadata.data.forEach((item) => {
+        item.forEach((val) => {
+          if(city_id == val.id){
+            let areaCitycrumone = {
+              id: val.id,
+              index: val.pid - 2 < 0 ? 0 : val.pid - 2,
+              name: val.city,
+              pid: val.pid
+            }
+            areaCitycrumall.push(areaCitycrumone);
+            return;
+          }
+        })
+      })
+    }else if(province_id){
+      areadata.data.forEach((item) => {
+        item.forEach((val) => {
+          if(province_id == val.id){
+            let areaProcrumone = {
+              id: val.id,
+              index: val.pid - 2 < 0 ? 0 : val.pid - 2,
+              name: val.city,
+              pid: val.pid
+            }
+            areaProcrumall.push(areaProcrumone);
+            return;
+          }
+        })
+      })
+    }else{
+      let areaAllcrumone = {
+        id: areadata.data[0][0].id,
+        index: areadata.data[0][0].pid - 2 < 0 ? 0 : areadata.data[0][0].pid - 2,
+        name: areadata.data[0][0].city,
+        pid: areadata.data[0][0].pid
+      }
+      areaAllcrumall.push(areaAllcrumone);
+    }
+    that.setData({
+      areaProcrum: areaProcrumall,
+      areaCitycrum: areaCitycrumall,
+      areaAllcrum: areaAllcrumall,
+      alllength: areaProcrumall.length + areaCitycrumall.length + areaAllcrumall.length
     })
   },
   gettopareas() {
@@ -659,7 +733,7 @@ Page({
       }
     })
   },
-  getdetail() {
+  getdetail(options) {
     let that = this;
     app.appRequestAction({
       url: 'job/top-config/',
@@ -679,7 +753,15 @@ Page({
             special_ids: mydata.data.special_ids,
             country_integral: mydata.data.country_integral
           })
-          
+          if(options.topId == 'undefined'){
+            let numcity = mydata.data.city_integral;
+            let numprovice = mydata.data.province_integral;
+            let numAll = mydata.data.country_integral;
+            let all = (numcity * (that.data.areaCitycrum.length) + numprovice * (that.data.areaProcrum.length) + numAll * (that.data.areaAllcrum.length))*2;
+            that.setData({
+              point: all
+            });
+          }
           that.getMoreDay()
         } else {
           wx.showModal({
@@ -763,7 +845,7 @@ Page({
       shoutime: false,
       showpoint: false,
       detailprice: 0,
-      rangevalue:0
+      rangevalue:1
     })
     this.getCityNum()
   },
@@ -873,7 +955,8 @@ Page({
   onLoad: function(options) {
 
     // this.authrasution()
-    this.getdetail()
+    this.getdetail(options)
+    this.getAreaData(options)
     this.getNewId(options)
   },
 
