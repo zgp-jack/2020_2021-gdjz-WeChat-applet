@@ -172,7 +172,7 @@ Page({
 
     }else{
       wx.navigateTo({
-        url: `/pages/workingtopAll/workingtop/workingtop?id=${id}&topId=undefined`,
+        url: `/pages/workingtopAll/workingtop/workingtop?id=${id}&topId=undefined&city_id=${topdata.city_id}&province_id=${topdata.province_id}`,
       })
     }
 
@@ -331,6 +331,9 @@ Page({
     })
     // this.getRecruitList()
   },
+  getAreaData: function () {
+    app.getAreaData(this);
+  },
   initFooterData: function () {
     this.setData({
       footerImgs: footerjs.footerImgs,
@@ -379,6 +382,7 @@ Page({
         showTopTips:true
       })
     }
+    this.getAreaData();
     this.initFooterData()
   },
 

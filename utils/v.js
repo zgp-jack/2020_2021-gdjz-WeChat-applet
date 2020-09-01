@@ -27,9 +27,8 @@ let vali = {
       }
       //中文汉字2-5验证规则
       vali.chineseReg = function (v) {
-        let vRegx, vResult; 
-           vRegx = /^[\u4E00-\u9FA5]{2,5}$/; 
-           vResult = vRegx.test(v);
+        let vRegx= /^[\u4E00-\u9FA5]{2,5}$/; 
+        let vResult = vRegx.test(v);
            if (vResult) { 
              return true;
            }

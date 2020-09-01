@@ -100,6 +100,14 @@ padding-left: 26%;
     line-height: 90rpx;
   height: 90rpx;
 }
+.daynum .rightarrow{
+  position: absolute;
+  right: 10rpx;
+  top: 30rpx;
+  width: 25rpx;
+  height: 45rpx;
+  transform: rotate(90deg);
+}
 .daynum text{
   width: 22%;
   display: inline-block;

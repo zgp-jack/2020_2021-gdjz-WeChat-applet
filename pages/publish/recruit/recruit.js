@@ -559,7 +559,7 @@ Page({
       app.showMyTips("请选择您的详细地址！");
       return false;
     }
-    if (!v.regStrNone(cardInfo.username) || !v.chineseReg(cardInfo.username) || (cardInfo.username).trim().length<2) {
+    if (!v.chineseReg(cardInfo.username)) {
       app.showMyTips("请输入2~5字纯中文姓名!");
       return false;
     }

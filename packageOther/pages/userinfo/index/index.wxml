@@ -29,7 +29,7 @@
     <text class='yupao-enter-title'>修改姓名</text>
     <text class='yupao-enter-tips'>请输入中文姓名</text>
     <view class='yupao-enter-body'>
-      <input class='yupao-enter-wrap yupao-enter-input' value='{{ userName }}' placeholder='请输入您的姓名' bindinput='userEntername' maxlength='5'></input>
+      <input class='yupao-enter-wrap yupao-enter-input' value='{{ userName }}' placeholder='请输入您的姓名' bindinput='userEntername' ></input>
     </view>
     <view class='yupao-enter-footer clearfix'>
       <text bindtap='cancleEditInfo'>取消</text>

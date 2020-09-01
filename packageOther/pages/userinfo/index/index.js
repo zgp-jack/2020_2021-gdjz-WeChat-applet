@@ -45,9 +45,9 @@ Page({
         let _this = this;
         let username = this.data.userName
         let userInfo = this.data.userInfo;
-        if (!v.regStrNone(username) || !v.chineseReg(username) || (username).trim().length<2) {
+        if (!v.chineseReg(username)) {
             app.showMyTips("请输入2~5字纯中文姓名！");
-            return false;
+            return false; 
         }
         wx.showLoading({ title: '正在修改姓名' })
         app.doRequestAction({

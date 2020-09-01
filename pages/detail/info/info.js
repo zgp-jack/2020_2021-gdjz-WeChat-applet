@@ -268,7 +268,7 @@ Page({
       }
       
       wx.navigateTo({
-        url: `/pages/workingtopAll/workingtop/workingtop?id=${id}&topId=undefined`,
+        url: `/pages/workingtopAll/workingtop/workingtop?id=${id}&topId=undefined&city_id=${info.city_id}&province_id=${info.province_id}`,
       })
     },
     userSetTop:function(e){
