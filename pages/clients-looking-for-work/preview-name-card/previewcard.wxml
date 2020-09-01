@@ -106,7 +106,7 @@
             </view>
             <view class="cardotext" wx:if="{{city != ''}}" >
 
-              <text class="oworkotext">所在地区</text>
+              <text class="oworkotext">期望地区</text>
 
 
               <text class="workotextone">{{city}}</text>
