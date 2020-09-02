@@ -45,12 +45,17 @@ Page({
     rangevalue:0,
     country_integral:0,
     defaultDayIndex:0,
+    //从resume-list请求点击马上置顶（首次）带过来的默认置顶区域
     defaultTop:false,
-    defaultArea:[],
+    //从resume-list请求点击修改置顶带过来的置顶数据
     topdata:{},
     special_ids: [],
+    //top-config请求是的服务器时间戳
     serverTime:"",
-    hostTime:""
+    //top-config请求是的本地时间戳
+    hostTime:"",
+    //首次置顶的时候显示置顶到期时间输入框内容
+    firstEndTime:"",//
   },
   //用户首次置顶或者置顶到期点击‘选择置顶范围’跳转到置顶区域选择界面
   jumpstickyrule() {
@@ -114,18 +119,53 @@ Page({
   dayclocy(e) {
     // 获取积分规则
     let that = this;
+    // 普通城市单价积分
     let numcity = that.data.city_integral;
+    // 省或直辖市单价积分
     let numprovice = that.data.province_integral;
+    // 全国积分单价
     let numAll = that.data.country_integral;
+    // 是否是置顶
     let istop = that.data.topdata.is_top;
+    // 是否是第一次置顶
     let hastop = that.data.topdata.has_top;
+    // 获取请求的服务器时间戳
+    let serverTime = that.data.serverTime;
+    // 获取配置请求时本地主机时间
+    let hostTime = that.data.hostTime;
+    // 点击当前延期选择天数后的当前本地时间
+    let currentTime = new Date().getTime();
+    // 计算本地时间差
+    let currentTimeDiff = currentTime - hostTime;
+    // 最新服务器时间
+    let newSeverTime = serverTime + currentTimeDiff;
+    // 获取选择的天数
+    let detail = null
+    let daynumber = "";
+    if (e.detail.value == 10) {
+      detail = 15;
+      daynumber = "15天";
+    }else if(e.detail.value == 11){
+      detail = 30;
+      daynumber = "30天";
+    }else if(e.detail.value == 12){
+      detail = 60;
+      daynumber = "60天";
+    }else{
+      detail = e.detail.value - 0 + 1
+    }
+    // 最新的到期时间毫秒+正在置顶结束的时间毫秒
+    let all = 86400000 * (detail) + (newSeverTime - 0)
+    // 格式化到期时间
+    let time = this.getMyDate(all)
     // 如果存在选择置顶天数
     if (e) {
       let day = e.detail.value - 0 + 1;
     // 获取选择的置顶天数并设置到data中
       that.setData({
-        daynumber: (day * 24) + "小时(" + day + "天)",
-        day: day
+        daynumber: e.detail.value < 10 ? (day * 24) + "小时(" + day + "天)" : daynumber,
+        day: day,
+        firstEndTime: time
       });
     // 计算出需要的积分
       let price = (numcity * (that.data.areaCitycrum.length) + numprovice * (that.data.areaProcrum.length) + numAll * (that.data.areaAllcrum.length)) * day
@@ -146,12 +186,12 @@ Page({
           point: price
         });
       } 
-      // else if (istop == 2 || hastop == 0) {
-      //   let price = (numcity * (that.data.areaCitycrum.length) + numprovice * (that.data.areaProcrum.length) + numAll * (that.data.areaAllcrum.length)) * that.data.day
-      //   that.setData({
-      //     point: price
-      //   });
-      // }
+      else if (istop == 2 || hastop == 0) {
+        let price = (numcity * (that.data.areaCitycrum.length) + numprovice * (that.data.areaProcrum.length) + numAll * (that.data.areaAllcrum.length)) * that.data.day
+        that.setData({
+          point: price
+        });
+      }
     }
   },
   // 置顶数据保存前提取全国、省、直辖市、市的区域id
@@ -438,23 +478,13 @@ Page({
       let areaProcrum = that.data.topdata.top_provinces_str;
       let areaCitycrum = that.data.topdata.top_citys_str;
       let isCountry = that.data.topdata.is_country;
-      // let startTime = this.data.topdata.start_time_str;
-      // let endTime = this.data.topdata.end_time_str;
-      // let startTimeO = new Date(startTime).getTime() - 0;
-      // let endTimeO = new Date(endTime).getTime() - 0;
-      // let topDay = (endTimeO - startTimeO)/1000/3600/24;
       let max_price = parseInt(that.data.topdata.max_price);
-      // let province_integral = that.data.province_integral;
-      // let country_integral = that.data.country_integral;
-      // let city_integral = that.data.city_integral;
       let areaAllcrum = [];
       let areaItem = area.data[0][0];
       areaItem.name = areaItem.city;
       if (isCountry == 1) {
        areaAllcrum = areaItem
       }
-      // let diffPrice = ((areaProcrum.length * province_integral + areaCitycrum * city_integral + areaAllcrum * country_integral) - max_price) * topDay
-      // console.log("diffPrice",diffPrice)
       let alllength = areaProcrum.length + areaCitycrum.length + areaAllcrum.length;
       let endtime = that.data.topdata.end_time_str;
       let endtimeh = (that.data.topdata.end_time-0)*1000;
@@ -473,6 +503,16 @@ Page({
   seletedsub() {
     let that = this;
     let day = that.data.max_top_days;
+    // 获取请求的服务器时间戳
+    let serverTime = that.data.serverTime;
+    // 获取配置请求时本地主机时间
+    let hostTime = that.data.hostTime;
+    // 点击当前确定置顶的当前本地时间
+    let currentTime = new Date().getTime();
+    // 计算本地时间差
+    let currentTimeDiff = currentTime - hostTime;
+    // 最新服务器时间
+    let newSeverTime = serverTime + currentTimeDiff;
     let userInfo = wx.getStorageSync("userInfo");
     let userUuid = wx.getStorageSync("userUuid");
     if (!userInfo || !userUuid) {
@@ -499,7 +539,7 @@ Page({
       country = 1
     }
 
-    that.getAllpoint()
+    that.getAllpoint(newSeverTime)
 
     let detail = {
       mid: userInfo.userId, 
@@ -640,6 +680,9 @@ Page({
           let max_top_days = mydata.data.max_top_days-0;
           let special_ids = mydata.data.special_ids;
           let serverTime = mydata.data.time -0;
+          let day = mydata.data.default_days-0;
+          let daynumber = (day * 24) + "小时(" + day + "天)";
+          let firstEndTime = that.getMyDate(86400000 * day + serverTime * 1000) 
           if (hastop == 0 || istop == 2) {
             let point = (areaProcrum.length * province_integral + areaCitycrum.length * city_integral + areaAllcrum.length * country_integral) * day;
             that.setData({
@@ -662,8 +705,17 @@ Page({
             //置顶规则
             top_rules: top_rules,
             special_ids: special_ids,
+            // 服务器时间戳
             serverTime: serverTime * 1000,
-            hostTime: new Date().getTime()
+            // 本地时间戳
+            hostTime: new Date().getTime(),
+            // 默认选择天数
+            day: day,
+            // 默认天数下选择框显示内容
+            daynumber: daynumber,
+            // 首次置顶显示的置顶到期时间
+            firstEndTime: firstEndTime
+
           })
           // 初始化选择置顶天数的下拉列表
           that.getMoreDay()
@@ -732,7 +784,16 @@ Page({
       // 最新服务器时间
       let newSeverTime = serverTime + currentTimeDiff;
       // 获取选择的天数
-      let detail = e.detail.value - 0 + 1
+      let detail = null
+      if (e.detail.value == 10) {
+        detail = 15
+      }else if(e.detail.value == 11){
+        detail = 30
+      }else if(e.detail.value == 12){
+        detail = 60
+      }else{
+        detail = e.detail.value - 0 + 1
+      }
       // 点击延长或者修改显示“最新到期时间”与“积分”框
       this.setData({
         shoutime: true,
@@ -783,16 +844,16 @@ Page({
     // 初始化置顶状态下的数据
     this.gettopareas()
   },
-  getAllpoint(time) {
+  getAllpoint(timeItem) {
     // 积分单价差
     let shen = this.data.allprice - this.data.max_price;
     
-    if (time != 0 && shen>=0) {
+    if (timeItem != 0 && shen>=0) {
       let shennum = shen;
       // let shenmiao = this.changeTwoDecimal(shennum)
       
       // 计算置顶积分总差额
-      let time = ((this.data.endtimeh - time) / 3600 / 1000 / 24) * (shennum) + "";
+      let time = ((this.data.endtimeh - timeItem) / 3600 / 1000 / 24) * (shennum) + "";
       
       var str = Math.round(time) - 0 + (this.data.allprice - 0) * (this.data.detailprice - 0);
 
@@ -932,8 +993,6 @@ Page({
   }
   //初始化默认置顶时间为两天
   this.setData({
-    daynumber: "48小时(" + 2 + "天)",
-    day: 2,
     defaultDayIndex:1,
     rangevalue:1
   });

@@ -350,22 +350,71 @@ Page({
               projectlength: 0
             });
           }else{
-            if (new Date(mydata.project[0].completion_time).getTime() / 86400000 < parseInt(new Date().getTime() / 86400000)) {
+            // 获取项目经验对象
+            let project = mydata.project;
+            console.log("project",project)
+            // 定义有图片项目数组
+            let hasImageProject = [];
+            // 定义没图片的数组
+            let NoImageProject = [];
+            for (let i = 0; i < project.length; i++) {
+              // 获取项目经验对象中images不为空的项目
+              if (project[i].image.length != 0) {
+                // 将时间转成毫秒并存入数组
+                project[i].endTime = new Date(project[i].completion_time).getTime()
+                // 增加index字段作为project数组查找标识
+                project[i].index = i
+                hasImageProject.push(project[i])
+              }else{
+                project[i].endTime = new Date(project[i].completion_time).getTime()
+                project[i].index = i
+                NoImageProject.push(project[i])
+              }
+            }
+            // 获取项目结束时间比较近的项目
+            // 排序规则降序排列
+            function projectSort(key) {
+              return function (objectN,objectM) {
+                let valueN = objectN[key];
+                let valueM = objectM[key];
+                if (valueN < valueM) return 1
+                else if (valueN > valueM) return -1
+                else return 0
+              }
+            }
+            // 将有图片的数组与没有图片的数组进行按照时间降序排列
+            let sortImageProject = hasImageProject.sort(projectSort("endTime"))
+            let sortNoImageProject = NoImageProject.sort(projectSort("endTime"))
+            // 组合项目经验对象
+            let projectObj = [...sortImageProject, ...sortNoImageProject]
+            // 获取排序后的第一个元素
+            let projectOne = {...projectObj[0]}
+            let images = projectOne.image
+            let image = []
+            for (let i = 0; i < images.length; i++) {
+              if (i < 3) {
+                image.push(images[i])
+              }
+            }
+            projectOne.image = image
+
+
+            if (new Date(projectObj[0].completion_time).getTime() / 86400000 < parseInt(new Date().getTime() / 86400000)) {
 
               that.setData({
-                project: mydata.project,
-                projectone: [mydata.project[0]],
-                projectlength: mydata.project.length >= 1 ? mydata.project.length : 0
+                project: projectObj,
+                projectone: [projectOne],
+                projectlength: projectObj.length >= 1 ? projectObj.length : 0
               });
               that.data.project[0].completiontime = "zhijing"
             } else {
               that.setData({
-                project: [...mydata.project],
+                project: [projectObj],
               })
               that.data.project[0].completiontime = "zhijin"
               that.setData({
-                projectone: [that.data.project[0]],
-                projectlength: mydata.project.length >= 1 ? mydata.project.length : 0
+                projectone: [projectOne],
+                projectlength: projectObj.length >= 1 ? projectObj.length : 0
               });
             }
           }

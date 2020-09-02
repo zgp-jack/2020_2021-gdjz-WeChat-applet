@@ -46,7 +46,13 @@ Page({
     detailprice: 0,
     special_ids:[],
     rangevalue:1,
-    country_integral:""
+    country_integral:"",
+    // 首次置顶显示的置顶到期时间
+    firstEndTime:"",
+    // top-config返回的服务器时间戳
+    serverTime:0,
+    // top-config请求的同时记录本地时间戳
+    hostTime:""
   },
 
   jumpstickyrule() {
@@ -108,13 +114,43 @@ Page({
     let numcity = that.data.city_integral;
     let numprovice = that.data.province_integral;
     let numAll = that.data.country_integral;
+    // 获取请求的服务器时间戳
+    let serverTime = that.data.serverTime;
+    // 获取配置请求时本地主机时间
+    let hostTime = that.data.hostTime;
+    // 点击当前延期选择天数后的当前本地时间
+    let currentTime = new Date().getTime();
+    // 计算本地时间差
+    let currentTimeDiff = currentTime - hostTime;
+    // 最新服务器时间
+    let newSeverTime = serverTime + currentTimeDiff;
+    // 获取选择的天数
+    let detail = null;
+    let daynumber = "";
+    if (e.detail.value == 10) {
+      detail = 15;
+      daynumber = "15天";
+    }else if(e.detail.value == 11){
+      detail = 30;
+      daynumber = "30天";
+    }else if(e.detail.value == 12){
+      detail = 60;
+      daynumber = "60天";
+    }else{
+      detail = e.detail.value - 0 + 1
+    }
+    // 最新的到期时间毫秒+正在置顶结束的时间毫秒
+    let all = 86400000 * (detail) + (newSeverTime - 0)
+    // 格式化到期时间
+    let time = this.getMyDate(all)
     if (e) {
 
       let day = e.detail.value - 0 + 1;
       
       that.setData({
-        daynumber: day*24 + "小时" + '（' + day + '天' + '）',
-        day: day
+        daynumber: e.detail.value<10 ? day*24 + "小时" + '（' + day + '天' + '）' : daynumber,
+        day: day,
+        firstEndTime: time,
       });
 
       let price = (numcity * (that.data.areaCitycrum.length) + numprovice * (that.data.areaProcrum.length) + numAll * (that.data.areaAllcrum.length)) * day
@@ -409,10 +445,12 @@ Page({
   },
   getMoreDay() {
     let topDay = this.data.max_top_days - 0;
-    let array = []
+    let oldArray = [];
+    let newArray = ["15天","30天","60天"]
     for (let i = 0; i < topDay; i++) {
-      array.push((i + 1)*24 + "小时"  + '（' + (i + 1) + '天' + '）')
+      oldArray.push((i + 1)*24 + "小时"  + '（' + (i + 1) + '天' + '）')
     }
+    let array = [...oldArray, ...newArray]
     this.setData({
       array: array
     })
@@ -736,13 +774,19 @@ Page({
             max_top_days: mydata.data.max_top_days,
             top_rules: mydata.data.top_rules,
             special_ids: mydata.data.special_ids,
-            country_integral: mydata.data.country_integral
+            country_integral: mydata.data.country_integral,
+            day: mydata.data.default_days-0,
+            daynumber: (mydata.data.default_days * 24) + "小时(" + mydata.data.default_days + "天)",
+            serverTime: mydata.data.time * 1000,
+            firstEndTime: that.getMyDate(86400000 * mydata.data.default_days + mydata.data.time * 1000),
+            // 本地时间戳
+            hostTime: new Date().getTime(),
           })
           if(options.topId == 'undefined'){
             let numcity = mydata.data.city_integral;
             let numprovice = mydata.data.province_integral;
             let numAll = mydata.data.country_integral;
-            let all = (numcity * (that.data.areaCitycrum.length) + numprovice * (that.data.areaProcrum.length) + numAll * (that.data.areaAllcrum.length))*2;
+            let all = (numcity * (that.data.areaCitycrum.length) + numprovice * (that.data.areaProcrum.length) + numAll * (that.data.areaAllcrum.length)) * mydata.data.default_days;
             that.setData({
               point: all
             });
@@ -793,9 +837,34 @@ Page({
   },
 
   dayclocyone(e) {
+    debugger
     let that = this;
+    // 获取请求的服务器时间戳
+    let serverTime = that.data.serverTime;
+    // 获取配置请求时本地主机时间
+    let hostTime = that.data.hostTime;
     if (e && (e.detail.value - 0 + 1 > 0)) {
-      let detail = e.detail.value - 0 + 1
+     
+      let allprice = this.data.max_price
+    
+      let alllength = (that.data.areaProcrum.length) * that.data.province_integral + (that.data.areaCitycrum.length) * that.data.city_integral + (that.data.areaAllcrum.length) * that.data.country_integral
+       // 点击当前延期选择天数后的当前本地时间
+      let currentTime = new Date().getTime();
+      // 计算本地时间差
+      let currentTimeDiff = currentTime - hostTime;
+      // 最新服务器时间
+      let newSeverTime = serverTime + currentTimeDiff;
+      // 获取选择的天数
+      let detail = null
+      if (e.detail.value == 10) {
+        detail = 15
+      }else if(e.detail.value == 11){
+        detail = 30
+      }else if(e.detail.value == 12){
+        detail = 60
+      }else{
+        detail = e.detail.value - 0 + 1
+      }
       this.setData({
         shoutime: true,
         showpoint: true
@@ -803,26 +872,21 @@ Page({
       
       let all = 86400000 * (detail) + (this.data.endtimeh - 0)
       let time = this.getMyDate(all)
-     
-
-      let allprice = this.data.max_price
-    
-      let alllength = (that.data.areaProcrum.length) * that.data.province_integral + (that.data.areaCitycrum.length) * that.data.city_integral + (that.data.areaAllcrum.length) * that.data.country_integral
-  
       if (alllength <= allprice) {
         this.setData({
           endtimeone: time,
-          point: allprice * detail,
-          detailprice: detail
+          detailprice: detail,
+          allprice: alllength
         })
+        this.getAllpoint(newSeverTime)
       } else {
         this.setData({
           endtimeone: time,
-          point: alllength * detail + that.data.showpointnum,
-          detailprice: detail
+          detailprice: detail,
+          allprice: alllength
         })
+        this.getAllpoint(newSeverTime)
       }
-
     }
   },
   deletea() {
@@ -871,16 +935,16 @@ Page({
 
   //   return f_x;
   // },
-  getAllpoint() {
+  getAllpoint(timeItem) {
     
     let shen = this.data.allprice - this.data.max_price;
     
-    if (this.data.clocktime != 0 && shen>=0) {
+    if (timeItem != 0 && shen>=0) {
       let shennum = shen;
       // let shenmiao = this.changeTwoDecimal(shennum)
       
       
-      let time = ((this.data.endtimeh - this.data.clocktime) / 3600 / 1000 / 24) * (shennum) + "";
+      let time = ((this.data.endtimeh - timeItem) / 3600 / 1000 / 24) * (shennum) + "";
       
       
    
@@ -911,9 +975,9 @@ Page({
           showpointone: true,
           allprice: all
         })
-        this.getAllpoint()
+        this.getAllpoint(this.data.clocktime)
       } else if (all == this.data.max_price){
-        this.getAllpoint()
+        this.getAllpoint(this.data.clocktime)
       } else if (all < this.data.max_price){
 
         this.setData({

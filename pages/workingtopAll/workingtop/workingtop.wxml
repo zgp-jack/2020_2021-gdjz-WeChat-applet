@@ -53,7 +53,12 @@
            <text class="yanchangon" bindtap="deletea">取消</text>
         </input>
     </view>
-
+    
+    <view class="daynumone" wx:if="{{topId == 'undefined'}}">
+      <text class="endtime">置顶到期时间</text>
+        <input class="end bluet" disabled="false"  value="{{firstEndTime}}">
+        </input>
+    </view>
 
     <view class="daynum" wx:if="{{showpoint||topId == 'undefined'||showpointone}}"  >
       <text>消耗积分</text>

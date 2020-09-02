@@ -571,7 +571,6 @@ Page({
           } else {
             // 获取项目经验对象
             let project = mydata.project;
-            console.log("project",project)
             // 定义有图片项目数组
             let hasImageProject = [];
             // 定义没图片的数组
@@ -890,7 +889,6 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    console.log(options)
     this.setData({
       options: options
     })
@@ -900,7 +898,6 @@ Page({
       })
     }
     if(options.hasOwnProperty('child')){
-      console.log(options.child)
       this.setData({
         child: options.child
       })

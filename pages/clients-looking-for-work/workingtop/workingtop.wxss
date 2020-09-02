@@ -248,7 +248,7 @@ page {
 }
 .daynum picker .end{
   width: 80%;
-    display: flex;
+  display: flex;
   align-items: center;
 }
 
@@ -270,6 +270,7 @@ padding-left: 31%;
 }
  .daynumone .bluet{
    color: #0099FF;
+   padding-left: 20rpx;
  }
 
 .daynumone .endtime::after{

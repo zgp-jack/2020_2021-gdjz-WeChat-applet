@@ -268,8 +268,6 @@ Page({
     app.globalData.previewproject = true;
   },
   previewImage: function (e) {
-    console.log(this.data.projecthree)
-    console.log(this.data.allproject)
     let url = e.currentTarget.dataset.url;
     let i = e.currentTarget.dataset.index;
     let type = e.currentTarget.dataset.type;
