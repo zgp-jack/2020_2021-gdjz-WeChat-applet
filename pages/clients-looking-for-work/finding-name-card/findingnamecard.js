@@ -916,27 +916,28 @@ Page({
               projectlength: 0
             });
           } else {
+          
             // 获取项目经验对象
             let project = mydata.project;
             // 定义有图片项目数组
             let hasImageProject = [];
-            // 定义项目是否都有图片数据
-            let imagesNum = 0;
+            // 定义没图片的数组
+            let NoImageProject = [];
             for (let i = 0; i < project.length; i++) {
+              // 将时间转成毫秒并存入数组
+              project[i].endTime = new Date(project[i].completion_time).getTime()
               // 获取项目经验对象中images不为空的项目
               if (project[i].image.length != 0) {
                 // 处理如果图片数量大于3就只保留三张图片
-                if (project[i].image.length > 3) {
-                  project[i].image.splice(3,project[i].image.length-3)
-                }
-                // 将时间转成毫秒并存入数组
-                project[i].endTime = new Date(project[i].completion_time).getTime()
+                // if (project[i].image.length > 3) {
+                //   project[i].image.splice(3,project[i].image.length-3)
+                // }
                 // 增加index字段作为project数组查找标识
                 project[i].index = i
                 hasImageProject.push(project[i])
               }else{
                 project[i].index = i
-                imagesNum ++
+                NoImageProject.push(project[i])
               }
             }
             // 获取项目结束时间比较近的项目
@@ -950,31 +951,34 @@ Page({
                 else return 0
               }
             }
-            // 如果所有的项目经验都没有图片就保持原数组,否则按照处理过的图片数组按照结束时间进行降序排序
-            if (imagesNum == project.length) {
-              hasImageProject = project
-            } else {
-              hasImageProject.sort(projectSort("endTime"))
-            }
+            // 将有图片的数组与没有图片的数组进行按照时间降序排列
+            let sortImageProject = hasImageProject.sort(projectSort("endTime"))
+            let sortNoImageProject = NoImageProject.sort(projectSort("endTime"))
+            // 组合项目经验对象
+            let projectObj = [...sortImageProject, ...sortNoImageProject]
+            console.log("projectObj",projectObj)
             // 获取排序后的第一个元素
-            let projectOne = hasImageProject[0]
-
-            if (new Date(projectOne.completion_time).getTime() / 86400000 < parseInt(new Date().getTime() / 86400000)) {
-
+            let projectOne = projectObj[0]
+            // 处理如果图片数量大于3就只保留三张图片
+            if (projectOne.image.length > 3) {
+              projectOne.image.splice(3, projectOne.image.length-3)
+            }
+            
+            if (new Date(projectObj[0].completion_time).getTime() / 86400000 < parseInt(new Date().getTime() / 86400000)) {
               that.setData({
-                project: project,
+                project: projectObj,
                 projectone: [projectOne],
-                projectlength: project.length >= 1 ? project.length : 0
+                projectlength: projectObj.length >= 1 ? projectObj.length : 0
               });
-              that.data.project[projectOne.index].completiontime = "zhijing"
+              that.data.project[0].completiontime = "zhijing"
             } else {
               that.setData({
-                project: [...project],
+                project: projectObj,
               })
-              that.data.project[projectOne.index].completiontime = "zhijin"
+              that.data.project[0].completiontime = "zhijin"
               that.setData({
                 projectone: [projectOne],
-                projectlength: project.length >= 1 ? project.length : 0
+                projectlength: projectObj.length >= 1 ? projectObj.length : 0
               });
             }
           }

@@ -82,14 +82,53 @@ Page({
         
         let allproject = [];
         if (res.data.errcode == 200) {
-          let dataproject = res.data.data.project;
-          for (let i = 0; i < dataproject.length ; i++){
-            if (new Date(dataproject[i].completion_time).getTime() / 86400000 < parseInt(new Date().getTime() / 86400000)) {
-              dataproject[i].completiontime = "zhijing"
-              allproject.push(dataproject[i])
+          let mydata = res.data.data;
+          // 获取项目经验对象
+          let project = mydata.project;
+          // 定义有图片项目数组
+          let hasImageProject = [];
+          // 定义没图片的数组
+          let NoImageProject = [];
+          for (let i = 0; i < project.length; i++) {
+            // 将时间转成毫秒并存入数组
+            project[i].endTime = new Date(project[i].completion_time).getTime()
+            // 获取项目经验对象中images不为空的项目
+            if (project[i].image.length != 0) {
+              // 处理如果图片数量大于3就只保留三张图片
+              // if (project[i].image.length > 3) {
+              //   project[i].image.splice(3,project[i].image.length-3)
+              // }
+              // 增加index字段作为project数组查找标识
+              project[i].index = i
+              hasImageProject.push(project[i])
             }else{
-              dataproject[i].completiontime = "zhijin"
-              allproject.push(dataproject[i])
+              project[i].index = i
+              NoImageProject.push(project[i])
+            }
+          }
+          // 获取项目结束时间比较近的项目
+          // 排序规则降序排列
+          function projectSort(key) {
+            return function (objectN,objectM) {
+              let valueN = objectN[key];
+              let valueM = objectM[key];
+              if (valueN < valueM) return 1
+              else if (valueN > valueM) return -1
+              else return 0
+            }
+          }
+          // 将有图片的数组与没有图片的数组进行按照时间降序排列
+          let sortImageProject = hasImageProject.sort(projectSort("endTime"))
+          let sortNoImageProject = NoImageProject.sort(projectSort("endTime"))
+          // 组合项目经验对象
+          let projectObj = [...sortImageProject, ...sortNoImageProject]
+          for (let i = 0; i < projectObj.length ; i++){
+            if (new Date(projectObj[i].completion_time).getTime() / 86400000 < parseInt(new Date().getTime() / 86400000)) {
+              projectObj[i].completiontime = "zhijing"
+              allproject.push(projectObj[i])
+            }else{
+              projectObj[i].completiontime = "zhijin"
+              allproject.push(projectObj[i])
             }
           }
 
@@ -157,15 +196,55 @@ Page({
       for (let i = 0; i < allexpress.length; i++) {
         projectall.push(allexpress[i])
       }
+       // 获取项目经验对象
+       let project = allexpress;
+       // 定义有图片项目数组
+       let hasImageProject = [];
+       // 定义没图片的数组
+       let NoImageProject = [];
+       for (let i = 0; i < project.length; i++) {
+         // 获取项目经验对象中images不为空的项目
+         if (project[i].image.length != 0) {
+           // 处理如果图片数量大于3就只保留三张图片
+           // if (project[i].image.length > 3) {
+           //   project[i].image.splice(3,project[i].image.length-3)
+           // }
+           // 将时间转成毫秒并存入数组
+           project[i].endTime = new Date(project[i].completion_time).getTime()
+           // 增加index字段作为project数组查找标识
+           project[i].index = i
+           hasImageProject.push(project[i])
+         }else{
+           project[i].endTime = new Date(project[i].completion_time).getTime()
+           project[i].index = i
+           NoImageProject.push(project[i])
+         }
+       }
+       // 获取项目结束时间比较近的项目
+       // 排序规则降序排列
+       function projectSort(key) {
+         return function (objectN,objectM) {
+           let valueN = objectN[key];
+           let valueM = objectM[key];
+           if (valueN < valueM) return 1
+           else if (valueN > valueM) return -1
+           else return 0
+         }
+       }
+       // 将有图片的数组与没有图片的数组进行按照时间降序排列
+       let sortImageProject = hasImageProject.sort(projectSort("endTime"))
+       let sortNoImageProject = NoImageProject.sort(projectSort("endTime"))
+       // 组合项目经验对象
+       let projectObj = [...sortImageProject, ...sortNoImageProject]
+       
 
-
-      for (let i = 0; i < projectall.length; i++) {
-        if (new Date(projectall[i].completion_time).getTime() / 86400000 < parseInt(new Date().getTime() / 86400000)) {
-          projectall[i].completiontime = "zhijing"
-          allproject.push(projectall[i])
+      for (let i = 0; i < projectObj.length; i++) {
+        if (new Date(projectObj[i].completion_time).getTime() / 86400000 < parseInt(new Date().getTime() / 86400000)) {
+          projectObj[i].completiontime = "zhijing"
+          allproject.push(projectObj[i])
         } else {
-          projectall[i].completiontime = "zhijin"
-          allproject.push(projectall[i])
+          projectObj[i].completiontime = "zhijin"
+          allproject.push(projectObj[i])
         }
       }
     

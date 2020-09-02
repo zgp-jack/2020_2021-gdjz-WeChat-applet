@@ -37,18 +37,20 @@ Page({
     top_rules: [],
     max_top_days: "",
     max_price: 0,
-    allprice: 0,
+    allprice: 0,//最新单价
     clocktime: 0,
     showpointnum: 0,
     showpointone: false,
-    detailprice: 0,
+    detailprice: 0,//新选择的置顶天数
     rangevalue:0,
     country_integral:0,
     defaultDayIndex:0,
     defaultTop:false,
     defaultArea:[],
     topdata:{},
-    special_ids: []
+    special_ids: [],
+    serverTime:"",
+    hostTime:""
   },
   //用户首次置顶或者置顶到期点击‘选择置顶范围’跳转到置顶区域选择界面
   jumpstickyrule() {
@@ -436,13 +438,23 @@ Page({
       let areaProcrum = that.data.topdata.top_provinces_str;
       let areaCitycrum = that.data.topdata.top_citys_str;
       let isCountry = that.data.topdata.is_country;
+      // let startTime = this.data.topdata.start_time_str;
+      // let endTime = this.data.topdata.end_time_str;
+      // let startTimeO = new Date(startTime).getTime() - 0;
+      // let endTimeO = new Date(endTime).getTime() - 0;
+      // let topDay = (endTimeO - startTimeO)/1000/3600/24;
       let max_price = parseInt(that.data.topdata.max_price);
+      // let province_integral = that.data.province_integral;
+      // let country_integral = that.data.country_integral;
+      // let city_integral = that.data.city_integral;
       let areaAllcrum = [];
       let areaItem = area.data[0][0];
       areaItem.name = areaItem.city;
       if (isCountry == 1) {
        areaAllcrum = areaItem
       }
+      // let diffPrice = ((areaProcrum.length * province_integral + areaCitycrum * city_integral + areaAllcrum * country_integral) - max_price) * topDay
+      // console.log("diffPrice",diffPrice)
       let alllength = areaProcrum.length + areaCitycrum.length + areaAllcrum.length;
       let endtime = that.data.topdata.end_time_str;
       let endtimeh = (that.data.topdata.end_time-0)*1000;
@@ -627,6 +639,7 @@ Page({
           let top_rules = mydata.data.top_rules;
           let max_top_days = mydata.data.max_top_days-0;
           let special_ids = mydata.data.special_ids;
+          let serverTime = mydata.data.time -0;
           if (hastop == 0 || istop == 2) {
             let point = (areaProcrum.length * province_integral + areaCitycrum.length * city_integral + areaAllcrum.length * country_integral) * day;
             that.setData({
@@ -648,7 +661,9 @@ Page({
             max_top_days: max_top_days,
             //置顶规则
             top_rules: top_rules,
-            special_ids: special_ids
+            special_ids: special_ids,
+            serverTime: serverTime * 1000,
+            hostTime: new Date().getTime()
           })
           // 初始化选择置顶天数的下拉列表
           that.getMoreDay()
@@ -699,10 +714,23 @@ Page({
   },
   // 延长修改置顶日期的点击事件
   dayclocyone(e) {
-    console.log("dfdfdfdfdfdfd")
     let that = this;
+    // 获取请求的服务器时间戳
+    let serverTime = that.data.serverTime;
+    // 获取配置请求时本地主机时间
+    let hostTime = that.data.hostTime;
     // 存在点击事件
     if (e && (e.detail.value - 0 + 1 > 0)) {
+      // 上次的置顶单价（基本单位天）
+      let allprice = this.data.max_price
+      // 现在新置顶的单价
+      let alllength = (that.data.areaProcrum.length) * that.data.province_integral + (that.data.areaCitycrum.length) * that.data.city_integral + (that.data.areaAllcrum.length) * that.data.country_integral
+      // 点击当前延期选择天数后的当前本地时间
+      let currentTime = new Date().getTime();
+      // 计算本地时间差
+      let currentTimeDiff = currentTime - hostTime;
+      // 最新服务器时间
+      let newSeverTime = serverTime + currentTimeDiff;
       // 获取选择的天数
       let detail = e.detail.value - 0 + 1
       // 点击延长或者修改显示“最新到期时间”与“积分”框
@@ -710,28 +738,24 @@ Page({
         shoutime: true,
         showpoint: true,
       })
-      // 最新的到期时间
+      // 最新的到期时间毫秒+正在置顶结束的时间毫秒
       let all = 86400000 * (detail) + (this.data.endtimeh - 0)
       // 格式化到期时间
       let time = this.getMyDate(all)
-     
-
-      let allprice = this.data.max_price
-    
-      let alllength = (that.data.areaProcrum.length) * that.data.province_integral + (that.data.areaCitycrum.length) * that.data.city_integral + (that.data.areaAllcrum.length) * that.data.country_integral
-  
       if (alllength <= allprice) {
         this.setData({
           endtimeone: time,
-          point: allprice * detail,
-          detailprice: detail
+          detailprice: detail,
+          allprice: alllength
         })
+        this.getAllpoint(newSeverTime)
       } else {
         this.setData({
           endtimeone: time,
-          point: alllength * detail + that.data.showpointnum,
-          detailprice: detail
+          detailprice: detail,
+          allprice: alllength
         })
+        this.getAllpoint(newSeverTime)
       }
     }
   },
@@ -759,19 +783,17 @@ Page({
     // 初始化置顶状态下的数据
     this.gettopareas()
   },
-  getAllpoint() {
+  getAllpoint(time) {
     // 积分单价差
     let shen = this.data.allprice - this.data.max_price;
     
-    if (this.data.clocktime != 0 && shen>=0) {
+    if (time != 0 && shen>=0) {
       let shennum = shen;
       // let shenmiao = this.changeTwoDecimal(shennum)
       
+      // 计算置顶积分总差额
+      let time = ((this.data.endtimeh - time) / 3600 / 1000 / 24) * (shennum) + "";
       
-      let time = ((this.data.endtimeh - this.data.clocktime) / 3600 / 1000 / 24) * (shennum) + "";
-      
-      
-   
       var str = Math.round(time) - 0 + (this.data.allprice - 0) * (this.data.detailprice - 0);
 
       if (str==0){
@@ -796,9 +818,9 @@ Page({
           showpointone: true,
           allprice: all
         })
-        this.getAllpoint()
+        this.getAllpoint(this.data.clocktime)
       } else if (all == this.data.max_price){
-        this.getAllpoint()
+        this.getAllpoint(this.data.clocktime)
       } else if (all < this.data.max_price){
         this.setData({
           point: (this.data.max_price) * (this.data.detailprice),

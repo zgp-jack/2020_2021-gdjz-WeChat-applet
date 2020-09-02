@@ -96,7 +96,7 @@
               <text class="workotextone">{{personnum}}</text>
             </view>
             <view class="cardotext" wx:if="{{city}}">
-              <text class="oworkotext">所在地区</text>
+              <text class="oworkotext">期望地区</text>
               <view class="distancev" bindtap="showThisMapInfo">
                 <text class="({{location&&status == 0&& distance != ''?'workotextone':'zong'}})">{{city}}</text>
                 <view class="distanceo" wx:if="{{location&&status == 0&& distance != '' }}">
