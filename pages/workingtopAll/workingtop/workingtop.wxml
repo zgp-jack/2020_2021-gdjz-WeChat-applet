@@ -30,7 +30,7 @@
   <view class="dayall">
     <view class="daynum" wx:if="{{topId == 'undefined'}}">
       <text>置顶时间</text>
-      <picker bindchange="dayclocy" range="{{array}}" value="{{1}}">
+      <picker bindchange="dayclocy" range="{{array}}" value="{{defaultDayIndex}}">
         <input   type="number" disabled="true" placeholder="请选择置顶时间" value="{{daynumber}}">
           <image class="rightarrow" src="{{ rightarrow }}"></image>
         </input>

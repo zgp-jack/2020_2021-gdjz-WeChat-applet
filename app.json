@@ -25,7 +25,6 @@
     "pages/userauth/userauth",
     "pages/publish/recruit/recruit",
     "pages/publish/pmap/pmap",
-    "pages/collect/collect",
     "pages/collect/info/info",
     "pages/published/published",
     "pages/fast-issue/index/index",

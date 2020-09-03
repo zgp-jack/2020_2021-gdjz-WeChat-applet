@@ -27,7 +27,7 @@
 			"outputPath": ""
 		},
 		"useIsolateContext": true,
-		"useCompilerModule": true,
+		"useCompilerModule": false,
 		"userConfirmedUseCompilerModuleSwitch": false
 	},
 	"compileType": "miniprogram",
@@ -72,13 +72,6 @@
 					"scene": 1047
 				},
 				{
-					"id": 1,
-					"name": "/pages/publish/fast/fast",
-					"pathName": "/pages/publish/fast/fast",
-					"query": "",
-					"scene": null
-				},
-				{
 					"id": -1,
 					"name": "会员中心-新",
 					"pathName": "pages/ucenter/ucenterNew/ucenterNew",
@@ -104,13 +97,6 @@
 					"name": "订阅",
 					"pathName": "pages/others/message/publish/publish",
 					"query": "tel=19983741552&name=我服了",
-					"scene": null
-				},
-				{
-					"id": 6,
-					"name": "pages/others/message/lists/lists",
-					"pathName": "pages/others/message/lists/lists",
-					"query": "",
 					"scene": null
 				},
 				{
@@ -348,13 +334,6 @@
 					"id": -1,
 					"name": "pages/findingworkinglist/findingworkinglist",
 					"pathName": "pages/findingworkinglist/findingworkinglist",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "pages/fast/issue/index",
-					"pathName": "pages/fast/issue/index",
 					"query": "",
 					"scene": null
 				},

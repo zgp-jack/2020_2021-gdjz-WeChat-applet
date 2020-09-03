@@ -198,15 +198,7 @@ Page({
     this.closeArea();
     //将选择城市信息保存到lacationHistory中
     app.setStorageAction(id, mydata, true)
-    // //获取页面栈prevPage为上一界面
-    // let prevPage = app.getPrevPage();
-    // //设置上一个页面data中数据
-    // prevPage.setData({ 
-    //   areaId: parseInt(id), 
-    // })
-    //获取历史城市信息和定位城市信息存入data中
     this.initHistoryLoc();
-
     this.getKeywordsInputs(adName, function (data) {
       _this.setData({ addressList: data })
     })

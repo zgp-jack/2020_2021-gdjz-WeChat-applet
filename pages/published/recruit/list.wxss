@@ -40,10 +40,10 @@ page {
 }
 .recruit-list-container{
   position: relative;
-  padding-top: 100rpx;
+  padding-top: 110rpx;
   padding-bottom: 120rpx;
   padding-bottom: 120rpx;
-  height: calc(100% - 200rpx)
+  height: calc(100% - 210rpx)
 }
 .recruit-list-item{
   position: relative;

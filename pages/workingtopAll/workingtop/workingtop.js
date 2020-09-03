@@ -45,14 +45,16 @@ Page({
     showpointone: false,
     detailprice: 0,
     special_ids:[],
-    rangevalue:1,
+    rangevalue:2,
     country_integral:"",
     // 首次置顶显示的置顶到期时间
     firstEndTime:"",
     // top-config返回的服务器时间戳
     serverTime:0,
     // top-config请求的同时记录本地时间戳
-    hostTime:""
+    hostTime:"",
+    // 初次置顶的默认选中的置顶天数对应的index
+    defaultDayIndex: 0 
   },
 
   jumpstickyrule() {
@@ -109,7 +111,6 @@ Page({
     });
   },
   dayclocy(e) {
-    
     let that = this;
     let numcity = that.data.city_integral;
     let numprovice = that.data.province_integral;
@@ -124,46 +125,42 @@ Page({
     let currentTimeDiff = currentTime - hostTime;
     // 最新服务器时间
     let newSeverTime = serverTime + currentTimeDiff;
-    // 获取选择的天数
-    let detail = null;
-    let daynumber = "";
-    if (e.detail.value == 10) {
-      detail = 15;
-      daynumber = "15天";
-    }else if(e.detail.value == 11){
-      detail = 30;
-      daynumber = "30天";
-    }else if(e.detail.value == 12){
-      detail = 60;
-      daynumber = "60天";
-    }else{
-      detail = e.detail.value - 0 + 1
-    }
-    // 最新的到期时间毫秒+正在置顶结束的时间毫秒
-    let all = 86400000 * (detail) + (newSeverTime - 0)
-    // 格式化到期时间
-    let time = this.getMyDate(all)
     if (e) {
-
-      let day = e.detail.value - 0 + 1;
+      // 获取选择的天数
+      let detail = null;
+      let daynumber = "";
+      if (e.detail.value == 10) {
+        detail = 15;
+        daynumber = "15天";
+      }else if(e.detail.value == 11){
+        detail = 30;
+        daynumber = "30天";
+      }else if(e.detail.value == 12){
+        detail = 60;
+        daynumber = "60天";
+      }else if(e.detail.value > 2  && e.detail.value < 10){
+        detail = e.detail.value - 0 + 1;
+        daynumber = `${detail}天`;
+      }else{
+        detail = e.detail.value - 0 + 1
+      }
+      // 最新的到期时间毫秒+正在置顶结束的时间毫秒
+      let all = 86400000 * (detail) + (newSeverTime - 0)
+      // 格式化到期时间
+      let time = this.getMyDate(all)
       
       that.setData({
-        daynumber: e.detail.value<10 ? day*24 + "小时" + '（' + day + '天' + '）' : daynumber,
-        day: day,
+        daynumber: e.detail.value < 3 ? detail * 24 + "小时" + '（' + detail + '天' + '）' : daynumber,
+        day: detail,
         firstEndTime: time,
       });
 
-      let price = (numcity * (that.data.areaCitycrum.length) + numprovice * (that.data.areaProcrum.length) + numAll * (that.data.areaAllcrum.length)) * day
+      let price = (numcity * (that.data.areaCitycrum.length) + numprovice * (that.data.areaProcrum.length) + numAll * (that.data.areaAllcrum.length)) * detail
       // point
       that.setData({
         point: price
       });
     } else {
-      
-      
-      
-      
-      
       let price = (numcity * (that.data.areaCitycrum.length) + numprovice * (that.data.areaProcrum.length) + numAll * (that.data.areaAllcrum.length) );
       that.setData({
         allprice: price
@@ -183,8 +180,6 @@ Page({
           point: price
         });
       }
-
-
     }
 
 
@@ -444,16 +439,16 @@ Page({
     }
   },
   getMoreDay() {
-    let topDay = this.data.max_top_days - 0;
-    let oldArray = [];
-    let newArray = ["15天","30天","60天"]
-    for (let i = 0; i < topDay; i++) {
-      oldArray.push((i + 1)*24 + "小时"  + '（' + (i + 1) + '天' + '）')
-    }
-    let array = [...oldArray, ...newArray]
-    this.setData({
-      array: array
-    })
+    // let topDay = this.data.max_top_days - 0;
+    // let oldArray = [];
+    // let newArray = ["15天","30天","60天"]
+    // for (let i = 0; i < topDay; i++) {
+    //   oldArray.push((i + 1)*24 + "小时"  + '（' + (i + 1) + '天' + '）')
+    // }
+    // let array = [...oldArray, ...newArray]
+    // this.setData({
+    //   array: array
+    // })
   },
   getAreaData: function (options) {
     if(options.topId != 'undefined'){
@@ -612,6 +607,16 @@ Page({
     let day = that.data.max_top_days;
     let userInfo = wx.getStorageSync("userInfo");
     let userUuid = wx.getStorageSync("userUuid");
+    // 获取请求的服务器时间戳
+    let serverTime = that.data.serverTime;
+    // 获取配置请求时本地主机时间
+    let hostTime = that.data.hostTime;
+    // 点击当前延期选择天数后的当前本地时间
+    let currentTime = new Date().getTime();
+    // 计算本地时间差
+    let currentTimeDiff = currentTime - hostTime;
+    // 最新服务器时间
+    let newSeverTime = serverTime + currentTimeDiff;
     if (!userInfo || !userUuid) {
       wx.showModal({
         title: '温馨提示',
@@ -636,7 +641,7 @@ Page({
       country = that.data.areaAllcrum[0].id
     }
 
-    that.getAllpoint()
+    that.getAllpoint(newSeverTime)
 
     let detail = {
       mid: userInfo.userId,
@@ -765,6 +770,26 @@ Page({
         let mydata = res.data;
 
         if (mydata.errcode == "ok") {
+          let array =[]
+          let days = mydata.data.days
+          for (let i = 0; i < days.length; i++) {
+            if (i < 3 ) {
+              array.push(days[i] * 24 + "小时"  + '（' + days[i] + '天' + '）')
+            }else{
+              array.push(days[i] + "天")
+            }
+          }
+          let day = mydata.data.default_days
+          let index = null
+          if (day < 11){
+            index = day -1
+          }else if (day == 15){
+            index = 10
+          }else if (day == 30){
+            index = 11
+          }else if (day == 60){
+            index = 12
+          }
           that.setData({
             max_province: mydata.data.max_province-0,
             max_city: mydata.data.max_city-0,
@@ -781,6 +806,9 @@ Page({
             firstEndTime: that.getMyDate(86400000 * mydata.data.default_days + mydata.data.time * 1000),
             // 本地时间戳
             hostTime: new Date().getTime(),
+            array: array,
+            defaultDayIndex: index,
+            rangevalue: index
           })
           if(options.topId == 'undefined'){
             let numcity = mydata.data.city_integral;
@@ -837,13 +865,13 @@ Page({
   },
 
   dayclocyone(e) {
-    debugger
     let that = this;
+    let value = e.detail.value
     // 获取请求的服务器时间戳
     let serverTime = that.data.serverTime;
     // 获取配置请求时本地主机时间
     let hostTime = that.data.hostTime;
-    if (e && (e.detail.value - 0 + 1 > 0)) {
+    if (e && (value - 0 + 1 > 0)) {
      
       let allprice = this.data.max_price
     
@@ -856,11 +884,11 @@ Page({
       let newSeverTime = serverTime + currentTimeDiff;
       // 获取选择的天数
       let detail = null
-      if (e.detail.value == 10) {
+      if (value == 10) {
         detail = 15
-      }else if(e.detail.value == 11){
+      }else if(value == 11){
         detail = 30
-      }else if(e.detail.value == 12){
+      }else if(value == 12){
         detail = 60
       }else{
         detail = e.detail.value - 0 + 1
@@ -996,8 +1024,6 @@ Page({
       }
     }
   },
-
-
   /**
    * 生命周期函数--监听页面加载
    */

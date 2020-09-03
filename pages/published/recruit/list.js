@@ -58,8 +58,6 @@ Page({
     let now = new Date().getTime() / 1000 // 当前时间戳
     let top = topdata.top; //是否有置顶数据
     let userInfo = wx.getStorageSync('userInfo') // 用户信息
-    
-
     if(end == '2'){ //如果已招到
       wx.showModal({
         title: '提示',
@@ -172,7 +170,7 @@ Page({
 
     }else{
       wx.navigateTo({
-        url: `/pages/workingtopAll/workingtop/workingtop?id=${id}&topId=undefined&city_id=${topdata.city_id}&province_id=${topdata.province_id}`,
+        url: `/pages/workingtopAll/workingtop/workingtop?id=${id}&topId=undefined&city_id=${topdata.area_id}&province_id=${topdata.province_id}`,
       })
     }
 

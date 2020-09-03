@@ -139,36 +139,37 @@ Page({
     let currentTimeDiff = currentTime - hostTime;
     // 最新服务器时间
     let newSeverTime = serverTime + currentTimeDiff;
-    // 获取选择的天数
-    let detail = null
-    let daynumber = "";
-    if (e.detail.value == 10) {
-      detail = 15;
-      daynumber = "15天";
-    }else if(e.detail.value == 11){
-      detail = 30;
-      daynumber = "30天";
-    }else if(e.detail.value == 12){
-      detail = 60;
-      daynumber = "60天";
-    }else{
-      detail = e.detail.value - 0 + 1
-    }
-    // 最新的到期时间毫秒+正在置顶结束的时间毫秒
-    let all = 86400000 * (detail) + (newSeverTime - 0)
-    // 格式化到期时间
-    let time = this.getMyDate(all)
-    // 如果存在选择置顶天数
     if (e) {
-      let day = e.detail.value - 0 + 1;
-    // 获取选择的置顶天数并设置到data中
+      // 获取选择的天数
+      let detail = null;
+      let daynumber = "";
+      if (e.detail.value == 10) {
+        detail = 15;
+        daynumber = "15天";
+      }else if(e.detail.value == 11){
+        detail = 30;
+        daynumber = "30天";
+      }else if(e.detail.value == 12){
+        detail = 60;
+        daynumber = "60天";
+      }else if(e.detail.value > 2 && e.detail.value < 9){
+        detail = e.detail.value - 0 + 1;
+        daynumber = `${detail}天`;
+      }else{
+        detail = e.detail.value - 0 + 1
+      }
+      // 最新的到期时间毫秒+正在置顶结束的时间毫秒
+      let all = 86400000 * (detail) + (newSeverTime - 0)
+      // 格式化到期时间
+      let time = this.getMyDate(all)
+      // 获取选择的置顶天数并设置到data中
       that.setData({
-        daynumber: e.detail.value < 10 ? (day * 24) + "小时(" + day + "天)" : daynumber,
-        day: day,
+        daynumber: e.detail.value < 3 ? (detail * 24) + "小时(" + detail + "天)" : daynumber,
+        day: detail,
         firstEndTime: time
       });
     // 计算出需要的积分
-      let price = (numcity * (that.data.areaCitycrum.length) + numprovice * (that.data.areaProcrum.length) + numAll * (that.data.areaAllcrum.length)) * day
+      let price = (numcity * (that.data.areaCitycrum.length) + numprovice * (that.data.areaProcrum.length) + numAll * (that.data.areaAllcrum.length)) * detail
     // 将积分设置到data中
       that.setData({
         point: price
@@ -275,7 +276,6 @@ Page({
       city_ids: that.data.areaTextIdC,
       province_ids: that.data.areaTextIdP,
     }
-    console.log("detail",detail)
     app.appRequestAction({
       url: 'resumes/do-top-v2/',
       way: 'POST',
@@ -451,16 +451,16 @@ Page({
   },
   // 初始化点击置顶时间的选择框数据
   getMoreDay() {
-    let topDay = this.data.max_top_days - 0;
-    let oldArray = [];
-    let newArray = ["15天","30天","60天"]
-    for (let i = 0; i < topDay; i++) {
-      oldArray.push((i + 1)*24 + "小时(" + (i+1) + "天)")
-    }
-    let array = [...oldArray, ...newArray]
-    this.setData({
-      array: array
-    })
+    // let topDay = this.data.max_top_days - 0;
+    // let oldArray = [];
+    // let newArray = ["15天","30天","60天"]
+    // for (let i = 0; i < topDay; i++) {
+    //   oldArray.push((i + 1)*24 + "小时(" + (i+1) + "天)")
+    // }
+    // let array = [...oldArray, ...newArray]
+    // this.setData({
+    //   array: array
+    // })
   },
   // 初始化已经置顶的置顶数据
   gettopareas() {
@@ -689,6 +689,25 @@ Page({
               point: point
             })
           }
+          let array =[]
+          let days = mydata.data.days
+          for (let i = 0; i < days.length; i++) {
+            if (i < 3 ) {
+              array.push(days[i] * 24 + "小时"  + '（' + days[i] + '天' + '）')
+            }else{
+              array.push(days[i] + "天")
+            }
+          }
+          let index = null
+          if (day < 11){
+            index = day -1
+          }else if (day == 15){
+            index = 10
+          }else if (day == 30){
+            index = 11
+          }else if (day == 60){
+            index = 12
+          }
           that.setData({
             //最大省份数
             max_province: max_province,
@@ -714,7 +733,11 @@ Page({
             // 默认天数下选择框显示内容
             daynumber: daynumber,
             // 首次置顶显示的置顶到期时间
-            firstEndTime: firstEndTime
+            firstEndTime: firstEndTime,
+            // 置顶时间选择数组
+            array: array,
+            defaultDayIndex: index,
+            rangevalue: index
 
           })
           // 初始化选择置顶天数的下拉列表
@@ -900,6 +923,7 @@ Page({
   },
    //获取找活置顶的省份城市选择界面
   getDefaultArea: function(areaId) {
+    console.log("areaId",areaId)
     //获取本地缓存区域信息
     let areadata = wx.getStorageSync("areadata");
     //如果本地有缓存区域信息
@@ -927,13 +951,12 @@ Page({
       }
       console.log("defaultTop",defaultTop)
       let pid = defaultTop[0].pid
-      let index = defaultTop[0].index
       if (pid == 0) {
         this.setData({
           areaAllcrum:defaultTop,
           alllength:defaultTop.length,
         })
-      } else if(pid == 1 && index == 0) {
+      } else if(pid == 1) {
         this.setData({
           areaProcrum: defaultTop,
           alllength:defaultTop.length,
@@ -963,13 +986,12 @@ Page({
         }
       }
       let pid = defaultTop.pid
-      let index = defaultTop[0].index
       if (pid == 0) {
         this.setData({
           areaAllcrum:defaultTop,
           alllength:defaultTop.length,
         })
-      } else if(pid == 1 && index == 0) {
+      } else if(pid == 1) {
         this.setData({
           areaProcrum: defaultTop,
           alllength:defaultTop.length,
@@ -1023,9 +1045,6 @@ Page({
     //计算消耗积分
     this.dayclocy()
     this.getCityNum()
-    console.log("this.data.province_integral",this.data.province_integral)
-    console.log("this.data.areaProcrum",this.data.areaProcrum)
-    console.log("this.data",this.data)
   },
 
   /**
