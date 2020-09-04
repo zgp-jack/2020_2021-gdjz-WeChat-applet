@@ -291,6 +291,7 @@ padding-left: 31%;
   font-size: 30rpx;
   display: inline-block;
   height: 90rpx;
+  padding-left: 20rpx;
 }
 .daynumone:last-child{
   border: 0;

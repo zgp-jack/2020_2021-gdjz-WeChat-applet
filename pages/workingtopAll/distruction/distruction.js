@@ -96,6 +96,18 @@ Page({
       isAllAreas: false
     })
   },
+  // 如果搜索城市框内容为空，点击非输入框以外的区域那么就隐藏历史记录框
+  hideInputList:function(e){
+    let val = e.detail.value
+    if (val.length == 0) {
+      this.setData({
+        showListsTtile: false,
+        showListsAnd: false,
+        showInputList: false,
+        searchInputVal: "",
+      })
+    }
+  },
   showInputList: function() {
     this.setData({
       showInputList: true,

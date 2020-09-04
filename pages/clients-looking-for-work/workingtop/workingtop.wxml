@@ -24,7 +24,7 @@
     <text>点击选择置顶范围></text>
   </view>
   <view class="scopenum">
-    <text>请选择置顶时间</text>
+    <text>请选择置顶天数</text>
   </view>
 <!--  -->
   <view class="dayall">

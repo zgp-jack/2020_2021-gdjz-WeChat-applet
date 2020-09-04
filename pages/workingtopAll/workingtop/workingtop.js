@@ -54,7 +54,9 @@ Page({
     // top-config请求的同时记录本地时间戳
     hostTime:"",
     // 初次置顶的默认选中的置顶天数对应的index
-    defaultDayIndex: 0 
+    defaultDayIndex: 0 ,
+    // 是否审核状态
+    isCheck: 0
   },
 
   jumpstickyrule() {
@@ -215,6 +217,8 @@ Page({
   },
   submitscop() {
     let that = this;
+    // 招工信息的审核状态
+    let isCheck = that.data.isCheck
     let day = that.data.max_top_days;
     let userInfo = wx.getStorageSync("userInfo");
     let userUuid = wx.getStorageSync("userUuid");
@@ -276,7 +280,6 @@ Page({
       success: function(res) {
         let mydata = res.data;
         if (mydata.errcode == "ok") {
-
           wx.showModal({
             title: '温馨提示',
             content: res.data.errmsg,
@@ -346,7 +349,21 @@ Page({
             }
           })
           return
-        } else {
+        }else if(mydata.errcode == "status_error"){
+          wx.showModal({
+            title: '温馨提示',
+            content: res.data.errmsg,
+            showCancel:false,
+            success(res) {
+              if (res.confirm == true) {
+                wx.navigateTo({
+                  url: `/pages/published/recruit/list`,
+                })
+              }
+            }
+          })
+          return
+        }else {
           wx.showModal({
             title: '温馨提示',
             content: res.data.errmsg,
@@ -770,6 +787,7 @@ Page({
         let mydata = res.data;
 
         if (mydata.errcode == "ok") {
+          // 处理3天内显示“1天（24小时）”，超过3天显示“4天”
           let array =[]
           let days = mydata.data.days
           for (let i = 0; i < days.length; i++) {
@@ -779,6 +797,7 @@ Page({
               array.push(days[i] + "天")
             }
           }
+          // 默认置顶天数对应的时间
           let day = mydata.data.default_days
           let index = null
           if (day < 11){
@@ -789,6 +808,13 @@ Page({
             index = 11
           }else if (day == 60){
             index = 12
+          }
+          // 处理默认置顶天数显示内容
+          let daynumber = "";
+          if ( day < 4 ) {
+            daynumber = (day * 24) + "小时(" + day + "天)"
+          } else {
+            daynumber = day + "天"
           }
           that.setData({
             max_province: mydata.data.max_province-0,
@@ -801,12 +827,15 @@ Page({
             special_ids: mydata.data.special_ids,
             country_integral: mydata.data.country_integral,
             day: mydata.data.default_days-0,
-            daynumber: (mydata.data.default_days * 24) + "小时(" + mydata.data.default_days + "天)",
+            daynumber: daynumber,
             serverTime: mydata.data.time * 1000,
+            // 首次置顶显示的置顶到期时间
             firstEndTime: that.getMyDate(86400000 * mydata.data.default_days + mydata.data.time * 1000),
             // 本地时间戳
             hostTime: new Date().getTime(),
+            // 后台返回的置顶选择天数
             array: array,
+            // 后台默认置顶天数对应的选择index
             defaultDayIndex: index,
             rangevalue: index
           })
@@ -937,18 +966,12 @@ Page({
       this.setData({
         topId: options.topId
       })
-
     }
-    // if (options.hasOwnProperty("endtime")) {
-    //   this.setData({
-    //     endtime: options.endtime
-    //   })
-    // }
-    // if (options.hasOwnProperty("endtimeh")) {
-    //   this.setData({
-    //     endtimeh: options.endtimeh
-    //   })
-    // }
+    if (options.hasOwnProperty("ischeck")) {
+      this.setData({
+        isCheck: options.ischeck
+      })
+    }
     this.gettopareas()
   },
   // changeTwoDecimal(x) {

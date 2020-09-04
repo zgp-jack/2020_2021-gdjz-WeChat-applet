@@ -679,16 +679,27 @@ Page({
           let top_rules = mydata.data.top_rules;
           let max_top_days = mydata.data.max_top_days-0;
           let special_ids = mydata.data.special_ids;
+          // 服务器时间戳
           let serverTime = mydata.data.time -0;
+          // 默认置顶天数
           let day = mydata.data.default_days-0;
-          let daynumber = (day * 24) + "小时(" + day + "天)";
+          // 首次置顶的置顶到期时间的格式化日期时间显示
           let firstEndTime = that.getMyDate(86400000 * day + serverTime * 1000) 
+          // 处理默认置顶天数显示内容
+          let daynumber = "";
+          if ( day < 4 ) {
+            daynumber = (day * 24) + "小时(" + day + "天)"
+          } else {
+            daynumber = day + "天"
+          }
+          // 首次置顶或者置顶到期后根据默认置顶城市和时间计算积分
           if (hastop == 0 || istop == 2) {
             let point = (areaProcrum.length * province_integral + areaCitycrum.length * city_integral + areaAllcrum.length * country_integral) * day;
             that.setData({
               point: point
             })
           }
+          // 处理3天内显示“1天（24小时）”，超过3天显示“4天”
           let array =[]
           let days = mydata.data.days
           for (let i = 0; i < days.length; i++) {
@@ -698,6 +709,7 @@ Page({
               array.push(days[i] + "天")
             }
           }
+          // 处理默认选择天数对应的时间选择框的index
           let index = null
           if (day < 11){
             index = day -1
@@ -736,9 +748,9 @@ Page({
             firstEndTime: firstEndTime,
             // 置顶时间选择数组
             array: array,
+            // 默认置顶天数对应的时间选择框的index
             defaultDayIndex: index,
             rangevalue: index
-
           })
           // 初始化选择置顶天数的下拉列表
           that.getMoreDay()

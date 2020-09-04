@@ -135,11 +135,7 @@ Page({
     let key = e.currentTarget.dataset.key
     this.setData({
       current: parseInt(key),
-      page: 1,
-      hasmore: true,
-      lists: []
     })
-    // this.getUsedList()
   },
   getUsedList:function(){
     let _this = this

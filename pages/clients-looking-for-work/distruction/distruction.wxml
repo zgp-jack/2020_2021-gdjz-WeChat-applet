@@ -45,7 +45,7 @@
         </view>
       </view>
     </view>
-    <view class='index-area-tips overwords'>请选择置顶范围：
+    <view class='index-area-tips overwords' wx:if="{{ !showInputList || !showListsAnd }}">请选择置顶范围：
 
     </view>
     <view class='index-area-item' wx:for="{{ areadatas }}" wx:key="{{ index }}" wx:for-item="areaItem">

@@ -27,6 +27,8 @@ Page({
     //我的全部招工信息是否有数据
     isAllList : false,
     resumeText:"",
+    // 滑动与点击请求
+    isRequest: true,
   },
   publishJob:function () {
     app.initJobView()
@@ -58,6 +60,7 @@ Page({
     let now = new Date().getTime() / 1000 // 当前时间戳
     let top = topdata.top; //是否有置顶数据
     let userInfo = wx.getStorageSync('userInfo') // 用户信息
+    let isCheck = e.currentTarget.dataset.ischeck;//用户审核状态
     if(end == '2'){ //如果已招到
       wx.showModal({
         title: '提示',
@@ -75,7 +78,6 @@ Page({
       
       
       if(showTime){ //如果置顶过期
-        console.log(showTime)
         wx.navigateTo({
           url: `/pages/workingtopAll/workingtop/workingtop?id=${id}$topId=${data}`,
         })
@@ -98,7 +100,6 @@ Page({
         success: function (res) {
           wx.hideLoading();
           let mydata = res.data;
-          console.log(mydata)
           if (mydata.errcode == "ok") {
             let newData = _this.data.lists;
             newData[infoIndex].top_data.is_top = mydata.data.top.is_top
@@ -170,7 +171,7 @@ Page({
 
     }else{
       wx.navigateTo({
-        url: `/pages/workingtopAll/workingtop/workingtop?id=${id}&topId=undefined&city_id=${topdata.area_id}&province_id=${topdata.province_id}`,
+        url: `/pages/workingtopAll/workingtop/workingtop?id=${id}&topId=undefined&city_id=${topdata.area_id}&province_id=${topdata.province_id}&ischeck=${isCheck}`,
       })
     }
 
@@ -290,7 +291,6 @@ Page({
     userinfo.uuid = userUuid
     userinfo.type = this.data.types[this.data.current].id
     userinfo.page = this.data.page
-    console.log("userinfo",userinfo)
     app.appRequestAction({
       url: 'job/issue-lists/',
       way: 'POST',
@@ -323,11 +323,7 @@ Page({
     let key = e.currentTarget.dataset.key
     this.setData({
       current: parseInt(key),
-      page: 1,
-      hasmore: true,
-      lists: []
     })
-    // this.getRecruitList()
   },
   getAreaData: function () {
     app.getAreaData(this);
