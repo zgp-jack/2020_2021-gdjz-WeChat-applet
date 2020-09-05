@@ -30,10 +30,10 @@
 							<view class="newdetail-callbox" wx:if="{{ userInfo.userId != info.user_id }}">
 								<view class="newdetail-call-show" wx:if="{{ info.show_ajax_btn }}" bindtap='getInfoTel'>查看招工电话</view>
 								<view class="newdetail-call-end" wx:if="{{ info.is_end == '2' }}">已招满</view>
-								<view class="{{info.show_complaint.show_complaint===1?'newdetail-call-report':'newdetail-call-report info-complained'}}" data-complaint="{{ info.show_complaint.show_complaint }}" bindtap='userTapComplain'  wx:if="{{ (info.isLook == 1)&&info.is_end == '2'}}">{{info.show_complaint.show_complaint===1?"投诉":"已投诉"}}</view>
+								<view class="{{info.show_complaint.show_complaint==1?'newdetail-call-report':'info-complained'}}" data-complaint="{{ info.show_complaint.show_complaint }}" bindtap='userTapComplain'  wx:if="{{ (info.isLook == 1)&&info.is_end == '2'}}">{{info.show_complaint.show_complaint===1?"投诉":"已投诉"}}</view>
 								<block wx:if="{{ !info.show_ajax_btn && (info.is_end == '1') }}">
 									<view class="newdetail-call-tell" bindtap='callThisPhone' data-phone="{{ info.tel_str }}">点击拨打</view>
-									<view class="newdetail-call-report" bindtap='userTapComplain'>{{info.show_complaint.show_complaint===1?"投诉":"已投诉"}}</view>
+									<view class="{{info.show_complaint.show_complaint==1?'newdetail-call-report':'info-complained'}}" bindtap='userTapComplain'>{{info.show_complaint.show_complaint===1?"投诉":"已投诉"}}</view>
 								</block>
 							</view>
 						</view>
