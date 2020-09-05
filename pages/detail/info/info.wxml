@@ -33,7 +33,7 @@
 								<view class="{{info.show_complaint.show_complaint===1?'newdetail-call-report':'newdetail-call-report info-complained'}}" data-complaint="{{ info.show_complaint.show_complaint }}" bindtap='userTapComplain'  wx:if="{{ (info.isLook == 1)&&info.is_end == '2'}}">{{info.show_complaint.show_complaint===1?"投诉":"已投诉"}}</view>
 								<block wx:if="{{ !info.show_ajax_btn && (info.is_end == '1') }}">
 									<view class="newdetail-call-tell" bindtap='callThisPhone' data-phone="{{ info.tel_str }}">点击拨打</view>
-									<view class="newdetail-call-report" bindtap='userTapComplain'>投诉</view>
+									<view class="newdetail-call-report" bindtap='userTapComplain'>{{info.show_complaint.show_complaint===1?"投诉":"已投诉"}}</view>
 								</block>
 							</view>
 						</view>
@@ -163,7 +163,7 @@
 		</view>
 		<view class="newdetail-info-item" bindtap="userTapComplain">
 			<image src="{{ complainImg }}"></image>
-			<text>投诉</text>
+			<text>{{info.show_complaint.show_complaint===1?"投诉":"已投诉"}}</text>
 		</view>
 		<button class="newdetail-info-item" open-type="share">
 			<image src="{{ sharebtnImg }}"></image>
