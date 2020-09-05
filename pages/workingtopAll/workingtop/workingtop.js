@@ -356,8 +356,8 @@ Page({
             showCancel:false,
             success(res) {
               if (res.confirm == true) {
-                wx.navigateTo({
-                  url: `/pages/published/recruit/list`,
+                wx.navigateBack({
+                  delta: 1,
                 })
               }
             }
