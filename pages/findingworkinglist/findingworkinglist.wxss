@@ -38,15 +38,20 @@
   justify-content: space-between;
 }
 
-.listsboxintro {
-  width: 82%;
+.listsboxintrowork {
+  width: 100%;
   line-height: 70rpx;
   /* display: flex;
   flex-direction: row;
   justify-content: space-between; */
   position: relative;
-  padding-right: 100rpx;
+  /* padding-right: 100rpx; */
   margin-left: 26rpx;
+  height: 92rpx;
+}
+.liststype {
+  font-size: 30rpx;
+  color: black;
 }
 .listsboxage{
   width: 100%;
@@ -141,17 +146,18 @@ box-sizing: border-box;
 
 
 }
-.listsboxshow{
+/* .listsboxshow{
   font-size: 30rpx;
   color: #353636;
   position: absolute;
   top: 40rpx;
   right: 0;
-}
+} */
 .listsboxagetwo{
   display: flex;
   font-size: 26rpx;
   color: #616060;
+  justify-content: space-between;
 }
 .listsboxagetwo text{
   font-size: 28rpx;
@@ -182,6 +188,9 @@ height: 70rpx;
   color: #353636;
   margin-top: 4rpx;
   margin-bottom: 17rpx;
+  display: flex;
+  justify-content: space-between;
+  padding-right: 30rpx;
 }
 .listsboxlable view{
   background:#F4F4F4;
@@ -201,17 +210,18 @@ height: 70rpx;
     color: rgba(42, 42, 42, 1);
 }
 .listsboxself{
-   width: 91%;
-   margin: 0 auto;
-   font-size: 28rpx;
-   color: #555;
-   border-bottom: 1rpx dashed #9A9A9A;
-   padding-bottom: 14rpx;
-    display:block;           /*  内联对象需加  */
-    word-break:keep-all;    /* 不换行 */
-    white-space:nowrap;     /* 不换行 */
-    overflow:hidden;       /* 内容超出宽度时隐藏超出部分的内容 */
-    text-overflow:ellipsis;
+  width: 91%;
+  margin: 0 auto;
+  font-size: 28rpx;
+  color: #555;
+  border-bottom: 1rpx dashed #9A9A9A;
+  padding-bottom: 14rpx;
+  display:block;           /*  内联对象需加  */
+  word-break:keep-all;    /* 不换行 */
+  white-space:nowrap;     /* 不换行 */
+  overflow:hidden;       /* 内容超出宽度时隐藏超出部分的内容 */
+  text-overflow:ellipsis;
+  padding-right: 15rpx;
 }
 
 .listsboxlocal{

@@ -101,57 +101,8 @@
 				},
 				{
 					"id": -1,
-					"name": "pages/course/course",
-					"pathName": "pages/course/course",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": -1,
 					"name": "帮助中心",
 					"pathName": "pages/ucenter/ucenterNew/helpCenter",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": 9,
-					"name": "pages/information/mymessage/mymessage",
-					"pathName": "pages/information/mymessage/mymessage",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": 10,
-					"name": "pages/information/system/system?type=3",
-					"pathName": "pages/information/system/system",
-					"query": "type=3",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "pages/information/recruit/recruit",
-					"pathName": "pages/information/recruit/recruit",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "pages/information/mymessage/mymessage",
-					"pathName": "pages/information/mymessage/mymessage",
-					"query": "type=3",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "pages/boss-look-card/lookcard",
-					"pathName": "pages/boss-look-card/lookcard",
-					"query": "uuid=1577670093341138&location=30.57447%2C103.92377",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "pages/ucenter/ucenter",
-					"pathName": "pages/ucenter/ucenter",
 					"query": "",
 					"scene": null
 				},
@@ -219,30 +170,9 @@
 					"scene": null
 				},
 				{
-					"id": 24,
-					"name": "pages/fast-issue/index/index",
-					"pathName": "pages/fast-issue/index/index",
-					"query": "",
-					"scene": null
-				},
-				{
 					"id": -1,
 					"name": "我的找活名片",
 					"pathName": "pages/clients-looking-for-work/finding-name-card/findingnamecard",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "pages/clients-looking-for-work/preview-name-card/previewcard名片",
-					"pathName": "pages/clients-looking-for-work/preview-name-card/previewcard",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "pages/turntable/turntable",
-					"pathName": "pages/turntable/turntable",
 					"query": "",
 					"scene": null
 				},
@@ -286,55 +216,6 @@
 					"name": "新版发布招工地址地图选择",
 					"pathName": "pages/issue/area/area",
 					"query": "showfor=showfor&showmap=noshowmap",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "packageOther/pages/helpCenter/helpCenter",
-					"pathName": "packageOther/pages/helpCenter/helpCenter",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "pages/static/invite",
-					"pathName": "pages/static/invite",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "pages/integral/expend/expend",
-					"pathName": "pages/integral/expend/expend",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "pages/boss-look-card/lookcard",
-					"pathName": "pages/boss-look-card/lookcard",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "pages/findingworkinglist/findingworkinglist",
-					"pathName": "pages/findingworkinglist/findingworkinglist",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "pages/integral/expend/expend",
-					"pathName": "pages/integral/expend/expend",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "pages/findingworkinglist/findingworkinglist",
-					"pathName": "pages/findingworkinglist/findingworkinglist",
-					"query": "",
 					"scene": null
 				},
 				{
@@ -460,6 +341,13 @@
 					"id": 60,
 					"name": "找活置顶-城市选择",
 					"pathName": "pages/clients-looking-for-work/distruction/distruction",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "找活列表",
+					"pathName": "pages/findingworkinglist/findingworkinglist",
 					"query": "",
 					"scene": null
 				}
