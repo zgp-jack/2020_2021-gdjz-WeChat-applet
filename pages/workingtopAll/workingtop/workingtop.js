@@ -56,7 +56,9 @@ Page({
     // 初次置顶的默认选中的置顶天数对应的index
     defaultDayIndex: 0 ,
     // 是否审核状态
-    isCheck: 0
+    isCheck: 0,
+    // config请求返回的置顶可选天数
+    reqDays:[]
   },
 
   jumpstickyrule() {
@@ -127,24 +129,17 @@ Page({
     let currentTimeDiff = currentTime - hostTime;
     // 最新服务器时间
     let newSeverTime = serverTime + currentTimeDiff;
+    // 获取服务端返回的可选择的置顶天数
+    let days = that.data.reqDays;
     if (e) {
       // 获取选择的天数
-      let detail = null;
+      let detail = days[e.detail.value]
+      // 选择对应天数文本框显示内容
       let daynumber = "";
-      if (e.detail.value == 10) {
-        detail = 15;
-        daynumber = "15天";
-      }else if(e.detail.value == 11){
-        detail = 30;
-        daynumber = "30天";
-      }else if(e.detail.value == 12){
-        detail = 60;
-        daynumber = "60天";
-      }else if(e.detail.value > 2  && e.detail.value < 10){
-        detail = e.detail.value - 0 + 1;
-        daynumber = `${detail}天`;
-      }else{
-        detail = e.detail.value - 0 + 1
+      if ( detail < 4 ) {
+        daynumber = (detail * 24) + "小时(" + detail + "天)"
+      } else {
+        daynumber = detail + "天"
       }
       // 最新的到期时间毫秒+正在置顶结束的时间毫秒
       let all = 86400000 * (detail) + (newSeverTime - 0)
@@ -152,7 +147,7 @@ Page({
       let time = this.getMyDate(all)
       
       that.setData({
-        daynumber: e.detail.value < 3 ? detail * 24 + "小时" + '（' + detail + '天' + '）' : daynumber,
+        daynumber: daynumber,
         day: detail,
         firstEndTime: time,
       });
@@ -791,24 +786,18 @@ Page({
           let array =[]
           let days = mydata.data.days
           for (let i = 0; i < days.length; i++) {
-            if (i < 3 ) {
+            if (days[i] < 4 ) {
               array.push(days[i] * 24 + "小时"  + '（' + days[i] + '天' + '）')
             }else{
               array.push(days[i] + "天")
             }
           }
           // 默认置顶天数对应的时间
-          let day = mydata.data.default_days
           let index = null
-          if (day < 11){
-            index = day -1
-          }else if (day == 15){
-            index = 10
-          }else if (day == 30){
-            index = 11
-          }else if (day == 60){
-            index = 12
-          }
+          // 后台默认天数
+          let day = mydata.data.default_days
+          // 默认天数对应的index下标
+          index = days.findIndex((value)=> value == day );
           // 处理默认置顶天数显示内容
           let daynumber = "";
           if ( day < 4 ) {
@@ -837,7 +826,9 @@ Page({
             array: array,
             // 后台默认置顶天数对应的选择index
             defaultDayIndex: index,
-            rangevalue: index
+            rangevalue: index,
+            // 保存请求返回的可选择置顶天数
+            reqDays: days
           })
           if(options.topId == 'undefined'){
             let numcity = mydata.data.city_integral;
@@ -911,17 +902,11 @@ Page({
       let currentTimeDiff = currentTime - hostTime;
       // 最新服务器时间
       let newSeverTime = serverTime + currentTimeDiff;
+      // 获取可选择的置顶天数
+      let days = that.data.reqDays
       // 获取选择的天数
       let detail = null
-      if (value == 10) {
-        detail = 15
-      }else if(value == 11){
-        detail = 30
-      }else if(value == 12){
-        detail = 60
-      }else{
-        detail = e.detail.value - 0 + 1
-      }
+      detail = days[e.detail.value]
       this.setData({
         shoutime: true,
         showpoint: true

@@ -55,7 +55,9 @@ Page({
     //top-config请求是的本地时间戳
     hostTime:"",
     //首次置顶的时候显示置顶到期时间输入框内容
-    firstEndTime:"",//
+    firstEndTime:"",
+    // 保存请求返回的可选择置顶天数
+    reqDays: []
   },
   //用户首次置顶或者置顶到期点击‘选择置顶范围’跳转到置顶区域选择界面
   jumpstickyrule() {
@@ -139,24 +141,17 @@ Page({
     let currentTimeDiff = currentTime - hostTime;
     // 最新服务器时间
     let newSeverTime = serverTime + currentTimeDiff;
+    // 获取后台的可置顶天数
+    let days = that.data.reqDays;
     if (e) {
       // 获取选择的天数
-      let detail = null;
+      let detail = days[e.detail.value]
+      // 选择对应天数文本框显示内容
       let daynumber = "";
-      if (e.detail.value == 10) {
-        detail = 15;
-        daynumber = "15天";
-      }else if(e.detail.value == 11){
-        detail = 30;
-        daynumber = "30天";
-      }else if(e.detail.value == 12){
-        detail = 60;
-        daynumber = "60天";
-      }else if(e.detail.value > 2 && e.detail.value < 9){
-        detail = e.detail.value - 0 + 1;
-        daynumber = `${detail}天`;
-      }else{
-        detail = e.detail.value - 0 + 1
+      if ( detail < 4 ) {
+        daynumber = (detail * 24) + "小时(" + detail + "天)"
+      } else {
+        daynumber = detail + "天"
       }
       // 最新的到期时间毫秒+正在置顶结束的时间毫秒
       let all = 86400000 * (detail) + (newSeverTime - 0)
@@ -164,7 +159,7 @@ Page({
       let time = this.getMyDate(all)
       // 获取选择的置顶天数并设置到data中
       that.setData({
-        daynumber: e.detail.value < 3 ? (detail * 24) + "小时(" + detail + "天)" : daynumber,
+        daynumber: daynumber,
         day: detail,
         firstEndTime: time
       });
@@ -703,7 +698,7 @@ Page({
           let array =[]
           let days = mydata.data.days
           for (let i = 0; i < days.length; i++) {
-            if (i < 3 ) {
+            if (days[i] < 4 ) {
               array.push(days[i] * 24 + "小时"  + '（' + days[i] + '天' + '）')
             }else{
               array.push(days[i] + "天")
@@ -711,15 +706,8 @@ Page({
           }
           // 处理默认选择天数对应的时间选择框的index
           let index = null
-          if (day < 11){
-            index = day -1
-          }else if (day == 15){
-            index = 10
-          }else if (day == 30){
-            index = 11
-          }else if (day == 60){
-            index = 12
-          }
+          // 默认天数对应的index下标
+          index = days.findIndex((value)=> value == day );
           that.setData({
             //最大省份数
             max_province: max_province,
@@ -750,7 +738,9 @@ Page({
             array: array,
             // 默认置顶天数对应的时间选择框的index
             defaultDayIndex: index,
-            rangevalue: index
+            rangevalue: index,
+            // 保存请求返回的可选择置顶天数
+            reqDays: days
           })
           // 初始化选择置顶天数的下拉列表
           that.getMoreDay()
@@ -820,15 +810,8 @@ Page({
       let newSeverTime = serverTime + currentTimeDiff;
       // 获取选择的天数
       let detail = null
-      if (e.detail.value == 10) {
-        detail = 15
-      }else if(e.detail.value == 11){
-        detail = 30
-      }else if(e.detail.value == 12){
-        detail = 60
-      }else{
-        detail = e.detail.value - 0 + 1
-      }
+      let days = that.data.reqDays;
+      detail = days[e.detail.value];
       // 点击延长或者修改显示“最新到期时间”与“积分”框
       this.setData({
         shoutime: true,

@@ -5,30 +5,30 @@
 	},
 	"setting": {
 		"urlCheck": false,
+		"scopeDataCheck": false,
+		"coverView": true,
 		"es6": true,
-		"enhance": false,
 		"postcss": true,
+		"compileHotReLoad": false,
 		"preloadBackgroundData": false,
 		"minified": true,
-		"newFeature": true,
-		"coverView": true,
-		"nodeModules": false,
 		"autoAudits": false,
-		"showShadowRootInWxmlPanel": false,
-		"scopeDataCheck": false,
+		"newFeature": true,
 		"uglifyFileName": true,
+		"uploadWithSourceMap": true,
+		"useIsolateContext": true,
+		"nodeModules": false,
+		"enhance": false,
+		"useCompilerModule": false,
+		"userConfirmedUseCompilerModuleSwitch": false,
+		"showShadowRootInWxmlPanel": false,
 		"checkInvalidKey": true,
 		"checkSiteMap": true,
-		"uploadWithSourceMap": true,
-		"compileHotReLoad": false,
 		"babelSetting": {
 			"ignore": [],
 			"disablePlugins": [],
 			"outputPath": ""
-		},
-		"useIsolateContext": true,
-		"useCompilerModule": false,
-		"userConfirmedUseCompilerModuleSwitch": false
+		}
 	},
 	"compileType": "miniprogram",
 	"libVersion": "2.10.4",
@@ -461,6 +461,12 @@
 					"name": "找活置顶-城市选择",
 					"pathName": "pages/clients-looking-for-work/distruction/distruction",
 					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "招工置顶",
+					"pathName": "pages/workingtopAll/workingtop/workingtop",
 					"scene": null
 				}
 			]
