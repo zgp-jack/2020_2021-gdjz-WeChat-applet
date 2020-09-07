@@ -361,7 +361,9 @@ Page({
       hasmore: true,
       lists: []
     })
-    this.getRecruitList()
+    if (this.data.lists.length == 0) {
+      this.getRecruitList()
+    }
   },
   loadmore:function(){
     if(!this.data.hasmore) return false
