@@ -462,6 +462,12 @@
 					"pathName": "pages/clients-looking-for-work/distruction/distruction",
 					"query": "",
 					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "招工置顶",
+					"pathName": "pages/workingtopAll/workingtop/workingtop",
+					"scene": null
 				}
 			]
 		}

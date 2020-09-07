@@ -218,7 +218,9 @@
   margin-left: -175rpx;
   border-radius: 20px;
 }
-
+.lists-nodata{
+ padding-top: 240rpx;
+}
 .lists-nodata button {
   width: 320rpx;
   height:88rpx;
@@ -226,6 +228,10 @@
   color:#FFFFFF;
   border-radius: 44rpx;
   font-size: 35rpx;
+}
+.lists-nodata image {
+  width: 240rpx;
+  height: 240rpx;
 }
 .nodataText {
   margin-top: -60rpx;

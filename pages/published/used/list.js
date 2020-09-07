@@ -141,7 +141,7 @@ Page({
       hasmore: true,
       lists: []
     })
-    this.getUsedList()
+    this.getUsedList(key)
   },
   getUsedList:function(){
     let _this = this
