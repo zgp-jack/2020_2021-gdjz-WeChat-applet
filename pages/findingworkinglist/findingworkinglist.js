@@ -105,7 +105,13 @@ Page({
     showHistoryList: false,
     historyList: [],
     joingroup: [],
-    resumeText:""
+    resumeText:"",
+    hasSortFlag:1,
+    hasTime: 1,
+    hasTop: 1,
+    lastSortFlagPos: 0,
+    lastTimePos: 0,
+    lastNormalPos: 0
   },
   // 根据发布方式不同发布招工：未登录或者“fast_add_job”是快速发布，“ordinary_add_job”是普通发布。
   publishJob:function () {
@@ -347,9 +353,22 @@ Page({
     let _this = this;
     if (_this.data.isload) return false;
     let userLocation = wx.getStorageSync("userLocation");
-
+    let has_sort_flag= _this.data.hasSortFlag;
+    let has_time = _this.data.hasTime;
+    let has_top= _this.data.hasTop;
+    let last_sort_flag_pos= _this.data.lastSortFlagPos;
+    let last_time_pos= _this.data.lastTimePos;
+    let last_normal_pos= _this.data.lastNormalPos || 0;
+    let params = {
+      has_sort_flag,
+      has_time,
+      has_top,
+      last_sort_flag_pos,
+      last_time_pos,
+      last_normal_pos,
+    }
     let locate = {}
-    Object.assign(locate, _this.data.searchDate, {
+    Object.assign(locate, params,  _this.data.searchDate, {
       location: userLocation ? userLocation.split(",").reverse().join(",") : '',
     })
     this.setData({
@@ -359,14 +378,14 @@ Page({
     })
     wx.showLoading({ title: '数据加载中' })
     app.appRequestAction({
-      url: "resumes/index/",
+      url: "resumes/new-index/",
       params: locate,
       success: function (res) {
         callback ? callback() : ""
         if (res.data.errcode == "ok") {
           _this.setData({ isload: false })
           wx.hideLoading();
-          let mydata = res.data.errmsg;
+          let mydata = res.data.data.list;
           let _page = parseInt(_this.data.searchDate.page)
           _this.setData({ isFirstRequest: false });
           if (mydata && mydata.length) {
@@ -376,7 +395,13 @@ Page({
             }
             _this.setData({
               "searchDate.page": (parseInt(_page) + 1),
-              lists: _append ? _data : mydata
+              lists: _append ? _data : mydata,
+              hasSortFlag: res.data.data.has_sort_flag,
+              hasTime: res.data.data.has_time,
+              hasTop: res.data.data.has_top,
+              lastSortFlagPos: res.data.data.last_sort_flag_pos,
+              lastTimePos: res.data.data.last_time_pos,
+              lastNormalPos: res.data.data.last_normal_pos || 0
             })
             // _this.setData({
             //   information: _data
