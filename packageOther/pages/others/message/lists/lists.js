@@ -179,7 +179,7 @@ Page({
         app.callThisPhone(e);
     },
     initNeedData: function () {
-        let joingroup = app.globalData.joingroup;
+        let joingroup = app.globalData.joingroup.slice(5,7);
       if(joingroup){
         this.setData({
           joingroup: joingroup,

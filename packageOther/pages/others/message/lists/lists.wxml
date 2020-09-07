@@ -1,7 +1,8 @@
 <!-- 意见反馈列表 -->
 <view class="feedback-header" id="comment">
     <view class="yupao-lists-wxtips">
-        <text  wx:for="{{joingroup}}" wx:key="{{ index }}" style="color:{{item.color}}"      data-wechat="{{ item.text== 'wechat_number'|| item.action.type == 'copy' ?wechat:'' }}" bindtap="{{item.action.type == 'replace'?'clipboardWechat':((item.action.type == 'copy'?'clipboardWechat':(item.action.type == 'call'?'callThisPhone':''))) }}" data-phone="{{ item.action.type == 'call'?phone:'' }}"  class="{{item.action.is_btn == '1'?'phoneer':'' }}" >{{item.text== 'wechat_number'?wechat:item.text}}</text>
+        <text style="color:#f86e09">客服电话：</text>
+        <text wx:for="{{joingroup}}" wx:key="{{ index }}" bindtap="{{item.action.type == 'replace'?'clipboardWechat':((item.action.type == 'copy'?'clipboardWechat':(item.action.type == 'call'?'callThisPhone':''))) }}" data-phone="{{ item.action.type == 'call'?phone:'' }}" class="{{item.action.is_btn == '1'?'phoneer':'' }}">{{item.text}}</text>
     </view>
 </view>
 
