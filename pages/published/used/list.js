@@ -132,10 +132,16 @@ Page({
 
   },
   userChangeType:function(e){
-    let key = e.currentTarget.dataset.key
+    let key = e.currentTarget.dataset.key;
+    let current = this.data.current;
+    if (key == current) return
     this.setData({
       current: parseInt(key),
+      page: 1,
+      hasmore: true,
+      lists: []
     })
+    this.getUsedList()
   },
   getUsedList:function(){
     let _this = this
