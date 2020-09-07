@@ -63,7 +63,7 @@ Page({
       sort: "recommend",
       keywords: "",
       occupations: "",
-      province: 1
+      area_id: 1
     },
     fillterArea: [],
     fillterType: [],
@@ -198,7 +198,7 @@ Page({
     let _id = e.currentTarget.dataset.id;
     let areaText = e.currentTarget.dataset.area;
     // let _sid = this.data.searchDate.area_id;
-    let _sid = this.data.searchDate.province;
+    let _sid = this.data.searchDate.area_id;
     let panme = e.currentTarget.dataset.pname;
     let mydata = { "name": areaText, "id": _id, "ad_name": panme };
     this.setData({ province: index })
@@ -219,7 +219,7 @@ Page({
         _this.setData({
           isFirstRequest: true,
           "searchDate.page": 1,
-          "searchDate.province": _id,
+          "searchDate.area_id": _id,
           areaText: areaText,
         })
         wx.setStorageSync("areaId", _id)
@@ -235,7 +235,7 @@ Page({
             _this.setData({
               isFirstRequest: true,
               "searchDate.page": 1,
-              "searchDate.province": _id,
+              "searchDate.area_id": _id,
               areaText: areaText
             })
             _this.doRequestAction(false);
@@ -259,7 +259,7 @@ Page({
       isFirstRequest: true,
       areaText: areaText,
       "searchDate.page": 1,
-      "searchDate.province": id
+      "searchDate.area_id": id
     })
     let mydata = { "name": areaText, "id": id, ad_name: pname };
     if (id != pid) {
@@ -469,7 +469,7 @@ Page({
     let areaId = wx.getStorageSync("areaId");
     let areaText = wx.getStorageSync("areaText");
     this.setData({
-      "searchDate.province": areaId ? areaId : 1
+      "searchDate.area_id": areaId ? areaId : 1
     })
     this.doRequestAction(false);
   },
