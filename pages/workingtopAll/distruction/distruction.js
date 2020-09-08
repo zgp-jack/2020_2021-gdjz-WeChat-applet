@@ -324,15 +324,25 @@ Page({
     return (area.id == '1') ? true : false
   },
   chooseThisCtiy(e) {
+    // 获取选择城市信息
     let that = this;
+    // 城市（一级数组）index序号
     let num = e.currentTarget.dataset.index;
+    // 城市名称
     let name = e.currentTarget.dataset.area;
+    // 二级数组index
     let pro = e.currentTarget.dataset.pro;
+    // 城市id
     let cityId = e.currentTarget.dataset.id;
+    // 城市pid
     let judgeId = e.currentTarget.dataset.pid;
+    //城市数据
     let dareaTextC = app.arrDeepCopy(that.data.areaTextC)
+    // 省份数据
     let dareaTextP = app.arrDeepCopy(that.data.areaTextP)
+    // 拷贝一份区域数据
     let areadatafor = app.arrDeepCopy(that.data.areadatas);
+    // 组合选择城市对象
     let detail = {
       id: cityId,
       name: name,
@@ -349,45 +359,49 @@ Page({
         }
       }
     }
+    // 如果区域信息是未选择状态
     if (areadatafor[num][pro].selected == 1) {
-
+    // 如果pid即选择的是省
       if (judgeId == 1) {
-
+        // 如果选择的区域超过了要求的数量给出提示并返回
         let show = that.mustjudge(judgeId)
         if (show == "nil") {
           return
         }
-
-        console.log('点击直辖市/全省影响击全国')
-        
+        // 是否是全国，将全国状态值变为1（未选中）
         let first = that.validIsChina()
+        // 是全国将selected设置成1
         if(first) areadatafor[0][0].selected = 1;
+
+        // 将选择的省会的selected状态改为2
         areadatafor[num][pro].selected = 2
-
-
+        // 将选择省会数据状态改为2后存入data中
         that.setData({
           areadatas: areadatafor,
         })
+        // 如果选择的是非热门城市
         if (num > 0) {
           that.getFull(num, cityId, pro)
         }
-
+        // 将选择的省的信息压入dareaTextP中
         dareaTextP.push(detail)
+        // 将选择的省信息存入data中
         that.setData({
           areaTextP: dareaTextP,
           areaTextA:[]
         })
-
+        // 选择的是全国
       } else if (judgeId == 0) {
+        // 将所有的城市信息选中状态都变成1（未选中）
         for (let i = 0; i < areadatafor.length;i++){
           for (let j = 0; j < areadatafor[i].length; j++){
             areadatafor[i][j].selected = 1
           }
         }
-        console.log('直接点击全国 点亮')
+        // 将全国的数据选中状态变成2
         areadatafor[0][0].selected = 2
         let areaTextA = that.data.areaTextA;
-
+        // 将选中的全国信息存入areaTextA中
         areaTextA.push(detail)
         that.setData({
           areaTextC: [],
@@ -395,16 +409,21 @@ Page({
           areaTextP: [],
           areaTextA: areaTextA
         })
+        // 选中的是市
       } else {
+        // 是否通过数量限制检验，没通过直接返回
         let show = that.mustjudge(judgeId)
         if (show == "nil") {
           return
         }
-        console.log('点击普通市')
+        //是否是全国，将全国状态值变为1（未选中）
         let firstarea = that.validIsChina()
         if(firstarea) areadatafor[0][0].selected = 1;
+        // 将选中的市级选中状态变成2
         areadatafor[num][pro].selected = 2
+        // 取出所有区域数组的第一个热门城市数据
         let areadataforq = areadatafor[0]
+        // 如果选择的非热门城市中包含了热门城市将热门城市选中状态变成2
         if (num != 0) {
 
           for (let i = 0; i < areadataforq.length; i++) {
@@ -413,25 +432,29 @@ Page({
             }
           }
         } else {
-          let number = areadatafor[judgeId - 2];
-          for (let i = 0; i < number.length; i++) {
-            if (number[i].id == cityId) {
-              number[i].selected = 2
+        // 如果选择热门城市也将对应省份的城市也选中
+          for (let i = 0; i < index.length; i++) {
+            let number = areadatafor[index[i]];
+            for (let j = 0; j < number.length; j++) {
+              if (number[j].id == cityId) {
+                number[j].selected = 2
+              }
             }
           }
-
         }
+        // 将改变的数据存入data中
         that.setData({
           areadatas: areadatafor,
         })
+        // 如果选中的是非热门城市
         if (num > 0) {
+        // 将选中城市对应的全省选中状态变成1（（未选中））
           that.getFullone(num)
         } else if (num == 0) {
+        // 选中热门城市后将该城市对应的全省状态变成1（未选中）
           that.getzero(index)
         }
-
-
-
+        // 将选中城市数据保存在data中
         dareaTextC.push(detail)
 
         that.setData({
@@ -440,20 +463,21 @@ Page({
         })
 
       }
+      // 保存所有的选中区域数据
       that.setData({
         areaText: [...that.data.areaTextC, ...that.data.areaTextP, ...that.data.areaTextA]
       })
-    
+    // 点击的区域信息是选中状态
     } else {
-
+      // 获取所有选中的数据
       let areadatafor = app.arrDeepCopy(that.data.areadatas);
       let dareaTextC = app.arrDeepCopy(that.data.areaTextC)
       let dareaTextP = app.arrDeepCopy(that.data.areaTextP)
       let areaArrT = app.arrDeepCopy(that.data.areaText)
+      // 点击省，将状态变成1未选中
       if (judgeId == 1) {
         areadatafor[num][pro].selected = 1
       } else if (judgeId == 0) {
-        console.log('直接点击全国 取消')
         areadatafor[0][0].selected = 1
         that.setData({
           areaTextA: []
@@ -476,15 +500,11 @@ Page({
 
         }
       }
-
-
-
-
       that.setData({
         areadatas: areadatafor
       })
 
-
+      // 删除保存的选中区域的数据
       for (let i = 0; i < areaArrT.length; i++) {
         if (areaArrT[i].id == cityId) {
           areaArrT.splice(i, 1)
@@ -500,13 +520,12 @@ Page({
           dareaTextC.splice(i, 1)
         }
       }
-
+      // 重新保存取消选中后的数据
       that.setData({
         areaText: areaArrT,
         areaTextP: dareaTextP,
         areaTextC: dareaTextC
       })
-
     }
   },
   changeAreaData(data, options) {
@@ -699,6 +718,7 @@ Page({
   },
   showseleted(item) {
     let that = this;
+    let areadatafor = app.arrDeepCopy(that.data.areadatas);
     let detail = {
       id: item.id,
       name: item.area ? item.area : item.name,
