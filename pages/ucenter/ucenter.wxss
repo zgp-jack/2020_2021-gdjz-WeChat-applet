@@ -1,74 +1,81 @@
 @import '../index/index.wxss';
+
 .ucener-header {
     position: relative;
     width: 100%;
-    height: 380rpx;
+    height: 330rpx;
+    background: linear-gradient(0deg, #72DCFF, #0099FF);
+    /*height: 380rpx;
     background: url("http://cdn.yupao.com/miniprogram/images/new-ucenter.png") no-repeat;
-    background-size: 100% 100%;
+    background-size: 100% 100%;*/
 }
-.felx{
+
+.felx {
     display: flex;
     align-items: center;
 }
+
 .ucenter-title {
-    position: relative;
-    width: 100%;
     text-align: center;
     display: block;
-    line-height: 110rpx;
     font-size: 34rpx;
+    padding-top: 42rpx;
     color: white;
 }
 
 .ucener-userinfo-wrap {
     width: 100%;
     position: absolute;
-    height: 315rpx;
     left: 0;
-    top: 110rpx;
+    top: 128rpx;
     padding: 0 27rpx;
 }
 
 .ucenter-userinfo {
-    position: relative;
     width: 100%;
-    height: 100%;
-    display: block;
-    background: white;
-    border-radius: 5px;
-    box-shadow: #e7e6e4 0 0 10rpx;
+    height: 350rpx;
+    background-color: white;
+    box-shadow: 0 5rpx 5rpx 0 rgba(223, 225, 226, 0.43);
+    border-radius: 10rpx;
+}
+
+.basic-info {
+    padding: 23rpx 37rpx 0 23rpx;
 }
 
 .ucenter-userinfo-box {
-    position: relative;
-    width: 100%;
-    padding: 0 27rpx;
-    height: 175rpx;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    border-bottom: 1rpx solid #E0E0E0;
+    padding-bottom: 23rpx;
+}
+
+.avatar-bor {
+    width: 133rpx;
+    height: 133rpx;
+    margin-right: 30rpx;
+
 }
 
 .ucenter-userimg {
-    position: absolute;
-    width: 120rpx;
-    height: 120rpx;
+    width: 133rpx;
+    height: 133rpx;
     border-radius: 50%;
-    top: 25rpx;
-    left: 27rpx;
 }
 
 .ucenter-userinfo-words {
     position: relative;
     width: 100%;
-    height: 175rpx;
     font-size: 30rpx;
     color: #1c1c1c;
-    line-height: 50rpx;
     font-weight: bold;
-    padding: 40rpx 0 10rpx 140rpx;
-    border-bottom: 1rpx solid #E0E0E0;
+    padding: 17rpx 0;
 }
 
 .ucenter-username {
-    padding-right: 220rpx;
+    font-size: 36rpx;
+    margin-bottom: 20rpx;
 }
 
 .user-update-tag {
@@ -79,28 +86,33 @@
 }
 
 .user-update-info {
-    position: absolute;
-    right: 0;
-    bottom: 40rpx;
-    font-size: 24rpx;
-    border: 1px solid #d3d4d5;
-    border-radius: 5px;
-    padding: 0 10rpx;
-    font-weight: normal;
-    height: 42rpx;
-    line-height: 42rpx;
-    color: #656666;
+    font-size: 20rpx;
+    color: #6C6C6C;
+    width: 110rpx;
+    height: 36rpx;
+    line-height: 36rpx;
+    border: 1rpx solid #E5E5E5;
+    border-radius: 10rpx;
+    text-align: center;
+}
+
+.ucenter-usernum {
+    font-size: 32rpx;
 }
 
 .ucenter-usernum text {
-    color: #0099ff;
+    color: #069BFE;
+}
+
+.nouser {
+    font-weight: bold;
 }
 
 .ucenter-menus-box {
     position: relative;
     width: 100%;
-    margin-top: 60rpx;
-    padding: 0 27rpx;
+    margin-top: 237rpx;
+    padding: 0 30rpx;
 }
 
 .ucenter-nouserinfo {
@@ -125,7 +137,7 @@
 }
 
 .ucenter-nouserinfo-tips {
-    border-top: 1px dashed #dcdcdc;
+    /*border-top: 1px dashed #dcdcdc;*/
     padding: 20rpx;
     font-size: 26rpx;
     line-height: 50rpx;
@@ -157,19 +169,17 @@
 
 .ucenter-integralbox {
     width: 100%;
-    height: 140rpx;
-    padding: 0 27rpx;
     display: flex;
-    flex-direction: row;
-    align-items: center;
+    justify-content: space-around;
+    background: white;
+    padding-top: 26rpx;
 }
 
 .ucenter-integral-item {
     position: relative;
     font-weight: bold;
-    line-height: 50rpx;
     height: 100%;
-    flex: 1;
+    /*flex: 1;*/
 }
 
 .ucenter-integral-item text:nth-child(1) {
@@ -231,8 +241,14 @@
     text-align: center;
     /* padding:0 2rpx 0 0; */
 }
-.msg-dot{
-    position:absolute;top:0;right:-20rpx;background:rgba(253,6,24,1);border-radius:100%;padding:8rpx;
+
+.msg-dot {
+    position: absolute;
+    top: 0;
+    right: -20rpx;
+    background: rgba(253, 6, 24, 1);
+    border-radius: 100%;
+    padding: 8rpx;
 }
 
 .ucener-detil {

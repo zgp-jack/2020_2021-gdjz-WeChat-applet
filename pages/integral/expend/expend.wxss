@@ -1,5 +1,5 @@
 /* pages/expend/expend.wxss */
-.integral-header{
+.integral-header {
     position: relative;
     width: 100%;
     height: 100rpx;
@@ -10,22 +10,27 @@
     letter-spacing: 2rpx;
     color: #333;
 }
-.integral-content{
+
+.integral-content {
     position: relative;
     width: 100%;
     height: 100%;
-    padding: 0 27rpx 0 87rpx;
+    background: white;
+    margin-top: 15rpx;
 }
-.integral-list-item{
+
+.item-container {
+    padding: 0 27rpx;
+    display: flex;
+}
+
+.integral-list-item {
     position: relative;
     width: 100%;
-    height: 200rpx;
-    background: white;
-    border-radius: 5rpx;
-    margin-top: 15rpx;
-    box-shadow: #e7e6e4 0 0 10rpx;
+    padding-top: 25rpx;
 }
-.integral-list-time{
+
+.integral-list-time {
     position: absolute;
     width: 120rpx;
     height: 120rpx;
@@ -35,51 +40,76 @@
     padding: 10rpx 0;
     border-radius: 6rpx;
 }
-.integral-list-time text{
+
+.icon-bor {
+    width: 60rpx;
+    height: 60rpx;
+    margin-right: 25rpx;
+}
+
+.icon {
+    width: 60rpx;
+    height: 60rpx;
+    border-radius: 50%;
+}
+
+.integral-list-time text {
     position: relative;
     display: block;
     text-align: center;
     line-height: 50rpx;
 }
-.integral-list-time text:nth-child(1){
+
+.integral-list-time text:nth-child(1) {
     color: white;
     font-size: 26rpx;
 }
-.integral-list-time text:nth-child(2){
+
+.integral-list-time text:nth-child(2) {
     color: white;
     font-size: 34rpx;
 }
-.integral-list-words{
+
+.integral-list-words {
     position: relative;
-    padding:10rpx 27rpx 10rpx 80rpx;
-    width: 100%;
-    height: 200rpx;
+    width: 610rpx;
+    border-bottom: 1rpx solid #E6E6E6;
 }
-.integral-list-words view{
-    position: relative;
-    display: block;
-    line-height:60rpx;
-    color: #333;
+
+.integral-list-item:last-child .integral-list-words {
+    border: none;
 }
-.integral-list-words .integral-list-title{
-    font-size: 32rpx;
-}
-.integral-list-words .integral-list-info{
+
+.integral-list-words .integral-list-title {
     font-size: 30rpx;
-}
-.integral-list-lasttime{
-    font-size: 30rpx;
-}
-.integral-list-lasttime text{
-    float: right;
-    font-size: 28rpx;
-    color: #fd4040;
+    font-weight: 500;
+    color: #262629;
 }
 
+.integral-list-words .integral-list-info {
+    margin: 24rpx 0;
+    font-size: 26rpx;
+    color: #262629;
+    font-family: Source Han Sans CN;
+}
+
+.integral-list-lasttime {
+    font-size: 26rpx;
+    color: #9F9F9F;
+    margin-bottom: 24rpx;
+}
+
+.tips {
+    position: absolute;
+    right: 0;
+    top: 0;
+    font-size: 26rpx;
+    font-weight: 500;
+    color: #FFB040;
+}
 
 
-
-.expend-showthis-record{
+.expend-showthis-record {
     position: fixed;
     width: 100%;
     height: 100%;
@@ -92,16 +122,18 @@
     justify-content: center;
     align-items: center;
 }
-.expend-show-recruit{
+
+.expend-show-recruit {
     position: relative;
     width: 90%;
-    height:70%;
+    height: 70%;
     background: white;
     border-radius: 10px 10px 5px 5px;
     padding-top: 50rpx;
     box-shadow: #e7e6e4 0 0 10rpx;
 }
-.expend-close-record{
+
+.expend-close-record {
     position: absolute;
     width: 100rpx;
     height: 100rpx;
@@ -111,99 +143,119 @@
     background: url("http://cdn.yupao.com/miniprogram/images/expend-close.png") no-repeat;
     background-size: 100% 100%;
 }
-.expend-show-recruit .yupao-common-list-left{
+
+.expend-show-recruit .yupao-common-list-left {
     width: auto;
 }
-.expend-show-recruit .yupao-common-list{
+
+.expend-show-recruit .yupao-common-list {
     box-shadow: none;
     border: 0;
     margin-top: 0;
     height: calc(100% - 50rpx);
     overflow-y: scroll;
 }
-.expend-show-recruit .yupao-common-list-left text{
+
+.expend-show-recruit .yupao-common-list-left text {
     margin-right: 20rpx;
     color: #0099ff;
 }
-.expend-show-recruit .yupao-common-list-left text:nth-last-child(1){
+
+.expend-show-recruit .yupao-common-list-left text:nth-last-child(1) {
     margin-right: 0;
 }
-.expend-show-recruit  .yupao-common-lists-text{
+
+.expend-show-recruit .yupao-common-lists-text {
     padding: 20rpx 27rpx;
-    line-height:50rpx;
+    line-height: 50rpx;
 }
-.list-call-phone{
+
+.list-call-phone {
     display: inline-block;
     color: #fff;
     padding: 0 20rpx;
     font-size: 26rpx;
-    border-radius:8rpx;
+    border-radius: 8rpx;
     background: #67C23A;
-    margin:0 5rpx;
+    margin: 0 5rpx;
 }
 
 
-.list-complain-phone{background: #ff0000;}
-.integral-select{
-  background: white;
+.list-complain-phone {
+    background: #ff0000;
 }
-.integral-select .select{
-  padding: 24rpx 24rpx;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  font-size: 30rpx;
+
+.integral-select {
+    background: white;
 }
+
+.integral-select .select {
+    padding: 24rpx 24rpx;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    font-size: 30rpx;
+}
+
 /* .select .time{
   font-weight: bold;
 } */
-.select .triangle{
-  width: 38rpx;
-  height: 34rpx;
-  margin-left: 8rpx;
-  margin-top: 6rpx;
-}
-.select .classfy{
-  background: #F6F6F6;
-  color: #4F4F4F;
-  padding: 6rpx 4rpx 6rpx 14rpx;
-  border-radius: 6rpx;
-}
-.integral-detail{
-  display: flex;
-  flex-direction: row;
-  font-size: 30rpx;
-  padding: 24rpx 24rpx;
-  border-top: 1px solid #EEEEEE;
-}
-.dointegral{
-  margin-left: 100rpx;
-}
-.integral-detail text{
-  padding-right: 10rpx;
-}
-.integral-detail .num{
-  color: #0099ff;
-}
-.timeall{
-  display: flex;
-  align-items: center;
-}
-.classfy{
-    display: flex;
-  align-items: center;
-}
-.classfy image{
+.select .triangle {
     width: 38rpx;
     height: 34rpx;
-    
+    margin-left: 8rpx;
+    margin-top: 6rpx;
 }
-.info-complained{
+
+.select .classfy {
+    background: #F6F6F6;
+    color: #4F4F4F;
+    padding: 6rpx 4rpx 6rpx 14rpx;
+    border-radius: 6rpx;
+}
+
+.integral-detail {
+    display: flex;
+    flex-direction: row;
+    font-size: 30rpx;
+    padding: 24rpx 24rpx;
+    border-top: 1px solid #EEEEEE;
+}
+
+.dointegral {
+    margin-left: 100rpx;
+}
+
+.integral-detail text {
+    padding-right: 10rpx;
+}
+
+.integral-detail .num {
+    color: #0099ff;
+}
+
+.timeall {
+    display: flex;
+    align-items: center;
+}
+
+.classfy {
+    display: flex;
+    align-items: center;
+}
+
+.classfy image {
+    width: 38rpx;
+    height: 34rpx;
+
+}
+
+.info-complained {
     display: inline-block;
-    color:  #333;
+    color: #333;
     padding: 0 20rpx;
     font-size: 26rpx;
-    border-radius:8rpx;
+    border-radius: 8rpx;
     background: #f5f5f5;
-    margin:0 5rpx;
+    margin: 0 5rpx;
 }

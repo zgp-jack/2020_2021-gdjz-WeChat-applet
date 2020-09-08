@@ -26,17 +26,18 @@
     </view>
     <view class='integral-content'>
         <view class='integral-list-item' wx:for="{{ lists }}" wx:key="{{ index }}" data-id='{{ item.id }}' data-time='{{ item.time }}' bindtap='showThisRecord'>
-            <view class='integral-list-time'>
-                <text>{{ item.y_m }}</text>
-                <text>{{ item.day }}</text>
-            </view>
-            <view class='integral-list-words'>
-                <view class='integral-list-title overwords'>{{ item.type_name }}</view>
-                <view class='integral-list-info overwords'>{{ item.title }}</view>
-                <view class='integral-list-lasttime overwords'>时间：{{ item.his }} <text>{{ item.tips }}</text></view>
-            </view>
+           <view class="item-container">
+               <view class="icon-bor">
+                   <image class="icon" src="{{item.icon}}" mode="scaleToFill"></image>
+               </view>
+               <view class='integral-list-words'>
+                   <view class='integral-list-title overwords'>{{ item.type_name }}</view>
+                   <view class='integral-list-info overwords'>{{ item.title }}</view>
+                   <view class='integral-list-lasttime overwords'>{{ item.date }}</view>
+                   <text class="tips">{{ item.tips }}</text>
+               </view>
+           </view>
         </view>
-
     </view>
 
     <view class='nodata-texttips' wx:if="{{ nothavemore }}">没有更多数据了</view>
