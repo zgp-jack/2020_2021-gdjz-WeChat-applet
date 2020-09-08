@@ -290,25 +290,27 @@ Page({
       areaText: areaArrT
     })
   },
-  getzero(judgeId) {
+  getzero(index) {
     let that = this;
-    let judgeIdone = judgeId - 2;
     let areaArr = app.arrDeepCopy(that.data.areadatas)
     let areaArrP = app.arrDeepCopy(that.data.areaTextP)
     let areaArrT = app.arrDeepCopy(that.data.areaText)
-    areaArr[judgeIdone][0].selected = 1;
-
-
+    for (let i = 0; i < index.length; i++) {
+      areaArr[index[i]].selected = 1;
+    }
     for (let j = 0; j < areaArrP.length; j++) {
-      if (areaArr[judgeIdone][0].id == areaArrP[j].id) {
-        areaArrP.splice(j, 1)
+      for (let i = 0; i < index.length; i++) {
+        if (areaArr[index[i]][0].id == areaArrP[j].id) {
+          areaArrP.splice(j, 1)
+        }
       }
     }
 
     for (let j = 0; j < areaArrT.length; j++) {
-      if (areaArr[judgeIdone][0].id == areaArrT[j].id) {
-
-        areaArrT.splice(j, 1)
+      for (let i = 0; i < index.length; i++) {
+        if (areaArr[index[i]][0].id == areaArrT[j].id) {
+          areaArrT.splice(j, 1)
+        }
       }
     }
     that.setData({
@@ -338,12 +340,19 @@ Page({
       pro: pro,
       pid: judgeId
     } 
-
+    let index =[]
+    for (let i = 0; i < areadatafor.length; i++) {
+      let areadataforItem = areadatafor[i]
+      for (let j = 0; j < areadataforItem.length; j++) {
+        if (areadataforItem[j].id == cityId) {
+          index.push(areadataforItem[j].index)
+        }
+      }
+    }
     if (areadatafor[num][pro].selected == 1) {
 
-
       if (judgeId == 1) {
-   
+
         let show = that.mustjudge(judgeId)
         if (show == "nil") {
           return
@@ -418,7 +427,7 @@ Page({
         if (num > 0) {
           that.getFullone(num)
         } else if (num == 0) {
-          that.getzero(judgeId)
+          that.getzero(index)
         }
 
 
@@ -695,6 +704,15 @@ Page({
       name: item.area ? item.area : item.name,
       pid: item.pid
     }
+    let indexs =[]
+    for (let i = 0; i < areadatafor.length; i++) {
+      let areadataforItem = areadatafor[i]
+      for (let j = 0; j < areadataforItem.length; j++) {
+        if (areadataforItem[j].id == detail.id) {
+          indexs.push(areadataforItem[j].index)
+        }
+      }
+    }
     let index = this.findIndex(item.id)
     let pro = this.findPro(index, item.id)
 
@@ -713,7 +731,7 @@ Page({
       if (index > 0) {
         this.getFullone(index)
       } else if (index == 0) {
-        that.getzero(item.pid)
+        that.getzero(indexs)
       }
       that.data.areaTextC.push(detail)
     }

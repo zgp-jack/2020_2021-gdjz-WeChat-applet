@@ -281,25 +281,27 @@ Page({
       areaText: areaArrT
     })
   },
-  getzero(judgeId) {
+  getzero(index) {
     let that = this;
-    let judgeIdone = judgeId - 2;
     let areaArr = app.arrDeepCopy(that.data.areadatas)
     let areaArrP = app.arrDeepCopy(that.data.areaTextP)
     let areaArrT = app.arrDeepCopy(that.data.areaText)
-    areaArr[judgeIdone][0].selected = 1;
-
-
+    for (let i = 0; i < index.length; i++) {
+      areaArr[index[i]].selected = 1;
+    }
     for (let j = 0; j < areaArrP.length; j++) {
-      if (areaArr[judgeIdone][0].id == areaArrP[j].id) {
-        areaArrP.splice(j, 1)
+      for (let i = 0; i < index.length; i++) {
+        if (areaArr[index[i]][0].id == areaArrP[j].id) {
+          areaArrP.splice(j, 1)
+        }
       }
     }
 
     for (let j = 0; j < areaArrT.length; j++) {
-      if (areaArr[judgeIdone][0].id == areaArrT[j].id) {
-
-        areaArrT.splice(j, 1)
+      for (let i = 0; i < index.length; i++) {
+        if (areaArr[index[i]][0].id == areaArrT[j].id) {
+          areaArrT.splice(j, 1)
+        }
       }
     }
     that.setData({
@@ -342,6 +344,15 @@ Page({
       pro: pro,
       pid: judgeId
     } 
+    let index =[]
+    for (let i = 0; i < areadatafor.length; i++) {
+      let areadataforItem = areadatafor[i]
+      for (let j = 0; j < areadataforItem.length; j++) {
+        if (areadataforItem[j].id == cityId) {
+          index.push(areadataforItem[j].index)
+        }
+      }
+    }
     // 如果区域信息是未选择状态
     if (areadatafor[num][pro].selected == 1) {
     // 如果pid即选择的是省
@@ -416,15 +427,6 @@ Page({
           }
         } else {
         // 如果选择热门城市也将对应省份的城市也选中
-          let index =[]
-          for (let i = 0; i < areadatafor.length; i++) {
-            let areadataforItem = areadatafor[i]
-            for (let j = 0; j < areadataforItem.length; j++) {
-              if (areadataforItem[j].id == cityId) {
-                index.push(areadataforItem[j].index)
-              }
-            }
-          }
           for (let i = 0; i < index.length; i++) {
             let number = areadatafor[index[i]];
             for (let j = 0; j < number.length; j++) {
@@ -444,7 +446,7 @@ Page({
           that.getFullone(num)
         } else if (num == 0) {
         // 选中热门城市后将该城市对应的全省状态变成1（未选中）
-          that.getzero(judgeId)
+          that.getzero(index)
         }
         // 将选中城市数据保存在data中
         dareaTextC.push(detail)
@@ -738,10 +740,20 @@ Page({
   },
   showseleted(item) {
     let that = this;
+    let areadatafor = app.arrDeepCopy(that.data.areadatas);
     let detail = {
       id: item.id,
       name: item.area ? item.area : item.name,
       pid: item.pid
+    }
+    let indexs =[]
+    for (let i = 0; i < areadatafor.length; i++) {
+      let areadataforItem = areadatafor[i]
+      for (let j = 0; j < areadataforItem.length; j++) {
+        if (areadataforItem[j].id == detail.id) {
+          indexs.push(areadataforItem[j].index)
+        }
+      }
     }
     let index = this.findIndex(item.id)
     let pro = this.findPro(index, item.id)
@@ -749,14 +761,12 @@ Page({
       if (index > 0) {
         this.getFull(index, item.id, pro)
       }
-
-
       that.data.areaTextP.push(detail)
     } else {
       if (index > 0) {
         this.getFullone(index)
       } else if (index == 0) {
-        that.getzero(item.pid)
+        that.getzero(indexs)
       }
       that.data.areaTextC.push(detail)
     }
