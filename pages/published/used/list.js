@@ -21,7 +21,9 @@ Page({
     infoId: '',
     infoIndex: -1,
     tipmsg: '提示：人工审核，该信息仅自己可见。',
-    resumeText:""
+    resumeText:"",
+    // 是否请求加载完毕
+    isRequest: true
   },
   publishJob:function () {
     app.initJobView()
@@ -139,7 +141,8 @@ Page({
       current: parseInt(key),
       page: 1,
       hasmore: true,
-      lists: []
+      lists: [],
+      isRequest: false
     })
     this.getUsedList(key)
   },

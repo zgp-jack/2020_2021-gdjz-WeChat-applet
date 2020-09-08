@@ -306,7 +306,8 @@ Page({
           _this.setData({
             lists: lists.concat(newlist),
             hasmore: len ? true : false,
-            page: len ? page + 1 : page
+            page: len ? page + 1 : page,
+            isRequest: true
           })
           if(userinfo.type === "all" && _this.data.hasmore){
             _this.setData({
@@ -327,7 +328,8 @@ Page({
       current: parseInt(key),
       page: 1,
       hasmore: true,
-      lists: []
+      lists: [],
+      isRequest: false
     })
     this.getRecruitList()
   },
