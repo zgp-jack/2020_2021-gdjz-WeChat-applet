@@ -309,7 +309,7 @@ Page({
             page: len ? page + 1 : page,
             isRequest: true
           })
-          if(userinfo.type === "all" && _this.data.hasmore){
+          if(userinfo.type === "all" && userinfo.page == 1 &&  !(len ? true : false)){
             _this.setData({
               isAllList: true
             })

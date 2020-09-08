@@ -287,7 +287,7 @@ Page({
     let areaArrP = app.arrDeepCopy(that.data.areaTextP)
     let areaArrT = app.arrDeepCopy(that.data.areaText)
     for (let i = 0; i < index.length; i++) {
-      areaArr[index[i]].selected = 1;
+      areaArr[index[i]][0].selected = 1;
     }
     for (let j = 0; j < areaArrP.length; j++) {
       for (let i = 0; i < index.length; i++) {
@@ -486,12 +486,13 @@ Page({
             }
           }
         } else {
-          for (let i = 0; i < areadatafor[judgeId - 2].length; i++) {
-            if (areadatafor[judgeId - 2][i].id == cityId) {
-              areadatafor[judgeId - 2][i].selected = 1
+          for (let j = 0; j < index.length; j++) {
+            for (let i = 0; i < areadatafor[index[j]].length; i++) {
+              if (areadatafor[index[j]][i].id == cityId) {
+                areadatafor[index[j]][i].selected = 1
+              }
             }
           }
-
         }
       }
       that.setData({

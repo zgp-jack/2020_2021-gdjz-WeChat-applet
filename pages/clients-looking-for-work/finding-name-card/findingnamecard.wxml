@@ -1,6 +1,6 @@
 <view style="padding-bottom:120rpx;">
   <view class="cardcolore">
-    <view class="findingnamecard" wx:if="{{showtop}}">
+    <view class="findingnamecard">
       请完善以下信息
     </view>
   </view>

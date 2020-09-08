@@ -961,31 +961,14 @@ Page({
     }
     this.gettopareas()
   },
-  // changeTwoDecimal(x) {
-  //   var f_x = parseFloat(x);
-  //   if (isNaN(f_x)) {
-
-  //     return false;
-  //   }
-  //   f_x = Math.round(f_x * 100) / 100;
-
-
-
-  //   return f_x;
-  // },
+  
   getAllpoint(timeItem) {
     
     let shen = this.data.allprice - this.data.max_price;
     
     if (timeItem != 0 && shen>=0) {
       let shennum = shen;
-      // let shenmiao = this.changeTwoDecimal(shennum)
-      
-      
       let time = ((this.data.endtimeh - timeItem) / 3600 / 1000 / 24) * (shennum) + "";
-      
-      
-   
       var str = Math.round(time) - 0 + (this.data.allprice - 0) * (this.data.detailprice - 0);
 
       if (str==0){

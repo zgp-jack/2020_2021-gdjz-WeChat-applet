@@ -296,7 +296,7 @@ Page({
     let areaArrP = app.arrDeepCopy(that.data.areaTextP)
     let areaArrT = app.arrDeepCopy(that.data.areaText)
     for (let i = 0; i < index.length; i++) {
-      areaArr[index[i]].selected = 1;
+      areaArr[index[i]][0].selected = 1;
     }
     for (let j = 0; j < areaArrP.length; j++) {
       for (let i = 0; i < index.length; i++) {
@@ -361,7 +361,7 @@ Page({
     }
     // 如果区域信息是未选择状态
     if (areadatafor[num][pro].selected == 1) {
-    // 如果pid即选择的是省
+    // 如果pid即选择的是省或者直辖市
       if (judgeId == 1) {
         // 如果选择的区域超过了要求的数量给出提示并返回
         let show = that.mustjudge(judgeId)
@@ -492,12 +492,14 @@ Page({
             }
           }
         } else {
-          for (let i = 0; i < areadatafor[judgeId - 2].length; i++) {
-            if (areadatafor[judgeId - 2][i].id == cityId) {
-              areadatafor[judgeId - 2][i].selected = 1
+          for (let j = 0; j < index.length; j++) {
+            for (let i = 0; i < areadatafor[index[j]].length; i++) {
+              if (areadatafor[index[j]][i].id == cityId) {
+                areadatafor[index[j]][i].selected = 1
+              }
             }
+            
           }
-
         }
       }
       that.setData({
@@ -616,15 +618,6 @@ Page({
   chooseInputCtiy(e) {
     let that = this;
     let odataset = e.currentTarget.dataset;
-    // if (that.data.shoWmodifytop != "modifytop") {
-    //   let areaText = that.data.areaText
-    //   for (let i = 0; i < areaText.length; i++) {
-    //     if (areaText[i].id == 1) {
-    //       that.data.areadatas[0][0].selected = 1
-    //       that.data.areaText = []
-    //     }
-    //   }
-    // }
     let detail = {
       id: odataset.id,
       city: odataset.area,
@@ -735,17 +728,10 @@ Page({
     }
     let index = this.findIndex(item.id)
     let pro = this.findPro(index, item.id)
-
-    console.log(item.id)
-    console.log(pro)
-    console.log(index)
-
     if (item.pid == 1) {
       if (index > 0) {
         this.getFull(index, item.id, pro)
       }
-
-
       that.data.areaTextP.push(detail)
     } else {
       if (index > 0) {
@@ -755,7 +741,6 @@ Page({
       }
       that.data.areaTextC.push(detail)
     }
-    console.log('触发了')
     if(that.validIsChina()){
       that.data.areadatas[0][0].selected = 1;
     }
@@ -831,14 +816,6 @@ Page({
   },
 
   getedArea(item) {
-    // let num = e.currentTarget.dataset.index;
-    // let name = e.currentTarget.dataset.area;
-    // let pro = e.currentTarget.dataset.pro;
-    // let cityId = e.currentTarget.dataset.id;
-    // let judgeId = e.currentTarget.dataset.pid;
-
-    // let detail = { id: cityId, name: name, num: num, pro: pro }
-
     wx.showLoading({
       title: '加载中',
       mask: true
