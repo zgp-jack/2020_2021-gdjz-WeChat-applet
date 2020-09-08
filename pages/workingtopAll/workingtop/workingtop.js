@@ -45,7 +45,7 @@ Page({
     showpointone: false,
     detailprice: 0,
     special_ids:[],
-    rangevalue:2,
+    rangevalue: 0,
     country_integral:"",
     // 首次置顶显示的置顶到期时间
     firstEndTime:"",
@@ -891,6 +891,9 @@ Page({
     let serverTime = that.data.serverTime;
     // 获取配置请求时本地主机时间
     let hostTime = that.data.hostTime;
+    // 获取默认的置顶天数
+    let defaultDayIndex = that.data.defaultDayIndex
+    that.setData({rangevalue: defaultDayIndex})
     if (e && (value - 0 + 1 > 0)) {
      
       let allprice = this.data.max_price
@@ -909,7 +912,7 @@ Page({
       detail = days[e.detail.value]
       this.setData({
         shoutime: true,
-        showpoint: true
+        showpoint: true,
       })
       let all = 86400000 * (detail) + (this.data.endtimeh - 0)
       let time = this.getMyDate(all)
@@ -931,11 +934,14 @@ Page({
     }
   },
   deletea() {
+    // 获取默认的置顶天数
+    let defaultDayIndex = this.data.defaultDayIndex
     this.setData({
       shoutime: false,
       showpoint: false,
       detailprice: 0,
-      rangevalue:1
+      rangevalue:1,
+      rangevalue: defaultDayIndex
     })
     this.getCityNum()
   },

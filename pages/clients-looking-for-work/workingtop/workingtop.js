@@ -796,6 +796,8 @@ Page({
     let serverTime = that.data.serverTime;
     // 获取配置请求时本地主机时间
     let hostTime = that.data.hostTime;
+    let defaultDayIndex = that.data.defaultDayIndex
+    that.setData({rangevalue: defaultDayIndex})
     // 存在点击事件
     if (e && (e.detail.value - 0 + 1 > 0)) {
       // 上次的置顶单价（基本单位天）
@@ -839,11 +841,14 @@ Page({
     }
   },
   deletea() {
+    // 获取默认的置顶天数
+    let defaultDayIndex = this.data.defaultDayIndex
     this.setData({
       shoutime: false,
       showpoint: false,
       detailprice: 0,
-      rangevalue:1
+      rangevalue:1,
+      rangevalue: defaultDayIndex
     })
     this.getCityNum()
   },

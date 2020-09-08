@@ -356,7 +356,7 @@ Page({
   },
   jumpThisLink: function (e) {
     app.jumpThisLink(e);
-    app.initResume()
+    app.initResume(this)
   },
   goPublish:function () {
     app.initJobView()
