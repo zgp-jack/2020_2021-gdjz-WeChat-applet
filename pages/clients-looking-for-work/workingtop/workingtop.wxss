@@ -268,7 +268,7 @@ page {
   left: 0rpx;
 }
  .daynumone .bluet{
-   color: #0099FF;
+   color: black;
    padding-left: 20rpx;
  }
 

@@ -4,12 +4,10 @@
   <view class='common-choose-header'>
     <view class='choose-headerbox common-shaded-box flex-row'>
       <view class='choose-header-item' bindtap='showThisList'>
-        <view>
-          <image src='{{ collectIcon.infoIcon }}'></image>{{ collectIcon.infoTitle }}</view>
+        <view>{{ collectIcon.infoTitle }}</view>
       </view>
       <view class='choose-header-item choose-header-item-active'>
-        <view>
-          <image src='{{ collectIcon.resumeIcon }}'></image>{{ collectIcon.resumeTitle }}</view>
+        <view>{{ collectIcon.resumeTitle }}</view>
       </view>
     </view>
   </view>

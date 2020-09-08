@@ -266,7 +266,7 @@ padding-left: 31%;
   left: 0rpx;
 }
  .daynumone .bluet{
-   color: #0099FF;
+   color: black;
  }
 
 .daynumone .endtime::after{

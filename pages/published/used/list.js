@@ -144,7 +144,7 @@ Page({
       lists: [],
       isRequest: false
     })
-    this.getUsedList(key)
+    this.getUsedList()
   },
   getUsedList:function(){
     let _this = this
@@ -170,7 +170,8 @@ Page({
             lists: lists.concat(newlist),
             hasmore: len ? true : false,
             page: len ? page + 1 : page,
-            tipmsg: mydata.data.checking_tips
+            tipmsg: mydata.data.checking_tips,
+            isRequest: true
           })
         }else{
           app.showMyTips(mydata.errmsg)

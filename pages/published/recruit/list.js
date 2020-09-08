@@ -25,7 +25,7 @@ Page({
     infoIndex: -1,
     showTopTips: false,
     //我的全部招工信息是否有数据
-    isAllList : false,
+    isAllList : true,
     resumeText:"",
     // 滑动与点击请求
     isRequest: true,
@@ -309,9 +309,9 @@ Page({
             page: len ? page + 1 : page,
             isRequest: true
           })
-          if(userinfo.type === "all" && _this.data.hasmore){
+          if(userinfo.type === "all" && !(len ? true : false)){
             _this.setData({
-              isAllList: true
+              isAllList: false
             })
           }
         }else{
@@ -426,7 +426,7 @@ Page({
 
   },
   pageRefresh() {
-    this.setData({ lists: [], page: 1, hasmore: true })
+    this.setData({ lists: [], page: 1, hasmore: true, isAllList: true})
     this.getRecruitList()
   },
   /**

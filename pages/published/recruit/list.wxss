@@ -219,7 +219,7 @@
   border-radius: 20px;
 }
 .lists-nodata{
- padding-top: 240rpx;
+ padding-top: 160rpx;
 }
 .lists-nodata button {
   width: 320rpx;
