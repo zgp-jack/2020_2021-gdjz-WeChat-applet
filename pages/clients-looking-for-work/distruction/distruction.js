@@ -416,13 +416,23 @@ Page({
           }
         } else {
         // 如果选择热门城市也将对应省份的城市也选中
-          let number = areadatafor[judgeId - 2];
-          for (let i = 0; i < number.length; i++) {
-            if (number[i].id == cityId) {
-              number[i].selected = 2
+          let index =[]
+          for (let i = 0; i < areadatafor.length; i++) {
+            let areadataforItem = areadatafor[i]
+            for (let j = 0; j < areadataforItem.length; j++) {
+              if (areadataforItem[j].id == cityId) {
+                index.push(areadataforItem[j].index)
+              }
             }
           }
-
+          for (let i = 0; i < index.length; i++) {
+            let number = areadatafor[index[i]];
+            for (let j = 0; j < number.length; j++) {
+              if (number[j].id == cityId) {
+                number[j].selected = 2
+              }
+            }
+          }
         }
         // 将改变的数据存入data中
         that.setData({

@@ -796,8 +796,6 @@ Page({
     let serverTime = that.data.serverTime;
     // 获取配置请求时本地主机时间
     let hostTime = that.data.hostTime;
-    let defaultDayIndex = that.data.defaultDayIndex
-    that.setData({rangevalue: defaultDayIndex})
     // 存在点击事件
     if (e && (e.detail.value - 0 + 1 > 0)) {
       // 上次的置顶单价（基本单位天）
@@ -923,7 +921,6 @@ Page({
   },
    //获取找活置顶的省份城市选择界面
   getDefaultArea: function(areaId) {
-    console.log("areaId",areaId)
     //获取本地缓存区域信息
     let areadata = wx.getStorageSync("areadata");
     //如果本地有缓存区域信息
@@ -934,22 +931,25 @@ Page({
     //深拷贝区域信息
       let mydata = app.arrDeepCopy(areadata)  
       let areaData = mydata.data
-      // 遍历找到符合条件的区域信息
-      for (let i = 0; i < areaData.length; i++) {
-        let item = areaData[i]
-        for (let j = 0; j < item.length; j++) {
-          if (item[j].id == areaId) {
-            let areaArry = item[j];
-            areaArry.name = item[j].city;
-            areaArry.index = i;
-            defaultTop.push(areaArry);
+      if ( areaId == 0) {
+        return
+      }else{
+        // 遍历找到符合条件的区域信息
+        for (let i = 0; i < areaData.length; i++) {
+          let item = areaData[i]
+          for (let j = 0; j < item.length; j++) {
+            if (item[j].id == areaId) {
+              let areaArry = item[j];
+              areaArry.name = item[j].city;
+              areaArry.index = i;
+              defaultTop.push(areaArry);
+            }
           }
         }
+        if (defaultTop.length > 1) {
+          defaultTop.splice(0,1)
+        }
       }
-      if (defaultTop.length > 1) {
-        defaultTop.splice(0,1)
-      }
-      console.log("defaultTop",defaultTop)
       let pid = defaultTop[0].pid
       if (pid == 0) {
         this.setData({
@@ -967,22 +967,31 @@ Page({
           alllength:defaultTop.length,
         })
       }
-        return false
-      }
+      console.log("defaultTop",defaultTop)
+      return false
+    }
+    
     //如果没有缓存信息将通过app中方法获取区域数据
     app.getAreaData(this, function(data) {
       let resdata = app.arrDeepCopy(data)
       let areaData = resdata.data
-      // 遍历找到符合条件的区域信息
-      for (let i = 0; i < areaData.length; i++) {
-        let item = areaData[i]
-        for (let j = 0; j < item.length; j++) {
-          if (item[j].id == areaId) {
-            let areaArry = item[j];
-            areaArry.name = item[j].city;
-            areaArry.index = i;
-            defaultTop.push(areaArry)
+      if ( areaId == 0) {
+        return
+      }else{
+        // 遍历找到符合条件的区域信息
+        for (let i = 0; i < areaData.length; i++) {
+          let item = areaData[i]
+          for (let j = 0; j < item.length; j++) {
+            if (item[j].id == areaId) {
+              let areaArry = item[j];
+              areaArry.name = item[j].city;
+              areaArry.index = i;
+              defaultTop.push(areaArry)
+            }
           }
+        }
+        if (defaultTop.length > 1) {
+          defaultTop.splice(0,1)
         }
       }
       let pid = defaultTop.pid

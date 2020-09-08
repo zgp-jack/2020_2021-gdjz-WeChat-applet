@@ -891,9 +891,6 @@ Page({
     let serverTime = that.data.serverTime;
     // 获取配置请求时本地主机时间
     let hostTime = that.data.hostTime;
-    // 获取默认的置顶天数
-    let defaultDayIndex = that.data.defaultDayIndex
-    that.setData({rangevalue: defaultDayIndex})
     if (e && (value - 0 + 1 > 0)) {
      
       let allprice = this.data.max_price

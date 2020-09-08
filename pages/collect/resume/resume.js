@@ -26,6 +26,7 @@ Page({
       resumeIcon: app.globalData.apiImgUrl + "new-collect-resume-active.png",
       resumeTitle: '找活信息'
     },
+    resumeText:""
   },
 
   showThisList: function (e) {
@@ -211,6 +212,7 @@ Page({
   onShow: function (options) {
     this.setData({ isFirstRequest: true, lists: [], page: 1 })
     this.initPublishedData(options);
+    app.initResume(this)
   },
 
   /**

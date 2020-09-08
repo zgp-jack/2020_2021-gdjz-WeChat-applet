@@ -282,7 +282,7 @@ Page({
     //如果有找活名片信息跳转去招工置顶界面
     } else {
       wx.navigateTo({
-        url: "/pages/clients-looking-for-work/workingtop/workingtop?topdata=" + topdata + "&&defaulttop=" + defalutTop,
+        url: "/pages/clients-looking-for-work/workingtop/workingtop?topdata=" + topdata + "&defaulttop=" + defalutTop,
       })
     }
   },

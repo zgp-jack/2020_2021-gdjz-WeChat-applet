@@ -109,4 +109,4 @@
 
 
 <!-- 引入footer listsboxdetailo listsboxself -->
-<template is="footer" data="{{ footerImgs,publishActive,showPublishBox,footerActive }}" />
+<template is="footer" data="{{ footerImgs,publishActive,showPublishBox,footerActive,resumeText }}" />

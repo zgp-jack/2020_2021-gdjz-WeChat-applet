@@ -33,18 +33,24 @@ Page({
     showlodingimg: app.globalData.showlodingimg,
     areaDataNotEnd: []
   },
-  //
+  //获取区域数据
   getAreaData: function(options) {
+    // 缓存区域数据
     let areadata = wx.getStorageSync("areadata");
     let num = app.globalData.areaDataNum;
     let _this = this;
+    // 如果有区域数据
     if (areadata) {
+      // 数据深拷贝一份
       let mydata = app.arrDeepCopy(areadata)
+      // 删除第一组元素即热门城市
       mydata.data.shift()
       if (areadata.hasOwnProperty("num") && (areadata.num == num)) {
+        // 保存区域数据
         _this.setData({
           areaDataNotEnd: mydata.data
         })
+        // 热门城市
         _this.hotcities(options)
         wx.hideLoading()
         return false;
@@ -950,8 +956,6 @@ Page({
     this.initInputList();
     //this.modifytop(options)
     //this.getNewId(options)
-
-
   },
 
   /**
