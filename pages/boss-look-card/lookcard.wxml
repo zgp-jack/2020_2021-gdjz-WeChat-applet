@@ -46,18 +46,18 @@
                 <text class="workotextone">{{telephone}}</text>
                 <view class="cliok" wx:if="{{!examine&&onoff || is_read ==0&&is_end !=2&&!examine&&status == 0}}">
                   <text bindtap="telephorf" data-telephone="{{telephone}}">点击拨打</text>
-                  <text class="newdetail-call-report" bindtap="userTapComplain">{{show_complain.show_complain == 1? "投诉":"已投诉"}}</text>
+                  <text class="{{show_complain.show_complain == 1?'newdetail-call-report':'info-complained'}}" bindtap="userTapComplain">{{show_complain.show_complain == 1? "投诉":"已投诉"}}</text>
                 </view>
                 <view class="clioktel" wx:if="{{examine||!onoff && is_read ==1&&is_end !=2&&status == 0}}">
                   <text bindtap="authrasution" data-telephone="{{telephone}}">查看找活电话</text>
                 </view>
                 <view class="cliokine" wx:if="{{is_end ==2&&status == 0}}">
                   <text>已找到</text>
-                  <text class="newdetail-call-report" bindtap="userTapComplain" wx:if="{{is_read ==0&&is_end ==2}}">{{show_complain.show_complain == 1? "投诉":"已投诉"}}</text>
+                  <text class="{{show_complain.show_complain == 1?'newdetail-call-report':'info-complained'}}" bindtap="userTapComplain" wx:if="{{is_read ==0&&is_end ==2}}">{{show_complain.show_complain == 1? "投诉":"已投诉"}}</text>
                 </view>
                 <view class="cliokine" wx:if="{{is_end ==2&&status == 0}}">
                   <text>已找到</text>
-                  <text class="newdetail-call-report" bindtap="userTapComplain" wx:if="{{is_read ==0&&is_end ==2}}">{{show_complain.show_complain == 1? "投诉":"已投诉"}}</text>
+                  <text class="{{show_complain.show_complain == 1?'newdetail-call-report':'info-complained'}}" bindtap="userTapComplain" wx:if="{{is_read ==0&&is_end ==2}}">{{show_complain.show_complain == 1? "投诉":"已投诉"}}</text>
                 </view>
               </view>
             </view>
