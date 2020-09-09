@@ -59,11 +59,11 @@ page{
 .issue-contact-title{
   margin: 0rpx 10rpx;
 }
-.issue-form-header{
- background: white;
- border-radius: 10rpx;
-
+.issue-form-upload{
+  background: white;
+  border-radius: 10rpx;
 }
+
 .issue-form-switch{
   position:relative;
   display: flex;
@@ -78,11 +78,18 @@ page{
   zoom: 0.7;
 }
 .issue-upload-tips{
+  position: relative;
   font-size: 28rpx;
   color: #9b9b9b;
   line-height: 100rpx;
   padding: 0rpx 20rpx;
 }
 .issue-upload-tips::before{
+  position: absolute;
   content: '';
+  width: 95%;
+  height: 1rpx;
+  background: #eeee;
+  top: 0rpx;
+  
 }
