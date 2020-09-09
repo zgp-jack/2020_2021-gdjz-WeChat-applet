@@ -917,7 +917,8 @@ Page({
         this.setData({
           endtimeone: time,
           detailprice: detail,
-          allprice: alllength
+          allprice: alllength,
+          point: allprice * detail
         })
         this.getAllpoint(newSeverTime)
       } else {

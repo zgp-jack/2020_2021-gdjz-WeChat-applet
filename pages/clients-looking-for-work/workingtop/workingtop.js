@@ -458,10 +458,11 @@ Page({
     // })
   },
   // 初始化已经置顶的置顶数据
-  gettopareas() {
+  gettopareas(options) {
     let that = this;
-    let hastop= this.data.topdata.has_top;
-    let istop = this.data.topdata.is_top;
+    let topdata = JSON.parse(options.topdata)
+    let hastop= topdata.has_top;
+    let istop = topdata.is_top;
     let area = wx.getStorageSync('areadata')
     // 判断是否是置顶中的修改置顶
     if (hastop && istop == 1) {
@@ -470,9 +471,9 @@ Page({
       //没有用户信息直接返回
       if (!userInfo) return false;
       //获取置顶区域的信息
-      let areaProcrum = that.data.topdata.top_provinces_str;
-      let areaCitycrum = that.data.topdata.top_citys_str;
-      let isCountry = that.data.topdata.is_country;
+      let areaProcrum = topdata.top_provinces_str;
+      let areaCitycrum = topdata.top_citys_str;
+      let isCountry = topdata.is_country;
       let max_price = parseInt(that.data.topdata.max_price);
       let areaAllcrum = [];
       let areaItem = area.data[0][0];
@@ -480,7 +481,7 @@ Page({
       if (isCountry == 1) {
        areaAllcrum = areaItem
       }
-      let alllength = areaProcrum.length + areaCitycrum.length + areaAllcrum.length;
+      let alllength = areaProcrum.length-0 + areaCitycrum.length-0 + areaAllcrum.length-0;
       let endtime = that.data.topdata.end_time_str;
       let endtimeh = (that.data.topdata.end_time-0)*1000;
       that.setData({
@@ -659,6 +660,7 @@ Page({
     let day = that.data.day;
     let istop = that.data.topdata.is_top;
     let hastop = that.data.topdata.has_top;
+    console.log("this.data",that.data)
     app.appRequestAction({
       url: 'resumes/top-config/',
       way: 'POST',
@@ -825,7 +827,8 @@ Page({
         this.setData({
           endtimeone: time,
           detailprice: detail,
-          allprice: alllength
+          allprice: alllength,
+          point: allprice * detail,
         })
         this.getAllpoint(newSeverTime)
       } else {
@@ -863,7 +866,7 @@ Page({
       })
     }
     // 初始化置顶状态下的数据
-    this.gettopareas()
+    this.gettopareas(options)
   },
   getAllpoint(timeItem) {
     // 积分单价差
