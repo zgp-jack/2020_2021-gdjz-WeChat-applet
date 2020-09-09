@@ -91,5 +91,12 @@ page{
   height: 1rpx;
   background: #eeee;
   top: 0rpx;
-  
+}
+.issue-upload-item{
+  width: 190rpx;
+  height: 190rpx;
+}
+.imgitem-box{
+  width: 100%;
+  height: 100%;
 }

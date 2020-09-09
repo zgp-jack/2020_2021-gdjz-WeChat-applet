@@ -27,7 +27,11 @@ Page({
     userInfo:{},
     imageUrl: app.globalData.apiImgUrl +"new-publish-title-t-icon.png",
     // 上传图片的切换按钮
-    switch:false
+    switch:false,
+    // 上传图片的logo
+    upload: app.globalData.apiImgUrl + 'mini-new-publish-upload-img.png',
+    imglen:0,
+    maxNum:3
   },
   mini_user: function(session_key){
     let { token,areaId } = this.data;
