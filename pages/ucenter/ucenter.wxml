@@ -23,7 +23,8 @@
               <image src='{{ realName }}' class='user-update-tag'
                      wx:if="{{member.is_check==2&&showAuthor==1&&member.check_degree==2}}"></image>
             </view>
-            <view class='ucenter-usernum overwords'>会员编号：
+            <view class='ucenter-usernum overwords'>
+              会员编号：
               <text>{{ member.id }}</text>
             </view>
           </view>
@@ -86,7 +87,7 @@
         <view class="menu-item" wx:for="{{ item.menus }}" wx:key="{{ index }}" data-url="{{item.dataUrl}}"
               bindtap='valiUserUrl'>
           <navigator
-              wx:if="{{item.name==='记工记账'}}"
+              wx:if="{{item.key==='bookkeeping'}}"
               class="jump"
               target="miniProgram"
               path="/pages/index/index"
@@ -99,16 +100,19 @@
             </view>
             <text class="menu-text">{{item.name}}</text>
           </navigator>
-          <view wx:else class="block-box">
+
+          <view wx:else class="block-box" bindtap="{{item.key === 'service' ? 'callThisPhone' : '' }}"
+                data-phone="{{ item.key === 'service'? callServicePhone : '' }}">
             <view class="icon-bor">
               <image class="menu-icon" src="{{item.icon}}"></image>
             </view>
             <text class="menu-text">{{item.name}}</text>
           </view>
-          <view class="masnumber" wx:if="{{ footerImgs.msgsNumber > 0 && item.name==='我的消息' }}">
+
+          <view class="masnumber" wx:if="{{ footerImgs.msgsNumber > 0 && item.key==='mymessage' }}">
             <text>{{footerImgs.msgsNumber>9? '9+' : footerImgs.msgsNumber}}</text>
           </view>
-          <view wx:if="{{item.name==='记工记账'}}" class="new-tag">新</view>
+          <view wx:if="{{item.key==='bookkeeping'}}" class="new-tag">新</view>
         </view>
       </view>
 

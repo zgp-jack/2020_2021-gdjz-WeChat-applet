@@ -13,55 +13,49 @@ Page({
     rightarrow: app.globalData.apiImgUrl + "new-center-rightarrow.png",
     msgIcon: app.globalData.apiImgUrl + "ucenter/ucenter-msg-icon.png",
     realName: app.globalData.apiImgUrl + "ucenter/ucenter-realname.png",
-    ucenterimgs: {
-      recruit: app.globalData.apiImgUrl + "lpy/ucenter/newcenter-recruit.png",
-      mycard: app.globalData.apiImgUrl + "lpy/ucenter/newcenter-resume.png",
-      trade: app.globalData.apiImgUrl + "lpy/ucenter/newcenter-used.png",
-      ucenterMsg: app.globalData.apiImgUrl + "lpy/ucenter/newcenter-info.png",
-      getintegral: app.globalData.apiImgUrl + "lpy/ucenter/newcenter-integral.png",
-      invite: app.globalData.apiImgUrl + "lpy/ucenter/newcenter-invite.png",
-      integral: app.globalData.apiImgUrl + "lpy/ucenter/newcenter-expend.png",
-      integrallog: app.globalData.apiImgUrl + "lpy/ucenter/newcenter-origin.png",
-      realname: app.globalData.apiImgUrl + "lpy/ucenter/newcenter-realname.png",
-      collect: app.globalData.apiImgUrl + "lpy/ucenter/newcenter-collect.png",
-      feedback: app.globalData.apiImgUrl + "lpy/ucenter/newcenter-feedback.png",
-      ucenterHelp: app.globalData.apiImgUrl + "lpy/ucenter/newcenter-help.png",
-    },
+    callServicePhone: '',
     uCenterMenus: [
       {
         title: '基础信息',
         menus: [
           {
+            key: 'recruit',
             name: '我的招工',
             dataUrl: '../published/recruit/list',
             icon: app.globalData.apiImgUrl + "ucenter/ucenter-recruit.png",
           },
           {
+            key: 'findwork',
             name: '我的找活',
             dataUrl: '/pages/clients-looking-for-work/finding-name-card/findingnamecard',
             icon: app.globalData.apiImgUrl + "ucenter/ucenter-findwork.png",
           },
           {
+            key: 'trade',
             name: '二手交易',
             dataUrl: '../published/used/list',
             icon: app.globalData.apiImgUrl + "ucenter/ucenter-trade.png",
           },
           {
+            key: 'collect',
             name: '我的收藏',
             dataUrl: '../collect/info/info',
             icon: app.globalData.apiImgUrl + "ucenter/ucenter-collect.png",
           },
           {
+            key: 'bookkeeping',
             name: '记工记账',
             dataUrl: '',
             icon: app.globalData.apiImgUrl + "ucenter/ucenter-account.png",
           },
           {
+            key: 'mymessage',
             name: '我的消息',
             dataUrl: '/pages/information/mymessage/mymessage',
             icon: app.globalData.apiImgUrl + "ucenter/ucenter-message.png",
           },
           {
+            key: 'gift',
             name: '免费领好礼',
             dataUrl: '',
             icon: app.globalData.apiImgUrl + "ucenter/ucenter-gift.png",
@@ -72,16 +66,19 @@ Page({
         title: '积分管理',
         menus: [
           {
+            key: 'getintegral',
             name: '获取积分',
             dataUrl: '../getintegral/getintegral',
             icon: app.globalData.apiImgUrl + "ucenter/ucenter-integral.png",
           },
           {
+            key: 'record',
             name: '积分记录',
             dataUrl: '../integral/source/source',
             icon: app.globalData.apiImgUrl + "ucenter/ucenter-integral-record.png",
           },
           {
+            key: 'invite',
             name: '邀请工友',
             dataUrl: '../static/invite',
             icon: app.globalData.apiImgUrl + "ucenter/ucenter-invite.png",
@@ -92,31 +89,37 @@ Page({
         title: '系统设置',
         menus: [
           {
+            key: 'auth',
             name: '实名认证',
             dataUrl: '../realname/realname',
             icon: app.globalData.apiImgUrl + "ucenter/ucenter-auth.png",
           },
           {
+            key: 'findexport',
             name: '实名查询',
             dataUrl: '',
             icon: app.globalData.apiImgUrl + "ucenter/ucenter-find-export.png",
           },
           {
+            key: 'help',
             name: '帮助中心',
             dataUrl: '/packageOther/pages/helpCenter/helpCenter',
             icon: app.globalData.apiImgUrl + "ucenter/ucenter-help-center.png",
           },
           {
+            key: 'feedback',
             name: '意见反馈',
             dataUrl: '/packageOther/pages/others/message/lists/lists',
             icon: app.globalData.apiImgUrl + "ucenter/ucenter-feedback.png",
           },
           {
+            key: 'service',
             name: '联系客服',
             dataUrl: '',
             icon: app.globalData.apiImgUrl + "ucenter/ucenter-customer-server.png",
           },
           {
+            key: 'setting',
             name: '系统设置',
             dataUrl: '',
             icon: app.globalData.apiImgUrl + "ucenter/ucenter-seting.png",
@@ -133,6 +136,10 @@ Page({
     // },
     showAuthor: false,
     resumeText: ""
+  },
+  //联系客服拨打电话
+  callThisPhone: function (e) {
+    app.callThisPhone(e);
   },
   // 根据发布方式不同发布招工：未登录或者“fast_add_job”是快速发布，“ordinary_add_job”是普通发布。
   publishJob: function () {
@@ -236,6 +243,10 @@ Page({
   onLoad: function (options) {
     this.initFooterData();
     this.initGetIntegralList();
+    //初始化联系客服电话号码
+    this.setData({
+      callServicePhone: app.globalData.joingroup.slice(5, 6)[0].text
+    })
   },
   initGetIntegralList: function () {
     let _this = this;
@@ -251,7 +262,6 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-
   },
 
   /**

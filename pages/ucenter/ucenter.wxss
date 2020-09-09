@@ -186,6 +186,7 @@
     color: #069bfe;
     font-size: 32rpx;
     display: block;
+    margin-bottom: 8rpx;
 }
 
 .ucenter-integral-item text:nth-child(2) {
@@ -285,6 +286,7 @@
 }
 
 .title-block {
+    height: 27rpx;
     margin-left: 16rpx;
     display: flex;
     align-items: center;
@@ -377,19 +379,19 @@
 }
 
 .msg-icon {
-    width: 24rpx;
-    height: 29rpx;
+    width: 34rpx;
+    height: 39rpx;
 }
 
 .icon-text {
-    width: 14rpx;
-    height: 14rpx;
+    width: 20rpx;
+    height: 20rpx;
     background: #fd0618;
     border-radius: 50%;
     position: absolute;
-    top: 0rpx;
-    right: -12rpx;
+    top: -6rpx;
+    right: -17rpx;
     color: #fff;
-    font-size: 12rpx;
+    font-size: 17rpx;
     text-align: center;
 }
