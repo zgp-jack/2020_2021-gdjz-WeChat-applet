@@ -9,47 +9,121 @@ Page({
     showRecharge: false,
     footerActive: "member",
     nouser: app.globalData.apiImgUrl + "userauth-userinfo-null.png",
-    realNames: app.globalData.apiImgUrl + 'new-list-realname-icon.png',
     feedbackimg: app.globalData.apiImgUrl + "feedbackmsg-img.png",
     rightarrow: app.globalData.apiImgUrl + "new-center-rightarrow.png",
+    msgIcon: app.globalData.apiImgUrl + "ucenter/ucenter-msg-icon.png",
+    realName: app.globalData.apiImgUrl + "ucenter/ucenter-realname.png",
     ucenterimgs: {
-      recruit: app.globalData.apiImgUrl + "lpy/ucenter/ucenter-recruit.png",
-      findwork: app.globalData.apiImgUrl + "lpy/ucenter/ucenter-findwork.png",
-      trade: app.globalData.apiImgUrl + "lpy/ucenter/ucenter-trade.png",
-      info: app.globalData.apiImgUrl + "lpy/ucenter/newcenter-info.png",
-      collect: app.globalData.apiImgUrl + "lpy/ucenter/ucenter-collect.png",
-      account: app.globalData.apiImgUrl + "lpy/ucenter/ucenter-account.png",
-      message: app.globalData.apiImgUrl + "lpy/ucenter/ucenter-message.png",
-      gift: app.globalData.apiImgUrl + "lpy/ucenter/ucenter-gift.png",
-      integral: app.globalData.apiImgUrl + "lpy/ucenter/ucenter-integral.png",
-      record: app.globalData.apiImgUrl + "lpy/ucenter/ucenter-integral-record.png",
-      invite: app.globalData.apiImgUrl + "lpy/ucenter/ucenter-invite.png",
-      auth: app.globalData.apiImgUrl + "lpy/ucenter/ucenter-auth.png",
-      export: app.globalData.apiImgUrl + "lpy/ucenter/ucenter-find-export.png",
-      help: app.globalData.apiImgUrl + "lpy/ucenter/ucenter-help-center.png",
-      feedback: app.globalData.apiImgUrl + "lpy/ucenter/ucenter-feedback.png",
-      server: app.globalData.apiImgUrl + "lpy/ucenter/ucenter-customer-server.png",
-      seting: app.globalData.apiImgUrl + "lpy/ucenter/ucenter-seting.png",
+      recruit: app.globalData.apiImgUrl + "lpy/ucenter/newcenter-recruit.png",
+      mycard: app.globalData.apiImgUrl + "lpy/ucenter/newcenter-resume.png",
+      trade: app.globalData.apiImgUrl + "lpy/ucenter/newcenter-used.png",
+      ucenterMsg: app.globalData.apiImgUrl + "lpy/ucenter/newcenter-info.png",
+      getintegral: app.globalData.apiImgUrl + "lpy/ucenter/newcenter-integral.png",
+      invite: app.globalData.apiImgUrl + "lpy/ucenter/newcenter-invite.png",
+      integral: app.globalData.apiImgUrl + "lpy/ucenter/newcenter-expend.png",
+      integrallog: app.globalData.apiImgUrl + "lpy/ucenter/newcenter-origin.png",
+      realname: app.globalData.apiImgUrl + "lpy/ucenter/newcenter-realname.png",
+      collect: app.globalData.apiImgUrl + "lpy/ucenter/newcenter-collect.png",
+      feedback: app.globalData.apiImgUrl + "lpy/ucenter/newcenter-feedback.png",
+      ucenterHelp: app.globalData.apiImgUrl + "lpy/ucenter/newcenter-help.png",
     },
-    uCenterMenus: {
-      menuOne: [
-        {
-          name: '我的招工',
-          dataUrl: '../published/recruit/list',
-          icon: app.globalData.apiImgUrl + "lpy/ucenter/ucenter-recruit.png",
-        },
-        {
-          name: '我的找活',
-          dataUrl: '/pages/clients-looking-for-work/finding-name-card/findingnamecard',
-          icon: app.globalData.apiImgUrl + "lpy/ucenter/ucenter-findwork.png",
-        },
-        {
-          name: '二手交易',
-          dataUrl: '../published/used/list',
-          icon: app.globalData.apiImgUrl + "lpy/ucenter/ucenter-trade.png",
-        },
-      ]
-    }
+    uCenterMenus: [
+      {
+        title: '基础信息',
+        menus: [
+          {
+            name: '我的招工',
+            dataUrl: '../published/recruit/list',
+            icon: app.globalData.apiImgUrl + "ucenter/ucenter-recruit.png",
+          },
+          {
+            name: '我的找活',
+            dataUrl: '/pages/clients-looking-for-work/finding-name-card/findingnamecard',
+            icon: app.globalData.apiImgUrl + "ucenter/ucenter-findwork.png",
+          },
+          {
+            name: '二手交易',
+            dataUrl: '../published/used/list',
+            icon: app.globalData.apiImgUrl + "ucenter/ucenter-trade.png",
+          },
+          {
+            name: '我的收藏',
+            dataUrl: '../collect/info/info',
+            icon: app.globalData.apiImgUrl + "ucenter/ucenter-collect.png",
+          },
+          {
+            name: '记工记账',
+            dataUrl: '',
+            icon: app.globalData.apiImgUrl + "ucenter/ucenter-account.png",
+          },
+          {
+            name: '我的消息',
+            dataUrl: '/pages/information/mymessage/mymessage',
+            icon: app.globalData.apiImgUrl + "ucenter/ucenter-message.png",
+          },
+          {
+            name: '免费领好礼',
+            dataUrl: '',
+            icon: app.globalData.apiImgUrl + "ucenter/ucenter-gift.png",
+          },
+        ]
+      },
+      {
+        title: '积分管理',
+        menus: [
+          {
+            name: '获取积分',
+            dataUrl: '../getintegral/getintegral',
+            icon: app.globalData.apiImgUrl + "ucenter/ucenter-integral.png",
+          },
+          {
+            name: '积分记录',
+            dataUrl: '../integral/source/source',
+            icon: app.globalData.apiImgUrl + "ucenter/ucenter-integral-record.png",
+          },
+          {
+            name: '邀请工友',
+            dataUrl: '../static/invite',
+            icon: app.globalData.apiImgUrl + "ucenter/ucenter-invite.png",
+          },
+        ]
+      },
+      {
+        title: '系统设置',
+        menus: [
+          {
+            name: '实名认证',
+            dataUrl: '../realname/realname',
+            icon: app.globalData.apiImgUrl + "ucenter/ucenter-auth.png",
+          },
+          {
+            name: '实名查询',
+            dataUrl: '',
+            icon: app.globalData.apiImgUrl + "ucenter/ucenter-find-export.png",
+          },
+          {
+            name: '帮助中心',
+            dataUrl: '/packageOther/pages/helpCenter/helpCenter',
+            icon: app.globalData.apiImgUrl + "ucenter/ucenter-help-center.png",
+          },
+          {
+            name: '意见反馈',
+            dataUrl: '/packageOther/pages/others/message/lists/lists',
+            icon: app.globalData.apiImgUrl + "ucenter/ucenter-feedback.png",
+          },
+          {
+            name: '联系客服',
+            dataUrl: '',
+            icon: app.globalData.apiImgUrl + "ucenter/ucenter-customer-server.png",
+          },
+          {
+            name: '系统设置',
+            dataUrl: '',
+            icon: app.globalData.apiImgUrl + "ucenter/ucenter-seting.png",
+          },
+        ]
+      }
+    ],
     userInfo: false,
     member: {},
     showReturnIntegral: false,
