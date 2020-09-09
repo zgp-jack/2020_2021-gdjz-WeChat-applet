@@ -426,7 +426,7 @@ Page({
 
   },
   pageRefresh() {
-    this.setData({ lists: [], page: 1, hasmore: true })
+    this.setData({ lists: [], page: 1, hasmore: true,  isAllList: false})
     this.getRecruitList()
   },
   /**
