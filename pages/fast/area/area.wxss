@@ -92,11 +92,18 @@ page{
   background: #eeee;
   top: 0rpx;
 }
+.issue-upload-show{
+  padding: 40rpx 20rpx 80rpx;
+}
 .issue-upload-item{
   width: 190rpx;
   height: 190rpx;
 }
 .imgitem-box{
+  width: 100%;
+  height: 100%;
+}
+.imgitem-box image{
   width: 100%;
   height: 100%;
 }
