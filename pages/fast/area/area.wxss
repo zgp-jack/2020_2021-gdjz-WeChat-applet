@@ -38,16 +38,6 @@ page{
   font-size: 30rpx;
   margin-left: 20rpx;
 }
-.issue-area-triangle{
-  position: absolute;
-  width: 0; 
-  height: 0;
-  right: 20rpx;
-  top: 30rpx;
-  border-width: 12rpx;
-  border-style: solid;
-  border-color:#111 transparent transparent  transparent;
-}
 
 .issue-tip{
   display: flex;
@@ -68,4 +58,29 @@ page{
 }
 .issue-contact-title{
   margin: 0rpx 10rpx;
+}
+.issue-form-header{
+ background: white;
+ border-radius: 10rpx;
+
+}
+.issue-form-switch{
+  position:relative;
+  display: flex;
+  align-items: center;
+  height: 100rpx;
+  font-size: 28rpx;
+  padding: 0rpx 20rpx;
+}
+.issue-upload-switch{
+  position: absolute;
+  right: 20rpx;
+  zoom: 0.7;
+}
+.issue-upload-tips{
+  font-size: 28rpx;
+  color: #9b9b9b;
+  line-height: 100rpx;
+  padding: 0rpx 20rpx;
+  
 }

@@ -12,24 +12,23 @@
       <input placeholder="请选择工种" disabled class="issue-input" value="{{ addressData.title }}"></input>
     </view>
     <view class="issue-form-upload">
-    <view class="issue-form-header">
-      上传图片： <switch class="issue-upload-switch" checked="{{ switch }}"  bindchange="switchClick" type="switch" />
-    </view>
-    <view class="issue-upload-show" wx:if="{{ switch }}">
-      <view class="issue-upload-tips">可上传工地现场照片、工程图纸、承包合同等</view>
-      <view class="issue-upload-body clearfix">
-        
-        <view class="issue-upload-item" wx:for="{{ imgs }}" wx:key="{{ item.url }}">
-          <view class="imgitem-box" bindtap="userChangeImg" data-index="{{ index }}">
-            <image src="{{ item.httpurl }}" mode="aspectFill"></image>
-            <view class="mini-del" catchtap="delImgAction" data-index="{{ index }}"></view>
+      <view class="issue-form-header">
+        <view class="issue-form-switch">上传图片： <switch class="issue-upload-switch" checked="{{ switch }}"  bindchange="switchClick" type="switch" /></view>
+        <view class="issue-upload-tips">可上传工地现场照片、工程图纸、承包合同等</view>
+      </view>
+      <view class="issue-upload-show">
+        <view class="issue-upload-body clearfix">
+          <view class="issue-upload-item" wx:for="{{ imgs }}" wx:key="{{ item.url }}">
+            <view class="imgitem-box" bindtap="userChangeImg" data-index="{{ index }}">
+              <image src="{{ item.httpurl }}" mode="aspectFill"></image>
+              <view class="mini-del" catchtap="delImgAction" data-index="{{ index }}"></view>
+            </view>
           </view>
-        </view>
-        <view class="issue-upload-item" wx:if="{{ imglen < maxNum }}">
-          <view class="imgitem-box" bindtap="userUploadImg">
-            <image src="{{ upload }}"></image>
+          <view class="issue-upload-item" wx:if="{{ imglen < maxNum }}">
+            <view class="imgitem-box" bindtap="userUploadImg">
+              <image src="{{ upload }}"></image>
+            </view>
           </view>
-        </view>
       </view>
     </view>
   </view>

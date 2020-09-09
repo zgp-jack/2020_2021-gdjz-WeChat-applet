@@ -25,7 +25,9 @@ Page({
     token: '',
     //用户信息
     userInfo:{},
-    imageUrl: app.globalData.apiImgUrl +"new-publish-title-t-icon.png"
+    imageUrl: app.globalData.apiImgUrl +"new-publish-title-t-icon.png",
+    // 上传图片的切换按钮
+    switch:false
   },
   mini_user: function(session_key){
     let { token,areaId } = this.data;
