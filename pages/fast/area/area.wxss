@@ -1,9 +1,12 @@
 @import "../code/code.wxss";
 
+page{
+  background: #f7f6f7;
+}
 .issue-area-container{
   position: relative;
-  padding: 20rpx;
 }
+
 .issue-area-tips{
   position: relative;
   margin-top: 35rpx;
@@ -11,11 +14,29 @@
   line-height: 80rpx;
   font-size: 28rpx;
 }
-.issue-contact-input{
-  margin-top: 0;
+.issue-contactbox{
+  padding: 30rpx;
 }
-.issue-area-box{
+.issue-box{
   position: relative;
+  display: flex;
+  align-items: center;
+  background: white;
+  padding: 0rpx 20rpx;
+  margin-bottom: 20rpx;
+  font-size: 28rpx;
+  border-radius: 10rpx;
+}
+.issue-input{
+  position: relative;
+  display: inline-block;
+  border-radius: 5rpx;
+  height: 100rpx;
+  line-height: 75rpx;
+  background-color: white;
+  padding: 0 20rpx;
+  font-size: 30rpx;
+  margin-left: 20rpx;
 }
 .issue-area-triangle{
   position: absolute;
@@ -38,7 +59,8 @@
   font-weight: bold;
   font-size: 30rpx;
   color: #333;
-  line-height: 60rpx;
+  line-height: 100rpx;
+  background: white;
 }
 .issue-tip-image {
   display: inline-block;
