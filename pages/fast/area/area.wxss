@@ -82,5 +82,7 @@ page{
   color: #9b9b9b;
   line-height: 100rpx;
   padding: 0rpx 20rpx;
-  
+}
+.issue-upload-tips::before{
+  content: '';
 }
