@@ -15,7 +15,7 @@
       {{item.name}}
       <image class="deleteimg" data-id="{{ item }}" src="{{imgDetelte}}"></image>
     </view>
-    <view class="obttn" bindtap="jumpdetail" wx:if="{{alllength>0&&alllength<(max_province + max_city)&&areaAllcrum.length == 0 }}">
+    <view class="obttn" bindtap="jumpdetail" wx:if="{{alllength>0&&alllength<(max_province+max_city)&&areaAllcrum.length == 0 }}">
       添加更多
     </view>
       <!-- &&alllength<(max_province+max_city -->

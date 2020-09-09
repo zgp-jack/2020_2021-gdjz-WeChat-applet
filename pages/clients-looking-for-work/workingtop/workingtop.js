@@ -459,11 +459,12 @@ Page({
   },
   // 初始化已经置顶的置顶数据
   gettopareas(options) {
+    // debugger
     let that = this;
     let topdata = JSON.parse(options.topdata)
+    let area = wx.getStorageSync('areadata')
     let hastop= topdata.has_top;
     let istop = topdata.is_top;
-    let area = wx.getStorageSync('areadata')
     // 判断是否是置顶中的修改置顶
     if (hastop && istop == 1) {
       //判断是否有授权登录用户信息
@@ -471,15 +472,16 @@ Page({
       //没有用户信息直接返回
       if (!userInfo) return false;
       //获取置顶区域的信息
-      let areaProcrum = topdata.top_provinces_str;
+      let areaProcrum = topdata.top_provinces_str.pid == 1?topdata.top_provinces_str:[];
       let areaCitycrum = topdata.top_citys_str;
       let isCountry = topdata.is_country;
-      let max_price = parseInt(that.data.topdata.max_price);
+      let max_price = parseInt(topdata.max_price);
       let areaAllcrum = [];
+     
       let areaItem = area.data[0][0];
       areaItem.name = areaItem.city;
       if (isCountry == 1) {
-       areaAllcrum = areaItem
+       areaAllcrum.push(areaItem)
       }
       let alllength = areaProcrum.length-0 + areaCitycrum.length-0 + areaAllcrum.length-0;
       let endtime = that.data.topdata.end_time_str;
