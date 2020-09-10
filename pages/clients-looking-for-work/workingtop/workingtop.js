@@ -472,7 +472,7 @@ Page({
       //没有用户信息直接返回
       if (!userInfo) return false;
       //获取置顶区域的信息
-      let areaProcrum = topdata.top_provinces_str.pid == 1?topdata.top_provinces_str:[];
+      let areaProcrum = topdata.top_provinces_str[0].pid == 1?topdata.top_provinces_str:[];
       let areaCitycrum = topdata.top_citys_str;
       let isCountry = topdata.is_country;
       let max_price = parseInt(topdata.max_price);
