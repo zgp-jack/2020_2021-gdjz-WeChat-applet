@@ -30,6 +30,10 @@ Page({
     switch:false,
     // 上传图片的logo
     upload: app.globalData.apiImgUrl + 'mini-new-publish-upload-img.png',
+    // 已经上传图片数组
+    imgs:[],
+    // 工种选择文本
+    showClassifyText:"",
     imglen:0,
     maxNum:3
   },
@@ -396,6 +400,151 @@ Page({
           })
         }
       }
+  },
+  // 点击切换上传图片按钮,并显示或隐藏上传图片区域
+  switchClick: function () {
+    this.setData({
+      switch: !this.data.switch
+    })
+  },
+  // 上传图片到服务器
+  uploadImageSever: function (imagesFiles,callback){
+    // 上传成功图片数量
+    let upLoadCount = 0;
+    // 上传失败图片数量
+    let failCount = 0;
+    // 上传图片成功后的图片地址数组
+    let imagesArry = [];
+    wx.showToast({
+      title: '图片上传中',
+      icon: 'loading',
+      mask: true
+    })
+    // 遍历上传的图片本地路径数组
+    imagesFiles.forEach((image) => {
+      // 校验上传图片文件格式
+      let res = app.valiImgRules(image.path)
+      // 如果图片格式正确
+      if (res) {
+        // 调用上传图片接口
+        wx.uploadFile({
+          filePath: image.path,
+          name: 'file',
+          url: app.globalData.apiUploadImg,
+          success: function (res){
+            // 服务器返回数据
+            let mydata = JSON.parse(res.data);
+            // 如果上传成功
+            if (mydata.errcode === "ok") {
+              // 上传图片成功计数
+              upLoadCount += 1;
+              // 将服务器返回的数据保存到imagesArry
+              imagesArry.push({
+                httpurl: mydata.httpurl,
+                url: mydata.url
+              })
+              callback(upLoadCount,imagesArry,failCount)
+            }else{
+              // 上传图片失败计数
+              upLoadCount += 1
+              failCount += 1
+              callback(upLoadCount,imagesArry,failCount)
+            }
+          },
+          fail: function () {
+            // 上传图片失败计数
+            upLoadCount += 1
+            failCount += 1
+            callback(upLoadCount,imagesArry,failCount)
+          }
+        })
+      }else{
+        // 上传图片格式不对计数
+        upLoadCount += 1
+        failCount += 1
+        callback(upLoadCount,imagesArry,failCount)
+      }
+    })
+  },
+  // 点击上传图片按钮上传图片
+  userUploadImg: function (num) {
+    let that = this;
+    // 上传图片加载loading
+    wx.showLoading({
+      title: '正在上传图片',
+    })
+    // 选择上传图片
+    wx.chooseImage({
+      // 上传图片数量
+      count: num || 0,
+      // 压缩
+      sizeType: ['compressed'],
+      // 从相册选择还是拍照
+      sourceType: ['album', 'camera'],
+      // 上传成功回调
+      success: function (res){
+        if (res.errMsg === "chooseImage:ok") {
+          // 上传图片到服务器（res.tempFiles本地图片路径）
+          that.uploadImageSever(res.tempFiles,function (upLoadCount,imagesArry,failCount) {
+            // 图片全部上传完成隐藏上传loading效果
+          if (res.tempFiles.length === upLoadCount) {
+            wx.hideToast();
+            wx.hideLoading();
+            that.setData({
+              imgs:imagesArry
+            })
+            // 如果有上传失败图片给出对应提示
+            if (failCount) {
+              wx.showModal({
+                title: '提示',
+                content: `有${failCount}图片上传失败，请重新上传`,
+                showCancel: false,
+              })
+            }
+          }
+          })
+        }
+      },
+      fail: function (){
+        // 图片上传失败提示
+        app.showMyTips('图片上传失败，请重新上传')
+        // 隐藏loading
+        wx.hideLoading()
+      }
+    })
+  },
+  // 点击所需工种显示工种选择
+  showWorkTypePicker: function () {
+    //用户在点击一次工种选择框后，便不再自动匹配详情内容
+    app.globalData.isRuleClass = true
+    // 避免用户选择之后取消，所以对数据进行一次备份
+    this.setData({
+      // rchildClassifies: JSON.parse(JSON.stringify(this.data.childClassifies)),
+      // rrulesClassifyids: JSON.parse(JSON.stringify(this.data.rulesClassifyids)),
+      // ruserClassifyids: JSON.parse(JSON.stringify(this.data.userClassifyids)),
+      // rclassifies: JSON.parse(JSON.stringify(this.data.classifies)),
+      // rpindex: this.data.pindex,
+      showPicker: true,
+    })
+  },
+  // 点击取消关闭工种选择
+  cancelWorkTypePicker: function () {
+    this.setData({
+      showPicker: false,
+      // pindex: this.data.rpindex,
+      // userClassifyids: JSON.parse(JSON.stringify(this.data.ruserClassifyids)),
+      // rulesClassifyids: JSON.parse(JSON.stringify(this.data.rrulesClassifyids)),
+      // childClassifies: JSON.parse(JSON.stringify(this.data.rchildClassifies)),
+      // classifies: JSON.parse(JSON.stringify(this.data.rclassifies)),
+    })
+    // this.getWorkText()
+  },
+  // 点击工种选择确定按钮
+  sureWorkTypePicker: function () {
+    this.setData({
+      showPicker: false
+    })
+    // this.getWorkText()
   },
   /**
    * 生命周期函数--监听页面加载

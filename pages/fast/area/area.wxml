@@ -7,16 +7,17 @@
       <!-- <text>招工城市：</text> -->
       <input placeholder="请选择招工城市" disabled class="issue-input" value="{{ addressData.title }}"></input>
     </view>
-    <view class="issue-box" bindtap="showWorkArea">所需工种:
+    <view class="issue-box" bindtap="showWorkTypePicker">所需工种:
       <!-- <text>招工城市：</text> -->
-      <input placeholder="请选择工种" disabled class="issue-input" value="{{ addressData.title }}"></input>
+      <input placeholder="请选择工种" disabled class="issue-input"></input>
+      <view class="input-item-text" wx:if="{{ showClassifyText }}">{{ showClassifyText }}</view>
     </view>
     <view class="issue-form-upload">
       <view class="issue-form-header">
         <view class="issue-form-switch">上传图片： <switch class="issue-upload-switch" checked="{{ switch }}"  bindchange="switchClick" type="switch" /></view>
         <view class="issue-upload-tips">可上传工地现场照片、工程图纸、承包合同等</view>
       </view>
-      <view class="issue-upload-show">
+      <view class="issue-upload-show" wx-if="{{ switch }}">
         <view class="issue-upload-body clearfix">
           <view class="issue-upload-item" wx:for="{{ imgs }}" wx:key="{{ item.url }}">
             <view class="imgitem-box" bindtap="userChangeImg" data-index="{{ index }}">
@@ -24,7 +25,7 @@
               <view class="mini-del" catchtap="delImgAction" data-index="{{ index }}"></view>
             </view>
           </view>
-          <view class="issue-upload-item" wx:if="{{ imglen < maxNum }}">
+          <view class="issue-upload-item" wx:if="{{ (imgs.length) < maxNum }}">
             <view class="imgitem-box" bindtap="userUploadImg">
               <image src="{{ upload }}"></image>
             </view>
@@ -33,5 +34,38 @@
     </view>
   </view>
     <button class="issue-code-btn" open-type="{{ areaId?'getUserInfo':''}}" bindtap="sureAreaAction" bindgetuserinfo="bindGetUserInfo">确认地址</button>
+  </view>
+</view>
+
+<!-- 工种选择 -->
+<view class="common-picker-container {{ showPicker ? '':'common-picker-none' }}">
+  <view class="common-picker-box">
+    <view class="common-picker-header">
+      <view class="common-picker-left" bindtap="cancelWorkTypePicker">取消</view>
+      <view class="common-picker-title">选择工种(可多选)</view>
+      <view class="common-picker-right" bindtap="sureWorkTypePicker">确定</view>
+    </view>
+    <view class="common-picker-body">
+      <view class="common-picker-content">
+        <view
+          data-index="{{ index }}"
+          class="common-picker-item {{ pindex === index ? 'common-picker-item-active':'' }}" 
+          wx:for="{{ classifies }}" 
+          wx:key="{{ item.id }}"
+          bindtap="userCheckPindex"
+        >{{ item.name }}<text wx:if="{{ item.num }}">{{ item.num }}</text></view>
+      </view>
+      <view class="common-picker-content2">
+        <view 
+          class="common-picker-item {{ item.checked ? 'common-picker-text-active' : '' }}" 
+          data-id="{{ item.id }}" 
+          data-checked="{{ item.checked }}"
+          data-name="{{ item.name }}"
+          wx:for="{{ childClassifies }}" 
+          wx:key="{{ item.id }}"
+          bindtap="userCheckWorkType"
+        >{{ item.name }}</view>
+      </view>
+    </view>
   </view>
 </view>
