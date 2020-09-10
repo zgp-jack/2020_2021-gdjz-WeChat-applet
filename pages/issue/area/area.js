@@ -541,9 +541,9 @@ Page({
         let pname = gpsPorvince.ad_name || "";
         let positonData = { "name": name, "id": id, "ad_name": pname, "pid": pid };
         app.setStorageAction(id, positonData, true)
-        // locationHistory.unshift(gpsPorvince)
-        // wx.setStorageSync('locationHistory', locationHistory)
-        wx.setStorageSync('defaultname', gpsPorvince)
+        if (!infoId) {
+          wx.setStorageSync('defaultname', gpsPorvince)
+        }
         if (jiSuData) {
           jiSuData["defaultname"] = gpsPorvince
         } else {
