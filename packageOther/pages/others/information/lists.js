@@ -17,6 +17,7 @@ Page({
     currentType: '-1', //传的类型 
     page:1,
     typename: '暂无相关资讯', //提示类型
+    resumeText:""
   },
 
   /**
@@ -50,6 +51,7 @@ Page({
       scrollTop: 0,
       duration: 300
     })
+    app.initResume(this)
   },
   // 共用footer
   jumpThisLink: function(e) {

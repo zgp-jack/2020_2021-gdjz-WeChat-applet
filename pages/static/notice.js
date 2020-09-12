@@ -14,6 +14,7 @@ Page({
       author:"鱼泡网",
       time:"",
       footerActive: "home",
+      resumeText:""
     },
     getNoticeInfo:function(options){
         let _this = this;
@@ -75,7 +76,7 @@ Page({
      * 生命周期函数--监听页面初次渲染完成
      */
     onReady: function () {
-
+      app.initResume(this)
     },
 
     /**

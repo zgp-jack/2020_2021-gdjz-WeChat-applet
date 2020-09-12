@@ -56,7 +56,8 @@ Page({
     collecticon: app.globalData.apiImgUrl + "collect-tipicon.png",
     collecthand: app.globalData.apiImgUrl + "new-published-zd.png?t=" + new Date().getTime(),
     showCollectTips: false,
-    daytime: ""
+    daytime: "",
+    resumeText:""
   },
   bindAreaChange: function (e) {
     this.setData({
@@ -589,6 +590,7 @@ Page({
   onShow: function () {
     this.judge()
     this.twoRefresh()
+    app.initResume(this)
   },
 
   /**

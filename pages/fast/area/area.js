@@ -324,9 +324,9 @@ Page({
         amapFun.getRegeo({
           location: userLocation,
           success: function (data) {
-            console.log("positiondata",data)
+            let title = Array.isArray(data[0].regeocodeData.addressComponent.neighborhood.name)?data[0].desc:data[0].regeocodeData.addressComponent.neighborhood.name;
             _this.setData({
-              "addressData.title":data[0].regeocodeData.addressComponent.neighborhood.name,
+              "addressData.title":title,
               "addressData.location":userLocation,
               "addressData.adcode":data[0].regeocodeData.addressComponent.adcode,
               "addressData.district":data[0].regeocodeData.formatted_address,
@@ -413,7 +413,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    
   },
 
   /**
