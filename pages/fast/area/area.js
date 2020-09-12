@@ -357,8 +357,8 @@ Page({
       name: name,
       ad_name: adName
     }
+    wx.setStorageSync('defaultname', defaultname)
     if(!jiSuData){
-      wx.setStorageSync('defaultname', defaultname)
       app.setStorageAction(id, defaultname, true)
       return false;
     } else {

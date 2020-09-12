@@ -530,8 +530,20 @@ Page({
     let gpsloc = wx.getStorageSync("gpsPorvince");
     //是否获得位置授权
     let isGpsPorvince = this.data.isGpsPorvince
+    //获取历史访问城市信息
+    let locationHistory = wx.getStorageSync('locationHistory')
+    let index = null
+    // 是否是在进行定位授权
+    if (isGpsPorvince) {
+      if (locationHistory) {
+        index = locationHistory.findIndex((item) => {
+          return item.id == gpsPorvince.id
+        })
+        locationHistory.splice(index,1)
+      }
+    }
+    wx.setStorageSync('locationHistory', locationHistory)
     //如果缓存历史城市列表与最后选择城市都不存在，表明是首次进入地区选择
-    
     if (!historyCityLists && !lastCtiy) {
       //如果进入城市选择获得位置信息授权将位置信息保存到locationHistory、defaultname、jisuData中
       if (gpsPorvince) {
@@ -542,7 +554,7 @@ Page({
         let positonData = { "name": name, "id": id, "ad_name": pname, "pid": pid };
         app.setStorageAction(id, positonData, true)
         if (!infoId) {
-          wx.setStorageSync('defaultname', gpsPorvince)
+          wx.setStorageSync('defaultname', positonData)
         }
         if (jiSuData) {
           jiSuData["defaultname"] = gpsPorvince
@@ -555,7 +567,10 @@ Page({
     }
     
     
-    this.setData({ gpsOrientation: gpsPorvince });
+    this.setData({ 
+      gpsOrientation: gpsPorvince,
+      locationHistory:locationHistory
+     });
     let showfor = this.data.showfor;
     let showmap = this.data.showmap;
     
