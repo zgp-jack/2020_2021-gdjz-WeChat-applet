@@ -30,43 +30,38 @@
       <text class='history-children' wx:for="{{ historyArray }}" wx:key="{{ index }}" data-id="{{item.id}}" data-name="{{item.city}}" data-pid="{{ item.pid }}" bindtap="hischildren">{{item.city}}</text>
     </view>
   </view>
+  <scroll-view scroll-y="{{ true }}" scroll-into-view="{{ select }}" class="index-area-scroll">
+    <view class='index-area-content'>
+      <view class='index-area-item' wx:if="{{ gpsOrientation || locationHistory }}">
 
-  <view class='index-area-body'>
-    <view class='index-area-item' wx:if="{{ gpsOrientation || locationHistory }}">
-
-      <text class='area-header-words'>当前定位城市/最近访问</text>
-      <view class='area-body-content clearfix'>
-        <view class="gpsposi" wx:if="{{ gpsOrientation }}">
-          <view class='overwords' data-id="{{ gpsOrientation.id }}" data-area="{{ gpsOrientation.name }}" data-pname="{{ gpsOrientation.ad_name }}" bindtap='chooseThisCtiy'>
-            <image src="{{ gpsposi }}"></image>{{ gpsOrientation.name }}</view>
+        <text class='area-header-words'>当前定位城市/最近访问</text>
+        <view class='area-body-content clearfix'>
+          <view class="gpsposi" wx:if="{{ gpsOrientation }}">
+            <view class='overwords' data-id="{{ gpsOrientation.id }}" data-area="{{ gpsOrientation.name }}" data-pname="{{ gpsOrientation.ad_name }}" bindtap='chooseThisCtiy'>
+              <image src="{{ gpsposi }}"></image>{{ gpsOrientation.name }}</view>
+          </view>
+          <view wx:for="{{ locationHistory }}" wx:key="{{ index }}" wx:if="{{ gpsOrientation ? index < 2 : true }}">
+            <text class='overwords' data-id="{{ item.id }}" data-area="{{ item.name }}" data-pname="{{ item.ad_name || item.name  }}" bindtap='chooseThisCtiy'>{{ item.name }}</text>
+          </view>
         </view>
-        <view wx:for="{{ locationHistory }}" wx:key="{{ index }}" wx:if="{{ gpsOrientation ? index < 2 : true }}">
-          <text class='overwords' data-id="{{ item.id }}" data-area="{{ item.name }}" data-pname="{{ item.ad_name || item.name  }}" bindtap='chooseThisCtiy'>{{ item.name }}</text>
+      </view>
+      <view class='index-area-tips overwords' wx:if="{{ !showInputList || !showListsAnd }}">请选择置顶范围：
+
+      </view>
+      <view class='index-area-item' wx:for="{{ areadatas }}" wx:key="{{ index }}" wx:for-item="areaItem">
+        <text class='area-header-words'>{{ (index == 0) ? "热门城市" : areaItem[0].ad_name  }}</text>
+        <view class='area-body-content clearfix'>
+          <view wx:for="{{ areaItem }}" class="allCons"  wx:key="{{ index }}" id="{{ 'selected' + item.id + item.selected }}">
+            <text class="{{item.selected == 2 ?'body-content':'overwords'}}" data-id="{{ item.id }}" data-pname="{{ item.ad_name }}" data-area="{{ item.city }}" data-pid="{{item.pid }}" data-pro="{{ index}}" data-index="{{ item.index}}" bindtap='chooseThisCtiy'>{{index ==0&&item.index!=0? "全省置顶":item.city}}</text>
+            <block wx:if="{{index == 0}}">
+              <image wx:if="{{ item.index != 0 }}"  src="{{hot}}"></image>
+              <image wx:if="{{ item.index == 0 && item.id == 1 }}"  src="{{hot}}"></image>
+            </block>
+          </view>
         </view>
       </view>
     </view>
-    <view class='index-area-tips overwords' wx:if="{{ !showInputList || !showListsAnd }}">请选择置顶范围：
-
-    </view>
-    <view class='index-area-item' wx:for="{{ areadatas }}" wx:key="{{ index }}" wx:for-item="areaItem">
-      <text class='area-header-words'>{{ (index == 0) ? "热门城市" : areaItem[0].ad_name  }}</text>
-      <!-- <view class='area-body-content clearfix' wx:if="{{index ==0}}">
-        <view wx:for="{{ areaItem }}" wx:key="{{ index }}">
-          <text class="{{item.selected == 2 ?'body-content':'overwords'}}" data-id="{{ item.id }}" data-pname="{{ item.ad_name }}" data-area="{{ item.city }}" data-pid="{{item.pid }}" data-pro="{{ index}}" data-index="{{ item.index}}" bindtap='chooseThisCtiy'>{{item.city}}</text>
-        </view>
-      </view> -->
-      <view class='area-body-content clearfix'>
-        <view wx:for="{{ areaItem }}" class="allCons"  wx:key="{{ index }}">
-          <text class="{{item.selected == 2 ?'body-content':'overwords'}}" data-id="{{ item.id }}" data-pname="{{ item.ad_name }}" data-area="{{ item.city }}" data-pid="{{item.pid }}" data-pro="{{ index}}" data-index="{{ item.index}}" bindtap='chooseThisCtiy'>{{index ==0&&item.index!=0? "全省置顶":item.city}}</text>
-          <block wx:if="{{index == 0}}">
-            <image wx:if="{{ item.index != 0 }}"  src="{{hot}}"></image>
-            <image wx:if="{{ item.index == 0 && item.id == 1 }}"  src="{{hot}}"></image>
-          </block>
-        </view>
-      </view>
-    </view>
-  </view>
-
+  </scroll-view>
 </view>
 <!-- (index == publishIndex) ? "text-active" : "" -->
 <view class="obtn" wx:if="{{ !showInputList &&!showListsAnd}}">
