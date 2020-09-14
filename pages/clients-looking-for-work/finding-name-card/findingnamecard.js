@@ -1071,14 +1071,14 @@ Page({
           let area = wx.getStorageSync('areadata')
           //获取置顶区域的信息
           if (mydata.resume_top.has_top != 0 && mydata.resume_top.is_top ==1 ) {
-            let areaProcrum = mydata.resume_top.top_provinces_str;
+            let areaProcrum = mydata.resume_top.top_provinces_str.length === 0? mydata.resume_top.top_provinces_str: (mydata.resume_top.top_provinces_str[0].pid == 1?mydata.resume_top.top_provinces_str:[]);
             let areaCitycrum = mydata.resume_top.top_citys_str;
             let isCountry = mydata.resume_top.is_country
             let areaAllcrum = [];
             let areaItem = area.data[0][0];
             areaItem.name = areaItem.city;
             if (isCountry == 1) {
-             areaAllcrum = areaItem
+              areaAllcrum.push(areaItem) 
             }
             let userTopArea = [...areaProcrum,...areaCitycrum,...areaAllcrum]
             that.setData({
