@@ -960,9 +960,9 @@ Page({
             // 获取排序后的第一个元素
             let projectOne = projectObj[0]
             // 处理如果图片数量大于3就只保留三张图片
-            if (projectOne.image.length > 3) {
-              projectOne.image.splice(3, projectOne.image.length-3)
-            }
+            // if (projectOne.image.length > 3) {
+            //   projectOne.image.splice(3, projectOne.image.length-3)
+            // }
             
             if (new Date(projectObj[0].completion_time).getTime() / 86400000 < parseInt(new Date().getTime() / 86400000)) {
               that.setData({
