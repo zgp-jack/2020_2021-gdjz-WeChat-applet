@@ -118,8 +118,12 @@ page{
   float: left;
   width: 190rpx;
   height: 190rpx;
+  margin-right: 10rpx;
+  border-radius: 5rpx;
+  overflow: hidden;
 }
 .imgitem-box{
+  position: relative;
   width: 100%;
   height: 100%;
 }
@@ -127,7 +131,16 @@ page{
   width: 100%;
   height: 100%;
 }
-
+.mini-del{
+  position: absolute;
+  width: 35rpx;
+  height: 35rpx;
+  border-radius: 50%;
+  background: white url(http://cdn.yupao.com/miniprogram/images/new-published-close-icon.png) no-repeat;
+  background-size: 100% 100%;
+  right: 10rpx;
+  top: 10rpx;
+}
 
 /* 工种选择样式 */
 .common-picker-container{

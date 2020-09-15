@@ -61,13 +61,19 @@ Page({
     rrulesClassifyids: [], // 备份
     ruserClassifyids: [], // 备份
     rchildClassifies: [], // 备份
-    rclassifies: [],
+    rclassifies: [], //备份
   },
   mini_user: function(session_key){
     let { token,areaId } = this.data;
     let location = this.data.addressData.location
     let adName = this.data.addressData.title
     let address = this.data.addressData.district
+    let trades = this.data.selectedClassifies.join(",");
+    let imagsArry = []
+    this.data.imgs.forEach(function (item,index) {
+      imagsArry.push(item.url)
+    })
+    let imags = imagsArry.join(",")
     var that = this
     wx.getSetting({
       success: (res) => {
@@ -96,14 +102,16 @@ Page({
                     title: "发布中",
                     mask: true,
                     failTitle: "网络错误，保存失败！",
-                    url: "fast-issue/set-area/",
+                    url: "fast-issue/complete/",
                     way: "POST",
                     params: {
                       token: token,
                       area_id: areaId,
                       location: location,
                       ad_name: adName,
-                      address: address
+                      address: address,
+                      trades: trades,
+                      images: imags
                     },
                     success: function (res) {
                       let mydata = res.data;
@@ -153,14 +161,16 @@ Page({
                 title: "发布中",
                 mask: true,
                 failTitle: "网络错误，保存失败！",
-                url: "fast-issue/set-area/",
+                url: "fast-issue/complete/",
                 way: "POST",
                 params: {
                   token: token,
                   area_id: areaId,
                   location: location,
                   ad_name: adName,
-                  address: address
+                  address: address,
+                  trades: trades,
+                  images: imags
                 },
                 success: function (res) {
                   let mydata = res.data;
@@ -248,10 +258,35 @@ Page({
   //未登录状态下，确定地址后获取用户信息和授权
   bindGetUserInfo:function (e) {
     let { token,areaId } = this.data;
-    let location = this.data.addressData.location
-    let adName = this.data.addressData.title
-    let address = this.data.addressData.district
-    console.log("location detail",areaId,location,adName,address)
+    let location = this.data.addressData.location;
+    let adName = this.data.addressData.title;
+    let address = this.data.addressData.district;
+    let userClassifyids = this.data.userClassifyids;
+    let rulesClassifyids = this.data.rulesClassifyids;
+    let trades = this.data.selectedClassifies.join(",");
+    let imagsArry = []
+    this.data.imgs.forEach(function (item,index) {
+      imagsArry.push(item.url)
+    })
+    let imags = imagsArry.join(",")
+    if (!location) {
+      wx.showModal({
+        title: '提示',
+        content: "请选择招工所在地。",
+        showCancel: false
+      })
+      return false
+    }
+    let works = [...userClassifyids, ...rulesClassifyids]
+    works.splice(5)
+    if (!works.length) {
+      wx.showModal({
+        title: '提示',
+        content: '请选择工种。',
+        showCancel: false
+      })
+      return false
+    }
     let that = this;
     if (e.detail.userInfo) {
       wx.showToast({
@@ -289,14 +324,16 @@ Page({
         title: "发布中",
         mask: true,
         failTitle: "网络错误，保存失败！",
-        url: "fast-issue/set-area/",
+        url: "fast-issue/complete/",
         way: "POST",
         params: { 
           token: token,
           area_id: areaId,
           location: location,
           ad_name: adName,
-          address: address
+          address: address,
+          trades: trades,
+          images: imags
         },
         success: function (res) {
           let mydata = res.data;
@@ -434,7 +471,7 @@ Page({
   },
   // 上传图片到服务器
   uploadImageSever: function (imagesFiles,callback){
-    // 上传成功图片数量
+    // 上传图片数量
     let upLoadCount = 0;
     // 上传失败图片数量
     let failCount = 0;
@@ -515,9 +552,12 @@ Page({
           if (res.tempFiles.length === upLoadCount) {
             wx.hideToast();
             wx.hideLoading();
+            let imgs = [...that.data.imgs, ...imagesArry]
             that.setData({
-              imgs:imagesArry
+              imgs:imgs,
+              imglen: imgs.length
             })
+            that.setEnterInfo('imgs', imgs)
             // 如果有上传失败图片给出对应提示
             if (failCount) {
               wx.showModal({
@@ -537,6 +577,17 @@ Page({
         wx.hideLoading()
       }
     })
+  },
+  // 删除图片
+  delImgAction: function (e) {
+    let i = e.currentTarget.dataset.index
+    let imgs = this.data.imgs
+    imgs.splice(i, 1)
+    this.setData({
+      imgs: imgs,
+      imglen: imgs.length
+    })
+    this.setEnterInfo('imgs', imgs)
   },
   // 点击所需工种显示工种选择
   showWorkTypePicker: function () {
@@ -613,15 +664,10 @@ Page({
       // 工种字段
       let classifies = resolve.classifyTree;
       // 返回的数据对象
-      let mateDatas = {
-        maxImgNum,
-        maxWorkNum,
-        notMateData,
-        mateData,
-        classifies
-      }
+      let mateDatas = {maxImgNum,maxWorkNum,notMateData,mateData,classifies}
       // 保存到data中
       this.setData({  maxImgNum ,maxWorkNum ,notMateData ,mateData ,classifies,})
+      this.initChildWorkType()
       return mateDatas
     },reason => {
       wx.showModal({
@@ -752,6 +798,18 @@ Page({
       icon: 'none',
       mask: true
     })
+    let jiSuData = wx.getStorageSync('jiSuData')
+    if (jiSuData.imgs) {
+      this.setData({
+        imgs: jiSuData.imgs,
+        imglen: jiSuData.imgs.length,
+        switch: jiSuData.imgs.length ? true : false
+      })
+    }
+    this.setData({
+      userClassifyids: jiSuData.userClassifyids || [],
+      rulesClassifyids: jiSuData.rulesClassifyids || [],
+    })
     //用户根据所需工作自行选择工种
     let uids = JSON.parse(JSON.stringify(this.data.userClassifyids))
     //获取招工详情的内容
@@ -772,6 +830,9 @@ Page({
     let needArr = [];
     // 如果没有详情内容直接返回
     if (!content) {
+      this.countWorkNum()
+      this.initChildWorkType()
+      this.getWorkText()
       wx.hideLoading()
       return false;
     }
@@ -892,8 +953,8 @@ Page({
     })
     //初始化用户位置信息
     this.initArea()
+    // 初始化工种信息
     this.initWorkTypeData()
-    // this.mateClassifyIdsFun()
 
   },
 
