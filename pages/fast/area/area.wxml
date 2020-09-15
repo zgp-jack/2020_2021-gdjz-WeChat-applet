@@ -3,13 +3,13 @@
     <view class="issue-contact-title">信息越完善，招工越容易</view>
   </view>
   <view class="issue-contactbox">
-    <view class="issue-box" bindtap="showWorkArea">招工城市:
-      <!-- <text>招工城市：</text> -->
+    <view class="issue-box" bindtap="showWorkArea">
+      <text>招工城市：</text>
       <input placeholder="请选择招工城市" disabled class="issue-input" value="{{ addressData.title }}"></input>
     </view>
-    <view class="issue-box" bindtap="showWorkTypePicker">所需工种:
-      <!-- <text>招工城市：</text> -->
-      <input placeholder="请选择工种" disabled class="issue-input"></input>
+    <view class="issue-box" bindtap="showWorkTypePicker">
+      <text>所需工种：</text>
+      <input placeholder="请选择工种" disabled class="issue-input" wx:if="{{ !showClassifyText }}"></input>
       <view class="input-item-text" wx:if="{{ showClassifyText }}">{{ showClassifyText }}</view>
     </view>
     <view class="issue-form-upload">
