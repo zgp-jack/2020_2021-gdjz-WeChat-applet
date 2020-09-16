@@ -22,7 +22,7 @@
   </view>
 </view>
 
-<!-- 筛选条件 -->
+<!-- 筛选条件分别为区域、工种、人员、推荐 -->
 <view class='lists-condition-menu flex-row mybottomborder'>
   <view class='lists-condition-item {{ (showListsInfo == "1") ? "lists-condition-active" : ""}}' bindtap='showListsType' data-type="1">
     <view class='overwords'>{{ areaText }}
@@ -108,6 +108,7 @@
   <view class='listsbox '>
 
     <!-- <block  wx:for="{{ }}" wx:key="{{ }}" wx:if="{{}}"> -->
+    <!-- 找活列表 -->
 
     <view class="listsboxdetailover" wx:for="{{lists}}" wx:key="{{index}}">
       <image src="{{finded}}" class="finded" wx:if="{{item.is_end == 2}}"></image>
@@ -116,7 +117,7 @@
           <view>
             <image class="oimg" src="{{item.headerimg}}" data-index="{{index}}" binderror="errImg"></image>
           </view>
-          <view class="listsboxintro">
+          <view class="listsboxintrowork">
             <view class="listsboxage">
               <view class="listsboxageone">
                 <view class="listsboxname" wx:if="{{item.username}}">
@@ -139,14 +140,14 @@
               </view>
               <view class="listsboxagetwo" wx:if="{{item.gender != '0'}}">
                 <text class="listsboxnation" wx:if="{{item.nation}}">{{item.nation}}</text>
-                <text><text class="listsboxnum" wx:if="{{item.experience}}" >{{item.experience}}</text></text>
-        
+                <text><text class="listsboxnum" wx:if="{{item.prof_degree}}" >{{item.prof_degree}}</text></text>
+                <view class="liststype" wx:if="{{item.type}}">{{item.type}}</view>
               </view>
               <view class="listsboxagetwot" wx:if="{{item.gender == '0'}}">
                 <text wx:for="{{item.tags}}" wx:key="{{index}}">{{item.label_name}}</text>
               </view>
             </view>
-            <view class="listsboxshow" wx:if="{{item.type}}">{{item.type}}</view>
+            <!-- <view class="listsboxshow" wx:if="{{item.type}}">{{item.type}}</view> -->
           </view>
             <text class="listsboxstyru" catchtap="jumptop" wx:if="{{item.resume_top == 1}}">我要置顶</text>
             <image class="listsboxoimg" src="{{toptown}}" wx:if="{{item.resume_top == 1}}"></image>
@@ -169,7 +170,7 @@
           </view>
           <view class="listsboxlocaltwo">
             <!-- <text class="listsboxtime" wx:if="{{item.time}}">{{item.time}}</text> -->
-                    <text wx:if="{{item.prof_degree}}">{{item.prof_degree}}</text>
+                    <text wx:if="{{item.login_time}}">{{item.login_time}}</text>
           </view>
         </view>
       </view>
