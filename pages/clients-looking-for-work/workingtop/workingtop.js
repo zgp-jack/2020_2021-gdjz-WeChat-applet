@@ -1018,7 +1018,7 @@ Page({
       }
     });
   },
- //初次置顶的时候置顶天数默认2天
+ //初次置顶
  initTopData:function(){
   let hastop = this.data.topdata.has_top
   let istop = this.data.topdata.is_top
@@ -1027,12 +1027,6 @@ Page({
   if(hastop == 0 || istop == 2){
     this.getDefaultArea(defaultTop)
   }
-  //初始化默认置顶时间为两天
-  this.setData({
-    defaultDayIndex:1,
-    rangevalue:1
-  });
-
  },
   /**
    * 生命周期函数--监听页面加载

@@ -938,7 +938,6 @@ Page({
       shoutime: false,
       showpoint: false,
       detailprice: 0,
-      rangevalue:1,
       rangevalue: defaultDayIndex
     })
     this.getCityNum()

@@ -31,7 +31,9 @@ Page({
     specialids: [],
     showlodinga: true,
     showlodingimg: app.globalData.showlodingimg,
-    areaDataNotEnd: []
+    areaDataNotEnd: [],
+    // 滚动目标位置
+    select:""
   },
   //获取找活置顶的省份城市选择界面
   getAreaData: function(options) {
@@ -639,15 +641,6 @@ Page({
   chooseInputCtiy(e) {
     let that = this;
     let odataset = e.currentTarget.dataset;
-    // if (that.data.shoWmodifytop != "modifytop") {
-    //   let areaText = that.data.areaText
-    //   for (let i = 0; i < areaText.length; i++) {
-    //     if (areaText[i].id == 1) {
-    //       that.data.areadatas[0][0].selected = 1
-    //       that.data.areaText = []
-    //     }
-    //   }
-    // }
     let detail = {
       id: odataset.id,
       city: odataset.area,
@@ -793,7 +786,8 @@ Page({
     }
 
     that.setData({
-      areaTextA:[]
+      areaTextA:[],
+      select:`selected${detail.id}2`
     })
     that.data.areaText = that.unique(that.data.areaText)
   },
@@ -926,6 +920,7 @@ Page({
       delta: 1
     })
   },
+
   /**
    * 生命周期函数--监听页面加载
    */
@@ -961,7 +956,27 @@ Page({
       areaTextId: id
     })
   },
-  
+  // 初始化选中城市滚动位置id
+  initSelectedId:function (){
+    // 升序排序
+    function projectSort(key) {
+      return function (objectN,objectM) {
+        let valueN = objectN[key];
+        let valueM = objectM[key];
+        if (valueN < valueM) return -1
+        else if (valueN > valueM) return 1
+        else return 0
+      }
+    }
+    // 获取所有选择的城市区域
+    let areaText = this.data.areaText
+    // 按照pid升序排序
+    let sortAreaText = areaText.sort(projectSort("pid"))
+    this.setData({
+      select:`selected${sortAreaText[0].id}2`
+    })
+    
+  },
   onLoad: function(options) {
     //获取置顶配置中最大的城市数量和最大省数量并存入data中
     this.getMax(options);
@@ -981,7 +996,11 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function() {
-    this.gethistory()
+    let that = this
+    that.gethistory()
+    setTimeout(() => {
+      that.initSelectedId()
+    }, 300);
   },
 
   /**
