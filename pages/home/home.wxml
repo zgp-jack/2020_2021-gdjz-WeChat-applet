@@ -74,7 +74,7 @@
         <text>招聘司机</text>
       </view>
     </navigator>
-    <navigator class='index-footer-nav' target="miniProgram" open-type="navigate" app-id="wx33194c327f50b99d" path="" extra-data="" version="release">
+    <navigator class='index-footer-nav' url="/pages/index/index?id=25" open-type="navigate">
       <view class='index-industry-item'>
         <image src='{{ industry.gczg }}'></image>
         <text>工厂招人</text>
@@ -86,16 +86,16 @@
         <text>机械租赁</text>
       </view>
     </navigator>
-    <navigator class='index-footer-nav' target="miniProgram" open-type="navigate" app-id="wx7cea45b9ebdf87ac" path="" extra-data="" version="release">
+    <navigator class='index-footer-nav' url="/pages/index/index?id=19" open-type="navigate">
       <view class='index-industry-item'>
         <image src='{{ industry.newzjxm }}'></image>
-        <text>在建项目</text>
+        <text>招水电工</text>
       </view>
     </navigator>
-    <navigator class='index-footer-nav' target="miniProgram" open-type="navigate" app-id="wx3faf62a5edbb1513" path="" extra-data="" version="release">
+    <navigator class='index-footer-nav' url='/pages/index/index?id=14' open-type="navigate">
       <view class='index-industry-item'>
         <image src='{{ industry.gjsc }}'></image>
-        <text>工具商城</text>
+        <text>招钢筋工</text>
       </view>
     </navigator>
     <view class='index-industry-item' bindtap='jumpThisLink' data-url="/pages/usedlist/usedlist">

@@ -348,6 +348,14 @@
 					"id": -1,
 					"name": "我的收藏",
 					"pathName": "pages/collect/info/info",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "首页",
+					"pathName": "pages/home/home",
+					"query": "",
 					"scene": null
 				}
 			]
