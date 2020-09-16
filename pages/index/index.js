@@ -834,17 +834,20 @@ Page({
       app.globalData.isFirstLoading = false
     }, 3000)
   },
-  getFilterData: function () {
+  getFilterData: function (options) {
     let _this = this;
     this.setData({
       fillterArea: areas.getAreaArr
     })
+    let {id} = options
     if (app.globalData.allTypes) {
       _this.setData({ fillterType: app.globalData.allTypes.classTree, fillterListType: app.globalData.allTypes.jobListType, "searchDate.joblisttype": app.globalData.allTypes.jobListType[0].type, listText: app.globalData.allTypes.jobListType[0].name });
+      _this.initSelectedData(id,app.globalData.allTypes)
       if (_this.data.fillterType.length == 1) _this.setData({ typeText: _this.data.fillterType[0].name })
     } else {
       app.getListsAllType(function (_data) {
         _this.setData({ fillterType: _data.classTree, fillterListType: _data.jobListType, "searchDate.joblisttype": _data.jobListType[0].type, listText: _data.jobListType[0].name })
+        _this.initSelectedData(id,_data)
         if (_this.data.fillterType.length == 1) _this.setData({ typeText: _this.data.fillterType[0].name })
       });
     }
@@ -931,11 +934,39 @@ Page({
         }
       })
   },
+  // 初始化选中数据
+  initSelectedData: function (id,data) {
+    let classTree = data.classTree
+    for (let i = 0; i < classTree.length; i++) {
+      if (classTree[i].id === id) {
+        this.setData({
+          worktype: i,
+          typeText: classTree[i].name,
+          "searchDate.classify_id": id
+        })
+        return
+      }else{
+        if (classTree[i].has_children === 1) {
+          let childrenClassTree = classTree[i].children;
+          for (let j = 0; j < childrenClassTree.length; j++) {
+            if (childrenClassTree[j].id === id) {
+              this.setData({
+                worktype: i,
+                typeText: childrenClassTree[j].name,
+                "searchDate.classify_id": id,
+                workinfo: id
+              })
+              return
+            }
+          }
+        }
+      }
+    }
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
     let u =wx.getStorageSync('userInfo')
     let uuid = wx.getStorageSync('userUuid')
     
@@ -949,7 +980,7 @@ Page({
     this.initFirstTips();
     this.initAdminTime();
     //this.initUserShareTimes();
-    this.getFilterData();
+    this.getFilterData(options);
     this.timerLoading();
     this.initUserLocation();
     this.initFooterData();
