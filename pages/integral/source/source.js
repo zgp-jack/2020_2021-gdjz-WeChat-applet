@@ -125,6 +125,7 @@ Page({
             isNone: false
           })
           if (_this.data.showintegral) {
+            console.log(mydata.data.sum_data)
             _this.setData({
               getintegral: mydata.data.sum_data.get,
               getexpend: mydata.data.sum_data.expend,
@@ -244,8 +245,8 @@ Page({
     //     })
     // },
     dointegral() {
-      let num = parseInt(this.data.getexpend)
-      if(!num) return false
+      // let num = parseInt(this.data.getexpend)
+      // if(!num) return false
       let expend = this.data.expend
       let date = this.data.birthdaysubmit
       let source = "source"

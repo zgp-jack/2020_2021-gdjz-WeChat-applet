@@ -37,28 +37,28 @@ Page({
     classifyNameId: 0,
     stime: 0,
     bak: 0,
-    getintegral:0,
-    getexpend:0,
-    next_page:"",
-    showintegral:true,
-    system_type:"",
-    source:"",
-    classifyIndex:0,
+    getintegral: 0,
+    getexpend: 0,
+    next_page: "",
+    showintegral: true,
+    system_type: "",
+    source: "",
+    classifyIndex: 0,
     showend: false, // 软删除不展示已招满
-    errcode:false,
+    errcode: false,
     //置顶详情窗口是否显示
-    showTop:false,
+    showTop: false,
     //置顶招工或者找活详细信息
     topDetail: {}
   },
-  userCancleComplain: function() {
+  userCancleComplain: function () {
     this.setData({
       showComplain: false,
       complainInfo: ""
     })
   },
 
-  complainInfo: function(e) {
+  complainInfo: function (e) {
     if (e.currentTarget.dataset.complain === 0) {
       return
     }
@@ -70,8 +70,8 @@ Page({
       type: type
     })
   },
-  subscribeToNews: function(mydata) {
-    app.subscribeToNews("complain", function() {
+  subscribeToNews: function (mydata) {
+    app.subscribeToNews("complain", function () {
       wx.showModal({
         title: '提示',
         content: mydata.errmsg,
@@ -80,17 +80,17 @@ Page({
     })
 
   },
-  userEnterComplain: function(e) {
+  userEnterComplain: function (e) {
     this.setData({
       complainInfo: e.detail.value
     })
   },
-  bindconfirm: function(e) {
+  bindconfirm: function (e) {
     this.setData({
       complainInfo: e.detail.value
     })
   },
-  userComplaintAction: function(e) {
+  userComplaintAction: function (e) {
     let _this = this;
     let userInfo = this.data.userInfo;
     let infoId = this.data.infoId;
@@ -116,7 +116,7 @@ Page({
       },
       title: "正在提交投诉",
       failTitle: "网络错误，投诉失败！",
-      success: function(res) {
+      success: function (res) {
         let mydata = res.data;
         if (mydata.errcode == "ok") {
           _this.setData({
@@ -135,13 +135,13 @@ Page({
       }
     })
   },
-  getIntegralHeader: function(userInfo) {
+  getIntegralHeader: function (userInfo) {
     let _this = this;
     wx.showLoading({
       title: '数据加载中'
     })
     app.initSystemInfo(function (res) {
-      if (res)_this.setData({system_type: res.platform})
+      if (res) _this.setData({system_type: res.platform})
     })
     let date = _this.data.birthdaysubmit.split("-")
     app.doRequestAction({
@@ -158,11 +158,11 @@ Page({
         bak: _this.data.bak,
         system_type: _this.data.system_type
       },
-      success: function(res) { 
+      success: function (res) {
         console.log(res)
         wx.hideLoading();
         let mydata = res.data;
-        if (mydata.errcode = "ok"){
+        if (mydata.errcode = "ok") {
           _this.setData({
             bak: mydata.data.bak,
             stime: mydata.data.stime,
@@ -171,25 +171,25 @@ Page({
             next_page: mydata.data.next_page,
             isNone: false
           })
-          if (_this.data.showintegral){
+          if (_this.data.showintegral) {
             _this.setData({
-            getintegral: mydata.data.sum_data.get,
+              getintegral: mydata.data.sum_data.get,
               getexpend: mydata.data.sum_data.expend,
             })
           }
-          if (_this.data.lists.length==0){
+          if (_this.data.lists.length == 0) {
             _this.setData({
-              isNone:true
+              isNone: true
             })
           }
-          if (_this.data.lists.length != 0 && mydata.data.lists ==0){
+          if (_this.data.lists.length != 0 && mydata.data.lists == 0) {
             _this.setData({
               nothavemore: true
             })
           }
         }
       },
-      fail: function(err) {
+      fail: function (err) {
         wx.hideLoading();
         wx.showToast({
           title: '数据加载失败，请稍后重试！',
@@ -245,7 +245,7 @@ Page({
   //     }
   //   })
   // },
-  showThisRecord: function(e) {
+  showThisRecord: function (e) {
     let _this = this;
     let id = e.currentTarget.dataset.id;
     let userInfo = this.data.userInfo;
@@ -256,49 +256,49 @@ Page({
       url: "integral/look-used-info/",
       way: "POST",
       params: userInfo,
-      success: function(res) {
+      success: function (res) {
         console.log(res)
         let mydata = res.data;
         console.log(res.data.data)
         if (mydata.errcode == "ok" || mydata.errcode == "deleted") {
           if (mydata.info.type == "job") {
             _this.setData({
-              errcode:mydata.errcode,
+              errcode: mydata.errcode,
               info: mydata.info,
               showRecord: true,
-              showend: mydata.errcode == "ok"||"deleted" ? true : false
+              showend: mydata.errcode == "ok" || "deleted" ? true : false
             })
           } else if (mydata.info.type == "resume") {
             _this.setData({
               info: mydata.info,
               showWork: true
             })
-          } 
+          }
         } else if (mydata.errcode == "top_resume") {
           _this.setData({
             "topDetail.occupations": mydata.data.occupations,
             "topDetail.detail": mydata.data.detail,
-            "topDetail.address": mydata.data.address ,
+            "topDetail.address": mydata.data.address,
             "topDetail.e_time": mydata.data.e_time,
             "topDetail.s_time": mydata.data.s_time,
             "topDetail.team_type": mydata.data.team_type,
             "topDetail.tel": mydata.data.tel,
             "topDetail.title": mydata.data.title,
-            "topDetail.topType":mydata.errcode,
-            showTop:true
+            "topDetail.topType": mydata.errcode,
+            showTop: true
           })
-        } else if (mydata.errcode == "top_job"){
+        } else if (mydata.errcode == "top_job") {
           _this.setData({
             "topDetail.occupations": mydata.data.occupations,
             "topDetail.detail": mydata.data.detail,
-            "topDetail.address": mydata.data.address ,
+            "topDetail.address": mydata.data.address,
             "topDetail.e_time": mydata.data.e_time,
             "topDetail.s_time": mydata.data.s_time,
             "topDetail.team_type": mydata.data.team_type,
             "topDetail.tel": mydata.data.tel,
             "topDetail.title": mydata.data.title,
-            "topDetail.topType":mydata.errcode,
-            showTop:true
+            "topDetail.topType": mydata.errcode,
+            showTop: true
           })
         } else {
           wx.showModal({
@@ -308,7 +308,7 @@ Page({
           })
         }
       },
-      fail: function() {
+      fail: function () {
         wx.showModal({
           title: '温馨提示',
           content: '网络错误，数据加载失败！',
@@ -317,14 +317,14 @@ Page({
       }
     })
   },
-  closeThisRerocd: function() {
+  closeThisRerocd: function () {
     this.setData({
       showRecord: false,
       showWork: false,
       showTop: false
     })
   },
-  callThisPhone: function(e) {
+  callThisPhone: function (e) {
     app.callThisPhone(e);
   },
   birthday(e) {
@@ -332,7 +332,7 @@ Page({
     let date = e.detail.value.split("-")
     let end = data.emdDate.split("-")
     let start = data.beforeDate.split("-")
-    let selectdate = Date.UTC(date[0] - 0, date[1]-0);
+    let selectdate = Date.UTC(date[0] - 0, date[1] - 0);
     let enddate = Date.UTC(end[0] - 0, end[1] - 0);
     let startdate = Date.UTC(start[0] - 0, start[1] - 0);
     if (selectdate > enddate) {
@@ -345,12 +345,12 @@ Page({
     }
     this.setData({
       birthday: date[0] + '年' + date[1] + '月',
-      birthdaysubmit: date[0] + '-' + date[1] ,
+      birthdaysubmit: date[0] + '-' + date[1],
       stime: 0,
       bak: 0,
       nothavemore: false,
       lists: [],
-      showintegral:true
+      showintegral: true
     })
     console.log(123123)
     this.getIntegralHeader(this.data.userInfo)
@@ -378,22 +378,22 @@ Page({
       stime: 0,
       bak: 0,
       nothavemore: false,
-      lists:[],
+      lists: [],
       showintegral: true
     })
     that.getIntegralHeader(that.data.userInfo)
   },
-  dointegral(){
-    let num = parseInt(this.data.getintegral)
-    if(!num) return false
+  dointegral() {
+    /*let num = parseInt(this.data.getintegral)
+    if(!num) return false*/
     let date = this.data.birthdaysubmit
     let source = this.data.source
     let expend = "expend"
-    if (source == "source"){
+    if (source == "source") {
       wx.navigateBack({
         delta: 1
       })
-    }else{
+    } else {
       wx.navigateTo({
         url: `/pages/integral/source/source?expend=${expend}&date=${date}`,
       })
@@ -413,7 +413,7 @@ Page({
       url: "integral/expend-config/",
       way: "POST",
       params: userInfo,
-      success: function(res) {
+      success: function (res) {
         let mydata = res.data;
         if (mydata.errcode == "ok") {
           let classifymap = mydata.data.types.map((item, index) => item.name)
@@ -421,20 +421,20 @@ Page({
           that.setData({
             beforeDate: mydata.data.min.y + "-" + mydata.data.min.m,
             classify: mydata.data.types,
-            classifyArray: classifymap, 
+            classifyArray: classifymap,
             classifyName: "消耗分类",
             classifyNameId: mydata.data.types[0].type
           })
 
-          if(datestr){
+          if (datestr) {
             let arr = datestr.split('-')
             that.setData({
-              birthday: arr[0] + "年" + arr[1]+"月",
+              birthday: arr[0] + "年" + arr[1] + "月",
               birthdaysubmit: datestr,
             })
-          }else{
+          } else {
             that.setData({
-              birthday: mydata.data.default.y + "年" + mydata.data.default.m+"月",
+              birthday: mydata.data.default.y + "年" + mydata.data.default.m + "月",
               birthdaysubmit: mydata.data.default.y + "-" + mydata.data.default.m,
             })
           }
@@ -447,7 +447,7 @@ Page({
           })
         }
       },
-      fail: function() {
+      fail: function () {
         wx.showModal({
           title: '温馨提示',
           content: '网络错误，数据加载失败！',
@@ -457,7 +457,7 @@ Page({
     })
   },
 
-  onLoad: function(options) {
+  onLoad: function (options) {
     if (options.hasOwnProperty("source")) {
       this.setData({
         source: options.source
@@ -475,45 +475,45 @@ Page({
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function() {
-    
+  onReady: function () {
+
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function() {
-    
+  onShow: function () {
+
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
-  onHide: function() {
+  onHide: function () {
 
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
-  onUnload: function() {
+  onUnload: function () {
 
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
-  onPullDownRefresh: function() {
+  onPullDownRefresh: function () {
 
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
-  onReachBottom: function() {
+  onReachBottom: function () {
     console.log(12312)
-    if ( (this.data.isNone) || (this.data.nothavemore)) return false;
-    this.setData({showintegral:false})
+    if ((this.data.isNone) || (this.data.nothavemore)) return false;
+    this.setData({showintegral: false})
     this.getIntegralHeader(this.data.userInfo)
   },
 })

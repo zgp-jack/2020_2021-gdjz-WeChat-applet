@@ -37,15 +37,6 @@
               <text class="tips">{{ item.source_integral_string }}</text>
             </view>
           </view>
-            <!--<view class='integral-list-time'>
-                <text>{{ item.y_m }}</text>
-                <text>{{ item.day }}</text>
-            </view>
-            <view class='integral-list-words'>
-                <view class='integral-list-title overwords'>{{ item.type_name }}</view>
-                <view class='integral-list-info overwords'>{{ item.ext }}</view>
-                <view class='integral-list-lasttime overwords'>时间：{{ item.his }} <text>{{ item.source_integral_string }}</text></view>
-            </view>-->
         </view>
 
     </view>
