@@ -306,9 +306,10 @@ Page({
           _this.setData({
             lists: lists.concat(newlist),
             hasmore: len ? true : false,
-            page: len ? page + 1 : page
+            page: len ? page + 1 : page,
+            isRequest: true
           })
-          if(userinfo.type === "all" && _this.data.hasmore){
+          if(userinfo.type === "all" && userinfo.page == 1 &&  !(len ? true : false)){
             _this.setData({
               isAllList: true
             })
@@ -320,10 +321,17 @@ Page({
     })
   },
   userChangeType:function(e){
-    let key = e.currentTarget.dataset.key
+    let key = e.currentTarget.dataset.key;
+    let current = this.data.current;
+    if (key == current) return
     this.setData({
       current: parseInt(key),
+      page: 1,
+      hasmore: true,
+      lists: [],
+      isRequest: false
     })
+    this.getRecruitList()
   },
   getAreaData: function () {
     app.getAreaData(this);
@@ -348,7 +356,7 @@ Page({
   },
   jumpThisLink: function (e) {
     app.jumpThisLink(e);
-    app.initResume()
+    app.initResume(this)
   },
   goPublish:function () {
     app.initJobView()
@@ -361,7 +369,9 @@ Page({
       hasmore: true,
       lists: []
     })
-    this.getRecruitList()
+    if (this.data.lists.length == 0) {
+      this.getRecruitList()
+    }
   },
   loadmore:function(){
     if(!this.data.hasmore) return false
@@ -416,7 +426,7 @@ Page({
 
   },
   pageRefresh() {
-    this.setData({ lists: [], page: 1, hasmore: true })
+    this.setData({ lists: [], page: 1, hasmore: true,  isAllList: false})
     this.getRecruitList()
   },
   /**

@@ -346,9 +346,15 @@
 				},
 				{
 					"id": -1,
-					"name": "找活列表",
-					"pathName": "pages/findingworkinglist/findingworkinglist",
+					"name": "招工置顶",
+					"pathName": "pages/workingtopAll/workingtop/workingtop",
 					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "我的收藏",
+					"pathName": "pages/collect/info/info",
 					"scene": null
 				}
 			]

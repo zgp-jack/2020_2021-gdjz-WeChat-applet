@@ -21,7 +21,9 @@ Page({
     infoId: '',
     infoIndex: -1,
     tipmsg: '提示：人工审核，该信息仅自己可见。',
-    resumeText:""
+    resumeText:"",
+    // 是否请求加载完毕
+    isRequest: true
   },
   publishJob:function () {
     app.initJobView()
@@ -132,10 +134,17 @@ Page({
 
   },
   userChangeType:function(e){
-    let key = e.currentTarget.dataset.key
+    let key = e.currentTarget.dataset.key;
+    let current = this.data.current;
+    if (key == current) return
     this.setData({
       current: parseInt(key),
+      page: 1,
+      hasmore: true,
+      lists: [],
+      isRequest: false
     })
+    this.getUsedList()
   },
   getUsedList:function(){
     let _this = this
@@ -161,7 +170,8 @@ Page({
             lists: lists.concat(newlist),
             hasmore: len ? true : false,
             page: len ? page + 1 : page,
-            tipmsg: mydata.data.checking_tips
+            tipmsg: mydata.data.checking_tips,
+            isRequest: true
           })
         }else{
           app.showMyTips(mydata.errmsg)
