@@ -261,32 +261,12 @@ Page({
     let location = this.data.addressData.location;
     let adName = this.data.addressData.title;
     let address = this.data.addressData.district;
-    let userClassifyids = this.data.userClassifyids;
-    let rulesClassifyids = this.data.rulesClassifyids;
     let trades = this.data.selectedClassifies.join(",");
     let imagsArry = []
-    this.data.imgs.forEach(function (item,index) {
+    this.data.imgs.forEach(function (item) {
       imagsArry.push(item.url)
     })
     let imags = imagsArry.join(",")
-    if (!location) {
-      wx.showModal({
-        title: '提示',
-        content: "请选择招工所在地。",
-        showCancel: false
-      })
-      return false
-    }
-    let works = [...userClassifyids, ...rulesClassifyids]
-    works.splice(5)
-    if (!works.length) {
-      wx.showModal({
-        title: '提示',
-        content: '请选择工种。',
-        showCancel: false
-      })
-      return false
-    }
     let that = this;
     if (e.detail.userInfo) {
       wx.showToast({
@@ -348,16 +328,27 @@ Page({
     }
   },
   //确定地址招工发布
-  sureAreaAction:function(e){
-      console.log("areaId",this.data.areaId)
-      let { token,areaId } = this.data;
-      if(!areaId){
+  sureAreaAction:function(){
+      let { areaId } = this.data;
+      let userClassifyids = this.data.userClassifyids;
+      let rulesClassifyids = this.data.rulesClassifyids;
+      if (!areaId) {
         wx.showModal({
           title: '提示',
           content: "请选择招工所在地。",
           showCancel: false
         })
-        return
+        return false
+      }
+      let works = [...userClassifyids, ...rulesClassifyids]
+      works.splice(5)
+      if (!works.length) {
+        wx.showModal({
+          title: '提示',
+          content: '请选择工种。',
+          showCancel: false
+        })
+        return false
       }
   },
   //点击选择招工发布地址都地址详情界面
