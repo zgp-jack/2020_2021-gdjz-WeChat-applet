@@ -135,8 +135,28 @@ Page({
     //     request: false
     // },
     showAuthor: false,
-    resumeText: ""
+    resumeText: "",
+    advertising: false,//广告轮播图
   },
+  //获取广告数据
+  getAdvertising: function () {
+    let _this = this
+    app.doRequestAction({
+      url: "/member/member-ad/",
+      way: "get",
+      success: function (res) {
+        const data = res.data.data
+        if (data.length) {
+          _this.setData({
+            advertising: data
+          })
+        }
+      },
+      fail: function (err) {
+      }
+    })
+  },
+
   //联系客服拨打电话
   callThisPhone: function (e) {
     app.callThisPhone(e);
@@ -243,6 +263,7 @@ Page({
   onLoad: function (options) {
     this.initFooterData();
     this.initGetIntegralList();
+    this.getAdvertising();
     //初始化联系客服电话号码
     this.setData({
       callServicePhone: app.globalData.joingroup.slice(5, 6)[0].text

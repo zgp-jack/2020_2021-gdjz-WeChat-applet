@@ -1,5 +1,4 @@
 <import src="/pages/footer/footer.wxml"/>
-
 <view class="ucener-header">
   <text class='ucenter-title'>会员中心</text>
   <view class="msg-bor" data-url="/pages/information/mymessage/mymessage" bindtap='valiUserUrl'>
@@ -54,7 +53,6 @@
       </view>
     </view>
   </view>
-
   <view class='ucener-userinfo-wrap' wx:if="{{ !userInfo }}">
     <view class='ucenter-userinfo'>
       <view class="basic-info">
@@ -70,10 +68,23 @@
       </view>
     </view>
   </view>
-
 </view>
 
 <view class='yupao-common-container'>
+  <!-- 轮播图 -->
+  <view class='advertising' wx:if="{{advertising.length && userInfo}}">
+    <image wx:if="{{advertising.length===1}}" data-url="{{advertising[0].self_url}}" bindtap="valiUserUrl"
+           class="item-img"
+           src="{{advertising[0].banner}}"></image>
+
+    <swiper autoplay wx:else>
+      <swiper-item wx:for="{{advertising}}">
+        <image data-url="{{item.self_url}}" bindtap="valiUserUrl" class="item-img" src="{{item.banner}}"></image>
+      </swiper-item>
+    </swiper>
+  </view>
+
+
   <view class="menu-container">
     <view class="menu-block" wx:for="{{ uCenterMenus }}" wx:key="{{ index }}">
 

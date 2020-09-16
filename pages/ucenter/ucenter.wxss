@@ -23,6 +23,7 @@
     color: white;
 }
 
+
 .ucener-userinfo-wrap {
     width: 100%;
     position: absolute;
@@ -32,8 +33,9 @@
 }
 
 .ucenter-userinfo {
+    position: relative;
     width: 100%;
-    height: 350rpx;
+    height: 365rpx;
     background-color: white;
     box-shadow: 0 5rpx 5rpx 0 rgba(223, 225, 226, 0.43);
     border-radius: 10rpx;
@@ -266,8 +268,25 @@
 
 /*新版会员中心ui*/
 .menu-container {
-    padding: 237rpx 30rpx 30rpx;
+    padding: 260rpx 30rpx 30rpx;
 
+}
+.advertising {
+    position: absolute;
+    top: 125rpx;
+    left: 50%;
+    width: 696rpx;
+    height: 115rpx;
+    transform: translateX(-50%);
+    z-index: 2;
+    overflow: hidden;
+}
+
+.item-img {
+    max-width: 100%;
+    max-height: 115rpx;
+    display: block;
+    margin: 0 auto;
 }
 
 .menu-block {
