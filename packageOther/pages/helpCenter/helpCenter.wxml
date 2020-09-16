@@ -1,5 +1,5 @@
 <!--pages/ucenter/ucenterNew/helpCenter.wxml-->
-<view class='list_box yupao-common-container'>
+<!-- <view class='list_box yupao-common-container'>
     <view class='listItem' wx:for='{{helpeLists}}' wx:key='this' wx:for-item='parentItem' wx:for-index='parentIndex'>
         <view class='list_name_box' catchtap='listTap' data-parentindex='{{parentIndex}}'>
             <view class='list_item_title'>
@@ -20,8 +20,71 @@
         <text>暂无相关内容</text>
     </view>
 </view>
-<view class='goyi' bindtap='suggestUserUrl'>意见反馈</view>
+<view class='goyi' bindtap='suggestUserUrl'>意见反馈</view> -->
 
+<view class="help_center_head">
+    <view class="help_center_search">
+        <image class="help_search_icon" src="../../../images/search.png"></image> 
+        <input class="heip_search_input" placeholder="输入您要找的问题"></input>
+    </view>
+</view>
+<view class="help_search_list">
+    <view class="help_search_content"></view>
+</view>
+<view class="help_list_title">
+    <view>问题类型</view>
+</view>
+<scroll-view class="help_list_scroll" scroll-y>
+    <view class="help_list_body">
+        <view class="help_list_item">
+            <view class="help_list_question">
+                <image class="help_question_icon" src="{{ question }}"></image>
+                <view class="help_question_content">我为什么会有那么多的钱</view>
+                <image class="help_question_arrow" src="{{ rightarrow }}"></image>
+            </view>
+            <view class="help_question_detail">
+                <view class="help_list_question">你猜</view>
+                <view class="help_list_question">你猜</view>
+                <view class="help_list_question">你猜</view>
+                <view class="help_list_question">你猜</view>
+                <view class="help_list_question">你猜</view>
+            </view>
+        </view>
+        <view class="help_list_item">
+            <view class="help_list_question">
+                <image class="help_question_icon" src="{{ question }}"></image>
+                <view class="help_question_content">我为什么会有那么多的钱</view>
+                <image class="help_question_arrow" src="{{ rightarrow }}"></image>
+            </view>
+            <view class="help_question_detail">
+                <view class="help_list_question">你猜</view>
+                <view class="help_list_question">你猜</view>
+                <view class="help_list_question">你猜</view>
+                <view class="help_list_question">你猜</view>
+                <view class="help_list_question">你猜</view>
+            </view>
+        </view>
+        <view class="help_list_item">
+            <view class="help_list_question">
+                <image class="help_question_icon" src="{{ question }}"></image>
+                <view class="help_question_content">我为什么会有那么多的钱</view>
+                <image class="help_question_arrow" src="{{ rightarrow }}"></image>
+            </view>
+            <view class="help_question_detail">
+                <view class="help_list_question">你猜</view>
+                <view class="help_list_question">你猜</view>
+                <view class="help_list_question">你猜</view>
+                <view class="help_list_question">你猜</view>
+                <view class="help_list_question">你猜</view>
+            </view>
+        </view>
+    </view>
+</scroll-view>
+
+<view class="help_center_footer">
+    <view class="help_center_suggestions">意见反馈</view>
+    <view class="help_my_suggestions">我的反馈</view>
+</view>
 
 
 

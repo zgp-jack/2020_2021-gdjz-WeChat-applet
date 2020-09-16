@@ -474,6 +474,21 @@
 					"id": -1,
 					"name": "我的收藏",
 					"pathName": "pages/collect/info/info",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "会员中心",
+					"pathName": "pages/ucenter/ucenter",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "帮助中心",
+					"pathName": "packageOther/pages/helpCenter/helpCenter",
+					"query": "",
 					"scene": null
 				}
 			]
