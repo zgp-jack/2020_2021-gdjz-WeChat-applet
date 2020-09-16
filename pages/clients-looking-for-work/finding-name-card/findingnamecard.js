@@ -960,9 +960,9 @@ Page({
             // 获取排序后的第一个元素
             let projectOne = projectObj[0]
             // 处理如果图片数量大于3就只保留三张图片
-            if (projectOne.image.length > 3) {
-              projectOne.image.splice(3, projectOne.image.length-3)
-            }
+            // if (projectOne.image.length > 3) {
+            //   projectOne.image.splice(3, projectOne.image.length-3)
+            // }
             
             if (new Date(projectObj[0].completion_time).getTime() / 86400000 < parseInt(new Date().getTime() / 86400000)) {
               that.setData({
@@ -1071,14 +1071,14 @@ Page({
           let area = wx.getStorageSync('areadata')
           //获取置顶区域的信息
           if (mydata.resume_top.has_top != 0 && mydata.resume_top.is_top ==1 ) {
-            let areaProcrum = mydata.resume_top.top_provinces_str;
+            let areaProcrum = mydata.resume_top.top_provinces_str.length === 0? mydata.resume_top.top_provinces_str: (mydata.resume_top.top_provinces_str[0].pid == 1?mydata.resume_top.top_provinces_str:[]);
             let areaCitycrum = mydata.resume_top.top_citys_str;
             let isCountry = mydata.resume_top.is_country
             let areaAllcrum = [];
             let areaItem = area.data[0][0];
             areaItem.name = areaItem.city;
             if (isCountry == 1) {
-             areaAllcrum = areaItem
+              areaAllcrum.push(areaItem) 
             }
             let userTopArea = [...areaProcrum,...areaCitycrum,...areaAllcrum]
             that.setData({

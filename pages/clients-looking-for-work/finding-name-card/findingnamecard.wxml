@@ -356,7 +356,7 @@
         </text>
             </view>
             <view class="cardsixfive">
-              <image wx:for="{{item.image}}" data-url="{{ item }}" catchtap="previewImage" wx:key="{{index}}" src="{{item}}" data-index="{{ pindex }}"></image>
+              <image wx:for="{{item.image}}" wx:if="{{ index < 3 }}" data-url="{{ item }}" catchtap="previewImage" wx:key="{{index}}" src="{{item}}" data-index="{{ pindex }}"></image>
             </view>
             <view wx:if="{{item.check == 0}}" class="resson">
               未通过原因：{{item.fail_case}}
