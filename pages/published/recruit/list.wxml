@@ -1,7 +1,7 @@
 <import src="/pages/footer/footer.wxml" />
 
 <view class="recruit-list-header flex-row">
-  <view class="recruit-header-item" wx:for="{{ types }}" wx:key="{{ index }}" bindtap="userChangeType" data-key="{{ index }}"> 
+  <view class="recruit-header-item" wx:for="{{ types }}" wx:key="{{ index }}" bindtap="{{isRequest?'userChangeType':''}}" data-key="{{ index }}"> 
     <view class="recruit-header-text {{ current===index ? 'recruit-header-text-active' : '' }}">{{ item.name }}</view>
   </view>
 </view>
@@ -27,7 +27,7 @@
     </view>
   </view>
   <view class='nodata-texttips' wx:if="{{ !hasmore && page != 1 }}">没有更多内容了</view>
-  <view class='common-nodatabox flex-column lists-nodata'  wx:if="{{ !isAllList }}">
+  <view class='common-nodatabox flex-column lists-nodata'  wx:if="{{ isAllList }}">
     <image src='{{ nodata }}'></image>
     <text>您还没有发布过招工信息</text>
     <text class="nodataText">点击下方按钮去发布</text>

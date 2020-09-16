@@ -1,6 +1,6 @@
 <view style="padding-bottom:120rpx;">
   <view class="cardcolore">
-    <view class="findingnamecard" wx:if="{{showtop}}">
+    <view class="findingnamecard">
       请完善以下信息
     </view>
   </view>
@@ -356,7 +356,7 @@
         </text>
             </view>
             <view class="cardsixfive">
-              <image wx:for="{{item.image}}" data-url="{{ item }}" catchtap="previewImage" wx:key="{{index}}" src="{{item}}" data-index="{{ pindex }}"></image>
+              <image wx:for="{{item.image}}" wx:if="{{ index < 3 }}" data-url="{{ item }}" catchtap="previewImage" wx:key="{{index}}" src="{{item}}" data-index="{{ pindex }}"></image>
             </view>
             <view wx:if="{{item.check == 0}}" class="resson">
               未通过原因：{{item.fail_case}}
@@ -503,7 +503,7 @@
         提示
       </view>
       <view class="otextdetail">
-       马上去置顶提升找活名片排名，让更多老板看到您的找活名片
+       置顶找活名片 ，让更多老板能看到你，找更多的活！
       </view>
       <view class="topwhite"></view>
        <view class="buttontexttop" catchtap="topvertifyquit">

@@ -1,7 +1,7 @@
 <import src="/pages/footer/footer.wxml" />
 
 <view class="recruit-list-header flex-row">
-  <view class="recruit-header-item" wx:for="{{ types }}" wx:key="{{ index }}" bindtap="userChangeType" data-key="{{ index }}"> 
+  <view class="recruit-header-item" wx:for="{{ types }}" wx:key="{{ index }}" bindtap="{{isRequest?'userChangeType':''}}" data-key="{{ index }}"> 
     <view class="recruit-header-text {{ current===index ? 'recruit-header-text-active' : '' }}">{{ item.name }}</view>
   </view>
 </view>

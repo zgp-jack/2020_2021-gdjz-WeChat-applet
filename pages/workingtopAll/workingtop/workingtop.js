@@ -45,7 +45,7 @@ Page({
     showpointone: false,
     detailprice: 0,
     special_ids:[],
-    rangevalue:2,
+    rangevalue: 0,
     country_integral:"",
     // 首次置顶显示的置顶到期时间
     firstEndTime:"",
@@ -902,23 +902,23 @@ Page({
       let currentTimeDiff = currentTime - hostTime;
       // 最新服务器时间
       let newSeverTime = serverTime + currentTimeDiff;
-      // 获取可选择的置顶天数
-      let days = that.data.reqDays
+       // 获取可选择的置顶天数
+       let days = that.data.reqDays
       // 获取选择的天数
       let detail = null
       detail = days[e.detail.value]
       this.setData({
         shoutime: true,
-        showpoint: true
+        showpoint: true,
       })
-      
       let all = 86400000 * (detail) + (this.data.endtimeh - 0)
       let time = this.getMyDate(all)
       if (alllength <= allprice) {
         this.setData({
           endtimeone: time,
           detailprice: detail,
-          allprice: alllength
+          allprice: alllength,
+          point: allprice * detail
         })
         this.getAllpoint(newSeverTime)
       } else {
@@ -932,11 +932,14 @@ Page({
     }
   },
   deletea() {
+    // 获取默认的置顶天数
+    let defaultDayIndex = this.data.defaultDayIndex
     this.setData({
       shoutime: false,
       showpoint: false,
       detailprice: 0,
-      rangevalue:1
+      rangevalue:1,
+      rangevalue: defaultDayIndex
     })
     this.getCityNum()
   },
@@ -959,31 +962,14 @@ Page({
     }
     this.gettopareas()
   },
-  // changeTwoDecimal(x) {
-  //   var f_x = parseFloat(x);
-  //   if (isNaN(f_x)) {
-
-  //     return false;
-  //   }
-  //   f_x = Math.round(f_x * 100) / 100;
-
-
-
-  //   return f_x;
-  // },
+  
   getAllpoint(timeItem) {
     
     let shen = this.data.allprice - this.data.max_price;
     
     if (timeItem != 0 && shen>=0) {
       let shennum = shen;
-      // let shenmiao = this.changeTwoDecimal(shennum)
-      
-      
       let time = ((this.data.endtimeh - timeItem) / 3600 / 1000 / 24) * (shennum) + "";
-      
-      
-   
       var str = Math.round(time) - 0 + (this.data.allprice - 0) * (this.data.detailprice - 0);
 
       if (str==0){

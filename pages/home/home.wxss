@@ -58,6 +58,10 @@
     height: 220rpx;
 
 }
+.index-swiperbox button{ 
+  padding: 0rpx;
+  border-radius: 0rpx;
+}
 .index-swiper-img{
     position: relative;
     display:block;

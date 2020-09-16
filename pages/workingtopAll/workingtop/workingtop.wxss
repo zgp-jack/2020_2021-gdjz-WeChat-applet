@@ -90,13 +90,12 @@ page {
   margin-top: 20rpx;
   background: white!important;
   padding: 0rpx 30rpx 0rpx 30rpx;
-  box-shadow: 2rpx 4rpx 4rpx 4rpx #DCDCDC;
-
+  box-shadow: 2rpx 4rpx 10rpx 2rpx #DCDCDC;
 }
 .daynum{
   position: relative;
 padding-left: 26%;
-  border-bottom: 1px solid #DCDCDC;
+  border-bottom: 1px dashed #DCDCDC;
     line-height: 90rpx;
   height: 90rpx;
 }
@@ -254,7 +253,7 @@ padding-left: 26%;
   position: relative;
 padding-left: 31%;
 
-  border-bottom: 1px solid #DCDCDC;
+  border-bottom: 1px dashed #DCDCDC;
     line-height: 90rpx;
   height: 90rpx;
 }
@@ -267,7 +266,7 @@ padding-left: 31%;
   left: 0rpx;
 }
  .daynumone .bluet{
-   color: #0099FF;
+   color: black;
  }
 
 .daynumone .endtime::after{
