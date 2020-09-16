@@ -97,7 +97,8 @@ Page({
     showFollow: false,
     thisyear: new Date().getFullYear(),
     showAuthQuery: false,
-    resumeText:""
+    resumeText:"",
+    workTypes:[{id:"25",isHasWorkType:true},{id:"19",isHasWorkType:true},{id:"14",isHasWorkType:true}]
   },
   // 根据发布方式不同发布招工：未登录或者“fast_add_job”是快速发布，“ordinary_add_job”是普通发布。
   publishJob:function () {
@@ -421,6 +422,7 @@ Page({
     this.initInputList();
     this.initFooterData();
     this.getAreaData();
+    this.getFilterData()
   },
   valiUserUrl: function (e) {
     app.valiUserUrl(e, this.data.userInfo)
@@ -491,6 +493,56 @@ Page({
       })
     }
   },
+  // 初始化选中数据
+  initSelectedData: function (data) {
+    let classTree = data.classTree
+    let workTypes = [{id:"25",isHasWorkType:true},{id:"19",isHasWorkType:true},{id:"14",isHasWorkType:true}];
+    for (let n = 0; n < workTypes.length; n++) {
+      for (let i = 0; i < classTree.length; i++) {
+        if (classTree[i].id === workTypes[n].id) {
+          workTypes[n].isHasWorkType = true
+          this.setData({
+            workTypes,
+          })
+        }else{
+          if (classTree[i].has_children === 1) {
+            let childrenClassTree = classTree[i].children;
+            let num = 0;
+            for (let j = 0; j < childrenClassTree.length; j++) {
+              if (childrenClassTree[j].id === workTypes[n].id) {
+                workTypes[n].isHasWorkType = true
+                this.setData({
+                  workTypes,
+                })
+              }else{
+                num + 1
+              }
+            }
+            if (num == childrenClassTree.length) {
+              workTypes[n].isHasWorkType = false
+                this.setData({
+                workTypes,
+              })
+            }
+          }
+        }
+      }
+      
+    }
+    
+  },
+  // 初始化工种
+  getFilterData: function () {
+    let _this = this;
+    if (app.globalData.allTypes) {
+      _this.initSelectedData(app.globalData.allTypes)
+    } else {
+      app.getListsAllType(function (_data) {
+        _this.initSelectedData(_data)
+      });
+    }
+  },
+
   /**
      * 生命周期函数--监听页面初次渲染完成
      */
