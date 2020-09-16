@@ -100,7 +100,7 @@ Page({
     thisyear: new Date().getFullYear(),
     showAuthQuery: false,
     resumeText:"",
-    workTypes:[{id:"25",isHasWorkType:true},{id:"19",isHasWorkType:true},{id:"14",isHasWorkType:true}]
+    workTypes:[]
   },
   // 根据发布方式不同发布招工：未登录或者“fast_add_job”是快速发布，“ordinary_add_job”是普通发布。
   publishJob:function () {
@@ -526,6 +526,11 @@ Page({
                 workTypes,
               })
             }
+          }else{
+            workTypes[n].isHasWorkType = false
+              this.setData({
+              workTypes,
+            })
           }
         }
       }

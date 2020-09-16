@@ -74,7 +74,7 @@
         <text>招聘司机</text>
       </view>
     </navigator>
-    <navigator  class='index-footer-nav' url="{{workTypes[0].isHasWorkType?'/pages/index/index?id=25':''}}" target="{{workTypes[0].isHasWorkType?'slef':'miniProgram'}}" open-type="navigate" app-id="{{workTypes[0].isHasWorkType?'':'wx33194c327f50b99d'}}" path="" extra-data="" version="release">
+    <navigator  class='index-footer-nav' url='/pages/index/index?id=25' open-type="navigate">
       <view class='index-industry-item'>
         <image src='{{ industry.gczg }}'></image>
         <text>工厂招人</text>
