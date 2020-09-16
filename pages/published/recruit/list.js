@@ -14,7 +14,6 @@ Page({
     handsettop:app.globalData.apiImgUrl + "new-published-settop-tips.png",
     page: 1,
     types: [{id:'all',name:'全部'},{id:'being',name:'正在招'},{id:'checking',name:'审核中'},{id:'fail',name:'未通过'},{id:'end',name:'已招满'}],
-    //当前选中tab
     current: 0,
     hasmore: true,
     lists: [],
@@ -26,9 +25,6 @@ Page({
     showTopTips: false,
     //我的全部招工信息是否有数据
     isAllList : false,
-    resumeText:"",
-    // 滑动与点击请求
-    isRequest: true,
   },
   publishJob:function () {
     app.initJobView()
@@ -60,7 +56,8 @@ Page({
     let now = new Date().getTime() / 1000 // 当前时间戳
     let top = topdata.top; //是否有置顶数据
     let userInfo = wx.getStorageSync('userInfo') // 用户信息
-    let isCheck = e.currentTarget.dataset.ischeck;//用户审核状态
+    
+
     if(end == '2'){ //如果已招到
       wx.showModal({
         title: '提示',
@@ -78,6 +75,7 @@ Page({
       
       
       if(showTime){ //如果置顶过期
+        console.log(showTime)
         wx.navigateTo({
           url: `/pages/workingtopAll/workingtop/workingtop?id=${id}$topId=${data}`,
         })
@@ -100,6 +98,7 @@ Page({
         success: function (res) {
           wx.hideLoading();
           let mydata = res.data;
+          console.log(mydata)
           if (mydata.errcode == "ok") {
             let newData = _this.data.lists;
             newData[infoIndex].top_data.is_top = mydata.data.top.is_top
@@ -171,7 +170,7 @@ Page({
 
     }else{
       wx.navigateTo({
-        url: `/pages/workingtopAll/workingtop/workingtop?id=${id}&topId=undefined&city_id=${topdata.area_id}&province_id=${topdata.province_id}&ischeck=${isCheck}`,
+        url: `/pages/workingtopAll/workingtop/workingtop?id=${id}&topId=undefined`,
       })
     }
 
@@ -283,6 +282,16 @@ Page({
       }
     })
   },
+  // 防抖
+  debounce: function (fn,delay){
+    let timer = null 
+    return function() {
+      if(timer){
+        clearTimeout(timer) 
+      }
+      timer = setTimeout(fn,delay)
+    }
+  },
   getRecruitList:function(){
     let _this = this
     let userinfo = wx.getStorageSync('userInfo')
@@ -361,22 +370,6 @@ Page({
   goPublish:function () {
     app.initJobView()
   },
-  switchTab:function(e){
-    let key = e.detail.current
-    this.setData({
-      current: parseInt(key),
-      page: 1,
-      hasmore: true,
-      lists: []
-    })
-    if (this.data.lists.length == 0) {
-      this.getRecruitList()
-    }
-  },
-  loadmore:function(){
-    if(!this.data.hasmore) return false
-    this.getRecruitList()
-  },
   /**
    * 生命周期函数--监听页面加载
    */
@@ -386,7 +379,6 @@ Page({
         showTopTips:true
       })
     }
-    this.getAreaData();
     this.initFooterData()
   },
 
@@ -402,7 +394,6 @@ Page({
    */
   onShow: function () {
     this.pageRefresh()  
-    app.initResume(this)
   },
 
   /**
@@ -442,13 +433,5 @@ Page({
    */
   onShareAppMessage: function () {
 
-  },
-  onShareTimeline:function () {
-    let commonShareTips = app.globalData.commonShareTips;
-    let commonShareImg = app.globalData.commonShareImg;
-    return {
-      title: commonShareTips,
-      imageUrl: commonShareImg
-    }
   }
 })

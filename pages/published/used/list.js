@@ -133,6 +133,16 @@ Page({
       })
 
   },
+  // 防抖
+  debounce: function (fn,delay){
+    let timer = null 
+    return function() {
+      if(timer){
+        clearTimeout(timer) 
+      }
+      timer = setTimeout(fn,delay)
+    }
+  },
   userChangeType:function(e){
     let key = e.currentTarget.dataset.key;
     let current = this.data.current;
@@ -309,20 +319,6 @@ Page({
     let userInfo = this.data.userInfo;
     footerjs.valiUserCard(this, app, userInfo);
   },
-  switchTab:function(e){
-    let key = e.detail.current
-    this.setData({
-      current: parseInt(key),
-      page: 1,
-      hasmore: true,
-      lists: []
-    })
-    this.getUsedList()
-  },
-  loadmore:function(){
-    if(!this.data.hasmore) return false
-    this.getUsedList()
-  },
   /**
    * 生命周期函数--监听页面加载
    */
@@ -342,7 +338,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    app.initResume(this)
+
   },
 
   /**
@@ -379,13 +375,5 @@ Page({
    */
   onShareAppMessage: function () {
 
-  },
-  onShareTimeline:function () {
-    let commonShareTips = app.globalData.commonShareTips;
-    let commonShareImg = app.globalData.commonShareImg;
-    return {
-      title: commonShareTips,
-      imageUrl: commonShareImg
-    }
   }
 })
