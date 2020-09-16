@@ -170,10 +170,9 @@ height: 70rpx;
 
 
 }
-.listsboxagetwo .listsboxnum{
+.listsboxagetwo .listsboxnums{
     font-size: 28rpx;
-  margin-left: 0rpx;
-    color: #353636;
+    margin-left: 0rpx;
 }
 .listsboxlable{
   width: 94%;
