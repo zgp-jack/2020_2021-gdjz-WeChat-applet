@@ -446,8 +446,8 @@ App({
                 tokenTime: uinfo.data.sign.time,
               }
               that.getUserUuid(userInfo)
-              callback(res)
             }
+            callback(res)
             // 授权用户执行操作
             wx.hideToast();
           },

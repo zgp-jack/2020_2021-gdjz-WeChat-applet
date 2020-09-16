@@ -106,4 +106,4 @@
 
 
 <!-- 引入footer -->
-<template is="footer" data="{{ footerImgs,publishActive,showPublishBox,footerActive }}" />
+<template is="footer" data="{{ footerImgs,publishActive,showPublishBox,footerActive,resumeText }}" />

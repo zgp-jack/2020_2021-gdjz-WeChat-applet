@@ -1,42 +1,35 @@
 <import src="/pages/footer/footer.wxml" />
 
 <view class="recruit-list-header flex-row">
-  <view class="recruit-header-item" wx:for="{{ types }}" wx:key="{{ index }}" bindtap="userChangeType" data-key="{{ index }}"> 
+  <view class="recruit-header-item" wx:for="{{ types }}" wx:key="{{ index }}" bindtap="{{isRequest?'userChangeType':''}}" data-key="{{ index }}"> 
     <view class="recruit-header-text {{ current===index ? 'recruit-header-text-active' : '' }}">{{ item.name }}</view>
   </view>
 </view>
 
-
-<swiper class="recruit-content" current="{{ current }}"  duration="300" bindchange="switchTab">
-    <swiper-item wx:for="{{ types.length }}">
-      <scroll-view scroll-y="true" class="recruit-list-container" bindscrolltolower="loadmore">
-        <block wx:for="{{ lists }}" wx:key="{{ index }}" data-id="{{ item.id }}">
-          <view class="recruit-list-item">
-            <image class="recruit-list-endimg" src="{{ statusCheck }}" wx:if="{{ item.is_check == '1' }}"></image>
-            <image class="recruit-list-endimg" src="{{ statusNopass }}" wx:if="{{ item.is_check == '0' }}"></image>
-            <image class="recruit-list-endimg" src="{{ statusEnd }}" wx:if="{{ item.is_end == '2' }}"></image>
-            <view class="recruit-item-title overwords">{{ item.title }}</view>
-            <view class="recruit-item-content">{{ item.detail }}</view>
-            <view class="recruit-item-footerbox">
-              <view class="recruit-checking" wx:if="{{ item.is_check == '1'  }}"> <image src="{{ checkingimg }}"></image> {{ tipmsg }}</view>
-              <view class="recruit-item-footer flex-row" wx:if="{{ item.is_check != '1'  }}">
-                <view class="recruit-footer-item" data-id="{{ item.id }}" catchtap="userEditUsedInfo">修改</view>
-                <block wx:if="{{ item.is_check == '2'  }}">
-                  <view class="recruit-footer-item" catchtap="changeUsedStatus" data-id="{{ item.id }}" data-index="{{ index }}" data-status="{{ item.is_end }}">{{ item.is_end == '2' ? '重新交易' : '停止交易' }}</view>
-                  <view class="recruit-footer-item " wx:if="{{ item.is_end != '2' }}" catchtap="userSetTopAction" data-id="{{ item.id }}" data-index="{{ index }}">刷新置顶</view>
-                </block>
-              </view>
-            </view>
-          </view>
-        </block>  
-        <view class='nodata-texttips' wx:if="{{ !hasmore && page != 1 }}">没有更多内容了</view>
-        <view class='common-nodatabox flex-column lists-nodata'  wx:if="{{ page === 1 && !hasmore }}">
-            <image src='{{ nodata }}'></image>
-            <text>暂无相关内容</text>
-        </view>
-      </scroll-view>
-    </swiper-item>
-</swiper>
+<view class="recruit-list-container">
+  <view class="recruit-list-item" wx:for="{{ lists }}" wx:key="{{ index }}" data-id="{{ item.id }}" >
+    <image class="recruit-list-endimg" src="{{ statusCheck }}" wx:if="{{ item.is_check == '1' }}"></image>
+    <image class="recruit-list-endimg" src="{{ statusNopass }}" wx:if="{{ item.is_check == '0' }}"></image>
+    <image class="recruit-list-endimg" src="{{ statusEnd }}" wx:if="{{ item.is_end == '2' }}"></image>
+    <view class="recruit-item-title overwords">{{ item.title }}</view>
+    <view class="recruit-item-content">{{ item.detail }}</view>
+    <view class="recruit-item-footerbox">
+      <view class="recruit-checking" wx:if="{{ item.is_check == '1'  }}"> <image src="{{ checkingimg }}"></image> {{ tipmsg }}</view>
+      <view class="recruit-item-footer flex-row" wx:if="{{ item.is_check != '1'  }}">
+        <view class="recruit-footer-item" data-id="{{ item.id }}" catchtap="userEditUsedInfo">修改</view>
+        <block wx:if="{{ item.is_check == '2'  }}">
+          <view class="recruit-footer-item" catchtap="changeUsedStatus" data-id="{{ item.id }}" data-index="{{ index }}" data-status="{{ item.is_end }}">{{ item.is_end == '2' ? '重新交易' : '停止交易' }}</view>
+          <view class="recruit-footer-item " wx:if="{{ item.is_end != '2' }}" catchtap="userSetTopAction" data-id="{{ item.id }}" data-index="{{ index }}">刷新置顶</view>
+        </block>
+      </view>
+    </view>
+  </view>
+  <view class='nodata-texttips' wx:if="{{ !hasmore && page != 1 }}">没有更多内容了</view>
+  <view class='common-nodatabox flex-column lists-nodata'  wx:if="{{ page === 1 && !hasmore }}">
+      <image src='{{ nodata }}'></image>
+      <text>暂无相关内容</text>
+  </view>
+</view>
 
 <!-- 引入footer -->
 <template is="footer" data="{{ footerImgs,publishActive,showPublishBox,footerActive,resumeText }}" />

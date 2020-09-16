@@ -17,8 +17,12 @@ Page({
     currentType: '-1', //传的类型 
     page:1,
     typename: '暂无相关资讯', //提示类型
+    resumeText:""
   },
-
+  // 根据发布方式不同发布招工：未登录或者“fast_add_job”是快速发布，“ordinary_add_job”是普通发布。
+  publishJob:function () {
+    app.initJobView()
+  },
   /**
    * 生命周期函数--监听页面加载
    */
@@ -50,6 +54,7 @@ Page({
       scrollTop: 0,
       duration: 300
     })
+    app.initResume(this)
   },
   // 共用footer
   jumpThisLink: function(e) {

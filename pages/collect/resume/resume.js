@@ -9,7 +9,7 @@ Page({
   data: {
     footerActive: "member",
     finded: app.globalData.apiImgUrl + "lpy/finded.png",
-    nodataImg: app.globalData.apiImgUrl + "nodata.png",
+    nodataImg: app.globalData.apiImgUrl + "collect-nodata.png",
     biaoqian: app.globalData.apiImgUrl + "lpy/biaoqian.png",
     isFirstRequest: true,
     page: 1,
@@ -26,8 +26,12 @@ Page({
       resumeIcon: app.globalData.apiImgUrl + "new-collect-resume-active.png",
       resumeTitle: '找活信息'
     },
+    resumeText:""
   },
-
+  // 根据发布方式不同发布招工：未登录或者“fast_add_job”是快速发布，“ordinary_add_job”是普通发布。
+  publishJob:function () {
+    app.initJobView()
+  },
   showThisList: function (e) {
     wx.redirectTo({ url: "/pages/collect/info/info" })
   },
@@ -211,6 +215,7 @@ Page({
   onShow: function (options) {
     this.setData({ isFirstRequest: true, lists: [], page: 1 })
     this.initPublishedData(options);
+    app.initResume(this)
   },
 
   /**

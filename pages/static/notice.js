@@ -14,6 +14,11 @@ Page({
       author:"鱼泡网",
       time:"",
       footerActive: "home",
+      resumeText:""
+    },
+    // 根据发布方式不同发布招工：未登录或者“fast_add_job”是快速发布，“ordinary_add_job”是普通发布。
+    publishJob:function () {
+      app.initJobView()
     },
     getNoticeInfo:function(options){
         let _this = this;
@@ -75,7 +80,7 @@ Page({
      * 生命周期函数--监听页面初次渲染完成
      */
     onReady: function () {
-
+      app.initResume(this)
     },
 
     /**

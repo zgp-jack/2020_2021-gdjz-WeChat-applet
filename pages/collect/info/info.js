@@ -8,7 +8,7 @@ Page({
    */
   data: {
     footerActive: "member",
-    nodataImg: app.globalData.apiImgUrl + "nodata.png",
+    nodataImg: app.globalData.apiImgUrl + "collect-nodata.png",
     finded: app.globalData.apiImgUrl + 'published-recruit-end.png', //已找到
     sjim: app.globalData.apiImgUrl + 'recruit-lists-new-finding.png', 
     isFirstRequest: true,

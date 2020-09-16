@@ -328,9 +328,9 @@ margin-left: 20rpx;
 .choose-header-item-active::after{
     position: absolute;
     content: '';
-    width: 60%;
+    width: 30%;
     bottom: 0;
-    left: 20%;
+    left: 40%;
     height: 2px;
     background: #0099ff;
     z-index: 2;
@@ -349,6 +349,10 @@ margin-left: 20rpx;
 }
 .nodataText {
     margin-top: -60rpx;
+}
+.lists-nodata image {
+    width: 260rpx;
+    height: 200rpx;
 }
 
 
