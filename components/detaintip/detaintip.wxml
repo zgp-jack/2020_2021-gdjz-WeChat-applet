@@ -1,7 +1,7 @@
 <view class="issueok-container" wx:if="{{ show }}">
   <view class="issueok-box">
-    <view class="issueok-title">温馨提示</view>
-    <view class="issueok-body">您还未完善招工信息，招工信息越完善，招工越容易。</view>
+    <view class="issueok-title">提示</view>
+    <view class="issueok-body">发布成功</view>
     <view class="issueok-footer">
       <button class="issueok-btn" bindtap="goToResumeList">筛选找活简历</button>
       <button class="issueok-btn" bindtap="manageRecruit"  wx:if="{{ userInfo }}">管理招工信息</button>

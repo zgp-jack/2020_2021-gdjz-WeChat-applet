@@ -114,6 +114,13 @@ Page({
                       images: imags
                     },
                     success: function (res) {
+                      //发布成功后，清除缓存数据中的detail、rulesClassifyids、userClassifyids、imgs
+                      let jiSuData = wx.getStorageSync('jiSuData')
+                      jiSuData.detail = ''
+                      jiSuData.rulesClassifyids = []
+                      jiSuData.userClassifyids = []
+                      jiSuData.imgs = []
+                      wx.setStorageSync('jiSuData', jiSuData)
                       let mydata = res.data;
                       app.appRequestAction({
                         title: "发布中",
@@ -173,6 +180,13 @@ Page({
                   images: imags
                 },
                 success: function (res) {
+                  //发布成功后，清除缓存数据中的detail、rulesClassifyids、userClassifyids、imgs
+                  let jiSuData = wx.getStorageSync('jiSuData')
+                  jiSuData.detail = ''
+                  jiSuData.rulesClassifyids = []
+                  jiSuData.userClassifyids = []
+                  jiSuData.imgs = []
+                  wx.setStorageSync('jiSuData', jiSuData)
                   let mydata = res.data;
                   app.appRequestAction({
                     title: "发布中",
@@ -321,6 +335,13 @@ Page({
             wx.redirectTo({
               url: '/pages/fast/tips/tips?token=' + token,
             })
+            //发布成功后，清除缓存数据中的detail、rulesClassifyids、userClassifyids、imgs
+            let jiSuData = wx.getStorageSync('jiSuData')
+            jiSuData.detail = ''
+            jiSuData.rulesClassifyids = []
+            jiSuData.userClassifyids = []
+            jiSuData.imgs = []
+            wx.setStorageSync('jiSuData', jiSuData)
           }else{
             app.showMyTips(mydata.errmsg);
             }}
@@ -519,8 +540,13 @@ Page({
       }
     })
   },
+  // 点击上传图片
+  userUploadImg: function () {
+    let num = this.data.maxNum - this.data.imglen
+    this.multiImageUpload(num)
+  },
   // 点击上传图片按钮上传图片
-  userUploadImg: function (num) {
+  multiImageUpload: function (num) {
     let that = this;
     // 上传图片加载loading
     wx.showLoading({
