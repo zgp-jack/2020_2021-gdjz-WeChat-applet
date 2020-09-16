@@ -61,7 +61,9 @@ Page({
       gjsc: app.globalData.apiImgUrl + "ypsc.png",
       driver: app.globalData.apiImgUrl + "driver.png",
       jixiezr: app.globalData.apiImgUrl + "jixiezr.png",
-      newzjxm: app.globalData.apiImgUrl + "newindex-zjxmicon.png"
+      newzjxm: app.globalData.apiImgUrl + "newindex-zjxmicon.png",
+      zsdg: app.globalData.apiImgUrl + "index-cate-sdg.png",
+      zgjg: app.globalData.apiImgUrl + "index-cate-gjg.png",
     },
     fun: {
       yqhy: app.globalData.apiImgUrl + "yqhy.png",
