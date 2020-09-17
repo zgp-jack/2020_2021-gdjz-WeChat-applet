@@ -1,0 +1,50 @@
+/* packageOther/pages/helpCenter/answer/answer.wxss */
+@import "/wxParse/wxParse.wxss";
+
+.noticebox{
+  position: relative;
+  padding: 20rpx;
+  box-sizing: border-box;
+  max-width: 100%;
+  height: 100vh;
+}
+.infotitle{
+  font-size: 34rpx;
+  line-height:50rpx;
+  padding: 30rpx 0;
+  font-size: 40rpx;
+  font-weight: bold;
+  color: #474747;
+}
+.answer_scroll{
+  height: calc(100vh - 320rpx);
+  width: 100%;
+}
+.answer_footer{
+  position: absolute;
+  left: 0;
+  bottom: 0rpx;
+  width: 100%;
+  height: 200rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+}
+.answer_result{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 80rpx;
+  width: 80%;
+  background: rgba(219, 219, 219, 0);
+  border: 1px solid #E4E2E2;
+  border-radius: 4px;
+  font-weight: 400;
+  color: #474747;
+}
+.answer_scroll image{
+  margin-top: 20rpx;
+  margin-left: 50%;
+  transform: translateX(-50%);
+}

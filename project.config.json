@@ -1,497 +1,510 @@
 {
-	"description": "项目配置文件",
-	"packOptions": {
-		"ignore": []
-	},
-	"setting": {
-		"urlCheck": false,
-		"es6": true,
-		"enhance": false,
-		"postcss": true,
-		"preloadBackgroundData": false,
-		"minified": true,
-		"newFeature": true,
-		"coverView": true,
-		"nodeModules": false,
-		"autoAudits": false,
-		"showShadowRootInWxmlPanel": false,
-		"scopeDataCheck": false,
-		"uglifyFileName": true,
-		"checkInvalidKey": true,
-		"checkSiteMap": true,
-		"uploadWithSourceMap": true,
-		"compileHotReLoad": false,
-		"babelSetting": {
-			"ignore": [],
-			"disablePlugins": [],
-			"outputPath": ""
-		},
-		"useIsolateContext": true,
-		"useCompilerModule": false,
-		"userConfirmedUseCompilerModuleSwitch": false
-	},
-	"compileType": "miniprogram",
-	"libVersion": "2.10.4",
-	"appid": "wx456feacb0e86162f",
-	"projectname": "gdjz",
-	"debugOptions": {
-		"hidedInDevtools": []
-	},
-	"isGameTourist": false,
-	"simulatorType": "wechat",
-	"simulatorPluginLibVersion": {},
-	"condition": {
-		"search": {
-			"current": -1,
-			"list": []
-		},
-		"conversation": {
-			"current": -1,
-			"list": []
-		},
-		"plugin": {
-			"current": -1,
-			"list": []
-		},
-		"game": {
-			"currentL": -1,
-			"list": []
-		},
-		"gamePlugin": {
-			"current": -1,
-			"list": []
-		},
-		"miniprogram": {
-			"current": -1,
-			"list": [
-				{
-					"id": -1,
-					"name": "1047扫码进入",
-					"pathName": "pages/index/index",
-					"query": "",
-					"scene": 1047
-				},
-				{
-					"id": -1,
-					"name": "会员中心-新",
-					"pathName": "pages/ucenter/ucenterNew/ucenterNew",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "充值",
-					"pathName": "pages/ucenter/ucenterNew/hireMembers",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "邀请好友",
-					"pathName": "pages/ucenter/ucenterNew/invite",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": 5,
-					"name": "订阅",
-					"pathName": "pages/others/message/publish/publish",
-					"query": "tel=19983741552&name=我服了",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "pages/course/course",
-					"pathName": "pages/course/course",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "帮助中心",
-					"pathName": "pages/ucenter/ucenterNew/helpCenter",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": 9,
-					"name": "pages/information/mymessage/mymessage",
-					"pathName": "pages/information/mymessage/mymessage",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": 10,
-					"name": "pages/information/system/system?type=3",
-					"pathName": "pages/information/system/system",
-					"query": "type=3",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "pages/information/recruit/recruit",
-					"pathName": "pages/information/recruit/recruit",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "pages/information/mymessage/mymessage",
-					"pathName": "pages/information/mymessage/mymessage",
-					"query": "type=3",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "pages/boss-look-card/lookcard",
-					"pathName": "pages/boss-look-card/lookcard",
-					"query": "uuid=1577670093341138&location=30.57447%2C103.92377",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "pages/ucenter/ucenter",
-					"pathName": "pages/ucenter/ucenter",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "招工详情",
-					"pathName": "pages/detail/info/info",
-					"query": "id=6771211",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "找活列表",
-					"pathName": "pages/findingworkinglist/findingworkinglist",
-					"query": "id=6771211",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "二手列表",
-					"pathName": "pages/usedlist/usedlist",
-					"query": "id=6771211",
-					"scene": null
-				},
-				{
-					"id": 18,
-					"name": "新版本-我的招工信息",
-					"pathName": "pages/published/recruit/list",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "推荐招工子页面",
-					"pathName": "pages/lists/recruit/index",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "已发布列表",
-					"pathName": "pages/published/published",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "新版本-适合您的工人",
-					"pathName": "pages/published/resume/list",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "新版本-我的二手交易",
-					"pathName": "pages/published/used/list",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "积分记录",
-					"pathName": "pages/integral/return/return",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": 24,
-					"name": "pages/fast-issue/index/index",
-					"pathName": "pages/fast-issue/index/index",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "我的找活名片",
-					"pathName": "pages/clients-looking-for-work/finding-name-card/findingnamecard",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "pages/clients-looking-for-work/preview-name-card/previewcard名片",
-					"pathName": "pages/clients-looking-for-work/preview-name-card/previewcard",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "pages/turntable/turntable",
-					"pathName": "pages/turntable/turntable",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": 28,
-					"name": "新版本发布招工",
-					"pathName": "pages/fast/issue/index",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": 29,
-					"name": "新版发布招工获取验证码",
-					"pathName": "pages/fast/code/code",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": 30,
-					"name": "新版本发布选择地区",
-					"pathName": "pages/fast/area/area",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "新版快速发布提示页",
-					"pathName": "pages/fast/tips/tips",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "新版本发布",
-					"pathName": "pages/issue/index/index",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": 33,
-					"name": "新版发布招工地址地图选择",
-					"pathName": "pages/issue/area/area",
-					"query": "showfor=showfor&showmap=noshowmap",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "packageOther/pages/helpCenter/helpCenter",
-					"pathName": "packageOther/pages/helpCenter/helpCenter",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "pages/static/invite",
-					"pathName": "pages/static/invite",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "pages/integral/expend/expend",
-					"pathName": "pages/integral/expend/expend",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "pages/boss-look-card/lookcard",
-					"pathName": "pages/boss-look-card/lookcard",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "pages/findingworkinglist/findingworkinglist",
-					"pathName": "pages/findingworkinglist/findingworkinglist",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "pages/integral/expend/expend",
-					"pathName": "pages/integral/expend/expend",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "pages/findingworkinglist/findingworkinglist",
-					"pathName": "pages/findingworkinglist/findingworkinglist",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "大转盘",
-					"pathName": "pages/turntable/turntable",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": 43,
-					"name": "快速发布",
-					"pathName": "pages/fast/issue/index",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": 44,
-					"name": "极速发布",
-					"pathName": "pages/issue/index/index",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "个人中心",
-					"pathName": "pages/published/recruit/list",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "我的收藏",
-					"pathName": "pages/collect/info/info",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "修改手机号",
-					"pathName": "packageOther/pages/userinfo/phone/phone",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "修改绑定手机号",
-					"pathName": "packageOther/pages/userinfo/phone/phone",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": 49,
-					"name": "我的收藏-招工",
-					"pathName": "pages/collect/info/info",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "我的收藏-找活",
-					"pathName": "pages/collect/resume/resume",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "我的招工信息",
-					"pathName": "pages/published/recruit/list",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "快速发布-招工城市选择",
-					"pathName": "pages/fast/area/area",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "积分消耗记录",
-					"pathName": "pages/integral/expend/expend",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "完善资料",
-					"pathName": "packageOther/pages/userinfo/edit/edit",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "找活名片",
-					"pathName": "pages/clients-looking-for-work/finding-name-card/findingnamecard",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "我的二手交易",
-					"pathName": "pages/published/used/list",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "我的找活",
-					"pathName": "pages/clients-looking-for-work/finding-name-card/findingnamecard",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": 58,
-					"name": "找活置顶界面",
-					"pathName": "pages/clients-looking-for-work/workingtop/workingtop",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": 60,
-					"name": "找活置顶-城市选择",
-					"pathName": "pages/clients-looking-for-work/distruction/distruction",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "招工置顶",
-					"pathName": "pages/workingtopAll/workingtop/workingtop",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "我的收藏",
-					"pathName": "pages/collect/info/info",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "会员中心",
-					"pathName": "pages/ucenter/ucenter",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "帮助中心",
-					"pathName": "packageOther/pages/helpCenter/helpCenter",
-					"query": "",
-					"scene": null
-				}
-			]
-		}
-	}
+  "description": "项目配置文件",
+  "packOptions": {
+    "ignore": []
+  },
+  "setting": {
+    "urlCheck": false,
+    "es6": true,
+    "enhance": false,
+    "postcss": true,
+    "preloadBackgroundData": false,
+    "minified": true,
+    "newFeature": true,
+    "coverView": true,
+    "nodeModules": false,
+    "autoAudits": false,
+    "showShadowRootInWxmlPanel": false,
+    "scopeDataCheck": false,
+    "uglifyFileName": true,
+    "checkInvalidKey": true,
+    "checkSiteMap": true,
+    "uploadWithSourceMap": true,
+    "compileHotReLoad": false,
+    "babelSetting": {
+      "ignore": [],
+      "disablePlugins": [],
+      "outputPath": ""
+    },
+    "useIsolateContext": true,
+    "useCompilerModule": false,
+    "userConfirmedUseCompilerModuleSwitch": false
+  },
+  "compileType": "miniprogram",
+  "libVersion": "2.10.4",
+  "appid": "wx456feacb0e86162f",
+  "projectname": "gdjz",
+  "debugOptions": {
+    "hidedInDevtools": []
+  },
+  "isGameTourist": false,
+  "simulatorType": "wechat",
+  "simulatorPluginLibVersion": {},
+  "condition": {
+    "search": {
+      "current": -1,
+      "list": []
+    },
+    "conversation": {
+      "current": -1,
+      "list": []
+    },
+    "plugin": {
+      "current": -1,
+      "list": []
+    },
+    "game": {
+      "currentL": -1,
+      "list": []
+    },
+    "gamePlugin": {
+      "current": -1,
+      "list": []
+    },
+    "miniprogram": {
+      "current": -1,
+      "list": [
+        {
+          "id": -1,
+          "name": "1047扫码进入",
+          "pathName": "pages/index/index",
+          "query": "",
+          "scene": 1047
+        },
+        {
+          "id": -1,
+          "name": "会员中心-新",
+          "pathName": "pages/ucenter/ucenterNew/ucenterNew",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "充值",
+          "pathName": "pages/ucenter/ucenterNew/hireMembers",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "邀请好友",
+          "pathName": "pages/ucenter/ucenterNew/invite",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": 5,
+          "name": "订阅",
+          "pathName": "pages/others/message/publish/publish",
+          "query": "tel=19983741552&name=我服了",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "pages/course/course",
+          "pathName": "pages/course/course",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "帮助中心",
+          "pathName": "pages/ucenter/ucenterNew/helpCenter",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": 9,
+          "name": "pages/information/mymessage/mymessage",
+          "pathName": "pages/information/mymessage/mymessage",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": 10,
+          "name": "pages/information/system/system?type=3",
+          "pathName": "pages/information/system/system",
+          "query": "type=3",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "pages/information/recruit/recruit",
+          "pathName": "pages/information/recruit/recruit",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "pages/information/mymessage/mymessage",
+          "pathName": "pages/information/mymessage/mymessage",
+          "query": "type=3",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "pages/boss-look-card/lookcard",
+          "pathName": "pages/boss-look-card/lookcard",
+          "query": "uuid=1577670093341138&location=30.57447%2C103.92377",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "pages/ucenter/ucenter",
+          "pathName": "pages/ucenter/ucenter",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "招工详情",
+          "pathName": "pages/detail/info/info",
+          "query": "id=6771211",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "找活列表",
+          "pathName": "pages/findingworkinglist/findingworkinglist",
+          "query": "id=6771211",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "二手列表",
+          "pathName": "pages/usedlist/usedlist",
+          "query": "id=6771211",
+          "scene": null
+        },
+        {
+          "id": 18,
+          "name": "新版本-我的招工信息",
+          "pathName": "pages/published/recruit/list",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "推荐招工子页面",
+          "pathName": "pages/lists/recruit/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "已发布列表",
+          "pathName": "pages/published/published",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "新版本-适合您的工人",
+          "pathName": "pages/published/resume/list",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "新版本-我的二手交易",
+          "pathName": "pages/published/used/list",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "积分记录",
+          "pathName": "pages/integral/return/return",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": 24,
+          "name": "pages/fast-issue/index/index",
+          "pathName": "pages/fast-issue/index/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "我的找活名片",
+          "pathName": "pages/clients-looking-for-work/finding-name-card/findingnamecard",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "pages/clients-looking-for-work/preview-name-card/previewcard名片",
+          "pathName": "pages/clients-looking-for-work/preview-name-card/previewcard",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "pages/turntable/turntable",
+          "pathName": "pages/turntable/turntable",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": 28,
+          "name": "新版本发布招工",
+          "pathName": "pages/fast/issue/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": 29,
+          "name": "新版发布招工获取验证码",
+          "pathName": "pages/fast/code/code",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": 30,
+          "name": "新版本发布选择地区",
+          "pathName": "pages/fast/area/area",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "新版快速发布提示页",
+          "pathName": "pages/fast/tips/tips",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "新版本发布",
+          "pathName": "pages/issue/index/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": 33,
+          "name": "新版发布招工地址地图选择",
+          "pathName": "pages/issue/area/area",
+          "query": "showfor=showfor&showmap=noshowmap",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "packageOther/pages/helpCenter/helpCenter",
+          "pathName": "packageOther/pages/helpCenter/helpCenter",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "pages/static/invite",
+          "pathName": "pages/static/invite",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "pages/integral/expend/expend",
+          "pathName": "pages/integral/expend/expend",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "pages/boss-look-card/lookcard",
+          "pathName": "pages/boss-look-card/lookcard",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "pages/findingworkinglist/findingworkinglist",
+          "pathName": "pages/findingworkinglist/findingworkinglist",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "pages/integral/expend/expend",
+          "pathName": "pages/integral/expend/expend",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "pages/findingworkinglist/findingworkinglist",
+          "pathName": "pages/findingworkinglist/findingworkinglist",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "大转盘",
+          "pathName": "pages/turntable/turntable",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": 43,
+          "name": "快速发布",
+          "pathName": "pages/fast/issue/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": 44,
+          "name": "极速发布",
+          "pathName": "pages/issue/index/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "个人中心",
+          "pathName": "pages/published/recruit/list",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "我的收藏",
+          "pathName": "pages/collect/info/info",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "修改手机号",
+          "pathName": "packageOther/pages/userinfo/phone/phone",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "修改绑定手机号",
+          "pathName": "packageOther/pages/userinfo/phone/phone",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": 49,
+          "name": "我的收藏-招工",
+          "pathName": "pages/collect/info/info",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "我的收藏-找活",
+          "pathName": "pages/collect/resume/resume",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "我的招工信息",
+          "pathName": "pages/published/recruit/list",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "快速发布-招工城市选择",
+          "pathName": "pages/fast/area/area",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "积分消耗记录",
+          "pathName": "pages/integral/expend/expend",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "完善资料",
+          "pathName": "packageOther/pages/userinfo/edit/edit",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "找活名片",
+          "pathName": "pages/clients-looking-for-work/finding-name-card/findingnamecard",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "我的二手交易",
+          "pathName": "pages/published/used/list",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "我的找活",
+          "pathName": "pages/clients-looking-for-work/finding-name-card/findingnamecard",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": 58,
+          "name": "找活置顶界面",
+          "pathName": "pages/clients-looking-for-work/workingtop/workingtop",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": 60,
+          "name": "找活置顶-城市选择",
+          "pathName": "pages/clients-looking-for-work/distruction/distruction",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "招工置顶",
+          "pathName": "pages/workingtopAll/workingtop/workingtop",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "我的收藏",
+          "pathName": "pages/collect/info/info",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "会员中心",
+          "pathName": "pages/ucenter/ucenter",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "帮助中心",
+          "pathName": "packageOther/pages/helpCenter/helpCenter",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "帮助中心-问题答案",
+          "pathName": "packageOther/pages/helpCenter/answer/answer",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "意见反馈",
+          "pathName": "packageOther/pages/others/message/publish/publish",
+          "scene": null
+        }
+      ]
+    }
+  }
 }

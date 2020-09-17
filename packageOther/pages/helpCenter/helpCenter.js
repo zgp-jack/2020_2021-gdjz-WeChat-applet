@@ -2,23 +2,27 @@
 const app = getApp();
 Page({
     data: {
+        // 向右的方向箭头
         rightarrow: app.globalData.apiImgUrl + "new-center-rightarrow.png",
         question: app.globalData.apiImgUrl + "new-ucenter-question.png",
         isEnd: false,
         page:1,
-        listsImg: {
-          nodata: app.globalData.apiImgUrl + "nodata.png",
-        },
         helpeLists:[],
-        memberInfo:[]
+        memberInfo:[],
+        // 点击一级标题展示二级标题
+        showDetail:false,
+        // 手机系统ios或者andriod
+        system:""
     },
     //点击最外层列表展开收起
     listTap(e) {
-        // console.log('触发了最外层');
-        let aIndex = e.currentTarget.dataset.parentindex, //获取点击的下标值
+        //获取点击的下标值
+        let aIndex = e.currentTarget.dataset.parentindex, 
         helpeLists = this.data.helpeLists;
-        helpeLists[aIndex].show = !helpeLists[aIndex].show || false; //变换其打开、关闭的状态
-        if (helpeLists[aIndex].show) { //如果点击后是展开状态，则让其他已经展开的列表变为收起状态
+        //变换其打开、关闭的状态
+        helpeLists[aIndex].show = !helpeLists[aIndex].show || false; 
+        //如果点击后是展开状态，则让其他已经展开的列表变为收起状态
+        if (helpeLists[aIndex].show) { 
           this.packUp(helpeLists, aIndex);
         }
         this.setData({
@@ -33,31 +37,25 @@ Page({
             }
         }
     },
-    
+    // 获取帮助中心问题列表数据
     getHelpeData: function() {
         let _this = this;
         wx.showLoading({ title: '数据加载中' })
+        // 获取手机设备的平台信息ios或者Android
         _this.initGetIntegralList()
         app.appRequestAction({
-            url: "others/help-feedback/",
+            url: "/others/feedback-tree/",
             params: {
-                page: _this.data.page,
                 system:_this.data.system,
             },
             success: function(res) {
                 wx.hideLoading();
                 let mydata = res.data;
                 if (mydata.errcode == "ok") {
-                    let _list = _this.data.helpeLists;
-                    let _lists = mydata.lists;
-
-                    if(_lists.length == 0){
-                        _this.setData({ isEnd:true})
-                    }else{
-                        let mylist = _list.concat(_lists);
-                        let _page = _this.data.page + 1;
-                        _this.setData({ helpeLists: mylist, page: _page});
-                    }
+                    let lists = mydata.data;
+                    _this.setData({
+                        helpeLists: lists
+                    })
                 } else {
                     wx.showToast({
                         title: mydata.errmsg,
@@ -102,6 +100,7 @@ Page({
             },
         })
     },
+    // 获取当前设备平台信息ios或者android
     initGetIntegralList:function(){
         let _this = this;
         app.initSystemInfo(function(res){
@@ -116,7 +115,13 @@ Page({
             }
         })
     },
-
+    // 去问题答案详情页面
+    findAnswer: function (e) {
+        let url = e.currentTarget.dataset.url
+        wx.navigateTo({
+            url: url,
+        })
+    },
     initNeedData: function() {
         let _this = this;
         let _mark = true;
@@ -161,6 +166,11 @@ Page({
         let username = _this.memberInfo.username || "";
         wx.navigateTo({
             url: '/packageOther/pages/others/message/publish/publish?tel=' + tels + "&name=" + username + "&wechat=" + _this.wechat + "&phone=" + _this.phone
+        })
+    },
+    showQuestionDetail: function () {
+        this.setData({
+            showDetail: !this.data.showDetail
         })
     },
     onLoad: function(options) {
