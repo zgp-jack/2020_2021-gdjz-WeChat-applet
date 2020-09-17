@@ -6,7 +6,7 @@
       <template is="wxParse" data="{{ wxParseData:answer.nodes }}"/>
     </scroll-view>
     <view class="answer_footer">
-      <view class="answer_result" bindtap="questionStaus" data-val = "2">未解决</view>
-      <view class="answer_result" bindtap="questionStaus" data-val = "1">已解决</view>
+      <button class="answer_result" bindtap="questionStaus" data-val = "2">未解决</button>
+      <button class="answer_result" bindtap="questionStaus" data-val = "1">已解决</button>
     </view>
 </view>

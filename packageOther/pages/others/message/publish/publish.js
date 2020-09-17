@@ -27,7 +27,7 @@ Page({
         verify: "获取验证码",
         disabled: false, //验证按钮
         texralengh: 0,
-      joingroup:[]
+        joingroup:[]
     },
     initUserInfo: function(options) {
         let td = this.data
@@ -150,7 +150,6 @@ Page({
         let td = this.data
         let userInfo = wx.getStorageSync("userInfo");
         let imgs = this.data.imgs;
-      console.log(imgs)
         let content = this.data.content
         let username = td.member.username
         content = content.replace(/^\s+|\s+$/g, '');
@@ -160,22 +159,6 @@ Page({
             return false;
         }
 
-        if (username.length < 2 || !words.test(username)) {
-            app.showMyTips("请正确输入联系人且必须包含汉字！");
-            return false;
-        }
-
-        if (!vali.isMobile(td.member.phone)) {
-            app.showMyTips("请输入正确的手机号！");
-            return false;
-        }
-
-        if (td.member.phone != td.tel) {
-            if (td.member.verification == "") {
-                app.showMyTips("请输入正确的验证码！");
-                return false;
-            }
-        }
         app.appRequestAction({
             url: "leaving-message/publish/",
             way: "POST",

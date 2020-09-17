@@ -5,10 +5,12 @@
             <view class="feedback-container">
 
                 <view class="box-feelback">
+                    <view class="title">反馈内容</view>
                     <textarea id="texra" maxlength="500" placeholder="请填写您对鱼泡的建议或意见" bindinput="userEnterContent" value='{{ content }}'></textarea>
                     <view class="texralengh">{{texralengh}}/500</view>
                 </view>
                 <view class="feedback-imgs clearfix">
+                    <view class="title">图片上传</view>
                     <view class="feedback-img-item" data-type="0" data-index='{{ index }}' bindtap='userUploadsImg'wx:for="{{ imglists }}" wx:key="{{ index }}">
                         <view class='feedback-imgbox'>
                             <image src='{{ item }}'></image>
@@ -25,6 +27,6 @@
             </view>
         </view>
 
-        <text class="feedback-submit-btn" bindtap='userSubmitFeedback'>提交保存</text>
+        <button class="feedback-submit-btn"  disabled="{{ texralengh==0?'true':false }}" bindtap='userSubmitFeedback'>提交</button>
     </view>
 </view>
