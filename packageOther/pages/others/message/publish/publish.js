@@ -9,6 +9,7 @@ Page({
      */
     data: {
         normalImg: app.globalData.apiImgUrl + "uploads.png",
+        uploadImg: app.globalData.apiImgUrl + "yc/upload-img.png",
         delImg: app.globalData.apiImgUrl + "del.png",
         hintImg: app.globalData.apiImgUrl + 'new-uploadbgimg.png',
         imgs: [],

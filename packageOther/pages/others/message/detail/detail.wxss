@@ -1,0 +1,80 @@
+/* packageOther/pages/others/message/detail/detail.wxss */
+page{
+  background-color: white;
+}
+.detail_content{
+  padding: 0rpx 40rpx;
+  width: 100%;
+}
+.detail_header{
+  width: 100%;
+  height: 130rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin-top: 60rpx;
+}
+.detail_title{
+  font-size: 32rpx;
+  font-weight: 600;
+  color: #464646;
+}
+.detail_time{
+  font-size: 30rpx;
+  color: #464646;
+  font-weight: 500;
+}
+.detail_imag{
+  width:90%;
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  padding: 10rpx;
+  box-sizing: border-box;
+  margin-top: 10rpx;
+  
+}
+.detail_imag image{
+  width: 200rpx;
+  height: 200rpx;
+  border-radius: 8rpx;
+}
+.detail_reply{
+  margin-top: 80rpx;
+  font-size: 28rpx;
+}
+.detail_reply text {
+  font-size: 30rpx;
+}
+.detail_reply text:nth-child(1){
+  color: #0099ff;
+  margin-right: 5rpx;
+}
+.detail_reply view{
+  margin-top: 20rpx;
+  font-size: 30rpx;
+}
+
+.detail_footer{
+  width: 100%;
+  height: 250rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 100rpx;
+}
+.detail_footer button{
+  width: 95%;
+  height: 100rpx;
+  color: #505050;
+  font-size: 36rpx;
+  font-weight: 500;
+  border-color: #E4E2E2;
+}
+.button_choose{
+  background: url(http://cdn.yupao.com/miniprogram/images/yc/choose-status.png
+  ) no-repeat bottom right;
+  background-size: 40rpx 40rpx;
+}

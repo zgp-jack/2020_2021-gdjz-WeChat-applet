@@ -1,30 +1,8 @@
 <!--pages/ucenter/ucenterNew/helpCenter.wxml-->
-<!-- <view class='list_box yupao-common-container'>
-    <view class='listItem' wx:for='{{helpeLists}}' wx:key='this' wx:for-item='parentItem' wx:for-index='parentIndex'>
-        <view class='list_name_box' catchtap='listTap' data-parentindex='{{parentIndex}}'>
-            <view class='list_item_title'>
-                <image src='{{ question }}' class='icon_question'></image>
-                <text class='list_item_name'>{{parentItem.question}}</text>
-                <image src='{{ rightarrow }}' class='icon_down {{parentItem.show&&"icon_down_rotate"}}'></image>
-            </view>
-            <view class='list_item_box' wx:if='{{parentItem.show}}'>
-                <view class='other_box'>
-                    <view class='other'>{{parentItem.answer}}</view>
-                </view>
-            </view>
-        </view>
-    </view>
-    <view class='fast-list-nomore' wx:if="{{ isEnd }}">没有更多数据了</view>
-    <view class='common-nodatabox flex-column lists-nodata' wx:if="{{ helpeLists.length == 0 }}">
-        <image src='{{ listsImg.nodata }}'></image>
-        <text>暂无相关内容</text>
-    </view>
-</view>
-<view class='goyi' bindtap='suggestUserUrl'>意见反馈</view> -->
 
 <view class="help_center_head">
     <view class="help_center_search">
-        <image class="help_search_icon" src="../../../images/search.png"></image> 
+        <image class="help_search_icon" src="{{ searchIcon }}"></image> 
         <input class="heip_search_input" placeholder="输入您要找的问题"></input>
     </view>
 </view>
@@ -50,8 +28,8 @@
 </scroll-view>
 
 <view class="help_center_footer">
-    <view class="help_center_suggestions">意见反馈</view>
-    <view class="help_my_suggestions">我的反馈</view>
+    <view class="help_center_suggestions" bindtap="goPublishFeedback">意见反馈</view>
+    <view class="help_my_suggestions" bindtap="goFeedback">我的反馈</view>
 </view>
 
 

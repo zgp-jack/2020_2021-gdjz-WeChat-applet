@@ -87,7 +87,8 @@
         "pages/userinfo/index/index",
         "pages/userinfo/edit/edit",
         "pages/userinfo/phone/phone",
-        "pages/helpCenter/answer/answer"
+        "pages/helpCenter/answer/answer",
+        "pages/others/message/detail/detail"
       ]
     }
   ],

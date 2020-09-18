@@ -506,6 +506,13 @@
           "id": -1,
           "name": "意见反馈",
           "pathName": "packageOther/pages/others/message/publish/publish",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "意见反馈列表",
+          "pathName": "packageOther/pages/others/message/lists/lists",
           "scene": null
         }
       ]

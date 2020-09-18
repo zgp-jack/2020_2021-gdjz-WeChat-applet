@@ -5,6 +5,8 @@ Page({
         // 向右的方向箭头
         rightarrow: app.globalData.apiImgUrl + "new-center-rightarrow.png",
         question: app.globalData.apiImgUrl + "new-ucenter-question.png",
+        // 搜索框Icon
+        searchIcon: app.globalData.apiImgUrl + "yc/helpCenter-search.png",
         isEnd: false,
         page:1,
         helpeLists:[],
@@ -171,6 +173,18 @@ Page({
     showQuestionDetail: function () {
         this.setData({
             showDetail: !this.data.showDetail
+        })
+    },
+    // 点击我的反馈跳转到我的反馈列表
+    goFeedback: function () {
+        wx.navigateTo({
+          url: '/packageOther/pages/others/message/lists/lists',
+        })
+    },
+    // 点击去发布意见反馈
+    goPublishFeedback: function () {
+        wx.navigateTo({
+            url: '/packageOther/pages/others/message/publish/publish',
         })
     },
     onLoad: function(options) {
