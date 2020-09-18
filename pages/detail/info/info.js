@@ -513,6 +513,8 @@ Page({
         })
     },
     doDetailAction: function (mydata, _obj) {
+        let _this = this
+        let infoId = _this.data.infoId
         if ((mydata.errcode == "ok") || (mydata.errcode == "end") || (mydata.errcode == "ajax")) { //获取成功、已找到
             _obj.success();
         } else if (mydata.errcode == "auth_not_pass") {  //实名未通过、（进入实名）
@@ -583,7 +585,33 @@ Page({
 
                 }
             })
-        }else {  //用户异常、用户验证失败
+        } else if (mydata.errcode == "reload") { //已招满状态刷新页面
+          wx.showModal({
+            title: '温馨提示',
+            content: mydata.errmsg,
+            showCancel:false,
+            confirmText: "确定",
+            success(res) {
+              if (res.confirm) {
+                 _this.initJobInfo(infoId)
+              } 
+            }
+          })
+        } else if (mydata.errcode == "goback") { //已删除返回上一页
+          wx.showModal({
+            title: '温馨提示',
+            content: mydata.errmsg,
+            confirmText: "确定",
+            showCancel:false,
+            success(res) {
+              if (res.confirm) {
+                wx.navigateBack({
+                  delta: 1,
+                })
+              } 
+            }
+          })
+        } else {  //用户异常、用户验证失败
             wx.showModal({
                 title: '温馨提示',
                 content: mydata.errmsg,

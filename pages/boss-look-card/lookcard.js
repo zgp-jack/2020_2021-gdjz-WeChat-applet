@@ -262,6 +262,32 @@ Page({
               }
             }
           })
+        } else if (res.data.errcode == "reload") { //已招满状态刷新页面
+          wx.showModal({
+            title: '温馨提示',
+            content: res.data.errmsg,
+            showCancel:false,
+            confirmText: "确定",
+            success(res) {
+              if (res.confirm) {
+                 _this.getdetail(_this.data.options)
+              } 
+            }
+          })
+        } else if (res.data.errcode == "goback") { //已删除返回上一页
+          wx.showModal({
+            title: '温馨提示',
+            content: res.data.errmsg,
+            confirmText: "确定",
+            showCancel:false,
+            success(res) {
+              if (res.confirm) {
+                wx.navigateBack({
+                  delta: 1,
+                })
+              } 
+            }
+          })
         } else {
           app.showMyTips(res.data.errmsg)
         }

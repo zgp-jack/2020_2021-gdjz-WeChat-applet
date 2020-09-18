@@ -329,16 +329,18 @@
 
 .menu-item-box {
     display: flex;
-    justify-content: space-between;
+    /* justify-content: space-between; */
     flex-wrap: wrap;
-    padding: 0 34rpx;
+    padding: 0 25rpx;
 }
 
 .menu-item {
+    width: 161rpx;
+    height: 190rpx;
     position: relative;
-    margin-right: 117rpx;
-    margin-top: 48rpx;
-    width: 130rpx;
+    /* margin-right: 10rpx; */
+    /* margin-top: 48rpx; */
+    /* width: 130rpx; */
 }
 
 .menu-item:nth-child(1), .menu-item:nth-child(2), .menu-item:nth-child(3) {

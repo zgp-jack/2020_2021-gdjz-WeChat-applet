@@ -43,12 +43,6 @@ Page({
             icon: app.globalData.apiImgUrl + "ucenter/ucenter-collect.png",
           },
           {
-            key: 'bookkeeping',
-            name: '记工记账',
-            dataUrl: '',
-            icon: app.globalData.apiImgUrl + "ucenter/ucenter-account.png",
-          },
-          {
             key: 'mymessage',
             name: '我的消息',
             dataUrl: '/pages/information/mymessage/mymessage',
@@ -59,6 +53,12 @@ Page({
             name: '免费领好礼',
             dataUrl: '',
             icon: app.globalData.apiImgUrl + "ucenter/ucenter-gift.png",
+          },
+          {
+            key: 'bookkeeping',
+            name: '记工记账',
+            dataUrl: '',
+            icon: app.globalData.apiImgUrl + "ucenter/ucenter-account.png",
           },
         ]
       },
