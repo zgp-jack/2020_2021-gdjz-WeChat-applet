@@ -538,7 +538,11 @@ Page({
         areaTextC: allcity,
         areaText: allall
       })
-
+      setTimeout(() => {
+        that.setData({
+          select:`selected${allall[0].id}2`
+        })
+      }, 300);
       let hlid = allall.map(item => item.id)
       let outlen = areasArr.length
       for (let i = 0; i < outlen; i++) {
@@ -956,27 +960,6 @@ Page({
       areaTextId: id
     })
   },
-  // 初始化选中城市滚动位置id
-  initSelectedId:function (){
-    // 升序排序
-    function projectSort(key) {
-      return function (objectN,objectM) {
-        let valueN = objectN[key];
-        let valueM = objectM[key];
-        if (valueN < valueM) return -1
-        else if (valueN > valueM) return 1
-        else return 0
-      }
-    }
-    // 获取所有选择的城市区域
-    let areaText = this.data.areaText
-    // 按照pid升序排序
-    let sortAreaText = areaText.sort(projectSort("pid"))
-    this.setData({
-      select:`selected${sortAreaText[0].id}2`
-    })
-    
-  },
   onLoad: function(options) {
     //获取置顶配置中最大的城市数量和最大省数量并存入data中
     this.getMax(options);
@@ -998,9 +981,6 @@ Page({
   onShow: function() {
     let that = this
     that.gethistory()
-    setTimeout(() => {
-      that.initSelectedId()
-    }, 300);
   },
 
   /**

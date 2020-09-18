@@ -30,7 +30,7 @@
       <text class='history-children' wx:for="{{ historyArray }}" wx:key="{{ index }}" data-id="{{item.id}}" data-name="{{item.city}}" data-pid="{{ item.pid }}" bindtap="hischildren">{{item.city}}</text>
     </view>
   </view>
-
+  <view class='index-area-tips overwords' wx:if="{{ !showInputList || !showListsAnd }}">请选择置顶范围：</view>
   <scroll-view scroll-y="{{ true }}" scroll-into-view="{{ select }}" class="index-area-scroll">
     <view class='index-area-content'>
       <view class='index-area-item' wx:if="{{ gpsOrientation || locationHistory }}">
@@ -45,9 +45,6 @@
             <text class='overwords' data-id="{{ item.id }}" data-area="{{ item.name }}" data-pname="{{ item.ad_name || item.name  }}" bindtap='chooseThisCtiy'>{{ item.name }}</text>
           </view>
         </view>
-      </view>
-      <view class='index-area-tips overwords' wx:if="{{ !showInputList || !showListsAnd }}">请选择置顶范围：
-
       </view>
       <view class='index-area-item' wx:for="{{ areadatas }}" wx:key="{{ index }}" wx:for-item="areaItem">
         <text class='area-header-words'>{{ (index == 0) ? "热门城市" : areaItem[0].ad_name  }}</text>
