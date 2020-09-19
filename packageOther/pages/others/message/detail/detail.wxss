@@ -72,6 +72,7 @@ page{
   font-size: 36rpx;
   font-weight: 500;
   border-color: #E4E2E2;
+  line-height: 85rpx;
 }
 .button_choose{
   background: url(http://cdn.yupao.com/miniprogram/images/yc/choose-status.png

@@ -14,6 +14,8 @@ Page({
     useful: 0,
     // 选中状态图片
     chooseImage: app.globalData.apiImgUrl + "choose-status",
+    // 电话号码
+    serverPhone: app.globalData.serverPhone
   },
   initFeedDetail: function (options) {
     let _this = this;
@@ -65,16 +67,27 @@ Page({
   feedbackResult: function (e) {
     let _this = this
     let val = e.currentTarget.dataset.val;
+    // 电话号码
+    let serverPhone = _this.data.serverPhone;
     let id = this.data.id
     if (val == 2) {
         wx.showModal({
           title:'系统提示',
-          content:"是否需要联系客服帮您解决？ 客服电话：400-838-1888",
+          content:`是否需要联系客服帮您解决？ 客服电话：${serverPhone}`,
           cancelColor: '#B0ADAD',
           confirmText:'拨打电话',
-          confirmColor: '#0099FF'
+          confirmColor: '#0099FF',
+          success: function (res) {
+            if (res.confirm) {
+              wx.makePhoneCall({
+              phoneNumber: serverPhone,
+              })
+            }
+          }
         })
     }
+
+    
     app.appRequestAction({
       url: "others/message-useful/",
       way: "POST",

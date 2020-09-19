@@ -28,6 +28,7 @@ page{
   flex-direction: column;
   align-items: center;
   justify-content: space-evenly;
+  margin-bottom: 80rpx;
 }
 .answer_result{
   display: flex;
@@ -36,7 +37,6 @@ page{
   height: 80rpx;
   width: 80%;
   background: rgba(219, 219, 219, 0);
-  border: 1px solid #E4E2E2;
   border-radius: 4px;
   font-weight: 400;
   color: #474747;

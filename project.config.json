@@ -21,6 +21,8 @@
     "checkSiteMap": true,
     "uploadWithSourceMap": true,
     "compileHotReLoad": false,
+    "useMultiFrameRuntime": false,
+    "useApiHook": false,
     "babelSetting": {
       "ignore": [],
       "disablePlugins": [],
@@ -371,6 +373,13 @@
           "id": -1,
           "name": "会员中心",
           "pathName": "pages/ucenter/ucenter",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "帮助中心",
+          "pathName": "packageOther/pages/helpCenter/helpCenter",
           "scene": null
         }
       ]

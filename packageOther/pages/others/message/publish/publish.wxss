@@ -3,6 +3,9 @@
   position: relative;
   width: 100%;
 }
+.yupao-common-container{
+  padding-bottom: 0rpx;
+}
 page{
   background-color: white;
 }
@@ -124,13 +127,13 @@ page{
   line-height: 100rpx;
   background: #09f;
   text-align: center;
-  display: block;
   color: white;
   font-size: 30rpx;
   letter-spacing: 2rpx;
   margin: 50rpx auto 0;
   border-radius: 5px;
 }
+
 
 .feedback-del-thisimg {
   position: absolute;

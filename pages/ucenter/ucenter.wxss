@@ -139,7 +139,6 @@
 }
 
 .ucenter-nouserinfo-tips {
-    /*border-top: 1px dashed #dcdcdc;*/
     padding: 20rpx;
     font-size: 26rpx;
     line-height: 50rpx;
@@ -181,7 +180,6 @@
     position: relative;
     font-weight: bold;
     height: 100%;
-    /*flex: 1;*/
 }
 
 .ucenter-integral-item text:nth-child(1) {
@@ -206,7 +204,6 @@
 .ucener-leftImage {
     width: 42rpx;
     height: 38rpx;
-    /* padding: 32rpx 20rpx 30rpx 0 */
 }
 
 .ucener-border-b {
@@ -231,16 +228,17 @@
 }
 
 .masnumber {
-    width: 18rpx;
-    height: 18rpx;
+    width: 26rpx;
+    height: 26rpx;
     background: #fd0618;
     border-radius: 50%;
     position: absolute;
     top: 5rpx;
-    right: 15rpx;
+    right: 23rpx;
     color: #fff;
-    font-size: 17rpx;
+    font-size: 15rpx;
     text-align: center;
+    line-height: 26rpx;
 }
 
 .msg-dot {
@@ -294,7 +292,7 @@
     box-shadow: 0 4rpx 27rpx 0 rgba(144, 144, 144, 0.1);
     border-radius: 10rpx;
     padding: 30rpx 0;
-    margin-bottom: 16rpx;
+    margin-bottom: 20rpx;
 }
 
 .menu-box {
@@ -309,47 +307,27 @@
     margin-left: 16rpx;
     display: flex;
     align-items: center;
-    margin-bottom: 48rpx;
 }
 
-.line {
-    width: 5rpx;
-    height: 23rpx;
-    background: #08B1F8;
-    border-radius: 3px;
-    margin-right: 11rpx;
-}
 
 .title-text {
-    font-size: 28rpx;
-    font-weight: 500;
+    font-size: 30rpx;
+    font-weight: 600;
     color: #060606;
     line-height: 32rpx;
 }
 
 .menu-item-box {
     display: flex;
-    /* justify-content: space-between; */
     flex-wrap: wrap;
-    padding: 0 25rpx;
 }
 
 .menu-item {
-    width: 161rpx;
-    height: 190rpx;
+    width: 172rpx;
     position: relative;
-    /* margin-right: 10rpx; */
-    /* margin-top: 48rpx; */
-    /* width: 130rpx; */
+    margin-top: 55rpx;
 }
 
-.menu-item:nth-child(1), .menu-item:nth-child(2), .menu-item:nth-child(3) {
-    margin-top: 0;
-}
-
-.menu-item:nth-child(3), .menu-item:nth-child(6), .menu-item:nth-child(9) {
-    margin-right: 0;
-}
 
 .icon-bor {
     width: 68rpx;
@@ -376,9 +354,9 @@
 .new-tag {
     position: absolute;
     top: -7rpx;
-    right: -7rpx;
-    width: 32rpx;
-    height: 21rpx;
+    right: 15rpx;
+    width: 35rpx;
+    height: 25rpx;
     line-height: 21rpx;
     background: #FF1A1A;
     border-radius: 8rpx 8rpx 8rpx 0;
@@ -405,14 +383,15 @@
 }
 
 .icon-text {
-    width: 20rpx;
-    height: 20rpx;
+    width: 26rpx;
+    height: 26rpx;
     background: #fd0618;
     border-radius: 50%;
     position: absolute;
     top: -6rpx;
     right: -17rpx;
     color: #fff;
-    font-size: 17rpx;
+    font-size: 15rpx;
     text-align: center;
+    line-height: 26rpx;
 }

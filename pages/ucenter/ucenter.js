@@ -102,15 +102,9 @@ Page({
           },
           {
             key: 'help',
-            name: '帮助中心',
+            name: '帮助与反馈',
             dataUrl: '/packageOther/pages/helpCenter/helpCenter',
             icon: app.globalData.apiImgUrl + "ucenter/ucenter-help-center.png",
-          },
-          {
-            key: 'feedback',
-            name: '意见反馈',
-            dataUrl: '/packageOther/pages/others/message/lists/lists',
-            icon: app.globalData.apiImgUrl + "ucenter/ucenter-feedback.png",
           },
           {
             key: 'service',
