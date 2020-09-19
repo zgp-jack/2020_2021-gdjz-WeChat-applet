@@ -25,6 +25,7 @@ Page({
     showTopTips: false,
     //我的全部招工信息是否有数据
     isAllList : false,
+    resumeText: ""
   },
   publishJob:function () {
     app.initJobView()
