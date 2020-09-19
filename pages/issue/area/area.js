@@ -510,7 +510,7 @@ Page({
         }
       },
       fail: function () {
-        this.setData({ addressTips: '接口出错，请联系客服电话400-838-1888' })
+        this.setData({ addressTips: `接口出错，请联系客服电话${app.globalData.serverPhone}` })
       }
     })
 

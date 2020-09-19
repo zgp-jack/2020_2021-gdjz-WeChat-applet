@@ -119,7 +119,7 @@ Page({
   showInputList: function() {
     this.setData({
       showInputList: true,
-      showListsAnd: true
+      showListsAnd: true,
     })
   },
   closeArea: function() {
@@ -638,6 +638,7 @@ Page({
           showListsAnd: false,
           showInputList: false,
           searchInputVal: "",
+          select:`selected${odataset.id}2`
         })
         return
       }
@@ -679,6 +680,7 @@ Page({
           showListsAnd: false,
           showInputList: false,
           searchInputVal: "",
+          select:`selected${data.id}2`
         })
         return
       }
@@ -712,6 +714,7 @@ Page({
     }
   },
   showseleted(item) {
+    debugger
     let that = this;
     let areadatafor = app.arrDeepCopy(that.data.areadatas);
     let detail = {

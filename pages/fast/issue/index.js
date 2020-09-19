@@ -126,6 +126,7 @@ Page({
     // }
   },
   publishRecurit: function () {
+    let that = this
     let vali = v.v.new();
     let {
       content,
@@ -197,6 +198,8 @@ Page({
             wx.navigateTo({
               url: '/pages/fast/area/area?token=' + mydata.token,
             })
+            that.setEnterInfo("detail",'')
+            that.setEnterInfo("phone",'')
           } else {
             wx.navigateTo({
               url: '/pages/fast/code/code?token=' + mydata.token + '&tel=' + phone,

@@ -663,6 +663,7 @@ Page({
           showListsAnd: false,
           showInputList: false,
           searchInputVal: "",
+          select:`selected${odataset.id}2`
         })
         return
       }
@@ -704,6 +705,7 @@ Page({
           showListsAnd: false,
           showInputList: false,
           searchInputVal: "",
+          select:`selected${data.id}2`
         })
         return
       }

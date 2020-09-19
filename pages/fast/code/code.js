@@ -64,7 +64,36 @@ Page({
         }
     })
   },
+  // 设置缓存保留已填写信息
+  setEnterInfo: function (name, data) {
+    let regx = /1[3-9]\d{9}/g
+    let key = 'jiSuData'
+    let jiSuData = wx.getStorageSync(key)
+    if (name === "phone") {
+      if (regx.test(data)) {
+        if (jiSuData) {
+          jiSuData[name] = data
+        } else {
+          jiSuData = {}
+          jiSuData[name] = data
+        }
+      } else {
+        if (jiSuData) {
+          jiSuData[name] = ""
+        }
+      }
+    } else {
+      if (jiSuData) {
+        jiSuData[name] = data
+      } else {
+        jiSuData = {}
+        jiSuData[name] = data
+      }
+    }
+    wx.setStorageSync(key, jiSuData)
+  },
   surePublishAction:function(){
+    let that = this
     let { phone, code, token } = this.data;
     app.appRequestAction({
         title: "发布中",
