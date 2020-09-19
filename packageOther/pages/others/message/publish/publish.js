@@ -9,6 +9,7 @@ Page({
      */
     data: {
         normalImg: app.globalData.apiImgUrl + "uploads.png",
+        uploadImg: app.globalData.apiImgUrl + "yc/upload-img.png",
         delImg: app.globalData.apiImgUrl + "del.png",
         hintImg: app.globalData.apiImgUrl + 'new-uploadbgimg.png',
         imgs: [],
@@ -27,7 +28,7 @@ Page({
         verify: "获取验证码",
         disabled: false, //验证按钮
         texralengh: 0,
-      joingroup:[]
+        joingroup:[]
     },
     initUserInfo: function(options) {
         let td = this.data
@@ -147,50 +148,32 @@ Page({
     },
     userSubmitFeedback: function() {
         let _this = this;
-        let td = this.data
         let userInfo = wx.getStorageSync("userInfo");
         let imgs = this.data.imgs;
-      console.log(imgs)
+        let images = imgs.join(",");
         let content = this.data.content
-        let username = td.member.username
         content = content.replace(/^\s+|\s+$/g, '');
         let words = /[\u4e00-\u9fa5]+/;
         if (content.length < 15 || !words.test(content)) {
-            app.showMyTips("输入内容不少于15个字且必须包含文字！");
+            wx.showModal({
+                title: '提示',
+                content: "输入内容不少于15个字且必须包含文字",
+                showCancel: false
+            })
             return false;
-        }
-
-        if (username.length < 2 || !words.test(username)) {
-            app.showMyTips("请正确输入联系人且必须包含汉字！");
-            return false;
-        }
-
-        if (!vali.isMobile(td.member.phone)) {
-            app.showMyTips("请输入正确的手机号！");
-            return false;
-        }
-
-        if (td.member.phone != td.tel) {
-            if (td.member.verification == "") {
-                app.showMyTips("请输入正确的验证码！");
-                return false;
-            }
         }
         app.appRequestAction({
-            url: "leaving-message/publish/",
+            url: "leaving-message/publish-v2/",
             way: "POST",
             mask: true,
             title: "正在提交留言",
             failTitle: "网络错误，留言失败！",
             params: {
-                userId: userInfo.userId,
+                mid: userInfo.userId,
                 token: userInfo.token,
-                tokenTime: userInfo.tokenTime,
-                images: imgs,
+                time: userInfo.tokenTime,
+                images: images,
                 content: content,
-                username: username,
-                tel: td.member.phone,
-                code: td.member.verification
             },
             success: function(res) {
                 let mydata = res.data;

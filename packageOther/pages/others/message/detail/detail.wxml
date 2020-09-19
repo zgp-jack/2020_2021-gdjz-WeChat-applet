@@ -1,0 +1,18 @@
+<!--packageOther/pages/others/message/detail/detail.wxml-->
+<view class="detail_content"> 
+  <view class="detail_header">
+    <view class="detail_title">{{ feedbackDetail.content }}</view>
+    <view class="detail_time">{{ feedbackDetail.ask_time }}</view>
+  </view>
+  <view class="detail_imag">
+    <image src="{{ item}}" wx:for="{{ feedbackDetail.images }}" wx:key="index" mode="aspectFill" bindtap="previewImage" data-url="{{ item }}"></image>
+  </view>
+  <view class="detail_reply">
+    <text>回复：</text><text>{{ feedbackDetail.send_msg }}</text>
+    <view>{{ feedbackDetail.reply_time }}</view>
+  </view>
+  <view class="detail_footer">
+    <button class="{{useful==2?'button_choose':''}}" plain disabled="{{ useful !=0?true:false }}" bindtap="feedbackResult" data-val="2">未解决</button>
+    <button class="{{useful==1?'button_choose':''}}" plain disabled="{{ useful !=0?true:false }}" bindtap="feedbackResult" data-val="1">已解决</button>
+  </view>
+</view>

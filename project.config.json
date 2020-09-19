@@ -21,8 +21,6 @@
     "checkSiteMap": true,
     "uploadWithSourceMap": true,
     "compileHotReLoad": false,
-    "useMultiFrameRuntime": false,
-    "useApiHook": false,
     "babelSetting": {
       "ignore": [],
       "disablePlugins": [],

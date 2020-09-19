@@ -1,0 +1,12 @@
+<import src="../../../../wxParse/wxParse.wxml"/>
+
+<view class='noticebox'>
+    <view class="infotitle">{{ title }}</view>
+    <view class="answer_scroll">
+      <template is="wxParse" data="{{ wxParseData:answer.nodes }}"/>
+    </view>
+    <view class="answer_footer">
+      <button class="answer_result" bindtap="questionStaus" data-val = "2">未解决</button>
+      <button class="answer_result" bindtap="questionStaus" data-val = "1">已解决</button>
+    </view>
+</view>
