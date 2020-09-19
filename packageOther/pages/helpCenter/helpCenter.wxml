@@ -3,12 +3,14 @@
 <view class="help_center_head">
     <view class="help_center_search">
         <image class="help_search_icon" src="{{ searchIcon }}"></image> 
-        <input class="heip_search_input" placeholder="输入您要找的问题"></input>
+        <input class="help_search_input" bindinput="getSearchList" bindblur="hiddenSearch" bindfocus="showSearch" placeholder="输入您要找的问题"></input>
     </view>
 </view>
-<!-- <view class="help_search_list">
-    <view class="help_search_content"></view>
-</view> -->
+<view class="help_search_list" wx:if="{{ showSearch == true }}">
+    <view class="help_search_content">
+        <view class="help_search_item" wx:for="{{searchLists}}" wx:key="index" bindtap="findAnswer"   data-url='/packageOther/pages/helpCenter/answer/answer?id={{ item.id }}'>{{  item.question }}</view>
+    </view>
+</view>
 <view class="help_list_title">
     <view>问题类型</view>
 </view>

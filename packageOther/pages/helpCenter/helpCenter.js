@@ -4,7 +4,6 @@ Page({
     data: {
         // 向右的方向箭头
         rightarrow: app.globalData.apiImgUrl + "new-center-rightarrow.png",
-        question: app.globalData.apiImgUrl + "new-ucenter-question.png",
         // 搜索框Icon
         searchIcon: app.globalData.apiImgUrl + "yc/helpCenter-search.png",
         isEnd: false,
@@ -14,7 +13,42 @@ Page({
         // 点击一级标题展示二级标题
         showDetail:false,
         // 手机系统ios或者andriod
-        system:""
+        system:"",
+        // 检索结果数组
+        searchLists: [],
+        // 搜索结果框是否显示
+        showSearch: false
+    },
+    // 搜索框输入类型搜索问题
+    getSearchList: function (e) {
+        // 获取输入内容
+        let content = e.detail.value;
+        // 获取问题数据
+        let helpeLists = this.data.helpeLists;
+        // 检索结果的数据
+        let searchLists =[];
+        // 如果输入框内容不为空，才进行匹配
+        if (content.length != 0) {
+            // 找到与搜索关键词匹配的问题数据
+            searchLists = helpeLists.reduce((pre,item)=>{
+                // pre当前最新的检索数组
+                let searchArray = pre
+                // 获取data中二维数据quesitons
+                let questions = item.questions
+                // 遍历quesitons中每一项如果有跟输入内容匹配的数据就添加到searchArray中
+                for (let question of questions) {
+                    let questionStr = question.question
+                    if (questionStr.includes(content)) searchArray.push(question)
+                }
+                // 返回检索结果数据
+                return searchArray
+            },[])
+        }else searchLists=[] //如果将输入内容置空将检索结果数组也置空
+        // 将结果数据存入data中
+        this.setData({ 
+            searchLists: searchLists,
+            showSearch: searchLists.length == 0 ? false:true
+         })
     },
     //点击最外层列表展开收起
     listTap(e) {
@@ -123,8 +157,18 @@ Page({
         wx.navigateTo({
             url: url,
         })
+        this.setData({showSearch: false})
     },
-    initNeedData: function() {
+    // 搜索输入框获取焦点的时候如果输入框有搜索结果显示搜索结果框
+    showSearch: function () {
+        let searchLists = this.data.searchLists
+        this.setData({showSearch: searchLists.length == 0 ? false:true})
+    },
+    // 搜索输入框失去焦点隐藏结果
+    hiddenSearch: function () {
+        this.setData({showSearch: false})
+    },
+    initNeedData: function () {
         let _this = this;
         let _mark = true;
         let _wx = wx.getStorageSync("_wx");

@@ -19,6 +19,7 @@ Page({
         FeedBackLists:[],
         // 向右的箭头
         rightarrow: app.globalData.apiImgUrl + "new-center-rightarrow.png",
+        serverPhone: app.globalData.serverPhone
     },
     initUserData: function(options) {
         let userInfo = wx.getStorageSync("userInfo");
@@ -178,11 +179,8 @@ Page({
     // },
 
     valiUserUrl: function() {
-        let td = this.data;
-        let tels = td.memberInfo.phone || "";
-        let username = td.memberInfo.username || "";
         wx.navigateTo({
-            url: '/packageOther/pages/others/message/publish/publish?tel=' + tels + "&name=" + username + "&wechat=" + td.wechat + "&phone=" + td.phone
+            url: '/packageOther/pages/others/message/publish/publish',
         })
     },
     clipboardWechat: function (e) {

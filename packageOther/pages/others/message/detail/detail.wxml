@@ -4,8 +4,8 @@
     <view class="detail_title">{{ feedbackDetail.content }}</view>
     <view class="detail_time">{{ feedbackDetail.ask_time }}</view>
   </view>
-  <view class="detail_imag" wx:for="{{ feedbackDetail.images }}" wx:key="index">
-    <image src="{{ item}}" mode="aspectFill" bindtap="previewImage" data-url="{{ item }}"></image>
+  <view class="detail_imag">
+    <image src="{{ item}}" wx:for="{{ feedbackDetail.images }}" wx:key="index" mode="aspectFill" bindtap="previewImage" data-url="{{ item }}"></image>
   </view>
   <view class="detail_reply">
     <text>回复：</text><text>{{ feedbackDetail.send_msg }}</text>

@@ -1,8 +1,8 @@
 <scroll-view class="help_list_scroll" scroll-y>
     <!-- 意见反馈列表 -->
     <view class="feedback-header" id="comment">
-    <view class="yupao-lists-wxtips">
-        <text  wx:for="{{joingroup}}" wx:key="{{ index }}" style="color:{{item.color}}"      data-wechat="{{ item.text== 'wechat_number'|| item.action.type == 'copy' ?wechat:'' }}" bindtap="{{item.action.type == 'replace'?'clipboardWechat':((item.action.type == 'copy'?'clipboardWechat':(item.action.type == 'call'?'callThisPhone':''))) }}" data-phone="{{ item.action.type == 'call'?phone:'' }}"  class="{{item.action.is_btn == '1'?'phoneer':'' }}" >{{item.text== 'wechat_number'?wechat:item.text}}</text>
+    <view class="yupao-lists-tips">
+        <text>为提高沟通效率，建议您添加客服微信号或拨打客服电话。客服微信号:</text><text style="color:#007aff">{{ wechat }},</text><text>客服电话:</text><text style="color:#007aff">{{ serverPhone }}</text>
     </view>
     </view>
     <view class="help_list_body">
@@ -21,7 +21,7 @@
 </scroll-view>
 
 <view class="footr">
-    <view class="footr-1" bindtap='valiUserUrl'>我要提意见</view>
+    <view class="footr-1" bindtap='valiUserUrl'>意见反馈</view>
 </view>
 
 

@@ -148,33 +148,32 @@ Page({
     },
     userSubmitFeedback: function() {
         let _this = this;
-        let td = this.data
         let userInfo = wx.getStorageSync("userInfo");
         let imgs = this.data.imgs;
+        let images = imgs.join(",");
         let content = this.data.content
-        let username = td.member.username
         content = content.replace(/^\s+|\s+$/g, '');
         let words = /[\u4e00-\u9fa5]+/;
         if (content.length < 15 || !words.test(content)) {
-            app.showMyTips("输入内容不少于15个字且必须包含文字！");
+            wx.showModal({
+                title: '提示',
+                content: "输入内容不少于15个字且必须包含文字",
+                showCancel: false
+            })
             return false;
         }
-
         app.appRequestAction({
-            url: "leaving-message/publish/",
+            url: "leaving-message/publish-v2/",
             way: "POST",
             mask: true,
             title: "正在提交留言",
             failTitle: "网络错误，留言失败！",
             params: {
-                userId: userInfo.userId,
+                mid: userInfo.userId,
                 token: userInfo.token,
-                tokenTime: userInfo.tokenTime,
-                images: imgs,
+                time: userInfo.tokenTime,
+                images: images,
                 content: content,
-                username: username,
-                tel: td.member.phone,
-                code: td.member.verification
             },
             success: function(res) {
                 let mydata = res.data;
