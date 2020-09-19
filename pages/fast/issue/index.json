@@ -1,6 +1,7 @@
 {
   "usingComponents": {
-    "issueok": "/components/issueok/index"
+    "issueok": "/components/issueok/index",
+    "detaintip":"/components/detaintip/detaintip"
   },
   "navigationBarTitleText":"发布招工"
 }

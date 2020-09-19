@@ -1,9 +1,12 @@
 @import "../code/code.wxss";
 
+page{
+  background: #f7f6f7;
+}
 .issue-area-container{
   position: relative;
-  padding: 20rpx;
 }
+
 .issue-area-tips{
   position: relative;
   margin-top: 35rpx;
@@ -11,23 +14,46 @@
   line-height: 80rpx;
   font-size: 28rpx;
 }
-.issue-contact-input{
-  margin-top: 0;
+.issue-contactbox{
+  padding: 30rpx;
 }
-.issue-area-box{
+.issue-box{
   position: relative;
+  display: flex;
+  align-items: center;
+  background: white;
+  padding: 0rpx 20rpx;
+  margin-bottom: 20rpx;
+  font-size: 28rpx;
+  border-radius: 10rpx;
 }
-.issue-area-triangle{
-  position: absolute;
-  width: 0; 
-  height: 0;
-  right: 20rpx;
-  top: 30rpx;
-  border-width: 12rpx;
-  border-style: solid;
-  border-color:#111 transparent transparent  transparent;
+.issue-input{
+  position: relative;
+  display: inline-block;
+  border-radius: 5rpx;
+  height: 100rpx;
+  line-height: 75rpx;
+  background-color: white;
+  padding: 0 20rpx;
+  font-size: 30rpx;
+  flex:1;
 }
-
+.input-item-text{
+  position: relative;
+  width: 100%;
+  padding: 20rpx 0;
+  line-height: 45rpx;
+  font-size: 28rpx;
+  left: 20rpx;
+  flex:1
+}
+.issue-box text{
+  display: block;
+  position: relative;
+  line-height: 45rpx;
+  font-size: 28rpx;
+  width: 140rpx;
+}
 .issue-tip{
   display: flex;
   flex-direction: row;
@@ -38,7 +64,8 @@
   font-weight: bold;
   font-size: 30rpx;
   color: #333;
-  line-height: 60rpx;
+  line-height: 100rpx;
+  background: white;
 }
 .issue-tip-image {
   display: inline-block;
@@ -46,4 +73,187 @@
 }
 .issue-contact-title{
   margin: 0rpx 10rpx;
+}
+.issue-form-upload{
+  background: white;
+  border-radius: 10rpx;
+}
+
+.issue-form-switch{
+  position:relative;
+  display: flex;
+  align-items: center;
+  height: 100rpx;
+  font-size: 28rpx;
+  padding: 0rpx 20rpx;
+}
+.issue-upload-switch{
+  position: absolute;
+  right: 20rpx;
+  zoom: 0.7;
+}
+.issue-upload-tips{
+  position: relative;
+  font-size: 28rpx;
+  color: #9b9b9b;
+  line-height: 100rpx;
+  padding: 0rpx 20rpx;
+}
+.issue-upload-tips::before{
+  position: absolute;
+  content: '';
+  width: 95%;
+  height: 1rpx;
+  background: #eeee;
+  top: 0rpx;
+}
+.issue-upload-show{
+  padding: 40rpx 20rpx 80rpx;
+}
+.issue-upload-body{
+  position: relative;
+  padding:30rpx 0 5rpx;
+}
+.issue-upload-item{
+  float: left;
+  width: 190rpx;
+  height: 190rpx;
+  margin-right: 10rpx;
+  border-radius: 5rpx;
+  overflow: hidden;
+}
+.imgitem-box{
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+.imgitem-box image{
+  width: 100%;
+  height: 100%;
+}
+.mini-del{
+  position: absolute;
+  width: 35rpx;
+  height: 35rpx;
+  border-radius: 50%;
+  background: white url(http://cdn.yupao.com/miniprogram/images/new-published-close-icon.png) no-repeat;
+  background-size: 100% 100%;
+  right: 10rpx;
+  top: 10rpx;
+}
+
+/* 工种选择样式 */
+.common-picker-container{
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.65);
+  z-index: 100;
+  transition: 0.3s;
+}
+.common-picker-box{
+  position: absolute;
+  width: 100%;
+  left: 0;
+  bottom: 0;
+  height: 640rpx;
+  background-color: white;
+  padding-top: 95rpx;
+  transition: 0.3s;
+}
+.common-picker-header{
+  position: absolute;
+  width: 100%;
+  top: 0;
+  line-height: 93rpx;
+  border-bottom: 1rpx solid #ededed;
+}
+.common-picker-left{
+  position: absolute;
+  left: 20rpx;
+  top: 0;
+  font-size: 26rpx;
+  color: #777777;
+  z-index: 5;
+}
+.common-picker-title{
+  position: relative;
+  text-align: center;
+  color: #333;
+  font-size: 28rpx;
+  font-weight: bold;
+}
+.common-picker-right{
+  position: absolute;
+  right: 20rpx;
+  top: 0;
+  font-size: 26rpx;
+  color: #0099ff;
+  z-index: 5;
+}
+.common-picker-body{
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background-color: #F7F7F7;
+}
+.common-picker-content{
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow-y: scroll;
+}
+.common-picker-content2{
+  position: absolute;
+  width: 50%;
+  height: 100%;
+  left: 50%;
+  top: 0;
+  overflow-y: scroll;
+  background-color: white;
+}
+.common-picker-item{
+  position: relative;
+  width: 100%;
+  line-height: 40rpx;
+  padding: 25rpx 20rpx;
+  font-size: 28rpx;
+  color: #2C2C2C;
+  border-bottom: 1px solid #EDEDED;
+}
+.common-picker-item text{
+  position: absolute;
+  top: 10rpx;
+  display: inline-block;
+  font-size: 20rpx;
+  padding: 5rpx;
+  border-radius: 50%;
+  background-color: #ff0000;
+  color: white;
+  width: 30rpx;
+  height: 30rpx;
+  line-height: 23rpx;
+  text-align: center;
+}
+.common-picker-none{
+  z-index: -1;
+  opacity: 0;
+  background: transparent;
+}
+.common-picker-none .common-picker-box{
+  bottom: -700rpx;
+}
+.common-picker-item-active,.common-picker-text-active{
+  color: #0099ff;
+}
+.common-picker-item-active::after{
+  position: absolute;
+  content: '';
+  width: 4px;
+  height: 100%;
+  left: 0;
+  top: 0;
+  background-color: #0099ff;
 }

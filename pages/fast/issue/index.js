@@ -415,8 +415,11 @@ Page({
     let index = pages.length - 1
     let path = pages[index].__displayReporter.showReferpagepath
     path = path.slice(0, -5)
-    if (path == "pages/fast/tips/tips" || path == "pages/fast/area/area") {
+    if (path == "pages/fast/tips/tips") {
       this.selectComponent("#issueok").show()
+    }
+    if (path == "pages/fast/area/area") {
+      this.selectComponent("#detaintip").show()
     }
   },
 
