@@ -17,34 +17,12 @@ Page({
         maxLen: 9,
         userInfo: "",
         content: "",
-        wechat: "",
-        phone: "",
-        member: {
-            username: "", //名字
-            phone: "", //手机号
-            verification: "", //验证码
-        },
-        tel: "",
-        verify: "获取验证码",
         disabled: false, //验证按钮
         texralengh: 0,
         joingroup:[]
     },
-    initUserInfo: function(options) {
-        let td = this.data
-        let tel = options.tel;
-        let name = options.name;
-        this.setData({
-            tel: tel,
-            "member.phone": tel,
-            "member.username": name,
-            wechat: options.wechat,
-            phone: options.phone,
-        })
-
-    },
   
-  initNeedData: function () {
+    initNeedData: function () {
     let joingroup = app.globalData.joingroup;
     if(joingroup){
       this.setData({
@@ -95,11 +73,6 @@ Page({
         })
       }
     })
-  },
-    onLoad: function(options) {
-        this.initUserInfo(options);
-      this.initNeedData()
-        //this.initUploadImgsApi();
     },
     userUploadsImg: function(e) {
         let _type = parseInt(e.currentTarget.dataset.type);
@@ -206,103 +179,32 @@ Page({
     callThisPhone: function(e) {
         app.callThisPhone(e);
     },
-  clipboardWechat: function (e) {
-    let wechat = e.currentTarget.dataset.wechat;
-    wx.setClipboardData({
-      data: wechat,
-      success(res) {
-        wx.hideToast();
-        wx.showModal({
-          title: '恭喜您',
-          content: '微信号：' + wechat + "已复制到粘贴板,去微信-添加朋友-搜索框粘贴",
-          showCancel: false,
-          success: function () { }
-        })
-      }
-    })
-  },
-    /**
-     * 生命周期函数--监听页面加载
-     */
+    clipboardWechat: function (e) {
+      let wechat = e.currentTarget.dataset.wechat;
+      wx.setClipboardData({
+        data: wechat,
+        success(res) {
+          wx.hideToast();
+          wx.showModal({
+            title: '恭喜您',
+            content: '微信号：' + wechat + "已复制到粘贴板,去微信-添加朋友-搜索框粘贴",
+            showCancel: false,
+            success: function () { }
+          })
+        }
+      })
+    },
     initUploadImgsApi: function() {
         let userInfo = wx.getStorageSync("userInfo");
         this.setData({
-                userInfo: userInfo
-            })
-            // this.initNeedData();
-    },
-
-    //手机号
-    addinput: function(e) {
-        let val = e.detail.value
-        this.setData({
-            'member.phone': val
+            userInfo: userInfo
         })
     },
-    //名字
-    userEnterName: function(e) {
-        let username = e.detail.value
-        this.setData({
-            'member.username': username
-        })
-    },
-    //验证
-    verifi: function(e) {
-        let verification = e.detail.value
-        this.setData({
-            'member.verification': verification
-        })
-    },
-    //短信请求
-    getVerifyCode: function() {
-        let td = this.data
-        let userInfo = wx.getStorageSync("userInfo");
-        let _this = this
-        if (vali.isMobile(td.member.phone)) {
-            this.setData({
-                    disabled: true
-                })
-                // 发送网络请求
-            app.appRequestAction({
-                url: "index/get-code/",
-                way: "POST",
-                mask: true,
-                failTitle: "网络错误，获取失败！",
-                params: {
-                    userId: userInfo.userId,
-                    token: userInfo.token,
-                    tokenTime: userInfo.tokenTime,
-                    tel: td.member.phone,
-                    sendType: "have"
-                },
-                success: function(res) {
-                    let mydata = res.data;
-                    if (mydata.errcode == "ok") {
-                        _this.validateBtn(mydata.refresh);
-                    }
-                    app.showMyTips(mydata.errmsg);
-                },
-
-            })
-        } else app.showMyTips("手机号有误")
-    },
-
-    validateBtn: function(refresh) {
-        let time = refresh ? parseInt(refresh) : 60;
-        let timer = setInterval(() => {
-            if (time == 0) {
-                clearInterval(timer);
-                this.setData({
-                    verify: '获取验证码',
-                    disabled: false
-                })
-            } else {
-                // 倒计时
-                this.setData({
-                    verify: time + "秒后重试",
-                })
-                time--;
-            }
-        }, 1000);
+    /**
+     * 生命周期函数--监听页面加载
+     */
+    onLoad: function() {
+        this.initNeedData()
+        //this.initUploadImgsApi();
     },
 })

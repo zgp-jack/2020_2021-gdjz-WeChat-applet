@@ -179,7 +179,7 @@ Page({
     // },
 
     valiUserUrl: function() {
-        wx.navigateTo({
+        wx.redirectTo({
             url: '/packageOther/pages/others/message/publish/publish',
         })
     },

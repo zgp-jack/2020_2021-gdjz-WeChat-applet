@@ -9,7 +9,6 @@ Page({
         isEnd: false,
         page:1,
         helpeLists:[],
-        memberInfo:[],
         // 点击一级标题展示二级标题
         showDetail:false,
         // 手机系统ios或者andriod
@@ -73,6 +72,13 @@ Page({
             }
         }
     },
+    // 将问题列表数据存入缓存中
+    setStorage: function (data) {
+        let questions = data.reduce((pre,item)=>{
+            return [...pre, ...item.questions]
+        },[])
+        wx.setStorageSync('questionList', questions)
+    },
     // 获取帮助中心问题列表数据
     getHelpeData: function() {
         let _this = this;
@@ -92,6 +98,7 @@ Page({
                     _this.setData({
                         helpeLists: lists
                     })
+                    _this.setStorage(lists)
                 } else {
                     wx.showToast({
                         title: mydata.errmsg,
@@ -108,32 +115,6 @@ Page({
                     duration: 5000
                 })
             }
-        })
-    },
-    getFeedbackList: function() {
-        let _this = this;
-        let page = 1;
-        let userInfo = wx.getStorageSync("userInfo");
-        if (!userInfo) return false;
-        // 发送网络请求
-        app.appRequestAction({
-            url: "leaving-message/list/",
-            way: "POST",
-            params: {
-                userId: userInfo.userId,
-                token: userInfo.token,
-                tokenTime: userInfo.tokenTime,
-                page: 1,
-            },
-            success: function(res) {
-                let mydata = res.data.data;
-                if (page === 1) {
-                    let memberInfo = res.data.memberInfo;
-                    _this.setData({
-                        memberInfo: memberInfo
-                    })
-                }
-            },
         })
     },
     // 获取当前设备平台信息ios或者android
@@ -168,57 +149,6 @@ Page({
     hiddenSearch: function () {
         this.setData({showSearch: false})
     },
-    initNeedData: function () {
-        let _this = this;
-        let _mark = true;
-        let _wx = wx.getStorageSync("_wx");
-        let userInfo = wx.getStorageSync("userInfo");
-        let _time = Date.parse(new Date());
-        if (_wx && _wx.expirTime) {
-            if (parseInt(_wx.expirTime) > _time) _mark = false;
-        }
-        app.appRequestAction({
-            url: "index/search-data/",
-            params: {
-                type: "job",
-                userId: _mark ? (userInfo.userId ? userInfo.userId : "") : "",
-            },
-            success: function(res) {
-                let mydata = res.data;
-                _this.setData({
-                    phone: mydata.phone,
-                    wechat: _mark ? mydata.wechat.number : (_wx.wechat ? _wx.wechat : mydata.wechat.number)
-                })
-                if (_mark) {
-                    let extime = _time + (mydata.wechat.outTime * 1000);
-                    wx.setStorageSync("_wx", {
-                        wechat: mydata.wechat.number,
-                        expirTime: extime
-                    });
-                }
-            },
-            fail: function(err) {
-                wx.showToast({
-                    title: '数据加载失败！',
-                    icon: "none",
-                    duration: 3000
-                })
-            }
-        })
-    },
-    suggestUserUrl: function() {
-        let _this = this.data;
-        let tels = _this.memberInfo.phone || "";
-        let username = _this.memberInfo.username || "";
-        wx.navigateTo({
-            url: '/packageOther/pages/others/message/publish/publish?tel=' + tels + "&name=" + username + "&wechat=" + _this.wechat + "&phone=" + _this.phone
-        })
-    },
-    showQuestionDetail: function () {
-        this.setData({
-            showDetail: !this.data.showDetail
-        })
-    },
     // 点击我的反馈跳转到我的反馈列表
     goFeedback: function () {
         wx.navigateTo({
@@ -233,7 +163,6 @@ Page({
     },
     onLoad: function(options) {
         this.getHelpeData();
-        this.initNeedData();
     },
 
     /**
@@ -247,7 +176,7 @@ Page({
      * 生命周期函数--监听页面显示
      */
     onShow: function() {
-        this.getFeedbackList()
+    
     },
 
     /**

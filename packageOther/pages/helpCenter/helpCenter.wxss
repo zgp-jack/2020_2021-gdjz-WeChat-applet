@@ -58,7 +58,7 @@ page{
 }
 
 .help_list_scroll{
-    height: calc(100vh - 440rpx);
+    height: calc(100vh - 460rpx);
     width: 100%;
 }
 .help_list_title{

@@ -28,15 +28,15 @@ page{
   margin: 0 auto;
   display: flex;
   flex-wrap: wrap;
-  padding: 10rpx;
   box-sizing: border-box;
-  margin-top: 10rpx;
+  margin-top: 20rpx;
   
 }
 .detail_imag image{
   margin-right: 20rpx;
-  width: 200rpx;
-  height: 200rpx;
+  margin-bottom: 20rpx;
+  width: 180rpx;
+  height: 180rpx;
   border-radius: 8rpx;
 }
 .detail_reply{
@@ -69,7 +69,7 @@ page{
   width: 95%;
   height: 85rpx;
   color: #505050;
-  font-size: 36rpx;
+  font-size: 30rpx;
   font-weight: 500;
   border-color: #E4E2E2;
   line-height: 85rpx;

@@ -511,7 +511,7 @@ Page({
             let mydata = JSON.parse(res.data);
             // 如果上传成功
             if (mydata.errcode === "ok") {
-              // 上传图片成功计数
+              // 上传图片计数
               upLoadCount += 1;
               // 将服务器返回的数据保存到imagesArry
               imagesArry.push({
@@ -520,14 +520,14 @@ Page({
               })
               callback(upLoadCount,imagesArry,failCount)
             }else{
-              // 上传图片失败计数
+              // 上传图片计数
               upLoadCount += 1
               failCount += 1
               callback(upLoadCount,imagesArry,failCount)
             }
           },
           fail: function () {
-            // 上传图片失败计数
+            // 上传图片计数
             upLoadCount += 1
             failCount += 1
             callback(upLoadCount,imagesArry,failCount)
