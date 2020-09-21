@@ -17,6 +17,10 @@ Page({
     id:"",
     // 反馈按钮的可点击状态
     clickStatus: true,
+    // 视频连接
+    video: "",
+    // 可点击状态
+    effective: true
   },
   // 获取当前设备平台信息ios或者android
   initGetIntegralList:function(){
@@ -33,22 +37,6 @@ Page({
         }
     })
   },
-  // 从缓存中读取问题列表，并针对对应问题回答点击“未解决”、“已解决”设置点击时间
-  setClickTime: function () {
-    let clickTime = new Date().getTime()
-    // 当前答案的id
-    let id = this.data.id;
-    // 获取缓存的问题列表数据
-    let questionList = wx.getStorageSync('questionList')
-    // 遍历数据找到同一个id数据并设置点击当前时间
-    for (const value of questionList) {
-      if (value.id == id) {
-        value.clickTime = clickTime
-      }
-    }
-    // 重新设置缓存数据
-    wx.setStorageSync('questionList', questionList)
-  },
   // 点击解决或者未解决发送给后台
   questionStaus: function (e) {
     let that = this;
@@ -59,7 +47,7 @@ Page({
     // 发送反馈状态请求
     app.appRequestAction({
       url: "others/feedback-effective/",
-      way: "GET",
+      way: "POST",
       params: { id, val },
       success: function(res) {
         wx.hideLoading();
@@ -70,10 +58,7 @@ Page({
             icon: 'none',
             duration: 5000
           })
-          // 更改按钮的可点击状态
-          that.setData({clickStatus:false})
-          // 设置点击时间
-          that.setClickTime()
+          that.setData({ effective: false })
           // 点击是未解决条状到问题反馈界面
           if (val == 2) {
             wx.redirectTo({
@@ -126,7 +111,10 @@ Page({
         if(mydata.errcode == "ok"){
           _this.setData({
             answer: mydata.data.answer,
-            title: mydata.data.question
+            title: mydata.data.question,
+            video: mydata.data.video,
+            //有效性统计 为‘’可以点击，'1'上次点击有用，‘2‘上次点击没用
+            effective: (mydata.data.effective == '' || mydata.data.effective == 2) ? true:false
           })
           WxParse.wxParse('answer', 'html', mydata.data.answer,_this,5);
         }else{

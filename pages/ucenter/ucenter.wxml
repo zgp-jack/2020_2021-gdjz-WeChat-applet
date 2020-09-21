@@ -123,7 +123,7 @@
           <view class="masnumber" wx:if="{{ footerImgs.msgsNumber > 0 && item.key==='mymessage' }}">
             <text>{{footerImgs.msgsNumber>9? '9+' : footerImgs.msgsNumber}}</text>
           </view>
-          <view wx:if="{{item.key==='bookkeeping'}}" class="new-tag">新</view>
+          <view wx:if="{{item.key==='bookkeeping'}}" class="new-tag"><image src="{{item.newIcon}}"></image></view>
         </view>
       </view>
 

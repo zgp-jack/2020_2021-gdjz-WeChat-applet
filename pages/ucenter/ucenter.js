@@ -47,6 +47,7 @@ Page({
             name: '记工记账',
             dataUrl: '',
             icon: app.globalData.apiImgUrl + "ucenter/ucenter-account.png",
+            newIcon: app.globalData.apiImgUrl + "ucenter/ucenter-new.png"
           },
           {
             key: 'mymessage',
