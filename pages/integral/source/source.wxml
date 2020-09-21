@@ -1,6 +1,14 @@
 <view class="yupao-common-container yupao-common-nofooter">
+    <view class="integral-header">
+      <view class="integral-header-source" bindtap="">
+        <text class="integral-source-text">积分来源</text>
+      </view>
+      <view class="integral-header-expend" bindtap="dointegral">
+        <text class="integral-expend-text">积分消耗</text>
+      </view>
+    </view>
     <view class='integral-select'>
-    <view class='select'>
+      <view class='select'>
       <picker mode="date" fields="month"	 value="{{birthdaysubmit}}" start="{{beforeDate}}" end="{{emdDate}}" bindchange="birthday">
       <view class='timeall'>
         <text class='time'>{{birthday}}</text>
@@ -12,8 +20,8 @@
         <view class="classfy"><text>{{classifyName}}</text><image src="{{signright}}"></image></view>
       </picker>
       </view>
-    </view>
-    <view class="integral-detail">
+      </view>
+      <view class="integral-detail">
       <view class="getintegral">
          <text>获取积分:</text>
          <text class="num">{{getintegral}}</text>
@@ -22,8 +30,8 @@
          <text>消耗积分:</text>
          <text class="num">{{getexpend}}</text>
       </view>
-     </view>
-    </view>
+       </view>
+      </view>
     <view class='integral-content'>
         <view class='integral-list-item' wx:for="{{ lists }}" wx:key="{{ index }}" data-id='{{ item.id }}'>
           <view class="item-container">

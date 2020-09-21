@@ -27,13 +27,13 @@
           </view>
           <view class="issue-upload-item" wx:if="{{ imglen < maxNum }}">
             <view class="imgitem-box" bindtap="userUploadImg">
-              <image src="{{ upload }}"></image>
+              <image src="{{ upload }}"  mode="aspectFill"></image>
             </view>
           </view>
       </view>
     </view>
   </view>
-    <button class="issue-code-btn" open-type="{{ areaId && selectedClassifies.length != 0 ?'getUserInfo':''}}" bindtap="sureAreaAction" bindgetuserinfo="bindGetUserInfo">确认地址</button>
+    <button class="issue-code-btn" open-type="{{ areaId && selectedClassifies.length != 0 ?'getUserInfo':''}}" bindtap="sureAreaAction" bindgetuserinfo="bindGetUserInfo">确认发布</button>
   </view>
 </view>
 

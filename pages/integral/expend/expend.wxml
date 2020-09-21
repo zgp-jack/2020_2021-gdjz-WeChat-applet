@@ -1,4 +1,12 @@
 <view class="yupao-common-container yupao-common-nofooter">
+    <view class="integral-header">
+      <view class="expend-header-source" bindtap="dointegral">
+        <text class="expend-source-text">积分来源</text>
+      </view>
+      <view class="expend-header-expend">
+        <text class="expend-expend-text">积分消耗</text>
+      </view>
+    </view>
     <view class='integral-select'>
     <view class='select'>
       <picker mode="date" fields="month"	 value="{{birthdaysubmit}}" start="{{beforeDate}}" end="{{emdDate}}" bindchange="birthday">

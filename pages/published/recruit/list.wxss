@@ -57,6 +57,7 @@
   line-height: 60rpx;
   font-size: 30rpx;
   font-weight: bold;
+  width: 85%;
 }
 .recruit-item-content{
   position: relative;

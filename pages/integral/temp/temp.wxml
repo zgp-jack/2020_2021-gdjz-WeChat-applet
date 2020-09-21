@@ -1,18 +1,17 @@
 <view class="yupao-common-container yupao-common-nofooter">
     <view class='integral-header'>正式积分不为0时，可使用临时积分；临时积分仅限当天使用，第二天自动清空</view>
     <view class='integral-content'>
-        <view class='integral-list-item' wx:for="{{ lists }}" wx:key="{{ index }}">
-            <view class='integral-list-time'>
-                <text>{{ item.year_month }}</text>
-                <text>{{ item.day }}</text>
-            </view>
-            <view class='integral-list-words'>
-                <view class='integral-list-title overwords'>{{ item.source_title }}</view>
-                <view class='integral-list-info overwords'>{{ item.ext }}</view>
-                <view class='integral-list-lasttime overwords'>时间：{{ item.His }} <text>{{ item.source_integral_string }}</text></view>
-            </view>
+        <view class='integral-lists-item' wx:for="{{ lists }}" wx:key="{{ index }}">
+           <view class="integral-list-icon"><image src="{{ item.icon }}" mode="aspectFit"></image></view>
+           <view class="integral-list-content">
+               <view class="integral-list-firstline">
+                   <view>{{ item.source_title }}</view>
+                   <view>{{ item.source_integral_string }}</view>
+                </view>
+               <view class="integral-list-integral"> {{ item.ext }}</view>
+               <view class="integral-list-time">{{ item.time }}</view>
+           </view>
         </view>
-
     </view>
 
     <view class='nodata-texttips' wx:if="{{ nothavemore }}">没有更多数据了</view>

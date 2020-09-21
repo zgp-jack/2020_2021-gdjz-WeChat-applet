@@ -9,7 +9,13 @@
     /* background: url("http://cdn.yupao.com/miniprogram/images/yc/personCenter-topBackground.png") no-repeat; */
     /* background-size: 100% 100%; */
 }
-
+.header_background_image{
+    position: absolute;
+    width: 100%;
+    height: 250rpx;
+    top: -25rpx;
+    left: 25%;
+}
 .felx {
     display: flex;
     align-items: center;
@@ -30,6 +36,7 @@
     left: 0;
     top: 128rpx;
     padding: 0 27rpx;
+    z-index: 100;
 }
 
 .ucenter-userinfo {
@@ -38,7 +45,7 @@
     height: 365rpx;
     background-color: white;
     box-shadow: 0 5rpx 5rpx 0 rgba(223, 225, 226, 0.43);
-    border-radius: 10rpx;
+    border-radius: 15rpx;
 }
 
 .basic-info {
@@ -88,10 +95,10 @@
 }
 
 .user-update-info {
-    font-size: 20rpx;
+    font-size: 22rpx;
     color: #6C6C6C;
     width: 110rpx;
-    height: 36rpx;
+    height: 40rpx;
     line-height: 36rpx;
     border: 1rpx solid #E5E5E5;
     border-radius: 10rpx;
@@ -148,8 +155,8 @@
 .click-red-point::after {
     position: absolute;
     content: '详情';
-    font-size: 20rpx;
-    right: 30rpx;
+    font-size:20rpx;
+    right: -60rpx;
     top: 5rpx;
     color: #ff0000;
 }
@@ -269,18 +276,22 @@
     padding: 260rpx 30rpx 30rpx;
 
 }
+.isbanner {
+    padding: 180rpx 30rpx 30rpx;
+}
 .advertising {
     position: absolute;
     top: 125rpx;
     left: 50%;
-    width: 696rpx;
+    width: 98%;
     height: 115rpx;
     transform: translateX(-50%);
-    z-index: 2;
+    z-index: 100;
     overflow: hidden;
 }
 
 .item-img {
+    width: 100%;
     max-width: 100%;
     max-height: 115rpx;
     display: block;
@@ -290,7 +301,7 @@
 .menu-block {
     background: #FFFFFF;
     box-shadow: 0 4rpx 27rpx 0 rgba(144, 144, 144, 0.1);
-    border-radius: 10rpx;
+    border-radius: 15rpx;
     padding: 30rpx 0;
     margin-bottom: 20rpx;
 }
@@ -304,7 +315,7 @@
 
 .title-block {
     height: 27rpx;
-    margin-left: 16rpx;
+    margin-left: 30rpx;
     display: flex;
     align-items: center;
 }
@@ -353,7 +364,7 @@
 
 .new-tag {
     position: absolute;
-    top: -7rpx;
+    top: -15rpx;
     right: 15rpx;
     width: 35rpx;
     height: 25rpx;
@@ -369,6 +380,7 @@
     top: 38rpx;
     display: flex;
     align-items: flex-start;
+    z-index: 100;
 }
 
 .msg-icon-item {

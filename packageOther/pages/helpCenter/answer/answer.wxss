@@ -35,8 +35,8 @@ page{
   justify-content: center;
   align-items: center;
   height: 85rpx;
-  width: 80%;
-  border-radius: 4px;
+  width: 90%;
+  border-radius: 10rpx;
   font-weight: 400;
   color: #474747;
   border-color: #E4E2E2;
@@ -47,4 +47,9 @@ page{
   margin-left: 50%;
   transform: translateX(-50%);
   border-radius: 20rpx;
+}
+.button_choose{
+  background: url(http://cdn.yupao.com/miniprogram/images/yc/choose-status.png
+  ) no-repeat bottom right;
+  background-size: 40rpx 40rpx;
 }

@@ -20,7 +20,7 @@ Page({
     // 视频连接
     video: "",
     // 可点击状态
-    effective: true
+    effective: '',
   },
   // 获取当前设备平台信息ios或者android
   initGetIntegralList:function(){
@@ -58,7 +58,7 @@ Page({
             icon: 'none',
             duration: 5000
           })
-          that.setData({ effective: false })
+          that.setData({ effective: val })
           // 点击是未解决条状到问题反馈界面
           if (val == 2) {
             wx.redirectTo({
@@ -114,7 +114,7 @@ Page({
             title: mydata.data.question,
             video: mydata.data.video,
             //有效性统计 为‘’可以点击，'1'上次点击有用，‘2‘上次点击没用
-            effective: (mydata.data.effective == '' || mydata.data.effective == 2) ? true:false
+            effective: mydata.data.effective
           })
           WxParse.wxParse('answer', 'html', mydata.data.answer,_this,5);
         }else{

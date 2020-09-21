@@ -241,7 +241,7 @@ page{
 
 .texralengh {
   font-size: 30rpx;
-  color: #ccc;
+  color: #3D3D40;
   padding: 0 20rpx;
   text-align: right;
 }

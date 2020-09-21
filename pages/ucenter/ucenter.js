@@ -16,7 +16,7 @@ Page({
     callServicePhone: '',
     uCenterMenus: [
       {
-        title: '基础信息',
+        title: '信息管理',
         menus: [
           {
             key: 'recruit',

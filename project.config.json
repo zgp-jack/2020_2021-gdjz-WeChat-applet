@@ -380,6 +380,13 @@
           "id": -1,
           "name": "帮助中心",
           "pathName": "packageOther/pages/helpCenter/helpCenter",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "积分来源记录",
+          "pathName": "pages/integral/source/source",
           "scene": null
         }
       ]
