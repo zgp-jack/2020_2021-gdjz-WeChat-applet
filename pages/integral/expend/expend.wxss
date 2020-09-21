@@ -61,6 +61,7 @@
     height: 100%;
     background: white;
     margin-top: 15rpx;
+    box-shadow: 2rpx 2rpx 10rpx #d2d0d0;
 }
 
 .item-container {

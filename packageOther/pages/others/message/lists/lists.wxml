@@ -18,17 +18,16 @@
             </view>
         </block>
     </view>
+    <view class='common-nodatabox flex-column' wx:if="{{FeedBackLists.length==0}}">
+        <image src='{{nodata}}'></image>
+        <text>暂无相关意见反馈</text>
+    </view>
 </scroll-view>
 
 <view class="footr">
     <view class="footr-1" bindtap='valiUserUrl'>意见反馈</view>
 </view>
 
-
-<view class='common-nodatabox flex-column' wx:if="{{FeedBackLists.length==0}}">
-    <image src='{{nodata}}'></image>
-    <text>暂无相关意见反馈</text>
-</view>
 
 <view class="common-userauth" wx:if="{{ !userInfo }}">
   <image src='{{ icon }}' class='userauth-topicon'></image>

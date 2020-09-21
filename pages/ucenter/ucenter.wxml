@@ -68,7 +68,10 @@
       </view>
     </view>
   </view>
-  <image class="header_background_image" mode="aspectFit" src="http://cdn.yupao.com/miniprogram/images/yc/personCenter-topBackground.png"></image>
+  <view class="user_background_image">
+    <image class="header_background_image" mode="aspectFit" src="http://cdn.yupao.com/miniprogram/images/yc/personCenter-topBackground.png"></image>
+  </view>
+  
 </view>
 
 <view class="yupao-common-container">
