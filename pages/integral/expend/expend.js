@@ -300,6 +300,12 @@ Page({
             "topDetail.topType": mydata.errcode,
             showTop: true
           })
+        } else if (mydata.errcode == "paid_recruit") {
+          _this.setData({
+            errcode: mydata.errcode,
+            info: mydata.info,
+            showRecord: true,
+          })
         } else {
           wx.showModal({
             title: '温馨提示',

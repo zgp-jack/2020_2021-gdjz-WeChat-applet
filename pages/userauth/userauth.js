@@ -32,6 +32,19 @@ Page({
             let prevPage = pages[pages.length - 2];
             prevPage.setData({ userInfo:userInfo,userUuid:userUuid });
             wx.navigateBack({ delta: 1 })
+          } else if (uinfo.errcode == "member_shielding") {
+            wx.showModal({
+              content: uinfo.errmsg,
+              cancelText: "知道了",
+              confirmText: "联系客服",
+              success: function (res) {
+                if (res.confirm) {
+                  wx.makePhoneCall({
+                    phoneNumber: uinfo.service_tel,
+                  })
+                }
+              }
+            })
           } else {
             app.showMyTips(uinfo.errmsg);
           }

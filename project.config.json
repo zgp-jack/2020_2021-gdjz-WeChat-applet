@@ -387,6 +387,13 @@
           "id": -1,
           "name": "积分来源记录",
           "pathName": "pages/integral/source/source",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "积分消耗",
+          "pathName": "pages/integral/expend/expend",
           "scene": null
         }
       ]

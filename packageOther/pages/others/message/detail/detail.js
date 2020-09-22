@@ -86,8 +86,6 @@ Page({
           }
         })
     }
-
-    
     app.appRequestAction({
       url: "others/message-useful/",
       way: "POST",
@@ -99,11 +97,13 @@ Page({
         wx.hideLoading();
         let mydata = res.data
         if (mydata.errcode == "ok") {
-          wx.showToast({
-            title: mydata.errmsg,
-            icon: "none",
-            duration: 3000
-          })
+          if (val == 1) {
+            wx.showToast({
+              title: mydata.errmsg,
+              icon: "none",
+              duration: 3000
+            })
+          }
           _this.setData({
             useful: val
           })

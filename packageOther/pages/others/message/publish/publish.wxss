@@ -2,6 +2,7 @@
 .yupao-feedback {
   position: relative;
   width: 100%;
+  padding-bottom: 100rpx;
 }
 .yupao-common-container{
   padding-bottom: 0rpx;

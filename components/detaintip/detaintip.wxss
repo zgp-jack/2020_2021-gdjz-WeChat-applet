@@ -20,18 +20,18 @@
 }
 .issueok-title{
   position: relative;
-  line-height: 80rpx;
-  font-size: 30rpx;
+  line-height: 90rpx;
+  font-size: 40rpx;
   text-align: center;
-  padding-top: 50rpx;
+  padding-top: 25rpx;
   font-weight: bold;
 }
 .issueok-body{
   position: relative;
-  line-height: 80rpx;
-  font-size: 28rpx;
+  line-height: 65rpx;
+  font-size: 35rpx;
   text-align: center;
-  padding: 0rpx 40rpx;
+  padding: 0rpx 55rpx;
 }
 .issueok-footer{
   position: relative;
@@ -45,13 +45,13 @@
   overflow: hidden;
 }
 .issueok-btn{
-  font-size: 28rpx;
+  font-size: 35rpx;
   flex: 1;
   border-right: 1rpx solid #eeeeee;
-  color: #888;
   background: white;
   border-radius: 0;
   line-height: 100rpx;
+  font-weight: bold;
 }
 .issueok-btn::after{
   border: 0;

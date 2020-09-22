@@ -100,7 +100,7 @@
       </view>
       <view class="menu-item-box">
         <view class="menu-item" wx:for="{{ item.menus }}" wx:key="{{ index }}" data-url="{{item.dataUrl}}"
-              bindtap='valiUserUrl'>
+              bindtap="{{item.key != 'service'?'valiUserUrl':''}}">
           <navigator
               wx:if="{{item.key==='bookkeeping'}}"
               class="jump"

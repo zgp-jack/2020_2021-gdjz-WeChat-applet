@@ -55,12 +55,12 @@ Page({
             dataUrl: '/pages/information/mymessage/mymessage',
             icon: app.globalData.apiImgUrl + "ucenter/ucenter-message.png",
           },
-          {
-            key: 'gift',
-            name: '免费领好礼',
-            dataUrl: '',
-            icon: app.globalData.apiImgUrl + "ucenter/ucenter-gift.png",
-          },
+          // {
+          //   key: 'gift',
+          //   name: '免费领好礼',
+          //   dataUrl: '',
+          //   icon: app.globalData.apiImgUrl + "ucenter/ucenter-gift.png",
+          // },
         ]
       },
       {
@@ -98,7 +98,7 @@ Page({
           {
             key: 'findexport',
             name: '实名查询',
-            dataUrl: '',
+            dataUrl: '/packageOther/pages/query/query',
             icon: app.globalData.apiImgUrl + "ucenter/ucenter-find-export.png",
           },
           {
@@ -113,12 +113,12 @@ Page({
             dataUrl: '',
             icon: app.globalData.apiImgUrl + "ucenter/ucenter-customer-server.png",
           },
-          {
-            key: 'setting',
-            name: '系统设置',
-            dataUrl: '',
-            icon: app.globalData.apiImgUrl + "ucenter/ucenter-seting.png",
-          },
+          // {
+          //   key: 'setting',
+          //   name: '系统设置',
+          //   dataUrl: '',
+          //   icon: app.globalData.apiImgUrl + "ucenter/ucenter-seting.png",
+          // },
         ]
       }
     ],

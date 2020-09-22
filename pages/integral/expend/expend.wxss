@@ -192,7 +192,21 @@
 .expend-show-recruit .yupao-common-list-left {
     width: auto;
 }
-
+.yupao-common-list-title-left {
+    position: relative;
+    width: 200rpx;
+    color: #333;
+    line-height: 60rpx;
+    font-size: 30rpx;
+}
+.yupao-common-list-title-right{
+    position: relative;
+    float: left;
+    color: #0099ff;
+    font-size: 30rpx;
+    line-height: 60rpx;
+    max-width: 100%;
+}
 .expend-show-recruit .yupao-common-list {
     box-shadow: none;
     border: 0;

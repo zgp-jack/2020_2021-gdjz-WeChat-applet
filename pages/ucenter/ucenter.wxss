@@ -290,7 +290,7 @@
     position: absolute;
     top: 125rpx;
     left: 50%;
-    width: 98%;
+    width: 97%;
     height: 115rpx;
     transform: translateX(-50%);
     z-index: 100;

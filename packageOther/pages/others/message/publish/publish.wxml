@@ -6,8 +6,8 @@
 
                 <view class="box-feelback">
                     <view class="title">反馈内容</view>
-                    <textarea id="texra" maxlength="500" placeholder="请简要描述您的问题和意见，以便我们提供更好的帮助" bindinput="userEnterContent" value='{{ content }}'></textarea>
-                    <view class="texralengh">{{texralengh}}/500</view>
+                    <textarea id="texra" maxlength="300" placeholder="请简要描述您的问题和意见，以便我们提供更好的帮助" bindinput="userEnterContent" value='{{ content }}'></textarea>
+                    <view class="texralengh">{{texralengh}}/300</view>
                 </view>
                 <view class="feedback-imgs clearfix">
                     <view class="title">图片上传</view>
@@ -19,7 +19,7 @@
                             </view>
                         </view>
                     </view>
-                    <view class="feedback-img-itema feedback-uploadtips" data-type="1" bindtap='userUploadsImg' wx:if="{ imgs.length < maxLen }}">
+                    <view class="feedback-img-itema feedback-uploadtips" data-type="1" bindtap='userUploadsImg' wx:if="{{ imgs.length < maxLen }}">
                         <image src='{{ uploadImg }}'></image>
                     </view>
                 </view>

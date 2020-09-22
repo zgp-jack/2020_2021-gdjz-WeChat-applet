@@ -63,7 +63,8 @@ Page({
       sort: "recommend",
       keywords: "",
       occupations: "",
-      area_id: 1
+      area_id: 1,
+      type: 0
     },
     fillterArea: [],
     fillterType: [],
@@ -155,7 +156,13 @@ Page({
       isFirstRequest: true,
       "searchDate.page": 1,
       "searchDate.sort": _id,
-      recommended: text
+      recommended: text,
+      hasSortFlag:1,
+      hasTime: 1,
+      hasTop: 1,
+      lastSortFlagPos: 0,
+      lastTimePos: 0,
+      lastNormalPos: 0
     })
     _this.doRequestAction(false);
     _this.closeAllSelect();
@@ -176,7 +183,13 @@ Page({
       isFirstRequest: true,
       "searchDate.page": 1,
       "searchDate.type": _id,
-      teamText: teamText
+      teamText: teamText,
+      hasSortFlag:1,
+      hasTime: 1,
+      hasTop: 1,
+      lastSortFlagPos: 0,
+      lastTimePos: 0,
+      lastNormalPos: 0
     })
     _this.doRequestAction(false);
     _this.closeAllSelect();
@@ -221,6 +234,12 @@ Page({
           "searchDate.page": 1,
           "searchDate.area_id": _id,
           areaText: areaText,
+          hasSortFlag:1,
+          hasTime: 1,
+          hasTop: 1,
+          lastSortFlagPos: 0,
+          lastTimePos: 0,
+          lastNormalPos: 0
         })
         wx.setStorageSync("areaId", _id)
         wx.setStorageSync("areaText", areaText)
@@ -236,7 +255,13 @@ Page({
               isFirstRequest: true,
               "searchDate.page": 1,
               "searchDate.area_id": _id,
-              areaText: areaText
+              areaText: areaText,
+              hasSortFlag:1,
+              hasTime: 1,
+              hasTop: 1,
+              lastSortFlagPos: 0,
+              lastTimePos: 0,
+              lastNormalPos: 0
             })
             _this.doRequestAction(false);
             _this.closeAllSelect();
@@ -259,7 +284,13 @@ Page({
       isFirstRequest: true,
       areaText: areaText,
       "searchDate.page": 1,
-      "searchDate.area_id": id
+      "searchDate.area_id": id,
+      hasSortFlag:1,
+      hasTime: 1,
+      hasTop: 1,
+      lastSortFlagPos: 0,
+      lastTimePos: 0,
+      lastNormalPos: 0
     })
     let mydata = { "name": areaText, "id": id, ad_name: pname };
     if (id != pid) {
@@ -302,7 +333,13 @@ Page({
           isFirstRequest: true,
           "searchDate.page": 1,
           "searchDate.occupations": _typeid,
-          typeText: typeText
+          typeText: typeText,
+          hasSortFlag:1,
+          hasTime: 1,
+          hasTop: 1,
+          lastSortFlagPos: 0,
+          lastTimePos: 0,
+          lastNormalPos: 0
         })
         _this.returnTop();
         _this.doRequestAction(false);
@@ -316,7 +353,13 @@ Page({
               isFirstRequest: true,
               "searchDate.page": 1,
               "searchDate.occupations": _typeid,
-              typeText: typeText
+              typeText: typeText,
+              hasSortFlag:1,
+              hasTime: 1,
+              hasTop: 1,
+              lastSortFlagPos: 0,
+              lastTimePos: 0,
+              lastNormalPos: 0
             })
             _this.returnTop();
             _this.doRequestAction(false);
@@ -336,7 +379,13 @@ Page({
       typeText: typeText,
       isFirstRequest: true,
       "searchDate.page": 1,
-      "searchDate.occupations": id
+      "searchDate.occupations": id,
+      hasSortFlag:1,
+      hasTime: 1,
+      hasTop: 1,
+      lastSortFlagPos: 0,
+      lastTimePos: 0,
+      lastNormalPos: 0
     })
     this.returnTop();
     this.doRequestAction(false);
@@ -891,7 +940,13 @@ Page({
     this.returnTop();
     this.setData({
       "searchDate.page": 1,
-      showHistoryList: false
+      showHistoryList: false,
+      hasSortFlag:1,
+      hasTime: 1,
+      hasTop: 1,
+      lastSortFlagPos: 0,
+      lastTimePos: 0,
+      lastNormalPos: 0
     })
     this.doRequestAction(false, function () {
 
