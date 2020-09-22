@@ -64,7 +64,8 @@
     "pages/fast/tips/tips",
     "pages/issue/index/index",
     "pages/issue/area/area",
-    "pages/clients-looking-for-work/workingtop/workingtop"
+    "pages/clients-looking-for-work/workingtop/workingtop",
+    "pages/search/search"
   ],
   "subpackages": [
     {
