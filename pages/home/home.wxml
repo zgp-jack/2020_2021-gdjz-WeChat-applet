@@ -41,7 +41,7 @@
       <block wx:for="{{ swiper.newBanner }}" wx:key="{{ item.id }}">
         <swiper-item>
           <button data-url = "{{ item.self_url }}" data-login ="{{ item.need_login }}" open-type="getUserInfo" bindgetuserinfo="bindUserInfo">
-            <image src="{{ item.image_url }}" class="index-swiper-img" />
+            <image src="{{ item.image_url }}" class="index-swiper-img" mode="scaleToFill"/>
           </button>
         </swiper-item>
       </block>

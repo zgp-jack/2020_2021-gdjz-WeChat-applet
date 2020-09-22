@@ -144,15 +144,15 @@ Page({
     // 获取后台的可置顶天数
     let days = that.data.reqDays;
     if (e) {
-      // 获取选择的天数
-      let detail = days[e.detail.value]
-      // 选择对应天数文本框显示内容
-      let daynumber = "";
-      if ( detail < 4 ) {
-        daynumber = (detail * 24) + "小时(" + detail + "天)"
-      } else {
-        daynumber = detail + "天"
-      }
+     // 获取选择的天数
+     let detail = days[e.detail.value]
+     // 选择对应天数文本框显示内容
+     let daynumber = "";
+     if ( detail < 4 ) {
+       daynumber = (detail * 24) + "小时(" + detail + "天)"
+     } else {
+       daynumber = detail + "天"
+     }
       // 最新的到期时间毫秒+正在置顶结束的时间毫秒
       let all = 86400000 * (detail) + (newSeverTime - 0)
       // 格式化到期时间
@@ -458,11 +458,13 @@ Page({
     // })
   },
   // 初始化已经置顶的置顶数据
-  gettopareas() {
+  gettopareas(options) {
+    // debugger
     let that = this;
-    let hastop= this.data.topdata.has_top;
-    let istop = this.data.topdata.is_top;
+    let topdata = JSON.parse(options.topdata)
     let area = wx.getStorageSync('areadata')
+    let hastop= topdata.has_top;
+    let istop = topdata.is_top;
     // 判断是否是置顶中的修改置顶
     if (hastop && istop == 1) {
       //判断是否有授权登录用户信息
@@ -470,17 +472,18 @@ Page({
       //没有用户信息直接返回
       if (!userInfo) return false;
       //获取置顶区域的信息
-      let areaProcrum = that.data.topdata.top_provinces_str;
-      let areaCitycrum = that.data.topdata.top_citys_str;
-      let isCountry = that.data.topdata.is_country;
-      let max_price = parseInt(that.data.topdata.max_price);
+      let areaProcrum = topdata.top_provinces_str.length === 0? topdata.top_provinces_str: (topdata.top_provinces_str[0].pid == 1?topdata.top_provinces_str:[]);
+      let areaCitycrum = topdata.top_citys_str;
+      let isCountry = topdata.is_country;
+      let max_price = parseInt(topdata.max_price);
       let areaAllcrum = [];
+     
       let areaItem = area.data[0][0];
       areaItem.name = areaItem.city;
       if (isCountry == 1) {
-       areaAllcrum = areaItem
+       areaAllcrum.push(areaItem)
       }
-      let alllength = areaProcrum.length + areaCitycrum.length + areaAllcrum.length;
+      let alllength = areaProcrum.length-0 + areaCitycrum.length-0 + areaAllcrum.length-0;
       let endtime = that.data.topdata.end_time_str;
       let endtimeh = (that.data.topdata.end_time-0)*1000;
       that.setData({
@@ -659,6 +662,7 @@ Page({
     let day = that.data.day;
     let istop = that.data.topdata.is_top;
     let hastop = that.data.topdata.has_top;
+    console.log("this.data",that.data)
     app.appRequestAction({
       url: 'resumes/top-config/',
       way: 'POST',
@@ -694,20 +698,20 @@ Page({
               point: point
             })
           }
-          // 处理3天内显示“1天（24小时）”，超过3天显示“4天”
-          let array =[]
-          let days = mydata.data.days
-          for (let i = 0; i < days.length; i++) {
-            if (days[i] < 4 ) {
-              array.push(days[i] * 24 + "小时"  + '（' + days[i] + '天' + '）')
-            }else{
-              array.push(days[i] + "天")
-            }
-          }
-          // 处理默认选择天数对应的时间选择框的index
-          let index = null
-          // 默认天数对应的index下标
-          index = days.findIndex((value)=> value == day );
+         // 处理3天内显示“1天（24小时）”，超过3天显示“4天”
+         let array =[]
+         let days = mydata.data.days
+         for (let i = 0; i < days.length; i++) {
+           if (days[i] < 4 ) {
+             array.push(days[i] * 24 + "小时"  + '（' + days[i] + '天' + '）')
+           }else{
+             array.push(days[i] + "天")
+           }
+         }
+         // 处理默认选择天数对应的时间选择框的index
+         let index = null
+         // 默认天数对应的index下标
+         index = days.findIndex((value)=> value == day );
           that.setData({
             //最大省份数
             max_province: max_province,
@@ -825,7 +829,8 @@ Page({
         this.setData({
           endtimeone: time,
           detailprice: detail,
-          allprice: alllength
+          allprice: alllength,
+          point: allprice * detail,
         })
         this.getAllpoint(newSeverTime)
       } else {
@@ -839,11 +844,14 @@ Page({
     }
   },
   deletea() {
+    // 获取默认的置顶天数
+    let defaultDayIndex = this.data.defaultDayIndex
     this.setData({
       shoutime: false,
       showpoint: false,
       detailprice: 0,
-      rangevalue:1
+      rangevalue:1,
+      rangevalue: defaultDayIndex
     })
     this.getCityNum()
   },
@@ -860,7 +868,7 @@ Page({
       })
     }
     // 初始化置顶状态下的数据
-    this.gettopareas()
+    this.gettopareas(options)
   },
   getAllpoint(timeItem) {
     // 积分单价差
@@ -918,7 +926,6 @@ Page({
   },
    //获取找活置顶的省份城市选择界面
   getDefaultArea: function(areaId) {
-    console.log("areaId",areaId)
     //获取本地缓存区域信息
     let areadata = wx.getStorageSync("areadata");
     //如果本地有缓存区域信息
@@ -929,22 +936,25 @@ Page({
     //深拷贝区域信息
       let mydata = app.arrDeepCopy(areadata)  
       let areaData = mydata.data
-      // 遍历找到符合条件的区域信息
-      for (let i = 0; i < areaData.length; i++) {
-        let item = areaData[i]
-        for (let j = 0; j < item.length; j++) {
-          if (item[j].id == areaId) {
-            let areaArry = item[j];
-            areaArry.name = item[j].city;
-            areaArry.index = i;
-            defaultTop.push(areaArry);
+      if ( areaId == 0) {
+        return
+      }else{
+        // 遍历找到符合条件的区域信息
+        for (let i = 0; i < areaData.length; i++) {
+          let item = areaData[i]
+          for (let j = 0; j < item.length; j++) {
+            if (item[j].id == areaId) {
+              let areaArry = item[j];
+              areaArry.name = item[j].city;
+              areaArry.index = i;
+              defaultTop.push(areaArry);
+            }
           }
         }
+        if (defaultTop.length > 1) {
+          defaultTop.splice(0,1)
+        }
       }
-      if (defaultTop.length > 1) {
-        defaultTop.splice(0,1)
-      }
-      console.log("defaultTop",defaultTop)
       let pid = defaultTop[0].pid
       if (pid == 0) {
         this.setData({
@@ -962,22 +972,31 @@ Page({
           alllength:defaultTop.length,
         })
       }
-        return false
-      }
+      console.log("defaultTop",defaultTop)
+      return false
+    }
+    
     //如果没有缓存信息将通过app中方法获取区域数据
     app.getAreaData(this, function(data) {
       let resdata = app.arrDeepCopy(data)
       let areaData = resdata.data
-      // 遍历找到符合条件的区域信息
-      for (let i = 0; i < areaData.length; i++) {
-        let item = areaData[i]
-        for (let j = 0; j < item.length; j++) {
-          if (item[j].id == areaId) {
-            let areaArry = item[j];
-            areaArry.name = item[j].city;
-            areaArry.index = i;
-            defaultTop.push(areaArry)
+      if ( areaId == 0) {
+        return
+      }else{
+        // 遍历找到符合条件的区域信息
+        for (let i = 0; i < areaData.length; i++) {
+          let item = areaData[i]
+          for (let j = 0; j < item.length; j++) {
+            if (item[j].id == areaId) {
+              let areaArry = item[j];
+              areaArry.name = item[j].city;
+              areaArry.index = i;
+              defaultTop.push(areaArry)
+            }
           }
+        }
+        if (defaultTop.length > 1) {
+          defaultTop.splice(0,1)
         }
       }
       let pid = defaultTop.pid
