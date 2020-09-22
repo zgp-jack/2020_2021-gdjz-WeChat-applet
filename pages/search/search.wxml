@@ -1,0 +1,40 @@
+<!--pages/search/search.wxml-->
+<view class="search-page">
+  <view class="search-tab">
+    <view class="search-tab-item">
+      <block wx:for="{{ tab }}" wx:key="index">
+        <view class="{{ changeStatus == index?'search-tab-button search-active':'search-tab-button' }}" bindtap="tabChange" data-key = "{{ item.key }}">{{ item.title }}</view>
+      </block>
+    </view>
+  </view>
+  <view class="search-input-box">
+    <view class="input-box">
+      <image src="{{ searchIcon }}"></image>
+      <input type="text" placeholder="附近适合您的工作/工人"></input>
+    </view>
+    <view class="search-button" bindtap="clickSearch">搜索</view>
+  </view>
+  <view class="history-search">
+    <view class="history-search-title-box">
+      <view class="title">{{ historySearch.title }}</view>
+      <image src="../../images/laji.png"></image>
+    </view>
+    <view class="tag-box">
+      <block wx:for="{{ historySearch.historyList }}" wx:key="index">
+        <view>{{ item.keywords }}</view>
+      </block>
+    </view>
+  </view>
+  <view class="history-search">
+    <view class="history-search-title-box">
+      <view class="title">{{ hotSearch.title }}</view>
+      <image src="../../images/laji.png"></image>
+    </view>
+    <view class="tag-box">
+      <block wx:for="{{ hotSearch.hotList }}" wx:key="index">
+        <view>{{ item.keywords }}</view>
+      </block>
+    </view>
+  </view>
+</view>
+

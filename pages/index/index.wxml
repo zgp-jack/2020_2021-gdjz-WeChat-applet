@@ -13,7 +13,7 @@
 </view>
 
 <!-- 历史记录 -->
-<view class='usersearchhistorybox' wx:if="{{ showHistoryList && historyList.length }}" bindtap='closeHistory'>
+<!-- <view class='usersearchhistorybox' wx:if="{{ showHistoryList && historyList.length }}" bindtap='closeHistory'>
   <view class='usersearchhistory'>
     <view class='usersearchhistory-item usersearchhistory-item-title'>历史记录</view>
     <view class='usersearchhistory-box'>
@@ -23,7 +23,7 @@
       <view bindtap='clearHistory'>清空历史记录</view>
     </view>
   </view>
-</view>
+</view> -->
 
 <!-- 筛选条件 -->
 <view class='lists-condition-menu flex-row mybottomborder'>
