@@ -1,2 +1,37 @@
 <!--pages/search/search.wxml-->
-<text>pages/search/search.wxml</text>
+<view>
+  <view class="search-tab">
+    <ul>
+      <li class="{{tabn?'active':''}}" bindtap="tabchage(true)">找工作
+        <span></span></li>
+      <li class="{{!tabn?'active':''}}" bindtap="tabchage(false)">找工人<span></span></li>
+    </ul>
+  </view>
+  <view class="search-input-box">
+    <view class="input-box">
+      <image src="../../images/searchicon.png"></image>
+      <input type="text" placeholder="附近适合您的工作"></input>
+    </view>
+    <button>搜索</button>
+  </view>
+  <view class="history-search">
+    <view class="history-search-title-box">
+      <text class="title">历史搜索</text>
+      <image src="../../images/searchicon.png"></image>
+    </view>
+    <view class="tag-box">
+      <ul>
+        <li wx:for="{{historySearch.res.data.data}}">{{item.keywords}}</li>
+      </ul>
+    </view>
+  </view>
+  <view class="history-search">
+    <text class="title">热门搜索</text>
+    <view class="tag-box">
+      <ul>
+        <li wx:for="{{historySearch.res.data.data}}">{{item.keywords}}</li>
+      </ul>
+    </view>
+  </view>
+</view>
+

@@ -1,1 +1,122 @@
 /* pages/search/search.wxss */
+page {
+  background: #fff;
+}
+
+.search-tab {
+  padding-top: 30rpx;
+  padding-left: 20rpx;
+}
+
+.search-tab ul {
+  width: 100%;
+  display: flex;
+}
+
+.search-tab ul li {
+  font-size: 28rpx;
+}
+
+.search-tab ul li.active {
+  color: #0099ff;
+  font-weight: bold;
+}
+
+.search-tab ul li.active span {
+  display: block;
+}
+
+.search-tab ul li span {
+  width: 40rpx;
+  height: 6rpx;
+  background: #0099ff;
+  display: block;
+  margin: 0 auto;
+  border-radius: 40rpx;
+  display: none;
+}
+
+.search-tab ul li:last-child {
+  margin-left: 60rpx;
+}
+
+.search-input-box {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 20rpx;
+  padding-right: 0;
+  display: flex;
+}
+
+.input-box {
+  background: #f5f5f5;
+  display: flex;
+  align-items: center;
+  flex: 1;
+  height: 70rpx;
+  border-radius: 8rpx;
+}
+
+.input-box image {
+  width: 50rpx;
+  height: 50rpx;
+  display: block;
+  padding: 15rpx;
+}
+
+.search-input-box button {
+  height: 70rpx;
+  line-height: 70rpx;
+  font-size: 28rpx;
+  color: #999;
+  background: #fff;
+}
+
+.search-input-box button::after {
+  border: none;
+}
+
+.input-box input {
+  font-size: 28rpx;
+}
+
+.history-search {
+  padding: 0 20rpx;
+  margin-top: 20rpx;
+}
+
+.history-search .title {
+  font-size: 40rpx;
+  line-height: 1;
+}
+
+.history-search image {
+  width: 50rpx;
+  height: 50rpx;
+  display: block;
+}
+
+.history-search-title-box {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.tag-box {
+  margin-top: 40rpx;
+}
+
+.tag-box ul {
+  display: flex;
+  flex-wrap: wrap
+}
+
+.tag-box ul li {
+  padding: 10rpx 20rpx;
+  background: #f6f5f5;
+  text-align: center;
+  font-size: 28rpx;
+  color: #333;
+  margin-right: 20rpx;
+  margin-bottom: 20rpx;
+}

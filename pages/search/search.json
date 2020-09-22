@@ -1,3 +1,4 @@
 {
-  "usingComponents": {}
+  "navigationBarTitleText": "信息搜索",
+  "backgroundTextStyle": "dark"
 }

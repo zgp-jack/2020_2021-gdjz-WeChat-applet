@@ -213,9 +213,11 @@ Page({
     })
   },
   closeAllSelect: function () {
-
     this.setData({
       showListsInfo: 0
+    })
+    wx.redirectTo({
+      url: "../search/search"
     })
   },
   userChooseProvince: function (e) {
