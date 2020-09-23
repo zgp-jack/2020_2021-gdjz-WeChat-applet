@@ -10,29 +10,35 @@
   <view class="search-input-box">
     <view class="input-box">
       <image src="{{ searchIcon }}"></image>
-      <input type="text" placeholder="附近适合您的工作/工人"></input>
+      <input type="text" 
+      placeholder="附近适合您的工作/工人"
+      value="{{inputTetx}}"
+      bindinput='searchInput'
+      ></input>
     </view>
     <view class="search-button" bindtap="clickSearch">搜索</view>
   </view>
   <view class="history-search">
     <view class="history-search-title-box">
       <view class="title">{{ historySearch.title }}</view>
-      <image src="../../images/laji.png"></image>
+      <image src="../../images/laji.png" bindtap="deleteHistorySearch"></image>
     </view>
     <view class="tag-box">
-      <block wx:for="{{ historySearch.historyList }}" wx:key="index">
-        <view>{{ item.keywords }}</view>
+      <block wx:if="{{changeStatus == 0}}" wx:for="{{ historySearch.historyList }}" wx:key="index">
+        <view bindtap="clickTabSearch" data-key="{{ item.keywords }}">{{ item.keywords }}</view>
+      </block>
+      <block wx:if="{{changeStatus == 1}}" wx:for="{{ historySearchGr.historyList }}" wx:key="index">
+        <view bindtap="clickTabSearch" data-key="{{ item.keywords }}">{{ item.keywords }}</view>
       </block>
     </view>
   </view>
   <view class="history-search">
     <view class="history-search-title-box">
       <view class="title">{{ hotSearch.title }}</view>
-      <image src="../../images/laji.png"></image>
     </view>
     <view class="tag-box">
       <block wx:for="{{ hotSearch.hotList }}" wx:key="index">
-        <view>{{ item.keywords }}</view>
+        <view bindtap="clickTabSearch" data-key="{{ item.keywords }}">{{ item.keywords }}</view>
       </block>
     </view>
   </view>

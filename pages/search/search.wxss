@@ -52,6 +52,8 @@ page {
 }
 .input-box input{
   font-size: 28rpx;
+  flex: 1;
+  height: 100%;
 }
 .input-box image {
   width: 50rpx;
@@ -114,26 +116,4 @@ page {
   display: flex;
   align-items: center;
   border-radius: 4rpx;
-}
-
-
-
-
-
-
-
-
-.tag-box ul {
-  display: flex;
-  flex-wrap: wrap
-}
-
-.tag-box ul li {
-  padding: 10rpx 20rpx;
-  background: #f6f5f5;
-  text-align: center;
-  font-size: 28rpx;
-  color: #333;
-  margin-right: 20rpx;
-  margin-bottom: 20rpx;
 }

@@ -217,7 +217,7 @@ Page({
       showListsInfo: 0
     })
     wx.redirectTo({
-      url: "/pages/search/search"
+      url: "/pages/search/search?changeStatus=0"
     })
   },
   userChooseProvince: function (e) {
@@ -613,7 +613,14 @@ Page({
     }
   },
   userTapSearch: function () {
-    // if(!this.data.userInfo){
+    if(this.data.searchDate.keywords == ""){
+      wx.showModal({
+        title:"提示",
+        content:"请输入内容",
+        showCancel:false,
+      })
+    }else {
+      // if(!this.data.userInfo){
     //   app.gotoUserauth();
     //   return false;
     // }
@@ -653,6 +660,7 @@ Page({
     })
     this.initSearchHistory();
     this.doRequestAction(false);
+    }
   },
   returnTop: function () {
     //this.setData({ scrollTop: 0 })
@@ -784,7 +792,7 @@ Page({
       footerImgs: footerjs.footerImgs,
       publishActive: footerjs.publishActive,
       showPublishBox: footerjs.showPublishBox,
-      resumeText:app.globalData.resumeText
+      resumeText:app.globalData.resumeText,
     })
   },
   doPublishAction: function () {
@@ -975,7 +983,13 @@ Page({
     this.setData({
       jgjzData: {...u,userUuid: uuid}
     })
-
+    
+    
+    if(options.keywrods){
+      this.setData({
+        "searchDate.keywords":options.keywrods
+      })
+    }
     this.initFirstFcInfo();
     this.initSearchHistory();
     //this.isShowFastIssue();
@@ -987,6 +1001,8 @@ Page({
     this.initUserLocation();
     this.initFooterData();
     this.checkIsInvite(options);
+
+    
   },
   /**
    * 生命周期函数--监听页面初次渲染完成

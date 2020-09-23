@@ -278,6 +278,10 @@ Page({
     this.setData({
       showListsInfo: 0
     })
+    //跳转搜索页面
+    wx.redirectTo({
+      url: "/pages/search/search?changeStatus=1"
+    })
   },
   userChooseWorktype: function (e) {
     var _this = this;
@@ -545,45 +549,53 @@ Page({
 
   //用户点击搜索
   userTapSearch: function () {
-    // if (!this.data.userInfo) {
-    //   app.gotoUserauth();
-    //   return false;
-    // }
-    //if (this.data.searchDate.keywords == "") return false;
+    if(this.data.searchDate.keywords == "") {
+      wx.showModal({
+        title:"提示",
+        content:"请输入内容",
+        showCancel:false,
+      })
+    }else {
+      // if (!this.data.userInfo) {
+      //   app.gotoUserauth();
+      //   return false;
+      // }
+      //if (this.data.searchDate.keywords == "") return false;
 
-    let text = this.data.searchDate.keywords;
-    if (text) {
-      let his = wx.getStorageSync("searchHistory")
-      if (his) {
-        let job = his.hasOwnProperty("resume");
-        if (job) {
-          let jobs = his.resume;
-          let index = jobs.indexOf(text);
-          if (index != -1) {
-            jobs.splice(index, 1);
+      let text = this.data.searchDate.keywords;
+      if (text) {
+        let his = wx.getStorageSync("searchHistory")
+        if (his) {
+          let job = his.hasOwnProperty("resume");
+          if (job) {
+            let jobs = his.resume;
+            let index = jobs.indexOf(text);
+            if (index != -1) {
+              jobs.splice(index, 1);
+            }
+            jobs.unshift(text);
+
+          } else {
+            his.resume = [];
+            his.resume.push(text)
           }
-          jobs.unshift(text);
-
+          his.resume.splice(4)
+          wx.setStorageSync("searchHistory", his)
         } else {
-          his.resume = [];
-          his.resume.push(text)
+          let myhis = {
+            resume: [text]
+          }
+          wx.setStorageSync("searchHistory", myhis)
         }
-        his.resume.splice(4)
-        wx.setStorageSync("searchHistory", his)
-      } else {
-        let myhis = {
-          resume: [text]
-        }
-        wx.setStorageSync("searchHistory", myhis)
       }
-    }
-    this.returnTop();
-    this.setData({
-      "searchDate.page": 1,
-      showHistoryList: false
-    })
-    this.doRequestAction(false);
-    this.initSearchHistory();
+      this.returnTop();
+      this.setData({
+        "searchDate.page": 1,
+        showHistoryList: false
+      })
+      this.doRequestAction(false);
+      this.initSearchHistory();
+      }
   },
   returnTop: function () {
     //this.setData({ scrollTop: 0 })
@@ -839,6 +851,11 @@ Page({
     }
   },
   onLoad(options) {
+    if(options.keywrods){
+      this.setData({
+        "searchDate.keywords":options.keywrods
+      })
+    }
     this.initSearchHistory();
     this.initUserShareTimes();
     this.getFilterData();
