@@ -112,7 +112,11 @@ Page({
     hasTop: 1,
     lastSortFlagPos: 0,
     lastTimePos: 0,
-    lastNormalPos: 0
+    lastNormalPos: 0,
+    // pageStatus是goback的话需要刷新当前页面状态
+    pageStatus:'',
+    // pageStatus是goback的话需要刷新当前页面信息ID
+    pageId: ''
   },
   // 根据发布方式不同发布招工：未登录或者“fast_add_job”是快速发布，“ordinary_add_job”是普通发布。
   publishJob:function () {
@@ -853,7 +857,8 @@ Page({
 
   showDetailInfo: function (e) {
 
-    let uuid = e.currentTarget.dataset.uuid
+    let uuid = e.currentTarget.dataset.uuid;
+    let id = e.currentTarget.dataset.id;
     let userLocation = wx.getStorageSync("userLocation")
     if (!userLocation) {
       userLocation = ""
@@ -862,7 +867,7 @@ Page({
     }
 
     wx.navigateTo({
-      url: `/pages/boss-look-card/lookcard?uuid=${uuid}&location=${userLocation}`
+      url: `/pages/boss-look-card/lookcard?uuid=${uuid}&location=${userLocation}&id=${id}`
     })
   },
 
@@ -886,6 +891,19 @@ Page({
     if (options.hasOwnProperty("source")) {
       wx.setStorageSync("_source", options.source);
     }
+  },
+  // 如果pagestatus状态为goback代表需要刷新当前数据
+  initPageData: function () {
+    let pageStatus = this.data.pageStatus;
+    let lists =  this.data.lists;
+    let pageId = this.data.pageId;
+    if (pageStatus == "goback") {
+      let index = lists.findIndex((item)=>{
+        return item.id == pageId
+      })
+      lists.splice(index,1)
+    }
+    this.setData({lists,})
   },
   onLoad(options) {
     this.initSearchHistory();
@@ -915,6 +933,7 @@ Page({
     }
     footerjs.initMsgNum(this);
     app.initResume(this)
+    this.initPageData()
   },
 
   /**

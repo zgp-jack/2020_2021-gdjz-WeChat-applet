@@ -98,7 +98,8 @@ Page({
       if (!u) {
         if (isRule) {
           this.setData({
-            phone:""
+            phone:"",
+            showTel:false
           })
           this.setEnterInfo("phone","")
         }else{
@@ -198,7 +199,6 @@ Page({
             wx.navigateTo({
               url: '/pages/fast/area/area?token=' + mydata.token,
             })
-            that.setEnterInfo("detail",'')
             that.setEnterInfo("phone",'')
           } else {
             wx.navigateTo({
@@ -415,11 +415,26 @@ Page({
     let index = pages.length - 1
     let path = pages[index].__displayReporter.showReferpagepath
     path = path.slice(0, -5)
-    if (path == "pages/fast/tips/tips") {
+    if (path == "pages/fast/tips/tips" || path == "pages/fast/area/area") {
+      //获取本地缓存用户信息
+      let u = wx.getStorageSync('userInfo')
+      //获取globalData中的用户手机号码
+      let userPhone = app.globalData.publish.userPhone
       this.selectComponent("#issueok").show()
-    }
-    if (path == "pages/fast/area/area") {
-      this.selectComponent("#detaintip").show()
+      this.setEnterInfo("detail",'')
+      if (u) {
+        this.setData({
+          content:"",
+          phone: userPhone,
+          showTel: false
+        })
+      } else {
+        this.setData({
+          content:"",
+          phone: "userPhone",
+          showTel: false
+        })
+      }
     }
   },
 

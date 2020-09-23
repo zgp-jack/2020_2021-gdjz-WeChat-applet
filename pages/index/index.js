@@ -109,7 +109,11 @@ Page({
     inviteturntable:app.globalData.apiImgUrl + 'inviteuser-getintegral.png',
     showturntable: false,
     jgjzData: {},
-    resumeText:""
+    resumeText:"",
+    // pageStatus是goback的话需要刷新当前页面状态
+    pageStatus:'',
+    // pageStatus是goback的话需要刷新当前页面信息ID
+    pageId: ''
   },
   getPhoneNumber:function(e){
     console.log(e)
@@ -963,6 +967,19 @@ Page({
       }
     }
   },
+  // 如果pagestatus状态为goback代表需要刷新当前数据
+  initPageData: function () {
+    let pageStatus = this.data.pageStatus;
+    let lists =  this.data.lists;
+    let pageId = this.data.pageId;
+    if (pageStatus == "goback") {
+      let index = lists.findIndex((item)=>{
+        return item.id == pageId
+      })
+      lists.splice(index,1)
+    }
+    this.setData({lists,})
+  },
   /**
    * 生命周期函数--监听页面加载
    */
@@ -1002,6 +1019,7 @@ Page({
     footerjs.initMsgNum(this);
     this.initTurntable();
     app.initResume(this)
+    this.initPageData()
   },
   onPageScroll: function (e) {
     let top = e.scrollTop;

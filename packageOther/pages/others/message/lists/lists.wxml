@@ -2,7 +2,7 @@
     <!-- 意见反馈列表 -->
     <view class="feedback-header" id="comment">
     <view class="yupao-lists-tips">
-        <text>为提高沟通效率，建议您添加客服微信号或拨打客服电话。客服微信号:</text><text style="color:#007aff">{{ wechat }}</text><text>客服电话:</text><text style="color:#007aff">{{ serverPhone }}</text>
+        <text>为提高沟通效率，建议您添加客服微信号或拨打客服电话。</text><text>客服电话:</text><text style="color:#007aff" bindtap="tellPhone">{{ serverPhone }}</text>
     </view>
     </view>
     <view class="help_list_body">

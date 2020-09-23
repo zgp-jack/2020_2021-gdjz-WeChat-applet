@@ -394,6 +394,13 @@
           "id": -1,
           "name": "积分消耗",
           "pathName": "pages/integral/expend/expend",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "找工人列表",
+          "pathName": "pages/findingworkinglist/findingworkinglist",
           "scene": null
         }
       ]

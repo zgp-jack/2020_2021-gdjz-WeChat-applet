@@ -395,7 +395,7 @@ Page({
       if (!areaId) {
         wx.showModal({
           title: '提示',
-          content: "请选择招工所在地。",
+          content: "请选择招工城市。",
           showCancel: false
         })
         return false

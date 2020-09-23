@@ -21,6 +21,12 @@ Page({
         rightarrow: app.globalData.apiImgUrl + "new-center-rightarrow.png",
         serverPhone: app.globalData.serverPhone
     },
+    // 点击电话拨打电话
+    tellPhone: function () {
+        wx.makePhoneCall({
+          phoneNumber: this.data.serverPhone,
+        })
+    },
     initUserData: function(options) {
         let userInfo = wx.getStorageSync("userInfo");
         if (!userInfo) {

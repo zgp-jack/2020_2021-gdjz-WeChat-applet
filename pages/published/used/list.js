@@ -23,7 +23,8 @@ Page({
     tipmsg: '提示：人工审核，该信息仅自己可见。',
     resumeText:"",
     // 是否请求加载完毕
-    isRequest: true
+    isRequest: true,
+    current: 0
   },
   publishJob:function () {
     app.initJobView()
@@ -154,7 +155,6 @@ Page({
       lists: [],
       isRequest: false
     })
-    this.getUsedList()
   },
   getUsedList:function(){
     let _this = this
@@ -318,6 +318,22 @@ Page({
   valiUserCard: function () {
     let userInfo = this.data.userInfo;
     footerjs.valiUserCard(this, app, userInfo);
+  },
+  // 切换tab
+  switchTab:function(e){
+    let key = e.detail.current
+    this.setData({
+      current: parseInt(key),
+      page: 1,
+      hasmore: true,
+      lists: []
+    })
+    this.getUsedList()
+  },
+  // 下拉加载更多
+  loadmore:function(){
+    if(!this.data.hasmore) return false
+    this.getUsedList()
   },
   /**
    * 生命周期函数--监听页面加载
