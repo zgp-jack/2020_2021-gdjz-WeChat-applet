@@ -356,3 +356,24 @@ page{
 
 
 .jumpjgjz{position: fixed;background-color: #0099ff;color: white;line-height: 75rpx;padding: 0 35rpx;border-radius: 20px;font-size: 28rpx;right: 10rpx;top: 500rpx;z-index: 999;}
+
+.lists-nodata button {
+    border: none;
+    background: #0099ff;
+    color: #fff;
+    padding: 0 60rpx !important;
+    font-size: 24rpx !important;
+    border-radius: 3px;
+    margin-top: 40rpx;
+}
+.lists-nodata button::after {
+    border: none;
+}
+.no-data-text {
+    color: #999;
+}
+.btn-tips-text {
+    font-size: 32px;
+    color: #000;
+    line-height: 1 !important;
+}

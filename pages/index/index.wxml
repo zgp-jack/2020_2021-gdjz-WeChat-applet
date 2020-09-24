@@ -74,8 +74,8 @@
 
 
 
-    <!-- 公告 -->
-    <view class='yupao-lists-notice'>
+    <!-- 公告-加群 -->
+    <view class='yupao-lists-notice' wx:if="{{ !showNothinkData }}">
         <view class='yupao-lists-wxinfo'>
             <view class='yupao-lists-wxtips'>
             <!-- <text class='yupao-lists-tips'>加群：</text>加工友微信号:<text  data-wechat="{{ wechat }}" bindtap='clipboardWechat'>{{ wechat }}</text><text class="phoneer" data-wechat="{{ wechat }}" bindtap='clipboardWechat'>复制</text>
@@ -104,7 +104,7 @@
       <view class="overwords"><text>[{{ member_notice.infoTypeWord }}]</text>{{ member_notice.tipsMsg }} </view>
       <text class="feedback-btn">点击查看</text>
     </view> -->
-
+    <!-- 列表 -->
     <view class='gainebox'>
         <block  wx:for="{{ lists }}" wx:key="{{ index }}" wx:if="{{ lists.length }}">
   
@@ -156,14 +156,23 @@
         <navigator class='lists-ad lists-ad-image' target="miniProgram"  wx:if="{{ (index == 5) && (fillterType[worktype].id == '55')}}" open-type="navigate" app-id="wx0ae31bf0edad4390" path="" extra-data="" version="release" >
             <image  src="{{ jixieLinkImg }}"></image>
         </navigator>
-
         </block>
-
         <view class='nodata-texttips' wx:if="{{ nothavemore }}">没有更多内容了</view>
 
+        <!-- 未找到数据 -->
         <view class='common-nodatabox flex-column lists-nodata'  wx:if="{{ showNothinkData }}">
             <image src='{{ listsImg.nodata }}'></image>
-            <text>暂无相关内容</text>
+            <text class="no-data-text">没有找到您想要的内容</text>
+            <block wx:if="{{is_null == 2}}">
+              <text class="btn-tips-text">置顶找活，让那个更多老板看到您的找活信息～</text>
+            <button size="mini">去置顶</button>
+            </block>
+            
+            <block  wx:if="{{is_null == 1}}">
+              <text class="btn-tips-text">发布找活，让老板主动来找我～</text>
+            <button size="mini">去发布</button>
+            </block>
+          
         </view>
     </view>
 

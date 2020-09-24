@@ -84,7 +84,7 @@
 <view class='yupao-lists-container yupao-common-container'>
 
   <!-- 公告 -->
-  <view class='yupao-lists-notice'>
+  <view class='yupao-lists-notice' wx:if="{{ !showNothinkData }}">
     <view class='yupao-lists-wxinfo'>
       <view class='yupao-lists-wxtips'>
         <text  wx:for="{{joingroup}}" wx:key="{{ index }}" style="color:{{item.color}}"      data-wechat="{{ item.text== 'wechat_number'|| item.action.type == 'copy' ?wechat:'' }}" bindtap="{{item.action.type == 'replace'?'clipboardWechat':((item.action.type == 'copy'?'clipboardWechat':(item.action.type == 'call'?'callThisPhone':''))) }}" data-phone="{{ item.action.type == 'call'?phone:'' }}"  class="{{item.action.is_btn == '1'?'phoneer':'' }}" >{{item.text== 'wechat_number'?wechat:item.text}}</text>
@@ -189,7 +189,18 @@
 
     <view class='common-nodatabox flex-column lists-nodata' wx:if="{{ showNothinkData }}">
       <image src='{{ listsImg.nodata }}'></image>
-      <text>暂无相关内容</text>
+      <text>没有找到您想要的内容</text>
+      <block  wx:if="{{is_null == 2}}">
+        <text class="btn-tips-text">置顶招工，让更多工人看到你的招工信息～</text>
+        <button size="mini">去置顶</button>
+      </block>
+      
+      <block wx:if="{{is_null == 1}}">
+        <text class="btn-tips-text">发布招工，让招工人主动来找我～</text>
+        <button size="mini">去发布</button>
+      </block>
+      
+
     </view>
   </view>
 

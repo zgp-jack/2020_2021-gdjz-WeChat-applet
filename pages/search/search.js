@@ -56,7 +56,7 @@ Page({
     })
   }else{
     //判断找工作还是找工人
-    if(this.data.changeStatus === 0){
+    if(this.data.changeStatus == 0){
       var historyList = this.data.historySearch;
       if(historyList.historyList.length === 6) {
         historyList.historyList.pop()
@@ -165,16 +165,11 @@ Page({
   },
   //点击历史搜索热门搜索标签直接搜索
   clickTabSearch(e){
-    console.log(e)
-    if(this.data.changeStatus == 0){
-      wx.redirectTo({
-        url:"/pages/index/index?keywrods="+e.currentTarget.dataset.key
-      })
-    }else{
-      wx.redirectTo({
-        url:"/pages/findingworkinglist/findingworkinglist?keywrods="+e.currentTarget.dataset.key
-      })
-    }
+    this.setData({
+      inputTetx:e.currentTarget.dataset.key
+    })
+    //调用搜索方法 保存历史搜索
+    this.clickSearch()
   },
   //获取热门搜索
   getHotsearch:function (){
@@ -183,9 +178,16 @@ Page({
       url:"index/hot-search/",
       way: "GET",
       success:function (res) {
-        _this.setData({
-          "hotSearch.hotList":res.data.data
-        })
+        if(res.data.errcode == "ok"){
+          _this.setData({
+            "hotSearch.hotList":res.data.data
+          })
+        }else {
+          app.showMyTips(res.data.errmsg)
+        }
+      },
+      fail:()=>{
+        app.showMyTips('网络错误，加载失败！')
       }
     })
   },
