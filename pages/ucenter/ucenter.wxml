@@ -89,7 +89,7 @@
   </view>
 
 
-  <view class="{{ (!userInfo || advertising.length==0)? 'isbanner': 'menu-container'}}">
+  <view class="{{ userInfo && advertising.length? 'menu-container': 'isbanner'}}">
     <view class="menu-block" wx:for="{{ uCenterMenus }}" wx:key="{{ index }}">
 
       <view class="title-block">

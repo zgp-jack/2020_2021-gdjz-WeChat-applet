@@ -431,7 +431,7 @@ Page({
       } else {
         this.setData({
           content:"",
-          phone: "userPhone",
+          phone: "",
           showTel: false
         })
       }

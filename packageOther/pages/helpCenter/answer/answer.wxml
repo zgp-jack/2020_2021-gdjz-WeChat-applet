@@ -3,6 +3,7 @@
 <view class='noticebox'>
     <view class="infotitle">{{ title }}</view>
     <view class="answer_scroll">
+      <video src="{{ video }}" wx:if="{{ video }}"></video>
       <template is="wxParse" data="{{ wxParseData:answer.nodes }}"/>
     </view>
     <view class="answer_footer" wx:if="{{ answer }}">
