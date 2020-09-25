@@ -26,7 +26,7 @@
          <text>消耗积分:</text>
          <text class="num">{{getexpend}}</text>
       </view>
-      <view class="dointegral"  bindtap="dointegral">
+      <view class="dointegral">
          <text>获取积分:</text>
          <text class="num">{{getintegral}}</text>
       </view>

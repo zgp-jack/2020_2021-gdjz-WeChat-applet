@@ -416,7 +416,7 @@ Page({
     let path = pages[index].__displayReporter.showReferpagepath
     path = path.slice(0, -5)
     if (path == "pages/fast/tips/tips" || path == "pages/fast/area/area") {
-      // 显示发布成功提示框
+      // 显示发布成功弹框
       this.selectComponent("#issueok").show()
       //获取本地缓存用户信息
       let u = wx.getStorageSync('userInfo')
