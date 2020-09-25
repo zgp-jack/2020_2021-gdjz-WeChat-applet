@@ -12,7 +12,7 @@
     <view>{{ feedbackDetail.reply_time }}</view>
   </view>
   <view class="detail_footer">
-    <button class="{{useful==2?'button_choose':''}}" plain disabled="{{ useful !=0?true:false }}" bindtap="feedbackResult" data-val="2">未解决</button>
     <button class="{{useful==1?'button_choose':''}}" plain disabled="{{ useful !=0?true:false }}" bindtap="feedbackResult" data-val="1">已解决</button>
+    <button class="{{useful==2?'button_choose':''}}" plain disabled="{{ useful !=0?true:false }}" bindtap="feedbackResult" data-val="2">未解决</button>
   </view>
 </view>

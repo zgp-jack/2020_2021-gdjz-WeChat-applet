@@ -112,7 +112,8 @@ Page({
     more: 0,
     child: 0,
     user_id: '',
-    teltipsimg: app.globalData.apiImgUrl + 'usercallphone-tips.png'
+    teltipsimg: app.globalData.apiImgUrl + 'usercallphone-tips.png',
+    infoId:''
   },
   closeNewPhoneFc:function(){
     this.setData({shownewtips: false})
@@ -208,7 +209,9 @@ Page({
   },
   telephorft() {
     let that = this
+    var pages = getCurrentPages();//获取页面栈
     let userInfo = wx.getStorageSync("userInfo");
+    let infoId = this.data.infoId;
     let _this = this;
     if (!userInfo) {
       app.gotoUserauth();
@@ -275,6 +278,15 @@ Page({
             }
           })
         } else if (res.data.errcode == "goback") { //已删除返回上一页
+          if (pages.length > 1) {
+            //上一个页面实例对象
+            var prePage = pages[pages.length - 2];
+            // 设置上一页对象属性
+            prePage.setData({
+            pageStatus: res.data.errcode,
+            pageId: infoId
+            })
+          } 
           wx.showModal({
             title: '温馨提示',
             content: res.data.errmsg,
@@ -444,6 +456,8 @@ Page({
   },
   getdetail(option) {
     let that = this;
+    let infoId = option.id
+    var pages = getCurrentPages();//获取页面栈
     if (option.hasOwnProperty("refId")){
       app.globalData.refId = option.refId;
     }
@@ -566,7 +580,8 @@ Page({
             show_complain: mydata.info.hasOwnProperty("show_complain") ? mydata.info.show_complain : {},
             certificate_show: mydata.info.hasOwnProperty("certificate_show") ? mydata.info.certificate_show : "",
             authenticationimg: mydata.info.hasOwnProperty("authentication") ? mydata.info.authentication : "",
-            userId: mydata.info.user_id
+            userId: mydata.info.user_id,
+            infoId: mydata.info.id
           })
 
           // 加载推荐列表
@@ -706,6 +721,29 @@ Page({
               }
             })
           }
+        } else if (res.data.errcode == "goback") { //已删除返回上一页
+          if (pages.length > 1) {
+            //上一个页面实例对象
+            var prePage = pages[pages.length - 2];
+            // 设置上一页对象属性
+            prePage.setData({
+            pageStatus: res.data.errcode,
+            pageId: infoId
+            })
+          } 
+          wx.showModal({
+            title: '温馨提示',
+            content: res.data.errmsg,
+            confirmText: "确定",
+            showCancel:false,
+            success(res) {
+              if (res.confirm) {
+                wx.navigateBack({
+                  delta: 1,
+                })
+              } 
+            }
+          })
         } else {
           wx.showModal({
             title: '温馨提示',
@@ -926,6 +964,11 @@ Page({
     if(options.hasOwnProperty('child')){
       this.setData({
         child: options.child
+      })
+    }
+    if(options.hasOwnProperty('id')){
+      this.setData({
+        infoId: options.id
       })
     }
   },

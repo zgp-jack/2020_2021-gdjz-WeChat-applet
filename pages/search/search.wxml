@@ -14,6 +14,7 @@
       placeholder="附近适合您的工作/工人"
       value="{{inputTetx}}"
       bindinput='searchInput'
+      focus="{{focusInput}}"
       ></input>
     </view>
     <view class="search-button" bindtap="clickSearch">搜索</view>

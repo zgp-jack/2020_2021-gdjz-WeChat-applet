@@ -74,8 +74,9 @@ page{
     display: flex;
     align-items: center;
     font-size: 35rpx;
-    font-weight: 500;
+    font-weight: bold;
     color: #303030;
+    padding-top: 20rpx;
 }
 .help_list_body{
     width: 100%;
@@ -94,7 +95,7 @@ page{
     display: flex;
     align-items: center;
     border-bottom: 1px solid #EEEEEE;
-    height: 100rpx;
+    height: 120rpx;
     width: 100%;
 }
 .help_question_icon{
@@ -118,7 +119,7 @@ page{
     width: 15rpx;
 }
 .icon_down_rotate{
-    transform: rotate(90deg);
+    transform: rotate(-90deg);
 }
 
 .help_question_detail{
@@ -135,7 +136,7 @@ page{
     width: 100%;
 }
 .help_center_footer{
-    height: 200rpx;
+    height: 180rpx;
     width: 100%;
     position: absolute;
     bottom: 20rpx;

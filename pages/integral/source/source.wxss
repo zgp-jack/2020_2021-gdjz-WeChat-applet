@@ -1,4 +1,43 @@
 @import '../expend/expend.wxss';
+
+.integral-header{
+  width: 100%;
+  height: 100rpx;
+  display: flex;
+  border-bottom: 1px solid #EEEEEE;
+}
+.integral-header-source{
+  width: 50%;
+  height: 100%;
+  border-right: 1px solid #EEEEEE;
+}
+.integral-source-text{
+  position: relative;
+  display: inline-block;
+  color: #0099FF;
+  font-size: 30rpx;
+  font-weight: bold;
+}
+.integral-source-text:after{
+  position: absolute;
+  content: "";
+  display: inline-block;
+  width: 50%;
+  height: 8rpx;
+  background-color: #0099FF;
+  bottom: 18rpx;
+  margin-left: -50%;
+  transform: translateX(-50%);
+  border-radius: 4rpx;
+}
+.integral-header-expend{
+  width: 50%;
+  height: 100%;
+}
+.integral-header-expend text{
+  font-size: 30rpx;
+  font-weight: bold;
+}
 .integral-select{
   background: white;
 }
@@ -32,7 +71,7 @@
   border-top: 1px solid #EEEEEE;
 }
 .dointegral{
-  margin-left: 100rpx;
+  margin-left: 10rpx;
 }
 .integral-detail text{
   padding-right: 10rpx;
@@ -51,5 +90,4 @@
 .classfy image{
     width: 38rpx;
     height: 34rpx;
-    
 }

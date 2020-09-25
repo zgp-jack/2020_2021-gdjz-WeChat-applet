@@ -438,6 +438,7 @@ Page({
     initJobInfo: function (id){
         let _this = this;
         let userInfo = wx.getStorageSync("userInfo");
+        var pages = getCurrentPages();//获取页面栈
         let url = userInfo ? "job/job-info/" : "/job/no-user-info/";
         let infoId = id;
         this.setData({ userInfo:userInfo ? userInfo : false,infoId:infoId });
@@ -460,8 +461,32 @@ Page({
                     }
                   })
                   return
+                } 
+                if (mydata.errcode == "goback") { //已删除返回上一页
+                  if (pages.length > 1) {
+                    //上一个页面实例对象
+                    var prePage = pages[pages.length - 2];
+                    // 设置上一页对象属性
+                    prePage.setData({
+                    pageStatus: mydata.errcode,
+                    pageId: infoId
+                    })
+                  } 
+                  wx.showModal({
+                    title: '温馨提示',
+                    content: mydata.errmsg,
+                    confirmText: "确定",
+                    showCancel:false,
+                    success(res) {
+                      if (res.confirm) {
+                        wx.navigateBack({
+                          delta: 1,
+                        })
+                      } 
+                    }
+                  })
+                  return
                 }
-                
                 _this.setData({ info: mydata.result })
                 //_this.getRecommendList()
                 let cityid = mydata.result.hasOwnProperty('city_id') ? parseInt(mydata.result.city_id) : 0
@@ -514,6 +539,7 @@ Page({
     },
     doDetailAction: function (mydata, _obj) {
         let _this = this
+        var pages = getCurrentPages();//获取页面栈
         let infoId = _this.data.infoId
         if ((mydata.errcode == "ok") || (mydata.errcode == "end") || (mydata.errcode == "ajax")) { //获取成功、已找到
             _obj.success();
@@ -598,6 +624,15 @@ Page({
             }
           })
         } else if (mydata.errcode == "goback") { //已删除返回上一页
+          if (pages.length > 1) {
+            //上一个页面实例对象
+            var prePage = pages[pages.length - 2];
+            // 设置上一页对象属性
+            prePage.setData({
+            pageStatus: mydata.errcode,
+            pageId: infoId
+            })
+          } 
           wx.showModal({
             title: '温馨提示',
             content: mydata.errmsg,

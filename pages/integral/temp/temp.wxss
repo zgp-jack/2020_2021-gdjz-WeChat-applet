@@ -1,2 +1,72 @@
-@import '../expend/expend.wxss';
-.integral-header{color: #0099ff;font-weight: bold;}.integral-header{color: #0099ff;font-weight: bold;height: inherit;line-height: 40rpx;padding: 20rpx;box-sizing: border-box;}
+
+/* pages/expend/expend.wxss */
+.integral-content{
+  width: 100%;
+  margin-top: 20rpx;
+}
+.integral-lists-item{
+  height: 200rpx;
+  width: 100%;
+  background-color: white;
+  padding: 0rpx 27rpx;
+  display: flex;
+}
+.integral-list-icon{
+  height: 100%;
+  width: 60rpx;
+  padding-top: 25rpx;
+}
+.integral-list-icon image{
+  height: 60rpx;
+  width: 100%;
+}
+.integral-list-content{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  width: 100%;
+  border-bottom: 1rpx solid #E6E6E6;
+  margin-left: 25rpx;
+}
+
+.integral-lists-item:last-child .integral-list-content{
+  border: none;
+}
+.integral-content{
+  box-shadow: 2rpx 2rpx 10rpx #d2d0d0;
+}
+
+
+.integral-list-firstline{
+  display: flex;
+}
+.integral-list-firstline view:nth-child(1){
+  margin-right: auto;
+  font-size: 30rpx;
+  font-weight: 500;
+  color: #262629;
+}
+.integral-list-firstline view:nth-child(2){
+  font-size: 26rpx;
+  font-weight: 500;
+  color: #FFB040;
+}
+.integral-list-integral{
+  font-size: 26rpx;
+  color: #262629;
+  font-family: Source Han Sans CN;
+}
+.integral-list-time{
+  font-size: 26rpx;
+  color: #9F9F9F;
+}
+.integral-header{
+  color: #676767;
+  text-align: center;
+  height: inherit;
+  line-height: 40rpx;
+  padding: 20rpx;
+  box-sizing: border-box;
+  background-color: white;
+  font-size: 28rpx;
+}

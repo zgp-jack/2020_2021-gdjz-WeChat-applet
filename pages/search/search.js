@@ -31,7 +31,8 @@ Page({
     //搜索图标icon地址 
     searchIcon: app.globalData.apiImgUrl + 'yc/helpCenter-search.png',
     changeStatus: 0,
-    inputTetx: ""
+    inputTetx: "",
+    focusInput: false
   },
   //头部tab切换
   tabChange: function (e) {
@@ -195,6 +196,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    //判断默认显示找工作还是找工人
     if(options.changeStatus){
       this.setData({
         changeStatus:options.changeStatus
@@ -215,7 +217,10 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+     //进入页面获取焦点弹出键盘
+    this.setData({
+      focusInput:true
+    })
   },
 
   /**

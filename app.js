@@ -242,7 +242,23 @@ App({
       header: header,
       success(res) {
         if (res.statusCode == 200 || res.statusCode == 304) {
-          _options.hasOwnProperty("success") ? _options.success(res) : "";
+          if (res.data.errcode == "member_shielding") {
+            wx.showModal({
+              content: res.data.errmsg,
+              cancelText: "知道了",
+              confirmText: "联系客服",
+              success: function (res) {
+                if (res.confirm) {
+                  wx.makePhoneCall({
+                    phoneNumber: res.data.service_tel,
+                  })
+                }
+              }
+            })
+            wx.hideLoading();
+          }else{
+            _options.hasOwnProperty("success") ? _options.success(res) : "";
+          }
         } else {
           _options.hasOwnProperty("fail") ? _options.fail(res) : "";
         }
@@ -304,7 +320,22 @@ App({
           wx.hideLoading();
         }
         if (res.statusCode == 200 || res.statusCode == 304) {
-          _options.hasOwnProperty("success") ? _options.success(res) : "";
+          if (res.data.errcode == "member_shielding") {
+            wx.showModal({
+              content: res.data.errmsg,
+              cancelText: "知道了",
+              confirmText: "联系客服",
+              success: function (res) {
+                if (res.confirm) {
+                  wx.makePhoneCall({
+                    phoneNumber: res.data.service_tel,
+                  })
+                }
+              }
+            })
+          } else {
+            _options.hasOwnProperty("success") ? _options.success(res) : "";
+          } 
         } else {
           if (_options.hasOwnProperty("fail")) {
             _options.fail(res)

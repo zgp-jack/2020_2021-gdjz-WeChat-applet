@@ -25,7 +25,9 @@ Page({
     showTopTips: false,
     //我的全部招工信息是否有数据
     isAllList : false,
-    resumeText: ""
+    resumeText: "",
+    //当前选中tab
+    current: 0,
   },
   publishJob:function () {
     app.initJobView()
@@ -341,7 +343,7 @@ Page({
       lists: [],
       isRequest: false
     })
-    this.getRecruitList()
+    // this.getRecruitList()
   },
   getAreaData: function () {
     app.getAreaData(this);
@@ -370,6 +372,22 @@ Page({
   },
   goPublish:function () {
     app.initJobView()
+  },
+  // 欢动切换tab
+  switchTab:function(e){
+    let key = e.detail.current
+    this.setData({
+      current: parseInt(key),
+      page: 1,
+      hasmore: true,
+      lists: []
+    })
+    this.getRecruitList()
+  },
+  // 下拉加载更多
+  loadmore:function(){
+    if(!this.data.hasmore) return false
+    this.getRecruitList()
   },
   /**
    * 生命周期函数--监听页面加载

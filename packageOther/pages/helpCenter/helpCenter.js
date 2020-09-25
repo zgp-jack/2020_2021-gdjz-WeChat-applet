@@ -72,13 +72,6 @@ Page({
             }
         }
     },
-    // 将问题列表数据存入缓存中
-    setStorage: function (data) {
-        let questions = data.reduce((pre,item)=>{
-            return [...pre, ...item.questions]
-        },[])
-        wx.setStorageSync('questionList', questions)
-    },
     // 获取帮助中心问题列表数据
     getHelpeData: function() {
         let _this = this;
@@ -98,7 +91,6 @@ Page({
                     _this.setData({
                         helpeLists: lists
                     })
-                    _this.setStorage(lists)
                 } else {
                     wx.showToast({
                         title: mydata.errmsg,

@@ -68,14 +68,18 @@
       </view>
     </view>
   </view>
+  <view class="user_background_image">
+    <image class="header_background_image" mode="aspectFit" src="http://cdn.yupao.com/miniprogram/images/yc/personCenter-topBackground.png"></image>
+  </view>
+  
 </view>
 
-<view class='yupao-common-container'>
+<view class="yupao-common-container">
   <!-- 轮播图 -->
-  <view class='advertising' wx:if="{{advertising.length && userInfo}}">
+  <view class="advertising" wx:if="{{advertising.length && userInfo}}">
     <image wx:if="{{advertising.length===1}}" data-url="{{advertising[0].self_url}}" bindtap="valiUserUrl"
            class="item-img"
-           src="{{advertising[0].banner}}"></image>
+           src="{{advertising[0].image_url}}" mode="aspectFill"></image>
 
     <swiper autoplay wx:else>
       <swiper-item wx:for="{{advertising}}">
@@ -85,7 +89,7 @@
   </view>
 
 
-  <view class="menu-container">
+  <view class="{{ (!userInfo || advertising.length==0)? 'isbanner': 'menu-container'}}">
     <view class="menu-block" wx:for="{{ uCenterMenus }}" wx:key="{{ index }}">
 
       <view class="title-block">
@@ -96,7 +100,7 @@
       </view>
       <view class="menu-item-box">
         <view class="menu-item" wx:for="{{ item.menus }}" wx:key="{{ index }}" data-url="{{item.dataUrl}}"
-              bindtap='valiUserUrl'>
+              bindtap="{{item.key != 'service'?'valiUserUrl':''}}">
           <navigator
               wx:if="{{item.key==='bookkeeping'}}"
               class="jump"
@@ -123,7 +127,7 @@
           <view class="masnumber" wx:if="{{ footerImgs.msgsNumber > 0 && item.key==='mymessage' }}">
             <text>{{footerImgs.msgsNumber>9? '9+' : footerImgs.msgsNumber}}</text>
           </view>
-          <view wx:if="{{item.key==='bookkeeping'}}" class="new-tag">新</view>
+          <view wx:if="{{item.key==='bookkeeping'}}" class="new-tag"><image src="{{item.newIcon}}"></image></view>
         </view>
       </view>
 

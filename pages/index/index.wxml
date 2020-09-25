@@ -8,7 +8,7 @@
 
 <!-- 搜索头部 -->
 <view class="lists-header">
-    <input placeholder="找活、找工作" bindconfirm="userTapSearch"  confirm-type="search" bindfocus='bindInputFocus' bindinput='bindKeyInput' bindtap="closeAllSelect" value='{{ searchDate.keywords }}'/>
+    <input placeholder="找活、找工作" bindconfirm="userTapSearch"  confirm-type="search" bindfocus='bindInputFocus' bindinput='bindKeyInput' bindtap="closeAllSelect" value='{{ searchDate.keywords }}' data-goSearch="1" disabled/>
     <text bindtap='userTapSearch'>搜索</text>
 </view>
 
@@ -163,14 +163,14 @@
         <view class='common-nodatabox flex-column lists-nodata'  wx:if="{{ showNothinkData }}">
             <image src='{{ listsImg.nodata }}'></image>
             <text class="no-data-text">没有找到您想要的内容</text>
-            <block wx:if="{{is_null == 2}}">
+            <block wx:if="{{isNullStatus == 2}}">
               <text class="btn-tips-text">置顶找活，让那个更多老板看到您的找活信息～</text>
-            <button size="mini">去置顶</button>
+            <button size="mini" bindtap="goFinding">去置顶</button>
             </block>
             
-            <block  wx:if="{{is_null == 1}}">
+            <block  wx:if="{{isNullStatus == 1}}" bindtap='publishJob'>
               <text class="btn-tips-text">发布找活，让老板主动来找我～</text>
-            <button size="mini">去发布</button>
+            <button size="mini" bindtap="goFinding">去发布</button>
             </block>
           
         </view>

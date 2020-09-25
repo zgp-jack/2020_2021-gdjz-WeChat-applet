@@ -63,7 +63,8 @@ Page({
       sort: "recommend",
       keywords: "",
       occupations: "",
-      area_id: 1
+      area_id: 1,
+      type: 0
     },
     fillterArea: [],
     fillterType: [],
@@ -111,7 +112,13 @@ Page({
     hasTop: 1,
     lastSortFlagPos: 0,
     lastTimePos: 0,
-    lastNormalPos: 0
+    lastNormalPos: 0,
+    // pageStatus是goback的话需要刷新当前页面状态
+    pageStatus:'',
+    // pageStatus是goback的话需要刷新当前页面信息ID
+    pageId: '',
+    //没有数据时 按钮显示状态
+    isNullStatus:""
   },
   // 根据发布方式不同发布招工：未登录或者“fast_add_job”是快速发布，“ordinary_add_job”是普通发布。
   publishJob:function () {
@@ -155,7 +162,13 @@ Page({
       isFirstRequest: true,
       "searchDate.page": 1,
       "searchDate.sort": _id,
-      recommended: text
+      recommended: text,
+      hasSortFlag:1,
+      hasTime: 1,
+      hasTop: 1,
+      lastSortFlagPos: 0,
+      lastTimePos: 0,
+      lastNormalPos: 0
     })
     _this.doRequestAction(false);
     _this.closeAllSelect();
@@ -176,7 +189,13 @@ Page({
       isFirstRequest: true,
       "searchDate.page": 1,
       "searchDate.type": _id,
-      teamText: teamText
+      teamText: teamText,
+      hasSortFlag:1,
+      hasTime: 1,
+      hasTop: 1,
+      lastSortFlagPos: 0,
+      lastTimePos: 0,
+      lastNormalPos: 0
     })
     _this.doRequestAction(false);
     _this.closeAllSelect();
@@ -221,6 +240,12 @@ Page({
           "searchDate.page": 1,
           "searchDate.area_id": _id,
           areaText: areaText,
+          hasSortFlag:1,
+          hasTime: 1,
+          hasTop: 1,
+          lastSortFlagPos: 0,
+          lastTimePos: 0,
+          lastNormalPos: 0
         })
         wx.setStorageSync("areaId", _id)
         wx.setStorageSync("areaText", areaText)
@@ -236,7 +261,13 @@ Page({
               isFirstRequest: true,
               "searchDate.page": 1,
               "searchDate.area_id": _id,
-              areaText: areaText
+              areaText: areaText,
+              hasSortFlag:1,
+              hasTime: 1,
+              hasTop: 1,
+              lastSortFlagPos: 0,
+              lastTimePos: 0,
+              lastNormalPos: 0
             })
             _this.doRequestAction(false);
             _this.closeAllSelect();
@@ -259,7 +290,13 @@ Page({
       isFirstRequest: true,
       areaText: areaText,
       "searchDate.page": 1,
-      "searchDate.area_id": id
+      "searchDate.area_id": id,
+      hasSortFlag:1,
+      hasTime: 1,
+      hasTop: 1,
+      lastSortFlagPos: 0,
+      lastTimePos: 0,
+      lastNormalPos: 0
     })
     let mydata = { "name": areaText, "id": id, ad_name: pname };
     if (id != pid) {
@@ -274,14 +311,16 @@ Page({
     wx.setStorageSync("showCity", id)
   },
 
-  closeAllSelect: function () {
+  closeAllSelect: function (e) {
     this.setData({
       showListsInfo: 0
     })
     //跳转搜索页面
-    wx.redirectTo({
-      url: "/pages/search/search?changeStatus=1"
-    })
+    if(e.target.dataset.gosearch == 1) {
+      wx.redirectTo({
+        url: "/pages/search/search?changeStatus=1"
+      })
+    }
   },
   userChooseWorktype: function (e) {
     var _this = this;
@@ -306,7 +345,13 @@ Page({
           isFirstRequest: true,
           "searchDate.page": 1,
           "searchDate.occupations": _typeid,
-          typeText: typeText
+          typeText: typeText,
+          hasSortFlag:1,
+          hasTime: 1,
+          hasTop: 1,
+          lastSortFlagPos: 0,
+          lastTimePos: 0,
+          lastNormalPos: 0
         })
         _this.returnTop();
         _this.doRequestAction(false);
@@ -320,7 +365,13 @@ Page({
               isFirstRequest: true,
               "searchDate.page": 1,
               "searchDate.occupations": _typeid,
-              typeText: typeText
+              typeText: typeText,
+              hasSortFlag:1,
+              hasTime: 1,
+              hasTop: 1,
+              lastSortFlagPos: 0,
+              lastTimePos: 0,
+              lastNormalPos: 0
             })
             _this.returnTop();
             _this.doRequestAction(false);
@@ -340,7 +391,13 @@ Page({
       typeText: typeText,
       isFirstRequest: true,
       "searchDate.page": 1,
-      "searchDate.occupations": id
+      "searchDate.occupations": id,
+      hasSortFlag:1,
+      hasTime: 1,
+      hasTop: 1,
+      lastSortFlagPos: 0,
+      lastTimePos: 0,
+      lastNormalPos: 0
     })
     this.returnTop();
     this.doRequestAction(false);
@@ -405,12 +462,15 @@ Page({
               hasTop: res.data.data.has_top,
               lastSortFlagPos: res.data.data.last_sort_flag_pos,
               lastTimePos: res.data.data.last_time_pos,
-              lastNormalPos: res.data.data.last_normal_pos || 0
+              lastNormalPos: res.data.data.last_normal_pos || 0,
             })
             // _this.setData({
             //   information: _data
             // })
           } else {
+            _this.setData({
+              isNullStatus:res.data.is_null
+            })
             if (_page == 1) {
               _this.setData({
                 showNothinkData: true,
@@ -816,7 +876,8 @@ Page({
 
   showDetailInfo: function (e) {
 
-    let uuid = e.currentTarget.dataset.uuid
+    let uuid = e.currentTarget.dataset.uuid;
+    let id = e.currentTarget.dataset.id;
     let userLocation = wx.getStorageSync("userLocation")
     if (!userLocation) {
       userLocation = ""
@@ -825,7 +886,7 @@ Page({
     }
 
     wx.navigateTo({
-      url: `/pages/boss-look-card/lookcard?uuid=${uuid}&location=${userLocation}`
+      url: `/pages/boss-look-card/lookcard?uuid=${uuid}&location=${userLocation}&id=${id}`
     })
   },
 
@@ -849,6 +910,25 @@ Page({
     if (options.hasOwnProperty("source")) {
       wx.setStorageSync("_source", options.source);
     }
+  },
+  // 如果pagestatus状态为goback代表需要刷新当前数据
+  initPageData: function () {
+    let pageStatus = this.data.pageStatus;
+    let lists =  this.data.lists;
+    let pageId = this.data.pageId;
+    if (pageStatus == "goback") {
+      let index = lists.findIndex((item)=>{
+        return item.id == pageId
+      })
+      lists.splice(index,1)
+    }
+    this.setData({lists,})
+  },
+  //跳转我的招工
+  goRecruit: function () {
+    wx.navigateTo({
+      url: '/pages/published/recruit/list',
+    })
   },
   onLoad(options) {
     if(options.keywrods){
@@ -883,6 +963,7 @@ Page({
     }
     footerjs.initMsgNum(this);
     app.initResume(this)
+    this.initPageData()
   },
 
   /**
@@ -908,7 +989,13 @@ Page({
     this.returnTop();
     this.setData({
       "searchDate.page": 1,
-      showHistoryList: false
+      showHistoryList: false,
+      hasSortFlag:1,
+      hasTime: 1,
+      hasTop: 1,
+      lastSortFlagPos: 0,
+      lastTimePos: 0,
+      lastNormalPos: 0
     })
     this.doRequestAction(false, function () {
 

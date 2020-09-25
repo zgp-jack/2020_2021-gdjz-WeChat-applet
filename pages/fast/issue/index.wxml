@@ -25,4 +25,3 @@
 
 <!-- 发布招工成功提示框 -->
 <issueok  id="issueok" token="{{ }}"/>
-<detaintip  id="detaintip" token="{{ }}"/>

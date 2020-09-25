@@ -483,8 +483,50 @@
         },
         {
           "id": -1,
-          "name": "搜索界面",
-          "pathName": "pages/search/search",
+          "name": "首页",
+          "pathName": "pages/home/home",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "找工人",
+          "pathName": "pages/findingworkinglist/findingworkinglist",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "会员中心",
+          "pathName": "pages/ucenter/ucenter",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "帮助中心",
+          "pathName": "packageOther/pages/helpCenter/helpCenter",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "积分来源记录",
+          "pathName": "pages/integral/source/source",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "积分消耗",
+          "pathName": "pages/integral/expend/expend",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "找工人列表",
+          "pathName": "pages/findingworkinglist/findingworkinglist",
           "scene": null
         }
       ]

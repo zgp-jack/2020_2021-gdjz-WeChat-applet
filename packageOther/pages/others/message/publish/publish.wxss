@@ -2,6 +2,7 @@
 .yupao-feedback {
   position: relative;
   width: 100%;
+  padding-bottom: 100rpx;
 }
 .yupao-common-container{
   padding-bottom: 0rpx;
@@ -241,7 +242,7 @@ page{
 
 .texralengh {
   font-size: 30rpx;
-  color: #ccc;
+  color: #3D3D40;
   padding: 0 20rpx;
   text-align: right;
 }

@@ -1,3 +1,9 @@
+page {
+  height: 100%;
+}
+.recruit-content{
+  height: 100%;
+}
 .recruit-list-header{
   position: fixed;
   width: 100%;
@@ -36,6 +42,7 @@
   padding-top: 100rpx;
   padding-bottom: 120rpx;
   padding-bottom: 120rpx;
+  height: calc(100% - 200rpx)
 }
 .recruit-list-item{
   position: relative;
@@ -57,6 +64,7 @@
   line-height: 60rpx;
   font-size: 30rpx;
   font-weight: bold;
+  width: 85%;
 }
 .recruit-item-content{
   position: relative;

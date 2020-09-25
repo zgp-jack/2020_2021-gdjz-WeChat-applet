@@ -109,7 +109,13 @@ Page({
     inviteturntable:app.globalData.apiImgUrl + 'inviteuser-getintegral.png',
     showturntable: false,
     jgjzData: {},
-    resumeText:""
+    resumeText:"",
+    // pageStatus是goback的话需要刷新当前页面状态
+    pageStatus:'',
+    // pageStatus是goback的话需要刷新当前页面信息ID
+    pageId: '',
+    //没有数据时 按钮显示状态
+    isNullStatus:""
   },
   getPhoneNumber:function(e){
     console.log(e)
@@ -212,13 +218,15 @@ Page({
       showListsInfo: (this.data.showListsInfo == type) ? 0 : type
     })
   },
-  closeAllSelect: function () {
+  closeAllSelect: function (e) {
     this.setData({
       showListsInfo: 0
     })
-    wx.redirectTo({
-      url: "/pages/search/search?changeStatus=0"
-    })
+    if(e.target.dataset.gosearch == 1){
+      wx.redirectTo({
+        url: "/pages/search/search?changeStatus=0"
+      })
+    }
   },
   userChooseProvince: function (e) {
     var _this = this;
@@ -413,7 +421,7 @@ Page({
         callback ? callback() : ""
         _this.setData({ isload: false })
         app.globalData.isFirstLoading ? "" : wx.hideLoading();
-        let mydata = res.data;
+        let mydata = res.data.data;
         let _page = parseInt(_this.data.searchDate.page)
         _this.setData({ isFirstRequest: false });
         if (mydata && mydata.length) {
@@ -426,6 +434,9 @@ Page({
             lists: _append ? _data : mydata
           })
         } else {
+          _this.setData({
+            isNullStatus:res.data.is_null
+          })
           if (_page == 1) {
             _this.setData({
               showNothinkData: true,
@@ -973,6 +984,25 @@ Page({
       }
     }
   },
+  // 如果pagestatus状态为goback代表需要刷新当前数据
+  initPageData: function () {
+    let pageStatus = this.data.pageStatus;
+    let lists =  this.data.lists;
+    let pageId = this.data.pageId;
+    if (pageStatus == "goback") {
+      let index = lists.findIndex((item)=>{
+        return item.id == pageId
+      })
+      lists.splice(index,1)
+    }
+    this.setData({lists,})
+  },
+  //跳转找活名片
+  goFinding: function () {
+    wx.navigateTo({
+      url: '/pages/clients-looking-for-work/finding-name-card/findingnamecard',
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
@@ -1020,6 +1050,7 @@ Page({
     footerjs.initMsgNum(this);
     this.initTurntable();
     app.initResume(this)
+    this.initPageData()
   },
   onPageScroll: function (e) {
     let top = e.scrollTop;

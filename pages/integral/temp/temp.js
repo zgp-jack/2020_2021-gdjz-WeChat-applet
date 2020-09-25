@@ -16,6 +16,26 @@ Page({
         pageSize: 15,
         page: 1
     },
+    // 格式化时间
+    getMyDate(str) {
+        var oDate = new Date(str),
+        oYear = oDate.getFullYear(),
+        oMonth = oDate.getMonth() + 1,
+        oDay = oDate.getDate(),
+        oHour = oDate.getHours(),
+        oMin = oDate.getMinutes(),
+        oSen = oDate.getSeconds(),
+        oTime = oYear + '-' + this.addZero(oMonth) + '-' + this.addZero(oDay) + ' ' + this.addZero(oHour) + ':' +
+        this.addZero(oMin);
+        return oTime;
+      },
+      // 如果分钟小于10就添加一个0
+    addZero(num) {
+      if (parseInt(num) < 10) {
+        num = '0' + num;
+      }
+      return num;
+    },
     getIntegralHeader: function () {
         let _this = this;
         let userInfo = wx.getStorageSync("userInfo");
@@ -33,8 +53,14 @@ Page({
             success: function (res) {
                 wx.hideLoading();
                 let mydata = res.data;
+                let lists = mydata.firstList.list;
+                for (const item of lists) {
+                    let time = item.time * 1000
+                    let newTime = _this.getMyDate(time)
+                    item.time = newTime
+                }
                 _this.setData({
-                    lists: mydata.firstList.list,
+                    lists: lists,
                     pageSize: mydata.firstList.pageSize,
                     isNone: mydata.firstList.list.length ? false : true,
                     isFirst: false
