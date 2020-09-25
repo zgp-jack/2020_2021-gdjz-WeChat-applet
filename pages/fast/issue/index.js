@@ -416,12 +416,17 @@ Page({
     let path = pages[index].__displayReporter.showReferpagepath
     path = path.slice(0, -5)
     if (path == "pages/fast/tips/tips" || path == "pages/fast/area/area") {
+      // 显示发布成功提示框
+      this.selectComponent("#issueok").show()
       //获取本地缓存用户信息
       let u = wx.getStorageSync('userInfo')
       //获取globalData中的用户手机号码
       let userPhone = app.globalData.publish.userPhone
-      this.selectComponent("#issueok").show()
-      this.setEnterInfo("detail",'')
+      // 获取填写发布缓存数据
+      let jiSuData = wx.getStorageSync('jiSuData')
+      if (jiSuData) {
+        wx.removeStorageSync("jiSuData")
+      }
       if (u) {
         this.setData({
           content:"",

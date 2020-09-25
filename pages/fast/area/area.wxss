@@ -45,7 +45,10 @@ page{
   line-height: 45rpx;
   font-size: 28rpx;
   left: 20rpx;
-  flex:1
+  flex:1;
+  min-height: 100rpx;
+  display: flex;
+  align-items: center;
 }
 .issue-box text{
   display: block;

@@ -116,11 +116,14 @@ Page({
                     success: function (res) {
                       //发布成功后，清除缓存数据中的detail、rulesClassifyids、userClassifyids、imgs
                       let jiSuData = wx.getStorageSync('jiSuData')
-                      jiSuData.detail = ''
-                      jiSuData.rulesClassifyids = []
-                      jiSuData.userClassifyids = []
-                      jiSuData.imgs = []
-                      wx.setStorageSync('jiSuData', jiSuData)
+                      if (jiSuData) {
+                        jiSuData.detail = ''
+                        jiSuData.rulesClassifyids = []
+                        jiSuData.userClassifyids = []
+                        jiSuData.imgs = []
+                        jiSuData.phone = ''
+                        wx.setStorageSync('jiSuData', jiSuData)
+                      }
                       let mydata = res.data;
                       app.appRequestAction({
                         title: "发布中",
@@ -195,11 +198,14 @@ Page({
                 success: function (res) {
                   //发布成功后，清除缓存数据中的detail、rulesClassifyids、userClassifyids、imgs
                   let jiSuData = wx.getStorageSync('jiSuData')
-                  jiSuData.detail = ''
-                  jiSuData.rulesClassifyids = []
-                  jiSuData.userClassifyids = []
-                  jiSuData.imgs = []
-                  wx.setStorageSync('jiSuData', jiSuData)
+                  if (jiSuData) {
+                    jiSuData.detail = ''
+                    jiSuData.rulesClassifyids = []
+                    jiSuData.userClassifyids = []
+                    jiSuData.imgs = []
+                    jiSuData.phone = ''
+                    wx.setStorageSync('jiSuData', jiSuData)
+                  }
                   let mydata = res.data;
                   app.appRequestAction({
                     title: "发布中",
@@ -374,13 +380,16 @@ Page({
             wx.redirectTo({
               url: '/pages/fast/tips/tips?token=' + token,
             })
-            //发布成功后，清除缓存数据中的detail、rulesClassifyids、userClassifyids、imgs
+            //发布成功后，清除缓存数据中的detail、rulesClassifyids、userClassifyids、imgs、phone
             let jiSuData = wx.getStorageSync('jiSuData')
-            jiSuData.detail = ''
-            jiSuData.rulesClassifyids = []
-            jiSuData.userClassifyids = []
-            jiSuData.imgs = []
-            wx.setStorageSync('jiSuData', jiSuData)
+            if (jiSuData) {
+              jiSuData.detail = ''
+              jiSuData.rulesClassifyids = []
+              jiSuData.userClassifyids = []
+              jiSuData.imgs = []
+              jiSuData.phone = ''
+              wx.setStorageSync('jiSuData', jiSuData)
+            }
           }else{
             app.showMyTips(mydata.errmsg);
             }}
@@ -580,6 +589,15 @@ Page({
       }
     })
   },
+  // 点击图片查看大图
+  previewImage: function (e) {
+    // 点击图片url
+    let url = e.currentTarget.dataset.url;
+    wx.previewImage({
+      current: url, 
+      urls: [url] 
+    })
+  },   
   // 点击上传图片
   userUploadImg: function () {
     let num = this.data.maxNum - this.data.imglen
@@ -588,10 +606,6 @@ Page({
   // 点击上传图片按钮上传图片
   multiImageUpload: function (num) {
     let that = this;
-    // 上传图片加载loading
-    wx.showLoading({
-      title: '正在上传图片',
-    })
     // 选择上传图片
     wx.chooseImage({
       // 上传图片数量
@@ -608,7 +622,6 @@ Page({
             // 图片全部上传完成隐藏上传loading效果
           if (res.tempFiles.length === upLoadCount) {
             wx.hideToast();
-            wx.hideLoading();
             let imgs = [...that.data.imgs, ...imagesArry]
             that.setData({
               imgs:imgs,
@@ -626,12 +639,6 @@ Page({
           }
           })
         }
-      },
-      fail: function (){
-        // 图片上传失败提示
-        app.showMyTips('图片上传失败，请重新上传')
-        // 隐藏loading
-        wx.hideLoading()
       }
     })
   },

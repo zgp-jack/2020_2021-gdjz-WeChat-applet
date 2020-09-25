@@ -415,7 +415,7 @@ Page({
         callback ? callback() : ""
         _this.setData({ isload: false })
         app.globalData.isFirstLoading ? "" : wx.hideLoading();
-        let mydata = res.data;
+        let mydata = res.data.data;
         let _page = parseInt(_this.data.searchDate.page)
         _this.setData({ isFirstRequest: false });
         if (mydata && mydata.length) {
