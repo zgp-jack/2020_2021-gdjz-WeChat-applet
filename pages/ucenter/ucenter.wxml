@@ -108,7 +108,7 @@
               path="/pages/index/index"
               app-id="wx3abff5d74de220d2"
               version="trial"
-              extra-data="{{ jgjzData }}"
+              extra-data="{{ userInfo }}"
           >
             <view class="icon-bor">
               <image class="menu-icon" src="{{item.icon}}"></image>
