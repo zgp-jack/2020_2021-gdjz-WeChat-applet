@@ -43,7 +43,10 @@ Page({
   },
   //监听搜索框
   searchInput: function (e) {
-    this.setData({inputTetx:e.detail.value})
+    //去除空格
+    var text = e.detail.value;
+    var removeSpace = text.replace(/\s*/g,"");
+    this.setData({inputTetx:removeSpace})
   },
 
   //点击搜索 储存搜索历史

@@ -361,8 +361,8 @@ page{
     border: none;
     background: #0099ff;
     color: #fff;
-    padding: 0 60rpx !important;
-    font-size: 24rpx !important;
+    padding: 0 80rpx !important;
+    font-size: 28rpx !important;
     border-radius: 3px;
     margin-top: 40rpx;
 }
