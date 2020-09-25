@@ -19,7 +19,7 @@
       </view>
       <view class="issue-upload-show" wx-if="{{ switch }}">
         <view class="issue-upload-body clearfix">
-          <view class="issue-upload-item" wx:for="{{ imgs }}" wx:key="{{ item.url }}">
+          <view class="issue-upload-item" wx:for="{{ imgs }}" wx:key="{{ item.url }}" bindtap="previewImage" data-url="{{ item.httpurl }}">
             <view class="imgitem-box" bindtap="userChangeImg" data-index="{{ index }}">
               <image src="{{ item.httpurl }}" mode="aspectFill"></image>
               <view class="mini-del" catchtap="delImgAction" data-index="{{ index }}"></view>

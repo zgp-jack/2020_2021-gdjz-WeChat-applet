@@ -1,38 +1,40 @@
 <!--pages/ucenter/ucenterNew/helpCenter.wxml-->
-
-<view class="help_center_head">
-    <view class="help_center_search">
-        <image class="help_search_icon" src="{{ searchIcon }}"></image> 
-        <input class="help_search_input" bindinput="getSearchList" bindblur="hiddenSearch" bindfocus="showSearch" placeholder="输入您要找的问题"></input>
+<view class="help_center">
+    <view class="help_center_head">
+        <view class="help_center_search">
+            <image class="help_search_icon" src="{{ searchIcon }}"></image> 
+            <input class="help_search_input" bindinput="getSearchList" bindblur="hiddenSearch" bindfocus="showSearch" placeholder="输入您要找的问题"></input>
+        </view>
     </view>
-</view>
-<view class="help_search_list" wx:if="{{ showSearch == true }}">
+    <view class="help_search_list" wx:if="{{ showSearch == true }}">
     <view class="help_search_content">
         <view class="help_search_item" wx:for="{{searchLists}}" wx:key="index" bindtap="findAnswer"   data-url='/packageOther/pages/helpCenter/answer/answer?id={{ item.id }}'>{{  item.question }}</view>
     </view>
-</view>
-<view class="help_list_title">
-    <view>问题类型</view>
-</view>
-<scroll-view class="help_list_scroll" scroll-y>
-    <view class="help_list_body">
-        <view class="help_list_item" wx:for='{{helpeLists}}' wx:key='id' wx:for-item='parentItem' wx:for-index='parentIndex'>
-            <view class="help_list_question" bindtap="listTap" data-parentindex='{{parentIndex}}'>
-                <view class="help_question_icon"><image src="{{ parentItem.icon }}"></image></view>
-                <view class="help_question_content">{{parentItem.name}}</view>
-                <image class="help_question_arrow {{ parentItem.show?'icon_down_rotate':''}}" src="{{ rightarrow }}"></image>
-            </view>
-            <view class="help_question_detail" wx:if='{{parentItem.show}}' wx:for="{{  parentItem.questions }}" wx:key="id">
-                <view class="help_question_item" bindtap="findAnswer" data-url='/packageOther/pages/helpCenter/answer/answer?id={{ item.id }}'>{{item.question}}</view>
+    </view>
+    <view class="help_list_title">
+        <view>问题类型</view>
+    </view>
+    <view class="help_list_scroll">
+        <view class="help_list_body">
+            <view class="help_list_item" wx:for='{{helpeLists}}' wx:key='id' wx:for-item='parentItem' wx:for-index='parentIndex'>
+                <view class="help_list_question" bindtap="listTap" data-parentindex='{{parentIndex}}'>
+                    <view class="help_question_icon"><image src="{{ parentItem.icon }}"></image></view>
+                    <view class="help_question_content">{{parentItem.name}}</view>
+                    <image class="help_question_arrow {{ parentItem.show?'icon_down_rotate':''}}" src="{{ rightarrow }}"></image>
+                </view>
+                <view class="help_question_detail" wx:if='{{parentItem.show}}' wx:for="{{  parentItem.questions }}" wx:key="id">
+                    <view class="help_question_item" bindtap="findAnswer" data-url='/packageOther/pages/helpCenter/answer/answer?id={{ item.    id }}'>{{item.question}}</view>
+                </view>
             </view>
         </view>
     </view>
-</scroll-view>
 
-<view class="help_center_footer">
-    <view class="help_center_suggestions" bindtap="goPublishFeedback">意见反馈</view>
-    <view class="help_my_suggestions" bindtap="goFeedback">我的反馈</view>
+    <view class="help_center_footer">
+        <view class="help_center_suggestions" bindtap="goPublishFeedback">意见反馈</view>
+        <view class="help_my_suggestions" bindtap="goFeedback">我的反馈</view>
+    </view>
 </view>
+
 
 
 

@@ -45,7 +45,7 @@ Page({
         }else searchLists=[] //如果将输入内容置空将检索结果数组也置空
         // 将结果数据存入data中
         this.setData({ 
-            searchLists: searchLists,
+            searchLists: searchLists.slice(0,8),
             showSearch: searchLists.length == 0 ? false:true
          })
     },
@@ -138,20 +138,22 @@ Page({
         this.setData({showSearch: searchLists.length == 0 ? false:true})
     },
     // 搜索输入框失去焦点隐藏结果
-    hiddenSearch: function () {
-        this.setData({showSearch: false})
-    },
+    // hiddenSearch: function () {
+    //     this.setData({showSearch: false})
+    // },
     // 点击我的反馈跳转到我的反馈列表
     goFeedback: function () {
         wx.navigateTo({
           url: '/packageOther/pages/others/message/lists/lists',
         })
+        this.setData({showSearch: false})
     },
     // 点击去发布意见反馈
     goPublishFeedback: function () {
         wx.navigateTo({
             url: '/packageOther/pages/others/message/publish/publish',
         })
+        this.setData({showSearch: false})
     },
     onLoad: function(options) {
         this.getHelpeData();
@@ -196,7 +198,7 @@ Page({
      * 页面上拉触底事件的处理函数
      */
     onReachBottom: function() {
-        if(this.data.isEnd) return false;
-        this.getHelpeData()
+        // if(this.data.isEnd) return false;
+        // this.getHelpeData()
     }
 })

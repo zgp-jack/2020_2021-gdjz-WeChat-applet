@@ -10,8 +10,8 @@
   <swiper class="recruit-content" current="{{ current }}"  duration="300" bindchange="switchTab">
     <swiper-item wx:for="{{ types.length }}">
       <scroll-view scroll-y="true" class="recruit-list-container" bindscrolltolower="loadmore">
-        <block wx:for="{{ lists }}" wx:key="{{ index }}" data-id="{{ item.id }}" bindtap="jumpRecruitInfo">
-          <view class="recruit-list-item">
+        <block wx:for="{{ lists }}" wx:key="{{ index }}" data-id="{{ item.id }}">
+          <view class="recruit-list-item" bindtap="jumpRecruitInfo">
             <image class="recruit-list-endimg" src="{{ statusCheck }}" wx:if="{{ item.is_check == '1' }}"></image>
             <image class="recruit-list-endimg" src="{{ statusNopass }}" wx:if="{{ item.is_check == '0' }}"></image>
             <image class="recruit-list-endimg" src="{{ statusEnd }}" wx:if="{{ item.is_end == '2' }}"></image>

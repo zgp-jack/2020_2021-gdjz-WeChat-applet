@@ -247,8 +247,8 @@ App({
               content: res.data.errmsg,
               cancelText: "知道了",
               confirmText: "联系客服",
-              success: function (res) {
-                if (res.confirm) {
+              success: function (result) {
+                if (result.confirm) {
                   wx.makePhoneCall({
                     phoneNumber: res.data.service_tel,
                   })
@@ -325,8 +325,8 @@ App({
               content: res.data.errmsg,
               cancelText: "知道了",
               confirmText: "联系客服",
-              success: function (res) {
-                if (res.confirm) {
+              success: function (result) {
+                if (result.confirm) {
                   wx.makePhoneCall({
                     phoneNumber: res.data.service_tel,
                   })

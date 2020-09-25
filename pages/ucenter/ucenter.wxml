@@ -89,7 +89,7 @@
   </view>
 
 
-  <view class="{{ (!userInfo || advertising.length==0)? 'isbanner': 'menu-container'}}">
+  <view class="{{ userInfo && advertising.length? 'menu-container': 'isbanner'}}">
     <view class="menu-block" wx:for="{{ uCenterMenus }}" wx:key="{{ index }}">
 
       <view class="title-block">
@@ -108,7 +108,7 @@
               path="/pages/index/index"
               app-id="wx3abff5d74de220d2"
               version="trial"
-              extra-data="{{ jgjzData }}"
+              extra-data="{{ userInfo }}"
           >
             <view class="icon-bor">
               <image class="menu-icon" src="{{item.icon}}"></image>
