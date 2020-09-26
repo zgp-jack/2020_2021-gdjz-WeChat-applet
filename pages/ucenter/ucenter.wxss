@@ -43,7 +43,7 @@
     left: 0;
     top: 128rpx;
     padding: 0 27rpx;
-    z-index: 100;
+    z-index: 20;
 }
 
 .ucenter-userinfo {

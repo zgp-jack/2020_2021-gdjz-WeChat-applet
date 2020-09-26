@@ -24,7 +24,7 @@ page{
   padding: 0 50rpx;
   left: 0;
   width: 100%;
-  bottom: 300rpx;
+  bottom: 500rpx;
   justify-content: space-between;
   align-content: space-between;
 }
