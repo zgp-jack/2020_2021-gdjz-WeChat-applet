@@ -8,10 +8,11 @@ page {
 .search-tab {
   width: 100%;
   height: 70rpx;
+  margin-bottom: 10rpx;
 }
 .search-tab-item{
   /* height: 100%; */
-  width: 30%;
+  width: 35%;
   display: flex;
   justify-content: space-between;
 }
@@ -25,14 +26,16 @@ page {
 }
 .search-active::after{
   content: "";
-  display: blocks;
+  display: block;
   position: absolute;
-  bottom: -10rpx;
-  margin-left: -50%;
+  left: 50%;
+  bottom: -15rpx;
+  /* margin-top: 10rpx; */
   transform: translateX(-50%);
-  width: 70%;
+  width: 50%;
   height: 8rpx;
   background-color: #0099ff;
+  border-radius: 8rpx;
 }
 
 .search-input-box {

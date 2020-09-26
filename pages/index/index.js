@@ -222,7 +222,7 @@ Page({
     this.setData({
       showListsInfo: 0
     })
-    if(e.target.dataset.gosearch == 1){
+    if(e && e.target.dataset.gosearch == 1){
       wx.redirectTo({
         url: "/pages/search/search?changeStatus=0"
       })
@@ -624,13 +624,6 @@ Page({
     }
   },
   userTapSearch: function () {
-    if(this.data.searchDate.keywords == ""){
-      wx.showModal({
-        title:"提示",
-        content:"请输入内容",
-        showCancel:false,
-      })
-    }else {
       // if(!this.data.userInfo){
     //   app.gotoUserauth();
     //   return false;
@@ -671,7 +664,6 @@ Page({
     })
     this.initSearchHistory();
     this.doRequestAction(false);
-    }
   },
   returnTop: function () {
     //this.setData({ scrollTop: 0 })
