@@ -45,7 +45,7 @@ page{
 .input-item-text{
   position: relative;
   width: 100%;
-  padding: 20rpx 0;
+  padding: 20rpx 20rpx 20rpx 0rpx;
   line-height: 45rpx;
   font-size: 28rpx;
   left: 20rpx;
