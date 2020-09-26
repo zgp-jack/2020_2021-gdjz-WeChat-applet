@@ -217,12 +217,12 @@ Page({
     if(this.data.changeStatus == 0) {
       //跳转找工作页面
       wx.redirectTo({
-        url:"/pages/index/index"
+        url:this.data.inputTetx!="" ? "/pages/index/index?keywrods="+this.data.inputTetx:"/pages/index/index"
       })
     }else {
       //跳转找工人页面
       wx.redirectTo({
-        url:"/pages/findingworkinglist/findingworkinglist"
+        url:this.data.inputTetx!="" ? "/pages/findingworkinglist/findingworkinglist?keywrods="+this.data.inputTetx:"/pages/findingworkinglist/findingworkinglist"
       })
     }
   },
@@ -234,6 +234,11 @@ Page({
     if(options.changeStatus){
       this.setData({
         changeStatus:options.changeStatus
+      })
+    }
+    if(options.key){
+      this.setData({
+        inputTetx:options.key
       })
     }
     this.getStorageSearch()

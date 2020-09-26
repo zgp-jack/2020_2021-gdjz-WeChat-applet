@@ -1454,4 +1454,14 @@ App({
       }
     }
   },
+  //判断是否有空格或者为空
+  isEmpty:function isEmpty(obj){
+    var regu = "^[ ]+$";
+    var re = new RegExp(regu);
+    if(typeof obj == "undefined" || obj == null || obj == "" || re.test(obj)){
+        return true;
+    }else{
+        return false;
+    }
+  },
 })

@@ -223,9 +223,15 @@ Page({
       showListsInfo: 0
     })
     if(e && e.target.dataset.gosearch == 1){
-      wx.redirectTo({
-        url: "/pages/search/search?changeStatus=0"
-      })
+      if(this.data.searchDate.keywords == ""){
+        wx.redirectTo({
+          url: "/pages/search/search?changeStatus=0"
+        })
+      }else {
+        wx.redirectTo({
+          url: "/pages/search/search?changeStatus=0&key="+this.data.searchDate.keywords
+        })
+      }
     }
   },
   userChooseProvince: function (e) {
@@ -1005,9 +1011,8 @@ Page({
     this.setData({
       jgjzData: {...u,userUuid: uuid}
     })
-    
-    
-    if(options.keywrods){
+    var isEmpty = app.isEmpty(options.keywrods)
+    if(!isEmpty){
       this.setData({
         "searchDate.keywords":options.keywrods
       })
