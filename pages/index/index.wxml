@@ -165,12 +165,12 @@
             <text class="no-data-text">没有找到您想要的内容</text>
             <block wx:if="{{isNullStatus == 2}}">
               <text class="btn-tips-text">置顶找活，让那个更多老板看到您的找活信息～</text>
-            <button size="mini" bindtap="goFinding">去置顶</button>
+              <text class="text-btn"bindtap="goFinding">去置顶</text>
             </block>
             
             <block  wx:if="{{isNullStatus == 1}}" bindtap='publishJob'>
               <text class="btn-tips-text">发布找活，让老板主动来找我～</text>
-            <button size="mini" bindtap="goFinding">去发布</button>
+              <text class="text-btn" bindtap="goFinding">去发布</text>
             </block>
           
         </view>
