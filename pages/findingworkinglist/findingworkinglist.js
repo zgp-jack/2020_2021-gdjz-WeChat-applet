@@ -317,9 +317,15 @@ Page({
     })
     //跳转搜索页面
     if(e && e.target.dataset.gosearch == 1) {
-      wx.redirectTo({
-        url: "/pages/search/search?changeStatus=1"
-      })
+      if(this.data.searchDate.keywords == ""){
+        wx.redirectTo({
+          url: "/pages/search/search?changeStatus=1"
+        })
+      }else{
+        wx.redirectTo({
+          url: "/pages/search/search?changeStatus=1&key="+this.data.searchDate.keywords
+        })
+      }
     }
   },
   userChooseWorktype: function (e) {
@@ -931,7 +937,8 @@ Page({
     })
   },
   onLoad(options) {
-    if(options.keywrods){
+    var isEmpty = app.isEmpty(options.keywrods)
+    if(!isEmpty){
       this.setData({
         "searchDate.keywords":options.keywrods
       })
