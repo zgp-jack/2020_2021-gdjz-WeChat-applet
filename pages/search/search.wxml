@@ -8,6 +8,7 @@
     </view>
   </view>
   <view class="search-input-box">
+    <view class="close-button" bindtap="closeSearch">关闭</view>
     <view class="input-box">
       <image src="{{ searchIcon }}"></image>
       <input type="text" 

@@ -84,6 +84,14 @@ page {
   font-weight: 500;
   color:#999;
 }
+.close-button {
+  display: flex;
+  align-items: center;
+  font-size: 28rpx;
+  font-weight: 500;
+  color:#999;
+  margin-right: 20rpx;
+}
 
 .history-search .title {
   font-size: 35rpx;

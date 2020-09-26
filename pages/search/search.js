@@ -6,11 +6,12 @@ Page({
    * 页面的初始数据
    */
   data: {
-    // 历史搜索记录
+    // 找工作历史搜索记录
     historySearch:{
       title:"搜索历史",
       historyList:[]
     },
+    //找工人历史搜索记录
     historySearchGr:{
       title:"搜索历史",
       historyList:[]
@@ -51,8 +52,15 @@ Page({
 
   //点击搜索 储存搜索历史
   clickSearch: function (e) {
-  //判断是否输入内容 或者空格 为空不保存
-   let k = this.isEmpty(this.data.inputTetx)
+    //判断是否输入内容 或者空格 为空不保存
+    let k = this.isEmpty(this.data.inputTetx)
+    //不能超过10个字
+    if(this.data.inputTetx.length > 10){
+      wx.showModal({
+        title: '提示',
+        content: '搜索不能超过10个字符',
+      })
+    }else{
       //保存
       //判断找工作还是找工人
       if(this.data.changeStatus == 0){
@@ -116,7 +124,9 @@ Page({
           url:"/pages/findingworkinglist/findingworkinglist?keywrods="+this.data.inputTetx
         })
       this.getStorageSearch()
+      }
     }
+      
   },
     //判断字符是否为空的方法
   isEmpty:function isEmpty(obj){
@@ -201,6 +211,20 @@ Page({
         app.showMyTips('网络错误，加载失败！')
       }
     })
+  },
+  //关闭搜索 跳转页面
+  closeSearch(){
+    if(this.data.changeStatus == 0) {
+      //跳转找工作页面
+      wx.redirectTo({
+        url:"/pages/index/index"
+      })
+    }else {
+      //跳转找工人页面
+      wx.redirectTo({
+        url:"/pages/findingworkinglist/findingworkinglist"
+      })
+    }
   },
   /**
    * 生命周期函数--监听页面加载
