@@ -44,12 +44,18 @@ page {
   padding-bottom: 120rpx;
   height: calc(100% - 200rpx)
 }
+.recruit-lists{
+  overflow: hidden;
+}
 .recruit-list-item{
   position: relative;
   padding: 20rpx 20rpx 0;
   margin-bottom: 20rpx;
   background: white;
   box-shadow: 0 0 10rpx #dcdcdc;
+}
+.recruit-list-item:first-child{
+  margin-top: 10rpx;
 }
 .recruit-list-endimg{
   position: absolute;

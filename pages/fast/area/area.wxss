@@ -15,7 +15,8 @@ page{
   font-size: 28rpx;
 }
 .issue-contactbox{
-  padding: 30rpx;
+  padding: 20rpx 30rpx 30rpx;
+  /* padding: 30rpx; */
 }
 .issue-box{
   position: relative;
@@ -26,6 +27,9 @@ page{
   margin-bottom: 20rpx;
   font-size: 28rpx;
   border-radius: 10rpx;
+}
+.issue-box text{
+  font-weight: bold;
 }
 .issue-input{
   position: relative;
@@ -89,6 +93,7 @@ page{
   height: 100rpx;
   font-size: 28rpx;
   padding: 0rpx 20rpx;
+  font-weight: bold;
 }
 .issue-upload-switch{
   position: absolute;
@@ -260,4 +265,15 @@ page{
   left: 0;
   top: 0;
   background-color: #0099ff;
+}
+.issue-code-btn{
+  position: relative;
+  margin: 50rpx auto 20rpx;
+  width: 500rpx;
+  background-color: #0099ff;
+  color: #fff;
+  font-size: 30rpx;
+  text-align: center;
+  line-height: 100rpx;
+  border-radius: 5rpx;
 }

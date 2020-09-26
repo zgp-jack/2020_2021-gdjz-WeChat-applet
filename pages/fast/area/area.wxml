@@ -9,7 +9,7 @@
     </view>
     <view class="issue-box" bindtap="showWorkTypePicker">
       <text>所需工种：</text>
-      <input placeholder="请选择工种" disabled class="issue-input" wx:if="{{ !showClassifyText }}"></input>
+      <input placeholder="请选择工种（可多选）" disabled class="issue-input" wx:if="{{ !showClassifyText }}"></input>
       <view class="input-item-text" wx:if="{{ showClassifyText }}">{{ showClassifyText }}</view>
     </view>
     <view class="issue-form-upload">

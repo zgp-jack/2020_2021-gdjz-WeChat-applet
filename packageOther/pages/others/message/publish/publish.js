@@ -10,7 +10,7 @@ Page({
     data: {
         normalImg: app.globalData.apiImgUrl + "uploads.png",
         uploadImg: app.globalData.apiImgUrl + "yc/upload-img.png",
-        delImg: app.globalData.apiImgUrl + "del.png",
+        delImg: app.globalData.apiImgUrl + "new-published-close-icon.png",
         hintImg: app.globalData.apiImgUrl + 'new-uploadbgimg.png',
         imgs: [],
         imglists: [],

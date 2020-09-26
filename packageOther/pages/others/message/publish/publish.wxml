@@ -15,7 +15,7 @@
                         <view class='feedback-imgbox'>
                             <image src='{{ item }}'></image>
                             <view class="feedback-del-thisimg flex-row" catchtap="delThisImg" data-index="{{ index }}">
-                                <image src='{{ delImg }}'></image>
+                                <image src='{{ delImg }}' mode="aspectFit"></image>
                             </view>
                         </view>
                     </view>
