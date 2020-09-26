@@ -225,11 +225,6 @@ page{
     color: #7f7e7e;
     /*padding-left: 80rpx;*/
 }
-.yupao-lists-wxtips text:nth-child(1){
-    /*position: absolute;
-    left: 0;
-    top: 0;*/
-}
 .yupao-lists-wxtips text{
     color: #7f7e7e;
 }

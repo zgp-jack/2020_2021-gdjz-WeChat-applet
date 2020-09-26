@@ -68,7 +68,7 @@ page{
 .common-nodatabox{
     position: relative;
     width: 100%;
-    padding: 50rpx 0;
+    padding: 200rpx 0;
     background: transparent;
 }
 .common-nodatabox image{

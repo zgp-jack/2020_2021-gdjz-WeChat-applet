@@ -316,7 +316,7 @@ Page({
       showListsInfo: 0
     })
     //跳转搜索页面
-    if(e.target.dataset.gosearch == 1) {
+    if(e && e.target.dataset.gosearch == 1) {
       wx.redirectTo({
         url: "/pages/search/search?changeStatus=1"
       })

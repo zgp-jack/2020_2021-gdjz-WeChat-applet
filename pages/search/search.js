@@ -44,83 +44,90 @@ Page({
   //监听搜索框
   searchInput: function (e) {
     //去除空格
-    var text = e.detail.value;
-    var removeSpace = text.replace(/\s*/g,"");
-    this.setData({inputTetx:removeSpace})
+    // var text = e.detail.value;
+    // var removeSpace = text.replace(/\s*/g,"");
+    this.setData({inputTetx:e.detail.value})
   },
 
   //点击搜索 储存搜索历史
   clickSearch: function (e) {
-  //判断是否输入内容
-  if(this.data.inputTetx === ""){
-    wx.showModal({
-      title:"提示",
-      content:"请输入内容",
-      showCancel:false,
-    })
-  }else{
-    //判断找工作还是找工人
-    if(this.data.changeStatus == 0){
-      var historyList = this.data.historySearch;
-      if(historyList.historyList.length === 6) {
-        historyList.historyList.pop()
-        historyList.historyList.unshift({
-        keywords:this.data.inputTetx
-      })
-      }else{
-        historyList.historyList.unshift({
+  //判断是否输入内容 或者空格 为空不保存
+   let k = this.isEmpty(this.data.inputTetx)
+      //保存
+      //判断找工作还是找工人
+      if(this.data.changeStatus == 0){
+        var historyList = this.data.historySearch;
+        if(historyList.historyList.length === 6) {
+          historyList.historyList.pop()
+          historyList.historyList.unshift({
           keywords:this.data.inputTetx
         })
-    }
-    //去重
-      var result = [];
-      var obj = {};
-      for(var i =0; i<historyList.historyList.length; i++){
-        if(!obj[historyList.historyList[i].keywords]){
-          result.push(historyList.historyList[i]);
-          obj[historyList.historyList[i].keywords] = true;
-        }
+        }else{
+          historyList.historyList.unshift({
+            keywords:this.data.inputTetx
+          })
       }
-      historyList.historyList = result
-      this.setData({historySearch:result})
-      //存入strorage
-      wx.setStorageSync('historySearch', historyList)
-      //跳转找工作页面
-      wx.redirectTo({
-        url:"/pages/index/index?keywrods="+this.data.inputTetx
-      })
-    }else{
-      var historyList = this.data.historySearchGr;
-      if(historyList.historyList.length === 6) {
-        historyList.historyList.pop()
-        historyList.historyList.unshift({
-        keywords:this.data.inputTetx
-      })
+        //去重
+        var result = [];
+        var obj = {};
+        for(var i =0; i<historyList.historyList.length; i++){
+          if(!obj[historyList.historyList[i].keywords]){
+            result.push(historyList.historyList[i]);
+            obj[historyList.historyList[i].keywords] = true;
+          }
+        }
+        historyList.historyList = result
+        this.setData({historySearch:result})
+        //存入strorage
+        if(!k) {
+          wx.setStorageSync('historySearch', historyList)
+        }
+        //跳转找工作页面
+        wx.redirectTo({
+          url:"/pages/index/index?keywrods="+this.data.inputTetx
+        })
       }else{
-        historyList.historyList.unshift({
+        var historyList = this.data.historySearchGr;
+        if(historyList.historyList.length === 6) {
+          historyList.historyList.pop()
+          historyList.historyList.unshift({
           keywords:this.data.inputTetx
         })
-      }
-      var result = [];
-      var obj = {};
-      for(var i =0; i<historyList.historyList.length; i++){
-        if(!obj[historyList.historyList[i].keywords]){
-          result.push(historyList.historyList[i]);
-          obj[historyList.historyList[i].keywords] = true;
+        }else{
+          historyList.historyList.unshift({
+            keywords:this.data.inputTetx
+          })
         }
-      }
-      historyList.historyList = result
-      this.setData({historySearchGr:result})
-      wx.setStorageSync('historySearchGr', historyList)
-      //跳转找工作页面
-      wx.redirectTo({
-        url:"/pages/findingworkinglist/findingworkinglist?keywrods="+this.data.inputTetx
-      })
+        var result = [];
+        var obj = {};
+        for(var i =0; i<historyList.historyList.length; i++){
+          if(!obj[historyList.historyList[i].keywords]){
+            result.push(historyList.historyList[i]);
+            obj[historyList.historyList[i].keywords] = true;
+          }
+        }
+        historyList.historyList = result
+        this.setData({historySearchGr:result})
+        if(!k) {
+          wx.setStorageSync('historySearchGr', historyList)
+        }
+        //跳转找工作页面
+        wx.redirectTo({
+          url:"/pages/findingworkinglist/findingworkinglist?keywrods="+this.data.inputTetx
+        })
+      this.getStorageSearch()
     }
-    this.getStorageSearch()
-  }
   },
-
+    //判断字符是否为空的方法
+  isEmpty:function isEmpty(obj){
+    var regu = "^[ ]+$";
+    var re = new RegExp(regu);
+    if(typeof obj == "undefined" || obj == null || obj == "" || re.test(obj)){
+        return true;
+    }else{
+        return false;
+    }
+  },
   //获取缓存中的历史搜索记录
   getStorageSearch: function () {
     if(this.data.changeStatus == 0){
