@@ -33,7 +33,8 @@ Page({
     searchIcon: app.globalData.apiImgUrl + 'yc/helpCenter-search.png',
     changeStatus: 0,
     inputTetx: "",
-    focusInput: false
+    focusInput: false,
+    delImg: app.globalData.apiImgUrl + "new-published-close-icon.png",
   },
   //头部tab切换
   tabChange: function (e) {
@@ -225,6 +226,12 @@ Page({
         url:this.data.inputTetx!="" ? "/pages/findingworkinglist/findingworkinglist?keywrods="+this.data.inputTetx:"/pages/findingworkinglist/findingworkinglist"
       })
     }
+  },
+  // 清除搜索输入框内容
+  clearContent: function () {
+    this.setData({
+      inputTetx:""
+    })
   },
   /**
    * 生命周期函数--监听页面加载

@@ -64,7 +64,16 @@ page {
   display: block;
   padding: 15rpx;
 }
-
+.input-box .clearContent {
+  display: none;
+  width: 30rpx;
+  height: 30rpx;
+}
+.input-box .showdel{
+  display: block;
+  width: 30rpx;
+  height: 30rpx;
+}
 .search-input-box button {
   height: 70rpx;
   line-height: 70rpx;
