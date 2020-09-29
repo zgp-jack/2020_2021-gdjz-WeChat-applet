@@ -35,6 +35,10 @@ Page({
     inputTetx: "",
     focusInput: false,
     delImg: app.globalData.apiImgUrl + "new-published-close-icon.png",
+    //进入搜索页面之前搜索的内容
+    indexKey: "",
+    //从那个页面进入的搜索页面
+    source:""
   },
   //头部tab切换
   tabChange: function (e) {
@@ -215,16 +219,31 @@ Page({
   },
   //关闭搜索 跳转页面
   closeSearch(){
-    if(this.data.changeStatus == 0) {
-      //跳转找工作页面
-      wx.redirectTo({
-        url:this.data.inputTetx!="" ? "/pages/index/index?keywrods="+this.data.inputTetx:"/pages/index/index"
-      })
+    if(this.data.source == 0) {
+      if(this.data.indexKey !== ""){
+        //跳转找工作页面
+        wx.redirectTo({
+          url:this.data.indexKey!="" ? "/pages/index/index?keywrods="+this.data.indexKey:"/pages/index/index"
+        })
+      }else{
+        //跳转找工作页面
+        wx.redirectTo({
+          url:"/pages/index/index"
+        })
+      }
+      
     }else {
-      //跳转找工人页面
+      if(this.data.indexKey !== ""){
+        //跳转找工人页面
       wx.redirectTo({
-        url:this.data.inputTetx!="" ? "/pages/findingworkinglist/findingworkinglist?keywrods="+this.data.inputTetx:"/pages/findingworkinglist/findingworkinglist"
+        url:this.data.indexKey!="" ? "/pages/findingworkinglist/findingworkinglist?keywrods="+this.data.indexKey:"/pages/findingworkinglist/findingworkinglist"
       })
+      }else {
+        //跳转找工人页面
+      wx.redirectTo({
+        url:"/pages/findingworkinglist/findingworkinglist"
+      })
+      }
     }
   },
   // 清除搜索输入框内容
@@ -240,12 +259,19 @@ Page({
     //判断默认显示找工作还是找工人
     if(options.changeStatus){
       this.setData({
-        changeStatus:options.changeStatus
+        changeStatus:options.changeStatus,
+        source:options.changeStatus
       })
     }
     if(options.key){
       this.setData({
-        inputTetx:options.key
+        inputTetx:options.key,
+        indexKey:options.key
+      })
+    }else{
+      this.setData({
+        inputTetx:"",
+        indexKey:""
       })
     }
     this.getStorageSearch()

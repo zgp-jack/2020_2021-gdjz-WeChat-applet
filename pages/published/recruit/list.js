@@ -1,7 +1,7 @@
 const app = getApp()
 let footerjs = require("../../../utils/footer.js");
-Page({
 
+Page({
   /**
    * 页面的初始数据
    */
@@ -28,6 +28,10 @@ Page({
     resumeText: "",
     //当前选中tab
     current: 0,
+    //发布成功后的数据
+    tipdata:{},
+    thisListData:{},
+    isfrist:true
   },
   publishJob:function () {
     app.initJobView()
@@ -59,6 +63,7 @@ Page({
     let now = new Date().getTime() / 1000 // 当前时间戳
     let top = topdata.top; //是否有置顶数据
     let userInfo = wx.getStorageSync('userInfo') // 用户信息
+    let isCheck = e.currentTarget.dataset.ischeck;//用户审核状态
     
 
     if(end == '2'){ //如果已招到
@@ -173,7 +178,7 @@ Page({
 
     }else{
       wx.navigateTo({
-        url: `/pages/workingtopAll/workingtop/workingtop?id=${id}&topId=undefined`,
+        url: `/pages/workingtopAll/workingtop/workingtop?id=${id}&topId=undefined&city_id=${topdata.area_id}&province_id=${topdata.province_id}&ischeck=${isCheck}`,
       })
     }
 
@@ -295,7 +300,7 @@ Page({
       timer = setTimeout(fn,delay)
     }
   },
-  getRecruitList:function(){
+  getRecruitList:function(options){
     let _this = this
     let userinfo = wx.getStorageSync('userInfo')
     let userUuid = wx.getStorageSync('userUuid')
@@ -315,6 +320,23 @@ Page({
           let newlist = mydata.data.lists
           let page = _this.data.page
           let len = newlist.length
+          if(options.tip_data){
+            let option = JSON.parse(options.tip_data)
+            if(option.job_id){
+              for(let i = 0;i<newlist.length;i++) {
+                if(newlist[i].id == option.job_id){
+                  _this.setData({
+                    thisListData: newlist[i]
+                  })
+                }
+              }
+              if(options.tip_data.tip_type == "member_first"){
+                wx.navigateTo({
+                  url: `../../../pages/releaseSuccess/releaseSuccess?tipdata=${options.tip_data}&listdata=${this.data.thisListData}`,
+                })
+              }
+            }
+          }
           _this.setData({
             lists: lists.concat(newlist),
             hasmore: len ? true : false,
@@ -389,14 +411,43 @@ Page({
     if(!this.data.hasmore) return false
     this.getRecruitList()
   },
+  gitConfig:function () {
+    let userinfo = wx.getStorageSync('userInfo')
+    app.appRequestAction({
+      url: 'fast-issue/issue-config/',
+      way: 'GIT',
+      params:{
+        mid:"",
+        token:"",
+        time:""
+      }
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    //需判断是否是首次进入 ！！！重复请求
+    if(this.data.isfrist){
+      this.pageRefresh(options)  
+    }
     if(options.hasOwnProperty('jz')){
       this.setData({
         showTopTips:true
       })
+    }
+    if(options.hasOwnProperty('tip_data')){
+      this.setData({
+        tipdata:JSON.parse(options.tip_data)
+      })
+      //用户第一次发布
+      if(options.tip_data.tip_type == "member_first"){
+        wx.navigateTo({
+          url: '../../../pages/releaseSuccess/releaseSuccess?tipdata='+options.tip_data,
+        })
+      }else {
+        this.selectComponent("#tip").show();
+      }
     }
     this.initFooterData()
   },
@@ -412,7 +463,12 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    this.pageRefresh()  
+    if(!this.data.isfrist) {
+      this.pageRefresh(options? options:"")
+    }
+    this.setData({
+      isfrist:false
+    })
   },
 
   /**
@@ -435,9 +491,9 @@ Page({
   onPullDownRefresh: function () {
 
   },
-  pageRefresh() {
+  pageRefresh(options) {
     this.setData({ lists: [], page: 1, hasmore: true,  isAllList: false})
-    this.getRecruitList()
+    this.getRecruitList(options)
   },
   /**
    * 页面上拉触底事件的处理函数

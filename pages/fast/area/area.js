@@ -136,8 +136,9 @@ Page({
                         },
                         success:function (res) {
                           if(res.data.errcode == "ok"){
+                            let tip_data = JSON.stringify(mydata.data)
                             wx.redirectTo({
-                              url: '/pages/fast/tips/tips?token='+token,
+                              url: '../../published/recruit/list?tip_data='+tip_data,
                             })
                           }else{
                             app.showMyTips(mydata.errmsg);
@@ -218,8 +219,13 @@ Page({
                     },
                     success:function (res) {
                       if(res.data.errcode == "ok"){
+                        // wx.redirectTo({
+                        //   url: '/pages/fast/tips/tips?token='+token,
+                        // })
+                        //已授权 登陆跳转
+                        let tip_data = JSON.stringify(mydata.data)
                         wx.redirectTo({
-                          url: '/pages/fast/tips/tips?token='+token,
+                          url: '../../published/recruit/list?tip_data='+tip_data,
                         })
                       }else{
                         app.showMyTips(mydata.errmsg);

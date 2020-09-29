@@ -1,3 +1,4 @@
+let _city = require("../../utils/city")
 // pages/releaseSuccess.js
 Page({
 
@@ -15,33 +16,50 @@ Page({
 		firstName = firstName.split("");
 		let day = [1,1,1,2,2,3,3,4,4,5];
 		for (let index = 0; index < num; index++) {
-			let firstNameNum = this.getRandomInt(0,firstName.length)
-			let dayNum = this.getRandomInt(0,day.length)
+			let firstNameNum = this.getRandomInt(0,firstName.length-1)
+			let dayNum = this.getRandomInt(0,day.length-1)
+			let cityNum = this.getRandomInt(0,_city.city.length-1)
 			let m = 0;
 			switch (day[dayNum]){
 				case 1:
 					m = this.getRandomInt(1,5)
+					break;
 				case 2:
 					m = this.getRandomInt(5,10)
+					break;
 				case 3:
 					m = this.getRandomInt(10,15)
+					break;
 				case 4:
 					m = this.getRandomInt(15,20)
+					break;
 				case 5:
 					m = this.getRandomInt(20,30)
+					break;
 			}
-			arr.push(firstName[firstNameNum]+"老板 成都置顶"+day[dayNum]+"天 成功招到"+m+"人");
+			arr.push(firstName[firstNameNum]+"老板 " +_city.city[cityNum]+"置顶"+day[dayNum]+"天 成功招到"+m+"人");
 		}
-		console.log(arr)
+		var newArr = [];
+    for (var i = 0; i < arr.length; i += 4) {
+        newArr.push(arr.slice(i, i + 4));
+    }
+    this.setData({listArr:newArr})
 	},
 	getRandomInt:function(min,max){
 		return Math.floor(Math.random()*(max-min+1))+min;
+	},
+	//跳转招工列表
+	goRecruitList() {
+		wx.redirectTo({
+			url: '../../pages/published/recruit/list',
+		})
 	},
 
 	/**
 	 * 生命周期函数--监听页面加载
 	 */
 	onLoad: function (options) {
+		debugger
 		this.initList()
 	},
 

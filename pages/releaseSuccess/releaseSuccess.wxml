@@ -3,7 +3,7 @@
 	<image class="releasesuccessicon" src="../../images/releasesuccessicon.png"></image>
 	<text class="tips-text">增加曝光率，让更多优质工人看到你，联系你</text>
 	<view class="btn-box">
-		<button>管理招工信息</button>
+		<button bindtap="goRecruitList">管理招工信息</button>
 		<button>去增加曝光率</button>
 	</view>
 	<view class="slide-box">
@@ -18,23 +18,8 @@
 				<view class="slide-title">成功招到</view>
 				<view class="swiper-box">
 					<swiper autoplay="{{true}}" interval="{{3000}}" duration="{{1000}}" vertical="true" circular="true"> 
-						<swiper-item>
-							<text>王老板 成都置顶3天 成功招到20人</text>
-							<text>王老板 成都置顶3天 成功招到20人</text>
-							<text>王老板 成都置顶3天 成功招到20人</text>
-							<text>王老板 成都置顶3天 成功招到20人</text>
-						</swiper-item>
-						<swiper-item>
-							<text>王老板 成都置顶3天 成功招到20人</text>
-							<text>王老板 成都置顶3天 成功招到20人</text>
-							<text>王老板 成都置顶3天 成功招到20人</text>
-							<text>王老板 成都置顶3天 成功招到20人</text>
-						</swiper-item>
-						<swiper-item>
-							<text>王老板 成都置顶3天 成功招到20人</text>
-							<text>王老板 成都置顶3天 成功招到20人</text>
-							<text>王老板 成都置顶3天 成功招到20人</text>
-							<text>王老板 成都置顶3天 成功招到20人</text>
+						<swiper-item wx:for="{{listArr}}"  wx:key="{{index}}">
+							<text wx:for="{{item}}" wx:for-item="listItem" wx:for-index="n" wx:key="{{n}}">{{listItem}}</text>
 						</swiper-item>
 					</swiper>
 				</view>

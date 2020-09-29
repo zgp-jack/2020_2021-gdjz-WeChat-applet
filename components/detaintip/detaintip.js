@@ -5,9 +5,9 @@ Component({
    * 组件的属性列表
    */
   properties: {
-
+    tipdata: Object,
+    thisLstData: Object
   },
-
   /**
    * 组件的初始数据
    */
@@ -16,101 +16,58 @@ Component({
     userInfo: false,
     icon: app.globalData.apiImgUrl + 'mini-fast-success-icon.png',
     close: app.globalData.apiImgUrl + 'mini-close-icon.png',
-  },
-  attached:function(){
-    this.initUserinfo()
-    console.log(this.data.userInfo)
+    buttontext:{
+      "close":"取消",
+      "comfirm":"确定"
+    }
   },
   /**
    * 组件的方法列表
    */
   methods: {
     show:function(){
-      let bool = this.data.show
       this.setData({
-        show: !bool
+        show: !this.data.show
       })
     },
-    //登录状态下打开招工信息列表
-    manageRecruit:function () {
-      wx.reLaunch({
-        url: '/pages/published/recruit/list',
-      })
-    },
-    goToResumeList:function(){
-      wx.reLaunch({
-        url: '/pages/findingworkinglist/findingworkinglist',
-      })
-    },
-    manageRecuit:function(){
-      wx.reLaunch({
-        url: '/pages/published/recruit/list',
-      })
-    },
-    bindGetUserInfo:function(e){
-      let token = app.globalData.fastToken
-      let that = this;
-      app.bindGetUserInfo(e, function (res) {
-        app.mini_user(res, function (res) {
-          app.api_user(res, function (res) {
-            let uinfo = res.data;
-            if (uinfo.errcode == "ok") {
-              let userInfo = {
-                userId: uinfo.data.id,
-                token: uinfo.data.sign.token,
-                tokenTime: uinfo.data.sign.time,
-              }
-              that.setData({
-                userInfo: userInfo
-              })
-              app.globalData.userInfo = userInfo;
-              wx.setStorageSync('userInfo', userInfo)
-              app.appRequestAction({
-                title: "发布中",
-                mask: true,
-                failTitle: "网络错误，保存失败！",
-                url: "fast-issue/to-job/",
-                way: "POST",
-                params: { 
-                  token: token,
-                },
-                success: function (res) {
-                  let mydata = res.data;
-                  if (mydata.errcode == "ok") {
-                    wx.reLaunch({
-                      url: '/pages/published/recruit/list',
-                    })
-                  }else{
-                    app.showMyTips(mydata.errmsg);
-                    }}
-              })
-            } else if (uinfo.errcode == "member_shielding") {
-              wx.showModal({
-                content: uinfo.errmsg,
-                cancelText: "知道了",
-                confirmText: "联系客服",
-                success: function (res) {
-                  if (res.confirm) {
-                    wx.makePhoneCall({
-                      phoneNumber: uinfo.service_tel,
-                    })
-                  }
-                }
-              })
-            } else {
-              app.showMyTips(uinfo.errmsg);
-            }
-          });
-        });
-      });
-    },
-    initUserinfo:function(){
-      let u = wx.getStorageSync('userInfo')
-      if(u){
-        this.setData({
-          userInfo: u
+    comfirm:function () {
+    let topdata = this.properties.thisLstData; //当前数据
+    let isCheck = topdata.is_check;//用户审核状态
+    this.show()
+      //去增加曝光率
+      if(this.properties.tipdata.tip_type == "day_first"){
+        wx.navigateTo({
+          url: `/pages/workingtopAll/workingtop/workingtop?id=${this.properties.tipdata.job_id}&topId=undefined&city_id=${topdata.area_id}&province_id=${topdata.province_id}&ischeck=${isCheck}`,
+        })
+      }else{
+        //去发布
+        wx.redirectTo({
+          url: '../../pages/fast/issue/index',
         })
       }
     },
+    close:function () {
+      this.show()
+    }
+  },
+  ready:function() {
+    let tipdata = this.properties.tipdata
+    if(tipdata){
+      //当日第一次发布
+      if(tipdata.tip_type == "day_first") {
+        this.setData({
+          "buttontext.close":"暂不提醒",
+          "buttontext.comfirm":"去增加曝光率",
+        })
+      }
+      //最后一次发布
+      if(tipdata.tip_type == "day_last") {
+        debugger
+        this.setData({
+          "buttontext.close":"不了，谢谢",
+          "buttontext.comfirm":"去发布",
+        })
+      }
+    }
   }
 })

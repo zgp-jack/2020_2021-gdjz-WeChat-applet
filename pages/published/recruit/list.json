@@ -1,4 +1,6 @@
 {
   "navigationBarTitleText": "鱼泡网-我的招工信息",
-  "usingComponents": {}
+  "usingComponents": {
+    "dataintip":"/components/detaintip/detaintip"
+  }
 }

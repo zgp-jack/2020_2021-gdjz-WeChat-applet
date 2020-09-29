@@ -342,7 +342,8 @@ Page({
     let typeText = e.currentTarget.dataset.type;
     this.setData({ worktype: index })
     //if (_type == _typeid) return false;
-
+    wx.setStorageSync('typeTextgr', typeText)
+    wx.setStorageSync('typeIdgr', _typeid)
     if (_this.touchEndTime - _this.touchStartTime < 350) {
       var currentTime = e.timeStamp
       var lastTapTime = _this.lastTapTime
@@ -981,6 +982,7 @@ Page({
         userInfo: userInfo
       })
     }
+    this.valiFilterProvince();
     footerjs.initMsgNum(this);
     app.initResume(this)
     this.initPageData()

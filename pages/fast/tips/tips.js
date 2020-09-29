@@ -55,8 +55,9 @@ Page({
               success: function (res) {
                 let mydata = res.data;
                 if (mydata.errcode == "ok") {
-                  wx.reLaunch({
-                    url: '/pages/published/recruit/list',
+                  let tip_data = JSON.stringify(mydata.data)
+                  wx.redirectTo({
+                    url: '../../published/recruit/list?tip_data='+tip_data,
                   })
                 }else{
                   app.showMyTips(mydata.errmsg);

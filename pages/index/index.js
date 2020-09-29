@@ -324,7 +324,8 @@ Page({
     let typeText = e.currentTarget.dataset.type;
     this.setData({ worktype: index })
     //if (_type == _typeid) return false;
-
+    wx.setStorageSync('typeText', typeText)
+    wx.setStorageSync('typeId', _typeid)
     if (_this.touchEndTime - _this.touchStartTime < 350) {
       var currentTime = e.timeStamp
       var lastTapTime = _this.lastTapTime
@@ -1022,7 +1023,6 @@ Page({
   onLoad: function (options) {
     let u =wx.getStorageSync('userInfo')
     let uuid = wx.getStorageSync('userUuid')
-    
     this.setData({
       jgjzData: {...u,userUuid: uuid}
     })
@@ -1057,6 +1057,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
+    this.initUserLocation();
     this.getUserUuid();
     this.initUserinfo();
     footerjs.initMsgNum(this);
