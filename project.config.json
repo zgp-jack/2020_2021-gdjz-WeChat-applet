@@ -527,6 +527,13 @@
           "id": -1,
           "name": "找工人列表",
           "pathName": "pages/findingworkinglist/findingworkinglist",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "发布成功",
+          "pathName": "pages/releaseSuccess/releaseSuccess",
           "scene": null
         }
       ]

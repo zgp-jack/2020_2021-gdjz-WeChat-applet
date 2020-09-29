@@ -67,7 +67,7 @@ Page({
     lists: [],
     areaText: "选择城市",
     typeText: "选择工种",
-    listText: "最新",
+    listText: "最新排序",
     showNothinkData: false,
     nothavemore: false,
     showMyLoading: false,
@@ -173,7 +173,7 @@ Page({
         let province = areas.getProviceItem(gpsLocation.province, gpsLocation.city)
         wx.setStorageSync("areaText", province.name)
         wx.setStorageSync("areaId", province.id)
-
+        
         callback(province)
       },
       fail: function (info) {
@@ -366,6 +366,8 @@ Page({
   userChooseListType: function (e) {
     let type = e.currentTarget.dataset.type;
     let name = e.currentTarget.dataset.name;
+    wx.setStorageSync("joblisttype",type)
+    wx.setStorageSync("joblistname",name)
     this.setData({
       "searchDate.joblisttype": type,
       listText: name,
@@ -379,6 +381,8 @@ Page({
   userChooseWorkinfo: function (e) {
     let typeText = e.currentTarget.dataset.type;
     let id = parseInt(e.currentTarget.dataset.id);
+    wx.setStorageSync('typeText', e.currentTarget.dataset.type)
+    wx.setStorageSync('typeId', e.currentTarget.dataset.id)
     //if (parseInt(this.data.searchDate.classify_id) == id) return false;
     this.setData({
       workinfo: id,
@@ -556,9 +560,17 @@ Page({
   initAreaInfo: function () {
     let areaId = wx.getStorageSync("areaId");
     let areaText = wx.getStorageSync("areaText");
+    let typeText = wx.getStorageSync('typeText');
+    let typeId = wx.getStorageSync('typeId');
+    let joblisttype = wx.getStorageSync('joblisttype');
+    let joblistname = wx.getStorageSync('joblistname');
     this.setData({
       "searchDate.area_id": areaId ? areaId : 1,
-      areaText: areaText ? areaText : "全国"
+      areaText: areaText ? areaText : "全国",
+      typeText: typeText ? typeText : "全部分类",
+      "searchDate.classify_id": typeId ? typeId:"0",
+      "searchDate.joblisttype": joblisttype ? joblisttype:"newest",
+      listText: joblistname ? joblistname:"最新排序"
     })
     this.doRequestAction(false);
   },
@@ -821,7 +833,10 @@ Page({
     let areaId = wx.getStorageSync("areaId");
     let areaText = wx.getStorageSync("areaText");
     let gpsOrientation = wx.getStorageSync("gpsOrientation");
-
+    let joblisttype = wx.getStorageSync('joblisttype')
+    let joblistname = wx.getStorageSync('joblistname')
+    let typeText = wx.getStorageSync("typeText");
+    let typeId = wx.getStorageSync("typeId");
     if (areaId && areaText) {
       _this.initAreaInfo()
     } else if (gpsOrientation) {
@@ -841,9 +856,7 @@ Page({
         })
         _this.initAreaInfo();
       })
-
     }
-
   },
   timerLoading: function () {
     let _this = this;
@@ -854,18 +867,20 @@ Page({
     }, 3000)
   },
   getFilterData: function (options) {
+    let joblistname = wx.getStorageSync('joblistname')
+    let joblisttype = wx.getStorageSync('joblisttype')
     let _this = this;
     this.setData({
       fillterArea: areas.getAreaArr
     })
     let {id} = options
     if (app.globalData.allTypes) {
-      _this.setData({ fillterType: app.globalData.allTypes.classTree, fillterListType: app.globalData.allTypes.jobListType, "searchDate.joblisttype": app.globalData.allTypes.jobListType[0].type, listText: app.globalData.allTypes.jobListType[0].name });
+      _this.setData({ fillterType: app.globalData.allTypes.classTree, fillterListType: app.globalData.allTypes.jobListType, "searchDate.joblisttype": joblisttype ? joblisttype : app.globalData.allTypes.jobListType[0].type, listText: joblistname ? joblistname : app.globalData.allTypes.jobListType[0].name });
       _this.initSelectedData(id,app.globalData.allTypes)
       if (_this.data.fillterType.length == 1) _this.setData({ typeText: _this.data.fillterType[0].name })
     } else {
       app.getListsAllType(function (_data) {
-        _this.setData({ fillterType: _data.classTree, fillterListType: _data.jobListType, "searchDate.joblisttype": _data.jobListType[0].type, listText: _data.jobListType[0].name })
+        _this.setData({ fillterType: _data.classTree, fillterListType: _data.jobListType, "searchDate.joblisttype":joblisttype ? joblisttype : _data.jobListType[0].type, listText: joblistname ? joblistname :_data.jobListType[0].name })
         _this.initSelectedData(id,_data)
         if (_this.data.fillterType.length == 1) _this.setData({ typeText: _this.data.fillterType[0].name })
       });

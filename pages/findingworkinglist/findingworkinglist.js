@@ -154,6 +154,8 @@ Page({
     let _id = e.currentTarget.dataset.id;
     let text = e.currentTarget.dataset.type
 
+    wx.setStorageSync('listType', e.currentTarget.dataset.type)
+    wx.setStorageSync('listTypeid', e.currentTarget.dataset.id)
 
     this.setData({ newindex: index })
 
@@ -183,6 +185,9 @@ Page({
     let _sid = this.data.searchDate.staff_id;
     this.setData({ teamindex: index })
     //if (_id == _sid) return false;
+
+    wx.setStorageSync('teamType', e.currentTarget.dataset.id)
+    wx.setStorageSync('teamText', e.currentTarget.dataset.team)
 
     _this.returnTop();
     _this.setData({
@@ -391,6 +396,9 @@ Page({
   userChooseWorkinfo: function (e) {
     let typeText = e.currentTarget.dataset.type;
     let id = parseInt(e.currentTarget.dataset.id);
+    wx.setStorageSync('typeTextgr', e.currentTarget.dataset.type)
+    wx.setStorageSync('typeIdgr', e.currentTarget.dataset.id)
+
     //if (parseInt(this.data.searchDate.classify_id) == id) return false;
     this.setData({
       workinfo: id,
@@ -538,8 +546,21 @@ Page({
   initAreaInfo: function () {
     let areaId = wx.getStorageSync("areaId");
     let areaText = wx.getStorageSync("areaText");
+    let typeTextgr = wx.getStorageSync("typeTextgr");
+    let typeIdgr = wx.getStorageSync("typeIdgr");
+    let teamText = wx.getStorageSync("teamText");
+    let teamType = wx.getStorageSync("teamType");
+    let listType = wx.getStorageSync("listType");
+    let listTypeid = wx.getStorageSync("listTypeid");
     this.setData({
-      "searchDate.area_id": areaId ? areaId : 1
+      "searchDate.area_id": areaId ? areaId : 1,
+      "searchDate.occupations": typeIdgr ? typeIdgr : 0,
+      "searchDate.type": teamType ? teamType : 0,
+      "searchDate.sort": listTypeid ? listTypeid : 0,
+      areaText:areaText ? areaText:"全国",
+      typeText:typeTextgr? typeTextgr:"全部分类",
+      teamText:teamText? teamText:"全部",
+      recommended:listType? listType:"智能推荐"
     })
     this.doRequestAction(false);
   },
@@ -615,13 +636,6 @@ Page({
 
   //用户点击搜索
   userTapSearch: function () {
-    if(this.data.searchDate.keywords == "") {
-      wx.showModal({
-        title:"提示",
-        content:"请输入内容",
-        showCancel:false,
-      })
-    }else {
       // if (!this.data.userInfo) {
       //   app.gotoUserauth();
       //   return false;
@@ -661,7 +675,6 @@ Page({
       })
       this.doRequestAction(false);
       this.initSearchHistory();
-      }
   },
   returnTop: function () {
     //this.setData({ scrollTop: 0 })

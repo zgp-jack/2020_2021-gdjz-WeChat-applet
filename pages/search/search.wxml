@@ -28,10 +28,10 @@
     </view>
     <view class="tag-box">
       <block wx:if="{{changeStatus == 0}}" wx:for="{{ historySearch.historyList }}" wx:key="index">
-        <view bindtap="clickTabSearch" data-key="{{ item.keywords }}">{{ item.keywords }}</view>
+        <text bindtap="clickTabSearch" space="ensp" data-key="{{ item.keywords }}">{{ item.keywords }}</text>
       </block>
       <block wx:if="{{changeStatus == 1}}" wx:for="{{ historySearchGr.historyList }}" wx:key="index">
-        <view bindtap="clickTabSearch" data-key="{{ item.keywords }}">{{ item.keywords }}</view>
+        <text bindtap="clickTabSearch" space="ensp" data-key="{{ item.keywords }}">{{ item.keywords }}</text>
       </block>
     </view>
   </view>

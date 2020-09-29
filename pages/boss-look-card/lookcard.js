@@ -714,7 +714,7 @@ Page({
           } else {
             wx.showModal({
               title: '温馨提示',
-              content: '该信息已被删除！',
+              content: res.data.errmsg,
               showCancel: false,
               success: function () {
                 wx.navigateBack({})

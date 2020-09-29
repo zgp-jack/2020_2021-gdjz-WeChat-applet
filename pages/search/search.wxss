@@ -125,7 +125,7 @@ page {
   display: flex;
   flex-wrap: wrap;
 }
-.tag-box view{
+.tag-box text,.tag-box view{
   background-color: #f6f5f5;
   color: #333;
   font-size: 28rpx;

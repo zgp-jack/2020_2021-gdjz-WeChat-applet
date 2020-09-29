@@ -1,0 +1,96 @@
+// pages/releaseSuccess.js
+Page({
+
+	/**
+	 * 页面的初始数据
+	 */
+	data: {
+		listArr:[]
+	},
+
+	initList:function (){
+		let num = 30;
+		let arr = [];
+		let firstName = "赵钱孙李周吴郑王冯陈褚卫蒋沈韩杨朱秦尤许何吕施张孔曹严华金魏陶姜戚谢邹喻柏水窦章云苏潘葛奚范彭郎鲁韦昌马苗凤花方俞任袁柳酆鲍史唐费廉岑薛雷贺倪汤滕殷罗毕郝邬安常乐于时傅皮卞齐康伍余元卜顾孟平黄和穆萧尹姚邵湛汪祁毛禹狄米贝明臧计伏成戴谈宋茅庞熊纪舒屈项祝董梁杜阮蓝闵席季麻强贾路娄危江童颜郭梅盛林刁钟徐邱骆高夏蔡田樊胡凌霍虞万支柯昝管卢莫经房裘缪干解应宗丁宣贲邓郁单杭洪包诸左石崔吉钮龚程嵇邢滑裴陆荣翁荀羊於惠甄曲家封芮羿储靳汲邴糜松井段富巫乌焦巴弓牧隗山谷车侯宓蓬全郗班仰秋仲伊宫宁仇栾暴甘钭厉戎祖武符刘景詹束龙叶幸司韶郜黎蓟薄印宿白怀蒲邰从鄂索咸籍赖卓蔺屠蒙池乔阴鬱胥能苍双闻莘党翟谭贡劳逄姬申扶堵冉宰郦雍卻璩桑桂濮牛寿通边扈燕冀郏浦尚农温别庄晏柴瞿阎充慕连茹习宦艾鱼容向古易";
+		firstName = firstName.split("");
+		let day = [1,1,1,2,2,3,3,4,4,5];
+		for (let index = 0; index < num; index++) {
+			let firstNameNum = this.getRandomInt(0,firstName.length)
+			let dayNum = this.getRandomInt(0,day.length)
+			let m = 0;
+			switch (day[dayNum]){
+				case 1:
+					m = this.getRandomInt(1,5)
+				case 2:
+					m = this.getRandomInt(5,10)
+				case 3:
+					m = this.getRandomInt(10,15)
+				case 4:
+					m = this.getRandomInt(15,20)
+				case 5:
+					m = this.getRandomInt(20,30)
+			}
+			arr.push(firstName[firstNameNum]+"老板 成都置顶"+day[dayNum]+"天 成功招到"+m+"人");
+		}
+		console.log(arr)
+	},
+	getRandomInt:function(min,max){
+		return Math.floor(Math.random()*(max-min+1))+min;
+	},
+
+	/**
+	 * 生命周期函数--监听页面加载
+	 */
+	onLoad: function (options) {
+		this.initList()
+	},
+
+	/**
+	 * 生命周期函数--监听页面初次渲染完成
+	 */
+	onReady: function () {
+
+	},
+
+	/**
+	 * 生命周期函数--监听页面显示
+	 */
+	onShow: function () {
+
+	},
+
+	/**
+	 * 生命周期函数--监听页面隐藏
+	 */
+	onHide: function () {
+
+	},
+
+	/**
+	 * 生命周期函数--监听页面卸载
+	 */
+	onUnload: function () {
+
+	},
+
+	/**
+	 * 页面相关事件处理函数--监听用户下拉动作
+	 */
+	onPullDownRefresh: function () {
+
+	},
+
+	/**
+	 * 页面上拉触底事件的处理函数
+	 */
+	onReachBottom: function () {
+
+	},
+
+	/**
+	 * 用户点击右上角分享
+	 */
+	onShareAppMessage: function () {
+
+	}
+})
