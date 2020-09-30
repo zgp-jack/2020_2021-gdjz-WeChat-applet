@@ -6,7 +6,8 @@ Component({
    */
   properties: {
     tipdata: Object,
-    thisLstData: Object
+    thisLstData: Object,
+    ConfigData: Object
   },
   /**
    * 组件的初始数据

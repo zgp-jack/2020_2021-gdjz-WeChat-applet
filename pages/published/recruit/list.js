@@ -31,7 +31,8 @@ Page({
     //发布成功后的数据
     tipdata:{},
     thisListData:{},
-    isfrist:true
+    isfrist:true,
+    ConfigData:{}
   },
   publishJob:function () {
     app.initJobView()
@@ -411,16 +412,29 @@ Page({
     if(!this.data.hasmore) return false
     this.getRecruitList()
   },
+   //最后一次发布 请求配置
   gitConfig:function () {
     let userinfo = wx.getStorageSync('userInfo')
+    let _this = this
     app.appRequestAction({
       url: 'fast-issue/issue-config/',
-      way: 'GIT',
+      way: 'GET',
       params:{
-        mid:"",
-        token:"",
-        time:""
-      }
+        mid:userinfo.userId,
+        token:userinfo.token,
+        time:userinfo.tokenTime
+      },
+      success:function (res){
+        if(res.data.errcode == "ok"){
+          if(res.data.data.type == "paid_issue"){
+            _this.setData({
+              ConfigData:res.data.data
+            })
+          }
+        }else if(res.data.errcode == "fail"){
+          app.showMyTips()
+        }
+      },
     })
   },
   /**
@@ -437,14 +451,19 @@ Page({
       })
     }
     if(options.hasOwnProperty('tip_data')){
+      let tipdata = JSON.parse(options.tip_data)
+      debugger
       this.setData({
-        tipdata:JSON.parse(options.tip_data)
+        tipdata:tipdata
       })
       //用户第一次发布
-      if(options.tip_data.tip_type == "member_first"){
+      if(tipdata.tip_type == "member_first"){
         wx.navigateTo({
-          url: '../../../pages/releaseSuccess/releaseSuccess?tipdata='+options.tip_data,
+          url: '../../../pages/releaseSuccess/releaseSuccess?tipdata='+tipdata,
         })
+      }else if(tipdata.tip_type == "day_last"){
+        //最后一次发布 请求配置
+        this.gitConfig()
       }else {
         this.selectComponent("#tip").show();
       }

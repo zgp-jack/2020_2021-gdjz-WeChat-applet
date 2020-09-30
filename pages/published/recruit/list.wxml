@@ -64,4 +64,4 @@
 <!-- 引入footer -->
 <template is="footer" data="{{ footerImgs,publishActive,showPublishBox,footerActive,resumeText }}" />
 <!-- 最后一次发布 提示框 -->
-<dataintip id="tip" tipdata="{{tipdata}}" thisLstData="{{thisListData}}"></dataintip>
+<dataintip id="tip" tipdata="{{tipdata}}" thisLstData="{{thisListData}}" ConfigData="{{ConfigData}}"></dataintip>
