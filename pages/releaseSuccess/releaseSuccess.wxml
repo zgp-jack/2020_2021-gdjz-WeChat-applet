@@ -1,7 +1,7 @@
 <!--pages/releaseSuccess/releaseSuccess.wxml-->
 <view>
 	<image class="releasesuccessicon" src="../../images/releasesuccessicon.png"></image>
-	<text class="tips-text">增加曝光率，让更多优质工人看到你，联系你</text>
+	<text class="tips-text">{{tipdata.top_tips.text}}</text>
 	<view class="btn-box">
 		<button bindtap="goRecruitList">管理招工信息</button>
 		<button>去增加曝光率</button>

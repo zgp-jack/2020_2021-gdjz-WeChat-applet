@@ -32,7 +32,9 @@ Page({
     tipdata:{},
     thisListData:{},
     isfrist:true,
-    ConfigData:{}
+    ConfigData:{},
+    _options:{},
+    tipstr:""
   },
   publishJob:function () {
     app.initJobView()
@@ -331,9 +333,10 @@ Page({
                   })
                 }
               }
-              if(options.tip_data.tip_type == "member_first"){
+              if(option.tip_type == "member_first"){
+                let listdata = JSON.stringify(_this.data.thisListData)
                 wx.navigateTo({
-                  url: `../../../pages/releaseSuccess/releaseSuccess?tipdata=${options.tip_data}&listdata=${this.data.thisListData}`,
+                  url: `../../../pages/releaseSuccess/releaseSuccess?tipdata=${options.tip_data}&listdata=${listdata}`,
                 })
               }
             }
@@ -430,6 +433,29 @@ Page({
             _this.setData({
               ConfigData:res.data.data
             })
+
+            //拼接提示文字 颜色
+            let text = res.data.data.tips.text
+            let rules = res.data.data.tips.rules
+            let texts = []
+            for (let i = 0; i < rules.length; i++) {
+              if (i === 0) {
+                texts.push({text:text.substring(i,rules[i].start)})
+              } else {
+                texts.push({text:text.substring(rules[i-1].start + rules[i-1].length,rules[i].start)})
+              }
+              texts.push({
+                text:text.substring(rules[i].start,rules[i].start + rules[i].length),
+                color: rules[i].type,
+                value:rules[i].value
+              })
+              if (i === rules.length-1) {
+                texts.push({text:text.substring(rules[i].start + rules[i].length)})
+              }
+            }
+            _this.setData({
+              tipstr:texts
+            })
           }
         }else if(res.data.errcode == "fail"){
           app.showMyTips()
@@ -452,19 +478,19 @@ Page({
     }
     if(options.hasOwnProperty('tip_data')){
       let tipdata = JSON.parse(options.tip_data)
-      debugger
       this.setData({
         tipdata:tipdata
       })
       //用户第一次发布
       if(tipdata.tip_type == "member_first"){
-        wx.navigateTo({
-          url: '../../../pages/releaseSuccess/releaseSuccess?tipdata='+tipdata,
-        })
+        // wx.navigateTo({
+        //   url: `../../../pages/releaseSuccess/releaseSuccess?tipdata='${options.tip_data}'?listdata='${thisListData}'`,
+        // })
       }else if(tipdata.tip_type == "day_last"){
         //最后一次发布 请求配置
         this.gitConfig()
-      }else {
+        this.selectComponent("#tip").show();
+      }else if(tipdata.tip_type == "day_first") {
         this.selectComponent("#tip").show();
       }
     }
@@ -483,7 +509,7 @@ Page({
    */
   onShow: function () {
     if(!this.data.isfrist) {
-      this.pageRefresh(options? options:"")
+      this.pageRefresh(this.data.tipdata? this.data.tipdata:"")
     }
     this.setData({
       isfrist:false

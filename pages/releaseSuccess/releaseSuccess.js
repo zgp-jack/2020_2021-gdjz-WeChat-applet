@@ -6,7 +6,8 @@ Page({
 	 * 页面的初始数据
 	 */
 	data: {
-		listArr:[]
+		listArr:[],
+		tipdata:{}
 	},
 
 	initList:function (){
@@ -59,6 +60,9 @@ Page({
 	 * 生命周期函数--监听页面加载
 	 */
 	onLoad: function (options) {
+		this.setData({
+			tipdata:JSON.parse(options.tipdata)
+		})
 		debugger
 		this.initList()
 	},

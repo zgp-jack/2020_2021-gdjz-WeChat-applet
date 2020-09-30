@@ -15,7 +15,9 @@ Page({
     request:false,
     //对电话输入框填写东西后是否需要匹配
     isRule:true,
-    imageUrl: app.globalData.apiImgUrl +"new-publish-title-t-icon.png"
+    imageUrl: app.globalData.apiImgUrl +"new-publish-title-t-icon.png",
+    issueData:{},
+    payreleasetip:""
   },
   checkType: function (obj, _type) {
     var _re = Object.prototype.toString.call(obj).slice(8, -1).toLowerCase();
@@ -126,7 +128,7 @@ Page({
     //   }
     // }
   },
-  publishRecurit: function () {
+  publishRecurit: function (e) {
     let that = this
     let vali = v.v.new();
     let {
@@ -188,7 +190,8 @@ Page({
       url: 'fast-issue/issue/',
       params: {
         content,
-        phone
+        phone,
+        paid_issue:e.detail?e.detail:0
       },
       way: 'POST',
       success: function (res) {
@@ -222,7 +225,46 @@ Page({
             }
           })
         }
-        if (res.data.errcode !== "unusable" && res.data.errcode !== "ok") {
+        //付费发布
+        if(res.data.errcode == "paid_issue") {
+          //提示信息拼接 颜色
+          let text = res.data.data.text
+          let rules = res.data.data.rules
+          let frist = text.substring(rules[0].start,0)
+          let nt = text.substring((rules[0].start+rules[0].length),rules[0].start)
+          let mindtext = text.substring(rules[1].start,(rules[0].start+rules[0].length))
+          let jf = text.substring((rules[1].start+rules[1].length),rules[1].start)
+          let lasttext = text.substring(text.length,(rules[1].start+rules[1].length))
+
+          let str = []
+          str.push({
+            text:frist
+          })
+          str.push({
+            text:nt,
+            color:rules[0].value,
+          })
+          str.push({
+            text:mindtext
+          })
+          str.push({
+            text:jf,
+            color:rules[1].value,
+          })
+          str.push({
+            text:lasttext
+          })
+          that.setData({
+            payreleasetip:str
+          })
+
+
+          that.setData({
+            issueData:res.data.data
+          })
+          that.selectComponent("#tips").show();
+        }
+        if (res.data.errcode !== "unusable" && res.data.errcode !== "ok" && res.data.errcode !== "paid_issue") {
           wx.showModal({
             title: '提示',
             content: res.data.errmsg,

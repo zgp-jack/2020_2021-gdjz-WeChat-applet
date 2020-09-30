@@ -1,9 +1,8 @@
 <view class="issueok-container" wx:if="{{show}}">
   <view class="issueok-box">
     <view class="issueok-title">提示</view>
-    <view class="issueok-body" wx:if="{{!tipstr.length}}">{{tipdata.tip_type == "day_last" ? ConfigData.tips.text : tipdata.top_tips.text}}</view>
-    <view class="issueok-body" wx:if="{{tipstr.length}}">
-      <text wx:for="{{tipstr}}" wx:key="{{index}}" style="color:{{item.value ? item.value:''}}">{{item.text}}</text>
+    <view class="issueok-body">
+      <text wx:for="{{payreleasetip}}" wx:key="{{index}}" style="color:{{item.color ? item.color:''}}">{{item.text}}</text>
     </view>
     <view class="issueok-footer">
       <button class="issueok-btn" bindtap="close">{{buttontext.close}}</button>

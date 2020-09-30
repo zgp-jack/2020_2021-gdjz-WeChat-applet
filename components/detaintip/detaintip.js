@@ -7,7 +7,8 @@ Component({
   properties: {
     tipdata: Object,
     thisLstData: Object,
-    ConfigData: Object
+    ConfigData: Object,
+    tipstr:Array,
   },
   /**
    * 组件的初始数据
@@ -32,24 +33,38 @@ Component({
       })
     },
     comfirm:function () {
-    let topdata = this.properties.thisLstData; //当前数据
-    let isCheck = topdata.is_check;//用户审核状态
-    this.show()
-      //去增加曝光率
-      if(this.properties.tipdata.tip_type == "day_first"){
-        wx.navigateTo({
-          url: `/pages/workingtopAll/workingtop/workingtop?id=${this.properties.tipdata.job_id}&topId=undefined&city_id=${topdata.area_id}&province_id=${topdata.province_id}&ischeck=${isCheck}`,
-        })
-      }else{
-        //去发布
-        wx.redirectTo({
-          url: '../../pages/fast/issue/index',
-        })
+      let topdata = this.properties.thisLstData; //当前数据
+      let isCheck = topdata.is_check;//用户审核状态
+      this.show()
+        //去增加曝光率
+        if(this.properties.tipdata.tip_type == "day_first"){
+          wx.navigateTo({
+            url: `/pages/workingtopAll/workingtop/workingtop?id=${this.properties.tipdata.job_id}&topId=undefined&city_id=${topdata.area_id}&province_id=${topdata.province_id}&ischeck=${isCheck}`,
+          })
+        }else if(this.properties.tipdata.tip_type == "day_last"){
+            wx.redirectTo({
+              url: '/pages/fast/issue/index',
+            })
+        }else{
+          //去发布
+          wx.redirectTo({
+            url: '../../pages/fast/issue/index',
+          })
       }
     },
     close:function () {
+      let tipdata = this.properties.tipdata
+      if(tipdata.tip_type == "day_first"){
+        this.notip();
+      }
       this.show()
-    }
+    },
+    notip:function () {
+      app.appRequestAction({
+        url:"/fast-issue/hide-tips/",
+        way:"GET"
+      })
+    },
   },
   ready:function() {
     let tipdata = this.properties.tipdata
@@ -63,7 +78,6 @@ Component({
       }
       //最后一次发布
       if(tipdata.tip_type == "day_last") {
-        debugger
         this.setData({
           "buttontext.close":"不了，谢谢",
           "buttontext.comfirm":"去发布",

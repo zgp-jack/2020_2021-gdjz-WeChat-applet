@@ -25,4 +25,6 @@
 
 <!-- 发布招工成功提示框 -->
 <issueok  id="issueok" token="{{ }}"/>
+<!-- 付费发布提示框 -->
+<detaintipPay id="tips" tipdata="{{issueData}}" payreleasetip="{{payreleasetip}}" bind:mycomfirm="publishRecurit"></detaintipPay>  
 
