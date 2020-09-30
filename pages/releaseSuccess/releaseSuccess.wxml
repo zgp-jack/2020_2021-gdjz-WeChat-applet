@@ -4,7 +4,7 @@
 	<text class="tips-text">{{tipdata.top_tips.text}}</text>
 	<view class="btn-box">
 		<button bindtap="goRecruitList">管理招工信息</button>
-		<button>去增加曝光率</button>
+		<button bindtap="goexposure">去增加曝光率</button>
 	</view>
 	<view class="slide-box">
 		<view class="slide-head">

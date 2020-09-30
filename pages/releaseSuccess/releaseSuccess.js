@@ -7,7 +7,8 @@ Page({
 	 */
 	data: {
 		listArr:[],
-		tipdata:{}
+		tipdata:{},
+		thislistData:{}
 	},
 
 	initList:function (){
@@ -55,6 +56,15 @@ Page({
 			url: '../../pages/published/recruit/list',
 		})
 	},
+	goexposure:function() {
+		let topdata = this.data.thislistData; //当前数据
+		let isCheck = topdata.is_check;//用户审核状态
+		// let id = this.thislistData.currentTarget.dataset.id;
+    // let time = this.thislistData.currentTarget.dataset.time
+    wx.navigateTo({
+			url: `/pages/workingtopAll/workingtop/workingtop?id=${topdata.job_id}&topId=undefined&city_id=${topdata.area_id}&province_id=${topdata.province_id}&ischeck=${isCheck}`,
+		})
+	},
 
 	/**
 	 * 生命周期函数--监听页面加载
@@ -63,7 +73,9 @@ Page({
 		this.setData({
 			tipdata:JSON.parse(options.tipdata)
 		})
-		debugger
+		this.setData({
+			thislistData:JSON.parse(options.listdata)
+		})
 		this.initList()
 	},
 

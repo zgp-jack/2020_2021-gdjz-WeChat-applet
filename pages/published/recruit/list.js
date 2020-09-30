@@ -323,7 +323,8 @@ Page({
           let newlist = mydata.data.lists
           let page = _this.data.page
           let len = newlist.length
-          if(options.tip_data){
+          if(options){
+            if(options.tip_data){
             let option = JSON.parse(options.tip_data)
             if(option.job_id){
               for(let i = 0;i<newlist.length;i++) {
@@ -341,6 +342,8 @@ Page({
               }
             }
           }
+          }
+          
           _this.setData({
             lists: lists.concat(newlist),
             hasmore: len ? true : false,
