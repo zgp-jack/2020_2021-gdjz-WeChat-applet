@@ -54,7 +54,7 @@
         </input>
     </view>
     
-    <view class="daynumone" wx:if="{{topId == 'undefined'}}">
+    <view class="daynumone" wx:if="{{topId == 'undefined' && isCheck !== '1'}}">
       <text class="endtime">置顶到期时间</text>
         <input class="end bluet" disabled="false"  value="{{firstEndTime}}">
         </input>
@@ -89,3 +89,5 @@
   <button class='userauth-btn userauth-sure-btn' open-type="getUserInfo" bindgetuserinfo='bindGetUserInfo'>微信授权登录</button>
   <button class='userauth-btn  userauth-back-btn' bindtap='returnPrevPage'>返回上一页</button>
 </view> -->
+<!-- 置顶成功弹窗 -->
+<dataintip id="tip" wx:if="{{successData}}" successData="{{successData}}"></dataintip>

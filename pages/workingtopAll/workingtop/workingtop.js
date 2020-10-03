@@ -58,7 +58,9 @@ Page({
     // 是否审核状态
     isCheck: 0,
     // config请求返回的置顶可选天数
-    reqDays:[]
+    reqDays:[],
+    //置顶成功后的数据
+    successData:""
   },
 
   jumpstickyrule() {
@@ -359,16 +361,22 @@ Page({
           })
           return
         }else if(mydata.errcode == "checking_top"){
-          wx.showModal({
-            title: '温馨提示',
-            content: res.data.errmsg,
-            showCancel: false,
-            success(res) {
-              wx.navigateBack({
-                delta: 1
-              })
-            }
+          //预约置顶成功
+          that.setData({
+            successData:mydata
           })
+          that.selectComponent("#tip").show();
+
+          // wx.showModal({
+          //   title: '温馨提示',
+          //   content: res.data.errmsg,
+          //   showCancel: false,
+          //   success(res) {
+          //     wx.navigateBack({
+          //       delta: 1
+          //     })
+          //   }
+          // })
         }else {
           wx.showModal({
             title: '温馨提示',
@@ -1031,7 +1039,6 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-
     // this.authrasution()
     this.getdetail(options)
     this.getAreaData(options)

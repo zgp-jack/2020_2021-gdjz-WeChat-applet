@@ -1,3 +1,6 @@
 {
-  "navigationBarTitleText": "招工置顶"
+  "navigationBarTitleText": "招工置顶",
+  "usingComponents": {
+    "dataintip":"/components/detaintip/detaintip"
+  }
 }

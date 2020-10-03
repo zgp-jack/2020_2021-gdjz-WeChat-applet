@@ -62,7 +62,7 @@ Page({
 		// let id = this.thislistData.currentTarget.dataset.id;
     // let time = this.thislistData.currentTarget.dataset.time
     wx.navigateTo({
-			url: `/pages/workingtopAll/workingtop/workingtop?id=${topdata.job_id}&topId=undefined&city_id=${topdata.area_id}&province_id=${topdata.province_id}&ischeck=${isCheck}`,
+			url: `/pages/workingtopAll/workingtop/workingtop?id=${topdata.id}&topId=undefined&city_id=${topdata.area_id}&province_id=${topdata.province_id}&ischeck=${isCheck}`,
 		})
 	},
 

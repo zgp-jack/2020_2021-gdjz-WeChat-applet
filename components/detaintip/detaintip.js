@@ -5,10 +5,26 @@ Component({
    * 组件的属性列表
    */
   properties: {
-    tipdata: Object,
-    thisLstData: Object,
-    ConfigData: Object,
-    tipstr:Array,
+    tipdata: {
+      type:Object,
+      value:null
+    },
+    thisLstData:  {
+      type:Object,
+      value:null
+    },
+    ConfigData:  {
+      type:Object,
+      value:null
+    },
+    tipstr: {
+      type:Array,
+      value:null
+    },
+    successData:{
+      type:Object,
+      value:null
+    }
   },
   /**
    * 组件的初始数据
@@ -33,9 +49,11 @@ Component({
       })
     },
     comfirm:function () {
-      let topdata = this.properties.thisLstData; //当前数据
-      let isCheck = topdata.is_check;//用户审核状态
       this.show()
+      // 是否是置顶成功
+      if(!this.properties.successData){
+        let topdata = this.properties.thisLstData; //当前数据
+        let isCheck = topdata.is_check;//用户审核状态
         //去增加曝光率
         if(this.properties.tipdata.tip_type == "day_first"){
           wx.navigateTo({
@@ -48,14 +66,28 @@ Component({
         }else{
           //去发布
           wx.redirectTo({
-            url: '../../pages/fast/issue/index',
+            url: '/pages/fast/issue/index',
           })
+        }
+      }else {
+        //去招工列表
+        wx.redirectTo({
+          url: '/pages/published/recruit/list',
+        })
       }
+       
     },
     close:function () {
-      let tipdata = this.properties.tipdata
-      if(tipdata.tip_type == "day_first"){
-        this.notip();
+      if(!this.properties.successData){
+        let tipdata = this.properties.tipdata
+        if(tipdata.tip_type == "day_first"){
+          this.notip();
+        }
+      }else{
+         //去找活列表
+         wx.redirectTo({
+          url: '/pages/clients-looking-for-work/finding-name-card/findingnamecard',
+        })
       }
       this.show()
     },
@@ -67,8 +99,8 @@ Component({
     },
   },
   ready:function() {
-    let tipdata = this.properties.tipdata
-    if(tipdata){
+    if(this.properties.tipdata){
+      let tipdata = this.properties.tipdata
       //当日第一次发布
       if(tipdata.tip_type == "day_first") {
         this.setData({
@@ -83,6 +115,13 @@ Component({
           "buttontext.comfirm":"去发布",
         })
       }
+    }
+    //如果是置顶成功
+    if(this.properties.successData) {
+      this.setData({
+        "buttontext.close":"查看人工简历",
+        "buttontext.comfirm":"管理招工信息",
+      })
     }
   }
 })
