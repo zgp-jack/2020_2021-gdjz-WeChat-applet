@@ -2,11 +2,12 @@
   <view class="issueok-box">
     <view class="issueok-title">提示</view>
     <view class="issueok-body">
-      <text wx:for="{{payreleasetip}}" wx:key="{{index}}" style="color:{{item.color ? item.color:''}}">{{item.text}}</text>
+      <text wx:for="{{payreleasetip}}" wx:if="{{payreleasetip.length}}" wx:key="{{index}}" style="color:{{item.color ? item.color:''}}">{{item.text}}</text>
+      <text wx:for="{{dayMax}}" wx:if="{{dayMax}}" wx:key="{{index}}" style="color:{{item.color ? item.color:''}}">{{item.text}}</text>
     </view>
     <view class="issueok-footer">
-      <button class="issueok-btn" bindtap="close">{{buttontext.close}}</button>
-      <button class="issueok-btn" bindtap="comfirm">{{buttontext.comfirm}}</button>
+      <button class="issueok-btn" wx:if="{{payreleasetip.length}}" bindtap="close">{{buttontext.close}}</button>
+      <button class="issueok-btn" bindtap="comfirm">{{dayMax.length?"确定":buttontext.comfirm}}</button>
     </view>
   </view>
 </view>

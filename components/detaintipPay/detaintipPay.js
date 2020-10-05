@@ -12,6 +12,14 @@ Component({
     payreleasetip:{
       type:Array,
       value:[]
+    },
+    dayMaxData:{
+      type:Object,
+      value:false
+    },
+    dayMax:{
+      type:Array,
+      value:[]
     }
   },
   /**
@@ -43,6 +51,5 @@ Component({
     },
   },
   ready:function() {
-    
   }
 })

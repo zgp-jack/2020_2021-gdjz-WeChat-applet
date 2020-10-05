@@ -137,7 +137,7 @@ Page({
                         success:function (res) {
                           if(res.data.errcode == "ok"){
                             let tip_data = JSON.stringify(mydata.data)
-                            wx.redirectTo({
+                            wx.reLaunch({
                               url: '../../published/recruit/list?tip_data='+tip_data,
                             })
                           }else{
@@ -224,7 +224,7 @@ Page({
                         // })
                         //已授权 登陆跳转
                         let tip_data = JSON.stringify(mydata.data)
-                        wx.redirectTo({
+                        wx.reLaunch({
                           url: '../../published/recruit/list?tip_data='+tip_data,
                         })
                       }else{

@@ -52,7 +52,7 @@ Page({
 	},
 	//跳转招工列表
 	goRecruitList() {
-		wx.redirectTo({
+		wx.reLaunch({
 			url: '../../pages/published/recruit/list',
 		})
 	},

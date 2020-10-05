@@ -56,7 +56,7 @@ Page({
                 let mydata = res.data;
                 if (mydata.errcode == "ok") {
                   let tip_data = JSON.stringify(mydata.data)
-                  wx.redirectTo({
+                  wx.reLaunch({
                     url: '../../published/recruit/list?tip_data='+tip_data,
                   })
                 }else{

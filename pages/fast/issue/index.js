@@ -17,7 +17,8 @@ Page({
     isRule:true,
     imageUrl: app.globalData.apiImgUrl +"new-publish-title-t-icon.png",
     issueData:{},
-    payreleasetip:""
+    payreleasetip:"",
+    dayMax:{}//每日最多发n条提示
   },
   checkType: function (obj, _type) {
     var _re = Object.prototype.toString.call(obj).slice(8, -1).toLowerCase();
@@ -257,19 +258,44 @@ Page({
           that.setData({
             payreleasetip:str
           })
-
-
           that.setData({
             issueData:res.data.data
           })
           that.selectComponent("#tips").show();
         }
         if (res.data.errcode !== "unusable" && res.data.errcode !== "ok" && res.data.errcode !== "paid_issue") {
-          wx.showModal({
-            title: '提示',
-            content: res.data.errmsg,
-            showCancel: false,
-          })
+          if(res.data.data && res.data.errcode == "fail"){
+            //每日最多发n条提示
+            let text = res.data.data.text
+            let rules = res.data.data.rules
+            let fristtext = text.substring(rules[0].start,0)
+            let nt = text.substring((rules[0].start+rules[0].length),rules[0].start)
+            let lasttext = text.substring(text.length,(rules[0].start+rules[0].length))
+            let str = []
+            str.push({
+              text:fristtext
+            })
+            str.push({
+              text:nt,
+              color:rules[0].value
+            })
+            str.push({
+              text:lasttext
+            })
+            that.setData({
+              dayMaxData:res.data.data
+            })
+            that.setData({
+              dayMax:str
+            })
+            that.selectComponent("#tips").show();
+          }else{
+            wx.showModal({
+              title: '提示',
+              content: res.data.errmsg,
+              showCancel: false,
+            })
+          }
         }
       }
     })
