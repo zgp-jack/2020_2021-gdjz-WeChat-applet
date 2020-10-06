@@ -189,7 +189,7 @@
 
     <view class='common-nodatabox flex-column lists-nodata' wx:if="{{ showNothinkData }}">
       <image src='{{ listsImg.nodata }}'></image>
-      <text class="no-data-text">没有找到您想要的内容，您可以换哥内容搜索</text>
+      <text class="no-data-text">没有找到您想要的内容，您可以换个内容搜索</text>
       <block  wx:if="{{isNullStatus == 2}}">
         <text class="btn-tips-text">置顶招工，让更多工人看到你的招工信息～</text>
         <text bindtap="goRecruit" class="text-btn">去置顶</text>

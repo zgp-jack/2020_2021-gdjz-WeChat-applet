@@ -47,8 +47,10 @@ Component({
       })
     },
     comfirm:function (e) {
-      let issue = 1
-      this.triggerEvent('mycomfirm',issue)
+      if(this.properties.payreleasetip.length) {
+        let issue = 1
+        this.triggerEvent('mycomfirm',issue)
+      }
       this.show()
       if(this.properties.tipstr.length){
         wx.redirectTo({

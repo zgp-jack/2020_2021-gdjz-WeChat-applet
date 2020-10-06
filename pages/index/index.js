@@ -1057,7 +1057,21 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    this.initUserLocation();
+
+    let pages = getCurrentPages();
+    let index = pages.length - 1
+    let path = pages[index].__displayReporter.showReferpagepath
+    path = path.slice(0, -5)
+    //如果置顶或者发布回来 需要刷新数据
+    if(path == "pages/clients-looking-for-work/finding-name-card/findingnamecard"){
+      this.returnTop();
+      this.setData({
+        "searchDate.page": 1,
+        showHistoryList: false
+      })
+      this.doRequestAction(false)
+    }
+  
     this.getUserUuid();
     this.initUserinfo();
     footerjs.initMsgNum(this);

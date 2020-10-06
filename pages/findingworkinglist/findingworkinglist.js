@@ -976,13 +976,35 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
+    let pages = getCurrentPages();
+    let index = pages.length - 1
+    let path = pages[index].__displayReporter.showReferpagepath
+    path = path.slice(0, -5)
+    //如果置顶或者发布回来 需要刷新数据
+    if(path == "pages/published/recruit/list" || path == "pages/issue/index/index"){
+      this.returnTop();
+      this.setData({
+        "searchDate.page": 1,
+        showHistoryList: false,
+        hasSortFlag:1,
+        hasTime: 1,
+        hasTop: 1,
+        lastSortFlagPos: 0,
+        lastTimePos: 0,
+        lastNormalPos: 0
+      })
+      this.doRequestAction(false)
+    }
+
+
+
+
     let userInfo = wx.getStorageSync("userInfo");
     if (userInfo) {
       this.setData({
         userInfo: userInfo
       })
     }
-    this.valiFilterProvince();
     footerjs.initMsgNum(this);
     app.initResume(this)
     this.initPageData()

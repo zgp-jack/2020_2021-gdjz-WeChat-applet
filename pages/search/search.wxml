@@ -22,7 +22,7 @@
     <view class="search-button" bindtap="clickSearch">搜索</view>
   </view>
   <view class="history-search">
-    <view class="history-search-title-box">
+    <view class="history-search-title-box" wx:if="{{(changeStatus == 0 && historySearch.historyList.length > 0) || (changeStatus == 1 && historySearchGr.historyList.length > 0)}}">
       <view class="title">{{ historySearch.title }}</view>
       <image src="../../images/laji.png" bindtap="deleteHistorySearch"></image>
     </view>
@@ -35,7 +35,7 @@
       </block>
     </view>
   </view>
-  <view class="history-search">
+  <view class="history-search" wx:if="{{hotSearch.hotList.length > 0}}">
     <view class="history-search-title-box">
       <view class="title">{{ hotSearch.title }}</view>
     </view>
