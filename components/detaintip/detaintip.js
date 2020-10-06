@@ -119,7 +119,7 @@ Component({
     //如果是置顶成功
     if(this.properties.successData) {
       this.setData({
-        "buttontext.close":"查看人工人简历",
+        "buttontext.close":"查看工人简历",
         "buttontext.comfirm":"管理招工信息",
       })
     }

@@ -17,8 +17,9 @@ Page({
     isRule:true,
     imageUrl: app.globalData.apiImgUrl +"new-publish-title-t-icon.png",
     issueData:{},
-    payreleasetip:"",
-    dayMax:{}//每日最多发n条提示
+    payreleasetip:null,
+    dayMax:null,//每日最多发n条提示
+    tipstr:null
   },
   checkType: function (obj, _type) {
     var _re = Object.prototype.toString.call(obj).slice(8, -1).toLowerCase();
@@ -290,11 +291,51 @@ Page({
             })
             that.selectComponent("#tips").show();
           }else{
-            wx.showModal({
-              title: '提示',
-              content: res.data.errmsg,
-              showCancel: false,
+            if(res.data.errcode == 'integral_lack'){
+              //拼接提示文字 颜色
+            let text = res.data.data.text
+            let rules = res.data.data.rules
+            let texts = []
+            for (let i = 0; i < rules.length; i++) {
+              if (i === 0) {
+                texts.push({text:text.substring(i,rules[i].start)})
+              } else {
+                texts.push({text:text.substring(rules[i-1].start + rules[i-1].length,rules[i].start)})
+              }
+              texts.push({
+                text:text.substring(rules[i].start,rules[i].start + rules[i].length),
+                color: rules[i].type,
+                value:rules[i].value
+              })
+              if (i === rules.length-1) {
+                texts.push({text:text.substring(rules[i].start + rules[i].length)})
+              }
+            }
+            that.setData({
+              tipstr:texts
             })
+            that.selectComponent("#tips").show();
+
+              // wx.showModal({
+              //   title: '提示',
+              //   content: res.data.errmsg,
+              //   cancelText:"取消",
+              //   confirmText:"获取积分",
+              //   success:function (res) {
+              //     if(res.confirm) {
+              //       wx.redirectTo({
+              //         url: '/pages/recharge/recharge',
+              //       })
+              //     }
+              //   }
+              // })
+            }else{
+              wx.showModal({
+                title: '提示',
+                content: res.data.errmsg,
+                showCancel: false,
+              })
+            }
           }
         }
       }

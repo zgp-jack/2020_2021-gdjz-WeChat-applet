@@ -110,7 +110,7 @@ Page({
             let mydata = res.data;
             if (mydata.errcode == "ok") {
                 wx.redirectTo({
-                  url: '/pages/fast/area/area?token=' + token,
+                  url: '/pages/fast/area/area?token=' + token
                 })
             }else{
               app.showMyTips(mydata.errmsg);

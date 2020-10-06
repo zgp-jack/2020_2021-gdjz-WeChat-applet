@@ -2,12 +2,16 @@
   <view class="issueok-box">
     <view class="issueok-title">提示</view>
     <view class="issueok-body">
-      <text wx:for="{{payreleasetip}}" wx:if="{{payreleasetip.length}}" wx:key="{{index}}" style="color:{{item.color ? item.color:''}}">{{item.text}}</text>
-      <text wx:for="{{dayMax}}" wx:if="{{dayMax}}" wx:key="{{index}}" style="color:{{item.color ? item.color:''}}">{{item.text}}</text>
+      <text wx:for="{{payreleasetip}}" wx:if="{{payreleasetip}}" wx:key="index" style="color:{{item.color ? item.color:''}}">{{item.text}}</text>
+      <text wx:for="{{dayMax}}" wx:if="{{dayMax}}" wx:key="index" style="color:{{item.color ? item.color:''}}">{{item.text}}</text>
+      <text wx:for="{{tipstr}}" wx:if="{{tipstr}}" wx:key="index" style="color:{{item.value ? item.value:''}}">{{item.text}}</text>
     </view>
     <view class="issueok-footer">
       <button class="issueok-btn" wx:if="{{payreleasetip.length}}" bindtap="close">{{buttontext.close}}</button>
-      <button class="issueok-btn" bindtap="comfirm">{{dayMax.length?"确定":buttontext.comfirm}}</button>
+      <button class="issueok-btn" wx:if="{{payreleasetip.length}}" bindtap="comfirm">{{buttontext.comfirm}}</button>
+      <button class="issueok-btn" wx:if="{{dayMax.length}}" bindtap="comfirm">确定</button>
+      <button class="issueok-btn" wx:if="{{tipstr.length}}" bindtap="comfirm">取消</button>
+      <button class="issueok-btn" wx:if="{{tipstr.length}}" bindtap="comfirm">获取积分</button>
     </view>
   </view>
 </view>

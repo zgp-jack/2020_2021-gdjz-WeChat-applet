@@ -11,7 +11,7 @@ Component({
     },
     payreleasetip:{
       type:Array,
-      value:[]
+      value:null
     },
     dayMaxData:{
       type:Object,
@@ -19,7 +19,11 @@ Component({
     },
     dayMax:{
       type:Array,
-      value:[]
+      value:null
+    },
+    tipstr:{
+      type:Array,
+      value:null
     }
   },
   /**
@@ -29,7 +33,7 @@ Component({
     show: false,
     userInfo: false,
     buttontext:{
-      "close":"取消发布",
+      "close":"不了，谢谢",
       "comfirm":"确认发布"
     }
   },
@@ -45,9 +49,29 @@ Component({
     comfirm:function (e) {
       let issue = 1
       this.triggerEvent('mycomfirm',issue)
+      this.show()
+      if(this.properties.tipstr.length){
+        wx.redirectTo({
+          url: '/pages/getintegral/getintegral',
+        })
+      }
+      this.setData({
+        tipdata : null,
+        payreleasetip: null,
+        dayMaxData:null,
+        dayMax:null,
+        tipstr:null
+      })
     },
     close:function () {
       this.show()
+      this.setData({
+        tipdata : null,
+        payreleasetip: null,
+        dayMaxData:null,
+        dayMax:null,
+        tipstr:null
+      })
     },
   },
   ready:function() {

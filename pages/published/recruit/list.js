@@ -470,6 +470,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    this.getAreaData()
     //需判断是否是首次进入 ！！！重复请求
     if(this.data.isfrist){
       this.pageRefresh(options)  
@@ -486,9 +487,7 @@ Page({
       })
       //用户第一次发布
       if(tipdata.tip_type == "member_first"){
-        // wx.navigateTo({
-        //   url: `../../../pages/releaseSuccess/releaseSuccess?tipdata='${options.tip_data}'?listdata='${thisListData}'`,
-        // })
+
       }else if(tipdata.tip_type == "day_last"){
         //最后一次发布 请求配置
         this.gitConfig()

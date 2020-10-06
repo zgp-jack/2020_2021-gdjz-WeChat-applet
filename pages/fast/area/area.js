@@ -136,7 +136,7 @@ Page({
                         },
                         success:function (res) {
                           if(res.data.errcode == "ok"){
-                            let tip_data = JSON.stringify(mydata.data)
+                            let tip_data = JSON.stringify(res.data.data)
                             wx.reLaunch({
                               url: '../../published/recruit/list?tip_data='+tip_data,
                             })
@@ -223,7 +223,7 @@ Page({
                         //   url: '/pages/fast/tips/tips?token='+token,
                         // })
                         //已授权 登陆跳转
-                        let tip_data = JSON.stringify(mydata.data)
+                        let tip_data = JSON.stringify(res.data.data)
                         wx.reLaunch({
                           url: '../../published/recruit/list?tip_data='+tip_data,
                         })
@@ -384,7 +384,7 @@ Page({
           let mydata = res.data;
           if (mydata.errcode == "ok") {
             wx.redirectTo({
-              url: '/pages/fast/tips/tips?token=' + token,
+              url: '/pages/fast/tips/tips?token=' + token+'&id='+that.data.thisDataId,
             })
             //发布成功后，清除缓存数据中的detail、rulesClassifyids、userClassifyids、imgs、phone
             let jiSuData = wx.getStorageSync('jiSuData')

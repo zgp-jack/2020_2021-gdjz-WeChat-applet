@@ -8,7 +8,7 @@ Page({
   data: {
     token:"",
     userInfo: false,
-    icon: app.globalData.apiImgUrl + 'mini-fast-success-icon.png'
+    icon: app.globalData.apiImgUrl + 'mini-fast-success-icon.png',
   },
   goToResumeList:function(){
     wx.reLaunch({
@@ -56,9 +56,9 @@ Page({
                 let mydata = res.data;
                 if (mydata.errcode == "ok") {
                   let tip_data = JSON.stringify(mydata.data)
-                  wx.reLaunch({
-                    url: '../../published/recruit/list?tip_data='+tip_data,
-                  })
+                    wx.reLaunch({
+                      url: '../../published/recruit/list?tip_data='+tip_data,
+                    })
                 }else{
                   app.showMyTips(mydata.errmsg);
                   }}
