@@ -327,6 +327,7 @@ Page({
             if(options.tip_data){
             let option = JSON.parse(options.tip_data)
             if(option.job_id){
+              //找出当前发布的那一条数据
               for(let i = 0;i<newlist.length;i++) {
                 if(newlist[i].id == option.job_id){
                   _this.setData({
@@ -334,8 +335,10 @@ Page({
                   })
                 }
               }
+              //用户第一次发布
               if(option.tip_type == "member_first"){
                 let listdata = JSON.stringify(_this.data.thisListData)
+                //跳转营销页面
                 wx.navigateTo({
                   url: `../../../pages/releaseSuccess/releaseSuccess?tipdata=${options.tip_data}&listdata=${listdata}`,
                 })
@@ -343,7 +346,6 @@ Page({
             }
           }
           }
-          
           _this.setData({
             lists: lists.concat(newlist),
             hasmore: len ? true : false,
@@ -436,7 +438,6 @@ Page({
             _this.setData({
               ConfigData:res.data.data
             })
-
             //拼接提示文字 颜色
             let text = res.data.data.tips.text
             let rules = res.data.data.tips.rules
@@ -485,12 +486,10 @@ Page({
       this.setData({
         tipdata:tipdata
       })
-      //用户第一次发布
-      if(tipdata.tip_type == "member_first"){
-
-      }else if(tipdata.tip_type == "day_last"){
+      if(tipdata.tip_type == "day_last"){
         //最后一次发布 请求配置
         this.gitConfig()
+        //调用弹窗显示方法
         this.selectComponent("#tip").show();
       }else if(tipdata.tip_type == "day_first") {
         this.selectComponent("#tip").show();

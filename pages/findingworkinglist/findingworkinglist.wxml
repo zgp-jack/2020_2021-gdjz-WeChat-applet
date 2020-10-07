@@ -191,16 +191,14 @@
       <image src='{{ listsImg.nodata }}'></image>
       <text class="no-data-text">没有找到您想要的内容，您可以换个内容搜索</text>
       <block  wx:if="{{isNullStatus == 2}}">
-        <text class="btn-tips-text">置顶招工，让更多工人看到你的招工信息～</text>
+        <text class="btn-tips-text">还可以置顶招工，让更多工人看到你的招工信息～</text>
         <text bindtap="goRecruit" class="text-btn">去置顶</text>
       </block>
       
       <block wx:if="{{isNullStatus == 1}}">
-        <text class="btn-tips-text">发布招工，让工人主动来找我～</text>
+        <text class="btn-tips-text">还可以发布招工，让工人主动来找我～</text>
         <text bindtap='publishJob' class="text-btn">去发布</text>
       </block>
-      
-
     </view>
   </view>
 

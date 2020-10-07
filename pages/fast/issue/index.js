@@ -227,37 +227,28 @@ Page({
             }
           })
         }
-        //付费发布
+        //付费发布 需要付费才能发布的提示
         if(res.data.errcode == "paid_issue") {
-          //提示信息拼接 颜色
           let text = res.data.data.text
           let rules = res.data.data.rules
-          let frist = text.substring(rules[0].start,0)
-          let nt = text.substring((rules[0].start+rules[0].length),rules[0].start)
-          let mindtext = text.substring(rules[1].start,(rules[0].start+rules[0].length))
-          let jf = text.substring((rules[1].start+rules[1].length),rules[1].start)
-          let lasttext = text.substring(text.length,(rules[1].start+rules[1].length))
-
-          let str = []
-          str.push({
-            text:frist
-          })
-          str.push({
-            text:nt,
-            color:rules[0].value,
-          })
-          str.push({
-            text:mindtext
-          })
-          str.push({
-            text:jf,
-            color:rules[1].value,
-          })
-          str.push({
-            text:lasttext
-          })
+          let texts = []
+          for (let i = 0; i < rules.length; i++) {
+            if (i === 0) {
+              texts.push({text:text.substring(i,rules[i].start)})
+            } else {
+              texts.push({text:text.substring(rules[i-1].start + rules[i-1].length,rules[i].start)})
+            }
+            texts.push({
+              text:text.substring(rules[i].start,rules[i].start + rules[i].length),
+              color: rules[i].type,
+              value:rules[i].value
+            })
+            if (i === rules.length-1) {
+              texts.push({text:text.substring(rules[i].start + rules[i].length)})
+            }
+          }
           that.setData({
-            payreleasetip:str
+            payreleasetip:texts
           })
           that.setData({
             issueData:res.data.data
@@ -265,29 +256,31 @@ Page({
           that.selectComponent("#tips").show();
         }
         if (res.data.errcode !== "unusable" && res.data.errcode !== "ok" && res.data.errcode !== "paid_issue") {
+          //当日最发布大次数提示
           if(res.data.data && res.data.errcode == "fail"){
-            //每日最多发n条提示
             let text = res.data.data.text
             let rules = res.data.data.rules
-            let fristtext = text.substring(rules[0].start,0)
-            let nt = text.substring((rules[0].start+rules[0].length),rules[0].start)
-            let lasttext = text.substring(text.length,(rules[0].start+rules[0].length))
-            let str = []
-            str.push({
-              text:fristtext
-            })
-            str.push({
-              text:nt,
-              color:rules[0].value
-            })
-            str.push({
-              text:lasttext
-            })
+            let texts = []
+            for (let i = 0; i < rules.length; i++) {
+              if (i === 0) {
+                texts.push({text:text.substring(i,rules[i].start)})
+              } else {
+                texts.push({text:text.substring(rules[i-1].start + rules[i-1].length,rules[i].start)})
+              }
+              texts.push({
+                text:text.substring(rules[i].start,rules[i].start + rules[i].length),
+                color: rules[i].type,
+                value:rules[i].value
+              })
+              if (i === rules.length-1) {
+                texts.push({text:text.substring(rules[i].start + rules[i].length)})
+              }
+            }
             that.setData({
               dayMaxData:res.data.data
             })
             that.setData({
-              dayMax:str
+              dayMax:texts
             })
             that.selectComponent("#tips").show();
           }else{
@@ -315,20 +308,6 @@ Page({
               tipstr:texts
             })
             that.selectComponent("#tips").show();
-
-              // wx.showModal({
-              //   title: '提示',
-              //   content: res.data.errmsg,
-              //   cancelText:"取消",
-              //   confirmText:"获取积分",
-              //   success:function (res) {
-              //     if(res.confirm) {
-              //       wx.redirectTo({
-              //         url: '/pages/recharge/recharge',
-              //       })
-              //     }
-              //   }
-              // })
             }else{
               wx.showModal({
                 title: '提示',

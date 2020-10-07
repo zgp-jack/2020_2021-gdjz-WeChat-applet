@@ -167,7 +167,6 @@ Page({
           })
         } else {
           /**获取encryptdata **/
-          console.log("我打印了2")
           that.api_user(session_key,(res) =>{
             let uinfo = res.data;
             if (uinfo.errcode == "ok") {

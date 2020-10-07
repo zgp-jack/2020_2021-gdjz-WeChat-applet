@@ -2,8 +2,8 @@
   <view class="issueok-box">
     <view class="issueok-title">提示</view>
     <view class="issueok-body">
-      <text wx:for="{{payreleasetip}}" wx:if="{{payreleasetip}}" wx:key="index" style="color:{{item.color ? item.color:''}}">{{item.text}}</text>
-      <text wx:for="{{dayMax}}" wx:if="{{dayMax}}" wx:key="index" style="color:{{item.color ? item.color:''}}">{{item.text}}</text>
+      <text wx:for="{{payreleasetip}}" wx:if="{{payreleasetip}}" wx:key="index" style="color:{{item.color ? item.value:''}}">{{item.text}}</text>
+      <text wx:for="{{dayMax}}" wx:if="{{dayMax}}" wx:key="index" style="color:{{item.color ? item.value:''}}">{{item.text}}</text>
       <text wx:for="{{tipstr}}" wx:if="{{tipstr}}" wx:key="index" style="color:{{item.value ? item.value:''}}">{{item.text}}</text>
     </view>
     <view class="issueok-footer">

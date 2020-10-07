@@ -64,7 +64,7 @@ page {
 	height: 420rpx;
 	background: #FFFFFF;
 	box-shadow: 0px 10px 18px 0px rgba(0, 153, 255, 0.15);
-	border-radius: 0px 0px 20px 20px;
+	border-radius: 0px 0px 10px 10px;
 	/* box-shadow: inset 0px 20px 13px -12px rgba(0, 153, 255, 0.53); */
 	padding: 50rpx 30rpx;
 }
@@ -89,6 +89,7 @@ page {
 	left: 50%;
 	margin-left: -115rpx;
 	top: -25rpx;
+	line-height: 40rpx;
 }
 .swiper-box {
 	width: 100%;
@@ -100,5 +101,5 @@ page {
 	font-size: 32rpx;
 	line-height: 65rpx;
 	color: #0099FF;
-	text-align: center;
+	text-align: left;
 }

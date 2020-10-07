@@ -31,10 +31,10 @@ Page({
       }],
     //搜索图标icon地址 
     searchIcon: app.globalData.apiImgUrl + 'yc/helpCenter-search.png',
+    delImg: app.globalData.apiImgUrl + "new-published-close-icon.png",
     changeStatus: 0,
     inputTetx: "",
     focusInput: false,
-    delImg: app.globalData.apiImgUrl + "new-published-close-icon.png",
     //进入搜索页面之前搜索的内容
     indexKey: "",
     //从那个页面进入的搜索页面

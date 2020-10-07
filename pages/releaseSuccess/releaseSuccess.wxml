@@ -1,6 +1,6 @@
 <!--pages/releaseSuccess/releaseSuccess.wxml-->
 <view>
-	<image class="releasesuccessicon" src="../../images/releasesuccessicon.png"></image>
+	<image class="releasesuccessicon" src="{{successImg}}"></image>
 	<text class="tips-text">{{tipdata.top_tips.text}}</text>
 	<view class="btn-box">
 		<button bindtap="goRecruitList">管理招工信息</button>

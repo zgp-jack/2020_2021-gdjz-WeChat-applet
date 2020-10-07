@@ -1,4 +1,5 @@
 let _city = require("../../utils/city")
+const app = getApp()
 // pages/releaseSuccess.js
 Page({
 
@@ -8,7 +9,8 @@ Page({
 	data: {
 		listArr:[],
 		tipdata:{},
-		thislistData:{}
+		thislistData:{},
+		successImg:app.globalData.apiImgUrl + "publish-recruit-success-marketing.png"
 	},
 
 	initList:function (){
