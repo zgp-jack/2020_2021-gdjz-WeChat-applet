@@ -13,7 +13,7 @@
   <view class='usersearchhistory'>
     <view class='usersearchhistory-item usersearchhistory-item-title'>历史记录</view>
     <view class='usersearchhistory-box'>
-      <view class='usersearchhistory-item overwords' wx:for="{{ historyList }}" wx:key="{{ index }}" catchtap='searchThisWords' data-text='{{ item }}'>{{ item }}</view>
+      <view class='usersearchhistory-item overwords' wx:for="{{ historyList }}" wx:key="index" catchtap='searchThisWords' data-text='{{ item }}'>{{ item }}</view>
     </view>
     <view class='usersearchhistory-footer'>
       <view bindtap='clearHistory'>清空历史记录</view>
@@ -50,31 +50,31 @@
 
 
   <view class='user-choose-item {{ (showListsInfo == "1") ? "user-choose-item-active" : "" }}' wx:if="{{ showListsInfo == '1' }}">
-    <view class='filtrate-list-item mybottomborder overwords {{ (province == index) ? "filtrate-list-active" : "" }}' wx:for="{{ fillterArea }}" wx:key="{{ index }}" bindtouchstart="touchStart" bindtouchend="touchEnd" catchtap='userChooseProvince' data-haschild="{{ item.has_children }}" data-index="{{ index }}"
+    <view class='filtrate-list-item mybottomborder overwords {{ (province == index) ? "filtrate-list-active" : "" }}' wx:for="{{ fillterArea }}" wx:key="index" bindtouchstart="touchStart" bindtouchend="touchEnd" catchtap='userChooseProvince' data-haschild="{{ item.has_children }}" data-index="{{ index }}"
       data-id='{{ item.id }}' data-area="{{ item.name }}" data-pname="{{ item.ad_name }}">
       <text>{{ item.name }}</text>
                  <view class='filtrate-item-lists {{ (province == index) ? "filtrate-item-lists-active" : "" }}' wx:if="{{ item.has_children }}">
-                <view class='filtrate-item-info mybottomborder overwords {{ (userCity == item.id) ? "filtrate-item-info-active" : "" }}' wx:for="{{ item.children }}" wx:key="{{ index }}" catchtap='userChooseCity' data-id="{{ item.id }}"   data-area="{{ item.name }}">{{ item.name }}</view>
+                <view class='filtrate-item-info mybottomborder overwords {{ (userCity == item.id) ? "filtrate-item-info-active" : "" }}' wx:for="{{ item.children }}" wx:key="index" catchtap='userChooseCity' data-id="{{ item.id }}"   data-area="{{ item.name }}">{{ item.name }}</view>
             </view>
     </view>
   </view>
 
   <view class='user-choose-item {{ (showListsInfo == "2") ? "user-choose-item-active" : "" }}' wx:if="{{ showListsInfo == '2' }}">
-    <view class='filtrate-list-item mybottomborder overwords {{ (worktype == index) ? "filtrate-list-active" : "" }}' wx:for="{{ fillterType }}" wx:key="{{ index }}" catchtap='userChooseWorktype' data-index="{{ index }}" bindtouchstart="touchStart" bindtouchend="touchEnd"
+    <view class='filtrate-list-item mybottomborder overwords {{ (worktype == index) ? "filtrate-list-active" : "" }}' wx:for="{{ fillterType }}" wx:key="index" catchtap='userChooseWorktype' data-index="{{ index }}" bindtouchstart="touchStart" bindtouchend="touchEnd"
       data-id='{{ item.id }}' data-haschild="{{ item.has_children }}" data-type="{{ item.name }}">
       <text>{{ item.name }}</text>
       <view class='filtrate-item-lists {{ (worktype == index) ? "filtrate-item-lists-active" : "" }}' wx:if="{{ item.has_children }}">
-        <view class='filtrate-item-info mybottomborder overwords {{ (workinfo == item.id) ? "filtrate-item-info-active" : "" }}' wx:for="{{ item.children }}" wx:key="{{ index }}" wx:for-index="cindex" catchtap='userChooseWorkinfo' data-id="{{ item.id }}" data-type="{{ (cindex == 0) ? fillterType[index].name : item.name }}">{{ item.name }}</view>
+        <view class='filtrate-item-info mybottomborder overwords {{ (workinfo == item.id) ? "filtrate-item-info-active" : "" }}' wx:for="{{ item.children }}" wx:key="index" wx:for-index="cindex" catchtap='userChooseWorkinfo' data-id="{{ item.id }}" data-type="{{ (cindex == 0) ? fillterType[index].name : item.name }}">{{ item.name }}</view>
       </view>
     </view>
   </view>
   <view class='user-choose-item {{ (showListsInfo == "3") ? "user-choose-item-active" : "" }}' wx:if="{{ showListsInfo == '3' }}" catchtap='stopThisAction'>
-    <view class='filtrate-list-item mybottomborder overwords {{ ( teamindex == index) ? "filtrate-list-active" : "" }}' wx:for="{{ fillterTeam }}" wx:key="{{ index }}" catchtap='userChooseTeam' data-index="{{ index }}" data-id='{{ item.id }}' data-team="{{ item.name }}">
+    <view class='filtrate-list-item mybottomborder overwords {{ ( teamindex == index) ? "filtrate-list-active" : "" }}' wx:for="{{ fillterTeam }}" wx:key="index" catchtap='userChooseTeam' data-index="{{ index }}" data-id='{{ item.id }}' data-team="{{ item.name }}">
       <text>{{ item.name }}</text>
     </view>
   </view>
   <view class='user-choose-item {{ (showListsInfo == "4") ? "user-choose-item-active" : "" }}' wx:if="{{ showListsInfo == '4' }}" catchtap='stopThisAction'>
-    <view class='filtrate-list-item mybottomborder overwords {{ ( newindex == index) ? "filtrate-list-active" : "" }}' wx:for="{{ fillterNewest }}" wx:key="{{ index }}" catchtap='userChooseNewest' data-index="{{ index }}" data-id='{{ item.type }}' data-type="{{ item.name }}">
+    <view class='filtrate-list-item mybottomborder overwords {{ ( newindex == index) ? "filtrate-list-active" : "" }}' wx:for="{{ fillterNewest }}" wx:key="index" catchtap='userChooseNewest' data-index="{{ index }}" data-id='{{ item.type }}' data-type="{{ item.name }}">
       <text>{{ item.name }}</text>
     </view>
   </view>
@@ -87,14 +87,14 @@
   <view class='yupao-lists-notice' wx:if="{{ !showNothinkData }}">
     <view class='yupao-lists-wxinfo'>
       <view class='yupao-lists-wxtips'>
-        <text  wx:for="{{joingroup}}" wx:key="{{ index }}" style="color:{{item.color}}"      data-wechat="{{ item.text== 'wechat_number'|| item.action.type == 'copy' ?wechat:'' }}" bindtap="{{item.action.type == 'replace'?'clipboardWechat':((item.action.type == 'copy'?'clipboardWechat':(item.action.type == 'call'?'callThisPhone':''))) }}" data-phone="{{ item.action.type == 'call'?phone:'' }}"  class="{{item.action.is_btn == '1'?'phoneer':'' }}" >{{item.text== 'wechat_number'?wechat:item.text}}</text>
+        <text  wx:for="{{joingroup}}" wx:key="index" style="color:{{item.color}}"      data-wechat="{{ item.text== 'wechat_number'|| item.action.type == 'copy' ?wechat:'' }}" bindtap="{{item.action.type == 'replace'?'clipboardWechat':((item.action.type == 'copy'?'clipboardWechat':(item.action.type == 'call'?'callThisPhone':''))) }}" data-phone="{{ item.action.type == 'call'?phone:'' }}"  class="{{item.action.is_btn == '1'?'phoneer':'' }}" >{{item.text== 'wechat_number'?wechat:item.text}}</text>
       </view>
     </view>
     <view class='yupao-lists-noticetips'>
       <text class='yupao-common-tips yupao-lists-newtips'>鱼泡公告：</text>
       <view class='lists-notice-swiper'>
         <swiper indicator-dots="{{ notice.indicatorDots }}" autoplay="{{ notice.autoplay}} " interval="{{ notice.interval }}" duration="{{ notice.duration }}" circular="{{ notice.circular }}" vertical="{{ notice.vertical }}">
-          <block wx:for="{{ notice.lists }}" wx:key="{{ index }}">
+          <block wx:for="{{ notice.lists }}" wx:key="index">
             <swiper-item>
               <text class='lists-notice-text overwords' data-id="{{ item.id }}" bindtap='showThisNotice'>{{ item.title }}</text>
             </swiper-item>
@@ -105,10 +105,7 @@
   </view>
 
   <view class='listsbox '>
-
-    <!-- <block  wx:for="{{ }}" wx:key="{{ }}" wx:if="{{}}"> -->
-
-    <view class="listsboxdetailover" wx:for="{{lists}}" wx:key="{{index}}">
+    <view class="listsboxdetailover" wx:for="{{lists}}" wx:key="index">
       <image src="{{finded}}" class="finded" wx:if="{{item.is_end == 2}}"></image>
       <view class="listsoverhl" data-uuid="{{item.uuid}}" bindtap="showDetailInfo" data-id="{{ item.id }}">
         <view class="listsboxdetailo">
@@ -142,7 +139,7 @@
         
               </view>
               <view class="listsboxagetwot" wx:if="{{item.gender == '0'}}">
-                <text wx:for="{{item.tags}}" wx:key="{{index}}">{{item.label_name}}</text>
+                <text wx:for="{{item.tags}}" wx:key="index">{{item.label_name}}</text>
               </view>
             </view>
             <view class="listsboxshow" wx:if="{{item.type}}">{{item.type}}</view>
@@ -151,7 +148,7 @@
             <image class="listsboxoimg" src="{{toptown}}" wx:if="{{item.resume_top == 1}}"></image>
         </view>
         <view class="listsboxlable">
-          <view class="listsboxlableone" wx:for="{{item.occupations}}" wx:key="{{index}}">{{item}}</view>
+          <view class="listsboxlableone" wx:for="{{item.occupations}}" wx:key="index">{{item}}</view>
 
         </view>
         <view class="listsboxself" wx:if="{{item.introduce}}">{{item.introduce}}</view>

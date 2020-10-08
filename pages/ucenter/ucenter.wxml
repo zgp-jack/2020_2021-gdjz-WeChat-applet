@@ -90,7 +90,7 @@
 
 
   <view class="{{ userInfo && advertising.length? 'menu-container': 'isbanner'}}">
-    <view class="menu-block" wx:for="{{ uCenterMenus }}" wx:key="{{ index }}">
+    <view class="menu-block" wx:for="{{ uCenterMenus }}" wx:key="index">
 
       <view class="title-block">
         <view class="line"></view>
@@ -99,8 +99,13 @@
         </view>
       </view>
       <view class="menu-item-box">
+<<<<<<< HEAD
         <view class="menu-item" wx:for="{{ item.menus }}" wx:key="{{ index }}" data-url="{{item.dataUrl}}"
               bindtap="{{(item.key === 'service'  || item.key === 'bookkeeping')?'':'valiUserUrl'}}">
+=======
+        <view class="menu-item" wx:for="{{ item.menus }}" wx:key="index" data-url="{{item.dataUrl}}"
+              bindtap="{{item.key != 'service'?'valiUserUrl':''}}">
+>>>>>>> 4fab522642148986245ffda2f1e576233afff051
           <navigator
               wx:if="{{item.key==='bookkeeping'}}"
               class="jump"
