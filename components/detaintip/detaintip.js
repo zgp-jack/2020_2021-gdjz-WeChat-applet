@@ -84,9 +84,9 @@ Component({
           this.notip();
         }
       }else{
-         //去找活列表
+         //找工人列表
          wx.redirectTo({
-          url: '/pages/clients-looking-for-work/finding-name-card/findingnamecard',
+          url: '/pages/findingworkinglist/findingworkinglist',
         })
       }
       this.show()

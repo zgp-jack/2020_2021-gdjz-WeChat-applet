@@ -103,7 +103,7 @@ padding-left: 26%;
   position: absolute;
   right: 10rpx;
   top: 30rpx;
-  width: 25rpx;
+  width: 15rpx;
   height: 45rpx;
   transform: rotate(90deg);
 }

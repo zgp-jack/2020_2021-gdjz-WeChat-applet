@@ -74,7 +74,7 @@ page {
 	background: #F7FBFE;
 	border: 1px dashed #0099FF;
 	border-radius: 5px;
-	padding: 40rpx 20rpx;
+	padding: 33rpx 20rpx;
 	position: relative;
 }
 .slide-title {

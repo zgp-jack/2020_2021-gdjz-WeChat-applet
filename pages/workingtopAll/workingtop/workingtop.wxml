@@ -32,7 +32,7 @@
       <text>置顶时间</text>
       <picker bindchange="dayclocy" range="{{array}}" value="{{defaultDayIndex}}">
         <input   type="number" disabled="true" placeholder="请选择置顶时间" value="{{daynumber}}">
-          <image class="rightarrow" src="{{ rightarrow }}"></image>
+          <image class="rightarrow" mode="aspectFit" src="{{ rightarrow }}"></image>
         </input>
       </picker>
     </view>
