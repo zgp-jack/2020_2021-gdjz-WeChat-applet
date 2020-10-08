@@ -261,7 +261,7 @@ Page({
     this.getAdvertising();
     //初始化联系客服电话号码
     this.setData({
-      callServicePhone: app.globalData.joingroup.slice(5, 6)[0].text
+      callServicePhone: app.globalData.serverPhone
     })
   },
   initGetIntegralList: function () {
