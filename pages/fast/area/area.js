@@ -64,15 +64,18 @@ Page({
     rclassifies: [], //备份
   },
   mini_user: function(session_key){
+    let swithStatus = this.data.switch
     let { token,areaId } = this.data;
     let location = this.data.addressData.location
     let adName = this.data.addressData.title
     let address = this.data.addressData.district
     let trades = this.data.selectedClassifies.join(",");
     let imagsArry = []
-    this.data.imgs.forEach(function (item,index) {
-      imagsArry.push(item.url)
-    })
+    if (swithStatus) {
+      this.data.imgs.forEach(function (item,index) {
+        imagsArry.push(item.url)
+      })
+    }
     let imags = imagsArry.join(",")
     var that = this
     wx.getSetting({
@@ -321,15 +324,18 @@ Page({
   },
   //未登录状态下，确定地址后获取用户信息和授权
   bindGetUserInfo:function (e) {
+    let switchStatus = this.data.switch;
     let { token,areaId } = this.data;
     let location = this.data.addressData.location;
     let adName = this.data.addressData.title;
     let address = this.data.addressData.district;
     let trades = this.data.selectedClassifies.join(",");
     let imagsArry = []
-    this.data.imgs.forEach(function (item) {
-      imagsArry.push(item.url)
-    })
+    if (switchStatus) {
+      this.data.imgs.forEach(function (item) {
+        imagsArry.push(item.url)
+      })
+    }
     let imags = imagsArry.join(",")
     let that = this;
     if (e.detail.userInfo) {
