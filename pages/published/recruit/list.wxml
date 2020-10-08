@@ -1,17 +1,17 @@
 <import src="/pages/footer/footer.wxml" />
 
 <view class="recruit-list-header flex-row">
-  <view class="recruit-header-item" wx:for="{{ types }}" wx:key="{{ index }}" bindtap="{{isRequest?'userChangeType':''}}" data-key="{{ index }}"> 
+  <view class="recruit-header-item" wx:for="{{ types }}" wx:key="index" bindtap="{{isRequest?'userChangeType':''}}" data-key="{{ index }}"> 
     <view class="recruit-header-text {{ current===index ? 'recruit-header-text-active' : '' }}">{{ item.name }}</view>
   </view>
 </view>
 
 <!-- <view class="recruit-list-container"> -->
   <swiper class="recruit-content" current="{{ current }}"  duration="300" bindchange="switchTab">
-    <swiper-item wx:for="{{ types.length }}">
+    <swiper-item wx:for="{{ types.length }}" wx:key="index">
       <scroll-view scroll-y="true" class="recruit-list-container" bindscrolltolower="loadmore">
         <view class="recruit-lists">
-          <block wx:for="{{ lists }}" wx:key="{{ index }}">
+          <block wx:for="{{ lists }}" wx:key="index">
             <view class="recruit-list-item" bindtap="jumpRecruitInfo"  data-id="{{ item.id }}">
             <image class="recruit-list-endimg" src="{{ statusCheck }}" wx:if="{{ item.is_check == '1' }}"></image>
             <image class="recruit-list-endimg" src="{{ statusNopass }}" wx:if="{{ item.is_check == '0' }}"></image>

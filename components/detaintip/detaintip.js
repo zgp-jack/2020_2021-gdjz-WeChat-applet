@@ -72,7 +72,7 @@ Component({
       }else {
         //去招工列表
         wx.reLaunch({
-          url: '/pages/published/recruit/list',
+          url: '/pages/findingworkinglist/findingworkinglist',
         })
       }
        
@@ -86,7 +86,7 @@ Component({
       }else{
          //找工人列表
          wx.redirectTo({
-          url: '/pages/findingworkinglist/findingworkinglist',
+          url: '/pages/published/recruit/list',
         })
       }
       this.show()
@@ -119,8 +119,8 @@ Component({
     //如果是置顶成功
     if(this.properties.successData) {
       this.setData({
-        "buttontext.close":"查看工人简历",
-        "buttontext.comfirm":"管理招工信息",
+        "buttontext.close":"知道了",
+        "buttontext.comfirm":"查看工人简历",
       })
     }
   }

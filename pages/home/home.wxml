@@ -26,7 +26,7 @@
           <image src="{{ jixieLinkImg }}" class="index-swiper-img" />
         </navigator>
       </swiper-item>
-      <block wx:for="{{ swiper.imgUrls }}" wx:key="{{ index }}">
+      <block wx:for="{{ swiper.imgUrls }}" wx:key="index">
         <swiper-item wx:if="{{ !item.is_download }}">
           <navigator url='{{ item.small_url }}' open-type="navigate">
             <image src="{{ item.banner }}" class="index-swiper-img" />
@@ -38,7 +38,7 @@
           </view>
         </swiper-item>
       </block>
-      <block wx:for="{{ swiper.newBanner }}" wx:key="{{ item.id }}">
+      <block wx:for="{{ swiper.newBanner }}" wx:key="index">
         <swiper-item>
           <button data-url = "{{ item.self_url }}" data-login ="{{ item.need_login }}" open-type="getUserInfo" bindgetuserinfo="bindUserInfo">
             <image src="{{ item.image_url }}" class="index-swiper-img" mode="scaleToFill"/>
@@ -136,7 +136,7 @@
     <image src='{{ indexImgs.notice }}'></image>
     <view class='index-notice-swiper'>
       <swiper indicator-dots="{{ notice.indicatorDots }}" autoplay="{{ notice.autoplay}} " interval="{{ notice.interval }}" duration="{{ notice.duration }}" circular="{{ notice.circular }}" vertical="{{ notice.vertical }}">
-        <block wx:for="{{ notice.lists }}" wx:key="{{ index }}">
+        <block wx:for="{{ notice.lists }}" wx:key="index">
           <swiper-item>
             <navigator url='/pages/static/notice?type=1&id={{ item.id }}' open-type="navigate">
               <text class='index-notice-text' data-id="{{ item.id }}">{{ item.title }}</text>
@@ -154,7 +154,7 @@
         <text>更多</text> </navigator>
       <view class='index-lists-body'>
 
-        <view class="indxlistitem" wx:for="{{ infolists.job.lists }}" wx:key="{{ index }}" data-id="{{ item.id }}" data-type="job" bindtap='showMsgInfo'>
+        <view class="indxlistitem" wx:for="{{ infolists.job.lists }}" wx:key="index" data-id="{{ item.id }}" data-type="job" bindtap='showMsgInfo'>
 
           <image wx:if="{{ (item.is_end == '2') }}" class="imgseek" src="{{doneimg}}"></image>
           <!-- 上 -->
@@ -202,7 +202,7 @@
       <navigator url='/pages/findingworkinglist/findingworkinglist' class='index-lists-header' open-type="navigate">最新找活信息
         <text>更多</text> </navigator>
       <!-- <view class='index-lists-body'>
-                <view class='index-list-item'  wx:for="{{ infolists.resume.lists }}" wx:key="{{ index }}" data-id="{{ item.id }}" data-type="resume" bindtap='showMsgInfo'>
+                <view class='index-list-item'  wx:for="{{ infolists.resume.lists }}" wx:key="index" data-id="{{ item.id }}" data-type="resume" bindtap='showMsgInfo'>
                     <view class='index-item-header'>
                         <text class='index-item-title overwords'>{{ item.title }}</text>
                         <text class='index-item-time'>{{ item.time }}</text>
@@ -234,7 +234,7 @@
 
         <!-- <block  wx:for="{{ }}" wx:key="{{ }}" wx:if="{{}}"> -->
 
-        <view class="listsboxdetail" bindtap="persondetail" data-uuid="{{item.uuid}}" wx:for="{{infolists.resume.lists}}" wx:key="{{index}}">
+        <view class="listsboxdetail" bindtap="persondetail" data-uuid="{{item.uuid}}" wx:for="{{infolists.resume.lists}}" wx:key="index">
           <image src="{{finded}}" class="finded" wx:if="{{item.is_end == 2}}"></image>
           <view class="listsoverhl">
             <view class="listsboxdetailo">
@@ -268,7 +268,7 @@
                     <text wx:if="{{item.prof_degree}}">{{item.prof_degree}}</text>
                   </view>
                   <view class="listsboxagetwot" wx:if="{{item.gender == '0'}}">
-                    <text wx:for="{{item.tags}}" wx:key="{{index}}">{{item.label_name}}</text>
+                    <text wx:for="{{item.tags}}" wx:key="index">{{item.label_name}}</text>
                   </view>
                 </view>
                 <view class="listsboxshow" wx:if="{{item.type}}">
@@ -278,7 +278,7 @@
             </view>
 
             <view class="listsboxlable">
-              <view class="listsboxlableone" wx:for="{{item.occupations}}" wx:key="{{index}}">
+              <view class="listsboxlableone" wx:for="{{item.occupations}}" wx:key="index">
                 {{item}}
               </view>
 
@@ -331,7 +331,7 @@
       <navigator url='/pages/usedlist/usedlist' class='index-lists-header' open-type="navigate">最新二手交易信息
         <text>更多</text> </navigator>
       <view class='index-lists-body'>
-        <view class='index-list-item' wx:for="{{ infolists.fleamarket.lists }}" wx:key="{{ index }}" data-id="{{ item.id }}" data-type="fleamarket" bindtap='showMsgInfo'>
+        <view class='index-list-item' wx:for="{{ infolists.fleamarket.lists }}" wx:key="index" data-id="{{ item.id }}" data-type="fleamarket" bindtap='showMsgInfo'>
           <view class='index-item-header'>
             <text class='index-item-title overwords'>{{ item.title }}</text>
             <text class='index-item-time'>{{ item.time }}</text>
@@ -393,7 +393,7 @@
         <text>暂未找到相关城市</text>
       </view>
     </view>
-    <view class="search-list-item" wx:for="{{ isAllAreas ? allAreaLists : nAreaLists }}" wx:key="{{ index }}" bindtap='chooseInputCtiy' data-pname="{{ item.ad_name }}" data-id="{{ item.id }}" data-area="{{ item.name }}">{{ item.cname }} </view>
+    <view class="search-list-item" wx:for="{{ isAllAreas ? allAreaLists : nAreaLists }}" wx:key="index" bindtap='chooseInputCtiy' data-pname="{{ item.ad_name }}" data-id="{{ item.id }}" data-area="{{ item.name }}">{{ item.cname }} </view>
   </view>
 
   <view class='index-area-tips overwords'>当前选择城市：
@@ -407,15 +407,15 @@
           <view class='overwords' data-id="{{ gpsOrientation.id }}" data-area="{{ gpsOrientation.name }}" data-pname="{{ gpsOrientation.ad_name }}" bindtap='chooseThisCtiy'>
             <image src="{{ gpsposi }}"></image>{{ gpsOrientation.name }}</view>
         </view>
-        <view wx:for="{{ locationHistory }}" wx:key="{{ index }}" wx:if="{{ gpsOrientation ? index < 2 : true }}">
+        <view wx:for="{{ locationHistory }}" wx:key="index" wx:if="{{ gpsOrientation ? index < 2 : true }}">
           <text class='overwords' data-id="{{ item.id }}" data-area="{{ item.name }}" data-pname="{{ item.ad_name }}" bindtap='chooseThisCtiy'>{{ item.name }}</text>
         </view>
       </view>
     </view>
-    <view class='index-area-item' wx:for="{{ areadata }}" wx:key="{{ index }}">
+    <view class='index-area-item' wx:for="{{ areadata }}" wx:key="index">
       <text class='area-header-words'>{{ item[0].city }}</text>
       <view class='area-body-content clearfix'>
-        <view wx:for="{{ item }}" wx:key="{{ index }}">
+        <view wx:for="{{ item }}" wx:key="index">
           <text class='overwords' data-id="{{ item.id }}" data-area="{{ item.city }}" data-pname="{{ item.ad_name }}" bindtap='chooseThisCtiy'>{{ item.city }}</text>
         </view>
       </view>
