@@ -88,17 +88,19 @@ Page({
             let imgs = _this.data.imgs;
             let imglists = _this.data.imglists;
             if (_type == 0) {
-                imgs[_index] = mydata.url;
-                imglists[_index] = imgRes.tempFilePaths[0];
+                imgs[_index] = mydata;
+                imglists[_index] = imgRes;
             } else {
-                imgs.push(mydata.url)
-                imglists.push(imgRes.tempFilePaths[0])
+                if(imgs.length < 9){
+                    imgs.push(mydata)
+                    imglists.push(imgRes)
+                }
             }
             _this.setData({
                 imgs: imgs,
                 imglists: imglists
             })
-        })
+        },9)
     },
     userEnterContent: function(e) {
         let val = e.detail.value

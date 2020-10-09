@@ -84,29 +84,18 @@ vertify()
   },
   chooseImage() {
     let that = this;
-    // if (that.data.imgArrs.length >= 3) {
-    //   wx.showModal({
-    //     title: '温馨提示',
-    //     content: '您最多只能选择三张图片',
-    //     showCancel: false,
-    //     success(res) { }
-    //   })
-    //   return
-    // }
     app.userUploadImg(function (img, url) {
-
       that.data.imgArrs.push(url.httpurl)
       that.data.idArrs.push(url.url)
       that.setData({
         imgArrs: that.data.imgArrs
       })
-      if (that.data.imgArrs.length >= 3) {
+      if (that.data.imgArrs.length >= 9) {
         that.setData({
           imgArrslength: false
         })
       }
-    })
-
+    },9)
   },
   previewImage(e) {
     
@@ -126,7 +115,7 @@ vertify()
     this.setData({
       idArrs: this.data.idArrs
     })
-    if (this.data.imgArrs.length < 3) {
+    if (this.data.imgArrs.length < 9) {
       this.setData({
         imgArrslength: true
       })
@@ -513,7 +502,7 @@ vertify()
         checkonef: this.data.skill.check
       })
       this.judgecommit()
-      if (this.data.imgArrs.length >= 3) {
+      if (this.data.imgArrs.length >= 9) {
         this.setData({
           imgArrslength: false
         })

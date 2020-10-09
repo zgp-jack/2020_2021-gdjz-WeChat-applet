@@ -35,7 +35,8 @@ Page({
     // 工种选择文本
     showClassifyText:"",
     imglen:0,
-    maxNum:3,
+    //一次最多可以选取9张
+    maxNum:9,
     // 最大图片数量
     maxImgNum: 0,
     // 最大工种数量
