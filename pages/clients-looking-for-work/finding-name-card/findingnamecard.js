@@ -121,7 +121,9 @@ Page({
     topshow:false,
     is_top_show:true,
     default_top_area:false,
-    userTopArea:[]//初始化用户置顶城市数据
+    userTopArea:[],//初始化用户置顶城市数据
+    showFindCard:false, //是否展示找活名片
+    info:{}
   },
 
 
@@ -757,6 +759,7 @@ Page({
               showtop: true,
               showtopone: false
             })
+            that.selectComponent("#pulishfindwork").show()
           }
 
           if (mydata.info.gender != "0" && mydata.info.gender) {
@@ -820,6 +823,8 @@ Page({
             resume_top: mydata.hasOwnProperty("resume_top") ? mydata.resume_top : [],
             top_status: mydata.hasOwnProperty("top_status") ? mydata.top_status : [],
             default_top_area: mydata.hasOwnProperty("default_top_area")?mydata.default_top_area : false,
+            showFindCard: true,
+            info:mydata.info
           })
           if (mydata.hasOwnProperty("resume_top")) {
             if (mydata.resume_top.is_top == 1) {
