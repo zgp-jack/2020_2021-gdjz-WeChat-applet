@@ -788,6 +788,7 @@ Page({
           }
           let cityid = mydata.info.hasOwnProperty("city")? parseInt(mydata.info.city) : 0
           let province = mydata.info.hasOwnProperty("province") ? mydata.info.province : 0
+          let info = {...mydata.info, type:'findWorkCard'}
 
           that.setData({
             occupations_id: mydata.info.hasOwnProperty("occupations_id")?mydata.info.occupations_id : '',	
@@ -824,7 +825,7 @@ Page({
             top_status: mydata.hasOwnProperty("top_status") ? mydata.top_status : [],
             default_top_area: mydata.hasOwnProperty("default_top_area")?mydata.default_top_area : false,
             showFindCard: true,
-            info:mydata.info
+            info:info
           })
           if (mydata.hasOwnProperty("resume_top")) {
             if (mydata.resume_top.is_top == 1) {

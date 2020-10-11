@@ -59,7 +59,9 @@ Page({
       aid: '', // 地区
       cid: '', // 工种
       child: 0, // 是否是子列表
-      showFollow: false
+      showFollow: false,
+      fastInfo:{},//快速发布找活名片数据
+      showDetail:false,//初始化是否展示详情界面
     },
     showdownappaction:function(){
       wx.navigateTo({
@@ -491,6 +493,12 @@ Page({
                 //_this.getRecommendList()
                 let cityid = mydata.result.hasOwnProperty('city_id') ? parseInt(mydata.result.city_id) : 0
                 let provinceid = mydata.result.hasOwnProperty('province_id') ? parseInt(mydata.result.province_id) : 0
+                let fastInfo = mydata.result.hasOwnProperty('fast_info')?((Array.isArray(mydata.result.fast_info) && mydata.result.fast_info.length === 0)? {} : mydata.result.fast_info): {}
+                if (mydata.result.hasOwnProperty('fast_info')) {
+                  if (!Array.isArray(mydata.result.fast_info)) {
+                    _this.selectComponent("#pulishfindwork").show()
+                  }
+                }
                 if (mydata.errcode != "fail") {
                   let aid =  cityid || provinceid;
                   let cid = mydata.result.occupations.join(',')
@@ -508,9 +516,10 @@ Page({
                   }
                   _this.setData({
                     usepang: mydata.result.hasOwnProperty("isLook") ? mydata.result.isLook:8,
-                    isEnd: mydata.result.hasOwnProperty("is_end") ? mydata.result.is_end : ""
+                    isEnd: mydata.result.hasOwnProperty("is_end") ? mydata.result.is_end : "",
+                    fastInfo: {...fastInfo, type:'findWorkDetail'},
+                    showDetail: true,
                   })
-                  
                 }
                 _this.doDetailAction(mydata, {
                     success:function(){},

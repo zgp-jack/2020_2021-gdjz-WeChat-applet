@@ -10,7 +10,10 @@ Component({
    * 组件的属性列表
    */
   properties: {
-    info:Object
+    info:{
+      type: Object,
+      value: {},
+    }
   },
 
   /**
@@ -22,7 +25,10 @@ Component({
     index: [0,0],
     mindex: [0,0],
     titleImage: app.globalData.apiImgUrl +"new-publish-title-t-icon.png",
+    // 城市id
     id:0,
+    // 省id
+    pid:0,
     // 期望地区文本数据
     areatext: '',
     //保存onload传过来的token
@@ -31,16 +37,11 @@ Component({
     userInfo:{},
     // 工种选择文本
     showClassifyText:"",
-    imglen:0,
     maxNum:3,
     // 最大图片数量
     maxImgNum: 0,
     // 最大工种数量
     maxWorkNum: 0,
-    // 不匹配库
-    notMateData: [],
-    // 匹配库
-    mateData: [],
     // 工种字段
     classifies: [],
     // 选择一级工种index
@@ -57,7 +58,6 @@ Component({
     showPicker:false,
     // 选择或者匹配的工种id数组
     selectedClassifies: [],
-    rrulesClassifyids: [], // 备份
     ruserClassifyids: [], // 备份
     rchildClassifies: [], // 备份
     rclassifies: [], //备份
@@ -66,29 +66,48 @@ Component({
     // 是否展示验证码输入框
     showTel:true,
     // 手机号码
-    telPhone:""
+    telPhone:"",
+    // 验证码时间
+    sendrefresh:60,
+    // 第一次获取验证码
+    firstGetCode:true,
+    // 标题城市
+    titleCity:'',
+    // 标题工种
+    titleOcc:'',
   },
 
   /**
    * 组件的方法列表
    */
   methods: {
+    // 输入电话号码
+    inputPhoneNumber: function (e) {
+      // 输入的电话号码
+      let phoneNumber = e.detail.value;
+      // 设置电话号码到data中
+      this.setData({telPhone: phoneNumber})
+    },
     initLocArea:function(){
+      // 获取满足积分消耗条件的找工作信息
+      let findWorkData = wx.getStorageSync('findWorkData');
+      let areaData = findWorkData?(findWorkData.areaData?findWorkData.areaData:false):false;
       //获取手机本地缓存地理位置信息
-      let province = wx.getStorageSync('gpsPorvince')
+      let gpsPorvince = wx.getStorageSync('gpsPorvince')?wx.getStorageSync('gpsPorvince'):false;
+      let province = areaData?areaData:gpsPorvince
       //获取所有省的信息
       let allProvince = this.getProvinceLists()
       //判断如果有本地缓存地理位置信息
       if(province){
-      //本地地理位置信息与所有省份信息相同对应的allProvince的index
-      let index = allProvince.findIndex(item => item.id == province.pid)
-      //本地地理位置信息具体信息
-      console.log("index",index)
+        //本地地理位置信息与所有省份信息相同对应的allProvince的index
+        let index = allProvince.findIndex(item => item.id == province.pid)
+        //本地地理位置信息具体信息
         let item = allProvince[index]
-      //记录本地位置信息到data中
+        //记录本地位置信息到data中
         this.setData({
           id: province.id,
-          areatext: item.name + province.name,
+          pid: item.id,
+          areatext: province.pid == province.id? item.name: item.name + province.name,
           index:[index,0],
           "mindex[0]":index
         })
@@ -100,6 +119,7 @@ Component({
           "index[1]": ci,
           "mindex[1]": ci
         })
+        // 组合成初始化picker数据
         let areapicker = [allProvince,cities]
         this.setData({
           areapicker
@@ -107,6 +127,7 @@ Component({
       }else{
         //获取所有城市信息
         let cities = this.getCityLists()
+        // 组合成初始化picker数据
         let areapicker = [allProvince,cities]
         this.setData({
           areapicker
@@ -115,31 +136,41 @@ Component({
     },
     initAreaData:function(){
       let _this = this;
-      let province = wx.getStorageSync('gpsOrientation')
+      let findWorkData = wx.getStorageSync('findWorkData');
+      let areaData = findWorkData?(findWorkData.areaData?findWorkData.areaData:false):false;
+      //获取手机本地缓存地理位置信息
+      let gpsPorvince = wx.getStorageSync('gpsPorvince')?wx.getStorageSync('gpsPorvince'):false;
+      let province = areaData?areaData:gpsPorvince
+      // 保存城市数据
+      this.setData({
+        titleCity: province? province.name: ''
+      })
       if(province){
-        this.initLocArea()
+          this.initLocArea()
       }else{
-        amapFun.getRegeo({
-          success: function (data) {
-            let gpsLocation = {
-              province: data[0].regeocodeData.addressComponent.province,
-              city: data[0].regeocodeData.addressComponent.city,
-              adcode: data[0].regeocodeData.addressComponent.adcode,
-              citycode: data[0].regeocodeData.addressComponent.citycode
+          amapFun.getRegeo({
+            success: function (data) {
+              console.log(data)
+              let gpsLocation = {
+                province: data[0].regeocodeData.addressComponent.province,
+                city: data[0].regeocodeData.addressComponent.city,
+                adcode: data[0].regeocodeData.addressComponent.adcode,
+                citycode: data[0].regeocodeData.addressComponent.citycode
+              }
+              areas.getProviceItem(gpsLocation.province, gpsLocation.city)
+              _this.initLocArea()
+            },
+            fail:function(){
+              _this.setData({
+                id: 0,
+                areatext: ""
+              })
+              _this.initLocArea();
             }
-            areas.getProviceItem(gpsLocation.province, gpsLocation.city)
-            _this.initLocArea()
-          },
-          fail:function(){
-            _this.setData({
-              id: 0,
-              areatext: ""
-            })
-            _this.initLocArea();
-          }
-        })
+          })
       }
     },
+    // 获取省的数据
     getProvinceLists:function(){
       let len = area.length
       //省信息数组
@@ -148,8 +179,10 @@ Component({
         let data = area[i]
         arr.push({id:data.id,pid:data.pid,name:data.name})
       }
+      console.log(area)
       return arr;
     },
+    // 获取城市数据
     getCityLists:function(){
       //获取省的信息
       let index = this.data.mindex[0]
@@ -174,12 +207,14 @@ Component({
       }
       return arr;
     },
+    // 期望地区的文本展示数据
     getAreaText:function(){
       let index = this.data.index
       let areapicker = this.data.areapicker
       let ptext = areapicker[0][index[0]].name
       let ctext = areapicker[1][index[1]].name
       let id = areapicker[1][index[1]].id
+      let pid = areapicker[0][index[0]].id
       let text = ''
       if(ptext == ctext){
         text = ptext
@@ -188,9 +223,11 @@ Component({
       }
       this.setData({
         areatext: text,
-        id:id
+        id:id,
+        pid:pid
       })
     },
+    // picker改变列的时候
     bindMultiPickerColumnChange:function(e){
       let val = e.detail.value
       if(e.detail.column === 0){
@@ -205,11 +242,14 @@ Component({
         })
       }
     },
+    // picker value改变的时候
     bindPickerChange:function(e){
       let data = e.detail.value
       let mydata = this.data.areapicker[1]
+      let pid = mydata[data[1]].pid
       let id = mydata[data[1]].id
       this.setData({
+        pid: pid,
         id: id,
         index: data
       })
@@ -249,28 +289,21 @@ Component({
     },
     // 设置缓存保留已填写信息
     setEnterInfo: function (name, data) {
-      let key = 'jiSuData'
-      let jiSuData = wx.getStorageSync(key)
-      if (jiSuData) {
-        jiSuData[name] = data
+      let key = 'findWorkData'
+      let findWorkData = wx.getStorageSync(key)
+      if (findWorkData) {
+        findWorkData[name] = data
       } else {
-        jiSuData = {}
-        jiSuData[name] = data
+        findWorkData = {}
+        findWorkData[name] = data
       }
-      wx.setStorageSync(key, jiSuData)
-    },
-    //点击地址详情页的详细地址设置到jiSuData缓存数据中
-    userSetAreaInfo: function () {
-      let val = this.data.addressData
-      //调用函数设置缓存
-      this.setEnterInfo('area', val)
+      wx.setStorageSync(key, findWorkData)
     },
     // 点击所需工种显示工种选择
     showWorkTypePicker: function () {
       // 避免用户选择之后取消，所以对数据进行一次备份
       this.setData({
         rchildClassifies: JSON.parse(JSON.stringify(this.data.childClassifies)),
-        rrulesClassifyids: JSON.parse(JSON.stringify(this.data.rulesClassifyids)),
         ruserClassifyids: JSON.parse(JSON.stringify(this.data.userClassifyids)),
         rclassifies: JSON.parse(JSON.stringify(this.data.classifies)),
         rpindex: this.data.pindex,
@@ -283,7 +316,6 @@ Component({
         showPicker: false,
         pindex: this.data.rpindex,
         userClassifyids: JSON.parse(JSON.stringify(this.data.ruserClassifyids)),
-        rulesClassifyids: JSON.parse(JSON.stringify(this.data.rrulesClassifyids)),
         childClassifies: JSON.parse(JSON.stringify(this.data.rchildClassifies)),
         classifies: JSON.parse(JSON.stringify(this.data.rclassifies)),
       })
@@ -329,22 +361,19 @@ Component({
     // 初始化加载工种数据
     initWorkTypeData: function () {
       this.initWorkType().then(resolve => {
+        let findWorkData = wx.getStorageSync('findWorkData');
+        let classifyids = findWorkData?(findWorkData.userClassifyids || []):[]
         // 最大图片数量
         let maxImgNum = resolve.typeTextArr.maxImageCount;
         // 最大工种数量
         let maxWorkNum = resolve.typeTextArr.maxClassifyCount;
-        // 不匹配库
-        let notMateData = resolve.not_mate_data;
-        // 匹配库
-        let mateData = resolve.mate_data;
         // 工种字段
         let classifies = resolve.classifyTree;
-        // 返回的数据对象
-        let mateDatas = {maxImgNum,maxWorkNum,notMateData,mateData,classifies}
         // 保存到data中
-        this.setData({  maxImgNum ,maxWorkNum ,notMateData ,mateData ,classifies,})
+        this.setData({ maxImgNum ,maxWorkNum ,classifies,userClassifyids: classifyids, titleOcc: classifyids.length === 0?'':classifyids[0].name })
+        this.countWorkNum()
         this.initChildWorkType()
-        return mateDatas
+        this.getWorkText()
       },reason => {
         wx.showModal({
           title: '提示',
@@ -362,30 +391,22 @@ Component({
             }
           }
         })
-      }).then(resolve => {
-        this.mateClassifyIdsFun(resolve)
       })
     },
     // 初始化子类工种信息和选中状态
     initChildWorkType: function () {
       // 父级工种index
       let index = this.data.pindex;
-      // 匹配工种字段
-      let rids = this.data.rulesClassifyids;
       // 用户选择工种字段
       let uids = this.data.userClassifyids;
       // 获取父级工种对应的子类工种信息
       let data = JSON.parse(JSON.stringify(this.data.classifies[index].children))
       // 循环遍历子类工种数据与自动匹配和选择工种数据进行对比相同就将对应工种数据变成选中状态
       for (let i = 0; i < data.length; i++) {
-        if (rids.findIndex(item => item.id == data[i].id) !== -1) {
+        if (uids.findIndex(item => item.id == data[i].id) !== -1) {
           data[i].checked = true
         } else {
-          if (uids.findIndex(item => item.id == data[i].id) !== -1) {
-            data[i].checked = true
-          } else {
-            data[i].checked = false
-          }
+          data[i].checked = false
         }
       }
       // 设置父类对应子类工种数据
@@ -413,8 +434,6 @@ Component({
       let checked = e.currentTarget.dataset.checked
       // 工种名称
       let name = e.currentTarget.dataset.name
-      // 已经匹配的工种数据
-      let rulesClassifyids = this.data.rulesClassifyids
       // 已经选择的工种数据
       let userClassifyids = this.data.userClassifyids
       // 全部工种数据
@@ -423,17 +442,10 @@ Component({
       let pindex = this.data.pindex
       // 如果是选中状态
       if (checked) {
-        // 匹配的工种找到对应的工种然后删除并将对应的选中数量减1
-        let ri = rulesClassifyids.findIndex(item => item.id == id)
-        if (ri !== -1) {
-          rulesClassifyids.splice(ri, 1)
-          data[pindex].num = data[pindex].num - 1
-        } else {
-         // 选择的工种找到对应的工种然后删除并将对应的选中数量减1
-          let ui = userClassifyids.findIndex(item => item.id == id)
-          userClassifyids.splice(ui, 1)
-          data[pindex].num = data[pindex].num - 1
-        }
+        // 选择的工种找到对应的工种然后删除并将对应的选中数量减1
+        let ui = userClassifyids.findIndex(item => item.id == id)
+        userClassifyids.splice(ui, 1)
+        data[pindex].num = data[pindex].num - 1
         // 重新设置选择工种数据
         this.setData({
           classifies: data
@@ -441,7 +453,7 @@ Component({
       } else {
         // 从未选中状态到选中状态
         // 检查选择工种数量
-        let len = rulesClassifyids.length + userClassifyids.length
+        let len = userClassifyids.length
         // 大于规定数量给出提示
         if (len >= num) {
           app.showMyTips('工种最多可以选择' + num + '个')
@@ -463,123 +475,21 @@ Component({
       }
       // 将选择的工种数据与匹配的工种数据存入缓存
       this.setEnterInfo('userClassifyids', userClassifyids)
-      this.setEnterInfo('rulesClassifyids', rulesClassifyids)
       // 初始化子类工种的数据与选中状态
       this.initChildWorkType()
     },
-    // 根据详情匹配工种
-    mateClassifyIdsFun: function (resolve) {
-      wx.showLoading({
-        title: '匹配中',
-        icon: 'none',
-        mask: true
-      })
-      let jiSuData = wx.getStorageSync('jiSuData')
-      if (jiSuData.imgs) {
-        this.setData({
-          imgs: jiSuData.imgs,
-          imglen: jiSuData.imgs.length,
-          switch: jiSuData.imgs.length ? true : false
-        })
-      }
-      this.setData({
-        userClassifyids: jiSuData.userClassifyids || [],
-        rulesClassifyids: jiSuData.rulesClassifyids || [],
-      })
-      //用户根据所需工作自行选择工种
-      let uids = JSON.parse(JSON.stringify(this.data.userClassifyids))
-      //获取招工详情的内容
-      let content = wx.getStorageSync('jiSuData').detail
-      //所需工种最大选择数
-      let maxWorkNum = resolve.maxWorkNum
-      //不匹配的数据
-      let notRules = resolve.notMateData;
-      //不匹配数据长度
-      let notLen = notRules.length;
-      //获取data中匹配数据
-      let needRules = resolve.mateData;
-      //匹配数据长度
-      let needLen = needRules.length;
-      // 不需要的数据
-      let notArr = [];
-      // 需要的数据
-      let needArr = [];
-      // 如果没有详情内容直接返回
-      if (!content) {
-        this.countWorkNum()
-        this.initChildWorkType()
-        this.getWorkText()
-        wx.hideLoading()
-        return false;
-      }
-      // 不需要匹配的关键词
-      for (let i = 0; i < notLen; i++) {
-        if (content.indexOf(notRules[i].keywords) !== -1) {
-          let id = notRules[i].occupation_id;
-          if (notArr.findIndex(item => item.id == id) == -1) {
-            notArr.push({
-              id: id,
-              name: notRules[i].name
-            })
-          }
-        }
-      }
-      // 匹配关键词并且该关键词没有匹配过放入匹配数组中
-      for (let i = 0; i < needLen; i++) {
-        if (content.indexOf(needRules[i].keywords) !== -1) {
-          let id = needRules[i].occupation_id;
-          if (needArr.findIndex(item => item.id == id) == -1) {
-            needArr.push({
-              id: id,
-              name: needRules[i].name
-            })
-          }
-        }
-      }
-      // 过滤不匹配关键词将不匹配的关键词从匹配到的关键词删除
-      for (let i = 0; i < notArr.length; i++) {
-        let id = notArr[i].id;
-        let index = needArr.findIndex(item => item.id == id)
-        if (index !== -1) {
-          needArr.splice(index, 1)
-          }
-        }
-      // 如果用户选择的工种等于规定最大长度将匹配的数据置空
-      // 否则将匹配的数据长度等于总长度减去用户选择的长度
-      let uidsLen = uids.length
-      if(uidsLen >= maxWorkNum){
-        this.setData({
-          rulesClassifyids: []
-        })
-      }else{
-        let needLen = maxWorkNum - uidsLen
-        needArr.splice(needLen)
-        this.setData({
-          rulesClassifyids: needArr
-        })  
-        this.setEnterInfo('rulesClassifyids',needArr)
-      }
-      this.countWorkNum()
-      this.initChildWorkType()
-      this.getWorkText()
-      wx.hideLoading()
-    },
     // 匹配的工种数量
     countWorkNum: function () {
-      //根据详情匹配工种字段
-      let rulesClassifyids = JSON.parse(JSON.stringify(this.data.rulesClassifyids))
       //用户选择工种字段
       let userClassifyids = JSON.parse(JSON.stringify(this.data.userClassifyids))
-      //匹配工种字段与用户选择工种字段组成一个数组
-      rulesClassifyids = [...rulesClassifyids, ...userClassifyids]
       //返回所有工种字段id数组
-      rulesClassifyids = rulesClassifyids.map(item => item.id)
+      let rulesClassifyids = userClassifyids.map(item => item.id)
       //rulesClassifyids数组长度
       let ruleLen = rulesClassifyids.length
       let classifyids = this.data.classifies
       //所有工种数组长度
       let len = classifyids.length
-      //如果既没有选择工种也没有匹配工种那么就将num置为0
+      //如果没有选择工种那么就将num置为0
       if (!ruleLen) {
         classifyids.forEach(function(item){
           if (item.num) {
@@ -587,7 +497,7 @@ Component({
           }
         })
       }
-      //记录选择或者详情匹配工种的数量
+      //记录选择工种的数量
       for (let i = 0; i < len; i++) {
         let data = classifyids[i].children
         let inum = 0
@@ -605,7 +515,7 @@ Component({
     },
     // 所需工种显示工种文本信息
     getWorkText: function () {
-      let list = this.data.userClassifyids.concat(this.data.rulesClassifyids)
+      let list = this.data.userClassifyids
       //记录选中工种的id并存入this.data.selectedClassifies中
       let selectWorkType = list.map(function (item,index) {
         return item.id
@@ -620,6 +530,65 @@ Component({
         selectedClassifies: selectWorkType
       })
     },
+    // 点击确认发布，发布找活信息
+    publishFindWork: function () {
+      let { id, pid } = this.data;
+      let userClassifyids = this.data.userClassifyids;
+      let occupations = this.data.selectedClassifies.join(",");
+      if (!id || !pid) {
+        wx.showModal({
+          title: '提示',
+          content: "请选择招工城市。",
+          showCancel: false
+        })
+        return false
+      }
+      if (!userClassifyids.length) {
+        wx.showModal({
+          title: '提示',
+          content: '请选择工种。',
+          showCancel: false
+        })
+        return false
+      }
+
+      console.log(id,pid,occupations)
+    },
+    // 初始化验证码时间
+    initCodeTime: function () {
+      let _this = this;
+      let codeTime = this.data.sendrefresh;
+      _this.data.timer = setInterval(function () {
+          codeTime--;
+          _this.setData({ sendrefresh: codeTime })
+          if (codeTime == 0) {
+              clearInterval(_this.data.timer);
+              return false;
+          }
+      }, 1000)
+    },
+    // 获取验证码
+    reGetPhoneCode:function(){
+
+      let _this = this;
+      let phone = this.data.telPhone;
+      app.appRequestAction({
+          title: "正在获取验证码",
+          mask: true,
+          failTitle: "网络错误，验证码获取失败！",
+          url: "fast-issue/get-code/",
+          way: "POST",
+          params: { phone: phone},
+          success: function (res) {
+              let mydata = res.data;
+              app.showMyTips(mydata.errmsg);
+              if (mydata.errcode == "ok") {
+                  _this.setData({ sendrefresh: 60, firstGetCode:false });
+                  _this.initCodeTime();
+              }
+          }
+      })
+    },
   },
   /**
     * 生命周期函数
@@ -632,4 +601,41 @@ Component({
       this.initAreaData()
     },
   },
+  /**
+    * 监测属性值变化
+    */
+  observers: {
+    info: function (newVal) {
+      // 获取类型是从哪个界面来的数据
+      let type = newVal.type;
+      // 判断是否是从找工作详情来数据
+      if ( type === "findWorkDetail" ) {
+        // 定义位置数据
+        let areaData = {}
+        // 判断是否有工种、区域数据字段，并保存相关数据
+        let occId = newVal.hasOwnProperty("occ")? newVal.occ: '';
+        let occName = newVal.hasOwnProperty("occ_txt")? newVal.occ_txt: '';
+        let pid = newVal.hasOwnProperty("province_id")? newVal.province_id: '';
+        let id = newVal.hasOwnProperty("city_id")? newVal.city_id: '';
+        let provinceText = newVal.hasOwnProperty("province_txt")? newVal.province_txt:'';
+        let cityText = newVal.hasOwnProperty("city_txt")? newVal.city_txt:'';
+        // 如果id = 0，代表是直辖市，否则是市数据
+        if (id === "0") {
+          areaData.pid = pid;
+          areaData.id = pid;
+          areaData.name = provinceText
+        } else {
+          areaData.pid = pid;
+          areaData.id = id;
+          areaData.name = cityText
+        }
+        // 组合工种数据
+        let classifyids = [{ id: occId, name: occName }];
+        // 保存到data数据中
+        this.setEnterInfo("userClassifyids",classifyids);
+        this.setEnterInfo("areaData",areaData)
+      }
+      this.setData({telPhone:newVal.tel})
+    }
+  }
 })

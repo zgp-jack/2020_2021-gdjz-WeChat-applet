@@ -3,6 +3,7 @@
   "usingComponents": {
     "recommendRecruit": "/components/recommendRecruit/recommendRecruit",
     "recommendResume": "/components/recommendResume/recommendResume",
-    "downapptips": "/components/downapptips/index"
+    "downapptips": "/components/downapptips/index",
+    "publishfindwork":"/components/publishfindwork/publishfindword"
   }
 }

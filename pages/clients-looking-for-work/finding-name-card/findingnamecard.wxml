@@ -544,4 +544,5 @@
   <button class='userauth-btn  userauth-back-btn' bindtap='returnPrevPage'>返回上一页</button>
 </view>
 
+<!-- 快速发布找活名片 -->
 <publishfindwork id="pulishfindwork" info="{{ info }}"></publishfindwork>

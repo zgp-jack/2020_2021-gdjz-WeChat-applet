@@ -3,8 +3,8 @@
   <view class="publish-contentbox">
     <view class="issue-title-box">
       <image src="{{ titleImage }}" class="issue-title-iamge"></image>
-      <!-- <view class="issue-title" wx:if="{{info}}">你是否要在成都找建筑木工/电工</view> -->
-      <view class="issue-title" wx:if="{{ !info.uuid }}">请完善以下信息</view>
+      <view class="issue-title" wx:if="{{info}}">你是否要在<text class="issue-title-info">{{ titleCity }}</text>找<text class="issue-title-info">{{ titleOcc }}</text>工作</view>
+      <view class="issue-title" wx:if="{{ info.type == 'findWorkCard' && !info.uuid && !titleCity && !titleOcc }}">请完善以下信息</view>
       <image src="{{ titleImage }}" class="issue-title-iamge"></image>
     </view>
     <view class="issue-contactbox">
@@ -13,7 +13,7 @@
         <picker  mode="multiSelector" 
           bindchange="bindPickerChange" 
           bindcolumnchange="bindMultiPickerColumnChange" 
-          value="{ {index}}" 
+          value="{{ index }}" 
           range="{{ areapicker }}" 
           range-key="name">
           <input placeholder="请选择招工城市" disabled class="issue-input" value="{{ areatext }}"></input>
@@ -25,21 +25,22 @@
           <input placeholder="请选择工种（可多选）" disabled class="issue-input" wx:if="{{ !showClassifyText }}"></input>
           <view class="input-item-text" wx:if="{{ showClassifyText }}">{{ showClassifyText }}</view>
         </view>
-        <view class="issue-box-worktype-tip">注：最多可选择5个工种</view>
+        <view class="issue-box-worktype-tip">注：最多可选择{{ maxWorkNum }}个工种</view>
       </view>
       <view class="issue-box">
         <text>联系电话：</text>
-        <input placeholder="请输入联系电话"  class="issue-input" value="{{ info.tel }}"></input>
+        <input placeholder="请输入联系电话"  class="issue-input" value="{{ info.tel }}" bindinput="inputPhoneNumber" type="number" maxlength="11"></input>
       </view>
       <view class="issue-box" wx:if="{{ !info.tel || info.tel != telPhone}}">
         <text>验证码：</text>
-        <input placeholder="请输入验证码"  class="issue-input"></input>
-        <text class="issue-phone-code">获取验证码</text>
+        <input placeholder="请输入验证码"  class="issue-input" type="number"></input>
+        <view class="issue-phone-code" wx:if="{{ firstGetCode }}" bindtap="reGetPhoneCode">获取验证码</view>
+        <view class="issue-phone-code" wx:elif="{{ !firstGetCode }}" bindtap="{{ sendrefresh?'':'reGetPhoneCode' }}">{{ sendrefresh? sendrefresh + '秒后可重新获取':'重新获取' }}</view>
       </view>
     </view>
     <view class="issue-footer-button">
       <button class="issue-code-btn" plain="true" bindtap="closeFindWork">取消</button>
-      <button class="issue-code-btn" type="primary" open-type="{{ areaId && selectedClassifies.length != 0 ?'getUserInfo':''}}"  bindtap="sureAreaAction" bindgetuserinfo="bindGetUserInfo">确认发布</button>
+      <button class="issue-code-btn" type="primary" bindtap="publishFindWork">确认发布</button>
     </view>
     <view class="issue-cloose-tip" bindtap="clooseTip">暂不提示</view>
   </view>
