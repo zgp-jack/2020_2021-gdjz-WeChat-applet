@@ -3,7 +3,7 @@
   <view class="publish-contentbox">
     <view class="issue-title-box">
       <image src="{{ titleImage }}" class="issue-title-iamge"></image>
-      <view class="issue-title" wx:if="{{  fastInfo.type === 1 || fastInfo.type === 3 }}">你是否要在<text class="issue-title-info">{{ areaData.name }}</text>找<text class="issue-title-info">{{ userClassifyids[0].name }}</text>工作</view>
+      <view class="issue-title" wx:if="{{ fastInfo.type === 3 || !fastInfo.type}}">你是否要在<text class="issue-title-info">{{ areaData.name }}</text>找<text class="issue-title-info">{{ userClassifyids[0].name }}</text>工作</view>
       <view class="issue-title" wx:if="{{ fastInfo.type === 2 }}">请完善以下信息</view>
       <image src="{{ titleImage }}" class="issue-title-iamge"></image>
     </view>
@@ -42,7 +42,7 @@
       <button class="issue-code-btn" plain="true" bindtap="closeFindWork">取消</button>
       <button class="issue-code-btn" type="primary" bindtap="publishFindWork">确认发布</button>
     </view>
-    <view class="issue-cloose-tip" wx:if="{{ fastInfo.type === 1 }}" bindtap="clooseTip">暂不提示</view>
+    <view class="issue-cloose-tip" wx:if="{{ !fastInfo.type }}" bindtap="clooseTip">暂不提示</view>
   </view>
   <!-- 工种选择 -->
   <view class="common-picker-container {{ showPicker ? '':'common-picker-none' }}">

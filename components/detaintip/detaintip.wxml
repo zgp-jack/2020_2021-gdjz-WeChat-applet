@@ -1,6 +1,5 @@
 <view class="issueok-container" wx:if="{{show}}">
   <view class="issueok-box">
-    <view class="issueok-title" wx:if="{{tipdata.type}}">发布成功</view>
     <view class="issueok-title" wx:if="{{!tipdata.type}}">提示</view>
     <!-- 内容不需要 拼接颜色样式 -->
     <view class="issueok-body" wx:if="{{!tipstr.length}}">{{tipdata.tip_type == "day_last" ? ConfigData.tips.text : tipdata.top_tips.text}}</view>
@@ -8,8 +7,6 @@
     <view class="issueok-body" wx:if="{{tipstr.length}}">
       <text wx:for="{{tipstr}}" wx:key="{{index}}" style="color:{{item.value ? item.value:''}}">{{item.text}}</text>
     </view>
-    <!-- 找活名片发布成功提示 -->
-    <view class="issueok-body" wx:if="{{tipdata.type}}">置顶找活名片，让老板主动联系你</view>
     <!-- 置顶成功弹窗内容 -->
     <view class="issueok-body" wx:if="{{successData}}">
       <text>{{successData.errmsg}}</text>
@@ -18,6 +15,5 @@
       <button class="issueok-btn" bindtap="close">{{buttontext.close}}</button>
       <button class="issueok-btn" bindtap="comfirm">{{buttontext.comfirm}}</button>
     </view>
-    <image class="issueok-close" bindtap="show" src="{{ close }}"></image>
   </view>
 </view>

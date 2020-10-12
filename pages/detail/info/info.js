@@ -64,6 +64,7 @@ Page({
       showDetail:false,//初始化是否展示详情界面
       defalutTop:false, //置顶默认城市
       topdata: {}, //置顶数据
+      showTip: false,//是否展示成功提示框
     },
     showdownappaction:function(){
       wx.navigateTo({
@@ -869,7 +870,12 @@ Page({
   },
   // 展示发布成功界面
   showPublishTip: function () {
-    this.selectComponent("#publishtip").show()
+    this.setData({ showTip: true })
+    let showTip = this.data.showTip;
+    if (showTip) {
+      this.setData({ showTip: false })
+      this.selectComponent("#publishtip").show()
+    } 
   },
     /**
      * 生命周期函数--监听页面加载

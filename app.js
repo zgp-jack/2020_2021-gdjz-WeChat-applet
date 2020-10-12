@@ -98,8 +98,6 @@ App({
       logoutWay: "",
       loginWay: "",
     },
-    // 快速发布找活名片成功提示框的展示
-    pulishFindWork:false
     
   },
   //是否为极速发布与快速发布请求,快速发布与极速发布跳转

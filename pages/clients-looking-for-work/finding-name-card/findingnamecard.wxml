@@ -549,4 +549,4 @@
 
 
 <!-- 发布招工成功提示框 -->
-<issueok  id="publishtip" tipdata="{{ { type:'publishFindWork' } }}"/>
+<issueok  id="publishtip" tipdata="{{ { type:'publishFindWork'} }}" topdata="{{ resume_top }}" defalutTop="{{ default_top_area }}"/>

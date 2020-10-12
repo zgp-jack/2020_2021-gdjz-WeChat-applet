@@ -124,6 +124,7 @@ Page({
     userTopArea:[],//初始化用户置顶城市数据
     showFindCard:false, //是否展示找活名片
     fastInfo:{},//快速发布招工信息
+    pulishFindWork:false,//展示发布成功提示框
   },
 
 
@@ -1260,17 +1261,18 @@ Page({
       top_display: "none",
     })
   },
+  // 刷新页面
   refreshPage: function () {
     this.getdetail();
-    app.globalData.pulishFindWork = true;
+    this.setData({pulishFindWork:true})
     this.showPublishTip()
   },
   // 展示发布成功界面
   showPublishTip: function () {
-    let pulishFindWork = app.globalData.pulishFindWork;
+    let pulishFindWork = this.data.pulishFindWork;
     if (pulishFindWork) {
       this.selectComponent("#publishtip").show()
-      app.globalData.pulishFindWork = false
+      this.setData({pulishFindWork:false})
     }
   },
   /**

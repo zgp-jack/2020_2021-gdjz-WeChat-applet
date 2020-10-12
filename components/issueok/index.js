@@ -5,7 +5,18 @@ Component({
    * 组件的属性列表
    */
   properties: {
-
+    tipdata:{
+      type: Object,
+      value:{}
+    },
+    topdata:{
+      type: Object,
+      value:{}
+    },
+    defalutTop:{
+      type:Number,
+      value: null
+    }
   },
 
   /**
@@ -30,6 +41,27 @@ Component({
       this.setData({
         show: !bool
       })
+    },
+    //去查看招工信息
+    goFindWork: function () {
+      let type = this.properties.tipdata.type
+      if ( type === "publishFindWork") {
+        wx.navigateTo({
+          url: '/pages/index/index',
+        })
+        this.show()
+      }else{
+        this.show()
+      }
+    },
+    // 发布成功去置顶
+    goTop: function () {
+      let topdata = JSON.stringify(this.properties.topdata);
+      let defalutTop = this.properties.defalutTop;
+      wx.navigateTo({
+        url: "/pages/clients-looking-for-work/workingtop/workingtop?topdata=" + topdata + "&defaulttop=" + defalutTop,
+      })
+      this.show()
     },
     //登录状态下打开招工信息列表
     manageRecruit:function () {

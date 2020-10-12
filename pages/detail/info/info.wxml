@@ -217,7 +217,7 @@
 
 
 <!-- 快速发布找活名片 -->
-<publishfindwork id="pulishfindwork" fastInfo="{{ fastInfo }}" bind:showtip = "showPublishTip"></publishfindwork>
+<publishfindwork id="pulishfindwork" fastInfo="{{ fastInfo }}" bind:refreshPage = "showPublishTip"></publishfindwork>
 
 <!-- 发布招工成功提示框 -->
-<issueok  id="publishtip" tipdata="{{ { type:'publishFindWork' } }}"/>
+<issueok  id="publishtip" tipdata="{{ { type:'findWorkDetail' } }}"/>
