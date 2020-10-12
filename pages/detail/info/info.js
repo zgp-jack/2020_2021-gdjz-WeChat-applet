@@ -62,6 +62,8 @@ Page({
       showFollow: false,
       fastInfo:{},//快速发布找活名片数据
       showDetail:false,//初始化是否展示详情界面
+      defalutTop:false, //置顶默认城市
+      topdata: {}, //置顶数据
     },
     showdownappaction:function(){
       wx.navigateTo({
@@ -864,6 +866,10 @@ Page({
     },
   isShowHomeBtn: function (options) {
     if (options.hasOwnProperty("home") && options.home == "1") this.setData({ showHomeImg:true })
+  },
+  // 展示发布成功界面
+  showPublishTip: function () {
+    this.selectComponent("#publishtip").show()
   },
     /**
      * 生命周期函数--监听页面加载

@@ -3,6 +3,6 @@
     "usingComponents": {
         "recommendRecruit": "/components/recommendRecruit/recommendRecruit",
         "publishfindwork":"/components/publishfindwork/publishfindword",
-        "toptip":"/components/detaintip/detaintip"
+        "issueok": "/components/issueok/index"
     }
 }

@@ -5,6 +5,6 @@
     "recommendResume": "/components/recommendResume/recommendResume",
     "downapptips": "/components/downapptips/index",
     "publishfindwork":"/components/publishfindwork/publishfindword",
-    "toptip":"/components/detaintip/detaintip"
+    "issueok": "/components/issueok/index"
   }
 }

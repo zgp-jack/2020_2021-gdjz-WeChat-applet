@@ -1260,8 +1260,18 @@ Page({
       top_display: "none",
     })
   },
+  refreshPage: function () {
+    this.getdetail();
+    app.globalData.pulishFindWork = true;
+    this.showPublishTip()
+  },
+  // 展示发布成功界面
   showPublishTip: function () {
-    this.selectComponent("#publishtip").show()
+    let pulishFindWork = app.globalData.pulishFindWork;
+    if (pulishFindWork) {
+      this.selectComponent("#publishtip").show()
+      app.globalData.pulishFindWork = false
+    }
   },
   /**
    * 生命周期函数--监听页面加载

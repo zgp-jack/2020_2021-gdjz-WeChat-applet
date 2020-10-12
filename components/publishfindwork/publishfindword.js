@@ -440,6 +440,13 @@ Component({
     },
     // 点击确认发布，发布找活信息
     publishFindWork: function () {
+      // 用户信息
+      let userInfo = wx.getStorageSync('userInfo')
+      // 没有用户信息直接返回
+      if (!userInfo) return
+      let userId = userInfo.userId;
+      let token	= userInfo.token;
+      let tokenTime	= userInfo.tokenTime;
       let that = this;
       let vali = v.v.new();
       let { id, pid } = this.data.areaData;
@@ -447,6 +454,7 @@ Component({
       let occupations = this.data.selectedClassifies.join(",");
       let phone = this.data.telPhone;
       let code = this.data.code;
+      // 验证是否有选择城市
       if (!id && !pid) {
         wx.showModal({
           title: '提示',
@@ -455,6 +463,7 @@ Component({
         })
         return false
       }
+      // 验证是否有选择工种
       if (!userClassifyids.length) {
         wx.showModal({
           title: '提示',
@@ -463,6 +472,7 @@ Component({
         })
         return false
       }
+      // 验证是否有电话号码
       if (phone == "") {
         wx.showModal({
           title: '提示',
@@ -471,6 +481,7 @@ Component({
         })
         return false
       }
+      // 验证电话号码格式是否正确
       if (phone && !vali.isMobile(phone)) {
         wx.showModal({
           title: '提示',
@@ -479,6 +490,7 @@ Component({
         })
         return false;
       }
+      // 验证是否输入验证码
       if (this.properties.fastInfo.tel != phone) {
         if (code == "") {
           wx.showModal({
@@ -489,7 +501,8 @@ Component({
           return false
         }
       }
-      let params = { province: pid, city: id, tel: phone, code: code, occupations: occupations }
+      // 发送请求参数
+      let params = { province: pid, city: id, tel: phone, code: code, occupations: occupations, userId, token, tokenTime }
       app.appRequestAction({
         url: 'resumes/add-fast-resume/',
         way: 'POST',
@@ -497,7 +510,8 @@ Component({
         success: function (res) {
           let mydata = res.data;
           if (mydata.errcode === "ok") {
-            that.triggerEvent("showtip")
+            that.triggerEvent("refreshPage")
+            that.show()
           }else{
             wx.showModal({
               title: '温馨提示',
