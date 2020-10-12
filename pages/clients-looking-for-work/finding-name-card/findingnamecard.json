@@ -2,6 +2,7 @@
     "navigationBarTitleText": "找活名片",
     "usingComponents": {
         "recommendRecruit": "/components/recommendRecruit/recommendRecruit",
-        "publishfindwork":"/components/publishfindwork/publishfindword"
+        "publishfindwork":"/components/publishfindwork/publishfindword",
+        "toptip":"/components/detaintip/detaintip"
     }
 }

@@ -4,6 +4,7 @@
     "recommendRecruit": "/components/recommendRecruit/recommendRecruit",
     "recommendResume": "/components/recommendResume/recommendResume",
     "downapptips": "/components/downapptips/index",
-    "publishfindwork":"/components/publishfindwork/publishfindword"
+    "publishfindwork":"/components/publishfindwork/publishfindword",
+    "toptip":"/components/detaintip/detaintip"
   }
 }

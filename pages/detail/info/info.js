@@ -517,7 +517,7 @@ Page({
                   _this.setData({
                     usepang: mydata.result.hasOwnProperty("isLook") ? mydata.result.isLook:8,
                     isEnd: mydata.result.hasOwnProperty("is_end") ? mydata.result.is_end : "",
-                    fastInfo: {...fastInfo, type:'findWorkDetail'},
+                    fastInfo: fastInfo,
                     showDetail: true,
                   })
                 }

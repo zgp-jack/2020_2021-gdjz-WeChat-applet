@@ -217,4 +217,6 @@
 
 
 <!-- 快速发布找活名片 -->
-<publishfindwork id="pulishfindwork" info="{{ fastInfo }}"></publishfindwork>
+<publishfindwork id="pulishfindwork" fastInfo="{{ fastInfo }}" ></publishfindwork>
+<!-- 发布成功提示 -->
+<toptip id="publishtip"></toptip>
