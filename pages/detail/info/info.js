@@ -65,6 +65,7 @@ Page({
       defalutTop:false, //置顶默认城市
       topdata: {}, //置顶数据
       showTip: false,//是否展示成功提示框
+      defalutTop:null,//置顶默认区域
     },
     showdownappaction:function(){
       wx.navigateTo({
@@ -496,10 +497,28 @@ Page({
                 //_this.getRecommendList()
                 let cityid = mydata.result.hasOwnProperty('city_id') ? parseInt(mydata.result.city_id) : 0
                 let provinceid = mydata.result.hasOwnProperty('province_id') ? parseInt(mydata.result.province_id) : 0
-                let fastInfo = mydata.result.hasOwnProperty('fast_info')?((Array.isArray(mydata.result.fast_info) && mydata.result.fast_info.length === 0)? {} : mydata.result.fast_info): {}
+                let fastInfo = mydata.result.hasOwnProperty('fast_info')?((Array.isArray(mydata.result.fast_info) && mydata.result.fast_info.length === 0)? {} : mydata.result.fast_info): {};
+                // 获取缓存的发布找活弹窗是否展示到期时间
+                let FindWorkTime = wx.getStorageSync("FindWorkTime");
+                // 判断返回有没有fast_info字段
                 if (mydata.result.hasOwnProperty('fast_info')) {
+                // 判断返回字段是否是空数组
                   if (!Array.isArray(mydata.result.fast_info)) {
-                    _this.selectComponent("#pulishfindwork").show()
+                    // 判断是否有时间缓存有缓存判断当前时间是否大于到期时间
+                    // 无缓存到期时间则展示快速发布框
+                    if (FindWorkTime) {
+                      let dueDate = FindWorkTime.dueDate;
+                      let currentTime = new Date().getTime();
+                      if (currentTime > dueDate) {
+                        _this.selectComponent("#pulishfindwork").show();
+                      }else{
+                        _this.setData({showDetail: true})
+                      }
+                    }else{
+                      _this.selectComponent("#pulishfindwork").show();
+                    }
+                  }else{
+                    _this.setData({showDetail: true})
                   }
                 }
                 if (mydata.errcode != "fail") {
@@ -521,7 +540,6 @@ Page({
                     usepang: mydata.result.hasOwnProperty("isLook") ? mydata.result.isLook:8,
                     isEnd: mydata.result.hasOwnProperty("is_end") ? mydata.result.is_end : "",
                     fastInfo: fastInfo,
-                    showDetail: true,
                   })
                 }
                 _this.doDetailAction(mydata, {
@@ -869,13 +887,19 @@ Page({
     if (options.hasOwnProperty("home") && options.home == "1") this.setData({ showHomeImg:true })
   },
   // 展示发布成功界面
-  showPublishTip: function () {
-    this.setData({ showTip: true })
+  showPublishTip: function (e) {
+    console.log(e)
+    let defalutTop = e.detail.defalutTop
+    this.setData({ showTip: true, defalutTop: defalutTop })
     let showTip = this.data.showTip;
     if (showTip) {
-      this.setData({ showTip: false })
+      this.setData({ showTip: false, showDetail: true })
       this.selectComponent("#publishtip").show()
     } 
+  },
+  // 快速发布成功界面点击取消显示招工详情
+  cancelPublish: function () {
+    this.setData({ showDetail: true })
   },
     /**
      * 生命周期函数--监听页面加载

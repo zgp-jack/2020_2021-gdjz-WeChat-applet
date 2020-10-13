@@ -109,25 +109,23 @@ Component({
         let item = allProvince[index]
         //记录本地位置信息到data中
         this.setData({
-          'areaData.id': province.pid == province.id? 0 : province.pid,
-          'areaData.pid': province.pid,
-          'areaData.name': province.name,
-          areatext: province.pid == province.id? item.name: item.name + province.name,
           index:[index,0],
           "mindex[0]":index
         })
         //获取所有城市信息
         let cities = this.getCityLists()
-      //从城市列表中匹配与本地位置对应的index
+        //从城市列表中匹配与本地位置对应的index
         let ci = cities.findIndex(item=>item.id == province.id)
-        this.setData({
-          "index[1]": ci,
-          "mindex[1]": ci
-        })
         // 组合成初始化picker数据
         let areapicker = [allProvince,cities]
         this.setData({
-          areapicker
+          'areaData.id': (province.pid === province.id)? 0 : province.id,
+          'areaData.pid': province.pid,
+          'areaData.name': province.name,
+          areatext: (province.pid === province.id)? item.name: item.name + province.name,
+          index: [index,ci],
+          mindex: [index,ci],
+          areapicker: areapicker
         })
       }else{
         //获取所有城市信息
@@ -261,6 +259,32 @@ Component({
     },
     // 点击取消关闭快速发布找活名片
     closeFindWork: function () {
+      // type值是2或者3代表是找活名片快速发布
+      let type = this.data.type
+      // type存在关闭弹窗后续还会继续弹窗，
+      // 反之（招工信息）点击取消后，当天不再展示
+      if (type) {
+        this.triggerEvent("cancelPublish")
+        this.show()
+      }else{
+        let myDate = new Date();
+        // 当前时间戳
+        let currentTime = myDate.getTime();
+        // 到期时间戳（23:59:59）
+        let dueDate = (new Date(new Date().toLocaleDateString())).getTime() +  (24 * 60 * 60 * 1000 - 1);
+        // 存入缓存
+        let FindWorkTime = {currentTime:currentTime,dueDate:dueDate}
+        wx.setStorageSync("FindWorkTime",FindWorkTime)
+        this.triggerEvent("cancelPublish")
+        this.show()
+      }
+    },
+    clooseTip: function () {
+      let myDate = new Date();
+      let currentTime = myDate.getTime();
+      let dueDate = currentTime +  (24 * 7* 60 * 60 * 1000 - 1);
+      let FindWorkTime = {currentTime:currentTime,dueDate:dueDate}
+      wx.setStorageSync("FindWorkTime",FindWorkTime)
       this.show()
     },
     // 显示快速找活名片
@@ -502,7 +526,7 @@ Component({
         }
       }
       // 发送请求参数
-      let params = { province: pid, city: id, tel: phone, code: code, occupations: occupations, userId, token, tokenTime }
+      let params = { province: parseInt(pid), city: parseInt(id), tel: parseInt(phone), code: parseInt(code), occupations: occupations, userId, token, tokenTime }
       app.appRequestAction({
         url: 'resumes/add-fast-resume/',
         way: 'POST',
@@ -510,7 +534,8 @@ Component({
         success: function (res) {
           let mydata = res.data;
           if (mydata.errcode === "ok") {
-            that.triggerEvent("refreshPage")
+            let defalutTop = mydata.data.default_top_area;
+            that.triggerEvent("refreshPage",{ defalutTop: defalutTop })
             that.show()
           }else{
             wx.showModal({
@@ -565,10 +590,6 @@ Component({
     */
   lifetimes: {
     attached: function () { 
-      // 初始化工种信息
-      // this.initWorkTypeData()
-      // 初始化用户位置信息
-      // this.initAreaData()
     },
   },
   /**
@@ -610,14 +631,13 @@ Component({
         }
         // 组合工种数据
         classifyids = [{ id: occId, name: occName }];
-      }
-      // 保存到data数据中
-      this.setData({userClassifyids:classifyids, classifies:occupations, areaData:areaData, type:type, telPhone:telPhone});
-      if (JSON.stringify(newVal ) != "{}") {
+        this.setData({userClassifyids:classifyids, classifies:occupations, areaData:areaData, type:type, telPhone:telPhone});
         // 初始化用户位置信息
         this.initAreaData()
         // 初始化工种信息
         this.initWorkTypeData()
+      }else{
+        this.setData({userClassifyids:classifyids, classifies:occupations, areaData:areaData, type:type, telPhone:telPhone});
       }
     }
   }

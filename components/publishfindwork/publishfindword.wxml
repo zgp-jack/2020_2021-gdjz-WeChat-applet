@@ -33,7 +33,7 @@
       </view>
       <view class="issue-box" wx:if="{{ !fastInfo.tel || fastInfo.tel != telPhone }}">
         <text>验证码：</text>
-        <input placeholder="请输入验证码"  class="issue-input" type="number" value="{{ code }}" bindtap="inputCode"></input>
+        <input placeholder="请输入验证码"  class="issue-input" type="number" value="{{ code }}" bindinput="inputCode"></input>
         <view class="issue-phone-code" wx:if="{{ firstGetCode }}" bindtap="reGetPhoneCode">获取验证码</view>
         <view class="issue-phone-code" wx:elif="{{ !firstGetCode }}" bindtap="{{ sendrefresh?'':'reGetPhoneCode' }}">{{ sendrefresh? sendrefresh + '秒后可重新获取':'重新获取' }}</view>
       </view>

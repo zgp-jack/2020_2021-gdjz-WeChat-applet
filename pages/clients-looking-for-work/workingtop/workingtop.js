@@ -972,14 +972,15 @@ Page({
           alllength:defaultTop.length,
         })
       }
-      console.log("defaultTop",defaultTop)
+      // 获取配置信息和计算初次置顶数据
+      this.getdetail()
       return false
     }
     
     //如果没有缓存信息将通过app中方法获取区域数据
     app.getAreaData(this, function(data) {
       let resdata = app.arrDeepCopy(data)
-      let areaData = resdata.data
+      let areaData = resdata
       if ( areaId == 0) {
         return
       }else{
@@ -1001,21 +1002,23 @@ Page({
       }
       let pid = defaultTop.pid
       if (pid == 0) {
-        this.setData({
+        _this.setData({
           areaAllcrum:defaultTop,
           alllength:defaultTop.length,
         })
       } else if(pid == 1) {
-        this.setData({
+        _this.setData({
           areaProcrum: defaultTop,
           alllength:defaultTop.length,
         })
       }else{
-        this.setData({
+        _this.setData({
           areaCitycrum: defaultTop,
           alllength:defaultTop.length,
         })
       }
+      // 获取配置信息和计算初次置顶数据
+      _this.getdetail()
     });
   },
  //初次置顶
@@ -1026,6 +1029,9 @@ Page({
   //如果时初次置顶或者置顶到期，置顶地区默认找活名片地区
   if(hastop == 0 || istop == 2){
     this.getDefaultArea(defaultTop)
+  }else{
+    // 获取配置信息和计算初次置顶数据
+    this.getdetail()
   }
  },
   /**
@@ -1036,7 +1042,8 @@ Page({
     this.getNewId(options)
     // 初始化置顶城市与置顶天数
     this.initTopData()
-    this.getdetail()
+    // 获取配置信息和计算初次置顶数据
+    // this.getdetail()
   },
 
   /**
