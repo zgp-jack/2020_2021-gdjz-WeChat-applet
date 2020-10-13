@@ -979,6 +979,8 @@ Page({
           typeText: classTree[i].name,
           "searchDate.classify_id": id
         })
+        //判断是否有传入 工种id 有则存入缓存
+        wx.setStorageSync('typeText',classTree[i].name)
         return
       }else{
         if (classTree[i].has_children === 1) {
@@ -991,6 +993,8 @@ Page({
                 "searchDate.classify_id": id,
                 workinfo: id
               })
+              //判断是否有传入 工种id 有则存入缓存
+              wx.setStorageSync('typeText',childrenClassTree[j].name)
               return
             }
           }
