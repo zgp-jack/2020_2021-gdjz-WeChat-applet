@@ -29,7 +29,8 @@ vertify()
     deletestatus: true,
     skillnum:'',
     model:{},
-    checkonef:""
+    checkonef:"",
+    maximg: 3
   },
   vertify() {
     this.setData({
@@ -84,18 +85,19 @@ vertify()
   },
   chooseImage() {
     let that = this;
+    let max = this.data.maximg - this.data.imgArrs.length;
     app.userUploadImg(function (img, url) {
       that.data.imgArrs.push(url.httpurl)
       that.data.idArrs.push(url.url)
       that.setData({
         imgArrs: that.data.imgArrs
       })
-      if (that.data.imgArrs.length >= 9) {
+      if (that.data.imgArrs.length >= 3) {
         that.setData({
           imgArrslength: false
         })
       }
-    },9)
+    },max)
   },
   previewImage(e) {
     
@@ -115,7 +117,7 @@ vertify()
     this.setData({
       idArrs: this.data.idArrs
     })
-    if (this.data.imgArrs.length < 9) {
+    if (this.data.imgArrs.length < 3) {
       this.setData({
         imgArrslength: true
       })
@@ -502,7 +504,7 @@ vertify()
         checkonef: this.data.skill.check
       })
       this.judgecommit()
-      if (this.data.imgArrs.length >= 9) {
+      if (this.data.imgArrs.length >= 3) {
         this.setData({
           imgArrslength: false
         })

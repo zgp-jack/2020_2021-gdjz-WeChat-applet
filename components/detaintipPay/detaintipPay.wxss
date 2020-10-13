@@ -52,6 +52,7 @@
   border-radius: 0;
   line-height: 100rpx;
   font-weight: bold;
+  color: #797979;
 }
 .issueok-btn::after{
   border: 0;

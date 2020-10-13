@@ -78,6 +78,7 @@ Page({
         let _type = parseInt(e.currentTarget.dataset.type);
         let _index = parseInt(e.currentTarget.dataset.index);
         let _this = this;
+        let max = this.data.maxLen - this.data.imglists.length
         app.userUploadImg(function(imgRes, mydata) {
             wx.hideLoading();
             wx.showToast({
@@ -88,11 +89,11 @@ Page({
             let imgs = _this.data.imgs;
             let imglists = _this.data.imglists;
             if (_type == 0) {
-                imgs[_index] = mydata;
+                imgs[_index] = mydata.url;
                 imglists[_index] = imgRes;
             } else {
                 if(imgs.length < 9){
-                    imgs.push(mydata)
+                    imgs.push(mydata.url)
                     imglists.push(imgRes)
                 }
             }
@@ -100,7 +101,7 @@ Page({
                 imgs: imgs,
                 imglists: imglists
             })
-        },9)
+        },max)
     },
     userEnterContent: function(e) {
         let val = e.detail.value

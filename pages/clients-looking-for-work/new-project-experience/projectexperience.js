@@ -37,13 +37,13 @@ Page({
     project_cou: 0,
     project_count: 0,
     project_show: true,
-    //选择的图片大于9张 就不再显示添加按钮
     imgArrslength: true,
     display: "none",
     ranktypes: "",
     deletestatus:true,
     model:{},
-    checkonef:""
+    checkonef:"",
+    maximg: 6
   },
 
   obtn() {
@@ -138,7 +138,7 @@ Page({
   },
   chooseImage() {
     let that = this;
- 
+    let max = this.data.maximg - this.data.imgArrs.length
     app.userUploadImg(function (img, url) {
       wx.hideLoading()
       that.data.imgArrs.push(url.httpurl)
@@ -146,13 +146,12 @@ Page({
       that.setData({
         imgArrs: that.data.imgArrs
       })
-
-      if (that.data.imgArrs.length >= 9) {
+      if (that.data.imgArrs.length >= 6) {
         that.setData({
           imgArrslength: false
         })
       }
-    },9)
+    },max)
   },
   initAllProvice: function () { //获取所有省份
     let that = this;
@@ -585,7 +584,7 @@ Page({
       importimg: this.data.importimg
     })
 
-    if (this.data.imgArrs.length < 9) {
+    if (this.data.imgArrs.length < 6) {
       this.setData({
         imgArrslength: true
       })
@@ -739,7 +738,7 @@ Page({
       this.setData({
         importimg: this.data.project.images[0] == "" ? [] : this.data.project.images
       })
-      if (that.data.imgArrs.length >= 9) {
+      if (that.data.imgArrs.length >= 6) {
         that.setData({
           imgArrslength: false
         })
