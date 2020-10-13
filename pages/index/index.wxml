@@ -9,7 +9,8 @@
 <!-- 搜索头部 -->
 <view class="lists-header">
     <input placeholder="找活、找工作" bindconfirm="userTapSearch"  confirm-type="search" bindfocus='bindInputFocus' bindinput='bindKeyInput' bindtap="closeAllSelect" value='{{ searchDate.keywords }}' data-goSearch="1" disabled/>
-    <text bindtap="userTapSearch">搜索</text>
+    <image wx:if="{{showdeletekey}}" bindtap="deletekey" src="{{ delImg }}" mode="aspectFit"></image>
+    <text bindtap="userTapSearch">{{showdeletekey ? "取消":"搜索"}}</text>
 </view>
 
 <!-- 历史记录 -->

@@ -115,7 +115,11 @@ Page({
     // pageStatus是goback的话需要刷新当前页面信息ID
     pageId: '',
     //没有数据时 按钮显示状态
-    isNullStatus:""
+    isNullStatus:"",
+    //搜索框清除按钮
+    delImg: app.globalData.apiImgUrl + "new-published-close-icon.png",
+    //是否显示清除按钮
+    showdeletekey:false
   },
   getPhoneNumber:function(e){
     console.log(e)
@@ -643,46 +647,45 @@ Page({
     }
   },
   userTapSearch: function () {
-      // if(!this.data.userInfo){
-    //   app.gotoUserauth();
-    //   return false;
-    // }
-    //if(this.data.searchDate.keywords == "") return false;
-    let text = this.data.searchDate.keywords;
-    if (text) {
-      let his = wx.getStorageSync("searchHistory")
-      if (his) {
-        let job = his.hasOwnProperty("job");
-        if (job) {
-          let jobs = his.job;
-          let index = jobs.indexOf(text);
-          if (index != -1) {
-            jobs.splice(index, 1);
+    //判断是搜索还是取消按钮
+    if(this.data.showdeletekey){
+      //清除搜索内容 重新请求搜索接口
+      this.deletekey()
+    }else {
+      let text = this.data.searchDate.keywords;
+      if (text) {
+        let his = wx.getStorageSync("searchHistory")
+        if (his) {
+          let job = his.hasOwnProperty("job");
+          if (job) {
+            let jobs = his.job;
+            let index = jobs.indexOf(text);
+            if (index != -1) {
+              jobs.splice(index, 1);
+            }
+            jobs.unshift(text);
+  
+          } else {
+            his.job = [];
+            his.job.push(text)
           }
-          jobs.unshift(text);
-
+          his.job.splice(4)
+          wx.setStorageSync("searchHistory", his)
         } else {
-          his.job = [];
-          his.job.push(text)
+          let myhis = {
+            job: [text]
+          }
+          wx.setStorageSync("searchHistory", myhis)
         }
-        his.job.splice(4)
-        wx.setStorageSync("searchHistory", his)
-      } else {
-        let myhis = {
-          job: [text]
-        }
-        wx.setStorageSync("searchHistory", myhis)
       }
+      this.returnTop();
+      this.setData({
+        "searchDate.page": 1,
+        showHistoryList: false
+      })
+      this.initSearchHistory();
+      this.doRequestAction(false);
     }
-
-
-    this.returnTop();
-    this.setData({
-      "searchDate.page": 1,
-      showHistoryList: false
-    })
-    this.initSearchHistory();
-    this.doRequestAction(false);
   },
   returnTop: function () {
     //this.setData({ scrollTop: 0 })
@@ -979,6 +982,8 @@ Page({
           typeText: classTree[i].name,
           "searchDate.classify_id": id
         })
+        //判断是否有传入 工种id 有则存入缓存
+        wx.setStorageSync('typeText',classTree[i].name)
         return
       }else{
         if (classTree[i].has_children === 1) {
@@ -991,6 +996,8 @@ Page({
                 "searchDate.classify_id": id,
                 workinfo: id
               })
+              //判断是否有传入 工种id 有则存入缓存
+              wx.setStorageSync('typeText',childrenClassTree[j].name)
               return
             }
           }
@@ -1017,6 +1024,17 @@ Page({
       url: '/pages/clients-looking-for-work/finding-name-card/findingnamecard',
     })
   },
+  //删除搜索内容
+  deletekey:function () {
+    this.setData({
+      "searchDate.keywords":"",
+      showdeletekey:false,
+      "searchDate.page": 1,
+    })
+    //重新请求搜索接口
+    this.returnTop();
+    this.doRequestAction(false)
+  },
   /**
    * 生命周期函数--监听页面加载
    */
@@ -1032,6 +1050,16 @@ Page({
         "searchDate.keywords":options.keywrods
       })
     }
+    //判断是否有搜索内容
+    if(this.data.searchDate.keywords){
+      this.setData({
+        showdeletekey:true
+      })
+    }else {
+      this.setData({
+        showdeletekey:false
+      })
+    }
     this.initFirstFcInfo();
     this.initSearchHistory();
     //this.isShowFastIssue();
@@ -1043,8 +1071,6 @@ Page({
     this.initUserLocation();
     this.initFooterData();
     this.checkIsInvite(options);
-
-    
   },
   /**
    * 生命周期函数--监听页面初次渲染完成

@@ -118,7 +118,11 @@ Page({
     // pageStatus是goback的话需要刷新当前页面信息ID
     pageId: '',
     //没有数据时 按钮显示状态
-    isNullStatus:""
+    isNullStatus:"",
+    //搜索框清除按钮
+    delImg: app.globalData.apiImgUrl + "new-published-close-icon.png",
+    //是否显示清除按钮
+    showdeletekey:false
   },
   // 根据发布方式不同发布招工：未登录或者“fast_add_job”是快速发布，“ordinary_add_job”是普通发布。
   publishJob:function () {
@@ -637,12 +641,10 @@ Page({
 
   //用户点击搜索
   userTapSearch: function () {
-      // if (!this.data.userInfo) {
-      //   app.gotoUserauth();
-      //   return false;
-      // }
-      //if (this.data.searchDate.keywords == "") return false;
-
+    if(this.data.showdeletekey){
+      //清除搜索内容 重新请求搜索接口
+      this.deletekey()
+    }else {
       let text = this.data.searchDate.keywords;
       if (text) {
         let his = wx.getStorageSync("searchHistory")
@@ -676,6 +678,7 @@ Page({
       })
       this.doRequestAction(false);
       this.initSearchHistory();
+    }
   },
   returnTop: function () {
     //this.setData({ scrollTop: 0 })
@@ -950,11 +953,39 @@ Page({
       url: '/pages/published/recruit/list',
     })
   },
+  //删除搜索内容
+  deletekey:function () {
+    this.setData({
+      "searchDate.keywords":"",
+      showdeletekey:false,
+      "searchDate.page": 1,
+      showHistoryList: false,
+      hasSortFlag:1,
+      hasTime: 1,
+      hasTop: 1,
+      lastSortFlagPos: 0,
+      lastTimePos: 0,
+      lastNormalPos: 0
+    })
+    //重新请求搜索接口
+    this.returnTop();
+    this.doRequestAction(false)
+  },
   onLoad(options) {
     var isEmpty = app.isEmpty(options.keywrods)
     if(!isEmpty){
       this.setData({
         "searchDate.keywords":options.keywrods
+      })
+    }
+    //判断是否有搜索内容
+    if(this.data.searchDate.keywords){
+      this.setData({
+        showdeletekey:true
+      })
+    }else {
+      this.setData({
+        showdeletekey:false
       })
     }
     this.initSearchHistory();

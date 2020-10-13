@@ -74,7 +74,7 @@
         <text>招聘司机</text>
       </view>
     </navigator>
-    <navigator  class='index-footer-nav' url='/pages/index/index?id=25' open-type="navigate">
+    <navigator  class='index-footer-nav' url='/pages/index/index?id=73' open-type="navigate">
       <view class='index-industry-item'>
         <image src='{{ industry.gczg }}'></image>
         <text>工厂招人</text>

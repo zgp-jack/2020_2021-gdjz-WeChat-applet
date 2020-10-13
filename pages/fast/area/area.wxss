@@ -99,6 +99,7 @@ page{
   position: absolute;
   right: 20rpx;
   zoom: 0.7;
+  top: 40rpx;
 }
 .issue-upload-tips{
   position: relative;
