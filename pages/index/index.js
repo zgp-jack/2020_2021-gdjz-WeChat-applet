@@ -224,11 +224,11 @@ Page({
     })
     if(e && e.target.dataset.gosearch == 1){
       if(this.data.searchDate.keywords == ""){
-        wx.redirectTo({
+        wx.navigateTo({
           url: "/pages/search/search?changeStatus=0"
         })
       }else {
-        wx.redirectTo({
+        wx.navigateTo({
           url: "/pages/search/search?changeStatus=0&key="+this.data.searchDate.keywords
         })
       }
