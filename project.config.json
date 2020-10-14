@@ -534,6 +534,13 @@
           "id": -1,
           "name": "发布成功",
           "pathName": "pages/releaseSuccess/releaseSuccess",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "pages/boss-look-card/lookcard",
+          "pathName": "pages/lists/resume/index",
           "scene": null
         }
       ]

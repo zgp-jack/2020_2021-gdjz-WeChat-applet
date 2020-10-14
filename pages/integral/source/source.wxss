@@ -22,13 +22,13 @@
   position: absolute;
   content: "";
   display: inline-block;
-  width: 50%;
-  height: 8rpx;
+  width: 40%;
+  height: 10rpx;
   background-color: #0099FF;
   bottom: 18rpx;
   margin-left: -50%;
   transform: translateX(-50%);
-  border-radius: 4rpx;
+  border-radius: 10rpx;
 }
 .integral-header-expend{
   width: 50%;

@@ -43,7 +43,6 @@
         </view>
         <view class="listsboxlable">
           <view class="listsboxlableone" wx:for="{{item.occupations}}" wx:key="{{index}}">{{item}}</view>
-
         </view>
         <view class="listsboxself" wx:if="{{item.introduce}}">{{item.introduce}}</view>
         <view class="listsboxself" wx:if="{{!item.introduce}}"></view>

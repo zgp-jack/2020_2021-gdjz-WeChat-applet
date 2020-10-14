@@ -70,7 +70,6 @@ Component({
     },
     seemoreaction:function(){
       let { aid, cid, child, uuid } = this.properties
-      
       let len = this.data.lists.length
       let num = parseInt(this.data.pagesize)
       if(len < num){

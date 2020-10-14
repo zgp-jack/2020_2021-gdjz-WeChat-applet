@@ -24,7 +24,7 @@
             <view class="listsboxagetwo" wx:if="{{item.gender != '0'}}">
               <text class="listsboxnation" wx:if="{{item.nation}}">{{item.nation}}</text>
               <text><text class="listsboxnum" wx:if="{{item.experience}}" >{{item.experience}}</text></text>
-      
+              <text>{{item.prof_degree}}</text>
             </view>
             <view class="listsboxagetwot" wx:if="{{item.gender == '0'}}">
               <text wx:for="{{item.tags}}" wx:key="{{index}}">{{item.label_name}}</text>
@@ -52,8 +52,8 @@
           </view>
         </view>
         <view class="listsboxlocaltwo">
-          <!-- <text class="listsboxtime" wx:if="{{item.time}}">{{item.time}}</text> -->
-                  <text wx:if="{{item.prof_degree}}">{{item.prof_degree}}</text>
+          <text class="listsboxtime" wx:if="{{item.time}}">{{item.login_time}}</text>
+                  <!-- <text wx:if="{{item.prof_degree}}">{{item.prof_degree}}</text> -->
         </view>
       </view>
     </view>
