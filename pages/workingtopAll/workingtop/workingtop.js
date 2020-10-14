@@ -366,17 +366,6 @@ Page({
             successData:mydata
           })
           that.selectComponent("#tip").show();
-
-          // wx.showModal({
-          //   title: '温馨提示',
-          //   content: res.data.errmsg,
-          //   showCancel: false,
-          //   success(res) {
-          //     wx.navigateBack({
-          //       delta: 1
-          //     })
-          //   }
-          // })
         }else {
           wx.showModal({
             title: '温馨提示',

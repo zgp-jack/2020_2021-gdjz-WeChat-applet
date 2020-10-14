@@ -83,8 +83,6 @@ Page({
       let endtime = data.end_time //置顶到期时间
       let toping = data.is_top // 是否置顶状态
       let showTime = now > parseInt(endtime) ? true : false; // 置顶是否过期 已过期
-      
-      
       if(showTime){ //如果置顶过期
         console.log(showTime)
         wx.navigateTo({

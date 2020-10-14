@@ -541,6 +541,20 @@
           "id": -1,
           "name": "pages/boss-look-card/lookcard",
           "pathName": "pages/lists/resume/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "pages/published/recruit/list",
+          "pathName": "pages/published/recruit/list",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "pages/published/recruit/list",
+          "pathName": "pages/lists/resume/index",
           "scene": null
         }
       ]

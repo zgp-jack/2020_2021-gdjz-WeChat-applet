@@ -752,6 +752,9 @@ color: #616060;
   margin-left: 0rpx!important;
 
 }
+.listsboxagetwo text:first-child{
+  margin-left: 0 !important;
+}
 .listsboxagetwo text{
   font-size: 28rpx;
   margin-left: 18rpx;
