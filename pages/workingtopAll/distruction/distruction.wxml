@@ -2,7 +2,7 @@
 <view class='{{(!showInputList &&!showListsAnd)?"index-pullareabox":"index-pullareabox index-pullareaboxone"}}'>
   <view class='index-area-header'>
     <view class="searchinputbox">
-      <input class="area-input" placeholder="输入城市名字进行搜索" bindinput="searchInput" bindfocus="showInputList" bindblur="hideInputList" value="{{ searchInputVal }}" focus="{{ areaInputFocus }}" tabindex="99999999999"></input>
+      <input class="area-input" placeholder="请输入城市" bindinput="searchInput" bindfocus="showInputList" bindblur="hideInputList" value="{{ searchInputVal }}" focus="{{ areaInputFocus }}" tabindex="99999999999"></input>
       <image src="{{ clearinput }}" bindtap="clearInputAction"></image>
     </view>
     <text class='index-close-area'>搜索</text>

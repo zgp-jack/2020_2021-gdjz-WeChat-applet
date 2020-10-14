@@ -102,11 +102,12 @@ Page({
     },
     userEnterContent: function(e) {
         let val = e.detail.value
-        let cursor = e.detail.cursor
         this.setData({
-            texralengh: cursor,
             content: val
         })
+        let content = this.data.content;
+        let length = content.length;
+        this.setData({texralengh:length})
     },
     delThisImg: function(e) {
         let index = parseInt(e.currentTarget.dataset.index);

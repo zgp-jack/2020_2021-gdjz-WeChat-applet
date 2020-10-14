@@ -7,7 +7,7 @@
 </view>
 
 
-  <swiper class="recruit-content" current="{{ current }}"  duration="300" bindchange="switchTab">
+  <swiper class="recruit-content" current="{{ current }}"  duration="500" bindchange="switchTab">
     <swiper-item wx:for="{{ types.length }}">
       <scroll-view scroll-y="true" class="recruit-list-container" bindscrolltolower="loadmore">
         <block wx:for="{{ lists }}" wx:key="{{ index }}" data-id="{{ item.id }}">

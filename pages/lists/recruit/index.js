@@ -95,6 +95,19 @@ Page({
       url: '/pages/published/recruit/list?jz=1',
     })
   },
+  // 如果pagestatus状态为goback代表需要刷新当前数据
+  initPageData: function () {
+    let pageStatus = this.data.pageStatus;
+    let lists =  this.data.lists;
+    let pageId = this.data.pageId;
+    if (pageStatus == "goback") {
+      let index = lists.findIndex((item)=>{
+        return item.id == pageId
+      })
+      lists.splice(index,1)
+    }
+    this.setData({lists,})
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
@@ -140,6 +153,7 @@ Page({
     }catch(err){
       console.log(err)
     }
+    this.initPageData()
   },
 
   /**

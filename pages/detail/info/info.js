@@ -59,7 +59,7 @@ Page({
       aid: '', // 地区
       cid: '', // 工种
       child: 0, // 是否是子列表
-      showFollow: false
+      showFollow: false,
     },
     showdownappaction:function(){
       wx.navigateTo({
@@ -468,8 +468,8 @@ Page({
                     var prePage = pages[pages.length - 2];
                     // 设置上一页对象属性
                     prePage.setData({
-                    pageStatus: mydata.errcode,
-                    pageId: infoId
+                      pageStatus: mydata.errcode,
+                      pageId: infoId,
                     })
                   } 
                   wx.showModal({
@@ -696,7 +696,8 @@ Page({
                         _this.setData({
                             "info.tel_str": mydata.tel,
                             "info.show_ajax_btn": false,
-                             usepang:1,
+                            "info.isLook": 1,
+                             usepang: 1,
                              "info.show_complaint.show_complaint":1
                         })
                         console.log(123)

@@ -549,6 +549,25 @@ Page({
       });
     }
   },
+  // 如果pagestatus状态为goback代表需要刷新当前数据
+  initPageData: function () {
+    let type = this.data.type;
+    let pageStatus = this.data.pageStatus;
+    let lists = type?(type === "findWorker"?this.data.infolists.resume.lists:this.data.infolists.job.lists):[]
+    let pageId = this.data.pageId;
+    if (pageStatus == "goback") {
+      let index = lists.findIndex((item)=>{
+        return item.id == pageId
+      })
+      lists.splice(index,1)
+    }
+    if (type === "findWorker") {
+      this.setData({"infolists.resume.lists":lists})
+    }
+    if (type === "findWork") {
+      this.setData({"infolists.job.lists":lists})
+    }
+  },
 
   /**
      * 生命周期函数--监听页面初次渲染完成
@@ -565,6 +584,7 @@ Page({
     this.initUserInfo();
     this.initHistoryLoc();
     app.initResume(this)
+    // this.initPageData()
     
   },
 

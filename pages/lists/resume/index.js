@@ -22,6 +22,19 @@ Page({
     uuid: '',
     loading: false
   },
+  // 如果pagestatus状态为goback代表需要刷新当前数据
+  initPageData: function () {
+    let pageStatus = this.data.pageStatus;
+    let lists =  this.data.lists;
+    let pageId = this.data.pageId;
+    if (pageStatus == "goback") {
+      let index = lists.findIndex((item)=>{
+        return item.id == pageId
+      })
+      lists.splice(index,1)
+    }
+    this.setData({lists,})
+  },
   showDetailInfo:function(e){
     let id = e.currentTarget.dataset.uuid
     wx.navigateTo({
@@ -135,6 +148,7 @@ Page({
     }catch(err){
       console.log(err)
     }
+    this.initPageData()
   },
 
   /**

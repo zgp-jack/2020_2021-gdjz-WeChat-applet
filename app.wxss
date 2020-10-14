@@ -153,7 +153,7 @@ page{
     -moz-transition: 0.5s;
     -webkit-transition: 0.5s;
     -o-transition: 0.5s;
-    z-index: 25;
+    z-index: 101;
 }
 .common-publish-box-active{
     opacity: 1;
