@@ -58,8 +58,6 @@
             </view>
           </view>
           <view class="listsboxlocaltwo">
-
-            
             <text wx:if="{{item.login_time}}">{{item.login_time}}</text>
           </view>
         </view>

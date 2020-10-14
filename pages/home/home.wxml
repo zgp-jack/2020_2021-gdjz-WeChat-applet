@@ -302,7 +302,7 @@
                 </view>
               </view>
               <view class="listsboxlocaltwo" wx:if="{{item.time}}">
-                <text class="listsboxtime">{{item.time}}</text>
+                <text class="listsboxtime">{{item.login_time}}</text>
               </view>
             </view>
           </view>
