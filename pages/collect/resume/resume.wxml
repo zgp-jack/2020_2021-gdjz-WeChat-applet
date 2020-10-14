@@ -84,7 +84,10 @@
             <view>
                 <image src="{{biaoqian}}"></image>
               </view>
-            <view wx:if="{{item.resume.show_address}}" class="show_address_all"> <text class="show_address">{{item.resume.show_address}}</text>  <text wx:if="{{item.resume.distance}}" class="distance">{{item.resume.distance}}</text></view>
+            <view wx:if="{{item.resume.show_address}}" class="show_address_all"> 
+              <text class="show_address">{{item.resume.show_address}}</text>
+              <text wx:if="{{item.resume.distance}}" class="distance">{{item.resume.distance}}</text>
+            </view>
           </view>
           <view class="listsboxlocaltwo">
             <text class="cancel-collect-item" data-id="{{ item.resume.uuid }}" catchtap="cancleCollect" data-index="{{ index }}">取消收藏</text>

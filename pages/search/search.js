@@ -96,7 +96,7 @@ Page({
           wx.setStorageSync('historySearch', historyList)
         }
         //跳转找工作页面
-        wx.redirectTo({
+        wx.reLaunch({
           url:"/pages/index/index?keywrods="+this.data.inputTetx
         })
       }else{
@@ -125,7 +125,7 @@ Page({
           wx.setStorageSync('historySearchGr', historyList)
         }
         //跳转找工作页面
-        wx.redirectTo({
+        wx.reLaunch({
           url:"/pages/findingworkinglist/findingworkinglist?keywrods="+this.data.inputTetx
         })
       this.getStorageSearch()
@@ -222,12 +222,12 @@ Page({
     if(this.data.source == 0) {
       if(this.data.indexKey !== ""){
         //跳转找工作页面
-        wx.redirectTo({
+        wx.reLaunch({
           url:this.data.indexKey!="" ? "/pages/index/index?keywrods="+this.data.indexKey:"/pages/index/index"
         })
       }else{
         //跳转找工作页面
-        wx.redirectTo({
+        wx.reLaunch({
           url:"/pages/index/index"
         })
       }
@@ -235,12 +235,12 @@ Page({
     }else {
       if(this.data.indexKey !== ""){
         //跳转找工人页面
-      wx.redirectTo({
+      wx.reLaunch({
         url:this.data.indexKey!="" ? "/pages/findingworkinglist/findingworkinglist?keywrods="+this.data.indexKey:"/pages/findingworkinglist/findingworkinglist"
       })
       }else {
         //跳转找工人页面
-      wx.redirectTo({
+      wx.reLaunch({
         url:"/pages/findingworkinglist/findingworkinglist"
       })
       }
