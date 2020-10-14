@@ -202,17 +202,19 @@ padding-left: 26%;
    top: 0rpx;
 }
 .scopedetail view{
-   display: inline-block;
-   width: 26.33%;
-   font-size: 36rpx;
-   color: #6F6F6F;
-   line-height: 80rpx;
-   border:  1px solid #6F6F6F;
-   border-radius: 10rpx;
-   text-align: center;
-   margin-top: 22rpx;
-   margin-right: 10.5%;
-   position: relative;
+  display: inline-block;
+  width: 26.33%;
+  font-size: 36rpx;
+  color: #6F6F6F;
+  line-height: 80rpx;
+  border:  1px solid #6F6F6F;
+  border-radius: 10rpx;
+  text-align: center;
+  margin-top: 22rpx;
+  margin-right: 10.5%;
+  position: relative;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 .scopedetail .obttn{
    display: inline-block;

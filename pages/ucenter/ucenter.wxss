@@ -242,15 +242,15 @@
 }
 
 .masnumber {
-    width: 26rpx;
-    height: 26rpx;
+    width: 28rpx;
+    height: 28rpx;
     background: #fd0618;
     border-radius: 50%;
     position: absolute;
     top: 5rpx;
-    right: 23rpx;
+    right: 30rpx;
     color: #fff;
-    font-size: 15rpx;
+    font-size: 20rpx;
     text-align: center;
     line-height: 26rpx;
 }
@@ -400,15 +400,15 @@
 }
 
 .icon-text {
-    width: 26rpx;
-    height: 26rpx;
+    width: 28rpx;
+    height: 28rpx;
     background: #fd0618;
     border-radius: 50%;
     position: absolute;
     top: -6rpx;
-    right: -17rpx;
+    right: -25rpx;
     color: #fff;
-    font-size: 15rpx;
+    font-size: 20rpx;
     text-align: center;
     line-height: 26rpx;
 }

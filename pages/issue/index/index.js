@@ -1024,11 +1024,24 @@ Page({
               }
             }
           })
+        } else if (res.data.errcode == "fail") {
+          wx.showModal({
+            title: '提示',
+            content: resdata.errmsg,
+            showCancel: false,
+            success(res) {
+              if (res.confirm == true) {
+                wx.navigateBack({
+                  delta: 1,
+                })
+              }
+            }
+          })
         } else {
           wx.showModal({
             title: '提示',
             content: resdata.errmsg,
-            showCancel: false
+            showCancel: false,
           })
         }
       }
