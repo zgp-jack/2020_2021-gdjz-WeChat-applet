@@ -966,15 +966,6 @@ Page({
         topArea:options.topArea,
         topOcc:options.topOcc
       }
-      let typeTextgr;
-      let typeIdgr = options.topOcc;
-      let areaText;
-      let areaId = options.topArea;
-      for(let i = 0;i<this.data.fillterArea.length;i++){
-        if(this.data.fillterArea[i].id== areaId){
-          areaText = this.data.fillterArea[i].name
-        }
-      }
       this.setData({
         topData:topData
       })
