@@ -207,7 +207,7 @@ height: 70rpx;
    margin: 0 auto;
    font-size: 28rpx;
    color: #555;
-   border-bottom: 1rpx dashed #9A9A9A;
+   border-bottom: 1rpx dashed #e5e5e5;
    padding-bottom: 14rpx;
     display:block;           /*  内联对象需加  */
     word-break:keep-all;    /* 不换行 */
