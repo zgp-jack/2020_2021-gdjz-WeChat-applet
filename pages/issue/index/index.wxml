@@ -49,7 +49,7 @@
             <view class="mini-del" catchtap="delImgAction" data-index="{{ index }}"></view>
           </view>
         </view>
-        <view class="issue-upload-item" wx:if="{{ imglen < maxNum }}">
+        <view class="issue-upload-button" wx:if="{{ imglen < maxNum }}">
           <view class="imgitem-box" bindtap="userUploadImg">
             <image src="{{ upload }}"></image>
           </view>
