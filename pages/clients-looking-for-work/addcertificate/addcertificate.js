@@ -29,7 +29,8 @@ vertify()
     deletestatus: true,
     skillnum:'',
     model:{},
-    checkonef:""
+    checkonef:"",
+    maximg: 3
   },
   vertify() {
     this.setData({
@@ -84,17 +85,8 @@ vertify()
   },
   chooseImage() {
     let that = this;
-    // if (that.data.imgArrs.length >= 3) {
-    //   wx.showModal({
-    //     title: '温馨提示',
-    //     content: '您最多只能选择三张图片',
-    //     showCancel: false,
-    //     success(res) { }
-    //   })
-    //   return
-    // }
+    let max = this.data.maximg - this.data.imgArrs.length;
     app.userUploadImg(function (img, url) {
-
       that.data.imgArrs.push(url.httpurl)
       that.data.idArrs.push(url.url)
       that.setData({
@@ -105,8 +97,7 @@ vertify()
           imgArrslength: false
         })
       }
-    })
-
+    },max)
   },
   previewImage(e) {
     

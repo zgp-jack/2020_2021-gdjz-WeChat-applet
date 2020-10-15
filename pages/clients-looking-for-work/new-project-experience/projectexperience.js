@@ -42,7 +42,8 @@ Page({
     ranktypes: "",
     deletestatus:true,
     model:{},
-    checkonef:""
+    checkonef:"",
+    maximg: 6
   },
 
   obtn() {
@@ -137,15 +138,7 @@ Page({
   },
   chooseImage() {
     let that = this;
-    // if (that.data.imgArrs.length >= 6) {
-    //   wx.showModal({
-    //     title: '温馨提示',
-    //     content: '您最多只能选择六张图片',
-    //     showCancel: false,
-    //     success(res) { }
-    //   })
-    //   return
-    // }
+    let max = this.data.maximg - this.data.imgArrs.length
     app.userUploadImg(function (img, url) {
       wx.hideLoading()
       that.data.imgArrs.push(url.httpurl)
@@ -153,13 +146,12 @@ Page({
       that.setData({
         imgArrs: that.data.imgArrs
       })
-
       if (that.data.imgArrs.length >= 6) {
         that.setData({
           imgArrslength: false
         })
       }
-    })
+    },max)
   },
   initAllProvice: function () { //获取所有省份
     let that = this;
