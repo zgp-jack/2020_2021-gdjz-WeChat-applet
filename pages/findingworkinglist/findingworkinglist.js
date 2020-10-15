@@ -118,7 +118,9 @@ Page({
     // pageStatus是goback的话需要刷新当前页面信息ID
     pageId: '',
     //没有数据时 按钮显示状态
-    isNullStatus:""
+    isNullStatus:"",
+    //置顶成功后的城市id和工种id
+    topData:null
   },
   // 根据发布方式不同发布招工：未登录或者“fast_add_job”是快速发布，“ordinary_add_job”是普通发布。
   publishJob:function () {
@@ -951,10 +953,21 @@ Page({
     })
   },
   onLoad(options) {
+    
     var isEmpty = app.isEmpty(options.keywrods)
     if(!isEmpty){
       this.setData({
         "searchDate.keywords":options.keywrods
+      })
+    }
+    //置顶成功传过来的城市id和工种id
+    if(options.topArea){
+      let topData = {
+        topArea:options.topArea,
+        topOcc:options.topOcc
+      }
+      this.setData({
+        topData:topData
       })
     }
     this.initSearchHistory();

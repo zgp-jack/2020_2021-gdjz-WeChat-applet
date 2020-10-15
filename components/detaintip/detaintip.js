@@ -49,8 +49,6 @@ Component({
       })
     },
     comfirm:function () {
-      console.log(this.properties.successData)
-      debugger
       this.show()
       // 是否是置顶成功
       if(!this.properties.successData){
@@ -72,9 +70,11 @@ Component({
           })
         }
       }else {
+        let topDataArea_id = this.properties.successData.data.area_id
+        let topDataocc_id = this.properties.successData.data.occ_id
         //去招工列表
         wx.reLaunch({
-          url: `/pages/findingworkinglist/findingworkinglist`,
+          url: `/pages/findingworkinglist/findingworkinglist?topArea=${topDataArea_id}&topOcc=${topDataocc_id}`,
         })
       }
        
