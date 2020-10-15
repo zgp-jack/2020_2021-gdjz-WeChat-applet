@@ -119,8 +119,6 @@ Page({
     pageId: '',
     //没有数据时 按钮显示状态
     isNullStatus:"",
-    //置顶成功后的城市id和工种id
-    topData:null
   },
   // 根据发布方式不同发布招工：未登录或者“fast_add_job”是快速发布，“ordinary_add_job”是普通发布。
   publishJob:function () {
@@ -953,22 +951,45 @@ Page({
     })
   },
   onLoad(options) {
-    
     var isEmpty = app.isEmpty(options.keywrods)
     if(!isEmpty){
       this.setData({
         "searchDate.keywords":options.keywrods
       })
     }
-    //置顶成功传过来的城市id和工种id
-    if(options.topArea){
-      let topData = {
-        topArea:options.topArea,
-        topOcc:options.topOcc
+    //置顶的第一个城市 存入缓存中
+    if(options.frstCity){
+      let frstCity = JSON.parse(options.frstCity)
+      wx.setStorageSync('areaId',frstCity.id)
+      wx.setStorageSync('areaText', frstCity.name)
+    }
+    if(options.topOcc){
+      let toptype = options.topOcc//置顶成功后传过来的工种
+      let type = app.globalData.allTypes.classTree//所有工种
+      let _typeid = null,_typetext = null;//匹配到的工种
+      //匹配工种
+      for(let i=0;i<type.length;i++) {//循环一级列表
+        if(type[i].id == toptype){
+          _typeid = type[i].id
+          _typetext = type[i].name
+          return
+        }
       }
-      this.setData({
-        topData:topData
-      })
+      if(!_typetext){//如果以及列表没有匹配到
+        for(let n=0;n<type.length;n++) {//循环二级列表
+          if(type[n].has_children == 1){
+            for(let m = 0;m < type[n].children.length;m++){
+              if(type[n].children[m].id == toptype){
+                _typeid = type[n].children[m].id
+                _typetext = type[n].children[m].name
+              }
+            }
+          }
+        }
+      }
+      //置顶成功后的 工种 存入缓存
+      wx.setStorageSync('typeTextgr', _typetext)
+      wx.setStorageSync('typeIdgr', _typeid)
     }
     this.initSearchHistory();
     this.initUserShareTimes();

@@ -24,6 +24,10 @@ Component({
     successData:{
       type:Object,
       value:null
+    },
+    frstCity:{
+      type:Object,
+      value:null
     }
   },
   /**
@@ -72,9 +76,10 @@ Component({
       }else {
         let topDataArea_id = this.properties.successData.data.area_id
         let topDataocc_id = this.properties.successData.data.occ_id
+        let frstCity = JSON.stringify(this.properties.frstCity)
         //去招工列表
         wx.reLaunch({
-          url: `/pages/findingworkinglist/findingworkinglist?topArea=${topDataArea_id}&topOcc=${topDataocc_id}`,
+          url: `/pages/findingworkinglist/findingworkinglist?topArea=${topDataArea_id}&topOcc=${topDataocc_id}&frstCity=${frstCity}`,
         })
       }
        
