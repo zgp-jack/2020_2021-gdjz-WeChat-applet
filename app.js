@@ -546,7 +546,7 @@ App({
     })
     wx.uploadFile({
       url: type == 1 || _type == "sc" ? _this.globalData.apiUploadImg : _this.globalData.apiUploadImgphoto,
-      filePath: res.tempFilePaths[0],
+      filePath: imgRes,
       header: {
         userid: userInfo.userId
       },
@@ -596,25 +596,31 @@ App({
     }
     return false
   },
-  userUploadImg: function (callback) {
+  userUploadImg: function (callback,num) {
     let _this = this;
     wx.showLoading({
       title: '正在上传图片'
     });
     wx.chooseImage({
-      count: 1,
+      //2020-9-10-王帅-新增参数 每次最大上传数量 默认1张
+      count: num?num:1,
       sizeType: ['compressed'],
       sourceType: ['album', 'camera'],
       success: res => {
         if (res.errMsg == "chooseImage:ok") {
-          let img = res.tempFiles[0].path
-          let ok = this.valiImgRules(img)
-          if (ok) {
-            _this.detailUpimg(1, res, callback);
-          } else {
-            wx.hideLoading()
-            _this.showMyTips('图片格式不正确,请重新选择')
-          }
+          //多张循环上传
+          res.tempFiles.forEach((image)=> {
+            //判断图片格式是否正确
+            let img = image.path
+            let ok = this.valiImgRules(img)
+            if (ok) {
+              //上传
+              _this.detailUpimg(1, img, callback);
+            } else {
+              wx.hideLoading()
+              _this.showMyTips('图片格式不正确,请重新选择')
+            }
+          })
         }
       },
       fail: function () {

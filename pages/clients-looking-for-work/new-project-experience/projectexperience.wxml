@@ -50,7 +50,8 @@
    <text class="informationenum">{{detailength}}/500</text>
   </view>
   <view class="experiencefour">
-    <view wx:for="{{imgArrs}}"  class='img_item' wx:key="{{item}}"><image class="experiencefourone" src='{{item}}' mode="scaleToFill" bindtap='previewImage' data-item="{{item}}">
+    <view wx:for="{{imgArrs}}"  class='img_item' wx:key="{{item}}">
+    <image class="experiencefourone" src='{{item}}' mode="scaleToFill" bindtap='previewImage' data-item="{{item}}">
         <view class="delete" catchtap="delete" data-index="{{index}}">X</view>
       </image>
     </view>
