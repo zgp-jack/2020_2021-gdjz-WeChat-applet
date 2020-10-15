@@ -45,7 +45,7 @@ Page({
         }else searchLists=[] //如果将输入内容置空将检索结果数组也置空
         // 将结果数据存入data中
         this.setData({ 
-            searchLists: searchLists.slice(0,8),
+            searchLists: searchLists,
             showSearch: searchLists.length == 0 ? false:true
          })
     },
