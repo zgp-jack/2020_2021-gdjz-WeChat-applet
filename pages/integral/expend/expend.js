@@ -327,7 +327,8 @@ Page({
     this.setData({
       showRecord: false,
       showWork: false,
-      showTop: false
+      showTop: false,
+      info: {}
     })
   },
   callThisPhone: function (e) {

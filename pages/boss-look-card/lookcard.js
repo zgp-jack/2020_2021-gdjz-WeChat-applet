@@ -283,8 +283,8 @@ Page({
             var prePage = pages[pages.length - 2];
             // 设置上一页对象属性
             prePage.setData({
-            pageStatus: res.data.errcode,
-            pageId: infoId
+              pageStatus: res.data.errcode,
+              pageId: infoId,
             })
           } 
           wx.showModal({
@@ -727,8 +727,8 @@ Page({
             var prePage = pages[pages.length - 2];
             // 设置上一页对象属性
             prePage.setData({
-            pageStatus: res.data.errcode,
-            pageId: infoId
+              pageStatus: res.data.errcode,
+              pageId: infoId,
             })
           } 
           wx.showModal({
