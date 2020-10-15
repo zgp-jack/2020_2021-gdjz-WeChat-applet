@@ -153,7 +153,6 @@ Page({
       page: 1,
       hasmore: true,
       lists: [],
-      isRequest: false
     })
   },
   getUsedList:function(){
@@ -326,7 +325,8 @@ Page({
       current: parseInt(key),
       page: 1,
       hasmore: true,
-      lists: []
+      lists: [],
+      isRequest: false
     })
     this.getUsedList()
   },
@@ -334,6 +334,10 @@ Page({
   loadmore:function(){
     if(!this.data.hasmore) return false
     this.getUsedList()
+  },
+  // 阻止滑动
+  touchMove: function () {
+    // console.log("touchMove")
   },
   /**
    * 生命周期函数--监听页面加载

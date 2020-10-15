@@ -8,7 +8,7 @@
 
 <!-- <view class="recruit-list-container"> -->
   <swiper class="recruit-content" current="{{ current }}"  duration="300" bindchange="switchTab">
-    <swiper-item wx:for="{{ types.length }}" wx:key="index">
+    <swiper-item wx:for="{{ types.length }}" wx:key="index" catchtouchmove="{{ isRequest?'':'touchMove' }}">
       <scroll-view scroll-y="true" class="recruit-list-container" bindscrolltolower="loadmore">
         <view class="recruit-lists">
           <block wx:for="{{ lists }}" wx:key="index">

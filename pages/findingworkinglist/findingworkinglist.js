@@ -472,11 +472,11 @@ Page({
             _this.setData({
               "searchDate.page": (parseInt(_page) + 1),
               lists: _append ? _data : mydata,
-              hasSortFlag: res.data.data.has_sort_flag,
-              hasTime: res.data.data.has_time,
-              hasTop: res.data.data.has_top,
-              lastSortFlagPos: res.data.data.last_sort_flag_pos,
-              lastTimePos: res.data.data.last_time_pos,
+              hasSortFlag: res.data.data.has_sort_flag || 1,
+              hasTime: res.data.data.has_time || 1,
+              hasTop: res.data.data.has_top || 1,
+              lastSortFlagPos: res.data.data.last_sort_flag_pos || 0,
+              lastTimePos: res.data.data.last_time_pos || 0,
               lastNormalPos: res.data.data.last_normal_pos || 0,
             })
             // _this.setData({
