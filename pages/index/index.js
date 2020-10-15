@@ -834,10 +834,6 @@ Page({
     let areaId = wx.getStorageSync("areaId");
     let areaText = wx.getStorageSync("areaText");
     let gpsOrientation = wx.getStorageSync("gpsOrientation");
-    let joblisttype = wx.getStorageSync('joblisttype')
-    let joblistname = wx.getStorageSync('joblistname')
-    let typeText = wx.getStorageSync("typeText");
-    let typeId = wx.getStorageSync("typeId");
     if (areaId && areaText) {
       _this.initAreaInfo()
     } else if (gpsOrientation) {
@@ -1036,6 +1032,9 @@ Page({
         "searchDate.keywords":options.keywrods
       })
     }
+    if(options.id) {
+      wx.setStorageSync('typeId', options.id)
+    }
     this.initFirstFcInfo();
     this.initSearchHistory();
     //this.isShowFastIssue();
@@ -1047,8 +1046,6 @@ Page({
     this.initUserLocation();
     this.initFooterData();
     this.checkIsInvite(options);
-
-    
   },
   /**
    * 生命周期函数--监听页面初次渲染完成
