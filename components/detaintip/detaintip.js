@@ -50,7 +50,6 @@ Component({
     },
     comfirm:function () {
       console.log(this.properties.successData)
-      debugger
       this.show()
       // 是否是置顶成功
       if(!this.properties.successData){

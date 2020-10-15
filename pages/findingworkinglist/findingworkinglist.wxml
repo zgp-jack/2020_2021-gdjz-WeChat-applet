@@ -4,7 +4,7 @@
 
 <!-- 搜索头部 -->
 <view class="lists-header">
-  <input placeholder="找工人，找班组，找队伍" bindconfirm="userTapSearch" confirm-type="search" bindfocus='bindInputFocus' bindinput='bindKeyInput' bindtap="closeAllSelect" value='{{ searchDate.keywords }}' data-goSearch="1" disabled/>
+  <input placeholder="找优质工作，就上鱼泡网" bindconfirm="userTapSearch" confirm-type="search" bindfocus='bindInputFocus' bindinput='bindKeyInput' bindtap="closeAllSelect" value='{{ searchDate.keywords }}' data-goSearch="1" disabled/>
   <text bindtap='userTapSearch'>搜索</text>
 </view>
 
