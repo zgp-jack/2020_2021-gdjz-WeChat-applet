@@ -4,7 +4,7 @@
 
 <!-- 搜索头部 -->
 <view class="lists-header">
-  <input placeholder="找优质工作，就上鱼泡网" bindconfirm="userTapSearch" confirm-type="search" bindfocus='bindInputFocus' bindinput='bindKeyInput' bindtap="closeAllSelect" value='{{ searchDate.keywords }}' data-goSearch="1" disabled/>
+  <input placeholder="找优质工人，就上鱼泡网" bindconfirm="userTapSearch" confirm-type="search" bindfocus='bindInputFocus' bindinput='bindKeyInput' bindtap="closeAllSelect" value='{{ searchDate.keywords }}' data-goSearch="1" disabled/>
   <text bindtap='userTapSearch'>搜索</text>
 </view>
 
@@ -135,8 +135,7 @@
               </view>
               <view class="listsboxagetwo" wx:if="{{item.gender != '0'}}">
                 <text class="listsboxnation" wx:if="{{item.nation}}">{{item.nation}}</text>
-                <text><text class="listsboxnums" wx:if="{{item.prof_degree}}" >{{item.prof_degree}}</text></text>
-        
+                <text class="listsboxnums" wx:if="{{item.prof_degree}}" >{{item.prof_degree}}</text>
               </view>
               <view class="listsboxagetwot" wx:if="{{item.gender == '0'}}">
                 <text wx:for="{{item.tags}}" wx:key="index">{{item.label_name}}</text>
