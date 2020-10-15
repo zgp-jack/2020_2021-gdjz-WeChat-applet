@@ -236,6 +236,16 @@ page{
 }
 .issue-upload-item{
   position: relative;
+  width: 33.33%;
+  height: 190rpx;
+  padding: 20rpx 10rpx;
+  float: left;
+  margin-top: -20rpx;
+  border-radius: 5rpx;
+  overflow: hidden;
+}
+.issue-upload-button{
+  position: relative;
   width: 190rpx;
   height: 190rpx;
   padding: 20rpx 10rpx;
@@ -243,6 +253,11 @@ page{
   margin-top: -20rpx;
   border-radius: 5rpx;
   overflow: hidden;
+}
+.issue-upload-button image{
+  width: 100%;
+  height: 100%;
+  display: block;
 }
 .issue-upload-item image{
   width: 100%;
