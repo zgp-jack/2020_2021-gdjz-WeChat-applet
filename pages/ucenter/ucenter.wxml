@@ -105,7 +105,7 @@
               wx:if="{{item.key==='bookkeeping'}}"
               class="jump"
               target="miniProgram"
-              path="/pages/index/index"
+              path="{{'/pages/index/index?userId=' + userInfo.userId + '&token=' + userInfo.token + '&tokenTime=' + userInfo.tokenTime + '&userUuid=' + userInfo.userUuid}}"
               app-id="wx3abff5d74de220d2"
               version="trial"
               extra-data="{{ userInfo }}"

@@ -117,11 +117,10 @@ page{
   top: 0rpx;
 }
 .issue-upload-show{
-  padding: 40rpx 20rpx 80rpx;
+  padding: 0rpx 20rpx 40rpx;
 }
 .issue-upload-body{
   position: relative;
-  padding:30rpx 0 5rpx;
 }
 .issue-upload-item{
   float: left;

@@ -327,6 +327,8 @@ Page({
     this.initHistoryLoc();
   },
   getSwipersData: function () {
+    let userInfo = wx.getStorageSync('userInfo');
+    let userUuid = wx.getStorageSync('userUuid');
     let _this = this;
     let areaId = wx.getStorageSync("areaId");
     let areaText = wx.getStorageSync("areaText");
@@ -334,10 +336,25 @@ Page({
       url: "index/index-banner-carousel/",
       success: function (res) {
         let mydata = res.data;
+        let newBanner = mydata.banner_newest;
+        let banner = newBanner.reduce(function (current,item) {
+          if (item.type === "3" ) {
+            let selfUrl = item.self_url;
+            let bannerData = selfUrl.split(",")
+            let url = `${bannerData[0]}?userId=${userInfo.userId}&token=${userInfo.token}&tokenTime=${userInfo.tokenTime}&userUuid=${userUuid}`;
+            let appId = bannerData[1]
+            item.self_url = url;
+            item.app_id = appId;
+            current.push(item)
+          } else {
+            current.push(item)
+          }
+          return current
+        },[])
         _this.setData({
           "notice.lists": mydata.notice,
           "swiper.imgUrls": mydata.banner,
-          "swiper.newBanner":mydata.banner_newest,
+          "swiper.newBanner": banner,
           areaId: areaId ? areaId : mydata.address.id,
           areaText: areaText ? areaText : mydata.address.name,
           showAuthQuery: mydata.show_auth_query ? true : false

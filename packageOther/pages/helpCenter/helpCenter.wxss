@@ -23,7 +23,7 @@
     display: flex;
     align-items: center;
     background-color: #ffff;
-    box-shadow: 1rpx 2rpx 7rpx 0rpx rgba(177, 177, 177, 0.31);
+    box-shadow: 0rpx 10rpx 10rpx 0rpx rgba(177, 177, 177, 0.31);
 }
 .help_search_icon{
     padding: 5rpx 10rpx;
