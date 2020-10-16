@@ -323,11 +323,11 @@ Page({
     //跳转搜索页面
     if(e && e.target.dataset.gosearch == 1) {
       if(this.data.searchDate.keywords == ""){
-        wx.redirectTo({
+        wx.navigateTo({
           url: "/pages/search/search?changeStatus=1"
         })
       }else{
-        wx.redirectTo({
+        wx.navigateTo({
           url: "/pages/search/search?changeStatus=1&key="+this.data.searchDate.keywords
         })
       }
