@@ -341,7 +341,8 @@ Page({
           if (item.type === "3" ) {
             let selfUrl = item.self_url;
             let bannerData = selfUrl.split(",")
-            let url = `${bannerData[0]}?userId=${userInfo.userId}&token=${userInfo.token}&tokenTime=${userInfo.tokenTime}&userUuid=${userUuid}`;
+            let arug = userInfo?`?userId=${userInfo.userId}&token=${userInfo.token}&tokenTime=${userInfo.tokenTime}&userUuid=${userUuid}`:''
+            let url = `${bannerData[0]}${arug}`;
             let appId = bannerData[1]
             item.self_url = url;
             item.app_id = appId;
@@ -475,7 +476,7 @@ Page({
     let login =e.currentTarget.dataset.login
     let u = wx.getStorageSync('userInfo')
     let that = this;
-    if (login) {
+    if (login != "0") {
       if (u) {
         wx.navigateTo({
           url: url,

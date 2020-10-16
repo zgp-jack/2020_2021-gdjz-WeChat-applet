@@ -40,10 +40,13 @@
       </block> -->
       <block wx:for="{{ swiper.newBanner }}" wx:key="index">
         <swiper-item>
-          <button data-url = "{{ item.self_url }}" wx:if="{{item.type != 3}}" data-login ="{{ item.need_login }}" open-type="getUserInfo" bindgetuserinfo="bindUserInfo">
+          <button data-url = "{{ item.self_url }}" wx:if="{{item.type != '3' && item.need_login != '0'}}" data-login ="{{ item.need_login }}" open-type="getUserInfo" bindgetuserinfo="bindUserInfo">
             <image src="{{ item.image_url }}" class="index-swiper-img" mode="scaleToFill"/>
           </button>
-          <navigator url='{{ item.self_url }}'  target="miniProgram" open-type="navigate" app-id="{{ item.app_id }}" path="" extra-data="" version="release">
+          <navigator url='{{ item.self_url }}' wx:if="{{item.type === '3'}}" target="miniProgram" open-type="navigate" app-id="{{ item.app_id }}" path="" extra-data="" version="release">
+            <image src="{{ item.image_url }}" class="index-swiper-img" mode="scaleToFill"/>
+          </navigator>
+          <navigator url='{{ item.self_url }}' wx:if="{{item.type != '3' && item.need_login === '0'}}">
             <image src="{{ item.image_url }}" class="index-swiper-img" mode="scaleToFill"/>
           </navigator>
         </swiper-item>
