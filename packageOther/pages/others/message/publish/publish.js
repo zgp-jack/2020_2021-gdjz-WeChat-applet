@@ -79,6 +79,9 @@ Page({
         let _index = parseInt(e.currentTarget.dataset.index);
         let _this = this;
         let max = this.data.maxLen - this.data.imglists.length
+        if(_type == 0) {
+            max = 1
+        }
         app.userUploadImg(function(imgRes, mydata) {
             wx.hideLoading();
             wx.showToast({

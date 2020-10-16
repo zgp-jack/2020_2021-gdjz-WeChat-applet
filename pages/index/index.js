@@ -1032,6 +1032,7 @@ Page({
         "searchDate.keywords":options.keywrods
       })
     }
+    //首页工厂招工跳转传入的工种id
     if(options.id) {
       wx.setStorageSync('typeId', options.id)
     }
