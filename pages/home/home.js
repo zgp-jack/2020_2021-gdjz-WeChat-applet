@@ -100,7 +100,7 @@ Page({
     thisyear: new Date().getFullYear(),
     showAuthQuery: false,
     resumeText:"",
-    workTypes:[]
+    workTypes:[{id:"25",isHasWorkType:true},{id:"19",isHasWorkType:true},{id:"14",isHasWorkType:true}]
   },
   // 根据发布方式不同发布招工：未登录或者“fast_add_job”是快速发布，“ordinary_add_job”是普通发布。
   publishJob:function () {
@@ -498,7 +498,7 @@ Page({
   // 初始化选中数据
   initSelectedData: function (data) {
     let classTree = data.classTree
-    let workTypes = [{id:"25",isHasWorkType:true},{id:"19",isHasWorkType:true},{id:"14",isHasWorkType:true}];
+    let workTypes = this.data.workTypes;
     for (let n = 0; n < workTypes.length; n++) {
       for (let i = 0; i < classTree.length; i++) {
         if (classTree[i].id === workTypes[n].id) {

@@ -1,10 +1,6 @@
 /* pages/ucenter/ucenterNew/helpCenter.wxss */
 
-page{
-    /* height: 100%;
-    width: 100%; */
-    /* position: relative; */
-}
+
 .help_center{
     width: 100%;
     height: 100vh;
@@ -55,6 +51,8 @@ page{
     border-radius: 6rpx;
     background-color: #ffff;
     box-shadow: 1rpx 2rpx 7rpx 0rpx rgba(177, 177, 177, 0.31);
+    max-height: 640rpx;
+    overflow: scroll;
 }
 .help_search_item{
     width: 100%;

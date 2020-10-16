@@ -21,6 +21,9 @@ page{
   width: 100%;
   line-height: 50rpx;
 }
+.answer_scroll video{
+  width: 100%;
+}
 .answer_footer{
   display: flex;
   width: 100%;

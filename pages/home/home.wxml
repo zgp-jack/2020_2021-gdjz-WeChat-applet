@@ -86,13 +86,13 @@
         <text>机械租赁</text>
       </view>
     </navigator>
-    <navigator  class='index-footer-nav' url="{{workTypes[1].isHasWorkType?'/pages/index/index?id=19':''}}" target="{{workTypes[1].isHasWorkType?'slef':'miniProgram'}}" open-type="navigate" app-id="{{workTypes[1].isHasWorkType?'':'wx260188c8d40378c0'}}" path="" extra-data="" version="release">
+    <navigator  class='index-footer-nav' url="{{workTypes[1].isHasWorkType?'/pages/index/index?id=' + workTypes[1].id:''}}" target="{{workTypes[1].isHasWorkType?'slef':'miniProgram'}}" open-type="navigate" app-id="{{workTypes[1].isHasWorkType?'':'wx260188c8d40378c0'}}" path="" extra-data="" version="release">
       <view class='index-industry-item'>
         <image src='{{ industry.zsdg }}'></image>
         <text>招水电工</text>
       </view>
     </navigator>
-    <navigator  class='index-footer-nav' url="{{workTypes[2].isHasWorkType?'/pages/index/index?id=14':''}}" target="{{workTypes[2].isHasWorkType?'slef':'miniProgram'}}" open-type="navigate" app-id="{{workTypes[2].isHasWorkType?'':'wxa6cc235c0fd8e7b4'}}" path="" extra-data="" version="release">
+    <navigator  class='index-footer-nav' url="{{workTypes[2].isHasWorkType?'/pages/index/index?id='+ workTypes[2].id:''}}" target="{{workTypes[2].isHasWorkType?'slef':'miniProgram'}}" open-type="navigate" app-id="{{workTypes[2].isHasWorkType?'':'wxa6cc235c0fd8e7b4'}}" path="" extra-data="" version="release">
       <view class='index-industry-item'>
         <image src='{{ industry.zgjg }}'></image>
         <text>招钢筋工</text>
