@@ -124,7 +124,7 @@ page{
 }
 .issue-upload-item{
   float: left;
-  width: 190rpx;
+  width: 31.5%;
   height: 190rpx;
   margin-right: 10rpx;
   border-radius: 5rpx;

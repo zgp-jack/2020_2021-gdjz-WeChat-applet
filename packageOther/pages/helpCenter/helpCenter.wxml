@@ -5,15 +5,16 @@
             <image class="help_search_icon" src="{{ searchIcon }}"></image> 
             <input class="help_search_input" bindinput="getSearchList" bindblur="hiddenSearch" bindfocus="showSearch" placeholder="输入您要找的问题"></input>
         </view>
+        <view class="help_list_title">
+            <view>问题类型</view>
+        </view>
     </view>
     <view class="help_search_list" wx:if="{{ showSearch == true }}">
     <view class="help_search_content">
         <view class="help_search_item" wx:for="{{searchLists}}" wx:key="index" bindtap="findAnswer"   data-url='/packageOther/pages/helpCenter/answer/answer?id={{ item.id }}'>{{  item.question }}</view>
     </view>
     </view>
-    <view class="help_list_title">
-        <view>问题类型</view>
-    </view>
+    
     <view class="help_list_scroll">
         <view class="help_list_body">
             <view class="help_list_item" wx:for='{{helpeLists}}' wx:key='id' wx:for-item='parentItem' wx:for-index='parentIndex'>

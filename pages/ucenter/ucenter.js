@@ -42,13 +42,13 @@ Page({
             dataUrl: '../collect/info/info',
             icon: app.globalData.apiImgUrl + "ucenter/ucenter-collect.png",
           },
-          {
-            key: 'bookkeeping',
-            name: '记工记账',
-            dataUrl: '',
-            icon: app.globalData.apiImgUrl + "ucenter/ucenter-account.png",
-            newIcon: app.globalData.apiImgUrl + "ucenter/ucenter-new.png",
-          },
+          // {
+          //   key: 'bookkeeping',
+          //   name: '记工记账',
+          //   dataUrl: '',
+          //   icon: app.globalData.apiImgUrl + "ucenter/ucenter-account.png",
+          //   newIcon: app.globalData.apiImgUrl + "ucenter/ucenter-new.png",
+          // },
           {
             key: 'mymessage',
             name: '我的消息',
