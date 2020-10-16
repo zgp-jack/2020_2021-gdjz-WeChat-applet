@@ -56,8 +56,7 @@
 
               </view>
               <view class="listsboxagetwo" wx:if="{{item.resume.gender != '0'}}">
-                <text id="listsboxnation">{{item.resume.nation}}</text>
-                <text><text class="listsboxnum" wx:if="{{item.resume.experience}}"  >{{item.resume.experience}}</text></text>
+                <text id="listsboxnation" wx:if="{{item.resume.nation}}">{{item.resume.nation}}</text>
                 <text wx:if="{{item.resume.prof_degree}}">{{item.resume.prof_degree}}</text>
               </view>
               <view class="listsboxagetwot" wx:if="{{item.resume.gender == '0'}}">
