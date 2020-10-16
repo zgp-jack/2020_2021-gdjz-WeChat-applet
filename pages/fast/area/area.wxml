@@ -27,7 +27,7 @@
           </view>
           <view class="issue-upload-item" wx:if="{{ imglen < maxNum }}">
             <view class="imgitem-box" bindtap="userUploadImg">
-              <image src="{{ upload }}"  mode="aspectFill"></image>
+              <image src="{{ upload }}"  mode="aspectFit"></image>
             </view>
           </view>
       </view>
