@@ -47,7 +47,7 @@ Page({
             name: '记工记账',
             dataUrl: '',
             icon: app.globalData.apiImgUrl + "ucenter/ucenter-account.png",
-            newIcon: app.globalData.apiImgUrl + "ucenter/ucenter-new.png"
+            newIcon: app.globalData.apiImgUrl + "ucenter/ucenter-new.png",
           },
           {
             key: 'mymessage',
@@ -162,8 +162,10 @@ Page({
   },
   initUserInfo: function (callback) {
     let userInfo = wx.getStorageSync("userInfo");
+    let userUuid = wx.getStorageSync('uuid');
+    userInfo.userUuid = userUuid;
     if (!userInfo) {
-      // this.setData({ showFastIssue: false })
+      // this.setData({ showFastIssue: fkeyalse })
       callback ? callback() : ""
       return false
     }
