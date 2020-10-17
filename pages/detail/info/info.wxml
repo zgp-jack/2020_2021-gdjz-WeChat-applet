@@ -163,7 +163,7 @@
 		</view>
 		<view class="newdetail-info-item" bindtap="userTapComplain">
 			<image src="{{ complainImg }}"></image>
-			<text>{{ (info.isLook === 0 && info.show_complaint.show_complaint === 0) || info.show_complaint.show_complaint === 1? "投诉":"已投诉"}}</text>
+			<text>{{ (info.isLook === 0 && info.show_complaint.show_complaint === 0) || info.show_complaint.show_complaint === 1 || !userInfo? "投诉":"已投诉"}}</text>
 		</view>
 		<button class="newdetail-info-item" open-type="share">
 			<image src="{{ sharebtnImg }}"></image>
