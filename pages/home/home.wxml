@@ -21,12 +21,12 @@
   <!-- 轮播图 -->
   <view class='index-swiperbox'>
     <swiper indicator-dots="{{ swiper.indicatorDots }}" autoplay="{{ swiper.autoplay}} " interval="{{ swiper.interval }}" duration="{{ swiper.duration }}" circular="{{ swiper.circular }}">
-      <swiper-item>
+      <!-- <swiper-item>
         <navigator target="miniProgram" open-type="navigate" app-id="wx0ae31bf0edad4390" path="pages/index/index" extra-data="" version="release">
           <image src="{{ jixieLinkImg }}" class="index-swiper-img" />
         </navigator>
-      </swiper-item>
-      <block wx:for="{{ swiper.imgUrls }}" wx:key="index">
+      </swiper-item> -->
+      <!-- <block wx:for="{{ swiper.imgUrls }}" wx:key="index">
         <swiper-item wx:if="{{ !item.is_download }}">
           <navigator url='{{ item.small_url }}' open-type="navigate">
             <image src="{{ item.banner }}" class="index-swiper-img" />
@@ -37,13 +37,16 @@
             <image src="{{ item.banner }}" class="index-swiper-img" />
           </view>
         </swiper-item>
-      </block>
+      </block> -->
       <block wx:for="{{ swiper.newBanner }}" wx:key="index">
         <swiper-item>
-          <button data-url = "{{ item.self_url }}" wx:if="{{item.type != 3}}" data-login ="{{ item.need_login }}" open-type="getUserInfo" bindgetuserinfo="bindUserInfo">
+          <button data-url = "{{ item.self_url }}" wx:if="{{item.type != '3' && item.need_login != '0'}}" data-login ="{{ item.need_login }}" open-type="getUserInfo" bindgetuserinfo="bindUserInfo">
             <image src="{{ item.image_url }}" class="index-swiper-img" mode="scaleToFill"/>
           </button>
-          <navigator url='{{ item.self_url }}'  target="miniProgram" open-type="navigate" app-id="{{ item.app_id }}" path="" extra-data="" version="release">
+          <navigator url='{{ item.self_url }}' wx:if="{{item.type === '3'}}" target="miniProgram" open-type="navigate" app-id="{{ item.app_id }}" path="" extra-data="" version="release">
+            <image src="{{ item.image_url }}" class="index-swiper-img" mode="scaleToFill"/>
+          </navigator>
+          <navigator url='{{ item.self_url }}' wx:if="{{item.type != '3' && item.need_login === '0'}}">
             <image src="{{ item.image_url }}" class="index-swiper-img" mode="scaleToFill"/>
           </navigator>
         </swiper-item>

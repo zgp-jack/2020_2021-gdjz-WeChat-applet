@@ -163,7 +163,9 @@ Page({
   initUserInfo: function (callback) {
     let userInfo = wx.getStorageSync("userInfo");
     let userUuid = wx.getStorageSync('uuid');
-    userInfo.userUuid = userUuid;
+    if (userUuid) {
+      userInfo.userUuid = userUuid;
+    }
     if (!userInfo) {
       // this.setData({ showFastIssue: fkeyalse })
       callback ? callback() : ""
