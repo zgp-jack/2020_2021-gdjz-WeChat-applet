@@ -950,6 +950,40 @@ Page({
       url: '/pages/published/recruit/list',
     })
   },
+  //根据id匹配工种
+  matchingType(id){
+    let toptype = parseInt(id)//置顶成功后传过来的工种
+      let type = app.globalData.allTypes.classTree//所有工种
+      let _typeid = null,_typetext = null;//匹配到的工种
+      //匹配工种
+      for(let i=0;i<type.length;i++) {//循环一级列表
+        if(type[i].id == toptype){
+          _typeid = type[i].id
+          _typetext = type[i].realNames
+          //置顶成功后的 工种 存入缓存
+          wx.setStorageSync('typeTextgr', _typetext)
+          wx.setStorageSync('typeIdgr', _typeid)
+          return
+        }
+      }
+      if(!_typetext){//如果一级列表没有匹配到
+        for(let n=0;n<type.length;n++) {//循环二级列表
+          if(type[n].has_children == 1){
+            for(let m = 0;m < type[n].children.length;m++){
+              if(type[n].children[m].id == toptype){
+                _typeid = type[n].children[m].id
+                _typetext = type[n].children[m].name
+                //置顶成功后的 工种 存入缓存
+                wx.setStorageSync('typeTextgr', _typetext)
+                wx.setStorageSync('typeIdgr', _typeid)
+                return
+              }
+            }
+          }
+        }
+      }
+      
+  },
   onLoad(options) {
     var isEmpty = app.isEmpty(options.keywrods)
     if(!isEmpty){
@@ -963,33 +997,10 @@ Page({
       wx.setStorageSync('areaId',frstCity.id)
       wx.setStorageSync('areaText', frstCity.name)
     }
+    //置顶成功后的工种id
     if(options.topOcc){
-      let toptype = options.topOcc//置顶成功后传过来的工种
-      let type = app.globalData.allTypes.classTree//所有工种
-      let _typeid = null,_typetext = null;//匹配到的工种
-      //匹配工种
-      for(let i=0;i<type.length;i++) {//循环一级列表
-        if(type[i].id == toptype){
-          _typeid = type[i].id
-          _typetext = type[i].name
-          return
-        }
-      }
-      if(!_typetext){//如果以及列表没有匹配到
-        for(let n=0;n<type.length;n++) {//循环二级列表
-          if(type[n].has_children == 1){
-            for(let m = 0;m < type[n].children.length;m++){
-              if(type[n].children[m].id == toptype){
-                _typeid = type[n].children[m].id
-                _typetext = type[n].children[m].name
-              }
-            }
-          }
-        }
-      }
-      //置顶成功后的 工种 存入缓存
-      wx.setStorageSync('typeTextgr', _typetext)
-      wx.setStorageSync('typeIdgr', _typeid)
+      //根据工种id匹配工种名称
+      this.matchingType(options.topOcc)
     }
     this.initSearchHistory();
     this.initUserShareTimes();

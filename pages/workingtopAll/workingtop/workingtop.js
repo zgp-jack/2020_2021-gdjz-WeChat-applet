@@ -381,6 +381,7 @@ Page({
               frstCity:that.data.areaAllcrum[0]
             })
           }
+          //弹出提示框
           that.selectComponent("#tip").show();
         }else {
           wx.showModal({
