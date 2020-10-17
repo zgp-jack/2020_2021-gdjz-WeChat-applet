@@ -637,12 +637,6 @@ Page({
 
   //用户点击搜索
   userTapSearch: function () {
-      // if (!this.data.userInfo) {
-      //   app.gotoUserauth();
-      //   return false;
-      // }
-      //if (this.data.searchDate.keywords == "") return false;
-
       let text = this.data.searchDate.keywords;
       if (text) {
         let his = wx.getStorageSync("searchHistory")
@@ -672,7 +666,13 @@ Page({
       this.returnTop();
       this.setData({
         "searchDate.page": 1,
-        showHistoryList: false
+        showHistoryList: false,
+        hasSortFlag:1,
+        hasTime: 1,
+        hasTop: 1,
+        lastSortFlagPos: 0,
+        lastTimePos: 0,
+        lastNormalPos: 0,
       })
       this.doRequestAction(false);
       this.initSearchHistory();
