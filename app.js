@@ -42,8 +42,8 @@ App({
     commonDownloadApp: "http://cdn.yupao.com/miniprogram/images/download.png?t=" + new Date().getTime(),
     commonJixieAd: "http://cdn.yupao.com/miniprogram/images/list-ad-newjixie.png?t=" + new Date().getTime(),
     // apiRequestUrl: "http://miniapi.kkbbi.com/",
-    apiRequestUrl: "https://miniapi.zhaogong.vrtbbs.com/",
-    // apiRequestUrl: "https://newyupaomini.54xiaoshuo.com/",
+    // apiRequestUrl: "https://miniapi.zhaogong.vrtbbs.com/",
+    apiRequestUrl: "https://newyupaomini.54xiaoshuo.com/",
     apiUploadImg: "https://newyupaomini.54xiaoshuo.com/index/upload/",
     apiUploadImgphoto: "https://newyupaomini.54xiaoshuo.com/index/authid-card/",
     apiImgUrl: "http://cdn.yupao.com/miniprogram/images/",
@@ -537,7 +537,7 @@ App({
   detailUpimg: function (type, res, callback, _type) {
     let userInfo = wx.getStorageSync("userInfo");
     let _this = this;
-    let imgRes = res;
+    let imgRes = res.tempFilePaths ? res.tempFilePaths[0] : res;
     wx.showToast({
       title: '图片上传中',
       icon: 'loading',

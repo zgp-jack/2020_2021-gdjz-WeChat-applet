@@ -96,7 +96,7 @@ Page({
                     app.showMyTips(_data.errmsg);
                     if(_data.errcode == "ok"){
                         _this.setData({
-                            "member.img": imgRes.tempFilePaths[0]
+                            "member.img": imgRes.tempFilePaths ? imgRes.tempFilePaths[0]:imgRes
                         })
                     }
                 },
