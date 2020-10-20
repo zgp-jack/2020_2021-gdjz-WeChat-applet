@@ -66,6 +66,7 @@ Page({
       topdata: {}, //置顶数据
       showTip: false,//是否展示成功提示框
       defalutTop:null,//置顶默认区域
+      showTip: true,//需要展示快速发布找活名片时，在多次onshow下只设置一次
     },
     showdownappaction:function(){
       wx.navigateTo({
@@ -502,23 +503,33 @@ Page({
                 let FindWorkTime = wx.getStorageSync("FindWorkTime");
                 // 判断返回有没有fast_info字段
                 if (mydata.result.hasOwnProperty('fast_info')) {
-                // 判断返回字段是否是空数组
+                  // 判断返回字段是否是空数组，如果不是空数组展示发布找活名片
                   if (!Array.isArray(mydata.result.fast_info)) {
                     // 判断是否有时间缓存有缓存判断当前时间是否大于到期时间
                     // 无缓存到期时间则展示快速发布框
                     if (FindWorkTime) {
+                      // 到期时间
                       let dueDate = FindWorkTime.dueDate;
+                      // 当前时间
                       let currentTime = new Date().getTime();
+                      // 如果当前时间大于到期时间且多次onshow展示发布找活
+                      // 如果当前时间小于到期时间展示招工详细信息
                       if (currentTime > dueDate) {
-                        _this.selectComponent("#pulishfindwork").show();
+                        if (_this.data.showTip) {
+                          _this.selectComponent("#pulishfindwork").show();
+                          _this.setData({showTip: false})
+                        }
                       }else{
                         _this.setData({showDetail: true})
                       }
                     }else{
-                      _this.selectComponent("#pulishfindwork").show();
+                      if (_this.data.showTip) {
+                        _this.selectComponent("#pulishfindwork").show();
+                        _this.setData({showTip: false})
+                      }
                     }
                   }else{
-                    _this.setData({showDetail: true})
+                    _this.setData({showDetail: true,showTip: false})
                   }
                 }
                 if (mydata.errcode != "fail") {

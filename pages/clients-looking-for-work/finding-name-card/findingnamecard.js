@@ -126,6 +126,7 @@ Page({
     fastInfo:{},//快速发布招工信息
     pulishFindWork:false,//展示发布成功提示框
     publishWay: false,//是否展示发布置顶弹窗（有两个弹窗只会弹其中一个）
+    showTip: true,//快速找活名片展示多次onshow只进行一次设置
   },
 
 
@@ -758,11 +759,14 @@ Page({
             })
             wx.setStorageSync("uuid", mydata.info.uuid)
           } else {
+            if (that.data.showTip) {
+              that.selectComponent("#pulishfindwork").show()
+            }
             that.setData({
               showtop: true,
-              showtopone: false
+              showtopone: false,
+              showTip: false
             })
-            that.selectComponent("#pulishfindwork").show()
           }
 
           if (mydata.info.gender != "0" && mydata.info.gender) {

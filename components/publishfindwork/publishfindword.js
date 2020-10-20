@@ -599,6 +599,7 @@ Component({
     */
   lifetimes: {
     attached: function () { 
+      console.log(this.data)
     },
   },
   /**
@@ -638,8 +639,10 @@ Component({
           areaData.id = id;
           areaData.name = cityText
         }
-        // 组合工种数据
-        classifyids = [{ id: occId, name: occName }];
+        if (occId) {
+          // 组合工种数据
+          classifyids = [{ id: occId, name: occName }];
+        }
         this.setData({userClassifyids:classifyids, classifies:occupations, areaData:areaData, type:type, telPhone:telPhone});
         // 初始化用户位置信息
         this.initAreaData()
