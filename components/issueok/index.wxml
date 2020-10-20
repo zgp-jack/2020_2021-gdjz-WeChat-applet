@@ -1,7 +1,7 @@
 <view class="issueok-container" wx:if="{{ show }}">
   <view class="issueok-box">
     <view class="issueok-title" wx:if="{{ !tipdata.type }}">提示</view>
-    <view class="issueok-title" wx:if="{{ tipdata.type }}"><image src="../../images/pulish-success.png"></image></view>
+    <view class="issueok-title" wx:if="{{ tipdata.type }}"><image src="{{ successIcon }}"></image></view>
     <view class="issueok-body {{ tipdata.type?'pulish-active':'' }}">发布成功</view>
     <view class="issueok-body {{ tipdata.type?'pulish-active':'' }}" wx:if="{{ tipdata.type }}">置顶找活名片,让老板主动联系你</view>
     <view class="issueok-footer">

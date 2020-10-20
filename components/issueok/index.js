@@ -27,6 +27,7 @@ Component({
     userInfo: false,
     icon: app.globalData.apiImgUrl + 'mini-fast-success-icon.png',
     close: app.globalData.apiImgUrl + 'mini-close-icon.png',
+    successIcon:app.globalData.apiImgUrl + 'yc/pulish-success.png'
   },
   attached:function(){
     this.initUserinfo()

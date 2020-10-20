@@ -79,6 +79,13 @@
   font-size: 28rpx;
   border-radius: 10rpx;
 }
+.issue-box image{
+  width: 20rpx;
+  height: 20rpx;
+}
+.issue-box-image{
+  transform: rotate(-180deg);
+}
 .issue-box text{
   font-weight: bold;
 }

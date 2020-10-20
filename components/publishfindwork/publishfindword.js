@@ -74,7 +74,8 @@ Component({
     // 是哪个界面2、3(找活名片)或者1（招工详情）
     type: false,
     // 验证码
-    code:''
+    code:'',
+    selectimg: app.globalData.apiImgUrl + 'select.png',
   },
 
   /**
@@ -564,16 +565,24 @@ Component({
     },
     // 获取验证码
     reGetPhoneCode:function(){
-
-      let _this = this;
+      // 用户信息
+      let userInfo = wx.getStorageSync('userInfo')
+      // 没有用户信息直接返回
+      if (!userInfo) return
+      let userId = userInfo.userId;
+      let token	= userInfo.token;
+      let tokenTime	= userInfo.tokenTime;
       let phone = this.data.telPhone;
+      let _this = this;
+      // 发送请求参数
+      let params = { tel: parseInt(phone), userId, token, tokenTime }
       app.appRequestAction({
           title: "正在获取验证码",
           mask: true,
           failTitle: "网络错误，验证码获取失败！",
-          url: "fast-issue/get-code/",
+          url: "index/get-code/",
           way: "POST",
-          params: { phone: phone},
+          params: params,
           success: function (res) {
               let mydata = res.data;
               app.showMyTips(mydata.errmsg);
