@@ -321,20 +321,11 @@ Page({
   },
   userEnterIdcard: function (e) {
     let that = this;
+    let regx = /[\u4e00-\u9fa5]/;
+    let idCard = this.data.member.id_card;
     if (e) {
-      var re = /^\w{0,18}$/;
-      if (!re.test(e.detail.value)) {
-        wx.showModal({
-          title: '温馨提示',
-          content: '只能输入英文与数字，请重新输入',
-          showCancel: false,
-          success(res) {
-
-            that.setData({
-              "member.id_card": ''
-            })
-          }
-        })
+      if (regx.test(e.detail.value)) {
+        that.setData({ "member.id_card": idCard })
         return
       }
     }
@@ -657,8 +648,8 @@ Page({
       return false;
     }
 
-    if (!v.isRequire(member.id_card, 15)) {
-      app.showMyTips("请输入正确的身份证号码！");
+    if (!v.isRequire(member.id_card, 8) || !(new RegExp(/\d+/).test(member.id_card))) {
+      app.showMyTips("请输入正确的证件号码！");
       return false;
     }
     if (_this.data.regionone == "") {
