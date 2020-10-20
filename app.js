@@ -10,7 +10,7 @@ App({
     copywechat: '',
     callphone: '',
     procity: 0,
-    version: "1.0.5",
+    version: "1.0.6",
     complaincontent: '请填写5~100字，必须含有汉字。（恶意投诉会被封号，请谨慎投诉！）',
     areaIs: false,
     topshow: false,
