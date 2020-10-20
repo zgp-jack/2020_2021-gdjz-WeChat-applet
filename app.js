@@ -10,7 +10,7 @@ App({
     copywechat: '',
     callphone: '',
     procity: 0,
-    version: "1.0.5",
+    version: "1.0.6",
     complaincontent: '请填写5~100字，必须含有汉字。（恶意投诉会被封号，请谨慎投诉！）',
     areaIs: false,
     topshow: false,
@@ -42,8 +42,8 @@ App({
     commonDownloadApp: "http://cdn.yupao.com/miniprogram/images/download.png?t=" + new Date().getTime(),
     commonJixieAd: "http://cdn.yupao.com/miniprogram/images/list-ad-newjixie.png?t=" + new Date().getTime(),
     // apiRequestUrl: "http://miniapi.kkbbi.com/",
-    // apiRequestUrl: "https://miniapi.zhaogong.vrtbbs.com/",
-    apiRequestUrl: "https://newyupaomini.54xiaoshuo.com/",
+    apiRequestUrl: "https://miniapi.zhaogong.vrtbbs.com/",
+    // apiRequestUrl: "https://newyupaomini.54xiaoshuo.com/",
     apiUploadImg: "https://newyupaomini.54xiaoshuo.com/index/upload/",
     apiUploadImgphoto: "https://newyupaomini.54xiaoshuo.com/index/authid-card/",
     apiImgUrl: "http://cdn.yupao.com/miniprogram/images/",
@@ -97,7 +97,7 @@ App({
       loginAfter: false,
       logoutWay: "",
       loginWay: "",
-    }
+    },
     
   },
   //是否为极速发布与快速发布请求,快速发布与极速发布跳转

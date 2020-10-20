@@ -1,6 +1,6 @@
 <view class="issueok-container" wx:if="{{show}}">
   <view class="issueok-box">
-    <view class="issueok-title">提示</view>
+    <view class="issueok-title" wx:if="{{!tipdata.type}}">提示</view>
     <!-- 内容不需要 拼接颜色样式 -->
     <view class="issueok-body" wx:if="{{!tipstr.length}}">{{tipdata.tip_type == "day_last" ? ConfigData.tips.text : tipdata.top_tips.text}}</view>
     <!-- 内容拼接颜色样式 -->

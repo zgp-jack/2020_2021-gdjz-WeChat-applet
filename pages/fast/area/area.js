@@ -432,7 +432,7 @@ Page({
         return false
       }
   },
-  //点击选择招工发布地址都地址详情界面
+  //点击选择招工发布地址到地址详情界面
   showWorkArea: function () {
     wx.navigateTo({
       url: '/pages/fast/detailarea/detailarea?showfor=showfor&showmap=showmap'

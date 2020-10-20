@@ -1,5 +1,5 @@
 <!-- locatext -->
-<view style='height:100%;{{ showComplain ? "overflow:hidden;" : "" }}'>
+<view style='height:100%;{{ showComplain ? "overflow:hidden;" : "" }}' wx:if="{{ showDetail }}">
 
 	<view class="yupao-common-container" style="padding-bottom:130rpx">
 
@@ -154,7 +154,7 @@
 	</block>
 </view>
 
-<view class="newdetail-info-footer" wx:if="{{ userInfo.userId != info.user_id }}">
+<view class="newdetail-info-footer" wx:if="{{ userInfo.userId != info.user_id && showDetail}}">
 	<view class="newdetail-info-itembox clearfix">
 		<view class="newdetail-info-item" bindtap='userCollectAction'>
 			<image src="{{ collectMark ? collectedImg : collectImg }}"></image>
@@ -214,3 +214,10 @@
 </view>
 
 <downapptips id='downapptips'></downapptips>
+
+
+<!-- 快速发布找活名片 -->
+<publishfindwork id="pulishfindwork" fastInfo="{{ fastInfo }}" bind:refreshPage = "showPublishTip" bind:cancelPublish = "cancelPublish"></publishfindwork>
+
+<!-- 发布招工成功提示框 -->
+<issueok  id="publishtip" tipdata="{{ { type:'findWorkDetail' } }}" topdata="{{ { has_top:0, is_top:0 } }}" defalutTop="{{ defalutTop}}" />

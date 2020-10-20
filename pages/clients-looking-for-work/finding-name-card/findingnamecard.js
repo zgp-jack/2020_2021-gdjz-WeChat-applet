@@ -121,7 +121,11 @@ Page({
     topshow:false,
     is_top_show:true,
     default_top_area:false,
-    userTopArea:[]//初始化用户置顶城市数据
+    userTopArea:[],//初始化用户置顶城市数据
+    showFindCard:false, //是否展示找活名片
+    fastInfo:{},//快速发布招工信息
+    pulishFindWork:false,//展示发布成功提示框
+    publishWay: false,//是否展示发布置顶弹窗（有两个弹窗只会弹其中一个）
   },
 
 
@@ -749,7 +753,8 @@ Page({
           //隐藏提示信息窗口
             that.showtop()
             that.setData({
-              resume_uuid: mydata.info.uuid
+              resume_uuid: mydata.info.uuid,
+              showFindCard: true,
             })
             wx.setStorageSync("uuid", mydata.info.uuid)
           } else {
@@ -757,6 +762,7 @@ Page({
               showtop: true,
               showtopone: false
             })
+            that.selectComponent("#pulishfindwork").show()
           }
 
           if (mydata.info.gender != "0" && mydata.info.gender) {
@@ -785,6 +791,7 @@ Page({
           }
           let cityid = mydata.info.hasOwnProperty("city")? parseInt(mydata.info.city) : 0
           let province = mydata.info.hasOwnProperty("province") ? mydata.info.province : 0
+          let fastInfo = mydata.hasOwnProperty('fast_info')?((Array.isArray(mydata.fast_info) && mydata.fast_info.length === 0)? {} : mydata.fast_info): {}
 
           that.setData({
             occupations_id: mydata.info.hasOwnProperty("occupations_id")?mydata.info.occupations_id : '',	
@@ -820,6 +827,7 @@ Page({
             resume_top: mydata.hasOwnProperty("resume_top") ? mydata.resume_top : [],
             top_status: mydata.hasOwnProperty("top_status") ? mydata.top_status : [],
             default_top_area: mydata.hasOwnProperty("default_top_area")?mydata.default_top_area : false,
+            fastInfo: fastInfo 
           })
           if (mydata.hasOwnProperty("resume_top")) {
             if (mydata.resume_top.is_top == 1) {
@@ -1193,9 +1201,6 @@ Page({
       });
     });
   },
-  /**
-   * 生命周期函数--监听页面加载
-   */
   cardjump(options) {
 
     if (options.hasOwnProperty("rankjump")) {
@@ -1203,16 +1208,6 @@ Page({
         rankjump: options.rankjump
       })
     }
-  },
-  onLoad: function (options) {
-    this.authrasution();
-    this.cardjump(options)
-  },
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-
   },
   showskill() {
     this.setData({
@@ -1230,7 +1225,7 @@ Page({
     let timer = new Date().getTime();
     let top_onoff = that.data.checkonef == "0" || that.data.checktwof == "0" || that.data.checkthreef == "0" || that.data.checkfourf == "0"
     let timer_maker = (timer - toptimer) / 86400000;
-    if (!toptimer && !top_onoff && !that.data.showtop && onoff && !that.data.checkone && that.data.index == 0){
+    if (!toptimer && !top_onoff && !that.data.showtop && onoff && !that.data.checkone && that.data.index == 0 && !that.data.publishWay){
        app.globalData.topshow = true;
        that.setData({
          topshow: app.globalData.topshow,
@@ -1238,7 +1233,7 @@ Page({
        })
        wx.setStorageSync("toptimer", timer)
     }else{
-      if (timer_maker >= 7 && !top_onoff && !that.data.showtop && onoff && !that.data.checkone && that.data.index == 0){
+      if (timer_maker >= 7 && !top_onoff && !that.data.showtop && onoff && !that.data.checkone && that.data.index == 0 && !that.data.publishWay){
         
         app.globalData.topshow = true;
         that.setData({
@@ -1266,6 +1261,40 @@ Page({
       topshow: app.globalData.topshow,
       top_display: "none",
     })
+  },
+  // 点击快速发布找活名片取消按钮显示找活名片详情
+  cancelPublish: function () {
+    this.setData({ showFindCard: true })
+  },
+  // 刷新页面issok子组件调用方法
+  refreshPage: function () {
+    // 将是否展示发布成功提示框设置为true（要展示）
+    this.setData({pulishFindWork:true, publishWay:true, showFindCard: true,})
+    // 重新获取数据
+    this.getdetail();
+    // 展示发布成功弹窗
+    this.showPublishTip()
+  },
+  // 展示发布成功界面
+  showPublishTip: function () {
+    let pulishFindWork = this.data.pulishFindWork;
+    if (pulishFindWork) {
+      this.selectComponent("#publishtip").show()
+      this.setData({pulishFindWork:false})
+    }
+  },
+  /**
+   * 生命周期函数--监听页面加载
+   */
+  onLoad: function (options) {
+    this.authrasution();
+    this.cardjump(options)
+  },
+  /**
+   * 生命周期函数--监听页面初次渲染完成
+   */
+  onReady: function () {
+
   },
   /**
    * 生命周期函数--监听页面显示

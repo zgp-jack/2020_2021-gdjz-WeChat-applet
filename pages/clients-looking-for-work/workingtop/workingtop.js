@@ -972,6 +972,7 @@ Page({
           alllength:defaultTop.length,
         })
       }
+      // 获取配置信息和计算初次置顶数据
       this.getdetail()
       return false
     }
@@ -1016,6 +1017,7 @@ Page({
           alllength:defaultTop.length,
         })
       }
+      // 获取配置信息和计算初次置顶数据
       _this.getdetail()
     });
   },
@@ -1027,7 +1029,8 @@ Page({
   //如果时初次置顶或者置顶到期，置顶地区默认找活名片地区
   if(hastop == 0 || istop == 2){
     this.getDefaultArea(defaultTop)
-  } else {
+  }else{
+    // 获取配置信息和计算初次置顶数据
     this.getdetail()
   }
  },
@@ -1039,6 +1042,8 @@ Page({
     this.getNewId(options)
     // 初始化置顶城市与置顶天数
     this.initTopData()
+    // 获取配置信息和计算初次置顶数据
+    // this.getdetail()
   },
 
   /**

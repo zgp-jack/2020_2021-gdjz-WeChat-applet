@@ -1,11 +1,15 @@
 <view class="issueok-container" wx:if="{{ show }}">
   <view class="issueok-box">
-    <view class="issueok-title">提示</view>
-    <view class="issueok-body">发布成功</view>
+    <view class="issueok-title" wx:if="{{ !tipdata.type }}">提示</view>
+    <view class="issueok-title" wx:if="{{ tipdata.type }}"><image src="{{ successIcon }}"></image></view>
+    <view class="issueok-body {{ tipdata.type?'pulish-active':'' }}">发布成功</view>
+    <view class="issueok-body {{ tipdata.type?'pulish-active':'' }}" wx:if="{{ tipdata.type }}">置顶找活名片,让老板主动联系你</view>
     <view class="issueok-footer">
-      <button class="issueok-btn" bindtap="goToResumeList">筛选找活简历</button>
-      <button class="issueok-btn" bindtap="manageRecruit"  wx:if="{{ userInfo }}">管理招工信息</button>
-      <button class="issueok-btn" wx:else open-type="getUserInfo"  bindgetuserinfo='bindGetUserInfo'>管理招工信息</button>
+      <button class="issueok-btn" wx:if="{{ tipdata.type }}" bindtap="goFindWork">查看招工信息</button>
+      <button class="issueok-btn" wx:if="{{ !tipdata.type }}" bindtap="goToResumeList">筛选找活简历</button>
+      <button class="issueok-btn" wx:if="{{ tipdata.type }}" bindtap="goTop">去置顶</button>
+      <button class="issueok-btn" bindtap="manageRecruit"  wx:if="{{ !tipdata.type && userInfo }}">管理招工信息</button>
+      <button class="issueok-btn"  wx:if="{{ !tipdata.type && !userInfo }}" open-type="getUserInfo"  bindgetuserinfo='bindGetUserInfo'>管理招工信息</button>
     </view>
     <image class="issueok-close" bindtap="show" src="{{ close }}"></image>
   </view>

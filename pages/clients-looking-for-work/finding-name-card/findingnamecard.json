@@ -1,6 +1,8 @@
 {
     "navigationBarTitleText": "找活名片",
     "usingComponents": {
-        "recommendRecruit": "/components/recommendRecruit/recommendRecruit"
+        "recommendRecruit": "/components/recommendRecruit/recommendRecruit",
+        "publishfindwork":"/components/publishfindwork/publishfindword",
+        "issueok": "/components/issueok/index"
     }
 }

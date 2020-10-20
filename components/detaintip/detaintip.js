@@ -124,5 +124,5 @@ Component({
         "buttontext.comfirm":"查看工人简历",
       })
     }
-  }
+  },
 })

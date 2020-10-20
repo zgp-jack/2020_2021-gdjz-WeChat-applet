@@ -1,4 +1,4 @@
-<view style="padding-bottom:120rpx;">
+<view style="padding-bottom:120rpx;" wx:if="{{showFindCard}}">
   <view class="cardcolore">
     <view class="findingnamecard">
       请完善以下信息
@@ -543,3 +543,10 @@
   <button class='userauth-btn userauth-sure-btn' open-type="getUserInfo" bindgetuserinfo='bindGetUserInfo'>微信授权登录</button>
   <button class='userauth-btn  userauth-back-btn' bindtap='returnPrevPage'>返回上一页</button>
 </view>
+
+<!-- 快速发布找活名片 -->
+<publishfindwork id="pulishfindwork" fastInfo="{{ fastInfo }}" bind:refreshPage="refreshPage" bind:cancelPublish = "cancelPublish"></publishfindwork>
+
+
+<!-- 发布招工成功提示框 -->
+<issueok  id="publishtip" tipdata="{{ { type:'publishFindWork'} }}" topdata="{{ resume_top }}" defalutTop="{{ default_top_area }}"/>

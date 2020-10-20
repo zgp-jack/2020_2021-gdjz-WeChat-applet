@@ -1,0 +1,340 @@
+/* components/publishfindwork/publishfindword.wxss */
+
+.publish-container{
+  position: fixed;
+  width: 100%;
+  background-color: white;
+  left: 0;
+  top: 0;
+  display: flex;
+  flex-direction: column;
+  /* justify-content: center; */
+  align-items: center;
+  z-index: 1000;
+  height: 100%;
+  padding-top: 130rpx;
+  padding-bottom: 150rpx;
+  overflow: scroll;
+}
+.publish-contentbox{
+  width: 90%;
+  height: 100vh;
+  margin-top: 130rpx;
+  margin-bottom: 200rpx;
+}
+.issue-title-box{
+  position: relative;
+  display: flex;
+  width: 80%;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+}
+.issue-title-box::after{
+  content:"";
+  display: inline-block;
+  width: 90%;
+  height: 15rpx;
+  background-color: #ADDFFF;
+  opacity: .8;
+  position: absolute;
+  bottom: -5rpx;
+  left: 0rpx;
+  border-radius: 10rpx;
+  z-index: -1;
+  margin-left: 50%;
+  transform: translateX(-50%);
+}
+.issue-title-no{
+  position: relative;
+  display: flex;
+  width: 80%;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+}
+.issue-title-no::after{
+  content: "";
+  display: inline-block;
+  width: 42%;
+  height: 15rpx;
+  background-color: #ADDFFF;
+  opacity: .8;
+  position: absolute;
+  bottom: -5rpx;
+  left: 0rpx;
+  border-radius: 10rpx;
+  z-index: -1;
+  margin-left: 50%;
+  transform: translateX(-50%);
+}
+.issue-title-iamge{
+  width: 30rpx;
+  height: 30rpx;
+}
+.issue-title-iamge:first-child{
+  margin-right: 5rpx;
+}
+.issue-title-iamge:last-child{
+  margin-left: 5rpx;
+}
+.issue-title{
+  position: relative;
+  font-size: 32rpx;
+  font-weight: bold;
+  height: 35rpx;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  white-space: nowrap;
+}
+/* .issue-title::after{
+  content:"";
+  display: inline-block;
+  width: 100%;
+  height: 15rpx;
+  background-color: #ADDFFF;
+  opacity: .8;
+  position: absolute;
+  bottom: 0rpx;
+  left: 0rpx;
+  border-radius: 10rpx;
+  z-index: -1;
+} */
+.issue-title-info {
+  color: #F80F25;
+  font-size: 33rpx;
+}
+.issue-title-info:last-child{
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.issue-contactbox{
+  margin-top: 100rpx;
+  margin-bottom: 100rpx;
+  width: 90%;
+}
+.issue-box{
+  width: 100%;
+  display: flex;
+}
+
+.issue-box{
+  position: relative;
+  display: flex;
+  align-items: center;
+  background: #F8F8F8;
+  padding: 0rpx 20rpx;
+  margin-bottom: 20rpx;
+  font-size: 28rpx;
+  border-radius: 10rpx;
+}
+.issue-box image{
+  width: 20rpx;
+  height: 20rpx;
+}
+.issue-box-image{
+  transform: rotate(-180deg);
+}
+.issue-box text{
+  font-weight: bold;
+}
+.issue-box-worktype{
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20rpx;
+  font-size: 28rpx;
+}
+.issue-box-worktype-tip{
+  color: #ff9600;
+  padding-left: 20rpx;
+}
+.issue-box .issue-input{
+  position: relative;
+  border-radius: 5rpx;
+  height: 110rpx;
+  line-height: 110rpx;
+  background-color: #F8F8F8;
+  padding: 0 20rpx;
+  font-size: 30rpx;
+  flex:1;
+}
+.input-item-text{
+  position: relative;
+  width: 100%;
+  padding: 20rpx 20rpx 25rpx 0rpx;
+  line-height: 45rpx;
+  font-size: 28rpx;
+  left: 20rpx;
+  flex:1;
+  min-height: 110rpx;
+  display: flex;
+  align-items: center;
+}
+.issue-box text{
+  display: block;
+  position: relative;
+  line-height: 45rpx;
+  font-size: 28rpx;
+  width: 140rpx;
+}
+.issue-box .issue-phone-code{
+  color: #0297fe;
+  font-weight: normal;
+}
+.issue-footer-button{
+  width: 90%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 0rpx;
+}
+.issue-code-btn{
+  width: 48%;
+}
+.issue-footer-button button{
+  margin: 0rpx;
+}
+.issue-footer-button button:first-child{
+  border:1rpx solid #E8E8E8
+}
+.issue-footer-button button:last-child{
+  background-color: #0297fe;
+}
+.issue-cloose-tip{
+  text-align: center;
+  color: #0099ff;
+  position: relative;
+  margin-top: 100rpx;
+}
+.issue-cloose-tip::after{
+  content:"";
+  display: inline-block;
+  width: 140rpx;
+  height: 2rpx;
+  background-color:  #0099ff;
+  position: absolute;
+  bottom: -2rpx;
+  left: 0rpx;
+  margin-left: 50%;
+  transform: translateX(-50%);
+}
+
+
+/* 工种选择样式 */
+.common-picker-container{
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.65);
+  z-index: 1001;
+  transition: 0.3s;
+}
+.common-picker-box{
+  position: absolute;
+  width: 100%;
+  left: 0;
+  bottom: 0;
+  height: 640rpx;
+  background-color: white;
+  padding-top: 95rpx;
+  transition: 0.3s;
+}
+.common-picker-header{
+  position: absolute;
+  width: 100%;
+  top: 0;
+  line-height: 93rpx;
+  border-bottom: 1rpx solid #ededed;
+}
+.common-picker-left{
+  position: absolute;
+  left: 20rpx;
+  top: 0;
+  font-size: 26rpx;
+  color: #777777;
+  z-index: 5;
+}
+.common-picker-title{
+  position: relative;
+  text-align: center;
+  color: #333;
+  font-size: 28rpx;
+  font-weight: bold;
+}
+.common-picker-right{
+  position: absolute;
+  right: 20rpx;
+  top: 0;
+  font-size: 26rpx;
+  color: #0099ff;
+  z-index: 5;
+}
+.common-picker-body{
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background-color: #F7F7F7;
+}
+.common-picker-content{
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow-y: scroll;
+}
+.common-picker-content2{
+  position: absolute;
+  width: 50%;
+  height: 100%;
+  left: 50%;
+  top: 0;
+  overflow-y: scroll;
+  background-color: white;
+}
+.common-picker-item{
+  position: relative;
+  width: 100%;
+  line-height: 40rpx;
+  padding: 25rpx 20rpx;
+  font-size: 28rpx;
+  color: #2C2C2C;
+  border-bottom: 1px solid #EDEDED;
+}
+.common-picker-item text{
+  position: absolute;
+  top: 10rpx;
+  display: inline-block;
+  font-size: 20rpx;
+  padding: 5rpx;
+  border-radius: 50%;
+  background-color: #ff0000;
+  color: white;
+  width: 30rpx;
+  height: 30rpx;
+  line-height: 23rpx;
+  text-align: center;
+}
+.common-picker-none{
+  z-index: -1;
+  opacity: 0;
+  background: transparent;
+}
+.common-picker-none .common-picker-box{
+  bottom: -700rpx;
+}
+.common-picker-item-active,.common-picker-text-active{
+  color: #0099ff;
+}
+.common-picker-item-active::after{
+  position: absolute;
+  content: '';
+  width: 4px;
+  height: 100%;
+  left: 0;
+  top: 0;
+  background-color: #0099ff;
+}
