@@ -66,6 +66,11 @@ Page({
         content: '搜索不能超过10个字符',
       })
     }else{
+      //判断是否大于五个字 提取前五个字 大于五个字需要显示...
+      let _key;
+      if(this.data.inputTetx.length > 5){
+        _key = this.data.inputTetx.substring(0,5)
+      }
       //保存
       //判断找工作还是找工人
       if(this.data.changeStatus == 0){
@@ -73,11 +78,13 @@ Page({
         if(historyList.historyList.length === 6) {
           historyList.historyList.pop()
           historyList.historyList.unshift({
-          keywords:this.data.inputTetx
+          keywords:this.data.inputTetx,
+          _keywords:_key
         })
         }else{
           historyList.historyList.unshift({
-            keywords:this.data.inputTetx
+            keywords:this.data.inputTetx,
+            _keywords:_key
           })
       }
         //去重
@@ -104,11 +111,13 @@ Page({
         if(historyList.historyList.length === 6) {
           historyList.historyList.pop()
           historyList.historyList.unshift({
-          keywords:this.data.inputTetx
+          keywords:this.data.inputTetx,
+          _keywords:_key
         })
         }else{
           historyList.historyList.unshift({
-            keywords:this.data.inputTetx
+            keywords:this.data.inputTetx,
+            _keywords:_key
           })
         }
         var result = [];

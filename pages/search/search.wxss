@@ -125,7 +125,7 @@ page {
   display: flex;
   flex-wrap: wrap;
 }
-.tag-box text,.tag-box view{
+.history-search-title-box text,.tag-box .tab-bg{
   background-color: #f6f5f5;
   color: #333;
   font-size: 28rpx;

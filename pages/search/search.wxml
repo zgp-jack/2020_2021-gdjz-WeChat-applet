@@ -28,10 +28,16 @@
     </view>
     <view class="tag-box">
       <block wx:if="{{changeStatus == 0}}" wx:for="{{ historySearch.historyList }}" wx:key="index">
-        <text bindtap="clickTabSearch" space="ensp" data-key="{{ item.keywords }}">{{ item.keywords }}</text>
+        <view class="tab-bg" bindtap="clickTabSearch" space="ensp" data-key="{{ item.keywords }}">
+          <text wx:if="item.keywords">{{ item.keywords }}</text>
+          <text wx:if="{{item.keywords.length > 5}}">···</text>
+        </view>
       </block>
       <block wx:if="{{changeStatus == 1}}" wx:for="{{ historySearchGr.historyList }}" wx:key="index">
-        <text bindtap="clickTabSearch" space="ensp" data-key="{{ item.keywords }}">{{ item.keywords }}</text>
+        <view class="tab-bg" bindtap="clickTabSearch" space="ensp" data-key="{{ item.keywords }}">
+          <text>{{ item.keywords }}</text>
+          <text wx:if="{{item.keywords.length > 5}}">···</text>
+        </view>
       </block>
     </view>
   </view>
@@ -41,7 +47,7 @@
     </view>
     <view class="tag-box">
       <block wx:for="{{ hotSearch.hotList }}" wx:key="index">
-        <view bindtap="clickTabSearch" data-key="{{ item.keywords }}">{{ item.keywords }}</view>
+        <view class="tab-bg" bindtap="clickTabSearch" data-key="{{ item.keywords }}">{{ item.keywords }}</view>
       </block>
     </view>
   </view>
