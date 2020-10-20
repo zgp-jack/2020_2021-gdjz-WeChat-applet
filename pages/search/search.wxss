@@ -137,3 +137,13 @@ page {
   align-items: center;
   border-radius: 4rpx;
 }
+.tab-inner {
+  width: 100%;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+  font-size: 28rpx;
+}
+.max-tab-box{
+  max-width: 100%;
+}

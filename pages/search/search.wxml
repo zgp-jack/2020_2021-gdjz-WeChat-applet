@@ -32,14 +32,14 @@
         <view class="tab-bg" bindtap="clickTabSearch" space="ensp" data-key="{{ item.keywords }}">
           <text wx:if="{{item._keywords}}">{{ item._keywords }}</text>
           <text wx:elif="{{!item._keywords}}">{{ item.keywords }}</text>
-          <text wx:if="{{item.keywords.length > 5}}">···</text>
+          <text wx:if="{{item.keywords.length > 5}}">...</text>
         </view>
       </block>
       <block wx:if="{{changeStatus == 1}}" wx:for="{{ historySearchGr.historyList }}" wx:key="index">
         <view class="tab-bg" bindtap="clickTabSearch" space="ensp" data-key="{{ item.keywords }}">
           <text wx:if="{{item._keywords}}">{{ item._keywords }}</text>
           <text wx:elif="{{!item._keywords}}">{{ item.keywords }}</text>
-          <text wx:if="{{item.keywords.length > 5}}">···</text>
+          <text wx:if="{{item.keywords.length > 5}}">...</text>
         </view>
       </block>
     </view>
@@ -50,7 +50,11 @@
     </view>
     <view class="tag-box">
       <block wx:for="{{ hotSearch.hotList }}" wx:key="index">
-        <view class="tab-bg" bindtap="clickTabSearch" data-key="{{ item.keywords }}">{{ item.keywords }}</view>
+        <view class="tab-bg max-tab-box" bindtap="clickTabSearch" data-key="{{ item.keywords }}">
+          <view class="tab-inner">
+            {{ item.keywords }}
+          </view>
+        </view>
       </block>
     </view>
   </view>
