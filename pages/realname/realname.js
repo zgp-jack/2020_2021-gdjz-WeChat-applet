@@ -649,7 +649,11 @@ Page({
     }
 
     if (!v.isRequire(member.id_card, 8) || !(new RegExp(/\d+/).test(member.id_card))) {
-      app.showMyTips("请输入正确的证件号码！");
+      wx.showModal({
+        title: "提示",
+        content: '请输入正确证件号码。',
+        showCancel:false,
+      })
       return false;
     }
     if (_this.data.regionone == "") {
