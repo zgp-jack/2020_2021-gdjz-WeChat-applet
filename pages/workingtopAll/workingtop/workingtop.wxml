@@ -90,4 +90,4 @@
   <button class='userauth-btn  userauth-back-btn' bindtap='returnPrevPage'>返回上一页</button>
 </view> -->
 <!-- 置顶成功弹窗 -->
-<dataintip id="tip" wx:if="{{successData}}" successData="{{successData}}"></dataintip>
+<dataintip id="tip" wx:if="{{successData}}" successData="{{successData}}" frstCity="{{frstCity}}"></dataintip>

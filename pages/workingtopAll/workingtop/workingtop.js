@@ -60,7 +60,9 @@ Page({
     // config请求返回的置顶可选天数
     reqDays:[],
     //置顶成功后的数据
-    successData:""
+    successData:"",
+    //置顶的第一个区域
+    frstCity:null
   },
 
   jumpstickyrule() {
@@ -365,6 +367,21 @@ Page({
           that.setData({
             successData:mydata
           })
+          //找出置顶第一个城市
+          if(that.data.areaProcrum.length > 0){
+            that.setData({
+              frstCity:that.data.areaProcrum[0]
+            })
+          }else if(that.data.areaCitycrum.length > 0){
+            that.setData({
+              frstCity:that.data.areaCitycrum[0]
+            })
+          }else if(that.data.areaAllcrum.length > 0){
+            that.setData({
+              frstCity:that.data.areaAllcrum[0]
+            })
+          }
+          //弹出提示框
           that.selectComponent("#tip").show();
         }else {
           wx.showModal({
