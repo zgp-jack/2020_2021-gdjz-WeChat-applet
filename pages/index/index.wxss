@@ -43,7 +43,7 @@ page{
     display: block;
     width: 30rpx;
     height: 30rpx;
-    left: 40rpx;
+    right: 120rpx;
     top: 35rpx;
 }
 
