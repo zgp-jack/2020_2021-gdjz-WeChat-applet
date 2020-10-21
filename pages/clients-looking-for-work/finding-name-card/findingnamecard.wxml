@@ -484,8 +484,7 @@
         提示
       </view>
       <view class="textdetail">
-       您的
-        <text class="popup">{{popup}}</text>未审核通过，请修改后再进行提交
+       您的<text class="popup">{{popup}}</text>审核未通过，请修改后再提交！
       </view>
       <view class="buttontext" catchtap="vertify">
         确定
