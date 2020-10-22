@@ -45,17 +45,19 @@
   "simulatorType": "wechat",
   "simulatorPluginLibVersion": {},
   "condition": {
+<<<<<<< HEAD
     "search": {
       "list": []
     },
     "conversation": {
       "list": []
     },
+=======
+>>>>>>> YP-4959
     "plugin": {
       "list": []
     },
     "game": {
-      "currentL": -1,
       "list": []
     },
     "gamePlugin": {
@@ -550,6 +552,12 @@
           "id": -1,
           "name": "pages/published/recruit/list",
           "pathName": "pages/lists/resume/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "投诉",
+          "pathName": "pages/complaint/index",
           "scene": null
         }
       ]

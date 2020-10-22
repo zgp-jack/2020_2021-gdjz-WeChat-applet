@@ -162,8 +162,8 @@ Page({
   },
   initUserInfo: function (callback) {
     let userInfo = wx.getStorageSync("userInfo");
-    let userUuid = wx.getStorageSync('uuid');
-    if (userUuid) {
+    let userUuid = wx.getStorageSync('userUuid');
+    if (userUuid && userInfo) {
       userInfo.userUuid = userUuid;
     }
     if (!userInfo) {

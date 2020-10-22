@@ -762,8 +762,8 @@ Page({
         this.setData({ complainInfo: e.detail.value })
     },
     userTapComplain: function (e) {
-      console.log(e)
       let userInfo = this.data.userInfo;
+      let infoId = this.data.infoId;
       if (!userInfo) {
         app.gotoUserauth();
         return false;
@@ -781,9 +781,10 @@ Page({
         })
         return false;
       }
-      this.setData({
-        showComplain: true
-    })
+      // 跳转到投诉界面
+      wx.navigateTo({
+        url: `/pages/complaint/index?infoId=${infoId}&type=job&page=detail`,
+      })
     },
     
     subscribeToNews: function(mydata) {
@@ -795,57 +796,6 @@ Page({
                 confirmText: '确定'
               })
               
-        })
-    },
-    userCancleComplain: function () {
-      this.setData({ showComplain: false, complainInfo:"" })
-    },
-    userComplaintAction: function () {
-        let _this = this; 
-        let userInfo = this.data.userInfo;
-        let infoId = this.data.infoId;
-        let info = this.data.complainInfo; 
-      let complaincontent = this.data.complaincontent
-      let vertifyNum = v.v.new()
-        info = info.replace(/^\s+|\s+$/g, '');
-      if (info == "" || info.length < 5 || info.length > 100 || !vertifyNum.isChinese(info)) {
-        app.showMyTips(complaincontent);
-            return false;
-        }
-        app.appRequestAction({
-            url: "publish/complain/",
-            way: "POST",
-            params: {
-                userId: userInfo.userId,
-                token: userInfo.token,
-                tokenTime: userInfo.tokenTime,
-                infoId: infoId,
-                type: "job",
-                content: info
-            },
-            title: "正在提交投诉",
-            failTitle: "网络错误，投诉失败！",
-            success: function (res) {
-                let mydata = res.data;
-              if (mydata.errcode == "ok"){
-                _this.setData({ 
-                  showComplain: false,
-                  complainInfo: "",
-                  "info.show_complaint.show_complaint": 0,
-                  "info.show_complaint.tips_message": "您已经投诉过这条信息，请勿重复投诉!"
-                });
-                _this.subscribeToNews(mydata)
-              }else{
-                wx.showModal({
-                    title: '提示',
-                    content: mydata.errmsg,
-                    showCancel:false,
-                    confirmText: mydata.errcode == 'pass_complaint' ? '知道了' : '确定'
-                  })
-              }
-                
-                
-            }
         })
     },
     userShareAddIntegral: function () {
@@ -959,7 +909,7 @@ Page({
         this.setData({ userInfo: userInfo })
       }
       this.initJobInfo(infoId);
-      
+
     },
 
     /**
