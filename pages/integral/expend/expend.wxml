@@ -164,24 +164,4 @@
     </view>
 </view>
 
-
-
-
-
-<!-- 投诉填写界面 -->
-<view class='yupao-common-enterbox flex-row' catchtouchmove="move" wx:if="{{ showComplain }}">
-    <view class='yupao-common-enter'>
-        <text class='yupao-enter-title'>投诉信息</text>
-        <text class='yupao-enter-tips'>请输入投诉内容</text>
-        <view class='yupao-enter-body'>
-            <textarea class='yupao-enter-wrap yupao-enter-textarea' fixed='true'  placeholder='{{complaincontent}}' bindinput='userEnterComplain' maxlength='200' value='{{ complainInfo }}'></textarea>
-        </view>
-        <view class='yupao-enter-footer clearfix'>
-            <text bindtap='userCancleComplain'>取消</text>
-            <text bindtap='userComplaintAction'>确定</text>
-        </view>
-    </view>
-</view>
-
-
 <!-- showRecord  listsboxdetailo -->

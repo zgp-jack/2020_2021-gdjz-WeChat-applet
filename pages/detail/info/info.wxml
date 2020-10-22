@@ -112,21 +112,6 @@
 			</view>
 		</view>
 	</view>
-
-	<view class='yupao-common-enterbox flex-row' wx:if="{{ showComplain }}">
-		<view class='yupao-common-enter'>
-			<text class='yupao-enter-title'>投诉信息</text>
-			<text class='yupao-enter-tips'>请输入投诉内容</text>
-			<view class='yupao-enter-body'>
-				<textarea class='yupao-enter-wrap yupao-enter-textarea' placeholder='{{complaincontent}}' bindinput='userEnterComplain' maxlength='200' value='{{ complainInfo }}'></textarea>
-			</view>
-			<view class='yupao-enter-footer clearfix'>
-				<text bindtap='userCancleComplain'>取消</text>
-				<text bindtap='userComplaintAction'>确定</text>
-			</view>
-		</view>
-	</view>
-
 </view>
 
 <view class="usermine-footer" wx:if="{{ userInfo.userId == info.user_id }}">
