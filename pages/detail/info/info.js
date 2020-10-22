@@ -531,6 +531,8 @@ Page({
                   }else{
                     _this.setData({showDetail: true,showTip: false})
                   }
+                }else{
+                  _this.setData({ showDetail: true })
                 }
                 if (mydata.errcode != "fail") {
                   let aid =  cityid || provinceid;
