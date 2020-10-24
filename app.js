@@ -35,7 +35,7 @@ App({
     serverPhone: "400-838-1888",
     userInfo: null,
     refId: "",
-    fixedGetIntegral: "http://cdn.yupao.com/miniprogram/images/fixed-getintegral.png?t=" + new Date().getTime(),
+    fixedGetIntegral: "http://cdn.yupao.com/miniprogram/images/fixed-getintegr6al.png?t=" + new Date().getTime(),
     fixedDownApp: "http://cdn.yupao.com/miniprogram/images/fixed-downloadapp.png?t=" + new Date().getTime(),
     fixedPublishImg: "http://cdn.yupao.com/miniprogram/images/fixed-publishrecruit.png?t=" + new Date().getTime(),
     commonShareImg: "http://cdn.yupao.com/miniprogram/images/minishare.png?t=" + new Date().getTime(),
