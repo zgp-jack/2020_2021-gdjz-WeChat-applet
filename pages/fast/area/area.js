@@ -644,7 +644,7 @@ Page({
             if (failCount) {
               wx.showModal({
                 title: '提示',
-                content: `有${failCount}图片上传失败，请重新上传`,
+                content: `有${failCount}张图片上传失败，请重新上传`,
                 showCancel: false,
               })
             }

@@ -534,7 +534,7 @@ App({
     }, 1)
 
   },
-  detailUpimg: function (type, res, callback, _type) {
+  detailUpimg: function (type, res, callback, _type,allnum) {//allnum选中图片的数量
     let userInfo = wx.getStorageSync("userInfo");
     let _this = this;
     let imgRes = res.tempFilePaths ? res.tempFilePaths[0] : res;
@@ -552,30 +552,23 @@ App({
       },
       name: 'file',
       success(res) {
-        let mydata = JSON.parse(res.data);
-        if (mydata.errcode == "ok") {
-          wx.hideToast()
-          callback ? callback(imgRes, mydata) : "";
-        } else if (res.statusCode == 404) {
-          wx.showToast({
-            title: "网络错误",
-            icon: "none",
-            duration: 2000,
-
-          })
-        } else {
+        if(res.statusCode == 200 && res.data){
+          let mydata = JSON.parse(res.data);
+          if (mydata.errcode == "ok") {
+            wx.hideToast()
+            callback ? callback(imgRes, mydata, allnum , 'ok') : "";
+          }else {
+            wx.hideToast();
+            callback ? callback(imgRes, null, allnum) : "";
+          }
+        }else{
           wx.hideToast();
-          wx.showToast({
-            title: mydata.errmsg,
-            icon: "none",
-            duration: 2000,
-
-          })
+          callback ? callback(imgRes, null, allnum) : "";
         }
       },
-      fail: function () {
-
+      fail: function (err) {
         wx.hideToast();
+        callback ? callback(imgRes, null, allnum) : "";
         wx.showToast({
           title: "网络错误，上传失败！",
           icon: "none",
@@ -615,7 +608,7 @@ App({
             let ok = this.valiImgRules(img)
             if (ok) {
               //上传
-              _this.detailUpimg(1, img, callback);
+              _this.detailUpimg(1, img, callback,null,res.tempFiles.length);
             } else {
               wx.hideLoading()
               _this.showMyTips('图片格式不正确,请重新选择')
