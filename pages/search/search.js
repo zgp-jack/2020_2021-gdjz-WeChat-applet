@@ -38,7 +38,8 @@ Page({
     //进入搜索页面之前搜索的内容
     indexKey: "",
     //从那个页面进入的搜索页面
-    source:""
+    source:"",
+    clearbtn: false
   },
   //头部tab切换
   tabChange: function (e) {
@@ -49,10 +50,15 @@ Page({
   },
   //监听搜索框
   searchInput: function (e) {
-    //去除空格
-    // var text = e.detail.value;
-    // var removeSpace = text.replace(/\s*/g,"");
-    this.setData({inputTetx:e.detail.value})
+    console.log(e.detail.value)
+    this.setData({
+      inputTetx:e.detail.value
+    })
+    if(this.data.inputTetx.length > 0){
+      this.setData({
+        clearbtn:true
+      })
+    }
   },
 
   //点击搜索 储存搜索历史
@@ -61,7 +67,7 @@ Page({
     let k = this.isEmpty(this.data.inputTetx)
       //判断是否大于五个字 提取前五个字 大于五个字需要显示...
       let _key;
-      if(this.data.inputTetx.length > 5){
+      if(this.data.inputTetx && this.data.inputTetx.length > 5){
         _key = this.data.inputTetx.substring(0,5)
       }
       //保存
@@ -249,9 +255,12 @@ Page({
   },
   // 清除搜索输入框内容
   clearContent: function () {
-    this.setData({
-      inputTetx:""
-    })
+    setTimeout(()=>{
+      this.setData({
+        inputTetx:'',
+        clearbtn:false
+      })
+    },50)
   },
   /**
    * 生命周期函数--监听页面加载

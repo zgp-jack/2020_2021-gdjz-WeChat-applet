@@ -18,7 +18,9 @@
       focus="{{focusInput}}"
       maxlength="50"
       ></input>
-      <image class="{{ inputTetx.length>0 ?'showdel':'clearContent'}} " src="{{ delImg }}" mode="aspectFit" bindtap="clearContent"></image>
+    <view class='image-box' bindtap="clearContent" wx:if="{{clearbtn}}">
+      <image src="{{ delImg }}" class='showdel' mode="aspectFit"></image>
+    </view>
     </view>
     <view class="search-button" bindtap="clickSearch">搜索</view>
   </view>

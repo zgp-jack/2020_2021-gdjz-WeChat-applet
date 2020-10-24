@@ -71,8 +71,8 @@ page {
 }
 .input-box .showdel{
   display: block;
-  width: 30rpx;
-  height: 30rpx;
+  width: 35rpx;
+  height: 35rpx;
 }
 .search-input-box button {
   height: 70rpx;
@@ -146,4 +146,10 @@ page {
 }
 .max-tab-box{
   max-width: 100%;
+}
+
+.image-box {
+  height: 100%;
+  display: flex;
+  align-items: center;
 }
