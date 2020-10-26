@@ -153,19 +153,27 @@ Page({
                 })
               }
             }
+            setTimeout(function () {
+              wx.showToast({
+                title: mydata.errmsg,
+                duration: 3000,
+                mask: true,
+                success: function () {
+                  setTimeout(() => {
+                    wx.navigateBack({
+                    delta: 1,
+                  })
+                  }, 3000);
+                }
+              })
+            }, 1)
             // 投诉成功显示toast框，并展示3秒后返回上一页
-            wx.showToast({
-              title: mydata.errmsg,
-              duration: 3000,
-              mask: true,
-              success: function () {
-                setTimeout(() => {
-                  wx.navigateBack({
-                  delta: 1,
-                })
-                }, 3000);
-              }
-            })
+            // app.showMyTips(mydata.errmsg);
+            // setTimeout(() => {
+            //   wx.navigateBack({
+            //   delta: 1,
+            // })
+            // }, 2000);
           }else{
             wx.showModal({
               title: '提示',
