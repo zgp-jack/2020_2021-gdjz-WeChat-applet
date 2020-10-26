@@ -249,9 +249,11 @@ Page({
   },
   // 清除搜索输入框内容
   clearContent: function () {
-    this.setData({
-      inputTetx:""
-    })
+    setTimeout(()=>{
+      this.setData({
+        inputTetx:""
+      })
+    },50)
   },
   /**
    * 生命周期函数--监听页面加载
