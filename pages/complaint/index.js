@@ -41,30 +41,46 @@ Page({
     if(_type == 0) {
         max = 1
     }
-    app.userUploadImg(function(imgRes, mydata) {
-        wx.hideLoading();
-        wx.showToast({
-            title: mydata.errmsg,
-            icon: "none",
-            duration: 2000
-        })
-        let imgs = _this.data.imgs;
-        let imglists = _this.data.imglists;
-        if (_type == 0) {
-            imgs[_index] = mydata.url;
-            imglists[_index] = imgRes;
-        } else {
-            if(imgs.length < 9){
-                imgs.push(mydata.url)
-                imglists.push(imgRes)
+    let fail = 0;
+    let num = 0
+    app.userUploadImg(function(imgRes, mydata, allnum, res) {
+        num++//用于判断 选中的图片是否上传完毕
+        if(res !== 'ok'){
+            fail++//记录失败次数
+        }else {
+            wx.hideLoading();
+            wx.showToast({
+                title: mydata.errmsg,
+                icon: "none",
+                duration: 2000
+            })
+            let imgs = _this.data.imgs;
+            let imglists = _this.data.imglists;
+            if (_type == 0) {
+                imgs[_index] = mydata.url;
+                imglists[_index] = imgRes;
+            } else {
+                if(imgs.length < 6){
+                    imgs.push(mydata.url)
+                    imglists.push(imgRes)
+                }
             }
+            _this.setData({
+                imgs: imgs,
+                imglists: imglists
+            })
         }
-        _this.setData({
-            imgs: imgs,
-            imglists: imglists
-        })
+        if(num == allnum && fail !== 0){
+            wx.hideLoading()
+            wx.showModal({
+              title: "提示",
+              content:'您有'+fail+'张图片上传失败，请重新上传',
+              showCancel:true,
+              confirmText:'确定',
+            })
+        }
     },max)
-  },
+},
   // 用户输入投诉内容
   userEnterContent: function(e) {
     // 输入内容
