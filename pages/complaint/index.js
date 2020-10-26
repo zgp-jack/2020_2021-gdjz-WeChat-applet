@@ -118,8 +118,10 @@ Page({
     let vertifyNum = v.v.new();
     // 将以空格开头空格结尾的替换空字符串
     content = content.replace(/^\s+|\s+$/g, '');
+    // 不少于5个汉字的正则表达式
+    let vRegx = /[\u4E00-\u9FA5]{5,}/; 
     // 验证不通过直接退出
-    if (content == "" || content.length < 5 || content.length > 300 || !vertifyNum.isChinese(content)) {
+    if (content == "" || content.length < 5 || content.length > 300 || !vRegx.test(content)) {
       app.showMyTips(complaincontent);
       return false;
     }
