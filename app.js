@@ -535,6 +535,9 @@ App({
 
   },
   detailUpimg: function (type, res, callback, _type,allnum) {//allnum选中图片的数量
+    wx.showLoading({
+      title: '正在上传图片'
+    });
     let userInfo = wx.getStorageSync("userInfo");
     let _this = this;
     let imgRes = res.tempFilePaths ? res.tempFilePaths[0] : res;
@@ -591,9 +594,6 @@ App({
   },
   userUploadImg: function (callback,num) {
     let _this = this;
-    wx.showLoading({
-      title: '正在上传图片'
-    });
     wx.chooseImage({
       //2020-9-10-王帅-新增参数 每次最大上传数量 默认1张
       count: num?num:1,
