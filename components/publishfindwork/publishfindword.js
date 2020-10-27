@@ -465,8 +465,6 @@ Component({
     },
     // 点击确认发布，发布找活信息
     publishFindWork: function () {
-      debugger
-      console.log("data",this.data)
       // 用户信息
       let userInfo = wx.getStorageSync('userInfo')
       // 没有用户信息直接返回
@@ -609,7 +607,6 @@ Component({
     */
   observers: {
     'fastInfo': function (newVal) {
-      console.log("fastInfo",this.data.fastInfo)
       // 定义位置数据
       let areaData = {};
       let classifyids = [];
