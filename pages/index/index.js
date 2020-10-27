@@ -434,6 +434,7 @@ Page({
       way: "POST",
       params: _params,
       success: function (res) {
+        app.activeRefresh()
         callback ? callback() : ""
         _this.setData({ isload: false })
         app.globalData.isFirstLoading ? "" : wx.hideLoading();
@@ -495,7 +496,7 @@ Page({
       success: function (res) {
         app.globalData.isFirstLoading ? "" : wx.hideLoading();
         let mydata = res.data;
-
+        app.activeRefresh()
         if (mydata.errcode == "token_fail") {
           app.initAdminTime(function () {
             _this.doSearchRequestAction();
