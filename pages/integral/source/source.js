@@ -344,8 +344,8 @@ Page({
     })
   },
     onLoad: function (options) {
-
         this.getjump(options)
+        app.activeRefresh()
     },
 
     /**

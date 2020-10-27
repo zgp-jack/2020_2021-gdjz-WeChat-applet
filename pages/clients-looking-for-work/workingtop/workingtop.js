@@ -1039,6 +1039,7 @@ Page({
     this.getNewId(options)
     // 初始化置顶城市与置顶天数
     this.initTopData()
+    app.activeRefresh()
   },
 
   /**

@@ -112,6 +112,7 @@ Page({
      */
     onLoad: function (options) {
         this.initUserinfo(options);
+        app.activeRefresh()
     },
 
     /**

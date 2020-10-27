@@ -170,6 +170,7 @@ Page({
      */
     onLoad: function (options) {
         this.setData({ serverPhone: app.globalData.serverPhone })
+        app.activeRefresh()
         //this.initUserAuth();
     },
 

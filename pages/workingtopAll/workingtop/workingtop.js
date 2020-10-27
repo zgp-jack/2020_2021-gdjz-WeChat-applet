@@ -1049,6 +1049,7 @@ Page({
     this.getdetail(options)
     this.getAreaData(options)
     this.getNewId(options)
+    app.activeRefresh()
   },
 
   /**
