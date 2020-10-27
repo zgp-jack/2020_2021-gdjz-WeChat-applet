@@ -402,6 +402,8 @@ Page({
               jiSuData.phone = ''
               wx.setStorageSync('jiSuData', jiSuData)
             }
+            //发布成功更新活跃状态
+            app.activeRefresh()
           }else{
             app.showMyTips(mydata.errmsg);
             }}

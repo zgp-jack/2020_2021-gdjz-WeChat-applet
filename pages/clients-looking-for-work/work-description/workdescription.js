@@ -365,7 +365,7 @@ Page({
       success: function (res) {
         console.log(res.data)
         if (res.data.errcode == 200) {
-
+          app.activeRefresh()
           _this.subscribeToNew(res)
         } else {
           wx.showModal({

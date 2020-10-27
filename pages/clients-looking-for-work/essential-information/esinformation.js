@@ -675,7 +675,7 @@ Page({
 
         if (res.data.errcode == 200) {
           that.subscribeToNews(res)
-
+          app.activeRefresh()
         } else {
           remain.remain({
             tips: res.data.errmsg

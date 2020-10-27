@@ -321,6 +321,7 @@ Page({
   },
 
   closeAllSelect: function (e) {
+    app.activeRefresh()
     this.setData({
       showListsInfo: 0
     })

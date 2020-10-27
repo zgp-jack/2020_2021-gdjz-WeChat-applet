@@ -903,7 +903,7 @@ Page({
         this.setData({ userInfo: userInfo })
       }
       this.initJobInfo(infoId);
-      
+      app.activeRefresh()
     },
 
     /**

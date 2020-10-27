@@ -991,6 +991,7 @@ Page({
       this.deleskill()
     }
     app.globalData.previewboss = true;
+    app.activeRefresh()
   },
 
   /**

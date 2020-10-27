@@ -409,6 +409,7 @@ Page({
       success(res) {
         if(res.data.errcode == "ok"){
           that.subscribeToNews(res)
+          app.activeRefresh()
         }else{
           app.showMyTips(res.data.errmsg);
         }
