@@ -1278,6 +1278,7 @@ Page({
     }
     app.getAreaData(this)
     app.globalData.previewshou = true;
+    app.activeRefresh()
   },
 
   /**
