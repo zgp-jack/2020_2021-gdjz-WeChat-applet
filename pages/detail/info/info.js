@@ -627,7 +627,7 @@ Page({
                 success(res) {
                     if (res.confirm) {
                         wx.navigateTo({
-                          url: '/pages/userinfo/edit/edit',
+                          url: '/packageOther/pages/userinfo/edit/edit',
                         })
                     } else if (res.cancel) {
                         wx.navigateBack({ delta: 1 })
@@ -911,7 +911,7 @@ Page({
         this.setData({ userInfo: userInfo })
       }
       this.initJobInfo(infoId);
-
+      app.activeRefresh()
     },
 
     /**

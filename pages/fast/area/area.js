@@ -211,30 +211,45 @@ Page({
                     wx.setStorageSync('jiSuData', jiSuData)
                   }
                   let mydata = res.data;
-                  app.appRequestAction({
-                    title: "发布中",
-                    mask: true,
-                    failTitle: "网络错误，保存失败！",
-                    url: "fast-issue/to-job/",
-                    way: "POST",
-                    params: {
-                      token: token,
-                    },
-                    success:function (res) {
-                      if(res.data.errcode == "ok"){
-                        // wx.redirectTo({
-                        //   url: '/pages/fast/tips/tips?token='+token,
-                        // })
-                        //已授权 登陆跳转
-                        let tip_data = JSON.stringify(res.data.data)
-                        wx.reLaunch({
-                          url: '../../published/recruit/list?tip_data='+tip_data,
-                        })
-                      }else{
-                        app.showMyTips(mydata.errmsg);
+                  if(res.data.errcode !== 'discard'){//判断是否已经审核失败
+                    app.appRequestAction({
+                      title: "发布中",
+                      mask: true,
+                      failTitle: "网络错误，保存失败！",
+                      url: "fast-issue/to-job/",
+                      way: "POST",
+                      params: {
+                        token: token,
+                      },
+                      success:function (res) {
+                        if(res.data.errcode == "ok"){
+                          // wx.redirectTo({
+                          //   url: '/pages/fast/tips/tips?token='+token,
+                          // })
+                          //已授权 登陆跳转
+                          let tip_data = JSON.stringify(res.data.data)
+                          wx.reLaunch({
+                            url: '../../published/recruit/list?tip_data='+tip_data,
+                          })
+                        }else{
+                          app.showMyTips(mydata.errmsg);
+                        }
                       }
-                    }
-                  })
+                    })
+                  }else {
+                    wx.showModal({
+                      title:'提示',
+                      showCancel:false,
+                      content:mydata.errmsg,
+                      success(e){
+                        if(e.confirm){
+                          wx.reLaunch({
+                            url: '../../published/recruit/list',
+                          })
+                        }
+                      }
+                    })
+                  }
                 }
               })
             } else if (uinfo.errcode == "member_shielding") {
@@ -402,6 +417,8 @@ Page({
               jiSuData.phone = ''
               wx.setStorageSync('jiSuData', jiSuData)
             }
+            //发布成功更新活跃状态
+            app.activeRefresh()
           }else{
             app.showMyTips(mydata.errmsg);
             }}

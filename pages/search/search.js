@@ -57,6 +57,8 @@ Page({
 
   //点击搜索 储存搜索历史
   clickSearch: function (e) {
+    //更新活跃状态
+    app.activeRefresh()
     //判断是否输入内容 或者空格 为空不保存
     let k = this.isEmpty(this.data.inputTetx)
       //判断是否大于五个字 提取前五个字 大于五个字需要显示...
@@ -130,7 +132,7 @@ Page({
         wx.reLaunch({
           url:"/pages/findingworkinglist/findingworkinglist?keywrods="+this.data.inputTetx
         })
-      this.getStorageSearch()
+        this.getStorageSearch()
       }
       
   },

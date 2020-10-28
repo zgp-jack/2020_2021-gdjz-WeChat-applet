@@ -499,6 +499,7 @@ Page({
       }
     }
     this.initFooterData()
+    app.activeRefresh()
   },
 
   /**

@@ -1,7 +1,6 @@
 const tmplId = require("./utils/temp_ids.js");
 App({
 
-
   onLaunch: function (e) {
 
   },
@@ -690,7 +689,7 @@ App({
     let _page = "/" + currentPage.route
     let _url = e.currentTarget.dataset.url;
     if (_url == _page) return false;
-
+    this.activeRefresh()
     let _type = e.currentTarget.dataset.type;
     (_type == "1") ? wx.reLaunch({
       url: _url
@@ -1463,4 +1462,17 @@ App({
         return false;
     }
   },
+  //更新活跃状态n
+  activeRefresh:function(){
+    let userInfo = wx.getStorageSync("userInfo");
+    if(userInfo){
+      this.appRequestAction({
+        url:'active-time/refresh/',
+        way: "POST",
+        success:function(res) {
+          console.log('活跃状态更新成功')
+        }
+      })
+    }
+  }
 })

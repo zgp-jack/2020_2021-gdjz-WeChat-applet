@@ -306,8 +306,8 @@
                   </view>
                 </view>
               </view>
-              <view class="listsboxlocaltwo" wx:if="{{item.login_time}}">
-                <text class="listsboxtime">{{item.login_time}}</text>
+              <view class="listsboxlocaltwo" wx:if="{{item.active_time_str}}">
+                <text class="listsboxtime">{{item.active_time_str}}</text>
               </view>
             </view>
           </view>

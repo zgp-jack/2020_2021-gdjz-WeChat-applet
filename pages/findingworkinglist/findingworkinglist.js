@@ -321,6 +321,7 @@ Page({
   },
 
   closeAllSelect: function (e) {
+    app.activeRefresh()
     this.setData({
       showListsInfo: 0
     })
@@ -463,6 +464,7 @@ Page({
       success: function (res) {
         callback ? callback() : ""
         if (res.data.errcode == "ok") {
+          app.activeRefresh()
           _this.setData({ isload: false })
           wx.hideLoading();
           let mydata = res.data.data.list;

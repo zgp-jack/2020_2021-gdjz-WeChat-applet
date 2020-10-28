@@ -174,6 +174,7 @@ Page({
    */
   onLoad: function (options) {
     this.initFooterData();
+    app.activeRefresh()
   },
 
   /**

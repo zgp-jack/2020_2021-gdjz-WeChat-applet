@@ -758,6 +758,7 @@ Page({
   onLoad: function (options) {
     this.initUserInfo();
     this.getBack(options)
+    app.activeRefresh()
   },
 
   /**

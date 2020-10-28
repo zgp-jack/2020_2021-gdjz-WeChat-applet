@@ -391,7 +391,7 @@ Component({
         let len = userClassifyids.length
         // 大于规定数量给出提示
         if (len >= num) {
-          app.showMyTips('工种最多可以选择' + num + '个')
+          app.showMyTips('最多选择' + num + '个工种')
           return false
         }
         // 没有超过要求数量添加到用户选择工种数组中
