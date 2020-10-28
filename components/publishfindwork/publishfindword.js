@@ -76,12 +76,19 @@ Component({
     // 验证码
     code:'',
     selectimg: app.globalData.apiImgUrl + 'select.png',
+    isScroll:false,
   },
 
   /**
    * 组件的方法列表
    */
   methods: {
+    onfocus: function() {
+      this.setData({isScroll: false})
+    },
+    onblur: function () {
+      this.setData({isScroll: true})
+    },
     // 输入验证码
     inputCode: function (e) {
       this.setData({code: e.detail.value})
@@ -272,21 +279,26 @@ Component({
         // 当前时间戳
         let currentTime = myDate.getTime();
         // 到期时间戳（23:59:59）
-        let dueDate = (new Date(new Date().toLocaleDateString())).getTime() +  (24 * 60 * 60 * 1000 - 1);
+        // let dueDate = (new Date(new Date().toLocaleDateString())).getTime() +  (24 * 60 * 60 * 1000 - 1);
+        let dueDate = currentTime +  (2 * 60 * 1000 - 1);
         // 存入缓存
         let FindWorkTime = {currentTime:currentTime,dueDate:dueDate}
         wx.setStorageSync("FindWorkTime",FindWorkTime)
         this.triggerEvent("cancelPublish")
         this.show()
+        app.globalData.isShowFindWork = false;
       }
     },
     clooseTip: function () {
       let myDate = new Date();
       let currentTime = myDate.getTime();
-      let dueDate = currentTime +  (24 * 7* 60 * 60 * 1000 - 1);
+      // let dueDate = currentTime +  (24 * 7* 60 * 60 * 1000 - 1);
+      let dueDate = currentTime +  (2 * 60 * 1000 - 1);
       let FindWorkTime = {currentTime:currentTime,dueDate:dueDate}
       wx.setStorageSync("FindWorkTime",FindWorkTime)
       this.show()
+      this.triggerEvent("cancelPublish")
+      app.globalData.isShowFindWork = false;
     },
     // 显示快速找活名片
     show: function () {
@@ -510,14 +522,14 @@ Component({
       if (phone && !vali.isMobile(phone)) {
         wx.showModal({
           title: '提示',
-          content: '请正确输入11位联系电话。',
+          content: '请正确输入联系电话。',
           showCancel: false
         })
         return false;
       }
       // 验证是否输入验证码
       if (this.properties.fastInfo.tel != phone) {
-        if (code == "") {
+        if (code.length < 4 || code.length > 6) {
           wx.showModal({
             title: '提示',
             content: '请正确输入验证码',
@@ -538,6 +550,7 @@ Component({
             let defalutTop = mydata.data.default_top_area;
             that.triggerEvent("refreshPage",{ defalutTop: defalutTop })
             that.show()
+            app.globalData.isShowFindWork = false;
           }else{
             wx.showModal({
               title: '温馨提示',
@@ -573,9 +586,28 @@ Component({
       let token	= userInfo.token;
       let tokenTime	= userInfo.tokenTime;
       let phone = this.data.telPhone;
+      let vali = v.v.new();
       let _this = this;
       // 发送请求参数
       let params = { tel: parseInt(phone), userId, token, tokenTime }
+      // 验证是否有电话号码
+      if (phone == "" || !phone) {
+        wx.showModal({
+          title: '提示',
+          content: '请正确输入联系电话。',
+          showCancel: false
+        })
+        return false
+      }
+      // 验证电话号码格式是否正确
+      if (phone && !vali.isMobile(phone)) {
+        wx.showModal({
+          title: '提示',
+          content: '请正确输入联系电话。',
+          showCancel: false
+        })
+        return false;
+      }
       app.appRequestAction({
           title: "正在获取验证码",
           mask: true,

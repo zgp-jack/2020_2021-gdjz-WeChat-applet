@@ -517,7 +517,9 @@ Page({
                       if (currentTime > dueDate) {
                         if (_this.data.showTip) {
                           _this.selectComponent("#pulishfindwork").show();
-                          _this.setData({showTip: false})
+                          _this.setData({showTip: false});
+                          // 判断是否展示快速发布找活名片界面
+                          app.globalData.isShowFindWork = true;
                         }
                       }else{
                         _this.setData({showDetail: true})
@@ -526,6 +528,7 @@ Page({
                       if (_this.data.showTip) {
                         _this.selectComponent("#pulishfindwork").show();
                         _this.setData({showTip: false})
+                        app.globalData.isShowFindWork = true;
                       }
                     }
                   }else{

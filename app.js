@@ -97,7 +97,8 @@ App({
       logoutWay: "",
       loginWay: "",
     },
-    
+    // 招工信息详情界面是否展示快速发布找活名片
+    isShowFindWork: false
   },
   //是否为极速发布与快速发布请求,快速发布与极速发布跳转
   initJobView: function () {

@@ -1081,7 +1081,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    let isShowFindWork = app.globalData.isShowFindWork;
     let pages = getCurrentPages();
     let index = pages.length - 1
     let path = pages[index].__displayReporter.showReferpagepath
@@ -1095,7 +1095,22 @@ Page({
       })
       this.doRequestAction(false)
     }
-  
+    // 如果页面是来自于招工详情且有快速找活名片
+    // 返回的时候设置当天不再展示快速发布找活名片
+    if (path == "pages/detail/info/info") {
+      if (isShowFindWork) {
+        let myDate = new Date();
+        // 当前时间戳
+        let currentTime = myDate.getTime();
+        // 到期时间戳（23:59:59）
+        // let dueDate = (new Date(new Date().toLocaleDateString())).getTime() +  (24 * 60 * 60 * 1000 - 1);
+        let dueDate = currentTime +  (2 * 60 * 1000 - 1);
+        // 存入缓存
+        let FindWorkTime = {currentTime:currentTime,dueDate:dueDate};
+        wx.setStorageSync("FindWorkTime",FindWorkTime);
+        app.globalData.isShowFindWork = false;
+      }
+    }
     this.getUserUuid();
     this.initUserinfo();
     footerjs.initMsgNum(this);

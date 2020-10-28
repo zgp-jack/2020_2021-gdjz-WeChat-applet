@@ -1,7 +1,7 @@
 <!--pages/complaint/index.wxml-->
 <view class="yupao-common-container">
     <view class="yupao-feedback">
-        <view class="feedback-tip">恶意举报会被封号，请如实填写</view>
+        <view class="feedback-tip">恶意投诉会被封号，请如实填写</view>
         <view class="feedback-body">
             <view class="feedback-container">
                 <view class="box-feelback">

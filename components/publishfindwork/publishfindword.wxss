@@ -1,20 +1,11 @@
 /* components/publishfindwork/publishfindword.wxss */
-
+.publish-scroll{
+  height: 100vh;
+}
 .publish-container{
   position: fixed;
   width: 100%;
   background-color: white;
-  left: 0;
-  top: 0;
-  display: flex;
-  flex-direction: column;
-  /* justify-content: center; */
-  align-items: center;
-  z-index: 1000;
-  height: 100%;
-  padding-top: 130rpx;
-  padding-bottom: 150rpx;
-  overflow: scroll;
 }
 .publish-contentbox{
   width: 90%;
@@ -29,6 +20,7 @@
   justify-content: center;
   align-items: center;
   margin: 0 auto;
+  padding-top: 130rpx;
 }
 .issue-title-box::after{
   content:"";
@@ -88,19 +80,6 @@
   overflow: hidden;
   white-space: nowrap;
 }
-/* .issue-title::after{
-  content:"";
-  display: inline-block;
-  width: 100%;
-  height: 15rpx;
-  background-color: #ADDFFF;
-  opacity: .8;
-  position: absolute;
-  bottom: 0rpx;
-  left: 0rpx;
-  border-radius: 10rpx;
-  z-index: -1;
-} */
 .issue-title-info {
   color: #F80F25;
   font-size: 33rpx;
@@ -112,9 +91,10 @@
   white-space: nowrap;
 }
 .issue-contactbox{
+  width: 90%;
+  margin: 0 auto;
   margin-top: 100rpx;
   margin-bottom: 100rpx;
-  width: 90%;
 }
 .issue-box{
   width: 100%;
@@ -190,6 +170,7 @@
   flex-direction: row;
   justify-content: space-between;
   padding: 0rpx;
+  margin: 0 auto;
 }
 .issue-code-btn{
   width: 48%;
@@ -208,6 +189,7 @@
   color: #0099ff;
   position: relative;
   margin-top: 100rpx;
+  margin-bottom: 730rpx;
 }
 .issue-cloose-tip::after{
   content:"";
