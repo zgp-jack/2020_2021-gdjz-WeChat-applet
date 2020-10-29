@@ -308,6 +308,15 @@ Page({
   },
   userTapComplain: function () {
     let infoId = this.data.resume_uuid;
+    //查看电话三天后点击投诉按钮弹出该信息已过期
+    if(this.data.show_complain.not_complain == 1){
+      wx.showModal({
+        title:'提示',
+        content:'该信息已过期，无法投诉',
+        showCancel:false,
+      })
+      return  false
+    }
     if (!this.data.show_complain.show_complain) {
       wx.showModal({
         title: '提示',

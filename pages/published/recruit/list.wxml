@@ -34,7 +34,7 @@
           <view class='nodata-texttips' wx:if="{{ !hasmore && page != 1 }}">没有更多内容了</view>
           <view class='common-nodatabox flex-column lists-nodata'  wx:if="{{ isAllList }}">
           <image src='{{ nodata }}'></image>
-          <text>您还没有发布过招工信息</text>
+          <text>您没有发布过招工信息</text>
           <text class="nodataText">点击下方按钮去发布</text>
           <button bindtap="goPublish">马上去发布</button>
           </view>

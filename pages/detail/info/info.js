@@ -773,10 +773,19 @@ Page({
         app.gotoUserauth();
         return false;
       }
-    if (this.data.info.show_ajax_btn && this.data.isEnd != 2 || this.data.usepang == 0&&this.data.isEnd != 2 ){
-            app.showMyTips("请查看完整的手机号码后再操作！");
-            return false; 
-        }
+      //查看电话三天后点击投诉按钮弹出该信息已过期
+      if(this.data.info.show_complaint.not_complain == 1){
+        wx.showModal({
+          title:'提示',
+          content:'该信息已过期，无法投诉',
+          showCancel:false,
+        })
+        return  false
+      }
+      if (this.data.info.show_ajax_btn && this.data.isEnd != 2 || this.data.usepang == 0&&this.data.isEnd != 2 ){
+        app.showMyTips("请查看完整的手机号码后再操作！");
+        return false; 
+      }
       if (!this.data.info.show_complaint.show_complaint || this.data.usepang == 0 &&this.data.isEnd == 2){
         wx.showModal({
           title: '提示',
