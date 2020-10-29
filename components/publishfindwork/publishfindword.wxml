@@ -9,7 +9,7 @@
       <image src="{{ titleImage }}" class="issue-title-iamge"></image>
     </view>
     <view class="issue-contactbox">
-      <view class="issue-box" bindtap="showWorkArea">
+      <view class="issue-box" bindtap="hideKeyboard">
         <text>期望地区：</text>
         <picker  mode="multiSelector" 
           bindchange="bindPickerChange" 
@@ -40,7 +40,7 @@
         <view class="issue-phone-code" wx:elif="{{ !firstGetCode }}" bindtap="{{ sendrefresh?'':'reGetPhoneCode' }}">{{ sendrefresh? sendrefresh + '秒后可重新获取':'重新获取' }}</view>
       </view>
     </view>
-    <view class="issue-footer-button">
+    <view class="issue-footer-button {{ !fastInfo.type?'':'issue-footer-button-margin' }}">
       <button class="issue-code-btn" plain="true" bindtap="closeFindWork">取消</button>
       <button class="issue-code-btn" type="primary" bindtap="publishFindWork">确认发布</button>
     </view>

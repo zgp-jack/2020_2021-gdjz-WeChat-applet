@@ -83,6 +83,10 @@ Component({
    * 组件的方法列表
    */
   methods: {
+    // 点击期望地区隐藏软键盘
+    hideKeyboard: function () {
+      wx.hideKeyboard()
+    },
     onfocus: function() {
       this.setData({isScroll: false})
     },
@@ -315,6 +319,7 @@ Component({
         rpindex: this.data.pindex,
         showPicker: true,
       })
+      wx.hideKeyboard()
     },
     // 点击取消关闭工种选择
     cancelWorkTypePicker: function () {
