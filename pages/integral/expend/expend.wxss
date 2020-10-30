@@ -318,3 +318,6 @@
     background: #f5f5f5;
     margin: 0 5rpx;
 }
+.newColor {
+    color: #808080;
+}

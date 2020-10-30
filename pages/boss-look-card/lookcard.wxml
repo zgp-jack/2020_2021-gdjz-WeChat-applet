@@ -2,7 +2,7 @@
 <view>
   <view class="cardcolore">
     <view class="header"  wx:if="{{status == 0}}">
-      注:老板对找活者满意，可以直接与他联系以及点赞或转发
+      注:老板对找活者满意，可以直接与他联系、点赞、转发
     </view>
     <view class="header" wx:if="{{status == 1}}" >
       注:分享名片 让您的名片排名更靠前

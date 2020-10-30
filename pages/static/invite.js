@@ -132,6 +132,7 @@ Page({
   onShow: function () {
     if (!this.data.shareUrl) this.getUserInviteLink();
     app.initResume(this)
+    app.activeRefresh()
   },
 
   /**

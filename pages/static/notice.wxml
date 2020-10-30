@@ -7,6 +7,6 @@
 </view>
 
 
-<button class="info-shareimg" open-type="share">分享</button>
+<button class="info-shareimg" bindtap="activeRefresh" open-type="share">分享</button>
 <!-- 引入footer -->
 <template is="footer" data="{{ footerImgs,publishActive,showPublishBox,footerActive,resumeText }}" />

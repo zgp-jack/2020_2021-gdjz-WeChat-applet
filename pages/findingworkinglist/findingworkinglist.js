@@ -145,6 +145,7 @@ Page({
     this.setData({
       showListsInfo: (this.data.showListsInfo == type) ? 0 : type
     })
+    app.activeRefresh()
   },
   jumprull() {
     wx.navigateTo({
