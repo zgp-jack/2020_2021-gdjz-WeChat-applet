@@ -486,6 +486,7 @@ Page({
    */
   onLoad: function (options) {
     this.initClipboardData()
+    app.activeRefresh()
   },
 
   /**

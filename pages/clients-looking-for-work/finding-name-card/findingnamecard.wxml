@@ -526,7 +526,7 @@
 <view class="cardnine" wx:if="{{showtopone}}">
   <button class="cardnineone" bindtap="preview">
     <image src="{{pvw}}"></image> 预览</button>
-  <button class="cardnineone" open-type='share'>
+  <button bindtap="activeRefresh" class="cardnineone" open-type='share'>
     <image src="{{participation}}"></image>分享</button>
 </view>
 

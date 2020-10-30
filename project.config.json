@@ -45,6 +45,12 @@
   "simulatorType": "wechat",
   "simulatorPluginLibVersion": {},
   "condition": {
+    "search": {
+      "list": []
+    },
+    "conversation": {
+      "list": []
+    },
     "plugin": {
       "list": []
     },
@@ -547,8 +553,9 @@
           "scene": null
         },
         {
-          "name": "投诉",
-          "pathName": "pages/complaint/index",
+          "id": -1,
+          "name": "pages/integral/expend/expend",
+          "pathName": "pages/integral/expend/expend",
           "scene": null
         }
       ]
