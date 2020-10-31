@@ -312,7 +312,14 @@ Page({
               wx.showModal({
                 title: '提示',
                 content: res.data.errmsg,
-                showCancel: false,
+                confirmText: '去实名',
+                success(e){
+                  if(e.confirm){
+                    wx.navigateTo({
+                      url: '/pages/realname/realname',
+                    })
+                  }
+                }
               })
             }
           }
