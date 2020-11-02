@@ -1,15 +1,58 @@
 <import src="/pages/footer/footer.wxml"/>
 <view class="ucener-header">
-  <text class='ucenter-title'>会员中心</text>
-  <view class="msg-bor" data-url="/pages/information/mymessage/mymessage" bindtap='valiUserUrl'>
+  <view class="header-top">
+    <view class="top-left" bindtap="callThisPhone" data-phone="{{callServicePhone}}">
+      <image src="{{kficon}}"></image>
+      <text>联系客服</text>
+    </view>
+    <view class="top-right" data-url="/pages/information/mymessage/mymessage" bindtap='valiUserUrl'>
+      <image src="{{msgicon}}"></image>
+      <view class="icon-text" wx:if="{{ footerImgs.msgsNumber > 0}}">
+        <text>{{footerImgs.msgsNumber>9? '9+' : footerImgs.msgsNumber}}</text>
+      </view>
+    </view>
+  </view>
+  <view class="user-data-box">
+    <view class="user-data">
+      <image class="user-avater" src='{{ member.headimgurl }}'></image>
+      <view class="user-info-box">
+        <view class="edit-box">
+          <text class="user-name">{{ member.username || member.nickname }}</text>
+          <navigator url='/packageOther/pages/userinfo/index/index?img={{ member.headimgurl }}&auth={{ member.is_check }}&tel={{ member.tel }}&name={{ member.username || member.nickname }}&pass={{ member.pwd_status }}'
+                       open-type="navigate" wx:if="{{ member.tel }}">
+                       <image src="{{editInfoIcon}}"></image>
+            </navigator>
+        </view>
+        <view>
+          <text class="user-memberid">会员编号:{{ member.id }}</text>
+        </view>
+      </view>
+    </view>
+    <view class="integral-box">
+      <view>
+        <text>{{ member.integral }}</text>
+        <text>正式积分</text>
+      </view>
+      <view>
+        <text>{{ member.temporary_integral }}</text>
+        <text>临时积分</text>
+      </view>
+      <view data-url="../collect/info/info" bindtap="valiUserUrl">
+        <text>666</text>
+        <text>我的收藏</text>
+      </view>
+    </view>
+  </view>
+  <!-- <text class='ucenter-title'>会员中心</text> -->
+  <!-- <view class="msg-bor" data-url="/pages/information/mymessage/mymessage" bindtap='valiUserUrl'>
     <view class="msg-icon-item">
       <view class="icon-text" wx:if="{{ footerImgs.msgsNumber > 0}}">
         <text>{{footerImgs.msgsNumber>9? '9+' : footerImgs.msgsNumber}}</text>
       </view>
       <image class="msg-icon" src="{{msgIcon}}"></image>
     </view>
-  </view>
-  <view class='ucener-userinfo-wrap' wx:if="{{ userInfo }}">
+  </view> -->
+  <!-- <view class='ucener-userinfo-wrap' wx:if="{{ userInfo }}">
     <view class='ucenter-userinfo'>
       <view class="basic-info">
         <view class='ucenter-userinfo-box'>
@@ -67,13 +110,119 @@
         点击上方登录/注册按钮可以前往登录页面，登录成功后可解锁小程序全部功能，方便您能更便捷的招工找活。
       </view>
     </view>
-  </view>
-  <view class="user_background_image">
+  </view> -->
+  <!-- <view class="user_background_image">
     <image class="header_background_image" mode="aspectFit" src="http://cdn.yupao.com/miniprogram/images/yc/personCenter-topBackground.png"></image>
-  </view>
-  
+  </view> -->
 </view>
-
+<!-- banner -->
+<view class="banner-box">
+  <image src="{{bannerImg}}"></image>
+</view>
+<!-- 我的工作 -->
+<view class="mywork">
+  <view class="work-box">
+    <text class="title">我的工作</text>
+    <view class="work-content">
+      <view class="work-zg item-work">
+        <image class="banner"></image>
+        <view class="icon-box">
+          <view>
+            <image src="{{msgicon}}"></image>
+            <text>我的招工</text>
+          </view>
+          <view>
+            <image src="{{msgicon}}"></image>
+            <text>谁看过我</text>
+          </view>
+        </view>
+      </view>
+      <view class="work-zh item-work">
+        <image class="banner"></image>
+        <view class="icon-box">
+          <view>
+            <image src="{{msgicon}}"></image>
+            <text>我的招工</text>
+          </view>
+          <view>
+            <image src="{{msgicon}}"></image>
+            <text>谁看过我</text>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>
+<!-- 常用功能 -->
+<view class="commonly">
+  <view class="commonly-box">
+    <text class="title">常用功能</text>
+    <view class="icon-content">
+      <view class="commonly-icon-box">
+        <view>
+          <image src="{{msgicon}}"></image>
+          <text>积分充值</text>
+        </view>
+        <view>
+          <image src="{{msgicon}}"></image>
+          <text>积分充值</text>
+        </view>
+        <view>
+          <image src="{{msgicon}}"></image>
+          <text>积分充值</text>
+        </view>
+        <view>
+          <image src="{{msgicon}}"></image>
+          <text>积分充值</text>
+        </view>
+      </view>
+      <view class="commonly-icon-box">
+        <view>
+          <image src="{{msgicon}}"></image>
+          <text>积分充值</text>
+        </view>
+        <view>
+          <image src="{{msgicon}}"></image>
+          <text>积分充值</text>
+        </view>
+        <view>
+          <image src="{{msgicon}}"></image>
+          <text>积分充值</text>
+        </view>
+        <view>
+          <image src="{{msgicon}}"></image>
+          <text>积分充值</text>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>
+<!-- 系统设置 -->
+<view class="commonly system-settings">
+  <view class="commonly-box">
+    <text class="title">系统设置</text>
+    <view class="icon-content">
+      <view class="commonly-icon-box">
+        <view>
+          <image src="{{msgicon}}"></image>
+          <text>积分充值</text>
+        </view>
+        <view>
+          <image src="{{msgicon}}"></image>
+          <text>积分充值</text>
+        </view>
+        <view>
+          <image src="{{msgicon}}"></image>
+          <text>积分充值</text>
+        </view>
+        <view>
+          <image src="{{msgicon}}"></image>
+          <text>积分充值</text>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>
 <view class="yupao-common-container">
   <!-- 轮播图 -->
   <view class="advertising" wx:if="{{advertising.length && userInfo}}">

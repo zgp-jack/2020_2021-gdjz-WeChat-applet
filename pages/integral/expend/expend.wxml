@@ -161,7 +161,7 @@
             </view>
             <view class='yupao-common-lists-item clearfix'>
                 <view class='yupao-common-list-left'>电话</view>
-                <view class='yupao-common-list-right'>{{ topDetail.tel }} 
+                <view class='yupao-common-list-right'>{{ topDetail.tel }}
                 </view>
             </view>
             <view class='yupao-common-lists-item clearfix' wx:if="{{topDetail.address}}">

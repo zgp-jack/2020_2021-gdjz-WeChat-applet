@@ -132,6 +132,10 @@ Page({
     showAuthor: false,
     resumeText: "",
     advertising: false,//广告轮播图
+    kficon:"../../images/serviceicon.png",
+    msgicon:"../../images/msgicon.png",
+    editInfoIcon:"../../images/eidticon.png",
+    bannerImg:''
   },
   //获取广告数据
   getAdvertising: function () {

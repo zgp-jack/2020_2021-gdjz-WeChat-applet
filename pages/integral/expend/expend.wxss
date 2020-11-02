@@ -321,3 +321,6 @@
 .newColor {
     color: #808080;
 }
+.clearfloat {
+    float: none;
+}
