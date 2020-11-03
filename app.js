@@ -1507,12 +1507,13 @@ App({
               content: '请将工作状态修改为<正在找工作>,审核通过后即可刷新名片',
               showCancel: source === 1? false: true,
               confirmText: source === 1? "确定":"去更改",
-              success: function () {
-                if (source === 2) {
-                  wx.navigateTo({
-                    url: '/pages/clients-looking-for-work/finding-name-card/findingnamecard',
-                  })
-                  // _this.selectComponent("#promptbox").show()
+              success: function (res) {
+                if (res.confirm) {
+                  if (source === 2) {
+                    wx.navigateTo({
+                      url: '/pages/clients-looking-for-work/finding-name-card/findingnamecard',
+                    })
+                  }
                 }
               }
             })
