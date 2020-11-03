@@ -1475,5 +1475,92 @@ App({
         }
       })
     }
-  }
+  },
+  // 刷新找活名片请求(找工作列表与找活名片使用)
+  refreshReq: function (source,_this) {
+    // source  1-找活名片编辑页；2-招工列表引导弹窗
+    // 积分获取url
+    let url = '/pages/recharge/recharge';
+    let userInfo = wx.getStorageSync('userInfo')
+    if (!userInfo) return
+    // 用户token
+    let token = userInfo.token;
+    this.appRequestAction({
+      url: 'resumes/refresh/',
+      way: 'POST',
+      params: {token,source_type:source},
+      success: function (res) {
+        let mydata= res.data
+        if (mydata.errcode === "ok") {
+          let refreshStatus = mydata.data.refresh_status;
+          if (refreshStatus === 0) {
+            // 该信息处于审核中或审核失败状态
+            wx.showModal({
+              title: '温馨提示',
+              content: '找活名片审核通过后即可刷新',
+              showCancel: false,
+            })
+          }else if(refreshStatus === 1){
+            // 该信息处于已找到工作状态
+            wx.showModal({
+              title: '温馨提示',
+              content: '请将工作状态修改为<正在找工作>,审核通过后即可刷新名片',
+              showCancel: source === 1? false: true,
+              confirmText: source === 1? "确定":"去更改",
+              success: function () {
+                if (source === 2) {
+                  wx.navigateTo({
+                    url: '/pages/clients-looking-for-work/finding-name-card/findingnamecard',
+                  })
+                  // _this.selectComponent("#promptbox").show()
+                }
+              }
+            })
+          }else if(refreshStatus === 2){
+            // 该用户积分不足
+            wx.showModal({
+              title: '温馨提示',
+              content: '您当前的正式积分不足，是否前往获取积分？',
+              cancelText: "否",
+              confirmText: "是",
+              success: function (res) {
+                if (res.confirm) {
+                  wx.navigateTo({
+                    url: url,
+                  })
+                }
+              }
+            })
+          }else if(refreshStatus === 3){
+            // 刷新成功
+            _this.selectComponent("#promptbox").show()
+          }else if(refreshStatus === 4){
+            // 刷新失败
+            wx.showModal({
+              title: '温馨提示',
+              content: '刷新失败',
+              showCancel: false,
+            })
+          }
+        } else {
+          wx.showModal({
+            title: '温馨提示',
+            content: mydata.errmsg,
+            showCancel: false,
+            success(res) {
+             }
+          })
+        }
+      },
+      fail: function () {
+        wx.showModal({
+          title: '温馨提示',
+          content: `您的网络请求失败`,
+          showCancel: false,
+          success(res) {
+          }
+        })
+      }
+    })
+  },
 })

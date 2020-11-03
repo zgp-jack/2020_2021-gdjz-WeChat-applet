@@ -523,11 +523,18 @@
   </view>
 </view>
 
-<view class="cardnine" wx:if="{{showtopone}}">
+<!-- <view class="cardnine" wx:if="{{showtopone}}">
   <button class="cardnineone" bindtap="preview">
     <image src="{{pvw}}"></image> 预览</button>
   <button bindtap="activeRefresh" class="cardnineone" open-type='share'>
     <image src="{{participation}}"></image>分享</button>
+</view> -->
+<view class="cardnine" wx:if="{{showtopone}}">
+  <view class="cardnineone" bindtap="preview">
+    <view>提升活跃度，让更多老板看到你的名片</view>
+    <view>{{ refreshText }}(消耗{{ integral }}积分/次)</view>
+  </view>
+  <button class="cardnineone" bindtap="refreshCard">刷新名片</button>
 </view>
 
 <!-- oworkotextonetu checkthree -- selectTap projectlength>
@@ -549,3 +556,6 @@
 
 <!-- 发布招工成功提示框 -->
 <issueok  id="publishtip" tipdata="{{ { type:'publishFindWork'} }}" topdata="{{ resume_top }}" defalutTop="{{ default_top_area }}"/>
+
+<!-- 刷新成功提示框 -->
+<promptbox id="promptbox" showTitle="{{ false }}" content="{{ tipContent }}" showCancel="{{ false }}" icon="{{ successIcon }}"></promptbox>

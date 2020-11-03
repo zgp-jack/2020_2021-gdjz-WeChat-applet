@@ -127,6 +127,12 @@ Page({
     pulishFindWork:false,//展示发布成功提示框
     publishWay: false,//是否展示发布置顶弹窗（有两个弹窗只会弹其中一个）
     showTip: true,//快速找活名片展示多次onshow只进行一次设置
+    refreshText: '',//刷新名片文本
+    integral:'',//刷新消耗积分
+    // 刷新提示框提示内容
+    tipContent: "刷新成功",
+    // 刷新成功icon
+    successIcon:app.globalData.apiImgUrl + 'yc/findwork-publish-success.png'
   },
 
 
@@ -831,6 +837,8 @@ Page({
             resume_top: mydata.hasOwnProperty("resume_top") ? mydata.resume_top : [],
             top_status: mydata.hasOwnProperty("top_status") ? mydata.top_status : [],
             default_top_area: mydata.hasOwnProperty("default_top_area")?mydata.default_top_area : false,
+            refreshText: mydata.hasOwnProperty("refresh_text")?mydata.refresh_text:'',
+            integral: mydata.hasOwnProperty("integral")?mydata.integral:'',
             fastInfo: fastInfo 
           })
           if (mydata.hasOwnProperty("resume_top")) {
@@ -1292,6 +1300,11 @@ Page({
       this.selectComponent("#publishtip").show()
       this.setData({pulishFindWork:false})
     }
+  },
+  
+  // 刷新找活名片
+  refreshCard: function () {
+    app.refreshReq(1,this)
   },
   /**
    * 生命周期函数--监听页面加载
