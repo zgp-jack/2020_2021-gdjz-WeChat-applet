@@ -119,7 +119,11 @@ Page({
     //搜索框清除按钮
     delImg: app.globalData.apiImgUrl + "new-published-close-icon.png",
     //是否显示清除按钮
-    showdeletekey:false
+    showdeletekey:false,
+    // 刷新成功提示框提示内容
+    tipContent: "刷新成功",
+    // 刷新成功icon
+    successIcon:app.globalData.apiImgUrl + 'yc/findwork-publish-success.png'
   },
   getPhoneNumber:function(e){
     console.log(e)
@@ -410,6 +414,7 @@ Page({
   },
   doRequestAction: function (_append, callback) {
     let _this = this;
+    this.showRefresh()
     if (_this.data.isload) return false;
     this.setData({
       isload: true,
@@ -480,6 +485,7 @@ Page({
   },
   doSearchRequestAction: function (_append) {
     let _this = this;
+    this.showRefresh()
     this.setData({
       nothavemore: false,
       showNothinkData: false
@@ -705,22 +711,8 @@ Page({
   initUserinfo: function () {
     let _this = this;
     let userInfo = wx.getStorageSync("userInfo");
-    // app.initSystemInfo(function (res) {
-    //     if (res) {
-    //         let _h = (res.windowWidth * 0.7) / 0.6216;
-    //         _this.setData({ userAuthBtn: _h })
-    //     }
-    // })
-
-    // if(!userInfo){
-    //     this.setData({ userInfo:false })
-    //     return false;
-    // }
     this.setData({ userInfo: userInfo ? userInfo : false });
     this.initNeedData();
-    // if (userInfo) if (!app.globalData.showFastIssue.request) app.isShowFastIssue(this);
-    // else this.setData({ showFastIssue: app.globalData.showFastIssue })
-
   },
   valiUserUrl: function (e) {
     let userInfo = this.data.userInfo;
@@ -1032,6 +1024,75 @@ Page({
     //重新请求搜索接口
     this.returnTop();
     this.doRequestAction(false)
+  },
+  // 点击取消刷新找活名片记录时间，在一定时间段内不再展示
+  cancelRefresh: function () {
+    // 获取用户信息
+    let userInfo = wx.getStorageSync('userInfo');
+    if (!userInfo) return;
+    let token = userInfo.token;
+    app.appRequestAction({
+      url: 'resumes/cancel-refresh/',
+      way: 'POST',
+      params: {token},
+      success: function (res) {
+        let mydata= res.data
+        if (mydata.errcode === "ok") {
+        }else{
+          wx.showToast({
+            title: mydata.errmsg,
+            icon: "none"
+          })
+        }
+      },
+      fail: function () {
+        wx.showToast({
+          title: '网络出错，数据加载失败！',
+          icon: "none"
+        })
+      }
+    })
+  },
+  // 找工作列表是否弹出引导刷新找活名片请求
+  showRefresh: function () {
+    let that = this;
+    // 获取用户信息
+    let userInfo = wx.getStorageSync('userInfo');
+    if (!userInfo) return;
+    let token = userInfo.token;
+    app.appRequestAction({
+      url: 'resumes/popup-to-refresh/',
+      way: 'POST',
+      params: {token},
+      success: function (res) {
+        let mydata= res.data
+        if (mydata.errcode === "ok") {
+          let showPopup = mydata.data.is_popup;
+          let integral = mydata.data.integral;
+          if (showPopup) {
+            wx.showModal({
+              title: '温馨提示',
+              content: `刷新找活名片让更多老板联系你，消耗${integral}积分刷新？`,
+              cancelText: "取消",
+              confirmText: "去刷新",
+              success: function (res) {
+                if (res.confirm) {
+                  app.refreshReq(2, that)
+                }else if (res.cancel) {
+                  that.cancelRefresh()
+                }
+              }
+            })
+          }
+        }
+      },
+      fail: function () {
+        wx.showToast({
+          title: '网络出错，数据加载失败！',
+          icon: "none"
+        })
+      }
+    })
   },
   /**
    * 生命周期函数--监听页面加载®

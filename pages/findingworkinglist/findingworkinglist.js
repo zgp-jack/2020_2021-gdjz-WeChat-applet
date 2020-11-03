@@ -107,12 +107,8 @@ Page({
     historyList: [],
     joingroup: [],
     resumeText:"",
-    hasSortFlag:1,
-    hasTime: 1,
     hasTop: 1,
-    lastSortFlagPos: 0,
-    lastTimePos: 0,
-    lastNormalPos: 0,
+    lastRefreshTimePos:0,
     // pageStatus是goback的话需要刷新当前页面状态
     pageStatus:'',
     // pageStatus是goback的话需要刷新当前页面信息ID
@@ -122,7 +118,7 @@ Page({
     //搜索框清除按钮
     delImg: app.globalData.apiImgUrl + "new-published-close-icon.png",
     //是否显示清除按钮
-    showdeletekey:false
+    showdeletekey:false,
   },
   // 根据发布方式不同发布招工：未登录或者“fast_add_job”是快速发布，“ordinary_add_job”是普通发布。
   publishJob:function () {
@@ -169,12 +165,8 @@ Page({
       "searchDate.page": 1,
       "searchDate.sort": _id,
       recommended: text,
-      hasSortFlag:1,
-      hasTime: 1,
       hasTop: 1,
-      lastSortFlagPos: 0,
-      lastTimePos: 0,
-      lastNormalPos: 0
+      lastRefreshTimePos: 0,
     })
     _this.doRequestAction(false);
     _this.closeAllSelect();
@@ -199,12 +191,8 @@ Page({
       "searchDate.page": 1,
       "searchDate.type": _id,
       teamText: teamText,
-      hasSortFlag:1,
-      hasTime: 1,
       hasTop: 1,
-      lastSortFlagPos: 0,
-      lastTimePos: 0,
-      lastNormalPos: 0
+      lastRefreshTimePos:0,
     })
     _this.doRequestAction(false);
     _this.closeAllSelect();
@@ -249,12 +237,8 @@ Page({
           "searchDate.page": 1,
           "searchDate.area_id": _id,
           areaText: areaText,
-          hasSortFlag:1,
-          hasTime: 1,
           hasTop: 1,
-          lastSortFlagPos: 0,
-          lastTimePos: 0,
-          lastNormalPos: 0
+          lastRefreshTimePos:0,
         })
         wx.setStorageSync("areaId", _id)
         wx.setStorageSync("areaText", areaText)
@@ -271,12 +255,8 @@ Page({
               "searchDate.page": 1,
               "searchDate.area_id": _id,
               areaText: areaText,
-              hasSortFlag:1,
-              hasTime: 1,
               hasTop: 1,
-              lastSortFlagPos: 0,
-              lastTimePos: 0,
-              lastNormalPos: 0
+              lastRefreshTimePos:0,
             })
             _this.doRequestAction(false);
             _this.closeAllSelect();
@@ -300,12 +280,8 @@ Page({
       areaText: areaText,
       "searchDate.page": 1,
       "searchDate.area_id": id,
-      hasSortFlag:1,
-      hasTime: 1,
       hasTop: 1,
-      lastSortFlagPos: 0,
-      lastTimePos: 0,
-      lastNormalPos: 0
+      lastRefreshTimePos:0,
     })
     let mydata = { "name": areaText, "id": id, ad_name: pname };
     if (id != pid) {
@@ -363,12 +339,8 @@ Page({
           "searchDate.page": 1,
           "searchDate.occupations": _typeid,
           typeText: typeText,
-          hasSortFlag:1,
-          hasTime: 1,
           hasTop: 1,
-          lastSortFlagPos: 0,
-          lastTimePos: 0,
-          lastNormalPos: 0
+          lastRefreshTimePos:0,
         })
         _this.returnTop();
         _this.doRequestAction(false);
@@ -383,12 +355,8 @@ Page({
               "searchDate.page": 1,
               "searchDate.occupations": _typeid,
               typeText: typeText,
-              hasSortFlag:1,
-              hasTime: 1,
               hasTop: 1,
-              lastSortFlagPos: 0,
-              lastTimePos: 0,
-              lastNormalPos: 0
+              lastRefreshTimePos:0,
             })
             _this.returnTop();
             _this.doRequestAction(false);
@@ -412,12 +380,8 @@ Page({
       isFirstRequest: true,
       "searchDate.page": 1,
       "searchDate.occupations": id,
-      hasSortFlag:1,
-      hasTime: 1,
       hasTop: 1,
-      lastSortFlagPos: 0,
-      lastTimePos: 0,
-      lastNormalPos: 0
+      lastRefreshTimePos:0,
     })
     this.returnTop();
     this.doRequestAction(false);
@@ -434,19 +398,11 @@ Page({
     let _this = this;
     if (_this.data.isload) return false;
     let userLocation = wx.getStorageSync("userLocation");
-    let has_sort_flag= _this.data.hasSortFlag;
-    let has_time = _this.data.hasTime;
     let has_top= _this.data.hasTop;
-    let last_sort_flag_pos= _this.data.lastSortFlagPos;
-    let last_time_pos= _this.data.lastTimePos;
-    let last_normal_pos= _this.data.lastNormalPos || 0;
+    let last_refresh_time_pos = _this.data.lastRefreshTimePos;
     let params = {
-      has_sort_flag,
-      has_time,
       has_top,
-      last_sort_flag_pos,
-      last_time_pos,
-      last_normal_pos,
+      last_refresh_time_pos
     }
     let locate = {}
     Object.assign(locate, params,  _this.data.searchDate, {
@@ -478,12 +434,8 @@ Page({
             _this.setData({
               "searchDate.page": (parseInt(_page) + 1),
               lists: _append ? _data : mydata,
-              hasSortFlag: res.data.data.has_sort_flag || 1,
-              hasTime: res.data.data.has_time || 1,
               hasTop: res.data.data.has_top || 1,
-              lastSortFlagPos: res.data.data.last_sort_flag_pos || 0,
-              lastTimePos: res.data.data.last_time_pos || 0,
-              lastNormalPos: res.data.data.last_normal_pos || 0,
+              lastRefreshTimePos: res.data.data.last_refresh_time_pos || 0,
             })
             // _this.setData({
             //   information: _data
@@ -677,12 +629,8 @@ Page({
       this.setData({
         "searchDate.page": 1,
         showHistoryList: false,
-        hasSortFlag:1,
-        hasTime: 1,
         hasTop: 1,
-        lastSortFlagPos: 0,
-        lastTimePos: 0,
-        lastNormalPos: 0,
+        lastRefreshTimePos: 0,
       })
       this.doRequestAction(false);
       this.initSearchHistory();
@@ -968,12 +916,8 @@ Page({
       showdeletekey:false,
       "searchDate.page": 1,
       showHistoryList: false,
-      hasSortFlag:1,
-      hasTime: 1,
       hasTop: 1,
-      lastSortFlagPos: 0,
-      lastTimePos: 0,
-      lastNormalPos: 0
+      lastRefreshTimePos: 0,
     })
     //重新请求搜索接口
     this.returnTop();
@@ -1070,12 +1014,8 @@ Page({
       this.setData({
         "searchDate.page": 1,
         showHistoryList: false,
-        hasSortFlag:1,
-        hasTime: 1,
         hasTop: 1,
-        lastSortFlagPos: 0,
-        lastTimePos: 0,
-        lastNormalPos: 0
+        lastRefreshTimePos: 0,
       })
       this.doRequestAction(false)
     }
@@ -1118,12 +1058,8 @@ Page({
     this.setData({
       "searchDate.page": 1,
       showHistoryList: false,
-      hasSortFlag:1,
-      hasTime: 1,
       hasTop: 1,
-      lastSortFlagPos: 0,
-      lastTimePos: 0,
-      lastNormalPos: 0
+      lastRefreshTimePos: 0,
     })
     this.doRequestAction(false, function () {
 
