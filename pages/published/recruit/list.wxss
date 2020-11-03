@@ -242,6 +242,8 @@ page {
   color:#FFFFFF;
   border-radius: 44rpx;
   font-size: 35rpx;
+  box-shadow: 0px 11px 22px 0px rgba(86, 146, 228, 0.32);
+  margin-top: 30rpx;
 }
 .lists-nodata image {
   width: 260rpx;
