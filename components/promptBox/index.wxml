@@ -1,0 +1,13 @@
+<!--components/promptBox/index.wxml-->
+<view class="prompt-container" wx:if="{{ show }}">
+  <view class="prompt-box">
+    <view class="prompt-title" wx:if="{{ showTitle }}">温馨提示</view>
+    <view class="prompt-title"><image src="{{ icon }}"></image></view>
+    <view class="prompt-body">{{ content }}</view>
+    <view class="prompt-footer">
+      <button class="prompt-btn" style="color:{{ cancelColor }}" wx:if="{{ showCancel }}" bindtap="cancel">{{ cancelText }}</button>
+      <button class="prompt-btn" style="color:{{ confirmColor }}" bindtap="confirm">{{ confirmText }}</button>
+    </view>
+    <image class="prompt-close" bindtap="cancel" wx:if="{{ showClose }}" src="{{ close }}"></image>
+  </view>
+</view>
