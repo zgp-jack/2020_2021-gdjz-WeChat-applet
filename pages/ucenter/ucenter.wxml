@@ -1,8 +1,9 @@
 <import src="/pages/footer/footer.wxml"/>
 <view class="ucener-header">
+  <!-- 联系客服-消息通知 -->
   <view class="header-top">
     <view class="top-left" bindtap="callThisPhone" data-phone="{{callServicePhone}}">
-      <image src="{{kficon}}"></image>
+      <image src="{{serviceicon}}"></image>
       <text>联系客服</text>
     </view>
     <view class="top-right" data-url="/pages/information/mymessage/mymessage" bindtap='valiUserUrl'>
@@ -13,36 +14,51 @@
     </view>
   </view>
   <view class="user-data-box">
+     <!-- 头像-昵称 -->
     <view class="user-data">
-      <image class="user-avater" src='{{ member.headimgurl }}'></image>
-      <view class="user-info-box">
+      <image class="user-avater" wx:if="{{userInfo}}" src='{{ member.headimgurl }}'></image>
+      <image class="user-avater"  bindtap='gotoUserauth' wx:if="{{!userInfo}}" src='{{ defaultavater }}'></image>
+      <view class="user-info-box" wx:if="{{userInfo}}">
         <view class="edit-box">
           <text class="user-name">{{ member.username || member.nickname }}</text>
           <navigator url='/packageOther/pages/userinfo/index/index?img={{ member.headimgurl }}&auth={{ member.is_check }}&tel={{ member.tel }}&name={{ member.username || member.nickname }}&pass={{ member.pwd_status }}'
                        open-type="navigate" wx:if="{{ member.tel }}">
-                       <image src="{{editInfoIcon}}"></image>
+                       <image src="{{eidticon}}"></image>
             </navigator>
         </view>
         <view>
           <text class="user-memberid">会员编号:{{ member.id }}</text>
         </view>
       </view>
+      <view  bindtap='gotoUserauth' class="Notlogin" wx:if="{{!userInfo}}">
+        <text>登陆/注册</text>
+      </view>
     </view>
+    <!-- 积分-收藏 -->
     <view class="integral-box">
-      <view>
-        <text>{{ member.integral }}</text>
+      <view bindtap='valiUserUrl' data-url='/pages/integral/source/source?office=1'>
+        <text class="top-text">{{ member.integral ? member.integral:0 }}</text>
         <text>正式积分</text>
       </view>
-      <view>
-        <text>{{ member.temporary_integral }}</text>
+      <view bindtap='valiUserUrl' data-url='/pages/integral/temp/temp'>
+        <view>
+          <text class="top-text">{{ member.temporary_integral ? member.temporary_integral:0 }}</text>
+          <text class="icon-text" wx:if="{{ member.temporary_integral > 0}}">
+            <text>详情</text>
+          </text>
+        </view>
         <text>临时积分</text>
       </view>
       <view data-url="../collect/info/info" bindtap="valiUserUrl">
-        <text>666</text>
+        <text class="top-text">66<text class="details-tip">详情</text></text>
         <text>我的收藏</text>
       </view>
     </view>
   </view>
+  <!-- banner -->
+  <view class="banner-box">
+      <image src="{{bannerImg}}"></image>
+    </view>
   <!-- <text class='ucenter-title'>会员中心</text> -->
   <!-- <view class="msg-bor" data-url="/pages/information/mymessage/mymessage" bindtap='valiUserUrl'>
     <view class="msg-icon-item">
@@ -115,38 +131,40 @@
     <image class="header_background_image" mode="aspectFit" src="http://cdn.yupao.com/miniprogram/images/yc/personCenter-topBackground.png"></image>
   </view> -->
 </view>
-<!-- banner -->
-<view class="banner-box">
-  <image src="{{bannerImg}}"></image>
-</view>
 <!-- 我的工作 -->
 <view class="mywork">
   <view class="work-box">
     <text class="title">我的工作</text>
     <view class="work-content">
       <view class="work-zg item-work">
-        <image class="banner"></image>
+        <image class="banner" src="{{bannerqz}}"></image>
         <view class="icon-box">
-          <view>
-            <image src="{{msgicon}}"></image>
+          <view data-url="../published/recruit/list" bindtap="valiUserUrl">
+            <image src="{{myzg}}"></image>
             <text>我的招工</text>
           </view>
           <view>
-            <image src="{{msgicon}}"></image>
+            <image src="{{seenme}}"></image>
             <text>谁看过我</text>
+            <view class="icon-text">
+              <text>9+</text>
+            </view>
           </view>
         </view>
       </view>
       <view class="work-zh item-work">
-        <image class="banner"></image>
+        <image class="banner" src="{{bannerbg}}"></image>
         <view class="icon-box">
-          <view>
-            <image src="{{msgicon}}"></image>
-            <text>我的招工</text>
+          <view bindtap="valiUserUrl" data-url="/pages/clients-looking-for-work/finding-name-card/findingnamecard">
+            <image src="{{myzh}}"></image>
+            <text>我的找活</text>
           </view>
           <view>
-            <image src="{{msgicon}}"></image>
+            <image src="{{seenmezh}}"></image>
             <text>谁看过我</text>
+            <view class="icon-text">
+              <text>9+</text>
+            </view>
           </view>
         </view>
       </view>
@@ -159,39 +177,48 @@
     <text class="title">常用功能</text>
     <view class="icon-content">
       <view class="commonly-icon-box">
-        <view>
-          <image src="{{msgicon}}"></image>
+        <view  bindtap="valiUserUrl" data-url="/pages/recharge/recharge">
+          <image src="{{Recharge}}"></image>
           <text>积分充值</text>
         </view>
-        <view>
-          <image src="{{msgicon}}"></image>
-          <text>积分充值</text>
+        <view bindtap="valiUserUrl" data-url="../getintegral/getintegral">
+          <image src="{{obtain}}"></image>
+          <text>积分获取</text>
         </view>
-        <view>
-          <image src="{{msgicon}}"></image>
-          <text>积分充值</text>
+        <view  bindtap="valiUserUrl" data-url="../integral/source/source">
+          <image src="{{record}}"></image>
+          <text>积分记录</text>
         </view>
-        <view>
-          <image src="{{msgicon}}"></image>
-          <text>积分充值</text>
+        <view bindtap="valiUserUrl" data-url="../static/invite">
+          <image src="{{invitation}}"></image>
+          <text>邀请工友</text>
         </view>
       </view>
       <view class="commonly-icon-box">
         <view>
-          <image src="{{msgicon}}"></image>
-          <text>积分充值</text>
+          <image src="{{Bookkeeping}}"></image>
+          <text>记工记账</text>
+          <view class="icon-text">
+              <text>新</text>
+          </view>
+        </view>
+        <view bindtap="valiUserUrl" data-url="../published/used/list">
+          <image src="{{secondhand}}"></image>
+          <text>二手交易</text>
         </view>
         <view>
-          <image src="{{msgicon}}"></image>
-          <text>积分充值</text>
+          <image src="{{gamecenter}}"></image>
+          <text>游戏中心</text>
+          <view class="icon-text">
+              <text>新</text>
+          </view>
         </view>
-        <view>
-          <image src="{{msgicon}}"></image>
-          <text>积分充值</text>
-        </view>
-        <view>
-          <image src="{{msgicon}}"></image>
-          <text>积分充值</text>
+        <view bindtap="valiUserUrl" data-url="/pages/information/mymessage/mymessage">
+          <image src="{{mymsg}}"></image>
+          <text>我的信息</text>
+          <view class="icon-text" wx:if="{{ footerImgs.msgsNumber > 0}}">
+              <text>{{footerImgs.msgsNumber>9? '9+' : footerImgs.msgsNumber}}</text>
+            </view>
         </view>
       </view>
     </view>
@@ -202,22 +229,18 @@
   <view class="commonly-box">
     <text class="title">系统设置</text>
     <view class="icon-content">
-      <view class="commonly-icon-box">
-        <view>
-          <image src="{{msgicon}}"></image>
-          <text>积分充值</text>
+      <view class="commonly-icon-box"> 
+        <view bindtap="valiUserUrl" data-url="../realname/realname">
+          <image src="{{Verified}}"></image>
+          <text>实名认证</text>
         </view>
-        <view>
-          <image src="{{msgicon}}"></image>
-          <text>积分充值</text>
+        <view data-url="/packageOther/pages/query/query" bindtap="valiUserUrl">
+          <image class="verifiedquery" src="{{verifiedquery}}"></image>
+          <text>实名查询</text>
         </view>
-        <view>
-          <image src="{{msgicon}}"></image>
-          <text>积分充值</text>
-        </view>
-        <view>
-          <image src="{{msgicon}}"></image>
-          <text>积分充值</text>
+        <view data-url="/packageOther/pages/helpCenter/helpCenter" bindtap="valiUserUrl">
+          <image class="help" src="{{help}}"></image>
+          <text>帮助与反馈</text>
         </view>
       </view>
     </view>

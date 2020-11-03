@@ -321,6 +321,12 @@
 .newColor {
     color: #808080;
 }
-.clearfloat {
-    float: none;
+.widthLine {
+    width: 100%;
+}
+.viewRight {
+    float: right;
+}
+.bluecolor {
+    color: #0099ff;
 }
