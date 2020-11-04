@@ -132,7 +132,8 @@ Page({
     // 刷新提示框提示内容
     tipContent: "刷新成功",
     // 刷新成功icon
-    successIcon:app.globalData.apiImgUrl + 'yc/findwork-publish-success.png'
+    successIcon:app.globalData.apiImgUrl + 'yc/findwork-publish-success.png',
+    reqStatus:false,//刷新请求状态
   },
 
 
@@ -1304,7 +1305,49 @@ Page({
   
   // 刷新找活名片
   refreshCard: function () {
-    app.refreshReq(1,this)
+    let reqStatus = this.data.reqStatus;
+    let reqDueTime = this.data.reqDueTime;
+    let currentTime = new Date().getTime();
+    if (!reqStatus) {
+      if (reqDueTime) {
+        if (currentTime > reqDueTime) {
+          wx.showModal({
+            title: '温馨提示',
+            content: '请勿点击过快',
+            showCancel: false,
+          })
+        }else{
+          wx.showModal({
+            title: '温馨提示',
+            content: '您已消耗1积分成功刷新名片，请勿点击过快',
+            showCancel: false,
+          })
+          this.setData({reqStatus:true})
+        }
+      }else{
+        app.refreshReq(1,this)
+        this.setData({reqStatus:true})
+      }
+    } else {
+      if (reqDueTime) {
+        if (reqDueTime > currentTime) {
+          wx.showModal({
+            title: '温馨提示',
+            content: '您已消耗1积分成功刷新名片，请勿点击过快',
+            showCancel: false,
+          })
+        }else{
+          app.refreshReq(1,this)
+          this.setData({reqStatus:false})
+        }
+      }else{
+        wx.showModal({
+          title: '温馨提示',
+          content: '请勿点击过快',
+          showCancel: false,
+        })
+      }
+    }
   },
   /**
    * 生命周期函数--监听页面加载
@@ -1357,7 +1400,7 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-
+    this.getdetail();
   },
 
   /**
