@@ -1,0 +1,12 @@
+<!--pages/recruitworker-browsing-record/recruit-worker-record/index.wxml-->
+<view class="recruit-record-contain">
+  <view class="recruit-record-content">
+    <view class="recruit-record-head">
+      <view class="recruit-record-title">
+        <view class="recruit-record-name"></view>
+        <view class="recruit-record-phone"></view>
+      </view>
+      <view class="recruit-record-button"></view>
+    </view>
+  </view>
+</view>
