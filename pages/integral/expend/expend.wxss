@@ -191,6 +191,7 @@
 
 .expend-show-recruit .yupao-common-list-left {
     width: auto;
+    font-weight: bold;
 }
 .yupao-common-list-title-left {
     position: relative;
@@ -198,6 +199,7 @@
     color: #333;
     line-height: 60rpx;
     font-size: 30rpx;
+    font-weight: bold;
 }
 .yupao-common-list-title-right{
     position: relative;
@@ -213,6 +215,7 @@
     margin-top: 0;
     height: calc(100% - 50rpx);
     overflow-y: scroll;
+    padding: 0 27rpx;
 }
 
 .expend-show-recruit .yupao-common-list-left text {

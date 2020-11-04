@@ -511,6 +511,10 @@
     margin-bottom: 15rpx;
     position: relative;
 }
+.integral-box>view>view {
+    margin-bottom: 15rpx;
+    line-height: 1;
+}
 /* .integral-box .icon-text {
     position: absolute;
     right: 50rpx;

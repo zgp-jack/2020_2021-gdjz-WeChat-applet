@@ -274,8 +274,11 @@ page{
     position: relative;
     width: 100%;
     min-height: 100rpx;
-    padding: 20rpx 27rpx;
+    padding: 20rpx 0;
     border-bottom: 1px solid #e7e6e4;
+}
+.yupao-common-lists-item:last-child{
+    border: none;
 }
 .yupao-common-lists-item .yupao-common-lists-item:nth-last-child(1){
     border-bottom: 0;

@@ -41,7 +41,7 @@
         <text>正式积分</text>
       </view>
       <view bindtap='valiUserUrl' data-url='/pages/integral/temp/temp'>
-        <view style="    margin-bottom: 15rpx;">
+        <view>
           <text class="top-text">{{ member.temporary_integral ? member.temporary_integral:0 }}</text>
           <text class="icon-text" wx:if="{{ member.temporary_integral > 0}}">
             <text>详情</text>
@@ -139,7 +139,9 @@
     <text class="title">我的工作</text>
     <view class="work-content">
       <view class="work-zg item-work">
-        <image class="banner" src="{{bannerqz}}"></image>
+        <navigator url="{{member.job_banner.self_url}}">
+          <image class="banner" src="{{member.job_banner.banner}}"></image>
+        </navigator>
         <view class="icon-box">
           <view data-url="../published/recruit/list" bindtap="valiUserUrl">
             <image src="{{myzg}}"></image>
@@ -155,7 +157,9 @@
         </view>
       </view>
       <view class="work-zh item-work">
-        <image class="banner" src="{{bannerbg}}"></image>
+        <navigator url="{{member.resume_banner.self_url}}">
+          <image class="banner" src="{{member.resume_banner.banner}}"></image>
+        </navigator>
         <view class="icon-box">
           <view bindtap="valiUserUrl" data-url="/pages/clients-looking-for-work/finding-name-card/findingnamecard">
             <image src="{{myzh}}"></image>
