@@ -41,7 +41,7 @@
         <text>正式积分</text>
       </view>
       <view bindtap='valiUserUrl' data-url='/pages/integral/temp/temp'>
-        <view>
+        <view style="    margin-bottom: 15rpx;">
           <text class="top-text">{{ member.temporary_integral ? member.temporary_integral:0 }}</text>
           <text class="icon-text" wx:if="{{ member.temporary_integral > 0}}">
             <text>详情</text>
@@ -50,14 +50,16 @@
         <text>临时积分</text>
       </view>
       <view data-url="../collect/info/info" bindtap="valiUserUrl">
-        <text class="top-text">66<text class="details-tip">详情</text></text>
+        <text class="top-text">{{member.collect_count}}</text>
         <text>我的收藏</text>
       </view>
     </view>
   </view>
   <!-- banner -->
   <view class="banner-box">
+    <navigator target="miniProgram" extra-data="null" open-type="navigate" app-id="wx3abff5d74de220d2">
       <image src="{{bannerImg}}"></image>
+    </navigator>
     </view>
   <!-- <text class='ucenter-title'>会员中心</text> -->
   <!-- <view class="msg-bor" data-url="/pages/information/mymessage/mymessage" bindtap='valiUserUrl'>
