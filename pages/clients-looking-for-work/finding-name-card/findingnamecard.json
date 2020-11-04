@@ -1,5 +1,6 @@
 {
     "navigationBarTitleText": "找活名片",
+    "enablePullDownRefresh": true ,
     "usingComponents": {
         "recommendRecruit": "/components/recommendRecruit/recommendRecruit",
         "publishfindwork":"/components/publishfindwork/publishfindword",
