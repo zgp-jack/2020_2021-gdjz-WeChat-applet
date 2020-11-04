@@ -30,14 +30,21 @@ page {
   margin: 0 auto;
   height: 80rpx;
   background: white;
-  font-size: 31rpx;
+  font-size: 30rpx;
   color: #343434;
   line-height: 80rpx;
   text-align: center;
   letter-spacing: 4rpx;
   font-weight: bold;
+  position: relative;
 }
-
+.sharecard{
+  position: absolute;
+  top: 0;
+  right: 0;
+  font-size: 28rpx;
+  color: #09f;
+}
 .nopass {
   width: 93%;
   margin: 0 auto;
