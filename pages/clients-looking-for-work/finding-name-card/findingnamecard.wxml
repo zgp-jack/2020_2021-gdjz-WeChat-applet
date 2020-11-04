@@ -2,6 +2,7 @@
   <view class="cardcolore">
     <view class="findingnamecard">
       请完善以下信息
+      <view class="sharecard" bindtap="preview">预览/分享名片</view>
     </view>
   </view>
   <!-- {{selectShow&&"select_img_rotate"}} show_tips editor -->
