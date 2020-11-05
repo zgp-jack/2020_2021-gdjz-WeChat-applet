@@ -116,9 +116,12 @@
             <view class='yupao-common-lists-item clearfix'>
                 <view class='yupao-common-list-left'>电话</view>
                 <view class='yupao-common-list-right widthLine'>{{ info.user_mobile }} <block wx:if="{{ info.is_end == '2' }}">({{ info.end_word }})</block>
-                <block wx:else="{{ info.is_end == '2' }}">
-                <text class='list-call-phone' wx:if="{{ info.is_end == '1' }}"   bindtap='callThisPhone'  data-phone="{{ info.user_mobile }}">拨打</text></block>
-                <block><text class="{{info.show_complain==1?'list-call-phone list-complain-phone':'list-call-phone info-complained'}} viewRight" data-id="{{ info.id }}" data-complain="{{ info.show_complain }}" data-type="{{ info.type }}" bindtap="complainInfo" wx:if="{{info.show_complain}}">{{info.show_complain===1?"投诉":"已投诉"}}</text></block>
+                    <block>
+                        <text class="{{info.show_complain==1?'list-call-phone list-complain-phone':'list-call-phone info-complained'}} viewRight" data-id="{{ info.id }}" data-complain="{{ info.show_complain }}" data-type="{{ info.type }}" bindtap="complainInfo" wx:if="{{info.show_complain}}">{{info.show_complain===1?"投诉":"已投诉"}}</text>
+                    </block>
+                    <block>
+                        <text class='list-call-phone viewRight' wx:if="{{ info.is_end == '1' }}"   bindtap='callThisPhone'  data-phone="{{ info.user_mobile }}">拨打</text>
+                    </block>
                 </view>
             </view>
             <view class='yupao-common-lists-item clearfix' wx:if="{{ info.type =='resume' }}">

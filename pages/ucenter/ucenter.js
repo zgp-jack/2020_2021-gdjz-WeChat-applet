@@ -157,6 +157,11 @@ Page({
     bannerws: app.globalData.apiImgUrl + 'ws/bannerws.png',
     bannerzg: app.globalData.apiImgUrl + 'ws/bannerzg.png',
     defaultavater: app.globalData.apiImgUrl + 'ws/defaultavater.png',
+    toCollectUrl:'',
+    //我的工作距离顶部的距离
+    worktop:0,
+    //吸顶显示会员中心
+    showCenter:false
   },
   //获取广告数据
   getAdvertising: function () {
@@ -223,6 +228,16 @@ Page({
             showReturnIntegral: (parseInt(mydata.member.return_integral) == 0) ? false : true
           })
           app.globalData.publish.userPhone = mydata.tel
+          //点击收藏跳转地址 有招工跳转招工 有找活没招工跳转找活  都没有跳转招工
+          if(mydata.member.resume_collect_count > 0 && mydata.member.job_collect_count == 0){
+            _this.setData({
+              toCollectUrl:'/pages/collect/resume/resume'
+            })
+          }else {
+            _this.setData({
+              toCollectUrl:'/pages/collect/info/info'
+            })
+          }
         } else {
           wx.showToast({
             title: mydata.errmsg,
@@ -303,6 +318,18 @@ Page({
       }
     })
   },
+  //监听页面滚动
+  onPageScroll: function (e) {
+    if(e.scrollTop > this.data.worktop){
+      this.setData({
+        showCenter:true
+      })
+    }else{
+      this.setData({
+        showCenter:false
+      })
+    }
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
@@ -316,6 +343,12 @@ Page({
     this.initUserInfo();
     footerjs.initMsgNum(this);
     app.initResume(this)
+    let _this = this
+    wx.createSelectorQuery().select('.work-box').boundingClientRect(function(rect){
+      _this.setData({
+        worktop:rect.top - 30
+      })
+    }).exec()
   },
   releaselive() {
     app.globalData.showdetail = true

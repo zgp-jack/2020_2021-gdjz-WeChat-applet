@@ -2,12 +2,14 @@
 <view class="ucener-header">
   <!-- 联系客服-消息通知 -->
   <view class="header-top">
-    <view class="top-left" bindtap="callThisPhone" data-phone="{{callServicePhone}}">
-      <image src="{{serviceicon}}"></image>
-      <text>联系客服</text>
+    <view class="top-left">
+      <image wx:if="{{!showCenter}}" bindtap="callThisPhone" data-phone="{{callServicePhone}}" src="{{serviceicon}}"></image>
+      <text wx:if="{{!showCenter}}" bindtap="callThisPhone" data-phone="{{callServicePhone}}">联系客服</text>
+      <text wx:if="{{showCenter}}" style="margin-left:0">会员中心</text>
     </view>
-    <view class="top-right" data-url="/pages/information/mymessage/mymessage" bindtap='valiUserUrl'>
-      <image src="{{msgicon}}"></image>
+    <view class="top-right">
+      <image wx:if="{{showCenter}}" class="serviceicon" bindtap="callThisPhone" data-phone="{{callServicePhone}}" src="{{serviceicon}}"></image>
+      <image src="{{msgicon}}" data-url="/pages/information/mymessage/mymessage" bindtap='valiUserUrl'></image>
       <view class="icon-text" wx:if="{{ footerImgs.msgsNumber > 0}}">
         <text>{{footerImgs.msgsNumber>9? '9+' : footerImgs.msgsNumber}}</text>
       </view>
@@ -49,88 +51,17 @@
         </view>
         <text>临时积分</text>
       </view>
-      <view data-url="../collect/info/info" bindtap="valiUserUrl">
-        <text class="top-text">{{member.collect_count}}</text>
+      <view data-url="{{toCollectUrl}}" bindtap="valiUserUrl">
+        <text class="top-text">{{member.job_collect_count+member.resume_collect_count ? member.job_collect_count+member.resume_collect_count:'0'}}</text>
         <text>我的收藏</text>
       </view>
     </view>
   </view>
   <!-- banner -->
-  <view class="banner-box">
+  <!-- <view class="banner-box">
     <navigator target="miniProgram" extra-data="null" open-type="navigate" app-id="wx3abff5d74de220d2">
       <image src="{{bannerImg}}"></image>
     </navigator>
-    </view>
-  <!-- <text class='ucenter-title'>会员中心</text> -->
-  <!-- <view class="msg-bor" data-url="/pages/information/mymessage/mymessage" bindtap='valiUserUrl'>
-    <view class="msg-icon-item">
-      <view class="icon-text" wx:if="{{ footerImgs.msgsNumber > 0}}">
-        <text>{{footerImgs.msgsNumber>9? '9+' : footerImgs.msgsNumber}}</text>
-      </view>
-      <image class="msg-icon" src="{{msgIcon}}"></image>
-    </view>
-  </view> -->
-  <!-- <view class='ucener-userinfo-wrap' wx:if="{{ userInfo }}">
-    <view class='ucenter-userinfo'>
-      <view class="basic-info">
-        <view class='ucenter-userinfo-box'>
-          <view class="avatar-bor">
-            <image src='{{ member.headimgurl }}' class='ucenter-userimg'></image>
-          </view>
-          <view class='ucenter-userinfo-words'>
-            <view class='ucenter-username overwords felx'>
-              {{ member.username || member.nickname }}
-              <image src='{{ realName }}' class='user-update-tag'
-                     wx:if="{{member.is_check==2&&showAuthor==1&&member.check_degree==2}}"></image>
-            </view>
-            <view class='ucenter-usernum overwords'>
-              会员编号：
-              <text>{{ member.id }}</text>
-            </view>
-          </view>
-          <view class='user-update-info-tag'>
-            <navigator class='user-update-info'
-                       url='/packageOther/pages/userinfo/index/index?img={{ member.headimgurl }}&auth={{ member.is_check }}&tel={{ member.tel }}&name={{ member.username || member.nickname }}&pass={{ member.pwd_status }}'
-                       open-type="navigate" wx:if="{{ member.tel }}">修改资料
-            </navigator>
-            <navigator class='user-update-info' url='/packageOther/pages/userinfo/edit/edit' open-type="navigate"
-                       wx:else="{{ member.tel }}">完善资料
-            </navigator>
-          </view>
-        </view>
-      </view>
-      <view class='ucenter-integralbox'>
-        <navigator class='ucenter-integral-item flex-column' url='/pages/integral/source/source?office=1'
-                   open-type="navigate">
-          <text class='overwords'>{{ member.integral }}</text>
-          <text>正式积分</text>
-        </navigator>
-        <navigator
-            class='ucenter-integral-item flex-column {{ member.temporary_integral != "0" ? "click-red-point" : "" }}'
-            url='/pages/integral/temp/temp' open-type="navigate">
-          <text>{{ member.temporary_integral }}</text>
-          <text>临时积分</text>
-        </navigator>
-      </view>
-    </view>
-  </view>
-  <view class='ucener-userinfo-wrap' wx:if="{{ !userInfo }}">
-    <view class='ucenter-userinfo'>
-      <view class="basic-info">
-        <view class='ucenter-userinfo-box' bindtap='gotoUserauth'>
-          <view class="avatar-bor">
-            <image class='ucenter-userimg' src='{{ nouser }}'></image>
-          </view>
-          <view class="ucenter-usernum nouser">登录/注册</view>
-        </view>
-      </view>
-      <view class='ucenter-integralbox ucenter-nouserinfo-tips'>
-        点击上方登录/注册按钮可以前往登录页面，登录成功后可解锁小程序全部功能，方便您能更便捷的招工找活。
-      </view>
-    </view>
-  </view> -->
-  <!-- <view class="user_background_image">
-    <image class="header_background_image" mode="aspectFit" src="http://cdn.yupao.com/miniprogram/images/yc/personCenter-topBackground.png"></image>
   </view> -->
 </view>
 <!-- 我的工作 -->
@@ -139,9 +70,12 @@
     <text class="title">我的工作</text>
     <view class="work-content">
       <view class="work-zg item-work">
-        <navigator url="{{member.job_banner.self_url}}">
-          <image class="banner" src="{{member.job_banner.banner}}"></image>
-        </navigator>
+          <image 
+          class="banner" 
+          src="{{member.job_banner.banner ? member.job_banner.banner:'http://cdn.yupao.com/miniprogram/images/ws/bannerzg.png'}}"
+          data-url="{{member.job_banner.self_url ? member.job_banner.self_url:'../published/recruit/list'}}"
+          bindtap="valiUserUrl"
+          ></image>
         <view class="icon-box">
           <view data-url="../published/recruit/list" bindtap="valiUserUrl">
             <image src="{{myzg}}"></image>
@@ -150,16 +84,18 @@
           <view>
             <image src="{{seenme}}"></image>
             <text>谁看过我</text>
-            <view class="icon-text">
-              <text>9+</text>
+            <view class="icon-text" wx:if="{{member.job_view_count > 0}}">
+              <text>{{member.job_view_count > 9 ? '9+':member.job_view_count}}</text>
             </view>
           </view>
         </view>
       </view>
       <view class="work-zh item-work">
-        <navigator url="{{member.resume_banner.self_url}}">
-          <image class="banner" src="{{member.resume_banner.banner}}"></image>
-        </navigator>
+          <image 
+          class="banner" 
+          bindtap="valiUserUrl" 
+          data-url="{{member.resume_banner.self_url ? member.resume_banner.self_url:'/pages/clients-looking-for-work/finding-name-card/findingnamecard'}}" src="{{member.resume_banner.banner ? member.resume_banner.banner:'http://cdn.yupao.com/miniprogram/images/ws/bannerqz.png'}}">
+        </image>
         <view class="icon-box">
           <view bindtap="valiUserUrl" data-url="/pages/clients-looking-for-work/finding-name-card/findingnamecard">
             <image src="{{myzh}}"></image>
@@ -168,8 +104,8 @@
           <view>
             <image src="{{seenmezh}}"></image>
             <text>谁看过我</text>
-            <view class="icon-text">
-              <text>9+</text>
+            <view class="icon-text" wx:if="{{member.resume_view_count > 0}}">
+              <text>{{member.resume_view_count > 9 ? '9+':member.resume_view_count}}</text>
             </view>
           </view>
         </view>
@@ -252,9 +188,12 @@
     </view>
   </view>
 </view>
-<view class="yupao-common-container">
+
+
+<!-- 1.0.5个人中心 -->
+<!-- <view class="yupao-common-container"> -->
   <!-- 轮播图 -->
-  <view class="advertising" wx:if="{{advertising.length && userInfo}}">
+  <!-- <view class="advertising" wx:if="{{advertising.length && userInfo}}">
     <image wx:if="{{advertising.length===1}}" data-url="{{advertising[0].self_url}}" bindtap="valiUserUrl"
            class="item-img"
            src="{{advertising[0].image_url}}" mode="aspectFill"></image>
@@ -311,7 +250,7 @@
 
     </view>
   </view>
-</view>
+</view> -->
 
 
     <!-- 引入footer -->

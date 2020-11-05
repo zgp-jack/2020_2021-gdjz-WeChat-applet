@@ -520,7 +520,10 @@ App({
   callThisPhone: function (e) {
     let phone = e.currentTarget.dataset.phone;
     wx.makePhoneCall({
-      phoneNumber: phone
+      phoneNumber: phone,
+      fail(res){
+        debugger
+      }
     })
   },
   showMyTips: function (_msg) {
@@ -1148,7 +1151,7 @@ App({
         if (res.data.errcode == "ok") {
           _this.globalData.jobNumber = res.data.data.jobNumber
           _this.globalData.msgsNumber = res.data.data.messageNumber
-          callback(res.data.data.jobNumber, res.data.data.messageNumber)
+          callback(res.data.data.jobNumber, res.data.data.messageNumber,res.data.data.job_view_count,res.data.data.resume_view_count)
         }
       }
     })

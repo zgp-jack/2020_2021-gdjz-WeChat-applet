@@ -3,7 +3,7 @@
 .ucener-header {
     position: relative;
     width: 100%;
-    height: 407rpx;
+    height: 330rpx;
     background: #fff url(http://cdn.yupao.com/miniprogram/images/ws/headerBg2.png) no-repeat center;
     background-size:100%;
     padding-top: 60rpx;
@@ -399,12 +399,13 @@
 }
 
 .icon-text {
+    width: 35rpx;
     background: #FF6363;
     color: #fff !important;
     font-size: 20rpx !important;
     text-align: center;
     line-height: 1;
-    padding: 2px 6rpx;
+    padding: 2rpx 0;
     font-size: 20rpx; 
     border-top-left-radius: 20rpx;
     border-top-right-radius: 20rpx;
@@ -473,8 +474,9 @@
 }
 .user-name{
     font-size: 36rpx;
-    font-weight: 500;
+    font-weight: bold;
     color: #333333;
+    line-height: 1;
 }
 .user-memberid{
     font-size: 26rpx;
@@ -483,6 +485,9 @@
 }
 .edit-box{
     display: flex;
+}
+.edit-box navigator {
+    line-height: 1;
 }
 .edit-box image {
     width: 33rpx;
@@ -535,6 +540,11 @@
     position: relative;
     top: -10rpx;
 }
+.top-right image.serviceicon {
+    width: 36rpx;
+    height: 35rpx;
+    margin-right: 30rpx;
+}
 /* banner */
 .banner-box {
     padding: 0 24rpx;
@@ -548,7 +558,7 @@
 /* 我的工作 */
 .mywork {
     padding: 0 24rpx;
-    margin-top: 18rpx;
+    border-top: 18rpx solid #f7f6f9;
 }
 .work-box {
     background: #fff;
@@ -560,7 +570,7 @@
 .work-box .title {
     color: #7f7f7f;
     font-size: 30rpx;
-    font-weight: 500;
+    font-weight: bold;
     line-height: 1;
 }
 .work-content {
@@ -618,13 +628,13 @@
     background: #fff;
     box-shadow: 0px 0px 21px 0px rgba(66, 66, 66, 0.08);
     border-radius: 10rpx;
-    height: 358rpx;
+    height: 390rpx;
     padding: 30rpx 20rpx;
 }
 .commonly-box .title {
     color: #7f7f7f;
     font-size: 30rpx;
-    font-weight: 500;
+    font-weight: bold;
     line-height: 1;
 }
 .commonly .icon-content{
@@ -633,7 +643,7 @@
 .commonly-icon-box {
     display: flex;
     justify-content: space-between;
-    margin-bottom: 29rpx;
+    margin-bottom: 55rpx;
 }
 .commonly-icon-box image {
     width: 45rpx;
@@ -658,6 +668,9 @@
     top: 0rpx;
 }
 /* 系统设置 */
-.system-settings .commonly-box  {
+.system-settings .commonly-box {
     height: 237rpx;
+}
+.system-settings {
+    padding-bottom: 150rpx;
 }
