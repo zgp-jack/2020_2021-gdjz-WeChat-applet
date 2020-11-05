@@ -35,6 +35,10 @@ Component({
     infoId:{
       type: String,
       value:''
+    },
+    type:{
+      type: String,
+      value:''
     }
   },
   observers:{

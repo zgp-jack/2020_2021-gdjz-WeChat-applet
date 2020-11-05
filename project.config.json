@@ -576,6 +576,12 @@
           "pathName": "pages/recruitworker-browsing-record/recruit-worker-record/index",
           "query": "",
           "scene": null
+        },
+        {
+          "name": "pages/recruitworker-browsing-record/recruit-worker-lists/index",
+          "pathName": "pages/recruitworker-browsing-record/recruit-worker-lists/index",
+          "query": "",
+          "scene": null
         }
       ]
     }

@@ -1,11 +1,16 @@
 <!--pages/recruitworker-browsing-record/recruit-worker-lists/index.wxml-->
 <view class="recruit-record-contain">
-  <view class="recruit-record-head">
-    <view class="recruit-head-title">四川成都找混凝土工</view>
-    <view class="recruit-head-desc">本人做事很好很好都是浪费建设路口的分解落实到房管局发电量的飞机离开对方个梵蒂冈电饭锅电饭锅地方噶的说法是打发发送给第三方广东省分公司地方噶是的发送到</view>
-  </view>
-  <view class="recruit-record-footer">
-    <view class="recruit-footer-button-left">增加曝光率</view>
-    <view class="recruit-footer-button-right">被查看99+次<view class="record-see-count">9+</view></view>
-  </view>
+  <block  wx:for="{{ lists }}" wx:key="index">
+    <view class="recruit-record-content">
+      <view class="recruit-record-head">
+        <view class="recruit-head-title">{{ item.title }}</view>
+        <view class="recruit-head-desc">{{ item.detail }}</view>
+      </view>
+      <view class="recruit-record-footer">
+        <view class="recruit-footer-button-left" bindtap="goTop" data-id="{{ item.id }}" data-index="{{ index }}" data-ischeck="{{ item.is_check }}">增加曝光率</view>
+        <view class="recruit-footer-button-right" bindtap="goNoReadRecord" data-id="{{ item.id }}">被查看{{ item.sum_num }}次<view class="record-see-count">{{ item.unread_num }}</view></view>
+      </view>
+    </view>
+  </block>
+  <view class="record-no-more" wx:if="{{ !hasmore }}">没有更多数据</view>
 </view>

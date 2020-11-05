@@ -1,4 +1,5 @@
 /* pages/findwork-browsing-record/index.wxss */
+@import "../../home/home.wxss";
 page{
   height: 100%;
 }
@@ -7,7 +8,7 @@ page{
   background-color: white;
   margin-bottom: 20rpx;
 }
-.findework-record-container .record-content:last-child{
+.record-content:last-child{
   margin-bottom: 0rpx;
 }
 .record-up{
@@ -23,7 +24,7 @@ page{
   align-items: flex-end;
 }
 .record-up-left-name{
-  margin-right: 20rpx;
+  margin-right: 30rpx;
   font-size: 30rpx;
   color: #595959;
 }
@@ -64,7 +65,7 @@ page{
   align-items: center;
 }
 .record-no-more{
-  height: 100rpx;
+  height: 60rpx;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -83,6 +84,7 @@ page{
   align-items: center;
 }
 .no-record image{
+  margin-top: 30rpx;
   height: 50%;
 }
 

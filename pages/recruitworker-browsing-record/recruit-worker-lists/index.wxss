@@ -1,5 +1,7 @@
 /* pages/recruitworker-browsing-record/recruit-worker-lists/index.wxss */
-.recruit-record-contain{
+
+.recruit-record-content{
+  margin-bottom: 20rpx;
   background-color: white;
 }
 .recruit-record-head{
@@ -60,11 +62,19 @@
   position: absolute;
   height: 30rpx;
   width: 30rpx;
-  font-size: 20rpx;
+  font-size: 18rpx;
   line-height: 30rpx;
   text-align: center;
   background-color:#FF5B5B;
   border-radius: 50%;
   right: -10rpx;
   top: -15rpx;
+}
+.record-no-more{
+  height: 60rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #909090;
+  font-size: 30rpx;
 }
