@@ -137,6 +137,7 @@ Component({
         },
         hideLoading: true,
         success:(res)=>{
+          _this.triggerEvent("show")
           let mydata = res.data
           if(mydata.errcode == 'ok'){
             _this.setData({

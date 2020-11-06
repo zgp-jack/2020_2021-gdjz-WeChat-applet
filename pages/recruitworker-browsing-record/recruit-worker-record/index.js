@@ -11,13 +11,24 @@ Page({
     id: '',//招工信息id
     hasmore: true,//是否有更多数据
     lists: [],//浏览记录数组
+    child: 0,//是否子列表
+    cid: "",//工种id
+    aid: "",//区域id
+    uuid:"",//用户uuid
+    show: false,//展示界面
   },
-  getRecordLists: function (options) {
-    let zg_info_id = options.id;
+  show: function () {
+    this.setData({show:true})
+    wx.hideLoading()
+  },
+  getRecordLists: function () {
+    let zg_info_id = this.data.id;
     let that = this;
     // 用户uid
-    let userInfo = wx.getStorageSync('userInfo')
+    let userInfo = wx.getStorageSync('userInfo');
+    let uuid = wx.getStorageSync('userUuid');
     if (!userInfo) return
+    this.setData({uuid})
     // 用户id
     let mid = userInfo.userId;
     // token
@@ -40,7 +51,7 @@ Page({
           that.setData({
             lists: _list.concat(list),
             page: page + 1 ,
-            hasmore: len ? true: false,
+            hasmore: len < 15 ? false: true,
           })
         }
       },
@@ -63,9 +74,18 @@ Page({
     } else {
       userLocation = userLocation.split(",").reverse().join(",")
     }
-    wx.navigateTo({
-      url: `/pages/boss-look-card/lookcard?uuid=${uuid}&location=${userLocation}&id=${id}`
-    })
+    if (uuid) {
+      wx.navigateTo({
+        url: `/pages/boss-look-card/lookcard?uuid=${uuid}&location=${userLocation}&id=${id}`
+      })
+    }else{
+      wx.showToast({
+        title: '该工人暂无找活名片',
+        icon: 'none',
+        duration: 3000,
+        mask: true
+      })
+    }
   },
 
   /**
@@ -76,7 +96,13 @@ Page({
     if (options.hasOwnProperty("id")) {
       this.setData({ id: options.id })
     }
-    this.getRecordLists(options)
+    if (options.hasOwnProperty("aid")) {
+      this.setData({ aid: options.aid })
+    }
+    if (options.hasOwnProperty("cid")) {
+      this.setData({ cid: options.cid })
+    }
+    this.getRecordLists()
   },
 
   /**
@@ -118,7 +144,10 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-
+    let hasmore = this.data.hasmore;
+    if (hasmore) {
+      this.getRecordLists()
+    }
   },
 
   /**

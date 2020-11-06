@@ -415,7 +415,6 @@ Page({
   },
   doRequestAction: function (_append, callback) {
     let _this = this;
-    this.showRefresh()
     if (_this.data.isload) return false;
     this.setData({
       isload: true,
@@ -483,6 +482,7 @@ Page({
         })
       }
     })
+    this.showRefresh()
   },
   doSearchRequestAction: function (_append) {
     let _this = this;

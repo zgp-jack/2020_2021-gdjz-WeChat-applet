@@ -103,5 +103,5 @@ page{
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 40rpx;
+  margin: 40rpx 0rpx;
 }

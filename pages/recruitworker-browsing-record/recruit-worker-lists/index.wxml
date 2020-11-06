@@ -7,10 +7,13 @@
         <view class="recruit-head-desc">{{ item.detail }}</view>
       </view>
       <view class="recruit-record-footer">
-        <view class="recruit-footer-button-left" bindtap="goTop" data-id="{{ item.id }}" data-index="{{ index }}" data-ischeck="{{ item.is_check }}">增加曝光率</view>
-        <view class="recruit-footer-button-right" bindtap="goNoReadRecord" data-id="{{ item.id }}">被查看{{ item.sum_num }}次<view class="record-see-count">{{ item.unread_num }}</view></view>
+        <view class="recruit-footer-button-left" bindtap="goTop" data-index="{{ index }}">{{ item.top_data.is_top == 1?'修改置顶':'增加曝光率'}}</view>
+        <view class="recruit-footer-button-right {{ item.sum_num>0?'':'noclick'}}" data-id="{{ item.id }}" bindtap="{{ item.sum_num>0?'goNoReadRecord':'showModel' }}" data-index="{{ index }}" data-cid="{{ item.occupations }}" data-aid="{{ item.area_id }}">被查看{{ item.sum_num }}次<view class="record-see-count" wx:if="{{ item.unread_num>0 }}">{{ item.unread_num }}</view></view>
       </view>
     </view>
   </block>
   <view class="record-no-more" wx:if="{{ !hasmore }}">没有更多数据</view>
 </view>
+
+<!-- 置顶提示框 -->
+<promptbox id="promptbox" showTitle="{{ false }}" content="{{ tipBox.content }}" confirmText="{{ tipBox.confirmText }}" des="{{ tipBox.des }}" bind:confirm="confirm"></promptbox>

@@ -58,6 +58,9 @@
   align-items: center;
   position: relative;
 }
+.noclick{
+  background-color:rgb(198, 198, 198);
+}
 .record-see-count{
   position: absolute;
   height: 30rpx;
@@ -77,4 +80,5 @@
   align-items: center;
   color: #909090;
   font-size: 30rpx;
+  margin-bottom: 30rpx;
 }

@@ -161,7 +161,8 @@ Page({
     //我的工作距离顶部的距离
     worktop:0,
     //吸顶显示会员中心
-    showCenter:false
+    showCenter:false,
+    findWorkRecord: [],//找活浏览记录
   },
   //获取广告数据
   getAdvertising: function () {
@@ -181,7 +182,10 @@ Page({
       }
     })
   },
-
+  // 去查看找活浏览记录
+  findWorkRecord: function () {
+    
+  },
   //联系客服拨打电话
   callThisPhone: function (e) {
     app.callThisPhone(e);
@@ -257,9 +261,150 @@ Page({
       }
     })
   },
+  // 发送验证是否有找活名片及找活浏览记录请求
+  reqRecordData: function () {
+    // 用户信息
+    let userInfo = wx.getStorageSync('userInfo');
+    if (!userInfo) return;
+    let mid = userInfo.userId;
+    // 请求页数
+    let page = 1;
+    // 请求参数
+    let params = { mid, page }
+    wx.showLoading({ title: '数据加载中' })
+    app.appRequestAction({
+      url: 'focus-me/zh-view-list/',
+      way: 'POST',
+      params: params,
+      success: function (res) {
+        wx.hideLoading();
+        if (res.data.errcode == "success") {
+          // 浏览记录数据
+          let recordInfo = JSON.stringify(res.data.data);
+          wx.navigateTo({
+            url: `/pages/findwork-browsing-record/recordlist/index?recordInfo=${recordInfo}`,
+          })
+        }else if(res.data.errcode == "have_not_zh"){
+          // 没有找活名片提示框去发布找活名片
+          wx.showModal({
+            title: '',
+            content: res.data.errmsg,
+            confirmText: "去发布",
+            success: function (res) {
+              if (res.confirm) {
+                wx.navigateTo({
+                  url: '/pages/clients-looking-for-work/finding-name-card/findingnamecard',
+                })
+              }
+            }
+          })
+        }else{
+          wx.showModal({
+            title: '提示',
+            content: res.data.errmsg,
+            showCancel:false,
+            success: function (res) {
+            }
+          })
+        }
+      },
+      fail: function (err) {
+        wx.hideLoading();
+        wx.showToast({
+          title: '网络出错，数据加载失败！',
+          icon: "none"
+        })
+      }
+    })
+  },
+  // 发送验证是否有招工信息及浏览记录请求
+  getRecruitLists: function () {
+    // 用户uid
+    let userInfo = wx.getStorageSync('userInfo')
+    if (!userInfo) return
+    let mid = userInfo.userId;
+    // 请求页数
+    let page = 1;
+    // 请求参数
+    let params = { page, mid }
+    wx.showLoading({ title: '数据加载中' })
+    app.appRequestAction({
+      url: 'focus-me/zg-my-list/',
+      way: 'POST',
+      params: params,
+      success: function (res) {
+        if (res.data.errcode == "success") {
+          wx.hideLoading();
+          // 浏览记录数据
+          let recordInfo = JSON.stringify(res.data.data);
+          wx.navigateTo({
+            url: `/pages/recruitworker-browsing-record/recruit-worker-lists/index?recordInfo=${recordInfo}`,
+          })
+        }else if (res.data.errcode == "have_not_zg_ing") {
+          // 有招工信息，没有正在招的跳转到招工信息列表
+          wx.showModal({
+            title: '',
+            content: res.data.errmsg,
+            confirmText: "去修改",
+            success: function (res) {
+              if (res.confirm) {
+                wx.navigateTo({
+                  url: '/pages/published/recruit/list',
+                })
+              }
+            }
+          })
+        }else if (res.data.errcode == "have_not_zg") {
+          // 没有招工信息，跳转到发布招工界面
+          wx.showModal({
+            title: '',
+            content: res.data.errmsg,
+            confirmText: "去发布",
+            success: function (res) {
+              if (res.confirm) {
+                app.initJobView()
+              }
+            }
+          })
+        }else {
+          wx.showModal({
+            title: '提示',
+            content: res.data.errmsg,
+            showCancel:false,
+            success: function (res) {
+            }
+          })
+        }
+      },
+      fail: function (err) {
+        wx.hideLoading();
+        wx.showToast({
+          title: '网络出错，数据加载失败！',
+          icon: "none"
+        })
+      }
+    })
+  },
   valiUserUrl: function (e) {
-    app.globalData.showdetail = true
-    app.valiUserUrl(e, this.data.userInfo)
+    let url = e.currentTarget.dataset.url;
+    // 用户信息
+    let userInfo = this.data.userInfo;
+    // 如果有用户信息判断点击的是否是招工找活的“谁看过我”
+    if (userInfo) {
+      // 点击“我的找活—谁看过我”
+      if (url === '/pages/findwork-browsing-record/recordlist/index') {
+        // 没有找活名片给出去发布找活名片提示信息,有找活名片前往浏览记录
+        this.reqRecordData()
+      }else if(url === '/pages/recruitworker-browsing-record/recruit-worker-lists/index'){
+        this.getRecruitLists()
+      }else{
+        app.globalData.showdetail = true
+        app.valiUserUrl(e, this.data.userInfo)
+      }
+    }else{
+      app.globalData.showdetail = true
+      app.valiUserUrl(e, this.data.userInfo)
+    }
   },
   suggestUserUrl: function (e) {
     app.globalData.showdetail = true

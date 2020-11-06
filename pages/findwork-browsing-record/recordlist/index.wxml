@@ -18,11 +18,11 @@
       </view>
     </view>
   </block>
-  <view class="record-no-more">没有更多数据</view>
+  <view class="record-no-more" wx:if="{{ !more }}">没有更多数据</view>
 </view>
 
 <!-- 无浏览记录 -->
-<view class="no-record" wx:if="{{ lists.length === 0 }}">
+<view class="no-record" wx:if="{{ lists.length === 0 && show}}">
   <image src="{{ emptyImage }}" mode="aspectFit"></image>
   <view class="no-record-text">您暂时没有浏览记录</view>
   <view class="no-record-text">快去置顶找活，让更多老板看到你</view>
@@ -30,4 +30,4 @@
 </view>
 
 <!-- 推荐列表（可能适合您的工作） -->
-<recommendRecruit infoId='{{ infoId }}' cid="{{ cid }}" aid="{{ aid }}" more="{{ more }}" type='record' child="{{ child }}" wx:if="{{ !more }}" />
+<recommendRecruit infoId='{{ infoId }}' cid="{{ cid }}" aid="{{ aid }}" more="{{ more }}" type='record' child="{{ child }}" wx:if="{{ !more }}" bind:show="show"/>

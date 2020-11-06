@@ -6,11 +6,18 @@ Page({
    * 页面的初始数据
    */
   data: {
-    page: 1,//请求页数
+    page: 2,//请求页数,第一页数据有会员中心点击后url传递
     hasmore: true,//是否还有更多数据
     lists: [],//我的正在招工信息列表
     seeNum: 0,//浏览增加数量
     sumNum: 0,//被查看总数
+    tipBox: {//提示框显示信息
+      showTitle: false,
+      content: '该信息未被查看过置顶招工信息',
+      des: '可以增加曝光率，让更多工人看到您的招工',
+      confirmText: '增加曝光率'
+    },
+    topIndex:false,//点击没有被查看的招工信息的index
   },
   getRecruitLists: function () {
     let that = this;
@@ -34,7 +41,7 @@ Page({
           // 处理查看总数和新增加浏览总数的显示
           list.forEach(item => {
             let sum_num = item.sum_num > 99? '99+' : item.sum_num;
-            let unread_num = item.unread_num > 99? '99+' : item.unread_num;
+            let unread_num = item.unread_num > 9? '9+' : item.unread_num;
             item.sum_num = sum_num;
             item.unread_num = unread_num;
           });
@@ -58,26 +65,113 @@ Page({
   },
   // 去增加曝光率
   goTop: function (e) {
-    let isCheck = e.currentTarget.dataset.ischeck;//用户审核状态
-    let infoIndex =e.currentTarget.dataset.index;//点击招工信息的index
+    let topIndex = this.data.topIndex;
+    let infoIndex = null;//点击招工信息的index
+    if (e) {
+      infoIndex = e.currentTarget.dataset.index;
+    }else{
+      infoIndex = topIndex;
+    }
     let topdata = this.data.lists[infoIndex]; //当前招工信息数据
-    let id = e.currentTarget.dataset.id; // 信息id
-    wx.navigateTo({
-      url: `/pages/workingtopAll/workingtop/workingtop?id=${id}&topId=undefined&city_id=${topdata.area_id}&province_id=${topdata.province_id}&ischeck=${isCheck}`,
-    })
+    let id = topdata.id; // 信息id
+    let top = topdata.top;
+    let now = new Date().getTime() / 1000 // 当前时间戳
+    let isCheck = topdata.ischeck;//用户审核状态
+    // 如果有置顶
+    if (top == '1') {
+      let data = topdata.top_data; //置顶数据
+      let isTop = data.is_top;
+      let endtime = data.end_time //置顶到期时间
+      let showTime = now > parseInt(endtime) ? true : false; // 置顶是否过期 已过期
+      let time = topdata.sort_time;
+      if (isTop === '1') {
+        wx.navigateTo({
+          url: `/pages/workingtopAll/workingtop/workingtop?id=${id}&topId=${time}`,
+        })
+      }else{
+        if(showTime){ //如果置顶过期
+          wx.navigateTo({
+            url: `/pages/workingtopAll/workingtop/workingtop?id=${id}$topId=${data}`,
+          })
+          return false
+        }
+        wx.navigateTo({
+          url: `/pages/workingtopAll/workingtop/workingtop?id=${id}&topId=${time}`,
+        })
+      }
+    }else{
+      wx.navigateTo({
+        url: `/pages/workingtopAll/workingtop/workingtop?id=${id}&topId=undefined&city_id=${topdata.area_id}&province_id=${topdata.province_id}&ischeck=${isCheck}`,
+      })
+    }
   },
   // 跳转到招工信息的浏览记录
   goNoReadRecord: function (e) {
     let id = e.currentTarget.dataset.id;
+    let aid = e.currentTarget.dataset.aid;
+    let cid = e.currentTarget.dataset.cid;
     wx.navigateTo({
-      url: `/pages/recruitworker-browsing-record/recruit-worker-record/index?id=${id}`
+      url: `/pages/recruitworker-browsing-record/recruit-worker-record/index?id=${id}&cid=${cid}&aid=${aid}`
     })
+  },
+  // 点击提示框的“增加曝光率”或者“扩大置顶范围”去置顶界面
+  confirm: function () {
+    this.goTop()
+  },
+  // 如果招工信息一次没有被查看，点击后展示提示框
+  showModel: function (e) {
+    let infoIndex =e.currentTarget.dataset.index;//点击招工信息的index
+    let topdata = this.data.lists[infoIndex]; //当前招工信息数据
+    let top = topdata.top;
+    // 如果有置顶
+    if (top == '1') {
+      let data = topdata.top_data; //置顶数据
+      let isTop = data.is_top;
+      if (isTop === '1') {
+        this.setData({
+          'tipBox.content':'该信息未被查看过',
+          'tipBox.des': '扩大置顶范围，可以让更多工人看到您的招工',
+          'tipBox.confirmText':'扩大置顶范围',
+          topIndex: infoIndex
+        })
+        this.selectComponent("#promptbox").show()
+      }else{
+        this.setData({
+          'tipBox.content':'该信息未被查看过',
+          'tipBox.des': '置顶招工信息可以增加曝光率，让更多工人看到您的招工',
+          'tipBox.confirmText':'增加曝光率',
+          topIndex: infoIndex
+        })
+        this.selectComponent("#promptbox").show()
+      }
+    }else{
+      this.setData({
+        'tipBox.content':'该信息未被查看过',
+        'tipBox.des': '置顶招工信息可以增加曝光率，让更多工人看到您的招工',
+        'tipBox.confirmText':'增加曝光率',
+        topIndex: infoIndex
+      })
+      this.selectComponent("#promptbox").show()
+    }
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    this.getRecruitLists()
+    if (options.hasOwnProperty("recordInfo")) {
+      let recordInfo = JSON.parse(options.recordInfo);
+      let lists = recordInfo.list;
+      lists.forEach(item => {
+        let sum_num = item.sum_num > 99? '99+' : item.sum_num;
+        let unread_num = item.unread_num > 9? '9+' : item.unread_num;
+        item.sum_num = sum_num;
+        item.unread_num = unread_num;
+      });
+      if (lists.length < 15) {
+        this.setData({hasmore: false})
+      }
+      this.setData({lists})
+    }
   },
 
   /**
@@ -91,8 +185,8 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    this.setData({ page: 1 })
-    this.getRecruitLists()
+    // this.setData({ page: 1 })
+    // this.getRecruitLists()
   },
 
   /**

@@ -49,8 +49,17 @@
       <view class="seemore-recommend-recruit" bindtap="seemoretorecruit">查看更多</view>
     </view>
 
-    <view class='common-nodatabox flex-column lists-nodata'  wx:if="{{ !lists.length&&!hasmore }}">
+    <view class='common-nodatabox flex-column lists-nodata'  wx:if="{{ !lists.length&&!hasmore&&!typeData }}">
         <image src='{{ nodata }}'></image>
         <text>暂无相关内容</text>
     </view>
 </view>
+
+<!-- 无浏览记录 -->
+<view class="no-record" wx:if="{{ show && lists.length === 0 && typeData === 'record'}}">
+  <image src="{{ emptyImage }}" mode="aspectFit"></image>
+  <view class="no-record-text">该老板没有正在招的岗位</view>
+</view>
+
+<!-- 推荐列表（可能适合您的工作） -->
+<recommendRecruit infoId='{{ infoId }}' cid="{{ cid }}" aid="{{ aid }}" more="{{ more }}" type='record' child="{{ child }}" wx:if="{{ lists.length === 0 && typeData === 'record'}}" bind:show="show"/>

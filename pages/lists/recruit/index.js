@@ -13,6 +13,7 @@ Page({
     doneimg: app.globalData.apiImgUrl + 'published-recruit-end.png', //已找到
     iondzs: app.globalData.apiImgUrl + 'newlist-jobposi.png',//定位
     unitid: ads.recruitRecommendAd,
+    emptyImage: app.globalData.apiImgUrl + 'yc/no-query-data.png',
     ids: '',
     area_id: '',
     rids: '',
@@ -23,12 +24,16 @@ Page({
     hasmore: true,
     nodata: app.globalData.apiImgUrl + 'nodata.png',
     infoId: '',
-    loading: false
+    loading: false,
+    show:false,//展示界面
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
+  show: function () {
+    this.setData({show:true})
+  },
    // 获取指定格式的时间
    getMyDate(str) {
     var oDate = new Date(str),
@@ -113,7 +118,8 @@ Page({
     if(options.hasOwnProperty('aid')){
       this.setData({
         area_id: options.aid,
-        rarea_id: options.aid
+        rarea_id: options.aid,
+        aid: options.aid,
       })
     }
     if (options.hasOwnProperty('type')) {
@@ -127,6 +133,16 @@ Page({
       })
       this.setData({
         userName: options.userName
+      })
+    }
+    if(options.hasOwnProperty('cid')){
+      this.setData({
+        cid: options.cid,
+      })
+    }
+    if(options.hasOwnProperty('child')){
+      this.setData({
+        child: options.child,
       })
     }
     this.getRecommendLists()

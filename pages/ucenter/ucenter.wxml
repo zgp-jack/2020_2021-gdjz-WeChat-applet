@@ -81,7 +81,7 @@
             <image src="{{myzg}}"></image>
             <text>我的招工</text>
           </view>
-          <view>
+          <view data-url="/pages/recruitworker-browsing-record/recruit-worker-lists/index" bindtap="valiUserUrl">
             <image src="{{seenme}}"></image>
             <text>谁看过我</text>
             <view class="icon-text" wx:if="{{member.job_view_count > 0}}">
@@ -101,7 +101,7 @@
             <image src="{{myzh}}"></image>
             <text>我的找活</text>
           </view>
-          <view>
+          <view data-url="/pages/findwork-browsing-record/recordlist/index" bindtap="valiUserUrl">
             <image src="{{seenmezh}}"></image>
             <text>谁看过我</text>
             <view class="icon-text" wx:if="{{member.resume_view_count > 0}}">
