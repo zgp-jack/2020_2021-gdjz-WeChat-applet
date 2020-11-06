@@ -298,16 +298,12 @@ Page({
           return
         } else if (mydata.errcode == "auth_forbid") {
           wx.showModal({
-            title: '温馨提示',
+            title: '提示',
             content: res.data.errmsg,
             cancelText: '取消',
             confirmText: '去实名',
             success(res) {
-              if (res.cancel) {
-                wx.navigateBack({
-                  delta: 1
-                })
-              } else if (res.confirm) {
+              if (res.confirm) {
                 let backtwo = "backtwo"
                 wx.redirectTo({
                   url: `/pages/realname/realname?backtwo=${backtwo}`
@@ -741,16 +737,12 @@ Page({
           return
         } else if (mydata.errcode == "auth_forbid") {
           wx.showModal({
-            title: '温馨提示',
+            title: '提示',
             content: res.data.errmsg,
             cancelText: '取消',
             confirmText: '去实名',
             success(res) {
-              if (res.cancel) {
-                wx.navigateBack({
-                  delta: 1
-                })
-              } else if (res.confirm) {
+              if (res.confirm) {
                 let backtwo = "backtwo"
                 wx.redirectTo({
                   url: `/pages/realname/realname?backtwo=${backtwo}`

@@ -4,10 +4,9 @@
     position: relative;
     width: 100%;
     height: 330rpx;
-    background: linear-gradient(0deg, #0099FF, #0084FF);
-    /* height: 380rpx; */
-    /* background: url("http://cdn.yupao.com/miniprogram/images/yc/personCenter-topBackground.png") no-repeat; */
-    /* background-size: 100% 100%; */
+    background: #fff url(http://cdn.yupao.com/miniprogram/images/ws/headerBg2.png) no-repeat center;
+    background-size:100%;
+    padding-top: 60rpx;
 }
 .user_background_image{
     width: 100%;
@@ -41,7 +40,7 @@
     width: 100%;
     position: absolute;
     left: 0;
-    top: 128rpx;
+    top: 500rpx;
     padding: 0 27rpx;
     z-index: 20;
 }
@@ -400,15 +399,278 @@
 }
 
 .icon-text {
-    width: 28rpx;
-    height: 28rpx;
-    background: #fd0618;
-    border-radius: 50%;
-    position: absolute;
-    top: -6rpx;
-    right: -25rpx;
-    color: #fff;
-    font-size: 20rpx;
+    width: 35rpx;
+    background: #FF6363;
+    color: #fff !important;
+    font-size: 20rpx !important;
     text-align: center;
-    line-height: 28rpx;
+    line-height: 1;
+    padding: 2rpx 0;
+    font-size: 20rpx; 
+    border-top-left-radius: 20rpx;
+    border-top-right-radius: 20rpx;
+    border-bottom-right-radius: 20rpx;
+    position: relative;
+    top: -10rpx;
+}
+
+/* ============================11.2 会员中心 */
+.header-top {
+    width: 100%;
+    height: 60rpx;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 24rpx;
+    position: fixed;
+    background-color: #fff;
+    top: 0;
+    z-index: 999;
+}
+.top-left {
+    line-height: 60rpx;
+    display: flex;
+    align-items: center;
+}
+.header-top .top-left image {
+    width: 36rpx;
+    height: 35rpx;
+}
+.header-top .top-left text {
+    font-size: 26rpx;
+    margin-left: 14rpx;
+    font-weight: 500;
+    color: #333333;
+}
+.top-right {
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+.top-right image {
+    width: 30rpx;
+    height: 36rpx;
+}
+.user-data-box {
+    height: 265rpx;
+    padding: 15rpx 24rpx;
+}
+.user-data {
+    display: flex;
+}
+.user-data .user-avater {
+    width: 110rpx;
+    height: 110rpx;
+    border-radius: 100%;
+}
+.user-info-box{
+    display: flex;
+    flex-direction: column;
+    margin-left: 30rpx;
+}
+.user-info-box view {
+    height: 50%;
+    display: flex;
+    align-items: center;
+}
+.user-name{
+    font-size: 36rpx;
+    font-weight: bold;
+    color: #333333;
+    line-height: 1;
+}
+.user-memberid{
+    font-size: 26rpx;
+    color: #333;
+    font-weight: 400;
+}
+.edit-box{
+    display: flex;
+}
+.edit-box navigator {
+    line-height: 1;
+}
+.edit-box image {
+    width: 33rpx;
+    height: 36rpx;
+    margin-left: 39rpx;
+}
+.integral-box {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 40rpx;
+}
+.integral-box>view {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex: 1;
+    position: relative;
+}
+.integral-box view  text {
+    line-height: 1;
+}
+.integral-box>view .top-text{
+    font-size: 34rpx;
+    color: #333;
+    font-weight: bold;
+    margin-bottom: 15rpx;
+    position: relative;
+}
+.integral-box>view>view {
+    margin-bottom: 15rpx;
+    line-height: 1;
+}
+/* .integral-box .icon-text {
+    position: absolute;
+    right: 50rpx;
+} */
+.integral-box>view>text:last-child{
+    font-size: 24rpx;
+    color: #808080;
+    font-weight:400;
+}
+.Notlogin {
+    display: flex;
+    align-items: center;
+    margin-left: 30rpx;
+}
+.details-tip {
+    font-size: 20rpx !important;
+    color: #0099FF !important;
+    position: relative;
+    top: -10rpx;
+}
+.top-right image.serviceicon {
+    width: 36rpx;
+    height: 35rpx;
+    margin-right: 30rpx;
+}
+/* banner */
+.banner-box {
+    padding: 0 24rpx;
+}
+.banner-box image {
+    height: 82rpx;
+    width: 100%;
+    border-top-left-radius: 10rpx;
+    border-top-right-radius: 10rpx;
+}
+/* 我的工作 */
+.mywork {
+    padding: 0 24rpx;
+    border-top: 18rpx solid #f7f6f9;
+}
+.work-box {
+    background: #fff;
+    box-shadow: 0px 0px 21px 0px rgba(66, 66, 66, 0.08);
+    border-radius: 10rpx;
+    height: 431rpx;
+    padding: 30rpx 20rpx;
+}
+.work-box .title {
+    color: #7f7f7f;
+    font-size: 30rpx;
+    font-weight: bold;
+    line-height: 1;
+}
+.work-content {
+    display: flex;
+    margin-top: 20rpx;
+    flex-direction: column;
+}
+.work-zg {
+    margin-bottom: 20rpx;
+    
+}
+.item-work {
+    height: 144rpx;
+    width: 100%;
+    display: flex;
+}
+.item-work .banner {
+    width: 302rpx;
+    height: 100%;
+}
+.icon-box>view {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+.icon-box>view .icon-text {
+    position: absolute;
+    right: -10rpx;
+    top: 10rpx;
+}
+.icon-box>view>text {
+    margin-top: 20rpx;
+    line-height: 1;
+    color: #2d2d2d;
+    font-weight: 400;
+    font-size: 28rpx;
+}
+.icon-box view image {
+    width: 50rpx;
+    height: 50rpx;
+}
+.icon-box {
+    flex: 1;
+    display: flex;
+    justify-content: space-around;
+}
+/* 常用功能 */
+.commonly {
+    padding: 0 24rpx;
+    margin-top: 18rpx;
+}
+.commonly-box {
+    background: #fff;
+    box-shadow: 0px 0px 21px 0px rgba(66, 66, 66, 0.08);
+    border-radius: 10rpx;
+    height: 390rpx;
+    padding: 30rpx 20rpx;
+}
+.commonly-box .title {
+    color: #7f7f7f;
+    font-size: 30rpx;
+    font-weight: bold;
+    line-height: 1;
+}
+.commonly .icon-content{
+    padding: 35rpx 20rpx;
+}
+.commonly-icon-box {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 55rpx;
+}
+.commonly-icon-box image {
+    width: 45rpx;
+    height: 45rpx;
+}
+.commonly-icon-box>view {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+.commonly-icon-box>view>text {
+    color: #333;
+    font-size: 26rpx;
+    line-height: 1;
+    margin-top: 24rpx;
+}
+.commonly-icon-box .icon-text {
+    position: absolute;
+    right: -10rpx;
+    top: 0rpx;
+}
+/* 系统设置 */
+.system-settings .commonly-box {
+    height: 237rpx;
+}
+.system-settings {
+    padding-bottom: 150rpx;
 }

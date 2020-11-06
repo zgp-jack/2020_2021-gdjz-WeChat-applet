@@ -520,7 +520,10 @@ App({
   callThisPhone: function (e) {
     let phone = e.currentTarget.dataset.phone;
     wx.makePhoneCall({
-      phoneNumber: phone
+      phoneNumber: phone,
+      fail(res){
+        debugger
+      }
     })
   },
   showMyTips: function (_msg) {
@@ -1148,7 +1151,7 @@ App({
         if (res.data.errcode == "ok") {
           _this.globalData.jobNumber = res.data.data.jobNumber
           _this.globalData.msgsNumber = res.data.data.messageNumber
-          callback(res.data.data.jobNumber, res.data.data.messageNumber)
+          callback(res.data.data.jobNumber, res.data.data.messageNumber,res.data.data.job_view_count,res.data.data.resume_view_count)
         }
       }
     })
@@ -1492,6 +1495,9 @@ App({
       success: function (res) {
         let mydata= res.data
         if (mydata.errcode === "ok") {
+          let currentTime = new Date().getTime();
+          let reqDueTime = currentTime + 3000;
+          _this.setData({reqDueTime,reqStatus:true})
           let refreshStatus = mydata.data.refresh_status;
           if (refreshStatus === 0) {
             // 该信息处于审核中或审核失败状态

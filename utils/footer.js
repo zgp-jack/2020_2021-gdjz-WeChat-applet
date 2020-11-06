@@ -14,10 +14,12 @@ const footerImgs = {
   pubicon: "/images/yupao-footer-publish-btnimg.png",
 }
 function initMsgNum(_this){
-  app.getUserMsg((infoNum,msgNum)=>{
+  app.getUserMsg((infoNum,msgNum,job_view_count,resume_view_count)=>{
     _this.setData({
       "footerImgs.infoNumber": infoNum,
-      "footerImgs.msgsNumber": msgNum
+      "footerImgs.msgsNumber": msgNum,
+      "footerImgs.job_view_count":job_view_count,// 招工谁看过我
+      "footerImgs.resume_view_count":resume_view_count// 找活谁看过我
     })
   })
 }

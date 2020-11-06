@@ -30,7 +30,8 @@
     <view class='yupao-footer-item' bindtap='jumpThisLink' data-url="/pages/ucenter/ucenter" data-type='1'>
         <image src='{{ footerActive == "member" ? footerImgs.memberActive : footerImgs.memberNormal }}'></image>
         <text class='{{ footerActive == "member" ? "footer-text-active" : "" }}'>会员中心</text>
-        <view wx:if="{{ footerImgs.msgsNumber }}" class="footer-dot">{{footerImgs.msgsNumber>9?'9+':footerImgs.msgsNumber}}</view>
+        <!-- 招工谁看过我+找活谁看过我+我的消息 -->
+        <view wx:if="{{ footerImgs.msgsNumber || footerImgs.job_view_count || footerImgs.resume_view_count }}" class="footer-dot">{{footerImgs.msgsNumber+footerImgs.job_view_count+footerImgs.resume_view_count>9?'9+':footerImgs.msgsNumber+footerImgs.job_view_count+footerImgs.resume_view_count}}</view>
     </view>
 </view>
 

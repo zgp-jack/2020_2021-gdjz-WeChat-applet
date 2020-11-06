@@ -132,6 +132,36 @@ Page({
     showAuthor: false,
     resumeText: "",
     advertising: false,//广告轮播图
+    bannerImg: app.globalData.apiImgUrl + 'ws/jgjzbanner2.png',
+    eidticon: app.globalData.apiImgUrl + 'ws/eidticon.png',
+    serviceicon: app.globalData.apiImgUrl + 'ws/serviceicon.png',
+    msgicon: app.globalData.apiImgUrl + 'ws/msgicon.png',
+    myzg: app.globalData.apiImgUrl + 'ws/myzg.png',
+    seenme: app.globalData.apiImgUrl + 'ws/seenme.png',
+    myzh: app.globalData.apiImgUrl + 'ws/myzh.png',
+    seenmezh: app.globalData.apiImgUrl + 'ws/seenmezh.png',
+    Recharge: app.globalData.apiImgUrl + 'ws/Recharge.png',
+    obtain: app.globalData.apiImgUrl + 'ws/obtain.png',
+    record: app.globalData.apiImgUrl + 'ws/record.png',
+    invitation: app.globalData.apiImgUrl + 'ws/invitation.png',
+    Bookkeeping: app.globalData.apiImgUrl + 'ws/Bookkeeping.png',
+    secondhand: app.globalData.apiImgUrl + 'ws/second-hand.png',
+    gamecenter: app.globalData.apiImgUrl + 'ws/gamecenter.png',
+    mymsg: app.globalData.apiImgUrl + 'ws/mymsg.png',
+    Verified: app.globalData.apiImgUrl + 'ws/Verified.png',
+    verifiedquery: app.globalData.apiImgUrl + 'ws/verifiedquery.png',
+    help: app.globalData.apiImgUrl + 'ws/help.png',
+    setup: app.globalData.apiImgUrl + 'ws/setup.png',
+    bannerbg: app.globalData.apiImgUrl + 'ws/bannerbg.png',
+    bannerqz: app.globalData.apiImgUrl + 'ws/bannerqz.png',
+    bannerws: app.globalData.apiImgUrl + 'ws/bannerws.png',
+    bannerzg: app.globalData.apiImgUrl + 'ws/bannerzg.png',
+    defaultavater: app.globalData.apiImgUrl + 'ws/defaultavater.png',
+    toCollectUrl:'',
+    //我的工作距离顶部的距离
+    worktop:0,
+    //吸顶显示会员中心
+    showCenter:false
   },
   //获取广告数据
   getAdvertising: function () {
@@ -198,6 +228,16 @@ Page({
             showReturnIntegral: (parseInt(mydata.member.return_integral) == 0) ? false : true
           })
           app.globalData.publish.userPhone = mydata.tel
+          //点击收藏跳转地址 有招工跳转招工 有找活没招工跳转找活  都没有跳转招工
+          if(mydata.member.resume_collect_count > 0 && mydata.member.job_collect_count == 0){
+            _this.setData({
+              toCollectUrl:'/pages/collect/resume/resume'
+            })
+          }else {
+            _this.setData({
+              toCollectUrl:'/pages/collect/info/info'
+            })
+          }
         } else {
           wx.showToast({
             title: mydata.errmsg,
@@ -278,6 +318,18 @@ Page({
       }
     })
   },
+  //监听页面滚动
+  onPageScroll: function (e) {
+    if(e.scrollTop > this.data.worktop){
+      this.setData({
+        showCenter:true
+      })
+    }else{
+      this.setData({
+        showCenter:false
+      })
+    }
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
@@ -291,6 +343,12 @@ Page({
     this.initUserInfo();
     footerjs.initMsgNum(this);
     app.initResume(this)
+    let _this = this
+    wx.createSelectorQuery().select('.work-box').boundingClientRect(function(rect){
+      _this.setData({
+        worktop:rect.top - 30
+      })
+    }).exec()
   },
   releaselive() {
     app.globalData.showdetail = true
