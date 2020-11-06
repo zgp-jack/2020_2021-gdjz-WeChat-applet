@@ -521,9 +521,6 @@ App({
     let phone = e.currentTarget.dataset.phone;
     wx.makePhoneCall({
       phoneNumber: phone,
-      fail(res){
-        debugger
-      }
     })
   },
   showMyTips: function (_msg) {

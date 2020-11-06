@@ -33,7 +33,9 @@ Page({
     showlodingimg: app.globalData.showlodingimg,
     areaDataNotEnd: [],
     // 滚动目标位置
-    select:""
+    select:"",
+    //最多可选城市提示文案
+    maxTips:''
   },
   //获取区域数据
   getAreaData: function(options) {
@@ -155,10 +157,10 @@ Page({
     let that = this;
 
     if ((that.data.areaTextP.length >= that.data.max_province && that.data.areaTextC.length >= that.data.max_city)) {
-      wx.showModal({
-        title: '温馨提示',
-        content: `最多可同时置顶${that.data.max_city}个市、${that.data.max_province}个省或直辖市`,
-        showCancel: false,
+      wx.showToast({
+        title: that.data.maxTips,
+        icon:'none',
+        duration:3000,
         success(res) {
           that.setData({
             showListsTtile: false,
@@ -171,10 +173,10 @@ Page({
       return "nil"
     }
     if (that.data.areaTextC.length >= that.data.max_city && judgeId != 1) {
-      wx.showModal({
-        title: '温馨提示',
-        content: `最多可同时置顶${that.data.max_city}个市、${that.data.max_province}个省或直辖市`,
-        showCancel: false,
+      wx.showToast({
+        title: that.data.maxTips,
+        icon:'none',
+        duration:3000,
         success(res) {
           that.setData({
             showListsTtile: false,
@@ -187,10 +189,10 @@ Page({
       return "nil"
     }
     if (that.data.areaTextP.length >= that.data.max_province && judgeId == 1) {
-      wx.showModal({
-        title: '温馨提示',
-        content: `最多可同时置顶${that.data.max_city}个市、${that.data.max_province}个省或直辖市`,
-        showCancel: false,
+      wx.showToast({
+        title: that.data.maxTips,
+        icon:'none',
+        duration:3000,
         success(res) {
           that.setData({
             showListsTtile: false,
@@ -978,6 +980,9 @@ Page({
     this.getMax(options);
     this.getAreaData(options);
     this.initInputList();
+    this.setData({
+      maxTips:options.toTopTip
+    })
     //this.modifytop(options)
     //this.getNewId(options)
   },

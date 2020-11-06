@@ -14,121 +14,9 @@ Page({
     msgIcon: app.globalData.apiImgUrl + "ucenter/ucenter-msg-icon.png",
     realName: app.globalData.apiImgUrl + "ucenter/ucenter-realname.png",
     callServicePhone: '',
-    uCenterMenus: [
-      {
-        title: '信息管理',
-        menus: [
-          {
-            key: 'recruit',
-            name: '我的招工',
-            dataUrl: '../published/recruit/list',
-            icon: app.globalData.apiImgUrl + "ucenter/ucenter-recruit.png",
-          },
-          {
-            key: 'findwork',
-            name: '我的找活',
-            dataUrl: '/pages/clients-looking-for-work/finding-name-card/findingnamecard',
-            icon: app.globalData.apiImgUrl + "ucenter/ucenter-findwork.png",
-          },
-          {
-            key: 'trade',
-            name: '二手交易',
-            dataUrl: '../published/used/list',
-            icon: app.globalData.apiImgUrl + "ucenter/ucenter-trade.png",
-          },
-          {
-            key: 'collect',
-            name: '我的收藏',
-            dataUrl: '../collect/info/info',
-            icon: app.globalData.apiImgUrl + "ucenter/ucenter-collect.png",
-          },
-          // {
-          //   key: 'bookkeeping',
-          //   name: '记工记账',
-          //   dataUrl: '',
-          //   icon: app.globalData.apiImgUrl + "ucenter/ucenter-account.png",
-          //   newIcon: app.globalData.apiImgUrl + "ucenter/ucenter-new.png",
-          // },
-          {
-            key: 'mymessage',
-            name: '我的消息',
-            dataUrl: '/pages/information/mymessage/mymessage',
-            icon: app.globalData.apiImgUrl + "ucenter/ucenter-message.png",
-          },
-          // {
-          //   key: 'gift',
-          //   name: '免费领好礼',
-          //   dataUrl: '',
-          //   icon: app.globalData.apiImgUrl + "ucenter/ucenter-gift.png",
-          // },
-        ]
-      },
-      {
-        title: '积分管理',
-        menus: [
-          {
-            key: 'getintegral',
-            name: '获取积分',
-            dataUrl: '../getintegral/getintegral',
-            icon: app.globalData.apiImgUrl + "ucenter/ucenter-integral.png",
-          },
-          {
-            key: 'record',
-            name: '积分记录',
-            dataUrl: '../integral/source/source',
-            icon: app.globalData.apiImgUrl + "ucenter/ucenter-integral-record.png",
-          },
-          {
-            key: 'invite',
-            name: '邀请工友',
-            dataUrl: '../static/invite',
-            icon: app.globalData.apiImgUrl + "ucenter/ucenter-invite.png",
-          },
-        ]
-      },
-      {
-        title: '系统设置',
-        menus: [
-          {
-            key: 'auth',
-            name: '实名认证',
-            dataUrl: '../realname/realname',
-            icon: app.globalData.apiImgUrl + "ucenter/ucenter-auth.png",
-          },
-          {
-            key: 'findexport',
-            name: '实名查询',
-            dataUrl: '/packageOther/pages/query/query',
-            icon: app.globalData.apiImgUrl + "ucenter/ucenter-find-export.png",
-          },
-          {
-            key: 'help',
-            name: '帮助与反馈',
-            dataUrl: '/packageOther/pages/helpCenter/helpCenter',
-            icon: app.globalData.apiImgUrl + "ucenter/ucenter-help-center.png",
-          },
-          {
-            key: 'service',
-            name: '联系客服',
-            dataUrl: '',
-            icon: app.globalData.apiImgUrl + "ucenter/ucenter-customer-server.png",
-          },
-          // {
-          //   key: 'setting',
-          //   name: '系统设置',
-          //   dataUrl: '',
-          //   icon: app.globalData.apiImgUrl + "ucenter/ucenter-seting.png",
-          // },
-        ]
-      }
-    ],
     userInfo: false,
     member: {},
     showReturnIntegral: false,
-    // showFastIssue: {
-    //     show: 0,
-    //     request: false
-    // },
     showAuthor: false,
     resumeText: "",
     advertising: false,//广告轮播图
@@ -157,11 +45,10 @@ Page({
     bannerws: app.globalData.apiImgUrl + 'ws/bannerws.png',
     bannerzg: app.globalData.apiImgUrl + 'ws/bannerzg.png',
     defaultavater: app.globalData.apiImgUrl + 'ws/defaultavater.png',
+    Serviceicon2: app.globalData.apiImgUrl+'ws/Serviceicon2.png',
     toCollectUrl:'',
     //我的工作距离顶部的距离
     worktop:0,
-    //吸顶显示会员中心
-    showCenter:false
   },
   //获取广告数据
   getAdvertising: function () {
@@ -318,18 +205,6 @@ Page({
       }
     })
   },
-  //监听页面滚动
-  onPageScroll: function (e) {
-    if(e.scrollTop > this.data.worktop){
-      this.setData({
-        showCenter:true
-      })
-    }else{
-      this.setData({
-        showCenter:false
-      })
-    }
-  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
@@ -343,12 +218,6 @@ Page({
     this.initUserInfo();
     footerjs.initMsgNum(this);
     app.initResume(this)
-    let _this = this
-    wx.createSelectorQuery().select('.work-box').boundingClientRect(function(rect){
-      _this.setData({
-        worktop:rect.top - 30
-      })
-    }).exec()
   },
   releaselive() {
     app.globalData.showdetail = true

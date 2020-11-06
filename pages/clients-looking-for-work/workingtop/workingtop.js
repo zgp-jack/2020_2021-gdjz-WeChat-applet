@@ -57,7 +57,9 @@ Page({
     //首次置顶的时候显示置顶到期时间输入框内容
     firstEndTime:"",
     // 保存请求返回的可选择置顶天数
-    reqDays: []
+    reqDays: [],
+    //选择置顶城市 提示文案
+    toTopTip:''
   },
   //用户首次置顶或者置顶到期点击‘选择置顶范围’跳转到置顶区域选择界面
   jumpstickyrule() {
@@ -87,8 +89,9 @@ Page({
     let specialids = JSON.stringify(that.data.special_ids);
     let max_province = that.data.max_province;
     let max_city = that.data.max_city;
+    let toTopTip = that.data.toTopTip;
     wx.navigateTo({
-      url: `/pages/clients-looking-for-work/distruction/distruction?max_province=${max_province}&max_city=${max_city}&allpro= ${allpro}&allcity= ${allcity}&specialids=${specialids}&allall=${allall}`,
+      url: `/pages/clients-looking-for-work/distruction/distruction?max_province=${max_province}&max_city=${max_city}&allpro= ${allpro}&allcity= ${allcity}&specialids=${specialids}&allall=${allall}&toTopTip=${toTopTip}`,
     })
   },
   // 登录授权
@@ -744,7 +747,9 @@ Page({
             defaultDayIndex: index,
             rangevalue: index,
             // 保存请求返回的可选择置顶天数
-            reqDays: days
+            reqDays: days,
+            //最多可选城市提示文案
+            toTopTip:mydata.data.max_number_tips
           })
           // 初始化选择置顶天数的下拉列表
           that.getMoreDay()

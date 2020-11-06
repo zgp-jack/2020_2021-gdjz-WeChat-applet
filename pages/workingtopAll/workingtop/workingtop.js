@@ -62,7 +62,9 @@ Page({
     //置顶成功后的数据
     successData:"",
     //置顶的第一个区域
-    frstCity:null
+    frstCity:null,
+    //选择置顶城市 提示文案
+    toTopTip:''
   },
 
   jumpstickyrule() {
@@ -89,8 +91,9 @@ Page({
     let specialids = JSON.stringify(that.data.special_ids);
     let max_province = that.data.max_province;
     let max_city = that.data.max_city;
+    let toTopTip = that.data.toTopTip;
     wx.navigateTo({
-      url: `/pages/workingtopAll/distruction/distruction?max_province=${max_province}&max_city=${max_city}&allpro= ${allpro}&allcity= ${allcity}&specialids=${specialids}&allall=${allall}`,
+      url: `/pages/workingtopAll/distruction/distruction?max_province=${max_province}&max_city=${max_city}&allpro= ${allpro}&allcity= ${allcity}&specialids=${specialids}&allall=${allall}&toTopTip=${toTopTip}`,
     })
   },
   bindGetUserInfo: function(e) {
@@ -845,7 +848,9 @@ Page({
             defaultDayIndex: index,
             rangevalue: index,
             // 保存请求返回的可选择置顶天数
-            reqDays: days
+            reqDays: days,
+            //最多可选城市提示文案
+            toTopTip:mydata.data.max_number_tips
           })
           if(options.topId == 'undefined'){
             let numcity = mydata.data.city_integral;
