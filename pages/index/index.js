@@ -1079,6 +1079,7 @@ Page({
               success: function (res) {
                 if (res.confirm) {
                   app.refreshReq(2, that)
+                  that.cancelRefresh()
                 }else if (res.cancel) {
                   that.cancelRefresh()
                 }

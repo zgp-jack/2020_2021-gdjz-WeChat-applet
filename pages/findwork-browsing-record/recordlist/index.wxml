@@ -30,4 +30,4 @@
 </view>
 
 <!-- 推荐列表（可能适合您的工作） -->
-<recommendRecruit infoId='{{ infoId }}' cid="{{ cid }}" aid="{{ aid }}" more="{{ more }}" type='record' child="{{ child }}" wx:if="{{ !more }}" bind:show="show"/>
+<recommendRecruit infoId='{{ infoId }}' cid="{{ cid }}" aid="{{ aid }}" more="{{ more }}" type='record' child="{{ child }}" wx:if="{{ !more }}" bind:show="show" />

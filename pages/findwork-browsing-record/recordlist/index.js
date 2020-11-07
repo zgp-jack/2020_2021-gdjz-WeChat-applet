@@ -17,6 +17,7 @@ Page({
     more: true,
     defalutTop:'',//置顶默认区域
     show: false,//展示界面
+    isEnd: false,//找活名片状态 1 正在找 2不是正在找
   },
   show: function () {
     this.setData({show:true})
@@ -95,9 +96,18 @@ Page({
   goTop: function () {
     let topdata = JSON.stringify({ has_top : 0});
     let defalutTop = this.properties.defalutTop;
-    wx.navigateTo({
-      url: "/pages/clients-looking-for-work/workingtop/workingtop?topdata=" + topdata + "&defaulttop=" + defalutTop,
-    })
+    let isEnd = this.data.isEnd;
+    if (isEnd === '1') {
+      wx.navigateTo({
+        url: "/pages/clients-looking-for-work/workingtop/workingtop?topdata=" + topdata + "&defaulttop=" + defalutTop,
+      })
+    } 
+    if (isEnd === '2') {
+      wx.navigateTo({
+        url: "/pages/clients-looking-for-work/finding-name-card/findingnamecard",
+      })
+    }
+    
   },
   /**
    * 生命周期函数--监听页面加载
@@ -108,17 +118,19 @@ Page({
       let recordInfo = JSON.parse(options.recordInfo)
       let lists = recordInfo.list;
       let zh_info = recordInfo.zh_info;
-      // 城市id
+      // 区域id
       let aid = zh_info.city || zh_info.province;
       // 工种id
       let cid = zh_info.classify_id;
       // 默认置顶区域
       let defalutTop = recordInfo.default_top_area;
+      // 找活名片状态
+      let isEnd = zh_info.is_end;
       // 浏览记录数据为空
       if ( lists.length === 0 || lists.length < 15) {
         this.setData({more: false})
       }
-      this.setData({ lists, aid, cid, defalutTop })
+      this.setData({ lists, aid, cid, defalutTop, isEnd })
     }
     if (!this.data.show) {
       wx.showLoading({
