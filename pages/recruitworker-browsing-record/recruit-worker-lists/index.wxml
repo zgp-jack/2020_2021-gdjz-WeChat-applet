@@ -16,4 +16,4 @@
 </view>
 
 <!-- 置顶提示框 -->
-<promptbox id="promptbox" showTitle="{{ false }}" content="{{ tipBox.content }}" confirmText="{{ tipBox.confirmText }}" des="{{ tipBox.des }}" bind:confirm="confirm"></promptbox>
+<promptbox id="promptbox" showTitle="{{ true }}" content="{{ tipBox.content }}" confirmText="{{ tipBox.confirmText }}" des="{{ tipBox.des }}" bind:confirm="confirm"></promptbox>

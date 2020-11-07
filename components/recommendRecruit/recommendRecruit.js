@@ -59,7 +59,7 @@ Component({
     autimg: app.globalData.apiImgUrl + 'newlist-jobrealname.png', //实名图片
     hirimg: app.globalData.apiImgUrl + 'recruit-lists-new-finding.png', //招人图片
     doneimg: app.globalData.apiImgUrl + 'published-recruit-end.png', //已找到
-    iondzs: app.globalData.apiImgUrl + 'newlist-jobposi.png',//定位,
+    iondzs: app.globalData.apiImgUrl + 'lpy/biaoqian.png',//定位,
     isload: false
   },
   /**

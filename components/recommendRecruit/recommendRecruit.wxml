@@ -51,7 +51,7 @@
         
         </block>
 
-        <view class="seemore-recommend-recruit" bindtap="seemoreaction">查看更多招工信息</view>
+        <view class="seemore-recommend-recruit" bindtap="seemoreaction">{{type === 'record'? '查看更多>>':'查看更多招工信息'}}</view>
     </view>
 
 

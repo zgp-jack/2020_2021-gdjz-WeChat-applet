@@ -1115,7 +1115,7 @@ top: -14rpx;
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
-  line-height: 12rpx;
+  line-height: 30rpx;
 }
 .cardnine .cardnineone:first-child view:first-child{
   color: black;

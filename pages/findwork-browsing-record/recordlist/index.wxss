@@ -24,6 +24,7 @@ page{
   align-items: flex-end;
 }
 .record-up-left-name{
+  font-weight: bold;
   margin-right: 30rpx;
   font-size: 30rpx;
   color: #595959;
@@ -59,7 +60,7 @@ page{
   height: 50rpx;
   border-radius: 8rpx;
   color: white;
-  font-size: 22rpx;
+  font-size: 25rpx;
   padding: 30rpx 20rpx;
   display: flex;
   align-items: center;
@@ -85,7 +86,7 @@ page{
 }
 .no-record image{
   margin-top: 30rpx;
-  height: 50%;
+  height: 40%;
 }
 
 .no-record-text{

@@ -3,7 +3,7 @@
 /* 没有浏览记录css */
 
 .no-record {
-  height: 25%;
+  height: 22%;
   display: flex;
   flex-direction: column;
   align-items: center;
