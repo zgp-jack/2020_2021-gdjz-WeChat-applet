@@ -72,11 +72,11 @@ Page({
     let that = this;
     let max_province = that.data.max_province;
     let max_city = that.data.max_city;
-
+    let toTopTip = that.data.toTopTip;
     let specialids = JSON.stringify(that.data.special_ids);
     app.globalData.judge = ""
     wx.navigateTo({
-      url: `/pages/workingtopAll/distruction/distruction?max_province=${max_province}&max_city=${max_city}&specialids=${specialids}`,
+      url: `/pages/workingtopAll/distruction/distruction?max_province=${max_province}&max_city=${max_city}&specialids=${specialids}&toTopTip=${toTopTip}`,
     })
   },
   callThisPhone: function (e) {
@@ -92,6 +92,7 @@ Page({
     let max_province = that.data.max_province;
     let max_city = that.data.max_city;
     let toTopTip = that.data.toTopTip;
+    debugger
     wx.navigateTo({
       url: `/pages/workingtopAll/distruction/distruction?max_province=${max_province}&max_city=${max_city}&allpro= ${allpro}&allcity= ${allcity}&specialids=${specialids}&allall=${allall}&toTopTip=${toTopTip}`,
     })

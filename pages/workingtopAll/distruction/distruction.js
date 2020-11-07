@@ -155,7 +155,6 @@ Page({
 
   mustjudge(judgeId) {
     let that = this;
-
     if ((that.data.areaTextP.length >= that.data.max_province && that.data.areaTextC.length >= that.data.max_city)) {
       wx.showToast({
         title: that.data.maxTips,
@@ -983,6 +982,7 @@ Page({
     this.setData({
       maxTips:options.toTopTip
     })
+    debugger
     //this.modifytop(options)
     //this.getNewId(options)
   },

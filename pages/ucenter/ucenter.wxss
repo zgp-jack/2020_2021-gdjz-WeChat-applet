@@ -558,6 +558,7 @@
 .ucenterAuth {
     width: 102rpx;
     height: 26rpx;
+    margin-left: 20rpx;
 }
 /* banner */
 .banner-box {
