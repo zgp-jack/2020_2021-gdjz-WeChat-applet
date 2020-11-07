@@ -50,8 +50,6 @@
     "pages/footer/footer",
     "pages/tpl/win/win",
     "pages/tpl/app/app",
-    "pages/ucenter/ucenterNew/hireMembers",
-    "pages/ucenter/ucenterNew/invite",
     "pages/information/mymessage/mymessage",
     "pages/information/system/system",
     "pages/published/recruit/list",

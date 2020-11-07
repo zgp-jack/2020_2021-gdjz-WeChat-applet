@@ -306,7 +306,7 @@ App({
 
     let _this = this;
 
-    let url = _options.hasOwnProperty("url") ? _this.globalData.apiRequestUrl + _options.url : _this.globalData.apiRequestUrl
+    let url = _options.hasOwnProperty("url") ?  _this.globalData.apiRequestUrl +_options.url : _this.globalData.apiRequestUrl
 
     // let url = _options.url;
 
@@ -1218,6 +1218,7 @@ App({
         that.globalData.joingroup = mydata.join_group_config
         that.globalData.copywechat = mydata.wechat.number
         that.globalData.callphone = mydata.phone
+        that.globalData.serverPhone = mydata.phone
         if (userinfo.record) that.globalData.firstSaveUserLoginLog = true
       },
       fail: function (err) {

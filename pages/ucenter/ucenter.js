@@ -48,6 +48,7 @@ Page({
     Serviceicon2: app.globalData.apiImgUrl+'ws/Serviceicon2.png',
     toCollectUrl:'',
     findWorkRecord: [],//找活浏览记录
+    ucenterAuth: app.globalData.apiImgUrl + "new-list-realname-icon.png?t=1",
   },
   //获取广告数据
   getAdvertising: function () {

@@ -28,6 +28,7 @@
         </view>
         <view>
           <text class="user-memberid">会员编号:{{ member.id }}</text>
+          <image class="ucenterAuth" src="{{ucenterAuth}}" wx:if="{{member.is_check==2&&showAuthor==1&&member.check_degree==2}}"></image>
         </view>
       </view>
       <view  bindtap='gotoUserauth' class="Notlogin" wx:if="{{!userInfo}}">
@@ -89,7 +90,7 @@
       <view class="work-zh item-work">
           <image 
           class="banner" 
-          bindtap="valiUserUrl" 
+          bindtap="valiUserUrl"
           data-url="{{member.resume_banner.self_url ? member.resume_banner.self_url:'/pages/clients-looking-for-work/finding-name-card/findingnamecard'}}" src="{{member.resume_banner.banner ? member.resume_banner.banner:bannerws}}">
         </image>
         <view class="icon-box">

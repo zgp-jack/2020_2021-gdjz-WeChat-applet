@@ -555,6 +555,10 @@
     top: -4px;
     width: 44rpx;
 }
+.ucenterAuth {
+    width: 102rpx;
+    height: 26rpx;
+}
 /* banner */
 .banner-box {
     padding: 0 24rpx;
