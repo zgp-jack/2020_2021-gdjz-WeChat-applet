@@ -18,6 +18,7 @@ Page({
       confirmText: '增加曝光率'
     },
     topIndex:false,//点击没有被查看的招工信息的index
+    clickId: '',//点击查看浏览记录的招工信息id
   },
   getRecruitLists: function () {
     let that = this;
@@ -50,7 +51,7 @@ Page({
           that.setData({
             lists: _list.concat(list),
             page: page + 1 ,
-            hasmore: len ? true: false,
+            hasmore: len < 15? false: true,
           })
         }
       },
@@ -107,9 +108,15 @@ Page({
   },
   // 跳转到招工信息的浏览记录
   goNoReadRecord: function (e) {
+    // 招工信息id
     let id = e.currentTarget.dataset.id;
+    // 招工信息城市id
     let aid = e.currentTarget.dataset.aid;
+    // 工种id
     let cid = e.currentTarget.dataset.cid;
+    // 保存点击的招工信息id
+    this.setData({clickId: id})
+    // 跳转到招工信息浏览记录列表
     wx.navigateTo({
       url: `/pages/recruitworker-browsing-record/recruit-worker-record/index?id=${id}&cid=${cid}&aid=${aid}`
     })
@@ -154,6 +161,17 @@ Page({
       this.selectComponent("#promptbox").show()
     }
   },
+  // 从招工信息的浏览记录列表回到招工信息界面将对应未读浏览记录清零
+  clearUnRead: function () {
+    let id = this.data.clickId;
+    let lists = this.data.lists;
+    if (id) {
+      let index = lists.findIndex((item)=> item.id == id)
+      let listItem = lists[index];
+      listItem.unread_num = 0;
+      this.setData({lists})
+    }
+  },
   /**
    * 生命周期函数--监听页面加载
    */
@@ -185,8 +203,8 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    // this.setData({ page: 1 })
-    // this.getRecruitLists()
+    // 点击某招工信息浏览记录，清空对应该记录的未读数
+    this.clearUnRead()
   },
 
   /**
@@ -207,14 +225,17 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-
+    this.setData({ page: 1, lists: [], hasmore: true })
+    this.getRecruitLists()
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-    this.getRecruitLists()
+    if (this.data.hasmore) {
+      this.getRecruitLists()
+    }
   },
 
   /**
