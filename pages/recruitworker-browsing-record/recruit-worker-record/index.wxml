@@ -1,0 +1,21 @@
+<!--pages/recruitworker-browsing-record/recruit-worker-record/index.wxml-->
+<view class="recruit-record-contain" wx:if="{{ show }}">
+  <block wx:for="{{ lists }}" wx:key="key">
+    <view class="recruit-record-content">
+      <view class="recruit-record-head">
+        <view class="recruit-record-oneRow">
+          <view class="recruit-record-title">
+            <view class="recruit-record-name">{{ item.user_name }}</view>
+            <view class="recruit-record-phone">{{ item.tel }}</view>
+          </view>
+          <view class="recruit-record-button" bindtap="getDetail" data-uuid="{{ item.resume_uuid }}">查看他的找活信息</view>
+        </view>
+        <view class="recruit-record-des">{{ item.introduce }}</view>
+      </view>
+      <view class="recruit-record-position"><image src="{{ positionImage }}" class="record-position-image"></image>{{ item.address }}</view>
+    </view>
+  </block>
+  <view class="record-no-more" wx:if="{{ !hasmore }}">没有更多数据</view>
+</view>
+
+<recommendResume wx:if="{{ !hasmore }}" aid="{{ aid }}" cid="{{ cid }}" more="{{ more }}" uuid="{{ uuid }}" child="{{ child }}"  typeData="record" bind:show="show"/>

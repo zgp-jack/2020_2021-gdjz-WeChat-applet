@@ -1,0 +1,84 @@
+/* pages/recruitworker-browsing-record/recruit-worker-lists/index.wxss */
+
+.recruit-record-content{
+  margin-bottom: 20rpx;
+  background-color: white;
+}
+.recruit-record-head{
+  height: 156rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  border-bottom: 1px solid #EEEEEE;
+  padding: 0rpx 20rpx;
+}
+.recruit-head-title{
+  color:#333333;
+  font-size: 30rpx;
+  font-weight: bold;
+}
+.recruit-head-desc{
+  font-size: 26rpx;
+  color: #808080;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2; 
+  -webkit-box-orient: vertical;
+}
+.recruit-record-footer{
+  height: 104rpx;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 0rpx 20rpx;
+}
+.recruit-footer-button-left{
+  width: 164rpx;
+  height: 56rpx;
+  background: #0099FF;
+  border-radius: 6rpx;
+  color: #FFFFFF;
+  font-size: 26rpx;
+  margin-right: 50rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.recruit-footer-button-right{
+  width: 164rpx;
+  height: 56rpx;
+  background: #0099FF;
+  border-radius: 6rpx;
+  color: #FFFFFF;
+  font-size: 26rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+.noclick{
+  background-color:rgb(198, 198, 198);
+}
+.record-see-count{
+  position: absolute;
+  height: 30rpx;
+  width: 30rpx;
+  font-size: 18rpx;
+  line-height: 30rpx;
+  text-align: center;
+  background-color:#FF5B5B;
+  border-radius: 50%;
+  right: -10rpx;
+  top: -15rpx;
+}
+.record-no-more{
+  height: 60rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #909090;
+  font-size: 30rpx;
+  margin-bottom: 30rpx;
+}

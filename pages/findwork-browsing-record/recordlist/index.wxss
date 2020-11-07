@@ -1,0 +1,107 @@
+/* pages/findwork-browsing-record/index.wxss */
+@import "../../home/home.wxss";
+page{
+  height: 100%;
+}
+.record-content{
+  padding: 0 30rpx;
+  background-color: white;
+  margin-bottom: 20rpx;
+}
+.record-content:last-child{
+  margin-bottom: 0rpx;
+}
+.record-up{
+  height: 60rpx;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+}
+.record-up-left{
+  height: 100%;
+  display: flex;
+  margin-right: auto;
+  align-items: flex-end;
+}
+.record-up-left-name{
+  margin-right: 30rpx;
+  font-size: 30rpx;
+  color: #595959;
+}
+.record-up-left-see{
+  font-size: 28rpx;
+  color: #B2B2B2;
+}
+.record-up-right-phone{
+  font-size: 28rpx;
+  color: #828586;
+}
+.record-down{
+  height: 110rpx;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.record-down-left-position{
+  font-size: 28rpx;
+  margin-right: auto;
+  display: flex;
+  align-items: center;
+  color: #828586;
+}
+.record-position-image{
+  width: 24rpx;
+  height: 36rpx;
+  margin-right: 10rpx;
+}
+.record-down-right-button{
+  background-color: #0099FF;
+  height: 50rpx;
+  border-radius: 8rpx;
+  color: white;
+  font-size: 22rpx;
+  padding: 30rpx 20rpx;
+  display: flex;
+  align-items: center;
+}
+.record-no-more{
+  height: 60rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #909090;
+  font-size: 30rpx;
+}
+
+
+/* 没有浏览记录css */
+
+.no-record {
+  height: 40%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.no-record image{
+  margin-top: 30rpx;
+  height: 50%;
+}
+
+.no-record-text{
+  font-size: 30rpx;
+  color: #828586;
+  margin-bottom: 20rpx;
+  font-weight: 400;
+}
+.record-top-button{
+  width: 300rpx;
+  height: 80rpx;
+  background: #0099FF;
+  border-radius: 6rpx;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 40rpx 0rpx;
+}

@@ -12,6 +12,10 @@
   align-items: center;
   z-index: 99999;
 }
+.prompt-content{
+  margin-top: 50rpx;
+  padding:0rpx 50rpx;
+}
 .prompt-box{
   position: relative;
   width: 80%;
@@ -33,9 +37,10 @@
 }
 .prompt-body{
   position: relative;
-  line-height: 80rpx;
-  font-size: 35rpx;
+  line-height: 60rpx;
+  font-size: 32rpx;
   text-align: center;
+  color: #868686;
 }
 .prompt-box .pulish-active{
   line-height: 50rpx;

@@ -45,12 +45,6 @@
   "simulatorType": "wechat",
   "simulatorPluginLibVersion": {},
   "condition": {
-    "search": {
-      "list": []
-    },
-    "conversation": {
-      "list": []
-    },
     "plugin": {
       "list": []
     },
@@ -556,6 +550,37 @@
           "id": -1,
           "name": "pages/integral/expend/expend",
           "pathName": "pages/integral/expend/expend",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/findwork-browsing-record/recordlist/index",
+          "pathName": "pages/findwork-browsing-record/recordlist/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/recruitworker-browsing-record/recruit-worker-lists/index",
+          "pathName": "pages/recruitworker-browsing-record/recruit-worker-lists/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/recruitworker-browsing-record/recruit-worker-lists/index",
+          "pathName": "pages/recruitworker-browsing-record/recruit-worker-lists/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/recruitworker-browsing-record/recruit-worker-record/index",
+          "pathName": "pages/recruitworker-browsing-record/recruit-worker-record/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/recruitworker-browsing-record/recruit-worker-lists/index",
+          "pathName": "pages/recruitworker-browsing-record/recruit-worker-lists/index",
+          "query": "",
           "scene": null
         }
       ]

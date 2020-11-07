@@ -13,6 +13,7 @@ Page({
     doneimg: app.globalData.apiImgUrl + 'published-recruit-end.png', //已找到
     iondzs: app.globalData.apiImgUrl + 'newlist-jobposi.png',//定位
     unitid: ads.recruitRecommendAd,
+    emptyImage: app.globalData.apiImgUrl + 'yc/no-query-data.png',
     ids: '',
     area_id: '',
     rids: '',
@@ -23,36 +24,78 @@ Page({
     hasmore: true,
     nodata: app.globalData.apiImgUrl + 'nodata.png',
     infoId: '',
-    loading: false
+    loading: false,
+    show:false,//展示界面
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
+  show: function () {
+    this.setData({show:true})
+  },
+   // 获取指定格式的时间
+   getMyDate(str) {
+    var oDate = new Date(str),
+    oYear = oDate.getFullYear(),
+    oMonth = oDate.getMonth() + 1,
+    oDay = oDate.getDate(),
+    oHour = oDate.getHours(),
+    oMin = oDate.getMinutes(),
+    oSen = oDate.getSeconds(),
+    oTime = oYear + '-' + this.addZero(oMonth) + '-' + this.addZero(oDay) + ' ' + this.addZero(oHour) + ':' +
+    this.addZero(oMin);
+    return oTime;
+  },
+  // 如果分钟小于10就添加一个0
+  addZero(num) {
+    if (parseInt(num) < 10) {
+      num = '0' + num;
+    }
+    return num;
+  },
   getRecommendLists: function(){
     let _this = this;
     this.setData({
       loading: true
     })
+    let mid = this.data.infoId;
+    let typeData = this.data.typeData;
+    let user_name = this.data.userName;
+    let page = this.data.page
+    let params = typeData === 'record'?{
+      mid,
+      page,
+    }:{
+      area_id: _this.data.area_id,
+      classify_id: _this.data.ids,
+      page: _this.data.page,
+      type: _this.data.type,
+      job_ids: _this.data.infoId,
+    }
+
     app.appRequestAction({
-      url: '/job/job-recommend-list/',
+      url: typeData === 'record'?'/focus-me/zg-info-list/':'/job/job-recommend-list/',
       way: 'POST',
-      params:{
-        area_id: _this.data.area_id,
-        classify_id: _this.data.ids,
-        page: _this.data.page,
-        type: _this.data.type,
-        job_ids: _this.data.infoId
-      },
+      params:params,
       success:(res)=>{
         let mydata = res.data
-        if(mydata.errcode == 'ok'){
+        if(mydata.errcode == 'ok' || 'success'){
+          console.log("mydata.data.list",mydata.data.list)
           let list = mydata.data.list
+          if (typeData === 'record') {
+            list.forEach(item => {
+              item.show_address = item.hasOwnProperty("address")?item.address:'';
+              item.time = item.hasOwnProperty("sort_time")?_this.getMyDate( item.sort_time * 1000 ):'';
+              item.user_name = user_name;
+              item.image = mydata.data.hasOwnProperty("portrait")? mydata.data.portrait:'';
+            });
+          }
           let _list = _this.data.lists
           let len = list.length
           _this.setData({
             lists: _list.concat(list),
-            page: mydata.data.next_page,
+            page: typeData === 'record'? page + 1 : mydata.data.next_page,
             type: mydata.data.type,
             hasmore: len ? true:  false,
           })
@@ -75,7 +118,31 @@ Page({
     if(options.hasOwnProperty('aid')){
       this.setData({
         area_id: options.aid,
-        rarea_id: options.aid
+        rarea_id: options.aid,
+        aid: options.aid,
+      })
+    }
+    if (options.hasOwnProperty('type')) {
+      this.setData({
+        typeData: options.type
+      })
+    }
+    if (options.hasOwnProperty('userName')) {
+      wx.setNavigationBarTitle({
+        title: `${options.userName}的招工信息`
+      })
+      this.setData({
+        userName: options.userName
+      })
+    }
+    if(options.hasOwnProperty('cid')){
+      this.setData({
+        cid: options.cid,
+      })
+    }
+    if(options.hasOwnProperty('child')){
+      this.setData({
+        child: options.child,
       })
     }
     this.getRecommendLists()

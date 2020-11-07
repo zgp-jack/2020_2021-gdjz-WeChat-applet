@@ -41,11 +41,9 @@
         <text>正式积分</text>
       </view>
       <view bindtap='valiUserUrl' data-url='/pages/integral/temp/temp'>
-        <view>
+        <view class="integral-icon-view">
           <text class="top-text">{{ member.temporary_integral ? member.temporary_integral:0 }}</text>
-          <text class="icon-text" wx:if="{{ member.temporary_integral > 0}}">
-            <text>详情</text>
-          </text>
+          <text class="icon-text integral-icon-text" wx:if="{{ member.temporary_integral > 0}}"><text>详情</text></text>
         </view>
         <text>临时积分</text>
       </view>
@@ -79,7 +77,7 @@
             <image src="{{myzg}}"></image>
             <text>我的招工</text>
           </view>
-          <view>
+          <view data-url="/pages/recruitworker-browsing-record/recruit-worker-lists/index" bindtap="valiUserUrl">
             <image src="{{seenme}}"></image>
             <text>谁看过我</text>
             <view class="icon-text" wx:if="{{member.job_view_count > 0}}">
@@ -92,14 +90,14 @@
           <image 
           class="banner" 
           bindtap="valiUserUrl" 
-          data-url="{{member.resume_banner.self_url ? member.resume_banner.self_url:'/pages/clients-looking-for-work/finding-name-card/findingnamecard'}}" src="{{member.resume_banner.banner ? member.resume_banner.banner:bannerqz}}">
+          data-url="{{member.resume_banner.self_url ? member.resume_banner.self_url:'/pages/clients-looking-for-work/finding-name-card/findingnamecard'}}" src="{{member.resume_banner.banner ? member.resume_banner.banner:bannerws}}">
         </image>
         <view class="icon-box">
           <view bindtap="valiUserUrl" data-url="/pages/clients-looking-for-work/finding-name-card/findingnamecard">
             <image src="{{myzh}}"></image>
             <text>我的找活</text>
           </view>
-          <view>
+          <view data-url="/pages/findwork-browsing-record/recordlist/index" bindtap="valiUserUrl">
             <image src="{{seenmezh}}"></image>
             <text>谁看过我</text>
             <view class="icon-text" wx:if="{{member.resume_view_count > 0}}">

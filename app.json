@@ -67,7 +67,10 @@
     "pages/clients-looking-for-work/workingtop/workingtop",
     "pages/search/search",
     "pages/releaseSuccess/releaseSuccess",
-    "pages/complaint/index"
+    "pages/complaint/index",
+    "pages/findwork-browsing-record/recordlist/index",
+    "pages/recruitworker-browsing-record/recruit-worker-lists/index",
+    "pages/recruitworker-browsing-record/recruit-worker-record/index"
   ],
   "subpackages": [
     {

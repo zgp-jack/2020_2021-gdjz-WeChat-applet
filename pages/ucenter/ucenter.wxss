@@ -546,6 +546,15 @@
     height: 35rpx;
     margin-right: 30rpx;
 }
+.integral-icon-view {
+    position: relative;
+}
+.integral-icon-text {
+    position: absolute;
+    right: -45rpx;
+    top: -4px;
+    width: 44rpx;
+}
 /* banner */
 .banner-box {
     padding: 0 24rpx;

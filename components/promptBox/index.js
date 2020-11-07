@@ -14,6 +14,10 @@ Component({
       type: Boolean,
       value: true
     },
+    showIcon: {
+      type: Boolean,
+      value: false
+    },
     //是否显示取消按钮
     showCancel: {
       type: Boolean,
@@ -51,6 +55,11 @@ Component({
     },
     // 发布提示内容
     content: {
+      type: String,
+      value: ""
+    },
+    // 详细描述信息
+    des: {
       type: String,
       value: ""
     },
