@@ -111,7 +111,10 @@ Page({
     // 招工信息id
     let id = e.currentTarget.dataset.id;
     // 招工信息城市id
-    let aid = e.currentTarget.dataset.aid;
+    let cityId = e.currentTarget.dataset.cityid;
+    // 省id
+    let provinceId = e.currentTarget.dataset.provinceid;
+    let aid = cityId || provinceId;
     // 工种id
     let cid = e.currentTarget.dataset.cid;
     // 保存点击的招工信息id

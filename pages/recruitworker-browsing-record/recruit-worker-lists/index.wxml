@@ -8,7 +8,7 @@
       </view>
       <view class="recruit-record-footer">
         <view class="recruit-footer-button-left" bindtap="goTop" data-index="{{ index }}">{{ item.top_data.is_top == 1?'修改置顶':'增加曝光率'}}</view>
-        <view class="recruit-footer-button-right {{ item.sum_num>0?'':'noclick'}}" data-id="{{ item.id }}" bindtap="{{ item.sum_num>0?'goNoReadRecord':'showModel' }}" data-index="{{ index }}" data-cid="{{ item.occupations }}" data-aid="{{ item.area_id }}">被查看{{ item.sum_num }}次<view class="record-see-count" wx:if="{{ item.unread_num>0 }}">{{ item.unread_num }}</view></view>
+        <view class="recruit-footer-button-right {{ item.sum_num>0?'':'noclick'}}" data-id="{{ item.id }}" bindtap="{{ item.sum_num>0?'goNoReadRecord':'showModel' }}" data-index="{{ index }}" data-cid="{{ item.occupations }}" data-cityid="{{ item.city_id }}" data-provinceid="{{ item.province_id }}">被查看{{ item.sum_num }}次<view class="record-see-count" wx:if="{{ item.unread_num>0 }}">{{ item.unread_num }}</view></view>
       </view>
     </view>
   </block>
