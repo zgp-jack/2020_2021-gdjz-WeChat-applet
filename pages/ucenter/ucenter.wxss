@@ -6,7 +6,6 @@
     height: 330rpx;
     background: #fff url(http://cdn.yupao.com/miniprogram/images/ws/headerBg2.png) no-repeat center;
     background-size:100%;
-    padding-top: 60rpx;
 }
 .user_background_image{
     width: 100%;
@@ -399,19 +398,25 @@
 }
 
 .icon-text {
-    width: 35rpx;
+    width: 40rpx;
     background: #FF6363;
     color: #fff !important;
     font-size: 20rpx !important;
     text-align: center;
     line-height: 1;
-    padding: 2rpx 0;
+    padding: 4rpx 0;
     font-size: 20rpx; 
-    border-top-left-radius: 20rpx;
-    border-top-right-radius: 20rpx;
-    border-bottom-right-radius: 20rpx;
+    border-top-left-radius: 10rpx;
+    border-top-right-radius: 10rpx;
+    border-bottom-right-radius: 10rpx;
     position: relative;
     top: -10rpx;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.icon-text text{
+    line-height: 1;
 }
 
 /* ============================11.2 会员中心 */
@@ -421,10 +426,6 @@
     display: flex;
     justify-content: space-between;
     padding: 0 24rpx;
-    position: fixed;
-    background-color: #fff;
-    top: 0;
-    z-index: 999;
 }
 .top-left {
     line-height: 60rpx;
@@ -525,7 +526,7 @@
     right: 50rpx;
 } */
 .integral-box>view>text:last-child{
-    font-size: 24rpx;
+    font-size: 26rpx;
     color: #808080;
     font-weight:400;
 }
@@ -544,6 +545,20 @@
     width: 36rpx;
     height: 35rpx;
     margin-right: 30rpx;
+}
+.integral-icon-view {
+    position: relative;
+}
+.integral-icon-text {
+    position: absolute;
+    right: -45rpx;
+    top: -4px;
+    width: 44rpx;
+}
+.ucenterAuth {
+    width: 102rpx;
+    height: 26rpx;
+    margin-left: 20rpx;
 }
 /* banner */
 .banner-box {
@@ -664,8 +679,11 @@
 }
 .commonly-icon-box .icon-text {
     position: absolute;
-    right: -10rpx;
+    right: -7px;
     top: 0rpx;
+}
+.visibility-view {
+    visibility: hidden;
 }
 /* 系统设置 */
 .system-settings .commonly-box {
