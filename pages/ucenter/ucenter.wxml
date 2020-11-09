@@ -22,7 +22,7 @@
         <view class="edit-box">
           <text class="user-name">{{ member.username || member.nickname }}</text>
           <navigator url='/packageOther/pages/userinfo/index/index?img={{ member.headimgurl }}&auth={{ member.is_check }}&tel={{ member.tel }}&name={{ member.username || member.nickname }}&pass={{ member.pwd_status }}'
-                       open-type="navigate" wx:if="{{ member.tel }}">
+                       open-type="navigate">
                        <image src="{{eidticon}}"></image>
             </navigator>
         </view>

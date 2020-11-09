@@ -206,8 +206,18 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    // 点击某招工信息浏览记录，清空对应该记录的未读数
-    this.clearUnRead()
+    let pages = getCurrentPages();
+    let index = pages.length - 1
+    let path = pages[index].__displayReporter.showReferpagepath
+    path = path.slice(0, -5)
+    if (path == "pages/workingtopAll/workingtop/workingtop") {
+      this.setData({ page: 1, lists: [], hasmore: true })
+      this.getRecruitLists()
+    }
+    if (path == "pages/recruitworker-browsing-record/recruit-worker-record/index") {
+      // 点击某招工信息浏览记录，清空对应该记录的未读数
+      this.clearUnRead()
+    }
   },
 
   /**

@@ -16,6 +16,9 @@
   color:#333333;
   font-size: 30rpx;
   font-weight: bold;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 .recruit-head-desc{
   font-size: 26rpx;

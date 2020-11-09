@@ -1495,8 +1495,8 @@ App({
         if (mydata.errcode === "ok") {
           let currentTime = new Date().getTime();
           let reqDueTime = currentTime + 3000;
-          _this.setData({reqDueTime,reqStatus:true})
           let refreshStatus = mydata.data.refresh_status;
+          _this.setData({reqDueTime, reqStatus:true, refreshStatus})
           if (refreshStatus === 0) {
             // 该信息处于审核中或审核失败状态
             wx.showModal({

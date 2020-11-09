@@ -59,13 +59,19 @@ Page({
     this.setData({
       loading: true
     })
-    let mid = this.data.infoId;
+    let userInfo = wx.getStorageSync('userInfo');
+    let mid = null;
+    if (userInfo) {
+      mid = userInfo.userId;
+    }
+    let user_id = this.data.infoId;
     let typeData = this.data.typeData;
     let user_name = this.data.userName;
     let page = this.data.page
     let params = typeData === 'record'?{
-      mid,
+      user_id,
       page,
+      mid
     }:{
       area_id: _this.data.area_id,
       classify_id: _this.data.ids,

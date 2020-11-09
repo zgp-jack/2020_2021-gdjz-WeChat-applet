@@ -1308,6 +1308,8 @@ Page({
     let reqStatus = this.data.reqStatus;
     let reqDueTime = this.data.reqDueTime;
     let currentTime = new Date().getTime();
+    // 刷新请求返回状态（3为刷新成功）
+    let refreshStatus = this.data.refreshStatus;
     if (!reqStatus) {
       if (reqDueTime) {
         if (currentTime > reqDueTime) {
@@ -1317,12 +1319,20 @@ Page({
             showCancel: false,
           })
         }else{
-          wx.showModal({
-            title: '温馨提示',
-            content: '您已消耗1积分成功刷新名片，请勿点击过快',
-            showCancel: false,
-          })
-          this.setData({reqStatus:true})
+          if (refreshStatus === 3) {
+            wx.showModal({
+              title: '温馨提示',
+              content: '您已消耗1积分成功刷新名片，请勿点击过快',
+              showCancel: false,
+            })
+            this.setData({reqStatus:true})
+          }else{
+            wx.showModal({
+              title: '温馨提示',
+              content: '请勿点击过快',
+              showCancel: false,
+            })
+          }
         }
       }else{
         app.refreshReq(1,this)
@@ -1331,11 +1341,19 @@ Page({
     } else {
       if (reqDueTime) {
         if (reqDueTime > currentTime) {
-          wx.showModal({
-            title: '温馨提示',
-            content: '您已消耗1积分成功刷新名片，请勿点击过快',
-            showCancel: false,
-          })
+          if (refreshStatus === 3) {
+            wx.showModal({
+              title: '温馨提示',
+              content: '您已消耗1积分成功刷新名片，请勿点击过快',
+              showCancel: false,
+            })
+          }else{
+            wx.showModal({
+              title: '温馨提示',
+              content: '请勿点击过快',
+              showCancel: false,
+            })
+          }
         }else{
           app.refreshReq(1,this)
           this.setData({reqStatus:false})

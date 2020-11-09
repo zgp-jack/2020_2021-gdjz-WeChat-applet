@@ -71,9 +71,10 @@ Page({
     let max_city = that.data.max_city;
     let specialids = JSON.stringify(that.data.special_ids);
     app.globalData.judge = ""
+    let toTopTip = that.data.toTopTip;
     //跳转到置顶范围选择界面并携带省城市信息
     wx.navigateTo({
-      url: `/pages/clients-looking-for-work/distruction/distruction?max_province=${max_province}&max_city=${max_city}&specialids=${specialids}`,
+      url: `/pages/clients-looking-for-work/distruction/distruction?max_province=${max_province}&max_city=${max_city}&specialids=${specialids}&toTopTip=${toTopTip}`,
     })
   },
   callThisPhone: function (e) {
