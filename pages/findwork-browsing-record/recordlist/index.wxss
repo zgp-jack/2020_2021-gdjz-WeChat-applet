@@ -78,22 +78,30 @@ page{
 /* 没有浏览记录css */
 
 .no-record {
-  height: 40%;
+  height: 35%;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-evenly;
   align-items: center;
 }
 .no-record image{
-  margin-top: 30rpx;
-  height: 40%;
+  height: 45%;
 }
-
+.no-record-content{
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+}
 .no-record-text{
   font-size: 30rpx;
   color: #828586;
-  margin-bottom: 20rpx;
   font-weight: 400;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+.no-record-text:nth-child(1){
+  margin-bottom: 10rpx;
 }
 .record-top-button{
   width: 300rpx;
@@ -104,5 +112,5 @@ page{
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 40rpx 0rpx;
+  margin-top: 10rpx;
 }

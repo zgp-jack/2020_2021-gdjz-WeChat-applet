@@ -1537,6 +1537,26 @@ App({
               }
             })
           }else if(refreshStatus === 3){
+            if (source === 2) {
+              let tipBox = {//提示框显示信息
+                showTitle: false,
+                showIcon: true,
+                showCancel: false,
+                confirmColor:'#0099FF',
+                cancelColor:'#797979',
+                content: [{
+                  des: '刷新成功',
+                  color: '##85963',
+                  text: []
+                }
+              ],
+                confirmText: '确定'
+              };
+              _this.setData({
+                tipBox: tipBox,
+                refreshStatus: true
+              })
+            }
             // 刷新成功
             _this.selectComponent("#promptbox").show()
           }else if(refreshStatus === 4){

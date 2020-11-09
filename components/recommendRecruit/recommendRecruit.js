@@ -77,9 +77,18 @@ Component({
     },
     detailinfoaction:function(e){
       let id = e.currentTarget.dataset.id
-      wx.redirectTo({
-        url: '/pages/detail/info/info?id=' + id + '&child=' + this.properties.child,
-      })
+      const pages = getCurrentPages();//获取当前的页面栈
+      const prevPage = pages[pages.length - 1];//当前的page
+      let url = prevPage.route;
+      if (url === 'pages/findwork-browsing-record/recordlist/index') {
+        wx.navigateTo({
+          url: '/pages/detail/info/info?id=' + id + '&child=' + this.properties.child,
+        })
+      }else{
+        wx.redirectTo({
+          url: '/pages/detail/info/info?id=' + id + '&child=' + this.properties.child,
+        })
+      }
     },
     seemoreaction:function(){
       

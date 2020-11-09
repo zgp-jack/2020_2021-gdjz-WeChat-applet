@@ -58,7 +58,7 @@
 <!-- 无浏览记录 -->
 <view class="no-record" wx:if="{{ show && lists.length === 0 && typeData === 'record'}}">
   <image src="{{ emptyImage }}" mode="aspectFit"></image>
-  <view class="no-record-text">该老板没有正在招的岗位</view>
+  <view class="no-record-text">该老板暂时没有正在招的岗位</view>
 </view>
 
 <!-- 推荐列表（可能适合您的工作） -->

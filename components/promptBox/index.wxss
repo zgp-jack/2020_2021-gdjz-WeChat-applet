@@ -12,10 +12,15 @@
   align-items: center;
   z-index: 99999;
 }
-.prompt-content{
-  margin-top: 30rpx;
-  padding:0rpx 50rpx;
+.margin{
+  margin-top: 40rpx;
 }
+
+.prompt-content{
+  padding:0rpx 50rpx;
+  margin-top: 22rpx;
+}
+
 .prompt-box{
   position: relative;
   width: 80%;
@@ -25,11 +30,12 @@
 }
 .prompt-title{
   position: relative;
-  line-height: 80rpx;
+  /* line-height: 80rpx; */
   font-size: 35rpx;
   text-align: center;
-  padding-top: 50rpx;
+  padding-top: 52rpx;
   font-weight: bold;
+  padding-bottom: 10rpx;
 }
 .prompt-title image{
   width: 80rpx;
@@ -37,7 +43,7 @@
 }
 .prompt-body{
   position: relative;
-  line-height: 60rpx;
+  line-height: 50rpx;
   font-size: 32rpx;
   text-align: center;
   color: #868686;
@@ -49,12 +55,13 @@
 .prompt-footer{
   position: relative;
   border-top: 1rpx solid #eeeeee;
-  margin-top: 50rpx;
+  margin-top: 40rpx;
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  border-radius: 30rpx;
+  border-bottom-right-radius: 30rpx;   
+  border-bottom-left-radius: 30rpx;
   overflow: hidden;
 }
 .prompt-btn{

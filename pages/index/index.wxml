@@ -237,4 +237,4 @@
 <downapptips id='downapptips'></downapptips>
 
 <!-- 刷新成功提示框 -->
-<promptbox id="promptbox" showTitle="{{ false }}" showIcon="{{ true }}" content="{{ tipContent }}" showCancel="{{ false }}" icon="{{ successIcon }}"></promptbox>
+<promptbox id="promptbox" showTitle="{{ tipBox.showTitle }}" showIcon="{{ tipBox.showIcon }}" content="{{ tipBox.content }}" showCancel="{{ tipBox.showCancel }}" icon="{{ successIcon }}" confirmText="{{ tipBox.confirmText }}" cancelColor="{{ tipBox.cancelColor }}" bind:confirm="confirm" bind:cancel="cancel"></promptbox>

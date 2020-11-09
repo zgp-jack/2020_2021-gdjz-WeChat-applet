@@ -4,15 +4,15 @@
   margin-bottom: 20rpx;
 }
 .recruit-record-head{
-  height: 151rpx;
-
-}
-.recruit-record-head{
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
-  border-bottom: 1rpx solid  #E5E5E5;
+  border-bottom: 1rpx solid  #F5F5F5;
   padding: 0rpx 20rpx;
+  height: 150rpx;
+}
+.recruit-record-head-height {
+  height: 100rpx;
 }
 .recruit-record-oneRow{
   display: flex;
@@ -28,12 +28,12 @@
   margin-right: 20rpx;
   font-size: 30rpx;
   font-weight: bold;
-  color: #333333;
+  color: #595959;
 }
 .recruit-record-phone{
   font-size: 30rpx;
   font-weight: bold;
-  color: #333333;
+  color: #595959;
 }
 .recruit-record-button{
   width: 240rpx;

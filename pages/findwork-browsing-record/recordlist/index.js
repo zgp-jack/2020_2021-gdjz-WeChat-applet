@@ -18,6 +18,8 @@ Page({
     defalutTop:'',//置顶默认区域
     show: false,//展示界面
     isEnd: false,//找活名片状态 1 正在找 2不是正在找
+    isTop: false,//是否在置顶中状态 0 未置顶  1 置顶中
+    resumeTop: [],//置顶数据
   },
   show: function () {
     this.setData({show:true})
@@ -34,7 +36,7 @@ Page({
     // 请求页数
     let page = this.data.page;
     // 请求参数
-    let params = { mid, page }
+    let params = { mid, page, }
     wx.showLoading({ title: '数据加载中' })
     app.appRequestAction({
       url: 'focus-me/zh-view-list/',
@@ -64,8 +66,10 @@ Page({
             let zh_info = res.data.data.zh_info;
             let aid = zh_info.city || zh_info.province;
             let cid = zh_info.classify_id;
-            let defalutTop = res.data.data.default_top_area
-            that.setData({ aid, cid, defalutTop })
+            let defalutTop = res.data.data.default_top_area;
+            let isTop = zh_info.is_top;
+            let resumeTop = zh_info.resume_top;
+            that.setData({ aid, cid, defalutTop, isTop, resumeTop })
           }
         }
       },
@@ -94,20 +98,38 @@ Page({
   },
   // 浏览记录为空，去找活置顶
   goTop: function () {
-    let topdata = JSON.stringify({ has_top : 0});
-    let defalutTop = this.properties.defalutTop;
+    let resumeTop = this.data.resumeTop;
+    let hasTop = resumeTop.has_top;
+    // 如果需要去完善数据跳转去发布填写找活名片界面
+    let topdata = JSON.stringify(resumeTop)
+    let isTop = resumeTop.is_top;
     let isEnd = this.data.isEnd;
-    if (isEnd === '1') {
-      wx.navigateTo({
-        url: "/pages/clients-looking-for-work/workingtop/workingtop?topdata=" + topdata + "&defaulttop=" + defalutTop,
-      })
-    } 
-    if (isEnd === '2') {
+    let defalutTop = this.data.defalutTop;
+    if (isEnd === 2) {
       wx.navigateTo({
         url: "/pages/clients-looking-for-work/finding-name-card/findingnamecard",
       })
     }
-    
+    if (isEnd === 1) {
+      if (!hasTop) {
+        wx.navigateTo({
+          url: "/pages/clients-looking-for-work/workingtop/workingtop?topdata=" + topdata + "&defaulttop=" + defalutTop,
+        })
+      }else{
+        if (isTop === 2) {
+          // 置顶到期
+          wx.navigateTo({
+            url: "/pages/clients-looking-for-work/workingtop/workingtop?topdata=" + topdata + "&defaulttop=" + defalutTop,
+          })
+        }else{
+          // 修改置顶或者继续置顶
+          let modify = "modify";
+          wx.navigateTo({
+            url: `/pages/clients-looking-for-work/workingtop/workingtop?topdata=${topdata}&modify=${modify}`,
+          })
+        }
+      }
+    }
   },
   /**
    * 生命周期函数--监听页面加载
@@ -126,17 +148,21 @@ Page({
       let defalutTop = recordInfo.default_top_area;
       // 找活名片状态
       let isEnd = zh_info.is_end;
+      //置顶状态
+      let isTop = zh_info.is_top;
+      // 置顶数据
+      let resumeTop = zh_info.resume_top;
       // 浏览记录数据为空
       if ( lists.length === 0 || lists.length < 15) {
         this.setData({more: false})
       }
-      this.setData({ lists, aid, cid, defalutTop, isEnd })
+      this.setData({ lists, aid, cid, defalutTop, isEnd, isTop, resumeTop })
     }
-    if (!this.data.show) {
-      wx.showLoading({
-        title: '数据加载中',
-      })
-    }
+    // if (!this.data.show) {
+    //   wx.showLoading({
+    //     title: '数据加载中',
+    //   })
+    // }
   },
 
   /**
@@ -150,7 +176,14 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    let pages = getCurrentPages();
+    let index = pages.length - 1
+    let path = pages[index].__displayReporter.showReferpagepath
+    path = path.slice(0, -5)
+    if (path == "pages/clients-looking-for-work/workingtop/workingtop") {
+      this.setData({ page: 1, lists: [], more: true, show: false })
+      this.reqRecordData()
+    }
   },
 
   /**
@@ -171,7 +204,8 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-    // this.getRecruitLists()
+    this.setData({ page: 1, lists: [], more: true, show: false })
+    this.reqRecordData()
   },
 
   /**

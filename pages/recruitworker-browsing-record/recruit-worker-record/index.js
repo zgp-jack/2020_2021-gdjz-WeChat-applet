@@ -53,6 +53,17 @@ Page({
             page: page + 1 ,
             hasmore: len < 15 ? false: true,
           })
+        }else{
+          wx.hideLoading();
+          wx.showModal({
+            showCancel: false,
+            content: res.data.errmsg,
+            success: function () {
+              wx.navigateBack({
+                delta: 1,
+              })
+            }
+          })
         }
       },
       fail: function (err) {
@@ -137,7 +148,8 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-
+    this.setData({ page: 1, lists:[], hasmore: true, show: false })
+    this.getRecordLists()
   },
 
   /**

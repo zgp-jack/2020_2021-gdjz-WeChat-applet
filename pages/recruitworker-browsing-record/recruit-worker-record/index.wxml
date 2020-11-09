@@ -2,7 +2,7 @@
 <view class="recruit-record-contain" wx:if="{{ show }}">
   <block wx:for="{{ lists }}" wx:key="key">
     <view class="recruit-record-content">
-      <view class="recruit-record-head">
+      <view class="recruit-record-head {{ item.introduce?'':'recruit-record-head-height' }}">
         <view class="recruit-record-oneRow">
           <view class="recruit-record-title">
             <view class="recruit-record-name">{{ item.user_name }}</view>

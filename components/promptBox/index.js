@@ -55,8 +55,8 @@ Component({
     },
     // 发布提示内容
     content: {
-      type: String,
-      value: ""
+      type: Array,
+      value: []
     },
     // 详细描述信息
     des: {

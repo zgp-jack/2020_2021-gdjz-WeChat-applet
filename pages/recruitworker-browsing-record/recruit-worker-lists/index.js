@@ -12,9 +12,19 @@ Page({
     seeNum: 0,//浏览增加数量
     sumNum: 0,//被查看总数
     tipBox: {//提示框显示信息
-      showTitle: false,
-      content: '该信息未被查看过置顶招工信息',
-      des: '可以增加曝光率，让更多工人看到您的招工',
+      showTitle: true,
+      confirmColor:'#0099FF',
+      cancelColor:'#797979',
+      content: [{
+        des: '该信息未被查看过置顶招工信息',
+        color: '#868686',
+        text: []
+      },{
+        des: '可以增加曝光率，让更多工人看到您的招工',
+        color: '#868686',
+        text: []
+      }
+    ],
       confirmText: '增加曝光率'
     },
     topIndex:false,//点击没有被查看的招工信息的index
@@ -139,16 +149,16 @@ Page({
       let isTop = data.is_top;
       if (isTop === '1') {
         this.setData({
-          'tipBox.content':'该信息未被查看过',
-          'tipBox.des': '扩大置顶范围，可以让更多工人看到您的招工',
+          'tipBox.content[0].des':'该信息未被查看过',
+          'tipBox.content[1].des': '扩大置顶范围，可以让更多工人看到您的招工',
           'tipBox.confirmText':'扩大置顶范围',
           topIndex: infoIndex
         })
         this.selectComponent("#promptbox").show()
       }else{
         this.setData({
-          'tipBox.content':'该信息未被查看过',
-          'tipBox.des': '置顶招工信息可以增加曝光率，让更多工人看到您的招工',
+          'tipBox.content[0].des':'该信息未被查看过',
+          'tipBox.content[1].des': '置顶招工信息可以增加曝光率，让更多工人看到您的招工',
           'tipBox.confirmText':'增加曝光率',
           topIndex: infoIndex
         })
@@ -156,8 +166,8 @@ Page({
       }
     }else{
       this.setData({
-        'tipBox.content':'该信息未被查看过',
-        'tipBox.des': '置顶招工信息可以增加曝光率，让更多工人看到您的招工',
+        'tipBox.content[0].des':'该信息未被查看过',
+        'tipBox.content[1].des': '置顶招工信息可以增加曝光率，让更多工人看到您的招工',
         'tipBox.confirmText':'增加曝光率',
         topIndex: infoIndex
       })

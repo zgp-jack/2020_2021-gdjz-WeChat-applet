@@ -62,7 +62,7 @@
       </view>
       <ad class="lists-ad" unit-id="{{ unitid }}" wx:if="{{index % 6 == 0 && index > 1}}"></ad>
     </view>
-		<view class="seemore-recommend-recruit" bindtap="seemoreaction">查看更多找活信息</view>
+		<view class="seemore-recommend-recruit" bindtap="seemoreaction">{{ typeData === "record"?'查看更多>>':'查看更多找活信息' }}</view>
     </view>
   </view>
 

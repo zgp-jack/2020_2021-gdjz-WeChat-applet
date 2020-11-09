@@ -130,7 +130,11 @@ Page({
     refreshText: '',//刷新名片文本
     integral:'',//刷新消耗积分
     // 刷新提示框提示内容
-    tipContent: "刷新成功",
+    tipContent: [{
+      des: '刷新成功',
+      color: '#585963',
+      text:[]
+    }],
     // 刷新成功icon
     successIcon:app.globalData.apiImgUrl + 'yc/findwork-publish-success.png',
     reqStatus:false,//刷新请求状态

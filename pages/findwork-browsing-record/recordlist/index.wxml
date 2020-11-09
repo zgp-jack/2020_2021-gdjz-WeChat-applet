@@ -24,8 +24,10 @@
 <!-- 无浏览记录 -->
 <view class="no-record" wx:if="{{ lists.length === 0 && show}}">
   <image src="{{ emptyImage }}" mode="aspectFit"></image>
-  <view class="no-record-text">您暂时没有浏览记录</view>
-  <view class="no-record-text">快去置顶找活，让更多老板看到你</view>
+  <view class="no-record-content">
+    <view class="no-record-text">您暂时没有浏览记录</view>
+    <view class="no-record-text">快去置顶找活，让更多老板看到你</view>
+  </view>
   <view class="record-top-button" bindtap="goTop">去置顶</view>
 </view>
 

@@ -94,7 +94,7 @@ Page({
     autimg: app.globalData.apiImgUrl + 'new-list-realname-icon.png', //实名图片
     hirimg: app.globalData.apiImgUrl + 'recruit-lists-new-finding.png', //招人图片
     doneimg: app.globalData.apiImgUrl + 'published-recruit-end.png', //已找到
-    iondzs: app.globalData.apiImgUrl + 'newlist-jobposi.png',//定位
+    iondzs: app.globalData.apiImgUrl + 'lpy/biaoqian.png',//定位
     historydel: app.globalData.apiImgUrl + "historylist-del.png",
     feedbackimg: app.globalData.apiImgUrl + "feedbackmsg-img.png",
     rightarrow: app.globalData.apiImgUrl + "feedback-rightarrow.png",
@@ -120,8 +120,35 @@ Page({
     delImg: app.globalData.apiImgUrl + "new-published-close-icon.png",
     //是否显示清除按钮
     showdeletekey:false,
-    // 刷新成功提示框提示内容
-    tipContent: "刷新成功",
+    // 刷新提示框提示内容
+    tipBox: {//提示框显示信息
+      showTitle: true,
+      showIcon: false,
+      showCancel: true,
+      confirmColor:'#0099FF',
+      cancelColor:'#797979',
+      content: [{
+        des: '',
+        color: '#585963',
+        text: [{
+          textName: '',
+          color: '#585963'
+        },
+        {
+          textName: '',
+          color: 'red'
+        },
+        {
+          textName: '',
+          color: '#585963'
+        }
+      ]
+      }
+    ],
+      confirmText: ''
+    },
+    // 刷新状态
+    refreshStatus: false,
     // 刷新成功icon
     successIcon:app.globalData.apiImgUrl + 'yc/findwork-publish-success.png'
   },
@@ -1071,20 +1098,27 @@ Page({
           let showPopup = mydata.data.is_popup;
           let integral = mydata.data.integral;
           if (showPopup) {
-            wx.showModal({
-              title: '温馨提示',
-              content: `刷新找活名片让更多老板联系你，消耗${integral}积分刷新？`,
-              cancelText: "取消",
-              confirmText: "去刷新",
-              success: function (res) {
-                if (res.confirm) {
-                  app.refreshReq(2, that)
-                  that.cancelRefresh()
-                }else if (res.cancel) {
-                  that.cancelRefresh()
-                }
-              }
+            that.setData({
+              "tipBox.content[0].text[0].textName": `刷新找活名片让更多老板联系你，消耗`,
+              "tipBox.content[0].text[1].textName": integral,
+              "tipBox.content[0].text[2].textName": '积分刷新？',
+              'tipBox.confirmText': "去刷新",
             })
+            that.selectComponent("#promptbox").show()
+            // wx.showModal({
+            //   title: '温馨提示',
+            //   content: `刷新找活名片让更多老板联系你，消耗${integral}积分刷新？`,
+            //   cancelText: "取消",
+            //   confirmText: "去刷新",
+            //   success: function (res) {
+            //     if (res.confirm) {
+            //       app.refreshReq(2, that)
+            //       that.cancelRefresh()
+            //     }else if (res.cancel) {
+            //       that.cancelRefresh()
+            //     }
+            //   }
+            // })
           }
         }
       },
@@ -1095,6 +1129,17 @@ Page({
         })
       }
     })
+  },
+  confirm: function () {
+    if (this.data.refreshStatus) {
+      this.setData({refreshStatus: false})
+    }else{
+      app.refreshReq(2, this)
+      this.cancelRefresh()
+    }
+  },
+  cancel: function () {
+    this.cancelRefresh()
   },
   /**
    * 生命周期函数--监听页面加载®
@@ -1240,5 +1285,4 @@ Page({
       imageUrl: commonShareImg
     }
   }
-  
 })

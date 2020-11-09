@@ -9,7 +9,7 @@
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
-  border-bottom: 1px solid #EEEEEE;
+  border-bottom: 1px solid #F5F5F5;
   padding: 0rpx 20rpx;
 }
 .recruit-head-title{
