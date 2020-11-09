@@ -10,7 +10,7 @@
           </view>
           <view class="recruit-record-button" bindtap="getDetail" data-uuid="{{ item.resume_uuid }}">查看他的找活信息</view>
         </view>
-        <view class="recruit-record-des">{{ item.introduce }}</view>
+        <view class="recruit-record-des" wx:if="{{ item.introduce }}">{{ item.introduce }}</view>
       </view>
       <view class="recruit-record-position"><image src="{{ positionImage }}" class="record-position-image"></image>{{ item.address }}</view>
     </view>
