@@ -368,13 +368,13 @@ Page({
             successData:mydata
           })
           //找出置顶第一个城市
-          if(that.data.areaProcrum.length > 0){
-            that.setData({
-              frstCity:that.data.areaProcrum[0]
-            })
-          }else if(that.data.areaCitycrum.length > 0){
+          if(that.data.areaCitycrum.length > 0){
             that.setData({
               frstCity:that.data.areaCitycrum[0]
+            })
+          }else if(that.data.areaProcrum.length > 0){
+            that.setData({
+              frstCity:that.data.areaProcrum[0]
             })
           }else if(that.data.areaAllcrum.length > 0){
             that.setData({
