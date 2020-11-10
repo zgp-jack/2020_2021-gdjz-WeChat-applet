@@ -47,7 +47,7 @@ Page({
     let userInfo = this.data.userInfo
     wx.showLoading({ title: '数据加载中', })
     app.doRequestAction({
-      url: "resumes/collect-list/",
+      url: "resumes/collect-resume-list/",
       way: "POST",
       params: {
         userId: userInfo.userId,
@@ -61,21 +61,21 @@ Page({
         let mydata = res.data;
         console.log(mydata);
         if (mydata.errcode == "200") {
-          if (mydata.data.length > 0) {
+          if (mydata.list.length > 0) {
             let newData = _this.data.lists;
             if (_this.data.page != 1) {
-              for (let i = 0; i < mydata.data.length; i++) {
-                newData.push(mydata.data[i])
+              for (let i = 0; i < mydata.list.length; i++) {
+                newData.push(mydata.list[i])
               }
             }
             console.log(_this.data.page)
             _this.setData({
-              lists: (_this.data.page == 1) ? mydata.data : newData,
+              lists: (_this.data.page == 1) ? mydata.list : newData,
               pageSize: mydata.pageSize ? mydata.pageSize : 15,
               isFirstRequest: false
             })
             setTimeout(function () {
-              _this.setData({ nothavamore: (mydata.data.length < _this.data.pageSize) ? true : false, })
+              _this.setData({ nothavamore: (mydata.list.length < _this.data.pageSize) ? true : false, })
             }, 0)
           } else {
             _this.setData({
@@ -138,6 +138,7 @@ Page({
     let msg = e.currentTarget.dataset.msg;
     let tips = e.currentTarget.dataset.tips;
     let uuid = e.currentTarget.dataset.uuid;
+    let view = e.currentTarget.dataset.view;
     if (msg == "1") {
       wx.showModal({
         title: '温馨提示',

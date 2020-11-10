@@ -51,8 +51,8 @@ Page({
           let list = res.data.data.list;
           // 处理查看总数和新增加浏览总数的显示
           list.forEach(item => {
-            let sum_num = item.sum_num > 99? '99+' : item.sum_num;
-            let unread_num = item.unread_num > 9? '9+' : item.unread_num;
+            let sum_num = parseInt(item.sum_num ) > 99? '99+' : item.sum_num;
+            let unread_num = parseInt(item.unread_num) > 9? '9+' : item.unread_num;
             item.sum_num = sum_num;
             item.unread_num = unread_num;
           });
@@ -62,6 +62,17 @@ Page({
             lists: _list.concat(list),
             page: page + 1 ,
             hasmore: len < 15? false: true,
+          })
+        }else{
+          wx.showModal({
+            title: '提示',
+            content: res.data.errmsg,
+            showCancel:false,
+            success: function (res) {
+              wx.navigateBack({
+                delta: 1,
+              })
+            }
           })
         }
       },
@@ -147,7 +158,7 @@ Page({
     if (top == '1') {
       let data = topdata.top_data; //置顶数据
       let isTop = data.is_top;
-      if (isTop === '1') {
+      if (isTop == '1') {
         this.setData({
           'tipBox.content[0].des':'该信息未被查看过',
           'tipBox.content[1].des': '扩大置顶范围，可以让更多工人看到您的招工',
@@ -193,8 +204,8 @@ Page({
       let recordInfo = JSON.parse(options.recordInfo);
       let lists = recordInfo.list;
       lists.forEach(item => {
-        let sum_num = item.sum_num > 99? '99+' : item.sum_num;
-        let unread_num = item.unread_num > 9? '9+' : item.unread_num;
+        let sum_num = parseInt(item.sum_num) > 99? '99+' : item.sum_num;
+        let unread_num = parseInt(item.unread_num) > 9? '9+' : item.unread_num;
         item.sum_num = sum_num;
         item.unread_num = unread_num;
       });

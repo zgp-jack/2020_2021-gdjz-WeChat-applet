@@ -82,6 +82,7 @@ Component({
       }
     },
     seemoreaction:function(){
+      let typeData = this.data.typeData;
       let { aid, cid, child, uuid } = this.properties
       let len = this.data.lists.length
       let num = parseInt(this.data.pagesize)

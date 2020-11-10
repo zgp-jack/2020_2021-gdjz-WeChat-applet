@@ -52,6 +52,7 @@ Page({
             lists: _list.concat(list),
             page: page + 1 ,
             hasmore: len < 15 ? false: true,
+            show: true
           })
         }else{
           wx.hideLoading();

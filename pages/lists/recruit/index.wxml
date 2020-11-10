@@ -45,7 +45,7 @@
     <ad  class="lists-ad" unit-id="{{ unitid }}"  wx:if="{{index % 5 == 0 && index > 5}}"></ad>
     </block>
 
-    <view class='nodata-texttips' wx:if="{{ !hasmore && lists.length }}">
+    <view class='nodata-texttips' wx:if="{{ !hasmore && lists.length && typeData != 'record' }}">
       <view class="seemore-recommend-recruit" bindtap="seemoretorecruit">查看更多</view>
     </view>
 

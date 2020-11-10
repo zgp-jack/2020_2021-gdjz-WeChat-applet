@@ -15,12 +15,12 @@
   <view class='published-content clearfix'>
 
 
-    <view class="listsboxdetailover" bindtap="showCollectInfo" data-msg="{{ item.show_tips }}" data-tips="{{ item.check_tips_string }}" data-uuid="{{ item.resume.uuid }}" wx:for="{{lists}}" wx:key="{{index}}">
-      <image src="{{finded}}" class="finded" wx:if="{{item.resume.is_end == 2}}"></image>
+    <view class="listsboxdetailover" bindtap="showCollectInfo" data-msg="{{ item.show_tips }}" data-tips="{{ item.check_tips_string }}" data-uuid="{{ item.resume_uuid }}" wx:for="{{lists}}" wx:key="{{index}}" data-view="{{ item.is_view }}">
+      <image src="{{finded}}" class="finded" wx:if="{{item.is_end == 2}}"></image>
       <view class="listsoverhl">
         <view class="listsboxdetailo">
           <view>
-            <image class="oimg" src="{{item.resume.headerimg}}" data-index="{{index}}" binderror="errImg"></image>
+            <image class="oimg" src="{{item.headerimg}}" data-index="{{index}}" binderror="errImg"></image>
           </view>
           <view class="listsboxintro">
             <view class="listsboxage">
@@ -37,14 +37,14 @@
               </view> -->
 
               <view class="listsboxageone">
-                <view class="listsboxname" wx:if="{{item.resume.username}}">
-                  <text>{{item.resume.username}}</text>
+                <view class="listsboxname" wx:if="{{item.username}}">
+                  <text>{{item.username}}</text>
                 </view>
-                <view wx:if="{{item.resume.gender  == '1' ||item.resume.gender  == '2' }}" class="{{(item.resume.gender =='1'||item.resume.gender =='2')?'listsboxsex':''}}">
-                  <text>{{item.resume.gender  == "1" ? "男" : item.resume.gender == "2"?"女":""}}</text>
+                <view wx:if="{{item.gender  == '1' ||item.gender  == '2' }}" class="{{(item.gender =='1'||item.gender =='2')?'listsboxsex':''}}">
+                  <text>{{item.gender  == "1" ? "男" : item.gender == "2"?"女":""}}</text>
                 </view>
-                <view class="listsboxagezong" wx:if="{{item.resume.birthday != '' || item.resume.birthday != 0}}">
-                  <text>{{item.resume.birthday}}岁</text>
+                <view class="listsboxagezong" wx:if="{{item.birthday != '' || item.birthday != 0}}">
+                  <text>{{item.birthday}}岁</text>
                 </view>
 
 
@@ -52,44 +52,44 @@
 
 
 
-                <image wx:if="{{item.resume.certificate == 1}}" src="{{authentication}}"></image>
+                <image wx:if="{{item.certificate == 1}}" src="{{authentication}}"></image>
 
               </view>
-              <view class="listsboxagetwo" wx:if="{{item.resume.gender != '0'}}">
-                <text id="listsboxnation" wx:if="{{item.resume.nation}}">{{item.resume.nation}}</text>
-                <text wx:if="{{item.resume.prof_degree}}">{{item.resume.prof_degree}}</text>
+              <view class="listsboxagetwo" wx:if="{{item.gender != '0'}}">
+                <text id="listsboxnation" wx:if="{{item.nation}}">{{item.nation}}</text>
+                <text wx:if="{{item.prof_degree}}">{{item.prof_degree}}</text>
               </view>
-              <view class="listsboxagetwot" wx:if="{{item.resume.gender == '0'}}">
-                <text wx:for="{{item.resume.tags}}" wx:key="{{index}}">{{item.label_name}}</text>
+              <view class="listsboxagetwot" wx:if="{{item.gender == '0'}}">
+                <text wx:for="{{item.tags}}" wx:key="{{index}}">{{item.label_name}}</text>
               </view>
             </view>
-            <view class="listsboxshow" wx:if="{{item.resume.type}}">
-              {{item.resume.type}}
+            <view class="listsboxshow" wx:if="{{item.type}}">
+              {{item.type}}
             </view>
           </view>
         </view>
         <view class="listsboxlable">
-          <view class="listsboxlableone" wx:for="{{item.resume.occupations}}" wx:key="{{index}}">
+          <view class="listsboxlableone" wx:for="{{item.occupations}}" wx:key="{{index}}">
             {{item}}
           </view>
 
         </view>
-        <view class="listsboxself" wx:if="{{item.resume.introduce}}">
-          {{item.resume.introduce}}
+        <view class="listsboxself" wx:if="{{item.introduce}}">
+          {{item.introduce}}
         </view>
-        <view class="listsboxself" wx:if="{{!item.resume.introduce}}"></view>
+        <view class="listsboxself" wx:if="{{!item.introduce}}"></view>
         <view class="listsboxlocal">
           <view class="listsboxlocalone">
             <view>
                 <image src="{{biaoqian}}"></image>
               </view>
-            <view wx:if="{{item.resume.show_address}}" class="show_address_all"> 
-              <text class="show_address">{{item.resume.show_address}}</text>
-              <text wx:if="{{item.resume.distance}}" class="distance">{{item.resume.distance}}</text>
+            <view wx:if="{{item.show_address}}" class="show_address_all"> 
+              <text class="show_address">{{item.show_address}}</text>
+              <text wx:if="{{item.distance}}" class="distance">{{item.distance}}</text>
             </view>
           </view>
           <view class="listsboxlocaltwo">
-            <text class="cancel-collect-item" data-id="{{ item.resume.uuid }}" catchtap="cancleCollect" data-index="{{ index }}">取消收藏</text>
+            <text class="cancel-collect-item" data-id="{{ item.resume_uuid }}" catchtap="cancleCollect" data-index="{{ index }}">取消收藏</text>
           </view>
         </view>
       </view>

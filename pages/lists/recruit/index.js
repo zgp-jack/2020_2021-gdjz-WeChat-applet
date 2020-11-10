@@ -26,6 +26,7 @@ Page({
     infoId: '',
     loading: false,
     show:false,//展示界面
+    typeData:''
   },
 
   /**
