@@ -206,6 +206,7 @@ Page({
   onPullDownRefresh: function () {
     this.setData({ page: 1, lists: [], more: true, show: false })
     this.reqRecordData()
+    wx.stopPullDownRefresh();
   },
 
   /**

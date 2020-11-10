@@ -531,7 +531,7 @@
     <image src="{{participation}}"></image>分享</button>
 </view> -->
 <view class="cardnine" wx:if="{{showtopone}}">
-  <view class="cardnineone" bindtap="preview">
+  <view class="cardnineone">
     <view>提升活跃度，让更多老板看到你的名片</view>
     <view>{{ refreshText }}(消耗{{ integral }}积分/次)</view>
   </view>

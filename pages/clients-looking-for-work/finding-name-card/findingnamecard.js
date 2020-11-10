@@ -1423,6 +1423,8 @@ Page({
    */
   onPullDownRefresh: function () {
     this.getdetail();
+    // 停止下拉动作
+    wx.stopPullDownRefresh();
   },
 
   /**

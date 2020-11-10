@@ -250,6 +250,7 @@ Page({
   onPullDownRefresh: function () {
     this.setData({ page: 1, lists: [], hasmore: true })
     this.getRecruitLists()
+    wx.stopPullDownRefresh();
   },
 
   /**
