@@ -933,7 +933,7 @@ Page({
       for(let i=0;i<type.length;i++) {//循环一级列表
         if(type[i].id == toptype){
           _typeid = type[i].id
-          _typetext = type[i].realNames
+          _typetext = type[i].name
           //置顶成功后的 工种 存入缓存
           wx.setStorageSync('typeTextgr', _typetext)
           wx.setStorageSync('typeIdgr', _typeid)
@@ -982,7 +982,7 @@ Page({
       wx.setStorageSync('areaText', frstCity.name)
     }
     //置顶成功后的工种id
-    if(options.topOcc){
+    if(options.topOcc && options.topOcc !== "0"){
       //根据工种id匹配工种名称
       this.matchingType(options.topOcc)
     }

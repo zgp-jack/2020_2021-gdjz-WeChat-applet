@@ -715,7 +715,6 @@ Page({
     }
   },
   showseleted(item) {
-    debugger
     let that = this;
     let areadatafor = app.arrDeepCopy(that.data.areadatas);
     let detail = {
@@ -982,7 +981,6 @@ Page({
     this.setData({
       maxTips:options.toTopTip
     })
-    debugger
     //this.modifytop(options)
     //this.getNewId(options)
   },
