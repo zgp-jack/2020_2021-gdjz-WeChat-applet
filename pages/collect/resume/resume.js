@@ -140,11 +140,23 @@ Page({
     let uuid = e.currentTarget.dataset.uuid;
     let view = e.currentTarget.dataset.view;
     let viewMsg = e.currentTarget.dataset.viewmsg
+    let _id = e.currentTarget.dataset.id
+    let _this = this
     if (!view) {
       wx.showModal({
         showCancel: false,
         content: viewMsg,
         success: function () {
+          //点击已经被删除的信息 提示已下架-点击确定删除该信息
+          let itemListData = _this.data.lists
+          for(let i = 0 ;i<itemListData.length;i++){
+            if(itemListData[i].id == _id){
+              itemListData.splice(i,1)
+              _this.setData({
+                lists:itemListData
+              })
+            }
+          }
         }
       })
       return

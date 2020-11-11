@@ -13,7 +13,8 @@
     </view>
 
     <view class='published-content clearfix'>
-        <view class="indxlistitem"  wx:for="{{ lists }}" wx:key="{{ index }}" data-id="{{ item.id }}" data-type="job" bindtap='showCollectInfo' data-msg="{{ item.check_status.showTips }}" data-tips="{{ item.check_status.tipsMsg }}">
+        <view class="indxlistitem"  wx:for="{{ lists }}" wx:key="{{ index }}" data-id="{{ item.id }}" data-type="job" bindtap='showCollectInfo' data-msg="{{ item.check_status.showTips }}" data-tips="{{ item.check_status.tipsMsg }}"
+        data-view="{{ item.is_view }}" data-viewmsg="{{ item.view_msg }}" data-id="{{item.id}}">
           <image  wx:if="{{ (item.is_end == '2') }}" class="imgseek" src="{{finded}}"></image>
  
             <!-- 上 -->
