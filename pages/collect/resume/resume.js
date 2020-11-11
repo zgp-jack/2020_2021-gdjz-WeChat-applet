@@ -139,6 +139,16 @@ Page({
     let tips = e.currentTarget.dataset.tips;
     let uuid = e.currentTarget.dataset.uuid;
     let view = e.currentTarget.dataset.view;
+    let viewMsg = e.currentTarget.dataset.viewmsg
+    if (!view) {
+      wx.showModal({
+        showCancel: false,
+        content: viewMsg,
+        success: function () {
+        }
+      })
+      return
+    }
     if (msg == "1") {
       wx.showModal({
         title: '温馨提示',

@@ -49,6 +49,9 @@ page{
   display: flex;
   align-items: center;
   color: #828586;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
 }
 .record-position-image{
   width: 24rpx;
