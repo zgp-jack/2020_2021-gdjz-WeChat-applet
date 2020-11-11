@@ -6,7 +6,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    page: 2,//请求页数,第一页数据有会员中心点击后url传递
+    page: 1,//请求页数,第一页数据有会员中心点击后url传递
     hasmore: true,//是否还有更多数据
     lists: [],//我的正在招工信息列表
     seeNum: 0,//浏览增加数量
@@ -29,8 +29,9 @@ Page({
     },
     topIndex:false,//点击没有被查看的招工信息的index
     clickId: '',//点击查看浏览记录的招工信息id
+    nodataImg: app.globalData.apiImgUrl + "collect-nodata.png",
   },
-  getRecruitLists: function () {
+  getRecruitLists: function (action) {
     let that = this;
     // 用户uid
     let userInfo = wx.getStorageSync('userInfo')
@@ -59,9 +60,35 @@ Page({
           let _list = that.data.lists
           let len = list.length
           that.setData({
-            lists: _list.concat(list),
+            lists: action? list: _list.concat(list),
             page: page + 1 ,
             hasmore: len < 15? false: true,
+          })
+        }else if (res.data.errcode == "have_not_zg_ing") {
+          // 有招工信息，没有正在招的跳转到招工信息列表
+          wx.showModal({
+            title: '',
+            content: res.data.errmsg,
+            confirmText: "去修改",
+            success: function (res) {
+              if (res.confirm) {
+                wx.navigateTo({
+                  url: '/pages/published/recruit/list',
+                })
+              }
+            }
+          })
+        }else if (res.data.errcode == "have_not_zg") {
+          // 没有招工信息，跳转到发布招工界面
+          wx.showModal({
+            title: '',
+            content: res.data.errmsg,
+            confirmText: "去发布",
+            success: function (res) {
+              if (res.confirm) {
+                app.initJobView()
+              }
+            }
           })
         }else{
           wx.showModal({
@@ -78,10 +105,7 @@ Page({
       },
       fail: function (err) {
         wx.hideLoading();
-        wx.showToast({
-          title: '网络出错，数据加载失败！',
-          icon: "none"
-        })
+        app.showMyTips('网络出错，数据加载失败！')
       }
     })
   },
@@ -233,7 +257,7 @@ Page({
     path = path.slice(0, -5)
     if (path == "pages/workingtopAll/workingtop/workingtop") {
       this.setData({ page: 1, lists: [], hasmore: true })
-      this.getRecruitLists()
+      this.getRecruitLists(true)
     }
     if (path == "pages/recruitworker-browsing-record/recruit-worker-record/index") {
       // 点击某招工信息浏览记录，清空对应该记录的未读数
@@ -259,8 +283,8 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-    this.setData({ page: 1, lists: [], hasmore: true })
-    this.getRecruitLists()
+    this.setData({ page: 1, hasmore: true })
+    this.getRecruitLists(true)
     wx.stopPullDownRefresh();
   },
 
@@ -269,7 +293,7 @@ Page({
    */
   onReachBottom: function () {
     if (this.data.hasmore) {
-      this.getRecruitLists()
+      this.getRecruitLists(false)
     }
   },
 

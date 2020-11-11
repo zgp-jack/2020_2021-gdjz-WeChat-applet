@@ -91,8 +91,17 @@ Component({
       }
     },
     seemoreaction:function(){
-      
-
+      let { aid, cid, infoId } = this.properties
+      let cidArray = cid.split(',');
+      let cidItem = cidArray[0];
+      // 推荐列表数据的来源，“record”代表来自于浏览记录
+      let type = this.data.type;
+      // 如果推荐数据是在浏览记录页面，点击“查看更多”跳转到招工列表
+      if (type == 'record') {
+        wx.reLaunch({
+          url: `/pages/index/index?id=${cidItem}&aid=${aid}`,
+        })
+      }
       let len = this.data.lists.length
       let num = this.data.pagesize
       if(len < num){
@@ -112,7 +121,6 @@ Component({
         })
         return false
       }
-      let { aid, cid, infoId } = this.properties
       if(this.properties.child){
         var pages = getCurrentPages() 
         var prePage = pages[pages.length-2]

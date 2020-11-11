@@ -895,6 +895,27 @@ Page({
     this.setData({
       fillterArea: areas.getAreaArr
     })
+    if (options.hasOwnProperty("aid")) {
+      let aid = options.aid
+      let area = areas.getAreaArr;
+      let areaName = '';
+      area.forEach(areaItem => {
+        if (areaItem.has_children) {
+          let index = areaItem.children.findIndex((item=>item.id == aid))
+          if (index != -1) {
+            areaName = areaItem.children[index].name
+          }
+        }else{
+          if (areaItem.id == aid) {
+            areaName = areaItem.name;
+          }
+        }
+      });
+      if (areaName) {
+        wx.setStorageSync('areaId', aid);
+        wx.setStorageSync('areaText', areaName)
+      }
+    }
     let {id} = options
     if (app.globalData.allTypes) {
       _this.setData({ fillterType: app.globalData.allTypes.classTree, fillterListType: app.globalData.allTypes.jobListType, "searchDate.joblisttype": joblisttype ? joblisttype : app.globalData.allTypes.jobListType[0].type, listText: joblistname ? joblistname : app.globalData.allTypes.jobListType[0].name });
@@ -1002,6 +1023,7 @@ Page({
         })
         //判断是否有传入 工种id 有则存入缓存
         wx.setStorageSync('typeText',classTree[i].name)
+        wx.setStorageSync('typeId', id)
         return
       }else{
         if (classTree[i].has_children === 1) {
@@ -1105,20 +1127,6 @@ Page({
               'tipBox.confirmText': "去刷新",
             })
             that.selectComponent("#promptbox").show()
-            // wx.showModal({
-            //   title: '温馨提示',
-            //   content: `刷新找活名片让更多老板联系你，消耗${integral}积分刷新？`,
-            //   cancelText: "取消",
-            //   confirmText: "去刷新",
-            //   success: function (res) {
-            //     if (res.confirm) {
-            //       app.refreshReq(2, that)
-            //       that.cancelRefresh()
-            //     }else if (res.cancel) {
-            //       that.cancelRefresh()
-            //     }
-            //   }
-            // })
           }
         }
       },

@@ -26,7 +26,8 @@ Page({
     infoId: '',
     loading: false,
     show:false,//展示界面
-    typeData:''
+    typeData:'',
+    uuid:''
   },
 
   /**
@@ -61,9 +62,13 @@ Page({
       loading: true
     })
     let userInfo = wx.getStorageSync('userInfo');
+    let userUuid = wx.getStorageSync('userUuid');
     let mid = null;
     if (userInfo) {
       mid = userInfo.userId;
+    }
+    if (userUuid) {
+      this.setData({uuid:userUuid})
     }
     let user_id = this.data.infoId;
     let typeData = this.data.typeData;
@@ -255,8 +260,9 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-    let {loading} = this.data
+    let {loading, hasmore} = this.data
     if(loading) return false
+    if (!hasmore) return false
     this.getRecommendLists()
   },
 })

@@ -92,7 +92,6 @@ Page({
     let max_province = that.data.max_province;
     let max_city = that.data.max_city;
     let toTopTip = that.data.toTopTip;
-    debugger
     wx.navigateTo({
       url: `/pages/workingtopAll/distruction/distruction?max_province=${max_province}&max_city=${max_city}&allpro= ${allpro}&allcity= ${allcity}&specialids=${specialids}&allall=${allall}&toTopTip=${toTopTip}`,
     })

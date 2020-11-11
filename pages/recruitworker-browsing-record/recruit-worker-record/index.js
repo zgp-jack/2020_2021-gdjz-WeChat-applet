@@ -21,7 +21,8 @@ Page({
     this.setData({show:true})
     wx.hideLoading()
   },
-  getRecordLists: function () {
+  getRecordLists: function (action) {
+    //'action'为true时代表重新第一页刷新数据
     let zg_info_id = this.data.id;
     let that = this;
     // 用户uid
@@ -49,7 +50,7 @@ Page({
           let _list = that.data.lists
           let len = list.length
           that.setData({
-            lists: _list.concat(list),
+            lists: action? list: _list.concat(list),
             page: page + 1 ,
             hasmore: len < 15 ? false: true,
             show: true
@@ -69,10 +70,7 @@ Page({
       },
       fail: function (err) {
         wx.hideLoading();
-        wx.showToast({
-          title: '网络出错，数据加载失败！',
-          icon: "none"
-        })
+        app.showMyTips('网络出错，数据加载失败！')
       }
     })
   },
@@ -114,7 +112,7 @@ Page({
     if (options.hasOwnProperty("cid")) {
       this.setData({ cid: options.cid })
     }
-    this.getRecordLists()
+    this.getRecordLists(true)
   },
 
   /**
@@ -149,8 +147,8 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-    this.setData({ page: 1, lists:[], hasmore: true, show: false })
-    this.getRecordLists()
+    this.setData({ page: 1, hasmore: true, show: false })
+    this.getRecordLists(true)
     wx.stopPullDownRefresh();
   },
 
@@ -160,7 +158,7 @@ Page({
   onReachBottom: function () {
     let hasmore = this.data.hasmore;
     if (hasmore) {
-      this.getRecordLists()
+      this.getRecordLists(false)
     }
   },
 

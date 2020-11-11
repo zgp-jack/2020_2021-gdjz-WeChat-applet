@@ -792,12 +792,33 @@ Page({
   // },
   
   //如果加载工种信息的时候如果只有一条数据，那么选择工种默认选择那一条数据
-  getFilterData: function () {
+  getFilterData: function (options) {
     let _this = this;
     console.log(app.globalData)
     this.setData({
       fillterArea: areas.getAreaArr
     })
+    if (options.hasOwnProperty("aid")) {
+      let aid = options.aid
+      let area = areas.getAreaArr;
+      let areaName = '';
+      area.forEach(areaItem => {
+        if (areaItem.has_children) {
+          let index = areaItem.children.findIndex((item=>item.id == aid))
+          if (index != -1) {
+            areaName = areaItem.children[index].name
+          }
+        }else{
+          if (areaItem.id == aid) {
+            areaName = areaItem.name;
+          }
+        }
+      });
+      if (areaName) {
+        wx.setStorageSync('areaId', aid);
+        wx.setStorageSync('areaText', areaName)
+      }
+    }
     if (app.globalData.allTypes) {
       _this.setData({ fillterType: app.globalData.allTypes.classTree, fillterTeam: app.globalData.allTypes.staffTree, fillterNewest: app.globalData.allTypes.resumeListType });
       if (_this.data.fillterType.length == 1) _this.setData({ typeText: _this.data.fillterType[0].name })
@@ -986,9 +1007,12 @@ Page({
       //根据工种id匹配工种名称
       this.matchingType(options.topOcc)
     }
+    if (options.hasOwnProperty("cid")) {
+      this.matchingType(options.cid)
+    }
     this.initSearchHistory();
     this.initUserShareTimes();
-    this.getFilterData();
+    this.getFilterData(options);
     this.valiFilterProvince();
     this.initFooterData();
     this.initNeedData();

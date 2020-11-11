@@ -196,10 +196,7 @@ Page({
       },
       fail: function (err) {
         wx.hideLoading();
-        wx.showToast({
-          title: '网络出错，数据加载失败！',
-          icon: "none"
-        })
+        app.showMyTips('网络出错，数据加载失败！')
       }
     })
   },
@@ -264,33 +261,32 @@ Page({
       },
       fail: function (err) {
         wx.hideLoading();
-        wx.showToast({
-          title: '网络出错，数据加载失败！',
-          icon: "none"
-        })
+        app.showMyTips('网络出错，数据加载失败！')
       }
     })
   },
   valiUserUrl: function (e) {
-    let url = e.currentTarget.dataset.url;
-    // 用户信息
-    let userInfo = this.data.userInfo;
-    // 如果有用户信息判断点击的是否是招工找活的“谁看过我”
-    if (userInfo) {
-      // 点击“我的找活—谁看过我”
-      if (url === '/pages/findwork-browsing-record/recordlist/index') {
-        // 没有找活名片给出去发布找活名片提示信息,有找活名片前往浏览记录
-        this.reqRecordData()
-      }else if(url === '/pages/recruitworker-browsing-record/recruit-worker-lists/index'){
-        this.getRecruitLists()
-      }else{
-        app.globalData.showdetail = true
-        app.valiUserUrl(e, this.data.userInfo)
-      }
-    }else{
-      app.globalData.showdetail = true
-      app.valiUserUrl(e, this.data.userInfo)
-    }
+    // let url = e.currentTarget.dataset.url;
+    // // 用户信息
+    // let userInfo = this.data.userInfo;
+    // // 如果有用户信息判断点击的是否是招工找活的“谁看过我”
+    // if (userInfo) {
+    //   // 点击“我的找活—谁看过我”
+    //   if (url === '/pages/findwork-browsing-record/recordlist/index') {
+    //     // 没有找活名片给出去发布找活名片提示信息,有找活名片前往浏览记录
+    //     this.reqRecordData()
+    //   }else if(url === '/pages/recruitworker-browsing-record/recruit-worker-lists/index'){
+    //     this.getRecruitLists()
+    //   }else{
+    //     app.globalData.showdetail = true
+    //     app.valiUserUrl(e, this.data.userInfo)
+    //   }
+    // }else{
+    //   app.globalData.showdetail = true
+    //   app.valiUserUrl(e, this.data.userInfo)
+    // }
+    app.globalData.showdetail = true
+    app.valiUserUrl(e, this.data.userInfo)
   },
   suggestUserUrl: function (e) {
     app.globalData.showdetail = true
