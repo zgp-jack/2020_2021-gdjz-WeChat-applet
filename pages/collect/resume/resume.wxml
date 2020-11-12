@@ -15,7 +15,7 @@
   <view class='published-content clearfix'>
 
 
-    <view class="listsboxdetailover" bindtap="showCollectInfo" data-msg="{{ item.show_tips }}" data-tips="{{ item.check_tips_string }}" data-uuid="{{ item.resume_uuid }}" wx:for="{{lists}}" wx:key="{{index}}" data-view="{{ item.is_view }}" data-viewmsg="{{ item.view_msg }}">
+    <view class="listsboxdetailover" bindtap="showCollectInfo" data-msg="{{ item.show_tips }}" data-tips="{{ item.check_tips_string }}" data-uuid="{{ item.resume_uuid }}" wx:for="{{lists}}" wx:key="{{index}}" data-view="{{ item.is_view }}" data-viewmsg="{{ item.view_msg }}" data-id="{{item.id}}">
       <image src="{{finded}}" class="finded" wx:if="{{item.is_end == 2}}"></image>
       <view class="listsoverhl">
         <view class="listsboxdetailo">
