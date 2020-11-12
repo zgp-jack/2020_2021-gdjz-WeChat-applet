@@ -30,8 +30,10 @@ Page({
     topIndex:false,//点击没有被查看的招工信息的index
     clickId: '',//点击查看浏览记录的招工信息id
     nodataImg: app.globalData.apiImgUrl + "collect-nodata.png",
+    dataStatus: '', //
   },
   getRecruitLists: function (action) {
+    // action 确定是否需要重新加载数据，true代表重新加载数据
     let that = this;
     // 用户uid
     let userInfo = wx.getStorageSync('userInfo')
@@ -47,6 +49,7 @@ Page({
       way: 'POST',
       params: params,
       success: function (res) {
+        that.setData({ dataStatus: res.data.errcode })
         if (res.data.errcode == "success") {
           wx.hideLoading();
           let list = res.data.data.list;
@@ -63,43 +66,6 @@ Page({
             lists: action? list: _list.concat(list),
             page: page + 1 ,
             hasmore: len < 15? false: true,
-          })
-        }else if (res.data.errcode == "have_not_zg_ing") {
-          // 有招工信息，没有正在招的跳转到招工信息列表
-          wx.showModal({
-            title: '',
-            content: res.data.errmsg,
-            confirmText: "去修改",
-            success: function (res) {
-              if (res.confirm) {
-                wx.navigateTo({
-                  url: '/pages/published/recruit/list',
-                })
-              }
-            }
-          })
-        }else if (res.data.errcode == "have_not_zg") {
-          // 没有招工信息，跳转到发布招工界面
-          wx.showModal({
-            title: '',
-            content: res.data.errmsg,
-            confirmText: "去发布",
-            success: function (res) {
-              if (res.confirm) {
-                app.initJobView()
-              }
-            }
-          })
-        }else{
-          wx.showModal({
-            title: '提示',
-            content: res.data.errmsg,
-            showCancel:false,
-            success: function (res) {
-              wx.navigateBack({
-                delta: 1,
-              })
-            }
           })
         }
       },
@@ -173,6 +139,19 @@ Page({
   confirm: function () {
     this.goTop()
   },
+  // 根据状态进行跳转
+  goPage: function () {
+    let dataStatus = this.data.dataStatus;
+    if (dataStatus == 'have_not_zg') {
+      app.initJobView()
+      return false
+    }
+    if (dataStatus == 'have_not_zg_ing') {
+      wx.navigateTo({
+        url: '/pages/published/recruit/list',
+      })
+    }
+  },
   // 如果招工信息一次没有被查看，点击后展示提示框
   showModel: function (e) {
     let infoIndex =e.currentTarget.dataset.index;//点击招工信息的index
@@ -223,21 +202,8 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
-    if (options.hasOwnProperty("recordInfo")) {
-      let recordInfo = JSON.parse(options.recordInfo);
-      let lists = recordInfo.list;
-      lists.forEach(item => {
-        let sum_num = parseInt(item.sum_num) > 99? '99+' : item.sum_num;
-        let unread_num = parseInt(item.unread_num) > 9? '9+' : item.unread_num;
-        item.sum_num = sum_num;
-        item.unread_num = unread_num;
-      });
-      if (lists.length < 15) {
-        this.setData({hasmore: false})
-      }
-      this.setData({lists})
-    }
+  onLoad: function () {
+    this.getRecruitLists(true)
   },
 
   /**

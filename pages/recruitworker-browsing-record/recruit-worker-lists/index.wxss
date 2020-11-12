@@ -86,9 +86,6 @@
   font-size: 30rpx;
   margin-bottom: 30rpx;
 }
-.nodataText {
-  margin-top: -60rpx;
-}
 .lists-nodata button {
   width: 320rpx;
   background-color: #0099FF;
@@ -100,4 +97,8 @@
   text-align: center;
   letter-spacing: 5rpx;
   box-shadow: 0px 11px 22px 0px rgba(86, 146, 228, 0.32);
+}
+.common-nodatabox image{
+  width: 250rpx;
+  height: 250rpx;
 }
