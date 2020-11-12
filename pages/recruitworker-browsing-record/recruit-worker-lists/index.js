@@ -225,6 +225,10 @@ Page({
       this.setData({ page: 1, lists: [], hasmore: true })
       this.getRecruitLists(true)
     }
+    if (path == "pages/fast/issue/index") {
+      this.setData({ page: 1, lists: [], hasmore: true })
+      this.getRecruitLists(true)
+    }
     if (path == "pages/recruitworker-browsing-record/recruit-worker-record/index") {
       // 点击某招工信息浏览记录，清空对应该记录的未读数
       this.clearUnRead()
