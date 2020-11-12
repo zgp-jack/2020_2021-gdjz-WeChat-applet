@@ -16,10 +16,10 @@
         设置密码
       </navigator>
     </view>
-    <view class='user-editinfo-item clearfix'>
-      <text class='user-editinfo-left'>手机号</text>
-      <navigator class='user-editinfo-right' url='/packageOther/pages/userinfo/phone/phone' open-type="navigate">
-        {{ member.tel }}
+    <view class='user-editinfo-item'>
+      <navigator url='/packageOther/pages/userinfo/phone/phone' style="height:100%" open-type="navigate" class="clearfix">
+        <text class='user-editinfo-left'>手机号</text>
+        <text class='user-editinfo-right'>{{ member.tel }}</text>
       </navigator>
     </view>
   </view>
