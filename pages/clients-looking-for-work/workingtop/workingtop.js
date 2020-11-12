@@ -463,9 +463,8 @@ Page({
   },
   // 初始化已经置顶的置顶数据
   gettopareas(options) {
-    // debugger
     let that = this;
-    let topdata = JSON.parse(options.topdata)
+    let topdata = options.topdata
     let area = wx.getStorageSync('areadata')
     let hastop= topdata.has_top;
     let istop = topdata.is_top;
@@ -861,20 +860,39 @@ Page({
     })
     this.getCityNum()
   },
-  // 获取找活列表url传过来的值并保存到data中
-  getNewId(options) {
-    if (options.hasOwnProperty("topdata")) {
+  // 获取找活列表url传过来的值并保存到data中 //是否是会员中心过来的
+  getNewId(options,is_ucnter) {
+    if(is_ucnter){
+      let _options = {
+        topdata:{
+          has_top:0,
+          is_top:options.data.is_top,
+        },
+        defaultTop:options.data.default_top_area
+      }
       this.setData({
-        topdata: JSON.parse(options.topdata)
+        topdata:_options.topdata,
+        defaultTop:options.data.default_top_area
       })
+      // 初始化置顶城市与置顶天数
+      this.initTopData()
+      app.activeRefresh()
+       // 初始化置顶状态下的数据
+      this.gettopareas(_options)
+    }else{
+      if (options.hasOwnProperty("topdata")) {
+        this.setData({
+          topdata: JSON.parse(options.topdata)
+        })
+      }
+      if (options.hasOwnProperty("defaulttop")) {
+        this.setData({
+          defaultTop: JSON.parse(options.defaulttop)
+        })
+      }
+      // 初始化置顶状态下的数据
+      this.gettopareas(JSON.parse(options))
     }
-    if (options.hasOwnProperty("defaulttop")) {
-      this.setData({
-        defaultTop: JSON.parse(options.defaulttop)
-      })
-    }
-    // 初始化置顶状态下的数据
-    this.gettopareas(options)
   },
   getAllpoint(timeItem) {
     // 积分单价差
@@ -1032,6 +1050,7 @@ Page({
   let hastop = this.data.topdata.has_top
   let istop = this.data.topdata.is_top
   let defaultTop = this.data.defaultTop
+  debugger
   //如果时初次置顶或者置顶到期，置顶地区默认找活名片地区
   if(hastop == 0 || istop == 2){
     this.getDefaultArea(defaultTop)
@@ -1040,12 +1059,33 @@ Page({
     this.getdetail()
   }
  },
+ //会员中心进入置顶页面请求置顶参数
+resumeTopInfo() {
+  let userInfo = wx.getStorageSync("userInfo");
+  let _this = this
+  app.appRequestAction({
+    url: 'resumes/get-resume-top-info/',
+    way: 'POST',
+    params:userInfo,
+    mask: true,
+    success: function(res) {
+      if(res.data.errcode == 'ok'){
+        _this.getNewId(res.data,1)
+      }
+    }
+  })
+},
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-    // 获取url带过来的数据
-    this.getNewId(options)
+    //判断是否是会员中心跳转过来 
+    if(!options.topdata){
+      this.resumeTopInfo()
+    }else {
+      // 获取url带过来的数据
+      this.getNewId(options)
+    }
     // 初始化置顶城市与置顶天数
     this.initTopData()
     app.activeRefresh()

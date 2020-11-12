@@ -40,15 +40,28 @@ Page({
     verifiedquery: app.globalData.apiImgUrl + 'ws/verifiedquery.png',
     help: app.globalData.apiImgUrl + 'ws/help.png',
     setup: app.globalData.apiImgUrl + 'ws/setup.png',
-    bannerbg: app.globalData.apiImgUrl + 'ws/bannerbg.png',
-    bannerqz: app.globalData.apiImgUrl + 'ws/bannerqz.png',
-    bannerws: app.globalData.apiImgUrl + 'ws/bannerws.png',
-    bannerzg: app.globalData.apiImgUrl + 'ws/bannerzg.png',
     defaultavater: app.globalData.apiImgUrl + 'ws/defaultavater.png',
     Serviceicon2: app.globalData.apiImgUrl+'ws/Serviceicon2.png',
     toCollectUrl:'',
     findWorkRecord: [],//找活浏览记录
     ucenterAuth: app.globalData.apiImgUrl + "new-list-realname-icon.png?t=1",
+    bannerList:{
+      bannerbg: app.globalData.apiImgUrl + 'ws/bannerbg.png',
+      bannerqz: app.globalData.apiImgUrl + 'ws/bannerqz.png',
+      bannerws: app.globalData.apiImgUrl + 'ws/bannerws.png',
+      bannerzg: app.globalData.apiImgUrl + 'ws/bannerzg.png',
+      job_banner_zgr: app.globalData.apiImgUrl + 'ws/job_banner-zgr.png',
+      resuame_banner_zgz: app.globalData.apiImgUrl + 'ws/resume_banner-zgz.png',
+    },
+    //招工banner
+    jobBanner:{
+      banner:'',
+      link:'',
+    },
+    resumeBanner:{
+      banner:'',
+      link:'',
+    }
   },
   //获取广告数据
   getAdvertising: function () {
@@ -127,6 +140,60 @@ Page({
             _this.setData({
               toCollectUrl:'/pages/collect/info/info'
             })
+          }
+          //根据条件显示招工banner
+          switch(mydata.member.job_banner){
+            case 'to_add':
+              _this.setData({
+                'jobBanner.banner':app.globalData.apiImgUrl+'ws/bannerzg.png',
+                'jobBanner.link':'/pages/fast/issue/index'
+              })
+              break
+            case 'to_top':
+              _this.setData({
+                'jobBanner.banner':app.globalData.apiImgUrl+'ws/bannerbg.png',
+                'jobBanner.link':'/pages/published/recruit/list'
+              })
+              break
+            case 'to_resume_list':
+              _this.setData({
+                'jobBanner.banner':app.globalData.apiImgUrl+'ws/job_banner-zgr.png',
+                'jobBanner.link':'/pages/index/index'
+              })
+              break
+          }
+          //根据条件显示找货banner
+          switch(mydata.member.resume_banner){
+            case 'to_add':
+              _this.setData({
+                'resumeBanner.banner':app.globalData.apiImgUrl+'ws/bannerws.png',
+                'resumeBanner.link':'/pages/clients-looking-for-work/finding-name-card/findingnamecard'
+              })
+              break
+            case 'to_edit':
+              _this.setData({
+                'resumeBanner.banner':app.globalData.apiImgUrl+'ws/bannerws.png',
+                'resumeBanner.link':'/pages/clients-looking-for-work/finding-name-card/findingnamecard'
+              })
+              break
+            case 'to_top':
+              _this.setData({
+                'resumeBanner.banner':app.globalData.apiImgUrl+'ws/bannerqz.png',
+                'resumeBanner.link':'/pages/clients-looking-for-work/finding-name-card/findingnamecard'
+              })
+              break
+            case 'to_edit_top':
+              _this.setData({
+                'resumeBanner.banner':app.globalData.apiImgUrl+'ws/bannerqz.png',
+                'resumeBanner.link':'/pages/clients-looking-for-work/finding-name-card/findingnamecard'
+              })
+              break
+            case 'to_job_list':
+              _this.setData({
+                'resumeBanner.banner':app.globalData.apiImgUrl+'resume_banner-zgz.png',
+                'resumeBanner.link':'/pages/published/recruit/list'
+              })
+              break
           }
         } else {
           wx.showToast({

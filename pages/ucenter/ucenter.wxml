@@ -69,8 +69,8 @@
       <view class="work-zg item-work">
           <image 
           class="banner" 
-          src="{{member.job_banner.banner ? member.job_banner.banner:bannerzg}}"
-          data-url="{{member.job_banner.self_url ? member.job_banner.self_url:'../published/recruit/list'}}"
+          src="{{jobBanner.banner}}"
+          data-url="{{jobBanner.link}}"
           bindtap="valiUserUrl"
           ></image>
         <view class="icon-box">
@@ -91,7 +91,7 @@
           <image 
           class="banner" 
           bindtap="valiUserUrl"
-          data-url="{{member.resume_banner.self_url ? member.resume_banner.self_url:'/pages/clients-looking-for-work/finding-name-card/findingnamecard'}}" src="{{member.resume_banner.banner ? member.resume_banner.banner:bannerws}}">
+          data-url="{{resumeBanner.link}}" src="{{resumeBanner.banner}}">
         </image>
         <view class="icon-box">
           <view bindtap="valiUserUrl" data-url="/pages/clients-looking-for-work/finding-name-card/findingnamecard">
