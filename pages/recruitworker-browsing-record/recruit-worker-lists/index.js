@@ -67,6 +67,8 @@ Page({
             page: page + 1 ,
             hasmore: len < 15? false: true,
           })
+        }else{
+          that.setData({lists:[]})
         }
       },
       fail: function (err) {

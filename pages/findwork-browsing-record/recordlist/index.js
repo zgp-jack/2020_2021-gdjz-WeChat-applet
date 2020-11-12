@@ -71,7 +71,7 @@ Page({
           // 请求第一页的时候讲数据保存到data中，后续下拉请求不再重复保存
           if (page === 1) {
             let zh_info = res.data.data.zh_info;
-            let aid = zh_info.city || zh_info.province;
+            let aid = zh_info.city == '0'? zh_info.province: zh_info.city;
             let cid = zh_info.classify_id;
             let defalutTop = res.data.data.default_top_area;
             let isTop = zh_info.is_top;
@@ -169,7 +169,7 @@ Page({
       let lists = recordInfo.list;
       let zh_info = recordInfo.zh_info;
       // 区域id
-      let aid = zh_info.city || zh_info.province;
+      let aid = zh_info.city == '0'? zh_info.province: zh_info.city;
       // 工种id
       let cid = zh_info.classify_id;
       // 默认置顶区域

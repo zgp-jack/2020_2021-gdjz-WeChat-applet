@@ -160,7 +160,19 @@ Page({
     this.getRecommendLists()
   },
   showDetailInfo:function(e){
+    // 如果是列表页就返回
+    var pages = getCurrentPages() //获取加载的页面
+    var prePage = pages[pages.length-2]
     let id = e.currentTarget.dataset.id
+    if(prePage){
+      let flag = prePage.route == 'pages/findwork-browsing-record/recordlist/index'
+      if (flag) {
+        wx.navigateTo({
+          url: `/pages/detail/info/info?id=${id}&child=0`,
+        })
+        return false
+      }
+    }
     wx.navigateTo({
       url: `/pages/detail/info/info?id=${id}&child=1`,
     })

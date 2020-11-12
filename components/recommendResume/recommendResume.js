@@ -91,6 +91,7 @@ Component({
         wx.reLaunch({
           url: `/pages/findingworkinglist/findingworkinglist?aid=${aid}&cid=${cidItem}`,
         })
+        return false
       }
       if(len < num){
         // 如果是列表页就返回

@@ -101,7 +101,9 @@ Component({
         wx.reLaunch({
           url: `/pages/index/index?id=${cidItem}&aid=${aid}`,
         })
+        return false
       }
+
       let len = this.data.lists.length
       let num = this.data.pagesize
       if(len < num){
