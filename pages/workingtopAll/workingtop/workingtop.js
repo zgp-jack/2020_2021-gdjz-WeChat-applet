@@ -328,7 +328,7 @@ Page({
                 })
               } else if (res.confirm) {
                 wx.makePhoneCall({
-                  phoneNumber: that.data.serverPhone
+                  phoneNumber: app.globalData.serverPhone
                 });
               }
             }
@@ -732,7 +732,7 @@ Page({
                 })
               } else if (res.confirm) {
                 wx.makePhoneCall({
-                  phoneNumber: that.data.serverPhone
+                  phoneNumber: app.globalData.serverPhone
                 });
               } 
             }

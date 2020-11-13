@@ -16,7 +16,7 @@
   
   <view class='common-nodatabox flex-column lists-nodata'  wx:if="{{ dataStatus == 'have_not_zg_ing' || dataStatus == 'have_not_zg' }}">
     <image src='{{ nodataImg }}' mode="aspectFit"></image>
-    <text class="nodataText">{{ dataStatus == 'have_not_zg_ing'? '您暂时没有审核通过的信息': '您未发布过招工信息，点击下方按钮去发布' }}</text>
+    <text class="nodataText">{{ dataStatus == 'have_not_zg_ing'? '您暂时没有“正在招”状态的信息': '您未发布过招工信息，点击下方按钮去发布' }}</text>
     <button bindtap="goPage">{{ dataStatus == 'have_not_zg_ing'? '管理我的招工信息' : '发布招工' }}</button>
   </view>
 </view>
