@@ -61,7 +61,9 @@ Page({
     resumeBanner:{
       banner:app.globalData.apiImgUrl + 'ws/bannerws.png',
       link:'/pages/clients-looking-for-work/finding-name-card/findingnamecard',
-    }
+    },
+    //是否显示去充值
+    showRecharge:false
   },
   //获取广告数据
   getAdvertising: function () {

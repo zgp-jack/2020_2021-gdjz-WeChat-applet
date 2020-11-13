@@ -116,7 +116,7 @@
     <text class="title">常用功能</text>
     <view class="icon-content">
       <view class="commonly-icon-box">
-        <view  bindtap="valiUserUrl" data-url="/pages/recharge/recharge">
+        <view  bindtap="valiUserUrl" wx:if="{{showRecharge}}" data-url="/pages/recharge/recharge">
           <image src="{{Recharge}}"></image>
           <text>积分充值</text>
         </view>
@@ -132,10 +132,13 @@
           <image src="{{invitation}}"></image>
           <text>邀请工友</text>
         </view>
+        <view bindtap="valiUserUrl" wx:if="{{!showRecharge}}" data-url="../published/used/list">
+          <image src="{{secondhand}}"></image>
+          <text>二手交易</text>
+        </view>
       </view>
       <view class="commonly-icon-box">
-        
-        <view bindtap="valiUserUrl" data-url="../published/used/list">
+        <view bindtap="valiUserUrl" wx:if="{{showRecharge}}" data-url="../published/used/list">
           <image src="{{secondhand}}"></image>
           <text>二手交易</text>
         </view>
