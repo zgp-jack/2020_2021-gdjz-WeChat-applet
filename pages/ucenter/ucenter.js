@@ -55,12 +55,12 @@ Page({
     },
     //招工banner
     jobBanner:{
-      banner:'',
-      link:'',
+      banner:app.globalData.apiImgUrl + 'ws/bannerzg.png',
+      link:'/pages/fast/issue/index',
     },
     resumeBanner:{
-      banner:'',
-      link:'',
+      banner:app.globalData.apiImgUrl + 'ws/bannerws.png',
+      link:'/pages/clients-looking-for-work/finding-name-card/findingnamecard',
     }
   },
   //获取广告数据
