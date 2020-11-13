@@ -630,7 +630,11 @@ Page({
               title: '温馨提示',
               content: res.data.errmsg,
               showCancel: false,
-              success(res) {}
+              success(res) {
+                wx.navigateBack({
+                  delta: 1,
+                })
+              }
             })
           }
         }
