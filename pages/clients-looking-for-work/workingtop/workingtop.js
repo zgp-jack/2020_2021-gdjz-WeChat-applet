@@ -890,8 +890,12 @@ Page({
           defaultTop: JSON.parse(options.defaulttop)
         })
       }
+      let _options = {
+        topdata:JSON.parse(options.topdata),
+        defaultTop:options.defaultTop
+      }
       // 初始化置顶状态下的数据
-      this.gettopareas(JSON.parse(options))
+      this.gettopareas(_options)
     }
   },
   getAllpoint(timeItem) {
@@ -1050,7 +1054,6 @@ Page({
   let hastop = this.data.topdata.has_top
   let istop = this.data.topdata.is_top
   let defaultTop = this.data.defaultTop
-  debugger
   //如果时初次置顶或者置顶到期，置顶地区默认找活名片地区
   if(hastop == 0 || istop == 2){
     this.getDefaultArea(defaultTop)
