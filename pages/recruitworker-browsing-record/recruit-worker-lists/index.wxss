@@ -20,6 +20,18 @@
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+  display: flex;
+  flex-direction: row;
+}
+.recruit-title{
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  margin-right: auto;
+}
+.recruit-status{
+  color: #F9B626;
+  font-weight: bold;
 }
 .recruit-head-desc{
   font-size: 26rpx;

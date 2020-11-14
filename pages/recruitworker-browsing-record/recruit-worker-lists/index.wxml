@@ -3,12 +3,15 @@
   <block  wx:for="{{ lists }}" wx:key="index">
     <view class="recruit-record-content">
       <view class="recruit-record-head">
-        <view class="recruit-head-title">{{ item.title }}</view>
+        <view class="recruit-head-title">
+          <view class="recruit-title">{{ item.title }}</view>
+          <view class="recruit-status">{{ item.is_end == 1? (item.is_check != 2?(item.is_check == 1?'审核中':'未通过'):'' ):'已招满' }}</view>
+        </view>
         <view class="recruit-head-desc">{{ item.detail }}</view>
       </view>
       <view class="recruit-record-footer">
-        <view class="recruit-footer-button-left" bindtap="goTop" data-index="{{ index }}">{{ item.top_data.is_top == 1?'修改置顶':'增加曝光率'}}</view>
-        <view class="recruit-footer-button-right {{ item.sum_num != 0?'':'noclick'}}" data-id="{{ item.id }}" bindtap="{{ item.sum_num != 0?'goNoReadRecord':'showModel' }}" data-index="{{ index }}" data-cid="{{ item.occupations }}" data-cityid="{{ item.city_id }}" data-provinceid="{{ item.province_id }}">被查看{{ item.sum_num }}次<view class="record-see-count" wx:if="{{ item.unread_num != 0 }}">{{ item.unread_num }}</view></view>
+        <view class="recruit-footer-button-left" bindtap="goTop" wx:if="{{ item.is_end == 1 && item.is_check == 2}}" data-index="{{ index }}">{{ item.top_data.is_top == 1?'修改置顶':'增加曝光率'}}</view>
+        <view class="recruit-footer-button-right {{ item.sum_num != 0?'':'noclick'}}" data-id="{{ item.id }}" bindtap="{{ item.sum_num != 0?'goNoReadRecord':'showModel' }}" data-index="{{ index }}" data-cid="{{ item.occupations }}" data-cityid="{{ item.city_id }}" data-provinceid="{{ item.province_id }}" data-ischeck="{{ item.is_check }}" data-isend="{{ item.is_end }}">被查看{{ item.sum_num }}次<view class="record-see-count" wx:if="{{ item.unread_num != 0 }}">{{ item.unread_num }}</view></view>
       </view>
     </view>
   </block>

@@ -159,6 +159,9 @@ Page({
     let infoIndex =e.currentTarget.dataset.index;//点击招工信息的index
     let topdata = this.data.lists[infoIndex]; //当前招工信息数据
     let top = topdata.top;
+    let ischeck = e.currentTarget.dataset.ischeck;
+    let isend = e.currentTarget.dataset.isend;
+    if (ischeck != 2 || isend != 1) return
     // 如果有置顶
     if (top == '1') {
       let data = topdata.top_data; //置顶数据
