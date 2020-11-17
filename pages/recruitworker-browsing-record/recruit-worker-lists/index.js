@@ -127,7 +127,7 @@ Page({
     let cityId = e.currentTarget.dataset.cityid;
     // 省id
     let provinceId = e.currentTarget.dataset.provinceid;
-    let aid = cityId || provinceId;
+    let aid = cityId == '0'?provinceId:cityId;
     // 工种id
     let cid = e.currentTarget.dataset.cid;
     // 保存点击的招工信息id

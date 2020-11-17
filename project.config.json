@@ -598,6 +598,12 @@
         {
           "name": "pages/clients-looking-for-work/workingtop/workingtop",
           "pathName": "pages/clients-looking-for-work/workingtop/workingtop",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/fast/area/area",
+          "pathName": "pages/fast/area/area",
           "scene": null
         }
       ]
