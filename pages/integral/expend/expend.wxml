@@ -157,8 +157,8 @@
             </view>
             <view class='yupao-common-lists-item clearfix'>
                 <view class='yupao-common-list-left'>置顶范围</view>
-                <view class='yupao-common-list-right' wx:for = "{{topDetail.address}}" wx:key="index" >{{ item }}
-                </view>
+                <text class='yupao-common-list-right' wx:for = "{{topDetail.address}}" wx:key="index" >{{ item }} 
+                </text>
             </view>
             <view class='yupao-common-lists-item clearfix'>
                 <view class='yupao-common-list-left'>置顶开始时间</view>
