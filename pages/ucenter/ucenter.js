@@ -126,6 +126,7 @@ Page({
           showAuthor: mydata.show_auth == 1 ? true : false
         })
         if (mydata.errcode == "ok") {
+          console.log(res.data.member)
           _this.setData({
             member: mydata.member,
             is_checking: mydata.is_checking,
@@ -192,7 +193,7 @@ Page({
               break
             case 'to_job_list':
               _this.setData({
-                'resumeBanner.banner':app.globalData.apiImgUrl+'resume_banner-zgz.png',
+                'resumeBanner.banner':app.globalData.apiImgUrl+'ws/resume_banner-zgz.png',
                 'resumeBanner.link':'/pages/published/recruit/list'
               })
               break
