@@ -6,7 +6,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    page: 2,//请求页数,第一页数据有会员中心点击后url传递
+    page: 1,//请求页数,第一页数据有会员中心点击后url传递
     hasmore: true,//是否还有更多数据
     lists: [],//我的正在招工信息列表
     seeNum: 0,//浏览增加数量
@@ -29,8 +29,11 @@ Page({
     },
     topIndex:false,//点击没有被查看的招工信息的index
     clickId: '',//点击查看浏览记录的招工信息id
+    nodataImg: app.globalData.apiImgUrl + "collect-nodata.png",
+    dataStatus: '', //
   },
-  getRecruitLists: function () {
+  getRecruitLists: function (action) {
+    // action 确定是否需要重新加载数据，true代表重新加载数据
     let that = this;
     // 用户uid
     let userInfo = wx.getStorageSync('userInfo')
@@ -46,6 +49,7 @@ Page({
       way: 'POST',
       params: params,
       success: function (res) {
+        that.setData({ dataStatus: res.data.errcode })
         if (res.data.errcode == "success") {
           wx.hideLoading();
           let list = res.data.data.list;
@@ -59,29 +63,17 @@ Page({
           let _list = that.data.lists
           let len = list.length
           that.setData({
-            lists: _list.concat(list),
+            lists: action? list: _list.concat(list),
             page: page + 1 ,
             hasmore: len < 15? false: true,
           })
         }else{
-          wx.showModal({
-            title: '提示',
-            content: res.data.errmsg,
-            showCancel:false,
-            success: function (res) {
-              wx.navigateBack({
-                delta: 1,
-              })
-            }
-          })
+          that.setData({lists:[]})
         }
       },
       fail: function (err) {
         wx.hideLoading();
-        wx.showToast({
-          title: '网络出错，数据加载失败！',
-          icon: "none"
-        })
+        app.showMyTips('网络出错，数据加载失败！')
       }
     })
   },
@@ -135,7 +127,7 @@ Page({
     let cityId = e.currentTarget.dataset.cityid;
     // 省id
     let provinceId = e.currentTarget.dataset.provinceid;
-    let aid = cityId || provinceId;
+    let aid = cityId == '0'?provinceId:cityId;
     // 工种id
     let cid = e.currentTarget.dataset.cid;
     // 保存点击的招工信息id
@@ -149,11 +141,27 @@ Page({
   confirm: function () {
     this.goTop()
   },
+  // 根据状态进行跳转
+  goPage: function () {
+    let dataStatus = this.data.dataStatus;
+    if (dataStatus == 'have_not_zg') {
+      app.initJobView()
+      return false
+    }
+    if (dataStatus == 'have_not_zg_ing') {
+      wx.navigateTo({
+        url: '/pages/published/recruit/list',
+      })
+    }
+  },
   // 如果招工信息一次没有被查看，点击后展示提示框
   showModel: function (e) {
     let infoIndex =e.currentTarget.dataset.index;//点击招工信息的index
     let topdata = this.data.lists[infoIndex]; //当前招工信息数据
     let top = topdata.top;
+    let ischeck = e.currentTarget.dataset.ischeck;
+    let isend = e.currentTarget.dataset.isend;
+    if (ischeck != 2 || isend != 1) return
     // 如果有置顶
     if (top == '1') {
       let data = topdata.top_data; //置顶数据
@@ -199,21 +207,8 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
-    if (options.hasOwnProperty("recordInfo")) {
-      let recordInfo = JSON.parse(options.recordInfo);
-      let lists = recordInfo.list;
-      lists.forEach(item => {
-        let sum_num = parseInt(item.sum_num) > 99? '99+' : item.sum_num;
-        let unread_num = parseInt(item.unread_num) > 9? '9+' : item.unread_num;
-        item.sum_num = sum_num;
-        item.unread_num = unread_num;
-      });
-      if (lists.length < 15) {
-        this.setData({hasmore: false})
-      }
-      this.setData({lists})
-    }
+  onLoad: function () {
+    this.getRecruitLists(true)
   },
 
   /**
@@ -233,7 +228,11 @@ Page({
     path = path.slice(0, -5)
     if (path == "pages/workingtopAll/workingtop/workingtop") {
       this.setData({ page: 1, lists: [], hasmore: true })
-      this.getRecruitLists()
+      this.getRecruitLists(true)
+    }
+    if (path == "pages/fast/issue/index") {
+      this.setData({ page: 1, lists: [], hasmore: true })
+      this.getRecruitLists(true)
     }
     if (path == "pages/recruitworker-browsing-record/recruit-worker-record/index") {
       // 点击某招工信息浏览记录，清空对应该记录的未读数
@@ -259,8 +258,8 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-    this.setData({ page: 1, lists: [], hasmore: true })
-    this.getRecruitLists()
+    this.setData({ page: 1, hasmore: true })
+    this.getRecruitLists(true)
     wx.stopPullDownRefresh();
   },
 
@@ -269,7 +268,7 @@ Page({
    */
   onReachBottom: function () {
     if (this.data.hasmore) {
-      this.getRecruitLists()
+      this.getRecruitLists(false)
     }
   },
 

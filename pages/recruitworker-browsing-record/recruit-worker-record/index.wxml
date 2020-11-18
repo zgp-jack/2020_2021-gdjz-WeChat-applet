@@ -15,7 +15,7 @@
       <view class="recruit-record-position"><image src="{{ positionImage }}" class="record-position-image"></image>{{ item.address }}</view>
     </view>
   </block>
-  <view class="record-no-more" wx:if="{{ !hasmore }}">没有更多数据</view>
+  <view class="record-no-more" wx:if="{{ !hasmore }}">没有更多数据了</view>
 </view>
 
 <recommendResume wx:if="{{ !hasmore }}" aid="{{ aid }}" cid="{{ cid }}" more="{{ more }}" uuid="{{ uuid }}" child="{{ child }}"  typeData="record" bind:show="show"/>

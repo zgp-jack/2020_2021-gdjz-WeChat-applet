@@ -180,13 +180,12 @@ Page({
       that.setData({
         allprice: price
       });
-      if (istop == 1 && this.data.allprice > this.data.max_price) {
+      if (istop != 2  && this.data.allprice > this.data.max_price) {
         let price = (numcity * (that.data.areaCitycrum.length) + numprovice * (that.data.areaProcrum.length) + numAll * (that.data.areaAllcrum.length)) * that.data.detailprice;
         that.setData({
           point: price
         });
-      } 
-      else if (istop == 2 || hastop == 0) {
+      } else if (istop == 2 || hastop == 0) {
         let price = (numcity * (that.data.areaCitycrum.length) + numprovice * (that.data.areaProcrum.length) + numAll * (that.data.areaAllcrum.length)) * that.data.day
         that.setData({
           point: price
@@ -469,7 +468,7 @@ Page({
     let hastop= topdata.has_top;
     let istop = topdata.is_top;
     // 判断是否是置顶中的修改置顶
-    if (hastop && istop == 1) {
+    if (hastop && istop != 2) {
       //判断是否有授权登录用户信息
       let userInfo = wx.getStorageSync("userInfo");
       //没有用户信息直接返回
@@ -925,7 +924,7 @@ Page({
 
   // 修改添加置顶城市的价格计算
   getCityNum() {
-    if (this.data.topdata.is_top == 1) {
+    if (this.data.topdata.is_top != 2) {
       let all = this.data.areaCitycrum.length * this.data.city_integral + this.data.areaProcrum.length * this.data.province_integral + this.data.country_integral * this.data.areaAllcrum.length;
       console.log("all",all)
       if (all > this.data.max_price) {

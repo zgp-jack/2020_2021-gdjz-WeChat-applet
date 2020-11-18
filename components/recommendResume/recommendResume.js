@@ -84,8 +84,15 @@ Component({
     seemoreaction:function(){
       let typeData = this.data.typeData;
       let { aid, cid, child, uuid } = this.properties
+      let cidItem = cid.split(',')[0];
       let len = this.data.lists.length
       let num = parseInt(this.data.pagesize)
+      if (typeData == 'record') {
+        wx.reLaunch({
+          url: `/pages/findingworkinglist/findingworkinglist?aid=${aid}&cid=${cidItem}`,
+        })
+        return false
+      }
       if(len < num){
         // 如果是列表页就返回
         var pages = getCurrentPages() //获取加载的页面

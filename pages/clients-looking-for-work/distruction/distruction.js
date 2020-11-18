@@ -297,14 +297,18 @@ Page({
       for (let i = 0; i < index.length; i++) {
         if (areaArr[index[i]][0].id == areaArrP[j].id) {
           areaArrP.splice(j, 1)
+          j --
         }
       }
     }
 
     for (let j = 0; j < areaArrT.length; j++) {
       for (let i = 0; i < index.length; i++) {
-        if (areaArr[index[i]][0].id == areaArrT[j].id) {
-          areaArrT.splice(j, 1)
+        if (areaArrT.length > 0) {
+          if (areaArr[index[i]][0].id == areaArrT[j].id) {
+            areaArrT.splice(j, 1)
+            j--
+          }
         }
       }
     }

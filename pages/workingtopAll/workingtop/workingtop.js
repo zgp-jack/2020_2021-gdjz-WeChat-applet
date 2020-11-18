@@ -92,7 +92,6 @@ Page({
     let max_province = that.data.max_province;
     let max_city = that.data.max_city;
     let toTopTip = that.data.toTopTip;
-    debugger
     wx.navigateTo({
       url: `/pages/workingtopAll/distruction/distruction?max_province=${max_province}&max_city=${max_city}&allpro= ${allpro}&allcity= ${allcity}&specialids=${specialids}&allall=${allall}&toTopTip=${toTopTip}`,
     })
@@ -329,7 +328,7 @@ Page({
                 })
               } else if (res.confirm) {
                 wx.makePhoneCall({
-                  phoneNumber: that.data.serverPhone
+                  phoneNumber: app.globalData.serverPhone
                 });
               }
             }
@@ -631,7 +630,11 @@ Page({
               title: '温馨提示',
               content: res.data.errmsg,
               showCancel: false,
-              success(res) {}
+              success(res) {
+                wx.navigateBack({
+                  delta: 1,
+                })
+              }
             })
           }
         }
@@ -733,7 +736,7 @@ Page({
                 })
               } else if (res.confirm) {
                 wx.makePhoneCall({
-                  phoneNumber: that.data.serverPhone
+                  phoneNumber: app.globalData.serverPhone
                 });
               } 
             }

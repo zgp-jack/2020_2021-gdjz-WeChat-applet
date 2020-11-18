@@ -26,7 +26,8 @@ Page({
     infoId: '',
     loading: false,
     show:false,//展示界面
-    typeData:''
+    typeData:'',
+    uuid:''
   },
 
   /**
@@ -61,9 +62,13 @@ Page({
       loading: true
     })
     let userInfo = wx.getStorageSync('userInfo');
+    let userUuid = wx.getStorageSync('userUuid');
     let mid = null;
     if (userInfo) {
       mid = userInfo.userId;
+    }
+    if (userUuid) {
+      this.setData({uuid:userUuid})
     }
     let user_id = this.data.infoId;
     let typeData = this.data.typeData;
@@ -155,7 +160,19 @@ Page({
     this.getRecommendLists()
   },
   showDetailInfo:function(e){
+    // 如果是列表页就返回
+    var pages = getCurrentPages() //获取加载的页面
+    var prePage = pages[pages.length-2]
     let id = e.currentTarget.dataset.id
+    if(prePage){
+      let flag = prePage.route == 'pages/findwork-browsing-record/recordlist/index'
+      if (flag) {
+        wx.navigateTo({
+          url: `/pages/detail/info/info?id=${id}&child=0`,
+        })
+        return false
+      }
+    }
     wx.navigateTo({
       url: `/pages/detail/info/info?id=${id}&child=1`,
     })
@@ -255,8 +272,9 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-    let {loading} = this.data
+    let {loading, hasmore} = this.data
     if(loading) return false
+    if (!hasmore) return false
     this.getRecommendLists()
   },
 })

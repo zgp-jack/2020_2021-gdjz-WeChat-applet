@@ -1,4 +1,5 @@
 /* pages/recruitworker-browsing-record/recruit-worker-lists/index.wxss */
+@import "../../index/index.wxss";
 
 .recruit-record-content{
   margin-bottom: 20rpx;
@@ -19,6 +20,18 @@
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+  display: flex;
+  flex-direction: row;
+}
+.recruit-title{
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  margin-right: auto;
+}
+.recruit-status{
+  color: #F9B626;
+  font-weight: bold;
 }
 .recruit-head-desc{
   font-size: 26rpx;
@@ -84,4 +97,27 @@
   color: #909090;
   font-size: 30rpx;
   margin-bottom: 30rpx;
+}
+.lists-nodata button {
+  width: 320rpx;
+  background-color: #0099FF;
+  color:#FFFFFF;
+  border-radius: 20px;
+  margin-top: 30rpx;
+  font-size: 28rpx;
+  line-height: 80rpx;
+  text-align: center;
+  letter-spacing: 5rpx;
+  box-shadow: 0px 11px 22px 0px rgba(86, 146, 228, 0.32);
+}
+.common-nodatabox image{
+  width: 250rpx;
+  height: 250rpx;
+}
+
+.common-nodatabox {
+  position: relative;
+  width: 100%;
+  padding: 250rpx 0;
+  background: transparent;
 }

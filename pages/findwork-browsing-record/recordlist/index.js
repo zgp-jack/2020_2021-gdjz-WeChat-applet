@@ -26,7 +26,8 @@ Page({
     this.setData({show:true})
     wx.hideLoading()
   },
-  reqRecordData: function () {
+  reqRecordData: function (action) {
+    //'action'参数为数据刷新方式，true为下拉刷新，false为触底加载
     let more = this.data.more;
     if (!more) return  
     let that = this;
@@ -55,17 +56,22 @@ Page({
             for (let i = 0; i < list.length; i++) {
               lists.push(list[i]);
             }
-            that.setData({ page: parseInt(page) + 1, lists: lists })
+            that.setData({ page: parseInt(page) + 1, lists: action? list: lists })
             if (list.length < 15) {
               that.setData({ more:false })
+            }else{
+              that.setData({show: true})
             }
           }else{
+            if (action) {
+              that.setData({list:[]})
+            }
             that.setData({ more:false })
           }
           // 请求第一页的时候讲数据保存到data中，后续下拉请求不再重复保存
           if (page === 1) {
             let zh_info = res.data.data.zh_info;
-            let aid = zh_info.city || zh_info.province;
+            let aid = zh_info.city == '0'? zh_info.province: zh_info.city;
             let cid = zh_info.classify_id;
             let defalutTop = res.data.data.default_top_area;
             let isTop = zh_info.is_top;
@@ -88,10 +94,7 @@ Page({
       },
       fail: function (err) {
         wx.hideLoading();
-        wx.showToast({
-          title: '网络出错，数据加载失败！',
-          icon: "none"
-        })
+        app.showMyTips('网络出错，数据加载失败！')
       }
     })
   },
@@ -112,6 +115,7 @@ Page({
   // 浏览记录为空，去找活置顶
   goTop: function () {
     let resumeTop = this.data.resumeTop;
+    // 是否置顶过
     let hasTop = resumeTop.has_top;
     // 如果需要去完善数据跳转去发布填写找活名片界面
     let topdata = JSON.stringify(resumeTop)
@@ -165,7 +169,7 @@ Page({
       let lists = recordInfo.list;
       let zh_info = recordInfo.zh_info;
       // 区域id
-      let aid = zh_info.city || zh_info.province;
+      let aid = zh_info.city == '0'? zh_info.province: zh_info.city;
       // 工种id
       let cid = zh_info.classify_id;
       // 默认置顶区域
@@ -181,14 +185,17 @@ Page({
       // 浏览记录数据为空
       if ( lists.length === 0 || lists.length < 15) {
         this.setData({more: false})
+        if (!this.data.show) {
+          wx.showLoading({
+            title: '数据加载中',
+          })
+        }
+      }else{
+        this.setData({ show: true })
       }
       this.setData({ lists, aid, cid, defalutTop, isEnd, isTop, resumeTop, isCheck })
     }
-    // if (!this.data.show) {
-    //   wx.showLoading({
-    //     title: '数据加载中',
-    //   })
-    // }
+    
   },
 
   /**
@@ -207,8 +214,8 @@ Page({
     let path = pages[index].__displayReporter.showReferpagepath
     path = path.slice(0, -5)
     if (path == "pages/clients-looking-for-work/workingtop/workingtop") {
-      this.setData({ page: 1, lists: [], more: true, show: false })
-      this.reqRecordData()
+      this.setData({ page: 1, lists:[], more: true, show: false })
+      this.reqRecordData(true)
     }
   },
 
@@ -230,8 +237,8 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-    this.setData({ page: 1, lists: [], more: true, show: false })
-    this.reqRecordData()
+    this.setData({ page: 1, more: true })
+    this.reqRecordData(true)
     wx.stopPullDownRefresh();
   },
 
@@ -239,7 +246,7 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-    this.reqRecordData()
+    this.reqRecordData(false)
   },
 
   /**

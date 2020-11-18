@@ -1,6 +1,6 @@
 <!--pages/findwork-browsing-record/index.wxml-->
 <!-- 有浏览记录 -->
-<view class="findework-record-container" wx:if="{{ lists.length > 0 }}">
+<view class="findework-record-container" wx:if="{{ lists.length > 0 && show}}">
   <block wx:for="{{ lists }}" wx:key="index">
     <view class="record-content">
       <view class="record-up">
@@ -18,7 +18,7 @@
       </view>
     </view>
   </block>
-  <view class="record-no-more" wx:if="{{ !more }}">没有更多数据</view>
+  <view class="record-no-more" wx:if="{{ !more }}">没有更多数据了</view>
 </view>
 
 <!-- 无浏览记录 -->
