@@ -570,6 +570,26 @@
     border-top-left-radius: 10rpx;
     border-top-right-radius: 10rpx;
 }
+/* 完善资料 */
+.end-info {
+    width: 152rpx;
+    height: 52rpx;
+    background: #999;
+    position: absolute;
+    right: 0;
+    top: 100rpx;
+    background: #F2F4F8;
+    border-radius: 26rpx 0 0 26rpx;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.end-info text{
+    font-size: 24rpx;
+    text-align: center;
+    line-height: 52rpx;
+    color: #333;
+}
 /* 我的工作 */
 .mywork {
     padding: 0 24rpx;

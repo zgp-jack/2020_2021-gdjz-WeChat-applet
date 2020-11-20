@@ -182,7 +182,7 @@ Page({
             case 'to_top':
               _this.setData({
                 'resumeBanner.banner':app.globalData.apiImgUrl+'ws/bannerqz.png',
-                'resumeBanner.link':'/pages/clients-looking-for-work/finding-name-card/findingnamecard'
+                'resumeBanner.link':'/pages/clients-looking-for-work/workingtop/workingtop?datatop=1'
               })
               break
             case 'to_edit_top':
@@ -194,7 +194,7 @@ Page({
             case 'to_job_list':
               _this.setData({
                 'resumeBanner.banner':app.globalData.apiImgUrl+'ws/resume_banner-zgz.png',
-                'resumeBanner.link':'/pages/published/recruit/list'
+                'resumeBanner.link':'/pages/index/index'
               })
               break
           }
