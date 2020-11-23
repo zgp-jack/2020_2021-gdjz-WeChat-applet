@@ -576,7 +576,8 @@ Page({
     let _this = this;
     let _mark = true;
     let _wx = wx.getStorageSync("_wx");
-    let userInfo = this.data.userInfo;
+    let userInfo = wx.getStorageSync("userInfo");
+    this.setData({ userInfo: userInfo ? userInfo : false });
     let _time = Date.parse(new Date());
     this.validateLogin();
     if (_wx && _wx.expirTime) {
@@ -740,7 +741,6 @@ Page({
     let _this = this;
     let userInfo = wx.getStorageSync("userInfo");
     this.setData({ userInfo: userInfo ? userInfo : false });
-    this.initNeedData();
   },
   valiUserUrl: function (e) {
     let userInfo = this.data.userInfo;
@@ -1185,6 +1185,7 @@ Page({
     this.initUserLocation();
     this.initFooterData();
     this.checkIsInvite(options);
+    this.initNeedData()
   },
   /**
    * 生命周期函数--监听页面初次渲染完成

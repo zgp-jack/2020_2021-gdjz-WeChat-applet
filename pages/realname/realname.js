@@ -321,7 +321,7 @@ Page({
   },
   userEnterIdcard: function (e) {
     let that = this;
-    let regx = /[\u4e00-\u9fa5]/;
+    let regx = /[\u4e00-\u9fa5]|(\ud83c[\udf00-\udfff])|(\ud83d[\udc00-\ude4f\ude80-\udeff])|[\u2600-\u2B55]/;
     let idCard = this.data.member.id_card;
     if (e) {
       if (regx.test(e.detail.value)) {

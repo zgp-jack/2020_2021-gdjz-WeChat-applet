@@ -22,7 +22,7 @@
       <view class="input-item-text" wx:if="{{ showClassifyText }}">{{ showClassifyText }}</view>
     </view>
     <view class="issue-form-item" wx:if="{{ infoId }}">
-      <text>姓名：</text>
+      <text>联系人：</text>
       <input placeholder="请正确输入2~5字中文姓名" value="{{ data.user_name }}"  bindinput="userEnterName" maxlength="5"></input>
     </view>
     <view class="issue-form-item">
