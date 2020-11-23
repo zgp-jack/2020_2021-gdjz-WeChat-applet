@@ -1230,6 +1230,8 @@ Page({
           wx.setStorageSync("FindWorkTime",FindWorkTime);
           app.globalData.isShowFindWork = false;
         }
+      }else{
+        this.setData({authStatus: ''})
       }
     }
     this.getUserUuid();
