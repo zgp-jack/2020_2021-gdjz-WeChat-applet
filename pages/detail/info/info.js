@@ -605,6 +605,18 @@ Page({
                 }
             })
         } else if (mydata.errcode == "to_auth") { //是否进入实名 （取消=>返回、确定=>实名）
+          // 如果请求状态是“to_auth”,且上一页是招工列表页，那么返回的时候不需要设置快速找活名片隐藏时间
+          if (pages.length > 1) {
+            //上一个页面实例对象
+            var prePage = pages[pages.length - 2];
+            var route = prePage.route
+            if (route == 'pages/index/index') {
+              // 设置上一页对象属性
+              prePage.setData({
+                authStatus: mydata.errcode,
+              })
+            }
+          } 
             wx.showModal({
                 title: '温馨提示',
                 content: mydata.errmsg,

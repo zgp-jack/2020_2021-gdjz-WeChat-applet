@@ -150,7 +150,8 @@ Page({
     // 刷新状态
     refreshStatus: false,
     // 刷新成功icon
-    successIcon:app.globalData.apiImgUrl + 'yc/findwork-publish-success.png'
+    successIcon:app.globalData.apiImgUrl + 'yc/findwork-publish-success.png',
+    authStatus:''//如果从招工详情页返回到招工列表页面，是需要实名（to_auth）,那么就不设置隐藏快速发布找活名片的时间。
   },
   getPhoneNumber:function(e){
     console.log(e)
@@ -1202,6 +1203,7 @@ Page({
     let pages = getCurrentPages();
     let index = pages.length - 1
     let path = pages[index].__displayReporter.showReferpagepath
+    let authStatus = this.data.authStatus;//如果值“to_auth”,不需要设置隐藏快速找活名片时间
     path = path.slice(0, -5)
     //如果置顶或者发布回来 需要刷新数据
     if(path == "pages/clients-looking-for-work/finding-name-card/findingnamecard"){
@@ -1215,17 +1217,19 @@ Page({
     // 如果页面是来自于招工详情且有快速找活名片
     // 返回的时候设置当天不再展示快速发布找活名片
     if (path == "pages/detail/info/info") {
-      if (isShowFindWork) {
-        let myDate = new Date();
-        // 当前时间戳
-        let currentTime = myDate.getTime();
-        // 到期时间戳（23:59:59）
-        // let dueDate = (new Date(new Date().toLocaleDateString())).getTime() +  (24 * 60 * 60 * 1000 - 1);
-        let dueDate = currentTime +  (2 * 60 * 1000 - 1);
-        // 存入缓存
-        let FindWorkTime = {currentTime:currentTime,dueDate:dueDate};
-        wx.setStorageSync("FindWorkTime",FindWorkTime);
-        app.globalData.isShowFindWork = false;
+      if (!authStatus) {
+        if (isShowFindWork) {
+          let myDate = new Date();
+          // 当前时间戳
+          let currentTime = myDate.getTime();
+          // 到期时间戳（23:59:59）
+          // let dueDate = (new Date(new Date().toLocaleDateString())).getTime() +  (24 * 60 * 60 * 1000 - 1);
+          let dueDate = currentTime +  (2 * 60 * 1000 - 1);
+          // 存入缓存
+          let FindWorkTime = {currentTime:currentTime,dueDate:dueDate};
+          wx.setStorageSync("FindWorkTime",FindWorkTime);
+          app.globalData.isShowFindWork = false;
+        }
       }
     }
     this.getUserUuid();
