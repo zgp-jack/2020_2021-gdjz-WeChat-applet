@@ -1,14 +1,18 @@
 @import "../finding-name-card/findingnamecard.wxss";
+
 /* introcardtwo  obtcard cardnine obtcardnineone introcontent workotextone header workotextone .cardseven workotextone obtcardone */
 .cardeight {
   margin-bottom: 60rpx;
 }
-.skillcss{
+
+.skillcss {
   margin-bottom: 0;
 }
-.findingnamecardthreemobile text{
-   padding: 0 16rpx;
+
+.findingnamecardthreemobile text {
+  padding: 0 16rpx;
 }
+
 .header {
   width: 93%;
   margin: 0 auto;
@@ -18,7 +22,7 @@
   color: #f87a14;
   text-align: center;
   line-height: 60rpx;
-  font-weight:bold;
+  font-weight: bold;
 }
 
 .cardnine {
@@ -76,6 +80,7 @@
   margin-top: 19rpx;
   padding-left: 18rpx;
 }
+
 .jiluone {
   font-size: 30rpx;
   color: #7d7d7d;
@@ -84,6 +89,7 @@
   padding-left: 18rpx;
   margin-bottom: 90rpx;
 }
+
 .introcardtwo {
   width: 93%;
   margin: 0 auto;
@@ -143,26 +149,44 @@
   color: #7d7d7d;
   padding-right: 8rpx;
 }
-.cardtwosonone .cardtwosononeimg .oimg image{
+
+.cardtwosonone .cardtwosononeimg .oimg image {
   height: 88rpx;
   width: 88rpx;
   border-radius: 50%;
 
 }
-.cardnine{
+
+.cardnine {
   position: static;
 }
-.cardeight{
+
+.cardeight {
   margin-bottom: 65rpx;
 
 }
-.tagsone{
+
+.tagsone {
   font-size: 30rpx;
-    color: #797979
+  color: #797979
 }
-.workotextone{
+
+.workotextone {
   font-size: 30rpx;
   color: black;
   padding-left: 5rpx;
 
+}
+
+.fexd-button {
+  position: fixed;
+  bottom: 50rpx;
+}
+.contentView{
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 200rpx;
+  overflow: auto;
 }

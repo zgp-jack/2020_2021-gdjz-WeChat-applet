@@ -1,4 +1,9 @@
+
 <view>
+<view class="contentView">
+
+
+
   <view class="cardcolore">
     <view class="header">
       注:分享名片 让您的名片排名更靠前
@@ -285,7 +290,7 @@
   </view> -->
 
 
-  <view class="cardnine nobgshade {{projectlength == 0 || skilllength == 0?'obtcard':'' }} ">
+  <view class="cardnine nobgshade fexd-button {{projectlength == 0 || skilllength == 0?'obtcard':'' }} ">
     <button bindtap="activeRefresh" class="obtcardnineone" open-type='share'>
       分享
     </button>
@@ -295,5 +300,7 @@
   </view>
   <view wx:if="{{projectlength != 0 || skilllength != 0}}" style="height: 40rpx;">
   </view>
+</view>
+  
 </view>
 <!-- oworkotextonetu nopassre ressonone passre skilllength skillbooks  cardsixone-- selectTap projectone projectlength>
