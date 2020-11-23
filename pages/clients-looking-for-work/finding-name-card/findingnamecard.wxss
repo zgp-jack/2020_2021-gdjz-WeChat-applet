@@ -30,11 +30,11 @@ page {
 .findingnamecard {
   width: 93%;
   margin: 0 auto;
-  height: 80rpx;
+  height: 100rpx;
   background: white;
   font-size: 30rpx;
   color: #343434;
-  line-height: 80rpx;
+  line-height: 100rpx;
   text-align: center;
   letter-spacing: 4rpx;
   font-weight: bold;
@@ -526,7 +526,6 @@ height: 26rpx;
   background: white;
     position: relative;
     box-shadow: 0 0 1rpx #e7e6e4;
-    margin-top: 20rpx;
 }
 .cardone .cardoneson {
   width: 100%;

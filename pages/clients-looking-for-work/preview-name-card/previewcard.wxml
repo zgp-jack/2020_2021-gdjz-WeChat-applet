@@ -290,11 +290,7 @@
   </view> -->
 
 
-  <view class="cardnine nobgshade fexd-button {{projectlength == 0 || skilllength == 0?'obtcard':'' }} ">
-    <button bindtap="activeRefresh" class="obtcardnineone" open-type='share'>
-      分享
-    </button>
-  </view>
+  
 
   <view wx:if="{{projectlength == 0 && skilllength == 0}}" style="height: 88rpx;">
   </view>
@@ -302,5 +298,10 @@
   </view>
 </view>
   
+<view class="cardnine nobgshade fexd-button {{projectlength == 0 || skilllength == 0?'obtcard':'' }} ">
+    <button bindtap="activeRefresh" class="obtcardnineone" open-type='share'>
+      分享
+    </button>
+  </view>
 </view>
 <!-- oworkotextonetu nopassre ressonone passre skilllength skillbooks  cardsixone-- selectTap projectone projectlength>

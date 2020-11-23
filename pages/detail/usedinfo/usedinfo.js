@@ -129,6 +129,7 @@ Page({
     onLoad: function (options) {
         this.initUsedinfo(options);
         this.initNeedData();
+        app.activeRefresh()
     },
 
     /**

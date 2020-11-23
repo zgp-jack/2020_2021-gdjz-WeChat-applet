@@ -16,12 +16,12 @@
 .header {
   width: 93%;
   margin: 0 auto;
-  height: 60rpx;
+  height: 100rpx;
   background: white;
   font-size: 31rpx;
   color: #f87a14;
   text-align: center;
-  line-height: 60rpx;
+  line-height: 100rpx;
   font-weight: bold;
 }
 
@@ -33,9 +33,9 @@
   background-color: #09f;
   color: white;
   width: 500rpx;
-  height: 70rpx;
+  height: 80rpx;
   outline: 0;
-  line-height: 70rpx;
+  line-height: 80rpx;
 }
 
 .obtcard {
