@@ -206,7 +206,7 @@
     float: left;
     color: #0099ff;
     font-size: 30rpx;
-    line-height: 60rpx;
+    line-height: 45rpx;
     max-width: 100%;
 }
 .expend-show-recruit .yupao-common-list {
@@ -244,7 +244,7 @@
 
 
 .list-complain-phone {
-    background: #ff0000;
+    background: #ff5353;
 }
 
 .integral-select {
@@ -326,10 +326,20 @@
 }
 .widthLine {
     width: 100%;
+    line-height: 45rpx !important;
 }
 .viewRight {
     float: right;
 }
 .bluecolor {
     color: #0099ff;
+}
+
+.yupao-common-list-right {
+    line-height: 60rpx;
+    display: table-cell;
+    vertical-align: bottom;
+}
+.yupao-common-lists-item {
+    font-size: 30rpx;
 }

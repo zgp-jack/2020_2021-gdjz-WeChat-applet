@@ -54,7 +54,7 @@
       </view>
     </view>
   </view>
-  <view wx:if="{{!member.tel}}" class="end-info" data-url="/packageOther/pages/userinfo/edit/edit" bindtap="valiUserUrl">
+  <view wx:if="{{!member.tel && userInfo}}" class="end-info" data-url="/packageOther/pages/userinfo/edit/edit" bindtap="valiUserUrl">
     <text>完善资料</text>
   </view>
   <!-- banner -->

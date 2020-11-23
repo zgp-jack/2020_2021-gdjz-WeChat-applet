@@ -161,7 +161,7 @@ Page({
             case 'to_resume_list':
               _this.setData({
                 'jobBanner.banner':app.globalData.apiImgUrl+'ws/job_banner-zgr.png',
-                'jobBanner.link':'/pages/index/index'
+                'jobBanner.link':'/pages/findingworkinglist/findingworkinglist'
               })
               break
           }

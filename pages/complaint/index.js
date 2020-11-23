@@ -30,7 +30,8 @@ Page({
     // 来自哪个页面的投诉job（招工信息），resume（找活信息）
     type: "",
     // 详情页面还是积分消耗页面detail(详情页面)，expend（积分消耗页面）
-    page:""
+    page:"",
+    isIos:false
   },
   // 用户上传图片
   userUploadsImg: function(e) {
@@ -220,6 +221,18 @@ Page({
     }
     if (options.hasOwnProperty("page")) {
       this.setData({ page: options.page })
+    }
+    //判断ios
+    var phone = wx.getSystemInfoSync();  //调用方法获取机型
+    var that = this;
+    if (phone.platform == 'ios') {
+      that.setData({
+        isIos: true
+      });
+    } else if (phone.platform == 'android') {
+      that.setData({
+        isIos: false
+      });
     }
   },
 

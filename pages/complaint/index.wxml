@@ -6,7 +6,7 @@
             <view class="feedback-container">
                 <view class="box-feelback">
                     <view class="title">投诉内容<text class="title-subhead">（必填）</text></view>
-                    <textarea id="texra" maxlength="300" placeholder="请如实填写投诉内容" bindinput="userEnterContent" value='{{ content }}'></textarea>
+                    <textarea id="texra" class="{{isIos?'iostextarea':''}}" placeholder-class="placeholder-textarea" maxlength="300" placeholder="请如实填写投诉内容" bindinput="userEnterContent" value='{{ content }}'></textarea>
                     <view class="texralengh">{{texralength}}/300</view>
                 </view>
                 <view class="feedback-imgs clearfix">

@@ -134,11 +134,11 @@
             </view>
             <view class='yupao-common-lists-item clearfix'>
                 <view class='yupao-common-list-left'>工种</view>
-                <view class='yupao-common-list-right newColor'><text wx:for="{{ info.classifyName }}"  wx:key="index">{{ item }}<text wx:if="{{info.classifyName.length > 1 && index !== info.classifyName.length-1}}">、</text></text></view>
+                <view class='yupao-common-list-right newColor widthLine'><text wx:for="{{ info.classifyName }}"  wx:key="index">{{ item }}<text wx:if="{{info.classifyName.length > 1 && index !== info.classifyName.length-1}}">、</text></text></view>
             </view>
             <view class='yupao-common-lists-item clearfix'>
                 <view class='yupao-common-list-left'>自我介绍</view>
-                <view class='yupao-common-list-right newColor'>{{ info.detail }}</view>
+                <view class='yupao-common-list-right newColor widthLine'>{{ info.detail }}</view>
             </view>
             <!-- <view class='yupao-common-lists-text'>{{ info.detail }}</view> -->
         </view>
