@@ -7,6 +7,8 @@ App({
   globalData: {
     joingroup: false,
     copywechat: '',
+    notice:[],
+    member_less_info:{},
     callphone: '',
     procity: 0,
     version: "1.0.6",
@@ -98,7 +100,11 @@ App({
       loginWay: "",
     },
     // 招工信息详情界面是否展示快速发布找活名片
-    isShowFindWork: false
+    isShowFindWork: false,
+    getNotice:{
+      loginBefore:false,
+      loginAfter:false
+    }
   },
   //是否为极速发布与快速发布请求,快速发布与极速发布跳转
   initJobView: function () {
@@ -1199,36 +1205,100 @@ App({
   },
 
   getNoticeInfo: function (userinfo, callback) {
+    let loginAfter = this.globalData.getNotice.loginAfter;
+    let loginBefore = this.globalData.getNotice.loginBefore;
     let flag = this.globalData.firstSaveUserLoginLog
-    if (userinfo && userinfo.userId) {
-      userinfo.record = flag ? 0 : 1
-    } else {
-      userinfo = {
-        record: 0
+    if(userinfo &&　userinfo.userId){
+      if (!loginAfter) {
+        if (userinfo && userinfo.userId) {
+          userinfo.record = flag ? 0 : 1
+        } else {
+          userinfo = {
+            record: 0
+          }
+        }
+        let that = this
+        this.doRequestAction({
+          url: "index/less-search-data/",
+          way: "POST",
+          params: userinfo,
+          success: function (res) {
+            let mydata = res.data;
+            callback(mydata)
+            that.globalData.joingroup = mydata.join_group_config
+            that.globalData.copywechat = mydata.wechat.number
+            that.globalData.callphone = mydata.phone
+            that.globalData.serverPhone = mydata.phone
+            that.globalData.notice = mydata.notice
+            that.globalData.member_less_info = mydata.member_less_info
+            if (userinfo.record) that.globalData.firstSaveUserLoginLog = true
+            that.globalData.getNotice.loginAfter = true
+          },
+          fail: function (err) {
+            wx.showToast({
+              title: '数据加载失败！',
+              icon: "none",
+              duration: 3000
+            })
+          }
+        })
+      }else{
+        let copywechat = this.globalData.copywechat
+        let data = {
+          notice: this.globalData.notice,
+          member_less_info: this.globalData.member_less_info,
+          phone: this.globalData.serverPhone,
+          wechat: { number: copywechat },
+          join_group_config: this.globalData.joingroup,
+        }
+        callback(data)
+      }
+    }else{
+      if (!loginBefore) {
+        if (userinfo && userinfo.userId) {
+          userinfo.record = flag ? 0 : 1
+        } else {
+          userinfo = {
+            record: 0
+          }
+        }
+        let that = this
+        this.doRequestAction({
+          url: "index/less-search-data/",
+          way: "POST",
+          params: userinfo,
+          success: function (res) {
+            let mydata = res.data;
+            callback(mydata)
+            that.globalData.joingroup = mydata.join_group_config
+            that.globalData.copywechat = mydata.wechat.number
+            that.globalData.callphone = mydata.phone
+            that.globalData.serverPhone = mydata.phone
+            that.globalData.notice = mydata.notice
+            if (userinfo.record) that.globalData.firstSaveUserLoginLog = true
+            that.globalData.getNotice.loginBefore = true
+          },
+          fail: function (err) {
+            wx.showToast({
+              title: '数据加载失败！',
+              icon: "none",
+              duration: 3000
+            })
+          }
+        })
+      }else{
+        let copywechat = this.globalData.copywechat
+        let data = {
+          notice: this.globalData.notice,
+          member_less_info: this.globalData.member_less_info,
+          phone: this.globalData.serverPhone,
+          wechat: { number: copywechat },
+          join_group_config: this.globalData.joingroup,
+        }
+        callback(data)
       }
     }
-    let that = this
-    this.doRequestAction({
-      url: "index/less-search-data/",
-      way: "POST",
-      params: userinfo,
-      success: function (res) {
-        let mydata = res.data;
-        callback(mydata)
-        that.globalData.joingroup = mydata.join_group_config
-        that.globalData.copywechat = mydata.wechat.number
-        that.globalData.callphone = mydata.phone
-        that.globalData.serverPhone = mydata.phone
-        if (userinfo.record) that.globalData.firstSaveUserLoginLog = true
-      },
-      fail: function (err) {
-        wx.showToast({
-          title: '数据加载失败！',
-          icon: "none",
-          duration: 3000
-        })
-      }
-    })
+    
   },
   valiUserVideoAdStatus: function (callback, flag) {
     let vf = flag || 1
@@ -1557,6 +1627,7 @@ App({
                 refreshStatus: true
               })
             }
+            _this.activeRefresh()
             // 刷新成功
             _this.selectComponent("#promptbox").show()
           }else if(refreshStatus === 4){
