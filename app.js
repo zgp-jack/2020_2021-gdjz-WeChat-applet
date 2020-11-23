@@ -1551,6 +1551,7 @@ App({
   refreshReq: function (source,_this) {
     // source  1-找活名片编辑页；2-招工列表引导弹窗
     // 积分获取url
+    let that = this
     let url = '/pages/recharge/recharge';
     let userInfo = wx.getStorageSync('userInfo')
     if (!userInfo) return
@@ -1627,9 +1628,9 @@ App({
                 refreshStatus: true
               })
             }
-            _this.activeRefresh()
             // 刷新成功
             _this.selectComponent("#promptbox").show()
+            that.activeRefresh()
           }else if(refreshStatus === 4){
             // 刷新失败
             wx.showModal({

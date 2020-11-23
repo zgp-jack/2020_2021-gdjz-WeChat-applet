@@ -1,7 +1,7 @@
 <view style="padding-bottom:120rpx;" wx:if="{{showFindCard}}">
   <view class="cardcolore">
     <view class="findingnamecard">
-      请完善以下信息
+      <text class="left-text">请完善以下信息</text>
       <view class="sharecard" wx:if="{{showtopone}}" bindtap="preview">预览/分享名片</view>
     </view>
   </view>
