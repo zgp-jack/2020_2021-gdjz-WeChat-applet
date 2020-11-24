@@ -463,6 +463,9 @@ margin-left: 16rpx;
   color: #777;
   line-height: 40rpx;
   padding-bottom: 10rpx;
+  overflow: hidden;
+  white-space: normal;
+  width: 720rpx;
 }
 
 .craftbox {
