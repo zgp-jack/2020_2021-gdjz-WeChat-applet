@@ -904,7 +904,6 @@ Page({
     }
   },
   getAllpoint(timeItem) {
-    debugger
     // 积分单价差
     let shen = this.data.allprice - this.data.max_price;
     
@@ -970,13 +969,15 @@ Page({
     //深拷贝区域信息
       let mydata = app.arrDeepCopy(areadata)  
       let areaData = mydata.data
-      // if ( areaId == 0) {
-      //   return
-      // }else{
+      if ( areaId == 0) {
+        // 获取配置信息和计算初次置顶数据
+        this.getdetail()
+        return
+      }else{
         // 遍历找到符合条件的区域信息
         for (let i = 0; i < areaData.length; i++) {
           let item = areaData[i]
-          if(areaId == 0) areaId = 1
+          // if(areaId == 0) areaId = 1
           for (let j = 0; j < item.length; j++) {
             if (item[j].id == areaId) {
               let areaArry = item[j];
@@ -989,7 +990,7 @@ Page({
         if (defaultTop.length > 1) {
           defaultTop.splice(0,1)
         }
-      // }
+      }
       let pid = defaultTop[0].pid
       if (pid == 0) {
         this.setData({
@@ -1017,20 +1018,25 @@ Page({
       let resdata = app.arrDeepCopy(data)
       let areaData = resdata
       if(areaId == 0) areaId = 1
-      // 遍历找到符合条件的区域信息
-      for (let i = 0; i < areaData.length; i++) {
-        let item = areaData[i]
-        for (let j = 0; j < item.length; j++) {
-          if (item[j].id == areaId) {
-            let areaArry = item[j];
-            areaArry.name = item[j].city;
-            areaArry.index = i;
-            defaultTop.push(areaArry)
+      if (areaId == 0) {
+        _this.getdetail()
+        return
+      }else{
+        // 遍历找到符合条件的区域信息
+        for (let i = 0; i < areaData.length; i++) {
+          let item = areaData[i]
+          for (let j = 0; j < item.length; j++) {
+            if (item[j].id == areaId) {
+              let areaArry = item[j];
+              areaArry.name = item[j].city;
+              areaArry.index = i;
+              defaultTop.push(areaArry)
+            }
           }
         }
-      }
-      if (defaultTop.length > 1) {
-        defaultTop.splice(0,1)
+        if (defaultTop.length > 1) {
+          defaultTop.splice(0,1)
+        }
       }
       let pid = defaultTop.pid
       if (pid == 0) {
