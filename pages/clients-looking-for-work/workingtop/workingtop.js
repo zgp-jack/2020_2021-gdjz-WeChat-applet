@@ -715,6 +715,11 @@ Page({
          let index = null
          // 默认天数对应的index下标
          index = days.findIndex((value)=> value == day );
+         if (hastop == '0' || istop == '2') {
+           that.setData({
+            detailprice: day
+           })
+         }
           that.setData({
             //最大省份数
             max_province: max_province,
@@ -750,7 +755,6 @@ Page({
             reqDays: days,
             //最多可选城市提示文案
             toTopTip:mydata.data.max_number_tips,
-            detailprice: day
           })
           // 初始化选择置顶天数的下拉列表
           that.getMoreDay()
