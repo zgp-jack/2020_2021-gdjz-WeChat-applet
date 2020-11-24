@@ -295,9 +295,11 @@ Page({
     }
     for (let j = 0; j < areaArrP.length; j++) {
       for (let i = 0; i < index.length; i++) {
-        if (areaArr[index[i]][0].id == areaArrP[j].id) {
-          areaArrP.splice(j, 1)
-          j --
+        if (areaArrP.length > 0) {
+          if (areaArr[index[i]][0].id == areaArrP[j].id) {
+            areaArrP.splice(j, 1)
+            j --
+          }
         }
       }
     }
@@ -453,8 +455,10 @@ Page({
         // 将选中城市对应的全省选中状态变成1（（未选中））
           that.getFullone(num)
         } else if (num == 0) {
-        // 选中热门城市后将该城市对应的全省状态变成1（未选中）
-          that.getzero(index)
+          // 选中热门城市后将该城市对应的全省状态变成1（未选中）
+          if(judgeId === 0){
+            that.getzero(index)
+          }
         }
         // 将选中城市数据保存在data中
         dareaTextC.push(detail)
