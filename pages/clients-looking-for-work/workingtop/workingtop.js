@@ -165,7 +165,8 @@ Page({
       that.setData({
         daynumber: daynumber,
         day: detail,
-        firstEndTime: time
+        firstEndTime: time,
+        detailprice: detail
       });
     // 计算出需要的积分
       let price = (numcity * (that.data.areaCitycrum.length) + numprovice * (that.data.areaProcrum.length) + numAll * (that.data.areaAllcrum.length)) * detail
