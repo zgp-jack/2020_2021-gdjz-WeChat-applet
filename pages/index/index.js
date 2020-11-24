@@ -1130,7 +1130,8 @@ Page({
               "tipBox.confirmText": "去刷新",
               "tipBox.showCancel": true,
               "tipBox.showIcon": false,
-              "tipBox.showTitle": true
+              "tipBox.showTitle": true,
+              refreshStatus: false
             })
             that.selectComponent("#promptbox").show()
           }
