@@ -1122,10 +1122,15 @@ Page({
           let integral = mydata.data.integral;
           if (showPopup) {
             that.setData({
+              "tipBox.content": '',
               "tipBox.content[0].text[0].textName": `刷新找活名片让更多老板联系你，消耗`,
               "tipBox.content[0].text[1].textName": integral,
+              "tipBox.content[0].text[1].color":"#DC143C",
               "tipBox.content[0].text[2].textName": '积分刷新？',
-              'tipBox.confirmText': "去刷新",
+              "tipBox.confirmText": "去刷新",
+              "tipBox.showCancel": true,
+              "tipBox.showIcon": false,
+              "tipBox.showTitle": true
             })
             that.selectComponent("#promptbox").show()
           }
