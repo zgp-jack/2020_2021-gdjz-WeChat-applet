@@ -1552,7 +1552,7 @@ App({
     // source  1-找活名片编辑页；2-招工列表引导弹窗
     // 积分获取url
     let that = this
-    let url = '/pages/recharge/recharge';
+    let url = '/pages/getintegral/getintegral';
     let userInfo = wx.getStorageSync('userInfo')
     if (!userInfo) return
     // 用户token
