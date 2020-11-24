@@ -46,10 +46,10 @@
       </picker>
     </view>
 
-    <view class="daynumone" wx:if="{{topdata.is_top == 1 &&shoutime}}">
+    <view class="daynumone" wx:if="{{topdata.is_top != 2 && shoutime}}">
       <text class="endtime">最新到期时间</text>
 
-        <input class="end bluet" wx:if="{{topdata.is_top == 1}}" disabled="true"  value="{{endtimeone}}">
+        <input class="end bluet" wx:if="{{topdata.is_top != 2}}" disabled="true"  value="{{endtimeone}}">
            <text class="yanchangon" bindtap="deletea">取消</text>
         </input>
     </view>
