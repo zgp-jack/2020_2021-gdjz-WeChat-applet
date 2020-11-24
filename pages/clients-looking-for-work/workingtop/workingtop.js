@@ -165,7 +165,8 @@ Page({
       that.setData({
         daynumber: daynumber,
         day: detail,
-        firstEndTime: time
+        firstEndTime: time,
+        detailprice: detail
       });
     // 计算出需要的积分
       let price = (numcity * (that.data.areaCitycrum.length) + numprovice * (that.data.areaProcrum.length) + numAll * (that.data.areaAllcrum.length)) * detail
@@ -965,12 +966,13 @@ Page({
     //深拷贝区域信息
       let mydata = app.arrDeepCopy(areadata)  
       let areaData = mydata.data
-      if ( areaId == 0) {
-        return
-      }else{
+      // if ( areaId == 0) {
+      //   return
+      // }else{
         // 遍历找到符合条件的区域信息
         for (let i = 0; i < areaData.length; i++) {
           let item = areaData[i]
+          if(areaId == 0) areaId = 1
           for (let j = 0; j < item.length; j++) {
             if (item[j].id == areaId) {
               let areaArry = item[j];
@@ -983,7 +985,7 @@ Page({
         if (defaultTop.length > 1) {
           defaultTop.splice(0,1)
         }
-      }
+      // }
       let pid = defaultTop[0].pid
       if (pid == 0) {
         this.setData({
@@ -1010,24 +1012,21 @@ Page({
     app.getAreaData(this, function(data) {
       let resdata = app.arrDeepCopy(data)
       let areaData = resdata
-      if ( areaId == 0) {
-        return
-      }else{
-        // 遍历找到符合条件的区域信息
-        for (let i = 0; i < areaData.length; i++) {
-          let item = areaData[i]
-          for (let j = 0; j < item.length; j++) {
-            if (item[j].id == areaId) {
-              let areaArry = item[j];
-              areaArry.name = item[j].city;
-              areaArry.index = i;
-              defaultTop.push(areaArry)
-            }
+      if(areaId == 0) areaId = 1
+      // 遍历找到符合条件的区域信息
+      for (let i = 0; i < areaData.length; i++) {
+        let item = areaData[i]
+        for (let j = 0; j < item.length; j++) {
+          if (item[j].id == areaId) {
+            let areaArry = item[j];
+            areaArry.name = item[j].city;
+            areaArry.index = i;
+            defaultTop.push(areaArry)
           }
         }
-        if (defaultTop.length > 1) {
-          defaultTop.splice(0,1)
-        }
+      }
+      if (defaultTop.length > 1) {
+        defaultTop.splice(0,1)
       }
       let pid = defaultTop.pid
       if (pid == 0) {
