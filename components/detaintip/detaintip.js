@@ -92,7 +92,7 @@ Component({
         }
       }else{
          //找工人列表
-         wx.redirectTo({
+         wx.reLaunch({
           url: '/pages/published/recruit/list',
         })
       }

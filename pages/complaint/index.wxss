@@ -64,7 +64,8 @@ page{
   font-size: 32rpx;
   line-height: 50rpx;
   display: block;
-  letter-spacing: 2rpx;
+  margin: 0;
+  padding: 0;
 }
 
 .box-feelback {
@@ -168,6 +169,12 @@ page{
 #texra {
   font-size: 28rpx;
   word-wrap: break-word;
+}
+.placeholder-textarea {
+  color: #BEBDBD;
+}
+.iostextarea {
+  margin-left: -10rpx !important;
 }
 
 .texralengh {

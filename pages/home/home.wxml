@@ -56,49 +56,49 @@
 
   <!-- 鱼泡产业 -->
   <view class='index-yupao-industry clearfix'>
-    <navigator class='index-footer-nav' url='/pages/index/index' class='index-footer-nav' open-type="navigate">
+    <navigator class='index-footer-nav' url='/pages/index/index' class='index-footer-nav' open-type="navigate" bindtap="homeActiveRefresh">
       <view class='index-industry-item'>
         <image src='{{ industry.jzzg }}'></image>
         <text>建筑招工</text>
       </view>
     </navigator>
-    <navigator class='index-footer-nav' target="miniProgram" open-type="navigate" app-id="wxca0eab5cd5fe6a7c" path="" extra-data="" version="release">
+    <navigator class='index-footer-nav' target="miniProgram" open-type="navigate" app-id="wxca0eab5cd5fe6a7c" path="" extra-data="" version="release" bindtap="homeActiveRefresh">
       <view class='index-industry-item'>
         <image src='{{ industry.zxzg }}'></image>
         <text>装修招工</text>
       </view>
     </navigator>
-    <navigator  class='index-footer-nav' target="miniProgram" open-type="navigate" app-id="wxd348efa56021e8d0" path="" extra-data="" version="release">
+    <navigator  class='index-footer-nav' target="miniProgram" open-type="navigate" app-id="wxd348efa56021e8d0" path="" extra-data="" version="release" bindtap="homeActiveRefresh">
       <view class='index-industry-item'>
         <image src='{{ industry.hgzp }}'></image>
         <text>焊工招聘</text>
       </view>
     </navigator>
-    <navigator class='index-footer-nav' target="miniProgram" open-type="navigate" app-id="wxbfab0a324f27b966" path="" extra-data="" version="release">
+    <navigator class='index-footer-nav' target="miniProgram" open-type="navigate" app-id="wxbfab0a324f27b966" path="" extra-data="" version="release" bindtap="homeActiveRefresh">
       <view class='index-industry-item'>
         <image src='{{ industry.driver }}'></image>
         <text>招聘司机</text>
       </view>
     </navigator>
-    <navigator  class='index-footer-nav' url='/pages/index/index?id=73' open-type="navigate">
+    <navigator  class='index-footer-nav' url='/pages/index/index?id=73' open-type="navigate" bindtap="homeActiveRefresh">
       <view class='index-industry-item'>
         <image src='{{ industry.gczg }}'></image>
         <text>工厂招人</text>
       </view>
     </navigator>
-    <navigator class='index-footer-nav' target="miniProgram" open-type="navigate" app-id="wx0ae31bf0edad4390" path="pages/common/list?source={{ source }}" extra-data="" >
+    <navigator class='index-footer-nav' target="miniProgram" open-type="navigate" app-id="wx0ae31bf0edad4390" path="pages/common/list?source={{ source }}" extra-data="" bindtap="homeActiveRefresh">
       <view class='index-industry-item'>
         <image src='{{ industry.jxzl }}'></image>
         <text>机械租赁</text>
       </view>
     </navigator>
-    <navigator  class='index-footer-nav' url="{{workTypes[1].isHasWorkType?'/pages/index/index?id=' + workTypes[1].id:''}}" target="{{workTypes[1].isHasWorkType?'slef':'miniProgram'}}" open-type="navigate" app-id="{{workTypes[1].isHasWorkType?'':'wx260188c8d40378c0'}}" path="" extra-data="" version="release">
+    <navigator  class='index-footer-nav' url="{{workTypes[1].isHasWorkType?'/pages/index/index?id=' + workTypes[1].id:''}}" target="{{workTypes[1].isHasWorkType?'slef':'miniProgram'}}" open-type="navigate" app-id="{{workTypes[1].isHasWorkType?'':'wx260188c8d40378c0'}}" path="" extra-data="" version="release" bindtap="homeActiveRefresh">
       <view class='index-industry-item'>
         <image src='{{ industry.zsdg }}'></image>
         <text>招水电工</text>
       </view>
     </navigator>
-    <navigator  class='index-footer-nav' url="{{workTypes[2].isHasWorkType?'/pages/index/index?id='+ workTypes[2].id:''}}" target="{{workTypes[2].isHasWorkType?'slef':'miniProgram'}}" open-type="navigate" app-id="{{workTypes[2].isHasWorkType?'':'wxa6cc235c0fd8e7b4'}}" path="" extra-data="" version="release">
+    <navigator  class='index-footer-nav' url="{{workTypes[2].isHasWorkType?'/pages/index/index?id='+ workTypes[2].id:''}}" target="{{workTypes[2].isHasWorkType?'slef':'miniProgram'}}" open-type="navigate" app-id="{{workTypes[2].isHasWorkType?'':'wxa6cc235c0fd8e7b4'}}" path="" extra-data="" version="release" bindtap="homeActiveRefresh">
       <view class='index-industry-item'>
         <image src='{{ industry.zgjg }}'></image>
         <text>招钢筋工</text>
@@ -109,7 +109,7 @@
       <text>二手交易</text>
     </view>
 
-    <navigator class='index-footer-nav' target="miniProgram" open-type="navigate" app-id="wxbac40ffffdee0573" path="" extra-data="" version="release">
+    <navigator class='index-footer-nav' target="miniProgram" open-type="navigate" app-id="wxbac40ffffdee0573" path="" extra-data="" version="release" bindtap="homeActiveRefresh">
       <view class='index-industry-item'>
         <image src='{{ industry.zbcg }}'></image>
         <text>招标采购</text>

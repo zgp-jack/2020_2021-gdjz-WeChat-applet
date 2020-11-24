@@ -73,7 +73,7 @@ Page({
           title: "鱼泡资讯"
         })
       }
-      
+      app.activeRefresh()
     },
     activeRefresh:function () {
       app.activeRefresh()

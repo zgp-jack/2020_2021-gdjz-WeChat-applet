@@ -126,6 +126,7 @@ Page({
           showAuthor: mydata.show_auth == 1 ? true : false
         })
         if (mydata.errcode == "ok") {
+          console.log(res.data.member)
           _this.setData({
             member: mydata.member,
             is_checking: mydata.is_checking,
@@ -160,7 +161,7 @@ Page({
             case 'to_resume_list':
               _this.setData({
                 'jobBanner.banner':app.globalData.apiImgUrl+'ws/job_banner-zgr.png',
-                'jobBanner.link':'/pages/index/index'
+                'jobBanner.link':'/pages/findingworkinglist/findingworkinglist'
               })
               break
           }
@@ -181,7 +182,7 @@ Page({
             case 'to_top':
               _this.setData({
                 'resumeBanner.banner':app.globalData.apiImgUrl+'ws/bannerqz.png',
-                'resumeBanner.link':'/pages/clients-looking-for-work/finding-name-card/findingnamecard'
+                'resumeBanner.link':'/pages/clients-looking-for-work/workingtop/workingtop?datatop=1'
               })
               break
             case 'to_edit_top':
@@ -192,8 +193,8 @@ Page({
               break
             case 'to_job_list':
               _this.setData({
-                'resumeBanner.banner':app.globalData.apiImgUrl+'resume_banner-zgz.png',
-                'resumeBanner.link':'/pages/published/recruit/list'
+                'resumeBanner.banner':app.globalData.apiImgUrl+'ws/resume_banner-zgz.png',
+                'resumeBanner.link':'/pages/index/index'
               })
               break
           }

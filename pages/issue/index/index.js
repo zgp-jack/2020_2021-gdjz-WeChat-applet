@@ -491,7 +491,7 @@ Page({
         let has = rowData.has_children
         if(has){
           let newData = rowData.children
-          for(let j = 1 ; j < newData.length; j ++){
+          for(let j = 1 ; j < newData.length; j++){
             if(content.indexOf(newData[j].name) !== -1){
               console.log(newData[j].name)
               flag = true
