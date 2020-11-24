@@ -63,6 +63,10 @@ Page({
     model:{},
     is_check:""
   },
+  // 点击隐藏键盘
+  hiddenKeyBoard: function () {
+    wx.hideKeyboard()
+  },
   getaddressindexof(relname) {
     var reg = new RegExp("[\\u4E00-\\u9FFF]+", "g");
     if (reg.test(relname)) {
