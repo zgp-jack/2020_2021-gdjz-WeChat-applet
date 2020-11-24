@@ -748,7 +748,8 @@ Page({
             // 保存请求返回的可选择置顶天数
             reqDays: days,
             //最多可选城市提示文案
-            toTopTip:mydata.data.max_number_tips
+            toTopTip:mydata.data.max_number_tips,
+            detailprice: day
           })
           // 初始化选择置顶天数的下拉列表
           that.getMoreDay()
@@ -898,6 +899,7 @@ Page({
     }
   },
   getAllpoint(timeItem) {
+    debugger
     // 积分单价差
     let shen = this.data.allprice - this.data.max_price;
     
@@ -924,7 +926,7 @@ Page({
 
   // 修改添加置顶城市的价格计算
   getCityNum() {
-    if (this.data.topdata.is_top != 2) {
+    if (this.data.topdata.has_top &&　this.data.topdata.is_top != 2) {
       let all = this.data.areaCitycrum.length * this.data.city_integral + this.data.areaProcrum.length * this.data.province_integral + this.data.country_integral * this.data.areaAllcrum.length;
       console.log("all",all)
       if (all > this.data.max_price) {
