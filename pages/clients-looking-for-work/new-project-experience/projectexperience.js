@@ -45,7 +45,9 @@ Page({
     checkonef:"",
     maximg: 6
   },
-
+  hiddenKeyBoard: function () {
+    wx.hideKeyboard()
+  },
   obtn() {
     this.setData({
       showModal: false,
