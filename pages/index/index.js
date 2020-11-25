@@ -1016,7 +1016,7 @@ Page({
   initSelectedData: function (id,data) {
     let classTree = data.classTree
     for (let i = 0; i < classTree.length; i++) {
-      if (classTree[i].id === id) {
+      if (classTree[i].id == id) {
         this.setData({
           worktype: i,
           typeText: classTree[i].name,
@@ -1027,10 +1027,10 @@ Page({
         wx.setStorageSync('typeId', id)
         return
       }else{
-        if (classTree[i].has_children === 1) {
+        if (classTree[i].has_children == 1) {
           let childrenClassTree = classTree[i].children;
           for (let j = 0; j < childrenClassTree.length; j++) {
-            if (childrenClassTree[j].id === id) {
+            if (childrenClassTree[j].id == id) {
               this.setData({
                 worktype: i,
                 typeText: childrenClassTree[j].name,
@@ -1039,6 +1039,7 @@ Page({
               })
               //判断是否有传入 工种id 有则存入缓存
               wx.setStorageSync('typeText',childrenClassTree[j].name)
+              wx.setStorageSync('typeId', id)
               return
             }
           }

@@ -259,12 +259,6 @@
                     <view class="listsboxagezong" wx:if="{{item.birthday != 0}}">
                       <text>{{item.birthday}}岁</text>
                     </view>
-
-
-                    <image wx:if="{{item.authentication == 2}}" src="{{realNames}}"></image>
-
-
-
                     <image wx:if="{{item.certificate == 1}}" src="{{authentication}}"></image>
 
                   </view>
