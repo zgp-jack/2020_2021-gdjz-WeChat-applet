@@ -31,7 +31,8 @@ Page({
     type: "",
     // 详情页面还是积分消耗页面detail(详情页面)，expend（积分消耗页面）
     page:"",
-    isIos:false
+    isIos:false,
+    textLength: 300,
   },
   // 用户上传图片
   userUploadsImg: function(e) {
@@ -92,7 +93,7 @@ Page({
     })
     let content = this.data.content;
     // 获取输入内容长度
-    let length = content.length;
+    let length = content.length > textLength? textLength:content.length;
     // 设置长度到data中texralenth
     this.setData({texralength:length})
   },
