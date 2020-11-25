@@ -1,6 +1,6 @@
 <view class="yupao-common-container">
   <view class='user-editinfo-lists'>
-    <view class='user-editinfo-item clearfix' bindtap='userUplodImg'>
+    <view class='user-editinfo-item clearfix' bindtap="{{ clickStatus?'userUplodImg':'' }}">
       <text class='user-editinfo-left user-editinfo-username'>头像</text>
       <image class='user-editinfo-right user-editinfo-userimg' src='{{ member.img }}'></image>
     </view>
