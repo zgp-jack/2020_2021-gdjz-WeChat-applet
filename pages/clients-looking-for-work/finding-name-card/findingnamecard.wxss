@@ -915,13 +915,11 @@ height: 26rpx;
   color: white;
   background: #dc0102;
   border-radius: 50%;
-right: -20rpx;
-top: -14rpx;
-
+  right: -20rpx;
+  top: -14rpx;
   text-align: center;
   line-height: 24rpx;
   font-size: 20rpx;
-  z-index: 6666;
 }
 
 .cardsixsixall {
@@ -1071,7 +1069,6 @@ top: -14rpx;
   text-align: center;
   line-height: 24rpx;
   font-size: 20rpx;
-  z-index: 888;
 }
 
 .cardeightsixall {
