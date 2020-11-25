@@ -15,7 +15,7 @@
             <view class="recruit-list-item" bindtap="jumpRecruitInfo"  data-id="{{ item.id }}">
             <image class="recruit-list-endimg" src="{{ statusCheck }}" wx:if="{{ item.is_check == '1' }}"></image>
             <image class="recruit-list-endimg" src="{{ statusNopass }}" wx:if="{{ item.is_check == '0' }}"></image>
-            <image class="recruit-list-endimg" src="{{ statusEnd }}" wx:if="{{item.is_check != '0'&&item.is_end == '2'}}"></image>
+            <image class="recruit-list-endimg" src="{{ statusEnd }}" wx:if="{{item.is_check == '2'&&item.is_end == '2'}}"></image>
             <view class="recruit-item-title overwords">{{ item.title }}</view>
             <view class="recruit-item-content">{{ item.detail }}</view>
             <view class="recruit-item-footerbox">
