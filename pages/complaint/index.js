@@ -31,7 +31,8 @@ Page({
     type: "",
     // 详情页面还是积分消耗页面detail(详情页面)，expend（积分消耗页面）
     page:"",
-    isIos:false
+    isIos:false,
+    textLength: 300,
   },
   // 用户上传图片
   userUploadsImg: function(e) {
@@ -92,7 +93,7 @@ Page({
     })
     let content = this.data.content;
     // 获取输入内容长度
-    let length = content.length;
+    let length = content.length > this.data.textLength? this.data.textLength:content.length;
     // 设置长度到data中texralenth
     this.setData({texralength:length})
   },
@@ -135,10 +136,10 @@ Page({
     let vertifyNum = v.v.new();
     // 将以空格开头空格结尾的替换空字符串
     content = content.replace(/^\s+|\s+$/g, '');
-    // 不少于5个汉字的正则表达式
+    // 不少于1个汉字的正则表达式
     let vRegx = /[\u4E00-\u9FA5]{1}/g; 
     // 验证不通过直接退出
-    if (content == "" || !content.match(vRegx) ||　content.match(vRegx).length < 4 || content.length < 5 || content.length > 300) {
+    if (content == "" || !content.match(vRegx) ||　content.match(vRegx).length < 5 || content.length < 5) {
       app.showMyTips(complaincontent);
       return false;
     }
