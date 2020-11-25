@@ -604,6 +604,12 @@
         {
           "name": "pages/fast/area/area",
           "pathName": "pages/fast/area/area",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "下载页",
+          "pathName": "packageOther/pages/download/download-app",
           "scene": null
         }
       ]

@@ -7,19 +7,24 @@ Page({
      */
     data: {
         appUrl: "https://android.myapp.com/myapp/detail.htm?apkName=io.dcloud.H576E6CC7&amp;ADTAG=mobile",
-        appImg: app.globalData.apiImgUrl + "downloadappimg.png",
-        downappbg: app.globalData.apiImgUrl + "downloadapp-topbg.png?t=" + new Date().getTime()
+        donwloadimg: app.globalData.apiImgUrl + 'ws/downloadbg.png',
+        downloadBtn: app.globalData.apiImgUrl + 'ws/download-btn.png',
+        downloadText: app.globalData.apiImgUrl + 'ws/download-text.png',
+        downloadIcon: app.globalData.apiImgUrl + 'ws/download-icon.png',
+        iosDownUrl: 'https://sj.qq.com/myapp/detail.htm?apkName=io.dcloud.H576E6CC7',
+        AndroidDownUrl: 'https://cdn.yupao.com/apk/yupao_v2.6.1_202010231_mini.apk',
+        downLoadUrl: ''
     },
     copyAppUrl: function () {
         wx.setClipboardData({
-            data: this.data.appUrl,
+            data: this.data.downLoadUrl,
             success(res) {
                 wx.hideToast();
                 wx.showModal({
                     title: '温馨提示',
                     content: '鱼泡APP下载地址已复制到粘贴板,请粘贴到浏览器中下载!',
-                    showCancel:false,
-                    success:function(){}
+                    showCancel: false,
+                    success: function () {}
                 })
             }
         })
@@ -28,6 +33,16 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
+        const info = wx.getSystemInfoSync()
+        if (info.platform === 'android') {
+            this.setData({
+                downLoadUrl: this.data.AndroidDownUrl
+            })
+        } else {
+            this.setData({
+                downLoadUrl: this.data.iosDownUrl
+            })
+        }
     },
 
     /**

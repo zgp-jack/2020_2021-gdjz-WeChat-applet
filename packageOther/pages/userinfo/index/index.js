@@ -11,6 +11,7 @@ Page({
         allowEditName:false,
         userName:"",
         member:{},
+        clickStatus: true
     },
     initUserinfo: function (options){
         let userInfo = wx.getStorageSync("userInfo");
@@ -78,6 +79,10 @@ Page({
         })
     },
     userUplodImg:function(){
+        this.setData({clickStatus: false})
+        setTimeout(() => {
+            this.setData({clickStatus: true})
+        }, 500);
         let _this = this;
         let userInfo = this.data.userInfo;
         app.userUploadImg(function (imgRes,mydata){
