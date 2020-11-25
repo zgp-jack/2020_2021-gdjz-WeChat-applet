@@ -282,7 +282,18 @@ Page({
                       }
                     })
                   }else{
-                    app.showMyTips(res.data.errmsg);
+                    wx.showModal({
+                      title:'提示',
+                      showCancel:false,
+                      content:res.data.errmsg,
+                      success(e){
+                        if(e.confirm){
+                          wx.reLaunch({
+                            url: '../../published/recruit/list',
+                          })
+                        }
+                      }
+                    })
                   }
                 }
               })
