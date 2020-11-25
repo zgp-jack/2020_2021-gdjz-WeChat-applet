@@ -251,6 +251,7 @@ Page({
         })
     },
     userChangeWorktype: function () {
+        wx.hideKeyboard()
         this.setData({
             showWorkType: true,
             showTextarea: false

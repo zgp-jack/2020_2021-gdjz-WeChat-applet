@@ -47,11 +47,11 @@
           <input class='common-publish-input' type='number' value='{{ member.age }}' placeholder='请输入年龄' bindinput='userEnterAge'></input>
         </view>
       </view> -->
-      <view class='common-publish-item'>
+      <view class='common-publish-item' bindtap="hiddenKeyBoard">
         <view class='common-publish-item-content'>
           <text class='common-publish-words'>性别</text>
           <!-- <input class='common-publish-input' type='number' value='{{ member.age }}' placeholder='请输入年龄' bindinput='userEnterAge'></input> -->
-          <picker bindchange="sex" value="{{indexsex}}" range="{{arrayone}}" class="informationthreetwo" bindtap="hiddenKeyBoard">
+          <picker bindchange="sex" value="{{indexsex}}" range="{{arrayone}}" class="informationthreetwo">
             <input disabled name="addregion" class='common-publish-input' value="{{arrayone[indexsex]}}" placeholder="请选择性别"></input>
           </picker>
         </view>
@@ -65,7 +65,7 @@
           </picker>
         </view>
       </view>
-      <view class='common-publish-item'>
+      <view class='common-publish-item' bindtap="hiddenKeyBoard">
         <view class='common-publish-item-content'>
           <text class='common-publish-words' bindtap="hiddenKeyBoard">民族</text>
           <!-- <input class='common-publish-input' value='{{ member.nationality }}' placeholder='请输入民族' bindinput='userEnterNationality'></input> -->
