@@ -921,7 +921,6 @@ top: -14rpx;
   text-align: center;
   line-height: 24rpx;
   font-size: 20rpx;
-  z-index: 6666;
 }
 
 .cardsixsixall {
