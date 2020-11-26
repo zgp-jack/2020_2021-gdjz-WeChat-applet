@@ -308,7 +308,7 @@ Page({
               tipstr:texts
             })
             that.selectComponent("#tips").show();
-            }else{
+            }else if(res.data.errcode === 'auth_forbid'){
               wx.showModal({
                 title: '提示',
                 content: res.data.errmsg,
@@ -320,6 +320,14 @@ Page({
                     })
                   }
                 }
+              })
+            }else{
+              wx.showModal({
+                title: '提示',
+                content: res.data.errmsg,
+                confirmText: '确定',
+                showCancel:false,
+                success(e){}
               })
             }
           }

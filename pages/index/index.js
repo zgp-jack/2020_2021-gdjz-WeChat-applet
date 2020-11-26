@@ -1230,8 +1230,8 @@ Page({
           // 当前时间戳
           let currentTime = myDate.getTime();
           // 到期时间戳（23:59:59）
-          // let dueDate = (new Date(new Date().toLocaleDateString())).getTime() +  (24 * 60 * 60 * 1000 - 1);
-          let dueDate = currentTime +  (2 * 60 * 1000 - 1);
+          let dueDate = (new Date(new Date().toLocaleDateString())).getTime() +  (24 * 60 * 60 * 1000 - 1);
+          // let dueDate = currentTime +  (2 * 60 * 1000 - 1);
           // 存入缓存
           let FindWorkTime = {currentTime:currentTime,dueDate:dueDate};
           wx.setStorageSync("FindWorkTime",FindWorkTime);
