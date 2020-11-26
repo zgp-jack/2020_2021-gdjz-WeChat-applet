@@ -35,7 +35,8 @@ Page({
     ConfigData:{},
     _options:{},
     tipstr:"",
-    isRequest:true
+    isRequest:true,
+    nodataImg: app.globalData.apiImgUrl + "collect-nodata.png"
   },
   publishJob:function () {
     app.initJobView()
@@ -499,6 +500,7 @@ Page({
       }
     }
     this.initFooterData()
+    app.activeRefresh()
   },
 
   /**

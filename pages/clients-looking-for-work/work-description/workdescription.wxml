@@ -3,13 +3,13 @@
     <view class="informationworkage">
       <text class="informationworkageone">工龄</text>
       <view class="informationworkagetwo">
-        <input type="number" maxlength="2" placeholder="请输入工龄" value="{{workage}}" bindinput="peopleage" ></input>
+        <input type="number" maxlength="2" placeholder="请输入工龄" value="{{workage}}" bindinput="peopleage" always-embed="true"></input>
       </view>
     </view>
     <view class="informationsix">
       <text class="informationsixone">家乡</text>
       <!-- bindchange="initAllProvice" -->
-      <view class="informationsixtwo">
+      <view class="informationsixtwo" bindtap="hidekeyboard">
         <picker bindchange="bindMultiPickerChange" bindcolumnchange="bindMultiPickerColumnChange" mode="multiSelector" value="{{multiIndex}}" range="{{multiArray}}">
           <input disabled bindinput="" name="addregion" value="{{multiIndexvalue}}" placeholder="请选择家乡地址"></input>
         </picker>
@@ -17,13 +17,13 @@
     </view>
     <view class="informationproficiency">
       <text class="informationproficiencyone">熟练度</text>
-      <picker bindchange="proficiency" value="{{indexproficiency}}" class="informationproficiencytwo" range="{{proficiencyarray}}">
+      <picker bindchange="proficiency" value="{{indexproficiency}}" class="informationproficiencytwo" range="{{proficiencyarray}}" bindtap="hidekeyboard">
         <input disabled  name="addproficiencyarray" value="{{proficiencyarray[indexproficiency]}}"bindinput="proficiency"  placeholder="请选择熟练度"></input>
       </picker>
     </view>
     <view class="informationcomposition">
       <text class="informationcompositionone">人员构成</text>
-      <picker bindchange="constitute" class="informationcompositiontwo"value="{{indexperson}}"  range="{{compositionarray}}">
+      <picker bindchange="constitute" class="informationcompositiontwo"value="{{indexperson}}"  range="{{compositionarray}}" bindtap="hidekeyboard">
         <input disabled  name="addcompositionarray" value="{{compositionarray[indexperson]}}" placeholder="请选择人员构成"></input>
       </picker>
     </view>

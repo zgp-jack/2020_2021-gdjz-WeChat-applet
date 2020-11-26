@@ -1,134 +1,135 @@
 {
-	"pages": [
-		"pages/index/index",
-		"pages/integral/source/source",
-		"pages/workingtopAll/workingtop/workingtop",
-		"pages/workingtopAll/distruction/distruction",
-		"pages/clients-looking-for-work/finding-top/findingtop",
-		"pages/clients-looking-for-work/finding-name-card/findingnamecard",
-		"pages/clients-looking-for-work/the-sticky-rule/stickyrule",
-		"pages/clients-looking-for-work/ranking-list/rankinglist",
-		"pages/home/home",
-		"pages/findingworkinglist/findingworkinglist",
-		"pages/collect/resume/resume",
-		"pages/clients-looking-for-work/new-project-experience/projectexperience",
-		"pages/boss-look-card/lookcard",
-		"pages/clients-looking-for-work/preview-name-card/previewcard",
-		"pages/clients-looking-for-work/all-project-experience/allexperience",
-		"pages/clients-looking-for-work/essential-information/esinformation",
-		"pages/clients-looking-for-work/work-description/workdescription",
-		"pages/clients-looking-for-work/addcertificate/addcertificate",
-		"pages/clients-looking-for-work/all-skills-certificate/skillscertificate",
-		"pages/clients-looking-for-work/selectmap/smap",
-		"pages/detail/info/info",
-		"pages/ucenter/ucenter",
-		"pages/userauth/userauth",
-		"pages/publish/recruit/recruit",
-		"pages/publish/pmap/pmap",
-		"pages/collect/info/info",
-		"pages/published/published",
-		"pages/fast-issue/index/index",
-		"pages/publish/fast/fast",
-		"pages/fast-issue/lists/lists",
-		"pages/fast-issue/tips/tips",
-		"pages/fast-issue/code/code",
-		"pages/recharge/recharge",
-		"pages/turntable/turntable",
-		"pages/getintegral/getintegral",
-		"pages/usedlist/usedlist",
-		"pages/detail/usedinfo/usedinfo",
-		"pages/publish/card/card",
-		"pages/publish/used/used",
-		"pages/realname/realname",
-		"pages/feedback/feedback",
-		"pages/integral/temp/temp",
-		"pages/integral/official/official",
-		"pages/integral/return/return",
-		"pages/integral/expend/expend",
-		"pages/static/notice",
-		"pages/static/invite",
-		"pages/footer/footer",
-		"pages/tpl/win/win",
-		"pages/tpl/app/app",
-		"pages/ucenter/ucenterNew/hireMembers",
-		"pages/ucenter/ucenterNew/invite",
-		"pages/information/mymessage/mymessage",
-		"pages/information/system/system",
-		"pages/published/recruit/list",
-		"pages/published/used/list",
-		"pages/lists/recruit/index",
-		"pages/lists/resume/index",
-		"pages/fast/issue/index",
-		"pages/fast/code/code",
-		"pages/fast/area/area",
-		"pages/fast/tips/tips",
-		"pages/issue/index/index",
-		"pages/issue/area/area",
-		"pages/clients-looking-for-work/workingtop/workingtop",
-		"pages/search/search",
-		"pages/releaseSuccess/releaseSuccess"
-	],
-	"subpackages": [
-		{
-			"name": "other",
-			"root": "packageOther",
-			"pages": [
-				"pages/anti-fraud/anti-fraud",
-				"pages/about/about",
-				"pages/course/course",
-				"pages/download/download-app",
-				"pages/query/query",
-				"pages/others/information/lists",
-				"pages/others/message/lists/lists",
-				"pages/others/message/publish/publish",
-				"pages/helpCenter/helpCenter",
-				"pages/report/report",
-				"pages/ranking-rules/ranking-rules",
-				"pages/userinfo/setpass/setpass",
-				"pages/userinfo/pass/pass",
-				"pages/userinfo/index/index",
-				"pages/userinfo/edit/edit",
-				"pages/userinfo/phone/phone",
-				"pages/helpCenter/answer/answer",
-				"pages/others/message/detail/detail"
-			]
-		}
-	],
-	"preloadRule": {
-		"pages/ucenter/ucenter": {
-			"network": "all",
-			"packages": [
-				"packageOther"
-			]
-		},
-		"pages/index/index": {
-			"network": "all",
-			"packages": [
-				"packageOther"
-			]
-		}
-	},
-	"window": {
-		"backgroundTextStyle": "light",
-		"navigationBarBackgroundColor": "#0099ff",
-		"navigationBarTitleText": "鱼泡网-工地急招",
-		"navigationBarTextStyle": "white"
-	},
-	"permission": {
-		"scope.userLocation": {
-			"desc": "你的位置信息将用于小程序为您自动推荐位置信息"
-		}
-	},
-	"navigateToMiniProgramAppIdList": [
-		"wx31a1c86a67bc6c54",
-		"wxd348efa56021e8d0",
-		"wxca0eab5cd5fe6a7c",
-		"wx3faf62a5edbb1513",
-		"wx0ae31bf0edad4390",
-		"wx33194c327f50b99d",
-		"wxbfab0a324f27b966",
-		"wxbac40ffffdee0573",
-		"wx7cea45b9ebdf87ac"
-	],
-	"sitemapLocation": "sitemap.json"
+  "pages": [
+    "pages/index/index",
+    "pages/integral/source/source",
+    "pages/workingtopAll/workingtop/workingtop",
+    "pages/workingtopAll/distruction/distruction",
+    "pages/clients-looking-for-work/finding-top/findingtop",
+    "pages/clients-looking-for-work/finding-name-card/findingnamecard",
+    "pages/clients-looking-for-work/the-sticky-rule/stickyrule",
+    "pages/clients-looking-for-work/ranking-list/rankinglist",
+    "pages/home/home",
+    "pages/findingworkinglist/findingworkinglist",
+    "pages/collect/resume/resume",
+    "pages/clients-looking-for-work/new-project-experience/projectexperience",
+    "pages/boss-look-card/lookcard",
+    "pages/clients-looking-for-work/preview-name-card/previewcard",
+    "pages/clients-looking-for-work/all-project-experience/allexperience",
+    "pages/clients-looking-for-work/essential-information/esinformation",
+    "pages/clients-looking-for-work/work-description/workdescription",
+    "pages/clients-looking-for-work/addcertificate/addcertificate",
+    "pages/clients-looking-for-work/all-skills-certificate/skillscertificate",
+    "pages/clients-looking-for-work/selectmap/smap",
+    "pages/detail/info/info",
+    "pages/ucenter/ucenter",
+    "pages/userauth/userauth",
+    "pages/publish/recruit/recruit",
+    "pages/publish/pmap/pmap",
+    "pages/collect/info/info",
+    "pages/fast-issue/index/index",
+    "pages/publish/fast/fast",
+    "pages/fast-issue/lists/lists",
+    "pages/fast-issue/tips/tips",
+    "pages/fast-issue/code/code",
+    "pages/recharge/recharge",
+    "pages/turntable/turntable",
+    "pages/getintegral/getintegral",
+    "pages/usedlist/usedlist",
+    "pages/detail/usedinfo/usedinfo",
+    "pages/publish/card/card",
+    "pages/publish/used/used",
+    "pages/realname/realname",
+    "pages/feedback/feedback",
+    "pages/integral/temp/temp",
+    "pages/integral/official/official",
+    "pages/integral/return/return",
+    "pages/integral/expend/expend",
+    "pages/static/notice",
+    "pages/static/invite",
+    "pages/footer/footer",
+    "pages/tpl/win/win",
+    "pages/tpl/app/app",
+    "pages/information/mymessage/mymessage",
+    "pages/information/system/system",
+    "pages/published/recruit/list",
+    "pages/published/used/list",
+    "pages/lists/recruit/index",
+    "pages/lists/resume/index",
+    "pages/fast/issue/index",
+    "pages/fast/code/code",
+    "pages/fast/area/area",
+    "pages/fast/tips/tips",
+    "pages/issue/index/index",
+    "pages/issue/area/area",
+    "pages/clients-looking-for-work/workingtop/workingtop",
+    "pages/search/search",
+    "pages/releaseSuccess/releaseSuccess",
+    "pages/complaint/index",
+    "pages/findwork-browsing-record/recordlist/index",
+    "pages/recruitworker-browsing-record/recruit-worker-lists/index",
+    "pages/recruitworker-browsing-record/recruit-worker-record/index"
+  ],
+  "subpackages": [
+    {
+      "name": "other",
+      "root": "packageOther",
+      "pages": [
+        "pages/anti-fraud/anti-fraud",
+        "pages/about/about",
+        "pages/course/course",
+        "pages/download/download-app",
+        "pages/query/query",
+        "pages/others/information/lists",
+        "pages/others/message/lists/lists",
+        "pages/others/message/publish/publish",
+        "pages/helpCenter/helpCenter",
+        "pages/report/report",
+        "pages/ranking-rules/ranking-rules",
+        "pages/userinfo/setpass/setpass",
+        "pages/userinfo/pass/pass",
+        "pages/userinfo/index/index",
+        "pages/userinfo/edit/edit",
+        "pages/userinfo/phone/phone",
+        "pages/helpCenter/answer/answer",
+        "pages/others/message/detail/detail"
+      ]
+    }
+  ],
+  "preloadRule": {
+    "pages/ucenter/ucenter": {
+      "network": "all",
+      "packages": [
+        "packageOther"
+      ]
+    },
+    "pages/index/index": {
+      "network": "all",
+      "packages": [
+        "packageOther"
+      ]
+    }
+  },
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#0099ff",
+    "navigationBarTitleText": "鱼泡网-工地急招",
+    "navigationBarTextStyle": "white"
+  },
+  "permission": {
+    "scope.userLocation": {
+      "desc": "你的位置信息将用于小程序为您自动推荐位置信息"
+    }
+  },
+  "navigateToMiniProgramAppIdList": [
+    "wx31a1c86a67bc6c54",
+    "wxd348efa56021e8d0",
+    "wxca0eab5cd5fe6a7c",
+    "wx3faf62a5edbb1513",
+    "wx0ae31bf0edad4390",
+    "wx33194c327f50b99d",
+    "wxbfab0a324f27b966",
+    "wxbac40ffffdee0573",
+    "wx7cea45b9ebdf87ac"
+  ],
+  "sitemapLocation": "sitemap.json"
 }

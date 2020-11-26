@@ -1,7 +1,7 @@
 <!-- 推荐列表开始 -->
   <view class="recommend-info-container" wx:if="{{ lists.length }}">
     <view class="recommend-info-header flex-row">
-      <text>附近适合您的工人</text>
+      <text>{{ typeData === "record"?'可能适合您的工人':'附近适合您的工人'}}</text>
     </view>
     <view class="recommend-info-body">
 
@@ -56,13 +56,13 @@
             </view>
           </view>
           <view class="listsboxlocaltwo">
-            <text wx:if="{{item.login_time}}">{{item.login_time}}</text>
+            <text wx:if="{{item.active_time_str}}">{{item.active_time_str}}</text>
           </view>
         </view>
       </view>
       <ad class="lists-ad" unit-id="{{ unitid }}" wx:if="{{index % 6 == 0 && index > 1}}"></ad>
     </view>
-		<view class="seemore-recommend-recruit" bindtap="seemoreaction">查看更多找活信息</view>
+		<view class="seemore-recommend-recruit" bindtap="seemoreaction">{{ typeData === "record"?'查看更多>>':'查看更多找活信息' }}</view>
     </view>
   </view>
 

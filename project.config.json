@@ -45,28 +45,16 @@
   "simulatorType": "wechat",
   "simulatorPluginLibVersion": {},
   "condition": {
-    "search": {
-      "current": -1,
-      "list": []
-    },
-    "conversation": {
-      "current": -1,
-      "list": []
-    },
     "plugin": {
-      "current": -1,
       "list": []
     },
     "game": {
-      "currentL": -1,
       "list": []
     },
     "gamePlugin": {
-      "current": -1,
       "list": []
     },
     "miniprogram": {
-      "current": -1,
       "list": [
         {
           "id": -1,
@@ -555,6 +543,73 @@
           "id": -1,
           "name": "pages/published/recruit/list",
           "pathName": "pages/lists/resume/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "pages/integral/expend/expend",
+          "pathName": "pages/integral/expend/expend",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/findwork-browsing-record/recordlist/index",
+          "pathName": "pages/findwork-browsing-record/recordlist/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/recruitworker-browsing-record/recruit-worker-lists/index",
+          "pathName": "pages/recruitworker-browsing-record/recruit-worker-lists/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/recruitworker-browsing-record/recruit-worker-lists/index",
+          "pathName": "pages/recruitworker-browsing-record/recruit-worker-lists/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/recruitworker-browsing-record/recruit-worker-record/index",
+          "pathName": "pages/recruitworker-browsing-record/recruit-worker-record/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/recruitworker-browsing-record/recruit-worker-lists/index",
+          "pathName": "pages/recruitworker-browsing-record/recruit-worker-lists/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/index/index",
+          "pathName": "pages/index/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/clients-looking-for-work/workingtop/workingtop",
+          "pathName": "pages/clients-looking-for-work/workingtop/workingtop",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/clients-looking-for-work/workingtop/workingtop",
+          "pathName": "pages/clients-looking-for-work/workingtop/workingtop",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/fast/area/area",
+          "pathName": "pages/fast/area/area",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "下载页",
+          "pathName": "packageOther/pages/download/download-app",
           "scene": null
         }
       ]

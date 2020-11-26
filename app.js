@@ -1,17 +1,18 @@
 const tmplId = require("./utils/temp_ids.js");
 App({
 
-
   onLaunch: function (e) {
 
   },
   globalData: {
     joingroup: false,
     copywechat: '',
+    notice:[],
+    member_less_info:{},
     callphone: '',
     procity: 0,
-    version: "1.0.5",
-    complaincontent: '请填写5~100字，必须含有汉字。（恶意投诉会被封号，请谨慎投诉！）',
+    version: "1.0.6",
+    complaincontent: '投诉内容不能少于5个字，必须含有汉字',
     areaIs: false,
     topshow: false,
     isauthuuid: false,
@@ -35,7 +36,7 @@ App({
     serverPhone: "400-838-1888",
     userInfo: null,
     refId: "",
-    fixedGetIntegral: "http://cdn.yupao.com/miniprogram/images/fixed-getintegral.png?t=" + new Date().getTime(),
+    fixedGetIntegral: "http://cdn.yupao.com/miniprogram/images/fixed-getintegr6al.png?t=" + new Date().getTime(),
     fixedDownApp: "http://cdn.yupao.com/miniprogram/images/fixed-downloadapp.png?t=" + new Date().getTime(),
     fixedPublishImg: "http://cdn.yupao.com/miniprogram/images/fixed-publishrecruit.png?t=" + new Date().getTime(),
     commonShareImg: "http://cdn.yupao.com/miniprogram/images/minishare.png?t=" + new Date().getTime(),
@@ -97,8 +98,13 @@ App({
       loginAfter: false,
       logoutWay: "",
       loginWay: "",
+    },
+    // 招工信息详情界面是否展示快速发布找活名片
+    isShowFindWork: false,
+    getNotice:{
+      loginBefore:false,
+      loginAfter:false
     }
-    
   },
   //是否为极速发布与快速发布请求,快速发布与极速发布跳转
   initJobView: function () {
@@ -306,7 +312,7 @@ App({
 
     let _this = this;
 
-    let url = _options.hasOwnProperty("url") ? _this.globalData.apiRequestUrl + _options.url : _this.globalData.apiRequestUrl
+    let url = _options.hasOwnProperty("url") ?  _this.globalData.apiRequestUrl +_options.url : _this.globalData.apiRequestUrl
 
     // let url = _options.url;
 
@@ -520,7 +526,7 @@ App({
   callThisPhone: function (e) {
     let phone = e.currentTarget.dataset.phone;
     wx.makePhoneCall({
-      phoneNumber: phone
+      phoneNumber: phone,
     })
   },
   showMyTips: function (_msg) {
@@ -534,7 +540,10 @@ App({
     }, 1)
 
   },
-  detailUpimg: function (type, res, callback, _type) {
+  detailUpimg: function (type, res, callback, _type,allnum) {//allnum选中图片的数量
+    wx.showLoading({
+      title: '正在上传图片'
+    });
     let userInfo = wx.getStorageSync("userInfo");
     let _this = this;
     let imgRes = res.tempFilePaths ? res.tempFilePaths[0] : res;
@@ -552,30 +561,23 @@ App({
       },
       name: 'file',
       success(res) {
-        let mydata = JSON.parse(res.data);
-        if (mydata.errcode == "ok") {
-          wx.hideToast()
-          callback ? callback(imgRes, mydata) : "";
-        } else if (res.statusCode == 404) {
-          wx.showToast({
-            title: "网络错误",
-            icon: "none",
-            duration: 2000,
-
-          })
-        } else {
+        if(res.statusCode == 200 && res.data){
+          let mydata = JSON.parse(res.data);
+          if (mydata.errcode == "ok") {
+            wx.hideToast()
+            callback ? callback(imgRes, mydata, allnum , 'ok') : "";
+          }else {
+            wx.hideToast();
+            callback ? callback(imgRes, null, allnum) : "";
+          }
+        }else{
           wx.hideToast();
-          wx.showToast({
-            title: mydata.errmsg,
-            icon: "none",
-            duration: 2000,
-
-          })
+          callback ? callback(imgRes, null, allnum) : "";
         }
       },
-      fail: function () {
-
+      fail: function (err) {
         wx.hideToast();
+        callback ? callback(imgRes, null, allnum) : "";
         wx.showToast({
           title: "网络错误，上传失败！",
           icon: "none",
@@ -598,9 +600,6 @@ App({
   },
   userUploadImg: function (callback,num) {
     let _this = this;
-    wx.showLoading({
-      title: '正在上传图片'
-    });
     wx.chooseImage({
       //2020-9-10-王帅-新增参数 每次最大上传数量 默认1张
       count: num?num:1,
@@ -615,7 +614,7 @@ App({
             let ok = this.valiImgRules(img)
             if (ok) {
               //上传
-              _this.detailUpimg(1, img, callback);
+              _this.detailUpimg(1, img, callback,null,res.tempFiles.length);
             } else {
               wx.hideLoading()
               _this.showMyTips('图片格式不正确,请重新选择')
@@ -697,7 +696,7 @@ App({
     let _page = "/" + currentPage.route
     let _url = e.currentTarget.dataset.url;
     if (_url == _page) return false;
-
+    this.activeRefresh()
     let _type = e.currentTarget.dataset.type;
     (_type == "1") ? wx.reLaunch({
       url: _url
@@ -1155,7 +1154,7 @@ App({
         if (res.data.errcode == "ok") {
           _this.globalData.jobNumber = res.data.data.jobNumber
           _this.globalData.msgsNumber = res.data.data.messageNumber
-          callback(res.data.data.jobNumber, res.data.data.messageNumber)
+          callback(res.data.data.jobNumber, res.data.data.messageNumber,res.data.data.job_view_count,res.data.data.resume_view_count)
         }
       }
     })
@@ -1206,35 +1205,100 @@ App({
   },
 
   getNoticeInfo: function (userinfo, callback) {
+    let loginAfter = this.globalData.getNotice.loginAfter;
+    let loginBefore = this.globalData.getNotice.loginBefore;
     let flag = this.globalData.firstSaveUserLoginLog
-    if (userinfo && userinfo.userId) {
-      userinfo.record = flag ? 0 : 1
-    } else {
-      userinfo = {
-        record: 0
+    if(userinfo &&　userinfo.userId){
+      if (!loginAfter) {
+        if (userinfo && userinfo.userId) {
+          userinfo.record = flag ? 0 : 1
+        } else {
+          userinfo = {
+            record: 0
+          }
+        }
+        let that = this
+        this.doRequestAction({
+          url: "index/less-search-data/",
+          way: "POST",
+          params: userinfo,
+          success: function (res) {
+            let mydata = res.data;
+            callback(mydata)
+            that.globalData.joingroup = mydata.join_group_config
+            that.globalData.copywechat = mydata.wechat.number
+            that.globalData.callphone = mydata.phone
+            that.globalData.serverPhone = mydata.phone
+            that.globalData.notice = mydata.notice
+            that.globalData.member_less_info = mydata.member_less_info
+            if (userinfo.record) that.globalData.firstSaveUserLoginLog = true
+            that.globalData.getNotice.loginAfter = true
+          },
+          fail: function (err) {
+            wx.showToast({
+              title: '数据加载失败！',
+              icon: "none",
+              duration: 3000
+            })
+          }
+        })
+      }else{
+        let copywechat = this.globalData.copywechat
+        let data = {
+          notice: this.globalData.notice,
+          member_less_info: this.globalData.member_less_info,
+          phone: this.globalData.serverPhone,
+          wechat: { number: copywechat },
+          join_group_config: this.globalData.joingroup,
+        }
+        callback(data)
+      }
+    }else{
+      if (!loginBefore) {
+        if (userinfo && userinfo.userId) {
+          userinfo.record = flag ? 0 : 1
+        } else {
+          userinfo = {
+            record: 0
+          }
+        }
+        let that = this
+        this.doRequestAction({
+          url: "index/less-search-data/",
+          way: "POST",
+          params: userinfo,
+          success: function (res) {
+            let mydata = res.data;
+            callback(mydata)
+            that.globalData.joingroup = mydata.join_group_config
+            that.globalData.copywechat = mydata.wechat.number
+            that.globalData.callphone = mydata.phone
+            that.globalData.serverPhone = mydata.phone
+            that.globalData.notice = mydata.notice
+            if (userinfo.record) that.globalData.firstSaveUserLoginLog = true
+            that.globalData.getNotice.loginBefore = true
+          },
+          fail: function (err) {
+            wx.showToast({
+              title: '数据加载失败！',
+              icon: "none",
+              duration: 3000
+            })
+          }
+        })
+      }else{
+        let copywechat = this.globalData.copywechat
+        let data = {
+          notice: this.globalData.notice,
+          member_less_info: this.globalData.member_less_info,
+          phone: this.globalData.serverPhone,
+          wechat: { number: copywechat },
+          join_group_config: this.globalData.joingroup,
+        }
+        callback(data)
       }
     }
-    let that = this
-    this.doRequestAction({
-      url: "index/less-search-data/",
-      way: "POST",
-      params: userinfo,
-      success: function (res) {
-        let mydata = res.data;
-        callback(mydata)
-        that.globalData.joingroup = mydata.join_group_config
-        that.globalData.copywechat = mydata.wechat.number
-        that.globalData.callphone = mydata.phone
-        if (userinfo.record) that.globalData.firstSaveUserLoginLog = true
-      },
-      fail: function (err) {
-        wx.showToast({
-          title: '数据加载失败！',
-          icon: "none",
-          duration: 3000
-        })
-      }
-    })
+    
   },
   valiUserVideoAdStatus: function (callback, flag) {
     let vf = flag || 1
@@ -1469,5 +1533,131 @@ App({
     }else{
         return false;
     }
+  },
+  //更新活跃状态n
+  activeRefresh:function(){
+    let userInfo = wx.getStorageSync("userInfo");
+    if(userInfo){
+      this.appRequestAction({
+        url:'active-time/refresh/',
+        way: "POST",
+        success:function(res) {
+          console.log('活跃状态更新成功')
+        }
+      })
+    }
+  },
+  // 刷新找活名片请求(找工作列表与找活名片使用)
+  refreshReq: function (source,_this) {
+    // source  1-找活名片编辑页；2-招工列表引导弹窗
+    // 积分获取url
+    let that = this
+    let url = '/pages/getintegral/getintegral';
+    let userInfo = wx.getStorageSync('userInfo')
+    if (!userInfo) return
+    // 用户token
+    let token = userInfo.token;
+    this.appRequestAction({
+      url: 'resumes/refresh/',
+      way: 'POST',
+      params: {token,source_type:source},
+      success: function (res) {
+        let mydata= res.data
+        if (mydata.errcode === "ok") {
+          let currentTime = new Date().getTime();
+          let reqDueTime = currentTime + 3000;
+          let refreshStatus = mydata.data.refresh_status;
+          _this.setData({reqDueTime, reqStatus:true, refreshStatus})
+          if (refreshStatus === 0) {
+            // 该信息处于审核中或审核失败状态
+            wx.showModal({
+              title: '温馨提示',
+              content: '找活名片审核通过后即可刷新',
+              showCancel: false,
+            })
+          }else if(refreshStatus === 1){
+            // 该信息处于已找到工作状态
+            wx.showModal({
+              title: '温馨提示',
+              content: '请将工作状态修改为<正在找工作>,审核通过后即可刷新名片',
+              showCancel: source === 1? false: true,
+              confirmText: source === 1? "确定":"去更改",
+              success: function (res) {
+                if (res.confirm) {
+                  if (source === 2) {
+                    wx.navigateTo({
+                      url: '/pages/clients-looking-for-work/finding-name-card/findingnamecard',
+                    })
+                  }
+                }
+              }
+            })
+          }else if(refreshStatus === 2){
+            // 该用户积分不足
+            wx.showModal({
+              title: '温馨提示',
+              content: '您当前的正式积分不足，是否前往获取积分？',
+              cancelText: "否",
+              confirmText: "是",
+              success: function (res) {
+                if (res.confirm) {
+                  wx.navigateTo({
+                    url: url,
+                  })
+                }
+              }
+            })
+          }else if(refreshStatus === 3){
+            if (source === 2) {
+              let tipBox = {//提示框显示信息
+                showTitle: false,
+                showIcon: true,
+                showCancel: false,
+                confirmColor:'#0099FF',
+                cancelColor:'#797979',
+                content: [{
+                  des: '刷新成功',
+                  color: '##85963',
+                  text: []
+                }
+              ],
+                confirmText: '确定'
+              };
+              _this.setData({
+                tipBox: tipBox,
+                refreshStatus: true
+              })
+            }
+            // 刷新成功
+            _this.selectComponent("#promptbox").show()
+            that.activeRefresh()
+          }else if(refreshStatus === 4){
+            // 刷新失败
+            wx.showModal({
+              title: '温馨提示',
+              content: '刷新失败',
+              showCancel: false,
+            })
+          }
+        } else {
+          wx.showModal({
+            title: '温馨提示',
+            content: mydata.errmsg,
+            showCancel: false,
+            success(res) {
+             }
+          })
+        }
+      },
+      fail: function () {
+        wx.showModal({
+          title: '温馨提示',
+          content: `您的网络请求失败`,
+          showCancel: false,
+          success(res) {
+          }
+        })
+      }
+    })
   },
 })

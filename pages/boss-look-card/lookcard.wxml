@@ -2,7 +2,7 @@
 <view>
   <view class="cardcolore">
     <view class="header"  wx:if="{{status == 0}}">
-      注:老板对找活者满意，可以直接与他联系以及点赞或转发
+      注:老板对找活者满意，可直接与他联系、点赞、转发
     </view>
     <view class="header" wx:if="{{status == 1}}" >
       注:分享名片 让您的名片排名更靠前
@@ -289,20 +289,6 @@
         </view>
       </view>
     </button>
-  </view>
-
-  <view class='yupao-common-enterbox flex-row' wx:if="{{ showComplain }}" catchtouchmove="move">
-    <view class='yupao-common-enter'>
-      <text class='yupao-enter-title'>投诉信息</text>
-      <text class='yupao-enter-tips'>请输入投诉内容</text>
-      <view class='yupao-enter-body'>
-        <textarea class='yupao-enter-wrap yupao-enter-textarea' placeholder='{{complaincontent}}' bindinput='userEnterComplain' maxlength='200' value='{{ complainInfo }}' fixed='true'></textarea>
-      </view>
-      <view class='yupao-enter-footer clearfix'>
-        <text bindtap='userCancleComplain'>取消</text>
-        <text bindtap='userComplaintAction'>确定</text>
-      </view>
-    </view>
   </view>
   <image class="info-shareimg" src="{{homebtnImg}}" wx:if="{{!sharedeke}}" bindtap='returnindex'></image>
   <view class="common-userauth" wx:if="{{ !userInfo }}">

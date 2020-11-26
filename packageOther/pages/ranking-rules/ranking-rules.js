@@ -323,6 +323,9 @@ Page({
       }
     })
   },
+  activeRefresh:function () {
+    app.activeRefresh()  
+  },
   onLoad: function (options) {
     // this.getstatus(options)
     this.createVideo()

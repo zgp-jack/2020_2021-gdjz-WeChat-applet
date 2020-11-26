@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "浏览记录管理",
+  "usingComponents": {
+    "promptbox": "/components/promptBox/index"
+  },
+  "enablePullDownRefresh": true
+}

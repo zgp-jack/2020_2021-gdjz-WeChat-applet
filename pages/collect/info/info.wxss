@@ -105,6 +105,7 @@
     position: relative;
     width: 100%;
     padding:0 0 20rpx ;
+    margin-top: 15rpx;
 }
 
 .published-list-item{
@@ -315,7 +316,7 @@ margin-left: 20rpx;
 .published-list-body .collect-action{position: relative; float: right;color: #0099ff;z-index: 2;}
 
 
-.common-choose-header{position:relative;padding:15rpx 0;}
+.common-choose-header{position:relative;padding:0 0;}
 .cancel-collect-item{position: relative;padding:2rpx 10rpx;background:#0099ff;color:white;border-radius: 2px;margin-right: 5rpx;}
 
 
@@ -336,7 +337,7 @@ margin-left: 20rpx;
     z-index: 2;
 }
 .lists-nodata button {
-    width: 300rpx;
+    width: 320rpx;
     background-color: #0099FF;
     color:#FFFFFF;
     border-radius: 20px;
@@ -345,7 +346,7 @@ margin-left: 20rpx;
     line-height: 80rpx;
     text-align: center;
     letter-spacing: 5rpx;
-    box-shadow: #0099ff 0 0 10rpx;
+    box-shadow: 0px 11px 22px 0px rgba(86, 146, 228, 0.32);
 }
 .nodataText {
     margin-top: -60rpx;
@@ -353,6 +354,10 @@ margin-left: 20rpx;
 .lists-nodata image {
     width: 260rpx;
     height: 200rpx;
+}
+
+.indxlistitem {
+    box-shadow: 0 0 5rpx #e7e6e4;
 }
 
 

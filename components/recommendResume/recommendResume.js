@@ -36,6 +36,10 @@ Component({
     uuid: {
       type: String,
       value: ''
+    },
+    typeData: {
+      type: String,
+      value: ''
     }
   },
   observers:{
@@ -64,14 +68,31 @@ Component({
   methods: {
     showDetailInfo:function(e){
       let id = e.currentTarget.dataset.uuid
-      wx.redirectTo({
-        url: `/pages/boss-look-card/lookcard?more=1&uuid=${id}&child=${this.properties.child}`,
-      })
+      const pages = getCurrentPages();//获取当前的页面栈
+      const prevPage = pages[pages.length - 1];//当前的page
+      let url = prevPage.route;
+      if (url === 'pages/recruitworker-browsing-record/recruit-worker-record/index') {
+        wx.navigateTo({
+          url: `/pages/boss-look-card/lookcard?more=1&uuid=${id}&child=${this.properties.child}`,
+        })
+      }else{
+        wx.redirectTo({
+          url: `/pages/boss-look-card/lookcard?more=1&uuid=${id}&child=${this.properties.child}`,
+        })
+      }
     },
     seemoreaction:function(){
+      let typeData = this.data.typeData;
       let { aid, cid, child, uuid } = this.properties
+      let cidItem = cid.split(',')[0];
       let len = this.data.lists.length
       let num = parseInt(this.data.pagesize)
+      if (typeData == 'record') {
+        wx.reLaunch({
+          url: `/pages/findingworkinglist/findingworkinglist?aid=${aid}&cid=${cidItem}`,
+        })
+        return false
+      }
       if(len < num){
         // 如果是列表页就返回
         var pages = getCurrentPages() //获取加载的页面
@@ -132,6 +153,7 @@ Component({
         },
         hideLoading: true,
         success:(res)=>{
+          _this.triggerEvent("show")
           let mydata = res.data
           if(mydata.errcode == 'ok'){
             _this.setData({

@@ -86,15 +86,37 @@ vertify()
   chooseImage() {
     let that = this;
     let max = this.data.maximg - this.data.imgArrs.length;
-    app.userUploadImg(function (img, url) {
-      that.data.imgArrs.push(url.httpurl)
-      that.data.idArrs.push(url.url)
-      that.setData({
-        imgArrs: that.data.imgArrs
-      })
-      if (that.data.imgArrs.length >= 3) {
+    let fail = 0;
+    let num = 0
+    //allnum有几张图片正在上传;res当前图片是否上传成功
+    app.userUploadImg(function (img, url, allnum, res) {
+      num++//用于判断 选中的图片是否上传完毕
+      if(res !== 'ok') {
+        fail++//记录失败次数
+      }else{
+        that.data.imgArrs.push(url.httpurl)
+        that.data.idArrs.push(url.url)
         that.setData({
-          imgArrslength: false
+          imgArrs: that.data.imgArrs
+        })
+        if (that.data.imgArrs.length >= 3) {
+          that.setData({
+            imgArrslength: false
+          })
+        }
+      }
+      if(num == allnum && fail !== 0){
+        wx.hideLoading()
+        wx.showModal({
+          title: "提示",
+          content:'您有'+fail+'张图片上传失败，请重新上传',
+          showCancel:true,
+          confirmText:'重新上传',
+          success(res){
+            if(res.confirm){
+              that.chooseImage()
+            }
+          }
         })
       }
     },max)
@@ -292,6 +314,7 @@ vertify()
       success(res) {
         if(res.data.errcode == "ok"){
           that.subscribeToNews(res)
+          app.activeRefresh()
         }else{
           app.showMyTips(res.data.errmsg);
         }

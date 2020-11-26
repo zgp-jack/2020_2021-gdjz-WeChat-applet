@@ -14,124 +14,56 @@ Page({
     msgIcon: app.globalData.apiImgUrl + "ucenter/ucenter-msg-icon.png",
     realName: app.globalData.apiImgUrl + "ucenter/ucenter-realname.png",
     callServicePhone: '',
-    uCenterMenus: [
-      {
-        title: '信息管理',
-        menus: [
-          {
-            key: 'recruit',
-            name: '我的招工',
-            dataUrl: '../published/recruit/list',
-            icon: app.globalData.apiImgUrl + "ucenter/ucenter-recruit.png",
-          },
-          {
-            key: 'findwork',
-            name: '我的找活',
-            dataUrl: '/pages/clients-looking-for-work/finding-name-card/findingnamecard',
-            icon: app.globalData.apiImgUrl + "ucenter/ucenter-findwork.png",
-          },
-          {
-            key: 'trade',
-            name: '二手交易',
-            dataUrl: '../published/used/list',
-            icon: app.globalData.apiImgUrl + "ucenter/ucenter-trade.png",
-          },
-          {
-            key: 'collect',
-            name: '我的收藏',
-            dataUrl: '../collect/info/info',
-            icon: app.globalData.apiImgUrl + "ucenter/ucenter-collect.png",
-          },
-          // {
-          //   key: 'bookkeeping',
-          //   name: '记工记账',
-          //   dataUrl: '',
-          //   icon: app.globalData.apiImgUrl + "ucenter/ucenter-account.png",
-          //   newIcon: app.globalData.apiImgUrl + "ucenter/ucenter-new.png",
-          // },
-          {
-            key: 'mymessage',
-            name: '我的消息',
-            dataUrl: '/pages/information/mymessage/mymessage',
-            icon: app.globalData.apiImgUrl + "ucenter/ucenter-message.png",
-          },
-          // {
-          //   key: 'gift',
-          //   name: '免费领好礼',
-          //   dataUrl: '',
-          //   icon: app.globalData.apiImgUrl + "ucenter/ucenter-gift.png",
-          // },
-        ]
-      },
-      {
-        title: '积分管理',
-        menus: [
-          {
-            key: 'getintegral',
-            name: '获取积分',
-            dataUrl: '../getintegral/getintegral',
-            icon: app.globalData.apiImgUrl + "ucenter/ucenter-integral.png",
-          },
-          {
-            key: 'record',
-            name: '积分记录',
-            dataUrl: '../integral/source/source',
-            icon: app.globalData.apiImgUrl + "ucenter/ucenter-integral-record.png",
-          },
-          {
-            key: 'invite',
-            name: '邀请工友',
-            dataUrl: '../static/invite',
-            icon: app.globalData.apiImgUrl + "ucenter/ucenter-invite.png",
-          },
-        ]
-      },
-      {
-        title: '系统设置',
-        menus: [
-          {
-            key: 'auth',
-            name: '实名认证',
-            dataUrl: '../realname/realname',
-            icon: app.globalData.apiImgUrl + "ucenter/ucenter-auth.png",
-          },
-          {
-            key: 'findexport',
-            name: '实名查询',
-            dataUrl: '/packageOther/pages/query/query',
-            icon: app.globalData.apiImgUrl + "ucenter/ucenter-find-export.png",
-          },
-          {
-            key: 'help',
-            name: '帮助与反馈',
-            dataUrl: '/packageOther/pages/helpCenter/helpCenter',
-            icon: app.globalData.apiImgUrl + "ucenter/ucenter-help-center.png",
-          },
-          {
-            key: 'service',
-            name: '联系客服',
-            dataUrl: '',
-            icon: app.globalData.apiImgUrl + "ucenter/ucenter-customer-server.png",
-          },
-          // {
-          //   key: 'setting',
-          //   name: '系统设置',
-          //   dataUrl: '',
-          //   icon: app.globalData.apiImgUrl + "ucenter/ucenter-seting.png",
-          // },
-        ]
-      }
-    ],
     userInfo: false,
     member: {},
     showReturnIntegral: false,
-    // showFastIssue: {
-    //     show: 0,
-    //     request: false
-    // },
     showAuthor: false,
     resumeText: "",
     advertising: false,//广告轮播图
+    bannerImg: app.globalData.apiImgUrl + 'ws/jgjzbanner2.png',
+    eidticon: app.globalData.apiImgUrl + 'ws/eidticon.png',
+    serviceicon: app.globalData.apiImgUrl + 'ws/serviceicon.png',
+    msgicon: app.globalData.apiImgUrl + 'ws/msgicon.png',
+    myzg: app.globalData.apiImgUrl + 'ws/myzg.png',
+    seenme: app.globalData.apiImgUrl + 'ws/seenme.png',
+    myzh: app.globalData.apiImgUrl + 'ws/myzh.png',
+    seenmezh: app.globalData.apiImgUrl + 'ws/seenmezh.png',
+    Recharge: app.globalData.apiImgUrl + 'ws/Recharge.png',
+    obtain: app.globalData.apiImgUrl + 'ws/obtain.png',
+    record: app.globalData.apiImgUrl + 'ws/record.png',
+    invitation: app.globalData.apiImgUrl + 'ws/invitation.png',
+    Bookkeeping: app.globalData.apiImgUrl + 'ws/Bookkeeping.png',
+    secondhand: app.globalData.apiImgUrl + 'ws/second-hand.png',
+    gamecenter: app.globalData.apiImgUrl + 'ws/gamecenter.png',
+    mymsg: app.globalData.apiImgUrl + 'ws/mymsg.png',
+    Verified: app.globalData.apiImgUrl + 'ws/Verified.png',
+    verifiedquery: app.globalData.apiImgUrl + 'ws/verifiedquery.png',
+    help: app.globalData.apiImgUrl + 'ws/help.png',
+    setup: app.globalData.apiImgUrl + 'ws/setup.png',
+    defaultavater: app.globalData.apiImgUrl + 'ws/defaultavater.png',
+    Serviceicon2: app.globalData.apiImgUrl+'ws/Serviceicon2.png',
+    toCollectUrl:'',
+    findWorkRecord: [],//找活浏览记录
+    ucenterAuth: app.globalData.apiImgUrl + "new-list-realname-icon.png?t=1",
+    bannerList:{
+      bannerbg: app.globalData.apiImgUrl + 'ws/bannerbg.png',
+      bannerqz: app.globalData.apiImgUrl + 'ws/bannerqz.png',
+      bannerws: app.globalData.apiImgUrl + 'ws/bannerws.png',
+      bannerzg: app.globalData.apiImgUrl + 'ws/bannerzg.png',
+      job_banner_zgr: app.globalData.apiImgUrl + 'ws/job_banner-zgr.png',
+      resuame_banner_zgz: app.globalData.apiImgUrl + 'ws/resume_banner-zgz.png',
+    },
+    //招工banner
+    jobBanner:{
+      banner:app.globalData.apiImgUrl + 'ws/bannerzg.png',
+      link:'/pages/fast/issue/index',
+    },
+    resumeBanner:{
+      banner:app.globalData.apiImgUrl + 'ws/bannerws.png',
+      link:'/pages/clients-looking-for-work/finding-name-card/findingnamecard',
+    },
+    //是否显示去充值
+    showRecharge:false
   },
   //获取广告数据
   getAdvertising: function () {
@@ -151,7 +83,10 @@ Page({
       }
     })
   },
-
+  // 去查看找活浏览记录
+  findWorkRecord: function () {
+    
+  },
   //联系客服拨打电话
   callThisPhone: function (e) {
     app.callThisPhone(e);
@@ -162,8 +97,8 @@ Page({
   },
   initUserInfo: function (callback) {
     let userInfo = wx.getStorageSync("userInfo");
-    let userUuid = wx.getStorageSync('uuid');
-    if (userUuid) {
+    let userUuid = wx.getStorageSync('userUuid');
+    if (userUuid && userInfo) {
       userInfo.userUuid = userUuid;
     }
     if (!userInfo) {
@@ -191,6 +126,7 @@ Page({
           showAuthor: mydata.show_auth == 1 ? true : false
         })
         if (mydata.errcode == "ok") {
+          console.log(res.data.member)
           _this.setData({
             member: mydata.member,
             is_checking: mydata.is_checking,
@@ -198,6 +134,70 @@ Page({
             showReturnIntegral: (parseInt(mydata.member.return_integral) == 0) ? false : true
           })
           app.globalData.publish.userPhone = mydata.tel
+          //点击收藏跳转地址 有招工跳转招工 有找活没招工跳转找活  都没有跳转招工
+          if(mydata.member.resume_collect_count > 0 && mydata.member.job_collect_count == 0){
+            _this.setData({
+              toCollectUrl:'/pages/collect/resume/resume'
+            })
+          }else {
+            _this.setData({
+              toCollectUrl:'/pages/collect/info/info'
+            })
+          }
+          //根据条件显示招工banner
+          switch(mydata.member.job_banner){
+            case 'to_add':
+              _this.setData({
+                'jobBanner.banner':app.globalData.apiImgUrl+'ws/bannerzg.png',
+                'jobBanner.link':'/pages/fast/issue/index'
+              })
+              break
+            case 'to_top':
+              _this.setData({
+                'jobBanner.banner':app.globalData.apiImgUrl+'ws/bannerbg.png',
+                'jobBanner.link':'/pages/published/recruit/list'
+              })
+              break
+            case 'to_resume_list':
+              _this.setData({
+                'jobBanner.banner':app.globalData.apiImgUrl+'ws/job_banner-zgr.png',
+                'jobBanner.link':'/pages/findingworkinglist/findingworkinglist'
+              })
+              break
+          }
+          //根据条件显示找货banner
+          switch(mydata.member.resume_banner){
+            case 'to_add':
+              _this.setData({
+                'resumeBanner.banner':app.globalData.apiImgUrl+'ws/bannerws.png',
+                'resumeBanner.link':'/pages/clients-looking-for-work/finding-name-card/findingnamecard'
+              })
+              break
+            case 'to_edit':
+              _this.setData({
+                'resumeBanner.banner':app.globalData.apiImgUrl+'ws/bannerws.png',
+                'resumeBanner.link':'/pages/clients-looking-for-work/finding-name-card/findingnamecard'
+              })
+              break
+            case 'to_top':
+              _this.setData({
+                'resumeBanner.banner':app.globalData.apiImgUrl+'ws/bannerqz.png',
+                'resumeBanner.link':'/pages/clients-looking-for-work/workingtop/workingtop?datatop=1'
+              })
+              break
+            case 'to_edit_top':
+              _this.setData({
+                'resumeBanner.banner':app.globalData.apiImgUrl+'ws/bannerqz.png',
+                'resumeBanner.link':'/pages/clients-looking-for-work/finding-name-card/findingnamecard'
+              })
+              break
+            case 'to_job_list':
+              _this.setData({
+                'resumeBanner.banner':app.globalData.apiImgUrl+'ws/resume_banner-zgz.png',
+                'resumeBanner.link':'/pages/index/index'
+              })
+              break
+          }
         } else {
           wx.showToast({
             title: mydata.errmsg,
@@ -217,9 +217,77 @@ Page({
       }
     })
   },
+  // 发送验证是否有找活名片及找活浏览记录请求
+  reqRecordData: function () {
+    // 用户信息
+    let userInfo = wx.getStorageSync('userInfo');
+    if (!userInfo) return;
+    let mid = userInfo.userId;
+    // 请求页数
+    let page = 1;
+    // 请求参数
+    let params = { mid, page }
+    wx.showLoading({ title: '数据加载中' })
+    app.appRequestAction({
+      url: 'focus-me/zh-view-list/',
+      way: 'POST',
+      params: params,
+      success: function (res) {
+        wx.hideLoading();
+        if (res.data.errcode == "success") {
+          // 浏览记录数据
+          let recordInfo = JSON.stringify(res.data.data);
+          wx.navigateTo({
+            url: `/pages/findwork-browsing-record/recordlist/index?recordInfo=${recordInfo}`,
+          })
+        }else if(res.data.errcode == "have_not_zh"){
+          // 没有找活名片提示框去发布找活名片
+          wx.showModal({
+            title: '',
+            content: res.data.errmsg,
+            confirmText: "去发布",
+            success: function (res) {
+              if (res.confirm) {
+                wx.navigateTo({
+                  url: '/pages/clients-looking-for-work/finding-name-card/findingnamecard',
+                })
+              }
+            }
+          })
+        }else{
+          wx.showModal({
+            title: '提示',
+            content: res.data.errmsg,
+            showCancel:false,
+            success: function (res) {
+            }
+          })
+        }
+      },
+      fail: function (err) {
+        wx.hideLoading();
+        app.showMyTips('网络出错，数据加载失败！')
+      }
+    })
+  },
   valiUserUrl: function (e) {
-    app.globalData.showdetail = true
-    app.valiUserUrl(e, this.data.userInfo)
+    let url = e.currentTarget.dataset.url;
+    // 用户信息
+    let userInfo = this.data.userInfo;
+    // 如果有用户信息判断点击的是否是招工找活的“谁看过我”
+    if (userInfo) {
+      // 点击“我的找活—谁看过我”
+      if (url === '/pages/findwork-browsing-record/recordlist/index') {
+        // 没有找活名片给出去发布找活名片提示信息,有找活名片前往浏览记录
+        this.reqRecordData()
+      }else{
+        app.globalData.showdetail = true
+        app.valiUserUrl(e, this.data.userInfo)
+      }
+    }else{
+      app.globalData.showdetail = true
+      app.valiUserUrl(e, this.data.userInfo)
+    }
   },
   suggestUserUrl: function (e) {
     app.globalData.showdetail = true

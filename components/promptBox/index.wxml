@@ -1,0 +1,17 @@
+<!--components/promptBox/index.wxml-->
+<view class="prompt-container" wx:if="{{ show }}">
+  <view class="prompt-box">
+    <view class="prompt-title" wx:if="{{ showTitle }}">温馨提示</view>
+    <view class="prompt-title" wx:if="{{ showIcon }}"><image src="{{ icon }}"></image></view>
+    <view class="prompt-content {{ !showTitle? 'margin':''}}">
+      <block  wx:for="{{ content }}" wx:key="key">
+        <view class="prompt-body" style="color:{{ item.color }}">{{ item.des }}<text wx:if="{{ item.text && item.text.length > 0 }}" wx:for="{{ item.text }}" wx:for-item="textItem" wx:key="key" style="color:{{ textItem.color }}">{{ textItem.textName }}</text></view>
+      </block>
+    </view>
+    <view class="prompt-footer">
+      <button class="prompt-btn" style="color:{{ cancelColor }}" wx:if="{{ showCancel }}" bindtap="cancel">{{ cancelText }}</button>
+      <button class="prompt-btn" style="color:{{ confirmColor }}" bindtap="confirm">{{ confirmText }}</button>
+    </view>
+    <image class="prompt-close" bindtap="cancel" wx:if="{{ showClose }}" src="{{ close }}"></image>
+  </view>
+</view>

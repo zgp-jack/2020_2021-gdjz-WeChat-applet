@@ -63,6 +63,10 @@ Page({
     model:{},
     is_check:""
   },
+  // 点击隐藏键盘
+  hiddenKeyBoard: function () {
+    wx.hideKeyboard()
+  },
   getaddressindexof(relname) {
     var reg = new RegExp("[\\u4E00-\\u9FFF]+", "g");
     if (reg.test(relname)) {
@@ -321,20 +325,11 @@ Page({
   },
   userEnterIdcard: function (e) {
     let that = this;
+    let regx = /[\u4e00-\u9fa5]|(\ud83c[\udf00-\udfff])|(\ud83d[\udc00-\ude4f\ude80-\udeff])|[\u2600-\u2B55]/;
+    let idCard = this.data.member.id_card;
     if (e) {
-      var re = /^\w{0,18}$/;
-      if (!re.test(e.detail.value)) {
-        wx.showModal({
-          title: '温馨提示',
-          content: '只能输入英文与数字，请重新输入',
-          showCancel: false,
-          success(res) {
-
-            that.setData({
-              "member.id_card": ''
-            })
-          }
-        })
+      if (regx.test(e.detail.value)) {
+        that.setData({ "member.id_card": idCard })
         return
       }
     }
@@ -657,8 +652,12 @@ Page({
       return false;
     }
 
-    if (!v.isRequire(member.id_card, 15)) {
-      app.showMyTips("请输入正确的身份证号码！");
+    if (!v.isRequire(member.id_card, 8) || !(new RegExp(/\d+/).test(member.id_card))) {
+      wx.showModal({
+        title: "提示",
+        content: '请输入正确证件号码。',
+        showCancel:false,
+      })
       return false;
     }
     if (_this.data.regionone == "") {
@@ -763,6 +762,7 @@ Page({
   onLoad: function (options) {
     this.initUserInfo();
     this.getBack(options)
+    app.activeRefresh()
   },
 
   /**

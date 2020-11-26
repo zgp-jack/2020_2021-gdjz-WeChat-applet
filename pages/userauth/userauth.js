@@ -32,6 +32,7 @@ Page({
             let prevPage = pages[pages.length - 2];
             prevPage.setData({ userInfo:userInfo,userUuid:userUuid });
             wx.navigateBack({ delta: 1 })
+            app.activeRefresh()
           } else if (uinfo.errcode == "member_shielding") {
             wx.showModal({
               content: uinfo.errmsg,

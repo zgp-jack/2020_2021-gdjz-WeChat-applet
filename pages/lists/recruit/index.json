@@ -1,3 +1,6 @@
 {
-  "navigationBarTitleText": "适合您的工作"
+  "navigationBarTitleText": "适合您的工作",
+  "usingComponents": {
+    "recommendRecruit": "/components/recommendRecruit/recommendRecruit"
+  }
 }

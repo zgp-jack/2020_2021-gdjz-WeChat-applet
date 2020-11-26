@@ -191,6 +191,7 @@
 
 .expend-show-recruit .yupao-common-list-left {
     width: auto;
+    font-weight: bold;
 }
 .yupao-common-list-title-left {
     position: relative;
@@ -198,13 +199,14 @@
     color: #333;
     line-height: 60rpx;
     font-size: 30rpx;
+    font-weight: bold;
 }
 .yupao-common-list-title-right{
     position: relative;
     float: left;
     color: #0099ff;
     font-size: 30rpx;
-    line-height: 60rpx;
+    line-height: 45rpx;
     max-width: 100%;
 }
 .expend-show-recruit .yupao-common-list {
@@ -213,6 +215,7 @@
     margin-top: 0;
     height: calc(100% - 50rpx);
     overflow-y: scroll;
+    padding: 0 27rpx;
 }
 
 .expend-show-recruit .yupao-common-list-left text {
@@ -241,7 +244,7 @@
 
 
 .list-complain-phone {
-    background: #ff0000;
+    background: #ff5353;
 }
 
 .integral-select {
@@ -317,4 +320,26 @@
     border-radius: 8rpx;
     background: #f5f5f5;
     margin: 0 5rpx;
+}
+.newColor {
+    color: #808080;
+}
+.widthLine {
+    width: 100%;
+    line-height: 45rpx !important;
+}
+.viewRight {
+    float: right;
+}
+.bluecolor {
+    color: #0099ff;
+}
+
+.yupao-common-list-right {
+    line-height: 60rpx;
+    display: table-cell;
+    vertical-align: bottom;
+}
+.yupao-common-lists-item {
+    font-size: 30rpx;
 }

@@ -24,6 +24,10 @@ Component({
     successData:{
       type:Object,
       value:null
+    },
+    frstCity:{
+      type:Object,
+      value:null
     }
   },
   /**
@@ -49,7 +53,6 @@ Component({
       })
     },
     comfirm:function () {
-      console.log(this.properties.successData)
       this.show()
       // 是否是置顶成功
       if(!this.properties.successData){
@@ -71,9 +74,12 @@ Component({
           })
         }
       }else {
+        let topDataArea_id = this.properties.successData.data.area_id
+        let topDataocc_id = this.properties.successData.data.occ_id
+        let frstCity = JSON.stringify(this.properties.frstCity)
         //去招工列表
         wx.reLaunch({
-          url: `/pages/findingworkinglist/findingworkinglist`,
+          url: `/pages/findingworkinglist/findingworkinglist?topArea=${topDataArea_id}&topOcc=${topDataocc_id}&frstCity=${frstCity}`,
         })
       }
        
@@ -86,7 +92,7 @@ Component({
         }
       }else{
          //找工人列表
-         wx.redirectTo({
+         wx.reLaunch({
           url: '/pages/published/recruit/list',
         })
       }
@@ -124,5 +130,5 @@ Component({
         "buttontext.comfirm":"查看工人简历",
       })
     }
-  }
+  },
 })

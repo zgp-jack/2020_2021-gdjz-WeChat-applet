@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "谁看过我的找活",
+  "usingComponents": {
+    "recommendRecruit": "/components/recommendRecruit/recommendRecruit"
+  },
+  "enablePullDownRefresh": true
+}

@@ -51,23 +51,16 @@ Page({
     //置顶招工或者找活详细信息
     topDetail: {}
   },
-  userCancleComplain: function () {
-    this.setData({
-      showComplain: false,
-      complainInfo: ""
-    })
-  },
-
+ 
   complainInfo: function (e) {
     if (e.currentTarget.dataset.complain === 0) {
       return
     }
     let infoId = e.currentTarget.dataset.id;
     let type = e.currentTarget.dataset.type;
-    this.setData({
-      showComplain: true,
-      infoId: infoId,
-      type: type
+    // 跳转到投诉界面
+    wx.navigateTo({
+      url: `/pages/complaint/index?infoId=${infoId}&type=${type}&page=expend`,
     })
   },
   subscribeToNews: function (mydata) {
@@ -88,51 +81,6 @@ Page({
   bindconfirm: function (e) {
     this.setData({
       complainInfo: e.detail.value
-    })
-  },
-  userComplaintAction: function (e) {
-    let _this = this;
-    let userInfo = this.data.userInfo;
-    let infoId = this.data.infoId;
-    let type = this.data.type;
-    let info = this.data.complainInfo;
-    let complaincontent = this.data.complaincontent
-    let vertifyNum = v.v.new()
-    info = info.replace(/^\s+|\s+$/g, '');
-    if (!info || info.length < 5 || info.length > 100 || !vertifyNum.isChinese(info)) {
-      app.showMyTips(complaincontent);
-      return false;
-    }
-    app.appRequestAction({
-      url: "publish/complain/",
-      way: "POST",
-      params: {
-        userId: userInfo.userId,
-        token: userInfo.token,
-        tokenTime: userInfo.tokenTime,
-        infoId: infoId,
-        type: type,
-        content: info
-      },
-      title: "正在提交投诉",
-      failTitle: "网络错误，投诉失败！",
-      success: function (res) {
-        let mydata = res.data;
-        if (mydata.errcode == "ok") {
-          _this.setData({
-            showComplain: false,
-            complainInfo: "",
-            "info.show_complain": 0
-          })
-          _this.subscribeToNews(mydata)
-        } else {
-          wx.showModal({
-            title: '提示',
-            content: mydata.errmsg,
-            showCancel: false
-          })
-        }
-      }
     })
   },
   getIntegralHeader: function (userInfo) {

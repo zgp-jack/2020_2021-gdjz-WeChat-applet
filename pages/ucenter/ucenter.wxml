@@ -1,140 +1,200 @@
 <import src="/pages/footer/footer.wxml"/>
 <view class="ucener-header">
-  <text class='ucenter-title'>会员中心</text>
-  <view class="msg-bor" data-url="/pages/information/mymessage/mymessage" bindtap='valiUserUrl'>
-    <view class="msg-icon-item">
+  <!-- 联系客服-消息通知 -->
+  <view class="header-top">
+    <view class="top-left" bindtap="callThisPhone" data-phone="{{callServicePhone}}">
+      <image src="{{serviceicon}}"></image>
+      <text bindtap="callThisPhone" data-phone="{{callServicePhone}}">联系客服</text>
+    </view>
+    <view class="top-right">
+      <image src="{{msgicon}}" data-url="/pages/information/mymessage/mymessage" bindtap='valiUserUrl'></image>
       <view class="icon-text" wx:if="{{ footerImgs.msgsNumber > 0}}">
         <text>{{footerImgs.msgsNumber>9? '9+' : footerImgs.msgsNumber}}</text>
       </view>
-      <image class="msg-icon" src="{{msgIcon}}"></image>
     </view>
   </view>
-  <view class='ucener-userinfo-wrap' wx:if="{{ userInfo }}">
-    <view class='ucenter-userinfo'>
-      <view class="basic-info">
-        <view class='ucenter-userinfo-box'>
-          <view class="avatar-bor">
-            <image src='{{ member.headimgurl }}' class='ucenter-userimg'></image>
-          </view>
-          <view class='ucenter-userinfo-words'>
-            <view class='ucenter-username overwords felx'>
-              {{ member.username || member.nickname }}
-              <image src='{{ realName }}' class='user-update-tag'
-                     wx:if="{{member.is_check==2&&showAuthor==1&&member.check_degree==2}}"></image>
-            </view>
-            <view class='ucenter-usernum overwords'>
-              会员编号：
-              <text>{{ member.id }}</text>
-            </view>
-          </view>
-          <view class='user-update-info-tag'>
-            <navigator class='user-update-info'
-                       url='/packageOther/pages/userinfo/index/index?img={{ member.headimgurl }}&auth={{ member.is_check }}&tel={{ member.tel }}&name={{ member.username || member.nickname }}&pass={{ member.pwd_status }}'
-                       open-type="navigate" wx:if="{{ member.tel }}">修改资料
+  <view class="user-data-box">
+     <!-- 头像-昵称 -->
+    <view class="user-data">
+      <image class="user-avater" wx:if="{{userInfo}}" src='{{ member.headimgurl }}'></image>
+      <image class="user-avater"  bindtap='gotoUserauth' wx:if="{{!userInfo}}" src='{{ defaultavater }}'></image>
+      <view class="user-info-box" wx:if="{{userInfo}}">
+        <view class="edit-box">
+          <text class="user-name">{{ member.username || member.nickname }}</text>
+          <navigator url='/packageOther/pages/userinfo/index/index?img={{ member.headimgurl }}&auth={{ member.is_check }}&tel={{ member.tel }}&name={{ member.username || member.nickname }}&pass={{ member.pwd_status }}'
+                       open-type="navigate" wx:if="{{member.tel}}">
+                       <image src="{{eidticon}}"></image>
             </navigator>
-            <navigator class='user-update-info' url='/packageOther/pages/userinfo/edit/edit' open-type="navigate"
-                       wx:else="{{ member.tel }}">完善资料
-            </navigator>
-          </view>
+        </view>
+        <view>
+          <text class="user-memberid">会员编号:{{ member.id }}</text>
+          <image class="ucenterAuth" src="{{ucenterAuth}}" wx:if="{{member.is_check==2&&showAuthor==1&&member.check_degree==2}}"></image>
         </view>
       </view>
-      <view class='ucenter-integralbox'>
-        <navigator class='ucenter-integral-item flex-column' url='/pages/integral/source/source?office=1'
-                   open-type="navigate">
-          <text class='overwords'>{{ member.integral }}</text>
-          <text>正式积分</text>
-        </navigator>
-        <navigator
-            class='ucenter-integral-item flex-column {{ member.temporary_integral != "0" ? "click-red-point" : "" }}'
-            url='/pages/integral/temp/temp' open-type="navigate">
-          <text>{{ member.temporary_integral }}</text>
-          <text>临时积分</text>
-        </navigator>
+      <view  bindtap='gotoUserauth' class="Notlogin" wx:if="{{!userInfo}}">
+        <text>登录/注册</text>
       </view>
     </view>
-  </view>
-  <view class='ucener-userinfo-wrap' wx:if="{{ !userInfo }}">
-    <view class='ucenter-userinfo'>
-      <view class="basic-info">
-        <view class='ucenter-userinfo-box' bindtap='gotoUserauth'>
-          <view class="avatar-bor">
-            <image class='ucenter-userimg' src='{{ nouser }}'></image>
-          </view>
-          <view class="ucenter-usernum nouser">登录/注册</view>
+    <!-- 积分-收藏 -->
+    <view class="integral-box">
+      <view bindtap='valiUserUrl' data-url='/pages/integral/source/source?office=1'>
+        <text class="top-text">{{ member.integral ? member.integral:0 }}</text>
+        <text>正式积分</text>
+      </view>
+      <view bindtap='valiUserUrl' data-url='/pages/integral/temp/temp'>
+        <view class="integral-icon-view">
+          <text class="top-text">{{ member.temporary_integral ? member.temporary_integral:0 }}</text>
+          <text class="icon-text integral-icon-text" wx:if="{{ member.temporary_integral > 0}}"><text>详情</text></text>
         </view>
+        <text>临时积分</text>
       </view>
-      <view class='ucenter-integralbox ucenter-nouserinfo-tips'>
-        点击上方登录/注册按钮可以前往登录页面，登录成功后可解锁小程序全部功能，方便您能更便捷的招工找活。
+      <view data-url="{{toCollectUrl}}" bindtap="valiUserUrl">
+        <text class="top-text">{{member.job_collect_count+member.resume_collect_count ? member.job_collect_count+member.resume_collect_count:'0'}}</text>
+        <text>我的收藏</text>
       </view>
     </view>
   </view>
-  <view class="user_background_image">
-    <image class="header_background_image" mode="aspectFit" src="http://cdn.yupao.com/miniprogram/images/yc/personCenter-topBackground.png"></image>
+  <view wx:if="{{!member.tel && userInfo}}" class="end-info" data-url="/packageOther/pages/userinfo/edit/edit" bindtap="valiUserUrl">
+    <text>完善资料</text>
   </view>
-  
+  <!-- banner -->
+  <!-- <view class="banner-box">
+    <navigator target="miniProgram" extra-data="null" open-type="navigate" app-id="wx3abff5d74de220d2">
+      <image src="{{bannerImg}}"></image>
+    </navigator>
+  </view> -->
 </view>
-
-<view class="yupao-common-container">
-  <!-- 轮播图 -->
-  <view class="advertising" wx:if="{{advertising.length && userInfo}}">
-    <image wx:if="{{advertising.length===1}}" data-url="{{advertising[0].self_url}}" bindtap="valiUserUrl"
-           class="item-img"
-           src="{{advertising[0].image_url}}" mode="aspectFill"></image>
-
-    <swiper autoplay wx:else>
-      <swiper-item wx:for="{{advertising}}">
-        <image data-url="{{item.self_url}}" bindtap="valiUserUrl" class="item-img" src="{{item.banner}}"></image>
-      </swiper-item>
-    </swiper>
-  </view>
-
-
-  <view class="{{ userInfo && advertising.length? 'menu-container': 'isbanner'}}">
-    <view class="menu-block" wx:for="{{ uCenterMenus }}" wx:key="index">
-
-      <view class="title-block">
-        <view class="line"></view>
-        <view class="title-text">
-          {{item.title}}
+<!-- 我的工作 -->
+<view class="mywork">
+  <view class="work-box">
+    <text class="title">我的工作</text>
+    <view class="work-content">
+      <view class="work-zg item-work">
+          <image 
+          class="banner" 
+          src="{{jobBanner.banner}}"
+          data-url="{{jobBanner.link}}"
+          bindtap="valiUserUrl"
+          ></image>
+        <view class="icon-box">
+          <view data-url="../published/recruit/list" bindtap="valiUserUrl">
+            <image src="{{myzg}}"></image>
+            <text>我的招工</text>
+          </view>
+          <view data-url="/pages/recruitworker-browsing-record/recruit-worker-lists/index" bindtap="valiUserUrl">
+            <image src="{{seenme}}"></image>
+            <text>谁看过我</text>
+            <view class="icon-text" wx:if="{{member.job_view_count > 0}}">
+              <text>{{member.job_view_count > 9 ? '9+':member.job_view_count}}</text>
+            </view>
+          </view>
         </view>
       </view>
-      <view class="menu-item-box">
-        <view class="menu-item" wx:for="{{ item.menus }}" wx:key="{{ index }}" data-url="{{item.dataUrl}}"
-              bindtap="{{(item.key === 'service'  || item.key === 'bookkeeping')?'':'valiUserUrl'}}">
-          <navigator
-              wx:if="{{item.key==='bookkeeping'}}"
-              class="jump"
-              target="miniProgram"
-              path="{{'/pages/index/index?userId=' + userInfo.userId + '&token=' + userInfo.token + '&tokenTime=' + userInfo.tokenTime + '&userUuid=' + userInfo.userUuid}}"
-              app-id="wx3abff5d74de220d2"
-              version="trial"
-              extra-data="{{ userInfo }}"
-          >
-            <view class="icon-bor">
-              <image class="menu-icon" src="{{item.icon}}"></image>
-            </view>
-            <text class="menu-text">{{item.name}}</text>
-          </navigator>
-
-          <view wx:else class="block-box" bindtap="{{item.key === 'service' ? 'callThisPhone' : '' }}"
-                data-phone="{{ item.key === 'service'? callServicePhone : '' }}">
-            <view class="icon-bor">
-              <image class="menu-icon" src="{{item.icon}}"></image>
-            </view>
-            <text class="menu-text">{{item.name}}</text>
+      <view class="work-zh item-work">
+          <image 
+          class="banner" 
+          bindtap="valiUserUrl"
+          data-url="{{resumeBanner.link}}" src="{{resumeBanner.banner}}">
+        </image>
+        <view class="icon-box">
+          <view bindtap="valiUserUrl" data-url="/pages/clients-looking-for-work/finding-name-card/findingnamecard">
+            <image src="{{myzh}}"></image>
+            <text>我的找活</text>
           </view>
-
-          <view class="masnumber" wx:if="{{ footerImgs.msgsNumber > 0 && item.key==='mymessage' }}">
-            <text>{{footerImgs.msgsNumber>9? '9+' : footerImgs.msgsNumber}}</text>
+          <view data-url="/pages/findwork-browsing-record/recordlist/index" bindtap="valiUserUrl">
+            <image src="{{seenmezh}}"></image>
+            <text>谁看过我</text>
+            <view class="icon-text" wx:if="{{member.resume_view_count > 0}}">
+              <text>{{member.resume_view_count > 9 ? '9+':member.resume_view_count}}</text>
+            </view>
           </view>
-          <view wx:if="{{item.key==='bookkeeping'}}" class="new-tag"><image src="{{item.newIcon}}"></image></view>
         </view>
       </view>
-
     </view>
   </view>
 </view>
-
-
-    <!-- 引入footer -->
+<!-- 常用功能 -->
+<view class="commonly">
+  <view class="commonly-box">
+    <text class="title">常用功能</text>
+    <view class="icon-content">
+      <view class="commonly-icon-box">
+        <view  bindtap="valiUserUrl" wx:if="{{showRecharge}}" data-url="/pages/recharge/recharge">
+          <image src="{{Recharge}}"></image>
+          <text>积分充值</text>
+        </view>
+        <view bindtap="valiUserUrl" data-url="../getintegral/getintegral">
+          <image src="{{obtain}}"></image>
+          <text>积分获取</text>
+        </view>
+        <view  bindtap="valiUserUrl" data-url="../integral/source/source">
+          <image src="{{record}}"></image>
+          <text>积分记录</text>
+        </view>
+        <view bindtap="valiUserUrl" data-url="../static/invite">
+          <image src="{{invitation}}"></image>
+          <text>邀请工友</text>
+        </view>
+        <view bindtap="valiUserUrl" wx:if="{{!showRecharge}}" data-url="../published/used/list">
+          <image src="{{secondhand}}"></image>
+          <text>二手交易</text>
+        </view>
+      </view>
+      <view class="commonly-icon-box">
+        <view bindtap="valiUserUrl" wx:if="{{showRecharge}}" data-url="../published/used/list">
+          <image src="{{secondhand}}"></image>
+          <text>二手交易</text>
+        </view>
+        <view bindtap="valiUserUrl" data-url="/pages/information/mymessage/mymessage">
+          <image src="{{mymsg}}"></image>
+          <text>我的信息</text>
+          <view class="icon-text" wx:if="{{ footerImgs.msgsNumber > 0}}">
+              <text>{{footerImgs.msgsNumber>9? '9+' : footerImgs.msgsNumber}}</text>
+            </view>
+        </view>
+        <view class="visibility-view">
+          <image src="{{Bookkeeping}}"></image>
+          <text>记工记账</text>
+          <view class="icon-text">
+              <text>新</text>
+          </view>
+        </view>
+        <view class="visibility-view">
+          <image src="{{gamecenter}}"></image>
+          <text>游戏中心</text>
+          <view class="icon-text">
+              <text>新</text>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>
+<!-- 其他功能 -->
+<view class="commonly system-settings">
+  <view class="commonly-box">
+    <text class="title">其他功能</text>
+    <view class="icon-content">
+      <view class="commonly-icon-box"> 
+        <view bindtap="valiUserUrl" data-url="../realname/realname">
+          <image src="{{Verified}}"></image>
+          <text>实名认证</text>
+        </view>
+        <view data-url="/packageOther/pages/query/query" bindtap="valiUserUrl">
+          <image class="verifiedquery" src="{{verifiedquery}}"></image>
+          <text>实名查询</text>
+        </view>
+        <view data-url="/packageOther/pages/helpCenter/helpCenter" bindtap="valiUserUrl">
+          <image class="help" src="{{help}}"></image>
+          <text>帮助与反馈</text>
+        </view>
+        <view bindtap="callThisPhone" data-phone="{{callServicePhone}}">
+          <image class="help" src="{{Serviceicon2}}"></image>
+          <text>联系客服</text>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>
+<!-- 引入footer -->
 <template is="footer" data="{{ footerImgs,publishActive,showPublishBox,footerActive,resumeText }}"/>

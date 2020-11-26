@@ -37,19 +37,19 @@
       <image src='{{ rightarrow }}' class="findWork-rightIcon"></image>
     </view>
 
-   <view class="daynumone" wx:if="{{topdata.has_top != 0 && topdata.is_top == 1}}">
+   <view class="daynumone" wx:if="{{topdata.has_top != 0 && topdata.is_top != 2}}">
       <text class="endtime">当前到期时间</text>
       <picker bindchange="dayclocyone" range="{{array}}" value="{{rangevalue}}">
-        <input class="end" wx:if="{{ topdata.is_top == 1 }}" disabled="true"  value="{{endtime}}">
-           <text class="yanchang">{{ topdata.is_top == 1 && shoutime?'修改':'延长'}}</text>
+        <input class="end" wx:if="{{ topdata.is_top != 2 }}" disabled="true"  value="{{endtime}}">
+           <text class="yanchang">{{ topdata.is_top != 2 && shoutime?'修改':'延长'}}</text>
         </input>
       </picker>
     </view>
 
-    <view class="daynumone" wx:if="{{topdata.is_top == 1 &&shoutime}}">
+    <view class="daynumone" wx:if="{{topdata.is_top != 2 && shoutime}}">
       <text class="endtime">最新到期时间</text>
 
-        <input class="end bluet" wx:if="{{topdata.is_top == 1}}" disabled="true"  value="{{endtimeone}}">
+        <input class="end bluet" wx:if="{{topdata.is_top != 2}}" disabled="true"  value="{{endtimeone}}">
            <text class="yanchangon" bindtap="deletea">取消</text>
         </input>
     </view>
@@ -72,7 +72,7 @@
     <text>确定置顶</text>
   </view>
 
-  <view class="submitscope" bindtap="seletedsub" wx:if="{{ topdata.has_top != 0 && topdata.is_top == 1 }}">
+  <view class="submitscope" bindtap="seletedsub" wx:if="{{ topdata.has_top != 0 && topdata.is_top != 2 }}">
     <text>确定置顶</text>
   </view>
 

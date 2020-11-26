@@ -50,9 +50,7 @@ Page({
                                     url: '/pages/realname/realname',
                                 })
                             } else if (res.cancel) {
-                                wx.reLaunch({
-                                    url: '/pages/index/index',
-                                })
+                                wx.navigateBack()
                             }
                         }
                     })
@@ -170,6 +168,7 @@ Page({
      */
     onLoad: function (options) {
         this.setData({ serverPhone: app.globalData.serverPhone })
+        app.activeRefresh()
         //this.initUserAuth();
     },
 

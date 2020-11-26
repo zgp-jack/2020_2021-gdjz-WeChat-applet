@@ -26,12 +26,20 @@
   padding-top: 50rpx;
   font-weight: bold;
 }
+.issueok-title image{
+  width: 80rpx;
+  height: 80rpx;
+}
 .issueok-body{
   position: relative;
   line-height: 80rpx;
   font-size: 28rpx;
   text-align: center;
 }
+.issueok-box .pulish-active{
+  line-height: 50rpx;
+}
+
 .issueok-footer{
   position: relative;
   border-top: 1rpx solid #eeeeee;

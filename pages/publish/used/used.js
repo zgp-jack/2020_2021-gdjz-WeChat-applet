@@ -133,7 +133,7 @@ Page({
                     }, 0)
                 } else if (mydata.errcode == "to_auth") {
                   wx.showModal({
-                    title: '温馨提示',
+                    title: '提示',
                     content: res.data.errmsg,
                     cancelText: '取消',
                     confirmText: '去实名',
@@ -251,6 +251,7 @@ Page({
         })
     },
     userChangeWorktype: function () {
+        wx.hideKeyboard()
         this.setData({
             showWorkType: true,
             showTextarea: false

@@ -60,7 +60,11 @@ Page({
     // config请求返回的置顶可选天数
     reqDays:[],
     //置顶成功后的数据
-    successData:""
+    successData:"",
+    //置顶的第一个区域
+    frstCity:null,
+    //选择置顶城市 提示文案
+    toTopTip:''
   },
 
   jumpstickyrule() {
@@ -68,11 +72,11 @@ Page({
     let that = this;
     let max_province = that.data.max_province;
     let max_city = that.data.max_city;
-
+    let toTopTip = that.data.toTopTip;
     let specialids = JSON.stringify(that.data.special_ids);
     app.globalData.judge = ""
     wx.navigateTo({
-      url: `/pages/workingtopAll/distruction/distruction?max_province=${max_province}&max_city=${max_city}&specialids=${specialids}`,
+      url: `/pages/workingtopAll/distruction/distruction?max_province=${max_province}&max_city=${max_city}&specialids=${specialids}&toTopTip=${toTopTip}`,
     })
   },
   callThisPhone: function (e) {
@@ -87,8 +91,9 @@ Page({
     let specialids = JSON.stringify(that.data.special_ids);
     let max_province = that.data.max_province;
     let max_city = that.data.max_city;
+    let toTopTip = that.data.toTopTip;
     wx.navigateTo({
-      url: `/pages/workingtopAll/distruction/distruction?max_province=${max_province}&max_city=${max_city}&allpro= ${allpro}&allcity= ${allcity}&specialids=${specialids}&allall=${allall}`,
+      url: `/pages/workingtopAll/distruction/distruction?max_province=${max_province}&max_city=${max_city}&allpro= ${allpro}&allcity= ${allcity}&specialids=${specialids}&allall=${allall}&toTopTip=${toTopTip}`,
     })
   },
   bindGetUserInfo: function(e) {
@@ -296,16 +301,12 @@ Page({
           return
         } else if (mydata.errcode == "auth_forbid") {
           wx.showModal({
-            title: '温馨提示',
+            title: '提示',
             content: res.data.errmsg,
             cancelText: '取消',
             confirmText: '去实名',
             success(res) {
-              if (res.cancel) {
-                wx.navigateBack({
-                  delta: 1
-                })
-              } else if (res.confirm) {
+              if (res.confirm) {
                 let backtwo = "backtwo"
                 wx.redirectTo({
                   url: `/pages/realname/realname?backtwo=${backtwo}`
@@ -327,7 +328,7 @@ Page({
                 })
               } else if (res.confirm) {
                 wx.makePhoneCall({
-                  phoneNumber: that.data.serverPhone
+                  phoneNumber: app.globalData.serverPhone
                 });
               }
             }
@@ -365,6 +366,21 @@ Page({
           that.setData({
             successData:mydata
           })
+          //找出置顶第一个城市
+          if(that.data.areaCitycrum.length > 0){
+            that.setData({
+              frstCity:that.data.areaCitycrum[0]
+            })
+          }else if(that.data.areaProcrum.length > 0){
+            that.setData({
+              frstCity:that.data.areaProcrum[0]
+            })
+          }else if(that.data.areaAllcrum.length > 0){
+            that.setData({
+              frstCity:that.data.areaAllcrum[0]
+            })
+          }
+          //弹出提示框
           that.selectComponent("#tip").show();
         }else {
           wx.showModal({
@@ -614,7 +630,11 @@ Page({
               title: '温馨提示',
               content: res.data.errmsg,
               showCancel: false,
-              success(res) {}
+              success(res) {
+                wx.navigateBack({
+                  delta: 1,
+                })
+              }
             })
           }
         }
@@ -716,7 +736,7 @@ Page({
                 })
               } else if (res.confirm) {
                 wx.makePhoneCall({
-                  phoneNumber: that.data.serverPhone
+                  phoneNumber: app.globalData.serverPhone
                 });
               } 
             }
@@ -724,16 +744,12 @@ Page({
           return
         } else if (mydata.errcode == "auth_forbid") {
           wx.showModal({
-            title: '温馨提示',
+            title: '提示',
             content: res.data.errmsg,
             cancelText: '取消',
             confirmText: '去实名',
             success(res) {
-              if (res.cancel) {
-                wx.navigateBack({
-                  delta: 1
-                })
-              } else if (res.confirm) {
+              if (res.confirm) {
                 let backtwo = "backtwo"
                 wx.redirectTo({
                   url: `/pages/realname/realname?backtwo=${backtwo}`
@@ -836,7 +852,9 @@ Page({
             defaultDayIndex: index,
             rangevalue: index,
             // 保存请求返回的可选择置顶天数
-            reqDays: days
+            reqDays: days,
+            //最多可选城市提示文案
+            toTopTip:mydata.data.max_number_tips
           })
           if(options.topId == 'undefined'){
             let numcity = mydata.data.city_integral;
@@ -1032,6 +1050,7 @@ Page({
     this.getdetail(options)
     this.getAreaData(options)
     this.getNewId(options)
+    app.activeRefresh()
   },
 
   /**

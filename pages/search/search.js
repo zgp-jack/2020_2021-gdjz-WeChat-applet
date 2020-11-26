@@ -57,15 +57,10 @@ Page({
 
   //点击搜索 储存搜索历史
   clickSearch: function (e) {
+    //更新活跃状态
+    app.activeRefresh()
     //判断是否输入内容 或者空格 为空不保存
     let k = this.isEmpty(this.data.inputTetx)
-    //不能超过10个字
-    if(this.data.inputTetx.length > 10){
-      wx.showModal({
-        title: '提示',
-        content: '搜索不能超过10个字符',
-      })
-    }else{
       //保存
       //判断找工作还是找工人
       if(this.data.changeStatus == 0){
@@ -73,11 +68,11 @@ Page({
         if(historyList.historyList.length === 6) {
           historyList.historyList.pop()
           historyList.historyList.unshift({
-          keywords:this.data.inputTetx
+          keywords:this.data.inputTetx,
         })
         }else{
           historyList.historyList.unshift({
-            keywords:this.data.inputTetx
+            keywords:this.data.inputTetx,
           })
       }
         //去重
@@ -104,11 +99,11 @@ Page({
         if(historyList.historyList.length === 6) {
           historyList.historyList.pop()
           historyList.historyList.unshift({
-          keywords:this.data.inputTetx
+          keywords:this.data.inputTetx,
         })
         }else{
           historyList.historyList.unshift({
-            keywords:this.data.inputTetx
+            keywords:this.data.inputTetx,
           })
         }
         var result = [];
@@ -128,9 +123,8 @@ Page({
         wx.reLaunch({
           url:"/pages/findingworkinglist/findingworkinglist?keywrods="+this.data.inputTetx
         })
-      this.getStorageSearch()
+        this.getStorageSearch()
       }
-    }
       
   },
     //判断字符是否为空的方法
@@ -248,9 +242,11 @@ Page({
   },
   // 清除搜索输入框内容
   clearContent: function () {
-    this.setData({
-      inputTetx:""
-    })
+    setTimeout(()=>{
+      this.setData({
+        inputTetx:""
+      })
+    },50)
   },
   /**
    * 生命周期函数--监听页面加载

@@ -308,11 +308,26 @@ Page({
               tipstr:texts
             })
             that.selectComponent("#tips").show();
+            }else if(res.data.errcode === 'auth_forbid'){
+              wx.showModal({
+                title: '提示',
+                content: res.data.errmsg,
+                confirmText: '去实名',
+                success(e){
+                  if(e.confirm){
+                    wx.navigateTo({
+                      url: '/pages/realname/realname',
+                    })
+                  }
+                }
+              })
             }else{
               wx.showModal({
                 title: '提示',
                 content: res.data.errmsg,
-                showCancel: false,
+                confirmText: '确定',
+                showCancel:false,
+                success(e){}
               })
             }
           }
@@ -486,6 +501,7 @@ Page({
    */
   onLoad: function (options) {
     this.initClipboardData()
+    app.activeRefresh()
   },
 
   /**

@@ -32,7 +32,7 @@
       </picker>
     </view>
   </view> -->
-  <view class="experienceheader">
+  <view class="experienceheader" bindtap="hiddenKeyBoard">
     <text class="experienceheaderone">所在地区：</text>
     <!-- bindchange="initAllProvice"  delete vertify -->
     <view class="experienceheadertwo">

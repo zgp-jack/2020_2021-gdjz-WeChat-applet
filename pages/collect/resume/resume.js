@@ -47,7 +47,7 @@ Page({
     let userInfo = this.data.userInfo
     wx.showLoading({ title: '数据加载中', })
     app.doRequestAction({
-      url: "resumes/collect-list/",
+      url: "resumes/collect-resume-list/",
       way: "POST",
       params: {
         userId: userInfo.userId,
@@ -61,21 +61,21 @@ Page({
         let mydata = res.data;
         console.log(mydata);
         if (mydata.errcode == "200") {
-          if (mydata.data.length > 0) {
+          if (mydata.list.length > 0) {
             let newData = _this.data.lists;
             if (_this.data.page != 1) {
-              for (let i = 0; i < mydata.data.length; i++) {
-                newData.push(mydata.data[i])
+              for (let i = 0; i < mydata.list.length; i++) {
+                newData.push(mydata.list[i])
               }
             }
             console.log(_this.data.page)
             _this.setData({
-              lists: (_this.data.page == 1) ? mydata.data : newData,
+              lists: (_this.data.page == 1) ? mydata.list : newData,
               pageSize: mydata.pageSize ? mydata.pageSize : 15,
               isFirstRequest: false
             })
             setTimeout(function () {
-              _this.setData({ nothavamore: (mydata.data.length < _this.data.pageSize) ? true : false, })
+              _this.setData({ nothavamore: (mydata.list.length < _this.data.pageSize) ? true : false, })
             }, 0)
           } else {
             _this.setData({
@@ -138,6 +138,29 @@ Page({
     let msg = e.currentTarget.dataset.msg;
     let tips = e.currentTarget.dataset.tips;
     let uuid = e.currentTarget.dataset.uuid;
+    let view = e.currentTarget.dataset.view;
+    let viewMsg = e.currentTarget.dataset.viewmsg
+    let _id = e.currentTarget.dataset.id
+    let _this = this
+    if (!view) {
+      wx.showModal({
+        showCancel: false,
+        content: viewMsg,
+        success: function () {
+          //点击已经被删除的信息 提示已下架-点击确定删除该信息
+          let itemListData = _this.data.lists
+          for(let i = 0 ;i<itemListData.length;i++){
+            if(itemListData[i].id == _id){
+              itemListData.splice(i,1)
+              _this.setData({
+                lists:itemListData
+              })
+            }
+          }
+        }
+      })
+      return
+    }
     if (msg == "1") {
       wx.showModal({
         title: '温馨提示',

@@ -5,8 +5,9 @@
 <!-- 搜索头部 -->
 <view class="lists-header">
   <input placeholder="找优质工人，就上鱼泡网" bindconfirm="userTapSearch" confirm-type="search" bindfocus='bindInputFocus' bindinput='bindKeyInput' bindtap="closeAllSelect" value='{{ searchDate.keywords }}' data-goSearch="1" disabled/>
-  <text bindtap='userTapSearch'>搜索</text>
-</view>
+  <image wx:if="{{showdeletekey}}" bindtap="deletekey" src="{{ delImg }}" mode="aspectFit"></image>
+  <text bindtap='userTapSearch'>{{showdeletekey ? "取消":"搜索"}}</text>
+</view> 
 
 <!-- 历史记录 -->
 <view class='usersearchhistorybox' wx:if="{{ showHistoryList && historyList.length }}" bindtap='closeHistory'>
@@ -163,8 +164,7 @@
             </view>
           </view>
           <view class="listsboxlocaltwo">
-            <!-- <text class="listsboxtime" wx:if="{{item.time}}">{{item.time}}</text> -->
-                    <text wx:if="{{item.login_time}}">{{item.login_time}}</text>
+            <text wx:if="{{item.active_time_str}}">{{item.active_time_str}}</text>
           </view>
         </view>
       </view>

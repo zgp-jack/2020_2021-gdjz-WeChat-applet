@@ -1,0 +1,35 @@
+<!--pages/findwork-browsing-record/index.wxml-->
+<!-- 有浏览记录 -->
+<view class="findework-record-container" wx:if="{{ lists.length > 0 && show}}">
+  <block wx:for="{{ lists }}" wx:key="index">
+    <view class="record-content">
+      <view class="record-up">
+        <view class="record-up-left">
+          <view class="record-up-left-name">{{ item.user_name }}</view>
+          <view class="record-up-left-see">查看了你</view>
+        </view>
+        <view class="record-up-right">
+          <view class="record-up-right-phone">{{ item.tel }}</view>
+        </view>
+      </view>
+      <view class="record-down">
+        <view class="record-down-left-position"><image src="{{ positionImage }}" class="record-position-image"></image>{{ item.address }}</view>
+        <view class="record-down-right-button" bindtap="getRecruitLists" data-userid="{{ item.user_id }}" data-user="{{ item.user_name }}">查看他的招工信息</view>
+      </view>
+    </view>
+  </block>
+  <view class="record-no-more" wx:if="{{ !more }}">没有更多数据了</view>
+</view>
+
+<!-- 无浏览记录 -->
+<view class="no-record" wx:if="{{ lists.length === 0 && show}}">
+  <image src="{{ emptyImage }}" mode="aspectFit"></image>
+  <view class="no-record-content">
+    <view class="no-record-text">您暂时没有浏览记录</view>
+    <view class="no-record-text">快去置顶找活，让更多老板看到你</view>
+  </view>
+  <view class="record-top-button" bindtap="goTop">去置顶</view>
+</view>
+
+<!-- 推荐列表（可能适合您的工作） -->
+<recommendRecruit infoId='{{ infoId }}' cid="{{ cid }}" aid="{{ aid }}" more="{{ more }}" type='record' child="{{ child }}" wx:if="{{ !more }}" bind:show="show" />

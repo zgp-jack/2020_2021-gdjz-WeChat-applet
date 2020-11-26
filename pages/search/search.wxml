@@ -16,6 +16,7 @@
       value="{{inputTetx}}"
       bindinput='searchInput'
       focus="{{focusInput}}"
+      maxlength="50"
       ></input>
       <image class="{{ inputTetx.length>0 ?'showdel':'clearContent'}} " src="{{ delImg }}" mode="aspectFit" bindtap="clearContent"></image>
     </view>
@@ -28,10 +29,14 @@
     </view>
     <view class="tag-box">
       <block wx:if="{{changeStatus == 0}}" wx:for="{{ historySearch.historyList }}" wx:key="index">
-        <text bindtap="clickTabSearch" space="ensp" data-key="{{ item.keywords }}">{{ item.keywords }}</text>
+        <view class="tab-bg max-tab-box" bindtap="clickTabSearch" space="ensp" data-key="{{ item.keywords }}">
+          <view class="tab-inner">{{ item.keywords }}</view>
+        </view>
       </block>
       <block wx:if="{{changeStatus == 1}}" wx:for="{{ historySearchGr.historyList }}" wx:key="index">
-        <text bindtap="clickTabSearch" space="ensp" data-key="{{ item.keywords }}">{{ item.keywords }}</text>
+        <view class="tab-bg max-tab-box" bindtap="clickTabSearch" space="ensp" data-key="{{ item.keywords }}">
+          <view class="tab-inner">{{ item.keywords }}</view>
+        </view>
       </block>
     </view>
   </view>
@@ -41,7 +46,11 @@
     </view>
     <view class="tag-box">
       <block wx:for="{{ hotSearch.hotList }}" wx:key="index">
-        <view bindtap="clickTabSearch" data-key="{{ item.keywords }}">{{ item.keywords }}</view>
+        <view class="tab-bg max-tab-box" bindtap="clickTabSearch" data-key="{{ item.keywords }}">
+          <view class="tab-inner">
+            {{ item.keywords }}
+          </view>
+        </view>
       </block>
     </view>
   </view>

@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "谁看过我的招工",
+  "usingComponents": {
+    "recommendResume": "/components/recommendResume/recommendResume"
+  },
+  "enablePullDownRefresh": true
+}

@@ -35,6 +35,10 @@ Component({
     infoId:{
       type: String,
       value:''
+    },
+    type:{
+      type: String,
+      value:''
     }
   },
   observers:{
@@ -55,7 +59,7 @@ Component({
     autimg: app.globalData.apiImgUrl + 'newlist-jobrealname.png', //实名图片
     hirimg: app.globalData.apiImgUrl + 'recruit-lists-new-finding.png', //招人图片
     doneimg: app.globalData.apiImgUrl + 'published-recruit-end.png', //已找到
-    iondzs: app.globalData.apiImgUrl + 'newlist-jobposi.png',//定位,
+    iondzs: app.globalData.apiImgUrl + 'lpy/biaoqian.png',//定位,
     isload: false
   },
   /**
@@ -73,12 +77,32 @@ Component({
     },
     detailinfoaction:function(e){
       let id = e.currentTarget.dataset.id
-      wx.redirectTo({
-        url: '/pages/detail/info/info?id=' + id + '&child=' + this.properties.child,
-      })
+      const pages = getCurrentPages();//获取当前的页面栈
+      const prevPage = pages[pages.length - 1];//当前的page
+      let url = prevPage.route;
+      if (url === 'pages/findwork-browsing-record/recordlist/index') {
+        wx.navigateTo({
+          url: '/pages/detail/info/info?id=' + id + '&child=' + this.properties.child,
+        })
+      }else{
+        wx.redirectTo({
+          url: '/pages/detail/info/info?id=' + id + '&child=' + this.properties.child,
+        })
+      }
     },
     seemoreaction:function(){
-      
+      let { aid, cid, infoId } = this.properties
+      let cidArray = cid.split(',');
+      let cidItem = cidArray[0];
+      // 推荐列表数据的来源，“record”代表来自于浏览记录
+      let type = this.data.type;
+      // 如果推荐数据是在浏览记录页面，点击“查看更多”跳转到招工列表
+      if (type == 'record') {
+        wx.reLaunch({
+          url: `/pages/index/index?id=${cidItem}&aid=${aid}`,
+        })
+        return false
+      }
 
       let len = this.data.lists.length
       let num = this.data.pagesize
@@ -99,7 +123,6 @@ Component({
         })
         return false
       }
-      let { aid, cid, infoId } = this.properties
       if(this.properties.child){
         var pages = getCurrentPages() 
         var prePage = pages[pages.length-2]
@@ -133,6 +156,7 @@ Component({
         },
         hideLoading: true,
         success:(res)=>{
+          _this.triggerEvent("show")
           let mydata = res.data
           if(mydata.errcode == 'ok'){
             _this.setData({

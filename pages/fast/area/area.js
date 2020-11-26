@@ -118,37 +118,54 @@ Page({
                       images: imags
                     },
                     success: function (res) {
-                      //发布成功后，清除缓存数据中的detail、rulesClassifyids、userClassifyids、imgs
-                      let jiSuData = wx.getStorageSync('jiSuData')
-                      if (jiSuData) {
-                        jiSuData.detail = ''
-                        jiSuData.rulesClassifyids = []
-                        jiSuData.userClassifyids = []
-                        jiSuData.imgs = []
-                        jiSuData.phone = ''
-                        wx.setStorageSync('jiSuData', jiSuData)
-                      }
-                      let mydata = res.data;
-                      app.appRequestAction({
-                        title: "发布中",
-                        mask: true,
-                        failTitle: "网络错误，保存失败！",
-                        url: "fast-issue/to-job/",
-                        way: "POST",
-                        params: {
-                          token: token,
-                        },
-                        success:function (res) {
-                          if(res.data.errcode == "ok"){
-                            let tip_data = JSON.stringify(res.data.data)
-                            wx.reLaunch({
-                              url: '../../published/recruit/list?tip_data='+tip_data,
-                            })
-                          }else{
-                            app.showMyTips(mydata.errmsg);
-                          }
+                      if (res.data.errcode == 'ok') {
+                        //发布成功后，清除缓存数据中的detail、rulesClassifyids、userClassifyids、imgs
+                        let jiSuData = wx.getStorageSync('jiSuData')
+                        if (jiSuData) {
+                          jiSuData.detail = ''
+                          jiSuData.rulesClassifyids = []
+                          jiSuData.userClassifyids = []
+                          jiSuData.imgs = []
+                          jiSuData.phone = ''
+                          wx.setStorageSync('jiSuData', jiSuData)
                         }
-                      })
+                        let mydata = res.data;
+                        app.appRequestAction({
+                          title: "发布中",
+                          mask: true,
+                          failTitle: "网络错误，保存失败！",
+                          url: "fast-issue/to-job/",
+                          way: "POST",
+                          params: {
+                            token: token,
+                          },
+                          success:function (res) {
+                            if(res.data.errcode == "ok"){
+                              let tip_data = JSON.stringify(res.data.data)
+                              wx.reLaunch({
+                                url: '../../published/recruit/list?tip_data='+tip_data,
+                              })
+                            }else{
+                              app.showMyTips(mydata.errmsg);
+                            }
+                          }
+                        })
+                      }else if(res.data.errcode == "member_forbid"){
+                        wx.showModal({
+                          content: res.data.errmsg,
+                          cancelText: "知道了",
+                          confirmText: "联系客服",
+                          success: function (res) {
+                            if (res.confirm) {
+                              wx.makePhoneCall({
+                                phoneNumber: app.globalData.serverPhone,
+                              })
+                            }
+                          }
+                        })
+                      }else{
+                        app.showMyTips(res.data.errmsg);
+                      }
                     }
                   })
                 } else if (uinfo.errcode == "member_shielding") {
@@ -200,41 +217,84 @@ Page({
                   images: imags
                 },
                 success: function (res) {
-                  //发布成功后，清除缓存数据中的detail、rulesClassifyids、userClassifyids、imgs
-                  let jiSuData = wx.getStorageSync('jiSuData')
-                  if (jiSuData) {
-                    jiSuData.detail = ''
-                    jiSuData.rulesClassifyids = []
-                    jiSuData.userClassifyids = []
-                    jiSuData.imgs = []
-                    jiSuData.phone = ''
-                    wx.setStorageSync('jiSuData', jiSuData)
-                  }
-                  let mydata = res.data;
-                  app.appRequestAction({
-                    title: "发布中",
-                    mask: true,
-                    failTitle: "网络错误，保存失败！",
-                    url: "fast-issue/to-job/",
-                    way: "POST",
-                    params: {
-                      token: token,
-                    },
-                    success:function (res) {
-                      if(res.data.errcode == "ok"){
-                        // wx.redirectTo({
-                        //   url: '/pages/fast/tips/tips?token='+token,
-                        // })
-                        //已授权 登陆跳转
-                        let tip_data = JSON.stringify(res.data.data)
-                        wx.reLaunch({
-                          url: '../../published/recruit/list?tip_data='+tip_data,
-                        })
-                      }else{
-                        app.showMyTips(mydata.errmsg);
-                      }
+                  if (res.data.errcode == 'ok') {
+                    //发布成功后，清除缓存数据中的detail、rulesClassifyids、userClassifyids、imgs
+                    let jiSuData = wx.getStorageSync('jiSuData')
+                    if (jiSuData) {
+                      jiSuData.detail = ''
+                      jiSuData.rulesClassifyids = []
+                      jiSuData.userClassifyids = []
+                      jiSuData.imgs = []
+                      jiSuData.phone = ''
+                      wx.setStorageSync('jiSuData', jiSuData)
                     }
-                  })
+                    let mydata = res.data;
+                    if(res.data.errcode !== 'discard'){//判断是否已经审核失败
+                      app.appRequestAction({
+                        title: "发布中",
+                        mask: true,
+                        failTitle: "网络错误，保存失败！",
+                        url: "fast-issue/to-job/",
+                        way: "POST",
+                        params: {
+                          token: token,
+                        },
+                        success:function (res) {
+                          if(res.data.errcode == "ok"){
+                            // wx.redirectTo({
+                            //   url: '/pages/fast/tips/tips?token='+token,
+                            // })
+                            //已授权 登陆跳转
+                            let tip_data = JSON.stringify(res.data.data)
+                            wx.reLaunch({
+                              url: '../../published/recruit/list?tip_data='+tip_data,
+                            })
+                          }else{
+                            app.showMyTips(mydata.errmsg);
+                          }
+                        }
+                      })
+                    }else {
+                      wx.showModal({
+                        title:'提示',
+                        showCancel:false,
+                        content:mydata.errmsg,
+                        success(e){
+                          if(e.confirm){
+                            wx.reLaunch({
+                              url: '../../published/recruit/list',
+                            })
+                          }
+                        }
+                      })
+                    }
+                  }else if(res.data.errcode == "member_forbid"){
+                    wx.showModal({
+                      content: res.data.errmsg,
+                      cancelText: "知道了",
+                      confirmText: "联系客服",
+                      success: function (res) {
+                        if (res.confirm) {
+                          wx.makePhoneCall({
+                            phoneNumber: app.globalData.serverPhone,
+                          })
+                        }
+                      }
+                    })
+                  }else{
+                    wx.showModal({
+                      title:'提示',
+                      showCancel:false,
+                      content:res.data.errmsg,
+                      success(e){
+                        if(e.confirm){
+                          wx.reLaunch({
+                            url: '../../published/recruit/list',
+                          })
+                        }
+                      }
+                    })
+                  }
                 }
               })
             } else if (uinfo.errcode == "member_shielding") {
@@ -402,10 +462,26 @@ Page({
               jiSuData.phone = ''
               wx.setStorageSync('jiSuData', jiSuData)
             }
+            //发布成功更新活跃状态
+            app.activeRefresh()
+          }else if(res.data.errcode == "member_forbid"){
+            wx.showModal({
+              content: res.data.errmsg,
+              cancelText: "知道了",
+              confirmText: "联系客服",
+              success: function (res) {
+                if (res.confirm) {
+                  wx.makePhoneCall({
+                    phoneNumber: app.globalData.serverPhone,
+                  })
+                }
+              }
+            })
           }else{
-            app.showMyTips(mydata.errmsg);
-            }}
-        })
+            app.showMyTips(res.data.errmsg);
+          }
+        }
+      })
     }
   },
   //确定地址招工发布
@@ -432,7 +508,7 @@ Page({
         return false
       }
   },
-  //点击选择招工发布地址都地址详情界面
+  //点击选择招工发布地址到地址详情界面
   showWorkArea: function () {
     wx.navigateTo({
       url: '/pages/fast/detailarea/detailarea?showfor=showfor&showmap=showmap'
@@ -644,7 +720,7 @@ Page({
             if (failCount) {
               wx.showModal({
                 title: '提示',
-                content: `有${failCount}图片上传失败，请重新上传`,
+                content: `有${failCount}张图片上传失败，请重新上传`,
                 showCancel: false,
               })
             }

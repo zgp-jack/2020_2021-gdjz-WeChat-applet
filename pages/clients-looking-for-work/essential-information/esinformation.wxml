@@ -10,7 +10,7 @@
         <input type="text" maxlength="5" placeholder="请输入2~5字纯中文姓名" value="{{name}}" bindinput="name"></input>
       </view>
     </view>
-    <view class="informationthree">
+    <view class="informationthree" bindtap="hiddenKeyBoard">
       <text class="informationtwione">性别</text>
       <picker bindchange="sex" value="{{indexsex}}" range="{{array}}" class="informationthreetwo">
         <input disabled name="addregion" value="{{array[indexsex]}}" placeholder="请选择性别"></input>
@@ -24,7 +24,7 @@
         </picker>
       </view>
     </view>
-    <view class="informationfive">
+    <view class="informationfive" bindtap="hiddenKeyBoard">
       <text class="informationtwione">民族</text>
       <picker bindchange="nation" range="{{nationalarray}}" class="informationfivetwo" value="{{nationindex}}">
         <input disabled name="addnational" value="{{nationalarray[nationindex]}}" placeholder="请选择民族"></input>

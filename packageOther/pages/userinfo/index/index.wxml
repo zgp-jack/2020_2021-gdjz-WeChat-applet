@@ -1,6 +1,6 @@
 <view class="yupao-common-container">
   <view class='user-editinfo-lists'>
-    <view class='user-editinfo-item clearfix' bindtap='userUplodImg'>
+    <view class='user-editinfo-item clearfix' bindtap="{{ clickStatus?'userUplodImg':'' }}">
       <text class='user-editinfo-left user-editinfo-username'>头像</text>
       <image class='user-editinfo-right user-editinfo-userimg' src='{{ member.img }}'></image>
     </view>
@@ -16,10 +16,10 @@
         设置密码
       </navigator>
     </view>
-    <view class='user-editinfo-item clearfix'>
-      <text class='user-editinfo-left'>手机号</text>
-      <navigator class='user-editinfo-right' url='/packageOther/pages/userinfo/phone/phone' open-type="navigate">
-        {{ member.tel }}
+    <view class='user-editinfo-item'>
+      <navigator url='/packageOther/pages/userinfo/phone/phone' style="height:100%" open-type="navigate" class="clearfix">
+        <text class='user-editinfo-left'>手机号</text>
+        <text class='user-editinfo-right'>{{ member.tel }}</text>
       </navigator>
     </view>
   </view>

@@ -94,7 +94,7 @@ Page({
     autimg: app.globalData.apiImgUrl + 'new-list-realname-icon.png', //实名图片
     hirimg: app.globalData.apiImgUrl + 'recruit-lists-new-finding.png', //招人图片
     doneimg: app.globalData.apiImgUrl + 'published-recruit-end.png', //已找到
-    iondzs: app.globalData.apiImgUrl + 'newlist-jobposi.png',//定位
+    iondzs: app.globalData.apiImgUrl + 'lpy/biaoqian.png',//定位
     historydel: app.globalData.apiImgUrl + "historylist-del.png",
     feedbackimg: app.globalData.apiImgUrl + "feedbackmsg-img.png",
     rightarrow: app.globalData.apiImgUrl + "feedback-rightarrow.png",
@@ -115,7 +115,43 @@ Page({
     // pageStatus是goback的话需要刷新当前页面信息ID
     pageId: '',
     //没有数据时 按钮显示状态
-    isNullStatus:""
+    isNullStatus:"",
+    //搜索框清除按钮
+    delImg: app.globalData.apiImgUrl + "new-published-close-icon.png",
+    //是否显示清除按钮
+    showdeletekey:false,
+    // 刷新提示框提示内容
+    tipBox: {//提示框显示信息
+      showTitle: true,
+      showIcon: false,
+      showCancel: true,
+      confirmColor:'#0099FF',
+      cancelColor:'#797979',
+      content: [{
+        des: '',
+        color: '#585963',
+        text: [{
+          textName: '',
+          color: '#585963'
+        },
+        {
+          textName: '',
+          color: 'red'
+        },
+        {
+          textName: '',
+          color: '#585963'
+        }
+      ]
+      }
+    ],
+      confirmText: ''
+    },
+    // 刷新状态
+    refreshStatus: false,
+    // 刷新成功icon
+    successIcon:app.globalData.apiImgUrl + 'yc/findwork-publish-success.png',
+    authStatus:''//如果从招工详情页返回到招工列表页面，是需要实名（to_auth）,那么就不设置隐藏快速发布找活名片的时间。
   },
   getPhoneNumber:function(e){
     console.log(e)
@@ -217,8 +253,10 @@ Page({
     this.setData({
       showListsInfo: (this.data.showListsInfo == type) ? 0 : type
     })
+    app.activeRefresh()
   },
   closeAllSelect: function (e) {
+    app.activeRefresh()
     this.setData({
       showListsInfo: 0
     })
@@ -429,6 +467,7 @@ Page({
       way: "POST",
       params: _params,
       success: function (res) {
+        app.activeRefresh()
         callback ? callback() : ""
         _this.setData({ isload: false })
         app.globalData.isFirstLoading ? "" : wx.hideLoading();
@@ -471,9 +510,11 @@ Page({
         })
       }
     })
+    this.showRefresh()
   },
   doSearchRequestAction: function (_append) {
     let _this = this;
+    this.showRefresh()
     this.setData({
       nothavemore: false,
       showNothinkData: false
@@ -490,7 +531,7 @@ Page({
       success: function (res) {
         app.globalData.isFirstLoading ? "" : wx.hideLoading();
         let mydata = res.data;
-
+        app.activeRefresh()
         if (mydata.errcode == "token_fail") {
           app.initAdminTime(function () {
             _this.doSearchRequestAction();
@@ -536,7 +577,8 @@ Page({
     let _this = this;
     let _mark = true;
     let _wx = wx.getStorageSync("_wx");
-    let userInfo = this.data.userInfo;
+    let userInfo = wx.getStorageSync("userInfo");
+    this.setData({ userInfo: userInfo ? userInfo : false });
     let _time = Date.parse(new Date());
     this.validateLogin();
     if (_wx && _wx.expirTime) {
@@ -643,46 +685,45 @@ Page({
     }
   },
   userTapSearch: function () {
-      // if(!this.data.userInfo){
-    //   app.gotoUserauth();
-    //   return false;
-    // }
-    //if(this.data.searchDate.keywords == "") return false;
-    let text = this.data.searchDate.keywords;
-    if (text) {
-      let his = wx.getStorageSync("searchHistory")
-      if (his) {
-        let job = his.hasOwnProperty("job");
-        if (job) {
-          let jobs = his.job;
-          let index = jobs.indexOf(text);
-          if (index != -1) {
-            jobs.splice(index, 1);
+    //判断是搜索还是取消按钮
+    if(this.data.showdeletekey){
+      //清除搜索内容 重新请求搜索接口
+      this.deletekey()
+    }else {
+      let text = this.data.searchDate.keywords;
+      if (text) {
+        let his = wx.getStorageSync("searchHistory")
+        if (his) {
+          let job = his.hasOwnProperty("job");
+          if (job) {
+            let jobs = his.job;
+            let index = jobs.indexOf(text);
+            if (index != -1) {
+              jobs.splice(index, 1);
+            }
+            jobs.unshift(text);
+  
+          } else {
+            his.job = [];
+            his.job.push(text)
           }
-          jobs.unshift(text);
-
+          his.job.splice(4)
+          wx.setStorageSync("searchHistory", his)
         } else {
-          his.job = [];
-          his.job.push(text)
+          let myhis = {
+            job: [text]
+          }
+          wx.setStorageSync("searchHistory", myhis)
         }
-        his.job.splice(4)
-        wx.setStorageSync("searchHistory", his)
-      } else {
-        let myhis = {
-          job: [text]
-        }
-        wx.setStorageSync("searchHistory", myhis)
       }
+      this.returnTop();
+      this.setData({
+        "searchDate.page": 1,
+        showHistoryList: false
+      })
+      this.initSearchHistory();
+      this.doRequestAction(false);
     }
-
-
-    this.returnTop();
-    this.setData({
-      "searchDate.page": 1,
-      showHistoryList: false
-    })
-    this.initSearchHistory();
-    this.doRequestAction(false);
   },
   returnTop: function () {
     //this.setData({ scrollTop: 0 })
@@ -700,22 +741,7 @@ Page({
   initUserinfo: function () {
     let _this = this;
     let userInfo = wx.getStorageSync("userInfo");
-    // app.initSystemInfo(function (res) {
-    //     if (res) {
-    //         let _h = (res.windowWidth * 0.7) / 0.6216;
-    //         _this.setData({ userAuthBtn: _h })
-    //     }
-    // })
-
-    // if(!userInfo){
-    //     this.setData({ userInfo:false })
-    //     return false;
-    // }
     this.setData({ userInfo: userInfo ? userInfo : false });
-    this.initNeedData();
-    // if (userInfo) if (!app.globalData.showFastIssue.request) app.isShowFastIssue(this);
-    // else this.setData({ showFastIssue: app.globalData.showFastIssue })
-
   },
   valiUserUrl: function (e) {
     let userInfo = this.data.userInfo;
@@ -870,6 +896,27 @@ Page({
     this.setData({
       fillterArea: areas.getAreaArr
     })
+    if (options.hasOwnProperty("aid")) {
+      let aid = options.aid
+      let area = areas.getAreaArr;
+      let areaName = '';
+      area.forEach(areaItem => {
+        if (areaItem.has_children) {
+          let index = areaItem.children.findIndex((item=>item.id == aid))
+          if (index != -1) {
+            areaName = areaItem.children[index].name
+          }
+        }else{
+          if (areaItem.id == aid) {
+            areaName = areaItem.name;
+          }
+        }
+      });
+      if (areaName) {
+        wx.setStorageSync('areaId', aid);
+        wx.setStorageSync('areaText', areaName)
+      }
+    }
     let {id} = options
     if (app.globalData.allTypes) {
       _this.setData({ fillterType: app.globalData.allTypes.classTree, fillterListType: app.globalData.allTypes.jobListType, "searchDate.joblisttype": joblisttype ? joblisttype : app.globalData.allTypes.jobListType[0].type, listText: joblistname ? joblistname : app.globalData.allTypes.jobListType[0].name });
@@ -969,7 +1016,7 @@ Page({
   initSelectedData: function (id,data) {
     let classTree = data.classTree
     for (let i = 0; i < classTree.length; i++) {
-      if (classTree[i].id === id) {
+      if (classTree[i].id == id) {
         this.setData({
           worktype: i,
           typeText: classTree[i].name,
@@ -977,12 +1024,13 @@ Page({
         })
         //判断是否有传入 工种id 有则存入缓存
         wx.setStorageSync('typeText',classTree[i].name)
+        wx.setStorageSync('typeId', id)
         return
       }else{
-        if (classTree[i].has_children === 1) {
+        if (classTree[i].has_children == 1) {
           let childrenClassTree = classTree[i].children;
           for (let j = 0; j < childrenClassTree.length; j++) {
-            if (childrenClassTree[j].id === id) {
+            if (childrenClassTree[j].id == id) {
               this.setData({
                 worktype: i,
                 typeText: childrenClassTree[j].name,
@@ -991,6 +1039,7 @@ Page({
               })
               //判断是否有传入 工种id 有则存入缓存
               wx.setStorageSync('typeText',childrenClassTree[j].name)
+              wx.setStorageSync('typeId', id)
               return
             }
           }
@@ -1017,6 +1066,97 @@ Page({
       url: '/pages/clients-looking-for-work/finding-name-card/findingnamecard',
     })
   },
+  //删除搜索内容
+  deletekey:function () {
+    this.setData({
+      "searchDate.keywords":"",
+      showdeletekey:false,
+      "searchDate.page": 1,
+    })
+    //重新请求搜索接口
+    this.returnTop();
+    this.doRequestAction(false)
+  },
+  // 点击取消刷新找活名片记录时间，在一定时间段内不再展示
+  cancelRefresh: function () {
+    // 获取用户信息
+    let userInfo = wx.getStorageSync('userInfo');
+    if (!userInfo) return;
+    let token = userInfo.token;
+    app.appRequestAction({
+      url: 'resumes/cancel-refresh/',
+      way: 'POST',
+      params: {token},
+      success: function (res) {
+        let mydata= res.data
+        if (mydata.errcode === "ok") {
+        }else{
+          wx.showToast({
+            title: mydata.errmsg,
+            icon: "none"
+          })
+        }
+      },
+      fail: function () {
+        wx.showToast({
+          title: '网络出错，数据加载失败！',
+          icon: "none"
+        })
+      }
+    })
+  },
+  // 找工作列表是否弹出引导刷新找活名片请求
+  showRefresh: function () {
+    let that = this;
+    // 获取用户信息
+    let userInfo = wx.getStorageSync('userInfo');
+    if (!userInfo) return;
+    let token = userInfo.token;
+    app.appRequestAction({
+      url: 'resumes/popup-to-refresh/',
+      way: 'POST',
+      params: {token},
+      success: function (res) {
+        let mydata= res.data
+        if (mydata.errcode === "ok") {
+          let showPopup = mydata.data.is_popup;
+          let integral = mydata.data.integral;
+          if (showPopup) {
+            that.setData({
+              "tipBox.content": '',
+              "tipBox.content[0].text[0].textName": `刷新找活名片让更多老板联系你，消耗`,
+              "tipBox.content[0].text[1].textName": integral,
+              "tipBox.content[0].text[1].color":"#DC143C",
+              "tipBox.content[0].text[2].textName": '积分刷新？',
+              "tipBox.confirmText": "去刷新",
+              "tipBox.showCancel": true,
+              "tipBox.showIcon": false,
+              "tipBox.showTitle": true,
+              refreshStatus: false
+            })
+            that.selectComponent("#promptbox").show()
+          }
+        }
+      },
+      fail: function () {
+        wx.showToast({
+          title: '网络出错，数据加载失败！',
+          icon: "none"
+        })
+      }
+    })
+  },
+  confirm: function () {
+    if (this.data.refreshStatus) {
+      this.setData({refreshStatus: false})
+    }else{
+      app.refreshReq(2, this)
+      this.cancelRefresh()
+    }
+  },
+  cancel: function () {
+    this.cancelRefresh()
+  },
   /**
    * 生命周期函数--监听页面加载®
    */
@@ -1032,9 +1172,15 @@ Page({
         "searchDate.keywords":options.keywrods
       })
     }
-    //首页工厂招工跳转传入的工种id
-    if(options.id) {
-      wx.setStorageSync('typeId', options.id)
+    //判断是否有搜索内容
+    if(this.data.searchDate.keywords){
+      this.setData({
+        showdeletekey:true
+      })
+    }else {
+      this.setData({
+        showdeletekey:false
+      })
     }
     this.initFirstFcInfo();
     this.initSearchHistory();
@@ -1047,6 +1193,7 @@ Page({
     this.initUserLocation();
     this.initFooterData();
     this.checkIsInvite(options);
+    this.initNeedData()
   },
   /**
    * 生命周期函数--监听页面初次渲染完成
@@ -1059,10 +1206,11 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    let isShowFindWork = app.globalData.isShowFindWork;
     let pages = getCurrentPages();
     let index = pages.length - 1
     let path = pages[index].__displayReporter.showReferpagepath
+    let authStatus = this.data.authStatus;//如果值“to_auth”,不需要设置隐藏快速找活名片时间
     path = path.slice(0, -5)
     //如果置顶或者发布回来 需要刷新数据
     if(path == "pages/clients-looking-for-work/finding-name-card/findingnamecard"){
@@ -1073,7 +1221,26 @@ Page({
       })
       this.doRequestAction(false)
     }
-  
+    // 如果页面是来自于招工详情且有快速找活名片
+    // 返回的时候设置当天不再展示快速发布找活名片
+    if (path == "pages/detail/info/info") {
+      if (!authStatus) {
+        if (isShowFindWork) {
+          let myDate = new Date();
+          // 当前时间戳
+          let currentTime = myDate.getTime();
+          // 到期时间戳（23:59:59）
+          let dueDate = (new Date(new Date().toLocaleDateString())).getTime() +  (24 * 60 * 60 * 1000 - 1);
+          // let dueDate = currentTime +  (2 * 60 * 1000 - 1);
+          // 存入缓存
+          let FindWorkTime = {currentTime:currentTime,dueDate:dueDate};
+          wx.setStorageSync("FindWorkTime",FindWorkTime);
+          app.globalData.isShowFindWork = false;
+        }
+      }else{
+        this.setData({authStatus: ''})
+      }
+    }
     this.getUserUuid();
     this.initUserinfo();
     footerjs.initMsgNum(this);
@@ -1140,5 +1307,4 @@ Page({
       imageUrl: commonShareImg
     }
   }
-  
 })

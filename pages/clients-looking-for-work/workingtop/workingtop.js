@@ -57,7 +57,9 @@ Page({
     //首次置顶的时候显示置顶到期时间输入框内容
     firstEndTime:"",
     // 保存请求返回的可选择置顶天数
-    reqDays: []
+    reqDays: [],
+    //选择置顶城市 提示文案
+    toTopTip:''
   },
   //用户首次置顶或者置顶到期点击‘选择置顶范围’跳转到置顶区域选择界面
   jumpstickyrule() {
@@ -69,9 +71,10 @@ Page({
     let max_city = that.data.max_city;
     let specialids = JSON.stringify(that.data.special_ids);
     app.globalData.judge = ""
+    let toTopTip = that.data.toTopTip;
     //跳转到置顶范围选择界面并携带省城市信息
     wx.navigateTo({
-      url: `/pages/clients-looking-for-work/distruction/distruction?max_province=${max_province}&max_city=${max_city}&specialids=${specialids}`,
+      url: `/pages/clients-looking-for-work/distruction/distruction?max_province=${max_province}&max_city=${max_city}&specialids=${specialids}&toTopTip=${toTopTip}`,
     })
   },
   callThisPhone: function (e) {
@@ -87,8 +90,9 @@ Page({
     let specialids = JSON.stringify(that.data.special_ids);
     let max_province = that.data.max_province;
     let max_city = that.data.max_city;
+    let toTopTip = that.data.toTopTip;
     wx.navigateTo({
-      url: `/pages/clients-looking-for-work/distruction/distruction?max_province=${max_province}&max_city=${max_city}&allpro= ${allpro}&allcity= ${allcity}&specialids=${specialids}&allall=${allall}`,
+      url: `/pages/clients-looking-for-work/distruction/distruction?max_province=${max_province}&max_city=${max_city}&allpro= ${allpro}&allcity= ${allcity}&specialids=${specialids}&allall=${allall}&toTopTip=${toTopTip}`,
     })
   },
   // 登录授权
@@ -161,7 +165,8 @@ Page({
       that.setData({
         daynumber: daynumber,
         day: detail,
-        firstEndTime: time
+        firstEndTime: time,
+        detailprice: detail
       });
     // 计算出需要的积分
       let price = (numcity * (that.data.areaCitycrum.length) + numprovice * (that.data.areaProcrum.length) + numAll * (that.data.areaAllcrum.length)) * detail
@@ -176,13 +181,12 @@ Page({
       that.setData({
         allprice: price
       });
-      if (istop == 1 && this.data.allprice > this.data.max_price) {
+      if (istop != 2  && this.data.allprice > this.data.max_price) {
         let price = (numcity * (that.data.areaCitycrum.length) + numprovice * (that.data.areaProcrum.length) + numAll * (that.data.areaAllcrum.length)) * that.data.detailprice;
         that.setData({
           point: price
         });
-      } 
-      else if (istop == 2 || hastop == 0) {
+      } else if (istop == 2 || hastop == 0) {
         let price = (numcity * (that.data.areaCitycrum.length) + numprovice * (that.data.areaProcrum.length) + numAll * (that.data.areaAllcrum.length)) * that.data.day
         that.setData({
           point: price
@@ -459,14 +463,13 @@ Page({
   },
   // 初始化已经置顶的置顶数据
   gettopareas(options) {
-    // debugger
     let that = this;
-    let topdata = JSON.parse(options.topdata)
+    let topdata = options.topdata
     let area = wx.getStorageSync('areadata')
     let hastop= topdata.has_top;
     let istop = topdata.is_top;
     // 判断是否是置顶中的修改置顶
-    if (hastop && istop == 1) {
+    if (hastop && istop != 2) {
       //判断是否有授权登录用户信息
       let userInfo = wx.getStorageSync("userInfo");
       //没有用户信息直接返回
@@ -712,6 +715,11 @@ Page({
          let index = null
          // 默认天数对应的index下标
          index = days.findIndex((value)=> value == day );
+         if (hastop == '0' || istop == '2') {
+           that.setData({
+            detailprice: day
+           })
+         }
           that.setData({
             //最大省份数
             max_province: max_province,
@@ -744,7 +752,9 @@ Page({
             defaultDayIndex: index,
             rangevalue: index,
             // 保存请求返回的可选择置顶天数
-            reqDays: days
+            reqDays: days,
+            //最多可选城市提示文案
+            toTopTip:mydata.data.max_number_tips,
           })
           // 初始化选择置顶天数的下拉列表
           that.getMoreDay()
@@ -855,20 +865,43 @@ Page({
     })
     this.getCityNum()
   },
-  // 获取找活列表url传过来的值并保存到data中
-  getNewId(options) {
-    if (options.hasOwnProperty("topdata")) {
+  // 获取找活列表url传过来的值并保存到data中 //是否是会员中心过来的
+  getNewId(options,is_ucnter) {
+    if(is_ucnter){
+      let _options = {
+        topdata:{
+          has_top:0,
+          is_top:options.data.is_top,
+        },
+        defaultTop:options.data.default_top_area
+      }
       this.setData({
-        topdata: JSON.parse(options.topdata)
+        topdata:_options.topdata,
+        defaultTop:options.data.default_top_area
       })
+      // 初始化置顶城市与置顶天数
+      this.initTopData()
+      app.activeRefresh()
+       // 初始化置顶状态下的数据
+      this.gettopareas(_options)
+    }else{
+      if (options.hasOwnProperty("topdata")) {
+        this.setData({
+          topdata: JSON.parse(options.topdata)
+        })
+      }
+      if (options.hasOwnProperty("defaulttop")) {
+        this.setData({
+          defaultTop: JSON.parse(options.defaulttop)
+        })
+      }
+      let _options = {
+        topdata:JSON.parse(options.topdata),
+        defaultTop:options.defaultTop
+      }
+      // 初始化置顶状态下的数据
+      this.gettopareas(_options)
     }
-    if (options.hasOwnProperty("defaulttop")) {
-      this.setData({
-        defaultTop: JSON.parse(options.defaulttop)
-      })
-    }
-    // 初始化置顶状态下的数据
-    this.gettopareas(options)
   },
   getAllpoint(timeItem) {
     // 积分单价差
@@ -897,7 +930,7 @@ Page({
 
   // 修改添加置顶城市的价格计算
   getCityNum() {
-    if (this.data.topdata.is_top == 1) {
+    if (this.data.topdata.has_top &&　this.data.topdata.is_top != 2) {
       let all = this.data.areaCitycrum.length * this.data.city_integral + this.data.areaProcrum.length * this.data.province_integral + this.data.country_integral * this.data.areaAllcrum.length;
       console.log("all",all)
       if (all > this.data.max_price) {
@@ -937,11 +970,14 @@ Page({
       let mydata = app.arrDeepCopy(areadata)  
       let areaData = mydata.data
       if ( areaId == 0) {
+        // 获取配置信息和计算初次置顶数据
+        this.getdetail()
         return
       }else{
         // 遍历找到符合条件的区域信息
         for (let i = 0; i < areaData.length; i++) {
           let item = areaData[i]
+          // if(areaId == 0) areaId = 1
           for (let j = 0; j < item.length; j++) {
             if (item[j].id == areaId) {
               let areaArry = item[j];
@@ -972,6 +1008,7 @@ Page({
           alllength:defaultTop.length,
         })
       }
+      // 获取配置信息和计算初次置顶数据
       this.getdetail()
       return false
     }
@@ -980,7 +1017,9 @@ Page({
     app.getAreaData(this, function(data) {
       let resdata = app.arrDeepCopy(data)
       let areaData = resdata
-      if ( areaId == 0) {
+      if(areaId == 0) areaId = 1
+      if (areaId == 0) {
+        _this.getdetail()
         return
       }else{
         // 遍历找到符合条件的区域信息
@@ -1016,6 +1055,7 @@ Page({
           alllength:defaultTop.length,
         })
       }
+      // 获取配置信息和计算初次置顶数据
       _this.getdetail()
     });
   },
@@ -1027,18 +1067,41 @@ Page({
   //如果时初次置顶或者置顶到期，置顶地区默认找活名片地区
   if(hastop == 0 || istop == 2){
     this.getDefaultArea(defaultTop)
-  } else {
+  }else{
+    // 获取配置信息和计算初次置顶数据
     this.getdetail()
   }
  },
+ //会员中心进入置顶页面请求置顶参数
+resumeTopInfo() {
+  let userInfo = wx.getStorageSync("userInfo");
+  let _this = this
+  app.appRequestAction({
+    url: 'resumes/get-resume-top-info/',
+    way: 'POST',
+    params:userInfo,
+    mask: true,
+    success: function(res) {
+      if(res.data.errcode == 'ok'){
+        _this.getNewId(res.data,1)
+      }
+    }
+  })
+},
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-    // 获取url带过来的数据
-    this.getNewId(options)
+    //判断是否是会员中心跳转过来 
+    if(!options.topdata){
+      this.resumeTopInfo()
+    }else {
+      // 获取url带过来的数据
+      this.getNewId(options)
+    }
     // 初始化置顶城市与置顶天数
     this.initTopData()
+    app.activeRefresh()
   },
 
   /**

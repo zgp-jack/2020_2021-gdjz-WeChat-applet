@@ -569,6 +569,7 @@
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
+  word-break: break-all;
 }
 
 .bottomlist {
@@ -582,8 +583,8 @@
 }
 
 .imgheas {
-  width: 30rpx;
-  height: 30rpx;
+  width: 24rpx;
+  height: 36rpx;
 }
 
 .boomcom {

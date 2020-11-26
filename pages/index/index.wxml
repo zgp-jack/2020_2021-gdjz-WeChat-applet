@@ -9,7 +9,8 @@
 <!-- 搜索头部 -->
 <view class="lists-header">
     <input placeholder="找优质工作，就上鱼泡网" bindconfirm="userTapSearch"  confirm-type="search" bindfocus='bindInputFocus' bindinput='bindKeyInput' bindtap="closeAllSelect" value='{{ searchDate.keywords }}' data-goSearch="1" disabled/>
-    <text bindtap="userTapSearch">搜索</text>
+    <image wx:if="{{showdeletekey}}" bindtap="deletekey" src="{{ delImg }}" mode="aspectFit"></image>
+    <text bindtap="userTapSearch">{{showdeletekey ? "取消":"搜索"}}</text>
 </view>
 
 <!-- 历史记录 -->
@@ -234,3 +235,6 @@
 
 
 <downapptips id='downapptips'></downapptips>
+
+<!-- 刷新成功提示框 -->
+<promptbox id="promptbox" showTitle="{{ tipBox.showTitle }}" showIcon="{{ tipBox.showIcon }}" content="{{ tipBox.content }}" showCancel="{{ tipBox.showCancel }}" icon="{{ successIcon }}" confirmText="{{ tipBox.confirmText }}" cancelColor="{{ tipBox.cancelColor }}" bind:confirm="confirm" bind:cancel="cancel"></promptbox>

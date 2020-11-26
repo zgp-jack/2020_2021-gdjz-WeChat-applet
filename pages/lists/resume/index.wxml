@@ -21,11 +21,11 @@
               <image wx:if="{{item.certificate == 1}}" src="{{authentication}}"></image>
 
             </view>
-            <view class="listsboxagetwo" wx:if="{{item.gender != '0'}}">
+            <view class="listsboxagetwo"  wx:if="{{item.nation || item.prof_degree}}">
               <text class="listsboxnation" wx:if="{{item.nation}}">{{item.nation}}</text>
               <text wx:if="{{item.prof_degree}}">{{item.prof_degree}}</text>
             </view>
-            <view class="listsboxagetwot" wx:if="{{item.gender == '0'}}">
+            <view class="listsboxagetwot" wx:if="{{!item.nation && !item.prof_degree}}">
               <text wx:for="{{item.tags}}" wx:key="{{index}}">{{item.label_name}}</text>
             </view>
           </view>
@@ -51,8 +51,7 @@
           </view>
         </view>
         <view class="listsboxlocaltwo">
-          <text class="listsboxtime" wx:if="{{item.time}}">{{item.login_time}}</text>
-                  <!-- <text wx:if="{{item.prof_degree}}">{{item.prof_degree}}</text> -->
+          <text class="listsboxtime" wx:if="{{item.active_time_str}}">{{item.active_time_str}}</text>
         </view>
       </view>
     </view>

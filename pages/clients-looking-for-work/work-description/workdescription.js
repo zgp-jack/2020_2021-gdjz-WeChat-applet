@@ -365,7 +365,7 @@ Page({
       success: function (res) {
         console.log(res.data)
         if (res.data.errcode == 200) {
-
+          app.activeRefresh()
           _this.subscribeToNew(res)
         } else {
           wx.showModal({
@@ -506,6 +506,10 @@ Page({
       }
     }
     that.judgecommit(introdetail)
+  },
+  // 调起键盘后再点击picker导致picker在软键盘下面，软键盘并没有收起问题。
+  hidekeyboard: function () {
+    wx.hideKeyboard()
   },
   /**
    * 生命周期函数--监听页面加载

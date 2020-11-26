@@ -53,6 +53,10 @@ Page({
     checkonef:"",
     note:""
   },
+  // 点击隐藏键盘
+  hiddenKeyBoard: function () {
+    wx.hideKeyboard()
+  },
   // getbirth() {
   //   var date = new Date();
   //   var year = date.getFullYear();
@@ -675,7 +679,7 @@ Page({
 
         if (res.data.errcode == 200) {
           that.subscribeToNews(res)
-
+          app.activeRefresh()
         } else {
           remain.remain({
             tips: res.data.errmsg

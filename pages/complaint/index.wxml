@@ -1,0 +1,30 @@
+<!--pages/complaint/index.wxml-->
+<view class="yupao-common-container">
+    <view class="yupao-feedback">
+        <view class="feedback-tip">恶意投诉会被封号，请如实填写</view>
+        <view class="feedback-body">
+            <view class="feedback-container">
+                <view class="box-feelback">
+                    <view class="title">投诉内容<text class="title-subhead">（必填）</text></view>
+                    <textarea id="texra" class="{{isIos?'iostextarea':''}}" placeholder-class="placeholder-textarea" maxlength="300" placeholder="请如实填写投诉内容" bindinput="userEnterContent" value='{{ content }}'></textarea>
+                    <view class="texralengh">{{texralength}}/{{textLength}}</view>
+                </view>
+                <view class="feedback-imgs clearfix">
+                    <view class="title">上传凭证<text class="title-subhead">（可不传）</text></view>
+                    <view class="feedback-img-item" data-type="0" data-index='{{ index }}' bindtap='userUploadsImg'wx:for="{{ imglists }}" wx:key="{{ index }}">
+                        <view class='feedback-imgbox'>
+                            <image src='{{ item }}'></image>
+                            <view class="feedback-del-thisimg flex-row" catchtap="delThisImg" data-index="{{ index }}">
+                                <image src='{{ delImg }}' mode="aspectFit"></image>
+                            </view>
+                        </view>
+                    </view>
+                    <view class="feedback-img-itema feedback-uploadtips" data-type="1" bindtap='userUploadsImg' wx:if="{{ imgs.length < maxLen }}">
+                        <image src='{{ uploadImg }}'></image>
+                    </view>
+                </view>
+            </view>
+        </view>
+        <view class="feedback-submit-btn {{ texralength === 0?'disabled':'' }}" bindtap="{{ texralength === 0?'':'userSubmitComlaint'}}">提交</view>
+    </view>
+</view>

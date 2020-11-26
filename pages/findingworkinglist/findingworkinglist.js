@@ -107,18 +107,18 @@ Page({
     historyList: [],
     joingroup: [],
     resumeText:"",
-    hasSortFlag:1,
-    hasTime: 1,
     hasTop: 1,
-    lastSortFlagPos: 0,
-    lastTimePos: 0,
-    lastNormalPos: 0,
+    lastRefreshTimePos:0,
     // pageStatus是goback的话需要刷新当前页面状态
     pageStatus:'',
     // pageStatus是goback的话需要刷新当前页面信息ID
     pageId: '',
     //没有数据时 按钮显示状态
-    isNullStatus:""
+    isNullStatus:"",
+    //搜索框清除按钮
+    delImg: app.globalData.apiImgUrl + "new-published-close-icon.png",
+    //是否显示清除按钮
+    showdeletekey:false,
   },
   // 根据发布方式不同发布招工：未登录或者“fast_add_job”是快速发布，“ordinary_add_job”是普通发布。
   publishJob:function () {
@@ -141,6 +141,7 @@ Page({
     this.setData({
       showListsInfo: (this.data.showListsInfo == type) ? 0 : type
     })
+    app.activeRefresh()
   },
   jumprull() {
     wx.navigateTo({
@@ -165,12 +166,8 @@ Page({
       "searchDate.page": 1,
       "searchDate.sort": _id,
       recommended: text,
-      hasSortFlag:1,
-      hasTime: 1,
       hasTop: 1,
-      lastSortFlagPos: 0,
-      lastTimePos: 0,
-      lastNormalPos: 0
+      lastRefreshTimePos: 0,
     })
     _this.doRequestAction(false);
     _this.closeAllSelect();
@@ -195,12 +192,8 @@ Page({
       "searchDate.page": 1,
       "searchDate.type": _id,
       teamText: teamText,
-      hasSortFlag:1,
-      hasTime: 1,
       hasTop: 1,
-      lastSortFlagPos: 0,
-      lastTimePos: 0,
-      lastNormalPos: 0
+      lastRefreshTimePos:0,
     })
     _this.doRequestAction(false);
     _this.closeAllSelect();
@@ -245,12 +238,8 @@ Page({
           "searchDate.page": 1,
           "searchDate.area_id": _id,
           areaText: areaText,
-          hasSortFlag:1,
-          hasTime: 1,
           hasTop: 1,
-          lastSortFlagPos: 0,
-          lastTimePos: 0,
-          lastNormalPos: 0
+          lastRefreshTimePos:0,
         })
         wx.setStorageSync("areaId", _id)
         wx.setStorageSync("areaText", areaText)
@@ -267,12 +256,8 @@ Page({
               "searchDate.page": 1,
               "searchDate.area_id": _id,
               areaText: areaText,
-              hasSortFlag:1,
-              hasTime: 1,
               hasTop: 1,
-              lastSortFlagPos: 0,
-              lastTimePos: 0,
-              lastNormalPos: 0
+              lastRefreshTimePos:0,
             })
             _this.doRequestAction(false);
             _this.closeAllSelect();
@@ -296,12 +281,8 @@ Page({
       areaText: areaText,
       "searchDate.page": 1,
       "searchDate.area_id": id,
-      hasSortFlag:1,
-      hasTime: 1,
       hasTop: 1,
-      lastSortFlagPos: 0,
-      lastTimePos: 0,
-      lastNormalPos: 0
+      lastRefreshTimePos:0,
     })
     let mydata = { "name": areaText, "id": id, ad_name: pname };
     if (id != pid) {
@@ -317,6 +298,7 @@ Page({
   },
 
   closeAllSelect: function (e) {
+    app.activeRefresh()
     this.setData({
       showListsInfo: 0
     })
@@ -358,12 +340,8 @@ Page({
           "searchDate.page": 1,
           "searchDate.occupations": _typeid,
           typeText: typeText,
-          hasSortFlag:1,
-          hasTime: 1,
           hasTop: 1,
-          lastSortFlagPos: 0,
-          lastTimePos: 0,
-          lastNormalPos: 0
+          lastRefreshTimePos:0,
         })
         _this.returnTop();
         _this.doRequestAction(false);
@@ -378,12 +356,8 @@ Page({
               "searchDate.page": 1,
               "searchDate.occupations": _typeid,
               typeText: typeText,
-              hasSortFlag:1,
-              hasTime: 1,
               hasTop: 1,
-              lastSortFlagPos: 0,
-              lastTimePos: 0,
-              lastNormalPos: 0
+              lastRefreshTimePos:0,
             })
             _this.returnTop();
             _this.doRequestAction(false);
@@ -407,12 +381,8 @@ Page({
       isFirstRequest: true,
       "searchDate.page": 1,
       "searchDate.occupations": id,
-      hasSortFlag:1,
-      hasTime: 1,
       hasTop: 1,
-      lastSortFlagPos: 0,
-      lastTimePos: 0,
-      lastNormalPos: 0
+      lastRefreshTimePos:0,
     })
     this.returnTop();
     this.doRequestAction(false);
@@ -429,19 +399,11 @@ Page({
     let _this = this;
     if (_this.data.isload) return false;
     let userLocation = wx.getStorageSync("userLocation");
-    let has_sort_flag= _this.data.hasSortFlag;
-    let has_time = _this.data.hasTime;
     let has_top= _this.data.hasTop;
-    let last_sort_flag_pos= _this.data.lastSortFlagPos;
-    let last_time_pos= _this.data.lastTimePos;
-    let last_normal_pos= _this.data.lastNormalPos || 0;
+    let last_refresh_time_pos = _this.data.lastRefreshTimePos;
     let params = {
-      has_sort_flag,
-      has_time,
       has_top,
-      last_sort_flag_pos,
-      last_time_pos,
-      last_normal_pos,
+      last_refresh_time_pos
     }
     let locate = {}
     Object.assign(locate, params,  _this.data.searchDate, {
@@ -459,6 +421,7 @@ Page({
       success: function (res) {
         callback ? callback() : ""
         if (res.data.errcode == "ok") {
+          app.activeRefresh()
           _this.setData({ isload: false })
           wx.hideLoading();
           let mydata = res.data.data.list;
@@ -472,12 +435,8 @@ Page({
             _this.setData({
               "searchDate.page": (parseInt(_page) + 1),
               lists: _append ? _data : mydata,
-              hasSortFlag: res.data.data.has_sort_flag || 1,
-              hasTime: res.data.data.has_time || 1,
               hasTop: res.data.data.has_top || 1,
-              lastSortFlagPos: res.data.data.last_sort_flag_pos || 0,
-              lastTimePos: res.data.data.last_time_pos || 0,
-              lastNormalPos: res.data.data.last_normal_pos || 0,
+              lastRefreshTimePos: res.data.data.last_refresh_time_pos || 0,
             })
             // _this.setData({
             //   information: _data
@@ -637,6 +596,10 @@ Page({
 
   //用户点击搜索
   userTapSearch: function () {
+    if(this.data.showdeletekey){
+      //清除搜索内容 重新请求搜索接口
+      this.deletekey()
+    }else {
       let text = this.data.searchDate.keywords;
       if (text) {
         let his = wx.getStorageSync("searchHistory")
@@ -667,15 +630,12 @@ Page({
       this.setData({
         "searchDate.page": 1,
         showHistoryList: false,
-        hasSortFlag:1,
-        hasTime: 1,
         hasTop: 1,
-        lastSortFlagPos: 0,
-        lastTimePos: 0,
-        lastNormalPos: 0,
+        lastRefreshTimePos: 0,
       })
       this.doRequestAction(false);
       this.initSearchHistory();
+    }
   },
   returnTop: function () {
     //this.setData({ scrollTop: 0 })
@@ -832,12 +792,33 @@ Page({
   // },
   
   //如果加载工种信息的时候如果只有一条数据，那么选择工种默认选择那一条数据
-  getFilterData: function () {
+  getFilterData: function (options) {
     let _this = this;
     console.log(app.globalData)
     this.setData({
       fillterArea: areas.getAreaArr
     })
+    if (options.hasOwnProperty("aid")) {
+      let aid = options.aid
+      let area = areas.getAreaArr;
+      let areaName = '';
+      area.forEach(areaItem => {
+        if (areaItem.has_children) {
+          let index = areaItem.children.findIndex((item=>item.id == aid))
+          if (index != -1) {
+            areaName = areaItem.children[index].name
+          }
+        }else{
+          if (areaItem.id == aid) {
+            areaName = areaItem.name;
+          }
+        }
+      });
+      if (areaName) {
+        wx.setStorageSync('areaId', aid);
+        wx.setStorageSync('areaText', areaName)
+      }
+    }
     if (app.globalData.allTypes) {
       _this.setData({ fillterType: app.globalData.allTypes.classTree, fillterTeam: app.globalData.allTypes.staffTree, fillterNewest: app.globalData.allTypes.resumeListType });
       if (_this.data.fillterType.length == 1) _this.setData({ typeText: _this.data.fillterType[0].name })
@@ -950,6 +931,54 @@ Page({
       url: '/pages/published/recruit/list',
     })
   },
+  //删除搜索内容
+  deletekey:function () {
+    this.setData({
+      "searchDate.keywords":"",
+      showdeletekey:false,
+      "searchDate.page": 1,
+      showHistoryList: false,
+      hasTop: 1,
+      lastRefreshTimePos: 0,
+    })
+    //重新请求搜索接口
+    this.returnTop();
+    this.doRequestAction(false)
+  },
+  //根据id匹配工种
+  matchingType(id){
+    let toptype = parseInt(id)//置顶成功后传过来的工种
+      let type = app.globalData.allTypes.classTree//所有工种
+      let _typeid = null,_typetext = null;//匹配到的工种
+      //匹配工种
+      for(let i=0;i<type.length;i++) {//循环一级列表
+        if(type[i].id == toptype){
+          _typeid = type[i].id
+          _typetext = type[i].name
+          //置顶成功后的 工种 存入缓存
+          wx.setStorageSync('typeTextgr', _typetext)
+          wx.setStorageSync('typeIdgr', _typeid)
+          return
+        }
+      }
+      if(!_typetext){//如果一级列表没有匹配到
+        for(let n=0;n<type.length;n++) {//循环二级列表
+          if(type[n].has_children == 1){
+            for(let m = 0;m < type[n].children.length;m++){
+              if(type[n].children[m].id == toptype){
+                _typeid = type[n].children[m].id
+                _typetext = type[n].children[m].name
+                //置顶成功后的 工种 存入缓存
+                wx.setStorageSync('typeTextgr', _typetext)
+                wx.setStorageSync('typeIdgr', _typeid)
+                return
+              }
+            }
+          }
+        }
+      }
+      
+  },
   onLoad(options) {
     var isEmpty = app.isEmpty(options.keywrods)
     if(!isEmpty){
@@ -957,9 +986,33 @@ Page({
         "searchDate.keywords":options.keywrods
       })
     }
+    //判断是否有搜索内容
+    if(this.data.searchDate.keywords){
+      this.setData({
+        showdeletekey:true
+      })
+    }else {
+      this.setData({
+        showdeletekey:false
+      })
+    }
+    //置顶的第一个城市 存入缓存中
+    if(options.frstCity){
+      let frstCity = JSON.parse(options.frstCity)
+      wx.setStorageSync('areaId',frstCity.id)
+      wx.setStorageSync('areaText', frstCity.name)
+    }
+    //置顶成功后的工种id
+    if(options.topOcc && options.topOcc !== "0"){
+      //根据工种id匹配工种名称
+      this.matchingType(options.topOcc)
+    }
+    if (options.hasOwnProperty("cid")) {
+      this.matchingType(options.cid)
+    }
     this.initSearchHistory();
     this.initUserShareTimes();
-    this.getFilterData();
+    this.getFilterData(options);
     this.valiFilterProvince();
     this.initFooterData();
     this.initNeedData();
@@ -986,12 +1039,8 @@ Page({
       this.setData({
         "searchDate.page": 1,
         showHistoryList: false,
-        hasSortFlag:1,
-        hasTime: 1,
         hasTop: 1,
-        lastSortFlagPos: 0,
-        lastTimePos: 0,
-        lastNormalPos: 0
+        lastRefreshTimePos: 0,
       })
       this.doRequestAction(false)
     }
@@ -1034,12 +1083,8 @@ Page({
     this.setData({
       "searchDate.page": 1,
       showHistoryList: false,
-      hasSortFlag:1,
-      hasTime: 1,
       hasTop: 1,
-      lastSortFlagPos: 0,
-      lastTimePos: 0,
-      lastNormalPos: 0
+      lastRefreshTimePos: 0,
     })
     this.doRequestAction(false, function () {
 

@@ -66,42 +66,62 @@
                 <view class='yupao-common-list-title-left'>项目名称</view>
                 <view class='yupao-common-list-title-right'>{{ info.title }}</view>
             </view>
+            <view class='yupao-common-lists-item clearfix' wx:if="{{info.user_name}}">
+                <view class='yupao-common-list-title-left'>联系人</view>
+                <view class='yupao-common-list-title-right'>{{ info.user_name }}</view>
+            </view>
             <view class='yupao-common-lists-item clearfix'>
                 <view class='yupao-common-list-left'>电话</view>
-                <view class='yupao-common-list-right'>{{ info.user_mobile }} 
+                <view class='yupao-common-list-right widthLine'>{{ info.user_mobile }} 
                 <block wx:if="{{ info.is_end == '2' && showend }}"><text>({{ info.end_word }})</text></block>
-                <block wx:if="{{ info.is_end != '2' && errcode != 'paid_recruit'}}">({{ info.user_name }})<text class='list-call-phone'   bindtap='callThisPhone'  data-phone="{{ info.user_mobile }}">拨打</text></block>
+                <block wx:if="{{ (info.show_complain && (errcode !='deleted') ) || (info.show_complain == 1 && info.hide_complain != 1) }}"><text class='list-call-phone list-complain-phone viewRight' data-id="{{ info.id }}"  data-type="{{ info.type }}" bindtap='complainInfo'>投诉</text></block>
+                <block wx:if="{{ info.is_end != '2' && errcode != 'paid_recruit'}}"><text class='list-call-phone viewRight'   bindtap='callThisPhone'  data-phone="{{ info.user_mobile }}">拨打</text></block>
                 <!-- <block wx:if="{{ info.show_complain == 0 && showend && info.hide_complain != 1}}"><text class="info-complained">已投诉</text></block> -->
-                <block wx:if="{{ (info.show_complain && (errcode !='deleted') ) || (info.show_complain === 1 && info.hide_complain != 1) }}"><text class='list-call-phone list-complain-phone' data-id="{{ info.id }}"  data-type="{{ info.type }}" bindtap='complainInfo'>投诉</text></block>
                 </view>
+            </view>
+            <view class='yupao-common-lists-item clearfix' wx:if="{{info.address}}">
+                <view class='yupao-common-list-left'>项目地址</view>
+                <view class='yupao-common-list-right newColor widthLine'>{{info.address}}</view>
             </view>
             <view class='yupao-common-lists-item clearfix' wx:if="{{ info.type =='resume' }}">
                 <view class='yupao-common-list-left'>规模</view>
-                <view class='yupao-common-list-right'>{{ info.team_composition_words }}</view>
+                <view class='yupao-common-list-right widthLine'>{{ info.team_composition_words }}</view>
             </view>
             <view class='yupao-common-lists-item clearfix' wx:if="{{ info.type =='resume' }}">
-                <view class='yupao-common-list-left'>接活省份</view>
-                <view class='yupao-common-list-right'><block wx:for="{{ info.showProvinceList }}" wx:key="index">{{ item }}</block>  </view>
+                <view class='yupao-common-list-left'>接活省份</view> 
+                <view class='yupao-common-list-right widthLine'><block wx:for="{{ info.showProvinceList }}" wx:key="index">{{ item }}</block>  </view>
             </view>
             <view class='yupao-common-lists-item clearfix' wx:if="{{ info.classifyName.length != 0 }}">
-                <view class='yupao-common-list-left'><text wx:for="{{ info.classifyName }}"  wx:key="index">[{{ item }}]</text></view>
+                <view class='yupao-common-list-left'>工种</view> 
+                <view class='yupao-common-list-right newColor widthLine'>
+                    <text wx:for="{{ info.classifyName }}"  wx:key="index">{{ item }}<text wx:if="{{info.classifyName.length > 1 && index !== info.classifyName.length-1}}">、</text>
+                    </text>
+                </view>
             </view>
-            <view class='yupao-common-lists-text'>{{ info.detail }}</view>
+            <view class='yupao-common-lists-item clearfix' wx:if="{{ info.detail }}">
+                <view class='yupao-common-list-left'>项目描述</view> 
+                <view class='yupao-common-list-right newColor widthLine'>{{info.detail}}</view>
+            </view>
+            <!-- <view class='yupao-common-lists-text'>{{ info.detail }}</view> -->
         </view>
     </view>
 </view>
-<!-- 积分消耗记录“查看找活信息” -->
 
+<!-- 积分消耗记录“查看找活信息” -->
 <view class='expend-showthis-record' wx:if="{{ showWork }}">
     <view class='expend-show-recruit'>
         <view class='expend-close-record' bindtap='closeThisRerocd'></view>
         <view class='yupao-common-list'>
-            <view class='yupao-common-lists-item clearfix'>{{ info.user_name }}的找活名片</view>
+            <view class='yupao-common-lists-item clearfix bluecolor'>{{ info.user_name }}</view>
             <view class='yupao-common-lists-item clearfix'>
                 <view class='yupao-common-list-left'>电话</view>
-                <view class='yupao-common-list-right'>{{ info.user_mobile }} <block wx:if="{{ info.is_end == '2' }}">({{ info.end_word }})</block><block wx:else="{{ info.is_end == '2' }}">({{ info.user_name }})
-                <text class='list-call-phone' wx:if="{{ info.is_end == '1' }}"   bindtap='callThisPhone'  data-phone="{{ info.user_mobile }}">拨打</text></block>
-                <block><text class="{{info.show_complain==1?'list-call-phone list-complain-phone':'list-call-phone info-complained'}}" data-id="{{ info.id }}" data-complain="{{ info.show_complain }}" data-type="{{ info.type }}" bindtap="complainInfo" wx-if="{{ info.show_complain }}">{{info.show_complain===1?"投诉":"已投诉"}}</text></block>
+                <view class='yupao-common-list-right widthLine'>{{ info.user_mobile }} <block wx:if="{{ info.is_end == '2' }}">({{ info.end_word }})</block>
+                    <block>
+                        <text class="{{info.show_complain==1?'list-call-phone list-complain-phone':'list-call-phone info-complained'}} viewRight" data-id="{{ info.id }}" data-complain="{{ info.show_complain }}" data-type="{{ info.type }}" bindtap="complainInfo" wx:if="{{info.show_complain==1}}">{{info.show_complain===1?"投诉":"已投诉"}}</text>
+                    </block>
+                    <block>
+                        <text class='list-call-phone viewRight' wx:if="{{ info.is_end == '1' }}"   bindtap='callThisPhone'  data-phone="{{ info.user_mobile }}">拨打</text>
+                    </block>
                 </view>
             </view>
             <view class='yupao-common-lists-item clearfix' wx:if="{{ info.type =='resume' }}">
@@ -113,9 +133,14 @@
                 <view class='yupao-common-list-right'><block wx:for="{{ info.showProvinceList }}" wx:key="index">{{ item }}</block>  </view>
             </view>
             <view class='yupao-common-lists-item clearfix'>
-                <view class='yupao-common-list-left'><text wx:for="{{ info.classifyName }}"  wx:key="index">{{ item }}</text></view>
+                <view class='yupao-common-list-left'>工种</view>
+                <view class='yupao-common-list-right newColor widthLine'><text wx:for="{{ info.classifyName }}"  wx:key="index">{{ item }}<text wx:if="{{info.classifyName.length > 1 && index !== info.classifyName.length-1}}">、</text></text></view>
             </view>
-            <view class='yupao-common-lists-text'>{{ info.detail }}</view>
+            <view class='yupao-common-lists-item clearfix'>
+                <view class='yupao-common-list-left'>自我介绍</view>
+                <view class='yupao-common-list-right newColor widthLine'>{{ info.detail }}</view>
+            </view>
+            <!-- <view class='yupao-common-lists-text'>{{ info.detail }}</view> -->
         </view>
     </view>
 </view>
@@ -125,15 +150,14 @@
     <view class='expend-show-recruit'>
         <view class='expend-close-record' bindtap='closeThisRerocd'></view>
         <view class='yupao-common-list'>
-            <view class='yupao-common-lists-item clearfix' wx-if = "{{ topDetail.topType =='top_resume' }}">{{ topDetail.title }}</view>
+            <view class='yupao-common-lists-item clearfix bluecolor' wx-if = "{{ topDetail.topType =='top_resume' }}">{{ topDetail.title }}</view>
             <view class='yupao-common-lists-item clearfix' wx-if = "{{ topDetail.topType =='top_job' }}">
                 <view class='yupao-common-list-title-left'>项目名称</view>
                 <view class='yupao-common-list-title-right'>{{ topDetail.title }}</view>
             </view>
             <view class='yupao-common-lists-item clearfix'>
                 <view class='yupao-common-list-left'>置顶范围</view>
-                <view class='yupao-common-list-right' wx:for = "{{topDetail.address}}" wx:key="index" >[{{ item }}]
-                </view>
+                <text class='yupao-common-list-right' wx:for = "{{topDetail.address}}" wx:key="index" space="nbsp"> {{ item }}</text>
             </view>
             <view class='yupao-common-lists-item clearfix'>
                 <view class='yupao-common-list-left'>置顶开始时间</view>
@@ -147,41 +171,29 @@
             </view>
             <view class='yupao-common-lists-item clearfix'>
                 <view class='yupao-common-list-left'>电话</view>
-                <view class='yupao-common-list-right'>{{ topDetail.tel }} 
+                <view class='yupao-common-list-right'>{{ topDetail.tel }}
                 </view>
             </view>
-            <view class='yupao-common-lists-item clearfix'>
-                <view class='yupao-common-list-left'>工种</view>
-                <view class='yupao-common-list-right' wx:for = "{{topDetail.occupations}}" wx:key="index" >[{{ item }}]
-                </view>
-            </view>
+            <!-- <view class='yupao-common-lists-item clearfix' wx-if = "{{ topDetail.topType =='top_resume' && topDetail.address}}">
+                <view class='yupao-common-list-left'>项目地址</view>
+                <view class='yupao-common-list-right'>{{topDetail.address}}</view>
+            </view> -->
             <view class='yupao-common-lists-item clearfix' wx:if="{{ topDetail.topType =='top_resume' }}">
                 <view class='yupao-common-list-left'>规模</view>
                 <view class='yupao-common-list-right'>{{ topDetail.team_type }}</view>
             </view>
-            <view class='yupao-common-lists-text'>{{ topDetail.detail }}</view>
+            <view class='yupao-common-lists-item clearfix'>
+                <view class='yupao-common-list-left'>工种</view>
+                <view class='yupao-common-list-right  widthLine'>
+                    <text class="newColor" wx:for = "{{topDetail.occupations}}" wx:key="index">{{ item }}<text wx:if="{{topDetail.occupations.length > 1 && index !== topDetail.occupations.length-1}}">、</text></text>
+                </view>
+            </view>
+            <view class='yupao-common-lists-item clearfix' wx:if="{{ topDetail.detail }}">
+                <view class='yupao-common-list-left'>项目描述</view>
+                <view class='yupao-common-list-right newColor widthLine'>{{ topDetail.detail }}</view>
+            </view>
         </view>
     </view>
 </view>
-
-
-
-
-
-<!-- 投诉填写界面 -->
-<view class='yupao-common-enterbox flex-row' catchtouchmove="move" wx:if="{{ showComplain }}">
-    <view class='yupao-common-enter'>
-        <text class='yupao-enter-title'>投诉信息</text>
-        <text class='yupao-enter-tips'>请输入投诉内容</text>
-        <view class='yupao-enter-body'>
-            <textarea class='yupao-enter-wrap yupao-enter-textarea' fixed='true'  placeholder='{{complaincontent}}' bindinput='userEnterComplain' maxlength='200' value='{{ complainInfo }}'></textarea>
-        </view>
-        <view class='yupao-enter-footer clearfix'>
-            <text bindtap='userCancleComplain'>取消</text>
-            <text bindtap='userComplaintAction'>确定</text>
-        </view>
-    </view>
-</view>
-
 
 <!-- showRecord  listsboxdetailo -->

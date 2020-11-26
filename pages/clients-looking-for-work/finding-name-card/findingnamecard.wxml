@@ -1,7 +1,8 @@
-<view style="padding-bottom:120rpx;">
+<view style="padding-bottom:120rpx;" wx:if="{{showFindCard}}">
   <view class="cardcolore">
     <view class="findingnamecard">
-      请完善以下信息
+      <text class="left-text">请完善以下信息</text>
+      <view class="sharecard" wx:if="{{showtopone}}" bindtap="preview">预览/分享名片</view>
     </view>
   </view>
   <!-- {{selectShow&&"select_img_rotate"}} show_tips editor -->
@@ -356,7 +357,7 @@
         </text>
             </view>
             <view class="cardsixfive">
-              <image wx:for="{{item.image}}" wx:if="{{ index < 3 }}" data-url="{{ item }}" catchtap="previewImage" wx:key="{{index}}" src="{{item}}" data-index="{{ pindex }}"></image>
+              <image wx:for="{{item.image}}" data-url="{{ item }}" catchtap="previewImage" wx:key="{{index}}" src="{{item}}" data-index="{{ pindex }}"></image>
             </view>
             <view wx:if="{{item.check == 0}}" class="resson">
               未通过原因：{{item.fail_case}}
@@ -484,8 +485,7 @@
         提示
       </view>
       <view class="textdetail">
-       您的
-        <text class="popup">{{popup}}</text>未审核通过，请修改后再进行提交
+       您的<text class="popup">{{popup}}</text>审核未通过，请修改后再提交！
       </view>
       <view class="buttontext" catchtap="vertify">
         确定
@@ -524,11 +524,18 @@
   </view>
 </view>
 
-<view class="cardnine" wx:if="{{showtopone}}">
+<!-- <view class="cardnine" wx:if="{{showtopone}}">
   <button class="cardnineone" bindtap="preview">
     <image src="{{pvw}}"></image> 预览</button>
-  <button class="cardnineone" open-type='share'>
+  <button bindtap="activeRefresh" class="cardnineone" open-type='share'>
     <image src="{{participation}}"></image>分享</button>
+</view> -->
+<view class="cardnine" wx:if="{{showtopone}}">
+  <view class="cardnineone">
+    <view>提升活跃度，让更多老板看到你的名片</view>
+    <view>{{ refreshText }}(消耗{{ integral }}积分/次)</view>
+  </view>
+  <button class="cardnineone" bindtap="refreshCard">刷新名片</button>
 </view>
 
 <!-- oworkotextonetu checkthree -- selectTap projectlength>
@@ -543,3 +550,13 @@
   <button class='userauth-btn userauth-sure-btn' open-type="getUserInfo" bindgetuserinfo='bindGetUserInfo'>微信授权登录</button>
   <button class='userauth-btn  userauth-back-btn' bindtap='returnPrevPage'>返回上一页</button>
 </view>
+
+<!-- 快速发布找活名片 -->
+<publishfindwork id="pulishfindwork" fastInfo="{{ fastInfo }}" bind:refreshPage="refreshPage" bind:cancelPublish = "cancelPublish"></publishfindwork>
+
+
+<!-- 发布招工成功提示框 -->
+<issueok  id="publishtip" tipdata="{{ { type:'publishFindWork'} }}" topdata="{{ resume_top }}" defalutTop="{{ default_top_area }}"/>
+
+<!-- 刷新成功提示框 -->
+<promptbox id="promptbox" showTitle="{{ false }}" content="{{ tipContent }}" showIcon="{{ true }}" showCancel="{{ false }}" icon="{{ successIcon }}"></promptbox>
