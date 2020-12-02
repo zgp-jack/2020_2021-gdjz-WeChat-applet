@@ -1,0 +1,19 @@
+<view class="city-picker" wx:if="{{showPicker}}">
+	<view class="picker-content">
+		<view class="picker-head">
+			<text class="cancel-text">取消</text>
+			<text class="picker-head-title">期望工作地（最多选3个）</text>
+			<text class="confirm-text">确定</text>
+		</view>
+		<view class="picker-body">
+			<view class="picker-body-left">
+				<view bindtap="selectProvince" wx:for="{{ areaData }}" wx:key="id">
+					<text>{{item.name}}</text>
+				</view>
+			</view>
+			<view class="picker-body-right">
+				<view><text>四川</text></view>
+			</view>
+		</view>
+	</view>
+</view>

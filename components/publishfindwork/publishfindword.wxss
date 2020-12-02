@@ -129,7 +129,7 @@
   font-size: 28rpx;
 }
 .issue-box-worktype-tip{
-  color: #ff9600;
+  color: #FF9600;
   padding-left: 20rpx;
 }
 .issue-box .issue-input{

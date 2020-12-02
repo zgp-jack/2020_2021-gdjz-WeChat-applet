@@ -85,7 +85,8 @@ Component({
   methods: {
     // 点击期望地区隐藏软键盘
     hideKeyboard: function () {
-      wx.hideKeyboard()
+      // wx.hideKeyboard()
+      this.selectComponent("#cityPicker").show();
     },
     onfocus: function() {
       this.setData({isScroll: false})

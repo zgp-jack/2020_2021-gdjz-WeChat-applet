@@ -4,21 +4,23 @@
     <scroll-view scroll-y="{{isScroll}}" class="publish-scroll">
     <view class="{{ fastInfo.type === 2?'issue-title-no':'issue-title-box' }}">
       <image src="{{ titleImage }}" class="issue-title-iamge"></image>
-      <view class="issue-title" wx:if="{{ fastInfo.type === 3 || !fastInfo.type}}">你是否要在<text class="issue-title-info">{{ fastInfo.city_txt?fastInfo.city_txt:fastInfo.province_txt }}</text>找<text class="issue-title-info">{{ fastInfo.occ_txt }}</text>工作</view>
+      <!-- <view class="issue-title" wx:if="{{ fastInfo.type === 3 || !fastInfo.type}}">你是否要在<text class="issue-title-info">{{ fastInfo.city_txt?fastInfo.city_txt:fastInfo.province_txt }}</text>找<text class="issue-title-info">{{ fastInfo.occ_txt }}</text>工作</view> -->
+      <view class="issue-title">发布找活名片，让老板主动来找您！</view>
       <view class="issue-title" wx:if="{{ fastInfo.type === 2 }}">请完善以下信息</view>
       <image src="{{ titleImage }}" class="issue-title-iamge"></image>
     </view>
     <view class="issue-contactbox">
       <view class="issue-box" bindtap="hideKeyboard">
         <text>期望地区：</text>
-        <picker  mode="multiSelector" 
+        <!-- <picker  mode="multiSelector" 
           bindchange="bindPickerChange" 
           bindcolumnchange="bindMultiPickerColumnChange" 
           value="{{ index }}" 
           range="{{ areapicker }}" 
           range-key="name">
           <input placeholder="请选择招工城市" disabled class="issue-input" value="{{ areatext }}"></input>
-        </picker>
+        </picker> -->
+        <input placeholder="请选择招工城市" disabled class="issue-input" value="{{ areatext }}"></input>
       </view>
       <view class="issue-box-worktype">
         <view class="issue-box" bindtap="showWorkTypePicker"> 
@@ -46,6 +48,8 @@
     </view>
     <view class="issue-cloose-tip" wx:if="{{ !fastInfo.type }}" bindtap="clooseTip">暂不提示</view>
   <!-- </view> -->
+  <!-- 选择城市组件 -->
+  <cityPicker id="cityPicker"></cityPicker>
   <!-- 工种选择 -->
   <view class="common-picker-container {{ showPicker ? '':'common-picker-none' }}">
   <view class="common-picker-box">
@@ -60,7 +64,7 @@
           data-index="{{ index }}"
           class="common-picker-item {{ pindex === index ? 'common-picker-item-active':'' }}" 
           wx:for="{{ classifies }}" 
-          wx:key="item.id"
+          wx:key="id"
           bindtap="userCheckPindex"
         >{{ item.name }}<text wx:if="{{ item.num }}">{{ item.num }}</text></view>
       </view>
@@ -71,7 +75,7 @@
           data-checked="{{ item.checked }}"
           data-name="{{ item.name }}"
           wx:for="{{ childClassifies }}" 
-          wx:key="item.id"
+          wx:key="id"
           bindtap="userCheckWorkType"
         >{{ item.name }}</view>
       </view>

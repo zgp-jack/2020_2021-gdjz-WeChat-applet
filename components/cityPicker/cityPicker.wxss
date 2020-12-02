@@ -1,0 +1,74 @@
+.city-picker {
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background-color: rgba(0, 0, 0, 0.65);
+	z-index: 1000;
+	transition: .3s;
+}
+
+.picker-content {
+	height: 710rpx;
+	width: 100%;
+	position: fixed;
+	z-index: 1001;
+	background: #fff;
+	bottom: 0;
+	display: flex;
+	flex-direction: column;
+}
+
+.picker-head {
+	width: 100%;
+	height: 107rpx;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	font-size: 30rpx;
+	padding: 0 42rpx;
+	font-weight: 400;
+}
+
+.cancel-text {
+	color: #777;
+}
+
+.picker-head-title {
+	color: #2C2B2B;
+	font-weight: 500;
+}
+
+.confirm-text {
+	color: #0099FF;
+}
+
+.picker-body {
+	flex: 1;
+	width: 100%;
+	display: flex;
+}
+
+.picker-body-left {
+	flex: 1;
+	height: 100%;
+	overflow-y: auto;
+}
+
+.picker-body-right {
+	flex: 1;
+	height: 100%;
+	overflow-y: auto;
+	background: #F7F7F7;
+}
+
+.picker-body-left view,
+.picker-body-right view {
+	height: 100rpx;
+	line-height: 100rpx;
+	border-top: 1px solid #EDEDED;
+	padding-left: 60rpx;
+	font-size: 28rpx;
+	font-weight: 400;
+}
