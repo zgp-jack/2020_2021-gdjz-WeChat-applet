@@ -58,7 +58,7 @@ page{
 .yupao-common-container{
     position: relative;
     width: 100%;
-    padding-bottom: 150rpx;
+    padding-bottom: 220rpx;
 }
 .yupao-common-nofooter{
     padding-bottom: 0;
@@ -767,6 +767,28 @@ page{
       color: #999;
       text-align: center;
       margin-top: 20rpx;
+  }
+
+  /* 发布-浮动按钮 */
+  .issue-button-view {
+      width: 454rpx;
+      height: 70rpx;
+      position: fixed;
+      bottom: 150rpx;
+      left: 50%;
+      margin-left: -227rpx;
+      display: flex;
+      justify-content: space-between;
+  }
+  .button-zh,.button-zg {
+      width: 200rpx;
+      height: 100%;
+      line-height: 70rpx;
+      color: #fff;
+      background: #0099FF;
+      border-radius: 35rpx;
+      text-align: center;
+      font-size: 26rpx;
   }
 
   

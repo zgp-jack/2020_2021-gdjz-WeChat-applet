@@ -589,7 +589,10 @@ Page({
   homeActiveRefresh:function() {
     app.activeRefresh()
   },
-
+  //
+  toIssueRecruit(){
+    app.initJobView()
+  },
   /**
      * 生命周期函数--监听页面初次渲染完成
      */

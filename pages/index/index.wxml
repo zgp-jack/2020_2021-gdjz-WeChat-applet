@@ -198,7 +198,7 @@
     <image src='{{ fastIssueImg }}'></image>
 </view>
 
-<view class='bottompublishbtn'  bindtap='publishJob' data-url="/pages/publish/recruit/recruit"    data-type='0' >发布招工</view>
+<!-- <view class='bottompublishbtn'  bindtap='publishJob' data-url="/pages/publish/recruit/recruit"    data-type='0' >发布招工</view> -->
 
 <!-- <button class='bottompublishbtn' open-type="getPhoneNumber"  bindgetphonenumber="getPhoneNumber" >获取手机号</button> -->
 
@@ -238,3 +238,10 @@
 
 <!-- 刷新成功提示框 -->
 <promptbox id="promptbox" showTitle="{{ tipBox.showTitle }}" showIcon="{{ tipBox.showIcon }}" content="{{ tipBox.content }}" showCancel="{{ tipBox.showCancel }}" icon="{{ successIcon }}" confirmText="{{ tipBox.confirmText }}" cancelColor="{{ tipBox.cancelColor }}" bind:confirm="confirm" bind:cancel="cancel"></promptbox>
+
+
+<!-- 发布招工-找活 浮动按钮 -->
+<view class="issue-button-view">
+  <view class="button-zg" bindtap='publishJob' data-url="/pages/publish/recruit/recruit" data-type='0'>发布招工</view>
+  <view class="button-zh" bindtap="valiUserCard">发布找活</view>
+</view>

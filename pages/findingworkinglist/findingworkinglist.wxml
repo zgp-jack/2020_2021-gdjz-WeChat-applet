@@ -204,7 +204,7 @@
   <image src='{{ fixedAdImg }}'></image>
 </view> -->
 
-<view class='bottompublishbtn' bindtap='valiUserCard'>{{resumeText}}</view>
+<!-- <view class='bottompublishbtn' bindtap='valiUserCard'>{{resumeText}}</view> -->
 
 <view class='fixed-get-integral'  bindtap='jumprull'>
         <image src='{{ rullIntegral }}'></image>
@@ -223,3 +223,10 @@
 <template is="footer" data="{{ footerImgs,publishActive,showPublishBox,footerActive,resumeText }}" />
 
 <downapptips id='downapptips'></downapptips>
+
+
+<!-- 发布招工-找活 浮动按钮 -->
+<view class="issue-button-view">
+  <view class="button-zh" bindtap='valiUserCard'>发布找活</view>
+  <view class="button-zg"  bindtap="toIssueRecruit">发布招工</view>
+</view>
