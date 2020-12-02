@@ -556,6 +556,7 @@ Component({
             that.triggerEvent("refreshPage",{ defalutTop: defalutTop })
             that.show()
             app.globalData.isShowFindWork = false;
+            that.completes()
           }else{
             wx.showModal({
               title: '温馨提示',
@@ -628,6 +629,24 @@ Component({
                   _this.initCodeTime();
               }
           }
+      })
+    },
+    completes() {
+      app.appRequestAction({
+        url: 'resumes/exists/',
+        way: 'POST',
+        mask: true,
+        success: function(res){
+          let mydata = res.data
+          if(mydata.errcode == "ok"){
+            app.globalData.publishFindWork.resumeText = mydata.data.title
+            app.globalData.publishFindWork.loginAfter = true
+          }
+        },
+        fail:()=>{
+          app.showMyTips('网络错误，加载失败！')
+          app.globalData.resumeText = "发布找活"
+        }
       })
     },
   },
