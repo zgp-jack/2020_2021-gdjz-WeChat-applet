@@ -5,12 +5,13 @@ Component({
 	},
 	data:{
 		showPicker:false,
-		areaData:[]
+		areaData:[],
+		cityData:[]
 	},
 	methods: {
 		show:function () {
 			this.setData({
-				showPicker:true
+				showPicker:!this.data.showPicker
 			})
 		},
 		getAreaData() {
@@ -30,13 +31,17 @@ Component({
 			this.setData({
 				areaData:newAreaData
 			})
+			this.handleProvinceClick(0)
 			console.log(this.data.areaData)
 		},
-		handleClick() {
-
+		//切换省的时候 Provincei=省的index
+		handleProvinceClick(Provincei) {
+			this.setData({
+				cityData:this.data.areaData[Provincei].children
+			})
 		},
-		selectProvince() {
-			
+		selectProvince(e) {
+			this.handleProvinceClick(e.currentTarget.dataset.provincei)
 		}
 	},
 	lifetimes: {
