@@ -7,7 +7,7 @@
 		</view>
 		<view class="picker-body">
 			<view class="picker-body-left">
-				<view bindtap="selectProvince" wx:for="{{ areaData }}"  data-provincei="{{index}}" wx:key="id">
+				<view bindtap="selectProvince" class="{{item.ischeck ? 'check':''}}" wx:for="{{ areaData }}"  data-provincei="{{index}}" wx:key="id">
 					<text>{{item.name}}</text>
 				</view>
 			</view>
