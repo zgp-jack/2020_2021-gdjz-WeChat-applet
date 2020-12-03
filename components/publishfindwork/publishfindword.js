@@ -483,7 +483,6 @@ Component({
     },
     // 点击确认发布，发布找活信息
     publishFindWork: function () {
-      this.setData({reqStatus: false})
       // 用户信息
       let userInfo = wx.getStorageSync('userInfo')
       // 没有用户信息直接返回
@@ -548,6 +547,7 @@ Component({
       wx.showLoading({ title: '发布中', mask: true })
       // 发送请求参数
       let params = { province: parseInt(pid), city: parseInt(id), tel: parseInt(phone), code: parseInt(code), occupations: occupations, userId, token, tokenTime }
+      this.setData({reqStatus: false})
       app.appRequestAction({
         url: 'resumes/add-fast-resume/',
         way: 'POST',
