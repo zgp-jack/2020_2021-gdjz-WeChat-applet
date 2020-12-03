@@ -77,6 +77,7 @@ Component({
     code:'',
     selectimg: app.globalData.apiImgUrl + 'select.png',
     isScroll:false,
+    reqStatus: true
   },
 
   /**
@@ -482,6 +483,7 @@ Component({
     },
     // 点击确认发布，发布找活信息
     publishFindWork: function () {
+      this.setData({reqStatus: false})
       // 用户信息
       let userInfo = wx.getStorageSync('userInfo')
       // 没有用户信息直接返回
@@ -543,6 +545,7 @@ Component({
           return false
         }
       }
+      wx.showLoading({ title: '发布中', mask: true })
       // 发送请求参数
       let params = { province: parseInt(pid), city: parseInt(id), tel: parseInt(phone), code: parseInt(code), occupations: occupations, userId, token, tokenTime }
       app.appRequestAction({
@@ -551,13 +554,16 @@ Component({
         params: params,
         success: function (res) {
           let mydata = res.data;
+          wx.hideLoading();
           if (mydata.errcode === "ok") {
             let defalutTop = mydata.data.default_top_area;
             that.triggerEvent("refreshPage",{ defalutTop: defalutTop })
             that.show()
             app.globalData.isShowFindWork = false;
             that.completes()
+            that.setData({reqStatus: true})
           }else{
+            that.setData({reqStatus: true})
             wx.showModal({
               title: '温馨提示',
               content: mydata.errmsg,
@@ -566,6 +572,14 @@ Component({
                }
             })
           }
+        },
+        fail: function (err) {
+          that.setData({reqStatus: true})
+          wx.hideLoading();
+          wx.showToast({
+            title: '网络出错！',
+            icon: "none"
+          })
         }
       })
     },

@@ -42,7 +42,7 @@
     </view>
     <view class="issue-footer-button {{ !fastInfo.type?'':'issue-footer-button-margin' }}">
       <button class="issue-code-btn" plain="true" bindtap="closeFindWork">取消</button>
-      <button class="issue-code-btn" type="primary" bindtap="publishFindWork">确认发布</button>
+      <button class="issue-code-btn" type="primary" bindtap="{{reqStatus?'publishFindWork':''}}">确认发布</button>
     </view>
     <view class="issue-cloose-tip" wx:if="{{ !fastInfo.type }}" bindtap="clooseTip">暂不提示</view>
   <!-- </view> -->
