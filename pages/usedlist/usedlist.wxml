@@ -150,3 +150,8 @@
 <!-- <template is="app"  data="{{ bgHeight,btnWidth,wordsHeight,wordsWidth,shadeWidth,winWidth,winHeight,notimesW,userShareData,userShareTime }}" /> -->
 
 <downapptips id='downapptips'></downapptips>
+
+<!-- 发布二手交易 浮动按钮 -->
+<view class="issue-button-view">
+  <view class="button-zh" bindtap="jumpThisLink" data-url="/pages/publish/used/used">发布二手交易</view>
+</view>

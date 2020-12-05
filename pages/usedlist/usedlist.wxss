@@ -1,2 +1,5 @@
 @import "../index/index.wxss";
 .yupao-usedlist-container{height: calc(100% - 180rpx)}
+.issue-button-view {
+	justify-content: center;
+}

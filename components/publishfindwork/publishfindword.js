@@ -77,6 +77,7 @@ Component({
     code:'',
     selectimg: app.globalData.apiImgUrl + 'select.png',
     isScroll:false,
+    reqStatus: true
   },
 
   /**
@@ -543,20 +544,26 @@ Component({
           return false
         }
       }
+      wx.showLoading({ title: '发布中', mask: true })
       // 发送请求参数
       let params = { province: parseInt(pid), city: parseInt(id), tel: parseInt(phone), code: parseInt(code), occupations: occupations, userId, token, tokenTime }
+      this.setData({reqStatus: false})
       app.appRequestAction({
         url: 'resumes/add-fast-resume/',
         way: 'POST',
         params: params,
         success: function (res) {
           let mydata = res.data;
+          wx.hideLoading();
           if (mydata.errcode === "ok") {
             let defalutTop = mydata.data.default_top_area;
             that.triggerEvent("refreshPage",{ defalutTop: defalutTop })
             that.show()
             app.globalData.isShowFindWork = false;
+            that.completes()
+            that.setData({reqStatus: true})
           }else{
+            that.setData({reqStatus: true})
             wx.showModal({
               title: '温馨提示',
               content: mydata.errmsg,
@@ -565,6 +572,14 @@ Component({
                }
             })
           }
+        },
+        fail: function (err) {
+          that.setData({reqStatus: true})
+          wx.hideLoading();
+          wx.showToast({
+            title: '网络出错！',
+            icon: "none"
+          })
         }
       })
     },
@@ -628,6 +643,24 @@ Component({
                   _this.initCodeTime();
               }
           }
+      })
+    },
+    completes() {
+      app.appRequestAction({
+        url: 'resumes/exists/',
+        way: 'POST',
+        mask: true,
+        success: function(res){
+          let mydata = res.data
+          if(mydata.errcode == "ok"){
+            app.globalData.publishFindWork.resumeText = mydata.data.title
+            app.globalData.publishFindWork.loginAfter = true
+          }
+        },
+        fail:()=>{
+          app.showMyTips('网络错误，加载失败！')
+          app.globalData.resumeText = "发布找活"
+        }
       })
     },
   },

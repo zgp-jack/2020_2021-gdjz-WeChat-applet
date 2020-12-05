@@ -1059,6 +1059,10 @@ Page({
     this.initPageData()
   },
 
+  toIssueRecruit() {
+    app.initJobView()
+  },
+
   /**
    * 生命周期函数--监听页面隐藏
    */

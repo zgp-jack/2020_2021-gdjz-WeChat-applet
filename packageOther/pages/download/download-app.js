@@ -11,9 +11,7 @@ Page({
         downloadBtn: app.globalData.apiImgUrl + 'ws/download-btn.png',
         downloadText: app.globalData.apiImgUrl + 'ws/download-text.png',
         downloadIcon: app.globalData.apiImgUrl + 'ws/download-icon.png',
-        iosDownUrl: 'https://sj.qq.com/myapp/detail.htm?apkName=io.dcloud.H576E6CC7',
-        AndroidDownUrl: 'https://cdn.yupao.com/apk/yupao_v2.6.1_202010231_mini.apk',
-        downLoadUrl: ''
+        downLoadUrl: 'http://m.yupao.com/download/?type=mini'
     },
     copyAppUrl: function () {
         wx.setClipboardData({
@@ -32,18 +30,7 @@ Page({
     /**
      * 生命周期函数--监听页面加载
      */
-    onLoad: function (options) {
-        const info = wx.getSystemInfoSync()
-        if (info.platform === 'android') {
-            this.setData({
-                downLoadUrl: this.data.AndroidDownUrl
-            })
-        } else {
-            this.setData({
-                downLoadUrl: this.data.iosDownUrl
-            })
-        }
-    },
+    onLoad: function (options) {},
 
     /**
      * 生命周期函数--监听页面初次渲染完成
