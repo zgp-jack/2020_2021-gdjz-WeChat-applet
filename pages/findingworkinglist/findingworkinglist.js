@@ -821,11 +821,19 @@ Page({
     }
     if (app.globalData.allTypes) {
       _this.setData({ fillterType: app.globalData.allTypes.classTree, fillterTeam: app.globalData.allTypes.staffTree, fillterNewest: app.globalData.allTypes.resumeListType });
-      if (_this.data.fillterType.length == 1) _this.setData({ typeText: _this.data.fillterType[0].name })
+      if (_this.data.fillterType.length == 1) {
+        _this.setData({ typeText: _this.data.fillterType[0].name })
+        wx.setStorageSync('typeTextgr',_this.data.fillterType[0].name)
+        wx.setStorageSync('typeIdgr',_this.data.fillterType[0].id)
+      }
     } else {
       app.getListsAllType(function (_data) {
         _this.setData({ fillterType: _data.classTree, fillterTeam: _data.staffTree, fillterNewest: _data.resumeListType })
-        if (_this.data.fillterType.length == 1) _this.setData({ typeText: _this.data.fillterType[0].name })
+        if (_this.data.fillterType.length == 1) {
+          _this.setData({ typeText: _this.data.fillterType[0].name })
+          wx.setStorageSync('typeTextgr',_this.data.fillterType[0].name)
+          wx.setStorageSync('typeIdgr',_this.data.fillterType[0].id)
+        }
       });
     }
   },

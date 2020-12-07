@@ -921,12 +921,20 @@ Page({
     if (app.globalData.allTypes) {
       _this.setData({ fillterType: app.globalData.allTypes.classTree, fillterListType: app.globalData.allTypes.jobListType, "searchDate.joblisttype": joblisttype ? joblisttype : app.globalData.allTypes.jobListType[0].type, listText: joblistname ? joblistname : app.globalData.allTypes.jobListType[0].name });
       _this.initSelectedData(id,app.globalData.allTypes)
-      if (_this.data.fillterType.length == 1) _this.setData({ typeText: _this.data.fillterType[0].name })
+      if (_this.data.fillterType.length == 1) {
+        _this.setData({ typeText: _this.data.fillterType[0].name })
+        wx.setStorageSync('typeText',_this.data.fillterType[0].name)
+        wx.setStorageSync('typeId', _this.data.fillterType[0].id)
+      }
     } else {
       app.getListsAllType(function (_data) {
         _this.setData({ fillterType: _data.classTree, fillterListType: _data.jobListType, "searchDate.joblisttype":joblisttype ? joblisttype : _data.jobListType[0].type, listText: joblistname ? joblistname :_data.jobListType[0].name })
         _this.initSelectedData(id,_data)
-        if (_this.data.fillterType.length == 1) _this.setData({ typeText: _this.data.fillterType[0].name })
+        if (_this.data.fillterType.length == 1) {
+          _this.setData({ typeText: _this.data.fillterType[0].name })
+          wx.setStorageSync('typeText',_this.data.fillterType[0].name)
+          wx.setStorageSync('typeId', _this.data.fillterType[0].id)
+        }
       });
     }
   },
