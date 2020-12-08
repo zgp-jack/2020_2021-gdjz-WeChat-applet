@@ -613,6 +613,12 @@
         {
           "name": "下载页",
           "pathName": "packageOther/pages/download/download-app",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/integral/expend/expend",
+          "pathName": "pages/integral/expend/expend",
           "scene": null
         }
       ]

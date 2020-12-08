@@ -266,12 +266,12 @@ Page({
      */
     getjump(options){
       
-      if (options.hasOwnProperty("expend")){
+      if (options.hasOwnProperty("expend") && options.expend){
         this.setData({
           expend: options.expend
         })
       }
-      if (options.hasOwnProperty("date")){
+      if (options.hasOwnProperty("date") && options.date){
         this.setData({
           datestr: options.date
         })
@@ -315,10 +315,19 @@ Page({
           })
           if(datestr){
             let arr = datestr.split('-')
-            that.setData({
-              birthday: arr[0] + "年" + arr[1]+"月",
-              birthdaysubmit: datestr,
-            })
+            let year = arr[0]
+            let month = arr[1]
+            if (year !== 'undefined' &&　month !== 'undefined') {
+              that.setData({
+                birthday: arr[0] + "年" + arr[1]+"月",
+                birthdaysubmit: datestr,
+              })
+            }else{
+              that.setData({
+                birthday: mydata.data.default.y + "年" + mydata.data.default.m+"月",
+                birthdaysubmit: mydata.data.default.y + "-" + mydata.data.default.m,
+              })
+            }
           }else{
             that.setData({
               birthday: mydata.data.default.y + "年" + mydata.data.default.m+"月",
