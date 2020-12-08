@@ -49,7 +49,7 @@
     <view class="issue-cloose-tip" wx:if="{{ !fastInfo.type }}" bindtap="clooseTip">暂不提示</view>
   <!-- </view> -->
   <!-- 选择城市组件 -->
-  <cityPicker id="cityPicker"></cityPicker>
+  <cityPicker id="cityPicker" bindcityComfirm="cityComfirm"></cityPicker>
   <!-- 工种选择 -->
   <view class="common-picker-container {{ showPicker ? '':'common-picker-none' }}">
   <view class="common-picker-box">

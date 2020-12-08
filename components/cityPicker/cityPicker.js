@@ -39,6 +39,10 @@ Component({
 		},
 		//切换省的时候 Provincei=省的index
 		handleProvinceClick(Provincei) {
+			let _city = this.data.areaData[Provincei].children
+			if(_city[0].name !== '全部'){
+				_city.unshift({name:'全部'})
+			}
 			this.setData({
 				//用省的index找出对应的市
 				cityData: this.data.areaData[Provincei].children
@@ -67,14 +71,40 @@ Component({
 			let cityi = e.currentTarget.dataset.cityi
 			let _cityData = this.data.cityData
 			let _areaData = this.data.areaData
-			if(_cityData[cityi].ischeck){
-				//选中市
-				_cityData[cityi].ischeck = false
+			
+
+			//如果选了全部 吧下面所有的市全都加上选中状态
+			if(cityi == 0){
+				if(_cityData[0].ischeck){
+					for(let c = 0 ;c < _cityData.length; c++){
+						_cityData[c].ischeck = false
+					}
+				}else {
+					for(let c = 0 ;c < _cityData.length; c++){
+						_cityData[c].ischeck = true
+					}
+				}
 			}else {
-				//取消选中
-				_cityData[cityi].ischeck = true
+					//判断是否选中
+				if(_cityData[cityi].ischeck){
+						//判断是否已经全选
+						if(_cityData[0].ischeck){
+							//已经全选 就取消所有全选
+							for(let c = 0 ;c < _cityData.length; c++){
+								_cityData[c].ischeck = false
+							}
+						}
+					//取消
+					_cityData[cityi].ischeck = false
+					//取消全部选中
+					_cityData[0].ischeck = false
+				}else {
+					//选中
+					_cityData[cityi].ischeck = true	
+				}
 			}
-			//找出省下面有没有市被选中
+
+			//找出省下面有没有市被选中  省上面显示红点
 			for(let i = 0;i<_areaData.length;i++){
 				if(_areaData[i].children){
 					//选中的数量
@@ -100,7 +130,9 @@ Component({
 				cityData:_cityData,
 				areaData:_areaData
 			})
-			console.log(this.data.areaData)
+		},
+		comfirmCity(e) {
+			this.triggerEvent('cityComfirm',{params:this.data.areaData})
 		}
 	},
 	lifetimes: {

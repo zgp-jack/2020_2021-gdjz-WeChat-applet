@@ -631,7 +631,11 @@ Component({
           }
       })
     },
+    cityComfirm(e){
+      debugger
+    },
   },
+  
   /**
     * 生命周期函数
     */
