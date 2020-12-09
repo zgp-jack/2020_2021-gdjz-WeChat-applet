@@ -84,7 +84,12 @@ Component({
     //选中期望地区的name
     selectCityName: '',
     //选中期望地区的id
-    selectCityId: ''
+    selectCityId: '',
+
+
+
+
+    initIssueData:{}
   },
 
   /**
@@ -537,6 +542,7 @@ Component({
       let phone = this.data.telPhone;
       let code = this.data.code;
       let _selectCityId = this.data.selectCityId.join(',')
+      
       // 验证是否有选择城市
       if (!id && _selectCityId) {
         wx.showModal({
@@ -595,6 +601,7 @@ Component({
         token,
         tokenTime,
       }
+      debugger
       app.appRequestAction({
         url: 'resumes/add-fast-resume/',
         way: 'POST',
@@ -732,6 +739,54 @@ Component({
         selectCityId: _selectCityId
       })
     },
+    //初始化发布找活名片
+    initIssueResume() {
+      // 用户信息
+      let userInfo = wx.getStorageSync('userInfo')
+      let userId = userInfo.userId;
+      let token = userInfo.token;
+      let tokenTime = userInfo.tokenTime;
+      let params = {
+        userId,
+        token,
+        tokenTime
+      }
+      let _this = this
+      // app.appRequestAction({
+      //   url: 'resumes/fast-resume/',
+      //   way: 'POST',
+      //   params: params,
+      //   success: function (res) {
+          
+      //   }
+      // })
+
+      let _data = {
+        "job_id": "13767944",
+        "occ": "3",
+        "province_id": "26",
+        "city_id": "322",
+        "occ_txt": "架子工",
+        "province_txt": "四川",
+        "city_txt": "成都",
+        "provinces_txt": "成都",
+        "provinces_id": "322",
+        "tel": "14785698547",
+        "type": 3,
+        "occupation_tree": [
+          // 太长，省略
+        ]
+      }
+      let selectCityId = []
+      selectCityId.push(_data.provinces_id)
+      _this.setData({
+        selectCityName:_data.provinces_txt,
+        selectCityId:selectCityId,
+        initIssueData:_data
+      })
+
+
+    }
   },
 
   /**
@@ -739,7 +794,7 @@ Component({
    */
   lifetimes: {
     attached: function () {
-      console.log(this.data)
+      this.initIssueResume()
     },
   },
   /**
