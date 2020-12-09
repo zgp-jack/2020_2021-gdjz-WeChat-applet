@@ -20,7 +20,7 @@
           range-key="name">
           <input placeholder="请选择招工城市" disabled class="issue-input" value="{{ areatext }}"></input>
         </picker> -->
-        <input placeholder="请选择招工城市" disabled class="issue-input" value="{{ areatext }}"></input>
+        <input placeholder="请选择期望地区" disabled class="issue-input" value="{{ selectCityName }}"></input>
       </view>
       <view class="issue-box-worktype">
         <view class="issue-box" bindtap="showWorkTypePicker"> 
@@ -43,7 +43,7 @@
       </view>
     </view>
     <view class="issue-footer-button {{ !fastInfo.type?'':'issue-footer-button-margin' }}">
-      <button class="issue-code-btn" plain="true" bindtap="closeFindWork">取消</button>
+      <!-- <button class="issue-code-btn" plain="true" bindtap="closeFindWork">取消</button> -->
       <button class="issue-code-btn" type="primary" bindtap="publishFindWork">确认发布</button>
     </view>
     <view class="issue-cloose-tip" wx:if="{{ !fastInfo.type }}" bindtap="clooseTip">暂不提示</view>

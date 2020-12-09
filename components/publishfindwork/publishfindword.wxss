@@ -166,7 +166,8 @@
   font-weight: normal;
 }
 .issue-footer-button{
-  width: 90%;
+  width: 532rpx;
+  height: 88rpx;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -177,7 +178,7 @@
   margin-bottom: 450rpx;
 }
 .issue-code-btn{
-  width: 48%;
+  width: 100%;
 }
 .issue-footer-button button{
   margin: 0rpx;

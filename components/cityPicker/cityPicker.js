@@ -7,7 +7,7 @@ Component({
 		showPicker: false,
 		areaData: [],
 		cityData: [],
-		provincei:0
+		provincei: 0
 	},
 	methods: {
 		show: function () {
@@ -28,6 +28,7 @@ Component({
 				}
 			})
 		},
+		//初始化城市数据
 		initAeraData() {
 			let newAreaData = wx.getStorageSync('newAreaData')
 			//默认选中第一个省
@@ -40,8 +41,10 @@ Component({
 		//切换省的时候 Provincei=省的index
 		handleProvinceClick(Provincei) {
 			let _city = this.data.areaData[Provincei].children
-			if(_city[0].name !== '全部'){
-				_city.unshift({name:'全部'})
+			if (_city[0].name !== '全部') {
+				_city.unshift({
+					name: '全部'
+				})
 			}
 			this.setData({
 				//用省的index找出对应的市
@@ -55,71 +58,114 @@ Component({
 			let _areaData = this.data.areaData
 			for (let i = 0; i < _areaData.length; i++) {
 				//给点击的省添加选中的样式
-				if(i == e.currentTarget.dataset.provincei){
+				if (i == e.currentTarget.dataset.provincei) {
 					_areaData[i].current = true
-				}else{
+				} else {
 					_areaData[i].current = false
 				}
 			}
 			this.setData({
 				areaData: _areaData,
-				provincei:e.currentTarget.dataset.provincei
+				provincei: e.currentTarget.dataset.provincei
 			})
 		},
-		//选择市
+		//选择市 判断选中了几个
 		selectCity(e) {
 			let cityi = e.currentTarget.dataset.cityi
 			let _cityData = this.data.cityData
 			let _areaData = this.data.areaData
-			
 
-			//如果选了全部 吧下面所有的市全都加上选中状态
-			if(cityi == 0){
-				if(_cityData[0].ischeck){
-					for(let c = 0 ;c < _cityData.length; c++){
-						_cityData[c].ischeck = false
-					}
-				}else {
-					for(let c = 0 ;c < _cityData.length; c++){
-						_cityData[c].ischeck = true
-					}
-				}
-			}else {
-					//判断是否选中
-				if(_cityData[cityi].ischeck){
-						//判断是否已经全选
-						if(_cityData[0].ischeck){
-							//已经全选 就取消所有全选
-							for(let c = 0 ;c < _cityData.length; c++){
-								_cityData[c].ischeck = false
+			//判断已经选中了几个
+			//选中了几个省
+			let selectProvince = 0
+			//选中了几个市
+			let selectCity = 0
+			//判断是选中还是取消选中  如果是取消 不用给提示
+			if (!_cityData[cityi].ischeck) {
+				for (let q = 0; q < _areaData.length; q++) {
+					//如果选中了全部 就不循环下面的城市
+					if (_areaData[q].children[0].ischeck) {
+						selectProvince++
+					} else {
+						//循环下面的城市
+						for (let w = 0; w < _areaData[q].children.length; w++) {
+							if (_areaData[q].children[w].ischeck) {
+								selectCity++
 							}
 						}
-					//取消
-					_cityData[cityi].ischeck = false
-					//取消全部选中
-					_cityData[0].ischeck = false
-				}else {
-					//选中
-					_cityData[cityi].ischeck = true	
+					}
+				}
+				//如果已经选中了三个
+				if (selectProvince + selectCity >= 3) {
+					//当前点击的是否是全部
+					if (cityi == 0) { //如果点击全部 需要判断有没有选中下面的市 如果选中了市 需要把市取消 选中全部 而不是直接给提示
+						let dqcity = 0
+						//找出当前选中了几个市
+						for (let i = 0; i < _cityData.length; i++) {
+							if (_cityData[i].ischeck && i !== 0) {
+								dqcity++
+							}
+						}
+						//当前没有选中市
+						if (dqcity == 0) {
+							// wx.showToast({
+							// 	title: '最多选择三个',
+							// })
+							return
+						}
+						//点击的不是全部
+					} else { //如果点击市 需要判断是否选中了全部 如果选中了 需要把全部取消 选中市 而不是直接给提示
+						//没有选中全部
+						if (!_cityData[0].ischeck) {
+							// wx.showToast({
+							// 	title: '最多选择三个',
+							// })
+							return
+						}
+					}
 				}
 			}
 
+			//判断是否选中
+			if (_cityData[cityi].ischeck) {
+				//取消
+				_cityData[cityi].ischeck = false
+			} else {
+				if (cityi !== 0) {
+					//判断是否已经全选
+					if (_cityData[0].ischeck) {
+						_cityData[0].ischeck = false
+					}
+					//选中
+					_cityData[cityi].ischeck = true
+				} else {
+					if (!_cityData[0].ischeck) {
+						_cityData[0].ischeck = true
+						for (let e = 0; e < _cityData.length; e++) {
+							_cityData[e].ischeck = false
+							_cityData[0].ischeck = true
+						}
+					}
+				}
+
+			}
+
 			//找出省下面有没有市被选中  省上面显示红点
-			for(let i = 0;i<_areaData.length;i++){
-				if(_areaData[i].children){
+			for (let i = 0; i < _areaData.length; i++) {
+				if (_areaData[i].children) {
 					//选中的数量
 					let childrenCheckNum = 0
 					//已经循环了几个市
 					let childrenLen = 0
-					for(let n = 0;n < _areaData[i].children.length;n++){
-						childrenLen ++
-						if(_areaData[i].children[n].ischeck){
-							childrenCheckNum ++
+					for (let n = 0; n < _areaData[i].children.length; n++) {
+						childrenLen++
+						if (_areaData[i].children[n].ischeck) {
+							childrenCheckNum++
 							_areaData[i].childrenCheck = true
 						}
 						//如果市循环完了 还没有选中的市  说明这个省下面没有选中的市
-						if(childrenLen == _areaData[i].children.length){
-							if(childrenCheckNum == 0){
+						if (childrenLen == _areaData[i].children.length) {
+							if (childrenCheckNum == 0) {
 								_areaData[i].childrenCheck = false
 							}
 						}
@@ -127,13 +173,18 @@ Component({
 				}
 			}
 			this.setData({
-				cityData:_cityData,
-				areaData:_areaData
+				cityData: _cityData,
+				areaData: _areaData
 			})
 		},
+		//点击确定
 		comfirmCity(e) {
-			this.triggerEvent('cityComfirm',{params:this.data.areaData})
-		}
+			//通知父组件
+			this.triggerEvent('cityComfirm', {
+				params: this.data.areaData
+			})
+			this.show()
+		},
 	},
 	lifetimes: {
 		ready: function () {
