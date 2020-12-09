@@ -472,26 +472,16 @@ Page({
 
   initNeedData: function () {
     let _this = this;
-    let _mark = true;
-    let _wx = wx.getStorageSync("resume_wx");
     let userInfo = wx.getStorageSync("userInfo");
     this.setData({ userInfo: userInfo ? userInfo : false })
-    let _time = Date.parse(new Date());
-    if (_wx && _wx.expirTime) {
-      if (parseInt(_wx.expirTime) > _time) _mark = false;
-    }
     app.getNoticeInfo(userInfo,function(mydata){
       _this.setData({
         "notice.lists": mydata.notice,
         member_less_info: mydata.member_less_info,
         phone: mydata.phone,
-        wechat: _mark ? mydata.wechat.number : (_wx.wechat ? _wx.wechat : mydata.wechat.number),
+        wechat: mydata.wechat.number,
         joingroup: mydata.join_group_config
       })
-      if (_mark) {
-        let extime = _time + (mydata.wechat.outTime * 1000);
-        wx.setStorageSync("resume_wx", { wechat: mydata.wechat.number, expirTime: extime });
-      }
     })
   },
   errImg: function (e) {
