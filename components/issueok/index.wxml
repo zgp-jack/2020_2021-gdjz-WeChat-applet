@@ -11,6 +11,6 @@
       <button class="issueok-btn" bindtap="manageRecruit"  wx:if="{{ !tipdata.type && userInfo }}">管理招工信息</button>
       <button class="issueok-btn"  wx:if="{{ !tipdata.type && !userInfo }}" open-type="getUserInfo"  bindgetuserinfo='bindGetUserInfo'>管理招工信息</button>
     </view>
-    <image class="issueok-close" bindtap="show" src="{{ close }}"></image>
+    <image class="issueok-close" bindtap="close" src="{{ close }}"></image>
   </view>
 </view>

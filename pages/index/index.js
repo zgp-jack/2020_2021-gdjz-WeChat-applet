@@ -125,27 +125,17 @@ Page({
       showTitle: true,
       showIcon: false,
       showCancel: true,
-      confirmColor:'#0099FF',
-      cancelColor:'#797979',
+      confirmColor:'',
+      cancelColor:'',
       content: [{
         des: '',
-        color: '#585963',
-        text: [{
-          textName: '',
-          color: '#585963'
-        },
-        {
-          textName: '',
-          color: 'red'
-        },
-        {
-          textName: '',
-          color: '#585963'
-        }
-      ]
+        color: '',
+        text: []
       }
     ],
-      confirmText: ''
+      confirmText: '',
+      cancelText: '',
+      showClose: false
     },
     // 刷新状态
     refreshStatus: false,
@@ -1104,6 +1094,71 @@ Page({
       }
     })
   },
+  // 没有找活名片招工列表弹窗
+  noCardBox: function () {
+    wx.showModal({
+      title: "温馨提示",
+      content: "您还未发布找活名片，您可以发布找活名片，让老板主动来找您。",
+      confirmText: "去发布",
+      confirmColor: "#797979",
+      cancelColor: "#0097FF",
+      success: function (res) {
+        if (res.confirm) {
+          wx.navigateTo({
+            url: '/pages/jsIssueResume/index',
+          })
+        }
+        if (res.cancel) {
+          let time = new Date().getTime()
+          wx.setStorageSync('noCardStroage', time)
+        }
+      }
+    })
+  },
+  // 有找活名片，没有刷新没有置顶弹窗
+  haveCardBox: function () {
+    this.setData({
+      "tipBox.content[0].des": `您的找活名片排名靠后，您可以去刷新或置顶找活名片，让老板主动来联系您。`,
+      "tipBox.confirmText": "去刷新",
+      "tipBox.cancelText": "去置顶",
+      "tipBox.showCancel": true,
+      "tipBox.showIcon": false,
+      "tipBox.showClose": true,
+      "tipBox.showTitle": true,
+      "tipBox.confirmColor": "#0097FF",
+      "tipBox.cancelColor": "#797979",
+      refreshStatus: false
+    })
+    this.selectComponent("#promptbox").show()
+  },
+  // 没有找活名片招工列表弹窗 与 有找活名片，没有刷新没有置顶弹窗
+  showPromtBox: function (day, hasResume) {
+    // 没有找活名片点击取消的时间缓存
+    let haveCancelTime = wx.getStorageSync("haveCardCancelTime")
+    // 没有找活名片点击取消的时间缓存
+    let NoCancelTime = wx.getStorageSync("noCardCancelTime")
+    // 当前时间戳
+    let currentTime = new Date().getTime();
+    if (!hasResume) {
+      if (!NoCancelTime) {
+        this.noCardBox()
+      }else{
+        let dueTime = NoCancelTime + (day * 24 * 60 * 60 * 1000 - 1)
+        if (currentTime > dueTime) {
+          this.noCardBox()
+        }
+      }
+    }else{
+      if (!haveCancelTime) {
+        this.haveCardBox()
+      }else{
+        let dueTime = haveCancelTime + (day * 24 * 60 * 60 * 1000 - 1)
+        if (currentTime > dueTime) {
+          this.haveCardBox()
+        }
+      }
+    }
+  },
   // 找工作列表是否弹出引导刷新找活名片请求
   showRefresh: function () {
     let that = this;
@@ -1112,28 +1167,23 @@ Page({
     if (!userInfo) return;
     let token = userInfo.token;
     app.appRequestAction({
-      url: 'resumes/popup-to-refresh/',
+      url: '/resumes/popup/',
       way: 'POST',
       params: {token},
       success: function (res) {
         let mydata= res.data
         if (mydata.errcode === "ok") {
           let showPopup = mydata.data.is_popup;
-          let integral = mydata.data.integral;
+          let hasResume = mydata.data.has_resume;
+          if (mydata.data.hasOwnProperty("is_refreshed_today")) {
+            app.globalData.dayFirstRefresh = mydata.data.is_refreshed_today
+          }
           if (showPopup) {
-            that.setData({
-              "tipBox.content": '',
-              "tipBox.content[0].text[0].textName": `刷新找活名片让更多老板联系你，消耗`,
-              "tipBox.content[0].text[1].textName": integral,
-              "tipBox.content[0].text[1].color":"#DC143C",
-              "tipBox.content[0].text[2].textName": '积分刷新？',
-              "tipBox.confirmText": "去刷新",
-              "tipBox.showCancel": true,
-              "tipBox.showIcon": false,
-              "tipBox.showTitle": true,
-              refreshStatus: false
-            })
-            that.selectComponent("#promptbox").show()
+            if (hasResume) {
+              that.showPromtBox(parseInt(mydata.data.cancel_refresh_top_expire_days),hasResume)
+            } else {
+              that.showPromtBox(parseInt(mydata.data.cancel_publish_expire_days),hasResume)
+            }
           }
         }
       },

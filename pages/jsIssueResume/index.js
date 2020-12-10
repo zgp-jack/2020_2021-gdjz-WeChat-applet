@@ -7,25 +7,10 @@ const amapFun = new Amap.AMapWX({
   key: app.globalData.gdApiKey
 });
 let v = require('../../utils/v');
-Component({
-  /**
-   * 组件的属性列表
-   */
-  properties: {
-    fastInfo: {
-      type: Object,
-      value: {}
-    }
-  },
 
-  /**
-   * 组件的初始数据
-   */
+
+Page({
   data: {
-    // 选择区域数据
-    areapicker: [],
-    index: [0, 0],
-    mindex: [0, 0],
     titleImage: app.globalData.apiImgUrl + "new-publish-title-t-icon.png",
     areaData: {
       // 城市id
@@ -84,274 +69,42 @@ Component({
     selectCityName: '',
     //选中期望地区的id
     selectCityId: '',
-
-
-
-
     initIssueData:{}
   },
 
-  /**
-   * 组件的方法列表
-   */
-  methods: {
-    // 点击期望地区隐藏软键盘
-    hideKeyboard: function () {
-      // wx.hideKeyboard()
-      this.selectComponent("#cityPicker").show();
-    },
-    onfocus: function () {
-      this.setData({
-        isScroll: false
-      })
-    },
-    onblur: function () {
-      this.setData({
-        isScroll: true
-      })
-    },
-    // 输入验证码
-    inputCode: function (e) {
-      this.setData({
-        code: e.detail.value
-      })
-    },
-    // 输入电话号码
-    inputPhoneNumber: function (e) {
-      // 输入的电话号码
-      let phoneNumber = e.detail.value;
-      // 设置电话号码到data中
-      this.setData({
-        telPhone: phoneNumber
-      })
-    },
-    initLocArea: function () {
-      // 获取满足积分消耗条件的位置信息
-      let area = this.data.areaData;
-      let areaData = (area.pid && area.id && area.name) ? area : false;
-      //获取手机本地缓存地理位置信息
-      let gpsPorvince = wx.getStorageSync('gpsPorvince') ? wx.getStorageSync('gpsPorvince') : false;
-      let province = areaData ? areaData : gpsPorvince
-      //获取所有省的信息
-      let allProvince = this.getProvinceLists()
-      //判断如果有地理位置信息
-      if (province) {
-        //本地地理位置信息与所有省份信息相同对应的allProvince的index
-        let index = allProvince.findIndex(item => item.id == province.pid)
-        //本地地理位置信息具体信息
-        let item = allProvince[index]
-        //记录本地位置信息到data中
-        this.setData({
-          index: [index, 0],
-          "mindex[0]": index
-        })
-        //获取所有城市信息
-        let cities = this.getCityLists()
-        //从城市列表中匹配与本地位置对应的index
-        let ci = cities.findIndex(item => item.id == province.id)
-        // 组合成初始化picker数据
-        let areapicker = [allProvince, cities]
-        this.setData({
-          'areaData.id': (province.pid === province.id) ? 0 : province.id,
-          'areaData.pid': province.pid,
-          'areaData.name': province.name,
-          areatext: (province.pid === province.id) ? item.name : item.name + province.name,
-          index: [index, ci],
-          mindex: [index, ci],
-          areapicker: areapicker
-        })
-      } else {
-        //获取所有城市信息
-        let cities = this.getCityLists()
-        // 组合成初始化picker数据
-        let areapicker = [allProvince, cities]
-        this.setData({
-          areapicker
-        })
-      }
-    },
-    initAreaData: function () {
-      let _this = this;
-      let area = this.data.areaData;
-      let areaData = (area.pid && area.id && area.name) ? area : false;
-      //获取手机本地缓存地理位置信息
-      let gpsPorvince = wx.getStorageSync('gpsPorvince') ? wx.getStorageSync('gpsPorvince') : false;
-      let province = areaData ? areaData : gpsPorvince
-      if (province) {
-        this.initLocArea()
-      } else {
-        amapFun.getRegeo({
-          success: function (data) {
-            let gpsLocation = {
-              province: data[0].regeocodeData.addressComponent.province,
-              city: data[0].regeocodeData.addressComponent.city,
-              adcode: data[0].regeocodeData.addressComponent.adcode,
-              citycode: data[0].regeocodeData.addressComponent.citycode
-            }
-            areas.getProviceItem(gpsLocation.province, gpsLocation.city)
-            _this.initLocArea()
-          },
-          fail: function () {
-            _this.setData({
-              'areaData.id': 0,
-              'areaData.pid': 0,
-              'areaData.name': '',
-              areatext: ""
-            })
-            _this.initLocArea();
-          }
-        })
-      }
-    },
-    // 获取省的数据
-    getProvinceLists: function () {
-      let len = area.length
-      //省信息数组
-      let arr = []
-      for (let i = 0; i < len; i++) {
-        let data = area[i]
-        arr.push({
-          id: data.id,
-          pid: data.pid,
-          name: data.name
-        })
-      }
-      return arr;
-    },
-    // 获取城市数据
-    getCityLists: function () {
-      //获取省的信息
-      let index = this.data.mindex[0]
-      let arr = []
-      //获取省
-      let data = area[index]
-      //是否是直辖市
-      let has = data.has_children
-      if (has) {
-        //如果不是直辖市
-        //市长度
-        let len = data.children.length
-        for (let i = 1; i < len; i++) {
-          //获取每一个市的具体信息
-          let cdata = data.children[i]
-          //市的数据保存到arr
-          arr.push({
-            id: cdata.id,
-            pid: cdata.pid,
-            name: cdata.name
-          })
-        }
-      } else {
-        //是直辖市，直接存储直辖市信息
-        arr.push({
-          id: data.id,
-          pid: data.pid,
-          name: data.name
-        })
-      }
-      return arr;
-    },
-    // 期望地区的文本展示数据
-    getAreaText: function () {
-      let index = this.data.index
-      let areapicker = this.data.areapicker
-      let ptext = areapicker[0][index[0]].name
-      let ctext = areapicker[1][index[1]].name
-      let id = ptext == ctext ? 0 : areapicker[1][index[1]].id
-      let pid = ptext == ctext ? areapicker[1][index[1]].id : areapicker[1][index[1]].pid
-      let text = ''
-      if (ptext == ctext) {
-        text = ptext
-      } else {
-        text = ptext + ctext
-      }
-      this.setData({
-        areatext: text,
-        'areaData.id': id,
-        'areaData.pid': pid,
-        'areaData.name': ctext,
-      })
-    },
-    // picker改变列的时候
-    bindMultiPickerColumnChange: function (e) {
-      let val = e.detail.value
-      if (e.detail.column === 0) {
-        this.setData({
-          "mindex[0]": val
-        })
-        let cities = this.getCityLists();
-        let data = this.data.areapicker
-        data[1] = cities
-        this.setData({
-          "areapicker": data
-        })
-      }
-    },
-    // picker value改变的时候
-    bindPickerChange: function (e) {
-      let data = e.detail.value
-      let mydata = this.data.areapicker[1]
-      let pid = mydata[data[1]].pid
-      let id = mydata[data[1]].id
-      let name = mydata[data[1]].name
-      this.setData({
-        'areaData.pid': pid,
-        'areaData.id': id,
-        'areaData.name': name,
-        index: data
-      })
-      this.getAreaText()
-    },
-    // 点击取消关闭快速发布找活名片
-    closeFindWork: function () {
-      // type值是2或者3代表是找活名片快速发布
-      let type = this.data.type
-      // type存在关闭弹窗后续还会继续弹窗，
-      // 反之（招工信息）点击取消后，当天不再展示
-      if (type) {
-        this.triggerEvent("cancelPublish")
-        this.show()
-      } else {
-        let myDate = new Date();
-        // 当前时间戳
-        let currentTime = myDate.getTime();
-        // 到期时间戳（23:59:59）
-        let dueDate = (new Date(new Date().toLocaleDateString())).getTime() + (24 * 60 * 60 * 1000 - 1);
-        // let dueDate = currentTime +  (2 * 60 * 1000 - 1);
-        // 存入缓存
-        let FindWorkTime = {
-          currentTime: currentTime,
-          dueDate: dueDate
-        }
-        wx.setStorageSync("FindWorkTime", FindWorkTime)
-        this.triggerEvent("cancelPublish")
-        this.show()
-        app.globalData.isShowFindWork = false;
-      }
-    },
-    clooseTip: function () {
-      let myDate = new Date();
-      let currentTime = myDate.getTime();
-      let dueDate = currentTime + (24 * 7 * 60 * 60 * 1000 - 1);
-      // let dueDate = currentTime +  (2 * 60 * 1000 - 1);
-      let FindWorkTime = {
-        currentTime: currentTime,
-        dueDate: dueDate
-      }
-      wx.setStorageSync("FindWorkTime", FindWorkTime)
-      this.show()
-      this.triggerEvent("cancelPublish")
-      app.globalData.isShowFindWork = false;
-    },
-    // 显示快速找活名片
-    show: function () {
-      this.setData({
-        showfindwork: !this.data.showfindwork
-      })
-    },
+  // 点击期望地区隐藏软键盘
+  hideKeyboard: function () {
+    // wx.hideKeyboard()
+    this.selectComponent("#cityPicker").show();
+  },
+  onfocus: function () {
+    this.setData({
+      isScroll: false
+    })
+  },
+  onblur: function () {
+    this.setData({
+      isScroll: true
+    })
+  },
+  // 输入验证码
+  inputCode: function (e) {
+    this.setData({
+      code: e.detail.value
+    })
+  },
+  // 输入电话号码
+  inputPhoneNumber: function (e) {
+    // 输入的电话号码
+    let phoneNumber = e.detail.value;
+    // 设置电话号码到data中
+    this.setData({
+      telPhone: phoneNumber
+    })
+  },
 
-    // 点击所需工种显示工种选择
-    showWorkTypePicker: function () {
+  // 点击所需工种显示工种选择
+  showWorkTypePicker: function () {
       // 避免用户选择之后取消，所以对数据进行一次备份
       this.setData({
         rchildClassifies: JSON.parse(JSON.stringify(this.data.childClassifies)),
@@ -361,9 +114,9 @@ Component({
         showPicker: true,
       })
       wx.hideKeyboard()
-    },
-    // 点击取消关闭工种选择
-    cancelWorkTypePicker: function () {
+  },
+  // 点击取消关闭工种选择
+  cancelWorkTypePicker: function () {
       this.setData({
         showPicker: false,
         pindex: this.data.rpindex,
@@ -372,22 +125,22 @@ Component({
         classifies: JSON.parse(JSON.stringify(this.data.rclassifies)),
       })
       this.getWorkText()
-    },
-    // 点击工种选择确定按钮
-    sureWorkTypePicker: function () {
+  },
+  // 点击工种选择确定按钮
+  sureWorkTypePicker: function () {
       this.setData({
         showPicker: false
       })
       this.getWorkText()
-    },
-    // 初始化加载工种数据
-    initWorkTypeData: function () {
+  },
+  // 初始化加载工种数据
+  initWorkTypeData: function () {
       this.countWorkNum()
       this.initChildWorkType()
       this.getWorkText()
-    },
-    // 初始化子类工种信息和选中状态
-    initChildWorkType: function () {
+  },
+  // 初始化子类工种信息和选中状态
+  initChildWorkType: function () {
       // 父级工种index
       let index = this.data.pindex;
       // 用户选择工种字段
@@ -406,9 +159,9 @@ Component({
       this.setData({
         childClassifies: data
       })
-    },
-    // 选择一级工种信息
-    userCheckPindex: function (e) {
+  },
+  // 选择一级工种信息
+  userCheckPindex: function (e) {
       // 一级工种index
       let index = parseInt(e.currentTarget.dataset.index)
       this.setData({
@@ -416,9 +169,9 @@ Component({
       })
       // 初始化子类工种信息
       this.initChildWorkType()
-    },
-    // 用户选择工种
-    userCheckWorkType: function (e) {
+  },
+  // 用户选择工种
+  userCheckWorkType: function (e) {
       // 获取最大工种数量
       let num = this.data.maxWorkNum
       // 选择工种id
@@ -468,9 +221,9 @@ Component({
       }
       // 初始化子类工种的数据与选中状态
       this.initChildWorkType()
-    },
-    // 匹配的工种数量
-    countWorkNum: function () {
+  },
+  // 匹配的工种数量
+  countWorkNum: function () {
       //用户选择工种字段
       let userClassifyids = JSON.parse(JSON.stringify(this.data.userClassifyids))
       //返回所有工种字段id数组
@@ -503,9 +256,9 @@ Component({
       this.setData({
         classifies: classifyids
       })
-    },
-    // 所需工种显示工种文本信息
-    getWorkText: function () {
+  },
+  // 所需工种显示工种文本信息
+  getWorkText: function () {
       let list = this.data.userClassifyids
       //记录选中工种的id并存入this.data.selectedClassifies中
       let selectWorkType = list.map(function (item, index) {
@@ -520,185 +273,183 @@ Component({
         showClassifyText: list.join(','),
         selectedClassifies: selectWorkType
       })
-    },
-    // 点击确认发布，发布找活信息
-    publishFindWork: function () {
-      // 用户信息
-      let userInfo = wx.getStorageSync('userInfo')
-      // 没有用户信息直接返回
-      if (!userInfo) return
-      let userId = userInfo.userId;
-      let token = userInfo.token;
-      let tokenTime = userInfo.tokenTime;
-      let that = this;
-      let vali = v.v.new();
-      let {
-        id,
-        pid
-      } = this.data.areaData;
-      let userClassifyids = this.data.userClassifyids;
-      let occupations = this.data.selectedClassifies.join(",");
-      let phone = this.data.telPhone;
-      let code = this.data.code;
-      let _selectCityId = this.data.selectCityId.join(',')
-      
-      // 验证是否有选择城市
-      if (!id && _selectCityId) {
+  },
+  // 点击确认发布，发布找活信息
+  publishFindWork: function () {
+    // 用户信息
+    let userInfo = wx.getStorageSync('userInfo')
+    // 没有用户信息直接返回
+    if (!userInfo) return
+    let userId = userInfo.userId;
+    let token = userInfo.token;
+    let tokenTime = userInfo.tokenTime;
+    let that = this;
+    let vali = v.v.new();
+    let {
+      id,
+      pid
+    } = this.data.areaData;
+    let userClassifyids = this.data.userClassifyids;
+    let occupations = this.data.selectedClassifies.join(",");
+    let phone = this.data.telPhone;
+    let code = this.data.code;
+    let _selectCityId = this.data.selectCityId.join(',')
+    
+    // 验证是否有选择城市
+    if (!id && _selectCityId) {
+      wx.showModal({
+        title: '提示',
+        content: "请选择期望地区。",
+        showCancel: false
+      })
+      return false
+    }
+    // 验证是否有选择工种
+    if (!userClassifyids.length) {
+      wx.showModal({
+        title: '提示',
+        content: '请选择工种。',
+        showCancel: false
+      })
+      return false
+    }
+    // 验证是否有电话号码
+    if (phone == "" || !phone) {
+      wx.showModal({
+        title: '提示',
+        content: '请正确输入联系电话。',
+        showCancel: false
+      })
+      return false
+    }
+    // 验证电话号码格式是否正确
+    if (phone && !vali.isMobile(phone)) {
+      wx.showModal({
+        title: '提示',
+        content: '请正确输入联系电话。',
+        showCancel: false
+      })
+      return false;
+    }
+    // 验证是否输入验证码
+    if (this.properties.fastInfo.tel != phone) {
+      if (code.length < 4 || code.length > 6) {
         wx.showModal({
           title: '提示',
-          content: "请选择期望地区。",
+          content: '请正确输入验证码',
           showCancel: false
         })
         return false
       }
-      // 验证是否有选择工种
-      if (!userClassifyids.length) {
-        wx.showModal({
-          title: '提示',
-          content: '请选择工种。',
-          showCancel: false
-        })
-        return false
-      }
-      // 验证是否有电话号码
-      if (phone == "" || !phone) {
-        wx.showModal({
-          title: '提示',
-          content: '请正确输入联系电话。',
-          showCancel: false
-        })
-        return false
-      }
-      // 验证电话号码格式是否正确
-      if (phone && !vali.isMobile(phone)) {
-        wx.showModal({
-          title: '提示',
-          content: '请正确输入联系电话。',
-          showCancel: false
-        })
-        return false;
-      }
-      // 验证是否输入验证码
-      if (this.properties.fastInfo.tel != phone) {
-        if (code.length < 4 || code.length > 6) {
-          wx.showModal({
-            title: '提示',
-            content: '请正确输入验证码',
-            showCancel: false
+    }
+    // 发送请求参数
+    let params = {
+      //请选择地区 去掉s 
+      provinces: _selectCityId,
+      city: parseInt(id),
+      tel: parseInt(phone),
+      code: parseInt(code),
+      occupations: occupations,
+      userId,
+      token,
+      tokenTime,
+    }
+    app.appRequestAction({
+      url: 'resumes/add-fast-resume/',
+      way: 'POST',
+      params: params,
+      success: function (res) {
+        let mydata = res.data;
+        if (mydata.errcode === "ok") {
+          let defalutTop = mydata.data.default_top_area;
+          wx.navigateTo({
+            url: `/pages/clients-looking-for-work/finding-name-card/findingnamecard?defalutTop=${defalutTop}`,
           })
-          return false
+        } else {
+          wx.showModal({
+            title: '温馨提示',
+            content: mydata.errmsg,
+            showCancel: false,
+            success(res) {}
+          })
         }
       }
-      // 发送请求参数
-      let params = {
-        //请选择地区 去掉s 
-        provinces: _selectCityId,
-        city: parseInt(id),
-        tel: parseInt(phone),
-        code: parseInt(code),
-        occupations: occupations,
-        userId,
-        token,
-        tokenTime,
-      }
-      app.appRequestAction({
-        url: 'resumes/add-fast-resume/',
-        way: 'POST',
-        params: params,
-        success: function (res) {
-          let mydata = res.data;
-          if (mydata.errcode === "ok") {
-            let defalutTop = mydata.data.default_top_area;
-            that.triggerEvent("refreshPage", {
-              defalutTop: defalutTop
-            })
-            that.show()
-            app.globalData.isShowFindWork = false;
-          } else {
-            wx.showModal({
-              title: '温馨提示',
-              content: mydata.errmsg,
-              showCancel: false,
-              success(res) {}
-            })
-          }
-        }
+    })
+  },
+  // 初始化验证码时间
+  initCodeTime: function () {
+    let _this = this;
+    let codeTime = this.data.sendrefresh;
+    _this.data.timer = setInterval(function () {
+      codeTime--;
+      _this.setData({
+        sendrefresh: codeTime
       })
-    },
-    // 初始化验证码时间
-    initCodeTime: function () {
-      let _this = this;
-      let codeTime = this.data.sendrefresh;
-      _this.data.timer = setInterval(function () {
-        codeTime--;
-        _this.setData({
-          sendrefresh: codeTime
-        })
-        if (codeTime == 0) {
-          clearInterval(_this.data.timer);
-          return false;
-        }
-      }, 1000)
-    },
-    // 获取验证码
-    reGetPhoneCode: function () {
-      // 用户信息
-      let userInfo = wx.getStorageSync('userInfo')
-      // 没有用户信息直接返回
-      if (!userInfo) return
-      let userId = userInfo.userId;
-      let token = userInfo.token;
-      let tokenTime = userInfo.tokenTime;
-      let phone = this.data.telPhone;
-      let vali = v.v.new();
-      let _this = this;
-      // 发送请求参数
-      let params = {
-        tel: parseInt(phone),
-        userId,
-        token,
-        tokenTime
-      }
-      // 验证是否有电话号码
-      if (phone == "" || !phone) {
-        wx.showModal({
-          title: '提示',
-          content: '请正确输入联系电话。',
-          showCancel: false
-        })
-        return false
-      }
-      // 验证电话号码格式是否正确
-      if (phone && !vali.isMobile(phone)) {
-        wx.showModal({
-          title: '提示',
-          content: '请正确输入联系电话。',
-          showCancel: false
-        })
+      if (codeTime == 0) {
+        clearInterval(_this.data.timer);
         return false;
       }
-      app.appRequestAction({
-        title: "正在获取验证码",
-        mask: true,
-        failTitle: "网络错误，验证码获取失败！",
-        url: "index/get-code/",
-        way: "POST",
-        params: params,
-        success: function (res) {
-          let mydata = res.data;
-          app.showMyTips(mydata.errmsg);
-          if (mydata.errcode == "ok") {
-            _this.setData({
-              sendrefresh: 60,
-              firstGetCode: false
-            });
-            _this.initCodeTime();
-          }
-        }
+    }, 1000)
+  },
+  // 获取验证码
+  reGetPhoneCode: function () {
+    // 用户信息
+    let userInfo = wx.getStorageSync('userInfo')
+    // 没有用户信息直接返回
+    if (!userInfo) return
+    let userId = userInfo.userId;
+    let token = userInfo.token;
+    let tokenTime = userInfo.tokenTime;
+    let phone = this.data.telPhone;
+    let vali = v.v.new();
+    let _this = this;
+    // 发送请求参数
+    let params = {
+      tel: parseInt(phone),
+      userId,
+      token,
+      tokenTime
+    }
+    // 验证是否有电话号码
+    if (phone == "" || !phone) {
+      wx.showModal({
+        title: '提示',
+        content: '请正确输入联系电话。',
+        showCancel: false
       })
-    },
-    //选择期望地区 点击确定
-    cityComfirm(e) {
+      return false
+    }
+    // 验证电话号码格式是否正确
+    if (phone && !vali.isMobile(phone)) {
+      wx.showModal({
+        title: '提示',
+        content: '请正确输入联系电话。',
+        showCancel: false
+      })
+      return false;
+    }
+    app.appRequestAction({
+      title: "正在获取验证码",
+      mask: true,
+      failTitle: "网络错误，验证码获取失败！",
+      url: "index/get-code/",
+      way: "POST",
+      params: params,
+      success: function (res) {
+        let mydata = res.data;
+        app.showMyTips(mydata.errmsg);
+        if (mydata.errcode == "ok") {
+          _this.setData({
+            sendrefresh: 60,
+            firstGetCode: false
+          });
+          _this.initCodeTime();
+        }
+      }
+    })
+  },
+  //选择期望地区 点击确定
+  cityComfirm(e) {
       this.setData({
         selectCityData: [],
         selectCityName: [],
@@ -738,129 +489,64 @@ Component({
         selectCityName: _selectstr,
         selectCityId: _selectCityId
       })
-    },
-    //初始化发布找活名片
-    initIssueResume() {
-      // 用户信息
-      let userInfo = wx.getStorageSync('userInfo')
-      let userId = userInfo.userId;
-      let token = userInfo.token;
-      let tokenTime = userInfo.tokenTime;
-      let params = {
-        userId,
-        token,
-        tokenTime
-      }
-      let _this = this
-      // app.appRequestAction({
-      //   url: 'resumes/fast-resume/',
-      //   way: 'POST',
-      //   params: params,
-      //   success: function (res) {
-          
-      //   }
-      // })
-
-      let _data = {
-        "job_id": "13767944",
-        "occ": "3",
-        "province_id": "26",
-        "city_id": "322",
-        "occ_txt": "架子工",
-        "province_txt": "四川",
-        "city_txt": "成都",
-        "provinces_txt": "成都",
-        "provinces_id": "322",
-        "tel": "14785698547",
-        "type": 3,
-        "occupation_tree": [
-          // 太长，省略
-        ]
-      }
-      let selectCityId = []
-      selectCityId.push(_data.provinces_id)
-      _this.setData({
-        selectCityName:_data.provinces_txt,
-        selectCityId:selectCityId,
-        initIssueData:_data
-      })
-
-
+  },
+  //初始化发布找活名片
+  initIssueResume() {
+    // 用户信息
+    let userInfo = wx.getStorageSync('userInfo')
+    let userId = userInfo.userId;
+    let token = userInfo.token;
+    let tokenTime = userInfo.tokenTime;
+    let params = {
+      userId,
+      token,
+      tokenTime
     }
+    let _this = this
+    app.appRequestAction({
+      url: 'resumes/fast-resume/',
+      way: 'POST',
+      params: params,
+      success: function (res) {
+        let mydata = res.data
+        if(mydata.errcode == 'ok'){
+          // 用户手机号
+          let telPhone = mydata.data.hasOwnProperty("tel") ? mydata.data.tel : '';
+          // 工种id
+          let occId = mydata.data.hasOwnProperty("occ") ? mydata.data.occ : '';
+          // 工种名称
+          let occName = mydata.data.hasOwnProperty("occ_txt") ? mydata.data.occ_txt : '';
+          // 城市id
+          let id = mydata.data.hasOwnProperty("provinces_id") ? mydata.data.provinces_id : '';
+          // 地区名称
+          let name = mydata.data.hasOwnProperty("provinces_txt") ? mydata.data.provinces_txt : '';
+          // 所有工种字段
+          let occupations = mydata.data.hasOwnProperty("occupation_tree") ? mydata.data.occupation_tree : []
+          _this.setData({
+            userClassifyids: [{occId,occName}],
+            classifies: occupations,
+            selectCityData: [{id, name}],
+            telPhone: telPhone
+          })
+        }else{
+          wx.showModal({
+            title: '温馨提示',
+            content: res.data.errmsg,
+            showCancel: false,
+            success(res) {
+              wx.navigateBack()
+            }
+          })
+        }
+      }
+    })
   },
 
-  /**
-   * 生命周期函数
-   */
-  lifetimes: {
-    attached: function () {
-      this.initIssueResume()
-    },
+  onLoad(){
+    // 初始化期望工作地、所需工种、联系电话等信息
+    // this.initIssueResume()
   },
-  /**
-   * 监测属性值变化
-   */
-  observers: {
-    'fastInfo': function (newVal) {
-      // 定义位置数据
-      let areaData = {};
-      let classifyids = [];
-      // 是哪个界面2、3(找活名片)或者1（招工详情）
-      let type = newVal.hasOwnProperty("type") ? newVal.type : '';
-      let telPhone = newVal.hasOwnProperty("tel") ? newVal.tel : '';
-      // 判断是否有工种、区域数据字段，并保存相关数据
-      // 工种id
-      let occId = newVal.hasOwnProperty("occ") ? newVal.occ : '';
-      // 工种名称
-      let occName = newVal.hasOwnProperty("occ_txt") ? newVal.occ_txt : '';
-      // 省或者直辖市id
-      let pid = newVal.hasOwnProperty("province_id") ? newVal.province_id : '';
-      // 城市id
-      let id = newVal.hasOwnProperty("city_id") ? newVal.city_id : '';
-      // 省或者直辖市名称
-      let provinceText = newVal.hasOwnProperty("province_txt") ? newVal.province_txt : '';
-      // 城市名称
-      let cityText = newVal.hasOwnProperty("city_txt") ? newVal.city_txt : '';
-      // 所有工种字段
-      let occupations = newVal.hasOwnProperty("occupation_tree") ? newVal.occupation_tree : []
-      if (JSON.stringify(newVal) != "{}") {
-        // 如果id = 0，代表是直辖市，否则是市数据
-        if (id === "0") {
-          areaData.pid = pid;
-          areaData.id = pid;
-          areaData.name = provinceText
-        } else {
-          areaData.pid = pid;
-          areaData.id = id;
-          areaData.name = cityText
-        }
-        if (occId) {
-          // 组合工种数据
-          classifyids = [{
-            id: occId,
-            name: occName
-          }];
-        }
-        this.setData({
-          userClassifyids: classifyids,
-          classifies: occupations,
-          areaData: areaData,
-          type: type,
-          telPhone: telPhone
-        });
-        // 初始化用户位置信息
-        this.initAreaData()
-        // 初始化工种信息
-        this.initWorkTypeData()
-      } else {
-        this.setData({
-          userClassifyids: classifyids,
-          classifies: occupations,
-          areaData: areaData,
-          type: type,
-          telPhone: telPhone
-        });
-      }
-    }
+  onShow(){
+
   }
 })

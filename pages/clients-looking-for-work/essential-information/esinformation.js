@@ -747,9 +747,37 @@ Page({
       //联系电话
       if(!this.data.introinfo.tel) {
         params.tel = this.data.telephone
+        code: this.data.verify
       }
-      //自我介绍
       params.introduce = this.data.otextareavalue
+      params.userId = userInfo.userId
+      params.token = userInfo.token
+      params.tokenTime = userInfo.tokenTime
+      app.appRequestAction({
+        url:'resumes/introduce/',
+        way:'POST',
+        params:params,
+        mask:true,
+        failTitle: "操作失败，请稍后重试！",
+        success: function (res) {
+          if (res.data.errcode == 200) {
+            that.subscribeToNews(res)
+            app.activeRefresh()
+          } else {
+            remain.remain({
+              tips: res.data.errmsg
+            })
+          }
+        },
+        fail: function (err) {
+          wx.showModal({
+            title: '温馨提示',
+            content: '保存失败',
+            showCancel: false
+          })
+        }
+      })
+
     }
 
 
