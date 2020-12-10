@@ -557,9 +557,13 @@ Page({
     })
   },
   edit(e) {
-
     wx.navigateTo({
-      url: '/pages/clients-looking-for-work/essential-information/esinformation',
+      url: '/pages/clients-looking-for-work/essential-information/esinformation?type=ws',
+    })
+  },
+  editbj(e) {
+    wx.navigateTo({
+      url: '/pages/clients-looking-for-work/essential-information/esinformation?type=bj',
     })
   },
   addproject() {

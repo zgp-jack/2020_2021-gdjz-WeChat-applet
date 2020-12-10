@@ -148,7 +148,7 @@
             <text bindtap="edit">完善质料</text>
           </view>
           <view class="cardtwosontwo" wx:if="{{!checkone && is_introduces == '1'}}">
-            <text bindtap="edit">编辑</text>
+            <text bindtap="editbj">编辑</text>
           </view>
         </view>
         <view class="lineone">

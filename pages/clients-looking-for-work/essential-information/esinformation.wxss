@@ -168,7 +168,7 @@ font-size: 30rpx;
   margin-left: 19rpx;
 }
 .informationfour .informationfourtwo{
-  width: 72%;
+  width: 70%;
   height: 125rpx;
   display: flex;
   flex-direction: column;
@@ -237,7 +237,7 @@ border-bottom: 1px solid #F1F1F1;
     padding-left: 58rpx;
 }
 .informationTypeworktwo{
-  width: 72%;
+  width: 70%;
 
   display: flex;
   flex-direction: column;
@@ -385,6 +385,7 @@ width: 60%;
   justify-content: space-between;
   background-color: white;
   position: relative;
+  border-bottom: 1px solid #F1F1F1;
 }
 
 .informationseven .informationsevenone{
@@ -669,5 +670,16 @@ word-wrap:break-word;
 /* informationtelephone */
 
 
-.common-uinfo-editbox{position: relative;width:100%;padding: 20rpx 27rpx;}
+.common-uinfo-editbox{position: relative;width:100%;}
 .informationtwo,.informationtelephone,.informationevaluation{position: relative;width:100%;}
+
+
+.clearIntroduce {
+  width: 122rpx;
+  height: 40rpx;
+  color: #0099FF;
+  background: #F8F8F8;
+  text-align: center;
+  line-height: 40rpx;
+  font-size: 24rpx;
+}
