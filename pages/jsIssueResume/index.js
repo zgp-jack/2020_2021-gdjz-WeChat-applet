@@ -1,4 +1,3 @@
-// components/publishfindwork/publishfindword.js
 const app = getApp();
 let areas = require("../../utils/area");
 let area = app.arrDeepCopy(areas.getAreaArr)
@@ -327,6 +326,7 @@ Component({
         wx.setStorageSync("FindWorkTime", FindWorkTime)
         this.triggerEvent("cancelPublish")
         this.show()
+        app.globalData.isShowFindWork = false;
       }
     },
     clooseTip: function () {
@@ -341,6 +341,7 @@ Component({
       wx.setStorageSync("FindWorkTime", FindWorkTime)
       this.show()
       this.triggerEvent("cancelPublish")
+      app.globalData.isShowFindWork = false;
     },
     // 显示快速找活名片
     show: function () {
@@ -612,6 +613,7 @@ Component({
               defalutTop: defalutTop
             })
             that.show()
+            app.globalData.isShowFindWork = false;
           } else {
             wx.showModal({
               title: '温馨提示',
