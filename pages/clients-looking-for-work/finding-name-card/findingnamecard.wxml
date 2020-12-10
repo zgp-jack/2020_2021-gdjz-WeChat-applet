@@ -555,4 +555,18 @@
 </view>
 
 <!-- 刷新成功提示框 -->
-<promptbox id="promptbox" showTitle="{{ tipBox.showTitle }}" bind: cancel = "tapCancel" bind: confirm = "tapConfirm" content="{{ tipBox.content }}" showIcon="{{ tipBox.showIcon }}" showCancel="{{ tipBox.showCancel }}" showConfirm="{{ tipBox.showConfirm }}" icon="{{ successIcon }}" confirmColor="{{ tipBox.confirmColor }}" cancelColor= "{{ tipBox.cancelColor}}" confirmText="{{ tipBox.confirmText }}" cancelText="{{ tipBox.cancelText }}"></promptbox>
+<promptbox 
+  id="promptbox" 
+  showTitle="{{ tipBox.showTitle }}" 
+  bind:cancel = "tapCancel" 
+  bind:confirm = "tapConfirm" 
+  content="{{ tipBox.content }}" 
+  showIcon="{{ tipBox.showIcon }}" 
+  showCancel="{{ tipBox.showCancel }}" 
+  showConfirm="{{ tipBox.showConfirm }}" 
+  icon="{{ successIcon }}" 
+  confirmColor="{{ tipBox.confirmColor }}" 
+  cancelColor= "{{ tipBox.cancelColor}}" 
+  confirmText="{{ tipBox.confirmText }}" 
+  cancelText="{{ tipBox.cancelText }}">
+</promptbox>

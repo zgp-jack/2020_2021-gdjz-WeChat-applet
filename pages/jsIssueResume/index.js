@@ -224,38 +224,38 @@ Page({
   },
   // 匹配的工种数量
   countWorkNum: function () {
-      //用户选择工种字段
-      let userClassifyids = JSON.parse(JSON.stringify(this.data.userClassifyids))
-      //返回所有工种字段id数组
-      let rulesClassifyids = userClassifyids.map(item => item.id)
-      //rulesClassifyids数组长度
-      let ruleLen = rulesClassifyids.length
-      let classifyids = this.data.classifies
-      //所有工种数组长度
-      let len = classifyids.length
-      //如果没有选择工种那么就将num置为0
-      if (!ruleLen) {
-        classifyids.forEach(function (item) {
-          if (item.num) {
-            item.num = 0
-          }
-        })
-      }
-      //记录选择工种的数量
-      for (let i = 0; i < len; i++) {
-        let data = classifyids[i].children
-        let inum = 0
-        for (let j = 0; j < data.length; j++) {
-          let has = rulesClassifyids.indexOf(data[j].id)
-          if (has !== -1) {
-            inum++
-          }
-          classifyids[i].num = inum
+    //用户选择工种字段
+    let userClassifyids = JSON.parse(JSON.stringify(this.data.userClassifyids))
+    //返回所有工种字段id数组
+    let rulesClassifyids = userClassifyids.map(item => item.id)
+    //rulesClassifyids数组长度
+    let ruleLen = rulesClassifyids.length
+    let classifyids = this.data.classifies
+    //所有工种数组长度
+    let len = classifyids.length
+    //如果没有选择工种那么就将num置为0
+    if (!ruleLen) {
+      classifyids.forEach(function (item) {
+        if (item.num) {
+          item.num = 0
         }
-      }
-      this.setData({
-        classifies: classifyids
       })
+    }
+    //记录选择工种的数量
+    for (let i = 0; i < len; i++) {
+      let data = classifyids[i].children
+      let inum = 0
+      for (let j = 0; j < data.length; j++) {
+        let has = rulesClassifyids.indexOf(data[j].id)
+        if (has !== -1) {
+          inum++
+        }
+        classifyids[i].num = inum
+      }
+    }
+    this.setData({
+      classifies: classifyids
+    })
   },
   // 所需工种显示工种文本信息
   getWorkText: function () {
@@ -523,11 +523,12 @@ Page({
           // 所有工种字段
           let occupations = mydata.data.hasOwnProperty("occupation_tree") ? mydata.data.occupation_tree : []
           _this.setData({
-            userClassifyids: [{occId,occName}],
+            userClassifyids: [{id:occId,name:occName}],
             classifies: occupations,
             selectCityData: [{id, name}],
             telPhone: telPhone
           })
+          _this.initWorkTypeData()
         }else{
           wx.showModal({
             title: '温馨提示',
@@ -544,7 +545,7 @@ Page({
 
   onLoad(){
     // 初始化期望工作地、所需工种、联系电话等信息
-    // this.initIssueResume()
+    this.initIssueResume()
   },
   onShow(){
 

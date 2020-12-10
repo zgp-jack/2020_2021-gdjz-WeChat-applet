@@ -462,12 +462,11 @@ Page({
     // })
   },
   // 初始化已经置顶的置顶数据
-  gettopareas(options) {
+  gettopareas(topdata) {
     let that = this;
-    let topdata = options.topdata
     let area = wx.getStorageSync('areadata')
-    let hastop= topdata.has_top;
-    let istop = topdata.is_top;
+    let hastop= this.data.topdata.has_top;
+    let istop = this.data.topdata.is_top;
     // 判断是否是置顶中的修改置顶
     if (hastop && istop != 2) {
       //判断是否有授权登录用户信息
@@ -498,6 +497,8 @@ Page({
         endtimeh: endtimeh,
         max_price:max_price,
       })
+      // 获取配置信息和计算初次置顶数据
+      this.getdetail()
     }
   },
   // 修改的提交置顶
@@ -662,7 +663,6 @@ Page({
     let areaAllcrum = that.data.areaAllcrum;
     let areaProcrum =  that.data.areaProcrum;
     let areaCitycrum = that.data.areaCitycrum;
-    let day = that.data.day;
     let istop = that.data.topdata.is_top;
     let hastop = that.data.topdata.has_top;
     console.log("this.data",that.data)
@@ -698,28 +698,24 @@ Page({
           if (hastop == 0 || istop == 2) {
             let point = (areaProcrum.length * province_integral + areaCitycrum.length * city_integral + areaAllcrum.length * country_integral) * day;
             that.setData({
-              point: point
+              point: point,
+              detailprice: day
             })
           }
-         // 处理3天内显示“1天（24小时）”，超过3天显示“4天”
-         let array =[]
-         let days = mydata.data.days
-         for (let i = 0; i < days.length; i++) {
-           if (days[i] < 4 ) {
-             array.push(days[i] * 24 + "小时"  + '（' + days[i] + '天' + '）')
-           }else{
-             array.push(days[i] + "天")
-           }
-         }
-         // 处理默认选择天数对应的时间选择框的index
-         let index = null
-         // 默认天数对应的index下标
-         index = days.findIndex((value)=> value == day );
-         if (hastop == '0' || istop == '2') {
-           that.setData({
-            detailprice: day
-           })
-         }
+          // 处理3天内显示“1天（24小时）”，超过3天显示“4天”
+          let array =[]
+          let days = mydata.data.days
+          for (let i = 0; i < days.length; i++) {
+            if (days[i] < 4 ) {
+              array.push(days[i] * 24 + "小时"  + '（' + days[i] + '天' + '）')
+            }else{
+              array.push(days[i] + "天")
+            }
+          }
+          // 处理默认选择天数对应的时间选择框的index
+          let index = null
+          // 默认天数对应的index下标
+          index = days.findIndex((value)=> value == day );
           that.setData({
             //最大省份数
             max_province: max_province,
@@ -1059,48 +1055,100 @@ Page({
       _this.getdetail()
     });
   },
- //初次置顶
- initTopData:function(){
-  let hastop = this.data.topdata.has_top
-  let istop = this.data.topdata.is_top
-  let defaultTop = this.data.defaultTop
-  //如果时初次置顶或者置顶到期，置顶地区默认找活名片地区
-  if(hastop == 0 || istop == 2){
-    this.getDefaultArea(defaultTop)
-  }else{
-    // 获取配置信息和计算初次置顶数据
-    this.getdetail()
-  }
- },
- //会员中心进入置顶页面请求置顶参数
-resumeTopInfo() {
-  let userInfo = wx.getStorageSync("userInfo");
-  let _this = this
-  app.appRequestAction({
-    url: 'resumes/get-resume-top-info/',
-    way: 'POST',
-    params:userInfo,
-    mask: true,
-    success: function(res) {
-      if(res.data.errcode == 'ok'){
-        _this.getNewId(res.data,1)
+  //初始化置顶数据请求
+  initTopConfig: function () {
+    let that = this
+    // 获取用户信息
+    let userInfo = wx.getStorageSync("userInfo");
+    // 用户token
+    let token = userInfo.token;
+    // 如果没有用户信息直接退出
+    if (!userInfo) return
+    app.appRequestAction({
+      url: 'resumes/get-resume-top-info/',
+      way: 'POST',
+      params:{token},
+      mask: true,
+      success: function(res) {
+        if(res.data.errcode == 'ok'){
+          // 置顶数据
+          let topdata = res.data.data.resume_top;
+          // 默认置顶城市
+          let defaultTop = res.data.data.default_top_area
+          that.setData({
+            // 置顶数据
+            topdata,
+            // 默认置顶城市
+            defaultTop,
+          })
+          // 初始化置顶数据，包括初始化置顶城市和初始化积分计算（首次置顶与修改置顶）
+          that.initTopData()
+        }else{
+          wx.showModal({
+            title: '温馨提示',
+            content: res.data.errmsg,
+            showCancel: false,
+            success(res) {}
+          })
+          return
+        }
+      },
+      fail: function() {
+        wx.showModal({
+          title: '温馨提示',
+          content: `您的网络请求失败`,
+          showCancel: false,
+          success(res) {
+            wx.navigateBack({
+              delta: 1
+            })
+          }
+        })
       }
+    })
+    
+  },
+  initTopData:function(){
+    // 是否置顶过 0 没置顶过 1 置顶过
+    let hastop = this.data.topdata.has_top;
+    // 置顶状态0 取消置顶或者未置顶 1 置顶中 2置顶过期 
+    let istop = this.data.topdata.is_top;
+    // 默认置顶区域
+    let defaultTop = this.data.defaultTop;
+    //如果时初次置顶或者置顶到期，置顶地区默认找活名片地区
+    if(hastop == 0 || istop == 2){
+     // 根据置顶城市并计算置顶积分
+     this.getDefaultArea(defaultTop)
+    }else{
+      // 置顶未到期的初始化置顶数据（置顶城市、到期时间、最大置顶单价等数据）
+      this.gettopareas()
     }
-  })
-},
+  },
+  //会员中心进入置顶页面请求置顶参数
+  resumeTopInfo() {
+    let userInfo = wx.getStorageSync("userInfo");
+    let _this = this
+    app.appRequestAction({
+      url: 'resumes/get-resume-top-info/',
+      way: 'POST',
+      params:userInfo,
+      mask: true,
+      success: function(res) {
+        if(res.data.errcode == 'ok'){
+          _this.getNewId(res.data,1)
+        }
+      }
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-    //判断是否是会员中心跳转过来 
-    if(!options.topdata){
-      this.resumeTopInfo()
-    }else {
-      // 获取url带过来的数据
-      this.getNewId(options)
-    }
+    this.initTopConfig()
+    // 获取url带过来的数据
+    // this.getNewId(options)
     // 初始化置顶城市与置顶天数
-    this.initTopData()
+    // this.initTopData()
     app.activeRefresh()
   },
 

@@ -1567,7 +1567,6 @@ App({
     _this.setData({
       tipBox: tipBox,
       refreshStatus: true,
-      boxType: "refreshSuccess"
     })
     // 刷新成功
     _this.selectComponent("#promptbox").show()
@@ -1718,6 +1717,8 @@ App({
             }
           }
           if (mydata.data.hasOwnProperty("is_top")) {
+            // 找活名片置顶状态 1 置顶中 0 未置顶
+            let isTop = mydata.data.is_top;
             that.globalData.dayFirstRefresh = 1
             if (isTop) {
               that.showTipBox(_this)

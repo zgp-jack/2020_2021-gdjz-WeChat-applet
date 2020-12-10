@@ -45,6 +45,14 @@
   "simulatorType": "wechat",
   "simulatorPluginLibVersion": {},
   "condition": {
+    "search": {
+      "current": -1,
+      "list": []
+    },
+    "conversation": {
+      "current": -1,
+      "list": []
+    },
     "plugin": {
       "list": []
     },
@@ -554,74 +562,9 @@
           "scene": null
         },
         {
-          "name": "pages/findwork-browsing-record/recordlist/index",
-          "pathName": "pages/findwork-browsing-record/recordlist/index",
-          "query": "",
-          "scene": null
-        },
-        {
-          "name": "pages/recruitworker-browsing-record/recruit-worker-lists/index",
-          "pathName": "pages/recruitworker-browsing-record/recruit-worker-lists/index",
-          "query": "",
-          "scene": null
-        },
-        {
-          "name": "pages/recruitworker-browsing-record/recruit-worker-lists/index",
-          "pathName": "pages/recruitworker-browsing-record/recruit-worker-lists/index",
-          "query": "",
-          "scene": null
-        },
-        {
-          "name": "pages/recruitworker-browsing-record/recruit-worker-record/index",
-          "pathName": "pages/recruitworker-browsing-record/recruit-worker-record/index",
-          "query": "",
-          "scene": null
-        },
-        {
-          "name": "pages/recruitworker-browsing-record/recruit-worker-lists/index",
-          "pathName": "pages/recruitworker-browsing-record/recruit-worker-lists/index",
-          "query": "",
-          "scene": null
-        },
-        {
-          "name": "pages/index/index",
-          "pathName": "pages/index/index",
-          "query": "",
-          "scene": null
-        },
-        {
-          "name": "pages/clients-looking-for-work/workingtop/workingtop",
-          "pathName": "pages/clients-looking-for-work/workingtop/workingtop",
-          "query": "",
-          "scene": null
-        },
-        {
-          "name": "pages/clients-looking-for-work/workingtop/workingtop",
-          "pathName": "pages/clients-looking-for-work/workingtop/workingtop",
-          "query": "",
-          "scene": null
-        },
-        {
-          "name": "pages/fast/area/area",
-          "pathName": "pages/fast/area/area",
-          "query": "",
-          "scene": null
-        },
-        {
-          "name": "下载页",
-          "pathName": "packageOther/pages/download/download-app",
-          "query": "",
-          "scene": null
-        },
-        {
+          "id": -1,
           "name": "pages/jsIssueResume/index",
           "pathName": "pages/jsIssueResume/index",
-          "query": "",
-          "scene": null
-        },
-        {
-          "name": "pages/clients-looking-for-work/finding-name-card/findingnamecard",
-          "pathName": "pages/clients-looking-for-work/finding-name-card/findingnamecard",
           "scene": null
         }
       ]
