@@ -159,7 +159,7 @@
   position: relative;
   line-height: 45rpx;
   font-size: 28rpx;
-  width: 140rpx;
+  width: 170rpx;
 }
 .issue-box .issue-phone-code{
   color: #0297fe;

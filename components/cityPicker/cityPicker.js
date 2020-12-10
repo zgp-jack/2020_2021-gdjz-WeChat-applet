@@ -1,7 +1,7 @@
 const app = getApp();
 Component({
 	properties: {
-
+		defaultData:Object
 	},
 	data: {
 		showPicker: false,
@@ -32,7 +32,9 @@ Component({
 		initAeraData() {
 			let newAreaData = wx.getStorageSync('newAreaData')
 			//默认选中第一个省
-			newAreaData[0].current = true
+			if(!this.data.defaultData){//如果没有默认城市数据才默认显示第一个
+				newAreaData[0].current = true
+			}
 			this.setData({
 				areaData: newAreaData
 			})
@@ -108,18 +110,12 @@ Component({
 						}
 						//当前没有选中市
 						if (dqcity == 0) {
-							// wx.showToast({
-							// 	title: '最多选择三个',
-							// })
 							return
 						}
 						//点击的不是全部
 					} else { //如果点击市 需要判断是否选中了全部 如果选中了 需要把全部取消 选中市 而不是直接给提示
 						//没有选中全部
 						if (!_cityData[0].ischeck) {
-							// wx.showToast({
-							// 	title: '最多选择三个',
-							// })
 							return
 						}
 					}
@@ -185,6 +181,41 @@ Component({
 			})
 			this.show()
 		},
+		//找出默认地区
+		defaultCity(id) {
+			let _areaData = this.data.areaData
+			for(let i = 0;i<_areaData.length;i++){
+				//给每个市的第一个添加全部
+				if(_areaData[i].children[0].name != '全部'){
+					_areaData[i].children.unshift({
+						'name':'全部'
+					})
+				}
+				//如果匹配到省 就选中全部
+				if(id == _areaData[i].id){
+					_areaData[i].childrenCheck = true
+					_areaData[i].children[0].ischeck = true
+					_areaData[i].current = true
+					this.setData({
+						areaData:_areaData,
+						cityData:_areaData[i].children
+					})
+					return
+				}
+				for(let n = 0;n<_areaData[i].children.length;n++){
+					if(_areaData[i].children[n].id == id){
+						_areaData[i].childrenCheck = true
+						_areaData[i].children[n].ischeck = true
+						_areaData[i].current = true
+						this.setData({
+							areaData:_areaData,
+							cityData:_areaData[i].children
+						})
+						return
+					}
+				}
+			}
+		}
 	},
 	lifetimes: {
 		ready: function () {
@@ -193,6 +224,9 @@ Component({
 				this.getAreaData()
 			} else {
 				this.initAeraData()
+			}
+			if(this.data.defaultData){
+				this.defaultCity(this.data.defaultData.provinces_id)
 			}
 		},
 	}

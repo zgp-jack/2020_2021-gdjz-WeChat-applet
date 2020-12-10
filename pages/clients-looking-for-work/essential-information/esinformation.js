@@ -51,7 +51,10 @@ Page({
     showheder:"showheder",
     model:{},
     checkonef:"",
-    note:""
+    note:"",
+    selectCityData: [],
+    selectCityName: [],
+    selectCityId:[],
   },
   // 点击隐藏键盘
   hiddenKeyBoard: function () {
@@ -900,6 +903,52 @@ Page({
 
 
   },
+  showCityPicker(){
+    this.selectComponent("#cityPicker").show();
+  },
+
+//选择期望地区 点击确定
+cityComfirm(e) {
+  this.setData({
+    selectCityData: [],
+    selectCityName: [],
+    selectCityId:[]
+  })
+  let _selectCityData = this.data.selectCityData
+  let areaData = e.detail.params
+  //找出选中的值
+  for (let i = 0; i < areaData.length; i++) {
+    for (let n = 0; n < areaData[i].children.length; n++) {
+      if (areaData[i].children[0].ischeck) {
+        let provinceSelect = {
+          name: areaData[i].name,
+          id: areaData[i].id
+        }
+        //如果选中全部 就不继续循环下面的市了
+        _selectCityData.push(provinceSelect)
+        break
+      } else if (areaData[i].children[n].ischeck) {
+        let citySelect = {
+          name: areaData[i].children[n].name,
+          id: areaData[i].children[n].id
+        }
+        _selectCityData.push(citySelect)
+      }
+    }
+  }
+  let _selectCityName = []
+  let _selectCityId = []
+  for (let i = 0; i < _selectCityData.length; i++) {
+    _selectCityName.push(_selectCityData[i].name)
+    _selectCityId.push(_selectCityData[i].id)
+  }
+  let _selectstr = _selectCityName.join(' | ')
+  this.setData({
+    selectCityData: _selectCityData,
+    selectCityName: _selectstr,
+    selectCityId: _selectCityId
+  })
+},
   /**
    * 生命周期函数--监听页面加载
    */

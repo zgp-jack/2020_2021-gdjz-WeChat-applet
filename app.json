@@ -68,7 +68,7 @@
     "pages/findwork-browsing-record/recordlist/index",
     "pages/recruitworker-browsing-record/recruit-worker-lists/index",
     "pages/recruitworker-browsing-record/recruit-worker-record/index",
-    "pages/publishfindwork/index"
+    "pages/jsIssueResume/index"
   ],
   "subpackages": [
     {
