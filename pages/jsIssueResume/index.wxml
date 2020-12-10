@@ -1,5 +1,5 @@
 <!--components/publishfindwork/publishfindword.wxml-->
-  <view class="publish-container" wx:if="{{ showfindwork }}">
+  <view class="publish-container">
   <!-- <view class="publish-contentbox"> -->
     <scroll-view scroll-y="{{isScroll}}" class="publish-scroll">
     <view class="{{ fastInfo.type === 2?'issue-title-no':'issue-title-box' }}">

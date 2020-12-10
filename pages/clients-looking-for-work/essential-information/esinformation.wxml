@@ -76,9 +76,12 @@
 
     <view class="informationtwi">
       <text class="informationtwione">人员构成</text>
-      <view class="informationtwitwo">
+      <picker bindchange="constitute" class="informationtwitwo"value="{{indexperson}}"  range="{{compositionarray}}" bindtap="hidekeyboard">
+        <input disabled  name="addcompositionarray" value="{{compositionarray[indexperson]}}" placeholder="请选择人员构成"></input>
+      </picker>
+      <!-- <view class="informationtwitwo">
         <input type="number" maxlength="5" placeholder="请选择人员构成"></input>
-      </view>
+      </view> -->
     </view>
 
     <view class="informationtwi">
@@ -137,6 +140,6 @@
       </view>
     </view>
   </view>
-  <cityPicker id="cityPicker" bindcityComfirm="cityComfirm" defaultData='{{}}/'></cityPicker>
+  <cityPicker id="cityPicker" bindcityComfirm="cityComfirm"></cityPicker>
 </view>
 <!-- getlocationdetails completes -->

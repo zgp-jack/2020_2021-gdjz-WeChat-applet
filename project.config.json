@@ -610,6 +610,12 @@
         {
           "name": "下载页",
           "pathName": "packageOther/pages/download/download-app",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "极速发布找活名片",
+          "pathName": "pages/jsIssueResume/index",
           "scene": null
         }
       ]
