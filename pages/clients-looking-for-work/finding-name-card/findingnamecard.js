@@ -122,11 +122,8 @@ Page({
     is_top_show:true,
     default_top_area:false,
     userTopArea:[],//初始化用户置顶城市数据
-    showFindCard:false, //是否展示找活名片
-    fastInfo:{},//快速发布招工信息
     pulishFindWork:false,//展示发布成功提示框
     publishWay: false,//是否展示发布置顶弹窗（有两个弹窗只会弹其中一个）
-    showTip: true,//快速找活名片展示多次onshow只进行一次设置
     refreshText: '',//刷新名片文本
     integral:'',//刷新消耗积分
     // 刷新提示框提示内容
@@ -766,17 +763,12 @@ Page({
             that.showtop()
             that.setData({
               resume_uuid: mydata.info.uuid,
-              showFindCard: true,
             })
             wx.setStorageSync("uuid", mydata.info.uuid)
           } else {
-            if (that.data.showTip) {
-              that.selectComponent("#pulishfindwork").show()
-            }
             that.setData({
               showtop: true,
               showtopone: false,
-              showTip: false
             })
           }
 
@@ -806,7 +798,6 @@ Page({
           }
           let cityid = mydata.info.hasOwnProperty("city")? parseInt(mydata.info.city) : 0
           let province = mydata.info.hasOwnProperty("province") ? mydata.info.province : 0
-          let fastInfo = mydata.hasOwnProperty('fast_info')?((Array.isArray(mydata.fast_info) && mydata.fast_info.length === 0)? {} : mydata.fast_info): {}
 
           that.setData({
             occupations_id: mydata.info.hasOwnProperty("occupations_id")?mydata.info.occupations_id : '',	
@@ -844,7 +835,6 @@ Page({
             default_top_area: mydata.hasOwnProperty("default_top_area")?mydata.default_top_area : false,
             refreshText: mydata.hasOwnProperty("refresh_text")?mydata.refresh_text:'',
             integral: mydata.hasOwnProperty("integral")?mydata.integral:'',
-            fastInfo: fastInfo 
           })
           if (mydata.hasOwnProperty("resume_top")) {
             if (mydata.resume_top.is_top == 1) {
@@ -1285,14 +1275,10 @@ Page({
       top_display: "none",
     })
   },
-  // 点击快速发布找活名片取消按钮显示找活名片详情
-  cancelPublish: function () {
-    this.setData({ showFindCard: true })
-  },
   // 刷新页面issok子组件调用方法
   refreshPage: function () {
     // 将是否展示发布成功提示框设置为true（要展示）
-    this.setData({pulishFindWork:true, publishWay:true, showFindCard: true,})
+    this.setData({ pulishFindWork:true, publishWay:true })
     // 重新获取数据
     this.getdetail();
     // 展示发布成功弹窗

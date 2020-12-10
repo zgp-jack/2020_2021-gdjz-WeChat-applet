@@ -1,4 +1,4 @@
-<view style="padding-bottom:120rpx;" wx:if="{{showFindCard}}">
+<view style="padding-bottom:120rpx;">
   <view class="cardcolore">
     <view class="findingnamecard">
       <text class="left-text">请完善以下信息</text>

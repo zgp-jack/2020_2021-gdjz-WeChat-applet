@@ -99,8 +99,6 @@ App({
       logoutWay: "",
       loginWay: "",
     },
-    // 招工信息详情界面是否展示快速发布找活名片
-    isShowFindWork: false,
     getNotice:{
       loginBefore:false,
       loginAfter:false
