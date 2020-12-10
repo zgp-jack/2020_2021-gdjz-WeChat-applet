@@ -1,7 +1,7 @@
 <!--components/promptBox/index.wxml-->
 <view class="prompt-container" wx:if="{{ show }}">
   <view class="prompt-box">
-    <view class="prompt-title" wx:if="{{ showTitle }}">温馨提示</view>
+    <view class="prompt-title" wx:if="{{ showTitle }}">{{title}}</view>
     <view class="prompt-title" wx:if="{{ showIcon }}"><image src="{{ icon }}"></image></view>
     <view class="prompt-content {{ !showTitle? 'margin':''}}">
       <block  wx:for="{{ content }}" wx:key="key">

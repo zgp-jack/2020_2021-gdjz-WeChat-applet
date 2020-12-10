@@ -11,7 +11,7 @@ App({
     member_less_info:{},
     callphone: '',
     procity: 0,
-    version: "1.0.6",
+    version: "1.0.7",
     complaincontent: '投诉内容不能少于5个字，必须含有汉字',
     areaIs: false,
     topshow: false,
@@ -102,7 +102,9 @@ App({
     getNotice:{
       loginBefore:false,
       loginAfter:false
-    }
+    },
+    // 是否当前第一次刷新找活名片 0 否 1 是
+    dayFirstRefresh: 0
   },
   //是否为极速发布与快速发布请求,快速发布与极速发布跳转
   initJobView: function () {
@@ -1545,6 +1547,77 @@ App({
       })
     }
   },
+  // 找活名片刷新成功提示框（当天首次刷新且未置顶 或 非当天首次刷新）弹窗
+  showTipBox: function (_this) {
+    let tipBox = {//提示框显示信息
+      showTitle: true,
+      showIcon: false,
+      showCancel: true,
+      confirmColor:'#0099FF',
+      cancelColor:'#797979',
+      content: [{
+        des: '刷新成功',
+        color: '',
+        text: []
+      }
+    ],
+      confirmText: '确定',
+      cancelText: '查看招工信息'
+    };
+    _this.setData({
+      tipBox: tipBox,
+      refreshStatus: true,
+      boxType: "refreshSuccess"
+    })
+    // 刷新成功
+    _this.selectComponent("#promptbox").show()
+    this.activeRefresh()
+  },
+  // 刷新找活名片未置顶且当天首次刷新
+  showFirstBox: function () {
+    wx.showModal({
+      title:'刷新成功',
+      content:'置顶找活名片，可以让您的名片长期处于刷新状态。',
+      cancelColor: '#0097FF',
+      cancelColor:'#797979',
+      cancelText:'取消',
+      confirmText:'去置顶',
+      success: function (res) {
+        if (res.cancel) {
+          let dueDate = (new Date(new Date().toLocaleDateString())).getTime() +  (24 * 60 * 60 * 1000 - 1);
+          wx.setStorageSync('canceRefreshTime', dueDate)
+        }
+        if (res.confirm) {
+          // 是否置顶过
+          let hasTop = resumeTop.has_top;
+          // 如果需要去完善数据跳转去发布填写找活名片界面
+          let topdata = JSON.stringify(resumeTop)
+          // 置顶状态
+          let isTop = resumeTop.is_top;
+          // 审核状态
+          if (!hasTop) {
+            wx.navigateTo({
+              url: "/pages/clients-looking-for-work/workingtop/workingtop?topdata=" + topdata + "&defaulttop=" + defalutTop,
+            })
+          }else{
+            if (isTop == '2') {
+              // 置顶到期
+              wx.navigateTo({
+                url: "/pages/clients-looking-for-work/workingtop/workingtop?topdata=" + topdata + "&defaulttop=" + defalutTop,
+              })
+            }else{
+              // 修改置顶或者继续置顶
+              let modify = "modify";
+              wx.navigateTo({
+                url: `/pages/clients-looking-for-work/workingtop/workingtop?topdata=${topdata}&modify=${modify}`,
+              })
+            }
+          }
+        }
+      }
+    })
+  },
+
   // 刷新找活名片请求(找工作列表与找活名片使用)
   refreshReq: function (source,_this) {
     // source  1-找活名片编辑页；2-招工列表引导弹窗
@@ -1552,6 +1625,10 @@ App({
     let that = this
     let url = '/pages/getintegral/getintegral';
     let userInfo = wx.getStorageSync('userInfo')
+    // 获取用户未置顶当天首次刷新点击取消时间戳
+    let canceRefreshTime = wx.getStorageSync("canceRefreshTime")
+    // 当前时间戳
+    let nowTime = new Date().getTime()
     if (!userInfo) return
     // 用户token
     let token = userInfo.token;
@@ -1564,78 +1641,101 @@ App({
         if (mydata.errcode === "ok") {
           let currentTime = new Date().getTime();
           let reqDueTime = currentTime + 3000;
-          let refreshStatus = mydata.data.refresh_status;
-          _this.setData({reqDueTime, reqStatus:true, refreshStatus})
-          if (refreshStatus === 0) {
-            // 该信息处于审核中或审核失败状态
-            wx.showModal({
-              title: '温馨提示',
-              content: '找活名片审核通过后即可刷新',
-              showCancel: false,
-            })
-          }else if(refreshStatus === 1){
-            // 该信息处于已找到工作状态
-            wx.showModal({
-              title: '温馨提示',
-              content: '请将工作状态修改为<正在找工作>,审核通过后即可刷新名片',
-              showCancel: source === 1? false: true,
-              confirmText: source === 1? "确定":"去更改",
-              success: function (res) {
-                if (res.confirm) {
-                  if (source === 2) {
+          _this.setData({reqDueTime, reqStatus:true})
+          if (mydata.data.hasOwnProperty("refresh_status")) {
+            _this.setData({refreshStatus})
+            let refreshStatus = mydata.data.refresh_status;
+            if (refreshStatus === 0) {
+              // 该信息处于审核中或审核失败状态
+              wx.showModal({
+                title: '温馨提示',
+                content: '找活名片审核通过后即可刷新',
+                showCancel: false,
+              })
+            }else if(refreshStatus === 1){
+              // 该信息处于已找到工作状态
+              wx.showModal({
+                title: '温馨提示',
+                content: '请将工作状态修改为<正在找工作>,审核通过后即可刷新名片',
+                showCancel: source === 1? false: true,
+                confirmText: source === 1? "确定":"去更改",
+                success: function (res) {
+                  if (res.confirm) {
+                    if (source === 2) {
+                      wx.navigateTo({
+                        url: '/pages/clients-looking-for-work/finding-name-card/findingnamecard',
+                      })
+                    }
+                  }
+                }
+              })
+            }else if(refreshStatus === 2){
+              // 该用户积分不足
+              wx.showModal({
+                title: '温馨提示',
+                content: '您当前的正式积分不足，是否前往获取积分？',
+                cancelText: "否",
+                confirmText: "是",
+                success: function (res) {
+                  if (res.confirm) {
                     wx.navigateTo({
-                      url: '/pages/clients-looking-for-work/finding-name-card/findingnamecard',
+                      url: url,
                     })
                   }
                 }
+              })
+            }else if(refreshStatus === 3){
+              if (source === 2) {
+                let tipBox = {//提示框显示信息
+                  showTitle: false,
+                  showIcon: true,
+                  showCancel: false,
+                  confirmColor:'#0099FF',
+                  cancelColor:'#797979',
+                  content: [{
+                    des: '刷新成功',
+                    color: '##85963',
+                    text: []
+                  }
+                ],
+                  confirmText: '确定'
+                };
+                _this.setData({
+                  tipBox: tipBox,
+                  refreshStatus: true
+                })
               }
-            })
-          }else if(refreshStatus === 2){
-            // 该用户积分不足
-            wx.showModal({
-              title: '温馨提示',
-              content: '您当前的正式积分不足，是否前往获取积分？',
-              cancelText: "否",
-              confirmText: "是",
-              success: function (res) {
-                if (res.confirm) {
-                  wx.navigateTo({
-                    url: url,
-                  })
-                }
-              }
-            })
-          }else if(refreshStatus === 3){
-            if (source === 2) {
-              let tipBox = {//提示框显示信息
-                showTitle: false,
-                showIcon: true,
+              // 刷新成功
+              _this.selectComponent("#promptbox").show()
+              that.activeRefresh()
+            }else if(refreshStatus === 4){
+              // 刷新失败
+              wx.showModal({
+                title: '温馨提示',
+                content: '刷新失败',
                 showCancel: false,
-                confirmColor:'#0099FF',
-                cancelColor:'#797979',
-                content: [{
-                  des: '刷新成功',
-                  color: '##85963',
-                  text: []
-                }
-              ],
-                confirmText: '确定'
-              };
-              _this.setData({
-                tipBox: tipBox,
-                refreshStatus: true
               })
             }
-            // 刷新成功
-            _this.selectComponent("#promptbox").show()
-            that.activeRefresh()
-          }else if(refreshStatus === 4){
-            // 刷新失败
-            wx.showModal({
-              title: '温馨提示',
-              content: '刷新失败',
-              showCancel: false,
-            })
+          }
+          if (mydata.data.hasOwnProperty("is_top")) {
+            that.globalData.dayFirstRefresh = 1
+            if (isTop) {
+              that.showTipBox(_this)
+            }else{
+              if (that.globalData.dayFirstRefresh) {
+                if (!canceRefreshTime) {
+                  that.showFirstBox()
+                }else{
+                  if (nowTime > canceRefreshTime) {
+                    that.showTipBox(_this)
+                  } else {
+                    that.showTipBox(_this)
+                  }
+                }
+              }else{
+                that.showTipBox(_this)
+              }
+            }
           }
         } else {
           wx.showModal({

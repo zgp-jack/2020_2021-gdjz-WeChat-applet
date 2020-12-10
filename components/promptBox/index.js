@@ -7,7 +7,7 @@ Component({
   properties: {
     title: {
       type: String,
-      value: '提示'
+      value: '温馨提示'
     },
     // 是否展示标题
     showTitle: {
@@ -67,6 +67,11 @@ Component({
     showClose: {
       type: Boolean,
       value: false
+    },
+    // 关闭弹窗icon
+    closeIcon: {
+      type: String,
+      value: app.globalData.apiImgUrl + 'mini-close-icon.png',
     }
   },
 
@@ -86,17 +91,53 @@ Component({
         show: true
       })
     },
+    close() {
+      this.setData({
+        show: false,
+        title: '提示',
+        showTitle: true,
+        showIcon: false,
+        showCancel: true,
+        confirmText:'确定',
+        cancelText:'取消',
+        confirmColor:'#576B95',
+        cancelColor:'#000000',
+        content: [],
+        showClose: false
+      })
+      this.triggerEvent('close')
+    },
     // 取消函数
     cancel() {
       this.setData({
-        show: false
+        show: false,
+        title: '提示',
+        showTitle: true,
+        showIcon: false,
+        showCancel: true,
+        confirmText:'确定',
+        cancelText:'取消',
+        confirmColor:'#576B95',
+        cancelColor:'#000000',
+        content: [],
+        showClose: false
       })
       this.triggerEvent('cancel')
     },
     // 确认函数
     confirm() {
       this.setData({
-        show: false
+        show: false,
+        title: '提示',
+        showTitle: true,
+        showIcon: false,
+        showCancel: true,
+        confirmText:'确定',
+        cancelText:'取消',
+        confirmColor:'#576B95',
+        cancelColor:'#000000',
+        content: [],
+        showClose: false
       })
       this.triggerEvent('confirm')
     }

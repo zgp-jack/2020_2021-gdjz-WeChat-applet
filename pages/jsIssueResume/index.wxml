@@ -45,7 +45,6 @@
       <!-- <button class="issue-code-btn" plain="true" bindtap="closeFindWork">取消</button> -->
       <button class="issue-code-btn" type="primary" bindtap="publishFindWork">确认发布</button>
     </view>
-    <view class="issue-cloose-tip" wx:if="{{ !fastInfo.type }}" bindtap="clooseTip">暂不提示</view>
   <!-- </view> -->
   <!-- 选择城市组件 -->
   <cityPicker id="cityPicker" bindcityComfirm="cityComfirm" defaultData="{{initIssueData}}"></cityPicker>

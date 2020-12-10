@@ -127,15 +127,28 @@ Page({
     refreshText: '',//刷新名片文本
     integral:'',//刷新消耗积分
     // 刷新提示框提示内容
-    tipContent: [{
-      des: '刷新成功',
-      color: '#585963',
-      text:[]
-    }],
+    tipBox: {//提示框显示信息
+      title: '',
+      showTitle: true,
+      showIcon: false,
+      showCancel: true,
+      confirmColor:'',
+      cancelColor:'',
+      content: [{
+        des: '',
+        color: '',
+        text:[],
+      }],
+      confirmText: '',
+      cancelText: '',
+      showClose: false
+    },
     // 刷新成功icon
     successIcon:app.globalData.apiImgUrl + 'yc/findwork-publish-success.png',
     reqStatus:false,//刷新请求状态
     show_refresh_btn:true,//是否展示刷新名片
+    dayfirst: false, //是否是当天第一次从置顶界面返回（未成功置顶）
+    todayRefresh: 0,//是否是当天第一次刷新
   },
 
 
@@ -836,10 +849,13 @@ Page({
             default_top_area: mydata.hasOwnProperty("default_top_area")?mydata.default_top_area : false,
             refreshText: mydata.hasOwnProperty("refresh_text")?mydata.refresh_text:'',
             integral: mydata.hasOwnProperty("integral")?mydata.integral:'',
+            todayRefresh: mydata.hasOwnProperty("is_refreshed_today")?mydata.is_refreshed_today: 0
           })
+          if (mydata.hasOwnProperty("is_refreshed_today")) {
+            app.globalData.dayFirstRefresh = mydata.is_refreshed_today
+          }
           if (mydata.hasOwnProperty("resume_top")) {
             if (mydata.resume_top.is_top == 1) {
-              
               that.setData({
                 indextop: 0,
                 is_top_show: false,
@@ -1279,12 +1295,10 @@ Page({
       top_display: "none",
     })
   },
-  // 刷新页面issok子组件调用方法
+  // 刷新页面issuok子组件调用方法
   refreshPage: function () {
     // 将是否展示发布成功提示框设置为true（要展示）
-    this.setData({ pulishFindWork:true, publishWay:true })
-    // 重新获取数据
-    this.getdetail();
+    this.setData({ pulishFindWork:true, publishWay:true, })
     // 展示发布成功弹窗
     this.showPublishTip()
   },
@@ -1292,8 +1306,15 @@ Page({
   showPublishTip: function () {
     let pulishFindWork = this.data.pulishFindWork;
     if (pulishFindWork) {
-      this.selectComponent("#publishtip").show()
-      this.setData({pulishFindWork:false})
+      this.setData({
+        "tipBox.title": "发布成功",
+        "tipBox.content[0].des":"置顶找活名片，让更多老板能看到你，找更多活！",
+        "tipBox.confirmText": "去置顶",
+        "tipBox.cancelText": "查看招工信息",
+        "tipBox.showclose" : true,
+        pulishFindWork:false
+      })
+      this.selectComponent("#pulishfindwork").show()
     }
   },
   //去实名
@@ -1367,12 +1388,116 @@ Page({
       }
     }
   },
+  // 点击弹窗取消按钮
+  tapCancel: function () {
+    let defaultTop = this.data.default_top_area
+    if (defaultTop) {
+      wx.navigateTo({
+        url: '/pages/index/index',
+      })
+      this.setData({ defaultTop: false })
+      wx.setStorageSync("areaText")
+      wx.setStorageSync("areaId")
+      wx.setStorageSync("typeText")
+      wx.setStorageSync("typeId")
+    }
+  },
+  // 点击弹窗确定按钮
+  tapConfirm: function () {
+    // 快速发布找活名片默认置顶城市
+    let defaultTop = this.data.default_top_area
+    if (defaultTop) {
+      wx.navigateTo({
+        url: `/pages/clients-looking-for-work/workingtop/workingtop?defaulttop=${defaultTop}`,
+      })
+      this.setData({ defaultTop: false })
+    }
+  },
+  // 从置顶页面返回（未置顶）弹窗
+  todayRefresh: function () {
+    let that = this
+    //获取页面栈
+    let pages = getCurrentPages();
+    // 获取缓存
+    if(pages.length > 1) {
+      let index = pages.length - 1
+      let path = pages[index].__displayReporter.showReferpagepath
+      path = path.slice(0, -5)
+      if (path == "pages/clients-looking-for-work/workingtop/workingtop") {
+        wx.showModal({
+          title: "温馨提示",
+          content: "您可以刷新找活名片，让更多老板看到您的找活信息！",
+          confirmText: "去刷新",
+          confirmColor: "#797979",
+          cancelColor: "#0097FF",
+          success: function (res) {
+            if (res.confirm) {
+              that.refreshCard()
+            }
+            if (res.cancel) {
+              let myDate = new Date();
+              // 当前时间戳
+              let currentTime = myDate.getTime();
+              // 到期时间戳（23:59:59）
+              let dueDate = (new Date(new Date().toLocaleDateString())).getTime() +  (24 * 60 * 60 * 1000 - 1);
+              // let dueDate = currentTime +  (2 * 60 * 1000 - 1);
+              // 当天没有刷新过且未置顶返回找活名片缓存（是否当天第一次返回，到期时间）
+              let topBackRefresh = {currentTime:currentTime,dueDate:dueDate};
+              wx.setStorageSync("topBackRefresh",topBackRefresh)
+            }
+          }
+        })
+      }
+    }
+  },
+  // 从找活名片点击去置顶没有置顶成功返回提示框
+  noTopTipBox: function () {
+    // 当前时间戳
+    let currentTime = new Date().getTime();
+    // 找活名片置顶数据
+    let topData = this.data.resume_top;
+    // 找活名片是否置顶过
+    let hasTop = topData.has_top;
+    // 找活名片置顶状态
+    let isTop = topData.is_top;
+    // 是否是当天第一次从置顶界面返回（未成功置顶),当天多次返回只是第一次展示提示框
+    let todayRefresh = this.data.is_refresh_today;
+    // 当天没有刷新过且未置顶返回找活名片缓存（是否当天第一次返回，到期时间）
+    let topBackRefresh = wx.getStorageSync('topBackRefresh')
+    if (!hasTop || (hasTop && !isTop)) {
+      // 如果当天没有刷新过
+      if (!todayRefresh) {
+        // 如果置顶未置顶且是当天第一次返回
+        if (!topBackRefresh) {
+          this.todayRefresh()
+        }else{
+          if (currentTime > topBackRefresh.dueDate) {
+            this.todayRefresh()
+          }
+        }
+      }
+    }
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    //获取页面栈
+    let pages = getCurrentPages();
     this.authrasution();
     this.cardjump(options)
+    // 如果是从快速发布找活名片到我的找活名片展示发布成功弹窗
+    if (options.hasOwnProperty("defaultTop")) {
+      if(pages.length > 1) {
+        let index = pages.length - 1
+        let path = pages[index].__displayReporter.showReferpagepath
+        path = path.slice(0, -5)
+        if (path == "pages/jsIssueResume/index") {
+          this.setData({ default_top_area: options.defalutTop})
+          this.refreshPage()
+        }
+      }
+    }
   },
   /**
    * 生命周期函数--监听页面初次渲染完成
@@ -1392,6 +1517,7 @@ Page({
     app.getAreaData(this)
     app.globalData.previewshou = true;
     app.activeRefresh()
+    this.noTopTipBox
   },
 
   /**

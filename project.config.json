@@ -610,6 +610,18 @@
         {
           "name": "下载页",
           "pathName": "packageOther/pages/download/download-app",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/jsIssueResume/index",
+          "pathName": "pages/jsIssueResume/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/clients-looking-for-work/finding-name-card/findingnamecard",
+          "pathName": "pages/clients-looking-for-work/finding-name-card/findingnamecard",
           "scene": null
         }
       ]
