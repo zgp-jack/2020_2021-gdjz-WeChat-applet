@@ -16,28 +16,16 @@
         <input disabled name="addregion" value="{{array[indexsex]}}" placeholder="请选择性别"></input>
       </picker>
     </view>
-    <view class="informationfour">
-      <text class="informationtwione">出生日期</text>
-      <view class="informationfourtwo">
-        <picker mode="date" value="{{birthday}}" start="{{beforeDate}}" end="{{emdDate}}" bindchange="birthday">
-          <input disabled name="addtime" value="{{birthday}}" placeholder="请选择出生日期"></input>
-        </picker>
-      </view>
-    </view>
     <view class="informationfive" bindtap="hiddenKeyBoard">
       <text class="informationtwione">民族</text>
       <picker bindchange="nation" range="{{nationalarray}}" class="informationfivetwo" value="{{nationindex}}">
         <input disabled name="addnational" value="{{nationalarray[nationindex]}}" placeholder="请选择民族"></input>
       </picker>
     </view>
-
+    
     <view class="informationpeople">
-
-
       <text class="informationtwione">所属工种</text>
       <text bindtap="typeworktwo" class=' {{ workIndexvalue.length==5 ? "informationTypeworktwo":"informationTypeworktwoo" }}'>{{workIndexvalue}}</text>
-
-
       <view class='publish-choose-wordtype' wx:if="{{ showWorkType }}">
         <view class='publish-choose-contentbox common-shaded-box'>
           <view class='publish-choose-header'>选择工种（可多选）</view>
@@ -57,8 +45,22 @@
       </view>
     </view>
 
+    <view class="informationtwi">
+      <text class="informationtwione">工龄</text>
+      <view class="informationtwitwo">
+        <input type="number" placeholder="请输入工龄"></input>
+      </view>
+    </view>
+
+    <view class="informationtwi">
+      <text class="informationtwione" style="text-align:left">期望工作地</text>
+      <view class="informationtwitwo" bindtap="showCityPicker">
+        <input type="text" placeholder="请选择期望工作地" value="{{selectCityName}}"></input>
+      </view>
+    </view>
+
     <view class="informationseven">
-      <view class="informaregiononede"><text>期望地区</text></view>
+      <view class="informaregiononede"><text>当前所在地</text></view>
       <view class="informationseventwo">
         <!-- <input name="addregionone" disabled="true" placeholder="请选择你所在地址" bindtap='userTapAddress' value='{{regionone}}'>
         </input> -->
@@ -68,17 +70,25 @@
         <view class="informaregionone" bindtap='userTapAddress' wx:if="{{!regionone}}" >
          <view class="informaselect" >请选择你所在地址</view> 
         </view>
-        <!-- <view class="informationdos">
-
-        </view> -->
-                  <text class="positioning" bindtap="GPSsubmit">获取定位</text>
+        <text class="positioning" bindtap="GPSsubmit">获取定位</text>
       </view>
     </view>
 
-  </view>
-  <view class="informationtelephone">
+    <view class="informationtwi">
+      <text class="informationtwione">人员构成</text>
+      <view class="informationtwitwo">
+        <input type="number" maxlength="5" placeholder="请选择人员构成"></input>
+      </view>
+    </view>
+
+    <view class="informationtwi">
+      <text class="informationtwione">队伍人数</text>
+      <view class="informationtwitwo">
+        <input type="number" maxlength="5" placeholder="请选择人员构成"></input>
+      </view>
+    </view>
     <view class="informationtheinput">
-      <text class="informationtwione">手机号码</text>
+      <text class="informationtwione">联系电话</text>
       <view class="informationtheinputtwo">
         <input type="text" placeholder="请输入手机号" value="{{telephone}}" bindinput="telephone"></input>
       </view>
@@ -95,6 +105,8 @@
         </view>
       </view>
     </view>
+  
+
   </view>
 
   <view class="informationevaluation">
@@ -125,6 +137,6 @@
       </view>
     </view>
   </view>
-
+  <cityPicker id="cityPicker" bindcityComfirm="cityComfirm" defaultData='{{}}/'></cityPicker>
 </view>
 <!-- getlocationdetails completes -->

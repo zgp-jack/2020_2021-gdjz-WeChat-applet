@@ -1,8 +1,7 @@
 <view style="padding-bottom:120rpx;" wx:if="{{showFindCard}}">
   <view class="cardcolore">
     <view class="findingnamecard">
-      <text class="left-text">请完善以下信息</text>
-      <view class="sharecard" wx:if="{{showtopone}}" bindtap="preview">预览/分享名片</view>
+      <text>置顶找活信息能让你的名片展示更靠前，让更多老板看到</text>
     </view>
   </view>
   <!-- {{selectShow&&"select_img_rotate"}} show_tips editor -->
@@ -18,9 +17,9 @@
           <text class="view_num">{{view_num}}</text>
         </view>
         <view class="isline" wx:if="{{showcomplete}}">
-          <button class="shareliveone" bindtap="completeall">名片越完善 找活越容易,马上去完善>>
-
-          </button>
+          <button class="shareliveone" bindtap="completeall"  wx:if="{{project.length < 1}}">资料越完善 找活越容易,马上去完善>></button>
+          <button class="shareliveone" bindtap="goRealName" wx:if="{{authenticationimg != 2 && project.length > 0}}">招工方更喜欢找实名的工人哦！马上去实名>></button>
+          
           <text class="sontwoview">浏览次数</text>
         </view>
         <view class="isline" wx:if="{{!showcomplete}}">
@@ -142,11 +141,14 @@
               </view>
             </view>
           </view>
-          <view class="cardtwosontwo" wx:if="{{!checkone && checkonef != '0'}}">
-            <text bindtap="edit">编辑</text>
-          </view>
           <view class="cardtwosontwo" wx:if="{{checkonef == '0'}}">
             <text bindtap="edit">待修改</text>
+          </view>
+          <view class="cardtwosontwo" wx:if="{{!checkone && is_introduces == '0'}}">
+            <text bindtap="edit">完善质料</text>
+          </view>
+          <view class="cardtwosontwo" wx:if="{{!checkone && is_introduces == '1'}}">
+            <text bindtap="edit">编辑</text>
           </view>
         </view>
         <view class="lineone">
@@ -530,10 +532,11 @@
   <button bindtap="activeRefresh" class="cardnineone" open-type='share'>
     <image src="{{participation}}"></image>分享</button>
 </view> -->
-<view class="cardnine" wx:if="{{showtopone}}">
+<view class="cardnine" wx:if="{{showtopone && show_refresh_btn == 1}}">
   <view class="cardnineone">
     <view>提升活跃度，让更多老板看到你的名片</view>
-    <view>{{ refreshText }}(消耗{{ integral }}积分/次)</view>
+    <!-- <view>{{ refreshText }}(消耗{{ integral }}积分/次)</view> -->
+    <view><text class="important">消耗{{integral}}积分</text>即可刷新找活名片（无上限）</view>
   </view>
   <button class="cardnineone" bindtap="refreshCard">刷新名片</button>
 </view>

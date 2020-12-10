@@ -32,7 +32,7 @@ Component({
 		initAeraData() {
 			let newAreaData = wx.getStorageSync('newAreaData')
 			//默认选中第一个省
-			if(!this.data.defaultData.provinces_id){//如果没有默认城市数据才默认显示第一个
+			if(!this.data.defaultData){//如果没有默认城市数据才默认显示第一个
 				newAreaData[0].current = true
 			}
 			this.setData({
@@ -185,6 +185,12 @@ Component({
 		defaultCity(id) {
 			let _areaData = this.data.areaData
 			for(let i = 0;i<_areaData.length;i++){
+				//给每个市的第一个添加全部
+				if(_areaData[i].children[0].name != '全部'){
+					_areaData[i].children.unshift({
+						'name':'全部'
+					})
+				}
 				//如果匹配到省 就选中全部
 				if(id == _areaData[i].id){
 					_areaData[i].childrenCheck = true
@@ -219,7 +225,9 @@ Component({
 			} else {
 				this.initAeraData()
 			}
-			this.defaultCity(this.data.defaultData.provinces_id)
+			if(this.data.defaultData){
+				this.defaultCity(this.data.defaultData.provinces_id)
+			}
 		},
 	}
 })

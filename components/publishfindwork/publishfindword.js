@@ -547,7 +547,7 @@ Component({
       if (!id && _selectCityId) {
         wx.showModal({
           title: '提示',
-          content: "请选择招工城市。",
+          content: "请选择期望地区。",
           showCancel: false
         })
         return false
@@ -592,6 +592,7 @@ Component({
       }
       // 发送请求参数
       let params = {
+        //请选择地区 去掉s 
         provinces: _selectCityId,
         city: parseInt(id),
         tel: parseInt(phone),
@@ -601,7 +602,6 @@ Component({
         token,
         tokenTime,
       }
-      debugger
       app.appRequestAction({
         url: 'resumes/add-fast-resume/',
         way: 'POST',
@@ -702,7 +702,8 @@ Component({
     cityComfirm(e) {
       this.setData({
         selectCityData: [],
-        selectCityName: []
+        selectCityName: [],
+        selectCityId:[]
       })
       let _selectCityData = this.data.selectCityData
       let areaData = e.detail.params

@@ -11,7 +11,7 @@
     </view>
     <view class="issue-contactbox">
       <view class="issue-box" bindtap="hideKeyboard">
-        <text>期望地区：</text>
+        <text>期望工作地：</text>
         <!-- <picker  mode="multiSelector" 
           bindchange="bindPickerChange" 
           bindcolumnchange="bindMultiPickerColumnChange" 
@@ -20,7 +20,7 @@
           range-key="name">
           <input placeholder="请选择招工城市" disabled class="issue-input" value="{{ areatext }}"></input>
         </picker> -->
-        <input placeholder="请选择期望地区" disabled class="issue-input" value="{{ selectCityName }}"></input>
+        <input placeholder="请选择期望工作地" disabled class="issue-input" value="{{ selectCityName }}"></input>
       </view>
       <view class="issue-box-worktype">
         <view class="issue-box" bindtap="showWorkTypePicker"> 

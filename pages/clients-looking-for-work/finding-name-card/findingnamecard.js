@@ -138,6 +138,7 @@ Page({
     // 刷新成功icon
     successIcon:app.globalData.apiImgUrl + 'yc/findwork-publish-success.png',
     reqStatus:false,//刷新请求状态
+    show_refresh_btn:true,//是否展示刷新名片
   },
 
 
@@ -1113,6 +1114,9 @@ Page({
           that.redorblue()
           that.showskill();
           that.gettiner()
+          that.setData({
+            show_refresh_btn:mydata.show_refresh_btn
+          })
         } else {
           wx.showModal({
             title: '温馨提示',
@@ -1305,6 +1309,12 @@ Page({
       this.selectComponent("#publishtip").show()
       this.setData({pulishFindWork:false})
     }
+  },
+  //去实名
+  goRealName:function(){
+    wx.navigateTo({
+      url: '/pages/realname/realname',
+    })
   },
   
   // 刷新找活名片
