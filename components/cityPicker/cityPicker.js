@@ -45,7 +45,6 @@ Component({
 				})
 				this.handleProvinceClick(0)
 			}
-		
 		},
 		//切换省的时候 Provincei=省的index
 		handleProvinceClick(Provincei) {
@@ -207,6 +206,8 @@ Component({
 						if (j == 0) {
 							_areaData[i].current = true
 							this.handleProvinceClick(i)
+						}else{
+							_areaData[i].current = false
 						}
 					}else{
 						let children = _areaData[i].children
@@ -217,6 +218,8 @@ Component({
 							if (j == 0) {
 								_areaData[i].current = true
 								this.handleProvinceClick(i)
+							}else{
+								_areaData[i].current = false
 							}
 						}else{
 							_areaData[i].current = false
@@ -227,7 +230,6 @@ Component({
 			this.setData({
 				areaData:_areaData,
 			})
-			console.log("_areaData",_areaData)
 		}
 	},
 
@@ -248,7 +250,7 @@ Component({
 		"defaultData": function (newVal){
 			console.log("newVal",newVal)
 			let newAreaData = wx.getStorageSync('newAreaData')
-
+			this.setData({ selectArea: newVal })
 			if (!newAreaData) {
 				this.getAreaData(newVal)
 			} else {
