@@ -184,6 +184,13 @@ Component({
 		//找出默认地区
 		defaultCity(id) {
 			let _areaData = this.data.areaData
+			let defaultArr = []
+			if(id.indexOf(',') !== -1){//多个默认城市
+				defaultArr = id.split(',')
+
+			}else{//只有一个默认城市
+
+			}
 			for(let i = 0;i<_areaData.length;i++){
 				//给每个市的第一个添加全部
 				if(_areaData[i].children[0].name != '全部'){
@@ -191,6 +198,8 @@ Component({
 						'name':'全部'
 					})
 				}
+				
+				
 				//如果匹配到省 就选中全部
 				if(id == _areaData[i].id){
 					_areaData[i].childrenCheck = true

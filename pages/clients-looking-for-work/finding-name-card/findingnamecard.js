@@ -149,6 +149,7 @@ Page({
     show_refresh_btn:true,//是否展示刷新名片
     dayfirst: false, //是否是当天第一次从置顶界面返回（未成功置顶）
     todayRefresh: 0,//是否是当天第一次刷新
+    provinces_txt:""//期望工作地
   },
 
 
@@ -826,6 +827,7 @@ Page({
             occupations: mydata.info.hasOwnProperty("miniInfoOccupations") ? mydata.info.miniInfoOccupations : "",
             telephone: mydata.info.hasOwnProperty("tel") ? mydata.info.tel : "",
             city: mydata.info.hasOwnProperty("address") ? mydata.info.address : "",
+            provinces_txt:mydata.info.hasOwnProperty("provinces_txt") ? mydata.info.provinces_txt : "",
             intro: false,
             introne: true,
             introduce: mydata.info.hasOwnProperty("introduce") ? (mydata.info.introduce == "" ? "请简要介绍您所从事行业以及工作经验..." : mydata.info.introduce) : "",

@@ -60,6 +60,7 @@
     </view>
 
     <view class="informationtwi" wx:if="{{editType == 'bj'}}">
+      <!-- <view class="informationtwi"> -->
       <text class="informationtwione" style="text-align:left">期望工作地</text>
       <view class="informationtwitwo" bindtap="showCityPicker">
         <input type="text" placeholder="请选择期望工作地" value="{{selectCityName}}"></input>

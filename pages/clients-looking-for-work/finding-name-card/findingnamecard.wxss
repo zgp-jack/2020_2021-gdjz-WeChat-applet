@@ -630,9 +630,8 @@ height: 26rpx;
 
 .cardtwosonone .cardtwosononeimg .oimgone .otextone {
   font-size: 30rpx;
-  color: black;
+  color: #6C6B6B;
   margin-top: 6rpx;
-
 }
 
 .cardtwosonone .cardtwosononeimg .oimgone .otextone .ochange {
@@ -645,6 +644,7 @@ height: 26rpx;
   line-height: 88rpx;
   position: absolute;
   right: 0;
+  z-index: 99;
 }
 .cardcoloreno{
   background: #fffbf7;
@@ -706,7 +706,7 @@ height: 26rpx;
 }
 
 .cardotext .workotextone {
-  color: #222;
+  color: #6C6B6B;
   font-size: 30rpx;
   padding-left: 28rpx;
   width: 70%;
@@ -1177,7 +1177,7 @@ top: -14rpx;
 
 .contentone {
   font-size: 30rpx;
-  color: black;
+  color: #797979;
   margin-left: 7.5%;
   margin-bottom: 8rpx;
   padding-right: 2%;
@@ -1208,12 +1208,12 @@ top: -14rpx;
 }
 
 .cardotext .oworkotext {
-  width: 20.5%;
+  width: 22.5%;
   margin: 0;
   padding: 0;
   height: 34rpx;
   display: inline-block;
-  color: #555;
+  color: #7A7A7A;
   font-size: 30rpx;
   /* width: 100%; *//* margin-top: 14rpx;
   margin-bottom: 6rpx; */
@@ -1675,7 +1675,7 @@ color: #6d6b6b;
 }
 
 .ocworkotype {
-  width: 20.5%;
+  width: 22.5%;
   left: 0;
   top: 0;
   display: inline-block;
@@ -1707,12 +1707,12 @@ color: #6d6b6b;
 
 .ocworkotyp {
   position: relative;
-  left: 28rpx;
+  left: 46rpx;
   font-size: 0;
 }
 
 .ocworkotyp .ocworkotyptu {
-  color: rgba(42, 42, 42, 1);
+  color: #414141;
   font-size: 28rpx;
   display: inline-block;
   padding: 4rpx 10rpx;

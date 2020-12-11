@@ -619,7 +619,7 @@ Page({
     }
 
     //期望地区
-    if((this.dataeditType == 'bj' || this.data.introinfo.experience == 0) && vertifyNum.isNull(this.data.selectCityName)){
+    if((this.dataeditType == 'bj') && vertifyNum.isNull(this.data.selectCityName)){
       reminder.reminder({ tips: '期望地区' })
       return
     }
@@ -689,7 +689,7 @@ Page({
     if (vertifyNum.isNull(this.data.otextareavalue) || !vertifyNum.isChinese(this.data.otextareavalue)) {
       wx.showModal({
         title: '温馨提示',
-        content: '请填写真实自我介绍，15-500字，必须含有汉字',
+        content: '请填写真实自我介绍，5-500字，必须含有汉字',
         showCancel: false,
         success(res) { }
       })
@@ -713,6 +713,10 @@ Page({
       lng: this.data.longitude,
       address: this.data.regionone,
       adcode: this.data.oadcode,
+      provinces: String(this.data.selectCityId),
+      experience: this.data.workage,
+      type: String(this.data.constituttion),
+      number_people: this.data.teamsnumber
     })
     
     if (JSON.stringify(information) == JSON.stringify(this.data.model) && this.data.checkonef == '0'){
@@ -886,7 +890,7 @@ Page({
     let introinfo = wx.getStorageSync("introinfo");
 
     this.setData({
-      name: introinfo.hasOwnProperty("username") ? introinfo.username : "",
+      name: introinfo.username !== '先生' ? introinfo.username : "",
       indexsex: introinfo.hasOwnProperty("gender") ? introinfo.gender - 1 : "",
       sex: introinfo.hasOwnProperty("gender") ? introinfo.gender : "",
       birthday: introinfo.hasOwnProperty("birthday") ? introinfo.birthday : "",
@@ -901,9 +905,9 @@ Page({
       otextareavaluel: introinfo.hasOwnProperty("introduce") ? introinfo.introduce ? introinfo.introduce.length : 0 : 0,
       checkonef: introinfo.hasOwnProperty("check") ? introinfo.check : "",
       note: introinfo.hasOwnProperty("note") ? introinfo.note : "",
-      workage: introinfo.hasOwnProperty("experience") ? introinfo.experience : ""
+      workage: introinfo.hasOwnProperty("experience") ? introinfo.experience : "",
+      selectCityId: introinfo.provinces_id ? introinfo.provinces_id:''
     })
-
     if (introinfo.gender != "") {
       this.setData({
         nationindex: introinfo.hasOwnProperty("nation_id") ? introinfo.nation_id - 1 : ""
@@ -1066,7 +1070,7 @@ cityComfirm(e) {
   this.setData({
     selectCityData: _selectCityData,
     selectCityName: _selectstr,
-    selectCityId: _selectCityId
+    selectCityId: _selectCityId.join(',')
   })
 },
 
@@ -1122,7 +1126,8 @@ peopleage(e) { //工龄的选择
     this.setData({
       introinfo:introinfo,
       'defaultCityPicker.provinces_id':introinfo.provinces,
-      introdetail:introdetail
+      introdetail:introdetail,
+      selectCityName:introinfo.provinces_txt
     })
   },
 
