@@ -11,14 +11,6 @@
     <view class="issue-contactbox">
       <view class="issue-box" bindtap="hideKeyboard">
         <text>期望工作地：</text>
-        <!-- <picker  mode="multiSelector" 
-          bindchange="bindPickerChange" 
-          bindcolumnchange="bindMultiPickerColumnChange" 
-          value="{{ index }}" 
-          range="{{ areapicker }}" 
-          range-key="name">
-          <input placeholder="请选择招工城市" disabled class="issue-input" value="{{ areatext }}"></input>
-        </picker> -->
         <input placeholder="请选择期望工作地" disabled class="issue-input" value="{{ selectCityName }}"></input>
       </view>
       <view class="issue-box-worktype">
@@ -32,9 +24,9 @@
       </view>
       <view class="issue-box">
         <text>联系电话：</text>
-        <input placeholder="请输入联系电话"  class="issue-input" value="{{ fastInfo.tel }}" bindinput="inputPhoneNumber" type="number" maxlength="11" bindfocus="onfocus" bindblur="onblur"></input>
+        <input placeholder="请输入联系电话"  class="issue-input" value="{{ telPhone }}" bindinput="inputPhoneNumber" type="number" maxlength="11" bindfocus="onfocus" bindblur="onblur"></input>
       </view>
-      <view class="issue-box" wx:if="{{ !fastInfo.tel || fastInfo.tel != telPhone }}">
+      <view class="issue-box" wx:if="{{ !telPhone || fastInfo.tel != telPhone }}">
         <text>验证码：</text>
         <input placeholder="请输入验证码"  class="issue-input" type="number" value="{{ code }}" bindinput="inputCode" maxlength="6" bindfocus="onfocus" bindblur="onblur"></input>
         <view class="issue-phone-code" wx:if="{{ firstGetCode }}" bindtap="reGetPhoneCode">获取验证码</view>

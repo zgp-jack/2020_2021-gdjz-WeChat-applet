@@ -69,7 +69,9 @@ Page({
     selectCityName: '',
     //选中期望地区的id
     selectCityId: '',
-    initIssueData:{}
+    initIssueData:{},
+    fastInfo:'',
+    selectCityId:''
   },
 
   // 点击期望地区隐藏软键盘
@@ -293,10 +295,10 @@ Page({
     let occupations = this.data.selectedClassifies.join(",");
     let phone = this.data.telPhone;
     let code = this.data.code;
-    let _selectCityId = this.data.selectCityId.join(',')
+    let _selectCityId = this.data.selectCityId
     
     // 验证是否有选择城市
-    if (!id && _selectCityId) {
+    if (!_selectCityId) {
       wx.showModal({
         title: '提示',
         content: "请选择期望地区。",
@@ -450,45 +452,12 @@ Page({
   },
   //选择期望地区 点击确定
   cityComfirm(e) {
-      this.setData({
-        selectCityData: [],
-        selectCityName: [],
-        selectCityId:[]
-      })
-      let _selectCityData = this.data.selectCityData
-      let areaData = e.detail.params
-      //找出选中的值
-      for (let i = 0; i < areaData.length; i++) {
-        for (let n = 0; n < areaData[i].children.length; n++) {
-          if (areaData[i].children[0].ischeck) {
-            let provinceSelect = {
-              name: areaData[i].name,
-              id: areaData[i].id
-            }
-            //如果选中全部 就不继续循环下面的市了
-            _selectCityData.push(provinceSelect)
-            break
-          } else if (areaData[i].children[n].ischeck) {
-            let citySelect = {
-              name: areaData[i].children[n].name,
-              id: areaData[i].children[n].id
-            }
-            _selectCityData.push(citySelect)
-          }
-        }
-      }
-      let _selectCityName = []
-      let _selectCityId = []
-      for (let i = 0; i < _selectCityData.length; i++) {
-        _selectCityName.push(_selectCityData[i].name)
-        _selectCityId.push(_selectCityData[i].id)
-      }
-      let _selectstr = _selectCityName.join(' | ')
-      this.setData({
-        selectCityData: _selectCityData,
-        selectCityName: _selectstr,
-        selectCityId: _selectCityId
-      })
+    let _select = e.detail.params
+    this.setData({
+      selectAllData:e.detail.params,
+      selectCityName:_select.map(item => item.name).join(" | "),
+      selectCityId:_select.map(item => item.id).join(",")
+    })
   },
   //初始化发布找活名片
   initIssueResume() {
@@ -526,7 +495,10 @@ Page({
             userClassifyids: [{id: occId, name: occName}],
             classifies: occupations,
             selectCityData: [{id, name}],
-            telPhone: telPhone
+            telPhone: telPhone,
+            selectCityName:name.replace(/,/g, "|"),
+            fastInfo:mydata.data,
+            selectCityId:id
           })
           _this.initWorkTypeData()
         }else{

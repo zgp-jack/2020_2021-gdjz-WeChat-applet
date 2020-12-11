@@ -104,7 +104,8 @@ App({
       loginAfter:false
     },
     // 是否当前第一次刷新找活名片 0 否 1 是
-    dayFirstRefresh: 0
+    dayFirstRefresh: 0,
+    exists:'',//是否有找活名片
   },
   //是否为极速发布与快速发布请求,快速发布与极速发布跳转
   initJobView: function () {
@@ -1481,8 +1482,9 @@ App({
               that.globalData.publishFindWork.resumeText = mydata.data.title
               that.globalData.publishFindWork.loginAfter = true
               _this.setData({
-                resumeText:mydata.data.title
+                resumeText:mydata.data.title,
               })
+              that.globalData.exists = mydata.data.exists
             }
           },
           fail:()=>{
