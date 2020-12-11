@@ -1567,51 +1567,31 @@ App({
     _this.setData({
       tipBox: tipBox,
       refreshStatus: true,
+      boxType: "refreshSuccess"
     })
     // 刷新成功
     _this.selectComponent("#promptbox").show()
+    this.globalData.dayFirstRefresh = 1
     this.activeRefresh()
   },
   // 刷新找活名片未置顶且当天首次刷新
   showFirstBox: function () {
+    this.globalData.dayFirstRefresh = 1
     wx.showModal({
       title:'刷新成功',
       content:'置顶找活名片，可以让您的名片长期处于刷新状态。',
-      cancelColor: '#0097FF',
+      confirmColor: '#0097FF',
       cancelColor:'#797979',
       cancelText:'取消',
       confirmText:'去置顶',
       success: function (res) {
-        if (res.cancel) {
-          let dueDate = (new Date(new Date().toLocaleDateString())).getTime() +  (24 * 60 * 60 * 1000 - 1);
-          wx.setStorageSync('canceRefreshTime', dueDate)
-        }
         if (res.confirm) {
-          // 是否置顶过
-          let hasTop = resumeTop.has_top;
-          // 如果需要去完善数据跳转去发布填写找活名片界面
-          let topdata = JSON.stringify(resumeTop)
-          // 置顶状态
-          let isTop = resumeTop.is_top;
-          // 审核状态
-          if (!hasTop) {
-            wx.navigateTo({
-              url: "/pages/clients-looking-for-work/workingtop/workingtop?topdata=" + topdata + "&defaulttop=" + defalutTop,
-            })
-          }else{
-            if (isTop == '2') {
-              // 置顶到期
-              wx.navigateTo({
-                url: "/pages/clients-looking-for-work/workingtop/workingtop?topdata=" + topdata + "&defaulttop=" + defalutTop,
-              })
-            }else{
-              // 修改置顶或者继续置顶
-              let modify = "modify";
-              wx.navigateTo({
-                url: `/pages/clients-looking-for-work/workingtop/workingtop?topdata=${topdata}&modify=${modify}`,
-              })
-            }
-          }
+          wx.navigateTo({
+            url: "/pages/clients-looking-for-work/workingtop/workingtop",
+          })
+        }
+        if (res.cancel) {
+          _this.setData({ boxType: false })
         }
       }
     })
@@ -1624,10 +1604,6 @@ App({
     let that = this
     let url = '/pages/getintegral/getintegral';
     let userInfo = wx.getStorageSync('userInfo')
-    // 获取用户未置顶当天首次刷新点击取消时间戳
-    let canceRefreshTime = wx.getStorageSync("canceRefreshTime")
-    // 当前时间戳
-    let nowTime = new Date().getTime()
     if (!userInfo) return
     // 用户token
     let token = userInfo.token;
@@ -1719,22 +1695,13 @@ App({
           if (mydata.data.hasOwnProperty("is_top")) {
             // 找活名片置顶状态 1 置顶中 0 未置顶
             let isTop = mydata.data.is_top;
-            that.globalData.dayFirstRefresh = 1
             if (isTop) {
               that.showTipBox(_this)
             }else{
               if (that.globalData.dayFirstRefresh) {
-                if (!canceRefreshTime) {
-                  that.showFirstBox()
-                }else{
-                  if (nowTime > canceRefreshTime) {
-                    that.showTipBox(_this)
-                  } else {
-                    that.showTipBox(_this)
-                  }
-                }
+                that.showTipBox(_this)  
               }else{
-                that.showTipBox(_this)
+                that.showFirstBox(_this)
               }
             }
           }

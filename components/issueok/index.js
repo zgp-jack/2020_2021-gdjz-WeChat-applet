@@ -57,10 +57,8 @@ Component({
     },
     // 发布成功去置顶
     goTop: function () {
-      let topdata = JSON.stringify(this.properties.topdata);
-      let defalutTop = this.properties.defalutTop;
       wx.navigateTo({
-        url: "/pages/clients-looking-for-work/workingtop/workingtop?topdata=" + topdata + "&defaulttop=" + defalutTop,
+        url: "/pages/clients-looking-for-work/workingtop/workingtop",
       })
       this.show()
     },

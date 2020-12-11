@@ -141,6 +141,8 @@ Page({
     refreshStatus: false,
     // 刷新成功icon
     successIcon:app.globalData.apiImgUrl + 'yc/findwork-publish-success.png',
+    // 提示框状态
+    boxType: false
   },
   getPhoneNumber:function(e){
     console.log(e)
@@ -499,11 +501,9 @@ Page({
         })
       }
     })
-    this.showRefresh()
   },
   doSearchRequestAction: function (_append) {
     let _this = this;
-    this.showRefresh()
     this.setData({
       nothavemore: false,
       showNothinkData: false
@@ -1110,7 +1110,7 @@ Page({
         }
         if (res.cancel) {
           let time = new Date().getTime()
-          wx.setStorageSync('noCardStroage', time)
+          wx.setStorageSync('noCardCancelTime', time)
         }
       }
     })
@@ -1127,7 +1127,8 @@ Page({
       "tipBox.showTitle": true,
       "tipBox.confirmColor": "#0097FF",
       "tipBox.cancelColor": "#797979",
-      refreshStatus: false
+      refreshStatus: false,
+      boxType: "haveCardBox"
     })
     this.selectComponent("#promptbox").show()
   },
@@ -1152,12 +1153,21 @@ Page({
       if (!haveCancelTime) {
         this.haveCardBox()
       }else{
+        // 最新到期时间
         let dueTime = haveCancelTime + (day * 24 * 60 * 60 * 1000 - 1)
         if (currentTime > dueTime) {
           this.haveCardBox()
         }
       }
     }
+  },
+  // 如果有找活名片当天未刷新过且未置顶弹窗（is_pop 0, has_resume 1, is_refreshed_today 0）
+  // 点击关闭按钮根据后台返回天数设置不再展示弹窗 （cancel_refresh_top_expire_days）
+  tapClose: function () {
+    // 点击关闭按钮的时间戳
+    let clickTime = new Date().getTime()
+    // 保存到缓存
+    wx.setStorageSync("haveCardCancelTime", clickTime)
   },
   // 找工作列表是否弹出引导刷新找活名片请求
   showRefresh: function () {
@@ -1173,16 +1183,20 @@ Page({
       success: function (res) {
         let mydata= res.data
         if (mydata.errcode === "ok") {
+          // 是否弹窗。0-不弹窗；1-弹窗
           let showPopup = mydata.data.is_popup;
+          // 是否有找活名片。0-否；1-是
           let hasResume = mydata.data.has_resume;
-          if (mydata.data.hasOwnProperty("is_refreshed_today")) {
-            app.globalData.dayFirstRefresh = mydata.data.is_refreshed_today
-          }
+          // is_refreshed_today 今天是否刷新过找活。0-否；1-是
+          let dayFirstRefresh = mydata.data.is_refreshed_today
+          app.globalData.dayFirstRefresh = dayFirstRefresh
           if (showPopup) {
             if (hasResume) {
-              that.showPromtBox(parseInt(mydata.data.cancel_refresh_top_expire_days),hasResume)
+              if (!dayFirstRefresh) {
+                that.showPromtBox(parseInt(mydata.data.cancel_refresh_top_expire_days,10),hasResume)
+              }
             } else {
-              that.showPromtBox(parseInt(mydata.data.cancel_publish_expire_days),hasResume)
+              that.showPromtBox(parseInt(mydata.data.cancel_publish_expire_days,10),hasResume)
             }
           }
         }
@@ -1200,11 +1214,22 @@ Page({
       this.setData({refreshStatus: false})
     }else{
       app.refreshReq(2, this)
-      this.cancelRefresh()
     }
   },
   cancel: function () {
-    this.cancelRefresh()
+    // 弹窗类型，refreshSuccess 非首次刷新成功弹窗 
+    // haveCardBox 有找活名片且未置顶且当日未刷新弹窗
+    let boxType = this.data.boxType;
+    if (boxType == 'haveCardBox') {
+      wx.navigateTo({
+        url: '/pages/clients-looking-for-work/workingtop/workingtop',
+      })
+      // 点击关闭按钮的时间戳
+      let clickTime = new Date().getTime()
+      // 保存到缓存
+      wx.setStorageSync("haveCardCancelTime", clickTime)
+      this.setData({ boxType: false })
+    }
   },
   /**
    * 生命周期函数--监听页面加载®
@@ -1274,6 +1299,7 @@ Page({
     this.initTurntable();
     app.initResume(this)
     this.initPageData()
+    this.showRefresh()
   },
   onPageScroll: function (e) {
     let top = e.scrollTop;
@@ -1299,6 +1325,7 @@ Page({
    */
   onPullDownRefresh: function () {
     wx.showNavigationBarLoading()
+    this.showRefresh()
     //wx.startPullDownRefresh()
     this.returnTop();
     this.setData({

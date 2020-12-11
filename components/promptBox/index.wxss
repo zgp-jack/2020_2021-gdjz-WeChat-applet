@@ -19,6 +19,7 @@
 .prompt-content{
   padding:0rpx 50rpx;
   margin-top: 22rpx;
+  margin-bottom: 150rpx;
 }
 
 .prompt-box{
@@ -56,7 +57,6 @@
 .prompt-footer{
   position: absolute;
   border-top: 1rpx solid #eeeeee;
-  margin-top: 40rpx;
   display: flex;
   flex-direction: row;
   justify-content: center;

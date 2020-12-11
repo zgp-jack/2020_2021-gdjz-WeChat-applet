@@ -1,44 +1,63 @@
 const app = getApp();
 Component({
 	properties: {
-		defaultData:Object
+		defaultData: { 
+      type: Array,
+      value: []
+    },
 	},
 	data: {
 		showPicker: false,
 		areaData: [],
 		cityData: [],
-		provincei: 0
+		provincei: 0,
+		selectArea:[],
+		selectAllData:[],
+		oldSelectData: [],
+		oldCytiData:[]
 	},
 	methods: {
 		show: function () {
 			this.setData({
-				showPicker: !this.data.showPicker
+				oldSelectData: JSON.parse(JSON.stringify(this.data.areaData)),
+				oldCytiData: JSON.parse(JSON.stringify(this.data.cityData)),
+				showPicker: true
+			})
+		},
+		close: function () {
+			this.setData({
+				areaData: this.data.oldSelectData,
+				cityData: this.data.oldCytiData,
+				showPicker: false
 			})
 		},
 		//获取城市数据
-		getAreaData() {
+		getAreaData(newVal) {
 			const _this = this
 			wx.request({
 				url: 'https://cdn.yupao.com/json/yp_area_tree_2012021149.json',
 				success: function (res) {
 					if (res.data.all_tree) {
 						wx.setStorageSync('newAreaData', res.data.all_tree)
-						_this.initAeraData()
+						_this.initAeraData(newVal)
 					}
 				}
 			})
 		},
 		//初始化城市数据
-		initAeraData() {
+		initAeraData(newVal) {
 			let newAreaData = wx.getStorageSync('newAreaData')
-			//默认选中第一个省
-			if(!this.data.defaultData){//如果没有默认城市数据才默认显示第一个
+			if(newVal.length>0){//如果没有默认城市数据才默认显示第一个
+				this.defaultCity(newVal)
+			} else {
+				//默认选中第一个省
 				newAreaData[0].current = true
+				this.setData({
+					areaData: newAreaData
+				})
+				this.handleProvinceClick(0)
 			}
-			this.setData({
-				areaData: newAreaData
-			})
-			this.handleProvinceClick(0)
+		
 		},
 		//切换省的时候 Provincei=省的index
 		handleProvinceClick(Provincei) {
@@ -76,13 +95,13 @@ Component({
 			let cityi = e.currentTarget.dataset.cityi
 			let _cityData = this.data.cityData
 			let _areaData = this.data.areaData
-
+			let selectData = []//选中的数据
 			//判断已经选中了几个
 			//选中了几个省
 			let selectProvince = 0
 			//选中了几个市
 			let selectCity = 0
-			//判断是选中还是取消选中  如果是取消 不用给提示
+			//统计选中数量
 			if (!_cityData[cityi].ischeck) {
 				for (let q = 0; q < _areaData.length; q++) {
 					//如果选中了全部 就不循环下面的城市
@@ -110,12 +129,14 @@ Component({
 						}
 						//当前没有选中市
 						if (dqcity == 0) {
+							// debugger
 							return
 						}
 						//点击的不是全部
 					} else { //如果点击市 需要判断是否选中了全部 如果选中了 需要把全部取消 选中市 而不是直接给提示
 						//没有选中全部
 						if (!_cityData[0].ischeck) {
+							// debugger
 							return
 						}
 					}
@@ -168,75 +189,115 @@ Component({
 					}
 				}
 			}
+			//找出已经选中的数据
+			for(let a = 0;a<_areaData.length;a++){
+				for(let s = 0;s<_areaData[a].children.length;s++){
+					if(_areaData[a].children[0].ischeck){
+						selectData.push({
+							name:_areaData[a].name,
+							id:_areaData[a].id
+						})
+						break
+					}else if(_areaData[a].children[s].ischeck){
+						selectData.push({
+							name:_areaData[a].children[s].name,
+							id:_areaData[a].children[s].id
+						})
+					}
+				}
+			}
+			
 			this.setData({
 				cityData: _cityData,
-				areaData: _areaData
+				areaData: _areaData,
+				selectAllData: selectData
 			})
+			console.log("_cityData",_cityData)
 		},
 		//点击确定
 		comfirmCity(e) {
 			//通知父组件
 			this.triggerEvent('cityComfirm', {
-				params: this.data.areaData
+				params: this.data.selectAllData
 			})
-			this.show()
+			this.setData({
+				oldSelectData: JSON.parse(JSON.stringify(this.data.areaData)),
+				oldCytiData: JSON.parse(JSON.stringify(this.data.cityData)),
+				showPicker: false
+			})
 		},
 		//找出默认地区
-		defaultCity(id) {
+		defaultCity(defaultData) {
+			let ids = defaultData.map(item => item.id)
+			console.log("ids",ids)
 			let _areaData = this.data.areaData
-			let defaultArr = []
-			if(id.indexOf(',') !== -1){//多个默认城市
-				defaultArr = id.split(',')
-
-			}else{//只有一个默认城市
-
-			}
-			for(let i = 0;i<_areaData.length;i++){
-				//给每个市的第一个添加全部
-				if(_areaData[i].children[0].name != '全部'){
-					_areaData[i].children.unshift({
-						'name':'全部'
-					})
-				}
-				
-				
-				//如果匹配到省 就选中全部
-				if(id == _areaData[i].id){
-					_areaData[i].childrenCheck = true
-					_areaData[i].children[0].ischeck = true
-					_areaData[i].current = true
-					this.setData({
-						areaData:_areaData,
-						cityData:_areaData[i].children
-					})
-					return
-				}
-				for(let n = 0;n<_areaData[i].children.length;n++){
-					if(_areaData[i].children[n].id == id){
-						_areaData[i].childrenCheck = true
-						_areaData[i].children[n].ischeck = true
-						_areaData[i].current = true
-						this.setData({
-							areaData:_areaData,
-							cityData:_areaData[i].children
+			for (let j = 0; j < ids.length; j++) {
+				for(let i = 0;i<_areaData.length;i++){
+					//给每个市的第一个添加全部
+					if(_areaData[i].children[0].name != '全部'){
+						_areaData[i].children.unshift({
+							'name':'全部'
 						})
-						return
+					}
+					if (_areaData[i].id == ids[j]) {
+						_areaData[i].childrenCheck = true
+						_areaData[i].children[0].ischeck = true
+						if (j == 0) {
+							_areaData[i].current = true
+							this.handleProvinceClick(i)
+						}else{
+							_areaData[i].current = false
+						}
+					}else{
+						let children = _areaData[i].children
+						let index = children.findIndex((item) => item.id == ids[j])
+						if (index !== -1) {
+							_areaData[i].childrenCheck = true
+							_areaData[i].children[index].ischeck = true
+							if (j == 0) {
+								_areaData[i].current = true
+								this.handleProvinceClick(i)
+							}else{
+								_areaData[i].current = false
+							}
+						}else{
+							_areaData[i].current = false
+						}
 					}
 				}
 			}
+			this.setData({
+				areaData:_areaData,
+			})
+			console.log("_areaData",_areaData)
 		}
 	},
+
 	lifetimes: {
 		ready: function () {
-			let newAreaData = wx.getStorageSync('newAreaData')
-			if (!newAreaData) {
-				this.getAreaData()
-			} else {
-				this.initAeraData()
-			}
-			if(this.data.defaultData){
-				this.defaultCity(this.data.defaultData.provinces_id)
-			}
+			// let newAreaData = wx.getStorageSync('newAreaData')
+			// if (!newAreaData) {
+			// 	this.getAreaData()
+			// } else {
+			// 	this.initAeraData()
+			// }
+			// if(this.data.defaultData){
+			// 	this.defaultCity(this.data.defaultData)
+			// }
 		},
+	},
+	observers: {
+		"defaultData": function (newVal){
+			console.log("newVal",newVal)
+			let newAreaData = wx.getStorageSync('newAreaData')
+			this.setData({
+				selectArea:newVal
+			})
+			if (!newAreaData) {
+				this.getAreaData(newVal)
+			} else {
+				this.initAeraData(newVal)
+			}
+		}
 	}
 })

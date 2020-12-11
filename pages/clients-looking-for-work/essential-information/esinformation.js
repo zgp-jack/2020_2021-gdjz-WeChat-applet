@@ -81,10 +81,9 @@ Page({
     editType:'',//是编辑还是完善
     introinfo:{},//找活名片资料
     introdetail:{},//人员构成资料
-    defaultCityPicker:{
-      provinces_id:''
-    },
-    indexperson:0
+    defaultCityPicker:[],
+    indexperson:0,
+    selectAllData:[]
   },
   // 点击隐藏键盘
   hiddenKeyBoard: function () {
@@ -1033,44 +1032,11 @@ Page({
 
 //选择期望地区 点击确定
 cityComfirm(e) {
+  let _select = e.detail.params
+
   this.setData({
-    selectCityData: [],
-    selectCityName: [],
-    selectCityId:[]
-  })
-  let _selectCityData = this.data.selectCityData
-  let areaData = e.detail.params
-  //找出选中的值
-  for (let i = 0; i < areaData.length; i++) {
-    for (let n = 0; n < areaData[i].children.length; n++) {
-      if (areaData[i].children[0].ischeck) {
-        let provinceSelect = {
-          name: areaData[i].name,
-          id: areaData[i].id
-        }
-        //如果选中全部 就不继续循环下面的市了
-        _selectCityData.push(provinceSelect)
-        break
-      } else if (areaData[i].children[n].ischeck) {
-        let citySelect = {
-          name: areaData[i].children[n].name,
-          id: areaData[i].children[n].id
-        }
-        _selectCityData.push(citySelect)
-      }
-    }
-  }
-  let _selectCityName = []
-  let _selectCityId = []
-  for (let i = 0; i < _selectCityData.length; i++) {
-    _selectCityName.push(_selectCityData[i].name)
-    _selectCityId.push(_selectCityData[i].id)
-  }
-  let _selectstr = _selectCityName.join(' | ')
-  this.setData({
-    selectCityData: _selectCityData,
-    selectCityName: _selectstr,
-    selectCityId: _selectCityId.join(',')
+    selectAllData:e.detail.params,
+    selectCityName:_select.map(item => item.name).join(" | ")
   })
 },
 
@@ -1123,11 +1089,12 @@ peopleage(e) { //工龄的选择
     }
     let introinfo = wx.getStorageSync('introinfo')
     let introdetail = wx.getStorageSync('introdetail')
+
     this.setData({
       introinfo:introinfo,
-      'defaultCityPicker.provinces_id':introinfo.provinces,
+      defaultCityPicker:[{id:introinfo.provinces_id,name:introinfo.provinces_txt}],
       introdetail:introdetail,
-      selectCityName:introinfo.provinces_txt
+      selectCityName:introinfo.provinces_txt.replace(/,/g, "|")
     })
   },
 

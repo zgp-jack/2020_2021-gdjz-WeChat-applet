@@ -149,7 +149,8 @@ Page({
     show_refresh_btn:true,//是否展示刷新名片
     dayfirst: false, //是否是当天第一次从置顶界面返回（未成功置顶）
     todayRefresh: 0,//是否是当天第一次刷新
-    provinces_txt:""//期望工作地
+    provinces_txt:"",//期望工作地
+    isFastPublish: false,//弹窗状态 如果是从快速发布成功到找活名片 true 否则 false
   },
 
 
@@ -180,10 +181,8 @@ Page({
       })
       return
     }
-    let topdata = JSON.stringify(that.data.resume_top);
-    let modify = "modify";
     wx.navigateTo({
-      url: `/pages/clients-looking-for-work/workingtop/workingtop?topdata=${topdata}&modify=${modify}`,
+      url: `/pages/clients-looking-for-work/workingtop/workingtop`,
     })
 
   },
@@ -281,9 +280,6 @@ Page({
     let that = this;
     // 获取是否可以置顶的文案
     let contentom = that.data.top_tips_string
-    // 如果需要去完善数据跳转去发布填写找活名片界面
-    let topdata = JSON.stringify(that.data.resume_top)
-    let defalutTop = that.data.default_top_area
     if (that.data.showtop) {
       wx.showModal({
         title: '温馨提示',
@@ -310,7 +306,7 @@ Page({
     //如果有找活名片信息跳转去招工置顶界面
     } else {
       wx.navigateTo({
-        url: "/pages/clients-looking-for-work/workingtop/workingtop?topdata=" + topdata + "&defaulttop=" + defalutTop,
+        url: "/pages/clients-looking-for-work/workingtop/workingtop",
       })
     }
   },
@@ -855,7 +851,6 @@ Page({
             default_top_area: mydata.hasOwnProperty("default_top_area")?mydata.default_top_area : false,
             refreshText: mydata.hasOwnProperty("refresh_text")?mydata.refresh_text:'',
             integral: mydata.hasOwnProperty("integral")?mydata.integral:'',
-            todayRefresh: mydata.hasOwnProperty("is_refreshed_today")?mydata.is_refreshed_today: 0
           })
           if (mydata.hasOwnProperty("is_refreshed_today")) {
             app.globalData.dayFirstRefresh = mydata.is_refreshed_today
@@ -1396,27 +1391,29 @@ Page({
   },
   // 点击弹窗取消按钮
   tapCancel: function () {
-    let defaultTop = this.data.default_top_area
-    if (defaultTop) {
+    let isFastPublish = this.data.isFastPublish;
+    let cityid = this.data.cityid;
+    let occupations_id = this.data.occupations_id;
+    if (isFastPublish) {
       wx.navigateTo({
-        url: '/pages/index/index',
+        url: `/pages/index/index?aid=${cityid}id=${occupations_id}`,
       })
-      this.setData({ defaultTop: false })
-      wx.setStorageSync("areaText")
-      wx.setStorageSync("areaId")
-      wx.setStorageSync("typeText")
-      wx.setStorageSync("typeId")
+      this.setData({ isFastPublish: false })
+    }else{
+      wx.navigateTo({
+        url: `/pages/index/index?aid=${cityid}id=${occupations_id}`,
+      })
     }
   },
   // 点击弹窗确定按钮
   tapConfirm: function () {
     // 快速发布找活名片默认置顶城市
-    let defaultTop = this.data.default_top_area
-    if (defaultTop) {
+    let isFastPublish = this.data.isFastPublish
+    if (isFastPublish) {
       wx.navigateTo({
-        url: `/pages/clients-looking-for-work/workingtop/workingtop?defaulttop=${defaultTop}`,
+        url: `/pages/clients-looking-for-work/workingtop/workingtop`,
       })
-      this.setData({ defaultTop: false })
+      this.setData({ isFastPublish: false })
     }
   },
   // 从置顶页面返回（未置顶）弹窗
@@ -1434,8 +1431,8 @@ Page({
           title: "温馨提示",
           content: "您可以刷新找活名片，让更多老板看到您的找活信息！",
           confirmText: "去刷新",
-          confirmColor: "#797979",
-          cancelColor: "#0097FF",
+          confirmColor: "#0097FF",
+          cancelColor: "#797979",
           success: function (res) {
             if (res.confirm) {
               that.refreshCard()
@@ -1445,8 +1442,8 @@ Page({
               // 当前时间戳
               let currentTime = myDate.getTime();
               // 到期时间戳（23:59:59）
-              let dueDate = (new Date(new Date().toLocaleDateString())).getTime() +  (24 * 60 * 60 * 1000 - 1);
-              // let dueDate = currentTime +  (2 * 60 * 1000 - 1);
+              // let dueDate = (new Date(new Date().toLocaleDateString())).getTime() +  (24 * 60 * 60 * 1000 - 1);
+              let dueDate = currentTime +  (1 * 60 * 1000 - 1);
               // 当天没有刷新过且未置顶返回找活名片缓存（是否当天第一次返回，到期时间）
               let topBackRefresh = {currentTime:currentTime,dueDate:dueDate};
               wx.setStorageSync("topBackRefresh",topBackRefresh)
@@ -1467,13 +1464,13 @@ Page({
     // 找活名片置顶状态
     let isTop = topData.is_top;
     // 是否是当天第一次从置顶界面返回（未成功置顶),当天多次返回只是第一次展示提示框
-    let todayRefresh = this.data.is_refresh_today;
+    let todayRefresh = app.globalData.dayFirstRefresh;
     // 当天没有刷新过且未置顶返回找活名片缓存（是否当天第一次返回，到期时间）
     let topBackRefresh = wx.getStorageSync('topBackRefresh')
     if (!hasTop || (hasTop && !isTop)) {
       // 如果当天没有刷新过
       if (!todayRefresh) {
-        // 如果置顶未置顶且是当天第一次返回
+        // 如果置顶未成功置顶且是当天第一次返回
         if (!topBackRefresh) {
           this.todayRefresh()
         }else{
@@ -1493,13 +1490,13 @@ Page({
     this.authrasution();
     this.cardjump(options)
     // 如果是从快速发布找活名片到我的找活名片展示发布成功弹窗
-    if (options.hasOwnProperty("defaultTop")) {
+    if (options.hasOwnProperty("isFastPublish")) {
       if(pages.length > 1) {
         let index = pages.length - 1
         let path = pages[index].__displayReporter.showReferpagepath
         path = path.slice(0, -5)
         if (path == "pages/jsIssueResume/index") {
-          this.setData({ default_top_area: options.defalutTop})
+          this.setData({ isFastPublish: options.isFastPublish})
           this.refreshPage()
         }
       }
@@ -1523,7 +1520,7 @@ Page({
     app.getAreaData(this)
     app.globalData.previewshou = true;
     app.activeRefresh()
-    this.noTopTipBox
+    this.noTopTipBox()
   },
 
   /**

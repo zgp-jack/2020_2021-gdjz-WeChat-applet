@@ -47,7 +47,7 @@
     </view>
   <!-- </view> -->
   <!-- 选择城市组件 -->
-  <cityPicker id="cityPicker" bindcityComfirm="cityComfirm" defaultData="{{initIssueData}}"></cityPicker>
+  <cityPicker id="cityPicker" bindcityComfirm="cityComfirm" defaultData="{{selectCityData}}"></cityPicker>
   <!-- 工种选择 -->
   <view class="common-picker-container {{ showPicker ? '':'common-picker-none' }}">
   <view class="common-picker-box">

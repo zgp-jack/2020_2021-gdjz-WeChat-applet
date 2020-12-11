@@ -1,7 +1,7 @@
 <view class="city-picker" wx:if="{{showPicker}}">
 	<view class="picker-content">
 		<view class="picker-head">
-			<text class="cancel-text" bindtap="show">取消</text>
+			<text class="cancel-text" bindtap="close">取消</text>
 			<text class="picker-head-title">期望工作地（最多选3个）</text>
 			<text class="confirm-text" bindtap="comfirmCity">确定</text>
 		</view>
