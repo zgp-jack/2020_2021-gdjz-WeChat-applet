@@ -462,9 +462,10 @@ Page({
     // })
   },
   // 初始化已经置顶的置顶数据
-  gettopareas(topdata) {
+  gettopareas() {
     let that = this;
     let area = wx.getStorageSync('areadata')
+    let topdata = this.data.topdata;
     let hastop= this.data.topdata.has_top;
     let istop = this.data.topdata.is_top;
     // 判断是否是置顶中的修改置顶
@@ -1065,7 +1066,7 @@ Page({
     // 如果没有用户信息直接退出
     if (!userInfo) return
     app.appRequestAction({
-      url: 'resumes/get-resume-top-info/',
+      url: 'resumes/get-top-resume/',
       way: 'POST',
       params:{token},
       mask: true,

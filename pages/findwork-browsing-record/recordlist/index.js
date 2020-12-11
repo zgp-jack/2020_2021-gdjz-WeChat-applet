@@ -134,24 +134,9 @@ Page({
         })
       }
       if (isEnd == '1') {
-        if (!hasTop) {
-          wx.navigateTo({
-            url: "/pages/clients-looking-for-work/workingtop/workingtop?topdata=" + topdata + "&defaulttop=" + defalutTop,
-          })
-        }else{
-          if (isTop == '2') {
-            // 置顶到期
-            wx.navigateTo({
-              url: "/pages/clients-looking-for-work/workingtop/workingtop?topdata=" + topdata + "&defaulttop=" + defalutTop,
-            })
-          }else{
-            // 修改置顶或者继续置顶
-            let modify = "modify";
-            wx.navigateTo({
-              url: `/pages/clients-looking-for-work/workingtop/workingtop?topdata=${topdata}&modify=${modify}`,
-            })
-          }
-        }
+        wx.navigateTo({
+          url: "/pages/clients-looking-for-work/workingtop/workingtop",
+        })
       }
     }else{
       wx.navigateTo({

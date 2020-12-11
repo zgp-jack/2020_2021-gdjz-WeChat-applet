@@ -182,7 +182,7 @@ Page({
             case 'to_top':
               _this.setData({
                 'resumeBanner.banner':app.globalData.apiImgUrl+'ws/bannerqz.png',
-                'resumeBanner.link':'/pages/clients-looking-for-work/workingtop/workingtop?datatop=1'
+                'resumeBanner.link':'/pages/clients-looking-for-work/workingtop/workingtop'
               })
               break
             case 'to_edit_top':

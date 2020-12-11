@@ -523,7 +523,7 @@ Page({
           // 所有工种字段
           let occupations = mydata.data.hasOwnProperty("occupation_tree") ? mydata.data.occupation_tree : []
           _this.setData({
-            userClassifyids: [{id:occId,name:occName}],
+            userClassifyids: [{id: occId, name: occName}],
             classifies: occupations,
             selectCityData: [{id, name}],
             telPhone: telPhone

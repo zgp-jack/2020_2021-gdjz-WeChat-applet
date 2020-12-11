@@ -1,13 +1,17 @@
 const app = getApp();
 Component({
 	properties: {
-		defaultData:Object
+		defaultData: { 
+      type: Array,
+      value: []
+    },
 	},
 	data: {
 		showPicker: false,
 		areaData: [],
 		cityData: [],
-		provincei: 0
+		provincei: 0,
+		selectArea:[]
 	},
 	methods: {
 		show: function () {
@@ -16,29 +20,32 @@ Component({
 			})
 		},
 		//获取城市数据
-		getAreaData() {
+		getAreaData(newVal) {
 			const _this = this
 			wx.request({
 				url: 'https://cdn.yupao.com/json/yp_area_tree_2012021149.json',
 				success: function (res) {
 					if (res.data.all_tree) {
 						wx.setStorageSync('newAreaData', res.data.all_tree)
-						_this.initAeraData()
+						_this.initAeraData(newVal)
 					}
 				}
 			})
 		},
 		//初始化城市数据
-		initAeraData() {
+		initAeraData(newVal) {
 			let newAreaData = wx.getStorageSync('newAreaData')
-			//默认选中第一个省
-			if(!this.data.defaultData){//如果没有默认城市数据才默认显示第一个
+			if(newVal.length>0){//如果没有默认城市数据才默认显示第一个
+				this.defaultCity(newVal)
+			} else {
+				//默认选中第一个省
 				newAreaData[0].current = true
+				this.setData({
+					areaData: newAreaData
+				})
+				this.handleProvinceClick(0)
 			}
-			this.setData({
-				areaData: newAreaData
-			})
-			this.handleProvinceClick(0)
+		
 		},
 		//切换省的时候 Provincei=省的index
 		handleProvinceClick(Provincei) {
@@ -182,52 +189,71 @@ Component({
 			this.show()
 		},
 		//找出默认地区
-		defaultCity(id) {
+		defaultCity(defaultData) {
+			let ids = defaultData.map(item => item.id)
+			console.log("ids",ids)
 			let _areaData = this.data.areaData
-			for(let i = 0;i<_areaData.length;i++){
-				//给每个市的第一个添加全部
-				if(_areaData[i].children[0].name != '全部'){
-					_areaData[i].children.unshift({
-						'name':'全部'
-					})
-				}
-				//如果匹配到省 就选中全部
-				if(id == _areaData[i].id){
-					_areaData[i].childrenCheck = true
-					_areaData[i].children[0].ischeck = true
-					_areaData[i].current = true
-					this.setData({
-						areaData:_areaData,
-						cityData:_areaData[i].children
-					})
-					return
-				}
-				for(let n = 0;n<_areaData[i].children.length;n++){
-					if(_areaData[i].children[n].id == id){
-						_areaData[i].childrenCheck = true
-						_areaData[i].children[n].ischeck = true
-						_areaData[i].current = true
-						this.setData({
-							areaData:_areaData,
-							cityData:_areaData[i].children
+			for (let j = 0; j < ids.length; j++) {
+				for(let i = 0;i<_areaData.length;i++){
+					//给每个市的第一个添加全部
+					if(_areaData[i].children[0].name != '全部'){
+						_areaData[i].children.unshift({
+							'name':'全部'
 						})
-						return
+					}
+					if (_areaData[i].id == ids[j]) {
+						_areaData[i].childrenCheck = true
+						_areaData[i].children[0].ischeck = true
+						if (j == 0) {
+							_areaData[i].current = true
+							this.handleProvinceClick(i)
+						}
+					}else{
+						let children = _areaData[i].children
+						let index = children.findIndex((item) => item.id == ids[j])
+						if (index !== -1) {
+							_areaData[i].childrenCheck = true
+							_areaData[i].children[index].ischeck = true
+							if (j == 0) {
+								_areaData[i].current = true
+								this.handleProvinceClick(i)
+							}
+						}else{
+							_areaData[i].current = false
+						}
 					}
 				}
 			}
+			this.setData({
+				areaData:_areaData,
+			})
+			console.log("_areaData",_areaData)
 		}
 	},
+
 	lifetimes: {
 		ready: function () {
-			let newAreaData = wx.getStorageSync('newAreaData')
-			if (!newAreaData) {
-				this.getAreaData()
-			} else {
-				this.initAeraData()
-			}
-			if(this.data.defaultData){
-				this.defaultCity(this.data.defaultData.provinces_id)
-			}
+			// let newAreaData = wx.getStorageSync('newAreaData')
+			// if (!newAreaData) {
+			// 	this.getAreaData()
+			// } else {
+			// 	this.initAeraData()
+			// }
+			// if(this.data.defaultData){
+			// 	this.defaultCity(this.data.defaultData)
+			// }
 		},
+	},
+	observers: {
+		"defaultData": function (newVal){
+			console.log("newVal",newVal)
+			let newAreaData = wx.getStorageSync('newAreaData')
+
+			if (!newAreaData) {
+				this.getAreaData(newVal)
+			} else {
+				this.initAeraData(newVal)
+			}
+		}
 	}
 })
