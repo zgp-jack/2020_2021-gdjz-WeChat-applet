@@ -66,7 +66,7 @@ Page({
     degreeone: 0,
     compositionarray: [],
     compositionarrayone: [],
-    constituttion: "",
+    constituttion: 1,
     judge: false,
     detailevaluation: [],
     evaluation: [],
@@ -618,6 +618,13 @@ Page({
       return
     }
 
+    //期望地区
+    if((this.dataeditType == 'bj' || this.data.introinfo.experience == 0) && vertifyNum.isNull(this.data.selectCityName)){
+      reminder.reminder({ tips: '期望地区' })
+      return
+    }
+
+
     //所在地区
     if ((this.dataeditType == 'bj' || this.data.introinfo.experience == 0) && vertifyNum.isNull(this.data.regionone)) {
       reminder.reminder({ tips: '所在地区' })
@@ -625,7 +632,7 @@ Page({
     }
 
     //人员构成
-    if ((this.data.editType == 'bj' || !this.data.introdetail.type)&&vertifyNum.isNull(this.data.constituttion)) {
+    if ((this.data.editType == 'bj' || !this.data.introdetail.type) && vertifyNum.isNull(this.data.constituttion)) {
       reminder.reminder({ tips: '人员构成' })
       return
     }
@@ -717,15 +724,15 @@ Page({
       })
       return
     }
-    //编辑
-    if(this.data.editType == 'bj'){
+    //完善
+    if(this.data.editType == 'ws'){
       let params = {}
       //姓名 性别 民族 出生日期
       if(this.data.introinfo.authentication != 2){
         params.gender = String(this.data.sex)
         params.username = this.data.name
         params.nation = String(this.data.nation)
-        birthday = this.data.birthday
+        params.birthday = this.data.birthday
       }
       //工种
       if(this.data.introinfo.occupations.length < 1){
@@ -733,7 +740,7 @@ Page({
       }
       //工龄
       if(this.data.introinfo.experience == 0){
-        params.workage = this.data.workage
+        params.experience = this.data.workage
       }
       //所在地区
       if(this.data.introinfo.experience == 0){
@@ -753,6 +760,7 @@ Page({
       params.userId = userInfo.userId
       params.token = userInfo.token
       params.tokenTime = userInfo.tokenTime
+      // params.is_new_introduce = 1
       app.appRequestAction({
         url:'resumes/introduce/',
         way:'POST',
@@ -780,33 +788,34 @@ Page({
 
     }
 
+    //编辑
+    if(this.data.editType == 'bj'){
+      app.appRequestAction({
+        url: "resumes/add-resume/",
+        way: "POST",
+        params: information,
+        mask: true,
+        failTitle: "操作失败，请稍后重试！",
+        success: function (res) {
 
-
-    app.appRequestAction({
-      url: "resumes/add-resume/",
-      way: "POST",
-      params: information,
-      mask: true,
-      failTitle: "操作失败，请稍后重试！",
-      success: function (res) {
-
-        if (res.data.errcode == 200) {
-          that.subscribeToNews(res)
-          app.activeRefresh()
-        } else {
-          remain.remain({
-            tips: res.data.errmsg
+          if (res.data.errcode == 200) {
+            that.subscribeToNews(res)
+            app.activeRefresh()
+          } else {
+            remain.remain({
+              tips: res.data.errmsg
+            })
+          }
+        },
+        fail: function (err) {
+          wx.showModal({
+            title: '温馨提示',
+            content: '保存失败',
+            showCancel: false
           })
         }
-      },
-      fail: function (err) {
-        wx.showModal({
-          title: '温馨提示',
-          content: '保存失败',
-          showCancel: false
-        })
-      }
-    })
+      })
+    }
   },
   subscribeToNews: function(res) {
     let _this = this;
