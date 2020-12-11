@@ -62,7 +62,6 @@ Component({
 				})
 				this.handleProvinceClick(0)
 			}
-		
 		},
 		//切换省的时候 Provincei=省的index
 		handleProvinceClick(Provincei) {
@@ -227,7 +226,7 @@ Component({
 			})
 			this.setData({
 				oldSelectData: JSON.parse(JSON.stringify(this.data.areaData)),
-				oldCytiData: JSON.parse(JSON.stringify(this.data.cityData)),
+				// oldCytiData: JSON.parse(JSON.stringify(this.data.cityData)),
 				showPicker: false
 			})
 		},
@@ -273,7 +272,6 @@ Component({
 			this.setData({
 				areaData:_areaData,
 			})
-			console.log("_areaData",_areaData)
 		}
 	},
 

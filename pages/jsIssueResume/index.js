@@ -283,6 +283,7 @@ Page({
     let userId = userInfo.userId;
     let token = userInfo.token;
     let tokenTime = userInfo.tokenTime;
+    let provinces = this.data.selectCityData.map((item)=>item.id).join(",")
     let that = this;
     let vali = v.v.new();
     let {
@@ -296,10 +297,10 @@ Page({
     let _selectCityId = this.data.selectCityId.join(',')
     
     // 验证是否有选择城市
-    if (!id && _selectCityId) {
+    if (!provinces) {
       wx.showModal({
         title: '提示',
-        content: "请选择期望地区。",
+        content: "请选择期望工作地。",
         showCancel: false
       })
       return false
@@ -344,9 +345,7 @@ Page({
     }
     // 发送请求参数
     let params = {
-      //请选择地区 去掉s 
-      provinces: _selectCityId,
-      city: parseInt(id),
+      provinces: provinces,
       tel: parseInt(phone),
       code: parseInt(code),
       occupations: occupations,
@@ -361,9 +360,8 @@ Page({
       success: function (res) {
         let mydata = res.data;
         if (mydata.errcode === "ok") {
-          let defalutTop = mydata.data.default_top_area;
           wx.navigateTo({
-            url: `/pages/clients-looking-for-work/finding-name-card/findingnamecard?defalutTop=${defalutTop}`,
+            url: `/pages/clients-looking-for-work/finding-name-card/findingnamecard?isFastPublish=true`,
           })
         } else {
           wx.showModal({
