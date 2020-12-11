@@ -51,8 +51,10 @@ Page({
     showfindwork: false,
     // 是否展示验证码输入框
     showTel: true,
-    // 手机号码
+    // 用户手机号码
     telPhone: "",
+    // 输入手机号
+    phone: "",
     // 验证码时间
     sendrefresh: 60,
     // 第一次获取验证码
@@ -99,7 +101,7 @@ Page({
     let phoneNumber = e.detail.value;
     // 设置电话号码到data中
     this.setData({
-      telPhone: phoneNumber
+      phone: phoneNumber
     })
   },
 
@@ -284,17 +286,11 @@ Page({
     let token = userInfo.token;
     let tokenTime = userInfo.tokenTime;
     let provinces = this.data.selectCityData.map((item)=>item.id).join(",")
-    let that = this;
     let vali = v.v.new();
-    let {
-      id,
-      pid
-    } = this.data.areaData;
     let userClassifyids = this.data.userClassifyids;
     let occupations = this.data.selectedClassifies.join(",");
-    let phone = this.data.telPhone;
+    let phone = this.data.phone;
     let code = this.data.code;
-    let _selectCityId = this.data.selectCityId.join(',')
     
     // 验证是否有选择城市
     if (!provinces) {
@@ -333,7 +329,7 @@ Page({
       return false;
     }
     // 验证是否输入验证码
-    if (this.properties.fastInfo.tel != phone) {
+    if (this.data.telPhone != phone) {
       if (code.length < 4 || code.length > 6) {
         wx.showModal({
           title: '提示',
@@ -448,45 +444,11 @@ Page({
   },
   //选择期望地区 点击确定
   cityComfirm(e) {
-      this.setData({
-        selectCityData: [],
-        selectCityName: [],
-        selectCityId:[]
-      })
-      let _selectCityData = this.data.selectCityData
-      let areaData = e.detail.params
-      //找出选中的值
-      for (let i = 0; i < areaData.length; i++) {
-        for (let n = 0; n < areaData[i].children.length; n++) {
-          if (areaData[i].children[0].ischeck) {
-            let provinceSelect = {
-              name: areaData[i].name,
-              id: areaData[i].id
-            }
-            //如果选中全部 就不继续循环下面的市了
-            _selectCityData.push(provinceSelect)
-            break
-          } else if (areaData[i].children[n].ischeck) {
-            let citySelect = {
-              name: areaData[i].children[n].name,
-              id: areaData[i].children[n].id
-            }
-            _selectCityData.push(citySelect)
-          }
-        }
-      }
-      let _selectCityName = []
-      let _selectCityId = []
-      for (let i = 0; i < _selectCityData.length; i++) {
-        _selectCityName.push(_selectCityData[i].name)
-        _selectCityId.push(_selectCityData[i].id)
-      }
-      let _selectstr = _selectCityName.join(' | ')
-      this.setData({
-        selectCityData: _selectCityData,
-        selectCityName: _selectstr,
-        selectCityId: _selectCityId
-      })
+    let select = e.detail.params
+    this.setData({
+      selectCityData: select,
+      selectCityName: select.map(item => item.name).join(" | "),
+    })
   },
   //初始化发布找活名片
   initIssueResume() {
@@ -524,7 +486,9 @@ Page({
             userClassifyids: [{id: occId, name: occName}],
             classifies: occupations,
             selectCityData: [{id, name}],
-            telPhone: telPhone
+            telPhone: telPhone,
+            selectCityName: name,
+            phone: telPhone
           })
           _this.initWorkTypeData()
         }else{

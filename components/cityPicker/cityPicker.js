@@ -190,7 +190,7 @@ Component({
 			
 			console.log("selectarea",this.data.selectArea)
 		}, 
-		//选择市 判断选中了几个
+		//选择市
 		selectCity(e) {
 			// 选中父级index
 			let pIndex = this.data.provincei;
@@ -219,7 +219,6 @@ Component({
 			}else{
 				this.chooseCity(cityi)
 			}
-			
 			
 		},
 		//点击确定
