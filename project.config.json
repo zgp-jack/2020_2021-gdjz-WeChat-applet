@@ -45,6 +45,14 @@
   "simulatorType": "wechat",
   "simulatorPluginLibVersion": {},
   "condition": {
+    "search": {
+      "current": -1,
+      "list": []
+    },
+    "conversation": {
+      "current": -1,
+      "list": []
+    },
     "plugin": {
       "list": []
     },
@@ -561,12 +569,7 @@
           "scene": null
         },
         {
-          "name": "pages/issue/index/index",
-          "pathName": "pages/issue/index/index",
-          "query": "",
-          "scene": null
-        },
-        {
+          "id": -1,
           "name": "pages/clients-looking-for-work/finding-name-card/findingnamecard",
           "pathName": "pages/clients-looking-for-work/finding-name-card/findingnamecard",
           "scene": null
