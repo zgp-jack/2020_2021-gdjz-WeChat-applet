@@ -20,14 +20,18 @@ Component({
 		show: function () {
 			this.setData({
 				oldSelectData: JSON.parse(JSON.stringify(this.data.areaData)),
-				oldCytiData: JSON.parse(JSON.stringify(this.data.cityData)),
+				// oldCytiData: JSON.parse(JSON.stringify(this.data.cityData)),
 				showPicker: true
 			})
+			this.defaultCity(this.data.selectArea)
+
+
+
 		},
 		close: function () {
 			this.setData({
 				areaData: this.data.oldSelectData,
-				cityData: this.data.oldCytiData,
+				// cityData: this.data.oldCytiData,
 				showPicker: false
 			})
 		},
@@ -46,6 +50,7 @@ Component({
 		},
 		//初始化城市数据
 		initAeraData(newVal) {
+			console.log(newVal)
 			let newAreaData = wx.getStorageSync('newAreaData')
 			if(newVal.length>0){//如果没有默认城市数据才默认显示第一个
 				this.defaultCity(newVal)
@@ -61,6 +66,7 @@ Component({
 		},
 		//切换省的时候 Provincei=省的index
 		handleProvinceClick(Provincei) {
+			console.log(this.data.areaData)
 			let _city = this.data.areaData[Provincei].children
 			if (_city[0].name !== '全部') {
 				_city.unshift({
@@ -210,15 +216,14 @@ Component({
 			this.setData({
 				cityData: _cityData,
 				areaData: _areaData,
-				selectAllData: selectData
+				selectArea: selectData
 			})
-			console.log("_cityData",_cityData)
 		},
 		//点击确定
 		comfirmCity(e) {
 			//通知父组件
 			this.triggerEvent('cityComfirm', {
-				params: this.data.selectAllData
+				params: this.data.selectArea
 			})
 			this.setData({
 				oldSelectData: JSON.parse(JSON.stringify(this.data.areaData)),
@@ -229,7 +234,6 @@ Component({
 		//找出默认地区
 		defaultCity(defaultData) {
 			let ids = defaultData.map(item => item.id)
-			console.log("ids",ids)
 			let _areaData = this.data.areaData
 			for (let j = 0; j < ids.length; j++) {
 				for(let i = 0;i<_areaData.length;i++){
