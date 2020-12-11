@@ -146,6 +146,6 @@
       </view>
     </view>
   </view>
-  <cityPicker id="cityPicker" bindcityComfirm="cityComfirm" defaultData="{{defaultCityPicker}}"></cityPicker>
+  <cityPicker id="cityPicker" bindcityComfirm="cityComfirm" defaultData="{{selectAllData}}"></cityPicker>
 </view>
 <!-- getlocationdetails completes -->

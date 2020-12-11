@@ -12,7 +12,6 @@ Component({
 		cityData: [],
 		provincei: 0,
 		selectArea:[],
-		selectAllData:[],
 		oldSelectData: [],
 		oldCytiData:[]
 	},
@@ -20,13 +19,9 @@ Component({
 		show: function () {
 			this.setData({
 				oldSelectData: JSON.parse(JSON.stringify(this.data.areaData)),
-				// oldCytiData: JSON.parse(JSON.stringify(this.data.cityData)),
 				showPicker: true
 			})
 			this.defaultCity(this.data.selectArea)
-
-
-
 		},
 		close: function () {
 			this.setData({
@@ -50,22 +45,24 @@ Component({
 		},
 		//初始化城市数据
 		initAeraData(newVal) {
-			console.log(newVal)
 			let newAreaData = wx.getStorageSync('newAreaData')
+			this.setData({
+				areaData: newAreaData
+			})
 			if(newVal.length>0){//如果没有默认城市数据才默认显示第一个
 				this.defaultCity(newVal)
 			} else {
 				//默认选中第一个省
-				newAreaData[0].current = true
+				let areaData = this.data.areaData
+				areaData[0].current = true
 				this.setData({
-					areaData: newAreaData
+					areaData: areaData
 				})
 				this.handleProvinceClick(0)
 			}
 		},
 		//切换省的时候 Provincei=省的index
 		handleProvinceClick(Provincei) {
-			console.log(this.data.areaData)
 			let _city = this.data.areaData[Provincei].children
 			if (_city[0].name !== '全部') {
 				_city.unshift({
@@ -248,10 +245,9 @@ Component({
 						if (j == 0) {
 							_areaData[i].current = true
 							this.handleProvinceClick(i)
-						}else{
-							_areaData[i].current = false
 						}
 					}else{
+						_areaData[i].current = false
 						let children = _areaData[i].children
 						let index = children.findIndex((item) => item.id == ids[j])
 						if (index !== -1) {
@@ -260,8 +256,6 @@ Component({
 							if (j == 0) {
 								_areaData[i].current = true
 								this.handleProvinceClick(i)
-							}else{
-								_areaData[i].current = false
 							}
 						}else{
 							_areaData[i].current = false
@@ -272,20 +266,13 @@ Component({
 			this.setData({
 				areaData:_areaData,
 			})
+			console.log('areaData',_areaData)
 		}
 	},
 
 	lifetimes: {
 		ready: function () {
-			// let newAreaData = wx.getStorageSync('newAreaData')
-			// if (!newAreaData) {
-			// 	this.getAreaData()
-			// } else {
-			// 	this.initAeraData()
-			// }
-			// if(this.data.defaultData){
-			// 	this.defaultCity(this.data.defaultData)
-			// }
+			
 		},
 	},
 	observers: {

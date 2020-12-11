@@ -563,6 +563,12 @@
         {
           "name": "pages/issue/index/index",
           "pathName": "pages/issue/index/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/clients-looking-for-work/finding-name-card/findingnamecard",
+          "pathName": "pages/clients-looking-for-work/finding-name-card/findingnamecard",
           "scene": null
         }
       ]

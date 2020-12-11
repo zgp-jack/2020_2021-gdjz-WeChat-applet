@@ -1035,7 +1035,7 @@ cityComfirm(e) {
   let _select = e.detail.params
 
   this.setData({
-    selectAllData:e.detail.params,
+    selectAllData: _select,
     selectCityName:_select.map(item => item.name).join(" | ")
   })
 },
@@ -1092,7 +1092,7 @@ peopleage(e) { //工龄的选择
 
     this.setData({
       introinfo:introinfo,
-      defaultCityPicker:[{id:introinfo.provinces_id,name:introinfo.provinces_txt}],
+      selectAllData:[{id:introinfo.provinces_id,name:introinfo.provinces_txt}],
       introdetail:introdetail,
       selectCityName:introinfo.provinces_txt.replace(/,/g, "|")
     })
