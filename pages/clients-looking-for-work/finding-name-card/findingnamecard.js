@@ -1393,18 +1393,17 @@ Page({
   },
   // 点击弹窗取消按钮
   tapCancel: function () {
-    debugger
     let isFastPublish = this.data.isFastPublish;
     let cityid = this.data.cityid;
     let occupations_id = this.data.occupations_id;
     if (isFastPublish) {
       wx.reLaunch({
-        url: `/pages/index/index?aid=${cityid}id=${occupations_id}`,
+        url: `/pages/index/index?aid=${cityid}&id=${occupations_id}`,
       })
       this.setData({ isFastPublish: false })
     }else{
       wx.reLaunch({
-        url: `/pages/index/index?aid=${cityid}id=${occupations_id}`,
+        url: `/pages/index/index?aid=${cityid}&id=${occupations_id}`,
       })
     }
   },

@@ -1098,8 +1098,8 @@ Page({
       title: "温馨提示",
       content: "您还未发布找活名片，您可以发布找活名片，让老板主动来找您。",
       confirmText: "去发布",
-      confirmColor: "#797979",
-      cancelColor: "#0097FF",
+      confirmColor: "#0097FF",
+      cancelColor: "#797979",
       success: function (res) {
         if (res.confirm) {
           wx.navigateTo({
