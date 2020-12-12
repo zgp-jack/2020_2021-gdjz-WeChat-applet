@@ -1577,7 +1577,7 @@ App({
     this.activeRefresh()
   },
   // 刷新找活名片未置顶且当天首次刷新
-  showFirstBox: function () {
+  showFirstBox: function (_this) {
     this.globalData.dayFirstRefresh = 1
     wx.showModal({
       title:'刷新成功',

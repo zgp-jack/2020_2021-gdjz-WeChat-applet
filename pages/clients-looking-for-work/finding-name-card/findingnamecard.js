@@ -1485,6 +1485,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    console.log("options",options)
     //获取页面栈
     let pages = getCurrentPages();
     this.authrasution();
@@ -1492,10 +1493,9 @@ Page({
     // 如果是从快速发布找活名片到我的找活名片展示发布成功弹窗
     if (options.hasOwnProperty("isFastPublish")) {
       if(pages.length > 1) {
-        let index = pages.length - 1
-        let path = pages[index].__displayReporter.showReferpagepath
-        path = path.slice(0, -5)
-        if (path == "pages/jsIssueResume/index") {
+        let index = pages.length - 2
+        let path = pages[index].route
+        if (path == "pages/jsIssueResume/index" && options.isFastPublish) {
           this.setData({ isFastPublish: options.isFastPublish})
           this.refreshPage()
         }

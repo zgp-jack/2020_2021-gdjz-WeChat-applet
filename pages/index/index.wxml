@@ -237,7 +237,19 @@
 <downapptips id='downapptips'></downapptips>
 
 <!-- 刷新成功提示框 -->
-<promptbox id="promptbox" showTitle="{{ tipBox.showTitle }}" showIcon="{{ tipBox.showIcon }}" content="{{ tipBox.content }}" showCancel="{{ tipBox.showCancel }}" cancelText="{{ tipBox.cancelText }}" confirmText="{{ tipBox.confirmText }}" cancelColor="{{ tipBox.cancelColor }}" confirmColor="{{ tipBox.confirmColor }}" bind:confirm="confirm" bind:cancel="cancel" showClose="{{ tipBox.showClose}}" bind:close="tapClose"></promptbox>
+<promptbox 
+  id="promptbox" 
+  showTitle="{{ tipBox.showTitle }}" 
+  showIcon="{{ tipBox.showIcon }}" 
+  content="{{ tipBox.content }}" 
+  showCancel="{{ tipBox.showCancel }}" 
+  cancelText="{{ tipBox.cancelText }}" 
+  confirmText="{{ tipBox.confirmText }}" 
+  cancelColor="{{ tipBox.cancelColor }}" 
+  confirmColor="{{ tipBox.confirmColor }}" 
+  bind:confirm="confirm" bind:cancel="cancel" 
+  showClose="{{ tipBox.showClose}}" 
+  bind:close="tapClose"></promptbox>
 
 
 <!-- 发布招工-找活 浮动按钮 -->

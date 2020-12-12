@@ -51,8 +51,10 @@ Page({
     showfindwork: false,
     // 是否展示验证码输入框
     showTel: true,
-    // 手机号码
+    // 用户手机号码
     telPhone: "",
+    // 输入手机号
+    phone: "",
     // 验证码时间
     sendrefresh: 60,
     // 第一次获取验证码
@@ -101,7 +103,7 @@ Page({
     let phoneNumber = e.detail.value;
     // 设置电话号码到data中
     this.setData({
-      telPhone: phoneNumber
+      phone: phoneNumber
     })
   },
 
@@ -285,23 +287,18 @@ Page({
     let userId = userInfo.userId;
     let token = userInfo.token;
     let tokenTime = userInfo.tokenTime;
-    let that = this;
+    let provinces = this.data.selectCityData.map((item)=>item.id).join(",")
     let vali = v.v.new();
-    let {
-      id,
-      pid
-    } = this.data.areaData;
     let userClassifyids = this.data.userClassifyids;
     let occupations = this.data.selectedClassifies.join(",");
-    let phone = this.data.telPhone;
+    let phone = this.data.phone;
     let code = this.data.code;
-    let _selectCityId = this.data.selectCityId
     
     // 验证是否有选择城市
-    if (!_selectCityId) {
+    if (!provinces) {
       wx.showModal({
         title: '提示',
-        content: "请选择期望地区。",
+        content: "请选择期望工作地。",
         showCancel: false
       })
       return false
@@ -334,7 +331,7 @@ Page({
       return false;
     }
     // 验证是否输入验证码
-    if (this.properties.fastInfo.tel != phone) {
+    if (this.data.telPhone != phone) {
       if (code.length < 4 || code.length > 6) {
         wx.showModal({
           title: '提示',
@@ -346,9 +343,7 @@ Page({
     }
     // 发送请求参数
     let params = {
-      //请选择地区 去掉s 
-      provinces: _selectCityId,
-      city: parseInt(id),
+      provinces: provinces,
       tel: parseInt(phone),
       code: parseInt(code),
       occupations: occupations,
@@ -363,9 +358,8 @@ Page({
       success: function (res) {
         let mydata = res.data;
         if (mydata.errcode === "ok") {
-          let defalutTop = mydata.data.default_top_area;
           wx.navigateTo({
-            url: `/pages/clients-looking-for-work/finding-name-card/findingnamecard?defalutTop=${defalutTop}`,
+            url: `/pages/clients-looking-for-work/finding-name-card/findingnamecard?isFastPublish=true`,
           })
         } else {
           wx.showModal({
@@ -452,11 +446,10 @@ Page({
   },
   //选择期望地区 点击确定
   cityComfirm(e) {
-    let _select = e.detail.params
+    let select = e.detail.params
     this.setData({
-      selectAllData:e.detail.params,
-      selectCityName:_select.map(item => item.name).join(" | "),
-      selectCityId:_select.map(item => item.id).join(",")
+      selectCityData: select,
+      selectCityName: select.map(item => item.name).join(" | "),
     })
   },
   //初始化发布找活名片
@@ -496,9 +489,8 @@ Page({
             classifies: occupations,
             selectCityData: [{id, name}],
             telPhone: telPhone,
-            selectCityName:name.replace(/,/g, "|"),
-            fastInfo:mydata.data,
-            selectCityId:id
+            selectCityName: name,
+            phone: telPhone
           })
           _this.initWorkTypeData()
         }else{
