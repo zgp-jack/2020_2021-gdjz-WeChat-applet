@@ -717,7 +717,6 @@ Page({
       type: String(this.data.constituttion),
       number_people: this.data.teamsnumber
     })
-    
     if (JSON.stringify(information) == JSON.stringify(this.data.model) && this.data.checkonef == '0'){
       wx.showModal({
         title: '温馨提示',
@@ -1036,7 +1035,8 @@ cityComfirm(e) {
 
   this.setData({
     selectAllData: _select,
-    selectCityName:_select.map(item => item.name).join(" | ")
+    selectCityName:_select.map(item => item.name).join(" | "),
+    selectCityId:_select.map(item => item.id).join(",")
   })
 },
 

@@ -125,22 +125,23 @@
                 <view class="listsboxagezong" wx:if="{{item.birthday != 0}}">
                   <text>{{item.birthday}}岁</text>
                 </view>
-
-
-                <!-- <image wx:if="{{item.authentication == 2}}" src="{{realNames}}"></image> -->
-
-
-
                 <image wx:if="{{item.certificate == 1}}" src="{{authentication}}"></image>
-
               </view>
+
               <view class="listsboxagetwo" wx:if="{{item.nation || item.prof_degree}}">
                 <text class="listsboxnation" wx:if="{{item.nation}}">{{item.nation}}</text>
-                <text wx:if="{{item.prof_degree}}" >{{item.prof_degree}}</text>
+                <!-- <text wx:if="{{item.prof_degree}}" >{{item.prof_degree}}</text> -->
+                <text wx:if="{{item.experience}}">{{item.experience}}</text>
               </view>
+
               <view class="listsboxagetwot" wx:if="{{!item.nation && !item.prof_degree}}">
                 <text wx:for="{{item.tags}}" wx:key="index">{{item.label_name}}</text>
               </view>
+              
+              <view class="listsboxagetwo">
+                <text>期望工作地：测试 测试 测试</text>
+              </view>
+
             </view>
             <view class="listsboxshow" wx:if="{{item.type}}">{{item.type}}</view>
           </view>

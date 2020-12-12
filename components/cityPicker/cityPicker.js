@@ -65,9 +65,7 @@ Component({
 			if (selectData.length>0) {
 				this.defaultCity()
 			}else{
-				_areaData[0].childrenCheck = true;
 				_areaData[0].current = true;
-				_areaData[0].children[0].ischeck = true;
 				this.setData({areaData:_areaData,cityData:_areaData[0].children})
 			}
 		},

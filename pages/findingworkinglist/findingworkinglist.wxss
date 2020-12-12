@@ -50,7 +50,11 @@
 }
 .listsboxage{
   width: 100%;
-
+  height: 80rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin-top: 0;
 }
 .listsboxageone{
   display: flex;
@@ -152,6 +156,7 @@ box-sizing: border-box;
   display: flex;
   font-size: 26rpx;
   color: #616060;
+  line-height: 1;
 }
 .listsboxagetwo text{
   font-size: 28rpx;
