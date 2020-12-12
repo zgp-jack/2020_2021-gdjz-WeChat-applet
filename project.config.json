@@ -566,6 +566,12 @@
         {
           "name": "pages/jsIssueResume/index",
           "pathName": "pages/jsIssueResume/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "极速发布找活",
+          "pathName": "pages/jsIssueResume/index",
           "scene": null
         }
       ]

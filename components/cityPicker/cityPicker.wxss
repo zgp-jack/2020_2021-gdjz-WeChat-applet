@@ -12,12 +12,10 @@
 .picker-content {
 	height: 710rpx;
 	width: 100%;
-	position: fixed;
+	position: absolute;
 	z-index: 1001;
 	background: #fff;
 	bottom: 0;
-	display: flex;
-	flex-direction: column;
 }
 
 .picker-head {
@@ -45,7 +43,7 @@
 }
 
 .picker-body {
-	flex: 1;
+	height: 100%;
 	width: 100%;
 	display: flex;
 }
