@@ -1,5 +1,5 @@
 /* @import "../../course/course.wxss"; */
-@import "../../index/index.wxss";
+@import "../../../../pages/index/index.wxss";
 
 .common-choose-header{
     position: relative;

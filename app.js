@@ -44,7 +44,7 @@ App({
     commonJixieAd: "http://cdn.yupao.com/miniprogram/images/list-ad-newjixie.png?t=" + new Date().getTime(),
     // apiRequestUrl: "http://miniapi.kkbbi.com/",
     // apiRequestUrl: "https://miniapi.zhaogong.vrtbbs.com/",
-    apiRequestUrl: "https://newyupaomini.54xiaoshuo.com/",
+    // apiRequestUrl: "https://newyupaomini.54xiaoshuo.com/",
     apiRequestUrl: "https://miniapi.zhaogong.vrtbbs.com/",
     // apiRequestUrl: "https://newyupaomini.54xiaoshuo.com/",
     apiUploadImg: "https://newyupaomini.54xiaoshuo.com/index/upload/",
@@ -1554,13 +1554,14 @@ App({
   // 找活名片刷新成功提示框（当天首次刷新且未置顶 或 非当天首次刷新）弹窗
   showTipBox: function (_this) {
     let tipBox = {//提示框显示信息
+      title:"温馨提示",
       showTitle: true,
       showIcon: false,
       showCancel: true,
       confirmColor:'#0099FF',
       cancelColor:'#797979',
       content: [{
-        des: '刷新成功',
+        des: '刷新成功!',
         color: '',
         text: []
       }

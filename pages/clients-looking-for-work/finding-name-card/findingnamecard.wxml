@@ -572,7 +572,9 @@
 
 <!-- 刷新成功提示框 -->
 <promptbox 
-  id="pulishfindwork" 
+  id="promptbox" 
+  title="{{ tipBox.title }}"
+  showClose="{{ tipBox.showClose }}"
   showTitle="{{ tipBox.showTitle }}" 
   bind:cancel = "tapCancel" 
   bind:confirm = "tapConfirm" 

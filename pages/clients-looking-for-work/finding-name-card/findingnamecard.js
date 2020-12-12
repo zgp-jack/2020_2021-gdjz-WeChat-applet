@@ -1312,10 +1312,12 @@ Page({
         "tipBox.content[0].des":"置顶找活名片，让更多老板能看到你，找更多活！",
         "tipBox.confirmText": "去置顶",
         "tipBox.cancelText": "查看招工信息",
-        "tipBox.showclose" : true,
+        "tipBox.showClose" : true,
+        "tipBox.cancelColor" : "#797979",
+        "tipBox.confirmColor" : "#0097FF",
         pulishFindWork:false
       })
-      this.selectComponent("#pulishfindwork").show()
+      this.selectComponent("#promptbox").show()
     }
   },
   //去实名
@@ -1391,16 +1393,17 @@ Page({
   },
   // 点击弹窗取消按钮
   tapCancel: function () {
+    debugger
     let isFastPublish = this.data.isFastPublish;
     let cityid = this.data.cityid;
     let occupations_id = this.data.occupations_id;
     if (isFastPublish) {
-      wx.navigateTo({
+      wx.reLaunch({
         url: `/pages/index/index?aid=${cityid}id=${occupations_id}`,
       })
       this.setData({ isFastPublish: false })
     }else{
-      wx.navigateTo({
+      wx.reLaunch({
         url: `/pages/index/index?aid=${cityid}id=${occupations_id}`,
       })
     }
