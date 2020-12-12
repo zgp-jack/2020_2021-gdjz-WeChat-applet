@@ -19,6 +19,7 @@
 .prompt-content{
   padding:0rpx 50rpx;
   margin-top: 22rpx;
+  margin-bottom: 150rpx;
 }
 
 .prompt-box{
@@ -27,6 +28,7 @@
   background-color: white;
   border-radius: 30rpx;
   overflow: initial;
+  min-height: 370rpx;
 }
 .prompt-title{
   position: relative;
@@ -53,9 +55,8 @@
 }
 
 .prompt-footer{
-  position: relative;
+  position: absolute;
   border-top: 1rpx solid #eeeeee;
-  margin-top: 40rpx;
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -63,6 +64,8 @@
   border-bottom-right-radius: 30rpx;   
   border-bottom-left-radius: 30rpx;
   overflow: hidden;
+  width: 100%;
+  bottom: 0rpx;
 }
 .prompt-btn{
   font-size: 35rpx;
@@ -71,7 +74,7 @@
   color: #888;
   background: white;
   border-radius: 0;
-  line-height: 100rpx;
+  line-height: 110rpx;
   font-weight: 600;
 }
 .prompt-btn::after{

@@ -1,0 +1,19 @@
+<view class="city-picker" wx:if="{{showPicker}}">
+	<view class="picker-content">
+		<view class="picker-head">
+			<text class="cancel-text" bindtap="close">取消</text>
+			<text class="picker-head-title">期望工作地（最多选3个）</text>
+			<text class="confirm-text" bindtap="comfirmCity">确定</text>
+		</view>
+		<view class="picker-body">
+			<view class="picker-body-left">
+				<view bindtap="selectProvince" class="{{item.current ? 'current':''}}" wx:for="{{ areaData }}"  data-provincei="{{index}}" wx:key="id">
+					<text class="{{item.childrenCheck ? 'check':''}}">{{item.name}}</text>
+				</view>
+			</view>
+			<view class="picker-body-right">
+				<view wx:for="{{cityData}}" wx:key="id" bindtap="selectCity" data-cityi="{{index}}"  class="{{item.ischeck ? 'check':''}}"><text>{{item.name}}</text></view>
+			</view>
+		</view>
+	</view>
+</view>

@@ -125,33 +125,24 @@ Page({
       showTitle: true,
       showIcon: false,
       showCancel: true,
-      confirmColor:'#0099FF',
-      cancelColor:'#797979',
+      confirmColor:'',
+      cancelColor:'',
       content: [{
         des: '',
-        color: '#585963',
-        text: [{
-          textName: '',
-          color: '#585963'
-        },
-        {
-          textName: '',
-          color: 'red'
-        },
-        {
-          textName: '',
-          color: '#585963'
-        }
-      ]
+        color: '',
+        text: []
       }
     ],
-      confirmText: ''
+      confirmText: '',
+      cancelText: '',
+      showClose: false
     },
     // 刷新状态
     refreshStatus: false,
     // 刷新成功icon
     successIcon:app.globalData.apiImgUrl + 'yc/findwork-publish-success.png',
-    authStatus:''//如果从招工详情页返回到招工列表页面，是需要实名（to_auth）,那么就不设置隐藏快速发布找活名片的时间。
+    // 提示框状态
+    boxType: false
   },
   getPhoneNumber:function(e){
     console.log(e)
@@ -510,11 +501,9 @@ Page({
         })
       }
     })
-    this.showRefresh()
   },
   doSearchRequestAction: function (_append) {
     let _this = this;
-    this.showRefresh()
     this.setData({
       nothavemore: false,
       showNothinkData: false
@@ -1113,6 +1102,81 @@ Page({
       }
     })
   },
+  // 没有找活名片招工列表弹窗
+  noCardBox: function () {
+    wx.showModal({
+      title: "温馨提示",
+      content: "您还未发布找活名片，您可以发布找活名片，让老板主动来找您。",
+      confirmText: "去发布",
+      confirmColor: "#797979",
+      cancelColor: "#0097FF",
+      success: function (res) {
+        if (res.confirm) {
+          wx.navigateTo({
+            url: '/pages/jsIssueResume/index',
+          })
+        }
+        if (res.cancel) {
+          let time = new Date().getTime()
+          wx.setStorageSync('noCardCancelTime', time)
+        }
+      }
+    })
+  },
+  // 有找活名片，没有刷新没有置顶弹窗
+  haveCardBox: function () {
+    this.setData({
+      "tipBox.content[0].des": `您的找活名片排名靠后，您可以去刷新或置顶找活名片，让老板主动来联系您。`,
+      "tipBox.confirmText": "去刷新",
+      "tipBox.cancelText": "去置顶",
+      "tipBox.showCancel": true,
+      "tipBox.showIcon": false,
+      "tipBox.showClose": true,
+      "tipBox.showTitle": true,
+      "tipBox.confirmColor": "#0097FF",
+      "tipBox.cancelColor": "#797979",
+      refreshStatus: false,
+      boxType: "haveCardBox"
+    })
+    this.selectComponent("#promptbox").show()
+  },
+  // 没有找活名片招工列表弹窗 与 有找活名片，没有刷新没有置顶弹窗
+  showPromtBox: function (day, hasResume) {
+    // 没有找活名片点击取消的时间缓存
+    let haveCancelTime = wx.getStorageSync("haveCardCancelTime")
+    // 没有找活名片点击取消的时间缓存
+    let NoCancelTime = wx.getStorageSync("noCardCancelTime")
+    // 当前时间戳
+    let currentTime = new Date().getTime();
+    if (!hasResume) {
+      if (!NoCancelTime) {
+        this.noCardBox()
+      }else{
+        let dueTime = NoCancelTime + (day * 24 * 60 * 60 * 1000 - 1)
+        if (currentTime > dueTime) {
+          this.noCardBox()
+        }
+      }
+    }else{
+      if (!haveCancelTime) {
+        this.haveCardBox()
+      }else{
+        // 最新到期时间
+        let dueTime = haveCancelTime + (day * 24 * 60 * 60 * 1000 - 1)
+        if (currentTime > dueTime) {
+          this.haveCardBox()
+        }
+      }
+    }
+  },
+  // 如果有找活名片当天未刷新过且未置顶弹窗（is_pop 0, has_resume 1, is_refreshed_today 0）
+  // 点击关闭按钮根据后台返回天数设置不再展示弹窗 （cancel_refresh_top_expire_days）
+  tapClose: function () {
+    // 点击关闭按钮的时间戳
+    let clickTime = new Date().getTime()
+    // 保存到缓存
+    wx.setStorageSync("haveCardCancelTime", clickTime)
+  },
   // 找工作列表是否弹出引导刷新找活名片请求
   showRefresh: function () {
     let that = this;
@@ -1121,28 +1185,27 @@ Page({
     if (!userInfo) return;
     let token = userInfo.token;
     app.appRequestAction({
-      url: 'resumes/popup-to-refresh/',
+      url: '/resumes/popup/',
       way: 'POST',
       params: {token},
       success: function (res) {
         let mydata= res.data
         if (mydata.errcode === "ok") {
+          // 是否弹窗。0-不弹窗；1-弹窗
           let showPopup = mydata.data.is_popup;
-          let integral = mydata.data.integral;
+          // 是否有找活名片。0-否；1-是
+          let hasResume = mydata.data.has_resume;
+          // is_refreshed_today 今天是否刷新过找活。0-否；1-是
+          let dayFirstRefresh = mydata.data.is_refreshed_today
+          app.globalData.dayFirstRefresh = dayFirstRefresh
           if (showPopup) {
-            that.setData({
-              "tipBox.content": '',
-              "tipBox.content[0].text[0].textName": `刷新找活名片让更多老板联系你，消耗`,
-              "tipBox.content[0].text[1].textName": integral,
-              "tipBox.content[0].text[1].color":"#DC143C",
-              "tipBox.content[0].text[2].textName": '积分刷新？',
-              "tipBox.confirmText": "去刷新",
-              "tipBox.showCancel": true,
-              "tipBox.showIcon": false,
-              "tipBox.showTitle": true,
-              refreshStatus: false
-            })
-            that.selectComponent("#promptbox").show()
+            if (hasResume) {
+              if (!dayFirstRefresh) {
+                that.showPromtBox(parseInt(mydata.data.cancel_refresh_top_expire_days,10),hasResume)
+              }
+            } else {
+              that.showPromtBox(parseInt(mydata.data.cancel_publish_expire_days,10),hasResume)
+            }
           }
         }
       },
@@ -1159,11 +1222,22 @@ Page({
       this.setData({refreshStatus: false})
     }else{
       app.refreshReq(2, this)
-      this.cancelRefresh()
     }
   },
   cancel: function () {
-    this.cancelRefresh()
+    // 弹窗类型，refreshSuccess 非首次刷新成功弹窗 
+    // haveCardBox 有找活名片且未置顶且当日未刷新弹窗
+    let boxType = this.data.boxType;
+    if (boxType == 'haveCardBox') {
+      wx.navigateTo({
+        url: '/pages/clients-looking-for-work/workingtop/workingtop',
+      })
+      // 点击关闭按钮的时间戳
+      let clickTime = new Date().getTime()
+      // 保存到缓存
+      wx.setStorageSync("haveCardCancelTime", clickTime)
+      this.setData({ boxType: false })
+    }
   },
   /**
    * 生命周期函数--监听页面加载®
@@ -1214,11 +1288,9 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    let isShowFindWork = app.globalData.isShowFindWork;
     let pages = getCurrentPages();
     let index = pages.length - 1
     let path = pages[index].__displayReporter.showReferpagepath
-    let authStatus = this.data.authStatus;//如果值“to_auth”,不需要设置隐藏快速找活名片时间
     path = path.slice(0, -5)
     //如果置顶或者发布回来 需要刷新数据
     if(path == "pages/clients-looking-for-work/finding-name-card/findingnamecard"){
@@ -1229,32 +1301,13 @@ Page({
       })
       this.doRequestAction(false)
     }
-    // 如果页面是来自于招工详情且有快速找活名片
-    // 返回的时候设置当天不再展示快速发布找活名片
-    if (path == "pages/detail/info/info") {
-      if (!authStatus) {
-        if (isShowFindWork) {
-          let myDate = new Date();
-          // 当前时间戳
-          let currentTime = myDate.getTime();
-          // 到期时间戳（23:59:59）
-          let dueDate = (new Date(new Date().toLocaleDateString())).getTime() +  (24 * 60 * 60 * 1000 - 1);
-          // let dueDate = currentTime +  (2 * 60 * 1000 - 1);
-          // 存入缓存
-          let FindWorkTime = {currentTime:currentTime,dueDate:dueDate};
-          wx.setStorageSync("FindWorkTime",FindWorkTime);
-          app.globalData.isShowFindWork = false;
-        }
-      }else{
-        this.setData({authStatus: ''})
-      }
-    }
     this.getUserUuid();
     this.initUserinfo();
     footerjs.initMsgNum(this);
     this.initTurntable();
     app.initResume(this)
     this.initPageData()
+    this.showRefresh()
   },
   onPageScroll: function (e) {
     let top = e.scrollTop;
@@ -1280,6 +1333,7 @@ Page({
    */
   onPullDownRefresh: function () {
     wx.showNavigationBarLoading()
+    this.showRefresh()
     //wx.startPullDownRefresh()
     this.returnTop();
     this.setData({

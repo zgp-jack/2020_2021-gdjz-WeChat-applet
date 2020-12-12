@@ -1,22 +1,26 @@
-
- <view class="header" >
-      注: 资料越完善，找活越容易
-</view>
 <view class="common-uinfo-editbox">
   <view class="informationtwo">
-    <view class="informationtwi">
+    <view class="informationtwi" wx:if="{{editType == 'bj'|| introinfo.authentication != 2}}">
       <text class="informationtwione">姓名</text>
       <view class="informationtwitwo">
         <input type="text" maxlength="5" placeholder="请输入2~5字纯中文姓名" value="{{name}}" bindinput="name"></input>
       </view>
     </view>
-    <view class="informationthree" bindtap="hiddenKeyBoard">
+    <view class="informationthree" bindtap="hiddenKeyBoard" wx:if="{{editType == 'bj'||introinfo.authentication != 2}}">
       <text class="informationtwione">性别</text>
       <picker bindchange="sex" value="{{indexsex}}" range="{{array}}" class="informationthreetwo">
         <input disabled name="addregion" value="{{array[indexsex]}}" placeholder="请选择性别"></input>
       </picker>
     </view>
-    <view class="informationfour">
+    <view class="informationfive" bindtap="hiddenKeyBoard" wx:if="{{editType == 'bj'||introinfo.authentication != 2}}">
+      <text class="informationtwione">民族</text>
+      <picker bindchange="nation" range="{{nationalarray}}" class="informationfivetwo" value="{{nationindex}}">
+        <input disabled name="addnational" value="{{nationalarray[nationindex]}}" placeholder="请选择民族"></input>
+      </picker>
+    </view>
+
+
+    <view class="informationfour" wx:if="{{editType == 'bj'||introinfo.authentication != 2}}">
       <text class="informationtwione">出生日期</text>
       <view class="informationfourtwo">
         <picker mode="date" value="{{birthday}}" start="{{beforeDate}}" end="{{emdDate}}" bindchange="birthday">
@@ -24,20 +28,11 @@
         </picker>
       </view>
     </view>
-    <view class="informationfive" bindtap="hiddenKeyBoard">
-      <text class="informationtwione">民族</text>
-      <picker bindchange="nation" range="{{nationalarray}}" class="informationfivetwo" value="{{nationindex}}">
-        <input disabled name="addnational" value="{{nationalarray[nationindex]}}" placeholder="请选择民族"></input>
-      </picker>
-    </view>
 
-    <view class="informationpeople">
-
-
+    
+    <view class="informationpeople"  wx:if="{{editType == 'bj' || introinfo.occupations.length < 1}}">
       <text class="informationtwione">所属工种</text>
       <text bindtap="typeworktwo" class=' {{ workIndexvalue.length==5 ? "informationTypeworktwo":"informationTypeworktwoo" }}'>{{workIndexvalue}}</text>
-
-
       <view class='publish-choose-wordtype' wx:if="{{ showWorkType }}">
         <view class='publish-choose-contentbox common-shaded-box'>
           <view class='publish-choose-header'>选择工种（可多选）</view>
@@ -57,8 +52,23 @@
       </view>
     </view>
 
-    <view class="informationseven">
-      <view class="informaregiononede"><text>期望地区</text></view>
+    <view class="informationtwi" wx:if="{{editType == 'bj' || introinfo.experience == 0}}">
+      <text class="informationtwione">工龄</text>
+      <view class="informationtwitwo">
+        <input type="number" value="{{workage}}" bindinput="peopleage" placeholder="请输入工龄"></input>
+      </view>
+    </view>
+
+    <view class="informationtwi" wx:if="{{editType == 'bj'}}">
+      <!-- <view class="informationtwi"> -->
+      <text class="informationtwione" style="text-align:left">期望工作地</text>
+      <view class="informationtwitwo" bindtap="showCityPicker">
+        <input type="text" placeholder="请选择期望工作地" value="{{selectCityName}}"></input>
+      </view>
+    </view>
+
+    <view class="informationseven" wx:if="{{editType == 'bj' || !introinfo.address}}">
+      <view class="informaregiononede"><text>当前所在地</text></view>
       <view class="informationseventwo">
         <!-- <input name="addregionone" disabled="true" placeholder="请选择你所在地址" bindtap='userTapAddress' value='{{regionone}}'>
         </input> -->
@@ -68,17 +78,25 @@
         <view class="informaregionone" bindtap='userTapAddress' wx:if="{{!regionone}}" >
          <view class="informaselect" >请选择你所在地址</view> 
         </view>
-        <!-- <view class="informationdos">
-
-        </view> -->
-                  <text class="positioning" bindtap="GPSsubmit">获取定位</text>
+        <text class="positioning" bindtap="GPSsubmit">获取定位</text>
       </view>
     </view>
 
-  </view>
-  <view class="informationtelephone">
-    <view class="informationtheinput">
-      <text class="informationtwione">手机号码</text>
+    <view class="informationtwi" wx:if="{{editType == 'bj' || !introdetail.type}}">
+      <text class="informationtwione">人员构成</text>
+      <picker bindchange="constitute" class="informationtwitwo" value="{{indexperson}}"  range="{{compositionarray}}" bindtap="hidekeyboard">
+        <input disabled  name="addcompositionarray" value="{{compositionarray[indexperson]}}" placeholder="请选择人员构成"></input>
+      </picker>
+    </view>
+
+    <view class="informationtwi"  wx:if="{{indexperson != 0}}">
+      <text class="informationtwione">队伍人数</text>
+      <view class="informationtwitwo">
+        <input type="number" placeholder="请输入队伍人数" value="{{constituttion}}"></input>
+      </view>
+    </view>
+    <view class="informationtheinput" wx:if="{{editType == 'bj' || !introinfo.tel}}">
+      <text class="informationtwione">联系电话</text>
       <view class="informationtheinputtwo">
         <input type="text" placeholder="请输入手机号" value="{{telephone}}" bindinput="telephone"></input>
       </view>
@@ -95,6 +113,8 @@
         </view>
       </view>
     </view>
+  
+
   </view>
 
   <view class="informationevaluation">
@@ -103,6 +123,7 @@
       <textarea wrap="hard" wx:if="{{ !showWorkType && !perfection}}" class="informationevaluationtwo" bindinput="textareavalue" maxlength="500" placeholder="请简要介绍你所从事的行业以及工作经验..." value="{{otextareavalue}}">
       </textarea>
     </view>
+    <view class="clearIntroduce" bindtap="clearIntroduce">清空内容</view>
     <text class="informationenum">{{otextareavaluel}}/500</text>
   </view>
 
@@ -125,6 +146,6 @@
       </view>
     </view>
   </view>
-
+  <cityPicker id="cityPicker" bindcityComfirm="cityComfirm" defaultData="{{selectAllData}}"></cityPicker>
 </view>
 <!-- getlocationdetails completes -->

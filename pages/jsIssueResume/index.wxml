@@ -1,24 +1,15 @@
-<!--components/publishfindwork/publishfindword.wxml-->
-  <view class="publish-container" wx:if="{{ showfindwork }}">
+<view class="publish-container">
   <!-- <view class="publish-contentbox"> -->
     <scroll-view scroll-y="{{isScroll}}" class="publish-scroll">
-    <view class="{{ fastInfo.type === 2?'issue-title-no':'issue-title-box' }}">
+    <view class="issue-title-box">
       <image src="{{ titleImage }}" class="issue-title-iamge"></image>
-      <view class="issue-title" wx:if="{{ fastInfo.type === 3 || !fastInfo.type}}">你是否要在<text class="issue-title-info">{{ fastInfo.city_txt?fastInfo.city_txt:fastInfo.province_txt }}</text>找<text class="issue-title-info">{{ fastInfo.occ_txt }}</text>工作</view>
-      <view class="issue-title" wx:if="{{ fastInfo.type === 2 }}">请完善以下信息</view>
+      <view class="issue-title">发布找活名片，让老板主动来找您！</view>
       <image src="{{ titleImage }}" class="issue-title-iamge"></image>
     </view>
     <view class="issue-contactbox">
       <view class="issue-box" bindtap="hideKeyboard">
-        <text>期望地区：</text>
-        <picker  mode="multiSelector" 
-          bindchange="bindPickerChange" 
-          bindcolumnchange="bindMultiPickerColumnChange" 
-          value="{{ index }}" 
-          range="{{ areapicker }}" 
-          range-key="name">
-          <input placeholder="请选择招工城市" disabled class="issue-input" value="{{ areatext }}"></input>
-        </picker>
+        <text>期望工作地：</text>
+        <input placeholder="请选择期望工作地" disabled class="issue-input" value="{{ selectCityName }}"></input>
       </view>
       <view class="issue-box-worktype">
         <view class="issue-box" bindtap="showWorkTypePicker"> 
@@ -31,21 +22,21 @@
       </view>
       <view class="issue-box">
         <text>联系电话：</text>
-        <input placeholder="请输入联系电话"  class="issue-input" value="{{ fastInfo.tel }}" bindinput="inputPhoneNumber" type="number" maxlength="11" bindfocus="onfocus" bindblur="onblur"></input>
+        <input placeholder="请输入联系电话"  class="issue-input" value="{{ phone }}" bindinput="inputPhoneNumber" type="number" maxlength="11" bindfocus="onfocus" bindblur="onblur"></input>
       </view>
-      <view class="issue-box" wx:if="{{ !fastInfo.tel || fastInfo.tel != telPhone }}">
+      <view class="issue-box" wx:if="{{ !telPhone || telPhone != phone }}">
         <text>验证码：</text>
         <input placeholder="请输入验证码"  class="issue-input" type="number" value="{{ code }}" bindinput="inputCode" maxlength="6" bindfocus="onfocus" bindblur="onblur"></input>
         <view class="issue-phone-code" wx:if="{{ firstGetCode }}" bindtap="reGetPhoneCode">获取验证码</view>
         <view class="issue-phone-code" wx:elif="{{ !firstGetCode }}" bindtap="{{ sendrefresh?'':'reGetPhoneCode' }}">{{ sendrefresh? sendrefresh + '秒后可重新获取':'重新获取' }}</view>
       </view>
     </view>
-    <view class="issue-footer-button {{ !fastInfo.type?'':'issue-footer-button-margin' }}">
-      <button class="issue-code-btn" plain="true" bindtap="closeFindWork">取消</button>
-      <button class="issue-code-btn" type="primary" bindtap="{{reqStatus?'publishFindWork':''}}">确认发布</button>
+    <view class="issue-footer-button">
+      <button class="issue-code-btn" type="primary" bindtap="publishFindWork">确认发布</button>
     </view>
-    <view class="issue-cloose-tip" wx:if="{{ !fastInfo.type }}" bindtap="clooseTip">暂不提示</view>
   <!-- </view> -->
+  <!-- 选择城市组件 -->
+  <cityPicker id="cityPicker" bindcityComfirm="cityComfirm" defaultData="{{selectCityData}}"></cityPicker>
   <!-- 工种选择 -->
   <view class="common-picker-container {{ showPicker ? '':'common-picker-none' }}">
   <view class="common-picker-box">
@@ -60,7 +51,7 @@
           data-index="{{ index }}"
           class="common-picker-item {{ pindex === index ? 'common-picker-item-active':'' }}" 
           wx:for="{{ classifies }}" 
-          wx:key="item.id"
+          wx:key="id"
           bindtap="userCheckPindex"
         >{{ item.name }}<text wx:if="{{ item.num }}">{{ item.num }}</text></view>
       </view>
@@ -71,7 +62,7 @@
           data-checked="{{ item.checked }}"
           data-name="{{ item.name }}"
           wx:for="{{ childClassifies }}" 
-          wx:key="item.id"
+          wx:key="id"
           bindtap="userCheckWorkType"
         >{{ item.name }}</view>
       </view>
@@ -80,6 +71,3 @@
   </view>
 </scroll-view>
 </view>
-
-
-

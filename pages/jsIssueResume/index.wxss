@@ -129,7 +129,7 @@
   font-size: 28rpx;
 }
 .issue-box-worktype-tip{
-  color: #ff9600;
+  color: #FF9600;
   padding-left: 20rpx;
 }
 .issue-box .issue-input{
@@ -159,14 +159,15 @@
   position: relative;
   line-height: 45rpx;
   font-size: 28rpx;
-  width: 140rpx;
+  width: 170rpx;
 }
 .issue-box .issue-phone-code{
   color: #0297fe;
   font-weight: normal;
 }
 .issue-footer-button{
-  width: 90%;
+  width: 532rpx;
+  height: 88rpx;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -177,7 +178,7 @@
   margin-bottom: 450rpx;
 }
 .issue-code-btn{
-  width: 48%;
+  width: 100%;
 }
 .issue-footer-button button{
   margin: 0rpx;

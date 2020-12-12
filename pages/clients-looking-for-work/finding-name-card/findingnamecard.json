@@ -3,7 +3,6 @@
     "enablePullDownRefresh": true ,
     "usingComponents": {
         "recommendRecruit": "/components/recommendRecruit/recommendRecruit",
-        "publishfindwork":"/components/publishfindwork/publishfindword",
         "issueok": "/components/issueok/index",
         "promptbox": "/components/promptBox/index"
     }

@@ -28,17 +28,17 @@ page {
   padding-left: 6rpx;
 }
 .findingnamecard {
-  width: 93%;
+  width: 94%;
   margin: 0 auto;
   height: 100rpx;
   background: white;
-  font-size: 30rpx;
-  color: #343434;
+  font-size: 24rpx;
   line-height: 100rpx;
   text-align: center;
   letter-spacing: 4rpx;
   font-weight: bold;
   position: relative;
+  color: #535353;
 }
 .sharecard{
   position: absolute;
@@ -520,6 +520,7 @@ height: 26rpx;
   padding-right: 27rpx;
   background: white;
   box-shadow: 0 0 1rpx #e7e6e4;
+  margin-bottom: 20rpx;
 }
 
 .cardcolore{
@@ -530,7 +531,7 @@ height: 26rpx;
 .cardone .cardoneson {
   width: 100%;
   background-color: white;
-  height: 80rpx;
+  height: 105rpx;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -539,7 +540,7 @@ height: 26rpx;
 .cardone .cardoneson .cardonesonone {
   font-size: 30rpx;
   color: #343434;
-  margin-top: 25rpx;
+  margin-top: 33rpx;
   height: 28rpx;
   font-weight: bold;
 }
@@ -617,7 +618,7 @@ height: 26rpx;
 
 .cardtwosonone .cardtwosononeimg  .oimgone {
 
-  padding-left: 6px;
+  padding-left: 50rpx;
 
 }
 
@@ -629,9 +630,8 @@ height: 26rpx;
 
 .cardtwosonone .cardtwosononeimg .oimgone .otextone {
   font-size: 30rpx;
-  color: black;
+  color: #6C6B6B;
   margin-top: 6rpx;
-
 }
 
 .cardtwosonone .cardtwosononeimg .oimgone .otextone .ochange {
@@ -644,6 +644,7 @@ height: 26rpx;
   line-height: 88rpx;
   position: absolute;
   right: 0;
+  z-index: 99;
 }
 .cardcoloreno{
   background: #fffbf7;
@@ -705,7 +706,7 @@ height: 26rpx;
 }
 
 .cardotext .workotextone {
-  color: #222;
+  color: #6C6B6B;
   font-size: 30rpx;
   padding-left: 28rpx;
   width: 70%;
@@ -1115,6 +1116,9 @@ top: -14rpx;
   justify-content: space-evenly;
   line-height: 30rpx;
 }
+.cardnine .cardnineone .important {
+  color: #FF4D42;
+}
 .cardnine .cardnineone:first-child view:first-child{
   color: black;
   font-weight: bold;
@@ -1173,12 +1177,13 @@ top: -14rpx;
 
 .contentone {
   font-size: 30rpx;
-  color: black;
+  color: #797979;
   margin-left: 7.5%;
   margin-bottom: 8rpx;
   padding-right: 2%;
   word-wrap: break-word;
   word-break: break-all;
+  margin-top: 20rpx;
 }
 
 .cardotext {
@@ -1203,12 +1208,12 @@ top: -14rpx;
 }
 
 .cardotext .oworkotext {
-  width: 20.5%;
+  width: 22.5%;
   margin: 0;
   padding: 0;
   height: 34rpx;
   display: inline-block;
-  color: #555;
+  color: #7A7A7A;
   font-size: 30rpx;
   /* width: 100%; *//* margin-top: 14rpx;
   margin-bottom: 6rpx; */
@@ -1329,7 +1334,7 @@ top: -14rpx;
   height: 70%;
   border-radius: 14rpx;
   position: relative;
-  margin-top: 28rpx;
+  margin-top: 40rpx;
   margin-right: 1.5%;
   font-size: 22rpx;
 }
@@ -1345,8 +1350,7 @@ top: -14rpx;
   line-height: 28rpx;
   text-align: right;
   flex: 1;
-  padding-right: 6rpx;
-
+  padding-right: 15rpx;
 }
 .select_box .select .select_textone {
   font-size: 30rpx;
@@ -1359,11 +1363,10 @@ top: -14rpx;
 }
 
 .select_box .select image {
-width: 24rpx;
-height: 22rpx;
-display: block;
-margin-top: 4rpx;
-
+  width: 24rpx;
+  height: 22rpx;
+  display: block;
+  margin-top: 4rpx;
   transition: transform 0.3s;
 }
 
@@ -1672,7 +1675,7 @@ color: #6d6b6b;
 }
 
 .ocworkotype {
-  width: 20.5%;
+  width: 22.5%;
   left: 0;
   top: 0;
   display: inline-block;
@@ -1704,12 +1707,12 @@ color: #6d6b6b;
 
 .ocworkotyp {
   position: relative;
-  left: 28rpx;
+  left: 46rpx;
   font-size: 0;
 }
 
 .ocworkotyp .ocworkotyptu {
-  color: rgba(42, 42, 42, 1);
+  color: #414141;
   font-size: 28rpx;
   display: inline-block;
   padding: 4rpx 10rpx;

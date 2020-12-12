@@ -1,8 +1,7 @@
-<view style="padding-bottom:120rpx;" wx:if="{{showFindCard}}">
+<view style="padding-bottom:120rpx;">
   <view class="cardcolore">
     <view class="findingnamecard">
-      <text class="left-text">请完善以下信息</text>
-      <view class="sharecard" wx:if="{{showtopone}}" bindtap="preview">预览/分享名片</view>
+      <text>置顶找活信息能让你的名片展示更靠前，让更多老板看到</text>
     </view>
   </view>
   <!-- {{selectShow&&"select_img_rotate"}} show_tips editor -->
@@ -18,9 +17,9 @@
           <text class="view_num">{{view_num}}</text>
         </view>
         <view class="isline" wx:if="{{showcomplete}}">
-          <button class="shareliveone" bindtap="completeall">名片越完善 找活越容易,马上去完善>>
-
-          </button>
+          <button class="shareliveone" bindtap="completeall"  wx:if="{{project.length < 1 && is_introduces != '1'}}">资料越完善 找活越容易,马上去完善>></button>
+          <button class="shareliveone" bindtap="goRealName" wx:if="{{authenticationimg != 2 && (project.length > 0 || is_introduces == '1')}}">招工方更喜欢找实名的工人哦！马上去实名>></button>
+          
           <text class="sontwoview">浏览次数</text>
         </view>
         <view class="isline" wx:if="{{!showcomplete}}">
@@ -136,23 +135,36 @@
                 <image wx:if="{{authenticationimg == 2}}" src="{{realNames}}"></image>
                 <image wx:if="{{certificate_show ==1}}" src="{{authentication}}"></image>
               <view class="otextone">
-                <text>{{sex}}</text>
-                <text class="{{sex?'ochange':''}}" wx:if="{{age}}">{{age}}</text>
-                <text class="{{age?'ochange':''}}">{{nation}}</text>
+                <text>{{sex}} </text>
+                <text class="{{sex?'ochange':''}}" wx:if="{{age}}">{{age}} </text>
+                <text class="{{age?'ochange':''}}">{{nation}} </text>
               </view>
             </view>
           </view>
-          <view class="cardtwosontwo" wx:if="{{!checkone && checkonef != '0'}}">
-            <text bindtap="edit">编辑</text>
-          </view>
-          <view class="cardtwosontwo" wx:if="{{checkonef == '0'}}">
+          <view class="cardtwosontwo" wx:if="{{checkonef == 0}}">
             <text bindtap="edit">待修改</text>
+          </view>
+          <view class="cardtwosontwo" wx:if="{{checkonef != 0 && is_introduces == '0'}}">
+            <text bindtap="edit">完善质料</text>
+          </view>
+          <view class="cardtwosontwo" wx:if="{{checkone != 0 && is_introduces == '1'}}">
+            <text bindtap="editbj">编辑</text>
           </view>
         </view>
         <view class="lineone">
           <view class="linezo">
+            <!-- 工龄 -->
+            <view class="cardotext" wx:if="{{workingyears}}">
+              <text class="oworkotext">工龄</text>
+              <text class="workotextone">{{workingyears}}</text>
+            </view>
+            <!-- 手机 -->
+            <view class="cardotext">
+              <text class="oworkotext">联系电话</text>
+              <text class="workotextone">{{telephone}}</text>
+            </view>
+            <!-- 工种 -->
             <view class="cworkotype">
-
               <view class="ocworkotype">工种</view>
               <view class="ocworkotypeoo">
                 <view class="ocworkotyp" wx:if="{{!showskill}}">
@@ -167,21 +179,27 @@
                 </view>
               </view>
             </view>
+            <!-- 期望地区 -->
             <view class="cardotext">
-
-              <text class="oworkotext">手机</text>
-
-              <text class="workotextone">{{telephone}}</text>
-
-            </view>
-            <view class="cardotext">
-
               <text class="oworkotext">期望地区</text>
-
-
-              <text class="workotextone">{{city}}</text>
-
+              <text class="workotextone">{{provinces_txt}}</text>
             </view>
+            <!-- 当前所在地 -->
+            <view class="cardotext"  wx:if="{{city}}">
+              <text class="oworkotext">当前所在地</text>
+              <text class="workotextone">{{city}}</text>
+            </view>
+            <!-- 人员构成 -->
+            <view class="cardotext" wx:if="{{staffcomposition}}">
+              <text class="oworkotext">人员构成</text>
+              <text class="workotextone">{{staffcomposition}}</text>
+            </view>
+            <!-- 队伍人数 -->
+            <view class="cardotext" wx:if="{{personnum}}">
+              <text class="oworkotext">队伍人数</text>
+              <text class="workotextone">{{personnum}}</text>
+            </view>
+            <!-- 自我介绍 -->
             <view class="cardotext">
 
               <text class="oworkotext">自我介绍</text>
@@ -217,7 +235,7 @@
       <view class="findingnamecardfourtwo" bindtap="improvementwork">去完善</view>
     </view>
   </view>
-
+<!-- 
   <view class="findingnamecardthree" wx:if="{{selfintrone}}">
     <view class="findingnamecardthreemobile">
       <view class="findingnamemobile">
@@ -294,7 +312,7 @@
 
       <view class="cardotextbottom"></view>
     </view>
-  </view>
+  </view> -->
 
   <view class="findingnamecardthree" wx:if="{{projectlength == 0}}">
     <view class="findingnamecardthreemobile">
@@ -530,10 +548,11 @@
   <button bindtap="activeRefresh" class="cardnineone" open-type='share'>
     <image src="{{participation}}"></image>分享</button>
 </view> -->
-<view class="cardnine" wx:if="{{showtopone}}">
+<view class="cardnine" wx:if="{{showtopone && show_refresh_btn == 1}}">
   <view class="cardnineone">
     <view>提升活跃度，让更多老板看到你的名片</view>
-    <view>{{ refreshText }}(消耗{{ integral }}积分/次)</view>
+    <!-- <view>{{ refreshText }}(消耗{{ integral }}积分/次)</view> -->
+    <view><text class="important">消耗{{integral}}积分</text>即可刷新找活名片（无上限）</view>
   </view>
   <button class="cardnineone" bindtap="refreshCard">刷新名片</button>
 </view>
@@ -551,12 +570,19 @@
   <button class='userauth-btn  userauth-back-btn' bindtap='returnPrevPage'>返回上一页</button>
 </view>
 
-<!-- 快速发布找活名片 -->
-<publishfindwork id="pulishfindwork" fastInfo="{{ fastInfo }}" bind:refreshPage="refreshPage" bind:cancelPublish = "cancelPublish"></publishfindwork>
-
-
-<!-- 发布招工成功提示框 -->
-<issueok  id="publishtip" tipdata="{{ { type:'publishFindWork'} }}" topdata="{{ resume_top }}" defalutTop="{{ default_top_area }}"/>
-
 <!-- 刷新成功提示框 -->
-<promptbox id="promptbox" showTitle="{{ false }}" content="{{ tipContent }}" showIcon="{{ true }}" showCancel="{{ false }}" icon="{{ successIcon }}"></promptbox>
+<promptbox 
+  id="pulishfindwork" 
+  showTitle="{{ tipBox.showTitle }}" 
+  bind:cancel = "tapCancel" 
+  bind:confirm = "tapConfirm" 
+  content="{{ tipBox.content }}" 
+  showIcon="{{ tipBox.showIcon }}" 
+  showCancel="{{ tipBox.showCancel }}" 
+  showConfirm="{{ tipBox.showConfirm }}" 
+  icon="{{ successIcon }}" 
+  confirmColor="{{ tipBox.confirmColor }}" 
+  cancelColor= "{{ tipBox.cancelColor}}" 
+  confirmText="{{ tipBox.confirmText }}" 
+  cancelText="{{ tipBox.cancelText }}">
+</promptbox>
