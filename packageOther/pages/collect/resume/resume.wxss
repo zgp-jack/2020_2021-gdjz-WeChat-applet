@@ -1,5 +1,5 @@
 @import "../info/info.wxss";
-@import "../../findingworkinglist/findingworkinglist.wxss";
+@import "../../../../pages/findingworkinglist/findingworkinglist.wxss";
 .listsboxdetailover{
   width: 100%;
 background: white;

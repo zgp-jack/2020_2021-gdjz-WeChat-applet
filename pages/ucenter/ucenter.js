@@ -137,11 +137,11 @@ Page({
           //点击收藏跳转地址 有招工跳转招工 有找活没招工跳转找活  都没有跳转招工
           if(mydata.member.resume_collect_count > 0 && mydata.member.job_collect_count == 0){
             _this.setData({
-              toCollectUrl:'/pages/collect/resume/resume'
+              toCollectUrl:'/packageOther/pages/collect/resume/resume'
             })
           }else {
             _this.setData({
-              toCollectUrl:'/pages/collect/info/info'
+              toCollectUrl:'/packageOther/pages/collect/info/info'
             })
           }
           //根据条件显示招工banner

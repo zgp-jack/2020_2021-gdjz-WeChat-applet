@@ -1,5 +1,5 @@
 // pages/published/published.js  lists
-let footerjs = require("../../../utils/footer.js");
+let footerjs = require("../../../../utils/footer.js");
 const app = getApp();
 Page({
 
@@ -33,7 +33,7 @@ Page({
     app.initJobView()
   },
   showThisList: function (e) {
-    wx.redirectTo({ url: "/pages/collect/info/info" })
+    wx.redirectTo({ url: "/packageOther/pages/collect/info/info" })
   },
   initPublishedData: function (options) {
     let userInfo = wx.getStorageSync("userInfo");
