@@ -12,6 +12,8 @@ Component({
 		cityData: [],
 		provincei: 0,
 		selectArea:[],
+		scrollPId:'',
+		scrollCId:''
 	},
 	methods: {
 		show: function () {
@@ -81,7 +83,11 @@ Component({
 					let childrenCity = _areaData[i].children;
 					for (let n = 0; n < childrenCity.length; n++) {
 						if (ids[j] == childrenCity[n].id) {
-							index.push(i)
+							let indexObj = {
+								pIndex:i,
+								cId:childrenCity[n].id
+							}
+							index.push(indexObj)
 							if (selectData[j].hasOwnProperty("fid")) {
 								selectData[j].fid = childrenCity[n].fid
 							}
@@ -91,12 +97,21 @@ Component({
 					}
 				}
 			}
+			index.sort(function(a,b){
+				return a.pIndex > b.pIndex ? 1 : -1
+			})
+
+			let scrollPId = "p"+_areaData[index[0].pIndex].id
+			let scrollCId = "c"+index[0].cId
 			this.setData({
 				areaData:_areaData,
-				selectData
+				selectData,
+				scrollPId,
+				scrollCId
 			})
-			let minIndex = Math.min.apply(null,index)
-			this.setChildrenData(minIndex)
+			
+			this.setChildrenData(index[0].pIndex)
+			
 		},
 		// 初始化区域数据
 		initAeraData: function () {

@@ -381,7 +381,7 @@ Page({
       })
     } else if (this.data.is_introduces == 0) {
       wx.navigateTo({
-        url: '/pages/clients-looking-for-work/work-description/workdescription',
+        url: '/pages/clients-looking-for-work/essential-information/esinformation',
       })
     } else if (this.data.project.length == 0) {
       wx.navigateTo({

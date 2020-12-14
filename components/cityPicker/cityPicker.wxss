@@ -52,18 +52,16 @@
 .picker-body-left {
 	flex: 1;
 	height: 100%;
-	overflow-y: auto;
 }
 
 .picker-body-right {
 	flex: 1;
 	height: 100%;
-	overflow-y: auto;
 	background: #F7F7F7;
 }
 
-.picker-body-left view,
-.picker-body-right view {
+.picker-body-left view view,
+.picker-body-right view view {
 	height: 100rpx;
 	line-height: 100rpx;
 	border-top: 1px solid #EDEDED;
