@@ -12,19 +12,11 @@ Component({
 		cityData: [],
 		provincei: 0,
 		selectArea:[],
-		oldSelectData: [],
-		oldCytiData:[]
 	},
 	methods: {
 		show: function () {
-			let _defaultData = this.data.defaultData
-			if(_defaultData.length > 1){
-				_defaultData.sort(function (a,b){
-					return (parseInt(a.id) > parseInt(b.id)) ? 1 : -1
-				})
-			}
 			this.setData({
-				selectArea: JSON.parse(JSON.stringify(_defaultData)),
+				selectArea: JSON.parse(JSON.stringify(this.data.defaultData)),
 				showPicker: true
 			})
 			this.showCityData()
@@ -61,7 +53,8 @@ Component({
 					_areaData[i].children.unshift({
 						name:'全部',
 						ad_name: _areaData[i].name,
-						id: _areaData[i].id
+						id: _areaData[i].id,
+						fid: _areaData[i].fid
 					})
 				}
 			}
@@ -79,8 +72,8 @@ Component({
 			let _areaData = this.data.areaData
 			// 获取确定选择的获取默认的城市数据
 			let selectData = this.data.defaultData;
-			// 第一个匹配的一级城市index
-			let index = 0;
+			//匹配的一级城市index数组
+			let index = [];
 			let ids = selectData.map(item => item.id)
 			for (let j = 0; j < ids.length; j++) {
 				for(let i = 0;i<_areaData.length;i++){
@@ -88,20 +81,22 @@ Component({
 					let childrenCity = _areaData[i].children;
 					for (let n = 0; n < childrenCity.length; n++) {
 						if (ids[j] == childrenCity[n].id) {
-							if (j == 0) {
-								index = i
+							index.push(i)
+							if (selectData[j].hasOwnProperty("fid")) {
+								selectData[j].fid = childrenCity[n].fid
 							}
 							_areaData[i].childrenCheck = true;
 							_areaData[i].children[n].ischeck = true
 						}
 					}
-					
 				}
 			}
 			this.setData({
 				areaData:_areaData,
+				selectData
 			})
-			this.setChildrenData(index)
+			let minIndex = Math.min.apply(null,index)
+			this.setChildrenData(minIndex)
 		},
 		// 初始化区域数据
 		initAeraData: function () {
@@ -121,6 +116,7 @@ Component({
 				url: 'https://cdn.yupao.com/json/yp_area_tree_2012021149.json',
 				success: function (res) {
 					if (res.data.all_tree) {
+						wx.setStorageSync('newAreaData', res.data.all_tree)
 						_this.setData({newAreaData: res.data.all_tree})
 					}
 				}
@@ -138,12 +134,11 @@ Component({
 			let pIndex = this.data.provincei;
 			// 选中城市
 			let selectArea = this.data.selectArea;
-			// 选中数量
-			let selectNum = selectArea.length
 			let _cityData = this.data.cityData
 			let _areaData = this.data.areaData
 			// 点击二级城市的id
 			let id = _cityData[index].id
+			let fid = _cityData[index].fid
 			// 点击二级城市的名称
 			let name = index == 0? _cityData[index].ad_name: _cityData[index].name
 			
@@ -156,10 +151,8 @@ Component({
 						selectArea.splice(indexnum,1)
 					}
 				}
-				let item = { id, name }
-				
-				selectArea.push(item)
-				let length = selectArea.length;
+				let item = { id, name, fid }
+				let length = selectArea.push(item)
 				if (length<4) {
 					_cityData[index].ischeck = true
 					_areaData[pIndex].childrenCheck = true
@@ -176,9 +169,8 @@ Component({
 				if (indexnum !== -1) {
 					selectArea.splice(indexnum,1)
 				}
-				let item = { id, name }
-				selectArea.push(item)
-				let length = selectArea.length;
+				let item = { id, name, fid }
+				let length = selectArea.push(item)
 				if (length<4) {
 					_cityData[index].ischeck = true
 					_areaData[pIndex].childrenCheck = true	
@@ -188,10 +180,7 @@ Component({
 					selectArea.pop()
 					this.setData({selectArea})
 				}
-				
 			}
-			
-			console.log("selectarea",this.data.selectArea)
 		}, 
 		//选择市
 		selectCity(e) {
@@ -226,12 +215,6 @@ Component({
 		},
 		//点击确定
 		comfirmCity(e) {
-			//根据ID大小排序
-			if(this.data.selectArea.length > 1){
-				this.data.selectArea.sort(function (a,b){
-					return (parseInt(a.id) > parseInt(b.id)) ? 1 : -1
-				})
-			}
 			//通知父组件
 			this.triggerEvent('cityComfirm', {
 				params: this.data.selectArea

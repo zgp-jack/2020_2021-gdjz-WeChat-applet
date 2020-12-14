@@ -449,9 +449,18 @@ Page({
   //选择期望地区 点击确定
   cityComfirm(e) {
     let select = e.detail.params
+    let municipality = app.globalData.municipality
+    let selectStr = select.map(item=>{
+      let index = municipality.findIndex(i=> i.id == item.fid)
+      if (index !== -1) {
+        return municipality[index].name + item.name
+      }else{
+        return item.name
+      }
+    })
     this.setData({
       selectCityData: select,
-      selectCityName: select.map(item => item.name).join(" | "),
+      selectCityName: selectStr.join(" | "),
     })
   },
   //初始化发布找活名片
