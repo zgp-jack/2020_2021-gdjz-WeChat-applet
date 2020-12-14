@@ -17,8 +17,8 @@
           <text class="view_num">{{view_num}}</text>
         </view>
         <view class="isline" wx:if="{{showcomplete}}">
-          <button class="shareliveone" bindtap="completeall"  wx:if="{{project.length < 1 && is_introduces != '1'}}">资料越完善 找活越容易,马上去完善>></button>
-          <button class="shareliveone" bindtap="goRealName" wx:if="{{authenticationimg != 2 && (project.length > 0 || is_introduces == '1')}}">招工方更喜欢找实名的工人哦！马上去实名>></button>
+          <button class="shareliveone" bindtap="completeall"  wx:if="{{project.length < 1 && is_introduces != '1'}}">名片越完善,找活越容易!马上去完善>></button>
+          <button class="shareliveone" bindtap="goRealName" wx:if="{{authenticationimg != 2 && (project.length > 0 || is_introduces == '1')}}">老板更喜欢招已实名工人! 马上去实名>></button>
           
           <text class="sontwoview">浏览次数</text>
         </view>
@@ -550,7 +550,7 @@
 </view> -->
 <view class="cardnine" wx:if="{{showtopone && show_refresh_btn == 1}}">
   <view class="cardnineone">
-    <view>刷新找活名片，让老板主动来找您！</view>
+    <view>让更多老板联系您！</view>
     <!-- <view>{{ refreshText }}(消耗{{ integral }}积分/次)</view> -->
     <view><text class="important">消耗{{integral}}积分</text>即可刷新找活名片（无上限）</view>
   </view>
