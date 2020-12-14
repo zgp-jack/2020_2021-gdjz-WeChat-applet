@@ -1743,7 +1743,7 @@ color: #6d6b6b;
 }
 .rule-detail .rule-oimg{
 width: 34rpx;
-height: 36rpx;
+height: 34rpx;
 
 }
 .topselect_box{

@@ -17,8 +17,8 @@
           <text class="view_num">{{view_num}}</text>
         </view>
         <view class="isline" wx:if="{{showcomplete}}">
-          <button class="shareliveone" bindtap="completeall"  wx:if="{{project.length < 1 && is_introduces != '1'}}">资料越完善 找活越容易,马上去完善>></button>
-          <button class="shareliveone" bindtap="goRealName" wx:if="{{authenticationimg != 2 && (project.length > 0 || is_introduces == '1')}}">招工方更喜欢找实名的工人哦！马上去实名>></button>
+          <button class="shareliveone" bindtap="completeall"  wx:if="{{project.length < 1 && is_introduces != '1'}}">名片越完善,找活越容易!马上去完善>></button>
+          <button class="shareliveone" bindtap="goRealName" wx:if="{{authenticationimg != 2 && (project.length > 0 || is_introduces == '1')}}">老板更喜欢招已实名工人! 马上去实名>></button>
           
           <text class="sontwoview">浏览次数</text>
         </view>
