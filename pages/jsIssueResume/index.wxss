@@ -20,7 +20,7 @@
   justify-content: center;
   align-items: center;
   margin: 0 auto;
-  padding-top: 130rpx;
+  padding-top: 80rpx;
 }
 .issue-title-box::after{
   content:"";
@@ -142,6 +142,16 @@
   font-size: 30rpx;
   flex:1;
 }
+.issue-box .issue-input-text {
+  min-height: 110rpx;
+  font-size: 30rpx;
+  font-weight: 400;
+  padding: 0 20rpx;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  word-break:break-all;
+}
 .input-item-text{
   position: relative;
   width: 100%;
@@ -184,7 +194,7 @@
   margin: 0rpx;
 }
 .issue-footer-button button:first-child{
-  border:1rpx solid #E8E8E8
+  line-height: 88rpx;
 }
 .issue-footer-button button:last-child{
   background-color: #0297fe;

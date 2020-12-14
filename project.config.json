@@ -566,6 +566,18 @@
         {
           "name": "pages/jsIssueResume/index",
           "pathName": "pages/jsIssueResume/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "极速发布找活",
+          "pathName": "pages/jsIssueResume/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "个人中心",
+          "pathName": "pages/ucenter/ucenter",
           "scene": null
         }
       ]

@@ -1468,40 +1468,12 @@ App({
     }
   },
   //我的找活文本显示内容
-  initResume:function(_this){
+  initResume:function(_this,call){
     let userInfo = wx.getStorageSync("userInfo");
     let that = this
     if (userInfo) {
       let flag = JSON.parse(JSON.stringify(that.globalData.publishFindWork))
-      if (!flag.loginAfter) {
-        that.appRequestAction({
-          url: 'resumes/exists/',
-          way: 'POST',
-          mask: true,
-          success: function(res){
-            let mydata = res.data
-            if(mydata.errcode == "ok"){
-              that.globalData.publishFindWork.resumeText = mydata.data.title
-              that.globalData.publishFindWork.loginAfter = true
-              _this.setData({
-                resumeText:mydata.data.title,
-              })
-              that.globalData.exists = mydata.data.exists
-            }
-          },
-          fail:()=>{
-            that.showMyTips('网络错误，加载失败！')
-            that.globalData.resumeText = "发布找活"
-          }
-        })
-      } else {
-        _this.setData({
-          resumeText:that.globalData.publishFindWork.resumeText
-        })
-      }
-    } else {
-      let flag = JSON.parse(JSON.stringify(that.globalData.publishFindWork))
-      if (!flag.loginBefore) {
+      if(call){
         that.appRequestAction({
           url: 'resumes/exists/',
           way: 'POST',
@@ -1511,6 +1483,7 @@ App({
             if(mydata.errcode == "ok"){
               that.globalData.publishFindWork.resumeText = mydata.data.title
               that.globalData.publishFindWork.loginBefore = true
+              call ? call(mydata.data.exists) : ''
               _this.setData({
                 resumeText:mydata.data.title
               })
@@ -1521,10 +1494,68 @@ App({
             that.globalData.publishFindWork.resumeText = "发布找活"
           }
         })
-      } else {
-        _this.setData({
-          resumeText:that.globalData.publishFindWork.resumeText
+      }else{
+        if (!flag.loginAfter) {
+          that.appRequestAction({
+            url: 'resumes/exists/',
+            way: 'POST',
+            mask: true,
+            success: function(res){
+              let mydata = res.data
+              if(mydata.errcode == "ok"){
+                that.globalData.publishFindWork.resumeText = mydata.data.title
+                that.globalData.publishFindWork.loginAfter = true
+                _this.setData({
+                  resumeText:mydata.data.title,
+                })
+                that.globalData.exists = mydata.data.exists
+                call ? call(mydata.data.exists) : ''
+              }
+            },
+            fail:()=>{
+              that.showMyTips('网络错误，加载失败！')
+              that.globalData.resumeText = "发布找活"
+            }
+          })
+        } else {
+          _this.setData({
+            resumeText:that.globalData.publishFindWork.resumeText
+          })
+        }
+      }
+    } else {
+      let flag = JSON.parse(JSON.stringify(that.globalData.publishFindWork))
+      if(call){
+        wx.navigateTo({
+          url: '/pages/userauth/userauth'
         })
+      }else {
+        if (!flag.loginBefore) {
+          that.appRequestAction({
+            url: 'resumes/exists/',
+            way: 'POST',
+            mask: true,
+            success: function(res){
+              let mydata = res.data
+              if(mydata.errcode == "ok"){
+                that.globalData.publishFindWork.resumeText = mydata.data.title
+                that.globalData.publishFindWork.loginBefore = true
+                call ? call(mydata.data.exists) : ''
+                _this.setData({
+                  resumeText:mydata.data.title
+                })
+              }
+            },
+            fail:()=>{
+              that.showMyTips('网络错误，加载失败！')
+              that.globalData.publishFindWork.resumeText = "发布找活"
+            }
+          })
+        } else {
+          _this.setData({
+            resumeText:that.globalData.publishFindWork.resumeText
+          })
+        }
       }
     }
   },

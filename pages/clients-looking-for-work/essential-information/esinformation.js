@@ -1068,7 +1068,8 @@ hidekeyboard: function () {
 //点击清空内容自我介绍
 clearIntroduce() {
   this.setData({
-    otextareavalue:''
+    otextareavalue: '',
+    otextareavaluel: 0
   })
 },
 peopleage(e) { //工龄的选择
@@ -1089,10 +1090,20 @@ peopleage(e) { //工龄的选择
     }
     let introinfo = wx.getStorageSync('introinfo')
     let introdetail = wx.getStorageSync('introdetail')
-
+    let provincesidArr = introinfo.provinces_id.split(",")
+    let provincestxtArr = introinfo.provinces_txt.split("|")
+    let _provincesidArr = []
+    if(provincesidArr.length > 1){
+      for(let i = 0;i<provincesidArr.length;i++){
+        _provincesidArr.push({
+          name:provincestxtArr[i],
+          id:provincesidArr[i]
+        })
+      }
+    }
     this.setData({
       introinfo:introinfo,
-      selectAllData:[{id:introinfo.provinces_id,name:introinfo.provinces_txt}],
+      selectAllData:provincesidArr.length > 1 ? _provincesidArr:[{id:introinfo.provinces_id,name:introinfo.provinces_txt}],
       introdetail:introdetail,
       selectCityName:introinfo.provinces_txt.replace(/,/g, "|")
     })

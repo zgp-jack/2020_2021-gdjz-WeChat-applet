@@ -32,7 +32,7 @@ page {
   margin: 0 auto;
   height: 100rpx;
   background: white;
-  font-size: 24rpx;
+  font-size: 26rpx;
   line-height: 100rpx;
   text-align: center;
   letter-spacing: 4rpx;
@@ -1215,11 +1215,11 @@ top: -14rpx;
   display: inline-block;
   color: #7A7A7A;
   font-size: 30rpx;
-  /* width: 100%; *//* margin-top: 14rpx;
-  margin-bottom: 6rpx; */
-  text-align: justify;
   position: relative;
   margin-left: 52rpx;
+  text-align-last: justify;
+	text-align: justify;
+	text-justify: distribute-all-lines;
 }
 
 .cardotext .oworkotext::after {
@@ -1679,7 +1679,7 @@ color: #6d6b6b;
   left: 0;
   top: 0;
   display: inline-block;
-  color: #555;
+  color: #7A7A7A;
   font-size: 30rpx;
   text-align: justify;
   position: absolute;

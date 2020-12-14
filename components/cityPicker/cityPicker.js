@@ -17,9 +17,14 @@ Component({
 	},
 	methods: {
 		show: function () {
-			console.log(this.data.defaultData)
+			let _defaultData = this.data.defaultData
+			if(_defaultData.length > 1){
+				_defaultData.sort(function (a,b){
+					return (parseInt(a.id) > parseInt(b.id)) ? 1 : -1
+				})
+			}
 			this.setData({
-				selectArea: JSON.parse(JSON.stringify(this.data.defaultData)),
+				selectArea: JSON.parse(JSON.stringify(_defaultData)),
 				showPicker: true
 			})
 			this.showCityData()
@@ -221,6 +226,12 @@ Component({
 		},
 		//点击确定
 		comfirmCity(e) {
+			//根据ID大小排序
+			if(this.data.selectArea.length > 1){
+				this.data.selectArea.sort(function (a,b){
+					return (parseInt(a.id) > parseInt(b.id)) ? 1 : -1
+				})
+			}
 			//通知父组件
 			this.triggerEvent('cityComfirm', {
 				params: this.data.selectArea

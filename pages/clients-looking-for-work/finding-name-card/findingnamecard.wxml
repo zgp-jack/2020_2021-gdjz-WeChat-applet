@@ -1,7 +1,7 @@
 <view style="padding-bottom:120rpx;">
   <view class="cardcolore">
     <view class="findingnamecard">
-      <text>置顶找活信息能让你的名片展示更靠前，让更多老板看到</text>
+      <text>置顶找活名片，让排名更靠前 被更多老板看到</text>
     </view>
   </view>
   <!-- {{selectShow&&"select_img_rotate"}} show_tips editor -->
@@ -124,7 +124,7 @@
       <image class="link" src="{{linktag}}"></image>
       <image class="linkone" src="{{linktag}}"></image>
       <view class="cardonetwof">
-        <image class="checkone" src="{{audit}}" wx:if="{{checkone&&show_tips==1}}"></image>
+        <image class="checkone" src="{{audit}}" wx:if="{{checkone && show_tips==1}}"></image>
         <view class="cardtwosonone">
           <view class="cardtwosononeimg">
             <view class="oimg">
@@ -144,10 +144,10 @@
           <view class="cardtwosontwo" wx:if="{{checkonef == 0}}">
             <text bindtap="edit">待修改</text>
           </view>
-          <view class="cardtwosontwo" wx:if="{{checkonef != 0 && is_introduces == '0'}}">
+          <view class="cardtwosontwo" wx:if="{{checkonef != 0 && is_introduces == '0' && checkone != 1}}">
             <text bindtap="edit">完善质料</text>
           </view>
-          <view class="cardtwosontwo" wx:if="{{checkonef != 0 && is_introduces == '1'}}">
+          <view class="cardtwosontwo" wx:if="{{checkonef != 0 && is_introduces == '1' && checkone != 1}}">
             <text bindtap="editbj">编辑</text>
           </view>
         </view>
@@ -156,7 +156,7 @@
             <!-- 工龄 -->
             <view class="cardotext" wx:if="{{workingyears}}">
               <text class="oworkotext">工龄</text>
-              <text class="workotextone">{{workingyears}}</text>
+              <text class="workotextone">{{workingyears}} 年</text>
             </view>
             <!-- 手机 -->
             <view class="cardotext">
@@ -181,7 +181,7 @@
             </view>
             <!-- 期望地区 -->
             <view class="cardotext">
-              <text class="oworkotext">期望地区</text>
+              <text class="oworkotext">期望工作地</text>
               <text class="workotextone">{{provinces_txt}}</text>
             </view>
             <!-- 当前所在地 -->
@@ -197,7 +197,7 @@
             <!-- 队伍人数 -->
             <view class="cardotext" wx:if="{{personnum}}">
               <text class="oworkotext">队伍人数</text>
-              <text class="workotextone">{{personnum}}</text>
+              <text class="workotextone">{{personnum}} 人</text>
             </view>
             <!-- 自我介绍 -->
             <view class="cardotext">
@@ -550,7 +550,7 @@
 </view> -->
 <view class="cardnine" wx:if="{{showtopone && show_refresh_btn == 1}}">
   <view class="cardnineone">
-    <view>提升活跃度，让更多老板看到你的名片</view>
+    <view>刷新找活名片，让老板主动来找您！</view>
     <!-- <view>{{ refreshText }}(消耗{{ integral }}积分/次)</view> -->
     <view><text class="important">消耗{{integral}}积分</text>即可刷新找活名片（无上限）</view>
   </view>

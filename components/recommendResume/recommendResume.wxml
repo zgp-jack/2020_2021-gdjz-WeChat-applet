@@ -34,11 +34,12 @@
               <view class="listsboxagetwot" wx:if="{{!item.nation && !item.prof_degree}}">
                 <text wx:for="{{item.tags}}" wx:key="{{index}}">{{item.label_name}}</text>
               </view>
+              <view class="listsboxagetwo" wx:if="{{item.provinces_str}}">
+                <text>期望工作地：{{item.provinces_str}}</text>
+              </view>
             </view>
             <view class="listsboxshow" wx:if="{{item.type}}">{{item.type}}</view>
           </view>
-            <!-- <text class="listsboxstyru" catchtap="jumptop" wx:if="{{item.resume_top == 1}}">我要置顶</text> -->
-            <!-- <image class="listsboxoimg" src="{{toptown}}" wx:if="{{item.resume_top == 1}}"></image> -->
         </view>
         <view class="listsboxlable">
           <view class="listsboxlableone" wx:for="{{item.occupations}}" wx:key="{{index}}">{{item}}</view>

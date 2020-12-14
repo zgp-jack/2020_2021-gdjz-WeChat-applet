@@ -281,13 +281,17 @@ Page({
         // 没有找活名片给出去发布找活名片提示信息,有找活名片前往浏览记录
         this.reqRecordData()
       }else if(url === '/pages/clients-looking-for-work/finding-name-card/findingnamecard'){
-        if(app.globalData.exists === 1){
-          app.valiUserUrl(e, this.data.userInfo)
-        }else {
-          wx.navigateTo({
-            url: '/pages/jsIssueResume/index',
-          })
-        }
+        app.initResume(this,function (res){
+          if(res){
+            wx.navigateTo({
+              url: url,
+            })
+          }else{
+            wx.navigateTo({
+              url: '/pages/jsIssueResume/index',
+            })
+          }
+        })
       }else{
         app.globalData.showdetail = true
         app.valiUserUrl(e, this.data.userInfo)
