@@ -537,7 +537,7 @@
 
 
   <!-- <view class="bg" bindtap="obtn" style='display:{{display}}' catchtouchmove="{{move}}"></view> -->
-  <view class="bg"  style='display:{{top_display}}' catchtouchmove="{{move}}"></view>
+  <!-- <view class="bg"  style='display:{{top_display}}' catchtouchmove="{{move}}"></view> -->
   <view style="height: 118rpx;">
   </view>
 </view>
