@@ -119,6 +119,7 @@ font-size: 30rpx;
   display: flex;
   flex-direction: column;
   justify-content: center;
+  font-size: 30rpx;
 }
 .informationtwi .informationtwitwo input{
   font-size: 30rpx;

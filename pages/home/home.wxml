@@ -268,12 +268,17 @@
                     <image wx:if="{{item.certificate == 1}}" src="{{authentication}}"></image>
 
                   </view>
-                  <view class="listsboxagetwo" wx:if="{{item.nation || item.prof_degree}}">
+                  <view class="listsboxagetwo" wx:if="{{item.nation || item.prof_degree || item.experience}}">
                     <text class="listsboxnation" wx:if="{{item.nation}}">{{item.nation}}</text>
                     <text wx:if="{{item.prof_degree}}">{{item.prof_degree}}</text>
+                    <text wx:if="{{item.experience}}">{{item.experience}}</text>
                   </view>
-                  <view class="listsboxagetwot" wx:if="{{!item.nation && !item.prof_degree}}">
+                  <view class="listsboxagetwot" wx:if="{{!item.nation && !item.prof_degree && item.label_name}}">
                     <text wx:for="{{item.tags}}" wx:key="index">{{item.label_name}}</text>
+                  </view>
+
+                  <view class="listsboxagetwo" wx:if="{{item.provinces_str}}">
+                    <text>期望工作地：{{item.provinces_str}}</text>
                   </view>
                 </view>
                 <view class="listsboxshow" wx:if="{{item.type}}">

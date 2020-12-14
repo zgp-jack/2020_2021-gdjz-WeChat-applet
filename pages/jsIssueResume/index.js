@@ -73,7 +73,8 @@ Page({
     selectCityId: '',
     initIssueData:{},
     fastInfo:'',
-    selectCityId:''
+    selectCityId:'',
+    isShowPicker:false
   },
 
   // 点击期望地区隐藏软键盘

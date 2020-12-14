@@ -113,7 +113,10 @@ Page({
     child: 0,
     user_id: '',
     teltipsimg: app.globalData.apiImgUrl + 'usercallphone-tips.png',
-    infoId:''
+    infoId:'',
+    experience:'',
+    provinces_txt:'',
+    _address:''
   },
   closeNewPhoneFc:function(){
     this.setData({shownewtips: false})
@@ -538,7 +541,10 @@ Page({
             certificate_show: mydata.info.hasOwnProperty("certificate_show") ? mydata.info.certificate_show : "",
             authenticationimg: mydata.info.hasOwnProperty("authentication") ? mydata.info.authentication : "",
             userId: mydata.info.user_id,
-            infoId: mydata.info.id
+            infoId: mydata.info.id,
+            experience:mydata.info.hasOwnProperty("experience") ? mydata.info.experience : '',
+            provinces_txt:mydata.info.hasOwnProperty("provinces_txt") ? mydata.info.provinces_txt : '',
+            _address:mydata.info.hasOwnProperty("address") ? mydata.info.address : '',
           })
 
           // 加载推荐列表

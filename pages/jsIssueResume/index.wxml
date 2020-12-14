@@ -11,6 +11,7 @@
         <text>期望工作地：</text>
         <input placeholder="请选择期望工作地" disabled class="issue-input" wx:if="{{!selectCityName}}" value="{{ selectCityName }}"></input>
         <text wx:if="{{selectCityName}}" class="issue-input-text">{{selectCityName}}</text>
+        <image class="{{ showPicker?'issue-box-image':''}}" src="{{ selectimg }}"></image>
       </view>
       <view class="issue-box-worktype">
         <view class="issue-box" bindtap="showWorkTypePicker"> 

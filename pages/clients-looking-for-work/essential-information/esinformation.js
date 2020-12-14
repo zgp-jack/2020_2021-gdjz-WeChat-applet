@@ -167,6 +167,11 @@ Page({
     this.openSetting()
 
   },
+  teamsnum(e) { //队伍人数的额选择
+    this.setData({
+      teamsnumber: e.detail.value
+    })
+  },
   getLocation: function () { //定位获取
     if (app.globalData.gpsdetail) {
       app.globalData.gpsdetail = false
@@ -637,7 +642,7 @@ Page({
     }
     let strone = /^[0-9]{1,4}$/ig;
     if ((this.data.editType == 'bj' || this.data.indexperson !== 0)&&!strone.test(this.data.teamsnumber) && this.data.constituttion != 1 || ~~this.data.teamsnumber - 0 <= 1 && this.data.constituttion != 1) {
-
+      debugger
       wx.showModal({
         title: '温馨提示',
         content: '请输入您的队伍人数不得少于2人',
@@ -900,7 +905,7 @@ Page({
       telephone: introinfo.hasOwnProperty("tel") ? introinfo.tel : "",
       tele: introinfo.hasOwnProperty("tel") ? introinfo.tel : "",
       // otextareavalue: introinfo.hasOwnProperty("introduce") ? introinfo.introduce : "",
-      otextareavaluel: introinfo.hasOwnProperty("introduce") ? introinfo.introduce ? introinfo.introduce.length : 0 : 0,
+      // otextareavaluel: introinfo.hasOwnProperty("introduce") ? introinfo.introduce ? introinfo.introduce.length : 0 : 0,
       checkonef: introinfo.hasOwnProperty("check") ? introinfo.check : "",
       note: introinfo.hasOwnProperty("note") ? introinfo.note : "",
       workage: introinfo.hasOwnProperty("experience") ? introinfo.experience : "",
@@ -1043,7 +1048,8 @@ cityComfirm(e) {
 constitute(e) { //人员构成的选择
   this.setData({
     indexperson: e.detail.value,
-    constituttion: this.data.compositionarrayone[e.detail.value].id
+    constituttion: this.data.compositionarrayone[e.detail.value].id,
+    teamsnumber: this.data.compositionarrayone[e.detail.value].id
   })
 
 
