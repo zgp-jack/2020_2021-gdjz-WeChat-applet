@@ -119,7 +119,7 @@
   <view class="informationevaluation">
     <view class="informationevaluationone">自我介绍：</view>
     <view>
-      <textarea wrap="hard" wx:if="{{ !showWorkType && !perfection}}" class="informationevaluationtwo" bindinput="textareavalue" maxlength="500" placeholder="请简要介绍你所从事的行业以及工作经验..." value="{{otextareavalue}}">
+      <textarea wrap="hard" wx:if="{{ !showWorkType && !perfection}}" class="informationevaluationtwo" bindinput="textareavalue" maxlength="500" placeholder="请简要介绍你所从事的行业以及工作经验..." style="padding:{{isIos ? '17rpx':'25rpx'}}" value="{{otextareavalue}}">
       </textarea>
     </view>
     <view class="clearIntroduce" bindtap="clearIntroduce">清空内容</view>

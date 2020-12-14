@@ -106,9 +106,14 @@ Component({
 			this.setData({
 				areaData:_areaData,
 				selectData,
-				scrollPId,
-				scrollCId
+				
 			})
+			setTimeout(()=>{
+				this.setData({
+					scrollPId,
+					scrollCId
+				})
+			},300)
 			
 			this.setChildrenData(index[0].pIndex)
 			

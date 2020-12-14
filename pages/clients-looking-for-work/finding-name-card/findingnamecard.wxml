@@ -145,7 +145,7 @@
             <text bindtap="edit">待修改</text>
           </view>
           <view class="cardtwosontwo" wx:if="{{checkonef != 0 && is_introduces == '0' && checkone != 1}}">
-            <text bindtap="edit">完善质料</text>
+            <text bindtap="edit">完善资料</text>
           </view>
           <view class="cardtwosontwo" wx:if="{{checkonef != 0 && is_introduces == '1' && checkone != 1}}">
             <text bindtap="editbj">编辑</text>

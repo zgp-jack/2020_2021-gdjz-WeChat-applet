@@ -83,7 +83,8 @@ Page({
     introdetail:{},//人员构成资料
     defaultCityPicker:[],
     indexperson:0,
-    selectAllData:[]
+    selectAllData:[],
+    isIos:false,
   },
   // 点击隐藏键盘
   hiddenKeyBoard: function () {
@@ -904,7 +905,7 @@ Page({
       wardenryid: introinfo.hasOwnProperty("city") ? introinfo.city : "",
       telephone: introinfo.hasOwnProperty("tel") ? introinfo.tel : "",
       tele: introinfo.hasOwnProperty("tel") ? introinfo.tel : "",
-      // otextareavalue: introinfo.hasOwnProperty("introduce") ? introinfo.introduce : "",
+      otextareavalue: this.data.editType == 'bj' ? introinfo.hasOwnProperty("introduce") ? introinfo.introduce : "" : '',
       // otextareavaluel: introinfo.hasOwnProperty("introduce") ? introinfo.introduce ? introinfo.introduce.length : 0 : 0,
       checkonef: introinfo.hasOwnProperty("check") ? introinfo.check : "",
       note: introinfo.hasOwnProperty("note") ? introinfo.note : "",
@@ -1116,6 +1117,18 @@ peopleage(e) { //工龄的选择
         })
       }
     }
+    let Phone = wx.getSystemInfoSync();
+    if(Phone.platform == 'ios'){
+      this.setData({
+        isIos:true
+      })
+    }else{
+      this.setData({
+        isIos:false
+      })
+    }
+
+
     this.setData({
       introinfo:introinfo,
       selectAllData:provincesidArr.length > 1 ? _provincesidArr:[{id:introinfo.provinces_id,name:introinfo.provinces_txt}],

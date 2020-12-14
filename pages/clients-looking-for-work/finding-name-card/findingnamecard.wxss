@@ -85,6 +85,10 @@ page {
   background: white;
   box-shadow: 0 0 1rpx #e7e6e4;
 }
+.findingnamecardone view:last-child{
+  border-bottom: 0;
+}
+
 
 .findingnamecardoneson {
   width: 100%;
