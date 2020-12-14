@@ -29,7 +29,7 @@
         </view>
       </view>
     </view>
-    <view class="findingnamecardonesontwo">
+    <!-- <view class="findingnamecardonesontwo">
       <view class="rule-detail">
         <image src="{{ruleimage}}"></image>
         <text>我的排名点：{{sort_flag}}</text>
@@ -37,7 +37,7 @@
       <view class="rule-odetail" bindtap="rulepoit">
         马上去提升排名>>
       </view>
-    </view>
+    </view> -->
     <view class="{{resume_top.is_top == 2||has_top == 0?'findingnamecardonesontwo':'findingnamecardonesontwot'}}">
       <view class="rule-detail">
         <image class="rule-oimg" src="{{topimage}}"></image>

@@ -207,9 +207,9 @@
 
 <!-- <view class='bottompublishbtn' bindtap='valiUserCard'>{{resumeText}}</view> -->
 
-<view class='fixed-get-integral'  bindtap='jumprull'>
+<!-- <view class='fixed-get-integral'  bindtap='jumprull'>
         <image src='{{ rullIntegral }}'></image>
-</view>
+</view> -->
 
 <!-- <button class='fixed-get-integral-btn'  open-type="share" >
         <image src='http://cdn.yupao.com/miniprogram/images/list-share-btn.png?t=111'></image>
