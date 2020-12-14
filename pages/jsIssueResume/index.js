@@ -361,7 +361,7 @@ Page({
         let mydata = res.data;
         if (mydata.errcode === "ok") {
           app.initResume(_this)
-          wx.reLaunch({
+          wx.redirectTo({
             url: `/pages/clients-looking-for-work/finding-name-card/findingnamecard?isFastPublish=true`,
           })
         } else {

@@ -512,9 +512,9 @@
   </view>
 
 <!-- wx:if="{{topshow}}" -->
-  <view class="modalDlg" wx:if="{{topshow}}">
-    <!-- <view class="modalDlgone">
-    </view> -->
+  <!-- <view class="modalDlg" wx:if="{{topshow}}">
+    <view class="modalDlgone">
+    </view>
     <view class="text">
       <image src="{{topoimage}}"></image>
       <view class="otext">
@@ -531,7 +531,7 @@
         去置顶
       </view>
     </view>
-  </view>
+  </view> -->
 
   <recommendRecruit mine="1" aid="{{ cityid }}" cid="{{ occupations_id }}" more="1"></recommendRecruit>
 
@@ -576,6 +576,7 @@
   title="{{ tipBox.title }}"
   showClose="{{ tipBox.showClose }}"
   showTitle="{{ tipBox.showTitle }}" 
+  bind:close = "tapClose"
   bind:cancel = "tapCancel" 
   bind:confirm = "tapConfirm" 
   content="{{ tipBox.content }}" 
