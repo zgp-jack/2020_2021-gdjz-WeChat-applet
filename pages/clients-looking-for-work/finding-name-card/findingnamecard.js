@@ -151,6 +151,7 @@ Page({
     todayRefresh: 0,//是否是当天第一次刷新
     provinces_txt:"",//期望工作地
     isFastPublish: false,//弹窗状态 如果是从快速发布成功到找活名片 true 否则 false
+    province:0,//省id
   },
 
 
@@ -815,7 +816,8 @@ Page({
           let province = mydata.info.hasOwnProperty("province") ? mydata.info.province : 0
 
           that.setData({
-            occupations_id: mydata.info.hasOwnProperty("occupations_id")?mydata.info.occupations_id : '',	
+            occupations_id: mydata.info.hasOwnProperty("occupations_id")?mydata.info.occupations_id : '',
+            province: province,
             cityid: cityid || province,
             show_tips: mydata.hasOwnProperty("content") ? mydata.content.show_tips : "",
             name: mydata.info.hasOwnProperty("username") ? mydata.info.username : "",
@@ -1296,17 +1298,17 @@ Page({
       top_display: "none",
     })
   },
-  // 刷新页面issuok子组件调用方法
-  refreshPage: function () {
-    // 将是否展示发布成功提示框设置为true（要展示）
-    this.setData({ pulishFindWork:true, publishWay:true, })
-    // 展示发布成功弹窗
-    this.showPublishTip()
-  },
+  // 刷新页面子组件调用方法
+  // refreshPage: function () {
+  //   // 将是否展示发布成功提示框设置为true（要展示）
+  //   this.setData({ pulishFindWork:true, publishWay:true, })
+  //   // 展示发布成功弹窗
+  //   this.showPublishTip()
+  // },
   // 展示发布成功界面
   showPublishTip: function () {
-    let pulishFindWork = this.data.pulishFindWork;
-    if (pulishFindWork) {
+    let isFastPublish = this.data.isFastPublish;
+    if (isFastPublish) {
       this.setData({
         "tipBox.title": "发布成功",
         "tipBox.content[0].des":"置顶找活名片，让更多老板能看到你，找更多活！",
@@ -1315,7 +1317,6 @@ Page({
         "tipBox.showClose" : true,
         "tipBox.cancelColor" : "#797979",
         "tipBox.confirmColor" : "#0097FF",
-        pulishFindWork:false
       })
       this.selectComponent("#promptbox").show()
     }
@@ -1393,8 +1394,13 @@ Page({
   },
   // 点击弹窗取消按钮
   tapCancel: function () {
+    // 直辖市
+    let municipality = app.globalData.municipality;
+    // 省id或者直辖市id
+    let province = this.data.province;
     let isFastPublish = this.data.isFastPublish;
-    let cityid = this.data.cityid;
+    let index = municipality.findIndex(item=>item.id == province)
+    let cityid = index == -1 ? this.data.cityid:province;
     let occupations_id = this.data.occupations_id;
     if (isFastPublish) {
       wx.reLaunch({
@@ -1405,6 +1411,13 @@ Page({
       wx.reLaunch({
         url: `/pages/index/index?aid=${cityid}&id=${occupations_id}`,
       })
+    }
+  },
+  // 点击弹窗的关闭按钮
+  tapClose: function () {
+    let isFastPublish = this.data.isFastPublish
+    if (isFastPublish) {
+      this.setData({ isFastPublish: false })
     }
   },
   // 点击弹窗确定按钮
@@ -1487,20 +1500,13 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    console.log("options",options)
-    //获取页面栈
-    let pages = getCurrentPages();
     this.authrasution();
     this.cardjump(options)
     // 如果是从快速发布找活名片到我的找活名片展示发布成功弹窗
     if (options.hasOwnProperty("isFastPublish")) {
-      if(pages.length > 1) {
-        let index = pages.length - 2
-        let path = pages[index].route
-        if (path == "pages/jsIssueResume/index" && options.isFastPublish) {
-          this.setData({ isFastPublish: options.isFastPublish})
-          this.refreshPage()
-        }
+      if (options.isFastPublish) {
+        this.setData({ isFastPublish: options.isFastPublish})
+        this.showPublishTip()
       }
     }
   },

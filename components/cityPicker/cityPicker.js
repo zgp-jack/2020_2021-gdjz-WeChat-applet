@@ -106,7 +106,6 @@ Component({
 			this.setData({
 				areaData:_areaData,
 				selectData,
-				
 			})
 			setTimeout(()=>{
 				this.setData({
