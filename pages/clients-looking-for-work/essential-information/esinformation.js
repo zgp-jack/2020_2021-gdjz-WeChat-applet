@@ -1036,12 +1036,21 @@ Page({
 
 //选择期望地区 点击确定
 cityComfirm(e) {
-  let _select = e.detail.params
+  let select = e.detail.params
+  let municipality = app.globalData.municipality
+  let selectStr = select.map(item=>{
+    let index = municipality.findIndex(i=> i.id == item.fid)
+    if (index !== -1) {
+      return municipality[index].name + item.name
+    }else{
+      return item.name
+    }
+  })
 
   this.setData({
-    selectAllData: _select,
-    selectCityName:_select.map(item => item.name).join(" | "),
-    selectCityId:_select.map(item => item.id).join(",")
+    selectAllData: select,
+    selectCityName:selectStr.join(" | "),
+    selectCityId:select.map(item => item.id).join(",")
   })
 },
 

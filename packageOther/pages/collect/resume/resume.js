@@ -26,7 +26,9 @@ Page({
       resumeIcon: app.globalData.apiImgUrl + "new-collect-resume-active.png",
       resumeTitle: '找活信息'
     },
-    resumeText:""
+    resumeText:"",
+    experience_num:'',
+    provinces_str:''
   },
   // 根据发布方式不同发布招工：未登录或者“fast_add_job”是快速发布，“ordinary_add_job”是普通发布。
   publishJob:function () {

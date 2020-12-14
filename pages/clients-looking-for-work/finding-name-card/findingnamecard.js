@@ -1398,12 +1398,12 @@ Page({
     let occupations_id = this.data.occupations_id;
     if (isFastPublish) {
       wx.reLaunch({
-        url: `/pages/index/index?aid=${cityid}id=${occupations_id}`,
+        url: `/pages/index/index?aid=${cityid}&id=${occupations_id}`,
       })
       this.setData({ isFastPublish: false })
     }else{
       wx.reLaunch({
-        url: `/pages/index/index?aid=${cityid}id=${occupations_id}`,
+        url: `/pages/index/index?aid=${cityid}&id=${occupations_id}`,
       })
     }
   },
