@@ -57,6 +57,7 @@ font-size: 30rpx;
   margin-left: 19rpx;
   text-align: justify;
   position: relative;
+  font-weight: 700;
 }
 .informaregiononede{
   width: 24%;
@@ -68,6 +69,9 @@ font-size: 30rpx;
   display: flex;
   flex-direction: column;
   justify-content: center;
+}
+.informaregiononede text {
+  font-weight: 700;
 }
 .informaregiononede text{
     display: flex;
@@ -546,7 +550,7 @@ width: 140rpx;
 .informationevaluation{
   width: 93%;
   margin: 0 auto;
-  height: 255rpx;
+  height: 285rpx;
   background: white;
   margin-top: 20rpx;
   overflow: hidden;
@@ -557,6 +561,7 @@ width: 140rpx;
   width: 93%;
   margin: 0 auto;
   font-size: 30rpx;
+  font-weight: 700;
   /* padding: 0 10rpx; */
   /* padding-left: 17rpx; */
 }
@@ -591,7 +596,7 @@ word-wrap:break-word;
   font-size: 38rpx;
   text-align: center;
   line-height:  97rpx;
-  margin-top: 20rpx;
+  margin-top: 50rpx;
   margin-bottom: 42rpx;
 }
 
@@ -675,11 +680,11 @@ word-wrap:break-word;
 
 
 .clearIntroduce {
-  width: 122rpx;
-  height: 40rpx;
+  width: 150rpx;
+  height: 60rpx;
   color: #0099FF;
   background: #F8F8F8;
   text-align: center;
-  line-height: 40rpx;
-  font-size: 24rpx;
+  line-height: 60rpx;
+  font-size: 26rpx;
 }

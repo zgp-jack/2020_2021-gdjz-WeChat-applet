@@ -1393,7 +1393,6 @@ Page({
   },
   // 点击弹窗取消按钮
   tapCancel: function () {
-    debugger
     let isFastPublish = this.data.isFastPublish;
     let cityid = this.data.cityid;
     let occupations_id = this.data.occupations_id;

@@ -48,18 +48,17 @@ function closePublishAction(_this) {
 }
 function valiUserCard(_this,app,userInfo){
   app.globalData.showdetail = true
-  let exists = app.globalData.exists
-  if(exists){
-    wx.navigateTo({
-      url: '/pages/clients-looking-for-work/finding-name-card/findingnamecard',
-    })
-  }else{
-    wx.navigateTo({
-      url: '/pages/jsIssueResume/index',
-    })
-  }
- 
-
+  app.initResume(_this,function (res){
+    if(res){
+      wx.navigateTo({
+        url: '/pages/clients-looking-for-work/finding-name-card/findingnamecard',
+      })
+    }else{
+      wx.navigateTo({
+        url: '/pages/jsIssueResume/index',
+      })
+    }
+  })
   return false;
   if (!userInfo) {
     wx.navigateTo({

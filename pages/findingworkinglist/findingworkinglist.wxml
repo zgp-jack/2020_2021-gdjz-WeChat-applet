@@ -138,8 +138,8 @@
                 <text wx:for="{{item.tags}}" wx:key="index">{{item.label_name}}</text>
               </view>
               
-              <view class="listsboxagetwo">
-                <text>期望工作地：测试 测试 测试</text>
+              <view class="listsboxagetwo" wx:if="{{item.provinces_str}}">
+                <text>期望工作地：{{item.provinces_str}}</text>
               </view>
 
             </view>

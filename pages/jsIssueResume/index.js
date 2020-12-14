@@ -351,6 +351,7 @@ Page({
       token,
       tokenTime,
     }
+    let _this = this
     app.appRequestAction({
       url: 'resumes/add-fast-resume/',
       way: 'POST',
@@ -358,7 +359,8 @@ Page({
       success: function (res) {
         let mydata = res.data;
         if (mydata.errcode === "ok") {
-          wx.navigateTo({
+          app.initResume(_this)
+          wx.reLaunch({
             url: `/pages/clients-looking-for-work/finding-name-card/findingnamecard?isFastPublish=true`,
           })
         } else {
@@ -396,7 +398,7 @@ Page({
     let userId = userInfo.userId;
     let token = userInfo.token;
     let tokenTime = userInfo.tokenTime;
-    let phone = this.data.telPhone;
+    let phone = this.data.phone;
     let vali = v.v.new();
     let _this = this;
     // 发送请求参数
@@ -492,6 +494,7 @@ Page({
             selectCityName: name,
             phone: telPhone
           })
+
           _this.initWorkTypeData()
         }else{
           wx.showModal({

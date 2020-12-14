@@ -46,6 +46,7 @@
 	height: 100%;
 	width: 100%;
 	display: flex;
+	padding-bottom: 100rpx;
 }
 
 .picker-body-left {
