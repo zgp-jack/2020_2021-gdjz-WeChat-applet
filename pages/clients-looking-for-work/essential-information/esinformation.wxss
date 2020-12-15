@@ -87,7 +87,7 @@ font-size: 30rpx;
     height: 0;
 }
 .informaregiononede text::before{
-    content:':';
+    content:' ';
     /* overflow: hidden; */
     height: 100%;
     width: 6rpx;
@@ -103,7 +103,7 @@ font-size: 30rpx;
     height: 0;
 }
 .informationtwione::before{
-    content:':';
+    content:' ';
     /* overflow: hidden; */
     height: 100%;
     width: 6rpx;
@@ -114,7 +114,7 @@ font-size: 30rpx;
     padding-left: 58rpx;
 }
 .informationtwi .informationtwitwo{
-  width: 70%;
+  width: 65%;
   height: 125rpx;
   display: flex;
   flex-direction: column;
@@ -143,7 +143,7 @@ font-size: 30rpx;
     padding-left: 58rpx;
 }
 .informationthree .informationthreetwo{
-  width: 70%;
+  width: 65%;
   height: 125rpx;
   display: flex;
   flex-direction: column;
@@ -173,7 +173,7 @@ font-size: 30rpx;
   margin-left: 19rpx;
 }
 .informationfour .informationfourtwo{
-  width: 70%;
+  width: 65%;
   height: 125rpx;
   display: flex;
   flex-direction: column;
@@ -198,7 +198,7 @@ font-size: 30rpx;
 }
 
 .informationfive .informationfivetwo{
-  width: 70%;
+  width: 65%;
   height: 125rpx;
   display: flex;
   flex-direction: column;
@@ -251,7 +251,7 @@ border-bottom: 1px solid #F1F1F1;
   font-size: 30rpx;
 }
  .informationTypeworktwoo{
-  width: 70%;
+  width: 65%;
 
   display: flex;
   flex-direction: column;
@@ -404,7 +404,7 @@ width: 60%;
     padding-left: 58rpx;
 }
 .informationseven .informationseventwo{
-  width: 70%;
+  width: 65%;
   min-height: 125rpx;
   /* display: flex;
   flex-direction: row;
@@ -464,7 +464,7 @@ width: 140rpx;
     padding-left: 58rpx;
 }
 .informationtheinput .informationtheinputtwo{
-  width: 70%;
+  width: 65%;
   height: 125rpx;
   display: flex;
   flex-direction: column;
@@ -688,4 +688,5 @@ word-wrap:break-word;
   text-align: center;
   line-height: 60rpx;
   font-size: 26rpx;
+  margin-left: 25rpx;
 }

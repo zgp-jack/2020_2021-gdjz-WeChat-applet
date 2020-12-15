@@ -16,17 +16,17 @@
           <text class="olangw">{{percent}}%</text>
           <text class="view_num">{{view_num}}</text>
         </view>
-        <view class="isline" wx:if="{{showcomplete}}">
-          <button class="shareliveone" bindtap="completeall"  wx:if="{{project.length < 1 && is_introduces != '1'}}">名片越完善,找活越容易!马上去完善>></button>
-          <button class="shareliveone" bindtap="goRealName" wx:if="{{authenticationimg != 2 && (project.length > 0 || is_introduces == '1')}}">老板更喜欢招已实名工人! 马上去实名>></button>
+        <view class="isline">
+          <button class="shareliveone" bindtap="completeall"  wx:if="{{project.length < 1 || is_introduces != '1'}}">名片越完善,找活越容易!马上去完善>></button>
+          <button class="shareliveone" bindtap="goRealName" wx:if="{{authenticationimg != 2 && (project.length > 0 && is_introduces == '1')}}">老板更喜欢招已实名工人! 马上去实名>></button>
           
           <text class="sontwoview">浏览次数</text>
         </view>
-        <view class="isline" wx:if="{{!showcomplete}}">
+        <!-- <view class="isline" wx:if="{{!showcomplete}}">
           <button class="sharelive" open-type='share'>分享找活名片,可提升名片排名度
           </button>
           <text class="sontwoview">浏览次数</text>
-        </view>
+        </view> -->
       </view>
     </view>
     <!-- <view class="findingnamecardonesontwo">
@@ -142,13 +142,13 @@
             </view>
           </view>
           <view class="cardtwosontwo" wx:if="{{checkonef == 0}}">
-            <text bindtap="edit">待修改</text>
+            <text bindtap="edit" data-type="dxg">待修改</text>
           </view>
           <view class="cardtwosontwo" wx:if="{{checkonef != 0 && is_introduces == '0' && checkone != 1}}">
-            <text bindtap="edit">完善资料</text>
+            <text bindtap="edit" data-type="ws">完善资料</text>
           </view>
           <view class="cardtwosontwo" wx:if="{{checkonef != 0 && is_introduces == '1' && checkone != 1}}">
-            <text bindtap="editbj">编辑</text>
+            <text bindtap="edit" data-type="bj">编辑</text>
           </view>
         </view>
         <view class="lineone">
@@ -218,7 +218,7 @@
       <text>个人资料审核失败原因：</text> {{note}}
     </view>
   </view>
-  <view class="findingnamecardthree" wx:if="{{selfintro}}">
+  <!-- <view class="findingnamecardthree" wx:if="{{selfintro}}">
     <view class="findingnamecardthreemobile">
       <view class="findingnamemobile">
         <image src="{{description}}"></image>
@@ -234,7 +234,7 @@
       <text class="findingnamecardfourone">完善人员信息，能让老板充分了解您或您的队伍</text>
       <view class="findingnamecardfourtwo" bindtap="improvementwork">去完善</view>
     </view>
-  </view>
+  </view> -->
 <!-- 
   <view class="findingnamecardthree" wx:if="{{selfintrone}}">
     <view class="findingnamecardthreemobile">
@@ -535,8 +535,8 @@
 
   <recommendRecruit mine="1" aid="{{ cityid }}" cid="{{ occupations_id }}" more="1"></recommendRecruit>
 
-
-  <!-- <view class="bg" bindtap="obtn" style='display:{{display}}' catchtouchmove="{{move}}"></view> -->
+  <!-- 审核失败提示框 蒙层 -->
+  <view class="bg" bindtap="obtn" style='display:{{display}}' catchtouchmove="{{move}}"></view>
   <!-- <view class="bg"  style='display:{{top_display}}' catchtouchmove="{{move}}"></view> -->
   <view style="height: 118rpx;">
   </view>

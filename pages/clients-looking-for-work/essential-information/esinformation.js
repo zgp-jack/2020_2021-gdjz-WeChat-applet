@@ -166,7 +166,6 @@ Page({
   },
   GPSsubmit: function () {
     this.openSetting()
-
   },
   teamsnum(e) { //队伍人数的额选择
     this.setData({
@@ -643,7 +642,6 @@ Page({
     }
     let strone = /^[0-9]{1,4}$/ig;
     if ((this.data.editType == 'bj' || this.data.indexperson !== 0)&&!strone.test(this.data.teamsnumber) && this.data.constituttion != 1 || ~~this.data.teamsnumber - 0 <= 1 && this.data.constituttion != 1) {
-      debugger
       wx.showModal({
         title: '温馨提示',
         content: '请输入您的队伍人数不得少于2人',
@@ -905,7 +903,7 @@ Page({
       wardenryid: introinfo.hasOwnProperty("city") ? introinfo.city : "",
       telephone: introinfo.hasOwnProperty("tel") ? introinfo.tel : "",
       tele: introinfo.hasOwnProperty("tel") ? introinfo.tel : "",
-      otextareavalue: this.data.editType == 'bj' ? introinfo.hasOwnProperty("introduce") ? introinfo.introduce : "" : '',
+      otextareavalue: this.data.editType == 'bj' || this.data.editType == 'dxg' ? introinfo.hasOwnProperty("introduce") ? introinfo.introduce : "" : '',
       // otextareavaluel: introinfo.hasOwnProperty("introduce") ? introinfo.introduce ? introinfo.introduce.length : 0 : 0,
       checkonef: introinfo.hasOwnProperty("check") ? introinfo.check : "",
       note: introinfo.hasOwnProperty("note") ? introinfo.note : "",
@@ -1102,7 +1100,11 @@ peopleage(e) { //工龄的选择
     if(options.type){
       this.setData({
         editType:options.type
-      })
+      });
+      //完善资料的时候 自动获取定位
+      if(options.type == 'ws'){
+        this.GPSsubmit()
+      }
     }
     let introinfo = wx.getStorageSync('introinfo')
     let introdetail = wx.getStorageSync('introdetail')
