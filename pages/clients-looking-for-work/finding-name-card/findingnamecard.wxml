@@ -8,12 +8,12 @@
   <view class="findingnamecardone">
     <view class="findingnamecardoneson">
       <view class="findingnamecardonesonone">
-        <view class="otext">
-          <text>名片完善度：</text>
-          <view class="lang">
+        <view class="otext {{authenticationimg == 2 && (project.length > 0 && is_introduces == '1') ? 'onText':''}}">
+          <text class="ontextc">名片完善度：</text>
+          <view class="lang ontextc">
             <view class="olang" style="width:{{percent}}%;"></view>
           </view>
-          <text class="olangw">{{percent}}%</text>
+          <text class="olangw ontextc">{{percent}}%</text>
           <text class="view_num">{{view_num}}</text>
         </view>
         <view class="isline">
@@ -195,7 +195,7 @@
               <text class="workotextone">{{staffcomposition}}</text>
             </view>
             <!-- 队伍人数 -->
-            <view class="cardotext" wx:if="{{personnum != '0'}}">
+            <view class="cardotext" wx:if="{{personnum != '0' && staffcomposition != '个人'}}">
               <text class="oworkotext">队伍人数</text>
               <text class="workotextone">{{personnum}} 人</text>
             </view>

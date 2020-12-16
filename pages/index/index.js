@@ -1191,10 +1191,10 @@ Page({
           if (showPopup) {
             if (hasResume) {
               if (!dayFirstRefresh) {
-                that.showPromtBox(parseInt(mydata.data.cancel_refresh_top_expire_days,10),hasResume)
+                that.showPromtBox(Number(mydata.data.cancel_refresh_top_expire_days),hasResume)
               }
             } else {
-              that.showPromtBox(parseInt(mydata.data.cancel_publish_expire_days,10),hasResume)
+              that.showPromtBox(Number(mydata.data.cancel_publish_expire_days),hasResume)
             }
           }
         }

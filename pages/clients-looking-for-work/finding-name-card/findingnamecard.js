@@ -1396,7 +1396,7 @@ Page({
     let isFastPublish = this.data.isFastPublish;
     let index = municipality.findIndex(item=>item.id == province)
     let cityid = index == -1 ? this.data.cityid:province;
-    let occupations_id = this.data.occupations_id;
+    let occupations_id = this.data.occupations_id.split(",")[0];
     if (isFastPublish) {
       wx.reLaunch({
         url: `/pages/index/index?aid=${cityid}&id=${occupations_id}`,

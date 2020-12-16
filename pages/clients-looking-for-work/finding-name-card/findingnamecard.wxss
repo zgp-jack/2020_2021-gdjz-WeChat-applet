@@ -11,22 +11,27 @@
   height: 100%;
   background: white;
 }
-.left-text{
+
+.left-text {
   float: left;
 }
+
 page {
   background: #f7f6f9;
 }
-.more{
+
+.more {
   display: flex;
   padding: 6rpx 6rpx 6rpx 0rpx;
 }
-.more view{
+
+.more view {
   display: flex;
   flex-direction: column;
   justify-content: center;
   padding-left: 6rpx;
 }
+
 .findingnamecard {
   width: 94%;
   margin: 0 auto;
@@ -40,13 +45,15 @@ page {
   position: relative;
   color: #535353;
 }
-.sharecard{
+
+.sharecard {
   position: absolute;
   top: 0;
   right: 0;
   font-size: 28rpx;
   color: #09f;
 }
+
 .nopass {
   width: 93%;
   margin: 0 auto;
@@ -58,9 +65,11 @@ page {
   padding-right: 19rpx;
   padding-bottom: 10rpx;
 }
-.nopass text{
+
+.nopass text {
   color: red;
 }
+
 .link {
   width: 6px;
   height: 38rpx;
@@ -85,7 +94,8 @@ page {
   background: white;
   box-shadow: 0 0 1rpx #e7e6e4;
 }
-.findingnamecardone view:last-child{
+
+.findingnamecardone view:last-child {
   border-bottom: 0;
 }
 
@@ -98,10 +108,12 @@ page {
   /* flex-direction: row;
   justify-content: space-between; */
 }
-.findingnamecardonesonone{
+
+.findingnamecardonesonone {
   width: 100%;
 }
-.findingnamecardoneson .findingnamecardonesonone  .sharelive {
+
+.findingnamecardoneson .findingnamecardonesonone .sharelive {
   margin: 0;
   padding: 0;
   background-color: white;
@@ -112,11 +124,12 @@ page {
   /* margin-left: 13rpx; */
   height: 30rpx;
   line-height: 30rpx;
-text-align: left;
-display: inline-block;
+  text-align: left;
+  display: inline-block;
 
 }
-.findingnamecardoneson .findingnamecardonesonone  .shareliveone {
+
+.findingnamecardoneson .findingnamecardonesonone .shareliveone {
   margin: 0;
   padding: 0;
   background-color: white;
@@ -127,10 +140,11 @@ display: inline-block;
 
   height: 30rpx;
   line-height: 30rpx;
-text-align: left;
-display: inline-block;
+  text-align: left;
+  display: inline-block;
 }
-.findingnamecardoneson .findingnamecardonesonone  .shareliveone {
+
+.findingnamecardoneson .findingnamecardonesonone .shareliveone {
   margin: 0;
   padding: 0;
   background-color: white;
@@ -141,21 +155,29 @@ display: inline-block;
 
   height: 30rpx;
   line-height: 30rpx;
-text-align: left;
-position: relative;
+  text-align: left;
+  position: relative;
 
-display: inline-block;
+  display: inline-block;
 }
-.findingnamecardoneson .findingnamecardonesonone  .shareliveone:after{ border: none; }
-.findingnamecardoneson .findingnamecardonesonone  .sharelive:after{ border: none; }
+
+.findingnamecardoneson .findingnamecardonesonone .shareliveone:after {
+  border: none;
+}
+
+.findingnamecardoneson .findingnamecardonesonone .sharelive:after {
+  border: none;
+}
+
 .findingnamecardoneson .findingnamecardonesonone view {
   margin-bottom: 10rpx;
   font-size: 30rpx;
   color: #09f;
   margin-left: 13rpx;
 }
-.findingnamecardoneson .findingnamecardonesonone .isline{
-    margin-bottom: 0rpx;
+
+.findingnamecardoneson .findingnamecardonesonone .isline {
+  margin-bottom: 0rpx;
   font-size: 30rpx;
   color: #09f;
   margin-left: 13rpx;
@@ -163,6 +185,7 @@ display: inline-block;
   line-height: 30rpx;
 
 }
+
 .findingnamecardoneson .findingnamecardonesonone .otext {
   margin-top: 14rpx;
   font-size: 30rpx;
@@ -172,7 +195,7 @@ display: inline-block;
   color: #000;
   display: flex;
   position: relative;
-padding-right: 150rpx;
+  padding-right: 150rpx;
 
 }
 
@@ -210,6 +233,7 @@ padding-right: 150rpx;
   align-items: center;
   padding: 18rpx 0;
 }
+
 .findingnamecardonesontwot {
   margin-left: 14rpx;
   margin-right: 30rpx;
@@ -220,24 +244,29 @@ padding-right: 150rpx;
   align-items: center;
   padding: 18rpx 0;
 }
-.rule-detail{
+
+.rule-detail {
   display: flex;
   align-items: center;
 }
-.rule-detail image{
+
+.rule-detail image {
   width: 34rpx;
   height: 36rpx;
 }
-.rule-detail text{
+
+.rule-detail text {
   font-size: 30rpx;
   color: #6F6C6C;
-  padding-left:12rpx; 
+  padding-left: 12rpx;
 }
-.rule-odetail{
-    font-size: 30rpx;
+
+.rule-odetail {
+  font-size: 30rpx;
   color: #09f;
 }
- .view_num {
+
+.view_num {
   color: #09f;
   font-size: 30rpx;
   font-weight: bold;
@@ -245,8 +274,8 @@ padding-right: 150rpx;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-position: absolute;
-right: 78rpx;
+  position: absolute;
+  right: 78rpx;
 
 }
 
@@ -306,24 +335,27 @@ right: 78rpx;
   font-size: 30rpx;
   font-weight: bold;
   display: flex;
-justify-content: center;
-position: relative;
+  justify-content: center;
+  position: relative;
 }
-.findingnamemobile{
+
+.findingnamemobile {
   display: flex;
   flex-direction: column;
   justify-content: center;
   margin-right: 8rpx;
 
 }
-.findingnamemobileone{
-    display: flex;
+
+.findingnamemobileone {
+  display: flex;
   flex-direction: column;
   justify-content: center;
 }
+
 .findingnamecardthree image {
- width: 27rpx;
-height: 29rpx;
+  width: 27rpx;
+  height: 29rpx;
 
 }
 
@@ -430,8 +462,8 @@ height: 29rpx;
 }
 
 .findingnamecardseven image {
-width: 24rpx;
-height: 26rpx;
+  width: 24rpx;
+  height: 26rpx;
 
 }
 
@@ -527,11 +559,12 @@ height: 26rpx;
   margin-bottom: 20rpx;
 }
 
-.cardcolore{
+.cardcolore {
   background: white;
-    position: relative;
-    box-shadow: 0 0 1rpx #e7e6e4;
+  position: relative;
+  box-shadow: 0 0 1rpx #e7e6e4;
 }
+
 .cardone .cardoneson {
   width: 100%;
   background-color: white;
@@ -620,13 +653,13 @@ height: 26rpx;
   border-radius: 50%;
 }
 
-.cardtwosonone .cardtwosononeimg  .oimgone {
+.cardtwosonone .cardtwosononeimg .oimgone {
 
   padding-left: 50rpx;
 
 }
 
-.cardtwosonone .cardtwosononeimg  .oimgone .otext {
+.cardtwosonone .cardtwosononeimg .oimgone .otext {
   color: #343434;
   font-size: 32rpx;
   font-weight: bold;
@@ -650,10 +683,12 @@ height: 26rpx;
   right: 0;
   z-index: 99;
 }
-.cardcoloreno{
+
+.cardcoloreno {
   background: #fffbf7;
   position: relative;
 }
+
 .cardotext {
   position: relative;
   width: 100%;
@@ -789,7 +824,7 @@ height: 26rpx;
   background-color: white;
 }
 
-.cardfour  text {
+.cardfour text {
   padding-top: 4rpx;
   font-size: 24rpx;
 }
@@ -868,7 +903,7 @@ height: 26rpx;
   font-size: 30rpx;
   font-weight: bold;
   margin-left: 14rpx;
-   margin-top: 20rpx;
+  margin-top: 20rpx;
 
 }
 
@@ -879,9 +914,9 @@ height: 26rpx;
   margin-top: 10rpx;
 }
 
-.cardsixzong .cardsixthree  text:last-child {
+.cardsixzong .cardsixthree text:last-child {
   margin-left: 26rpx;
-    font-size: 30rpx;
+  font-size: 30rpx;
 }
 
 .cardsixzong .cardsixfour {
@@ -1013,16 +1048,18 @@ height: 26rpx;
   font-weight: bold;
 }
 
-.cardsixall{
+.cardsixall {
   width: 92%;
 }
-.certificatetime{
+
+.certificatetime {
   font-size: 30rpx;
   line-height: 26rpx;
   color: #8b8b8a;
   margin-left: 14rpx;
   margin-top: 14rpx;
 }
+
 .cardeightzong .cardeightthree {
   color: #8b8b8a;
   font-size: 22rpx;
@@ -1030,7 +1067,7 @@ height: 26rpx;
   margin-top: 10rpx;
 }
 
-.cardeightzong .cardeightthree  text:last-child {
+.cardeightzong .cardeightthree text:last-child {
   margin-left: 26rpx;
 }
 
@@ -1070,7 +1107,7 @@ height: 26rpx;
   background: #dc0102;
   border-radius: 50%;
   right: -20rpx;
-top: -14rpx;
+  top: -14rpx;
   text-align: center;
   line-height: 24rpx;
   font-size: 20rpx;
@@ -1088,7 +1125,7 @@ top: -14rpx;
 
 .cardnine {
   margin: 0 auto;
-  height:110rpx;
+  height: 110rpx;
   display: flex;
   justify-content: space-between;
   width: 100%;
@@ -1106,7 +1143,7 @@ top: -14rpx;
   margin: 0;
   padding: 0;
   height: 100%;
-  background:#fff;
+  background: #fff;
   border-radius: 0;
 }
 
@@ -1120,20 +1157,24 @@ top: -14rpx;
   justify-content: space-evenly;
   line-height: 30rpx;
 }
+
 .cardnine .cardnineone .important {
   color: #FF4D42;
 }
-.cardnine .cardnineone:first-child view:first-child{
+
+.cardnine .cardnineone:first-child view:first-child {
   color: black;
   font-weight: bold;
   font-size: 30rpx;
 }
-.cardnine .cardnineone:first-child view:last-child{
+
+.cardnine .cardnineone:first-child view:last-child {
   color: #838383;
   font-size: 600;
   font-size: 28rpx;
 }
-.cardnine .cardnineone:last-child{
+
+.cardnine .cardnineone:last-child {
   font-size: 30rpx;
   height: 60rpx;
   line-height: 60rpx;
@@ -1142,6 +1183,7 @@ top: -14rpx;
   width: 160rpx;
   border-radius: 8rpx;
 }
+
 .cardnine .cardnineone image {
   width: 35rpx;
   height: 35rpx;
@@ -1199,12 +1241,13 @@ top: -14rpx;
 .cardotext .oworkone {
   width: 16.5%;
   vertical-align: baseline;
-  /* height: 30rpx; *//* display: flex;
+  /* height: 30rpx; */
+  /* display: flex;
   flex-direction: column;
   justify-content: center; */
 }
 
-.cardotext  image {
+.cardotext image {
   width: 18rpx;
   height: 18rpx;
   margin: 0 20rpx;
@@ -1222,8 +1265,8 @@ top: -14rpx;
   position: relative;
   margin-left: 52rpx;
   text-align-last: justify;
-	text-align: justify;
-	text-justify: distribute-all-lines;
+  text-align: justify;
+  text-justify: distribute-all-lines;
 }
 
 .cardotext .oworkotext::after {
@@ -1244,7 +1287,9 @@ top: -14rpx;
 }
 
 .all {
-  /* width:70%; *//* line-height: 30rpx; *//* padding-top: 4.5rpx; */
+  /* width:70%; */
+  /* line-height: 30rpx; */
+  /* padding-top: 4.5rpx; */
   display: inline-block;
 }
 
@@ -1278,7 +1323,8 @@ top: -14rpx;
 .labletu {
   color: #09f;
   font-size: 26rpx;
-  /* background: #E7E7E7; *//* display: inline-block; */
+  /* background: #E7E7E7; */
+  /* display: inline-block; */
   display: inline-block;
   padding: 0 6rpx;
   text-align: center;
@@ -1287,9 +1333,11 @@ top: -14rpx;
   border: 1px solid #09f;
   line-height: 40rpx;
 }
-.labletu:nth-last-child(1){
+
+.labletu:nth-last-child(1) {
   margin-right: 0;
 }
+
 .alllabletu {
   display: flex;
   padding-left: 28rpx;
@@ -1356,6 +1404,7 @@ top: -14rpx;
   flex: 1;
   padding-right: 15rpx;
 }
+
 .select_box .select .select_textone {
   font-size: 30rpx;
   color: #078f1e;
@@ -1509,14 +1558,15 @@ top: -14rpx;
   margin-bottom: 40rpx;
   margin-top: 48rpx;
 }
-.text .otextdetail{
-    font-size: 30rpx;
+
+.text .otextdetail {
+  font-size: 30rpx;
   width: 86%;
   margin: 0 auto;
   text-align: center;
   margin-bottom: 40rpx;
-margin-top: 12rpx;
-color: #6d6b6b;
+  margin-top: 12rpx;
+  color: #6d6b6b;
 
 
 }
@@ -1533,6 +1583,7 @@ color: #6d6b6b;
   border-radius: 18rpx;
   margin-bottom: 50rpx;
 }
+
 .buttontexttop {
   /* margin: 0 auto; */
   /* display: inline-block; */
@@ -1546,11 +1597,12 @@ color: #6d6b6b;
   line-height: 74rpx;
   border-radius: 8rpx;
   bottom: 50rpx;
-    left: 40rpx;
+  left: 40rpx;
 }
-.buttontexttoptwo{
-    /* display: inline-block; */
-    position: absolute;
+
+.buttontexttoptwo {
+  /* display: inline-block; */
+  position: absolute;
   width: 200rpx;
   height: 74rpx;
   background: #09f;
@@ -1563,9 +1615,11 @@ color: #6d6b6b;
   right: 40rpx;
 
 }
-.topwhite{
+
+.topwhite {
   height: 120rpx;
 }
+
 .bg {
   position: fixed;
   top: 0%;
@@ -1625,11 +1679,11 @@ color: #6d6b6b;
   border-radius: 50%;
 }
 
-.cardtwoifsonone .cardtwoifsononeimg  .oimgone {
+.cardtwoifsonone .cardtwoifsononeimg .oimgone {
   width: 280rpx;
 }
 
-.cardtwoifsonone .cardtwoifsononeimg  .oimgone .otext {
+.cardtwoifsonone .cardtwoifsononeimg .oimgone .otext {
   color: #343434;
   font-size: 28rpx;
 }
@@ -1689,9 +1743,11 @@ color: #6d6b6b;
   position: absolute;
   margin-left: 52rpx;
 }
-.cworkotype .ocworkotypeoo{
+
+.cworkotype .ocworkotypeoo {
   padding-right: 30rpx;
 }
+
 .cworkotype .ocworkotype::after {
   content: '';
   width: 100%;
@@ -1726,11 +1782,13 @@ color: #6d6b6b;
   background: #f5f5f5;
   border-radius: 6rpx;
 }
-.ocworkotyp .ocworkotyptu:nth-last-child(1){
+
+.ocworkotyp .ocworkotyptu:nth-last-child(1) {
   margin-right: 0;
 }
-.ocworkotyp  .oimg{
-    color: black;
+
+.ocworkotyp .oimg {
+  color: black;
   font-size: 30rpx;
   display: inline-block;
   padding-left: 5rpx;
@@ -1741,25 +1799,28 @@ color: #6d6b6b;
 }
 
 
-.nobgshade{
-  background:transparent;
+.nobgshade {
+  background: transparent;
   box-shadow: none;
 }
-.rule-detail .rule-oimg{
-width: 34rpx;
-height: 34rpx;
+
+.rule-detail .rule-oimg {
+  width: 34rpx;
+  height: 34rpx;
 
 }
-.topselect_box{
+
+.topselect_box {
   width: 30%;
-height: 70%;
-border-radius: 14rpx;
-position: relative;
-/* margin-top: 28rpx; */
-margin-right: 1.5%;
-font-size: 22rpx;
+  height: 70%;
+  border-radius: 14rpx;
+  position: relative;
+  /* margin-top: 28rpx; */
+  margin-right: 1.5%;
+  font-size: 22rpx;
 
 }
+
 .topselect_box .select {
   display: flex;
   justify-content: space-around;
@@ -1774,6 +1835,7 @@ font-size: 22rpx;
   padding-right: 6rpx;
 
 }
+
 .topselect_box .select .select_textone {
   font-size: 30rpx;
   color: #078f1e;
@@ -1785,51 +1847,63 @@ font-size: 22rpx;
 }
 
 .topselect_box .select image {
-width: 24rpx;
-height: 22rpx;
-display: block;
-margin-top: 4rpx;
+  width: 24rpx;
+  height: 22rpx;
+  display: block;
+  margin-top: 4rpx;
 
   transition: transform 0.3s;
 }
-.toptime{
+
+.toptime {
   margin-top: 10rpx;
   font-size: 30rpx;
   color: #6F6C6C;
   line-height: 40rpx;
 }
-.toptime view{
+
+.toptime view {
   margin-left: 58rpx;
   margin-right: 30rpx;
 }
-.toptime .proviceop{
-   margin-right: 12rpx;
+
+.toptime .proviceop {
+  margin-right: 12rpx;
 }
-.toptime .proviceop:last-child{
-   margin-right: 0rpx;
+
+.toptime .proviceop:last-child {
+  margin-right: 0rpx;
 }
-.topdetail{
+
+.topdetail {
   color: #0099ff;
   font-size: 30rpx;
   margin-left: 58rpx;
   padding: 22rpx 0;
 }
-.rule-detail .rule-status{
-padding-left: 0rpx;
+
+.rule-detail .rule-status {
+  padding-left: 0rpx;
 
 }
 
-  .oimgone image{
+.oimgone image {
   width: 120rpx;
-height: 30rpx;
-margin-left: 14rpx;
+  height: 30rpx;
+  margin-left: 14rpx;
 
-  }
-  .text  image{
+}
+
+.text image {
   width: 100rpx;
-height: 100rpx;
-margin-top: 20rpx;
-  }
+  height: 100rpx;
+  margin-top: 20rpx;
+}
+
 /*oworkotext cardsix  tworkotextonetu.cardnine .all cardsixsixnum  cardeightsixnum bg showtop nopass findingnamecardsixtwo .workotextone oworkotextonetu cardtwoif workotextone alllabletu
 #7A7A7A
 workotype oworkotextonetu workotextone cardotext oworkotext cworkotype oworkotext ocworkotype ocworkotyp content link cardseven workotextone contentone*/
+.onText .ontextc {
+  position: relative;
+  top: 30rpx;
+}
