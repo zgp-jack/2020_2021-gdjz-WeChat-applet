@@ -1594,7 +1594,7 @@ App({
       cancelColor:'#797979',
       content: [{
         des: '刷新成功!',
-        color: '',
+        color: '#333',
         text: []
       }
     ],
@@ -1707,7 +1707,7 @@ App({
                   cancelColor:'#797979',
                   content: [{
                     des: '刷新成功',
-                    color: '##85963',
+                    color: '#333',
                     text: []
                   }
                 ],
@@ -1730,6 +1730,7 @@ App({
               })
             }
           }
+          // 有is_top 字段也代表了刷新成功
           if (mydata.data.hasOwnProperty("is_top")) {
             // 找活名片置顶状态 1 置顶中 0 未置顶
             let isTop = mydata.data.is_top;
