@@ -497,13 +497,17 @@ Page({
           // 所有工种字段
           let occupations = mydata.data.hasOwnProperty("occupation_tree") ? mydata.data.occupation_tree : []
           _this.setData({
-            userClassifyids: [{id: occId, name: occName}],
             classifies: occupations,
             selectCityData: [{id, name}],
             telPhone: telPhone,
             selectCityName: name,
             phone: telPhone
           })
+          if(occId && occName){
+            _this.setData({
+              userClassifyids: [{id: occId, name: occName}],
+            })
+          }
 
           _this.initWorkTypeData()
         }else{

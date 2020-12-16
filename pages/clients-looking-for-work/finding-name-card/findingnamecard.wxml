@@ -542,12 +542,12 @@
   </view>
 </view>
 
-<!-- <view class="cardnine" wx:if="{{showtopone}}">
+<view class="ylfxBtn" wx:if="{{showtopone && show_refresh_btn == 0}}">
   <button class="cardnineone" bindtap="preview">
     <image src="{{pvw}}"></image> 预览</button>
   <button bindtap="activeRefresh" class="cardnineone" open-type='share'>
     <image src="{{participation}}"></image>分享</button>
-</view> -->
+</view>
 <view class="cardnine" wx:if="{{showtopone && show_refresh_btn == 1}}">
   <view class="cardnineone">
     <view>让更多老板联系您！</view>

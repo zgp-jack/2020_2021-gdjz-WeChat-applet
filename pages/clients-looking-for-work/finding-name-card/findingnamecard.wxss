@@ -1139,6 +1139,8 @@ page {
   padding: 0rpx 25rpx;
 }
 
+
+
 .cardnine .cardnineone {
   margin: 0;
   padding: 0;
@@ -1906,4 +1908,50 @@ workotype oworkotextonetu workotextone cardotext oworkotext cworkotype oworkotex
 .onText .ontextc {
   position: relative;
   top: 30rpx;
+}
+
+
+
+
+
+.ylfxBtn {
+  margin: 0 auto;
+  height:110rpx;
+  display: flex;
+  /* flex-direction: row;
+  justify-content: space-between; */
+  width: 100%;
+  position: fixed;
+  bottom: 0;
+  margin-top: 18rpx;
+  background: #fff;
+  z-index: 7777;
+  box-shadow: 0 0 5rpx #e7e6e4;
+}
+.ylfxBtn .cardnineone {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 50%;
+  color: #7d7d7d;
+  font-size: 36rpx;
+  text-align: center;
+  line-height: 110rpx;
+  background:#fff;
+  border-radius: 0;
+}
+
+.ylfxBtn .cardnineone image {
+  width: 35rpx;
+  height: 35rpx;
+  position: relative;
+  top: 4rpx;
+}
+
+.ylfxBtn .cardnineone::after {
+  border: none;
+}
+
+.ylfxBtn .cardnineone:first-child {
+  border-right: 1px solid #dcdcdc;
 }

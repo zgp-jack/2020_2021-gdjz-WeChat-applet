@@ -152,6 +152,7 @@ Page({
     provinces_txt:"",//期望工作地
     isFastPublish: false,//弹窗状态 如果是从快速发布成功到找活名片 true 否则 false
     province:0,//省id
+    refresh: false,//是否显示提示刷新弹窗，如果置顶页面置顶成功返回会设置成true，不展示刷新弹窗
   },
 
 
@@ -715,6 +716,7 @@ Page({
      
         let mydata = res.data.data;
         if (res.data.errcode == 200) {
+          that.noTopTipBox(res.data.data)
           for (let i = 0; i < mydata.project.length; i++) {
 
             if (mydata.project[i].check == 1) {
@@ -1433,42 +1435,45 @@ Page({
     let pages = getCurrentPages();
     // 获取缓存
     if(pages.length > 1) {
-      let index = pages.length - 1
-      let path = pages[index].__displayReporter.showReferpagepath
-      path = path.slice(0, -5)
+      let index = pages.length - 1;
+      let path = pages[index].__displayReporter.showReferpagepath;
+      path = path.slice(0, -5);
+      let refresh = this.data.refresh;
       if (path == "pages/clients-looking-for-work/workingtop/workingtop") {
-        wx.showModal({
-          title: "温馨提示",
-          content: "您可以刷新找活名片，让更多老板看到您的找活信息！",
-          confirmText: "去刷新",
-          confirmColor: "#0097FF",
-          cancelColor: "#797979",
-          success: function (res) {
-            if (res.confirm) {
-              that.refreshCard()
+        if (!refresh) {
+          wx.showModal({
+            title: "温馨提示",
+            content: "您可以刷新找活名片，让更多老板看到您的找活信息！",
+            confirmText: "去刷新",
+            confirmColor: "#0097FF",
+            cancelColor: "#797979",
+            success: function (res) {
+              if (res.confirm) {
+                that.refreshCard()
+              }
+              if (res.cancel) {
+                let myDate = new Date();
+                // 当前时间戳
+                let currentTime = myDate.getTime();
+                // 到期时间戳（23:59:59）
+                // let dueDate = (new Date(new Date().toLocaleDateString())).getTime() +  (24 * 60 * 60 * 1000 - 1);
+                let dueDate = currentTime +  (1 * 60 * 1000 - 1);
+                // 当天没有刷新过且未置顶返回找活名片缓存（是否当天第一次返回，到期时间）
+                let topBackRefresh = {currentTime:currentTime,dueDate:dueDate};
+                wx.setStorageSync("topBackRefresh",topBackRefresh)
+              }
             }
-            if (res.cancel) {
-              let myDate = new Date();
-              // 当前时间戳
-              let currentTime = myDate.getTime();
-              // 到期时间戳（23:59:59）
-              // let dueDate = (new Date(new Date().toLocaleDateString())).getTime() +  (24 * 60 * 60 * 1000 - 1);
-              let dueDate = currentTime +  (1 * 60 * 1000 - 1);
-              // 当天没有刷新过且未置顶返回找活名片缓存（是否当天第一次返回，到期时间）
-              let topBackRefresh = {currentTime:currentTime,dueDate:dueDate};
-              wx.setStorageSync("topBackRefresh",topBackRefresh)
-            }
-          }
-        })
+          })
+        }
       }
     }
   },
   // 从找活名片点击去置顶没有置顶成功返回提示框
-  noTopTipBox: function () {
+  noTopTipBox: function (data) {
     // 当前时间戳
     let currentTime = new Date().getTime();
     // 找活名片置顶数据
-    let topData = this.data.resume_top;
+    let topData = data.resume_top;
     // 找活名片是否置顶过
     let hasTop = topData.has_top;
     // 找活名片置顶状态
@@ -1523,7 +1528,6 @@ Page({
     app.getAreaData(this)
     app.globalData.previewshou = true;
     app.activeRefresh()
-    this.noTopTipBox()
   },
 
   /**

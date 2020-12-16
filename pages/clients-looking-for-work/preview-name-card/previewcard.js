@@ -83,7 +83,8 @@ Page({
     fail_certificate: "",
     fail_project: "",
     authenticationimg: false,
-    certificate_show: false
+    certificate_show: false,
+    provinces_txt:''
   },
   errImg: function () {
     // let obj = `headerimg`;
@@ -302,6 +303,7 @@ Page({
             experience_str: mydata.introduces.hasOwnProperty("experience_str") ? mydata.introduces.experience_str : "",
             certificate_show: mydata.info.hasOwnProperty("certificate_show") ? mydata.info.certificate_show : "",
             authenticationimg: mydata.info.hasOwnProperty("authentication") ? mydata.info.authentication : "",
+            provinces_txt: mydata.info.hasOwnProperty("provinces_txt") ?  mydata.info.provinces_txt : ""
           })
           
           if (that.data.introduce === "") {

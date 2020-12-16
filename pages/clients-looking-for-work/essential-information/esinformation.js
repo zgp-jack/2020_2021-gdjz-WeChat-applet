@@ -1059,16 +1059,15 @@ cityComfirm(e) {
 constitute(e) { //人员构成的选择
   this.setData({
     indexperson: e.detail.value,
-    
   })
   if(e.detail.value != 0){
     this.setData({
-      constituttion: e.detail.value,
+      constituttion: Number(e.detail.value) + 1,
       teamsnumber: 2
     })
   }else if(e.detail.value == 0){
     this.setData({
-      constituttion: e.detail.value,
+      constituttion: Number(e.detail.value) + 1,
       teamsnumber: 1
     })
   }

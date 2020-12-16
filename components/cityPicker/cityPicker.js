@@ -17,9 +17,13 @@ Component({
 	},
 	methods: {
 		show: function () {
+			console.log("defaultData",this.data.defaultData)
 			this.setData({
 				selectArea: JSON.parse(JSON.stringify(this.data.defaultData)),
-				showPicker: true
+				showPicker: true,
+				scrollPId:'',
+				scrollCId:'',
+				provincei:0
 			})
 			this.showCityData()
 		},
@@ -175,6 +179,7 @@ Component({
 					_areaData[pIndex].children = _cityData
 					this.setData({selectArea,cityData:_cityData,areaData:_areaData})
 				}else{
+					app.showMyTips("最多只能选择3个城市！")
 					selectArea.pop()
 					this.setData({selectArea})
 				}
@@ -193,6 +198,7 @@ Component({
 					_areaData[pIndex].children = _cityData
 					this.setData({selectArea,cityData:_cityData,areaData:_areaData})
 				}else{
+					app.showMyTips("最多只能选择3个城市！")
 					selectArea.pop()
 					this.setData({selectArea})
 				}
@@ -231,6 +237,7 @@ Component({
 		},
 		//点击确定
 		comfirmCity(e) {
+			console.log("selectArea",this.data.selectArea)
 			//通知父组件
 			this.triggerEvent('cityComfirm', {
 				params: this.data.selectArea
