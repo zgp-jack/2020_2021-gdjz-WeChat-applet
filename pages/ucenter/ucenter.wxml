@@ -121,6 +121,7 @@
       <view class="commonly-icon-box">
         <view  bindtap="valiUserUrl" wx:if="{{showRecharge}}" data-url="/pages/recharge/recharge">
           <image src="{{Recharge}}"></image>
+          <image src="{{hotImg}}" class="hotImg"></image>
           <text>积分充值</text>
         </view>
         <view bindtap="valiUserUrl" data-url="../getintegral/getintegral">

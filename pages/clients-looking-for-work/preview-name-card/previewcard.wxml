@@ -76,7 +76,7 @@
               <text class="workotextone">{{provinces_txt}}</text>
             </view>
             <!-- 当前所在地 -->
-            <view class="cardotext" wx:if="{{city != ''}}" >
+            <view class="cardotext" wx:if="{{city != '' && city}}" >
               <text class="oworkotext">当前所在地</text>
               <text class="workotextone">{{city}}</text>
             </view>

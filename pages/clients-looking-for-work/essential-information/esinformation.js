@@ -900,7 +900,7 @@ Page({
       complexworkid: introinfo.hasOwnProperty("occupations_id") ? introinfo.occupations_id == null ? [] : introinfo.occupations_id.split(",") : [],
       regionone: introinfo.hasOwnProperty("address") ? introinfo.address : "",
       provinceid: introinfo.hasOwnProperty("province") ? introinfo.province : "",
-      wardenryid: introinfo.hasOwnProperty("city") ? introinfo.city : "",
+      // wardenryid: introinfo.hasOwnProperty("city") ? introinfo.city : "",
       telephone: introinfo.hasOwnProperty("tel") ? introinfo.tel : "",
       tele: introinfo.hasOwnProperty("tel") ? introinfo.tel : "",
       otextareavalue: this.data.editType == 'bj' || this.data.editType == 'dxg' ? introinfo.hasOwnProperty("introduce") ? introinfo.introduce : "" : '',
@@ -1097,7 +1097,7 @@ clearIntroduce() {
   })
 },
 peopleage(e) { //工龄的选择
-  if(e.detail.value == 0){
+  if(e.detail.value == '0'){
     this.setData({
       workage: 1
     })

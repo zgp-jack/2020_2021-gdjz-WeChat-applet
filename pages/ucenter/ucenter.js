@@ -63,7 +63,8 @@ Page({
       link:'/pages/clients-looking-for-work/finding-name-card/findingnamecard',
     },
     //是否显示去充值
-    showRecharge:false
+    showRecharge:false,
+    hotImg: app.globalData.apiImgUrl+'ws/ucenter-pointer-hot.png'
   },
   //获取广告数据
   getAdvertising: function () {
