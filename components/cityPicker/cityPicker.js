@@ -17,9 +17,13 @@ Component({
 	},
 	methods: {
 		show: function () {
+			console.log("defaultData",this.data.defaultData)
 			this.setData({
 				selectArea: JSON.parse(JSON.stringify(this.data.defaultData)),
-				showPicker: true
+				showPicker: true,
+				scrollPId:'',
+				scrollCId:'',
+				provincei:0
 			})
 			this.showCityData()
 		},
@@ -234,6 +238,7 @@ Component({
 		},
 		//点击确定
 		comfirmCity(e) {
+			console.log("selectArea",this.data.selectArea)
 			//通知父组件
 			this.triggerEvent('cityComfirm', {
 				params: this.data.selectArea
