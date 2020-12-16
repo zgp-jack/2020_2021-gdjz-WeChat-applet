@@ -8,7 +8,7 @@
   <view class="findingnamecardone">
     <view class="findingnamecardoneson">
       <view class="findingnamecardonesonone">
-        <view class="otext {{authenticationimg == 2 && (project.length > 0 && is_introduces == '1') ? 'onText':''}}">
+        <view class="otext {{authenticationimg == 2 && (projectCheckLen > 0 && is_introduces == '1') ? 'onText':''}}">
           <text class="ontextc">名片完善度：</text>
           <view class="lang ontextc">
             <view class="olang" style="width:{{percent}}%;"></view>
@@ -17,8 +17,8 @@
           <text class="view_num">{{view_num}}</text>
         </view>
         <view class="isline">
-          <button class="shareliveone" bindtap="completeall"  wx:if="{{project.length < 1 || is_introduces != '1'}}">名片越完善,找活越容易!马上去完善>></button>
-          <button class="shareliveone" bindtap="goRealName" wx:if="{{authenticationimg != 2 && (project.length > 0 && is_introduces == '1')}}">老板更喜欢招已实名工人! 马上去实名>></button>
+          <button class="shareliveone" bindtap="completeall"  wx:if="{{projectCheckLen < 1 || is_introduces != '1'}}">名片越完善,找活越容易!马上去完善>></button>
+          <button class="shareliveone" bindtap="goRealName" wx:if="{{authenticationimg != 2 && (projectCheckLen > 0 && is_introduces == '1')}}">老板更喜欢招已实名工人! 马上去实名>></button>
           
           <text class="sontwoview">浏览次数</text>
         </view>

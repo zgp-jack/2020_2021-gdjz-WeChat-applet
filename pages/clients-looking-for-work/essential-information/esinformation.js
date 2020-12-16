@@ -55,7 +55,7 @@ Page({
     selectCityData: [],
     selectCityName: [],
     selectCityId:[],
-    workage: "",
+    workage: 1,
     multiArray: [],
     multiArrayone: [],
     objectMultiArray: [],
@@ -907,11 +907,11 @@ Page({
       // otextareavaluel: introinfo.hasOwnProperty("introduce") ? introinfo.introduce ? introinfo.introduce.length : 0 : 0,
       checkonef: introinfo.hasOwnProperty("check") ? introinfo.check : "",
       note: introinfo.hasOwnProperty("note") ? introinfo.note : "",
-      workage: introinfo.hasOwnProperty("experience") ? introinfo.experience : "",
+      workage: introinfo.hasOwnProperty("experience") && introinfo.experience != 0 ? introinfo.experience : 1,
       selectCityId: introinfo.provinces_id ? introinfo.provinces_id:'',
       indexperson: Number(introinfo.type) ? introinfo.type - 1 : 0,
-      constituttion: Number(introinfo.number_people) ? introinfo.number_people: introinfo.type ? this.data.compositionarrayone[introinfo.type].id : this.data.compositionarrayone[0].id + 1,
-      teamsnumber: Number(introinfo.number_people) ? introinfo.number_people: introinfo.type ? this.data.compositionarrayone[introinfo.type].id : this.data.compositionarrayone[0].id + 1
+      constituttion: introinfo.type ? this.data.compositionarrayone[introinfo.type == 0?0:introinfo.type -1].id : this.data.compositionarrayone[0].id + 1,
+      teamsnumber: Number(introinfo.number_people) ? introinfo.number_people: introinfo.type ? this.data.compositionarrayone[introinfo.type == 0?0:introinfo.type -1].id : this.data.compositionarrayone[0].id + 1
     })
     if (introinfo.gender != "") {
       this.setData({
@@ -1097,9 +1097,16 @@ clearIntroduce() {
   })
 },
 peopleage(e) { //工龄的选择
-  this.setData({
-    workage: e.detail.value
-  })
+  if(e.detail.value == 0){
+    this.setData({
+      workage: 1
+    })
+  }else{
+    this.setData({
+      workage: e.detail.value
+    })
+  }
+  
 },
   /**
    * 生命周期函数--监听页面加载

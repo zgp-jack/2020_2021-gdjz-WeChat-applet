@@ -88,7 +88,7 @@
             <!-- 队伍人数 -->
             <view class="cardotext" wx:if="{{personnum != 1 && personnum != 0}}">
               <text class="oworkotext">队伍人数</text>
-              <text class="workotextone">{{personnum}}</text>
+              <text class="workotextone">{{personnum}}人</text>
             </view>
           </view>
         </view>

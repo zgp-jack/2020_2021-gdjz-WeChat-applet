@@ -194,7 +194,7 @@
       
       <block wx:if="{{isNullStatus == 1}}">
         <text class="btn-tips-text">还可以发布招工，让工人主动来找我～</text>
-        <text bindtap='publishJob' class="text-btn">去发布</text>
+        <text bindtap='valiUserCard' class="text-btn">去发布</text>
       </block>
     </view>
   </view>

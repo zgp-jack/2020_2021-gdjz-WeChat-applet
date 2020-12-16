@@ -1047,12 +1047,7 @@ Page({
     }
     this.setData({lists,})
   },
-  //跳转找活名片
-  goFinding: function () {
-    wx.navigateTo({
-      url: '/pages/clients-looking-for-work/finding-name-card/findingnamecard',
-    })
-  },
+
   //删除搜索内容
   deletekey:function () {
     this.setData({

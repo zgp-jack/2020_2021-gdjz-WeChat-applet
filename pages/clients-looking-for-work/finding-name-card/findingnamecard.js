@@ -153,6 +153,7 @@ Page({
     boxStatus: 0,//弹窗类型 如果是从快速发布成功到找活名片 1 有找活名片且未置顶当天未刷新 2 正常刷新 3 其他 0
     province:0,//省id
     refresh: false,//是否显示提示刷新弹窗，如果置顶页面置顶成功返回会设置成true，不展示刷新弹窗
+    projectCheckLen:0
   },
 
 
@@ -717,12 +718,8 @@ Page({
         let mydata = res.data.data;
         if (res.data.errcode == 200) {
           that.noTopTipBox(res.data.data)
-<<<<<<< HEAD
-=======
           that.showTopRefresh(res.data.data)
->>>>>>> 36987957e67a6324c859919d122986eb4a23c7df
           for (let i = 0; i < mydata.project.length; i++) {
-
             if (mydata.project[i].check == 1) {
               that.setData({
                 checkthree: true,
@@ -885,6 +882,17 @@ Page({
             selectDatatop: selectDtop,
             selectktop: selectktop
           })
+          if(mydata.project.length > 0){
+            let proj = 0
+            for(let i = 0; i < mydata.project.length;i++){
+              if(mydata.project[i].check == 2){
+                proj++
+              }
+            }
+            that.setData({
+              projectCheckLen:proj
+            })
+          }
 
           if (mydata.hasOwnProperty("resume_top")) {
 

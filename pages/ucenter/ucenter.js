@@ -249,7 +249,7 @@ Page({
             success: function (res) {
               if (res.confirm) {
                 wx.navigateTo({
-                  url: '/pages/clients-looking-for-work/finding-name-card/findingnamecard',
+                  url: '/pages/jsIssueResume/index',
                 })
               }
             }

@@ -171,7 +171,7 @@
             
             <block  wx:if="{{isNullStatus == 1}}" bindtap='publishJob'>
               <text class="btn-tips-text">还可以发布找活，让老板主动来找我～</text>
-              <text class="text-btn" bindtap="goFinding">去发布</text>
+              <text class="text-btn" bindtap="valiUserCard">去发布</text>
             </block>
           
         </view>

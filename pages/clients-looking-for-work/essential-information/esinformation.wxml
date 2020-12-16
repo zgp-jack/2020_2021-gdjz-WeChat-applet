@@ -55,7 +55,7 @@
     <view class="informationtwi" wx:if="{{editType == 'bj' || introinfo.experience == 0}}">
       <text class="informationtwione">工龄</text>
       <view class="informationtwitwo">
-        <input type="number" value="{{workage}}" bindinput="peopleage" placeholder="请输入工龄"></input>
+        <input type="number" maxlength="2" value="{{workage}}" bindinput="peopleage" placeholder="请输入工龄"></input>
       </view>
     </view>
 
