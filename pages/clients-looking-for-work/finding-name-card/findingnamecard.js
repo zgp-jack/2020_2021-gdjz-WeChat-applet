@@ -1459,9 +1459,7 @@ Page({
       this.setData({ boxStatus: 0 })
     }
     if(boxStatus == 2){
-      wx.navigateTo({
-        url: `/pages/clients-looking-for-work/workingtop/workingtop`,
-      })
+      this.refreshCard()
       this.setData({ boxStatus: 0 })
     }
   },
@@ -1490,7 +1488,11 @@ Page({
       this.setData({ boxStatus: 0 })
     }
     if (boxStatus == 2) {
-      this.refreshCard()
+      let currentTime = new Date().getTime();
+      wx.setStorageSync("haveCardCloseBox",currentTime)
+      wx.navigateTo({
+        url: `/pages/clients-looking-for-work/workingtop/workingtop`,
+      })
       this.setData({ boxStatus: 0 })
     }
   },
