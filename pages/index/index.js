@@ -1102,6 +1102,8 @@ Page({
       cancelColor: "#797979",
       success: function (res) {
         if (res.confirm) {
+          let time = new Date().getTime()
+          wx.setStorageSync('noCardCancelTime', time)
           wx.navigateTo({
             url: '/pages/jsIssueResume/index',
           })
