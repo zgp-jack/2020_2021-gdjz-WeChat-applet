@@ -908,7 +908,10 @@ Page({
       checkonef: introinfo.hasOwnProperty("check") ? introinfo.check : "",
       note: introinfo.hasOwnProperty("note") ? introinfo.note : "",
       workage: introinfo.hasOwnProperty("experience") ? introinfo.experience : "",
-      selectCityId: introinfo.provinces_id ? introinfo.provinces_id:''
+      selectCityId: introinfo.provinces_id ? introinfo.provinces_id:'',
+      indexperson: Number(introinfo.type) ? introinfo.type - 1 : 0,
+      constituttion: Number(introinfo.number_people) ? introinfo.number_people: introinfo.type ? this.data.compositionarrayone[introinfo.type].id : this.data.compositionarrayone[0].id + 1,
+      teamsnumber: Number(introinfo.number_people) ? introinfo.number_people: introinfo.type ? this.data.compositionarrayone[introinfo.type].id : this.data.compositionarrayone[0].id + 1
     })
     if (introinfo.gender != "") {
       this.setData({
@@ -1056,11 +1059,19 @@ cityComfirm(e) {
 constitute(e) { //人员构成的选择
   this.setData({
     indexperson: e.detail.value,
-    constituttion: this.data.compositionarrayone[e.detail.value].id,
-    teamsnumber: this.data.compositionarrayone[e.detail.value].id
+    
   })
-
-
+  if(e.detail.value != 0){
+    this.setData({
+      constituttion: e.detail.value,
+      teamsnumber: 2
+    })
+  }else if(e.detail.value == 0){
+    this.setData({
+      constituttion: e.detail.value,
+      teamsnumber: 1
+    })
+  }
   if (this.data.compositionarrayone[e.detail.value].id > 1) {
     this.setData({
       judge: true

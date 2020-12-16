@@ -100,7 +100,6 @@ Component({
 			index.sort(function(a,b){
 				return a.pIndex > b.pIndex ? 1 : -1
 			})
-
 			let scrollPId = "p"+_areaData[index[0].pIndex].id
 			let scrollCId = "c"+index[0].cId
 			this.setData({
@@ -113,9 +112,7 @@ Component({
 					scrollCId
 				})
 			},300)
-			
 			this.setChildrenData(index[0].pIndex)
-			
 		},
 		// 初始化区域数据
 		initAeraData: function () {

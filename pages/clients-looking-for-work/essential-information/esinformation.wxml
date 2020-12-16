@@ -91,7 +91,7 @@
     <view class="informationtwi"  wx:if="{{indexperson != 0}}">
       <text class="informationtwione">队伍人数</text>
       <view class="informationtwitwo">
-        <input type="number" placeholder="请输入队伍人数" value="{{constituttion}}"  bindinput="teamsnum"></input>
+        <input type="number" placeholder="请输入队伍人数" value="{{teamsnumber}}"  bindinput="teamsnum"></input>
       </view>
     </view>
     <view class="informationtheinput" wx:if="{{editType == 'bj' || !introinfo.tel}}">
