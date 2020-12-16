@@ -1604,7 +1604,8 @@ App({
     _this.setData({
       tipBox: tipBox,
       refreshStatus: true,
-      boxType: "refreshSuccess"
+      boxType: "refreshSuccess",
+      boxStatus: 3
     })
     // 刷新成功
     _this.selectComponent("#promptbox").show()

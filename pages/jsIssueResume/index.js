@@ -362,7 +362,7 @@ Page({
         if (mydata.errcode === "ok") {
           app.initResume(_this)
           wx.redirectTo({
-            url: `/pages/clients-looking-for-work/finding-name-card/findingnamecard?isFastPublish=true`,
+            url: `/pages/clients-looking-for-work/finding-name-card/findingnamecard?boxStatus=1`,
           })
         } else {
           wx.showModal({
