@@ -17,8 +17,8 @@
           <text class="view_num">{{view_num}}</text>
         </view>
         <view class="isline">
-          <button class="shareliveone" bindtap="completeall"  wx:if="{{projectCheckLen < 1 || is_introduces != '1'}}">名片越完善,找活越容易!马上去完善>></button>
-          <button class="shareliveone" bindtap="goRealName" wx:if="{{authenticationimg != 2 && (projectCheckLen > 0 && is_introduces == '1')}}">老板更喜欢招已实名工人! 马上去实名>></button>
+          <button class="shareliveone" bindtap="completeall"  wx:if="{{ project.length < 1 || !projectCheckLen || is_introduces != '1'}}">名片越完善,找活越容易!马上去完善>></button>
+          <button class="shareliveone" bindtap="goRealName" wx:if="{{authenticationimg != 2 && (projectCheckLen && is_introduces == '1')}}">老板更喜欢招已实名工人! 马上去实名>></button>
           
           <text class="sontwoview">浏览次数</text>
         </view>
@@ -141,14 +141,14 @@
               </view>
             </view>
           </view>
-          <view class="cardtwosontwo" wx:if="{{checkonef == 0}}">
-            <text bindtap="edit" data-type="dxg">待修改</text>
-          </view>
+          <!-- <view class="cardtwosontwo" wx:if="{{checkonef == 0}}">
+            <text bindtap="edit" data-type="bj">待修改</text>
+          </view> -->
           <view class="cardtwosontwo" wx:if="{{checkonef != 0 && is_introduces == '0' && checkone != 1}}">
             <text bindtap="edit" data-type="ws">完善资料</text>
           </view>
-          <view class="cardtwosontwo" wx:if="{{checkonef != 0 && is_introduces == '1' && checkone != 1}}">
-            <text bindtap="edit" data-type="bj">编辑</text>
+          <view class="cardtwosontwo" wx:if="{{checkonef == 0 || (checkonef != 0 && is_introduces == '1' && checkone != 1)}}">
+            <text bindtap="edit" data-type="bj">{{ checkonef == 0?'待修改': '编辑' }}</text>
           </view>
         </view>
         <view class="lineone">

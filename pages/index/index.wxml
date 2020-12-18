@@ -166,7 +166,7 @@
             <text class="no-data-text">没有找到您想要的内容，您可以换个内容搜索</text>
             <block wx:if="{{isNullStatus == 2}}">
               <text class="btn-tips-text">还可以置顶找活，让更多老板看到您的找活信息～</text>
-              <text class="text-btn"bindtap="goFinding">去置顶</text>
+              <text class="text-btn" bindtap="goFinding">去置顶</text>
             </block>
             
             <block  wx:if="{{isNullStatus == 1}}" bindtap='publishJob'>

@@ -1167,6 +1167,18 @@ Page({
     //计算消耗积分
     this.dayclocy()
     this.getCityNum()
+    // 获取页面栈
+    let pages = getCurrentPages();
+    if(pages.length > 1) {
+      // 上一个页面的页面栈
+      let prePage = pages[pages.length - 2]
+      // 上一页页面路径
+      let path = prePage.route
+      // 如果上一个页面是我的找活名片页面，给该页面设置弹窗类型（4 找活置顶未成功返回弹窗）
+      if (path == 'pages/clients-looking-for-work/finding-name-card/findingnamecard') {
+        prePage.setData({ boxStatus: 4 })
+      }
+    }
   },
 
   /**

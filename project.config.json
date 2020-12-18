@@ -38,7 +38,7 @@
     "bundle": false
   },
   "compileType": "miniprogram",
-  "libVersion": "2.10.4",
+  "libVersion": "2.14.0",
   "appid": "wx456feacb0e86162f",
   "projectname": "gdjz",
   "debugOptions": {

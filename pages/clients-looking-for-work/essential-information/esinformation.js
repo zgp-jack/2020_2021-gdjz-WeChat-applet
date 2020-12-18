@@ -251,10 +251,10 @@ Page({
 
               if (res.cancel) {
               } else if (res.confirm) {
+                
                 //village_LBS(that);
                 wx.openSetting({
                   success: function (data) {
-
                     if (data.authSetting["scope.userLocation"] == true) {
                       wx.showToast({
                         title: '授权成功',
@@ -271,12 +271,15 @@ Page({
                         duration: 2000
                       })
                     }
+                  },
+                  fail:function(res){
+                    
                   }
                 })
               }
             }
           })
-          return false;
+          // return false;
         } else {
           that.getLocation();
         }

@@ -150,10 +150,11 @@ Page({
     dayfirst: false, //是否是当天第一次从置顶界面返回（未成功置顶）
     todayRefresh: 0,//是否是当天第一次刷新
     provinces_txt:"",//期望工作地
-    boxStatus: 0,//弹窗类型 如果是从快速发布成功到找活名片 1 有找活名片且未置顶当天未刷新 2 正常刷新 3 其他 0
+    boxStatus: 0,//弹窗类型 如果是从快速发布成功到找活名片 1 有找活名片且未置顶当天未刷新 2 正常刷新 3 找活名片置顶未成功返回 4 其他 0
     province:0,//省id
     refresh: false,//是否显示提示刷新弹窗，如果置顶页面置顶成功返回会设置成true，不展示刷新弹窗
-    projectCheckLen:0
+    projectCheckLen:0,
+    projectCheck: false,//项目经验审核状态，有一个项目经验审核通过就视为通过，否则未通过
   },
 
 
@@ -377,24 +378,34 @@ Page({
     })
   },
   completeall() {
-
-    if (!this.data.resume_uuid) {
+    if ((this.data.is_introduces == '1' && this.data.project.length < 1) || (this.data.is_introduces == '1' && !this.data.projectCheckLen)) {
       wx.navigateTo({
-        url: '/pages/clients-looking-for-work/essential-information/esinformation',
-      })
-    } else if (this.data.is_introduces == 0) {
-      wx.navigateTo({
-        url: '/pages/clients-looking-for-work/essential-information/esinformation',
-      })
-    } else if (this.data.project.length == 0) {
-      wx.navigateTo({
-        url: "/pages/clients-looking-for-work/new-project-experience/projectexperience",
-      })
-    } else if (this.data.skillbooks.length == 0) {
-      wx.navigateTo({
-        url: "/pages/clients-looking-for-work/addcertificate/addcertificate",
+        url: '/pages/clients-looking-for-work/new-project-experience/projectexperience',
       })
     }
+    if (this.data.is_introduces != '1') {
+      wx.navigateTo({
+        url: '/pages/clients-looking-for-work/essential-information/esinformation',
+      })
+    }
+    if (!this.data.resume_uuid) {
+      wx.navigateTo({
+        url: '/pages/jsIssueResume/index',
+      })
+    } 
+    // else if (this.data.is_introduces == 0) {
+    //   wx.navigateTo({
+    //     url: '/pages/clients-looking-for-work/essential-information/esinformation',
+    //   })
+    // } else if (this.data.project.length == 0) {
+    //   wx.navigateTo({
+    //     url: "/pages/clients-looking-for-work/new-project-experience/projectexperience",
+    //   })
+    // } else if (this.data.skillbooks.length == 0) {
+    //   wx.navigateTo({
+    //     url: "/pages/clients-looking-for-work/addcertificate/addcertificate",
+    //   })
+    // }
   },
   redorblue() {
     if (this.data.resume_uuid && this.data.is_introduces != 0 && this.data.project.length != 0 && this.data.skillbooks.length != 0) {
@@ -882,17 +893,7 @@ Page({
             selectDatatop: selectDtop,
             selectktop: selectktop
           })
-          if(mydata.project.length > 0){
-            let proj = 0
-            for(let i = 0; i < mydata.project.length;i++){
-              if(mydata.project[i].check == 2){
-                proj++
-              }
-            }
-            that.setData({
-              projectCheckLen:proj
-            })
-          }
+
 
           if (mydata.hasOwnProperty("resume_top")) {
 
@@ -963,6 +964,8 @@ Page({
           
             // 获取项目经验对象
             let project = mydata.project;
+            let projectCheckLen = project.some(item=> item.check == '2')
+            that.setData({ projectCheckLen })
             // 定义有图片项目数组
             let hasImageProject = [];
             // 定义没图片的数组
@@ -1320,8 +1323,8 @@ Page({
     this.setData({
       "tipBox.title": "温馨提示",
       "tipBox.content[0].des":"您的找活名片排名靠后，您可以去刷新或置顶找活名片，让老板主动来联系您。",
-      "tipBox.confirmText": "去置顶",
-      "tipBox.cancelText": "去刷新",
+      "tipBox.confirmText": "去刷新",
+      "tipBox.cancelText": "去置顶",
       "tipBox.showClose" : true,
       "tipBox.cancelColor" : "#797979",
       "tipBox.confirmColor" : "#0097FF",
@@ -1348,21 +1351,32 @@ Page({
     let todayRefresh = data.is_refreshed_today;
     // 点击关闭弹窗的时间戳
     let haveCardCloseBox = wx.getStorageSync("haveCardCloseBox");
-    //弹窗类型 如果是从快速发布成功到找活名片 1 有找活名片且未置顶当天未刷新 2 正常刷新 3 其他 0
+    //弹窗类型 如果是从快速发布成功到找活名片 1 有找活名片且未置顶当天未刷新 2 正常刷新 3 找活名片置顶未成功返回 4 其他 0
     let boxStatus = this.data.boxStatus;
     // 当前时间戳
     let currentTime = new Date().getTime();
-    if ( isResume && check == 2 && isEnd == 1 && !isTop && !todayRefresh && boxStatus != 1) {
+    if ( isResume && check == '2' && isEnd == '1' && isTop != '1' && !todayRefresh && boxStatus != 1) {
       if (!haveCardCloseBox) {
-        this.setData({ boxStatus: 2 })
-        this.showBox()
-      }else{
-        let dueTime = haveCardCloseBox + day * 24 * 60 * 60 * 1000 - 1
-        if (currentTime > dueTime) {
+        wx.setStorageSync("haveCardCloseBox",currentTime)
+        if ( boxStatus == 4 ) {
+          this.setData({ boxStatus: 0 })
+        }else{
           this.setData({ boxStatus: 2 })
           this.showBox()
         }
+      }else{
+        let dueTime = haveCardCloseBox + day * 24 * 60 * 60 * 1000 - 1
+        if (currentTime > dueTime) {
+          wx.setStorageSync("haveCardCloseBox",currentTime)
+          if ( boxStatus == 4 ) {
+            this.setData({ boxStatus: 0 })
+          }else{
+            this.setData({ boxStatus: 2 })
+            this.showBox()
+          }
+        }
       }
+      
     }
   },
   // 展示发布成功界面
@@ -1458,7 +1472,7 @@ Page({
     let municipality = app.globalData.municipality;
     // 省id或者直辖市id
     let province = this.data.province;
-    //弹窗类型 如果是从快速发布成功到找活名片 1 有找活名片且未置顶当天未刷新 2 正常刷新 3 其他 0
+    //弹窗类型 如果是从快速发布成功到找活名片 1 有找活名片且未置顶当天未刷新 2 正常刷新 3 找活名片置顶未成功返回 4 其他 0
     let boxStatus = this.data.boxStatus;
     let index = municipality.findIndex(item=>item.id == province)
     let cityid = index == -1 ? this.data.cityid:province;
@@ -1470,14 +1484,18 @@ Page({
       this.setData({ boxStatus: 0 })
     }
     if(boxStatus == 2){
-      this.refreshCard()
+      let currentTime = new Date().getTime();
+      wx.setStorageSync("haveCardCloseBox",currentTime)
+      wx.navigateTo({
+        url: `/pages/clients-looking-for-work/workingtop/workingtop`,
+      })
       this.setData({ boxStatus: 0 })
     }
   },
   // 点击弹窗的关闭按钮
   tapClose: function () {
     let currentTime = new Date().getTime();
-    //弹窗类型 如果是从快速发布成功到找活名片 1 有找活名片且未置顶当天未刷新 2 正常刷新 3 其他 0
+    //弹窗类型 如果是从快速发布成功到找活名片 1 有找活名片且未置顶当天未刷新 2 正常刷新 3 找活名片置顶未成功返回 4 其他 0
     let boxStatus = this.data.boxStatus
     if (boxStatus == 1) {
       this.setData({ boxStatus: 0 })
@@ -1490,7 +1508,7 @@ Page({
   },
   // 点击弹窗确定按钮
   tapConfirm: function () {
-    //弹窗类型 如果是从快速发布成功到找活名片 1 有找活名片且未置顶当天未刷新 2 正常刷新 3 其他 0
+    //弹窗类型 如果是从快速发布成功到找活名片 1 有找活名片且未置顶当天未刷新 2 正常刷新 3 找活名片置顶未成功返回 4 其他 0
     let boxStatus = this.data.boxStatus
     if (boxStatus == 1) {
       wx.navigateTo({
@@ -1499,50 +1517,38 @@ Page({
       this.setData({ boxStatus: 0 })
     }
     if (boxStatus == 2) {
-      let currentTime = new Date().getTime();
-      wx.setStorageSync("haveCardCloseBox",currentTime)
-      wx.navigateTo({
-        url: `/pages/clients-looking-for-work/workingtop/workingtop`,
-      })
+      this.refreshCard()
       this.setData({ boxStatus: 0 })
     }
   },
   // 从置顶页面返回（未置顶）弹窗
   todayRefresh: function () {
     let that = this
-    //获取页面栈
-    let pages = getCurrentPages();
-    // 获取缓存
-    if(pages.length > 1) {
-      let index = pages.length - 1;
-      let path = pages[index].__displayReporter.showReferpagepath;
-      path = path.slice(0, -5);
-      if (path == "pages/clients-looking-for-work/workingtop/workingtop") {
-        wx.showModal({
-          title: "温馨提示",
-          content: "您可以刷新找活名片，让更多老板看到您的找活信息！",
-          confirmText: "去刷新",
-          confirmColor: "#0097FF",
-          cancelColor: "#797979",
-          success: function (res) {
-            if (res.confirm) {
-              that.refreshCard()
-            }
-            if (res.cancel) {
-              let myDate = new Date();
-              // 当前时间戳
-              let currentTime = myDate.getTime();
-              // 到期时间戳（23:59:59）
-              // let dueDate = (new Date(new Date().toLocaleDateString())).getTime() +  (24 * 60 * 60 * 1000 - 1);
-              let dueDate = currentTime +  (1 * 60 * 1000 - 1);
-              // 当天没有刷新过且未置顶返回找活名片缓存（是否当天第一次返回，到期时间）
-              let topBackRefresh = {currentTime:currentTime,dueDate:dueDate};
-              wx.setStorageSync("topBackRefresh",topBackRefresh)
-            }
-          }
-        })
+    wx.showModal({
+      title: "温馨提示",
+      content: "您可以刷新找活名片，让更多老板看到您的找活信息！",
+      confirmText: "去刷新",
+      confirmColor: "#0097FF",
+      cancelColor: "#797979",
+      success: function (res) {
+        if (res.confirm) {
+          that.refreshCard()
+          that.setData({ boxStatus: 0 })
+        }
+        if (res.cancel) {
+          let myDate = new Date();
+          // 当前时间戳
+          let currentTime = myDate.getTime();
+          // 到期时间戳（23:59:59）
+          // let dueDate = (new Date(new Date().toLocaleDateString())).getTime() +  (24 * 60 * 60 * 1000 - 1);
+          let dueDate = currentTime +  (1 * 60 * 1000 - 1);
+          // 当天没有刷新过且未置顶返回找活名片缓存（是否当天第一次返回，到期时间）
+          let topBackRefresh = {currentTime:currentTime,dueDate:dueDate};
+          wx.setStorageSync("topBackRefresh",topBackRefresh)
+          that.setData({ boxStatus: 0 })
+        }
       }
-    }
+    })
   },
   // 从找活名片点击去置顶没有置顶成功返回提示框
   noTopTipBox: function (data) {
@@ -1558,15 +1564,44 @@ Page({
     let todayRefresh = app.globalData.dayFirstRefresh;
     // 当天没有刷新过且未置顶返回找活名片缓存（是否当天第一次返回，到期时间）
     let topBackRefresh = wx.getStorageSync('topBackRefresh')
-    if (!hasTop || (hasTop && !isTop)) {
-      // 如果当天没有刷新过
-      if (!todayRefresh) {
-        // 如果置顶未成功置顶且是当天第一次返回
-        if (!topBackRefresh) {
-          this.todayRefresh()
-        }else{
-          if (currentTime > topBackRefresh.dueDate) {
-            this.todayRefresh()
+    //获取页面栈
+    let pages = getCurrentPages();
+    // 弹窗类型
+    let boxStatus = this.data.boxStatus;
+    if(pages.length > 1) {
+      let index = pages.length - 1;
+      let path = pages[index].__displayReporter.showReferpagepath;
+      path = path.slice(0, -5);
+      if (path == "pages/clients-looking-for-work/workingtop/workingtop") {
+        if ( ( !hasTop && boxStatus == 4 )|| ( hasTop && isTop != '1' && boxStatus == 4 )) {
+          // 如果当天没有刷新过
+          if (!todayRefresh) {
+            // 如果置顶未成功置顶且是当天第一次返回
+            if (!topBackRefresh) {
+              let myDate = new Date();
+              // 当前时间戳
+              let currentTime = myDate.getTime();
+              // 到期时间戳（23:59:59）
+              // let dueDate = (new Date(new Date().toLocaleDateString())).getTime() +  (24 * 60 * 60 * 1000 - 1);
+              let dueDate = currentTime +  (1 * 60 * 1000 - 1);
+              // 当天没有刷新过且未置顶返回找活名片缓存（是否当天第一次返回，到期时间）
+              let topBackRefresh = {currentTime:currentTime,dueDate:dueDate};
+              wx.setStorageSync("topBackRefresh",topBackRefresh)
+              this.todayRefresh()
+            }else{
+              if (currentTime > topBackRefresh.dueDate) {
+                let myDate = new Date();
+                // 当前时间戳
+                let currentTime = myDate.getTime();
+                // 到期时间戳（23:59:59）
+                // let dueDate = (new Date(new Date().toLocaleDateString())).getTime() +  (24 * 60 * 60 * 1000 - 1);
+                let dueDate = currentTime +  (1 * 60 * 1000 - 1);
+                // 当天没有刷新过且未置顶返回找活名片缓存（是否当天第一次返回，到期时间）
+                let topBackRefresh = {currentTime:currentTime,dueDate:dueDate};
+                wx.setStorageSync("topBackRefresh",topBackRefresh)
+                this.todayRefresh()
+              }
+            }
           }
         }
       }
