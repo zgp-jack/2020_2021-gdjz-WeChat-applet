@@ -578,8 +578,9 @@ width: 140rpx;
   outline: 0;
   padding:10rpx;
   padding-left: 25rpx;
-word-break:break-all;
-word-wrap:break-word;
+  word-break:break-all;
+  word-wrap:break-word;
+  z-index: 1;
 }
 
 .informationevaluation .informationenum{
@@ -677,7 +678,7 @@ word-wrap:break-word;
 
 
 .common-uinfo-editbox{position: relative;width:100%;}
-.informationtwo,.informationtelephone,.informationevaluation{position: relative;width:100%;}
+.informationtwo,.informationtelephone,.informationevaluation{position: relative;width:100%;z-index: 1;}
 
 
 .clearIntroduce {

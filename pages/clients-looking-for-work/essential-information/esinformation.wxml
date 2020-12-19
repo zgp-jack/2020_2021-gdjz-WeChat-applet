@@ -63,7 +63,7 @@
       <!-- <view class="informationtwi"> -->
       <text class="informationtwione" style="text-align:left">期望工作地</text>
       <view class="informationtwitwo" bindtap="showCityPicker">
-        <input type="text" placeholder="请选择期望工作地" wx:if="{{!selectCityName}}" value="{{selectCityName}}"></input>
+        <input type="text" placeholder="请选择期望工作地" disabled wx:if="{{!selectCityName}}" value="{{selectCityName}}"></input>
         <view x:if="{{selectCityName}}"><text>{{selectCityName}}</text></view>
       </view>
     </view>
@@ -116,10 +116,10 @@
 
   </view>
 
-  <view class="informationevaluation">
+  <view class="informationevaluation" wx:if="{{!isShowPicker}}">
     <view class="informationevaluationone">自我介绍：</view>
     <view>
-      <textarea wrap="hard" wx:if="{{ !showWorkType && !perfection}}" class="informationevaluationtwo" bindinput="textareavalue" maxlength="500" placeholder="请简要介绍你所从事的行业以及工作经验..." style="padding:{{isIos ? '17rpx':'25rpx'}}" value="{{otextareavalue}}">
+      <textarea wrap="hard" wx:if="{{!showWorkType && !perfection}}" class="informationevaluationtwo" bindinput="textareavalue" maxlength="500" placeholder="请简要介绍你所从事的行业以及工作经验..." style="padding:{{isIos ? '17rpx':'25rpx'}}" value="{{otextareavalue}}">
       </textarea>
     </view>
     <view class="clearIntroduce" bindtap="clearIntroduce">清空内容</view>
@@ -145,6 +145,6 @@
       </view>
     </view>
   </view>
-  <cityPicker id="cityPicker" bindcityComfirm="cityComfirm" defaultData="{{selectAllData}}"></cityPicker>
+  <cityPicker id="cityPicker" bindcityComfirm="cityComfirm" bindcityClose="cityClose" bindcityShow="cityShow" defaultData="{{selectAllData}}"></cityPicker>
 </view>
 <!-- getlocationdetails completes -->

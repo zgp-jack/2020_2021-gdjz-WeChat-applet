@@ -85,6 +85,7 @@ Page({
     indexperson:0,
     selectAllData:[],
     isIos:false,
+    isShowPicker:false
   },
   // 点击隐藏键盘
   hiddenKeyBoard: function () {
@@ -1110,6 +1111,16 @@ peopleage(e) { //工龄的选择
     })
   }
   
+},
+cityClose(e){
+  this.setData({
+    isShowPicker:false
+  })
+},
+cityShow(e) {
+  this.setData({
+    isShowPicker:true
+  })
 },
   /**
    * 生命周期函数--监听页面加载

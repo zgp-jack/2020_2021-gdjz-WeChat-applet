@@ -26,10 +26,14 @@ Component({
 				provincei:0
 			})
 			this.showCityData()
+			this.triggerEvent('cityShow',{params:true})
 		},
 		close: function () {
 			this.setData({
 				showPicker: false
+			})
+			this.triggerEvent('cityClose',{
+				params:false
 			})
 		},
 		// 根据父级index设置子城市数据
@@ -247,7 +251,6 @@ Component({
 			})
 		},
 	},
-
 	lifetimes: {
 		ready: function () {
 			this.initAeraData()
