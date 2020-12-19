@@ -155,6 +155,9 @@ Page({
     refresh: false,//是否显示提示刷新弹窗，如果置顶页面置顶成功返回会设置成true，不展示刷新弹窗
     projectCheckLen:0,
     projectCheck: false,//项目经验审核状态，有一个项目经验审核通过就视为通过，否则未通过
+    showRefreshToBox: false,//当有个人资料项目经验技能证书有审核失败，优先展示审核失败弹窗，点击失败确定按钮展示刷新置顶弹窗 true 展示刷新置顶  false 展示审核失败
+    dataInfo:{},//我的找活名片请求返回的信息集合
+    showCheckFailBox: false,//是否显示了审核失败弹窗
   },
 
 
@@ -344,6 +347,7 @@ Page({
       showModal: false,
       display: "none"
     })
+    this.showTopRefresh(this.data.dataInfo)
   },
   rulepoit() {
     // let rulestatus =  this.data.checkonef
@@ -378,14 +382,19 @@ Page({
     })
   },
   completeall() {
-    if ((this.data.is_introduces == '1' && this.data.project.length < 1) || (this.data.is_introduces == '1' && !this.data.projectCheckLen)) {
+    if (this.data.check != '0' && this.data.project.length < 1 ) {
       wx.navigateTo({
         url: '/pages/clients-looking-for-work/new-project-experience/projectexperience',
       })
     }
-    if (this.data.is_introduces != '1') {
+    if (this.data.check == '0') {
       wx.navigateTo({
-        url: '/pages/clients-looking-for-work/essential-information/esinformation',
+        url: `/pages/clients-looking-for-work/essential-information/esinformation?type=bj`,
+      })
+    }
+    if (this.data.check != '0' &&　this.data.project.length>0 && !this.data.projectCheckLen) {
+      wx.navigateTo({
+        url: `/pages/clients-looking-for-work/all-project-experience/allexperience`,
       })
     }
     if (!this.data.resume_uuid) {
@@ -827,6 +836,7 @@ Page({
           that.setData({
             occupations_id: mydata.info.hasOwnProperty("occupations_id")?mydata.info.occupations_id : '',
             province: province,
+            dataInfo: mydata,
             cityid: cityid || province,
             show_tips: mydata.hasOwnProperty("content") ? mydata.content.show_tips : "",
             name: mydata.info.hasOwnProperty("username") ? mydata.info.username : "",
@@ -1102,9 +1112,9 @@ Page({
               //   success(res) {
               //   }
               // })
-
               that.setData({
                 showModal: true,
+                showCheckFailBox: true,
                 display: "block",
                 popup: popup
               })
@@ -1353,14 +1363,27 @@ Page({
     let haveCardCloseBox = wx.getStorageSync("haveCardCloseBox");
     //弹窗类型 如果是从快速发布成功到找活名片 1 有找活名片且未置顶当天未刷新 2 正常刷新 3 找活名片置顶未成功返回 4 其他 0
     let boxStatus = this.data.boxStatus;
+    // 项目经验的是否全部审核
+    let projectCheck = data.project.some(item => item.check == '0')
+    // 审核失败弹窗是否显示状态
+    let showCheckFailBox = this.data.showCheckFailBox;
+    // 技能证书是否全部审核
+    let skillCheck = data.certificates.some(item => item.check == '0')
+    if ( check == '0' || projectCheck || skillCheck ) {
+      if (showCheckFailBox) {
+        this.setData({ showRefreshToBox: true })
+      }
+    }else{
+      this.setData({ showRefreshToBox: true })
+    }
     // 当前时间戳
     let currentTime = new Date().getTime();
-    if ( isResume && check == '2' && isEnd == '1' && isTop != '1' && !todayRefresh && boxStatus != 1) {
+    if ( isResume && check == '2' && isEnd == '1' && isTop != '1' && !todayRefresh && boxStatus != 1 &&　this.data.showRefreshToBox) {
       if (!haveCardCloseBox) {
         wx.setStorageSync("haveCardCloseBox",currentTime)
         if ( boxStatus == 4 ) {
           this.setData({ boxStatus: 0 })
-        }else{
+        }else{ 
           this.setData({ boxStatus: 2 })
           this.showBox()
         }

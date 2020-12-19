@@ -28,6 +28,9 @@
             <view class="listsboxagetwot" wx:if="{{!item.nation && !item.prof_degree}}">
               <text wx:for="{{item.tags}}" wx:key="{{index}}">{{item.label_name}}</text>
             </view>
+            <view class="listsboxagetwo" wx:if="{{item.provinces_str}}">
+              <text>期望工作地：{{item.provinces_str}}</text>
+            </view>
           </view>
           <view class="listsboxshow" wx:if="{{item.type}}">{{item.type}}</view>
         </view>

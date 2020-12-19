@@ -43,7 +43,8 @@ Page({
     deletestatus:true,
     model:{},
     checkonef:"",
-    maximg: 6
+    maximg: 6,
+    reqStatus: true
   },
   hiddenKeyBoard: function () {
     wx.hideKeyboard()
@@ -889,7 +890,7 @@ Page({
       })
       return
     }
-
+    this.setData({ reqStatus: false })
     app.appRequestAction({
       url: 'resumes/project/',
       way: 'POST',
@@ -902,9 +903,10 @@ Page({
         }else{
           app.showMyTips(res.data.errmsg);
         }
-        
+        that.setData({ reqStatus: true })
       },
       fail: function (err) {
+        that.setData({ reqStatus: true })
         app.showMyTips("保存失败");
       }
     })

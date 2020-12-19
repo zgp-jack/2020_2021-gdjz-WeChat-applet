@@ -142,7 +142,9 @@ Page({
     // 刷新成功icon
     successIcon:app.globalData.apiImgUrl + 'yc/findwork-publish-success.png',
     // 提示框状态
-    boxType: false
+    boxType: false,
+    // 没有找活面片弹窗状态 true 弹窗显示中 false 关闭弹窗或隐藏弹窗中
+    publishBoxStatus: false
   },
   getPhoneNumber:function(e){
     console.log(e)
@@ -1049,6 +1051,7 @@ Page({
   },
   //跳转找活名片
   goFinding: function () {
+    app.globalData.showdetail = true
     wx.navigateTo({
       url: '/pages/clients-looking-for-work/finding-name-card/findingnamecard',
     })
@@ -1094,6 +1097,7 @@ Page({
   },
   // 没有找活名片招工列表弹窗
   noCardBox: function () {
+    let that = this;
     wx.showModal({
       title: "温馨提示",
       content: "您还未发布找活名片，您可以发布找活名片，让老板主动来找您。",
@@ -1107,10 +1111,12 @@ Page({
           wx.navigateTo({
             url: '/pages/jsIssueResume/index',
           })
+          that.setData({ publishBoxStatus: false })
         }
         if (res.cancel) {
           let time = new Date().getTime()
           wx.setStorageSync('noCardCancelTime', time)
+          that.setData({ publishBoxStatus: false })
         }
       }
     })
@@ -1140,13 +1146,21 @@ Page({
     let NoCancelTime = wx.getStorageSync("noCardCancelTime")
     // 当前时间戳
     let currentTime = new Date().getTime();
+    // 没有找活面片弹窗状态 true 弹窗显示中 false 关闭弹窗或隐藏弹窗中
+    let publishBoxStatus = this.data.publishBoxStatus;
     if (!hasResume) {
       if (!NoCancelTime) {
-        this.noCardBox()
+        if (!publishBoxStatus) {
+          this.setData({ publishBoxStatus: true })
+          this.noCardBox()
+        }
       }else{
         let dueTime = NoCancelTime + (day * 24 * 60 * 60 * 1000 - 1)
         if (currentTime > dueTime) {
-          this.noCardBox()
+          if (!publishBoxStatus) {
+            this.setData({ publishBoxStatus: true })
+            this.noCardBox()
+          }
         }
       }
     }else{

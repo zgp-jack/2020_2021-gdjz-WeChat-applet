@@ -907,7 +907,7 @@ Page({
       telephone: introinfo.hasOwnProperty("tel") ? introinfo.tel : "",
       tele: introinfo.hasOwnProperty("tel") ? introinfo.tel : "",
       otextareavalue: this.data.editType == 'bj' || this.data.editType == 'dxg' ? introinfo.hasOwnProperty("introduce") ? introinfo.introduce : "" : '',
-      // otextareavaluel: introinfo.hasOwnProperty("introduce") ? introinfo.introduce ? introinfo.introduce.length : 0 : 0,
+      otextareavaluel: introinfo.hasOwnProperty("introduce") ? (this.data.editType == 'ws'? 0: introinfo.introduce.length) : 0,
       checkonef: introinfo.hasOwnProperty("check") ? introinfo.check : "",
       note: introinfo.hasOwnProperty("note") ? introinfo.note : "",
       workage: introinfo.hasOwnProperty("experience") && introinfo.experience != 0 ? introinfo.experience : 1,

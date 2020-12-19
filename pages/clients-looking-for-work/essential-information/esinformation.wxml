@@ -68,7 +68,7 @@
       </view>
     </view>
 
-    <view class="informationseven" wx:if="{{!introinfo.address}}">
+    <view class="informationseven" wx:if="{{editType == 'bj' || (editType == 'ws' && !introdetail.address)}}">
       <view class="informaregiononede"><text>当前所在地</text></view>
       <view class="informationseventwo">
         <view class="informaregionone" bindtap='userTapAddress' wx:if="{{regionone}}">

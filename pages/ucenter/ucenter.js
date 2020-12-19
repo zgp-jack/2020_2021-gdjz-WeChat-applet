@@ -284,6 +284,7 @@ Page({
       }else if(url === '/pages/clients-looking-for-work/finding-name-card/findingnamecard'){
         app.initResume(this,function (res){
           if(res){
+            app.globalData.showdetail = true
             wx.navigateTo({
               url: url,
             })
