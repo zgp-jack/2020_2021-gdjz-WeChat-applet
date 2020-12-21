@@ -74,7 +74,8 @@ Page({
     initIssueData:{},
     fastInfo:'',
     selectCityId:'',
-    isShowPicker:false
+    isShowPicker:false,
+    _timer:true
   },
 
   // 点击期望地区隐藏软键盘
@@ -353,27 +354,36 @@ Page({
       tokenTime,
     }
     let _this = this
-    app.appRequestAction({
-      url: 'resumes/add-fast-resume/',
-      way: 'POST',
-      params: params,
-      success: function (res) {
-        let mydata = res.data;
-        if (mydata.errcode === "ok") {
-          app.initResume(_this)
-          wx.redirectTo({
-            url: `/pages/clients-looking-for-work/finding-name-card/findingnamecard?boxStatus=1`,
-          })
-        } else {
-          wx.showModal({
-            title: '温馨提示',
-            content: mydata.errmsg,
-            showCancel: false,
-            success(res) {}
-          })
+    if(_this.data._timer){
+      _this.setData({_timer:false})
+      app.appRequestAction({
+        url: 'resumes/add-fast-resume/',
+        way: 'POST',
+        params: params,
+        success: function (res) {
+          let mydata = res.data;
+          if (mydata.errcode === "ok") {
+            app.initResume(_this)
+            wx.redirectTo({
+              url: `/pages/clients-looking-for-work/finding-name-card/findingnamecard?boxStatus=1`,
+            })
+          } else {
+            wx.showModal({
+              title: '温馨提示',
+              content: mydata.errmsg,
+              showCancel: false,
+              success(res) {}
+            })
+          }
+          _this.setData({_timer:true})
         }
-      }
-    })
+      })
+    }else{
+      wx.showToast({
+        title: '请勿重复提交！',
+        icon: 'error'
+      })
+    }
   },
   // 初始化验证码时间
   initCodeTime: function () {

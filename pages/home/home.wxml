@@ -268,10 +268,10 @@
                     <image wx:if="{{item.certificate == 1}}" src="{{authentication}}"></image>
 
                   </view>
-                  <view class="listsboxagetwo" wx:if="{{item.nation || item.prof_degree || item.experience}}">
+                  <view class="listsboxagetwo" wx:if="{{item.nation || item.experience_num != '0'}}">
                     <text class="listsboxnation" wx:if="{{item.nation}}">{{item.nation}}</text>
-                    <text wx:if="{{item.prof_degree}}">{{item.prof_degree}}</text>
-                    <text wx:if="{{item.experience}}">{{item.experience}}</text>
+                    <!-- <text wx:if="{{item.prof_degree}}">{{item.prof_degree}}</text> -->
+                    <text wx:if="{{item.experience_num != '0'}}">工龄:{{item.experience_num}}年</text>
                   </view>
                   <view class="listsboxagetwot" wx:if="{{!item.nation && !item.prof_degree && item.label_name}}">
                     <text wx:for="{{item.tags}}" wx:key="index">{{item.label_name}}</text>

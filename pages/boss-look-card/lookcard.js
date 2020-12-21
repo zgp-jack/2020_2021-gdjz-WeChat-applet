@@ -522,7 +522,7 @@ Page({
             intro: false,
             introne: true,
             introduce: mydata.info.hasOwnProperty("introduce") ? mydata.info.introduce : "",
-            workingyears: mydata.info.hasOwnProperty("experience") ? mydata.info.experience : "",
+            workingyears: mydata.info.hasOwnProperty("experience_num") ? mydata.info.experience_num : "",
             staffcomposition: mydata.info.hasOwnProperty("type_str") ? mydata.info.type_str : "",
             cityself: mydata.info.hasOwnProperty("hometown") ? mydata.info.hometown : "",
             procity: mydata.info.hasOwnProperty("prof_degree_str") ? mydata.info.prof_degree_str : "未填写",

@@ -757,6 +757,7 @@ Page({
       //所在地区
       if(this.data.introinfo.experience == 0){
         params.address = this.data.regionone
+        params.adcode = this.data.oadcode
       }
       //人员构成
       if(!this.data.introdetail.type) {
