@@ -20,18 +20,20 @@ Component({
 			console.log("defaultData",this.data.defaultData)
 			this.setData({
 				selectArea: JSON.parse(JSON.stringify(this.data.defaultData)),
-				showPicker: true,
 				scrollPId:'',
 				scrollCId:'',
 				provincei:0
 			})
+				this.setData({
+					showPicker: true,
+				})
 			this.showCityData()
 			this.triggerEvent('cityShow',{params:true})
 		},
 		close: function () {
-			this.setData({
-				showPicker: false
-			})
+				this.setData({
+					showPicker: false
+				})
 			this.triggerEvent('cityClose',{
 				params:false
 			})
@@ -248,6 +250,9 @@ Component({
 			})
 			this.setData({
 				showPicker: false
+			})
+			this.triggerEvent('cityClose',{
+				params:false
 			})
 		},
 	},

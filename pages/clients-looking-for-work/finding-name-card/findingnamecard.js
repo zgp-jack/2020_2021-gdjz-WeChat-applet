@@ -312,6 +312,7 @@ Page({
       return
     //如果有找活名片信息跳转去招工置顶界面
     } else {
+      app.globalData.showdetail = false
       wx.navigateTo({
         url: "/pages/clients-looking-for-work/workingtop/workingtop",
       })
@@ -843,7 +844,7 @@ Page({
             nation: mydata.info.hasOwnProperty("nation") ? mydata.info.nation : "",
             occupations: mydata.info.hasOwnProperty("miniInfoOccupations") ? mydata.info.miniInfoOccupations : "",
             telephone: mydata.info.hasOwnProperty("tel") ? mydata.info.tel : "",
-            city: mydata.info.hasOwnProperty("address") ? mydata.info.address : "",
+            city: mydata.info.hasOwnProperty("current_area") ? mydata.info.current_area : "",
             provinces_txt:mydata.info.hasOwnProperty("provinces_txt") ? mydata.info.provinces_txt : "",
             intro: false,
             introne: true,

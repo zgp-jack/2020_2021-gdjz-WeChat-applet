@@ -430,7 +430,8 @@ Page({
 
   userSureWorktype() {
     this.setData({
-      showWorkType: false
+      showWorkType: false,
+      isShowPicker:false
     })
     let all = ""
     for (let i = 0; i < this.data.complexwork.length; i++) {
@@ -495,7 +496,8 @@ Page({
 
   typeworktwo() {
     this.setData({
-      showWorkType: true
+      showWorkType: true,
+      isShowPicker:true
     })
   },
   textareavalue(e) {
@@ -884,7 +886,7 @@ Page({
       introduce:introinfo.hasOwnProperty("introduce") ? introinfo.introduce : "",
       lat: latitude,
       lng: longitude,
-      address: introinfo.hasOwnProperty("address") ? introinfo.address : "",
+      address: introinfo.hasOwnProperty("current_area") ? introinfo.current_area : "",
       adcode:"",
     }
     this.setData({
@@ -902,7 +904,7 @@ Page({
       birthday: introinfo.hasOwnProperty("birthday") ? introinfo.birthday : "",
       complexwork: introinfo.hasOwnProperty("occupations") ? introinfo.occupations : [],
       complexworkid: introinfo.hasOwnProperty("occupations_id") ? introinfo.occupations_id == null ? [] : introinfo.occupations_id.split(",") : [],
-      regionone: introinfo.hasOwnProperty("address") ? introinfo.address : "",
+      regionone: introinfo.hasOwnProperty("adcurrent_areadress") ? introinfo.current_area : "",
       provinceid: introinfo.hasOwnProperty("province") ? introinfo.province : "",
       // wardenryid: introinfo.hasOwnProperty("city") ? introinfo.city : "",
       telephone: introinfo.hasOwnProperty("tel") ? introinfo.tel : "",
