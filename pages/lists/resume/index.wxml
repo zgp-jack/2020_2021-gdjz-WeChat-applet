@@ -47,10 +47,10 @@
         <view>
           <view class="listsboxlocalone">
             <view>
-              <image src="{{biaoqian}}"></image>
+              <image src="{{biaoqian}}" wx:if="{{item.current_area_str}}"></image>
             </view>
-            <view class="listsboxadree" wx:if="{{item.show_address}}">{{item.show_address}}</view>
-            <view class="listsboxadreeq" wx:if="{{item.distance}}">{{item.distance}}</view>
+            <view class="listsboxadree" wx:if="{{item.current_area_str}}">{{item.current_area_str}}</view>
+            <view class="listsboxadreeq" wx:if="{{item.distance && item.current_area_str}}">{{item.distance}}</view>
           </view>
         </view>
         <view class="listsboxlocaltwo">

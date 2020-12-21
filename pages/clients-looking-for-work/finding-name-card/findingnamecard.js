@@ -844,7 +844,7 @@ Page({
             nation: mydata.info.hasOwnProperty("nation") ? mydata.info.nation : "",
             occupations: mydata.info.hasOwnProperty("miniInfoOccupations") ? mydata.info.miniInfoOccupations : "",
             telephone: mydata.info.hasOwnProperty("tel") ? mydata.info.tel : "",
-            city: mydata.info.hasOwnProperty("current_area") ? mydata.info.current_area : "",
+            city: mydata.info.hasOwnProperty("current_area_str") ? mydata.info.current_area_str : "",
             provinces_txt:mydata.info.hasOwnProperty("provinces_txt") ? mydata.info.provinces_txt : "",
             intro: false,
             introne: true,

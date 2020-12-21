@@ -518,7 +518,7 @@ Page({
             uuid: mydata.info.hasOwnProperty('uuid') ? mydata.info.uuid : '',
             telephone: mydata.info.hasOwnProperty("tel") ? mydata.info.tel : "",
             sharetelephone: mydata.info.hasOwnProperty("tel") ? mydata.info.tel : "",
-            city: mydata.info.hasOwnProperty("current_area") ? mydata.info.current_area : "",
+            city: mydata.info.hasOwnProperty("current_area_str") ? mydata.info.current_area_str : "",
             intro: false,
             introne: true,
             introduce: mydata.info.hasOwnProperty("introduce") ? mydata.info.introduce : "",

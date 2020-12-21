@@ -85,11 +85,11 @@
         <view class="listsboxself" wx:if="{{!item.introduce}}"></view>
         <view class="listsboxlocal">
           <view class="listsboxlocalone">
-            <view>
+            <view wx:if="{{item.current_area_str}}">
                 <image src="{{biaoqian}}"></image>
               </view>
-            <view wx:if="{{item.show_address}}" class="show_address_all"> 
-              <text class="show_address">{{item.show_address}}</text>
+            <view wx:if="{{item.current_area_str}}" class="show_address_all"> 
+              <text class="show_address">{{item.current_area_str}}</text>
               <text wx:if="{{item.distance}}" class="distance">{{item.distance}}</text>
             </view>
           </view>

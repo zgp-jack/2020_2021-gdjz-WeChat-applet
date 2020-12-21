@@ -886,7 +886,7 @@ Page({
       introduce:introinfo.hasOwnProperty("introduce") ? introinfo.introduce : "",
       lat: latitude,
       lng: longitude,
-      address: introinfo.hasOwnProperty("current_area") ? introinfo.current_area : "",
+      address: introinfo.hasOwnProperty("current_area_str") ? introinfo.current_area_str : "",
       adcode:"",
     }
     this.setData({
@@ -904,7 +904,7 @@ Page({
       birthday: introinfo.hasOwnProperty("birthday") ? introinfo.birthday : "",
       complexwork: introinfo.hasOwnProperty("occupations") ? introinfo.occupations : [],
       complexworkid: introinfo.hasOwnProperty("occupations_id") ? introinfo.occupations_id == null ? [] : introinfo.occupations_id.split(",") : [],
-      regionone: introinfo.hasOwnProperty("adcurrent_areadress") ? introinfo.current_area : "",
+      regionone: introinfo.hasOwnProperty("current_area_str") ? introinfo.current_area_str : "",
       provinceid: introinfo.hasOwnProperty("province") ? introinfo.province : "",
       // wardenryid: introinfo.hasOwnProperty("city") ? introinfo.city : "",
       telephone: introinfo.hasOwnProperty("tel") ? introinfo.tel : "",
