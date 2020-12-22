@@ -85,7 +85,8 @@ Page({
     indexperson:0,
     selectAllData:[],
     isIos:false,
-    isShowPicker:false
+    isShowPicker:false,
+    current_area:''
   },
   // 点击隐藏键盘
   hiddenKeyBoard: function () {
@@ -721,11 +722,12 @@ Page({
       lat: this.data.latitude,
       lng: this.data.longitude,
       address: this.data.regionone,
-      adcode: this.data.oadcode,
+      current_area_adcode: this.data.oadcode,
       provinces: String(this.data.selectCityId),
       experience: this.data.workage,
       type: String(this.data.constituttion),
-      number_people: this.data.teamsnumber
+      number_people: this.data.teamsnumber,
+      current_area:this.data.oadcode ? '' : this.data.current_area
     })
     if (JSON.stringify(information) == JSON.stringify(this.data.model) && this.data.checkonef == '0'){
       wx.showModal({
@@ -757,7 +759,7 @@ Page({
       //所在地区
       if(this.data.introinfo.experience == 0){
         params.address = this.data.regionone
-        params.adcode = this.data.oadcode
+        params.current_area_adcode = this.data.oadcode
       }
       //人员构成
       if(!this.data.introdetail.type) {
@@ -905,7 +907,7 @@ Page({
       birthday: introinfo.hasOwnProperty("birthday") ? introinfo.birthday : "",
       complexwork: introinfo.hasOwnProperty("occupations") ? introinfo.occupations : [],
       complexworkid: introinfo.hasOwnProperty("occupations_id") ? introinfo.occupations_id == null ? [] : introinfo.occupations_id.split(",") : [],
-      regionone: introinfo.hasOwnProperty("current_area_str") ? introinfo.current_area_str : "",
+      regionone: introinfo.hasOwnProperty("current_address") ? introinfo.current_address : "",
       provinceid: introinfo.hasOwnProperty("province") ? introinfo.province : "",
       // wardenryid: introinfo.hasOwnProperty("city") ? introinfo.city : "",
       telephone: introinfo.hasOwnProperty("tel") ? introinfo.tel : "",
@@ -918,7 +920,8 @@ Page({
       selectCityId: introinfo.provinces_id ? introinfo.provinces_id:'',
       indexperson: Number(introinfo.type) ? introinfo.type - 1 : 0,
       constituttion: introinfo.type ? this.data.compositionarrayone[introinfo.type == 0?0:introinfo.type -1].id : this.data.compositionarrayone[0].id + 1,
-      teamsnumber: Number(introinfo.number_people) ? introinfo.number_people: introinfo.type ? this.data.compositionarrayone[introinfo.type == 0?0:introinfo.type -1].id : this.data.compositionarrayone[0].id + 1
+      teamsnumber: Number(introinfo.number_people) ? introinfo.number_people: introinfo.type ? this.data.compositionarrayone[introinfo.type == 0?0:introinfo.type -1].id : this.data.compositionarrayone[0].id + 1,
+      current_area: introinfo.hasOwnProperty("current_area") ? introinfo.current_area : ''
     })
     if (introinfo.gender != "") {
       this.setData({

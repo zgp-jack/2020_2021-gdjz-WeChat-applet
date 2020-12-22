@@ -215,9 +215,10 @@ Page({
       success(res) {
         let mydata = res.data;
         if (mydata.errcode == "ok") {
-          that.getdetail()
+          // that.getdetail()
           that.setData({
-            top_status_one: mydata.data.top_data.top_status
+            top_status_one: mydata.data.top_data.top_status,
+            "resume_top.is_top": mydata.data.top_data.is_top
           })
           wx.showModal({
             title: '温馨提示',

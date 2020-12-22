@@ -533,7 +533,7 @@ Page({
             collect: mydata.operation.hasOwnProperty("is_collect") ? mydata.operation.is_collect : "",
             status: mydata.operation.hasOwnProperty("status") ? mydata.operation.status : "",
             is_read: mydata.info.hasOwnProperty("is_read") ? mydata.info.is_read : "",
-            distance: mydata.info.hasOwnProperty("distance") ? mydata.info.distance == "" ? "" : mydata.info.distance : "",
+            distance: mydata.info.hasOwnProperty("new_distance") ? mydata.info.new_distance == "" ? "" : mydata.info.new_distance : "",
             location: mydata.info.hasOwnProperty("location") ? mydata.info.location : "",
             is_end: mydata.info.hasOwnProperty("is_end") ? mydata.info.is_end : "",
             examine: false,

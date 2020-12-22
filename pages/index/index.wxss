@@ -348,6 +348,12 @@ page{
     width: 140rpx;
     height: 140rpx;
 }
+.rechargeicon {
+    bottom: 240px;
+    width: 165rpx;
+    height: 165rpx;
+    right: -12rpx;
+}
 
 
 .jumpjgjz{position: fixed;background-color: #0099ff;color: white;line-height: 75rpx;padding: 0 35rpx;border-radius: 20px;font-size: 28rpx;right: 10rpx;top: 500rpx;z-index: 999;}

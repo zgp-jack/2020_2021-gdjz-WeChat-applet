@@ -144,7 +144,10 @@ Page({
     // 提示框状态
     boxType: false,
     // 没有找活面片弹窗状态 true 弹窗显示中 false 关闭弹窗或隐藏弹窗中
-    publishBoxStatus: false
+    publishBoxStatus: false,
+    // 充值浮动按钮
+    rechargeicon:app.globalData.apiImgUrl+'ws/index-recharge-icon.png',
+    showRecharge:false
   },
   getPhoneNumber:function(e){
     console.log(e)
@@ -1282,6 +1285,7 @@ Page({
     this.initFooterData();
     this.checkIsInvite(options);
     this.initNeedData()
+    this.initGetIntegralList();
   },
   /**
    * 生命周期函数--监听页面初次渲染完成
@@ -1318,6 +1322,16 @@ Page({
   onPageScroll: function (e) {
     let top = e.scrollTop;
     this.setData({ showReturnTopImg: (top > 960) ? true : false })
+  },
+  initGetIntegralList: function () {
+    let _this = this;
+    app.initSystemInfo(function (res) {
+      if (res && res.platform != "ios") {
+        _this.setData({
+          showRecharge: true
+        })
+      }
+    })
   },
 
   /**

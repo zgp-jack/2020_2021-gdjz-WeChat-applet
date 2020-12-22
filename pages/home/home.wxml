@@ -306,8 +306,8 @@
                   <view class="listsboxadree" wx:if="{{item.current_area_str}}">
                     {{item.current_area_str}}
                   </view>
-                  <view class="listsboxadreeq" wx:if="{{item.distance && item.current_area_str}}">
-                    {{item.distance}}
+                  <view class="listsboxadreeq" wx:if="{{item.new_distance && item.current_area_str}}">
+                    {{item.new_distance}}
                   </view>
                 </view>
               </view>

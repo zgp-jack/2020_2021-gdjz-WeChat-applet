@@ -90,7 +90,7 @@
               </view>
             <view wx:if="{{item.current_area_str}}" class="show_address_all"> 
               <text class="show_address">{{item.current_area_str}}</text>
-              <text wx:if="{{item.distance}}" class="distance">{{item.distance}}</text>
+              <text wx:if="{{item.new_distance}}" class="distance">{{item.new_distance}}</text>
             </view>
           </view>
           <view class="listsboxlocaltwo">

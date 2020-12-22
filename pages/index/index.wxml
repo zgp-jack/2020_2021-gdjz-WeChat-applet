@@ -176,7 +176,6 @@
           
         </view>
     </view>
-
 </view>
 
 
@@ -184,6 +183,10 @@
 <!-- <view class='userauthbox flex-row'  wx:if="{{ !userInfo }}">
     <button  open-type="getUserInfo"  bindgetuserinfo='bindGetUserInfo' style='height:{{ userAuthBtn }}px;background:url({{ userAuthImg }}) no-repeat;background-size:100% 100%;'></button>
 </view> -->
+<!-- 充值 -->
+<view class='fixed-ad rechargeicon' bindtap="valiUserUrl" wx:if="{{showRecharge}}" data-url="/pages/recharge/recharge">
+    <image src='{{ rechargeicon }}'></image>
+</view>
 
 <view class='fixed-ad' wx:if="{{ showturntable }}"  bindtap='userTapTurntable' >
     <image src='{{ turntableimg }}'></image>
