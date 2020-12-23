@@ -86,7 +86,8 @@ Page({
     selectAllData:[],
     isIos:false,
     isShowPicker:false,
-    current_area:''
+    current_area:'',
+    is_introduces:'0',//是否完善过
   },
   // 点击隐藏键盘
   hiddenKeyBoard: function () {
@@ -725,10 +726,13 @@ Page({
       current_area_adcode: this.data.oadcode,
       provinces: String(this.data.selectCityId),
       experience: this.data.workage,
-      type: String(this.data.constituttion),
+      type: this.data.constituttion,
       number_people: this.data.teamsnumber,
       current_area:this.data.oadcode ? '' : this.data.current_area
     })
+    // console.log(JSON.stringify(information))
+    // console.log(JSON.stringify(this.data.model))
+    // debugger
     if (JSON.stringify(information) == JSON.stringify(this.data.model) && this.data.checkonef == '0'){
       wx.showModal({
         title: '温馨提示',
@@ -753,9 +757,9 @@ Page({
         params.occupations = worktype
       }
       //工龄
-      if(this.data.introinfo.experience == 0){
+      // if(this.data.introinfo.experience == 0){
         params.experience = this.data.workage
-      }
+      // }
       //所在地区
       if(this.data.introinfo.experience == 0){
         params.address = this.data.regionone
@@ -831,6 +835,7 @@ Page({
         }
       })
     }
+
   },
   subscribeToNews: function(res) {
     let _this = this;
@@ -880,17 +885,22 @@ Page({
       code:"",
       username: introinfo.hasOwnProperty("username") ? introinfo.username : "",
       tel: introinfo.hasOwnProperty("tel") ? introinfo.tel : "",
-      gender: introinfo.hasOwnProperty("gender") ? introinfo.gender : "", 
+      gender:introinfo.hasOwnProperty("gender") ? introinfo.gender : "",
       nation: nationCons,
       birthday: introinfo.hasOwnProperty("birthday") ? introinfo.birthday : "",
       occupations: worktype,
       province: introinfo.hasOwnProperty("province") ? introinfo.province : "",
-      city:introinfo.hasOwnProperty("city") ? introinfo.city : "",
+      city:"",
       introduce:introinfo.hasOwnProperty("introduce") ? introinfo.introduce : "",
       lat: latitude,
       lng: longitude,
-      address: introinfo.hasOwnProperty("current_area_str") ? introinfo.current_area_str : "",
-      adcode:"",
+      address: introinfo.hasOwnProperty("current_address") ? introinfo.current_address : "",
+      current_area_adcode: "",
+      provinces: introinfo.provinces_id ? introinfo.provinces_id:'',
+      experience: introinfo.hasOwnProperty("experience") && introinfo.experience != 0 ? introinfo.experience : 1,
+      type: introinfo.type ? this.data.compositionarrayone[introinfo.type == 0?0:introinfo.type -1].id : this.data.compositionarrayone[0].id + 1,
+      number_people: Number(introinfo.number_people) ? introinfo.number_people: introinfo.type ? this.data.compositionarrayone[introinfo.type == 0?0:introinfo.type -1].id : this.data.compositionarrayone[0].id + 1,
+      current_area: introinfo.hasOwnProperty("current_area") ? introinfo.current_area : '',
     }
     this.setData({
       model: getintrodetail
@@ -912,8 +922,8 @@ Page({
       // wardenryid: introinfo.hasOwnProperty("city") ? introinfo.city : "",
       telephone: introinfo.hasOwnProperty("tel") ? introinfo.tel : "",
       tele: introinfo.hasOwnProperty("tel") ? introinfo.tel : "",
-      otextareavalue: this.data.editType == 'bj' || this.data.editType == 'dxg' ? introinfo.hasOwnProperty("introduce") ? introinfo.introduce : "" : '',
-      otextareavaluel: introinfo.hasOwnProperty("introduce") ? (this.data.editType == 'ws'? 0: introinfo.introduce.length) : 0,
+      otextareavalue: (this.data.editType == 'bj' || this.data.editType == 'dxg') && introinfo.is_introduces!='0' ? introinfo.hasOwnProperty("introduce") ? introinfo.introduce : "" : '',
+      otextareavaluel: introinfo.hasOwnProperty("introduce") ? (this.data.editType == 'ws' || introinfo.is_introduces == '0' ? 0: introinfo.introduce.length) : 0,
       checkonef: introinfo.hasOwnProperty("check") ? introinfo.check : "",
       note: introinfo.hasOwnProperty("note") ? introinfo.note : "",
       workage: introinfo.hasOwnProperty("experience") && introinfo.experience != 0 ? introinfo.experience : 1,
@@ -921,7 +931,8 @@ Page({
       indexperson: Number(introinfo.type) ? introinfo.type - 1 : 0,
       constituttion: introinfo.type ? this.data.compositionarrayone[introinfo.type == 0?0:introinfo.type -1].id : this.data.compositionarrayone[0].id + 1,
       teamsnumber: Number(introinfo.number_people) ? introinfo.number_people: introinfo.type ? this.data.compositionarrayone[introinfo.type == 0?0:introinfo.type -1].id : this.data.compositionarrayone[0].id + 1,
-      current_area: introinfo.hasOwnProperty("current_area") ? introinfo.current_area : ''
+      current_area: introinfo.hasOwnProperty("current_area") ? introinfo.current_area : '',
+      is_introduces: introinfo.is_introduces
     })
     if (introinfo.gender != "") {
       this.setData({

@@ -282,7 +282,7 @@ Page({
             nation: mydata.info.hasOwnProperty("nation") ? mydata.info.nation : "",
             occupations: mydata.info.hasOwnProperty("miniInfoOccupations") ? mydata.info.miniInfoOccupations : "",
             telephone: mydata.info.hasOwnProperty("tel") ? mydata.info.tel : "",
-            city: mydata.info.hasOwnProperty("address") ? mydata.info.address : "",
+            city: mydata.info.hasOwnProperty("current_area_str") ? mydata.info.current_area_str : "",
             intro: false,
             introne: true,
             introduce: mydata.info.hasOwnProperty("introduce") ? mydata.info.introduce: "",
