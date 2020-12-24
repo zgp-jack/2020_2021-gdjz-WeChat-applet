@@ -1328,7 +1328,7 @@ Page({
     app.initSystemInfo(function (res) {
       if (res && res.platform != "ios") {
         let u =wx.getStorageSync('userInfo')
-        //判断id是奇数还是偶数
+        //未登录不展示 ios不展示 ID奇数不展示
         if(u && (u.userId%2) == 0) {
           _this.setData({
             showRecharge: true
