@@ -129,10 +129,17 @@ Page({
     this.setData({
       detail: e.detail.value
     })
-
-    this.setData({
-      detailength: e.detail.value.length
-    })
+    if(e.detail.value.length > 500){
+      let str = e.detail.value.substring(0,500)
+      this.setData({
+        detail: str,
+        detailength: 500
+      })
+    }else{
+      this.setData({
+        detailength: e.detail.value.length
+      })
+    }
   },
   bindstartDate(e) {
     this.setData({

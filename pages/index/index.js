@@ -1103,7 +1103,7 @@ Page({
     let that = this;
     wx.showModal({
       title: "温馨提示",
-      content: "您还未发布找活名片，您可以发布找活名片，让老板主动来找您。",
+      content: "您未发布找活名片！发布找活名片，让老板主动来找您。",
       confirmText: "去发布",
       confirmColor: "#0097FF",
       cancelColor: "#797979",
@@ -1329,7 +1329,7 @@ Page({
       if (res && res.platform != "ios") {
         let u =wx.getStorageSync('userInfo')
         //未登录不展示 ios不展示 ID奇数不展示
-        if(u && (u.userId%2) == 0) {
+        if(u && (u.userId%2) != 0) {
           _this.setData({
             showRecharge: true
           })

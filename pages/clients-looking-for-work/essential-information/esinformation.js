@@ -506,10 +506,17 @@ Page({
     this.setData({
       otextareavalue: e.detail.value
     })
-    this.setData({
-      otextareavaluel: e.detail.value.length
-    })
-
+    if(e.detail.value.length > 500){
+      let str = e.detail.value.substring(0,500)
+      this.setData({
+        otextareavalue: str,
+        otextareavaluel: 500
+      })
+    }else{
+      this.setData({
+        otextareavaluel: e.detail.value.length
+      })
+    }
   },
 
   getarea() {
