@@ -583,7 +583,7 @@ Page({
       }
     }
     // 姓名
-    if ((this.data.editType == 'bj' || this.data.introinfo.authentication != 2) && (vertifyNum.isNull(this.data.name) || this.data.name.length < 2 || this.data.name.length > 5) || !vertifyNum.isChinese(this.data.name)) {
+    if ((this.data.editType == 'bj' || this.data.introinfo.authentication != "2") && (vertifyNum.isNull(this.data.name) || this.data.name.length < 2 || this.data.name.length > 5 || !vertifyNum.isChinese(this.data.name))) {
       wx.showModal({
         title: '温馨提示',
         content: '请输入2~5字纯中文姓名!',
