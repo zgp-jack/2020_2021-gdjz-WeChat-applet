@@ -1327,9 +1327,17 @@ Page({
     let _this = this;
     app.initSystemInfo(function (res) {
       if (res && res.platform != "ios") {
-        _this.setData({
-          showRecharge: true
-        })
+        let u =wx.getStorageSync('userInfo')
+        //判断id是奇数还是偶数
+        if(u && (u.userId%2) == 0) {
+          _this.setData({
+            showRecharge: true
+          })
+        }else {
+          _this.setData({
+            showRecharge: false
+          })
+        }
       }
     })
   },

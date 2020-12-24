@@ -145,7 +145,7 @@
             </view>
             <view class="listsboxshow" wx:if="{{item.type}}">{{item.type}}</view>
           </view>
-            <text class="listsboxstyru" catchtap="jumptop" wx:if="{{item.resume_top == 1}}">我要置顶</text>
+            <text class="listsboxstyru" catchtap="valiUserCard" wx:if="{{item.resume_top == 1}}">我要置顶</text>
             <image class="listsboxoimg" src="{{toptown}}" wx:if="{{item.resume_top == 1}}"></image>
         </view>
         <view class="listsboxlable">
@@ -194,7 +194,7 @@
       
       <block wx:if="{{isNullStatus == 1}}">
         <text class="btn-tips-text">还可以发布招工，让工人主动来找我～</text>
-        <text bindtap='valiUserCard' class="text-btn">去发布</text>
+        <text bindtap='toIssueRecruit' class="text-btn">去发布</text>
       </block>
     </view>
   </view>

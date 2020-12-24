@@ -700,7 +700,7 @@ Page({
     if (vertifyNum.isNull(this.data.otextareavalue) || !vertifyNum.isChinese(this.data.otextareavalue)) {
       wx.showModal({
         title: '温馨提示',
-        content: '请填写真实自我介绍，5-500字，必须含有汉字',
+        content: '请填写5~500字的自我介绍，内容必须包含汉字',
         showCancel: false,
         success(res) { }
       })
