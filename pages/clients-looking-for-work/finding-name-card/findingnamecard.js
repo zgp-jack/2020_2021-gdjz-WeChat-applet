@@ -1524,6 +1524,7 @@ Page({
     let boxStatus = this.data.boxStatus
     if (boxStatus == 1) {
       this.setData({ boxStatus: 0 })
+      // 发布成功弹窗点击关闭按钮也要设置情况为2的弹窗时间缓存
       wx.setStorageSync("haveCardCloseBox",currentTime)
     }
     if (boxStatus == 2) {
@@ -1542,6 +1543,8 @@ Page({
       this.setData({ boxStatus: 0 })
     }
     if (boxStatus == 2) {
+      let currentTime = new Date().getTime();
+      wx.setStorageSync("haveCardCloseBox",currentTime)
       this.refreshCard()
       this.setData({ boxStatus: 0 })
     }

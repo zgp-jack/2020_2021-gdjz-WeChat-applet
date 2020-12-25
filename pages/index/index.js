@@ -1143,8 +1143,8 @@ Page({
   },
   // 没有找活名片招工列表弹窗 与 有找活名片，没有刷新没有置顶弹窗
   showPromtBox: function (day, hasResume) {
-    // 没有找活名片点击取消的时间缓存
-    let haveCancelTime = wx.getStorageSync("haveCardCancelTime")
+    // 有找活名片点击取消的时间缓存
+    let haveCardCloseBox = wx.getStorageSync("haveCardCloseBox")
     // 没有找活名片点击取消的时间缓存
     let NoCancelTime = wx.getStorageSync("noCardCancelTime")
     // 当前时间戳
@@ -1167,12 +1167,14 @@ Page({
         }
       }
     }else{
-      if (!haveCancelTime) {
+      if (!haveCardCloseBox) {
+        wx.setStorageSync("haveCardCloseBox",currentTime)
         this.haveCardBox()
       }else{
         // 最新到期时间
-        let dueTime = haveCancelTime + (day * 24 * 60 * 60 * 1000 - 1)
+        let dueTime = haveCardCloseBox + (day * 24 * 60 * 60 * 1000 - 1)
         if (currentTime > dueTime) {
+          wx.setStorageSync("haveCardCloseBox",currentTime)
           this.haveCardBox()
         }
       }
@@ -1232,6 +1234,9 @@ Page({
     }else{
       app.refreshReq(2, this)
     }
+    // 点击关闭按钮的时间戳
+    let currentTime = new Date().getTime()
+    wx.setStorageSync("haveCardCloseBox",currentTime)
   },
   cancel: function () {
     // 弹窗类型，refreshSuccess 非首次刷新成功弹窗 
