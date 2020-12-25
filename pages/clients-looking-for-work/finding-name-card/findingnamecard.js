@@ -1568,8 +1568,8 @@ Page({
           // 当前时间戳
           let currentTime = myDate.getTime();
           // 到期时间戳（23:59:59）
-          // let dueDate = (new Date(new Date().toLocaleDateString())).getTime() +  (24 * 60 * 60 * 1000 - 1);
-          let dueDate = currentTime +  (1 * 60 * 1000 - 1);
+          let dueDate = (new Date(new Date().toLocaleDateString())).getTime() +  (24 * 60 * 60 * 1000 - 1);
+          // let dueDate = currentTime +  (1 * 60 * 1000 - 1);
           // 当天没有刷新过且未置顶返回找活名片缓存（是否当天第一次返回，到期时间）
           let topBackRefresh = {currentTime:currentTime,dueDate:dueDate};
           wx.setStorageSync("topBackRefresh",topBackRefresh)
@@ -1610,8 +1610,8 @@ Page({
               // 当前时间戳
               let currentTime = myDate.getTime();
               // 到期时间戳（23:59:59）
-              // let dueDate = (new Date(new Date().toLocaleDateString())).getTime() +  (24 * 60 * 60 * 1000 - 1);
-              let dueDate = currentTime +  (1 * 60 * 1000 - 1);
+              let dueDate = (new Date(new Date().toLocaleDateString())).getTime() +  (24 * 60 * 60 * 1000 - 1);
+              // let dueDate = currentTime +  (1 * 60 * 1000 - 1);
               // 当天没有刷新过且未置顶返回找活名片缓存（是否当天第一次返回，到期时间）
               let topBackRefresh = {currentTime:currentTime,dueDate:dueDate};
               wx.setStorageSync("topBackRefresh",topBackRefresh)
@@ -1622,8 +1622,8 @@ Page({
                 // 当前时间戳
                 let currentTime = myDate.getTime();
                 // 到期时间戳（23:59:59）
-                // let dueDate = (new Date(new Date().toLocaleDateString())).getTime() +  (24 * 60 * 60 * 1000 - 1);
-                let dueDate = currentTime +  (1 * 60 * 1000 - 1);
+                let dueDate = (new Date(new Date().toLocaleDateString())).getTime() +  (24 * 60 * 60 * 1000 - 1);
+                // let dueDate = currentTime +  (1 * 60 * 1000 - 1);
                 // 当天没有刷新过且未置顶返回找活名片缓存（是否当天第一次返回，到期时间）
                 let topBackRefresh = {currentTime:currentTime,dueDate:dueDate};
                 wx.setStorageSync("topBackRefresh",topBackRefresh)
