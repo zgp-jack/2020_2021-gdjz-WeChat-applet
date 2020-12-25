@@ -677,8 +677,8 @@ Page({
       return
     }
     let that = this;
+    app.globalData.previewshou = false;
     app.userUploadImg(function (img, url) {
-
       wx.hideLoading()
       that.data.imgArrs = url.httpurl
       that.data.importimg = url.url

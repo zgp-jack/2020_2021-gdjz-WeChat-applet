@@ -47,7 +47,7 @@
         <view class="lineone">
           <view class="linezo">
             <!-- 工龄 -->
-            <view class="cardotext" wx:if="{{experience_str != ''}}">
+            <view class="cardotext" wx:if="{{experience_str != '0'}}">
               <text class="oworkotext">工龄</text>
               <text class="workotextone" wx:if="{{experience_str != '0'}}">{{experience_str}}年</text>
             </view>
