@@ -300,7 +300,7 @@ Page({
             note: mydata.info.hasOwnProperty("note") ? mydata.info.note : "",
             fail_certificate: mydata.hasOwnProperty("fail_certificate") ? mydata.fail_certificate : "",
             fail_project: mydata.hasOwnProperty("fail_project") ? mydata.fail_project : "",
-            experience_str: mydata.introduces.hasOwnProperty("experience_str") ? mydata.introduces.experience_str : "",
+            experience_str: mydata.introduces.hasOwnProperty("experience") ? mydata.introduces.experience : "",
             certificate_show: mydata.info.hasOwnProperty("certificate_show") ? mydata.info.certificate_show : "",
             authenticationimg: mydata.info.hasOwnProperty("authentication") ? mydata.info.authentication : "",
             provinces_txt: mydata.info.hasOwnProperty("provinces_txt") ?  mydata.info.provinces_txt : ""
