@@ -916,7 +916,6 @@ Page({
   getintrodetail() {
      
     let introinfo = wx.getStorageSync("introinfo");
-
     this.setData({
       name: introinfo.username !== '先生' ? introinfo.username : "",
       indexsex: introinfo.hasOwnProperty("gender") ? introinfo.gender - 1 : "",
@@ -929,7 +928,7 @@ Page({
       // wardenryid: introinfo.hasOwnProperty("city") ? introinfo.city : "",
       telephone: introinfo.hasOwnProperty("tel") ? introinfo.tel : "",
       tele: introinfo.hasOwnProperty("tel") ? introinfo.tel : "",
-      otextareavalue: (this.data.editType == 'bj' || this.data.editType == 'dxg') && introinfo.is_introduces!='0' ? introinfo.hasOwnProperty("introduce") ? introinfo.introduce : "" : '',
+      otextareavalue: (this.data.editType == 'bj' || this.data.editType == 'dxg') && introinfo.is_introduces !='0' ? introinfo.hasOwnProperty("introduce") ? introinfo.introduce : "" : '',
       otextareavaluel: introinfo.hasOwnProperty("introduce") ? (this.data.editType == 'ws' || introinfo.is_introduces == '0' ? 0: introinfo.introduce.length) : 0,
       checkonef: introinfo.hasOwnProperty("check") ? introinfo.check : "",
       note: introinfo.hasOwnProperty("note") ? introinfo.note : "",
