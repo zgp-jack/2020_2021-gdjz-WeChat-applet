@@ -52,17 +52,27 @@ Component({
 			// 设置子城市数据
 			this.setData({ cityData:childrenCity, areaData, provincei:index })
 		},
-		showCityData: async function() {
+		showCityData:function() {
 			// 获取缓存的城市数据
 			let newAreaData = wx.getStorageSync('newAreaData');
-			let _areaData = []
 			if (newAreaData) {
-				_areaData = JSON.parse(JSON.stringify(newAreaData))
+				let _areaData = JSON.parse(JSON.stringify(newAreaData))
+				this.initCity(_areaData)
 			}else{
-				let newAreaDate = await this.getAreaData()
-				wx.setStorageSync("newAreaData", newAreaDate)
-				_areaData = JSON.parse(JSON.stringify(newAreaData))
+				this.getAreaData().then((res)=>{
+					wx.setStorageSync("newAreaData", res)
+					let _areaData = JSON.parse(JSON.stringify(res))
+					this.initCity(_areaData)
+				}).catch((err)=>{
+					wx.showToast({
+						title: err,
+						duration:2000,
+						icon:'error'
+					})
+				})
 			}
+		},
+		initCity:function(_areaData){
 			// 获取确定选择的获取默认的城市数据
 			let selectData = this.data.defaultData;
 			//给每个市的第一个添加全部
@@ -145,14 +155,29 @@ Component({
 		// },
 		//获取城市数据
 		getAreaData() {
+			wx.showLoading({
+				title: '数据加载中',
+				mask: true
+			})
+			return new Promise ((resolve,reject)=>{
 				wx.request({
 					url: 'https://cdn.yupao.com/json/yp_area_tree_2012021149.json',
 					success: function (res) {
 						if (res.data.all_tree) {
-							return res.data.all_tree
+							resolve(res.data.all_tree)
+							wx.hideLoading()
+						}else {
+							reject("数据加载失败")
+							wx.hideLoading()
 						}
 					},
+					fail:function(err) {
+						reject("网络错误，数据请求失败")
+						wx.hideLoading()
+					}
 				})
+			})
+			
 		},
 
 		// 选择省

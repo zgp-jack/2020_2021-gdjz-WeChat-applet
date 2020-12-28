@@ -19,6 +19,9 @@ page{
   text-align: center;
   line-height: 80rpx;
 }
+.my-header {
+  color: #535353;
+}
 
 .cardnine {
   margin: 0 auto;
