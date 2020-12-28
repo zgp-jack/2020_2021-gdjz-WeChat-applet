@@ -8,20 +8,24 @@
   <view class="findingnamecardone">
     <view class="findingnamecardoneson">
       <view class="findingnamecardonesonone">
-        <view class="otext {{authenticationimg == 2 && (projectCheckLen > 0 && is_introduces == '1' && check != 0) ? 'onText':''}}">
-          <text class="ontextc">名片完善度：</text>
-          <view class="lang ontextc">
-            <view class="olang" style="width:{{percent}}%;"></view>
+        <view class="left">
+          <view class="Completeness">
+            <text class="ontextc">名片完善度：</text>
+            <view class="lang ontextc">
+              <view class="olang" style="width:{{percent}}%;"></view>
+            </view>
+            <text class="olangw ontextc">{{percent}}%</text>
           </view>
-          <text class="olangw ontextc">{{percent}}%</text>
-          <text class="view_num">{{view_num}}</text>
-        </view>
-        <view class="isline">
+         <view class="Completeness-text">
           <button class="shareliveone" bindtap="completeall"  wx:if="{{ check == 0 || (check != 0 && project.length < 1) || (project.length > 0 && !projectCheckLen) }}">名片越完善,找活越容易!马上去完善>></button>
           <button class="shareliveone" bindtap="goRealName" wx:if="{{authenticationimg !=2 && check !=0 && projectCheckLen}}">老板更喜欢招已实名工人! 马上去实名>></button>
-          
-          <text class="sontwoview">浏览次数</text>
+         </view>
         </view>
+        <view class="right">
+          <text class="view_num">{{view_num}}</text>
+          <text class="sontwoview">浏览次数</text>
+        </view> 
+
         <!-- <view class="isline" wx:if="{{!showcomplete}}">
           <button class="sharelive" open-type='share'>分享找活名片,可提升名片排名度
           </button>

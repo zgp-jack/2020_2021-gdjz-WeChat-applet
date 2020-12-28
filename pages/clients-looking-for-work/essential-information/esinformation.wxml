@@ -117,7 +117,7 @@
   </view>
 
   <view class="informationevaluation" wx:if="{{!isShowPicker}}">
-    <view class="informationevaluationone">自我介绍：</view>
+    <view class="informationevaluationone">自我介绍</view>
     <view>
       <textarea wrap="hard" wx:if="{{!showWorkType && !perfection}}" class="informationevaluationtwo" bindinput="textareavalue" maxlength="505" placeholder="请简要介绍你所从事的行业以及工作经验..." style="padding:{{isIos ? '17rpx':'25rpx'}}" value="{{otextareavalue}}">
       </textarea>

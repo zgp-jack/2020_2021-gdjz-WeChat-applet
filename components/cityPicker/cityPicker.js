@@ -86,6 +86,7 @@ Component({
 			let selectData = this.data.defaultData;
 			//匹配的一级城市index数组
 			let index = [];
+			let index2 = [];
 			let ids = selectData.map(item => item.id)
 			for (let j = 0; j < ids.length; j++) {
 				for(let i = 0;i<_areaData.length;i++){
@@ -98,6 +99,7 @@ Component({
 								cId:childrenCity[n].id
 							}
 							index.push(indexObj)
+							index2.push(indexObj)
 							if (selectData[j].hasOwnProperty("fid")) {
 								selectData[j].fid = childrenCity[n].fid
 							}
@@ -111,7 +113,7 @@ Component({
 				return a.pIndex > b.pIndex ? 1 : -1
 			})
 			let scrollPId = "p"+_areaData[index[0].pIndex].id
-			let scrollCId = "c"+index[0].cId
+			let scrollCId = "c"+index2[0].cId
 			this.setData({
 				areaData:_areaData,
 				selectData,
