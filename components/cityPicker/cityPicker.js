@@ -22,11 +22,9 @@ Component({
 				selectArea: JSON.parse(JSON.stringify(this.data.defaultData)),
 				scrollPId:'',
 				scrollCId:'',
-				provincei:0
+				provincei:0,
+				showPicker: true,
 			})
-				this.setData({
-					showPicker: true,
-				})
 			this.showCityData()
 			this.triggerEvent('cityShow',{params:true})
 		},
@@ -54,9 +52,17 @@ Component({
 			// 设置子城市数据
 			this.setData({ cityData:childrenCity, areaData, provincei:index })
 		},
-		showCityData: function() {
-			// 复制一份全新城市数据
-			let _areaData = JSON.parse(JSON.stringify(this.data.newAreaData))
+		showCityData: async function() {
+			// 获取缓存的城市数据
+			let newAreaData = wx.getStorageSync('newAreaData');
+			let _areaData = []
+			if (newAreaData) {
+				_areaData = JSON.parse(JSON.stringify(newAreaData))
+			}else{
+				let newAreaDate = await this.getAreaData()
+				wx.setStorageSync("newAreaData", newAreaDate)
+				_areaData = JSON.parse(JSON.stringify(newAreaData))
+			}
 			// 获取确定选择的获取默认的城市数据
 			let selectData = this.data.defaultData;
 			//给每个市的第一个添加全部
@@ -110,8 +116,10 @@ Component({
 			index.sort(function(a,b){
 				return a.pIndex > b.pIndex ? 1 : -1
 			})
-			let scrollPId = "p"+_areaData[index[0].pIndex].id
-			let scrollCId = "c"+index[0].cId
+			let scrollPId = "p"+_areaData[index[0].pIndex].id;
+			let someIndexArray = index.filter(item => item.pIndex == index[0].pIndex)
+			let sortArrayCtiy = someIndexArray.sort((a,b)=> a.cId > b.cId ? 1 : -1)
+			let scrollCId = "c" + sortArrayCtiy[0].cId
 			this.setData({
 				areaData:_areaData,
 				selectData,
@@ -125,28 +133,26 @@ Component({
 			this.setChildrenData(index[0].pIndex)
 		},
 		// 初始化区域数据
-		initAeraData: function () {
-			// 获取缓存的城市数据
-			let newAreaData = wx.getStorageSync('newAreaData');
-			// 如果有缓存城市数据直接存入data，否则从cdn获取数据并存入缓存
-			if (newAreaData) {
-				this.setData({ newAreaData })
-			}else{
-				this.getAreaData()
-			}
-		},
+		// initAeraData: function () {
+		// 	// 获取缓存的城市数据
+		// 	let newAreaData = wx.getStorageSync('newAreaData');
+		// 	// 如果有缓存城市数据直接存入data，否则从cdn获取数据并存入缓存
+		// 	if (newAreaData) {
+		// 		this.setData({ newAreaData })
+		// 	}else{
+		// 		this.getAreaData()
+		// 	}
+		// },
 		//获取城市数据
 		getAreaData() {
-			const _this = this
-			wx.request({
-				url: 'https://cdn.yupao.com/json/yp_area_tree_2012021149.json',
-				success: function (res) {
-					if (res.data.all_tree) {
-						wx.setStorageSync('newAreaData', res.data.all_tree)
-						_this.setData({newAreaData: res.data.all_tree})
-					}
-				}
-			})
+				wx.request({
+					url: 'https://cdn.yupao.com/json/yp_area_tree_2012021149.json',
+					success: function (res) {
+						if (res.data.all_tree) {
+							return res.data.all_tree
+						}
+					},
+				})
 		},
 
 		// 选择省
@@ -257,9 +263,9 @@ Component({
 		},
 	},
 	lifetimes: {
-		ready: function () {
-			this.initAeraData()
-		},
+		// ready: function () {
+		// 	this.initAeraData()
+		// },
 	},
 	
 	observers: {
