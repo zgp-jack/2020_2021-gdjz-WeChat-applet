@@ -1333,8 +1333,8 @@ Page({
     app.initSystemInfo(function (res) {
       if (res && res.platform != "ios") {
         let u =wx.getStorageSync('userInfo')
-        //未登录不展示 ios不展示 ID奇数不展示
-        if(u && (u.userId%2) != 0) {
+        //未登录不展示 ios不展示
+        if(u) {
           _this.setData({
             showRecharge: true
           })
