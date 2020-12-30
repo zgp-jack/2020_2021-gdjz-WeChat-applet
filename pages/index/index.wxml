@@ -166,17 +166,16 @@
             <text class="no-data-text">没有找到您想要的内容，您可以换个内容搜索</text>
             <block wx:if="{{isNullStatus == 2}}">
               <text class="btn-tips-text">还可以置顶找活，让更多老板看到您的找活信息～</text>
-              <text class="text-btn"bindtap="goFinding">去置顶</text>
+              <text class="text-btn" bindtap="goFinding">去置顶</text>
             </block>
             
             <block  wx:if="{{isNullStatus == 1}}" bindtap='publishJob'>
               <text class="btn-tips-text">还可以发布找活，让老板主动来找我～</text>
-              <text class="text-btn" bindtap="goFinding">去发布</text>
+              <text class="text-btn" bindtap="valiUserCard">去发布</text>
             </block>
           
         </view>
     </view>
-
 </view>
 
 
@@ -184,6 +183,10 @@
 <!-- <view class='userauthbox flex-row'  wx:if="{{ !userInfo }}">
     <button  open-type="getUserInfo"  bindgetuserinfo='bindGetUserInfo' style='height:{{ userAuthBtn }}px;background:url({{ userAuthImg }}) no-repeat;background-size:100% 100%;'></button>
 </view> -->
+<!-- 充值 -->
+<view class='fixed-ad rechargeicon' bindtap="valiUserUrl" wx:if="{{showRecharge}}" data-url="/pages/recharge/recharge">
+    <image src='{{ rechargeicon }}'></image>
+</view>
 
 <view class='fixed-ad' wx:if="{{ showturntable }}"  bindtap='userTapTurntable' >
     <image src='{{ turntableimg }}'></image>
@@ -237,7 +240,19 @@
 <downapptips id='downapptips'></downapptips>
 
 <!-- 刷新成功提示框 -->
-<promptbox id="promptbox" showTitle="{{ tipBox.showTitle }}" showIcon="{{ tipBox.showIcon }}" content="{{ tipBox.content }}" showCancel="{{ tipBox.showCancel }}" icon="{{ successIcon }}" confirmText="{{ tipBox.confirmText }}" cancelColor="{{ tipBox.cancelColor }}" bind:confirm="confirm" bind:cancel="cancel"></promptbox>
+<promptbox 
+  id="promptbox" 
+  showTitle="{{ tipBox.showTitle }}" 
+  showIcon="{{ tipBox.showIcon }}" 
+  content="{{ tipBox.content }}" 
+  showCancel="{{ tipBox.showCancel }}" 
+  cancelText="{{ tipBox.cancelText }}" 
+  confirmText="{{ tipBox.confirmText }}" 
+  cancelColor="{{ tipBox.cancelColor }}" 
+  confirmColor="{{ tipBox.confirmColor }}" 
+  bind:confirm="confirm" bind:cancel="cancel" 
+  showClose="{{ tipBox.showClose}}" 
+  bind:close="tapClose"></promptbox>
 
 
 <!-- 发布招工-找活 浮动按钮 -->

@@ -697,6 +697,13 @@
     line-height: 1;
     margin-top: 24rpx;
 }
+.commonly-icon-box>view>.hotImg{
+    width: 23rpx;
+    height: 30rpx;
+    position: absolute;
+    right: 0;
+    top: -10rpx;
+}
 .commonly-icon-box .icon-text {
     position: absolute;
     right: -7px;

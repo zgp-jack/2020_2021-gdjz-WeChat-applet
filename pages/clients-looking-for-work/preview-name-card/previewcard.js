@@ -83,7 +83,8 @@ Page({
     fail_certificate: "",
     fail_project: "",
     authenticationimg: false,
-    certificate_show: false
+    certificate_show: false,
+    provinces_txt:''
   },
   errImg: function () {
     // let obj = `headerimg`;
@@ -281,7 +282,7 @@ Page({
             nation: mydata.info.hasOwnProperty("nation") ? mydata.info.nation : "",
             occupations: mydata.info.hasOwnProperty("miniInfoOccupations") ? mydata.info.miniInfoOccupations : "",
             telephone: mydata.info.hasOwnProperty("tel") ? mydata.info.tel : "",
-            city: mydata.info.hasOwnProperty("address") ? mydata.info.address : "",
+            city: mydata.info.hasOwnProperty("current_area_str") ? mydata.info.current_area_str : "",
             intro: false,
             introne: true,
             introduce: mydata.info.hasOwnProperty("introduce") ? mydata.info.introduce: "",
@@ -299,9 +300,10 @@ Page({
             note: mydata.info.hasOwnProperty("note") ? mydata.info.note : "",
             fail_certificate: mydata.hasOwnProperty("fail_certificate") ? mydata.fail_certificate : "",
             fail_project: mydata.hasOwnProperty("fail_project") ? mydata.fail_project : "",
-            experience_str: mydata.introduces.hasOwnProperty("experience_str") ? mydata.introduces.experience_str : "",
+            experience_str: mydata.introduces.hasOwnProperty("experience") ? mydata.introduces.experience : "",
             certificate_show: mydata.info.hasOwnProperty("certificate_show") ? mydata.info.certificate_show : "",
             authenticationimg: mydata.info.hasOwnProperty("authentication") ? mydata.info.authentication : "",
+            provinces_txt: mydata.info.hasOwnProperty("provinces_txt") ?  mydata.info.provinces_txt : ""
           })
           
           if (that.data.introduce === "") {

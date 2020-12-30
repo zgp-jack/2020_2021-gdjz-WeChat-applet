@@ -1,5 +1,5 @@
-// pages/published/published.js
-let footerjs = require("../../../utils/footer.js");
+// pages/published/published.js  lists
+let footerjs = require("../../../../utils/footer.js");
 const app = getApp();
 Page({
 
@@ -8,29 +8,34 @@ Page({
    */
   data: {
     footerActive: "member",
+    finded: app.globalData.apiImgUrl + "lpy/finded.png",
     nodataImg: app.globalData.apiImgUrl + "collect-nodata.png",
-    finded: app.globalData.apiImgUrl + 'published-recruit-end.png', //已找到
-    sjim: app.globalData.apiImgUrl + 'recruit-lists-new-finding.png', 
+    biaoqian: app.globalData.apiImgUrl + "lpy/biaoqian.png",
     isFirstRequest: true,
     page: 1,
-    lists: [], 
+    lists: [],
     userInfo: "",
     pageSize: 15,
     showNoData: false,
     nothavamore: false,
+    realNames: app.globalData.apiImgUrl + 'newresume-infolist-ysm.png', 
+    authentication:app.globalData.apiImgUrl + "new-list-jnzs-icon.png",
     collectIcon: {
-      infoIcon: app.globalData.apiImgUrl + "new-collect-info-active.png",
+      infoIcon: app.globalData.apiImgUrl + "new-collect-info.png",
       infoTitle: '招工信息',
-      resumeIcon: app.globalData.apiImgUrl + "new-collect-resume.png",
+      resumeIcon: app.globalData.apiImgUrl + "new-collect-resume-active.png",
       resumeTitle: '找活信息'
     },
-    resumeText:""
+    resumeText:"",
+    experience_num:'',
+    provinces_str:''
   },
+  // 根据发布方式不同发布招工：未登录或者“fast_add_job”是快速发布，“ordinary_add_job”是普通发布。
   publishJob:function () {
     app.initJobView()
   },
   showThisList: function (e) {
-    wx.redirectTo({ url: "/pages/collect/resume/resume"})
+    wx.redirectTo({ url: "/packageOther/pages/collect/info/info" })
   },
   initPublishedData: function (options) {
     let userInfo = wx.getStorageSync("userInfo");
@@ -39,22 +44,25 @@ Page({
   },
   getPublishedData: function () {
     let _this = this;
+    let userLocation = wx.getStorageSync("userLocation");
     let _index = this.data.publishIndex
     let userInfo = this.data.userInfo
     wx.showLoading({ title: '数据加载中', })
     app.doRequestAction({
-      url: "job/collect-list/",
+      url: "resumes/collect-resume-list/",
       way: "POST",
       params: {
         userId: userInfo.userId,
         token: userInfo.token,
         tokenTime: userInfo.tokenTime,
-        page: _this.data.page
+        page: _this.data.page,
+        location: userLocation ? userLocation.split(",").reverse().join(",") : '',
       },
       success: function (res) {
         wx.hideLoading()
         let mydata = res.data;
-        if (mydata.errcode == "ok") {
+        console.log(mydata);
+        if (mydata.errcode == "200") {
           if (mydata.list.length > 0) {
             let newData = _this.data.lists;
             if (_this.data.page != 1) {
@@ -62,9 +70,10 @@ Page({
                 newData.push(mydata.list[i])
               }
             }
+            console.log(_this.data.page)
             _this.setData({
               lists: (_this.data.page == 1) ? mydata.list : newData,
-              pageSize: mydata.pageSize ? mydata.pageSize : 20,
+              pageSize: mydata.pageSize ? mydata.pageSize : 15,
               isFirstRequest: false
             })
             setTimeout(function () {
@@ -103,11 +112,11 @@ Page({
       userId: userInfo.userId,
       token: userInfo.token,
       tokenTime: userInfo.tokenTime,
-      id: id
+      resume_uuid: id
     };
 
     app.appRequestAction({
-      url: "job/collect/",
+      url: "resumes/resume-collect/",
       way: "POST",
       mask: true,
       params: data,
@@ -130,6 +139,7 @@ Page({
     let type = e.currentTarget.dataset.type;
     let msg = e.currentTarget.dataset.msg;
     let tips = e.currentTarget.dataset.tips;
+    let uuid = e.currentTarget.dataset.uuid;
     let view = e.currentTarget.dataset.view;
     let viewMsg = e.currentTarget.dataset.viewmsg
     let _id = e.currentTarget.dataset.id
@@ -153,15 +163,26 @@ Page({
       })
       return
     }
-    if(msg == "1"){
+    if (msg == "1") {
       wx.showModal({
         title: '温馨提示',
         content: tips,
-        showCancel:false
+        showCancel: false
       })
       return false;
     }
-    else  wx.navigateTo({url: '/pages/detail/info/info?id=' + id, })
+    else{
+      let userLocation = wx.getStorageSync("userLocation")
+      if (!userLocation) {
+        userLocation = ""
+      } else {
+        userLocation = userLocation.split(",").reverse().join(",")
+      }
+      let uuid = e.currentTarget.dataset.uuid
+      wx.navigateTo({
+        url: `/pages/boss-look-card/lookcard?uuid=${uuid}&location=${userLocation}`
+      })
+    }
   },
   // 共用footer
   jumpThisLink: function (e) {
@@ -185,19 +206,25 @@ Page({
     let userInfo = this.data.userInfo;
     footerjs.valiUserCard(this, app, userInfo);
   },
-  //点击跳转到招工信息界面
-  goFindWorker:function () {
-    wx.reLaunch({
-      url: '/pages/index/index',
+  errImg:function(e){
+    let index = e.currentTarget.dataset.index;
+    console.log(index)
+    let obj = `lists[${index}].resume.headerimg`;
+    this.setData({
+      [obj]: "http://cdn.yupao.com/miniprogram/images/user.png"
     })
   },
-  
+  //点击跳转到找活列表界面
+  goFindWork:function () {
+    wx.reLaunch({
+      url: '/pages/findingworkinglist/findingworkinglist',
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
     this.initFooterData();
-    app.activeRefresh()
   },
 
   /**

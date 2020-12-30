@@ -23,10 +23,13 @@
             </view>
             <view class="listsboxagetwo"  wx:if="{{item.nation || item.prof_degree}}">
               <text class="listsboxnation" wx:if="{{item.nation}}">{{item.nation}}</text>
-              <text wx:if="{{item.prof_degree}}">{{item.prof_degree}}</text>
+              <text wx:if="{{item.experience_num != '0'}}">工龄:{{item.experience_num}}年</text>
             </view>
             <view class="listsboxagetwot" wx:if="{{!item.nation && !item.prof_degree}}">
               <text wx:for="{{item.tags}}" wx:key="{{index}}">{{item.label_name}}</text>
+            </view>
+            <view class="listsboxagetwo" wx:if="{{item.provinces_str}}">
+              <text>期望工作地：{{item.provinces_str}}</text>
             </view>
           </view>
           <view class="listsboxshow" wx:if="{{item.type}}">{{item.type}}</view>
@@ -44,10 +47,10 @@
         <view>
           <view class="listsboxlocalone">
             <view>
-              <image src="{{biaoqian}}"></image>
+              <image src="{{biaoqian}}" wx:if="{{item.current_area_str}}"></image>
             </view>
-            <view class="listsboxadree" wx:if="{{item.show_address}}">{{item.show_address}}</view>
-            <view class="listsboxadreeq" wx:if="{{item.distance}}">{{item.distance}}</view>
+            <view class="listsboxadree" wx:if="{{item.current_area_str}}">{{item.current_area_str}}</view>
+            <view class="listsboxadreeq" wx:if="{{item.distance && item.current_area_str}}">{{item.distance}}</view>
           </view>
         </view>
         <view class="listsboxlocaltwo">

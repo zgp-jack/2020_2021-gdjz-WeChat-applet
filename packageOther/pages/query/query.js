@@ -59,9 +59,13 @@ Page({
                         title: '温馨提示',
                         content: mydata.errmsg,
                         success(res) {
-                            wx.reLaunch({
-                                url: '/pages/index/index',
-                            })
+                            if (res.confirm) {
+                                wx.reLaunch({
+                                    url: '/pages/index/index',
+                                })
+                            }else if (res.cancel) {
+                                wx.navigateBack()
+                            }
                         }
                     })
                 }

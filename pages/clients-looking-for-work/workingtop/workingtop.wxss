@@ -201,8 +201,8 @@ page {
    width: 30rpx;
    height: 30rpx;
    position: absolute;
-   right: 0rpx;
-   top: 0rpx;
+   right: -9rpx;
+   top: -12rpx;
 }
 .scopedetail view{
   display: inline-block;

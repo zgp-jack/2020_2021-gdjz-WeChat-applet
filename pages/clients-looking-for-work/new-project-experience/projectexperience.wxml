@@ -83,7 +83,7 @@
     <button wx:if="{{obtnbut&&project_show}}" class="experiencebottomone"  bindtap="preservechixu">保存 继续添加</button>
     <button wx:if="{{obtnbut&&!project_show}}" class="experiencebottomone"  bindtap="preservechixutui">取消</button>
     <button class="experiencebottomotwo" wx:if="{{obtnbut}}" bindtap="preserve">确认保存</button>
-    <button class="experiencebottomotwo" wx:if="{{!obtnbut}}" bindtap="preserveone">确认保存</button>
+    <button class="experiencebottomotwo" wx:if="{{!obtnbut}}" bindtap="{{ reqStatus?'preserveone':'' }}">确认保存</button>
   </view>
      <view style="height: 88rpx;">
   </view>

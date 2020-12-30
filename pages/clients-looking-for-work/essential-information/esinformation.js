@@ -51,7 +51,43 @@ Page({
     showheder:"showheder",
     model:{},
     checkonef:"",
-    note:""
+    note:"",
+    selectCityData: [],
+    selectCityName: [],
+    selectCityId:[],
+    workage: 1,
+    multiArray: [],
+    multiArrayone: [],
+    objectMultiArray: [],
+    multiIndex: [0, 0],
+    provincecity: "",
+    proficiencyarray: [],
+    proficiencyarrayone: [],
+    degreeone: 0,
+    compositionarray: [],
+    compositionarrayone: [],
+    constituttion: 1,
+    judge: false,
+    detailevaluation: [],
+    evaluation: [],
+    labelnum: [],
+    teamsnumber: "",
+    multiIndexvalue: "",
+    multiIndexsuan: [],
+    provicemore: [],
+    model:"",
+    checkonef:"",
+    note:"",
+    editType:'',//是编辑还是完善
+    introinfo:{},//找活名片资料
+    introdetail:{},//人员构成资料
+    defaultCityPicker:[],
+    indexperson:0,
+    selectAllData:[],
+    isIos:false,
+    isShowPicker:false,
+    current_area:'',
+    is_introduces:'0',//是否完善过
   },
   // 点击隐藏键盘
   hiddenKeyBoard: function () {
@@ -133,7 +169,11 @@ Page({
   },
   GPSsubmit: function () {
     this.openSetting()
-
+  },
+  teamsnum(e) { //队伍人数的额选择
+    this.setData({
+      teamsnumber: e.detail.value
+    })
   },
   getLocation: function () { //定位获取
     if (app.globalData.gpsdetail) {
@@ -214,10 +254,10 @@ Page({
 
               if (res.cancel) {
               } else if (res.confirm) {
+                
                 //village_LBS(that);
                 wx.openSetting({
                   success: function (data) {
-
                     if (data.authSetting["scope.userLocation"] == true) {
                       wx.showToast({
                         title: '授权成功',
@@ -234,12 +274,15 @@ Page({
                         duration: 2000
                       })
                     }
+                  },
+                  fail:function(res){
+                    
                   }
                 })
               }
             }
           })
-          return false;
+          // return false;
         } else {
           that.getLocation();
         }
@@ -364,7 +407,9 @@ Page({
           nationalarray: nationalarray,
           nationalarrayone: res.data.nation,
           array: array,
-          arrayone: res.data.gender
+          arrayone: res.data.gender,
+          compositionarray: compositionarray,
+          compositionarrayone: res.data.type
         })
         that.getintrodetail()
 
@@ -387,7 +432,8 @@ Page({
 
   userSureWorktype() {
     this.setData({
-      showWorkType: false
+      showWorkType: false,
+      isShowPicker:false
     })
     let all = ""
     for (let i = 0; i < this.data.complexwork.length; i++) {
@@ -452,17 +498,25 @@ Page({
 
   typeworktwo() {
     this.setData({
-      showWorkType: true
+      showWorkType: true,
+      isShowPicker:true
     })
   },
   textareavalue(e) {
     this.setData({
       otextareavalue: e.detail.value
     })
-    this.setData({
-      otextareavaluel: e.detail.value.length
-    })
-
+    if(e.detail.value.length > 500){
+      let str = e.detail.value.substring(0,500)
+      this.setData({
+        otextareavalue: str,
+        otextareavaluel: 500
+      })
+    }else{
+      this.setData({
+        otextareavaluel: e.detail.value.length
+      })
+    }
   },
 
   getarea() {
@@ -535,7 +589,8 @@ Page({
         worktype += this.data.complexworkid[i] + ","
       }
     }
-    if ((vertifyNum.isNull(this.data.name) || this.data.name.length < 2 || this.data.name.length > 5) || !vertifyNum.isChinese(this.data.name)) {
+    // 姓名
+    if ((this.data.editType == 'bj' || this.data.introinfo.authentication != "2") && (vertifyNum.isNull(this.data.name) || this.data.name.length < 2 || this.data.name.length > 5 || !vertifyNum.isChinese(this.data.name))) {
       wx.showModal({
         title: '温馨提示',
         content: '请输入2~5字纯中文姓名!',
@@ -544,30 +599,24 @@ Page({
       })
       return
     }
-    // if (!vertifyNum.isChinese(this.data.name)) {
-    //   wx.showModal({
-    //     title: '温馨提示',
-    //     content: '请正确输入姓名2-5字以内且必须包含汉字',
-    //     showCancel: false,
-    //     success(res) { }
-    //   })
-    //   return
-    // }
-    if (vertifyNum.isNull(this.data.sex)) {
+    //性别
+    if ((this.data.editType == 'bj' || this.data.introinfo.authentication != 2) && vertifyNum.isNull(this.data.sex)) {
       reminder.reminder({ tips: '性别' })
       return
     }
-    if (vertifyNum.isNull(this.data.birthday)) {
+    //民族
+    if ((this.data.editType == 'bj' || this.data.introinfo.authentication != 2) && vertifyNum.isNull(this.data.nation)) {
+      reminder.reminder({ tips: '民族' })
+      return
+    }
+    //出生日期
+    if ((this.data.editType == 'bj' || this.data.introinfo.authentication != 2) && vertifyNum.isNull(this.data.birthday)) {
 
       reminder.reminder({ tips: '出生日期' })
       return
     }
-
-    if (vertifyNum.isNull(this.data.nation)) {
-      reminder.reminder({ tips: '民族' })
-      return
-    }
-    if (vertifyNum.isNull(worktype)) {
+    //工种
+    if ((this.data.editType == 'bj' || this.data.introinfo.occupations.length < 1) && vertifyNum.isNull(worktype)) {
       wx.showModal({
         title: '温馨提示',
         content: '请选择您的工种',
@@ -576,14 +625,50 @@ Page({
       })
       return
     }
+    //工龄
+    let str = /^\d{1,2}$/ig;
+    if ((this.data.editType == 'bj' || this.data.introinfo.experience == 0) &&!str.test(this.data.workage)) {
+      wx.showModal({
+        title: '温馨提示',
+        content: '请输入您的工龄',
+        showCancel: false,
+        success(res) { }
+      })
+      return
+    }
 
-    if (vertifyNum.isNull(this.data.regionone)) {
-      reminder.reminder({ tips: '所在地区' })
+    //期望地区
+    if((this.dataeditType == 'bj') && vertifyNum.isNull(this.data.selectCityName)){
+      reminder.reminder({ tips: '期望地区' })
       return
     }
 
 
-    if (!vertifyNum.isMobile(this.data.telephone)) {
+    //所在地区
+    if ((this.dataeditType == 'bj' || this.data.introinfo.experience == 0) && vertifyNum.isNull(this.data.regionone)) {
+      reminder.reminder({ tips: '所在地区' })
+      return
+    }
+
+    //人员构成
+    if ((this.data.editType == 'bj' || !this.data.introdetail.type) && vertifyNum.isNull(this.data.constituttion)) {
+      reminder.reminder({ tips: '人员构成' })
+      return
+    }
+    let strone = /^[0-9]{1,4}$/ig;
+    if ((this.data.editType == 'bj' || this.data.indexperson !== 0)&&!strone.test(this.data.teamsnumber) && this.data.constituttion != 1 || ~~this.data.teamsnumber - 0 <= 1 && this.data.constituttion != 1) {
+      wx.showModal({
+        title: '温馨提示',
+        content: '请输入您的队伍人数不得少于2人',
+        showCancel: false,
+        success(res) { }
+      })
+      return
+    }
+
+
+    //联系电话
+    if ((this.data.editType == 'bj' || !this.data.introinfo.tel)&&!vertifyNum.isMobile(this.data.telephone)) {
       wx.showModal({
         title: '温馨提示',
         content: '请正确输入手机号码',
@@ -592,6 +677,7 @@ Page({
       })
       return
     }
+    //验证码
     if (this.data.telephone != this.data.tele) {
       if (vertifyNum.isNull(this.data.verify)) {
         wx.showModal({
@@ -617,28 +703,16 @@ Page({
       return
     }
 
-
+    //自我介绍
     if (vertifyNum.isNull(this.data.otextareavalue) || !vertifyNum.isChinese(this.data.otextareavalue)) {
       wx.showModal({
         title: '温馨提示',
-        content: '请填写真实自我介绍，15-500字，必须含有汉字',
+        content: '请填写5~500字的自我介绍，内容必须包含汉字',
         showCancel: false,
         success(res) { }
       })
       return
     }
-
-    // if (!vertifyNum.isChinese(this.data.otextareavalue)) {
-    //   wx.showModal({
-    //     title: '温馨提示',
-    //     content: '请正确输入自我介绍15-500字以内 且必须包含汉字',
-    //     showCancel: false,
-    //     success(res) { }
-    //   })
-    //   return
-    // }
-    // tele != telephone 1122
-
     Object.assign(information, {
       userId: userInfo.userId,
       token: userInfo.token,
@@ -656,9 +730,16 @@ Page({
       lat: this.data.latitude,
       lng: this.data.longitude,
       address: this.data.regionone,
-      adcode: this.data.oadcode,
+      current_area_adcode: this.data.oadcode,
+      provinces: String(this.data.selectCityId),
+      experience: this.data.workage,
+      type: this.data.constituttion,
+      number_people: this.data.teamsnumber,
+      current_area:this.data.oadcode ? '' : this.data.current_area
     })
-    
+    // console.log(JSON.stringify(information))
+    // console.log(JSON.stringify(this.data.model))
+    // debugger
     if (JSON.stringify(information) == JSON.stringify(this.data.model) && this.data.checkonef == '0'){
       wx.showModal({
         title: '温馨提示',
@@ -668,32 +749,100 @@ Page({
       })
       return
     }
-
-    app.appRequestAction({
-      url: "resumes/add-resume/",
-      way: "POST",
-      params: information,
-      mask: true,
-      failTitle: "操作失败，请稍后重试！",
-      success: function (res) {
-
-        if (res.data.errcode == 200) {
-          that.subscribeToNews(res)
-          app.activeRefresh()
-        } else {
-          remain.remain({
-            tips: res.data.errmsg
+    //完善
+    if(this.data.editType == 'ws'){
+      let params = {}
+      //姓名 性别 民族 出生日期
+      if(this.data.introinfo.authentication != 2){
+        params.gender = String(this.data.sex)
+        params.username = this.data.name
+        params.nation = String(this.data.nation)
+        params.birthday = this.data.birthday
+      }
+      //工种
+      if(this.data.introinfo.occupations.length < 1){
+        params.occupations = worktype
+      }
+      //工龄
+      // if(this.data.introinfo.experience == 0){
+        params.experience = this.data.workage
+      // }
+      //所在地区
+      if(this.data.introinfo.experience == 0){
+        params.address = this.data.regionone
+        params.current_area_adcode = this.data.oadcode
+      }
+      //人员构成
+      if(!this.data.introdetail.type) {
+       params.type = String(this.data.constituttion)
+       params.number_people = this.data.teamsnumber
+      }
+      //联系电话
+      if(!this.data.introinfo.tel) {
+        params.tel = this.data.telephone
+        code: this.data.verify
+      }
+      params.introduce = this.data.otextareavalue
+      params.userId = userInfo.userId
+      params.token = userInfo.token
+      params.tokenTime = userInfo.tokenTime
+      // params.is_new_introduce = 1
+      app.appRequestAction({
+        url:'resumes/introduce/',
+        way:'POST',
+        params:params,
+        mask:true,
+        failTitle: "操作失败，请稍后重试！",
+        success: function (res) {
+          if (res.data.errcode == 200) {
+            that.subscribeToNews(res)
+            app.activeRefresh()
+          } else {
+            remain.remain({
+              tips: res.data.errmsg
+            })
+          }
+        },
+        fail: function (err) {
+          wx.showModal({
+            title: '温馨提示',
+            content: '保存失败',
+            showCancel: false
           })
         }
-      },
-      fail: function (err) {
-        wx.showModal({
-          title: '温馨提示',
-          content: '保存失败',
-          showCancel: false
-        })
-      }
-    })
+      })
+
+    }
+
+    //编辑
+    if(this.data.editType == 'bj'){
+      app.appRequestAction({
+        url: "resumes/add-resume/",
+        way: "POST",
+        params: information,
+        mask: true,
+        failTitle: "操作失败，请稍后重试！",
+        success: function (res) {
+
+          if (res.data.errcode == 200) {
+            that.subscribeToNews(res)
+            app.activeRefresh()
+          } else {
+            remain.remain({
+              tips: res.data.errmsg
+            })
+          }
+        },
+        fail: function (err) {
+          wx.showModal({
+            title: '温馨提示',
+            content: '保存失败',
+            showCancel: false
+          })
+        }
+      })
+    }
+
   },
   subscribeToNews: function(res) {
     let _this = this;
@@ -743,17 +892,22 @@ Page({
       code:"",
       username: introinfo.hasOwnProperty("username") ? introinfo.username : "",
       tel: introinfo.hasOwnProperty("tel") ? introinfo.tel : "",
-      gender: introinfo.hasOwnProperty("gender") ? introinfo.gender : "", 
+      gender:introinfo.hasOwnProperty("gender") ? introinfo.gender : "",
       nation: nationCons,
       birthday: introinfo.hasOwnProperty("birthday") ? introinfo.birthday : "",
       occupations: worktype,
       province: introinfo.hasOwnProperty("province") ? introinfo.province : "",
-      city:introinfo.hasOwnProperty("city") ? introinfo.city : "",
+      city:"",
       introduce:introinfo.hasOwnProperty("introduce") ? introinfo.introduce : "",
       lat: latitude,
       lng: longitude,
-      address: introinfo.hasOwnProperty("address") ? introinfo.address : "",
-      adcode:"",
+      address: introinfo.hasOwnProperty("current_address") ? introinfo.current_address : "",
+      current_area_adcode: "",
+      provinces: introinfo.provinces_id ? introinfo.provinces_id:'',
+      experience: introinfo.hasOwnProperty("experience") && introinfo.experience != 0 ? introinfo.experience : 1,
+      type: introinfo.type ? this.data.compositionarrayone[introinfo.type == 0?0:introinfo.type -1].id : this.data.compositionarrayone[0].id + 1,
+      number_people: Number(introinfo.number_people) ? introinfo.number_people: introinfo.type ? this.data.compositionarrayone[introinfo.type == 0?0:introinfo.type -1].id : this.data.compositionarrayone[0].id + 1,
+      current_area: introinfo.hasOwnProperty("current_area") ? introinfo.current_area : '',
     }
     this.setData({
       model: getintrodetail
@@ -762,25 +916,30 @@ Page({
   getintrodetail() {
      
     let introinfo = wx.getStorageSync("introinfo");
-
     this.setData({
-      name: introinfo.hasOwnProperty("username") ? introinfo.username : "",
+      name: introinfo.username !== '先生' ? introinfo.username : "",
       indexsex: introinfo.hasOwnProperty("gender") ? introinfo.gender - 1 : "",
       sex: introinfo.hasOwnProperty("gender") ? introinfo.gender : "",
       birthday: introinfo.hasOwnProperty("birthday") ? introinfo.birthday : "",
       complexwork: introinfo.hasOwnProperty("occupations") ? introinfo.occupations : [],
       complexworkid: introinfo.hasOwnProperty("occupations_id") ? introinfo.occupations_id == null ? [] : introinfo.occupations_id.split(",") : [],
-      regionone: introinfo.hasOwnProperty("address") ? introinfo.address : "",
+      regionone: introinfo.hasOwnProperty("current_address") ? introinfo.current_address : "",
       provinceid: introinfo.hasOwnProperty("province") ? introinfo.province : "",
-      wardenryid: introinfo.hasOwnProperty("city") ? introinfo.city : "",
+      // wardenryid: introinfo.hasOwnProperty("city") ? introinfo.city : "",
       telephone: introinfo.hasOwnProperty("tel") ? introinfo.tel : "",
       tele: introinfo.hasOwnProperty("tel") ? introinfo.tel : "",
-      otextareavalue: introinfo.hasOwnProperty("introduce") ? introinfo.introduce : "",
-      otextareavaluel: introinfo.hasOwnProperty("introduce") ? introinfo.introduce ? introinfo.introduce.length : 0 : 0,
+      otextareavalue: introinfo.has_changed_introduce != '0' ? introinfo.hasOwnProperty("introduce") ? introinfo.introduce : "" : '',
+      otextareavaluel: introinfo.hasOwnProperty("introduce") && introinfo.has_changed_introduce != '0' ? introinfo.introduce.length : 0,
       checkonef: introinfo.hasOwnProperty("check") ? introinfo.check : "",
       note: introinfo.hasOwnProperty("note") ? introinfo.note : "",
+      workage: introinfo.hasOwnProperty("experience") && introinfo.experience != 0 ? introinfo.experience : 1,
+      selectCityId: introinfo.provinces_id ? introinfo.provinces_id:'',
+      indexperson: Number(introinfo.type) ? introinfo.type - 1 : 0,
+      constituttion: introinfo.type ? this.data.compositionarrayone[introinfo.type == 0?0:introinfo.type -1].id : this.data.compositionarrayone[0].id + 1,
+      teamsnumber: Number(introinfo.number_people) ? introinfo.number_people: introinfo.type ? this.data.compositionarrayone[introinfo.type == 0?0:introinfo.type -1].id : this.data.compositionarrayone[0].id + 1,
+      current_area: introinfo.hasOwnProperty("current_area") ? introinfo.current_area : '',
+      is_introduces: introinfo.is_introduces
     })
-
     if (introinfo.gender != "") {
       this.setData({
         nationindex: introinfo.hasOwnProperty("nation_id") ? introinfo.nation_id - 1 : ""
@@ -900,12 +1059,138 @@ Page({
 
 
   },
+  showCityPicker(){
+    this.selectComponent("#cityPicker").show();
+  },
+
+//选择期望地区 点击确定
+cityComfirm(e) {
+  let select = e.detail.params
+  let municipality = app.globalData.municipality
+  let selectStr = select.map(item=>{
+    let index = municipality.findIndex(i=> i.id == item.fid)
+    if (index !== -1) {
+      return municipality[index].name + item.name
+    }else{
+      return item.name
+    }
+  })
+
+  this.setData({
+    selectAllData: select,
+    selectCityName:selectStr.join(" | "),
+    selectCityId:select.map(item => item.id).join(",")
+  })
+},
+
+constitute(e) { //人员构成的选择
+  this.setData({
+    indexperson: e.detail.value,
+  })
+  if(e.detail.value != 0){
+    this.setData({
+      constituttion: Number(e.detail.value) + 1,
+      teamsnumber: 2
+    })
+  }else if(e.detail.value == 0){
+    this.setData({
+      constituttion: Number(e.detail.value) + 1,
+      teamsnumber: 1
+    })
+  }
+  if (this.data.compositionarrayone[e.detail.value].id > 1) {
+    this.setData({
+      judge: true
+    })
+  }
+  if (this.data.compositionarrayone[e.detail.value].id <= 1) {
+    this.setData({
+      judge: false
+    })
+  }
+},
+
+
+// 调起键盘后再点击picker导致picker在软键盘下面，软键盘并没有收起问题。
+hidekeyboard: function () {
+  wx.hideKeyboard()
+},
+
+//点击清空内容自我介绍
+clearIntroduce() {
+  this.setData({
+    otextareavalue: '',
+    otextareavaluel: 0
+  })
+},
+peopleage(e) { //工龄的选择
+  if(e.detail.value == '0'){
+    this.setData({
+      workage: 1
+    })
+  }else{
+    this.setData({
+      workage: e.detail.value
+    })
+  }
+  
+},
+cityClose(e){
+  this.setData({
+    isShowPicker:false
+  })
+},
+cityShow(e) {
+  this.setData({
+    isShowPicker:true
+  })
+},
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
     this.accessprovince()
     this.getallcity()
+    if(options.type){
+      this.setData({
+        editType:options.type
+      });
+      //完善资料的时候 自动获取定位
+      if(options.type == 'ws'){
+        this.GPSsubmit()
+      }
+    }
+    let introinfo = wx.getStorageSync('introinfo')
+    let introdetail = wx.getStorageSync('introdetail')
+    let provincesidArr = introinfo.provinces_id.split(",")
+    let provincestxtArr = introinfo.provinces_txt.split("|")
+    let _provincesidArr = []
+    if(provincesidArr.length > 1){
+      for(let i = 0;i<provincesidArr.length;i++){
+        _provincesidArr.push({
+          name:provincestxtArr[i],
+          id:provincesidArr[i]
+        })
+      }
+    }
+    let Phone = wx.getSystemInfoSync();
+    if(Phone.platform == 'ios'){
+      this.setData({
+        isIos:true
+      })
+    }else{
+      this.setData({
+        isIos:false
+      })
+    }
+
+
+    this.setData({
+      introinfo:introinfo,
+      selectAllData:provincesidArr.length > 1 ? _provincesidArr:[{id:introinfo.provinces_id,name:introinfo.provinces_txt}],
+      introdetail:introdetail,
+      selectCityName:introinfo.provinces_txt.replace(/,/g, "|")
+    })
   },
 
   /**

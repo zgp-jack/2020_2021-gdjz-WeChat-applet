@@ -43,7 +43,7 @@
             <image src='http://cdn.yupao.com/miniprogram/images/publish-recruit.png'></image>
             <text>发布招工</text>
         </view>
-        <view class='commo-publish-item flex-column'  bindtap='valiUserCard' >
+        <view class='commo-publish-item flex-column'  bindtap='valiUserCard'>
             <image src='http://cdn.yupao.com/miniprogram/images/publish-card.png'></image>
             <text>{{ resumeText }}</text>
         </view>

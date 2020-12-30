@@ -50,16 +50,17 @@ font-size: 30rpx;
 
 }
 .informationtwione{
-  width: 19%;
+  width: 24%;
   font-size: 30rpx;
   line-height: 125rpx;
   color: #2A2A2A;
   margin-left: 19rpx;
   text-align: justify;
   position: relative;
+  font-weight: 700;
 }
 .informaregiononede{
-  width: 19%;
+  width: 24%;
   font-size: 30rpx;
   color: #2A2A2A;
   margin-left: 19rpx;
@@ -68,6 +69,9 @@ font-size: 30rpx;
   display: flex;
   flex-direction: column;
   justify-content: center;
+}
+.informaregiononede text {
+  font-weight: 700;
 }
 .informaregiononede text{
     display: flex;
@@ -83,7 +87,7 @@ font-size: 30rpx;
     height: 0;
 }
 .informaregiononede text::before{
-    content:':';
+    content:' ';
     /* overflow: hidden; */
     height: 100%;
     width: 6rpx;
@@ -99,7 +103,7 @@ font-size: 30rpx;
     height: 0;
 }
 .informationtwione::before{
-    content:':';
+    content:' ';
     /* overflow: hidden; */
     height: 100%;
     width: 6rpx;
@@ -110,11 +114,12 @@ font-size: 30rpx;
     padding-left: 58rpx;
 }
 .informationtwi .informationtwitwo{
-  width: 72%;
+  width: 65%;
   height: 125rpx;
   display: flex;
   flex-direction: column;
   justify-content: center;
+  font-size: 30rpx;
 }
 .informationtwi .informationtwitwo input{
   font-size: 30rpx;
@@ -138,7 +143,7 @@ font-size: 30rpx;
     padding-left: 58rpx;
 }
 .informationthree .informationthreetwo{
-  width: 72%;
+  width: 65%;
   height: 125rpx;
   display: flex;
   flex-direction: column;
@@ -168,7 +173,7 @@ font-size: 30rpx;
   margin-left: 19rpx;
 }
 .informationfour .informationfourtwo{
-  width: 72%;
+  width: 65%;
   height: 125rpx;
   display: flex;
   flex-direction: column;
@@ -193,7 +198,7 @@ font-size: 30rpx;
 }
 
 .informationfive .informationfivetwo{
-  width: 72%;
+  width: 65%;
   height: 125rpx;
   display: flex;
   flex-direction: column;
@@ -237,7 +242,7 @@ border-bottom: 1px solid #F1F1F1;
     padding-left: 58rpx;
 }
 .informationTypeworktwo{
-  width: 72%;
+  width: 70%;
 
   display: flex;
   flex-direction: column;
@@ -246,7 +251,7 @@ border-bottom: 1px solid #F1F1F1;
   font-size: 30rpx;
 }
  .informationTypeworktwoo{
-  width: 72%;
+  width: 65%;
 
   display: flex;
   flex-direction: column;
@@ -385,6 +390,7 @@ width: 60%;
   justify-content: space-between;
   background-color: white;
   position: relative;
+  border-bottom: 1px solid #F1F1F1;
 }
 
 .informationseven .informationsevenone{
@@ -398,7 +404,7 @@ width: 60%;
     padding-left: 58rpx;
 }
 .informationseven .informationseventwo{
-  width: 72%;
+  width: 65%;
   min-height: 125rpx;
   /* display: flex;
   flex-direction: row;
@@ -458,7 +464,7 @@ width: 140rpx;
     padding-left: 58rpx;
 }
 .informationtheinput .informationtheinputtwo{
-  width: 72%;
+  width: 65%;
   height: 125rpx;
   display: flex;
   flex-direction: column;
@@ -545,7 +551,7 @@ width: 140rpx;
 .informationevaluation{
   width: 93%;
   margin: 0 auto;
-  height: 255rpx;
+  height: 285rpx;
   background: white;
   margin-top: 20rpx;
   overflow: hidden;
@@ -556,6 +562,7 @@ width: 140rpx;
   width: 93%;
   margin: 0 auto;
   font-size: 30rpx;
+  font-weight: 700;
   /* padding: 0 10rpx; */
   /* padding-left: 17rpx; */
 }
@@ -571,8 +578,9 @@ width: 140rpx;
   outline: 0;
   padding:10rpx;
   padding-left: 25rpx;
-word-break:break-all;
-word-wrap:break-word;
+  word-break:break-all;
+  word-wrap:break-word;
+  z-index: 1;
 }
 
 .informationevaluation .informationenum{
@@ -590,7 +598,7 @@ word-wrap:break-word;
   font-size: 38rpx;
   text-align: center;
   line-height:  97rpx;
-  margin-top: 20rpx;
+  margin-top: 50rpx;
   margin-bottom: 42rpx;
 }
 
@@ -669,5 +677,17 @@ word-wrap:break-word;
 /* informationtelephone */
 
 
-.common-uinfo-editbox{position: relative;width:100%;padding: 20rpx 27rpx;}
-.informationtwo,.informationtelephone,.informationevaluation{position: relative;width:100%;}
+.common-uinfo-editbox{position: relative;width:100%;}
+.informationtwo,.informationtelephone,.informationevaluation{position: relative;width:100%;z-index: 1;}
+
+
+.clearIntroduce {
+  width: 150rpx;
+  height: 60rpx;
+  color: #0099FF;
+  background: #F8F8F8;
+  text-align: center;
+  line-height: 60rpx;
+  font-size: 26rpx;
+  margin-left: 25rpx;
+}

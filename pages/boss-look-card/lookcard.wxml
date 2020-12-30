@@ -4,8 +4,8 @@
     <view class="header"  wx:if="{{status == 0}}">
       注:老板对找活者满意，可直接与他联系、点赞、转发
     </view>
-    <view class="header" wx:if="{{status == 1}}" >
-      注:分享名片 让您的名片排名更靠前
+    <view class="header my-header" wx:if="{{status == 1}}" >
+      置顶找活名片，让排名更靠前 被更多老板看到
     </view>
   </view>
   <view class="findingnamecardthree">
@@ -40,8 +40,14 @@
         </view>
         <view class="lineone">
           <view class="linezo">
+            <!-- 工龄 -->
+            <view class="cardotext" wx:if="{{workingyears != '0'}}">
+              <text class="oworkotext">工龄</text>
+              <text class="workotextone">{{workingyears}}年</text>
+            </view>
+            <!-- 联系电话 -->
             <view class="cardotext">
-              <text class="oworkotext">手机</text>
+              <text class="oworkotext">联系电话</text>
               <view class="allone">
                 <text class="workotextone">{{telephone}}</text>
                 <view class="cliok" wx:if="{{!examine&&onoff || is_read ==0&&is_end !=2&&!examine&&status == 0}}">
@@ -61,11 +67,7 @@
                 </view>
               </view>
             </view>
-            <view class="cardotext" wx:if="{{cityself}}">
-              <text class="oworkotext">我的家乡</text>
-              <text class="workotextone">{{cityself}}</text>
-            </view>
-
+            <!-- 工种 -->
             <view class="cworkotype ({{occupations.length == 0?'skillcss':''}})" wx:if="{{occupations}}">
               <view class="ocworkotype">工种</view>
               <view class="ocworkotypeoo">
@@ -79,24 +81,14 @@
                 </view>
               </view>
             </view>
-            <view class="cardotext" wx:if="{{workingyears}}">
-              <text class="oworkotext">工龄</text>
-              <text class="workotextone">{{workingyears}}</text>
+            <!-- 期望工作地 -->
+            <view class="cardotext" wx:if="{{provinces_txt}}">
+              <text class="oworkotext">期望工作地</text>
+              <text class="workotextone">{{provinces_txt}}</text>
             </view>
-            <view class="cardotext" wx:if="{{procity}}">
-              <text class="oworkotext">熟练度</text>
-              <text class="workotextone">{{procity}}</text>
-            </view>
-            <view class="cardotext" wx:if="{{staffcomposition}}">
-              <text class="oworkotext">人员构成</text>
-              <text class="workotextone">{{staffcomposition}}</text>
-            </view>
-            <view class="cardotext" wx:if="{{personnum && personnum !=1&& personnum !=0}}">
-              <text class="oworkotext">队伍人数</text>
-              <text class="workotextone">{{personnum}}</text>
-            </view>
-            <view class="cardotext" wx:if="{{city}}">
-              <text class="oworkotext">期望地区</text>
+             <!-- 当前所在地 -->
+             <view class="cardotext" wx:if="{{city}}">
+              <text class="oworkotext">当前所在地</text>
               <view class="distancev" bindtap="showThisMapInfo">
                 <text class="({{location&&status == 0&& distance != ''?'workotextone':'zong'}})">{{city}}</text>
                 <view class="distanceo" wx:if="{{location&&status == 0&& distance != '' }}">
@@ -105,8 +97,27 @@
                 </view>
               </view>
             </view>
+             <!-- 人员构成 -->
+             <view class="cardotext" wx:if="{{staffcomposition}}">
+              <text class="oworkotext">人员构成</text>
+              <text class="workotextone">{{staffcomposition}}</text>
+            </view>
+            <!-- 队伍人数 -->
+            <view class="cardotext" wx:if="{{personnum && personnum !=1&& personnum !=0}}">
+              <text class="oworkotext">队伍人数</text>
+              <text class="workotextone">{{personnum}}</text>
+            </view>
 
-            <view class="cardotext" wx:if="{{tags.length !=0 }}">
+
+            <!-- 熟练度 -->
+            <!-- <view class="cardotext" wx:if="{{procity}}">
+              <text class="oworkotext">熟练度</text>
+              <text class="workotextone">{{procity}}</text>
+            </view> -->
+           
+           
+            <!-- 标签 -->
+            <!-- <view class="cardotext" wx:if="{{tags.length !=0 }}">
               <text class="oworkotext">标签</text>
               <view class="alllabletu" wx:if="{{tags != '未填写'}}">
                 <view class="labletu" wx:for="{{tags}}" wx:key="{{index}}">
@@ -116,7 +127,7 @@
               <view class="alllabletu" wx:if="{{tags == '未填写'}}">
                 <text class="tagsone">{{tags}}</text>
               </view>
-            </view>
+            </view> -->
           </view>
 
         </view>

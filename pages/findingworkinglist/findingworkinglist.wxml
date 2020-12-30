@@ -125,26 +125,27 @@
                 <view class="listsboxagezong" wx:if="{{item.birthday != 0}}">
                   <text>{{item.birthday}}岁</text>
                 </view>
-
-
-                <!-- <image wx:if="{{item.authentication == 2}}" src="{{realNames}}"></image> -->
-
-
-
                 <image wx:if="{{item.certificate == 1}}" src="{{authentication}}"></image>
+              </view>
 
-              </view>
-              <view class="listsboxagetwo" wx:if="{{item.nation || item.prof_degree}}">
+              <view class="listsboxagetwo" wx:if="{{item.nation || item.experience}}">
                 <text class="listsboxnation" wx:if="{{item.nation}}">{{item.nation}}</text>
-                <text wx:if="{{item.prof_degree}}" >{{item.prof_degree}}</text>
+                <!-- <text wx:if="{{item.prof_degree}}" >{{item.prof_degree}}</text> -->
+                <text wx:if="{{item.experience_num != '0'}}">工龄:{{item.experience_num}}年</text>
               </view>
-              <view class="listsboxagetwot" wx:if="{{!item.nation && !item.prof_degree}}">
+
+              <view class="listsboxagetwot dsad123" wx:if="{{!item.nation && !item.prof_degree && item.label_name}}">
                 <text wx:for="{{item.tags}}" wx:key="index">{{item.label_name}}</text>
               </view>
+              
+              <view class="listsboxagetwo" wx:if="{{item.provinces_str}}">
+                <text>期望工作地：{{item.provinces_str}}</text>
+              </view>
+
             </view>
             <view class="listsboxshow" wx:if="{{item.type}}">{{item.type}}</view>
           </view>
-            <text class="listsboxstyru" catchtap="jumptop" wx:if="{{item.resume_top == 1}}">我要置顶</text>
+            <text class="listsboxstyru" catchtap="valiUserCard" wx:if="{{item.resume_top == 1}}">我要置顶</text>
             <image class="listsboxoimg" src="{{toptown}}" wx:if="{{item.resume_top == 1}}"></image>
         </view>
         <view class="listsboxlable">
@@ -156,11 +157,11 @@
         <view class="listsboxlocal">
           <view>
             <view class="listsboxlocalone">
-              <view>
+              <view wx:if="{{item.current_area_str}}">
                 <image src="{{biaoqian}}"></image>
               </view>
-              <view class="listsboxadree" wx:if="{{item.show_address}}">{{item.show_address}}</view>
-              <view class="listsboxadreeq" wx:if="{{item.distance}}">{{item.distance}}</view>
+              <view class="listsboxadree" wx:if="{{item.current_area_str}}">{{item.current_area_str}}</view>
+              <view class="listsboxadreeq" wx:if="{{item.new_distance && item.current_area_str}}">{{item.new_distance}}</view>
             </view>
           </view>
           <view class="listsboxlocaltwo">
@@ -193,7 +194,7 @@
       
       <block wx:if="{{isNullStatus == 1}}">
         <text class="btn-tips-text">还可以发布招工，让工人主动来找我～</text>
-        <text bindtap='publishJob' class="text-btn">去发布</text>
+        <text bindtap='toIssueRecruit' class="text-btn">去发布</text>
       </block>
     </view>
   </view>
@@ -206,9 +207,9 @@
 
 <!-- <view class='bottompublishbtn' bindtap='valiUserCard'>{{resumeText}}</view> -->
 
-<view class='fixed-get-integral'  bindtap='jumprull'>
+<!-- <view class='fixed-get-integral'  bindtap='jumprull'>
         <image src='{{ rullIntegral }}'></image>
-</view>
+</view> -->
 
 <!-- <button class='fixed-get-integral-btn'  open-type="share" >
         <image src='http://cdn.yupao.com/miniprogram/images/list-share-btn.png?t=111'></image>

@@ -43,7 +43,8 @@ Page({
     deletestatus:true,
     model:{},
     checkonef:"",
-    maximg: 6
+    maximg: 6,
+    reqStatus: true
   },
   hiddenKeyBoard: function () {
     wx.hideKeyboard()
@@ -128,10 +129,17 @@ Page({
     this.setData({
       detail: e.detail.value
     })
-
-    this.setData({
-      detailength: e.detail.value.length
-    })
+    if(e.detail.value.length > 500){
+      let str = e.detail.value.substring(0,500)
+      this.setData({
+        detail: str,
+        detailength: 500
+      })
+    }else{
+      this.setData({
+        detailength: e.detail.value.length
+      })
+    }
   },
   bindstartDate(e) {
     this.setData({
@@ -889,7 +897,7 @@ Page({
       })
       return
     }
-
+    this.setData({ reqStatus: false })
     app.appRequestAction({
       url: 'resumes/project/',
       way: 'POST',
@@ -902,9 +910,10 @@ Page({
         }else{
           app.showMyTips(res.data.errmsg);
         }
-        
+        that.setData({ reqStatus: true })
       },
       fail: function (err) {
+        that.setData({ reqStatus: true })
         app.showMyTips("保存失败");
       }
     })

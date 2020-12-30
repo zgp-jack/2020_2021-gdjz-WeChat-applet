@@ -63,7 +63,8 @@ Page({
       link:'/pages/clients-looking-for-work/finding-name-card/findingnamecard',
     },
     //是否显示去充值
-    showRecharge:false
+    showRecharge:false,
+    hotImg: app.globalData.apiImgUrl+'ws/ucenter-pointer-hot.png'
   },
   //获取广告数据
   getAdvertising: function () {
@@ -137,11 +138,11 @@ Page({
           //点击收藏跳转地址 有招工跳转招工 有找活没招工跳转找活  都没有跳转招工
           if(mydata.member.resume_collect_count > 0 && mydata.member.job_collect_count == 0){
             _this.setData({
-              toCollectUrl:'/pages/collect/resume/resume'
+              toCollectUrl:'/packageOther/pages/collect/resume/resume'
             })
           }else {
             _this.setData({
-              toCollectUrl:'/pages/collect/info/info'
+              toCollectUrl:'/packageOther/pages/collect/info/info'
             })
           }
           //根据条件显示招工banner
@@ -182,7 +183,7 @@ Page({
             case 'to_top':
               _this.setData({
                 'resumeBanner.banner':app.globalData.apiImgUrl+'ws/bannerqz.png',
-                'resumeBanner.link':'/pages/clients-looking-for-work/workingtop/workingtop?datatop=1'
+                'resumeBanner.link':'/pages/clients-looking-for-work/workingtop/workingtop'
               })
               break
             case 'to_edit_top':
@@ -249,7 +250,7 @@ Page({
             success: function (res) {
               if (res.confirm) {
                 wx.navigateTo({
-                  url: '/pages/clients-looking-for-work/finding-name-card/findingnamecard',
+                  url: '/pages/jsIssueResume/index',
                 })
               }
             }
@@ -280,6 +281,19 @@ Page({
       if (url === '/pages/findwork-browsing-record/recordlist/index') {
         // 没有找活名片给出去发布找活名片提示信息,有找活名片前往浏览记录
         this.reqRecordData()
+      }else if(url === '/pages/clients-looking-for-work/finding-name-card/findingnamecard'){
+        app.initResume(this,function (res){
+          if(res){
+            app.globalData.showdetail = true
+            wx.navigateTo({
+              url: url,
+            })
+          }else{
+            wx.navigateTo({
+              url: '/pages/jsIssueResume/index',
+            })
+          }
+        })
       }else{
         app.globalData.showdetail = true
         app.valiUserUrl(e, this.data.userInfo)

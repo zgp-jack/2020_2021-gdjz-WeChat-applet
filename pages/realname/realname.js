@@ -9,7 +9,7 @@ Page({
   data: {
     check_modify: false,
     card_img_path: "http://cdn.yupao.com/miniprogram/images/lpy/auth/idcard-l.png?t=" + new Date().getTime(),
-    handone_img_path: "http://cdn.yupao.com/miniprogram/images/lpy/auth/idcard-z.png?t=" + new Date().getTime(),
+    handone_img_path: app.globalData.apiImgUrl + 'ws/realname-2.png',
     card_img_status: app.globalData.apiImgUrl + "lpy/auth/idcard-bkqs.png",
     card_img_array: [app.globalData.apiImgUrl + "lpy/auth/idcard-yes.png", app.globalData.apiImgUrl + "lpy/auth/idcard-bkqs.png", app.globalData.apiImgUrl + "lpy/auth/idcard-qs.png", app.globalData.apiImgUrl + "lpy/auth/idcard-sg.png"],
     card_img_content: ["标准", "边框缺失", "照片模糊", "闪光强烈"],
@@ -41,7 +41,8 @@ Page({
     maxCount: 3,
     codeTips: "获取验证码",
     status: 1,
-    idcardz: "http://cdn.yupao.com/miniprogram/images/lpy/auth/idcard-z.png?t=" + new Date().getTime(),
+    // idcardz: "http://cdn.yupao.com/miniprogram/images/lpy/auth/idcard-z.png?t=" + new Date().getTime(),
+    idcardz:app.globalData.apiImgUrl + 'ws/realname-2.png',
     idcardf: "http://cdn.yupao.com/miniprogram/images/lpy/auth/idcard-l.png?t=" + new Date().getTime(),
     showWorkType: false,
     areaText: "",
@@ -608,11 +609,11 @@ Page({
     //   return false;
     // }
     if (member.id_card_img == "") {
-      app.showMyTips("请上传身份证人像照！");
+      app.showMyTips("请上传身份证人像面！");
       return false;
     }
     if (member.hand_img == "") {
-      app.showMyTips("请上传手持身份证照！");
+      app.showMyTips("请上传身份证国徽面！");
       return false;
     }
 

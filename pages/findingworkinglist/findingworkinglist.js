@@ -472,26 +472,16 @@ Page({
 
   initNeedData: function () {
     let _this = this;
-    let _mark = true;
-    let _wx = wx.getStorageSync("resume_wx");
     let userInfo = wx.getStorageSync("userInfo");
     this.setData({ userInfo: userInfo ? userInfo : false })
-    let _time = Date.parse(new Date());
-    if (_wx && _wx.expirTime) {
-      if (parseInt(_wx.expirTime) > _time) _mark = false;
-    }
     app.getNoticeInfo(userInfo,function(mydata){
       _this.setData({
         "notice.lists": mydata.notice,
         member_less_info: mydata.member_less_info,
         phone: mydata.phone,
-        wechat: _mark ? mydata.wechat.number : (_wx.wechat ? _wx.wechat : mydata.wechat.number),
+        wechat: mydata.wechat.number,
         joingroup: mydata.join_group_config
       })
-      if (_mark) {
-        let extime = _time + (mydata.wechat.outTime * 1000);
-        wx.setStorageSync("resume_wx", { wechat: mydata.wechat.number, expirTime: extime });
-      }
     })
   },
   errImg: function (e) {
@@ -821,11 +811,19 @@ Page({
     }
     if (app.globalData.allTypes) {
       _this.setData({ fillterType: app.globalData.allTypes.classTree, fillterTeam: app.globalData.allTypes.staffTree, fillterNewest: app.globalData.allTypes.resumeListType });
-      if (_this.data.fillterType.length == 1) _this.setData({ typeText: _this.data.fillterType[0].name })
+      if (_this.data.fillterType.length == 1) {
+        _this.setData({ typeText: _this.data.fillterType[0].name })
+        wx.setStorageSync('typeTextgr',_this.data.fillterType[0].name)
+        wx.setStorageSync('typeIdgr',_this.data.fillterType[0].id)
+      }
     } else {
       app.getListsAllType(function (_data) {
         _this.setData({ fillterType: _data.classTree, fillterTeam: _data.staffTree, fillterNewest: _data.resumeListType })
-        if (_this.data.fillterType.length == 1) _this.setData({ typeText: _this.data.fillterType[0].name })
+        if (_this.data.fillterType.length == 1) {
+          _this.setData({ typeText: _this.data.fillterType[0].name })
+          wx.setStorageSync('typeTextgr',_this.data.fillterType[0].name)
+          wx.setStorageSync('typeIdgr',_this.data.fillterType[0].id)
+        }
       });
     }
   },

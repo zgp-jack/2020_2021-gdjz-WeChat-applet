@@ -121,6 +121,7 @@
       <view class="commonly-icon-box">
         <view  bindtap="valiUserUrl" wx:if="{{showRecharge}}" data-url="/pages/recharge/recharge">
           <image src="{{Recharge}}"></image>
+          <image src="{{hotImg}}" class="hotImg"></image>
           <text>积分充值</text>
         </view>
         <view bindtap="valiUserUrl" data-url="../getintegral/getintegral">
@@ -176,11 +177,11 @@
     <text class="title">其他功能</text>
     <view class="icon-content">
       <view class="commonly-icon-box"> 
-        <view bindtap="valiUserUrl" data-url="../realname/realname">
+        <view bindtap="valiUserUrl" data-url="../realname/realname" wx:if="{{ showAuthor }}">
           <image src="{{Verified}}"></image>
           <text>实名认证</text>
         </view>
-        <view data-url="/packageOther/pages/query/query" bindtap="valiUserUrl">
+        <view data-url="/packageOther/pages/query/query" bindtap="valiUserUrl" wx:if="{{ showAuthor }}">
           <image class="verifiedquery" src="{{verifiedquery}}"></image>
           <text>实名查询</text>
         </view>

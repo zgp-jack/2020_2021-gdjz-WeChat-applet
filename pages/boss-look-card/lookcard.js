@@ -113,7 +113,10 @@ Page({
     child: 0,
     user_id: '',
     teltipsimg: app.globalData.apiImgUrl + 'usercallphone-tips.png',
-    infoId:''
+    infoId:'',
+    experience:'',
+    provinces_txt:'',
+    _address:''
   },
   closeNewPhoneFc:function(){
     this.setData({shownewtips: false})
@@ -515,11 +518,11 @@ Page({
             uuid: mydata.info.hasOwnProperty('uuid') ? mydata.info.uuid : '',
             telephone: mydata.info.hasOwnProperty("tel") ? mydata.info.tel : "",
             sharetelephone: mydata.info.hasOwnProperty("tel") ? mydata.info.tel : "",
-            city: mydata.info.hasOwnProperty("address") ? mydata.info.address : "",
+            city: mydata.info.hasOwnProperty("current_area_str") ? mydata.info.current_area_str : "",
             intro: false,
             introne: true,
             introduce: mydata.info.hasOwnProperty("introduce") ? mydata.info.introduce : "",
-            workingyears: mydata.info.hasOwnProperty("experience") ? mydata.info.experience : "",
+            workingyears: mydata.info.hasOwnProperty("experience_num") ? mydata.info.experience_num : "",
             staffcomposition: mydata.info.hasOwnProperty("type_str") ? mydata.info.type_str : "",
             cityself: mydata.info.hasOwnProperty("hometown") ? mydata.info.hometown : "",
             procity: mydata.info.hasOwnProperty("prof_degree_str") ? mydata.info.prof_degree_str : "未填写",
@@ -530,7 +533,7 @@ Page({
             collect: mydata.operation.hasOwnProperty("is_collect") ? mydata.operation.is_collect : "",
             status: mydata.operation.hasOwnProperty("status") ? mydata.operation.status : "",
             is_read: mydata.info.hasOwnProperty("is_read") ? mydata.info.is_read : "",
-            distance: mydata.info.hasOwnProperty("distance") ? mydata.info.distance == "" ? "" : mydata.info.distance : "",
+            distance: mydata.info.hasOwnProperty("new_distance") ? mydata.info.new_distance == "" ? "" : mydata.info.new_distance : "",
             location: mydata.info.hasOwnProperty("location") ? mydata.info.location : "",
             is_end: mydata.info.hasOwnProperty("is_end") ? mydata.info.is_end : "",
             examine: false,
@@ -538,7 +541,10 @@ Page({
             certificate_show: mydata.info.hasOwnProperty("certificate_show") ? mydata.info.certificate_show : "",
             authenticationimg: mydata.info.hasOwnProperty("authentication") ? mydata.info.authentication : "",
             userId: mydata.info.user_id,
-            infoId: mydata.info.id
+            infoId: mydata.info.id,
+            experience:mydata.info.hasOwnProperty("experience") ? mydata.info.experience : '',
+            provinces_txt:mydata.info.hasOwnProperty("provinces_txt") ? mydata.info.provinces_txt : '',
+            _address:mydata.info.hasOwnProperty("address") ? mydata.info.address : '',
           })
 
           // 加载推荐列表

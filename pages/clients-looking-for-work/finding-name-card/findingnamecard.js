@@ -122,22 +122,42 @@ Page({
     is_top_show:true,
     default_top_area:false,
     userTopArea:[],//初始化用户置顶城市数据
-    showFindCard:false, //是否展示找活名片
-    fastInfo:{},//快速发布招工信息
     pulishFindWork:false,//展示发布成功提示框
     publishWay: false,//是否展示发布置顶弹窗（有两个弹窗只会弹其中一个）
-    showTip: true,//快速找活名片展示多次onshow只进行一次设置
     refreshText: '',//刷新名片文本
     integral:'',//刷新消耗积分
     // 刷新提示框提示内容
-    tipContent: [{
-      des: '刷新成功',
-      color: '#585963',
-      text:[]
-    }],
+    tipBox: {//提示框显示信息
+      title: '',
+      showTitle: true,
+      showIcon: false,
+      showCancel: true,
+      confirmColor:'',
+      cancelColor:'',
+      content: [{
+        des: '',
+        color: '',
+        text:[],
+      }],
+      confirmText: '',
+      cancelText: '',
+      showClose: false
+    },
     // 刷新成功icon
     successIcon:app.globalData.apiImgUrl + 'yc/findwork-publish-success.png',
     reqStatus:false,//刷新请求状态
+    show_refresh_btn:true,//是否展示刷新名片
+    dayfirst: false, //是否是当天第一次从置顶界面返回（未成功置顶）
+    todayRefresh: 0,//是否是当天第一次刷新
+    provinces_txt:"",//期望工作地
+    boxStatus: 0,//弹窗类型 如果是从快速发布成功到找活名片 1 有找活名片且未置顶当天未刷新 2 正常刷新 3 找活名片置顶未成功返回 4 其他 0
+    province:0,//省id
+    refresh: false,//是否显示提示刷新弹窗，如果置顶页面置顶成功返回会设置成true，不展示刷新弹窗
+    projectCheckLen:0,
+    projectCheck: false,//项目经验审核状态，有一个项目经验审核通过就视为通过，否则未通过
+    showRefreshToBox: false,//当有个人资料项目经验技能证书有审核失败，优先展示审核失败弹窗，点击失败确定按钮展示刷新置顶弹窗 true 展示刷新置顶  false 展示审核失败
+    dataInfo:{},//我的找活名片请求返回的信息集合
+    showCheckFailBox: false,//是否显示了审核失败弹窗
   },
 
 
@@ -168,10 +188,8 @@ Page({
       })
       return
     }
-    let topdata = JSON.stringify(that.data.resume_top);
-    let modify = "modify";
     wx.navigateTo({
-      url: `/pages/clients-looking-for-work/workingtop/workingtop?topdata=${topdata}&modify=${modify}`,
+      url: `/pages/clients-looking-for-work/workingtop/workingtop`,
     })
 
   },
@@ -197,9 +215,10 @@ Page({
       success(res) {
         let mydata = res.data;
         if (mydata.errcode == "ok") {
-          that.getdetail()
+          // that.getdetail()
           that.setData({
-            top_status_one: mydata.data.top_data.top_status
+            top_status_one: mydata.data.top_data.top_status,
+            "resume_top.is_top": mydata.data.top_data.is_top
           })
           wx.showModal({
             title: '温馨提示',
@@ -269,9 +288,6 @@ Page({
     let that = this;
     // 获取是否可以置顶的文案
     let contentom = that.data.top_tips_string
-    // 如果需要去完善数据跳转去发布填写找活名片界面
-    let topdata = JSON.stringify(that.data.resume_top)
-    let defalutTop = that.data.default_top_area
     if (that.data.showtop) {
       wx.showModal({
         title: '温馨提示',
@@ -297,8 +313,9 @@ Page({
       return
     //如果有找活名片信息跳转去招工置顶界面
     } else {
+      app.globalData.showdetail = false
       wx.navigateTo({
-        url: "/pages/clients-looking-for-work/workingtop/workingtop?topdata=" + topdata + "&defaulttop=" + defalutTop,
+        url: "/pages/clients-looking-for-work/workingtop/workingtop",
       })
     }
   },
@@ -332,6 +349,7 @@ Page({
       showModal: false,
       display: "none"
     })
+    this.showTopRefresh(this.data.dataInfo)
   },
   rulepoit() {
     // let rulestatus =  this.data.checkonef
@@ -366,24 +384,39 @@ Page({
     })
   },
   completeall() {
-
-    if (!this.data.resume_uuid) {
+    if (this.data.check != '0' && this.data.project.length < 1 ) {
       wx.navigateTo({
-        url: '/pages/clients-looking-for-work/essential-information/esinformation',
-      })
-    } else if (this.data.is_introduces == 0) {
-      wx.navigateTo({
-        url: '/pages/clients-looking-for-work/work-description/workdescription',
-      })
-    } else if (this.data.project.length == 0) {
-      wx.navigateTo({
-        url: "/pages/clients-looking-for-work/new-project-experience/projectexperience",
-      })
-    } else if (this.data.skillbooks.length == 0) {
-      wx.navigateTo({
-        url: "/pages/clients-looking-for-work/addcertificate/addcertificate",
+        url: '/pages/clients-looking-for-work/new-project-experience/projectexperience?project_count='+this.data.project_count+'&certificate_count='+this.data.certificate_count+'&resume_uuid='+this.data.resume_uuid,
       })
     }
+    if (this.data.check == '0') {
+      wx.navigateTo({
+        url: `/pages/clients-looking-for-work/essential-information/esinformation?type=bj`,
+      })
+    }
+    if (this.data.check != '0' &&　this.data.project.length>0 && !this.data.projectCheckLen) {
+      wx.navigateTo({
+        url: `/pages/clients-looking-for-work/all-project-experience/allexperience`,
+      })
+    }
+    if (!this.data.resume_uuid) {
+      wx.navigateTo({
+        url: '/pages/jsIssueResume/index',
+      })
+    } 
+    // else if (this.data.is_introduces == 0) {
+    //   wx.navigateTo({
+    //     url: '/pages/clients-looking-for-work/essential-information/esinformation',
+    //   })
+    // } else if (this.data.project.length == 0) {
+    //   wx.navigateTo({
+    //     url: "/pages/clients-looking-for-work/new-project-experience/projectexperience",
+    //   })
+    // } else if (this.data.skillbooks.length == 0) {
+    //   wx.navigateTo({
+    //     url: "/pages/clients-looking-for-work/addcertificate/addcertificate",
+    //   })
+    // }
   },
   redorblue() {
     if (this.data.resume_uuid && this.data.is_introduces != 0 && this.data.project.length != 0 && this.data.skillbooks.length != 0) {
@@ -559,9 +592,8 @@ Page({
     })
   },
   edit(e) {
-
     wx.navigateTo({
-      url: '/pages/clients-looking-for-work/essential-information/esinformation',
+      url: '/pages/clients-looking-for-work/essential-information/esinformation?type='+e.currentTarget.dataset.type,
     })
   },
   addproject() {
@@ -645,8 +677,8 @@ Page({
       return
     }
     let that = this;
+    app.globalData.previewshou = false;
     app.userUploadImg(function (img, url) {
-
       wx.hideLoading()
       that.data.imgArrs = url.httpurl
       that.data.importimg = url.url
@@ -707,8 +739,9 @@ Page({
      
         let mydata = res.data.data;
         if (res.data.errcode == 200) {
+          that.noTopTipBox(res.data.data)
+          that.showTopRefresh(res.data.data)
           for (let i = 0; i < mydata.project.length; i++) {
-
             if (mydata.project[i].check == 1) {
               that.setData({
                 checkthree: true,
@@ -766,17 +799,12 @@ Page({
             that.showtop()
             that.setData({
               resume_uuid: mydata.info.uuid,
-              showFindCard: true,
             })
             wx.setStorageSync("uuid", mydata.info.uuid)
           } else {
-            if (that.data.showTip) {
-              that.selectComponent("#pulishfindwork").show()
-            }
             that.setData({
               showtop: true,
               showtopone: false,
-              showTip: false
             })
           }
 
@@ -806,17 +834,19 @@ Page({
           }
           let cityid = mydata.info.hasOwnProperty("city")? parseInt(mydata.info.city) : 0
           let province = mydata.info.hasOwnProperty("province") ? mydata.info.province : 0
-          let fastInfo = mydata.hasOwnProperty('fast_info')?((Array.isArray(mydata.fast_info) && mydata.fast_info.length === 0)? {} : mydata.fast_info): {}
 
           that.setData({
-            occupations_id: mydata.info.hasOwnProperty("occupations_id")?mydata.info.occupations_id : '',	
+            occupations_id: mydata.info.hasOwnProperty("occupations_id")?mydata.info.occupations_id : '',
+            province: province,
+            dataInfo: mydata,
             cityid: cityid || province,
             show_tips: mydata.hasOwnProperty("content") ? mydata.content.show_tips : "",
             name: mydata.info.hasOwnProperty("username") ? mydata.info.username : "",
             nation: mydata.info.hasOwnProperty("nation") ? mydata.info.nation : "",
             occupations: mydata.info.hasOwnProperty("miniInfoOccupations") ? mydata.info.miniInfoOccupations : "",
             telephone: mydata.info.hasOwnProperty("tel") ? mydata.info.tel : "",
-            city: mydata.info.hasOwnProperty("address") ? mydata.info.address : "",
+            city: mydata.info.hasOwnProperty("current_area_str") ? mydata.info.current_area_str : "",
+            provinces_txt:mydata.info.hasOwnProperty("provinces_txt") ? mydata.info.provinces_txt : "",
             intro: false,
             introne: true,
             introduce: mydata.info.hasOwnProperty("introduce") ? (mydata.info.introduce == "" ? "请简要介绍您所从事行业以及工作经验..." : mydata.info.introduce) : "",
@@ -844,11 +874,12 @@ Page({
             default_top_area: mydata.hasOwnProperty("default_top_area")?mydata.default_top_area : false,
             refreshText: mydata.hasOwnProperty("refresh_text")?mydata.refresh_text:'',
             integral: mydata.hasOwnProperty("integral")?mydata.integral:'',
-            fastInfo: fastInfo 
           })
+          if (mydata.hasOwnProperty("is_refreshed_today")) {
+            app.globalData.dayFirstRefresh = mydata.is_refreshed_today
+          }
           if (mydata.hasOwnProperty("resume_top")) {
             if (mydata.resume_top.is_top == 1) {
-              
               that.setData({
                 indextop: 0,
                 is_top_show: false,
@@ -874,6 +905,7 @@ Page({
             selectDatatop: selectDtop,
             selectktop: selectktop
           })
+
 
           if (mydata.hasOwnProperty("resume_top")) {
 
@@ -944,6 +976,8 @@ Page({
           
             // 获取项目经验对象
             let project = mydata.project;
+            let projectCheckLen = project.some(item=> item.check == '2')
+            that.setData({ projectCheckLen })
             // 定义有图片项目数组
             let hasImageProject = [];
             // 定义没图片的数组
@@ -1080,9 +1114,9 @@ Page({
               //   success(res) {
               //   }
               // })
-
               that.setData({
                 showModal: true,
+                showCheckFailBox: true,
                 display: "block",
                 popup: popup
               })
@@ -1113,6 +1147,9 @@ Page({
           that.redorblue()
           that.showskill();
           that.gettiner()
+          that.setData({
+            show_refresh_btn:mydata.show_refresh_btn
+          })
         } else {
           wx.showModal({
             title: '温馨提示',
@@ -1285,26 +1322,109 @@ Page({
       top_display: "none",
     })
   },
-  // 点击快速发布找活名片取消按钮显示找活名片详情
-  cancelPublish: function () {
-    this.setData({ showFindCard: true })
+  // 刷新页面子组件调用方法
+  // refreshPage: function () {
+  //   // 将是否展示发布成功提示框设置为true（要展示）
+  //   this.setData({ pulishFindWork:true, publishWay:true, })
+  //   // 展示发布成功弹窗
+  //   this.showPublishTip()
+  // },
+
+  // 有找活名片且正在招没有置顶弹窗
+  showBox: function () {
+    this.setData({
+      "tipBox.title": "温馨提示",
+      "tipBox.content[0].des":"您的找活名片排名靠后，您可以去刷新或置顶找活名片，让老板主动来联系您。",
+      "tipBox.confirmText": "去刷新",
+      "tipBox.cancelText": "去置顶",
+      "tipBox.showClose" : true,
+      "tipBox.cancelColor" : "#797979",
+      "tipBox.confirmColor" : "#0097FF",
+    })
+    this.selectComponent("#promptbox").show()
   },
-  // 刷新页面issok子组件调用方法
-  refreshPage: function () {
-    // 将是否展示发布成功提示框设置为true（要展示）
-    this.setData({pulishFindWork:true, publishWay:true, showFindCard: true,})
-    // 重新获取数据
-    this.getdetail();
-    // 展示发布成功弹窗
-    this.showPublishTip()
+
+
+  // 有找活名片且正在招没有置顶弹窗判断逻辑
+  showTopRefresh: function (data) {
+    // 置顶数据
+    let topData = data.resume_top;
+    // 判断是否在置顶中 0 没有置顶或者取消置顶 1 置顶中 2 置顶到期
+    let isTop = topData.is_top;
+    // 取消弹窗后不展示弹窗时间
+    let day = Number(data.cancel_refresh_top_expire_days);
+    // 找活名片审核状态 2 审核通过 1 正在审核 0 审核未通过
+    let check = data.info.check;
+    // 找活名片招工状态 1 正在招 2 已招满 
+    let isEnd = data.info.is_end;
+    // 是否有找活名片 
+    let isResume = data.info.hasOwnProperty("uuid")? true: false; 
+    // 当天是否刷新
+    let todayRefresh = data.is_refreshed_today;
+    // 点击关闭弹窗的时间戳
+    let haveCardCloseBox = wx.getStorageSync("haveCardCloseBox");
+    //弹窗类型 如果是从快速发布成功到找活名片 1 有找活名片且未置顶当天未刷新 2 正常刷新 3 找活名片置顶未成功返回 4 其他 0
+    let boxStatus = this.data.boxStatus;
+    // 项目经验的是否全部审核
+    let projectCheck = data.project.some(item => item.check == '0')
+    // 审核失败弹窗是否显示状态
+    let showCheckFailBox = this.data.showCheckFailBox;
+    // 技能证书是否全部审核
+    let skillCheck = data.certificates.some(item => item.check == '0')
+    if ( check == '0' || projectCheck || skillCheck ) {
+      if (showCheckFailBox) {
+        this.setData({ showRefreshToBox: true })
+      }
+    }else{
+      this.setData({ showRefreshToBox: true })
+    }
+    // 当前时间戳
+    let currentTime = new Date().getTime();
+    if ( isResume && check == '2' && isEnd == '1' && isTop != '1' && !todayRefresh && boxStatus != 1 &&　this.data.showRefreshToBox) {
+      if (!haveCardCloseBox) {
+        wx.setStorageSync("haveCardCloseBox",currentTime)
+        if ( boxStatus == 4 ) {
+          this.setData({ boxStatus: 0 })
+        }else{ 
+          this.setData({ boxStatus: 2 })
+          this.showBox()
+        }
+      }else{
+        let dueTime = haveCardCloseBox + day * 24 * 60 * 60 * 1000 - 1
+        if (currentTime > dueTime) {
+          wx.setStorageSync("haveCardCloseBox",currentTime)
+          if ( boxStatus == 4 ) {
+            this.setData({ boxStatus: 0 })
+          }else{
+            this.setData({ boxStatus: 2 })
+            this.showBox()
+          }
+        }
+      }
+      
+    }
   },
   // 展示发布成功界面
   showPublishTip: function () {
-    let pulishFindWork = this.data.pulishFindWork;
-    if (pulishFindWork) {
-      this.selectComponent("#publishtip").show()
-      this.setData({pulishFindWork:false})
+    let boxStatus = this.data.boxStatus;
+    if (boxStatus == 1 ) {
+      this.setData({
+        "tipBox.title": "发布成功",
+        "tipBox.content[0].des":"置顶找活名片，让更多老板能看到你，找更多活！",
+        "tipBox.confirmText": "去置顶",
+        "tipBox.cancelText": "查看招工信息",
+        "tipBox.showClose" : true,
+        "tipBox.cancelColor" : "#797979",
+        "tipBox.confirmColor" : "#0097FF",
+      })
+      this.selectComponent("#promptbox").show()
     }
+  },
+  //去实名
+  goRealName:function(){
+    wx.navigateTo({
+      url: '/pages/realname/realname',
+    })
   },
   
   // 刷新找活名片
@@ -1371,12 +1491,163 @@ Page({
       }
     }
   },
+  // 点击弹窗取消按钮
+  tapCancel: function () {
+    // 直辖市
+    let municipality = app.globalData.municipality;
+    // 省id或者直辖市id
+    let province = this.data.province;
+    //弹窗类型 如果是从快速发布成功到找活名片 1 有找活名片且未置顶当天未刷新 2 正常刷新 3 找活名片置顶未成功返回 4 其他 0
+    let boxStatus = this.data.boxStatus;
+    let index = municipality.findIndex(item=>item.id == province)
+    let cityid = index == -1 ? this.data.cityid:province;
+    let occupations_id = this.data.occupations_id.split(",")[0];
+    if (boxStatus == 1 || boxStatus == 3) {
+      wx.reLaunch({
+        url: `/pages/index/index?aid=${cityid}&id=${occupations_id}`,
+      })
+      this.setData({ boxStatus: 0 })
+    }
+    if(boxStatus == 2){
+      let currentTime = new Date().getTime();
+      wx.setStorageSync("haveCardCloseBox",currentTime)
+      wx.navigateTo({
+        url: `/pages/clients-looking-for-work/workingtop/workingtop`,
+      })
+      this.setData({ boxStatus: 0 })
+    }
+  },
+  // 点击弹窗的关闭按钮
+  tapClose: function () {
+    let currentTime = new Date().getTime();
+    //弹窗类型 如果是从快速发布成功到找活名片 1 有找活名片且未置顶当天未刷新 2 正常刷新 3 找活名片置顶未成功返回 4 其他 0
+    let boxStatus = this.data.boxStatus
+    if (boxStatus == 1) {
+      this.setData({ boxStatus: 0 })
+      // 发布成功弹窗点击关闭按钮也要设置情况为2的弹窗时间缓存
+      wx.setStorageSync("haveCardCloseBox",currentTime)
+    }
+    if (boxStatus == 2) {
+      wx.setStorageSync("haveCardCloseBox",currentTime)
+      this.setData({ boxStatus: 0 })
+    }
+  },
+  // 点击弹窗确定按钮
+  tapConfirm: function () {
+    //弹窗类型 如果是从快速发布成功到找活名片 1 有找活名片且未置顶当天未刷新 2 正常刷新 3 找活名片置顶未成功返回 4 其他 0
+    let boxStatus = this.data.boxStatus
+    if (boxStatus == 1) {
+      wx.navigateTo({
+        url: `/pages/clients-looking-for-work/workingtop/workingtop`,
+      })
+      this.setData({ boxStatus: 0 })
+    }
+    if (boxStatus == 2) {
+      let currentTime = new Date().getTime();
+      wx.setStorageSync("haveCardCloseBox",currentTime)
+      this.refreshCard()
+      this.setData({ boxStatus: 0 })
+    }
+  },
+  // 从置顶页面返回（未置顶）弹窗
+  todayRefresh: function () {
+    let that = this
+    wx.showModal({
+      title: "温馨提示",
+      content: "您可以刷新找活名片，让更多老板看到您的找活信息！",
+      confirmText: "去刷新",
+      confirmColor: "#0097FF",
+      cancelColor: "#797979",
+      success: function (res) {
+        if (res.confirm) {
+          that.refreshCard()
+          that.setData({ boxStatus: 0 })
+        }
+        if (res.cancel) {
+          let myDate = new Date();
+          // 当前时间戳
+          let currentTime = myDate.getTime();
+          // 到期时间戳（23:59:59）
+          let dueDate = (new Date(new Date().toLocaleDateString())).getTime() +  (24 * 60 * 60 * 1000 - 1);
+          // let dueDate = currentTime +  (1 * 60 * 1000 - 1);
+          // 当天没有刷新过且未置顶返回找活名片缓存（是否当天第一次返回，到期时间）
+          let topBackRefresh = {currentTime:currentTime,dueDate:dueDate};
+          wx.setStorageSync("topBackRefresh",topBackRefresh)
+          that.setData({ boxStatus: 0 })
+        }
+      }
+    })
+  },
+  // 从找活名片点击去置顶没有置顶成功返回提示框
+  noTopTipBox: function (data) {
+    // 当前时间戳
+    let currentTime = new Date().getTime();
+    // 找活名片置顶数据
+    let topData = data.resume_top;
+    // 找活名片是否置顶过
+    let hasTop = topData.has_top;
+    // 找活名片置顶状态
+    let isTop = topData.is_top;
+    // 是否是当天第一次从置顶界面返回（未成功置顶),当天多次返回只是第一次展示提示框
+    let todayRefresh = app.globalData.dayFirstRefresh;
+    // 当天没有刷新过且未置顶返回找活名片缓存（是否当天第一次返回，到期时间）
+    let topBackRefresh = wx.getStorageSync('topBackRefresh')
+    //获取页面栈
+    let pages = getCurrentPages();
+    // 弹窗类型
+    let boxStatus = this.data.boxStatus;
+    if(pages.length > 1) {
+      let index = pages.length - 1;
+      let path = pages[index].__displayReporter.showReferpagepath;
+      path = path.slice(0, -5);
+      if (path == "pages/clients-looking-for-work/workingtop/workingtop") {
+        if ( ( !hasTop && boxStatus == 4 )|| ( hasTop && isTop != '1' && boxStatus == 4 )) {
+          // 如果当天没有刷新过
+          if (!todayRefresh) {
+            // 如果置顶未成功置顶且是当天第一次返回
+            if (!topBackRefresh) {
+              let myDate = new Date();
+              // 当前时间戳
+              let currentTime = myDate.getTime();
+              // 到期时间戳（23:59:59）
+              let dueDate = (new Date(new Date().toLocaleDateString())).getTime() +  (24 * 60 * 60 * 1000 - 1);
+              // let dueDate = currentTime +  (1 * 60 * 1000 - 1);
+              // 当天没有刷新过且未置顶返回找活名片缓存（是否当天第一次返回，到期时间）
+              let topBackRefresh = {currentTime:currentTime,dueDate:dueDate};
+              wx.setStorageSync("topBackRefresh",topBackRefresh)
+              this.todayRefresh()
+            }else{
+              if (currentTime > topBackRefresh.dueDate) {
+                let myDate = new Date();
+                // 当前时间戳
+                let currentTime = myDate.getTime();
+                // 到期时间戳（23:59:59）
+                let dueDate = (new Date(new Date().toLocaleDateString())).getTime() +  (24 * 60 * 60 * 1000 - 1);
+                // let dueDate = currentTime +  (1 * 60 * 1000 - 1);
+                // 当天没有刷新过且未置顶返回找活名片缓存（是否当天第一次返回，到期时间）
+                let topBackRefresh = {currentTime:currentTime,dueDate:dueDate};
+                wx.setStorageSync("topBackRefresh",topBackRefresh)
+                this.todayRefresh()
+              }
+            }
+          }
+        }
+      }
+    }
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
     this.authrasution();
     this.cardjump(options)
+    // 如果是从快速发布找活名片到我的找活名片展示发布成功弹窗
+    if (options.hasOwnProperty("boxStatus")) {
+      if (options.boxStatus) {
+        this.setData({ boxStatus: options.boxStatus})
+        this.showPublishTip()
+      }
+    }
   },
   /**
    * 生命周期函数--监听页面初次渲染完成

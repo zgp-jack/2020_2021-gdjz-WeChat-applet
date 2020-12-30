@@ -4,15 +4,15 @@
       <view class='realname-photo'>请拍摄并上传你的身份证照片</view>
       <view class='realname-item' bindtap='userUploadIdcard' data-type="zm" wx:if="{{card_img_path != uploadfailicon}}">
         <image src='{{card_img_path|| idcardf}}'></image>
-        <text class="idengtify">身份证正面照</text>
+        <text class="idengtify">身份证人像面</text>
       </view>
       <view class='realname-item' bindtap='userUploadIdcard' data-type="zm" wx:if="{{card_img_path == uploadfailicon}}">
         <image src='{{uploadfailicon|| idcardf}}'></image>
-        <text class="idengtify">身份证正面照</text>
+        <text class="idengtify">身份证人像面</text>
       </view>
       <view class='realname-item' bindtap='userUploadIdcard' data-type="sc">
-        <image src='{{handone_img_path|| idcardz}}'></image>
-        <text class="idengtify">手持身份证照</text>
+        <image src='{{handone_img_path || idcardz}}'></image>
+        <text class="idengtify">身份证国徽面</text>
       </view>
     </view>
   </view>

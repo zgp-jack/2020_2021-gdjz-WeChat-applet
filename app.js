@@ -11,7 +11,7 @@ App({
     member_less_info:{},
     callphone: '',
     procity: 0,
-    version: "1.0.6",
+    version: "1.0.7",
     complaincontent: '投诉内容不能少于5个字，必须含有汉字',
     areaIs: false,
     topshow: false,
@@ -30,7 +30,7 @@ App({
     skip: false,
     perfection: false,
     showperfection: false,
-    showdetail: true,
+    showdetail: false,
     requestToken: "jizhao",
     unitid: "adunit-80f40e8b4f60c3f6",
     serverPhone: "400-838-1888",
@@ -43,7 +43,9 @@ App({
     commonDownloadApp: "http://cdn.yupao.com/miniprogram/images/download.png?t=" + new Date().getTime(),
     commonJixieAd: "http://cdn.yupao.com/miniprogram/images/list-ad-newjixie.png?t=" + new Date().getTime(),
     // apiRequestUrl: "http://miniapi.kkbbi.com/",
-    apiRequestUrl: "https://miniapi.zhaogong.vrtbbs.com/",
+    // apiRequestUrl: "https://miniapi.zhaogong.vrtbbs.com/",
+    apiRequestUrl: "https://newyupaomini.54xiaoshuo.com/",
+    // apiRequestUrl: "https://miniapi.zhaogong.vrtbbs.com/",
     // apiRequestUrl: "https://newyupaomini.54xiaoshuo.com/",
     apiUploadImg: "https://newyupaomini.54xiaoshuo.com/index/upload/",
     apiUploadImgphoto: "https://newyupaomini.54xiaoshuo.com/index/authid-card/",
@@ -99,12 +101,14 @@ App({
       logoutWay: "",
       loginWay: "",
     },
-    // 招工信息详情界面是否展示快速发布找活名片
-    isShowFindWork: false,
     getNotice:{
       loginBefore:false,
       loginAfter:false
-    }
+    },
+    // 是否当前第一次刷新找活名片 0 否 1 是
+    dayFirstRefresh: 0,
+    municipality: [{id:'2',name:'北京'},{id:'25',name:'上海'},{id:'27',name:'天津'},{id:'32',name:'重庆'}],//快速发布找活名片直辖市
+    exists:'',//是否有找活名片
   },
   //是否为极速发布与快速发布请求,快速发布与极速发布跳转
   initJobView: function () {
@@ -1465,39 +1469,12 @@ App({
     }
   },
   //我的找活文本显示内容
-  initResume:function(_this){
+  initResume:function(_this,call){
     let userInfo = wx.getStorageSync("userInfo");
     let that = this
     if (userInfo) {
       let flag = JSON.parse(JSON.stringify(that.globalData.publishFindWork))
-      if (!flag.loginAfter) {
-        that.appRequestAction({
-          url: 'resumes/exists/',
-          way: 'POST',
-          mask: true,
-          success: function(res){
-            let mydata = res.data
-            if(mydata.errcode == "ok"){
-              that.globalData.publishFindWork.resumeText = mydata.data.title
-              that.globalData.publishFindWork.loginAfter = true
-              _this.setData({
-                resumeText:mydata.data.title
-              })
-            }
-          },
-          fail:()=>{
-            that.showMyTips('网络错误，加载失败！')
-            that.globalData.resumeText = "发布找活"
-          }
-        })
-      } else {
-        _this.setData({
-          resumeText:that.globalData.publishFindWork.resumeText
-        })
-      }
-    } else {
-      let flag = JSON.parse(JSON.stringify(that.globalData.publishFindWork))
-      if (!flag.loginBefore) {
+      if(call){
         that.appRequestAction({
           url: 'resumes/exists/',
           way: 'POST',
@@ -1507,6 +1484,7 @@ App({
             if(mydata.errcode == "ok"){
               that.globalData.publishFindWork.resumeText = mydata.data.title
               that.globalData.publishFindWork.loginBefore = true
+              call ? call(mydata.data.exists) : ''
               _this.setData({
                 resumeText:mydata.data.title
               })
@@ -1517,10 +1495,68 @@ App({
             that.globalData.publishFindWork.resumeText = "发布找活"
           }
         })
-      } else {
-        _this.setData({
-          resumeText:that.globalData.publishFindWork.resumeText
+      }else{
+        if (!flag.loginAfter) {
+          that.appRequestAction({
+            url: 'resumes/exists/',
+            way: 'POST',
+            mask: true,
+            success: function(res){
+              let mydata = res.data
+              if(mydata.errcode == "ok"){
+                that.globalData.publishFindWork.resumeText = mydata.data.title
+                that.globalData.publishFindWork.loginAfter = true
+                _this.setData({
+                  resumeText:mydata.data.title,
+                })
+                that.globalData.exists = mydata.data.exists
+                call ? call(mydata.data.exists) : ''
+              }
+            },
+            fail:()=>{
+              that.showMyTips('网络错误，加载失败！')
+              that.globalData.resumeText = "发布找活"
+            }
+          })
+        } else {
+          _this.setData({
+            resumeText:that.globalData.publishFindWork.resumeText
+          })
+        }
+      }
+    } else {
+      let flag = JSON.parse(JSON.stringify(that.globalData.publishFindWork))
+      if(call){
+        wx.navigateTo({
+          url: '/pages/userauth/userauth'
         })
+      }else {
+        if (!flag.loginBefore) {
+          that.appRequestAction({
+            url: 'resumes/exists/',
+            way: 'POST',
+            mask: true,
+            success: function(res){
+              let mydata = res.data
+              if(mydata.errcode == "ok"){
+                that.globalData.publishFindWork.resumeText = mydata.data.title
+                that.globalData.publishFindWork.loginBefore = true
+                call ? call(mydata.data.exists) : ''
+                _this.setData({
+                  resumeText:mydata.data.title
+                })
+              }
+            },
+            fail:()=>{
+              that.showMyTips('网络错误，加载失败！')
+              that.globalData.publishFindWork.resumeText = "发布找活"
+            }
+          })
+        } else {
+          _this.setData({
+            resumeText:that.globalData.publishFindWork.resumeText
+          })
+        }
       }
     }
   },
@@ -1547,6 +1583,58 @@ App({
       })
     }
   },
+  // 找活名片刷新成功提示框（当天首次刷新且未置顶 或 非当天首次刷新）弹窗
+  showTipBox: function (_this) {
+    let tipBox = {//提示框显示信息
+      title:"温馨提示",
+      showTitle: true,
+      showIcon: false,
+      showCancel: true,
+      confirmColor:'#0099FF',
+      cancelColor:'#797979',
+      content: [{
+        des: '刷新成功!',
+        color: '#333',
+        text: []
+      }
+    ],
+      confirmText: '确定',
+      cancelText: '查看招工信息'
+    };
+    _this.setData({
+      tipBox: tipBox,
+      refreshStatus: true,
+      boxType: "refreshSuccess",
+      boxStatus: 3
+    })
+    // 刷新成功
+    _this.selectComponent("#promptbox").show()
+    this.globalData.dayFirstRefresh = 1
+    this.activeRefresh()
+  },
+  // 刷新找活名片未置顶且当天首次刷新
+  showFirstBox: function (_this) {
+    this.globalData.dayFirstRefresh = 1
+    wx.showModal({
+      title:'刷新成功',
+      content:'置顶找活名片，可以让您的名片长期处于刷新状态。',
+      confirmColor: '#0097FF',
+      cancelColor:'#797979',
+      cancelText:'取消',
+      confirmText:'去置顶',
+      success: function (res) {
+        if (res.confirm) {
+          wx.navigateTo({
+            url: "/pages/clients-looking-for-work/workingtop/workingtop",
+          })
+        }
+        if (res.cancel) {
+          _this.setData({ boxType: false })
+        }
+      }
+    })
+  },
+
   // 刷新找活名片请求(找工作列表与找活名片使用)
   refreshReq: function (source,_this) {
     // source  1-找活名片编辑页；2-招工列表引导弹窗
@@ -1566,78 +1654,95 @@ App({
         if (mydata.errcode === "ok") {
           let currentTime = new Date().getTime();
           let reqDueTime = currentTime + 3000;
-          let refreshStatus = mydata.data.refresh_status;
-          _this.setData({reqDueTime, reqStatus:true, refreshStatus})
-          if (refreshStatus === 0) {
-            // 该信息处于审核中或审核失败状态
-            wx.showModal({
-              title: '温馨提示',
-              content: '找活名片审核通过后即可刷新',
-              showCancel: false,
-            })
-          }else if(refreshStatus === 1){
-            // 该信息处于已找到工作状态
-            wx.showModal({
-              title: '温馨提示',
-              content: '请将工作状态修改为<正在找工作>,审核通过后即可刷新名片',
-              showCancel: source === 1? false: true,
-              confirmText: source === 1? "确定":"去更改",
-              success: function (res) {
-                if (res.confirm) {
-                  if (source === 2) {
+          _this.setData({reqDueTime, reqStatus:true})
+          if (mydata.data.hasOwnProperty("refresh_status")) {
+            _this.setData({refreshStatus})
+            let refreshStatus = mydata.data.refresh_status;
+            if (refreshStatus === 0) {
+              // 该信息处于审核中或审核失败状态
+              wx.showModal({
+                title: '温馨提示',
+                content: '找活名片审核通过后即可刷新',
+                showCancel: false,
+              })
+            }else if(refreshStatus === 1){
+              // 该信息处于已找到工作状态
+              wx.showModal({
+                title: '温馨提示',
+                content: '请将工作状态修改为<正在找工作>,审核通过后即可刷新名片',
+                showCancel: source === 1? false: true,
+                confirmText: source === 1? "确定":"去更改",
+                success: function (res) {
+                  if (res.confirm) {
+                    if (source === 2) {
+                      wx.navigateTo({
+                        url: '/pages/clients-looking-for-work/finding-name-card/findingnamecard',
+                      })
+                    }
+                  }
+                }
+              })
+            }else if(refreshStatus === 2){
+              // 该用户积分不足
+              wx.showModal({
+                title: '温馨提示',
+                content: '您当前的正式积分不足，是否前往获取积分？',
+                cancelText: "否",
+                confirmText: "是",
+                success: function (res) {
+                  if (res.confirm) {
                     wx.navigateTo({
-                      url: '/pages/clients-looking-for-work/finding-name-card/findingnamecard',
+                      url: url,
                     })
                   }
                 }
+              })
+            }else if(refreshStatus === 3){
+              if (source === 2) {
+                let tipBox = {//提示框显示信息
+                  showTitle: false,
+                  showIcon: true,
+                  showCancel: false,
+                  confirmColor:'#0099FF',
+                  cancelColor:'#797979',
+                  content: [{
+                    des: '刷新成功',
+                    color: '#333',
+                    text: []
+                  }
+                ],
+                  confirmText: '确定'
+                };
+                _this.setData({
+                  tipBox: tipBox,
+                  refreshStatus: true
+                })
               }
-            })
-          }else if(refreshStatus === 2){
-            // 该用户积分不足
-            wx.showModal({
-              title: '温馨提示',
-              content: '您当前的正式积分不足，是否前往获取积分？',
-              cancelText: "否",
-              confirmText: "是",
-              success: function (res) {
-                if (res.confirm) {
-                  wx.navigateTo({
-                    url: url,
-                  })
-                }
-              }
-            })
-          }else if(refreshStatus === 3){
-            if (source === 2) {
-              let tipBox = {//提示框显示信息
-                showTitle: false,
-                showIcon: true,
+              // 刷新成功
+              _this.selectComponent("#promptbox").show()
+              that.activeRefresh()
+            }else if(refreshStatus === 4){
+              // 刷新失败
+              wx.showModal({
+                title: '温馨提示',
+                content: '刷新失败',
                 showCancel: false,
-                confirmColor:'#0099FF',
-                cancelColor:'#797979',
-                content: [{
-                  des: '刷新成功',
-                  color: '##85963',
-                  text: []
-                }
-              ],
-                confirmText: '确定'
-              };
-              _this.setData({
-                tipBox: tipBox,
-                refreshStatus: true
               })
             }
-            // 刷新成功
-            _this.selectComponent("#promptbox").show()
-            that.activeRefresh()
-          }else if(refreshStatus === 4){
-            // 刷新失败
-            wx.showModal({
-              title: '温馨提示',
-              content: '刷新失败',
-              showCancel: false,
-            })
+          }
+          // 有is_top 字段也代表了刷新成功
+          if (mydata.data.hasOwnProperty("is_top")) {
+            // 找活名片置顶状态 1 置顶中 0 未置顶
+            let isTop = mydata.data.is_top;
+            if (isTop) {
+              that.showTipBox(_this)
+            }else{
+              if (that.globalData.dayFirstRefresh) {
+                that.showTipBox(_this)  
+              }else{
+                that.showFirstBox(_this)
+              }
+            }
           }
         } else {
           wx.showModal({
@@ -1660,4 +1765,5 @@ App({
       }
     })
   },
+
 })

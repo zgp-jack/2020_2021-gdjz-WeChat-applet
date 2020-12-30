@@ -198,8 +198,8 @@ padding-left: 26%;
    width: 30rpx;
    height: 30rpx;
    position: absolute;
-   right: 0rpx;
-   top: 0rpx;
+   right: -12rpx;
+   top: -12rpx;
 }
 .scopedetail view{
   display: inline-block;
