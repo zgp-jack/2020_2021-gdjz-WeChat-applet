@@ -1674,7 +1674,7 @@ Page({
    */
   onHide: function () {
     this.setData({
-      showpassre: false,
+      // showpassre: false,
       is_top_show:true
     })
   },

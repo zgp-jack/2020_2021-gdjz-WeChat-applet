@@ -88,6 +88,8 @@ Page({
     isShowPicker:false,
     current_area:'',
     is_introduces:'0',//是否完善过
+    workNameArr:[],
+    workIdArr:[]
   },
   // 点击隐藏键盘
   hiddenKeyBoard: function () {
@@ -436,8 +438,8 @@ Page({
       isShowPicker:false
     })
     let all = ""
-    for (let i = 0; i < this.data.complexwork.length; i++) {
-      all += this.data.complexwork[i] + " "
+    for (let i = 0; i < this.data.workNameArr.length; i++) {
+      all += this.data.workNameArr[i] + " "
     }
     if (all == "") {
       all = '请选择工种';
@@ -456,17 +458,18 @@ Page({
     for (let i = 0; i < this.data.typeworkarray.length; i++) {
       for (let j = 0; j < this.data.typeworkarray[i].children.length; j++) {
         if (~~this.data.typeworkarray[i].children[j].id === ~~e.currentTarget.dataset.id) {
-          for (let q = 0; q < this.data.complexwork.length; q++) {
-            if (this.data.complexwork[q] == e.currentTarget.dataset.name) {
+          for (let q = 0; q < this.data.workNameArr.length; q++) {
+            if (this.data.workNameArr[q] == e.currentTarget.dataset.name) {
               ce = true
             }
           }
-          if (this.data.complexwork.length < 3 || ce) {
-            for (let k = 0; k < this.data.complexwork.length; k++) {
-              if (this.data.complexwork[k] == e.currentTarget.dataset.name) {
+          // debugger
+          if (this.data.workNameArr.length < 3 || ce) {
+            for (let k = 0; k < this.data.workNameArr.length; k++) {
+              if (this.data.workNameArr[k] == e.currentTarget.dataset.name) {
 
-                this.data.complexwork.splice(k, 1)
-                this.data.complexworkid.splice(k, 1)
+                this.data.workNameArr.splice(k, 1)
+                this.data.workIdArr.splice(k, 1)
                 this.data.typeworkarray[i].children[j].is_check = false
 
 
@@ -477,12 +480,14 @@ Page({
               }
             }
             this.data.typeworkarray[i].children[j].is_check = true
-            this.data.complexwork.push(e.currentTarget.dataset.name)
-            this.data.complexworkid.push(e.currentTarget.dataset.id)
+            this.data.workNameArr.push(e.currentTarget.dataset.name)
+            // this.data.complexwork.push(e.currentTarget.dataset.name)
+            // this.data.complexworkid.push(e.currentTarget.dataset.id)
+            this.data.workIdArr.push(e.currentTarget.dataset.id)
           } else {
             wx.showModal({
               title: '温馨提示',
-              content: '工种最多可选' + that.data.complexwork.length + '个',
+              content: '工种最多可选' + that.data.workNameArr.length + '个',
               showCancel: false,
               success(res) { }
             })
@@ -582,11 +587,11 @@ Page({
     if (!userInfo) return false;
     let worktype = "";
     let vertifyNum = v.v.new()
-    for (let i = 0; i < this.data.complexworkid.length; i++) {
-      if (i == this.data.complexworkid.length - 1) {
-        worktype += this.data.complexworkid[i]
+    for (let i = 0; i < this.data.workIdArr.length; i++) {
+      if (i == this.data.workIdArr.length - 1) {
+        worktype += this.data.workIdArr[i]
       } else {
-        worktype += this.data.complexworkid[i] + ","
+        worktype += this.data.workIdArr[i] + ","
       }
     }
     // 姓名
@@ -737,9 +742,9 @@ Page({
       number_people: this.data.teamsnumber,
       current_area:this.data.oadcode ? '' : this.data.current_area
     })
-    // console.log(JSON.stringify(information))
-    // console.log(JSON.stringify(this.data.model))
-    // debugger
+    console.log(JSON.stringify(information))
+    console.log(JSON.stringify(this.data.model))
+    debugger
     if (JSON.stringify(information) == JSON.stringify(this.data.model) && this.data.checkonef == '0'){
       wx.showModal({
         title: '温馨提示',
@@ -949,12 +954,26 @@ Page({
       })
     }
     if (introinfo.hasOwnProperty("occupations") && introinfo.occupations.length != 0) {
-      let workIndexvalue = ""
-      for (let i = 0; i < introinfo.occupations.length; i++) {
-        workIndexvalue += introinfo.occupations[i] + " "
+      // let workIndexvalue = ""
+      let typeWorkArr = this.data.typeworkarray
+      let complexwork = this.data.complexwork
+      let workNameArr = []
+      let workIdArr = []
+
+      for(let i = 0;i<typeWorkArr.length;i++){
+        for(let n = 0 ;n<typeWorkArr[i].children.length;n++){
+          for(let q = 0;q<complexwork.length;q++){
+            if(typeWorkArr[i].children[n].name == complexwork[q]){
+              workNameArr.push(typeWorkArr[i].children[n].name)
+              // workIdArr.push(typeWorkArr[i].children[n].id)
+            }
+          }
+        }
       }
       this.setData({
-        workIndexvalue: workIndexvalue
+        workIndexvalue: workNameArr.join(" ") ? workNameArr.join(" ") : '请选择工种',
+        workNameArr,
+        workIdArr:introinfo.occupations_id.split(",") ? introinfo.occupations_id.split(","):[]
       })
     }
 
