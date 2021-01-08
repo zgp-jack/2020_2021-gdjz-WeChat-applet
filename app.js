@@ -1617,7 +1617,7 @@ App({
     this.globalData.dayFirstRefresh = 1
     wx.showModal({
       title:'刷新成功',
-      content:'置顶找活名片，可以让您的名片长期处于刷新状态。',
+      content:'置顶找活名片，可让您的名片长期处于刷新状态。',
       confirmColor: '#0097FF',
       cancelColor:'#797979',
       cancelText:'取消',
